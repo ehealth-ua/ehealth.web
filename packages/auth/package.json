@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@ehealth/iit-digital-signature": "^0.0.0",
     "emotion": "^9.0.1",
     "final-form": "^4.2.0",
     "react": "^16.2.0",
