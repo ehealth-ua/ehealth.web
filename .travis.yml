@@ -1,0 +1,41 @@
+language: node_js
+services:
+- docker
+node_js:
+- 8.10.0
+cache:
+  directories:
+  - "$HOME/.npm"
+env:
+  global:
+  - TRUNK_BRANCH="master"
+  - DOCKER_HUB_ACCOUNT="edenlabllc"
+  - CHART="fe"
+  - secure: lH9OnLqI/MumugNRjtumrPqP6HcdtCmrC7a//icBog91r9uUEL2+l+rIBId6BNGIBT6Lrw0SvpyUVExIMt2q4dfzBt0TV+wi3O/d445vrL+TIE1nCEEJfl7YudwskhZeYbGKoMM/TBAm5cO+8SJSCzdfFBeh08UFp0pPjaLE36KOsR55anmfq4fpRy7a28t1MCOCQad7X2jb5fGLNl6drrJjkd8TvT0vCTKHoeqare1tvt7mRm12xp8/VlJOWWlZVmyViAaELOBk1/Xx6HmTRSIOCPR5Lv5ANhiqWaAtFudBM2uyR5FM2uTHm7TD8cbtyt9XZ6+Ny/jOh8UwjDVxS8lxv3NkrGU80I8Z08lv+ercTfvzEi2DEiA3wzN9OkdKQ3KlSHLTPeHD8wgH3RkryWUK/KewbjuAKP1rHFeJZlZ2YhjdK0nMXMoZ0bpc151xe8airdhnjqI0rJ37HzhJ+23Ixoh6ly1BwWVlLdmm9ndqF4tTnSStWKWGhTp8x6hCwnT+t8QRGA/QDYYUQyFnphio/F4cblvMIV+XgWyH6a6929CWo1IiKtWzsWuyzRsaW9vwLvm/+7ADv4iVZLQgk/EOBxmcksnPa3nIK6E7rtzYlACppKQnjJaNPr2wEvf/zgis9ZVvQylCfvAETePkCVEFKOzt4QSPUOlraLkgj28=
+  - secure: dJdl1OdNL+rEi7p++BaXeihFg2pXF0Sg6eLFpsd4rdFhkVPfbd/hl9JzjK6mPUHSAcD/y90hpc/Hd5Bs8k1i5hA8D9cKKzj0XZZiGfHaVyZLp8byV+476WW5dhftRJHzUk4meDMqp2QQiccTZp1Y2imD/PT2woZ0HJszzG6wdLfuUj4Zv5hezJw0aZk8BPVPcn0uq93SNfWKbKIjd4RNZg7dSs5DBgrb59m2RM230djezdmzFxHTUtSGfp5F+q06uNghNWvfpGiuctIPpgJvspZp62SAT6LJ/ujO3Wy+1txrmUNfp+QBMw0+EkYjWIHWPGT0Vt4p9sLDW8Nm1BPXatDjsdU1xazJ0spZfFBsLS2DYr0bGVVFlSKzs7ZlAMVJeEbV0JJ6luxfPox5bEJyCEb9OSt/jiXPFlYkmGTF780RQWLkl+Ni2yMv+GDGlSbM3a5fMaIBbGjdoLRqQVEga2U0O7WK0qu5hVyt7UqXAVMVI1URSzWQA5cn8GdJFwOWsN3ydWQiTEJLfJaLcceASSvSV0wKB4YEgTmw+VSCTn++a963StIHHBkcwxIltA8ncK2srB9UBYjbg2w6QFFv1CWTwGjl7TMHY5/gJ7a59kC61dWnLZ70ORuMAldPfJjTQOZZAKUpcItF3yeMSsz9EbwnzgVjVIbaF2+sAiK8utc=
+  - secure: ZdO+AgAs3pBQ8SSJMepnaBdgvXZ7nOaLqAfwEkisHRAJHhn+LjaZNT2P3+4DeXJ+ZpGJMTGl2rokGoOkdh7bXPpYdD5DJvAxIrYmOVxYFq0fipDLr6pc+lNtmwmPATZl3QjAJjr/Nafg5z8a6UAKGG2Mb3JG7vFVhpvLtlBG4mOFeJsiQklxHE/LB3dlHALzxCOOgi9v3v6HnjxQ2MIhDDLKvYo+qmCugHMBN1K8LCB6iF09BOyYc4Lv9oFSW1I6kiBl2xaXc54lbhmrPONJQzS6X4ESDpek256jd0dpbrowtshguLXSrzE9tl+RZzohY9HtGS9xfQp/dqKBnY7r5bjFC1qygDRtg3q7k8Ewd69BYyLhPY3ffgnrE3MC5GRFYJSK5dETdV+TWj20ipS8s3gYD/1iEtoqZQgFLEZc8XaJh2sfTMl5EkuVaxIPjPtoPNWpB7MFh5fVyGvg8exKUsGOaxMfmxL02kfdlljNOusCNFXJC868Gp5leDQlO2t9yDDKNP3DspmkHwEgzHcKA7wraHGEpj+PqaiK7PT+OzNYRZ31O+ZDhNZ5ViZ27SmrrHulOA9C5hyaUgTcUP4tp+xXhTjHpbpepFlouy5bh3tL8rLvwi4KDuvQv+SziB/a9P3dOZEBcVIGuIYpXTsRSneYthZ66tUQyoaMOoTr/cI=
+before_install:
+- npm install cipm --global --quiet
+install:
+- cipm --ignore-scripts
+- npx lerna bootstrap --npm-client=cipm
+script: npm test
+before_deploy:
+- git config --global user.email "deploy@travis-ci.org" &&
+  git config --global user.name "Deployment Bot" &&
+  git config --global credential.helper "store"
+- echo "https://${GITHUB_TOKEN}:@github.com" > $HOME/.git-credentials
+- git checkout $TRAVIS_BRANCH
+- echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+- openssl aes-256-cbc -K $encrypted_e6ee5d7a5a67_key -iv $encrypted_e6ee5d7a5a67_iv -in eHealth-9917ee15cdfc.json.enc -out eHealth-9917ee15cdfc.json -d
+- gcloud auth activate-service-account --key-file=$TRAVIS_BUILD_DIR/eHealth-9917ee15cdfc.json &&
+  gcloud container clusters get-credentials dev --zone europe-west1-d --project ehealth-162117
+- curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+- git clone https://github.com/edenlabllc/ehealth.charts.git charts
+deploy:
+  provider: script
+  script: 'npm run publish -- --yes -m "chore(release): publish %s [skip ci]"'
+  skip_cleanup: true
+  on:
+    condition: "$TRAVIS_BRANCH =~ (^$TRUNK_BRANCH|[[:digit:]]-stable)$"
+after_deploy: npm run update-chart && npm run deploy-chart

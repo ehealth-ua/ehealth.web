@@ -55,3 +55,6 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# Helm charts repository
+charts/
