@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/edenlabllc/ehealth.web/compare/v0.1.0...v0.2.0) (2018-03-15)
+
+
+### Bug Fixes
+
+* **iit-proxy:** remove inspect flag from start script ([1cea2dc](https://github.com/edenlabllc/ehealth.web/commit/1cea2dc))
+
+
+### Features
+
+* **iit-digital-signature:** add ability to set settings on initialization ([276d1af](https://github.com/edenlabllc/ehealth.web/commit/276d1af))
+
+
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2018-03-15)
 

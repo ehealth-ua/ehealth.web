@@ -1,9 +1,9 @@
 {
   "name": "@ehealth/auth",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@ehealth/iit-digital-signature": "^0.1.0",
+    "@ehealth/iit-digital-signature": "^0.2.0",
     "emotion": "^9.0.1",
     "final-form": "^4.2.0",
     "react": "^16.2.0",
