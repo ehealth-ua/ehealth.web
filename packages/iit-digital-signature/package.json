@@ -5,9 +5,8 @@
   "description": "EUSignCP digital signature library ESM wrapper",
   "main": "dist/main.js",
   "scripts": {
-    "start": "webpack --watch",
-    "build": "webpack",
-    "prepublish": "rm -fr dist && npm run build"
+    "prepare": "rm -fr dist && NODE_ENV=production webpack",
+    "start": "NODE_ENV=development webpack --watch"
   },
   "dependencies": {
     "raw-loader": "^0.5.1",
