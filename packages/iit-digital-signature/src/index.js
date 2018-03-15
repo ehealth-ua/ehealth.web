@@ -15,18 +15,70 @@ eval(euscpmSource);
 // Load EUSignCP core
 eval(euscpSource);
 
-const initialize = () =>
+const initialize = settings =>
   new Promise((resolve, reject) => {
-    EUSignCPModuleInitialized = success => (success ? resolve() : reject());
+    EUSignCPModuleInitialized = success => {
+      if (!success) reject();
+
+      const instance = new EUSignCP();
+      setup(instance, settings);
+
+      resolve(instance);
+    };
 
     EUSignCPModuleInitialize();
   });
 
-const instantiate = () => initialize().then(() => new EUSignCP());
+const setup = (instance, settings = {}) => {
+  const {
+    proxy = "http://localhost:5000/",
+    fileStoreSettings,
+    proxySettings,
+    tspSettings,
+    ocspSettings,
+    cmpSettings,
+    ldapSettings,
+    ocspAccessInfoModeSettings
+  } = settings;
+
+  instance.SetXMLHTTPProxyService(proxy);
+
+  instance.SetFileStoreSettings(
+    Object.assign(instance.CreateFileStoreSettings(), fileStoreSettings)
+  );
+
+  instance.SetProxySettings(
+    Object.assign(instance.CreateProxySettings(), proxySettings)
+  );
+
+  instance.SetTSPSettings(
+    Object.assign(instance.CreateTSPSettings(), tspSettings)
+  );
+
+  instance.SetOCSPSettings(
+    Object.assign(instance.CreateOCSPSettings(), ocspSettings)
+  );
+
+  instance.SetCMPSettings(
+    Object.assign(instance.CreateCMPSettings(), cmpSettings)
+  );
+
+  instance.SetLDAPSettings(
+    Object.assign(instance.CreateLDAPSettings(), ldapSettings)
+  );
+
+  if (ocspAccessInfoModeSettings) {
+    instance.SetOCSPAccessInfoModeSettings(
+      Object.assign(
+        instance.CreateOCSPAccessInfoModeSettings(),
+        ocspAccessInfoModeSettings
+      )
+    );
+  }
+};
 
 module.exports = {
   __esModule: true,
   default: EUSignCP,
-  initialize,
-  instantiate
+  initialize
 };
