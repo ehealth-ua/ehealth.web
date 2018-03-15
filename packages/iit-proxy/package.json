@@ -6,7 +6,7 @@
   "main": "server.js",
   "bin": "server.js",
   "scripts": {
-    "start": "node --inspect server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "b64": "^4.0.0",
