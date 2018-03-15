@@ -15,6 +15,9 @@
 # Dependency directories
 **/node_modules/
 
+# Helm charts repository
+charts/
+
 # Git files and directories
 .git/
 **/.gitignore
