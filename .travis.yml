@@ -1,3 +1,4 @@
+if: tag IS blank
 language: node_js
 services:
 - docker
@@ -34,7 +35,7 @@ before_deploy:
 - git clone https://github.com/edenlabllc/ehealth.charts.git charts
 deploy:
   provider: script
-  script: 'npm run publish -- --yes -m "chore(release): publish %s [skip ci]"'
+  script: npm run publish -- --yes
   skip_cleanup: true
   on:
     condition: "$TRAVIS_BRANCH =~ (^$TRUNK_BRANCH|[[:digit:]]-stable)$"
