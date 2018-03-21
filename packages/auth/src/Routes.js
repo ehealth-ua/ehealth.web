@@ -8,6 +8,7 @@ import {
   browserHistory,
   applyRouterMiddleware
 } from "react-router";
+import { syncHistoryWithStore } from "react-router-redux";
 import { useRedial } from "react-router-redial";
 
 import { getUser, getToken } from "./reducers";
@@ -60,11 +61,14 @@ export default class Routes extends Component {
   }
 
   render() {
-    const { dispatch, getState } = this.context.store;
+    const { store } = this.context;
+    const { dispatch, getState } = store;
+
+    const history = syncHistoryWithStore(browserHistory, store);
 
     return (
       <Router
-        history={browserHistory}
+        history={history}
         render={applyRouterMiddleware(
           useRedial({
             locals: { dispatch, getState },
