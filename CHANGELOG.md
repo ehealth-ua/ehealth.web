@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/edenlabllc/ehealth.web/compare/v0.3.1...v0.3.2) (2018-03-21)
+
+
+### Bug Fixes
+
+* run npm start scripts in parallel ([728e5bb](https://github.com/edenlabllc/ehealth.web/commit/728e5bb))
+* **auth:** render nothing until initial data loaded ([665b241](https://github.com/edenlabllc/ehealth.web/commit/665b241))
+
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/edenlabllc/ehealth.web/compare/v0.3.0...v0.3.1) (2018-03-21)
 
