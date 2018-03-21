@@ -75,6 +75,7 @@ export default class Routes extends Component {
             beforeTransition: ["fetch"],
             afterTransition: ["defer", "done"],
             parallel: true,
+            initialLoading: () => null,
             onCompleted: transition =>
               transition === "beforeTransition" && window.scrollTo(0, 0)
           })
@@ -105,7 +106,9 @@ export default class Routes extends Component {
                   component={InviteRejectPage}
                 />
               </Route>
+
               <Route path="sign-in" component={SignInPage} />
+
               <Route
                 path="update-password"
                 component={PasswordExpiredSignInPage}
@@ -135,14 +138,17 @@ export default class Routes extends Component {
 
               <Route path="reset" component={ResetPasswordPage} />
               <Route path="reset/:id" component={NewPasswordPage} />
+
               <Route onEnter={this.requireAuth}>
                 <Route path="accept" component={AcceptPage} />
                 <Route path="otp-send" component={OtpPage} />
+
                 <Route path="request-factor" component={RequestFactorPage} />
                 <Route
                   path="request-factor/approve"
                   component={RequestFactorApprovePage}
                 />
+
                 <Route
                   path="update-factor/otp"
                   component={UpdateFactorOtpPage}
