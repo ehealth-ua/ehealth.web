@@ -5,7 +5,6 @@ import { denormalize } from "normalizr";
 
 import AcceptPage from "./containers/pages/AcceptPage/redux";
 import Invitelayout from "./containers/layouts/InviteLayout/redux";
-import loading from "./redux/loading";
 import session from "./redux/session";
 import auth from "./redux/auth";
 import clients from "./redux/clients";
@@ -35,8 +34,7 @@ export default combineReducers({
   data,
   // external libraries
   form,
-  routing,
-  loading
+  routing
 });
 
 export const getLocation = state => state.routing.locationBeforeTransitions;
