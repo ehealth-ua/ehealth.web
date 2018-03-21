@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/auth",
-  "version": "0.0.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
