@@ -7,6 +7,7 @@ const exec = require("../utils/exec");
 const DOCKER_SOCKET_PATH = "/var/run/docker.sock";
 const TEST_CONFIG_NAME = "image_test_config.yaml";
 const TEST_RUNTIME_IMAGE = "gcr.io/gcp-runtimes/container-structure-test";
+const TEST_RUNTIME_VERSION = "v1.0.0";
 
 const testImage = () => {
   const { imageName, version } = getPackageInfo();
@@ -19,7 +20,8 @@ const testImage = () => {
 docker run \
   --volume ${DOCKER_SOCKET_PATH}:${DOCKER_SOCKET_PATH} \
   --volume ${testConfigPath}:/test_config.yaml \
-  ${TEST_RUNTIME_IMAGE} -image ${imageName}:${version} /test_config.yaml
+  ${TEST_RUNTIME_IMAGE}:${TEST_RUNTIME_VERSION} \
+    test --image ${imageName}:${version} --config /test_config.yaml
 `);
 };
 
