@@ -1,0 +1,20 @@
+.error {
+  text-align: center;
+}
+.error .code {
+  font-size: 120px;
+  line-height: 200px;
+  font-weight: 300;
+}
+.error .footer {
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 32px;
+}
+.error .footer a {
+  color: #548ef0;
+  text-decoration: none;
+}
+.error .footer a:hover {
+  text-decoration: underline;
+}

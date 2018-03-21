@@ -1,0 +1,153 @@
+.icon::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: #d3dce6;
+  margin-top: 10px;
+  margin-bottom: 38px;
+}
+.icon__text {
+  line-height: 27px;
+  color: #3c4858;
+  font-weight: 700;
+  text-transform: uppercase;
+  vertical-align: top;
+  display: inline-block;
+}
+.icon_color-green {
+  background-color: #13ce66;
+}
+.column_align--middle {
+  vertical-align: top;
+}
+.column_align--top {
+  vertical-align: top;
+}
+.column_4-5 {
+  width: 80%;
+}
+.column_3-5 {
+  width: 60%;
+}
+.column_2-5 {
+  width: 40%;
+}
+.column_1-5 {
+  width: 20%;
+}
+.column_3-4 {
+  width: 75%;
+}
+.column_2-4 {
+  width: 50%;
+}
+.column_1-4 {
+  width: 25%;
+}
+.column_2-3 {
+  width: 66%;
+}
+.column_1-3 {
+  width: 33%;
+}
+.column_1-2 {
+  width: 50%;
+}
+.blockTitle__right {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+.form {
+  max-width: 730px;
+}
+
+.block {
+}
+
+.block > div {
+  margin-bottom: 32px;
+}
+
+.blockTitle {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 26px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.blockTitle__text {
+  color: #3c4858;
+  font-size: 18px;
+  font-weight: 700;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.row {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.row + .row {
+  margin-top: 19px;
+}
+
+.column {
+  display: table-cell;
+  width: 2%;
+}
+
+.column + .column {
+  padding-left: 24px;
+}
+
+.column_align {
+}
+
+.column_align--bottom {
+  vertical-align: bottom;
+}
+
+.buttons {
+  margin-top: 30px;
+}
+
+.icon {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.icon__symbol {
+  width: 27px;
+  height: 27px;
+  margin-right: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  line-height: 2;
+}
+
+.icon__symbol > i {
+  color: #fff;
+  font-size: 27px;
+}
+
+.error {
+  margin-top: 20px;
+  border: 1px solid #ff1f44;
+  padding: 10px;
+}

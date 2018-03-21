@@ -1,0 +1,10 @@
+.header {
+  flex: 0 0 45px;
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.logo img {
+  display: inline-block;
+  height: 80px;
+}

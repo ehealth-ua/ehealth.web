@@ -1,0 +1,38 @@
+.main {
+  text-align: center;
+}
+
+.main .header {
+  margin-bottom: 32px;
+}
+
+.main .content {
+  font-size: 16px;
+  line-height: 24px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.main .content p {
+  margin-bottom: 12px;
+}
+
+.main .content a {
+  color: #548ef0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.main .form {
+  max-width: 520px;
+  margin: 32px auto 0;
+  font-size: 18px;
+}
+
+.reject button {
+  cursor: pointer;
+}
+
+.reject button:hover {
+  color: #548ef0;
+}

@@ -1,0 +1,94 @@
+.wrap {
+  position: relative;
+  line-height: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.wrap input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.view {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 30px;
+  -ms-flex: 0 0 30px;
+  flex: 0 0 30px;
+  line-height: 30px;
+  background-color: #fff;
+  border: 1px solid #c9c9c9;
+  text-align: center;
+}
+
+.view i {
+  display: inline-block;
+  vertical-align: middle;
+  opacity: 0;
+  width: 18px;
+  font-size: 14px;
+  color: #44e240;
+  transition: opacity 0.05s ease-in-out;
+}
+
+input:disabled + .view {
+  opacity: 0.5;
+}
+
+input:focus + .view {
+  border-color: #11d8fb;
+}
+
+.checked .view i {
+  opacity: 1;
+}
+
+.label {
+  display: inline-block;
+  margin: 0 20px;
+  vertical-align: middle;
+  text-align: left;
+  line-height: 1.4em;
+  margin-bottom: -0.4em;
+}
+
+.isError .view {
+  border-color: #ff1f44;
+}
+
+.isError i {
+  color: #ff1f44;
+}
+
+.group {
+  display: inline-block;
+  position: relative;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+.group .wrap {
+  margin-top: 10px;
+  margin-left: 10px;
+}

@@ -1,0 +1,182 @@
+.theme-border.color-red.theme-border,
+.theme-fill.color-red.theme-border {
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #f65082;
+}
+.theme-border.color-red.theme-border.inherit-color,
+.theme-fill.color-red.theme-border.inherit-color {
+  color: #f65082;
+}
+.theme-border.color-red.theme-border:hover,
+.theme-fill.color-red.theme-border:hover {
+  background: rgba(245, 71, 124, 0.8);
+}
+.theme-border.color-red.theme-border:active,
+.theme-border.color-red.theme-border.active,
+.theme-fill.color-red.theme-border:active,
+.theme-fill.color-red.theme-border.active {
+  box-shadow: none;
+}
+.theme-border.color-red:disabled,
+.theme-border.color-red.disabled,
+.theme-fill.color-red:disabled,
+.theme-fill.color-red.disabled {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #d74472;
+}
+.theme-border.color-red:active,
+.theme-border.color-red.active,
+.theme-fill.color-red:active,
+.theme-fill.color-red.active {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #d74472;
+}
+.button.color-blue:active {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(75, 133, 238, 0.67) 0%,
+    rgba(116, 176, 248, 0.67) 99%,
+    rgba(116, 176, 248, 0.67) 100%
+  );
+}
+.button.block {
+  width: 100%;
+}
+.button.theme-link {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  min-width: auto;
+  background: transparent;
+  box-shadow: none;
+  text-transform: none;
+  font-weight: 400;
+  font-size: 14px;
+  color: #548ef0;
+}
+.button.theme-link:hover,
+.button.theme-link.hover,
+.button.theme-link.active {
+  text-decoration: underline;
+}
+.button.theme-link:disabled,
+.button.theme-link.disabled {
+  opacity: 1;
+  color: #c6d1d7;
+}
+.button.theme-link.size-small {
+  font-size: 10px;
+}
+.button:disabled,
+.button.disabled {
+  opacity: 0.5;
+  background-image: none;
+  pointer-events: none;
+  cursor: default;
+}
+.button.size-small {
+  padding: 12px 20px;
+  font-size: 10px;
+}
+.button.size-small.theme-fill {
+  box-shadow: none;
+}
+.button.size-small:active,
+.button.size-small.active {
+  box-shadow: none;
+}
+.button.color-green {
+  background: #b9dd2f linear-gradient(0deg, #c2e639 0%, #c2e639 100%);
+  color: #292b37;
+}
+.button.color-green:hover {
+  background-image: linear-gradient(180deg, #c2e639 0%, #c2e639 100%);
+}
+.button.color-green:active,
+.button.color-green.active {
+  background-image: none;
+}
+.button.color-green:disabled,
+.button.color-green.disabled {
+  background-image: none;
+}
+.button.color-green.theme-border {
+  background: #fff;
+}
+.button.color-green.theme-border.inherit-color {
+  color: #b9dd2f;
+}
+.button.color-green.theme-border:hover {
+  background: rgba(85, 235, 63, 0.8);
+}
+.button.color-green.theme-border:active,
+.button.color-green.theme-border.active {
+  box-shadow: none;
+}
+.button {
+  display: inline-block;
+  padding: 25px 50px;
+  min-width: 300px;
+  line-height: 1.2;
+  color: #fff;
+  background: #ff5a00 linear-gradient(0deg, #ff5a00 0%, #f8752e 100%);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.button .icon {
+  margin-right: 5px;
+}
+.button .icon i {
+  vertical-align: middle;
+}
+.button.color-blue {
+  background: #5791ef
+    linear-gradient(
+      to top,
+      rgba(75, 133, 238, 0.67) 0%,
+      rgba(116, 176, 248, 0.67) 99%,
+      rgba(116, 176, 248, 0.67) 100%
+    );
+}
+.button.color-blue:hover {
+  background-color: #74b0f8;
+}
+.theme-border,
+.theme-fill {
+}
+.theme-border.color-red,
+.theme-fill.color-red {
+  background: #f65082 linear-gradient(0deg, #f5477c 0%, #f86995 100%);
+  box-shadow: inset 0 -2px 0 0 #d74472;
+}
+.theme-border.color-red:hover,
+.theme-fill.color-red:hover {
+  background-image: linear-gradient(180deg, #f5477c 0%, #f86995 100%);
+}
+.theme-link {
+}
+.theme-link.color-red {
+  box-shadow: none;
+  background: none;
+  color: #d74472;
+}
+.buttonsGroup {
+  margin-left: -40px;
+  margin-top: -20px;
+}
+.buttonsGroup .buttonsGroupItem {
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+.inherit-font-size {
+  font-size: inherit !important;
+}

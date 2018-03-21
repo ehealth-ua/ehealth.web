@@ -1,0 +1,13 @@
+.main {
+  text-align: center;
+}
+.main .header {
+  margin-bottom: 32px;
+}
+.main .form {
+  max-width: 420px;
+  margin: 0 auto;
+}
+.main .description {
+  margin: 20px 0;
+}

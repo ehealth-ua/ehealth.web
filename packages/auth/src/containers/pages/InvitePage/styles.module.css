@@ -1,0 +1,54 @@
+.details__header__title {
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: top;
+}
+.details__header__arrow {
+  font-size: 8px;
+  margin-left: 7px;
+  vertical-align: middle;
+  display: inline-block;
+}
+.details__title {
+  font-weight: 800;
+  margin-top: 20px;
+}
+.details__block {
+  margin-top: 10px;
+}
+.main {
+  text-align: center;
+}
+.main .header {
+  margin-bottom: 32px;
+}
+.main .content,
+.main .form {
+  font-size: 18px;
+  line-height: 24px;
+}
+.main .description {
+  margin-bottom: 12px;
+}
+.main .accept {
+  font-weight: 700;
+  margin: 12px 0 26px;
+}
+.main .email {
+  margin: 32px 0;
+}
+
+.details {
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.details__body {
+  margin-top: 15px;
+  margin-bottom: 60px;
+}
+
+.details__body p {
+  margin-bottom: 0;
+}

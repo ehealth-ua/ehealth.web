@@ -1,0 +1,109 @@
+.group-input.theme-light {
+  border-color: #dadcde;
+}
+.group-input.disabled {
+  border-color: #dadcde;
+}
+.group-input.active {
+  border-color: #11d8fb;
+}
+.group-input.active .prefix-wrapper,
+.group-input.active .postfix-wrapper {
+  color: #3d3d3d;
+}
+.group-input.active .required-label {
+  border-bottom-color: #11d8fb;
+}
+.label-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.group-input {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  background-color: #fefefe;
+  border: 1px solid #dedede;
+}
+.group-input.error {
+  border-color: #ff1f44;
+}
+.group-input.error .prefix-wrapper,
+.group-input.error .postfix-wrapper {
+  color: #3d3d3d;
+}
+.group-input.error .required-label {
+  border-bottom-color: #ff1f44;
+}
+.input {
+  color: #3c4858;
+  font-size: 16px;
+  line-height: 16px;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+}
+.input::-webkit-input-placeholder {
+  color: #62758f;
+}
+.input:-ms-input-placeholder {
+  color: #62758f;
+}
+.input::placeholder {
+  color: #62758f;
+}
+input.input,
+textarea.input {
+  padding: 18px 26px;
+}
+.prefix-wrapper {
+  position: relative;
+  padding: 0 20px;
+  padding-right: 0;
+  line-height: 32px;
+  border-right: none;
+  font-size: 16px;
+  color: #3c4858;
+  margin: 10px 0;
+  margin-right: -15px;
+}
+.postfix-wrapper {
+  height: 35px;
+  padding: 0 11px;
+  padding-left: 0;
+  line-height: 32px;
+  color: rgba(61, 61, 61, 0.5);
+  border-left: none;
+  font-size: 16px;
+}
+.label-text {
+  margin-bottom: 10px;
+  color: #3d3d3d;
+  font-size: 12px;
+}
+.required-label {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  width: 0;
+  height: 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #dedede;
+  border-left: 5px solid transparent;
+}
+.error-label {
+  position: absolute;
+  top: 100%;
+  right: -1px;
+  padding: 8px 15px 7px 13px;
+  color: #fff;
+  background-color: #ff1f44;
+  font-size: 10px;
+  line-height: 1.4;
+}

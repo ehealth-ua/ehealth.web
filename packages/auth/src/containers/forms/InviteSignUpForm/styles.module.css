@@ -1,0 +1,40 @@
+.main {
+  color: #3c4858;
+  margin-bottom: 24px;
+}
+
+.main .description {
+  font-size: 16px;
+  color: #62758f;
+  max-width: 520px;
+  margin: 0 auto 24px;
+}
+
+.main .description_black {
+  color: #3c4858;
+}
+
+.caption {
+  font-size: 11px;
+  line-height: 14px;
+}
+
+.fields {
+  max-width: 420px;
+  margin: 24px auto 0;
+}
+
+.fields .field,
+.fields .title {
+  margin-bottom: 24px;
+}
+
+.confirm {
+  max-width: 520px;
+  margin: 0 auto;
+  font-size: 18px;
+}
+
+.button {
+  margin-top: 42px;
+}

@@ -1,0 +1,46 @@
+.faq {
+  padding: 0 20px;
+  min-width: 980px;
+}
+
+.header {
+  margin-bottom: 72px;
+  text-align: left;
+}
+
+.logo img {
+  display: inline-block;
+  height: 80px;
+}
+
+.main {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.aside {
+  flex: 0 0 400px;
+  padding-right: 20px;
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+.list {
+  font-size: 12px;
+}
+
+.list li {
+  margin-bottom: 16px;
+}
+
+.list a {
+  display: inline-block;
+  text-decoration: none;
+  color: #292b37;
+}
+
+.active {
+  font-weight: 700;
+}

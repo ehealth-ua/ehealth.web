@@ -1,0 +1,16 @@
+.points {
+  display: block;
+  margin-top: 12px;
+}
+.points li {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 9px;
+  background-color: #5893f0;
+  opacity: 0.5;
+  border-radius: 50%;
+}
+.points li.active {
+  opacity: 1;
+}

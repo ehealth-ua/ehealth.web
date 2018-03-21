@@ -1,0 +1,18 @@
+.main {
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 960px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding-top: 60px;
+}
+
+.main main {
+  flex: 1 1 auto;
+}
+
+.footer {
+  flex: 0 0 40px;
+  line-height: 40px;
+  text-align: center;
+}

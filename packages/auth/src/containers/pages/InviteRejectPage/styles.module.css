@@ -1,0 +1,26 @@
+.main {
+  max-width: 540px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+  line-height: 22px;
+}
+.main .header {
+  margin-bottom: 32px;
+}
+.main .content {
+  margin-bottom: 42px;
+}
+.main .links {
+  margin-top: 30px;
+}
+.main .links > div {
+  display: inline-block;
+  margin-right: 24px;
+}
+.main .links > div:last-child {
+  margin-right: 0;
+}
+.main p {
+  margin-bottom: 10px;
+}
