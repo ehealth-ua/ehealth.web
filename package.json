@@ -11,7 +11,7 @@
   },
   "scripts": {
     "prepare": "lerna bootstrap",
-    "start": "lerna run start",
+    "start": "lerna run start --parallel",
     "test": "lerna run test",
     "publish": "lerna publish",
     "precommit": "pretty-quick --staged",
