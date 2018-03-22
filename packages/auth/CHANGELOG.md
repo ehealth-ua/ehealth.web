@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.3"></a>
+## [0.3.3](https://github.com/edenlabllc/ehealth.web/compare/v0.3.2...v0.3.3) (2018-03-22)
+
+
+### Bug Fixes
+
+* **auth:** add missing links to OAuth flow pages ([#15](https://github.com/edenlabllc/ehealth.web/issues/15)) ([a6b8f7c](https://github.com/edenlabllc/ehealth.web/commit/a6b8f7c)), closes [#2](https://github.com/edenlabllc/ehealth.web/issues/2)
+
+
+
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://github.com/edenlabllc/ehealth.web/compare/v0.3.1...v0.3.2) (2018-03-21)
 
