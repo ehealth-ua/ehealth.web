@@ -6,6 +6,7 @@ import { withRouter } from "react-router";
 import format from "date-fns/format";
 
 import Button, { ButtonsGroup } from "../../../components/Button";
+import { Main, Header, Article } from "../../../components/CenterLayout";
 import { H1 } from "../../../components/Title";
 import Points from "../../../components/Points";
 import Icon from "../../../components/Icon";
@@ -19,9 +20,7 @@ import { getRequestById } from "../../../reducers";
 import { onSubmitSignUp, onSubmitSignIn } from "./redux";
 import styles from "./styles.module.css";
 
-const toArray = v => (!Array.isArray(v) ? [v] : v);
-
-class SignUpPage extends Component {
+class InvitePage extends Component {
   constructor(props) {
     super(props);
     this.toggleDetails = this.toggleDetails.bind(this);
@@ -221,85 +220,93 @@ class SignUpPage extends Component {
       </div>
     );
   }
+
   render() {
     const {
       request: { party = {}, legal_entity = {}, position, user_id, id } = {},
       location
     } = this.props;
+
     const invite =
       location.query && location.query.invite
         ? `invite=${location.query.invite}`
         : false;
 
     return (
-      <section className={styles.main} id="sign-up-page">
+      <Main id="sign-up-page">
         {!user_id && (
-          <header className={styles.header}>
+          <Header>
             <H1>Реєстрація</H1>
 
             <Points count={2} active={0} />
-          </header>
+          </Header>
         )}
-        <article className={styles.content}>
-          <div className={styles.description}>
-            Я, {party.first_name} {party.second_name} {party.last_name},{" "}
-            {format(party.birth_date, "DD.MM.YYYY")} р.н.
-          </div>
+        <Article>
+          <div className={styles.content}>
+            <div className={styles.description}>
+              Я, {party.first_name} {party.second_name} {party.last_name},{" "}
+              {format(party.birth_date, "DD.MM.YYYY")} р.н.
+            </div>
 
-          <div className={styles.accept}>
-            даю згоду на реєстрацію мене в системі eHealth<br />
-            у ролі "<DictionaryValue
-              dictionary="POSITION"
-              value={position}
-            />" <br />
-            {legal_entity.name}
+            <div className={styles.accept}>
+              даю згоду на реєстрацію мене в системі eHealth<br />
+              у ролі "<DictionaryValue
+                dictionary="POSITION"
+                value={position}
+              />"
+              <br />
+              {legal_entity.name}
+            </div>
           </div>
-        </article>
-        <div className={styles.details}>
-          <div className={styles.details__header}>
-            <Button onClick={this.toggleDetails} theme="link" inheritFontSize>
-              <span className={styles.details__header__title}>
-                {this.state.showDetails ? "Сховати деталі" : "Детальніше"}
-                <span className={styles.details__header__arrow}>
-                  <Icon
-                    name={this.state.showDetails ? "caret-up" : "caret-down"}
-                  />
+          <div className={styles.details}>
+            <div className={styles.details__header}>
+              <Button onClick={this.toggleDetails} theme="link" inheritFontSize>
+                <span className={styles.details__header__title}>
+                  {this.state.showDetails ? "Сховати деталі" : "Детальніше"}
+                  <span className={styles.details__header__arrow}>
+                    <Icon
+                      name={this.state.showDetails ? "caret-up" : "caret-down"}
+                    />
+                  </span>
                 </span>
-              </span>
-            </Button>
+              </Button>
+            </div>
+            {this.state.showDetails && this.renderDetails()}
           </div>
-          {this.state.showDetails && this.renderDetails()}
-        </div>
-        <FormBlock>
-          <div className={styles.form}>
-            {user_id && (
-              <InviteSignInForm
-                email={party.email}
-                onSubmit={({ password }) =>
-                  this.props.onSubmitSignIn(id, party.email, password)
-                }
-              />
-            )}
+          <FormBlock>
+            <div className={styles.form}>
+              {user_id && (
+                <InviteSignInForm
+                  email={party.email}
+                  onSubmit={({ password }) =>
+                    this.props.onSubmitSignIn(id, party.email, password)
+                  }
+                />
+              )}
 
-            {!user_id && (
-              <InviteSignUpForm
-                email={party.email}
-                onSubmit={({ password }) =>
-                  this.props.onSubmitSignUp(id, party.email, password)
-                }
-              />
-            )}
-          </div>
-        </FormBlock>
-        <ButtonsGroup>
-          <Button theme="link" to={`/update-password${location.search}`}>
-            Змінити пароль
-          </Button>
-          <Button theme="link" to={`/update-factor?${invite}`}>
-            Змінити додатковий фактор авторизації
-          </Button>
-        </ButtonsGroup>
-      </section>
+              {!user_id && (
+                <InviteSignUpForm
+                  email={party.email}
+                  onSubmit={({ password }) =>
+                    this.props.onSubmitSignUp(id, party.email, password)
+                  }
+                />
+              )}
+            </div>
+          </FormBlock>
+          <ButtonsGroup>
+            <Button theme="link" to={`/update-password${location.search}`}>
+              Змінити пароль
+            </Button>
+            <Button theme="link" to="/reset">
+              Забули пароль?
+            </Button>
+            <Button theme="link" to={`/update-factor?${invite}`}>
+              Змінити додатковий фактор авторизації
+            </Button>
+          </ButtonsGroup>
+        </Article>
+      </Main>
     );
   }
 }
@@ -315,4 +322,6 @@ export default compose(
     }),
     { onSubmitSignUp, onSubmitSignIn }
   )
-)(SignUpPage);
+)(InvitePage);
+
+const toArray = v => (Array.isArray(v) ? v : [v]);

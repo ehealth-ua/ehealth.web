@@ -4,31 +4,16 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
 import { H1, H3 } from "../../../components/Title";
-import Button from "../../../components/Button";
+import Button, { ButtonsGroup } from "../../../components/Button";
 import NewPasswordForm from "../../forms/NewPasswordForm";
 
 import { onSubmit } from "./redux";
 import styles from "./styles.module.css";
 
 class NewPasswordPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      code: false
-    };
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  onSubmit(values) {
-    return this.props.onSubmit(values, this.props).then(action => {
-      if (action.error) {
-        return this.setState({
-          code: action.payload.status
-        });
-      }
-      return this.setState({ code: 200 });
-    });
-  }
+  state = {
+    code: false
+  };
 
   render() {
     return (
@@ -50,7 +35,20 @@ class NewPasswordPage extends Component {
           )}
           {this.state.code === 422 && (
             <div>
-              <H3>Вийшов час дії токену</H3>
+              <H3>
+                Час дії посилання вичерпався, будь ласка відправте форму
+                повторно
+              </H3>
+              <div className={styles.description}>
+                <ButtonsGroup>
+                  <Button color="blue" to="/reset">
+                    Відправити повторно
+                  </Button>
+                  <Button theme="link" to="/sign-in">
+                    Повернутися до входу
+                  </Button>
+                </ButtonsGroup>
+              </div>
             </div>
           )}
           {this.state.code === 400 && (
@@ -68,13 +66,20 @@ class NewPasswordPage extends Component {
           )}
           {this.state.code === 404 && (
             <div>
-              <H3>Дана ссилка на відновлення паролю не дійсна</H3>
+              <H3>Посилання на відновлення паролю не дійсне</H3>
             </div>
           )}
         </article>
       </section>
     );
   }
+
+  onSubmit = async values => {
+    const { error, payload } = await this.props.onSubmit(values, this.props);
+    const code = error ? payload.status : 200;
+
+    this.setState({ code });
+  };
 }
 
 export default compose(withRouter, connect(null, { onSubmit }))(

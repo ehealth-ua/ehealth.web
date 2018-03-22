@@ -1,10 +1,12 @@
 .main {
   text-align: center;
 }
-.main .header {
+
+.header {
   margin-bottom: 32px;
 }
-.main .form {
+
+.form {
   max-width: 420px;
   margin: 0 auto;
 }

@@ -1,4 +1,6 @@
 import React from "react";
+import { compose } from "redux";
+import { withRouter } from "react-router";
 import { reduxForm, Field } from "redux-form";
 import { ErrorMessage, reduxFormValidate } from "react-nebo15-validate";
 
@@ -7,7 +9,7 @@ import Button, { ButtonsGroup } from "../../../components/Button";
 
 import styles from "./styles.module.css";
 
-const ResetPasswordForm = ({ handleSubmit, submitting }) => (
+const ResetPasswordForm = ({ handleSubmit, submitting, router }) => (
   <form className={styles.main} onSubmit={handleSubmit}>
     <div>
       <Field
@@ -24,19 +26,22 @@ const ResetPasswordForm = ({ handleSubmit, submitting }) => (
       <Button disabled={submitting} type="submit" color="blue">
         далі
       </Button>
-      <Button to="/sign-in" theme="link">
+      <Button theme="link" onClick={router.goBack}>
         Назад
       </Button>
     </ButtonsGroup>
   </form>
 );
 
-export default reduxForm({
-  form: "reset-password-form",
-  validate: reduxFormValidate({
-    email: {
-      required: true,
-      email: true
-    }
+export default compose(
+  withRouter,
+  reduxForm({
+    form: "reset-password-form",
+    validate: reduxFormValidate({
+      email: {
+        required: true,
+        email: true
+      }
+    })
   })
-})(ResetPasswordForm);
+)(ResetPasswordForm);
