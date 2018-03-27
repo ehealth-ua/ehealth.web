@@ -13,5 +13,5 @@ export const Header = ({ children }) => (
 );
 
 export const Article = ({ children }) => (
-  <article className={styles.form}>{children}</article>
+  <article className={styles.article}>{children}</article>
 );

@@ -242,21 +242,16 @@ class InvitePage extends Component {
           </Header>
         )}
         <Article>
-          <div className={styles.content}>
-            <div className={styles.description}>
-              Я, {party.first_name} {party.second_name} {party.last_name},{" "}
-              {format(party.birth_date, "DD.MM.YYYY")} р.н.
-            </div>
+          <div className={styles.description}>
+            Я, {party.first_name} {party.second_name} {party.last_name},{" "}
+            {format(party.birth_date, "DD.MM.YYYY")} р.н.
+          </div>
 
-            <div className={styles.accept}>
-              даю згоду на реєстрацію мене в системі eHealth<br />
-              у ролі "<DictionaryValue
-                dictionary="POSITION"
-                value={position}
-              />"
-              <br />
-              {legal_entity.name}
-            </div>
+          <div className={styles.accept}>
+            даю згоду на реєстрацію мене в системі eHealth<br />
+            у ролі "<DictionaryValue dictionary="POSITION" value={position} />"
+            <br />
+            {legal_entity.name}
           </div>
           <div className={styles.details}>
             <div className={styles.details__header}>
@@ -274,7 +269,7 @@ class InvitePage extends Component {
             {this.state.showDetails && this.renderDetails()}
           </div>
           <FormBlock>
-            <div className={styles.form}>
+            <div>
               {user_id && (
                 <InviteSignInForm
                   email={party.email}

@@ -1,0 +1,9 @@
+.article {
+  font-size: 16px;
+  margin: 0 auto;
+}
+
+.email {
+  display: block;
+  font-weight: 700;
+}
