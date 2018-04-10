@@ -9,8 +9,8 @@
     "start": "NODE_ENV=development babel src --out-dir dist --watch"
   },
   "dependencies": {
-    "@ehealth/icons": "^0.0.0",
-    "@ehealth/utils": "^0.0.0",
+    "@ehealth/icons": "^0.3.4",
+    "@ehealth/utils": "^0.3.4",
     "downshift": "^1.31.3",
     "emotion": "^9.1.1",
     "lodash": "^4.17.5",
