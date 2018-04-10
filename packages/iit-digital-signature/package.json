@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/iit-digital-signature",
-  "version": "0.2.0",
+  "version": "0.5.0",
   "private": true,
   "description": "EUSignCP digital signature library ESM wrapper",
   "main": "dist/main.js",

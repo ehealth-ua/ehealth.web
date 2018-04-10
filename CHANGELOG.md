@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/edenlabllc/ehealth.web/compare/v0.4.0...v0.5.0) (2018-04-10)
+
+
+### Features
+
+* **iit-digital-signature:** add ability to fetch CAs list and certificates ([7e60dcd](https://github.com/edenlabllc/ehealth.web/commit/7e60dcd)), closes [#19](https://github.com/edenlabllc/ehealth.web/issues/19)
+* **iit-proxy:** add ability cache requests and pass raw data ([3539943](https://github.com/edenlabllc/ehealth.web/commit/3539943))
+
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/edenlabllc/ehealth.web/compare/v0.3.4...v0.4.0) (2018-04-10)
 

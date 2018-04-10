@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/edenlabllc/ehealth.web/compare/v0.4.0...v0.5.0) (2018-04-10)
+
+
+### Features
+
+* **iit-proxy:** add ability cache requests and pass raw data ([3539943](https://github.com/edenlabllc/ehealth.web/commit/3539943))
+
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/edenlabllc/ehealth.web/compare/v0.1.0...v0.2.0) (2018-03-15)
 
