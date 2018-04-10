@@ -8,6 +8,9 @@
     "prepare": "rm -fr dist && NODE_ENV=production webpack",
     "start": "NODE_ENV=development webpack --watch"
   },
+  "dependencies": {
+    "whatwg-fetch": "^2.0.3"
+  },
   "devDependencies": {
     "raw-loader": "^0.5.1",
     "webpack": "^4.0.0-beta.2",
