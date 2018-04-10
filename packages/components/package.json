@@ -25,12 +25,14 @@
     "final-form": "^4.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-final-form": "^3.1.2"
+    "react-final-form": "^3.1.2",
+    "react-router": "^3.2.1"
   },
   "peerDependencies": {
     "final-form": "^4.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-final-form": "^3.1.2"
+    "react-final-form": "^3.1.2",
+    "react-router": "^3.2.1"
   }
 }
