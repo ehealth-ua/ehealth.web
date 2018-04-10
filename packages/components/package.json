@@ -8,15 +8,29 @@
     "prepare": "rm -fr dist && NODE_ENV=production babel src --out-dir dist",
     "start": "NODE_ENV=development babel src --out-dir dist --watch"
   },
+  "dependencies": {
+    "@ehealth/icons": "^0.0.0",
+    "@ehealth/utils": "^0.0.0",
+    "downshift": "^1.31.3",
+    "emotion": "^9.1.1",
+    "lodash": "^4.17.5",
+    "react-emotion": "^9.1.1",
+    "styled-tools": "^0.5.0",
+    "validator": "^9.4.1"
+  },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.38",
     "@babel/core": "7.0.0-beta.38",
     "babel-preset-react-app": "4.0.0-next.47d2d941",
+    "final-form": "^4.2.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-final-form": "^3.1.2"
   },
   "peerDependencies": {
+    "final-form": "^4.2.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-final-form": "^3.1.2"
   }
 }
