@@ -1,7 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Main, Header, Article } from "../../../components/CenterLayout";
+import {
+  Main,
+  Header,
+  Article,
+  NarrowContainer
+} from "../../../components/CenterLayout";
 import { H1, H2 } from "../../../components/Title";
 import FactorForm from "../../forms/FactorForm";
 import BackgroundLayout from "../../../components/BackgroundLayout";
@@ -20,11 +25,13 @@ const PasswordRequestFactorPage = ({ onSubmit = () => {} }) => (
       </H2>
     </Header>
     <Article>
-      <FactorForm
-        noLabel={false}
-        btnColor="green"
-        onSubmit={({ phone }) => onSubmit(phone.replace(/\s/g, ""))}
-      />
+      <NarrowContainer>
+        <FactorForm
+          noLabel={false}
+          btnColor="green"
+          onSubmit={({ phone }) => onSubmit(phone.replace(/\s/g, ""))}
+        />
+      </NarrowContainer>
     </Article>
   </Main>
 );

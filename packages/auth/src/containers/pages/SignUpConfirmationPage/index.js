@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 
-import { Main, Header } from "../../../components/CenterLayout";
+import { Main, Header, Article } from "../../../components/CenterLayout";
 import { H1 } from "../../../components/Title";
 
 import styles from "./styles.module.css";
@@ -11,7 +11,7 @@ const SignUpConfirmationPage = ({ location }) => (
     <Header>
       <H1>Email-авторизація</H1>
     </Header>
-    <div className={styles.article}>
+    <Article>
       <p>
         Ми відправили лист для авторизації на вашу email-адресу
         <div className={styles.email}>{location.query.email}</div>
@@ -21,7 +21,7 @@ const SignUpConfirmationPage = ({ location }) => (
         Не отримали листа? Спробуйте{" "}
         <Link to="/sign-up">змінити email-адресу</Link>
       </p>
-    </div>
+    </Article>
   </Main>
 );
 

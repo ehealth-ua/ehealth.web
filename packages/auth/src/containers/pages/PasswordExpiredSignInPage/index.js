@@ -5,7 +5,12 @@ import { withRouter } from "react-router";
 
 import { H1, H2 } from "../../../components/Title";
 import Button, { ButtonsGroup } from "../../../components/Button";
-import { Main, Header, Article } from "../../../components/CenterLayout";
+import {
+  Main,
+  Header,
+  Article,
+  NarrowContainer
+} from "../../../components/CenterLayout";
 import BackgroundLayout from "../../../components/BackgroundLayout";
 
 import SignInForm from "../../forms/SignInForm";
@@ -24,12 +29,14 @@ const PasswordExpiredSignInPage = ({ onSubmit = () => {}, router }) => (
       </H2>
     </Header>
     <Article>
-      <SignInForm onSubmit={onSubmit} btnColor="green" />
-      <ButtonsGroup>
-        <Button theme="link" onClick={() => router.goBack()}>
-          Назад
-        </Button>
-      </ButtonsGroup>
+      <NarrowContainer>
+        <SignInForm onSubmit={onSubmit} btnColor="green" />
+        <ButtonsGroup>
+          <Button theme="link" onClick={() => router.goBack()}>
+            Назад
+          </Button>
+        </ButtonsGroup>
+      </NarrowContainer>
     </Article>
   </Main>
 );

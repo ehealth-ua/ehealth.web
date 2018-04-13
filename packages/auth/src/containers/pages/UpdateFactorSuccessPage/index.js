@@ -3,7 +3,12 @@ import { withRouter } from "react-router";
 
 import { H2 } from "../../../components/Title";
 import Button from "../../../components/Button";
-import { Main, Header, Article } from "../../../components/CenterLayout";
+import {
+  Main,
+  Header,
+  Article,
+  NarrowContainer
+} from "../../../components/CenterLayout";
 
 const UpdateFactorSuccessPage = ({ location }) => {
   const invite =
@@ -17,15 +22,17 @@ const UpdateFactorSuccessPage = ({ location }) => {
         <H2>Фактор було успішно змінено!</H2>
       </Header>
       <Article>
-        {invite ? (
-          <Button color="blue" to={`/invite?${invite}`}>
-            Повернутися до запрошення
-          </Button>
-        ) : (
-          <Button color="blue" to={`/sign-in/${location.search}`}>
-            Повернутися до входу
-          </Button>
-        )}
+        <NarrowContainer>
+          {invite ? (
+            <Button color="blue" to={`/invite?${invite}`}>
+              Повернутися до запрошення
+            </Button>
+          ) : (
+            <Button color="blue" to={`/sign-in/${location.search}`}>
+              Повернутися до входу
+            </Button>
+          )}
+        </NarrowContainer>
       </Article>
     </Main>
   );

@@ -8,6 +8,10 @@
 
 .article {
   font-size: 16px;
+  margin: 0 auto;
+}
+
+.narrow_container {
   max-width: 420px;
   margin: 0 auto;
 }

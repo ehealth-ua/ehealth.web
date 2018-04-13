@@ -6,7 +6,12 @@ import { withRouter } from "react-router";
 import format from "date-fns/format";
 
 import Button, { ButtonsGroup } from "../../../components/Button";
-import { Main, Header, Article } from "../../../components/CenterLayout";
+import {
+  Main,
+  Header,
+  Article,
+  NarrowContainer
+} from "../../../components/CenterLayout";
 import { H1 } from "../../../components/Title";
 import Points from "../../../components/Points";
 import Icon from "../../../components/Icon";
@@ -242,64 +247,75 @@ class InvitePage extends Component {
           </Header>
         )}
         <Article>
-          <div className={styles.description}>
-            Я, {party.first_name} {party.second_name} {party.last_name},{" "}
-            {format(party.birth_date, "DD.MM.YYYY")} р.н.
-          </div>
+          <NarrowContainer>
+            <div className={styles.description}>
+              Я, {party.first_name} {party.second_name} {party.last_name},{" "}
+              {format(party.birth_date, "DD.MM.YYYY")} р.н.
+            </div>
 
-          <div className={styles.accept}>
-            даю згоду на реєстрацію мене в системі eHealth<br />
-            у ролі "<DictionaryValue dictionary="POSITION" value={position} />"
-            <br />
-            {legal_entity.name}
-          </div>
-          <div className={styles.details}>
-            <div className={styles.details__header}>
-              <Button onClick={this.toggleDetails} theme="link" inheritFontSize>
-                <span className={styles.details__header__title}>
-                  {this.state.showDetails ? "Сховати деталі" : "Детальніше"}
-                  <span className={styles.details__header__arrow}>
-                    <Icon
-                      name={this.state.showDetails ? "caret-up" : "caret-down"}
-                    />
+            <div className={styles.accept}>
+              даю згоду на реєстрацію мене в системі eHealth<br />
+              у ролі "<DictionaryValue
+                dictionary="POSITION"
+                value={position}
+              />"
+              <br />
+              {legal_entity.name}
+            </div>
+            <div className={styles.details}>
+              <div className={styles.details__header}>
+                <Button
+                  onClick={this.toggleDetails}
+                  theme="link"
+                  inheritFontSize
+                >
+                  <span className={styles.details__header__title}>
+                    {this.state.showDetails ? "Сховати деталі" : "Детальніше"}
+                    <span className={styles.details__header__arrow}>
+                      <Icon
+                        name={
+                          this.state.showDetails ? "caret-up" : "caret-down"
+                        }
+                      />
+                    </span>
                   </span>
-                </span>
-              </Button>
+                </Button>
+              </div>
+              {this.state.showDetails && this.renderDetails()}
             </div>
-            {this.state.showDetails && this.renderDetails()}
-          </div>
-          <FormBlock>
-            <div>
-              {user_id && (
-                <InviteSignInForm
-                  email={party.email}
-                  onSubmit={({ password }) =>
-                    this.props.onSubmitSignIn(id, party.email, password)
-                  }
-                />
-              )}
+            <FormBlock>
+              <div>
+                {user_id && (
+                  <InviteSignInForm
+                    email={party.email}
+                    onSubmit={({ password }) =>
+                      this.props.onSubmitSignIn(id, party.email, password)
+                    }
+                  />
+                )}
 
-              {!user_id && (
-                <InviteSignUpForm
-                  email={party.email}
-                  onSubmit={({ password }) =>
-                    this.props.onSubmitSignUp(id, party.email, password)
-                  }
-                />
-              )}
-            </div>
-          </FormBlock>
-          <ButtonsGroup>
-            <Button theme="link" to={`/update-password${location.search}`}>
-              Змінити пароль
-            </Button>
-            <Button theme="link" to="/reset">
-              Забули пароль?
-            </Button>
-            <Button theme="link" to={`/update-factor?${invite}`}>
-              Змінити додатковий фактор авторизації
-            </Button>
-          </ButtonsGroup>
+                {!user_id && (
+                  <InviteSignUpForm
+                    email={party.email}
+                    onSubmit={({ password }) =>
+                      this.props.onSubmitSignUp(id, party.email, password)
+                    }
+                  />
+                )}
+              </div>
+            </FormBlock>
+            <ButtonsGroup>
+              <Button theme="link" to={`/update-password${location.search}`}>
+                Змінити пароль
+              </Button>
+              <Button theme="link" to="/reset">
+                Забули пароль?
+              </Button>
+              <Button theme="link" to={`/update-factor?${invite}`}>
+                Змінити додатковий фактор авторизації
+              </Button>
+            </ButtonsGroup>
+          </NarrowContainer>
         </Article>
       </Main>
     );

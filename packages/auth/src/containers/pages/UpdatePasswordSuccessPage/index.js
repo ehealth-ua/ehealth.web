@@ -3,7 +3,12 @@ import { withRouter } from "react-router";
 
 import { H2 } from "../../../components/Title";
 import Button from "../../../components/Button";
-import { Main, Header, Article } from "../../../components/CenterLayout";
+import {
+  Main,
+  Header,
+  Article,
+  NarrowContainer
+} from "../../../components/CenterLayout";
 import BackgroundLayout from "../../../components/BackgroundLayout";
 
 const UpdatePasswordSuccessPage = ({
@@ -15,15 +20,17 @@ const UpdatePasswordSuccessPage = ({
       <H2>Пароль успішно змінено!</H2>
     </Header>
     <Article>
-      {invite ? (
-        <Button color="green" to={{ pathname: "/invite", query: { invite } }}>
-          Повернутися до запрошення
-        </Button>
-      ) : (
-        <Button color="green" to={{ pathname: "/sign-in", query }}>
-          Повернутися до входу
-        </Button>
-      )}
+      <NarrowContainer>
+        {invite ? (
+          <Button color="green" to={{ pathname: "/invite", query: { invite } }}>
+            Повернутися до запрошення
+          </Button>
+        ) : (
+          <Button color="green" to={{ pathname: "/sign-in", query }}>
+            Повернутися до входу
+          </Button>
+        )}
+      </NarrowContainer>
     </Article>
   </Main>
 );

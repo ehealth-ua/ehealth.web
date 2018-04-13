@@ -1,6 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Main, Header, Article } from "../../../components/CenterLayout";
+import {
+  Main,
+  Header,
+  Article,
+  NarrowContainer
+} from "../../../components/CenterLayout";
 
 import { H2 } from "../../../components/Title";
 import OtpForm from "../../forms/OtpForm";
@@ -13,10 +18,12 @@ const UpdateFactorOtpNewPage = ({ onSubmit = () => {}, location }) => (
       <H2>Введіть код, що було надіслано на Ваш новий телефон</H2>
     </Header>
     <Article>
-      <OtpForm onSubmit={onSubmit} />
-      <Button theme="link" to={`/update-factor/${location.search}`}>
-        Повернутися на початок
-      </Button>
+      <NarrowContainer>
+        <OtpForm onSubmit={onSubmit} />
+        <Button theme="link" to={`/update-factor/${location.search}`}>
+          Повернутися на початок
+        </Button>
+      </NarrowContainer>
     </Article>
   </Main>
 );

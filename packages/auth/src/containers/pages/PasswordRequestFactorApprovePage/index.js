@@ -5,7 +5,12 @@ import { withRouter } from "react-router";
 
 import { H1, H2 } from "../../../components/Title";
 import OtpForm from "../../forms/OtpForm";
-import { Main, Header, Article } from "../../../components/CenterLayout";
+import {
+  Main,
+  Header,
+  Article,
+  NarrowContainer
+} from "../../../components/CenterLayout";
 import Button from "../../../components/Button";
 import BackgroundLayout from "../../../components/BackgroundLayout";
 
@@ -32,16 +37,18 @@ const PasswordRequestFactorApprovePage = ({
         </H2>
       </Header>
       <Article>
-        <OtpForm onSubmit={onSubmit} btnColor="green" />
-        {invite ? (
-          <Button theme="link" to={`/invite?${invite}`}>
-            Повернутися до запрошення
-          </Button>
-        ) : (
-          <Button theme="link" to={`/sign-in/${location.search}`}>
-            Повернутися до входу
-          </Button>
-        )}
+        <NarrowContainer>
+          <OtpForm onSubmit={onSubmit} btnColor="green" />
+          {invite ? (
+            <Button theme="link" to={`/invite?${invite}`}>
+              Повернутися до запрошення
+            </Button>
+          ) : (
+            <Button theme="link" to={`/sign-in/${location.search}`}>
+              Повернутися до входу
+            </Button>
+          )}
+        </NarrowContainer>
       </Article>
     </Main>
   );

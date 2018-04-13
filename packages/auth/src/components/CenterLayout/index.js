@@ -15,3 +15,7 @@ export const Header = ({ children }) => (
 export const Article = ({ children }) => (
   <article className={styles.article}>{children}</article>
 );
+
+export const NarrowContainer = props => (
+  <div {...props} className={styles.narrow_container} />
+);
