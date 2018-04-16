@@ -3,6 +3,9 @@
   "version": "0.5.1",
   "private": true,
   "dependencies": {
+    "@ehealth/components": "^0.4.0",
+    "@ehealth/icons": "^0.4.0",
+    "@ehealth/react-iit-digital-signature": "^0.0.0",
     "classnames": "^2.2.5",
     "date-fns": "^1.27.2",
     "emotion-theming": "^9.0.0",
