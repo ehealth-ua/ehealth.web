@@ -22,6 +22,8 @@ import InviteLayout from "./containers/layouts/InviteLayout";
 
 import SignUpVerifyPage from "./containers/pages/SignUpVerifyPage";
 import SignUpConfirmationPage from "./containers/pages/SignUpConfirmationPage";
+import SignUpValidatePage from "./containers/pages/SignUpValidatePage";
+import SignUpFailurePage from "./containers/pages/SignUpFailurePage";
 
 import InvitePage from "./containers/pages/InvitePage";
 import InviteAcceptPage from "./containers/pages/InviteAcceptPage";
@@ -93,7 +95,15 @@ export default class Routes extends Component {
 
             <Route component={Default}>
               <Route path="sign-up" component={SignUpVerifyPage} />
-              <Route path="sign-up/confirmation" component={SignUpConfirmationPage} />
+              <Route
+                path="sign-up/confirmation"
+                component={SignUpConfirmationPage}
+              />
+              <Route path="sign-up/:token" component={SignUpValidatePage} />
+              <Route
+                path="sign-up/failure/:type"
+                component={SignUpFailurePage}
+              />
 
               <Route path="invite" component={InviteLayout}>
                 <IndexRoute inviteStatuses={["NEW"]} component={InvitePage} />

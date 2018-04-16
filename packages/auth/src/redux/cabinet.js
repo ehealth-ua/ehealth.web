@@ -15,3 +15,27 @@ export const verifyEmail = body =>
     ],
     body
   });
+
+export const validateEmail = () =>
+  invoke({
+    endpoint: "/api/cabinet/email_validation",
+    method: "POST",
+    types: [
+      "cabinet/VALIDATE_EMAIL_REQUEST",
+      "cabinet/VALIDATE_EMAIL_SUCCESS",
+      "cabinet/VALIDATE_EMAIL_FAILURE"
+    ]
+  });
+
+export const getUser = ({ drfo, ...body }) =>
+  invoke({
+    endpoint: "/api/cabinet/users",
+    method: "POST",
+    types: [
+      "cabinet/GET_USER_REQUEST",
+      "cabinet/GET_USER_SUCCESS",
+      "cabinet/GET_USER_FAILURE"
+    ],
+    headers: { drfo },
+    body
+  });
