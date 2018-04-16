@@ -4,20 +4,14 @@ import DigitalSignature from "@ehealth/iit-digital-signature";
 const DigitalSignatureContext = createContext();
 
 export default class ReactDigitalSignature extends Component {
-  static Producer = ({ children, render = children }) => (
+  static Consumer = ({ children, render = children }) => (
     <DigitalSignatureContext.Consumer>
-      {({
-        initialized,
-        authorityIndex,
-        ds: { authorities },
-        setAuthority,
-        readPrivateKey
-      }) =>
+      {({ initialized, keyAvailable, authorityIndex, ds, readPrivateKey }) =>
         initialized
           ? render({
+              keyAvailable,
               authorityIndex,
-              authorities,
-              setAuthority,
+              ds,
               readPrivateKey
             })
           : null
@@ -25,16 +19,9 @@ export default class ReactDigitalSignature extends Component {
     </DigitalSignatureContext.Consumer>
   );
 
-  static Consumer = ({ children, render = children }) => (
-    <DigitalSignatureContext.Consumer>
-      {({ keyAvailable, ds }) => (keyAvailable ? render({ ds }) : null)}
-    </DigitalSignatureContext.Consumer>
-  );
-
   state = {
     initialized: false,
-    keyAvailable: false,
-    authorityIndex: 0
+    keyAvailable: false
   };
 
   ds = {};
@@ -54,22 +41,16 @@ export default class ReactDigitalSignature extends Component {
 
   get stateAndHelpers() {
     const { initialized, keyAvailable, authorityIndex } = this.state;
-    const { ds, readPrivateKey, setAuthority } = this;
+    const { ds, readPrivateKey } = this;
 
     return {
       initialized,
       keyAvailable,
       authorityIndex,
       ds,
-      readPrivateKey,
-      setAuthority
+      readPrivateKey
     };
   }
-
-  setAuthority = authorityIndex => {
-    this.ds.setAuthoritySettings(authorityIndex);
-    this.setState({ authorityIndex });
-  };
 
   readPrivateKey = async (file, password) => {
     const privateKey = await readFile(file);
