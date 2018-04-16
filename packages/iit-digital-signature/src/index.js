@@ -44,7 +44,6 @@ class DigitalSignature extends EUSignCP {
     this.SetXMLHTTPProxyService(proxy);
     this.SaveCertificates(certificates);
     this.setOcspAccessInfo();
-    this.setAuthoritySettings(0);
   }
 
   setup() {
@@ -101,7 +100,7 @@ class DigitalSignature extends EUSignCP {
     );
   }
 
-  setAuthoritySettings(index) {
+  setAuthority(index) {
     if (index >= this.authorities.length) {
       throw new Error("Wrong authority index");
     }
