@@ -172,6 +172,8 @@ export const Dropdown = styled.ul`
   left: 0;
   right: 0;
   z-index: 9999;
+  max-height: 200px;
+  overflow-y: scroll;
 `;
 
 export const Option = styled.li`
