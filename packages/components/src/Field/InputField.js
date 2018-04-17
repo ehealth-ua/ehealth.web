@@ -50,9 +50,10 @@ export const FieldWrapper = styled.div`
 
 export const LabelText = styled.span`
   color: #3d3d3d;
-  display: inline-block;
-  font-size: 12px;
+  display: block;
+  font-size: ${prop("theme.input.label.fontSize", 12)}px;
   margin-bottom: 10px;
+  text-align: left;
 `;
 
 export const InputWrapper = styled.div`
@@ -87,6 +88,8 @@ export const InputContent = styled.div`
 export const Input = styled(InputContent.withComponent("input"))`
   background: none;
   border: none;
+  width: 100%;
+  overflow: hidden;
   color: inherit;
   flex: 1 1 auto;
   font: inherit;
