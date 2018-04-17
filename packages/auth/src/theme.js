@@ -11,7 +11,10 @@ const theme = {
     paddingTop: 14,
     paddingBottom: 14,
     paddingHorizontal: 25,
-    marginBottom: 23
+    marginBottom: 23,
+    label: {
+      fontSize: 16
+    }
   }
 };
 
