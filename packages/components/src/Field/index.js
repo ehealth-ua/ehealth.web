@@ -20,6 +20,7 @@ const FINAL_FORM_FIELD_PROPS = [
   "name",
   "parse",
   "subscription",
+  "type",
   "value"
 ];
 

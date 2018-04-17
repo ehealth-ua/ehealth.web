@@ -5,8 +5,8 @@ import { CheckRightIcon } from "@ehealth/icons";
 import Field from "./index";
 
 export const CheckboxField = ({ label, disabled, ...props }) => (
-  <Field {...props}>
-    {({ input, meta: { active, errored } }) => (
+  <Field {...props} type="checkbox">
+    {({ input, meta: { active, errored }, ...t }) => (
       <FieldWrapper>
         <Input {...input} disabled={disabled} type="checkbox" />
         <CheckBox active={active} errored={errored} disabled={disabled}>
@@ -19,7 +19,7 @@ export const CheckboxField = ({ label, disabled, ...props }) => (
 );
 
 export const RadioField = ({ label, disabled, ...props }) => (
-  <Field {...props}>
+  <Field {...props} type="radio">
     {({ input, meta: { active, errored } }) => (
       <FieldWrapper>
         <Input {...input} disabled={disabled} type="radio" />
