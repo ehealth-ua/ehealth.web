@@ -24,6 +24,9 @@ import SignUpVerifyPage from "./containers/pages/SignUpVerifyPage";
 import SignUpConfirmationPage from "./containers/pages/SignUpConfirmationPage";
 import SignUpValidatePage from "./containers/pages/SignUpValidatePage";
 import SignUpFailurePage from "./containers/pages/SignUpFailurePage";
+import SignUpNextPage from "./containers/pages/SignUpNextPage";
+import SignUpPersonPage from "./containers/pages/SignUpPersonPage";
+import SignUpUserPage from "./containers/pages/SignUpUserPage";
 
 import InvitePage from "./containers/pages/InvitePage";
 import InviteAcceptPage from "./containers/pages/InviteAcceptPage";
@@ -104,7 +107,10 @@ export default class Routes extends Component {
                 path="sign-up/failure/:type"
                 component={SignUpFailurePage}
               />
-
+              <Route path="sign-up/next" component={SignUpNextPage}>
+                <Route path="person" component={SignUpPersonPage} />
+                <Route path="user" component={SignUpUserPage} />
+              </Route>
               <Route path="invite" component={InviteLayout}>
                 <IndexRoute inviteStatuses={["NEW"]} component={InvitePage} />
                 <Route
@@ -123,9 +129,7 @@ export default class Routes extends Component {
                   component={InviteRejectPage}
                 />
               </Route>
-
               <Route path="sign-in" component={SignInPage} />
-
               <Route
                 path="update-password"
                 component={PasswordExpiredSignInPage}
@@ -150,12 +154,9 @@ export default class Routes extends Component {
                 path="update-password/success"
                 component={UpdatePasswordSuccessPage}
               />
-
               <Route path="update-factor" component={UpdateFactorSignInPage} />
-
               <Route path="reset" component={ResetPasswordPage} />
               <Route path="reset/:id" component={NewPasswordPage} />
-
               <Route onEnter={this.requireAuth}>
                 <Route path="accept" component={AcceptPage} />
                 <Route path="otp-send" component={OtpPage} />
@@ -183,7 +184,6 @@ export default class Routes extends Component {
                   component={UpdateFactorSuccessPage}
                 />
               </Route>
-
               <Route path="*" component={NotFoundPage} />
             </Route>
 

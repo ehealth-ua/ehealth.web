@@ -28,5 +28,5 @@ export default handleAction(
     ...state,
     ...action.payload.entities.dictionaries
   }),
-  null
+  {}
 );
