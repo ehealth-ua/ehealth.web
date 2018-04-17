@@ -11,7 +11,7 @@ import {
 } from "./InputField";
 import SelectField from "./SelectField";
 import FileField from "./FileField";
-import { CheckboxField, RadioField } from "./CheckableField";
+import { CheckboxField, RadioField, GroupField } from "./CheckableField";
 
 const FINAL_FORM_FIELD_PROPS = [
   "allowNull",
@@ -52,5 +52,6 @@ Field.Select = SelectField;
 Field.File = FileField;
 Field.Checkbox = CheckboxField;
 Field.Radio = RadioField;
+Field.Group = GroupField;
 
 export default Field;

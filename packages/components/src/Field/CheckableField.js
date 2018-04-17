@@ -4,6 +4,13 @@ import { CheckRightIcon } from "@ehealth/icons";
 
 import Field from "./index";
 
+export const GroupField = ({ label, children }) => (
+  <Group>
+    <GroupLabel>{label}</GroupLabel>
+    {children}
+  </Group>
+);
+
 export const CheckboxField = ({ label, disabled, ...props }) => (
   <Field {...props} type="checkbox">
     {({ input, meta: { active, errored }, ...t }) => (
@@ -32,12 +39,19 @@ export const RadioField = ({ label, disabled, ...props }) => (
   </Field>
 );
 
+const Group = styled.div`
+  & + & {
+    display: block;
+  }
+`;
+
 const FieldWrapper = styled.label`
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  align-items: left;
   position: relative;
   user-select: none;
+  margin-bottom: 23px;
 `;
 
 const Input = styled.input`
@@ -57,13 +71,13 @@ const CheckBox = styled.div`
     props.errored ? "#ff1f44" : props.active ? "#11d8fb" : "#c9c9c9"};
   color: ${props => (props.errored ? "#ff1f44" : "#44e240")};
   display: flex;
-  height: 20px;
-  width: 20px;
+  height: 34px;
+  width: 34px;
   opacity: ${props => props.disabled && "0.5"};
 `;
 
 const CheckMark = styled(CheckRightIcon)`
-  height: 10px;
+  height: 16px;
   margin: auto;
   opacity: 0;
   transition: opacity 0.05s ease-in-out;
@@ -78,15 +92,21 @@ const RadioBox = styled(CheckBox)`
 `;
 
 const RadioMark = styled(CheckMark.withComponent("div"))`
-  background-color: #44e240;
+  background-color: #2294f4;
   border-radius: 100%;
-  width: 10px;
+  width: 16px;
 
   ${Input}:checked + ${RadioBox} & {
     opacity: 1;
   }
 `;
 
+const GroupLabel = styled.div`
+  display: block;
+  text-align: left;
+`;
+
 const LabelText = styled.div`
   margin: 0 10px;
+  line-height: 2;
 `;
