@@ -1,7 +1,12 @@
 import React from "react";
 import { Form } from "@ehealth/components";
 
-import { Main, Header, Article } from "../../../components/CenterLayout";
+import {
+  Main,
+  Header,
+  Article,
+  NarrowContainer
+} from "../../../components/CenterLayout";
 import { H1, H3 } from "../../../components/Title";
 
 const SignUpNextPage = ({ params, children }) => (
@@ -14,12 +19,14 @@ const SignUpNextPage = ({ params, children }) => (
     </Header>
     <Article>
       <H3>Для продовження, додайте персональні дані</H3>
-      <Form
-        initialValues={{ authPhoneMatchesEmergencyContact: true }}
-        onSubmit={v => {}}
-      >
-        {children}
-      </Form>
+      <NarrowContainer>
+        <Form
+          initialValues={{ authPhoneMatchesEmergencyContact: true }}
+          onSubmit={v => {}}
+        >
+          {children}
+        </Form>
+      </NarrowContainer>
     </Article>
   </Main>
 );

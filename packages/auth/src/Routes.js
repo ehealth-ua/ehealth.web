@@ -102,15 +102,16 @@ export default class Routes extends Component {
                 path="sign-up/confirmation"
                 component={SignUpConfirmationPage}
               />
-              <Route path="sign-up/:token" component={SignUpValidatePage} />
               <Route
                 path="sign-up/failure/:type"
                 component={SignUpFailurePage}
               />
               <Route path="sign-up/next" component={SignUpNextPage}>
+                <IndexRedirect to="person" />
                 <Route path="person" component={SignUpPersonPage} />
                 <Route path="user" component={SignUpUserPage} />
               </Route>
+              <Route path="sign-up/:token" component={SignUpValidatePage} />
               <Route path="invite" component={InviteLayout}>
                 <IndexRoute inviteStatuses={["NEW"]} component={InvitePage} />
                 <Route

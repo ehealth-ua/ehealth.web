@@ -36,6 +36,6 @@ export const checkSignUpAbility = ({
       push({ pathname: `/sign-up/failure/${response.error.type}` })
     );
   } else {
-    return dispatch(push({ pathname: "/sign-up/next/person" }));
+    return dispatch(push({ pathname: "/sign-up/next" }));
   }
 };

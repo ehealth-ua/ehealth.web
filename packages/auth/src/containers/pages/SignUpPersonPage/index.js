@@ -7,7 +7,7 @@ import { Field, Form, Validation, Button } from "@ehealth/components";
 import { fetchDictionaries } from "../../../redux/dictionaries";
 import { createUrl } from "../../../helpers/url";
 
-const PersonFields = () => (
+const SignUpPersonPage = () => (
   <>
     <Field.Input
       name="second_name"
@@ -70,8 +70,8 @@ const PersonFields = () => (
       />
     </div>
     <Field name="same.address" subscription={{ value: true }}>
-      {({ input: { value: area } }) =>
-        !area && <Addresses index={1} type="RESIDENCE" />
+      {({ input: { value } }) =>
+        value || <Addresses index={1} type="RESIDENCE" />
       }
     </Field>
 
@@ -81,7 +81,7 @@ const PersonFields = () => (
   </>
 );
 
-export default PersonFields;
+export default SignUpPersonPage;
 
 class AddressComponent extends Component {
   state = {
@@ -89,6 +89,7 @@ class AddressComponent extends Component {
     regions: [],
     settlements: []
   };
+
   async componentDidMount() {
     const regionsResponse = await fetch(
       createUrl("/api/uaddresses/regions", { page_size: 30 })
@@ -99,6 +100,7 @@ class AddressComponent extends Component {
     await this.props.fetchDictionaries();
     this.setState({ loaded: true });
   }
+
   fetchSettlementsDebounced = debounce(this.fetchSettlementsSearch, 500);
 
   async fetchSettlementsSearch({ settlement, area }) {
@@ -116,6 +118,7 @@ class AddressComponent extends Component {
       this.setState({ settlements: data });
     }
   }
+
   render() {
     const { regions, settlements, loaded } = this.state;
 

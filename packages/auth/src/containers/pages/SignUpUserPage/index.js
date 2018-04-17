@@ -8,7 +8,7 @@ import { createUrl } from "../../../helpers/url";
 
 import { Field, Form, Validation, Button } from "@ehealth/components";
 
-const UserFields = () => (
+const SignUpUserPage = () => (
   <>
     <Field.Input name="email" placeholder="dima@nebo15.com" disabled />
     <Field.Password
@@ -93,4 +93,4 @@ const UserFields = () => (
   </>
 );
 
-export default UserFields;
+export default SignUpUserPage;
