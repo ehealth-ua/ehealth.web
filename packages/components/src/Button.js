@@ -47,10 +47,11 @@ const ButtonContainer = styled.button`
   }
 
   &:disabled {
+    background-color: rgba(34, 146, 242, 0.5);
     background-image: linear-gradient(
       0deg,
-      rgba(0, 134, 242, 0.67) 0%,
-      rgba(74, 178, 251, 0.67) 100%
+      rgba(0, 134, 242, 0.34) 0%,
+      rgba(74, 178, 251, 0.34) 100%
     );
   }
 `;
