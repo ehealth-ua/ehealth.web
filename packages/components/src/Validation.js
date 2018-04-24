@@ -27,7 +27,10 @@ const VENDOR_VALIDATORS = Object.entries(validator)
       ? name.replace(/^is/, "")
       : capitalize(name);
 
-    return { ...validators, [componentName]: fn };
+    return {
+      ...validators,
+      [componentName]: (value = "", ...args) => fn(value, ...args)
+    };
   }, {});
 
 const CUSTOM_VALIDATORS = {
