@@ -29,7 +29,7 @@ const VENDOR_VALIDATORS = Object.entries(validator)
 
     return {
       ...validators,
-      [componentName]: (value = "", ...args) => fn(value, ...args)
+      [componentName]: (value, ...args) => !value || fn(value, ...args)
     };
   }, {});
 
