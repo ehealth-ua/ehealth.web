@@ -1,5 +1,7 @@
 import React from "react";
 import { Form as FinalForm, FormSpy } from "react-final-form";
+import styled from "react-emotion/macro";
+import { prop } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
 
 import Button from "./Button";
@@ -32,4 +34,30 @@ const Form = ({ innerRef, ...props }) => {
   );
 };
 
+export const FormButton = props => (
+  <StyledButton
+    type={props.to || props.href ? undefined : "button"}
+    {...props}
+  />
+);
+
+export const FormSubmit = ({ disabled, ...props }) => (
+  <FormSpy subscription={{ submitting: true }}>
+    {({ submitting }) => (
+      <FormButton {...props} disabled={disabled || submitting} type="submit" />
+    )}
+  </FormSpy>
+);
+
+Form.Button = FormButton;
+Form.Submit = FormSubmit;
+
 export default Form;
+
+const StyledButton = styled(Button)`
+  margin-bottom: ${prop("theme.form.fieldVerticalDistance", 20)}px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
