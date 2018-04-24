@@ -22,7 +22,7 @@ export const FileField = ({
 }) => (
   <Field {...props}>
     {({
-      input: { value, onChange },
+      input: { value, onChange, onFocus, onBlur },
       meta: { active, errored, error, submitError }
     }) => (
       <FieldWrapper>
@@ -38,6 +38,8 @@ export const FileField = ({
                 const value = multiple ? Array.from(files) : files[0];
                 onChange(value);
               }}
+              onFocus={onFocus}
+              onBlur={onBlur}
             />
             <InputBorder disabled={disabled} errored={errored} active={active}>
               {(Array.isArray(value) && value.length > 0) || value ? (
@@ -60,7 +62,10 @@ export const FileField = ({
 export default FileField;
 
 const Input = styled.input`
-  display: none;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  position: absolute;
 `;
 
 const FileLabel = styled(InputContent)`
