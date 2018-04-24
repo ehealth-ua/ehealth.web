@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { prop } from "styled-tools";
+import { prop, ifProp } from "styled-tools";
 import { switchFlags } from "@ehealth/utils";
 
 import Field from "./index";
@@ -71,7 +71,7 @@ export const InputBorder = styled.div`
       },
       "#dedede"
     )};
-  color: #3d3d3d;
+  color: ${ifProp("disabled", "#9e9e9e", "#3d3d3d")};
   display: flex;
   font-size: ${prop("theme.input.fontSize", 14)}px;
   line-height: ${prop("theme.input.lineHeight", 24)}px;
