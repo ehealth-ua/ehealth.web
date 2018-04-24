@@ -53,7 +53,7 @@ const SelectField = ({
       selectedItem,
       openMenu,
       clearSelection,
-      input,
+      input: { onFocus, onBlur, ...input },
       meta: { active, errored, error, submitError }
     }) => (
       <FieldWrapper {...getRootProps({ refKey: "innerRef" })}>
@@ -65,6 +65,8 @@ const SelectField = ({
                 {...getInputProps({
                   ...input,
                   disabled,
+                  onFocus,
+                  onBlur,
                   onKeyDown: event => {
                     if (!isOpen && event.key === "Backspace") {
                       clearSelection();
@@ -72,7 +74,9 @@ const SelectField = ({
                   }
                 })}
               />
-              <DropdownArrow {...getToggleButtonProps({ open: isOpen })} />
+              <DropdownArrow
+                {...getToggleButtonProps({ open: isOpen, onFocus, onBlur })}
+              />
             </InputBorder>
             {errored && <ErrorMessage>{error || submitError}</ErrorMessage>}
             {isOpen && (
