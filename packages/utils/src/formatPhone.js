@@ -1,6 +1,7 @@
 const PHONE_REGEX = /(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/;
 
-const formatPhone = (digits = "") => {
+const formatPhone = (value = "") => {
+  const digits = value.replace(/[^\d]/g, "");
   const [_result, _countryCode, areaCode, ...numberSegments] = PHONE_REGEX.exec(
     digits
   );
