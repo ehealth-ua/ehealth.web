@@ -15,7 +15,7 @@ export const CheckboxField = ({ label, disabled, ...props }) => (
   <Field {...props} type="checkbox">
     {({ input, meta: { active, errored }, ...t }) => (
       <FieldWrapper>
-        <Input {...input} disabled={disabled} type="checkbox" />
+        <Input {...input} disabled={disabled} />
         <CheckBox active={active} errored={errored} disabled={disabled}>
           <CheckMark />
         </CheckBox>
@@ -29,7 +29,7 @@ export const RadioField = ({ label, disabled, ...props }) => (
   <Field {...props} type="radio">
     {({ input, meta: { active, errored } }) => (
       <FieldWrapper>
-        <Input {...input} disabled={disabled} type="radio" />
+        <Input {...input} disabled={disabled} />
         <RadioBox active={active} errored={errored} disabled={disabled}>
           <RadioMark />
         </RadioBox>

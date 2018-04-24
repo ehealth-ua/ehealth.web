@@ -20,19 +20,19 @@ const FINAL_FORM_FIELD_PROPS = [
   "name",
   "parse",
   "subscription",
-  "type",
   "value"
 ];
 
-const Field = ({ children, render = children, ...props }) => {
+const Field = ({ children, render = children, type, ...props }) => {
   const [fieldProps, inputProps] = pickProps(props, FINAL_FORM_FIELD_PROPS);
 
   return (
     <FinalFormField
       {...fieldProps}
+      type={type}
       render={({ input, meta }) =>
         render({
-          input: { ...inputProps, ...input },
+          input: { ...inputProps, ...input, type },
           meta: { ...meta, errored: isErrored(meta) }
         })
       }
