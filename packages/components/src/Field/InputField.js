@@ -45,13 +45,13 @@ export const InputField = ({
 export const FieldWrapper = styled.div`
   position: relative;
   width: 100%;
-  margin-bottom: ${prop("theme.input.marginBottom", 20)}px;
+  margin-bottom: ${prop("theme.form.fieldVerticalDistance", 20)}px;
 `;
 
 export const LabelText = styled.span`
   color: #3d3d3d;
   display: block;
-  font-size: ${prop("theme.input.label.fontSize", 12)}px;
+  font-size: ${prop("theme.input.labelFontSize", 12)}px;
   margin-bottom: 10px;
   text-align: left;
 `;
