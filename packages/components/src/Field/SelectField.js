@@ -179,7 +179,7 @@ export const Dropdown = styled.ul`
 export const Option = styled.li`
   background-color: ${ifProp("highlighted", "#f5f5f5")};
   color: ${ifProp("active", "#11d8fb")};
-  cursor: pointer;
+  cursor: default;
   padding: 10px 50px 10px 10px;
   line-height: 16px;
   word-break: break-all;

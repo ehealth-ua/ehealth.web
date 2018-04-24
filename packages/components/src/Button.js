@@ -22,6 +22,7 @@ const ButtonContainer = styled.button`
     rgba(74, 178, 251, 0.67) 100%
   );
   color: #fff;
+  cursor: default;
   font-weight: 700;
   font-size: ${prop("theme.button.fontSize", 12)}px;
   letter-spacing: ${prop("theme.button.letterSpacing", 2.4)}px;
@@ -32,7 +33,6 @@ const ButtonContainer = styled.button`
   text-transform: uppercase;
   text-decoration: none;
   user-select: none;
-  cursor: pointer;
 
   &:hover {
     background-image: linear-gradient(

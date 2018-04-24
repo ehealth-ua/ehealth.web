@@ -46,7 +46,7 @@ const Group = styled.div`
 `;
 
 const FieldWrapper = styled.label`
-  cursor: pointer;
+  cursor: default;
   display: flex;
   align-items: left;
   position: relative;
