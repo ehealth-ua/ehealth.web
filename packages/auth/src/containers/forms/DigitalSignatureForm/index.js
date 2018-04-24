@@ -1,12 +1,6 @@
 import React from "react";
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
-import {
-  Field,
-  Form,
-  Validation,
-  Validations,
-  Button
-} from "@ehealth/components";
+import { Field, Form, Validation, Validations } from "@ehealth/components";
 import { KeyIcon } from "@ehealth/icons";
 
 const DigitalSignatureForm = ({ onSubmit }) => (
@@ -41,19 +35,13 @@ const DigitalSignatureForm = ({ onSubmit }) => (
           }
           renderItem={({ issuerCNs: [name] }) => name}
         />
-        <Validation.Required
-          field="authorityIndex"
-          message="This field is required"
-        />
+        <Validation.Required field="authorityIndex" message="Об'язкове поле" />
         <Field.File
           name="privateKeyFile"
           placeholder="Файл із закритим ключем"
           icon={<KeyIcon width="13" height="28" />}
         />
-        <Validation.Required
-          field="privateKeyFile"
-          message="This field is required"
-        />
+        <Validation.Required field="privateKeyFile" message="Об'язкове поле" />
         <Field.Password
           name="privateKeyPassword"
           placeholder="Пароль до закритого ключа"
@@ -61,9 +49,9 @@ const DigitalSignatureForm = ({ onSubmit }) => (
         />
         <Validation.Required
           field="privateKeyPassword"
-          message="This field is required"
+          message="Об'язкове поле"
         />
-        <Button block>Далі</Button>
+        <Form.Submit block>Далі</Form.Submit>
       </Form>
     )}
   </DigitalSignature.Consumer>
