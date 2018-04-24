@@ -1,5 +1,6 @@
 import React from "react";
 import { Form as FinalForm, FormSpy } from "react-final-form";
+import createFocusDecorator from "final-form-focus";
 import styled from "react-emotion/macro";
 import { prop } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
@@ -17,11 +18,16 @@ const FINAL_FORM_PROPS = [
   "validateOnBlur"
 ];
 
+const focusOnErrors = createFocusDecorator();
+
 const Form = ({ innerRef, ...props }) => {
-  const [finalFormProps, formProps] = pickProps(props, FINAL_FORM_PROPS);
+  const [{ decorators = [], ...finalFormProps }, formProps] = pickProps(
+    props,
+    FINAL_FORM_PROPS
+  );
 
   return (
-    <FinalForm {...finalFormProps}>
+    <FinalForm decorators={[focusOnErrors, ...decorators]} {...finalFormProps}>
       {({ handleSubmit, values }) => (
         <form
           {...formProps}

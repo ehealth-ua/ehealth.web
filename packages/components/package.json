@@ -13,6 +13,7 @@
     "@ehealth/utils": "^0.4.0",
     "downshift": "^1.31.3",
     "emotion": "^9.1.1",
+    "final-form-focus": "^1.0.0",
     "lodash": "^4.17.5",
     "react-emotion": "^9.1.1",
     "styled-tools": "^0.5.0",
