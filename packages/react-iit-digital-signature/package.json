@@ -12,8 +12,7 @@
     "@ehealth/iit-digital-signature": "^0.5.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.38",
-    "@babel/core": "7.0.0-beta.38",
+    "@babel/cli": "7.0.0-beta.41",
     "babel-preset-react-app": "4.0.0-next.47d2d941",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
