@@ -9,6 +9,7 @@
     "start": "NODE_ENV=development webpack --watch"
   },
   "dependencies": {
+    "lodash": "^4.17.10",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 require("whatwg-fetch");
+const fromPairs = require("lodash/fromPairs");
 
 const euscptSource = require("../vendor/euscpt");
 const euscpmSource = require("../vendor/euscpm");
@@ -116,6 +117,16 @@ class DigitalSignature extends EUSignCP {
     tspSettings.SetGetStamps(true);
     tspSettings.SetAddress(tspAddress);
     this.SetTSPSettings(tspSettings);
+  }
+
+  get privKeySubject() {
+    if (!this.privKeyOwnerInfo) return null;
+
+    const subjectEntries = this.privKeyOwnerInfo.subject
+      .split(";")
+      .map(entryString => entryString.split("="));
+
+    return fromPairs(subjectEntries);
   }
 }
 
