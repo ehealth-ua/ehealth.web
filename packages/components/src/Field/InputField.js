@@ -17,6 +17,7 @@ export const PasswordField = props => <InputField {...props} type="password" />;
 
 export const InputField = ({
   label,
+  horizontal = false,
   prefix,
   postfix,
   disabled,
@@ -25,27 +26,30 @@ export const InputField = ({
 }) => (
   <Field {...props}>
     {({ input, meta: { active, errored, error, submitError } }) => (
-      <FieldWrapper>
-        <label>
-          {label && <LabelText>{label}</LabelText>}
-          <InputWrapper>
-            <InputBorder disabled={disabled} errored={errored} active={active}>
-              {prefix && <InputContent>{prefix}</InputContent>}
-              <InputComponent {...input} disabled={disabled} />
-              {postfix && <InputContent>{postfix}</InputContent>}
-            </InputBorder>
-            {errored && <ErrorMessage>{error || submitError}</ErrorMessage>}
-          </InputWrapper>
-        </label>
+      <FieldWrapper horizontal={horizontal}>
+        {label && <LabelText>{label}</LabelText>}
+        <InputWrapper>
+          <InputBorder disabled={disabled} errored={errored} active={active}>
+            {prefix && <InputContent>{prefix}</InputContent>}
+            <InputComponent {...input} disabled={disabled} />
+            {postfix && <InputContent>{postfix}</InputContent>}
+          </InputBorder>
+          {errored && <ErrorMessage>{error || submitError}</ErrorMessage>}
+        </InputWrapper>
       </FieldWrapper>
     )}
   </Field>
 );
 
-export const FieldWrapper = styled.div`
+export const FieldWrapper = styled.label`
   position: relative;
   width: 100%;
   margin-bottom: ${prop("theme.form.fieldVerticalDistance", 20)}px;
+  display: ${ifProp("horizontal", "flex", "block")};
+  margin-bottom: ${prop("theme.input.marginBottom", 20)}px;
+  align-items: baseline;
+  flex-direction: ${ifProp("horizontal", "row", "column")};
+  justify-content: ${ifProp("horizontal", "space-between")};
 `;
 
 export const LabelText = styled.span`
