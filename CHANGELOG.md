@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.5.1"></a>
+## [0.5.1](https://github.com/edenlabllc/ehealth.web/compare/v0.5.0...v0.5.1) (2018-04-26)
+
+
+### Bug Fixes
+
+* **auth:** fix wrong syntax ([#33](https://github.com/edenlabllc/ehealth.web/issues/33)) ([bf981cf](https://github.com/edenlabllc/ehealth.web/commit/bf981cf))
+
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/edenlabllc/ehealth.web/compare/v0.4.0...v0.5.0) (2018-04-10)
 
