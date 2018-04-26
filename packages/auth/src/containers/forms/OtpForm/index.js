@@ -116,14 +116,15 @@ class OtpForm extends Component {
   }
 }
 
-export default compose;
-(withRouter,
-reduxForm({
-  form: "otp-form",
-  validate: reduxFormValidate({
-    code: {
-      required: true,
-      format: /^\d*$/
-    }
+export default compose(
+  withRouter,
+  reduxForm({
+    form: "otp-form",
+    validate: reduxFormValidate({
+      code: {
+        required: true,
+        format: /^\d*$/
+      }
+    })
   })
-}))(OtpForm);
+)(OtpForm);
