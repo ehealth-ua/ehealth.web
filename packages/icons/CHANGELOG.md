@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.6.0"></a>
+# 0.6.0 (2018-04-27)
+
+
+### Features
+
+* **icons:** Add CalendarIcon, ChevronLeftIcon, ChevromRightIcon ([109b9e1](https://github.com/edenlabllc/ehealth.web/commit/109b9e1))
+* **icons:** Add InfoIcon ([3a4ff8f](https://github.com/edenlabllc/ehealth.web/commit/3a4ff8f))
+* **icons:** add KeyIcon ([bc13670](https://github.com/edenlabllc/ehealth.web/commit/bc13670))
+* **icons:** bump React to 16.3 ([614f89e](https://github.com/edenlabllc/ehealth.web/commit/614f89e))
+
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/edenlabllc/ehealth.web/compare/v0.3.4...v0.4.0) (2018-04-10)
 

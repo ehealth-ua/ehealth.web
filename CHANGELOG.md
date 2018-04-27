@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.6.0"></a>
+# 0.6.0 (2018-04-27)
+
+
+### Bug Fixes
+
+* **auth:** fix sign up route order, remove dead styles ([76e1d07](https://github.com/edenlabllc/ehealth.web/commit/76e1d07))
+* **auth:** translate validation messages in DigitalSignatureForm ([927a030](https://github.com/edenlabllc/ehealth.web/commit/927a030))
+* **components:** add missing Button component export ([f15f82d](https://github.com/edenlabllc/ehealth.web/commit/f15f82d))
+* **components:** add missing disabled state to InputField ([60b3459](https://github.com/edenlabllc/ehealth.web/commit/60b3459))
+* downgrade jest to mach version in react-scripts ([84bcec6](https://github.com/edenlabllc/ehealth.web/commit/84bcec6))
+* **utils:** ensure international format and limit phone length on parse ([9f82c6a](https://github.com/edenlabllc/ehealth.web/commit/9f82c6a))
+* make all root deps regular deps ([039ce66](https://github.com/edenlabllc/ehealth.web/commit/039ce66))
+* **components:** add scrolling to SelectField options list ([a3e50d6](https://github.com/edenlabllc/ehealth.web/commit/a3e50d6))
+* **components:** bind SelectField dropdown focus to focused state ([ac6ee4a](https://github.com/edenlabllc/ehealth.web/commit/ac6ee4a))
+* **components:** change control cursor states according HIG ([ab662d4](https://github.com/edenlabllc/ehealth.web/commit/ab662d4))
+* **components:** ensure vendor validators receive string values ([a9334ae](https://github.com/edenlabllc/ehealth.web/commit/a9334ae))
+* **components:** fix Button disabled state ([3180265](https://github.com/edenlabllc/ehealth.web/commit/3180265))
+* **components:** force text-align to left for InputField, make InputField shrinkable, add InputField font-size theming ability ([c8e34fc](https://github.com/edenlabllc/ehealth.web/commit/c8e34fc))
+* **components:** make FileField accessible ([e7d26ab](https://github.com/edenlabllc/ehealth.web/commit/e7d26ab))
+* **components:** Path type prop to checkable fields ([d36d52d](https://github.com/edenlabllc/ehealth.web/commit/d36d52d))
+* **components:** prevent length validation from failing when value is absent ([58b383f](https://github.com/edenlabllc/ehealth.web/commit/58b383f))
+
+
+### Features
+
+* **auth:** add client side validations to sign up flow ([b95f3c4](https://github.com/edenlabllc/ehealth.web/commit/b95f3c4)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+* **auth:** add DigitalSignature provider and DigitalSignatureForm component ([03d887a](https://github.com/edenlabllc/ehealth.web/commit/03d887a))
+* **auth:** add input label font-size to theme ([3ca1357](https://github.com/edenlabllc/ehealth.web/commit/3ca1357))
+* **auth:** add sign up otp page ([37bb1f2](https://github.com/edenlabllc/ehealth.web/commit/37bb1f2))
+* **auth:** add sign up person and user pages ([e1bc444](https://github.com/edenlabllc/ehealth.web/commit/e1bc444)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+* **auth:** add sign up validate and failure pages ([ceeb406](https://github.com/edenlabllc/ehealth.web/commit/ceeb406)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+* **auth:** bump React to 16.3.2 ([7c666a5](https://github.com/edenlabllc/ehealth.web/commit/7c666a5))
+* **auth:** bump react-scripts to 2.0.0-next.66cc7a90 ([e9c0e8a](https://github.com/edenlabllc/ehealth.web/commit/e9c0e8a))
+* **components:** add Async component ([0eee2b4](https://github.com/edenlabllc/ehealth.web/commit/0eee2b4))
+* **components:** add Connect component ([8a8289e](https://github.com/edenlabllc/ehealth.web/commit/8a8289e))
+* **components:** add final-form-focus decorator to Form ([c9f2650](https://github.com/edenlabllc/ehealth.web/commit/c9f2650))
+* **components:** add Form buttons ([b1ef0e5](https://github.com/edenlabllc/ehealth.web/commit/b1ef0e5))
+* **components:** add GroupField component, tweak checkable fields styles ([e6b391c](https://github.com/edenlabllc/ehealth.web/commit/e6b391c))
+* **components:** Add horizontal appearance to input ([bde4a18](https://github.com/edenlabllc/ehealth.web/commit/bde4a18))
+* **components:** add Redirect component ([1c4bb9a](https://github.com/edenlabllc/ehealth.web/commit/1c4bb9a))
+* **components:** add Switch component ([c2afbc7](https://github.com/edenlabllc/ehealth.web/commit/c2afbc7))
+* **components:** bump React to 16.3 ([f505414](https://github.com/edenlabllc/ehealth.web/commit/f505414))
+* **icons:** Add CalendarIcon, ChevronLeftIcon, ChevromRightIcon ([109b9e1](https://github.com/edenlabllc/ehealth.web/commit/109b9e1))
+* **icons:** Add InfoIcon ([3a4ff8f](https://github.com/edenlabllc/ehealth.web/commit/3a4ff8f))
+* **icons:** add KeyIcon ([bc13670](https://github.com/edenlabllc/ehealth.web/commit/bc13670))
+* **icons:** bump React to 16.3 ([614f89e](https://github.com/edenlabllc/ehealth.web/commit/614f89e))
+* **iit-digital-signature:** add privKeySubject getter ([36a1f9b](https://github.com/edenlabllc/ehealth.web/commit/36a1f9b))
+* **iit-digital-signature:** remove authority setup on init ([a2a625c](https://github.com/edenlabllc/ehealth.web/commit/a2a625c))
+* **react-iit-digital-signature:** bump React to 16.3.2 ([5692408](https://github.com/edenlabllc/ehealth.web/commit/5692408))
+* **react-iit-digital-signature:** deduplicate helpers, remove producer component ([0f9e4b1](https://github.com/edenlabllc/ehealth.web/commit/0f9e4b1))
+* **utils:** add date format and parse functions ([80212a9](https://github.com/edenlabllc/ehealth.web/commit/80212a9))
+* **utils:** add formatPhone and parsePhone functions ([95c9fe2](https://github.com/edenlabllc/ehealth.web/commit/95c9fe2))
+
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/edenlabllc/ehealth.web/compare/v0.5.0...v0.5.1) (2018-04-26)
 

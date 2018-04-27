@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.6.0"></a>
+# 0.6.0 (2018-04-27)
+
+
+### Bug Fixes
+
+* **auth:** fix sign up route order, remove dead styles ([76e1d07](https://github.com/edenlabllc/ehealth.web/commit/76e1d07))
+* **auth:** translate validation messages in DigitalSignatureForm ([927a030](https://github.com/edenlabllc/ehealth.web/commit/927a030))
+
+
+### Features
+
+* **auth:** add client side validations to sign up flow ([b95f3c4](https://github.com/edenlabllc/ehealth.web/commit/b95f3c4)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+* **auth:** add DigitalSignature provider and DigitalSignatureForm component ([03d887a](https://github.com/edenlabllc/ehealth.web/commit/03d887a))
+* **auth:** add input label font-size to theme ([3ca1357](https://github.com/edenlabllc/ehealth.web/commit/3ca1357))
+* **auth:** add sign up otp page ([37bb1f2](https://github.com/edenlabllc/ehealth.web/commit/37bb1f2))
+* **auth:** add sign up person and user pages ([e1bc444](https://github.com/edenlabllc/ehealth.web/commit/e1bc444)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+* **auth:** add sign up validate and failure pages ([ceeb406](https://github.com/edenlabllc/ehealth.web/commit/ceeb406)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+* **auth:** bump React to 16.3.2 ([7c666a5](https://github.com/edenlabllc/ehealth.web/commit/7c666a5))
+* **auth:** bump react-scripts to 2.0.0-next.66cc7a90 ([e9c0e8a](https://github.com/edenlabllc/ehealth.web/commit/e9c0e8a))
+
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/edenlabllc/ehealth.web/compare/v0.5.0...v0.5.1) (2018-04-26)
 

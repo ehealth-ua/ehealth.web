@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/react-iit-digital-signature",
-  "version": "0.0.0",
+  "version": "0.6.0",
   "private": true,
   "description": "EUSignCP digital signature library React component bingings",
   "main": "dist",
@@ -9,7 +9,7 @@
     "start": "NODE_ENV=development babel src --out-dir dist --watch"
   },
   "dependencies": {
-    "@ehealth/iit-digital-signature": "^0.5.0"
+    "@ehealth/iit-digital-signature": "^0.6.0"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.41",

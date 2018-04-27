@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.6.0"></a>
+# 0.6.0 (2018-04-27)
+
+
+### Bug Fixes
+
+* **utils:** ensure international format and limit phone length on parse ([9f82c6a](https://github.com/edenlabllc/ehealth.web/commit/9f82c6a))
+
+
+### Features
+
+* **utils:** add date format and parse functions ([80212a9](https://github.com/edenlabllc/ehealth.web/commit/80212a9))
+* **utils:** add formatPhone and parsePhone functions ([95c9fe2](https://github.com/edenlabllc/ehealth.web/commit/95c9fe2))
+
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/edenlabllc/ehealth.web/compare/v0.3.4...v0.4.0) (2018-04-10)
 

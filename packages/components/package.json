@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/components",
-  "version": "0.4.0",
+  "version": "0.6.0",
   "private": true,
   "description": "",
   "main": "dist",
@@ -9,8 +9,8 @@
     "start": "NODE_ENV=development babel src --out-dir dist --watch"
   },
   "dependencies": {
-    "@ehealth/icons": "^0.4.0",
-    "@ehealth/utils": "^0.4.0",
+    "@ehealth/icons": "^0.6.0",
+    "@ehealth/utils": "^0.6.0",
     "downshift": "^1.31.3",
     "emotion": "^9.1.1",
     "final-form-focus": "^1.0.0",
