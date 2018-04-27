@@ -4,7 +4,7 @@ import { Button, Switch } from "@ehealth/components";
 import { Main, Header, Article } from "../../../components/CenterLayout";
 import { H1 } from "../../../components/Title";
 
-const SignUpFailurePage = ({ params, router }) => (
+const SignUpFailurePage = ({ params, location }) => (
   <Main>
     <Header>
       <H1>Реєстрація</H1>
@@ -28,7 +28,9 @@ const SignUpFailurePage = ({ params, router }) => (
           <>
             <p>Час заповнення форми вичерпався.</p>
             <p>Будь ласка, відправте форму повторно.</p>
-            <Button onClick={router.goBack}>Відправити повторно</Button>
+            <Button to={{ ...location, pathname: "/sign-up/continue" }}>
+              Відправити повторно
+            </Button>
           </>
         }
         access_denied={null}

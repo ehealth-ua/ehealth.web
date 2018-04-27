@@ -27,6 +27,7 @@ import SignUpFailurePage from "./containers/pages/SignUpFailurePage";
 import SignUpNextPage from "./containers/pages/SignUpNextPage";
 import SignUpPersonPage from "./containers/pages/SignUpPersonPage";
 import SignUpUserPage from "./containers/pages/SignUpUserPage";
+import SignUpOtpPage from "./containers/pages/SignUpOtpPage";
 
 import InvitePage from "./containers/pages/InvitePage";
 import InviteAcceptPage from "./containers/pages/InviteAcceptPage";
@@ -102,16 +103,17 @@ export default class Routes extends Component {
                 path="sign-up/confirmation"
                 component={SignUpConfirmationPage}
               />
+              <Route path="/sign-up/continue" component={SignUpValidatePage} />
+              <Route component={SignUpNextPage}>
+                <Route path="/sign-up/person" component={SignUpPersonPage} />
+                <Route path="/sign-up/user" component={SignUpUserPage} />
+                <Route path="/sign-up/otp" component={SignUpOtpPage} />
+              </Route>
               <Route
-                path="sign-up/failure/:type"
+                path="/sign-up/failure/:type"
                 component={SignUpFailurePage}
               />
-              <Route path="sign-up/next" component={SignUpNextPage}>
-                <IndexRedirect to="person" />
-                <Route path="person" component={SignUpPersonPage} />
-                <Route path="user" component={SignUpUserPage} />
-              </Route>
-              <Route path="sign-up/:token" component={SignUpValidatePage} />
+
               <Route path="invite" component={InviteLayout}>
                 <IndexRoute inviteStatuses={["NEW"]} component={InvitePage} />
                 <Route

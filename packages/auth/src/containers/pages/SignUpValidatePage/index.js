@@ -4,6 +4,8 @@ import { Button, Switch } from "@ehealth/components";
 
 import { REACT_APP_DIGITAL_SIGNATURE_ENABLED } from "../../../env";
 import { getToken } from "../../../reducers";
+import { setData, logoutAction } from "../../../redux/session";
+import { validateEmail, getUser } from "../../../redux/cabinet";
 import {
   Main,
   Header,
@@ -13,22 +15,28 @@ import {
 import { H1 } from "../../../components/Title";
 import DigitalSignatureForm from "../../forms/DigitalSignatureForm";
 
-import { exchangeToken, checkSignUpAbility } from "./redux";
-
 class SignUpValidatePage extends Component {
   state = {
     tokenExchangeState: "pending"
   };
 
   async componentDidMount() {
-    try {
-      const { params: { token }, exchangeToken } = this.props;
-      await exchangeToken({ token });
+    const {
+      location: { query: { token } },
+      setData,
+      logoutAction,
+      validateEmail
+    } = this.props;
 
+    await setData({ token });
+    const { error, payload: { data, response } } = await validateEmail();
+
+    if (error) {
+      await logoutAction();
+      this.setState({ tokenExchangeState: response.error.type });
+    } else {
+      await setData(data);
       this.setState({ tokenExchangeState: "success" });
-    } catch (error) {
-      console.log(error);
-      this.setState({ tokenExchangeState: error.type });
     }
   }
 
@@ -74,22 +82,32 @@ class SignUpValidatePage extends Component {
   }
 
   handleSubmit = async ds => {
-    const { token, checkSignUpAbility } = this.props;
+    const { token, location, router, getUser } = this.props;
 
     const content = JSON.stringify({ token });
     const signed_content = REACT_APP_DIGITAL_SIGNATURE_ENABLED
       ? ds.SignDataInternal(true, content, true)
-      : btoa(content);
+      : btoa(unescape(encodeURIComponent(content)));
 
-    const drfo = REACT_APP_DIGITAL_SIGNATURE_ENABLED
-      ? undefined
-      : ds.privKeyOwnerInfo.subjDRFOCode;
+    const { error, payload: { response } } = await getUser({
+      signed_content,
+      drfo: ds.privKeyOwnerInfo.subjDRFOCode
+    });
 
-    return checkSignUpAbility({ signed_content, drfo });
+    if (error) {
+      router.push({
+        ...location,
+        pathname: `/sign-up/failure/${response.error.type}`
+      });
+    } else {
+      router.push({ ...location, pathname: "/sign-up/person" });
+    }
   };
 }
 
 export default connect(state => ({ token: getToken(state) }), {
-  exchangeToken,
-  checkSignUpAbility
+  setData,
+  logoutAction,
+  validateEmail,
+  getUser
 })(SignUpValidatePage);
