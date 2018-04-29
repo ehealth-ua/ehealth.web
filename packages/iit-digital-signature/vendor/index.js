@@ -1,19 +1,16 @@
-const euscptSource = require("../vendor/euscpt");
-const euscpmSource = require("../vendor/euscpm");
-const euscpSource = require("../vendor/euscp");
-
 var EU_MODULE_INITIALIZE_ON_LOAD = false;
 var EUSignCPModuleInitialized;
 
 // Load EUSignCP data types
 var eu_wait;
-eval(euscptSource);
+//= concat ./euscpt.js
 this.eu_wait = eu_wait;
 
 // Load EUSignCP API
-eval(euscpmSource);
+//= concat ./euscpm.js
+
 // Load EUSignCP core
-eval(euscpSource);
+//= concat ./euscp.js
 
 const initailizeModule = () =>
   new Promise((resolve, reject) => {

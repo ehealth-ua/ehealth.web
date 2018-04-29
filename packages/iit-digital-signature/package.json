@@ -3,21 +3,22 @@
   "version": "0.6.1",
   "private": true,
   "description": "EUSignCP digital signature library ESM wrapper",
-  "main": "dist/main.js",
+  "main": "dist/cjs/iit-digital-signature.min.js",
   "scripts": {
-    "prepare": "rm -fr dist && NODE_ENV=production webpack",
-    "start": "NODE_ENV=development webpack --watch"
+    "build": "npx -n --max-old-space-size=4096 rollup --config"
   },
   "dependencies": {
-    "lodash": "^4.17.10",
+    "lodash-es": "^4.17.10",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "@babel/preset-env": "7.0.0-beta.41",
-    "babel-loader": "^8.0.0-beta",
     "fast-async": "^7.0.0",
-    "raw-loader": "^0.5.1",
-    "webpack": "^4.0.0-beta.2",
-    "webpack-cli": "^2.0.6"
+    "rollup": "^0.58.2",
+    "rollup-plugin-babel": "^4.0.0-beta.4",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-concat": "github:kiurchv/rollup-plugin-concat",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0"
   }
 }

@@ -1,7 +1,7 @@
 import "whatwg-fetch";
-import fromPairs from "lodash/fromPairs";
+import { fromPairs } from "lodash-es";
 
-import EUSignCP, { initailizeModule } from "./euscp";
+import EUSignCP, { initailizeModule } from "../vendor";
 
 const IIT_CA_CERTS_URL =
   "https://iit.com.ua/download/productfiles/CACertificates.p7b";
