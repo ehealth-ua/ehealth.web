@@ -1,29 +1,14 @@
-require("whatwg-fetch");
-const fromPairs = require("lodash/fromPairs");
+import "whatwg-fetch";
+import fromPairs from "lodash/fromPairs";
 
-const euscptSource = require("../vendor/euscpt");
-const euscpmSource = require("../vendor/euscpm");
-const euscpSource = require("../vendor/euscp");
+import EUSignCP, { initailizeModule } from "./euscp";
 
 const IIT_CA_CERTS_URL =
   "https://iit.com.ua/download/productfiles/CACertificates.p7b";
 const IIT_CAS_URL = "https://iit.com.ua/download/productfiles/CAs.json";
 const DEVELOPMENT_PROXY = "http://localhost:5000/";
 
-var EU_MODULE_INITIALIZE_ON_LOAD = false;
-var EUSignCPModuleInitialized;
-
-// Load EUSignCP data types
-var eu_wait;
-eval(euscptSource);
-this.eu_wait = eu_wait;
-
-// Load EUSignCP API
-eval(euscpmSource);
-// Load EUSignCP core
-eval(euscpSource);
-
-class DigitalSignature extends EUSignCP {
+export default class DigitalSignature extends EUSignCP {
   static async initialize(settings = {}) {
     await initailizeModule();
 
@@ -130,12 +115,6 @@ class DigitalSignature extends EUSignCP {
   }
 }
 
-const initailizeModule = () =>
-  new Promise((resolve, reject) => {
-    EUSignCPModuleInitialized = success => (success ? resolve() : reject());
-    EUSignCPModuleInitialize();
-  });
-
 const fetchCertificates = async proxy => {
   const response = await fetch(
     `${proxy}?raw=true&cache=true&address=${IIT_CA_CERTS_URL}`
@@ -149,9 +128,4 @@ const fetchAuthorities = async proxy => {
     `${proxy}?raw=true&cache=true&address=${IIT_CAS_URL}`
   );
   return authoritiesResponse.json();
-};
-
-module.exports = {
-  __esModule: true,
-  default: DigitalSignature
 };
