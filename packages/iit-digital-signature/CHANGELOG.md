@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.6.1"></a>
+## [0.6.1](https://github.com/edenlabllc/ehealth.web/compare/v0.6.0...v0.6.1) (2018-04-29)
+
+
+### Bug Fixes
+
+* **iit-digital-signature:** transpile code to prevent unexpected errors when consuming by CRA apps ([2076bdb](https://github.com/edenlabllc/ehealth.web/commit/2076bdb))
+
+
+
+
 <a name="0.6.0"></a>
 # 0.6.0 (2018-04-27)
 
