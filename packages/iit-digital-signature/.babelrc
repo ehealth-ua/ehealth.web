@@ -1,0 +1,14 @@
+{
+  "extends": "../../.babelrc.js",
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "shippedProposals": true,
+        "exclude": ["transform-regenerator", "transform-async-to-generator"]
+      }
+    ]
+  ],
+  "plugins": ["module:fast-async"]
+}
