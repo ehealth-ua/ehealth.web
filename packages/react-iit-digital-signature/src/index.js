@@ -27,7 +27,8 @@ export default class ReactDigitalSignature extends Component {
   ds = {};
 
   async componentDidMount() {
-    this.ds = await DigitalSignature.initialize();
+    const { proxy } = this.props;
+    this.ds = await DigitalSignature.initialize({ proxy });
     this.setState({ initialized: true });
   }
 
