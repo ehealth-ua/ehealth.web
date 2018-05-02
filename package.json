@@ -22,7 +22,7 @@
     "build-images": "lerna exec --since origin/HEAD -- node \\$LERNA_ROOT_PATH/scripts/buildImage.js",
     "test-images": "lerna exec --since origin/HEAD -- node \\$LERNA_ROOT_PATH/scripts/testImage.js",
     "push-images": "lerna exec --since origin/HEAD -- node \\$LERNA_ROOT_PATH/scripts/pushImage.js",
-    "update-chart": "lerna exec --since origin/HEAD --concurrency 1 -- node \\$LERNA_ROOT_PATH/scripts/updateChart.js",
+    "update-chart": "lerna exec --concurrency 1 -- node \\$LERNA_ROOT_PATH/scripts/updateChart.js",
     "deploy-chart": "node scripts/deployChart.js"
   }
 }
