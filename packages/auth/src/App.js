@@ -7,6 +7,7 @@ import DigitalSignature from "@ehealth/react-iit-digital-signature";
 import "./global.css";
 import store from "./store";
 import theme from "./theme";
+import { REACT_APP_PROXY_URL } from "./env";
 import Routes from "./Routes";
 
 const App = () => (
@@ -14,7 +15,7 @@ const App = () => (
     <Helmet titleTemplate="Електронна система охорони здоров'я eHealth — %s" />
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <DigitalSignature>
+        <DigitalSignature proxy={REACT_APP_PROXY_URL}>
           <Routes />
         </DigitalSignature>
       </ThemeProvider>
