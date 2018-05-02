@@ -24,7 +24,7 @@ const getDeploymentInfo = (scope, unscopedName) => {
 
   if (existsSync(dockerfilePath)) {
     const imageName = `${scope}.${unscopedName}-web`;
-    const chartName = `${unscopedName}_web`;
+    const chartName = [...unscopedName.split("-"), "web"].join("_");
 
     return { dockerfilePath, imageName, chartName };
   } else {
