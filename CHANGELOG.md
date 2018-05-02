@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/edenlabllc/ehealth.web/compare/v0.6.1...v0.7.0) (2018-05-02)
+
+
+### Features
+
+* **iit-proxy:** add Dockerfile and container structure test config ([a4f5812](https://github.com/edenlabllc/ehealth.web/commit/a4f5812))
+
+
+
+
 <a name="0.6.1"></a>
 ## [0.6.1](https://github.com/edenlabllc/ehealth.web/compare/v0.6.0...v0.6.1) (2018-04-29)
 
