@@ -25,6 +25,7 @@ const SignUpOtpPage = ({ location }) => (
             options={{ min: 4, max: 4 }}
             message="Довжина становить 4 символи"
           />
+          <Validation.Submit message="Невірний код" />
         </Validations>
         <Form.Submit block>Відправити</Form.Submit>
         <Link to={{ ...location, pathname: "/sign-up/user" }}>Назад</Link>

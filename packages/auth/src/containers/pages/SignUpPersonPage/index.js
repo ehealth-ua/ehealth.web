@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Flex, Box } from "grid-emotion";
 import { connect } from "react-redux";
 import debounce from "lodash/debounce";
+import subYears from "date-fns/sub_years";
 import {
   Connect,
   Field,
@@ -99,6 +100,10 @@ const SignUpPersonPage = ({ location }) => (
         <Validations field="person.birth_date">
           <Validation.Required message="Об'язкове поле" />
           <Validation.ISO8601 message="Невірна дата" />
+          <Validation.After
+            options={subYears(new Date(), 100).toISOString()}
+            message="Невірна дата"
+          />
         </Validations>
         <Connect
           mapStateToProps={state => ({

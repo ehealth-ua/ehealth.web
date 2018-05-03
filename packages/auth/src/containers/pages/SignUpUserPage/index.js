@@ -45,6 +45,7 @@ const SignUpUserPage = ({ location, router }) => (
             options={/^(?=.*[a-zа-яёїієґ])(?=.*[A-ZА-ЯЁЇIЄҐ])(?=.*\d)/}
             message="Пароль повинен містити великі, малі літери та цифри"
           />
+          <Validation.Submit message="Пароль був використаний у системі раніше" />
         </Validations>
         <Field.Input
           name="person.emergency_contact.first_name"
@@ -124,10 +125,13 @@ const SignUpUserPage = ({ location, router }) => (
           format={formatPhone}
           parse={parsePhone}
         />
-        <Validation.Required
-          field="person.authentication_methods[0].phone_number"
-          message="Об'язкове поле"
-        />
+        <Validations field="person.authentication_methods[0].phone_number">
+          <Validation.Required message="Об'язкове поле" />
+          <Validation.Matches
+            options={/^\+380/}
+            message="Невірний номер телефону"
+          />
+        </Validations>
         <Field.Checkbox
           label="Співпадає з контактним номером телефону"
           name="local.contactPhoneMatchesAuth"
@@ -145,10 +149,13 @@ const SignUpUserPage = ({ location, router }) => (
                   format={formatPhone}
                   parse={parsePhone}
                 />
-                <Validation.Required
-                  field="local.contactPhoneNumber"
-                  message="Об'язкове поле"
-                />
+                <Validations field="local.contactPhoneNumber">
+                  <Validation.Required message="Об'язкове поле" />
+                  <Validation.Matches
+                    options={/^\+380/}
+                    message="Невірний номер телефону"
+                  />
+                </Validations>
               </>
             )
           }

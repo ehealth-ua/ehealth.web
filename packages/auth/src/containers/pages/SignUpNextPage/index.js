@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import merge from "lodash/merge";
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
-import { Async, Connect, Form, Redirect } from "@ehealth/components";
+import {
+  Async,
+  Connect,
+  Form,
+  Redirect,
+  SUBMIT_ERROR
+} from "@ehealth/components";
 import { pickProps } from "@ehealth/utils";
 
 import {
@@ -13,6 +19,11 @@ import { fetchDictionaries } from "../../../redux/dictionaries";
 import { sendOtp, register } from "../../../redux/cabinet";
 import { login } from "../../../redux/session";
 import { authorize } from "../../../redux/auth";
+
+const ENTRIES_PAGES_MAPPING = [
+  [["$.password"], "/sign-up/user"],
+  [["$.otp"], "/sign-up/otp"]
+];
 
 const STEP_FORM_PROPS = ["initialValues", "step", "transitions", "onSubmit"];
 
@@ -55,54 +66,61 @@ const SignUpNextPage = ({ children, location, router }) => (
                 transitions={{
                   person: () =>
                     router.push({ ...location, pathname: "/sign-up/user" }),
-                  user: async values => {
-                    const {
-                      person: {
-                        authentication_methods: [{ phone_number: factor }]
-                      }
-                    } = values;
+                  user: async ({ person }) => {
+                    try {
+                      const { error, payload: { response } } = await sendOtp({
+                        factor: person.authentication_methods[0].phone_number,
+                        type: "SMS"
+                      });
 
-                    const { error, payload: { response } } = await sendOtp({
-                      factor,
-                      type: "SMS"
-                    });
-
-                    if (error) {
-                      if (response.error.type === "validation_failed") {
-                        return {
-                          person: {
-                            authentication_methods: [
-                              { phone_number: "Невірний номер телефону" }
-                            ]
-                          }
-                        };
-                      } else {
-                        router.push({
-                          ...location,
-                          pathname: `/sign-up/failure/${response.error.type}`
-                        });
-                      }
-                    } else {
+                      if (error) throw response.error;
                       router.push({ ...location, pathname: "/sign-up/otp" });
+                    } catch (error) {
+                      if (error.type === "validation_failed") {
+                        return { [SUBMIT_ERROR]: error.invalid };
+                      }
+
+                      router.push({
+                        ...location,
+                        pathname: `/sign-up/failure/${error.type}`
+                      });
                     }
                   }
                 }}
                 onSubmit={async ({ password, otp, ...personData }) => {
-                  const content = getPersonContent(personData);
-                  const signed_content = REACT_APP_DIGITAL_SIGNATURE_ENABLED
-                    ? ds.SignDataInternal(true, content, true)
-                    : btoa(unescape(encodeURIComponent(content)));
+                  try {
+                    const content = getPersonContent(personData);
+                    const signed_content = REACT_APP_DIGITAL_SIGNATURE_ENABLED
+                      ? ds.SignDataInternal(true, content, true)
+                      : btoa(unescape(encodeURIComponent(content)));
 
-                  await registerUser({
-                    signed_content,
-                    password,
-                    otp,
-                    drfo: ds.privKeyOwnerInfo.subjDRFOCode,
-                    given_name: encodeURIComponent(ds.privKeySubject.GivenName),
-                    surname: encodeURIComponent(ds.privKeySubject.SN)
-                  });
+                    await registerUser({
+                      signed_content,
+                      password,
+                      otp,
+                      drfo: ds.privKeyOwnerInfo.subjDRFOCode,
+                      given_name: encodeURIComponent(
+                        ds.privKeySubject.GivenName
+                      ),
+                      surname: encodeURIComponent(ds.privKeySubject.SN)
+                    });
 
-                  return authorizeUser();
+                    return authorizeUser();
+                  } catch (error) {
+                    if (error.type === "validation_failed") {
+                      const pathname = findErroredPage(error.invalid);
+
+                      if (pathname) {
+                        router.replace({ ...location, pathname });
+                        return { [SUBMIT_ERROR]: error.invalid };
+                      }
+                    }
+
+                    router.push({
+                      ...location,
+                      pathname: `/sign-up/failure/${error.type}`
+                    });
+                  }
                 }}
               >
                 {children}
@@ -138,12 +156,17 @@ class SignUpNextForm extends Component {
     );
   }
 
-  handleSubmit = values => {
+  handleSubmit = (values, form) => {
     const { step, transitions, onSubmit } = this.props;
     const transition = transitions[step];
 
     this.setState({ values });
-    return transition ? transition(values) : onSubmit(values);
+
+    const { submitErrors } = form.getState();
+
+    return transition
+      ? transition(values, form) || submitErrors
+      : onSubmit(values, form);
   };
 }
 
@@ -219,4 +242,13 @@ const authorizeUser = () => async dispatch => {
   if (error) throw response.error;
 
   window.location = headers.get("location");
+};
+
+const findErroredPage = invalid => {
+  const [_entries, path] =
+    ENTRIES_PAGES_MAPPING.find(([entries]) =>
+      invalid.some(e => entries.includes(e.entry))
+    ) || [];
+
+  return path;
 };
