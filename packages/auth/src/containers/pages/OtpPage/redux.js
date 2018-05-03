@@ -1,7 +1,7 @@
 import { push } from "react-router-redux";
 import { SubmissionError } from "redux-form";
 import { getLocation } from "../../../reducers";
-import { otpVerifyToken, otpResendOtp } from "../../../redux/auth";
+import { otpVerifyToken, otpResendOtp, authorize } from "../../../redux/auth";
 import { fetchUserData } from "../../../redux/user";
 import { login } from "../../../redux/session";
 
@@ -20,6 +20,19 @@ export const onSubmit = ({ code }) => (dispatch, getState) =>
     }
 
     dispatch(login(action.payload.value));
+    if (action.meta.next_step === "REQUEST_APPS") {
+      const state = getState();
+      const { routing: { locationBeforeTransitions: { query } } } = state;
+      return dispatch(
+        authorize({
+          clientId: query.client_id,
+          redirectUri: query.redirect_uri
+        })
+      ).then(({ payload, error }) => {
+        return window && (window.location = payload.headers.get("location"));
+      });
+    }
+
     return dispatch(fetchUserData(action.payload.value)).then(action => {
       if (action.error) {
         return action;
