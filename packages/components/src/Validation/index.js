@@ -3,6 +3,8 @@ import { Field } from "react-final-form";
 import validator from "validator";
 import capitalize from "lodash/capitalize";
 
+import SubmitValidation from "./SubmitValidation";
+
 const VENDOR_BLACKLIST_FNS = [
   "isEmpty",
   "blacklist",
@@ -86,10 +88,10 @@ const createValidateFn = validator => (value, _allValues, options) => {
   return validator(value, ...options);
 };
 
-Object.assign(
-  Validation,
-  createValidationComponents(Validation, PREDEFINED_VALIDATORS)
-);
+Object.assign(Validation, {
+  ...createValidationComponents(Validation, PREDEFINED_VALIDATORS),
+  Submit: SubmitValidation
+});
 
 export default Validation;
 

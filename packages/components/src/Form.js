@@ -1,6 +1,7 @@
 import React from "react";
 import { Form as FinalForm, FormSpy } from "react-final-form";
 import createFocusDecorator from "final-form-focus";
+import setFieldData from "final-form-set-field-data";
 import styled from "react-emotion/macro";
 import { prop } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
@@ -21,14 +22,19 @@ const FINAL_FORM_PROPS = [
 const focusOnErrors = createFocusDecorator();
 
 const Form = ({ innerRef, ...props }) => {
-  const [{ decorators = [], ...finalFormProps }, formProps] = pickProps(
-    props,
-    FINAL_FORM_PROPS
-  );
+  const [
+    { decorators = [], mutators, ...finalFormProps },
+    formProps
+  ] = pickProps(props, FINAL_FORM_PROPS);
 
   return (
-    <FinalForm decorators={[focusOnErrors, ...decorators]} {...finalFormProps}>
-      {({ handleSubmit, values }) => (
+    <FinalForm
+      decorators={[focusOnErrors, ...decorators]}
+      mutators={{ setFieldData, ...mutators }}
+      subscription={{}}
+      {...finalFormProps}
+    >
+      {({ handleSubmit }) => (
         <form
           {...formProps}
           ref={innerRef}
@@ -59,6 +65,8 @@ Form.Button = FormButton;
 Form.Submit = FormSubmit;
 
 export default Form;
+
+export const SUBMIT_ERROR = "FINAL_FORM/submit-error";
 
 const StyledButton = styled(Button)`
   margin-bottom: ${prop("theme.form.fieldVerticalDistance", 20)}px;
