@@ -22,7 +22,7 @@ const SignInForm = ({ handleSubmit, submitting, btnColor = "blue" }) => (
       </div>
       <ButtonsGroup>
         <Button disabled={submitting} type="submit" color={btnColor}>
-          далі
+          увійти
         </Button>
       </ButtonsGroup>
     </FormBlock>
