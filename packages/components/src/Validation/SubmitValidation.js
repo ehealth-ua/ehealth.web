@@ -1,7 +1,7 @@
 import React from "react";
 import { FormSpy } from "react-final-form";
 
-import { SUBMIT_ERROR } from "./Form";
+import { SUBMIT_ERROR } from "../Form";
 
 const SubmitValidation = ({
   field,
