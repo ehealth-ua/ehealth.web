@@ -14,6 +14,7 @@
     "downshift": "^1.31.3",
     "emotion": "^9.1.1",
     "final-form-focus": "^1.0.0",
+    "final-form-set-field-data": "^1.0.1",
     "lodash": "^4.17.5",
     "react-emotion": "^9.1.1",
     "styled-tools": "^0.5.0",
