@@ -15,45 +15,19 @@ import SignInForm from "../../forms/SignInForm";
 
 import { onSubmit } from "./redux";
 
-class SignInPage extends React.Component {
-  renderNotFoundClientId() {
-    return (
-      <Main id="sign-in-page">
-        <Header>
-          <b>Помилка</b>
-        </Header>
-        <Article>
-          <p>Не вказан идентифікатор додатку для авторизації</p>
-        </Article>
-      </Main>
-    );
-  }
-  renderNotFoundRedirectUri() {
-    return (
-      <Main id="sign-in-page">
-        <Header>
-          <b>Помилка</b>
-        </Header>
-        <Article>
-          <p>Не вказано адресу зворотнього визову</p>
-        </Article>
-      </Main>
-    );
-  }
-  render() {
-    const {
-      onSubmit = () => {},
-      location: { search, query: { client_id, redirect_uri, email } }
-    } = this.props;
-    if (!client_id) return this.renderNotFoundClientId();
-    if (!redirect_uri) return this.renderNotFoundRedirectUri();
-
-    return (
-      <Main id="sign-in-page">
-        <Header>
-          <H1>Вхід у систему eHealth</H1>
-        </Header>
-        <Article>
+const SignInPage = ({
+  onSubmit = () => {},
+  location: { search, query: { client_id, redirect_uri, email } }
+}) => (
+  <Main id="sign-in-page">
+    <Header>
+      <H1>Вхід у систему eHealth</H1>
+    </Header>
+    <Article>
+      {!client_id && <p>Не вказано адресу зворотнього визову</p>}
+      {!redirect_uri && <p>Не вказан идентифікатор додатку для авторизації</p>}
+      {client_id &&
+        redirect_uri && (
           <NarrowContainer>
             <SignInForm
               onSubmit={args => onSubmit({ ...args, client_id })}
@@ -76,10 +50,9 @@ class SignInPage extends React.Component {
               </Button>
             </ButtonsGroup>
           </NarrowContainer>
-        </Article>
-      </Main>
-    );
-  }
-}
+        )}
+    </Article>
+  </Main>
+);
 
 export default compose(withRouter, connect(null, { onSubmit }))(SignInPage);
