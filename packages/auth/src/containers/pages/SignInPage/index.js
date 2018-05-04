@@ -56,7 +56,7 @@ class SignInPage extends React.Component {
         <Article>
           <NarrowContainer>
             <SignInForm
-              onSubmit={onSubmit}
+              onSubmit={args => onSubmit({ ...args, client_id })}
               initialValues={{
                 email
               }}
