@@ -22,14 +22,13 @@ export const onSubmit = ({ code }) => async (dispatch, getState) => {
   }
   dispatch(login(token));
   if (meta.next_step === "REQUEST_APPS") {
-    return dispatch(
+    const { payload, error } = await dispatch(
       authorize({
         clientId: details.client_id,
         redirectUri: details.redirect_uri
       })
-    ).then(({ payload, error }) => {
-      return window && (window.location = payload.headers.get("location"));
-    });
+    );
+    window.location = payload.headers.get("location");
   }
   return dispatch(fetchUserData(token)).then(action => {
     if (action.error) {
