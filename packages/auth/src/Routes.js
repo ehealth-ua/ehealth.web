@@ -35,6 +35,7 @@ import InviteSuccessPage from "./containers/pages/InviteSuccessPage";
 import InviteRejectPage from "./containers/pages/InviteRejectPage";
 
 import SignInPage from "./containers/pages/SignInPage";
+import SignInDSPage from "./containers/pages/SignInDSPage";
 import OtpPage from "./containers/pages/OtpPage";
 import AcceptPage from "./containers/pages/AcceptPage";
 import ConditionPage from "./containers/pages/ConditionPage";
@@ -133,6 +134,11 @@ export default class Routes extends Component {
                 />
               </Route>
               <Route path="sign-in" component={SignInPage} />
+              <Route
+                path="sign-in/digital-signature"
+                component={SignInDSPage}
+              />
+
               <Route
                 path="update-password"
                 component={PasswordExpiredSignInPage}
