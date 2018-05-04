@@ -62,7 +62,7 @@ class SignInPage extends React.Component {
               }}
             />
             <ButtonsGroup>
-              <Button color="blue" to={`sign-in/digital-sign?${search}`}>
+              <Button color="blue" to={`sign-in/digital-signature?${search}`}>
                 увійти за допомогою ЕЦП
               </Button>
               <Button theme="link" to={`/update-password?${search}`}>
