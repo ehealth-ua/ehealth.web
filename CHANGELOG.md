@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/edenlabllc/ehealth.web/compare/v0.7.2...v0.8.0) (2018-05-04)
+
+
+### Bug Fixes
+
+* **components:** add missing final-form-set-field-data mutator ([257be87](https://github.com/edenlabllc/ehealth.web/commit/257be87))
+* **components:** add missing SUBMIT_ERROR export ([c7bd6e5](https://github.com/edenlabllc/ehealth.web/commit/c7bd6e5))
+* **components:** fix SUBMIT_ERRORS import in SubmitValidation component ([67dd2c4](https://github.com/edenlabllc/ehealth.web/commit/67dd2c4))
+
+
+### Features
+
+* **auth:** add server-side validations to sign up form ([b3323cb](https://github.com/edenlabllc/ehealth.web/commit/b3323cb)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+* **components:** add SumbitValidation component ([9461f54](https://github.com/edenlabllc/ehealth.web/commit/9461f54))
+* **components:** bump final-form to 4.6.1 and react-final-form to 3.4.0 ([715f6d3](https://github.com/edenlabllc/ehealth.web/commit/715f6d3))
+
+
+
+
 <a name="0.7.2"></a>
 ## [0.7.2](https://github.com/edenlabllc/ehealth.web/compare/v0.7.1...v0.7.2) (2018-05-02)
 

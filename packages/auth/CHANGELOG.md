@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/edenlabllc/ehealth.web/compare/v0.7.2...v0.8.0) (2018-05-04)
+
+
+### Features
+
+* **auth:** add server-side validations to sign up form ([b3323cb](https://github.com/edenlabllc/ehealth.web/commit/b3323cb)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+
+
+
+
 <a name="0.7.2"></a>
 ## [0.7.2](https://github.com/edenlabllc/ehealth.web/compare/v0.7.1...v0.7.2) (2018-05-02)
 
