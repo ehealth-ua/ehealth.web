@@ -1,8 +1,8 @@
 import React from "react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm } from "redux-form";
 import { reduxFormValidate } from "react-nebo15-validate";
 
-import FieldCheckbox from "../../../components/reduxForm/FieldCheckbox";
+import { Field, Form, Validation, Validations } from "@ehealth/components";
 import Button from "../../../components/Button";
 
 import styles from "./styles.module.css";
@@ -12,21 +12,20 @@ const InviteAcceptForm = ({
   onSubmit = () => {},
   submitting
 }) => (
-  <form className={styles.main} onSubmit={handleSubmit(onSubmit)}>
+  <Form className={styles.main} onSubmit={handleSubmit(onSubmit)}>
     <div>
-      <Field
-        labelText="Погоджуюсь з Регламентом функціонування системи eHealth"
-        type="checkbox"
+      <Field.Checkbox
+        label="Погоджуюсь з Регламентом функціонування системи eHealth"
         name="confirm"
-        component={FieldCheckbox}
       />
+      <Validation.Required field="confirm" message="Об'язкове поле" />
     </div>
     <div>
       <Button disabled={submitting} type="submit" color="blue">
         прийняти запрошення
       </Button>
     </div>
-  </form>
+  </Form>
 );
 
 export default reduxForm({
