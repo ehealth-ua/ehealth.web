@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/edenlabllc/ehealth.web/compare/v0.8.2...v0.9.0) (2018-05-09)
+
+
+### Bug Fixes
+
+* **auth:** add padding for main layout ([9b8fef0](https://github.com/edenlabllc/ehealth.web/commit/9b8fef0))
+* **auth:** update btn text in sign-in form ([ac4ee44](https://github.com/edenlabllc/ehealth.web/commit/ac4ee44)), closes [#5](https://github.com/edenlabllc/ehealth.web/issues/5)
+* **auth:** use client_id from params for sign-in submit fn ([15a2990](https://github.com/edenlabllc/ehealth.web/commit/15a2990))
+* **auth:** user config client_id for session token generation ([c459866](https://github.com/edenlabllc/ehealth.web/commit/c459866))
+
+
+### Features
+
+* **auth:** add getNonce action, add drfo header to createSessionToken action ([3453ef8](https://github.com/edenlabllc/ehealth.web/commit/3453ef8))
+* **auth:** add sign-in logic for Otp page ([0ede426](https://github.com/edenlabllc/ehealth.web/commit/0ede426)), closes [#5](https://github.com/edenlabllc/ehealth.web/issues/5)
+* **auth:** add sign-in route ([7bd1a65](https://github.com/edenlabllc/ehealth.web/commit/7bd1a65)), closes [#5](https://github.com/edenlabllc/ehealth.web/issues/5)
+* **auth:** add verifying the cliend_id and redirect_uri in query in sign-in page, add DS button ([030b8c3](https://github.com/edenlabllc/ehealth.web/commit/030b8c3)), closes [#5](https://github.com/edenlabllc/ehealth.web/issues/5)
+* **auth:** DS Sign-in page ([8e3e072](https://github.com/edenlabllc/ehealth.web/commit/8e3e072))
+* **auth:** enable flow with default scope for cabinet client in otp page ([e8d7c41](https://github.com/edenlabllc/ehealth.web/commit/e8d7c41))
+* **auth:** get client_id from params for sign-in page ([1a40d46](https://github.com/edenlabllc/ehealth.web/commit/1a40d46))
+
+
+### Reverts
+
+* "Sign-in flow. Connects to [#5](https://github.com/edenlabllc/ehealth.web/issues/5) ([#35](https://github.com/edenlabllc/ehealth.web/issues/35))" ([af11b29](https://github.com/edenlabllc/ehealth.web/commit/af11b29))
+
+
+
+
 <a name="0.8.2"></a>
 ## [0.8.2](https://github.com/edenlabllc/ehealth.web/compare/v0.8.1...v0.8.2) (2018-05-07)
 
