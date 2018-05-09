@@ -2,7 +2,7 @@ import { handleAction } from "redux-actions";
 import { REACT_APP_AUTH_URL } from "../env";
 import { invoke } from "./api";
 
-export const createSessionToken = ({ drfo, ...body }) =>
+export const createSessionToken = body =>
   invoke({
     endpoint: `${REACT_APP_AUTH_URL}/oauth/tokens`,
     method: "POST",
@@ -25,9 +25,6 @@ export const createSessionToken = ({ drfo, ...body }) =>
     ],
     body: {
       token: body
-    },
-    headers: {
-      drfo
     }
   });
 
@@ -182,16 +179,6 @@ export const authorize = ({ clientId, scope, redirectUri }) =>
     },
     { auth: true }
   );
-
-export const getNonce = client_id =>
-  invoke({
-    endpoint: `${REACT_APP_AUTH_URL}/oauth/nonce`,
-    method: "POST",
-    types: ["auth/NONCE_REQUEST", "auth/NONCE_SUCCESS", "auth/NONCE_FAILURE"],
-    body: {
-      client_id
-    }
-  });
 
 export default handleAction(
   "auth/CREATE_SESSION_TOKEN_SUCCESS",
