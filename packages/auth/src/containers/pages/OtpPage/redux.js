@@ -21,11 +21,15 @@ export const onSubmit = ({ code }) => async (dispatch, getState) => {
     return response.error;
   }
   dispatch(login(token));
+
+  const state = getState();
+  const { query } = getLocation(state);
+
   if (meta.next_step === "REQUEST_APPS") {
     const { payload, error } = await dispatch(
       authorize({
-        clientId: details.client_id,
-        redirectUri: details.redirect_uri
+        clientId: query.client_id,
+        redirectUri: query.redirect_uri
       })
     );
     window.location = payload.headers.get("location");
