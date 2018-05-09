@@ -29,12 +29,7 @@ const SignInPage = ({
       {client_id &&
         redirect_uri && (
           <NarrowContainer>
-            <SignInForm
-              onSubmit={args => onSubmit({ ...args, client_id })}
-              initialValues={{
-                email
-              }}
-            />
+            <SignInForm onSubmit={onSubmit} initialValues={{ email }} />
             <ButtonsGroup>
               <Button color="blue" to={`sign-in/digital-signature?${search}`}>
                 увійти за допомогою ЕЦП

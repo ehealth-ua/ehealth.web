@@ -5,6 +5,7 @@ import { createSessionToken } from "../../../redux/auth";
 import { login } from "../../../redux/session";
 import { fetchUserData } from "../../../redux/user";
 import error_messages from "../../../helpers/errors";
+import { REACT_APP_CLIENT_ID } from "../../../env";
 
 export const onSubmit = ({ email, password, client_id }) => (
   dispatch,
@@ -15,7 +16,7 @@ export const onSubmit = ({ email, password, client_id }) => (
       grant_type: "password",
       email,
       password,
-      client_id,
+      client_id: REACT_APP_CLIENT_ID,
       scope: "app:authorize"
     })
   ).then(action => {
