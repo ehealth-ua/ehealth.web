@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.9.1"></a>
+## [0.9.1](https://github.com/edenlabllc/ehealth.web/compare/v0.9.0...v0.9.1) (2018-05-10)
+
+
+### Bug Fixes
+
+* **auth:** use client_id and redirect_uri from params to apps/authorize ([a599837](https://github.com/edenlabllc/ehealth.web/commit/a599837))
+
+
+
+
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/edenlabllc/ehealth.web/compare/v0.8.2...v0.9.0) (2018-05-09)
 
