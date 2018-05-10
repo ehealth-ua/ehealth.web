@@ -4,11 +4,11 @@ module.exports = {
   projects: [
     {
       displayName: "unit",
-      testMatch: ["**/__tests__/!e2e/**/*.js?(x)", "**/?(*.)(spec|test).js?(x)"]
+      testRegex: "(/__tests__/(?!e2e/).*|(\\.|/)(test|spec))\\.jsx?$"
     },
     {
       displayName: "e2e",
-      testMatch: ["**/__tests__/e2e/**/*.js?(x)"],
+      testRegex: "/__tests__/e2e/.*\\.jsx?$",
       testEnvironment: "jest-environment-puppeteer",
       setupTestFrameworkScriptFile: "expect-puppeteer"
     }
