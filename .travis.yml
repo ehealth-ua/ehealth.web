@@ -18,6 +18,7 @@ before_install:
 - npm install cipm --global --quiet
 install:
 - cipm --ignore-scripts
+- npm install puppeteer
 - npx lerna bootstrap --npm-client=cipm
 script: npm test
 before_deploy:
