@@ -1,16 +1,10 @@
 {
-  "lerna": "2.8.0",
-  "packages": [
-    "packages/*"
-  ],
-  "commands": {
+  "packages": ["packages/*"],
+  "command": {
     "publish": {
       "conventionalCommits": true,
       "message": "chore(release): publish %s",
-      "allowBranch": [
-        "master",
-        "*-stable"
-      ]
+      "allowBranch": ["master", "*-stable"]
     }
   },
   "version": "0.9.1"
