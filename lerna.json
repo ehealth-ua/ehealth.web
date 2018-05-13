@@ -1,12 +1,17 @@
 {
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "hoist": true,
   "command": {
     "publish": {
       "conventionalCommits": true,
       "message": "chore(release): publish %s",
-      "allowBranch": ["master", "*-stable"]
+      "allowBranch": [
+        "master",
+        "*-stable"
+      ]
     }
   },
-  "version": "0.9.1"
+  "version": "0.10.0"
 }

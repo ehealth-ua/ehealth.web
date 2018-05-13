@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/edenlabllc/ehealth.web/compare/v0.9.1...v0.10.0) (2018-05-13)
+
+
+### Features
+
+* **iit-digital-signature:** replace webpack with rollup ([8233e77](https://github.com/edenlabllc/ehealth.web/commit/8233e77))
+
+
+
+
+
 <a name="0.6.1"></a>
 ## [0.6.1](https://github.com/edenlabllc/ehealth.web/compare/v0.6.0...v0.6.1) (2018-04-29)
 

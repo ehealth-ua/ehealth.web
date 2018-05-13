@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/edenlabllc/ehealth.web/compare/v0.9.1...v0.10.0) (2018-05-13)
+
+
+### Features
+
+* use `npm ci` and `lerna bootstrap --ci` in dockerfiles ([c473984](https://github.com/edenlabllc/ehealth.web/commit/c473984))
+
+
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/edenlabllc/ehealth.web/compare/v0.6.1...v0.7.0) (2018-05-02)
 

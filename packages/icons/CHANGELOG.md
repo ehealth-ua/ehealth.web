@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/edenlabllc/ehealth.web/compare/v0.9.1...v0.10.0) (2018-05-13)
+
+
+### Features
+
+* **icons:** add EhealthLogoIcon ([bba6993](https://github.com/edenlabllc/ehealth.web/commit/bba6993))
+
+
+
+
+
 <a name="0.6.0"></a>
 # 0.6.0 (2018-04-27)
 

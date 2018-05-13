@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/edenlabllc/ehealth.web/compare/v0.9.1...v0.10.0) (2018-05-13)
+
+
+### Features
+
+* load DigitalSignature dynamically ([dc4faa3](https://github.com/edenlabllc/ehealth.web/commit/dc4faa3))
+* use `npm ci` and `lerna bootstrap --ci` in dockerfiles ([c473984](https://github.com/edenlabllc/ehealth.web/commit/c473984))
+
+
+
+
+
 <a name="0.9.1"></a>
 ## [0.9.1](https://github.com/edenlabllc/ehealth.web/compare/v0.9.0...v0.9.1) (2018-05-10)
 
