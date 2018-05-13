@@ -3,11 +3,7 @@
   "version": "0.8.0",
   "private": true,
   "description": "",
-  "main": "dist",
-  "scripts": {
-    "prepare": "rm -fr dist && NODE_ENV=production babel src --out-dir dist",
-    "start": "NODE_ENV=development babel src --out-dir dist --watch"
-  },
+  "main": "src",
   "dependencies": {
     "@ehealth/icons": "^0.6.0",
     "@ehealth/utils": "^0.6.0",
@@ -19,17 +15,6 @@
     "react-emotion": "^9.1.1",
     "styled-tools": "^0.5.0",
     "validator": "^9.4.1"
-  },
-  "devDependencies": {
-    "@babel/cli": "7.0.0-beta.41",
-    "babel-preset-react-app": "4.0.0-next.47d2d941",
-    "final-form": "^4.6.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-final-form": "^3.4.0",
-    "react-redux": "^5.0.7",
-    "react-router": "^3.2.1",
-    "redux": "^4.0.0"
   },
   "peerDependencies": {
     "final-form": "^4.6.1",

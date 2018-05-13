@@ -3,17 +3,7 @@
   "version": "0.6.0",
   "private": true,
   "description": "",
-  "main": "dist",
-  "scripts": {
-    "prepare": "rm -fr dist && NODE_ENV=production babel src --out-dir dist",
-    "start": "NODE_ENV=development babel src --out-dir dist --watch"
-  },
-  "devDependencies": {
-    "@babel/cli": "7.0.0-beta.41",
-    "babel-preset-react-app": "4.0.0-next.47d2d941",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
-  },
+  "main": "src",
   "peerDependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2"

@@ -1,5 +1,6 @@
 {
   "packages": ["packages/*"],
+  "hoist": true,
   "command": {
     "publish": {
       "conventionalCommits": true,

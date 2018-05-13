@@ -1,6 +1,0 @@
-{
-  "extends": "../../.babelrc.js",
-  "presets": [
-    ["@babel/preset-env", { "modules": false, "shippedProposals": true }]
-  ]
-}

@@ -3,19 +3,9 @@
   "version": "0.7.1",
   "private": true,
   "description": "EUSignCP digital signature library React component bingings",
-  "main": "dist",
-  "scripts": {
-    "prepare": "rm -fr dist && NODE_ENV=production babel src --out-dir dist",
-    "start": "NODE_ENV=development babel src --out-dir dist --watch"
-  },
+  "main": "src",
   "dependencies": {
     "load-js": "^3.0.2"
-  },
-  "devDependencies": {
-    "@babel/cli": "7.0.0-beta.41",
-    "babel-preset-react-app": "4.0.0-next.47d2d941",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
   },
   "peerDependencies": {
     "react": "^16.3.2",
