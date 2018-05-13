@@ -1,5 +1,5 @@
 import React, { createContext, Component } from "react";
-import DigitalSignature from "@ehealth/iit-digital-signature";
+import load from "load-js";
 
 const DigitalSignatureContext = createContext();
 
@@ -27,7 +27,10 @@ export default class ReactDigitalSignature extends Component {
   ds = {};
 
   async componentDidMount() {
-    const { proxy } = this.props;
+    const { sourceUrl, proxy } = this.props;
+
+    await load({ url: sourceUrl, async: true });
+
     this.ds = await DigitalSignature.initialize({ proxy });
     this.setState({ initialized: true });
   }

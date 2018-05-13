@@ -9,7 +9,7 @@
     "start": "NODE_ENV=development babel src --out-dir dist --watch"
   },
   "dependencies": {
-    "@ehealth/iit-digital-signature": "^0.6.1"
+    "load-js": "^3.0.2"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.41",

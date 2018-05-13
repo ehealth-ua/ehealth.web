@@ -15,7 +15,10 @@ const App = () => (
     <Helmet titleTemplate="Електронна система охорони здоров'я eHealth — %s" />
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <DigitalSignature proxy={REACT_APP_PROXY_URL}>
+        <DigitalSignature
+          sourceUrl="/iit-digital-signature.min.js"
+          proxy={REACT_APP_PROXY_URL}
+        >
           <Routes />
         </DigitalSignature>
       </ThemeProvider>
