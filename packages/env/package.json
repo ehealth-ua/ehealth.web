@@ -1,0 +1,11 @@
+{
+  "name": "@ehealth/env",
+  "version": "0.9.1",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "dotenv-expand": "^4.2.0"
+  }
+}
