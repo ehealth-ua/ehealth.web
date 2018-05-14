@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/auth",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "private": true,
   "dependencies": {
     "@ehealth/components": "^0.10.0",
