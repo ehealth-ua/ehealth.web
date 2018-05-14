@@ -12,7 +12,7 @@ import { pickProps } from "@ehealth/utils";
 
 import {
   REACT_APP_DIGITAL_SIGNATURE_ENABLED,
-  REACT_APP_CABINET_CLIENT_ID
+  REACT_APP_PATIENT_ACCOUNT_CLIENT_ID
 } from "../../../env";
 import { getTokenData } from "../../../reducers";
 import { fetchDictionaries } from "../../../redux/dictionaries";
@@ -236,7 +236,7 @@ const registerUser = payload => async dispatch => {
 
 const authorizeUser = () => async dispatch => {
   const { error, payload: { response, headers } } = await dispatch(
-    authorize({ clientId: REACT_APP_CABINET_CLIENT_ID })
+    authorize({ clientId: REACT_APP_PATIENT_ACCOUNT_CLIENT_ID })
   );
 
   if (error) throw response.error;
