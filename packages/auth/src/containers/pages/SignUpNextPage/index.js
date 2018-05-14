@@ -231,7 +231,7 @@ const registerUser = payload => async dispatch => {
 
   if (error) throw response.error;
 
-  return login(data.access_token);
+  return dispatch(login(data.access_token));
 };
 
 const authorizeUser = () => async dispatch => {
