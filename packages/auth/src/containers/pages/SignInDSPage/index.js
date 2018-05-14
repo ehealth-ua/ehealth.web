@@ -64,7 +64,7 @@ class SignInDSPage extends Component {
     } = await createSessionToken({
       drfo,
       signed_content,
-      client_id: query.client_id,
+      client_id: REACT_APP_CLIENT_ID,
       grant_type: "digital_signature",
       signed_content_encoding: "base64",
       scope: "app:authorize"
@@ -72,9 +72,8 @@ class SignInDSPage extends Component {
     login(value);
     if (next_step === "REQUEST_APPS") {
       authorize({
-        // scope,
-        clientId: client_id,
-        redirectUri: redirect_uri
+        clientId: query.client_id,
+        redirectUri: query.redirect_uri
       }).then(({ payload, error }) => {
         return window && (window.location = payload.headers.get("location"));
       });
