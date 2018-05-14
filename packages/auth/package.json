@@ -1,12 +1,12 @@
 {
   "name": "@ehealth/auth",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "private": true,
   "dependencies": {
-    "@ehealth/components": "^0.10.0",
-    "@ehealth/icons": "^0.10.0",
-    "@ehealth/react-iit-digital-signature": "^0.10.0",
-    "@ehealth/utils": "^0.10.0",
+    "@ehealth/components": "^0.11.0",
+    "@ehealth/icons": "^0.11.0",
+    "@ehealth/react-iit-digital-signature": "^0.11.0",
+    "@ehealth/utils": "^0.11.0",
     "classnames": "^2.2.5",
     "date-fns": "^1.27.2",
     "emotion": "^9.1.1",

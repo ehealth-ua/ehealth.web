@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.11.0"></a>
+# [0.11.0](https://github.com/edenlabllc/ehealth.web/compare/v0.10.1...v0.11.0) (2018-05-14)
+
+
+### Bug Fixes
+
+* **auth:** add missing dispatch call to post-register login action ([83007f4](https://github.com/edenlabllc/ehealth.web/commit/83007f4))
+
+
+### Features
+
+* **env:** bootstrap package ([b62158d](https://github.com/edenlabllc/ehealth.web/commit/b62158d))
+
+
+
+
+
 <a name="0.10.1"></a>
 ## [0.10.1](https://github.com/edenlabllc/ehealth.web/compare/v0.10.0...v0.10.1) (2018-05-14)
 
