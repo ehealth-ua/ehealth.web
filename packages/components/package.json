@@ -1,12 +1,12 @@
 {
   "name": "@ehealth/components",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "private": true,
   "description": "",
   "main": "src",
   "dependencies": {
-    "@ehealth/icons": "^0.11.0",
-    "@ehealth/utils": "^0.11.0",
+    "@ehealth/icons": "^0.12.0",
+    "@ehealth/utils": "^0.12.0",
     "downshift": "^1.31.3",
     "emotion": "^9.1.1",
     "final-form-focus": "^1.0.0",

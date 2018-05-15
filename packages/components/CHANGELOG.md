@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.12.0"></a>
+# [0.12.0](https://github.com/edenlabllc/ehealth.web/compare/v0.11.1...v0.12.0) (2018-05-15)
+
+
+### Bug Fixes
+
+* **components:** rename to AdminTable component ([65a17ce](https://github.com/edenlabllc/ehealth.web/commit/65a17ce))
+
+
+### Features
+
+* **components:** add basev TableView component ([2016d1b](https://github.com/edenlabllc/ehealth.web/commit/2016d1b))
+* **components:** add CabinetTable component ([cfdc92b](https://github.com/edenlabllc/ehealth.web/commit/cfdc92b))
+* **components:** add Title component ([3a6410c](https://github.com/edenlabllc/ehealth.web/commit/3a6410c))
+* **components:** use react-router-dom in Button ([35965ec](https://github.com/edenlabllc/ehealth.web/commit/35965ec))
+
+
+
+
+
 <a name="0.11.0"></a>
 # [0.11.0](https://github.com/edenlabllc/ehealth.web/compare/v0.10.1...v0.11.0) (2018-05-14)
 

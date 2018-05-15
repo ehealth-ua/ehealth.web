@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.12.0"></a>
+# [0.12.0](https://github.com/edenlabllc/ehealth.web/compare/v0.11.1...v0.12.0) (2018-05-15)
+
+
+### Bug Fixes
+
+* **components:** rename to AdminTable component ([65a17ce](https://github.com/edenlabllc/ehealth.web/commit/65a17ce))
+
+
+### Features
+
+* **components:** add basev TableView component ([2016d1b](https://github.com/edenlabllc/ehealth.web/commit/2016d1b))
+* **components:** add CabinetTable component ([cfdc92b](https://github.com/edenlabllc/ehealth.web/commit/cfdc92b))
+* **components:** add Title component ([3a6410c](https://github.com/edenlabllc/ehealth.web/commit/3a6410c))
+* **components:** use react-router-dom in Button ([35965ec](https://github.com/edenlabllc/ehealth.web/commit/35965ec))
+* **icons:** add ArrorRight Icon ([5426af0](https://github.com/edenlabllc/ehealth.web/commit/5426af0))
+* **patient-account:** add all required fonts ([e270e4e](https://github.com/edenlabllc/ehealth.web/commit/e270e4e))
+* **patient-account:** add global styles to patient-account ([6a6bb41](https://github.com/edenlabllc/ehealth.web/commit/6a6bb41))
+* **patient-account:** add Layout component ([e41722d](https://github.com/edenlabllc/ehealth.web/commit/e41722d))
+* **patient-account:** add Line component ([777de4d](https://github.com/edenlabllc/ehealth.web/commit/777de4d))
+* **patient-account:** add OrderedList component ([5fea755](https://github.com/edenlabllc/ehealth.web/commit/5fea755))
+* **patient-account:** add Tabs component ([bcdee70](https://github.com/edenlabllc/ehealth.web/commit/bcdee70)), closes [#2](https://github.com/edenlabllc/ehealth.web/issues/2)
+
+
+
+
+
 <a name="0.11.1"></a>
 ## [0.11.1](https://github.com/edenlabllc/ehealth.web/compare/v0.11.0...v0.11.1) (2018-05-14)
 
