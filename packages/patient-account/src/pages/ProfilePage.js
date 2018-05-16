@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "react-emotion/macro";
+import { Title } from "@ehealth/components";
+import { PencilIcon } from "@ehealth/icons";
 
-import DefinitionList from "../components/DefinitionList";
-import { SectionList, Title } from "@ehealth/components";
+import DefinitionListView from "../components/DefinitionListView";
 
 const temp_data_1 = {
   name: "Игорь",
@@ -31,13 +32,19 @@ const temp_data_5 = {
   phone: "+380993333343"
 };
 
-const Profile = () => (
+const ProfilePage = () => (
   <>
     <Title.H1>мій профіль</Title.H1>
-    <DefinitionListContainer>
-      <DefinitionList
-        title="Персональні дані"
-        label={{
+    <DefinitionListSection>
+      <SubTitle>
+        Персональні дані
+        <EditLink onClick={() => console.log("click")}>
+          <EditIcon height="14" width="14" />
+          Редагувати профіль
+        </EditLink>
+      </SubTitle>
+      <DefinitionListView
+        labels={{
           name: "ПІБ",
           bday: "Дата народження",
           country: "Країна народження",
@@ -46,21 +53,20 @@ const Profile = () => (
           sex: "Стать"
         }}
         data={temp_data_1}
-        onEdit={() => console.log("click")}
       />
-    </DefinitionListContainer>
-    <DefinitionListContainer>
-      <DefinitionList
-        label={{
+    </DefinitionListSection>
+    <DefinitionListSection>
+      <DefinitionListView
+        labels={{
           edrpou: "ІНН",
           passport: "Паспорт"
         }}
         data={temp_data_2}
       />
-    </DefinitionListContainer>
-    <DefinitionListContainer>
-      <DefinitionList
-        label={{
+    </DefinitionListSection>
+    <DefinitionListSection>
+      <DefinitionListView
+        labels={{
           registrationAddress: "Адреса реєстрації",
           residence: "Адреса проживання",
           contacts: "Бажаний метод зв’язку",
@@ -68,31 +74,31 @@ const Profile = () => (
         }}
         data={temp_data_3}
       />
-    </DefinitionListContainer>
-    <DefinitionListContainer>
-      <DefinitionList
-        title="Контактна особа у екстреному випадку"
-        label={{
+    </DefinitionListSection>
+    <DefinitionListSection>
+      <SubTitle>Контактна особа у екстреному випадку</SubTitle>
+      <DefinitionListView
+        labels={{
           name: "ПІБ",
           phone: "Номер телефону"
         }}
         data={temp_data_4}
       />
-    </DefinitionListContainer>
-    <DefinitionListContainer>
-      <DefinitionList
-        title="Авторизація"
-        label={{
+    </DefinitionListSection>
+    <DefinitionListSection>
+      <SubTitle>Авторизація</SubTitle>
+      <DefinitionListView
+        labels={{
           email: "Email",
           phone: "Номер телефону"
         }}
         data={temp_data_5}
       />
-    </DefinitionListContainer>
+    </DefinitionListSection>
   </>
 );
 
-const DefinitionListContainer = styled.div`
+const DefinitionListSection = styled.div`
   margin: 30px 0;
   border-bottom: 1px solid #e7e7e9;
   &:last-of-type {
@@ -100,4 +106,25 @@ const DefinitionListContainer = styled.div`
   }
 `;
 
-export default Profile;
+const SubTitle = styled.h3`
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  font-size: 16px;
+`;
+
+const EditLink = styled.span`
+  margin-left: auto;
+  font-size: 10px;
+  color: #4880ed;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+`;
+
+const EditIcon = styled(PencilIcon)`
+  margin-right: 5px;
+  vertical-align: middle;
+`;
+
+export default ProfilePage;
