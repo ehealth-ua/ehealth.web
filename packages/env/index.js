@@ -6,8 +6,11 @@ const path = require("path");
 const expand = require("dotenv-expand");
 const { config } = require("dotenv");
 
-const { NODE_ENV = "development" } = process.env;
+if (process.env.NODE_ENV === undefined) {
+  process.env.NODE_ENV = "development";
+}
 
+const { NODE_ENV } = process.env;
 const dotenvPath = path.resolve(process.cwd(), ".env");
 
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
