@@ -28,8 +28,7 @@
   },
   "proxy": {
     "/api": {
-      "target": "https://api-dev.ehealth-ukraine.org/",
-      "secure": false
+      "target": "http://api-dev.ehealth-ukraine.org/"
     },
     "/auth/redirect": {
       "target": "http://localhost:4000/"
