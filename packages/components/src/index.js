@@ -1,5 +1,6 @@
 export { default as Async } from "./Async";
 export { default as Button } from "./Button";
+export { default as Link } from "./Link";
 export { default as Connect } from "./Connect";
 export { default as Field } from "./Field";
 export { default as Form, SUBMIT_ERROR } from "./Form";
