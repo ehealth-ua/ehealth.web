@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.13.0"></a>
+# [0.13.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.13.0) (2018-05-16)
+
+
+### Bug Fixes
+
+* **component:** clean SectionList component ([1c33df4](https://github.com/edenlabllc/ehealth.web/commit/1c33df4))
+* **components:** use react-router-dom instead of react-router ([4c6f6e3](https://github.com/edenlabllc/ehealth.web/commit/4c6f6e3))
+
+
+### Features
+
+* **components:** Add SectionList component ([7decbb0](https://github.com/edenlabllc/ehealth.web/commit/7decbb0))
+
+
+
+
+
 <a name="0.12.0"></a>
 # [0.12.0](https://github.com/edenlabllc/ehealth.web/compare/v0.11.1...v0.12.0) (2018-05-15)
 

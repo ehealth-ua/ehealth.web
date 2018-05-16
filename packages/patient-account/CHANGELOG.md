@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.13.0"></a>
+# [0.13.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.13.0) (2018-05-16)
+
+
+### Bug Fixes
+
+* update api host in env files ([d6f80a2](https://github.com/edenlabllc/ehealth.web/commit/d6f80a2))
+* **components:** rename Profile component ([c18b1ff](https://github.com/edenlabllc/ehealth.web/commit/c18b1ff))
+* **icons:** Rename Pencil icon ([46a1819](https://github.com/edenlabllc/ehealth.web/commit/46a1819))
+* **patient-account:** update development proxy address ([3eed62e](https://github.com/edenlabllc/ehealth.web/commit/3eed62e))
+
+
+### Features
+
+* **patient-account:** add DefinitionList component ([9b3b793](https://github.com/edenlabllc/ehealth.web/commit/9b3b793))
+* **patient-account:** add profile page ([13688aa](https://github.com/edenlabllc/ehealth.web/commit/13688aa))
+* **patient-account:** setup authorization credentials for link-rest ([da80bc3](https://github.com/edenlabllc/ehealth.web/commit/da80bc3))
+
+
+
+
+
 <a name="0.12.1"></a>
 ## [0.12.1](https://github.com/edenlabllc/ehealth.web/compare/v0.12.0...v0.12.1) (2018-05-15)
 

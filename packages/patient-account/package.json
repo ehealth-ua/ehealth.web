@@ -1,10 +1,10 @@
 {
   "name": "@ehealth/patient-account",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "private": true,
   "dependencies": {
-    "@ehealth/components": "^0.12.0",
-    "@ehealth/icons": "^0.12.0",
+    "@ehealth/components": "^0.13.0",
+    "@ehealth/icons": "^0.13.0",
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
     "apollo-link-rest": "^0.2.4",
