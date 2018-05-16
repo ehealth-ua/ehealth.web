@@ -1,13 +1,18 @@
 {
   "private": true,
   "dependencies": {
+    "@ehealth/auth": "file:packages/auth",
+    "@ehealth/gatekeeper": "file:packages/gatekeeper",
+    "@ehealth/iit-digital-signature": "file:packages/iit-digital-signature",
+    "@ehealth/iit-proxy": "file:packages/iit-proxy",
+    "@ehealth/patient-account": "file:packages/patient-account",
     "lerna": "3.0.0-beta.21"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.44",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "22.1.0",
-    "babel-preset-react-app": "^4.0.0-next.66cc7a90",
+    "babel-preset-react-app": "4.0.0-next.66cc7a90",
     "husky": "^0.14.3",
     "jest": "22.1.2",
     "jest-environment-node": "22.1.2",

@@ -3,9 +3,8 @@
   "version": "0.14.0",
   "private": true,
   "dependencies": {
-    "@ehealth/components": "^0.14.0",
-    "@ehealth/icons": "^0.14.0",
-    "@ehealth/utils": "^0.14.0",
+    "@ehealth/components": "file:../components",
+    "@ehealth/icons": "file:../icons",
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
     "apollo-link-rest": "^0.2.4",

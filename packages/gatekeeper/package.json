@@ -9,7 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@ehealth/env": "^0.14.0",
+    "@ehealth/env": "file:../env",
     "express": "^4.16.3",
     "node-fetch": "^2.1.2"
   }
