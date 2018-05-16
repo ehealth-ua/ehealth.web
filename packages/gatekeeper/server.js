@@ -1,0 +1,82 @@
+require("@ehealth/env");
+
+const url = require("url");
+const express = require("express");
+const fetch = require("node-fetch");
+
+const {
+  NODE_ENV,
+  PORT = 4000,
+  API_URL,
+  CLIENT_ID,
+  CLIENT_SECRET,
+  AUTH_COOKIE_NAME = "authorization",
+  META_COOKIE_NAME = "meta",
+  REDIRECT_URL = "/"
+} = process.env;
+
+const app = express();
+
+app.set("trust proxy", true);
+
+app.get("*", async (req, res) => {
+  try {
+    const { query: { code }, protocol, path } = req;
+
+    const redirect_uri = url.format({
+      protocol,
+      host: req.get("host"),
+      pathname: path
+    });
+
+    const { value, user_id, expires_at } = await authenticate({
+      code,
+      redirect_uri
+    });
+
+    const expires = new Date(expires_at * 1000);
+    const secure = NODE_ENV !== "development";
+
+    res.cookie(AUTH_COOKIE_NAME, value, {
+      expires,
+      secure,
+      httpOnly: true,
+      sameSite: true
+    });
+
+    res.cookie(META_COOKIE_NAME, user_id, {
+      expires,
+      secure,
+      sameSite: true
+    });
+
+    res.redirect(REDIRECT_URL);
+  } catch (error) {
+    res.status(error.meta.code).json(error);
+  }
+});
+
+const authenticate = async ({ code, redirect_uri }) => {
+  const token = {
+    grant_type: "authorization_code",
+    code,
+    redirect_uri,
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET
+  };
+
+  const response = await fetch(`${API_URL}/oauth/tokens`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token })
+  });
+
+  const { meta, error, data } = await response.json();
+
+  if (error) throw { meta, error };
+  return data;
+};
+
+app.listen(PORT, () => {
+  console.log(`Listening on http://0.0.0.0:${PORT}`);
+});
