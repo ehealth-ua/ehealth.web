@@ -33,7 +33,7 @@ const TableRoot = styled.table`
 `;
 
 const TableHeader = styled.thead`
-  font-size: 10px;
+  font-size: 14px;
   user-select: none;
 `;
 
@@ -46,7 +46,7 @@ const TableRow = styled.tr`
 `;
 
 const TableCell = styled.td`
-  font-size: 12px;
+  font-size: 14px;
   line-height: 18px;
   padding: 17px 10px;
   text-align: left;

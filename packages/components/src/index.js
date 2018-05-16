@@ -9,3 +9,5 @@ export { default as Switch } from "./Switch";
 export { default as DefinitionList } from "./DefinitionList";
 export { default as Validation, Validations } from "./Validation";
 export { default as Title } from "./Title";
+export { default as AdminTable } from "./AdminTable";
+export { default as CabinetTable } from "./CabinetTable";
