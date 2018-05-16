@@ -18,7 +18,6 @@ before_install:
 - npm i -g npm@6.0.1
 install:
 - npm ci
-- npx lerna bootstrap --ci
 script: npm test
 before_deploy:
 - git config --global user.email "deploy@travis-ci.org" &&
