@@ -18,6 +18,7 @@ const Wrapper = styled.ul`
 
 const Item = styled.li`
   position: relative;
+  font-size: 18px;
   line-height: 70px;
   margin-bottom: 20px;
   padding-left: 70px;
