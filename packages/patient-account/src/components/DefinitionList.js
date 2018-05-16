@@ -2,7 +2,7 @@ import React from "react";
 import styled from "react-emotion/macro";
 
 import { SectionList } from "@ehealth/components";
-import { Pencil } from "@ehealth/icons";
+import { PencilIcon } from "@ehealth/icons";
 
 const DefinitionList = ({ title, label, data, onEdit }) => (
   <SectionList
@@ -30,7 +30,7 @@ const DefinitionList = ({ title, label, data, onEdit }) => (
   />
 );
 
-const EditIcon = styled(Pencil)`
+const EditIcon = styled(PencilIcon)`
   margin-right: 5px;
   vertical-align: middle;
 `;

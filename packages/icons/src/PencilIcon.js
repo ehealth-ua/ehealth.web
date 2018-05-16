@@ -1,6 +1,6 @@
 import React from "react";
 
-const Pencil = props => (
+const PencilIcon = props => (
   <svg {...props} viewBox="0 0 528.899 528.899">
     <path
       fill="#4880ed"
@@ -12,4 +12,4 @@ const Pencil = props => (
   </svg>
 );
 
-export default Pencil;
+export default PencilIcon;
