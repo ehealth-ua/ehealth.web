@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { prop, ifProp } from "styled-tools";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const Button = props => {
   const Component = ButtonContainer.withComponent(
