@@ -70,8 +70,4 @@ export const SUBMIT_ERROR = "FINAL_FORM/submit-error";
 
 const StyledButton = styled(Button)`
   margin-bottom: ${prop("theme.form.fieldVerticalDistance", 20)}px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 `;
