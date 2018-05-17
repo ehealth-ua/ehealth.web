@@ -2,6 +2,7 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { Form } from "@ehealth/components";
 
 import { H1 } from "../../../components/Title";
 import Button, { ButtonsGroup } from "../../../components/Button";
@@ -17,7 +18,8 @@ import { onSubmit } from "./redux";
 
 const SignInPage = ({
   onSubmit = () => {},
-  location: { search, query: { client_id, redirect_uri, email } }
+  location: { search, query: { client_id, redirect_uri, email } },
+  router
 }) => (
   <Main id="sign-in-page">
     <Header>
@@ -30,10 +32,14 @@ const SignInPage = ({
         redirect_uri && (
           <NarrowContainer>
             <SignInForm onSubmit={onSubmit} initialValues={{ email }} />
+            <Form.Button
+              color="blue"
+              onClick={() => router.push(`sign-in/digital-signature?${search}`)}
+              block
+            >
+              увійти за допомогою ЕЦП
+            </Form.Button>
             <ButtonsGroup>
-              <Button color="blue" to={`sign-in/digital-signature?${search}`}>
-                увійти за допомогою ЕЦП
-              </Button>
               <Button theme="link" to={`/update-password?${search}`}>
                 Змінити пароль
               </Button>
