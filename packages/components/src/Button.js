@@ -3,7 +3,13 @@ import styled from "react-emotion/macro";
 import { prop, ifProp } from "styled-tools";
 import { Link } from "react-router-dom";
 
-const Button = props => <ButtonContainer {...props} />;
+const Button = props => {
+  const Component = ButtonContainer.withComponent(
+    props.href ? "a" : props.to ? Link : "button"
+  );
+
+  return <Component {...props} />;
+};
 
 export default Button;
 
