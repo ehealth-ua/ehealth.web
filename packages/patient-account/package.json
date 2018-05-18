@@ -28,7 +28,7 @@
   },
   "proxy": {
     "/api": {
-      "target": "http://api-dev.ehealth-ukraine.org/"
+      "target": "http://api.dev.asclepius.com.ua/"
     },
     "/auth/redirect": {
       "target": "http://localhost:4000/"
