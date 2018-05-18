@@ -32,7 +32,7 @@ export const onSubmit = ({ code }) => async (dispatch, getState) => {
         redirectUri: query.redirect_uri
       })
     );
-    window.location = payload.headers.get("location");
+    return window && (window.location = payload.headers.get("location"));
   }
   return dispatch(fetchUserData(token)).then(action => {
     if (action.error) {
