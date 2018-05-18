@@ -117,7 +117,10 @@ const ProfilePage = () => (
                 email: "Email",
                 phone: "Номер телефону"
               }}
-              data={{ email, phone: getPhones(person.phones) }}
+              data={{
+                email,
+                phone: person.authentication_methods[0].phone_number
+              }}
             />
           </DefinitionListSection>
         </>
