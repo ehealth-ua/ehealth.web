@@ -36,7 +36,7 @@ const UpdateFactorSignInPage = ({ onSubmit = () => {}, location, router }) => {
             }}
           />
           <ButtonsGroup>
-            <Button theme="link" onClick={router.goBack()}>
+            <Button theme="link" onClick={router.goBack}>
               Назад
             </Button>
           </ButtonsGroup>
