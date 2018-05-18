@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
+import { withRouter } from "react-router";
 import {
   REACT_APP_DIGITAL_SIGNATURE_ENABLED,
   REACT_APP_CLIENT_ID
 } from "../../../env";
 
-import { Button } from "@ehealth/components";
+import Button from "../../../components/Button";
 import {
   Main,
   Header,
@@ -21,6 +22,7 @@ import { login } from "../../../redux/session";
 
 class SignInDSPage extends Component {
   render() {
+    const { router } = this.props;
     return (
       <Main>
         <Header>
@@ -32,6 +34,9 @@ class SignInDSPage extends Component {
               за допомогою <br /> Електронного Цифрового Підпису
             </p>
             <DigitalSignatureForm onSubmit={this.handleSubmit} />
+            <Button theme="link" onClick={() => router.goBack()}>
+              Назад
+            </Button>
           </NarrowContainer>
         </Article>
       </Main>
@@ -44,7 +49,8 @@ class SignInDSPage extends Component {
       createSessionToken,
       login,
       authorize,
-      location: { query }
+      location: { query },
+      router
     } = this.props;
     const { error, payload: { data: { token } } } = await getNonce(
       query.client_id
@@ -85,5 +91,6 @@ export default connect(null, {
   getNonce,
   createSessionToken,
   login,
-  authorize
+  authorize,
+  withRouter
 })(SignInDSPage);
