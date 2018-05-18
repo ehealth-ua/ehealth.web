@@ -36,13 +36,7 @@ const UpdateFactorSignInPage = ({ onSubmit = () => {}, location, router }) => {
             }}
           />
           <ButtonsGroup>
-            <Button
-              theme="link"
-              onClick={() => {
-                if (invite) return router.goBack();
-                return router.push("/sign-in");
-              }}
-            >
+            <Button theme="link" onClick={router.goBack()}>
               Назад
             </Button>
           </ButtonsGroup>
