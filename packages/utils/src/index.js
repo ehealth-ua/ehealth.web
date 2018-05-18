@@ -1,3 +1,6 @@
+export { default as getFullAddress } from "./getFullAddress";
+export { default as getFullName } from "./getFullName";
+export { default as getPhones } from "./getFullName";
 export { default as formatDate } from "./formatDate";
 export { default as formatPhone } from "./formatPhone";
 export { default as parseDate } from "./parseDate";
