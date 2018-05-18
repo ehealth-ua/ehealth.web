@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.15.0"></a>
+# [0.15.0](https://github.com/edenlabllc/ehealth.web/compare/v0.14.1...v0.15.0) (2018-05-18)
+
+
+### Bug Fixes
+
+* **components:** edit font-size in OrderedList component ([43212b0](https://github.com/edenlabllc/ehealth.web/commit/43212b0))
+* **components:** edit styles in CabinetTable, export Table components ([1134419](https://github.com/edenlabllc/ehealth.web/commit/1134419))
+* **components:** refactor btn component ([41a75eb](https://github.com/edenlabllc/ehealth.web/commit/41a75eb))
+* **patient-account:** fix conflicts ([032315e](https://github.com/edenlabllc/ehealth.web/commit/032315e))
+
+
+### Features
+
+* **components:** add Link component ([9d96f67](https://github.com/edenlabllc/ehealth.web/commit/9d96f67))
+
+
+
+
+
 <a name="0.14.1"></a>
 ## [0.14.1](https://github.com/edenlabllc/ehealth.web/compare/v0.14.0...v0.14.1) (2018-05-18)
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.15.0"></a>
+# [0.15.0](https://github.com/edenlabllc/ehealth.web/compare/v0.14.1...v0.15.0) (2018-05-18)
+
+
+### Bug Fixes
+
+* **components:** edit font-size in OrderedList component ([43212b0](https://github.com/edenlabllc/ehealth.web/commit/43212b0))
+* **patient-account:** fix conflicts ([032315e](https://github.com/edenlabllc/ehealth.web/commit/032315e))
+
+
+
+
+
 <a name="0.14.1"></a>
 ## [0.14.1](https://github.com/edenlabllc/ehealth.web/compare/v0.14.0...v0.14.1) (2018-05-18)
 
