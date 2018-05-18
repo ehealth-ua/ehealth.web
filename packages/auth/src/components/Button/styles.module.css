@@ -169,13 +169,12 @@
   color: #d74472;
 }
 .buttonsGroup {
-  margin-left: -40px;
-  margin-top: -20px;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
 }
 .buttonsGroup .buttonsGroupItem {
-  display: inline-block;
-  margin-left: 40px;
-  margin-top: 20px;
+  padding: 10px;
 }
 .inherit-font-size {
   font-size: inherit !important;
