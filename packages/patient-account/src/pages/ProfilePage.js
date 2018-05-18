@@ -46,7 +46,6 @@ const ProfilePage = () => (
 
       return (
         <>
-          <Spinner />
           <Title.H1>мій профіль</Title.H1>
           <DefinitionListSection>
             <SubTitle>
