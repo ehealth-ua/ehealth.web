@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { SUBMIT_ERROR } from "@ehealth/components";
+import { passwordRecoveryRequest } from "../../../redux/password";
 
 import { H1, H3 } from "../../../components/Title";
 import ResetPasswordForm from "../../forms/ResetPasswordForm";
 import Button, { ButtonsGroup } from "../../../components/Button";
 
-import { onSubmit } from "./redux";
 import styles from "./styles.module.css";
 
 class ResetPasswordPage extends Component {
@@ -41,7 +42,7 @@ class ResetPasswordPage extends Component {
   }
 
   render() {
-    const { onSubmit } = this.props;
+    const { passwordRecoveryRequest } = this.props;
     return (
       <section className={styles.main} id="reset-password-in-page">
         <header className={styles.header}>
@@ -50,11 +51,19 @@ class ResetPasswordPage extends Component {
         {!this.state.isSend && (
           <article className={styles.form}>
             <ResetPasswordForm
-              onSubmit={v => {
-                this.setState({ email: v.email });
-                return onSubmit(v).then(
-                  a => !a.error && this.setState({ isSend: true })
-                );
+              onSubmit={async ({ email }) => {
+                this.setState({ email });
+                const {
+                  payload: { response },
+                  error
+                } = await passwordRecoveryRequest(email);
+                if (error) {
+                  if (response.error.type === "validation_failed") {
+                    return {
+                      [SUBMIT_ERROR]: response.error.invalid
+                    };
+                  }
+                } else this.setState({ isSend: true });
               }}
             />
           </article>
@@ -68,12 +77,16 @@ class ResetPasswordPage extends Component {
               <Button
                 theme="link"
                 disabled={this.state.timer > 0}
-                onClick={() =>
-                  onSubmit({ email: this.state.email }).then(() => {
+                onClick={async () => {
+                  const {
+                    payload: { response },
+                    error
+                  } = await passwordRecoveryRequest(this.state.email);
+                  if (!error) {
                     this.setState({ timer: 10 });
                     return this.onClickResend();
-                  })
-                }
+                  }
+                }}
               >
                 {this.state.timer
                   ? `Надіслати повторно через ${this.state.timer} сек`
@@ -87,6 +100,6 @@ class ResetPasswordPage extends Component {
   }
 }
 
-export default compose(withRouter, connect(null, { onSubmit }))(
+export default compose(withRouter, connect(null, { passwordRecoveryRequest }))(
   ResetPasswordPage
 );
