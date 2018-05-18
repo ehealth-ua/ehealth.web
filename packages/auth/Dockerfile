@@ -1,15 +1,12 @@
 FROM node:10-alpine as builder
-ARG SCOPE
 ENV NODE_ENV production
-RUN apk add --update git
-RUN npm install npm@5.9.0-next.0 --global --quiet
+RUN npm install npm@6 --global --quiet
 RUN mkdir -p /opt/target
 WORKDIR /opt/src
-COPY package*.json ./
-RUN npm ci
 COPY . .
+RUN npm ci
+ARG SCOPE
 RUN npx lerna exec --scope $SCOPE mv nginx.conf /opt/target/
-RUN npx lerna bootstrap --ci --scope $SCOPE --include-filtered-dependencies
 RUN npx lerna run --scope $SCOPE build
 RUN npx lerna exec --scope $SCOPE mv build /opt/target/
 

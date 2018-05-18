@@ -25,3 +25,8 @@ charts/
 # Docker files
 **/Dockerfile
 **/.dockerignore
+
+# CI and deploy configs
+.travis.yml
+*.enc
+eHealth-*.json
