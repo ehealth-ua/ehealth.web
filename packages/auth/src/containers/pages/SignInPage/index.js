@@ -40,6 +40,9 @@ const SignInPage = ({
               увійти за допомогою ЕЦП
             </Form.Button>
             <ButtonsGroup>
+              <Button theme="link" to="/sign-up">
+                Зареєструватися
+              </Button>
               <Button theme="link" to={`/update-password?${search}`}>
                 Змінити пароль
               </Button>
