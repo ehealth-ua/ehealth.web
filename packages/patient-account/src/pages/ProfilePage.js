@@ -1,101 +1,130 @@
 import React from "react";
 import styled from "react-emotion/macro";
+import { Query } from "react-apollo";
+import { gql } from "graphql.macro";
+import { getFullName, getFullAddress, getPhones } from "@ehealth/utils";
 import { Title } from "@ehealth/components";
 import { PencilIcon } from "@ehealth/icons";
 
 import DefinitionListView from "../components/DefinitionListView";
 
-const temp_data_1 = {
-  name: "Игорь",
-  bday: "34/09",
-  country: "Украина",
-  city: "Киев",
-  citizenship: "Украинец",
-  sex: "М"
-};
-const temp_data_2 = {
-  edrpou: "3478****33",
-  passport: "ME713400"
-};
-const temp_data_3 = {
-  registrationAddress: "г.Киев, ул. Драгомирова 34, кв.3434",
-  residence: "г.Киев, ул. Драгомирова 34, кв.3434",
-  contacts: "Телефон",
-  secret: "Рыба-мечь"
-};
-const temp_data_4 = {
-  name: "Игорь",
-  phone: "+380993333343"
-};
-const temp_data_5 = {
-  email: "erwrew@gmail.com",
-  phone: "+380993333343"
-};
-
 const ProfilePage = () => (
-  <>
-    <Title.H1>мій профіль</Title.H1>
-    <DefinitionListSection>
-      <SubTitle>
-        Персональні дані
-        <EditLink onClick={() => console.log("click")}>
-          <EditIcon height="14" width="14" />
-          Редагувати профіль
-        </EditLink>
-      </SubTitle>
-      <DefinitionListView
-        labels={{
-          name: "ПІБ",
-          bday: "Дата народження",
-          country: "Країна народження",
-          city: "Місто народження",
-          citizenship: "Громадянство",
-          sex: "Стать"
-        }}
-        data={temp_data_1}
-      />
-    </DefinitionListSection>
-    <DefinitionListSection>
-      <DefinitionListView
-        labels={{
-          edrpou: "ІНН",
-          passport: "Паспорт"
-        }}
-        data={temp_data_2}
-      />
-    </DefinitionListSection>
-    <DefinitionListSection>
-      <DefinitionListView
-        labels={{
-          registrationAddress: "Адреса реєстрації",
-          residence: "Адреса проживання",
-          contacts: "Бажаний метод зв’язку",
-          secret: "Слово-пароль"
-        }}
-        data={temp_data_3}
-      />
-    </DefinitionListSection>
-    <DefinitionListSection>
-      <SubTitle>Контактна особа у екстреному випадку</SubTitle>
-      <DefinitionListView
-        labels={{
-          name: "ПІБ",
-          phone: "Номер телефону"
-        }}
-        data={temp_data_4}
-      />
-    </DefinitionListSection>
-    <DefinitionListSection>
-      <SubTitle>Авторизація</SubTitle>
-      <DefinitionListView
-        labels={{
-          email: "Email",
-          phone: "Номер телефону"
-        }}
-        data={temp_data_5}
-      />
-    </DefinitionListSection>
-  </>
+  <Query
+    query={gql`
+      query {
+        person @rest(path: "/cabinet/persons/details", type: "PersonPayload") {
+          data
+        }
+      }
+    `}
+  >
+    {({ loading, error, data }) => {
+      if (!data.person) return null;
+      const { data: person } = data.person;
+      const {
+        gender,
+        birth_date: birthDate,
+        birth_country: birthCountry,
+        birth_settlement: birthSettlement,
+        tax_id: taxId,
+        secret,
+        email,
+        preferred_way_communication: preferredWayCommunication
+      } = person;
+
+      let passport = person.documents.map(
+        i => (i.type === "PASSPORT" ? i.number : null)
+      );
+
+      let registrationAddress = person.addresses.filter(
+        i => (i.type === "REGISTRATION" ? i : null)
+      );
+
+      let residenceAddress = person.addresses.filter(
+        i => (i.type === "RESIDENCE" ? i : null)
+      );
+
+      return (
+        <>
+          <Spinner />
+          <Title.H1>мій профіль</Title.H1>
+          <DefinitionListSection>
+            <SubTitle>
+              Персональні дані
+              <EditLink onClick={() => console.log("click")}>
+                <EditIcon height="14" width="14" />
+                Редагувати профіль
+              </EditLink>
+            </SubTitle>
+            <DefinitionListView
+              labels={{
+                name: "ПІБ",
+                birthDate: "Дата народження",
+                birthCountry: "Країна народження",
+                birthSettlement: "Місто народження",
+                gender: "Стать"
+              }}
+              data={{
+                name: getFullName(person),
+                gender,
+                birthDate,
+                birthCountry,
+                birthSettlement
+              }}
+            />
+          </DefinitionListSection>
+          <DefinitionListSection>
+            <DefinitionListView
+              labels={{
+                taxId: "ІНН",
+                passport: "Паспорт"
+              }}
+              data={{ taxId, passport }}
+            />
+          </DefinitionListSection>
+          <DefinitionListSection>
+            <DefinitionListView
+              labels={{
+                registrationAddress: "Адреса реєстрації",
+                residence: "Адреса проживання",
+                preferredWayCommunication: "Бажаний метод зв’язку",
+                secret: "Слово-пароль"
+              }}
+              data={{
+                secret,
+                preferredWayCommunication,
+                registrationAddress: getFullAddress(registrationAddress[0]),
+                residence: getFullAddress(residenceAddress[0])
+              }}
+            />
+          </DefinitionListSection>
+          <DefinitionListSection>
+            <SubTitle>Контактна особа у екстреному випадку</SubTitle>
+            <DefinitionListView
+              labels={{
+                name: "ПІБ",
+                phone: "Номер телефону"
+              }}
+              data={{
+                name: getFullName(person.emergency_contact),
+                phone: getPhones(person.emergency_contact.phones)
+              }}
+            />
+          </DefinitionListSection>
+          <DefinitionListSection>
+            <SubTitle>Авторизація</SubTitle>
+            <DefinitionListView
+              labels={{
+                email: "Email",
+                phone: "Номер телефону"
+              }}
+              data={{ email, phone: getPhones(person.phones) }}
+            />
+          </DefinitionListSection>
+        </>
+      );
+    }}
+  </Query>
 );
 
 const DefinitionListSection = styled.div`

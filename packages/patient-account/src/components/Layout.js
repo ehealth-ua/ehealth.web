@@ -7,7 +7,7 @@ const Layout = ({ children }) => (
     <Wrapper>
       <Header>
         <EhealthLogoIcon height="45" />
-        <div>Григорій Квітка-Основяненко</div>
+        <User>Григорій Квітка-Основяненко</User>
       </Header>
       <section>{children}</section>
     </Wrapper>
@@ -37,4 +37,11 @@ const Footer = styled.footer`
   text-align: center;
   padding: 40px 0;
   border-top: 3px solid #a9da16;
+`;
+
+const User = styled.div`
+  color: #4880ed;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
 `;
