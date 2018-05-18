@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.14.0"></a>
+# [0.14.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.14.0) (2018-05-18)
+
+
+### Bug Fixes
+
+* update api host in env files ([d6f80a2](https://github.com/edenlabllc/ehealth.web/commit/d6f80a2))
+
+
+
+
+
 <a name="0.13.0"></a>
 # [0.13.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.13.0) (2018-05-16)
 

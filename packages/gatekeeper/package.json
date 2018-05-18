@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/gatekeeper",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "private": true,
   "description": "",
   "main": "server.js",
@@ -9,7 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@ehealth/env": "^0.13.0",
+    "@ehealth/env": "^0.14.0",
     "express": "^4.16.3",
     "node-fetch": "^2.1.2"
   }

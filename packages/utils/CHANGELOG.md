@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.14.0"></a>
+# [0.14.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.14.0) (2018-05-18)
+
+
+### Bug Fixes
+
+* **utils:** fix imports ([b0dad4e](https://github.com/edenlabllc/ehealth.web/commit/b0dad4e))
+
+
+### Features
+
+* **utils:** add helper functions for profile page ([f7e3279](https://github.com/edenlabllc/ehealth.web/commit/f7e3279))
+* **utils:** add settlement and street types in address ([9811921](https://github.com/edenlabllc/ehealth.web/commit/9811921))
+
+
+
+
+
 <a name="0.13.0"></a>
 # [0.13.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.13.0) (2018-05-16)
 
