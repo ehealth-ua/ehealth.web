@@ -269,7 +269,14 @@ class AddressFields extends Component {
         <Field.Select
           name={`local.addresses[${type}].area`}
           placeholder="Область"
-          items={regions.map(({ name }) => name)}
+          items={regions
+            .map(({ name }) => name)
+            .sort((a, b) =>
+              a.replace(/м\./i, "").localeCompare(b.replace(/м\./i, ""))
+            )}
+          filterItems={(inputValue, item) =>
+            item.toLowerCase().includes(inputValue.toLowerCase())
+          }
         />
         <Validation.Required
           field={`local.addresses[${type}].area`}
