@@ -52,7 +52,7 @@ const isErrored = ({
   data = {}
 }) =>
   (invalid || data.submitError) &&
-  (submitFailed ? !dirtySinceLastSubmit : touched);
+  ((submitFailed && !dirtySinceLastSubmit) || touched);
 
 const getSubmitError = ({ data = {}, submitError }) =>
   submitError || data.submitError;
