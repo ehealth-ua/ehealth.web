@@ -2,14 +2,16 @@ import React from "react";
 import styled from "react-emotion/macro";
 import { prop, ifProp, switchProp } from "styled-tools";
 import { NavLink as RouterLink } from "react-router-dom";
+import { pickValidProps } from "@ehealth/utils";
 
-const Link = ({ icon, to, rtl, children, ...rest }) => {
+const Link = props => {
+  const { icon, to, rtl, children, ...rest } = props;
+  const validProps = pickValidProps(props);
   const Component = LinkContainer.withComponent(to ? RouterLink : "a");
   return (
     <Wrapper rtl={rtl}>
       <Component
-        {...rest}
-        to={to}
+        {...validProps[0]}
         activeStyle={{
           fontWeight: "bold"
         }}
@@ -52,7 +54,7 @@ const LinkContainer = styled.a`
     medium: "18px",
     large: "22px"
   })};
-  letter-spacing: ${props => props.letterSpacing && "2.4px"};
+  letter-spacing: ${props => props.letterIndent && "2.4px"};
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
