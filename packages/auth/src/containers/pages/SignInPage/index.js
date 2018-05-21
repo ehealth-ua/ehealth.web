@@ -32,13 +32,13 @@ const SignInPage = ({
         redirect_uri && (
           <NarrowContainer>
             <SignInForm onSubmit={onSubmit} initialValues={{ email }} />
-            <Form.Button
+            <Button
               color="blue"
               onClick={() => router.push(`sign-in/digital-signature?${search}`)}
               block
             >
               увійти за допомогою ЕЦП
-            </Form.Button>
+            </Button>
             <ButtonsGroup>
               <Button theme="link" to="/sign-up">
                 Зареєструватися
