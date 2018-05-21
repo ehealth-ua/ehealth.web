@@ -18,7 +18,7 @@ export default class UserNav extends Component {
   }
 
   render() {
-    const { top, left, hidden } = this.state;
+    const { hidden } = this.state;
     return (
       <UserNavWrapper
         onMouseEnter={ev => this.handleTooltip(false)}
