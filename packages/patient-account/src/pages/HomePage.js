@@ -33,11 +33,11 @@ const HomePage = () => (
 
               <Link
                 size="small"
-                href="/"
+                to="/"
                 icon={
                   <ArrowRight height="15px" fill="#2292f2" display="block" />
                 }
-                letterSpacing
+                letterIndent
                 bold
               >
                 крок 1. оберіть лікаря

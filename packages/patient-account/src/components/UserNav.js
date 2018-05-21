@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { Query } from "react-apollo";
+import { gql } from "graphql.macro";
 import { css } from "emotion";
 import styled from "react-emotion/macro";
 import { Link } from "@ehealth/components";
+import { getFullName } from "@ehealth/utils";
 
 export default class UserNav extends Component {
   constructor(props) {
@@ -20,25 +23,41 @@ export default class UserNav extends Component {
   render() {
     const { hidden } = this.state;
     return (
-      <UserNavWrapper
-        onMouseEnter={ev => this.handleTooltip(false)}
-        onMouseLeave={ev => this.handleTooltip(true)}
+      <Query
+        query={gql`
+          query {
+            user @rest(path: "/cabinet/persons", type: "UserPayload") {
+              data
+            }
+          }
+        `}
       >
-        <User>Григорій Квітка-Основяненко</User>
-        <Tooltip isHidden={hidden}>
-          <TooltipInner>
-            <NavLink to="/profile" color="black">
-              Мій профіль
-            </NavLink>
-            <NavLink to="/security" color="black">
-              Безпека
-            </NavLink>
-            <NavLink to="/loguot" bold>
-              Вийти
-            </NavLink>
-          </TooltipInner>
-        </Tooltip>
-      </UserNavWrapper>
+        {({ loading, error, data }) => {
+          if (!data.user) return null;
+          const { data: user } = data.user;
+          return (
+            <UserNavWrapper
+              onMouseEnter={ev => this.handleTooltip(false)}
+              onMouseLeave={ev => this.handleTooltip(true)}
+            >
+              <User>{getFullName(user)}</User>
+              <Tooltip isHidden={hidden}>
+                <TooltipInner>
+                  <NavLink to="/profile" color="black">
+                    Мій профіль
+                  </NavLink>
+                  <NavLink to="/security" color="black">
+                    Безпека
+                  </NavLink>
+                  <NavLink to="/logout" bold>
+                    Вийти
+                  </NavLink>
+                </TooltipInner>
+              </Tooltip>
+            </UserNavWrapper>
+          );
+        }}
+      </Query>
     );
   }
 }
