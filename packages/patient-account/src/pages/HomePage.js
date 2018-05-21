@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { graphql } from "react-apollo";
-import { gql } from "graphql.macro";
 import { ArrowRight } from "@ehealth/icons";
 
 import { Title, Link, CabinetTable } from "@ehealth/components";
@@ -38,6 +37,8 @@ const HomePage = () => (
                 icon={
                   <ArrowRight height="15px" fill="#2292f2" display="block" />
                 }
+                letterSpacing
+                bold
               >
                 крок 1. оберіть лікаря
               </Link>

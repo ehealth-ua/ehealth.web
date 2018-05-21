@@ -3,7 +3,7 @@ import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import { getFullName, getFullAddress, getPhones } from "@ehealth/utils";
-import { Title } from "@ehealth/components";
+import { Title, Link } from "@ehealth/components";
 import { PencilIcon } from "@ehealth/icons";
 
 import DefinitionListView from "../components/DefinitionListView";
@@ -50,10 +50,14 @@ const ProfilePage = () => (
           <DefinitionListSection>
             <SubTitle>
               Персональні дані
-              <EditLink onClick={() => console.log("click")}>
-                <EditIcon height="14" width="14" />
+              <Link
+                size="xs"
+                to="/profile/edit"
+                icon={<EditIcon height="14" width="14" />}
+                rtl
+              >
                 Редагувати профіль
-              </EditLink>
+              </Link>
             </SubTitle>
             <DefinitionListView
               labels={{
@@ -140,17 +144,9 @@ const DefinitionListSection = styled.div`
 const SubTitle = styled.h3`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 30px;
   font-size: 16px;
-`;
-
-const EditLink = styled.span`
-  margin-left: auto;
-  font-size: 10px;
-  color: #4880ed;
-  line-height: 1;
-  text-transform: uppercase;
-  user-select: none;
 `;
 
 const EditIcon = styled(PencilIcon)`

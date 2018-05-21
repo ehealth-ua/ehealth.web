@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { EhealthLogoIcon } from "@ehealth/icons";
+import UserNav from "./UserNav";
 
 const Layout = ({ children }) => (
   <>
     <Wrapper>
       <Header>
         <EhealthLogoIcon height="45" />
-        <User>Григорій Квітка-Основяненко</User>
+        <UserNav />
       </Header>
       <section>{children}</section>
     </Wrapper>
