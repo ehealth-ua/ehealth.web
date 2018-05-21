@@ -5,6 +5,7 @@
   "description": "",
   "main": "src",
   "dependencies": {
+    "@emotion/is-prop-valid": "^0.6.2",
     "lodash": "^4.17.5"
   }
 }
