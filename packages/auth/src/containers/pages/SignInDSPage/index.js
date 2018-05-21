@@ -35,7 +35,7 @@ class SignInDSPage extends Component {
             </p>
             <DigitalSignatureForm onSubmit={this.handleSubmit} />
             <Button theme="link" onClick={() => router.goBack()}>
-              Назад
+              Увійти за допомогою email
             </Button>
           </NarrowContainer>
         </Article>
