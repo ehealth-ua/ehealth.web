@@ -42,7 +42,8 @@ class OtpForm extends Component {
       handleSubmit,
       submitting,
       repeat = false,
-      btnColor = "blue"
+      btnColor = "blue",
+      router
     } = this.props;
     const { sent, isSending, otp_timeout, token_expires } = this.state;
     return (
@@ -59,9 +60,12 @@ class OtpForm extends Component {
               </ErrorMessage>
             </Field>
           </div>
+          <Button disabled={submitting} type="submit" color={btnColor} block>
+            Ввести
+          </Button>
           <ButtonsGroup>
-            <Button disabled={submitting} type="submit" color={btnColor}>
-              Ввести
+            <Button theme="link" onClick={router.goBack}>
+              Назад
             </Button>
             {repeat && (
               <Button

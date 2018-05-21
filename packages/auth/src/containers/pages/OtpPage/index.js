@@ -10,15 +10,20 @@ import Button, { ButtonsGroup } from "../../../components/Button";
 import { onSubmit, onResend } from "./redux";
 import styles from "./styles.module.css";
 
-const OtpPage = ({ onSubmit = () => {}, onResend = () => {}, router }) => (
+const OtpPage = ({
+  onSubmit = () => {},
+  onResend = () => {},
+  router,
+  location: { search }
+}) => (
   <section className={styles.main} id="otp-page">
     <header className={styles.header}>
       <H1>Вхід у систему eHealth</H1>
     </header>
     <article className={styles.form}>
       <OtpForm onSubmit={onSubmit} onResend={onResend} repeat />
-      <Button theme="link" onClick={router.goBack}>
-        Назад
+      <Button theme="link" to={`/update-factor/${search}`}>
+        Змінити додатковий фактор авторизації
       </Button>
     </article>
   </section>
