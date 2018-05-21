@@ -1,17 +1,41 @@
 import React from "react";
-import { Field, Form, Validation, Validations } from "@ehealth/components";
+import { reduxForm, Field } from "redux-form";
+import { reduxFormValidate } from "react-nebo15-validate";
 
-const SignInForm = ({ onSubmit }) => (
-  <Form onSubmit={onSubmit}>
-    <Field.Input placeholder="E-mail" name="email" />
-    <Validation.Required field="email" message="Об'язкове поле" />
-    <Validation.Email field="email" message="Некоректний електронний адрес" />
-    <Field.Input type="password" placeholder="Пароль" name="password" />
-    <Validation.Required field="field" message="Об'язкове поле" />
-    <Form.Submit type="submit" block>
-      увійти
-    </Form.Submit>
-  </Form>
+import FieldInput from "../../../components/reduxForm/FieldInput";
+import Button, { ButtonsGroup } from "../../../components/Button";
+import { FormBlock } from "../../../components/Form";
+
+const SignInForm = ({ handleSubmit, submitting, btnColor = "blue" }) => (
+  <form onSubmit={handleSubmit}>
+    <FormBlock>
+      <div>
+        <Field placeholder="E-mail" name="email" component={FieldInput} />
+      </div>
+      <div>
+        <Field
+          type="password"
+          placeholder="Пароль"
+          name="password"
+          component={FieldInput}
+        />
+      </div>
+      <Button disabled={submitting} type="submit" color={btnColor} block>
+        увійти
+      </Button>
+    </FormBlock>
+  </form>
 );
 
-export default SignInForm;
+export default reduxForm({
+  form: "sign-in-form",
+  validate: reduxFormValidate({
+    email: {
+      required: true,
+      email: true
+    },
+    password: {
+      required: true
+    }
+  })
+})(SignInForm);
