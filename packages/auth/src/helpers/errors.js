@@ -1,6 +1,7 @@
 const error_messages = {
   defaultError: "unexpected_error",
   "User blocked": "user_blocked",
+  "User not found.": "user_not_found",
   "You reached login attempts limit. Try again later": "reached_max_attempts",
   "User blocked.": "user_blocked",
   "SMS not send. Try later": "resentOtp",

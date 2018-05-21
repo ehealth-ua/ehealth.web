@@ -39,6 +39,7 @@ const PredefinedErrorMessages = ({ children, ...props }) => (
       Невірний email або пароль
     </ErrorMessage>
 
+    <ErrorMessage when="user_not_found">Користувача не знайдено</ErrorMessage>
     <ErrorMessage when="user_blocked">
       Користувача заблоковано. Зверніться в службу підтримки
     </ErrorMessage>
