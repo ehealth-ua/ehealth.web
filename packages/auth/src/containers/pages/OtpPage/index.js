@@ -17,11 +17,9 @@ const OtpPage = ({ onSubmit = () => {}, onResend = () => {}, router }) => (
     </header>
     <article className={styles.form}>
       <OtpForm onSubmit={onSubmit} onResend={onResend} repeat />
-      <ButtonsGroup>
-        <Button theme="link" onClick={() => router.goBack()}>
-          Назад
-        </Button>
-      </ButtonsGroup>
+      <Button theme="link" onClick={router.goBack}>
+        Назад
+      </Button>
     </article>
   </section>
 );
