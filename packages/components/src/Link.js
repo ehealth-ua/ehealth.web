@@ -5,11 +5,11 @@ import { NavLink as RouterLink } from "react-router-dom";
 import { pickValidProps } from "@ehealth/utils";
 
 const Link = props => {
-  const { icon, to, rtl, children, ...rest } = props;
+  const { icon, to, rtl, letterIndent, bold, size, children } = props;
   const validProps = pickValidProps(props);
   const Component = LinkContainer.withComponent(to ? RouterLink : "a");
   return (
-    <Wrapper rtl={rtl}>
+    <Wrapper rtl={rtl} bold={bold}>
       <Component
         {...validProps[0]}
         activeStyle={{
@@ -19,7 +19,7 @@ const Link = props => {
         {children}
       </Component>
       {icon && (
-        <Icon rtl={rtl} size={rest.size}>
+        <Icon rtl={rtl} size={size}>
           {icon}
         </Icon>
       )}
@@ -38,16 +38,15 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: ${props => props.rtl && "row-reverse"};
   line-height: 1;
+  font-weight: ${props => props.bold && "bold"};
 `;
 
 const LinkContainer = styled.a`
-  display: ${ifProp("block", "block", "inline-block")};
   color: ${switchProp("color", {
     blue: "#2292f2",
     black: "#333"
   })};
   cursor: default;
-  font-weight: ${props => props.bold && "bold"};
   font-size: ${switchProp("size", {
     xs: "10px",
     small: "14px",
