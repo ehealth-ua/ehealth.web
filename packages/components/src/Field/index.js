@@ -13,6 +13,7 @@ import SelectField from "./SelectField";
 import FileField from "./FileField";
 import { CheckboxField, RadioField } from "./CheckableField";
 import GroupField from "./GroupField";
+import ArrayField from "./ArrayField";
 
 const FINAL_FORM_FIELD_PROPS = [
   "allowNull",
@@ -68,5 +69,6 @@ Field.File = FileField;
 Field.Checkbox = CheckboxField;
 Field.Radio = RadioField;
 Field.Group = GroupField;
+Field.Array = ArrayField;
 
 export default Field;
