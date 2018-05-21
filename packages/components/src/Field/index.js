@@ -11,7 +11,8 @@ import {
 } from "./InputField";
 import SelectField from "./SelectField";
 import FileField from "./FileField";
-import { CheckboxField, RadioField, GroupField } from "./CheckableField";
+import { CheckboxField, RadioField } from "./CheckableField";
+import GroupField from "./GroupField";
 
 const FINAL_FORM_FIELD_PROPS = [
   "allowNull",

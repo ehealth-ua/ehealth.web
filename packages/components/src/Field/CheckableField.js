@@ -3,13 +3,7 @@ import styled from "react-emotion/macro";
 import { CheckRightIcon } from "@ehealth/icons";
 
 import Field from "./index";
-
-export const GroupField = ({ label, children }) => (
-  <Group>
-    <GroupLabel>{label}</GroupLabel>
-    {children}
-  </Group>
-);
+import LabelText from "./LabelText";
 
 export const CheckboxField = ({ label, disabled, ...props }) => (
   <Field {...props} type="checkbox">
@@ -19,7 +13,7 @@ export const CheckboxField = ({ label, disabled, ...props }) => (
         <CheckBox active={active} errored={errored} disabled={disabled}>
           <CheckMark />
         </CheckBox>
-        <LabelText>{label}</LabelText>
+        <CheckableLabelText>{label}</CheckableLabelText>
       </FieldWrapper>
     )}
   </Field>
@@ -33,22 +27,16 @@ export const RadioField = ({ label, disabled, ...props }) => (
         <RadioBox active={active} errored={errored} disabled={disabled}>
           <RadioMark />
         </RadioBox>
-        <LabelText>{label}</LabelText>
+        <CheckableLabelText>{label}</CheckableLabelText>
       </FieldWrapper>
     )}
   </Field>
 );
 
-const Group = styled.div`
-  & + & {
-    display: block;
-  }
-`;
-
 const FieldWrapper = styled.label`
   cursor: default;
   display: flex;
-  align-items: left;
+  align-items: center;
   position: relative;
   user-select: none;
   margin-bottom: 23px;
@@ -71,6 +59,8 @@ const CheckBox = styled.div`
     props.errored ? "#ff1f44" : props.active ? "#11d8fb" : "#c9c9c9"};
   color: ${props => (props.errored ? "#ff1f44" : "#44e240")};
   display: flex;
+  flex-shrink: 0;
+  align-self: start;
   height: 34px;
   width: 34px;
   opacity: ${props => props.disabled && "0.5"};
@@ -101,12 +91,6 @@ const RadioMark = styled(CheckMark.withComponent("div"))`
   }
 `;
 
-const GroupLabel = styled.div`
-  display: block;
-  text-align: left;
-`;
-
-const LabelText = styled.div`
+const CheckableLabelText = styled(LabelText)`
   margin: 0 10px;
-  line-height: 2;
 `;

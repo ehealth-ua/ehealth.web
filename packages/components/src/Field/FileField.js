@@ -2,9 +2,9 @@ import React from "react";
 import styled from "react-emotion/macro";
 
 import Field from "./index";
+import LabelText from "./LabelText";
 import {
   FieldWrapper,
-  LabelText,
   InputWrapper,
   InputBorder,
   InputContent,

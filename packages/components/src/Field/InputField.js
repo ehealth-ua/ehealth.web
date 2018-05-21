@@ -4,6 +4,7 @@ import { prop, ifProp } from "styled-tools";
 import { switchFlags } from "@ehealth/utils";
 
 import Field from "./index";
+import LabelText from "./LabelText";
 
 export const TextField = props => <InputField {...props} type="text" />;
 
@@ -50,14 +51,6 @@ export const FieldWrapper = styled.label`
   align-items: baseline;
   flex-direction: ${ifProp("horizontal", "row", "column")};
   justify-content: ${ifProp("horizontal", "space-between")};
-`;
-
-export const LabelText = styled.span`
-  color: #3d3d3d;
-  display: block;
-  font-size: ${prop("theme.input.labelFontSize", 12)}px;
-  margin-bottom: 10px;
-  text-align: left;
 `;
 
 export const InputWrapper = styled.div`

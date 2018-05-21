@@ -6,9 +6,9 @@ import { pickProps } from "@ehealth/utils";
 import { CheckRightIcon } from "@ehealth/icons";
 
 import Field from "./index";
+import LabelText from "./LabelText";
 import {
   FieldWrapper,
-  LabelText,
   InputWrapper,
   InputBorder,
   Input,
