@@ -1,7 +1,4 @@
 import React from "react";
-import { reduxForm } from "redux-form";
-import { reduxFormValidate } from "react-nebo15-validate";
-
 import { Field, Form, Validation, Validations } from "@ehealth/components";
 import Button from "../../../components/Button";
 
@@ -28,11 +25,4 @@ const InviteAcceptForm = ({
   </Form>
 );
 
-export default reduxForm({
-  form: "invite-accept-form",
-  validate: reduxFormValidate({
-    confirm: {
-      required: true
-    }
-  })
-})(InviteAcceptForm);
+export default InviteAcceptForm;
