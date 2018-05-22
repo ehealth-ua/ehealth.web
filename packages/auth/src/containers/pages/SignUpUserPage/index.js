@@ -24,7 +24,7 @@ import { H1 } from "../../../components/Title";
 const NAME_PATTERN =
   '^(?!.*[ЫЪЭЁыъэё@%&$^#])[a-zA-ZА-ЯҐЇІЄа-яґїіє0-9№\\"!\\^\\*)\\]\\[(._-]*$';
 const PERSON_NAME_PATTERN = "^(?!.*[ЫЪЭЁыъэё@%&$^#])[А-ЯҐЇІЄа-яґїіє\\'\\- ]*$";
-const PHONE_PATTERN = "^+380{10}$";
+const PHONE_PATTERN = "^\\+380\\d{9}$";
 
 const SignUpUserPage = ({ location, router }) => (
   <Main>
