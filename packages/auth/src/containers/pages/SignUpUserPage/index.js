@@ -24,6 +24,7 @@ import { H1 } from "../../../components/Title";
 const NAME_PATTERN =
   '^(?!.*[ЫЪЭЁыъэё@%&$^#])[a-zA-ZА-ЯҐЇІЄа-яґїіє0-9№\\"!\\^\\*)\\]\\[(._-]*$';
 const PERSON_NAME_PATTERN = "^(?!.*[ЫЪЭЁыъэё@%&$^#])[А-ЯҐЇІЄа-яґїіє\\'\\- ]*$";
+const PHONE_PATTERN = "^+380{10}$";
 
 const SignUpUserPage = ({ location, router }) => (
   <Main>
@@ -85,10 +86,13 @@ const SignUpUserPage = ({ location, router }) => (
           format={formatPhone}
           parse={parsePhone}
         />
-        <Validation.Required
-          field="person.emergency_contact.phones[0].number"
-          message="Об'язкове поле"
-        />
+        <Validations field="person.emergency_contact.phones[0].number">
+          <Validation.Required message="Об'язкове поле" />
+          <Validation.Matches
+            options={PHONE_PATTERN}
+            message="Невірний номер телефону"
+          />
+        </Validations>
         <Field.Group label="Бажаний метод зв'язку">
           <Flex my={10}>
             <Box width={1 / 3}>
@@ -128,7 +132,7 @@ const SignUpUserPage = ({ location, router }) => (
         <Validations field="person.authentication_methods[0].phone_number">
           <Validation.Required message="Об'язкове поле" />
           <Validation.Matches
-            options={/^\+380/}
+            options={PHONE_PATTERN}
             message="Невірний номер телефону"
           />
         </Validations>
@@ -152,7 +156,7 @@ const SignUpUserPage = ({ location, router }) => (
                 <Validations field="local.contactPhoneNumber">
                   <Validation.Required message="Об'язкове поле" />
                   <Validation.Matches
-                    options={/^\+380/}
+                    options={PHONE_PATTERN}
                     message="Невірний номер телефону"
                   />
                 </Validations>
