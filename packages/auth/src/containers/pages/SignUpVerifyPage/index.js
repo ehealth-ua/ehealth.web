@@ -1,6 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router";
+import {
+  Form,
+  Field,
+  Validation,
+  Validations,
+  SUBMIT_ERROR
+} from "@ehealth/components";
 
 import {
   Main,
@@ -9,12 +16,9 @@ import {
   NarrowContainer
 } from "../../../components/CenterLayout";
 import { H1 } from "../../../components/Title";
-import Button, { ButtonsGroup } from "../../../components/Button";
-import SignUpVerifyForm from "../../forms/SignUpVerifyForm";
+import { verifyEmail } from "../../../redux/cabinet";
 
-import { onSubmit } from "./redux";
-
-const SignUpVerifyPage = ({ onSubmit }) => (
+const SignUpVerifyPage = ({ router, verifyEmail }) => (
   <Main>
     <Header>
       <H1>Реєстрація</H1>
@@ -22,7 +26,31 @@ const SignUpVerifyPage = ({ onSubmit }) => (
     <Article>
       <p>Будь ласка, надайте вашу email-адресу</p>
       <NarrowContainer>
-        <SignUpVerifyForm onSubmit={onSubmit} />
+        <Form
+          onSubmit={async ({ email }) => {
+            const { error, payload: { response } } = await verifyEmail({
+              email
+            });
+
+            if (error) return { [SUBMIT_ERROR]: response.error.invalid };
+
+            router.push({
+              pathname: "/sign-up/confirmation",
+              query: { email }
+            });
+          }}
+        >
+          <Field.Text name="email" placeholder="user@email.ua" />
+          <Validations field="email">
+            <Validation.Required message="Об'язкове поле" />
+            <Validation.Email message="Невірний формат" />
+            <Validation.Submit
+              rule="email_exists"
+              message="Користувач з цим email вже зареєстрований"
+            />
+          </Validations>
+          <Form.Submit block>Далі</Form.Submit>
+        </Form>
       </NarrowContainer>
       <p>
         Вже зареєстровані? <Link to="/sign-in">Авторизуйтеся</Link>
@@ -31,4 +59,4 @@ const SignUpVerifyPage = ({ onSubmit }) => (
   </Main>
 );
 
-export default connect(null, { onSubmit })(SignUpVerifyPage);
+export default connect(null, { verifyEmail })(SignUpVerifyPage);
