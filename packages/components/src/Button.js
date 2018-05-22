@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { prop, ifProp } from "styled-tools";
-import { Link } from "react-router-dom";
+
+import RouterLink from "./RouterLink";
 
 const Button = props => {
   const Component = ButtonContainer.withComponent(
-    props.href ? "a" : props.to ? Link : "button"
+    props.href ? "a" : props.to ? RouterLink : "button"
   );
 
   return <Component {...props} />;

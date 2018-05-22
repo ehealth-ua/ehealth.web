@@ -1,23 +1,17 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { prop, ifProp, switchProp } from "styled-tools";
-import { NavLink as RouterLink } from "react-router-dom";
 import { pickValidProps } from "@ehealth/utils";
 
+import RouterLink from "./RouterLink";
+
 const Link = props => {
-  const { icon, to, rtl, letterIndent, bold, size, children } = props;
-  const validProps = pickValidProps(props);
-  const Component = LinkContainer.withComponent(to ? RouterLink : "a");
+  const Component = LinkContainer.withComponent(props.to ? RouterLink : "a");
+  const [linkProps, { icon, rtl, size }] = pickValidProps(props);
+
   return (
     <Wrapper rtl={rtl} bold={bold}>
-      <Component
-        {...validProps[0]}
-        activeStyle={{
-          fontWeight: "bold"
-        }}
-      >
-        {children}
-      </Component>
+      <Component {...linkProps} />
       {icon && (
         <Icon rtl={rtl} size={size}>
           {icon}
