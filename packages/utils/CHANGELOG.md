@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.16.0"></a>
+# [0.16.0](https://github.com/edenlabllc/ehealth.web/compare/v0.15.0...v0.16.0) (2018-05-22)
+
+
+### Features
+
+* **utils:** add pickValidProps function, add function predicate option to pickProps component ([cf8ae92](https://github.com/edenlabllc/ehealth.web/commit/cf8ae92))
+
+
+
+
+
 <a name="0.15.0"></a>
 # [0.15.0](https://github.com/edenlabllc/ehealth.web/compare/v0.14.1...v0.15.0) (2018-05-18)
 

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.16.0"></a>
+# [0.16.0](https://github.com/edenlabllc/ehealth.web/compare/v0.15.0...v0.16.0) (2018-05-22)
+
+
+### Bug Fixes
+
+* **components:** fix font-weight in Link component ([4aa88cc](https://github.com/edenlabllc/ehealth.web/commit/4aa88cc))
+* **components:** fix props errors in Link Component ([5cbb121](https://github.com/edenlabllc/ehealth.web/commit/5cbb121))
+* **components:** return link behavior to Button component ([821e9b7](https://github.com/edenlabllc/ehealth.web/commit/821e9b7))
+
+
+### Features
+
+* **components:** Upgrade Link component ([71a9cf2](https://github.com/edenlabllc/ehealth.web/commit/71a9cf2))
+
+
+
+
+
 <a name="0.15.1"></a>
 ## [0.15.1](https://github.com/edenlabllc/ehealth.web/compare/v0.15.0...v0.15.1) (2018-05-18)
 
