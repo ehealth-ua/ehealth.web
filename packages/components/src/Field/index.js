@@ -37,7 +37,7 @@ const Field = ({ children, render = children, type, ...props }) => {
           meta: {
             ...meta,
             errored: isErrored(meta),
-            submitError: getSubmitError(meta)
+            error: getError(meta)
           }
         })
       }
@@ -46,17 +46,17 @@ const Field = ({ children, render = children, type, ...props }) => {
 };
 
 const isErrored = ({
+  error,
+  submitError,
+  data = {},
   touched,
-  submitFailed,
-  dirtySinceLastSubmit,
-  invalid,
-  data = {}
+  dirtySinceLastSubmit
 }) =>
-  (invalid || data.submitError) &&
-  ((submitFailed && !dirtySinceLastSubmit) || touched);
+  (error && touched) ||
+  ((submitError || data.submitError) && !dirtySinceLastSubmit);
 
-const getSubmitError = ({ data = {}, submitError }) =>
-  submitError || data.submitError;
+const getError = ({ error, submitError, data = {} }) =>
+  error || submitError || data.submitError;
 
 Field.Input = InputField;
 Field.Text = TextField;

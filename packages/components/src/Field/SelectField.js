@@ -54,7 +54,7 @@ const SelectField = ({
       openMenu,
       clearSelection,
       input: { onFocus, onBlur, ...input },
-      meta: { active, errored, error, submitError }
+      meta: { active, errored, error }
     }) => (
       <FieldWrapper {...getRootProps({ refKey: "innerRef" })}>
         <label {...getLabelProps()}>
@@ -78,7 +78,7 @@ const SelectField = ({
                 {...getToggleButtonProps({ open: isOpen, onFocus, onBlur })}
               />
             </InputBorder>
-            {errored && <ErrorMessage>{error || submitError}</ErrorMessage>}
+            {errored && <ErrorMessage>{error}</ErrorMessage>}
             {isOpen && (
               <Dropdown>
                 {items

@@ -26,7 +26,7 @@ export const InputField = ({
   ...props
 }) => (
   <Field {...props}>
-    {({ input, meta: { active, errored, error, submitError } }) => (
+    {({ input, meta: { active, errored, error } }) => (
       <FieldWrapper horizontal={horizontal}>
         {label && <LabelText>{label}</LabelText>}
         <InputWrapper>
@@ -35,7 +35,7 @@ export const InputField = ({
             <InputComponent {...input} disabled={disabled} />
             {postfix && <InputContent>{postfix}</InputContent>}
           </InputBorder>
-          {errored && <ErrorMessage>{error || submitError}</ErrorMessage>}
+          {errored && <ErrorMessage>{error}</ErrorMessage>}
         </InputWrapper>
       </FieldWrapper>
     )}
