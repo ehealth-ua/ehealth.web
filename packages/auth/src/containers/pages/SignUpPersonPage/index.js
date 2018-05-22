@@ -169,7 +169,7 @@ const SignUpPersonPage = ({ location }) => (
           </Flex>
         </Field.Group>
         <Validation.Required field="person.gender" message="Об'язкове поле" />
-        <AddressFields type="REGISTRATION" />
+        <AddressFields type="REGISTRATION" label="Адреса реєстрації" />
         <Field.Checkbox
           label="Співпадає з місцем проживання"
           name="local.residenceAddressMatchesRegistration"
@@ -179,7 +179,9 @@ const SignUpPersonPage = ({ location }) => (
           subscription={{ value: true }}
         >
           {({ input: { value } }) =>
-            value || <AddressFields type="RESIDENCE" />
+            value || (
+              <AddressFields type="RESIDENCE" label="Адреса проживання" />
+            )
           }
         </Field>
 
@@ -259,13 +261,13 @@ class AddressFields extends Component {
   }
 
   render() {
-    const { type } = this.props;
+    const { type, label } = this.props;
     const { regions, settlements, loaded } = this.state;
 
     if (!loaded) return null;
 
     return (
-      <>
+      <Field.Group label={label}>
         <Field.Select
           name={`local.addresses[${type}].area`}
           placeholder="Область"
@@ -400,7 +402,7 @@ class AddressFields extends Component {
             />
           </Box>
         </Flex>
-      </>
+      </Field.Group>
     );
   }
 }
