@@ -41,19 +41,19 @@
   margin-bottom: 10px;
 }
 
-.textTransform__uppercase {
+.textTransform-uppercase {
   text-transform: uppercase;
 }
 
-.textTransform__capitalize {
+.textTransform-capitalize {
   text-transform: capitalize;
 }
 
-.textTransform__lowercase {
+.textTransform-lowercase {
   text-transform: lowercase;
 }
 
-.textTransform__initial {
+.textTransform-initial {
   text-transform: initial;
 }
 

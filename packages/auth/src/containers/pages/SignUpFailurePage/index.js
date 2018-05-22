@@ -2,12 +2,12 @@ import React from "react";
 import { Button, Switch } from "@ehealth/components";
 
 import { Main, Header, Article } from "../../../components/CenterLayout";
-import { H1 } from "../../../components/Title";
+import { H1, H2 } from "../../../components/Title";
 
 const SignUpFailurePage = ({ params, location }) => (
   <Main>
     <Header>
-      <H1>Реєстрація</H1>
+      <H1>Помилка</H1>
     </Header>
     <Article>
       <Switch
@@ -33,7 +33,33 @@ const SignUpFailurePage = ({ params, location }) => (
             </Button>
           </>
         }
-        access_denied={null}
+        access_denied={
+          <>
+            <H2 textTransform="uppercase" color="red">
+              Користувача заблоковано
+            </H2>
+            <p>
+              При виникненні запитань, будь ласка<br />
+              <a href="">зверніться до служби підтримки</a>
+            </p>
+            <Button to={{ ...location, pathname: "/sign-up/continue" }}>
+              Повернутися
+            </Button>
+          </>
+        }
+        default={
+          <>
+            <H2 textTransform="uppercase">Внутрішня помилка</H2>
+            <p>Вибачте за тимчасові незручності</p>
+            <p>
+              При виникненні запитань, будь ласка<br />
+              <a href="">зверніться до служби підтримки</a>
+            </p>
+            <Button to={{ ...location, pathname: "/sign-up/continue" }}>
+              Повернутися
+            </Button>
+          </>
+        }
       />
     </Article>
   </Main>
