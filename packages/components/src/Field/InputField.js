@@ -93,6 +93,10 @@ export const Input = styled(InputContent.withComponent("input"))`
   line-height: inherit;
   outline: none;
 
+  &:disabled {
+    -webkit-text-fill-color: inherit;
+  }
+
   &::placeholder {
     color: #9e9e9e;
   }
