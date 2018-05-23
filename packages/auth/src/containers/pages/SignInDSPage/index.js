@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
+import { compose } from "redux";
 import { withRouter } from "react-router";
 import {
   REACT_APP_DIGITAL_SIGNATURE_ENABLED,
   REACT_APP_CLIENT_ID
 } from "../../../env";
 
-import Button from "../../../components/Button";
+import { Button, SUBMIT_ERROR } from "@ehealth/components";
+
 import {
   Main,
   Header,
@@ -34,7 +36,7 @@ class SignInDSPage extends Component {
               за допомогою <br /> Електронного Цифрового Підпису
             </p>
             <DigitalSignatureForm onSubmit={this.handleSubmit} />
-            <Button theme="link" onClick={() => router.goBack()}>
+            <Button theme="link" onClick={() => router.goBack()} block>
               Увійти за допомогою email
             </Button>
           </NarrowContainer>
@@ -65,8 +67,13 @@ class SignInDSPage extends Component {
       : ds.privKeyOwnerInfo.subjDRFOCode;
 
     const {
-      payload: { value, details: { redirect_uri, client_id } },
-      meta: { next_step }
+      payload: {
+        value,
+        details: { redirect_uri, client_id } = {},
+        response: { error: error_body } = {}
+      },
+      meta: { next_step } = {},
+      error: token_error
     } = await createSessionToken({
       drfo,
       signed_content,
@@ -75,7 +82,15 @@ class SignInDSPage extends Component {
       signed_content_encoding: "base64",
       scope: "app:authorize"
     });
+    if (token_error) {
+      if (error_body.type === "validation_failed") {
+        return { [SUBMIT_ERROR]: error.invalid };
+      }
+      return router.push(`/sign-in/failure/${error_body.type}`);
+    }
+
     login(value);
+
     if (next_step === "REQUEST_APPS") {
       authorize({
         clientId: query.client_id,
@@ -87,10 +102,12 @@ class SignInDSPage extends Component {
   };
 }
 
-export default connect(null, {
-  getNonce,
-  createSessionToken,
-  login,
-  authorize,
-  withRouter
-})(SignInDSPage);
+export default compose(
+  withRouter,
+  connect(null, {
+    getNonce,
+    createSessionToken,
+    login,
+    authorize
+  })
+)(SignInDSPage);
