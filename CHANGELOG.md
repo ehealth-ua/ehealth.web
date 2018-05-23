@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.17.1"></a>
+## [0.17.1](https://github.com/edenlabllc/ehealth.web/compare/v0.17.0...v0.17.1) (2018-05-23)
+
+
+### Bug Fixes
+
+* **components:** add missing RouterLink component, fix Link props ([606c10b](https://github.com/edenlabllc/ehealth.web/commit/606c10b))
+
+
+
+
+
 <a name="0.17.0"></a>
 # [0.17.0](https://github.com/edenlabllc/ehealth.web/compare/v0.16.0...v0.17.0) (2018-05-23)
 
