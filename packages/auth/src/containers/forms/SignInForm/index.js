@@ -3,7 +3,8 @@ import { reduxForm, Field } from "redux-form";
 import { reduxFormValidate } from "react-nebo15-validate";
 
 import FieldInput from "../../../components/reduxForm/FieldInput";
-import Button, { ButtonsGroup } from "../../../components/Button";
+import { ButtonsGroup } from "../../../components/Button";
+import { Button } from "@ehealth/components";
 import { FormBlock } from "../../../components/Form";
 
 const SignInForm = ({ handleSubmit, submitting, btnColor = "blue" }) => (
@@ -20,9 +21,11 @@ const SignInForm = ({ handleSubmit, submitting, btnColor = "blue" }) => (
           component={FieldInput}
         />
       </div>
-      <Button disabled={submitting} type="submit" color={btnColor} block>
-        увійти
-      </Button>
+      <div>
+        <Button disabled={submitting} type="submit" color={btnColor} block>
+          увійти
+        </Button>
+      </div>
     </FormBlock>
   </form>
 );
