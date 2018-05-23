@@ -33,10 +33,9 @@
 }
 .button.color-blue:active {
   background-image: linear-gradient(
-    to bottom,
-    rgba(75, 133, 238, 0.67) 0%,
-    rgba(116, 176, 248, 0.67) 99%,
-    rgba(116, 176, 248, 0.67) 100%
+    0deg,
+    rgba(0, 134, 242, 0.67) 0%,
+    rgba(74, 178, 251, 0.67) 100%
   );
 }
 .button.block {
@@ -139,16 +138,19 @@
   vertical-align: middle;
 }
 .button.color-blue {
-  background: #5791ef
-    linear-gradient(
-      to top,
-      rgba(75, 133, 238, 0.67) 0%,
-      rgba(116, 176, 248, 0.67) 99%,
-      rgba(116, 176, 248, 0.67) 100%
-    );
+  background-color: #2292f2;
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 134, 242, 0.67) 0%,
+    rgba(74, 178, 251, 0.67) 100%
+  );
 }
 .button.color-blue:hover {
-  background-color: #74b0f8;
+  background-image: linear-gradient(
+    0deg,
+    rgba(74, 178, 251, 0.67) 0%,
+    rgba(74, 178, 251, 0.67) 100%
+  );
 }
 .theme-border,
 .theme-fill {
