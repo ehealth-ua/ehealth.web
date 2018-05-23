@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.17.0"></a>
+# [0.17.0](https://github.com/edenlabllc/ehealth.web/compare/v0.16.0...v0.17.0) (2018-05-23)
+
+
+### Bug Fixes
+
+* **components:** add ability to Button and Link components to work in context of both react-router and react-router-dom ([12c5de5](https://github.com/edenlabllc/ehealth.web/commit/12c5de5))
+* **components:** fix disabled input appearance in Safari ([5ec7861](https://github.com/edenlabllc/ehealth.web/commit/5ec7861))
+* **components:** precise errored flag for Field ([4fa47bc](https://github.com/edenlabllc/ehealth.web/commit/4fa47bc))
+* **components:** show regular validations in submitted form ([8ebe392](https://github.com/edenlabllc/ehealth.web/commit/8ebe392))
+
+
+
+
+
 <a name="0.16.0"></a>
 # [0.16.0](https://github.com/edenlabllc/ehealth.web/compare/v0.15.0...v0.16.0) (2018-05-22)
 

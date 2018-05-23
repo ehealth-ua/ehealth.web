@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.17.0"></a>
+# [0.17.0](https://github.com/edenlabllc/ehealth.web/compare/v0.16.0...v0.17.0) (2018-05-23)
+
+
+### Bug Fixes
+
+* **auth:** change building format validation on SignUpPersonPage ([0072dc4](https://github.com/edenlabllc/ehealth.web/commit/0072dc4))
+* **auth:** change phone format validation on SignUpUserPage ([5fb4877](https://github.com/edenlabllc/ehealth.web/commit/5fb4877))
+* **auth:** fix phone pattern in SignUpUserPage ([3e3763d](https://github.com/edenlabllc/ehealth.web/commit/3e3763d))
+
+
+### Features
+
+* **auth:** add grouping to address fields ([2f69771](https://github.com/edenlabllc/ehealth.web/commit/2f69771))
+* **auth:** add messages for sign up edge cases ([46f73ad](https://github.com/edenlabllc/ehealth.web/commit/46f73ad)), closes [#42](https://github.com/edenlabllc/ehealth.web/issues/42)
+* **auth:** add placeholder to birth_date field on SignUpPerson page ([2cb3366](https://github.com/edenlabllc/ehealth.web/commit/2cb3366))
+* **auth:** sort and add filtering to address area field on SignUpPersonPage ([a1f1201](https://github.com/edenlabllc/ehealth.web/commit/a1f1201))
+
+
+
+
+
 <a name="0.16.0"></a>
 # [0.16.0](https://github.com/edenlabllc/ehealth.web/compare/v0.15.0...v0.16.0) (2018-05-22)
 
