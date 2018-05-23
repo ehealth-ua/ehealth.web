@@ -5,7 +5,7 @@ import { reduxForm, Field } from "redux-form";
 import { reduxFormValidate, ErrorMessage } from "react-nebo15-validate";
 
 import FieldInput from "../../../components/reduxForm/FieldInput";
-import Button, { ButtonsGroup } from "../../../components/Button";
+import Button from "../../../components/Button";
 import ColoredText from "../../../components/ColoredText";
 import { FormBlock } from "../../../components/Form";
 
@@ -60,13 +60,11 @@ class OtpForm extends Component {
               </ErrorMessage>
             </Field>
           </div>
+
           <Button disabled={submitting} type="submit" color={btnColor} block>
             Ввести
           </Button>
-          <ButtonsGroup>
-            <Button theme="link" onClick={router.goBack}>
-              Назад
-            </Button>
+          <div>
             {repeat && (
               <Button
                 theme="link"
@@ -112,7 +110,7 @@ class OtpForm extends Component {
                 )}
               </Button>
             )}
-          </ButtonsGroup>
+          </div>
         </FormBlock>
       </form>
     );
