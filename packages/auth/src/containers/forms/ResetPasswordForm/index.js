@@ -5,8 +5,6 @@ import { Form, Validation, Validations, Field } from "@ehealth/components";
 
 import Button, { ButtonsGroup } from "../../../components/Button";
 
-import styles from "./styles.module.css";
-
 const ResetPasswordForm = ({ onSubmit, submitting, router }) => (
   <Form onSubmit={onSubmit}>
     <Field.Input
