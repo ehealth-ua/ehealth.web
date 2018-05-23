@@ -7,13 +7,13 @@ import RouterLink from "./RouterLink";
 
 const Link = props => {
   const Component = LinkContainer.withComponent(props.to ? RouterLink : "a");
-  const [linkProps, { icon, rtl, size }] = pickValidProps(props);
+  const [linkProps, { icon, bold, rtl, size }] = pickValidProps(props);
 
   return (
-    <Wrapper rtl={rtl} bold={bold}>
+    <Wrapper rtl={rtl}>
       <Component {...linkProps} />
       {icon && (
-        <Icon rtl={rtl} size={size}>
+        <Icon bold={bold} rtl={rtl} size={size}>
           {icon}
         </Icon>
       )}
@@ -32,7 +32,6 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: ${props => props.rtl && "row-reverse"};
   line-height: 1;
-  font-weight: ${props => props.bold && "bold"};
 `;
 
 const LinkContainer = styled.a`
@@ -47,6 +46,7 @@ const LinkContainer = styled.a`
     medium: "18px",
     large: "22px"
   })};
+  font-weight: ${props => props.bold && "bold"};
   letter-spacing: ${props => props.letterIndent && "2.4px"};
   text-align: center;
   text-transform: uppercase;
