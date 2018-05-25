@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { graphql } from "react-apollo";
-import { ArrowRight } from "@ehealth/icons";
-
 import { Title, Link, CabinetTable } from "@ehealth/components";
+import { ArrowRight } from "@ehealth/icons";
 
 import Tabs from "../components/Tabs";
 import OrderedList from "../components/OrderedList";
@@ -32,13 +30,12 @@ const HomePage = () => (
               <Line />
 
               <Link
-                size="small"
                 to="/"
-                icon={
-                  <ArrowRight height="15px" fill="#2292f2" display="block" />
-                }
-                letterIndent
+                size="small"
+                upperCase
+                spaced
                 bold
+                icon={<ArrowRight height="15px" fill="#2292f2" />}
               >
                 крок 1. оберіть лікаря
               </Link>

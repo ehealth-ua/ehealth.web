@@ -36,10 +36,11 @@ const ProfileEditPage = () => (
             <SubTitle>
               Персональні дані
               <Link
-                size="xs"
                 to="/profile"
-                icon={<EditIcon height="14" width="14" />}
-                rtl
+                size="xs"
+                upperCase
+                icon={<PencilIcon height="14" />}
+                iconReverse
               >
                 Вийти з режиму редагування
               </Link>
@@ -92,11 +93,6 @@ const EditLink = styled.span`
   line-height: 1;
   text-transform: uppercase;
   user-select: none;
-`;
-
-const EditIcon = styled(PencilIcon)`
-  margin-right: 5px;
-  vertical-align: middle;
 `;
 
 export default ProfileEditPage;

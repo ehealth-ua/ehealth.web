@@ -1,61 +1,77 @@
 import React from "react";
 import styled from "react-emotion/macro";
+import { css } from "react-emotion";
 import { prop, ifProp, switchProp } from "styled-tools";
 import { pickValidProps } from "@ehealth/utils";
 
 import RouterLink from "./RouterLink";
 
 const Link = props => {
-  const Component = LinkContainer.withComponent(props.to ? RouterLink : "a");
-  const [linkProps, { icon, bold, rtl, size }] = pickValidProps(props);
+  const [
+    { children, ...linkProps },
+    { icon, iconReverse, ...textProps }
+  ] = pickValidProps(props);
+
+  const Component = LinkContainer.withComponent(
+    props.href ? "a" : props.to ? RouterLink : "button"
+  );
 
   return (
-    <Wrapper rtl={rtl}>
-      <Component {...linkProps} />
-      {icon && (
-        <Icon bold={bold} rtl={rtl} size={size}>
-          {icon}
-        </Icon>
-      )}
-    </Wrapper>
+    <Component
+      {...linkProps}
+      iconReverse={iconReverse}
+      type={!(props.href || props.to) ? "button" : undefined}
+    >
+      <Text {...textProps} hasIcon={!!icon} iconReverse={iconReverse}>
+        {children}
+      </Text>
+      {icon && <Icon iconReverse={iconReverse}>{icon}</Icon>}
+    </Component>
   );
-};
-
-Link.defaultProps = {
-  color: "blue"
 };
 
 export default Link;
 
-const Wrapper = styled.div`
-  display: flex;
+const LinkContainer = styled.a`
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
-  flex-direction: ${props => props.rtl && "row-reverse"};
-  line-height: 1;
+  flex-direction: ${ifProp("iconReverse", "row-reverse")};
+  opacity: ${ifProp("disabled", "0.5")};
+  padding: 0;
+  text-decoration: none;
 `;
 
-const LinkContainer = styled.a`
-  color: ${switchProp("color", {
-    blue: "#2292f2",
-    black: "#333"
+const Text = styled.span`
+  color: ${switchProp(prop("color", "blue"), {
+    blue: prop("theme.link.colors.blue", "#2292f2"),
+    black: prop("theme.link.colors.black", "#333")
   })};
-  cursor: default;
   font-size: ${switchProp("size", {
-    xs: "10px",
-    small: "14px",
-    medium: "18px",
-    large: "22px"
+    xs: prop("theme.link.sizes.xs", "10px"),
+    small: prop("theme.link.sizes.small", "14px"),
+    medium: prop("theme.link.sizes.medium", "18px"),
+    large: prop("theme.link.sizes.large", "22px")
   })};
-  font-weight: ${props => props.bold && "bold"};
-  letter-spacing: ${props => props.letterIndent && "2.4px"};
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
-  user-select: none;
+  font-weight: ${ifProp("bold", "700")};
+  letter-spacing: ${ifProp(
+    "spaced",
+    prop("theme.link.letterSpacing", "2.4px")
+  )};
+  text-transform: ${ifProp("upperCase", "uppercase")};
 `;
 
 const Icon = styled.span`
-  padding-right: ${props => props.rtl && "7px"};
-  padding-left: ${props => !props.rtl && "7px"};
-  vertical-align: middle;
+  display: flex;
+  flex: 0 0 auto;
+
+  ${ifProp(
+    "iconReverse",
+    css`
+      margin-right: 7px;
+    `,
+    css`
+      margin-left: 7px;
+    `
+  )};
 `;

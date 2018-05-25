@@ -51,10 +51,11 @@ const ProfilePage = () => (
             <SubTitle>
               Персональні дані
               <Link
-                size="xs"
                 to="/profile/edit"
-                icon={<EditIcon height="14" width="14" />}
-                rtl
+                size="xs"
+                upperCase
+                icon={<PencilIcon height="14" />}
+                iconReverse
               >
                 Редагувати профіль
               </Link>
@@ -147,11 +148,6 @@ const SubTitle = styled.h3`
   justify-content: space-between;
   margin-bottom: 30px;
   font-size: 16px;
-`;
-
-const EditIcon = styled(PencilIcon)`
-  margin-right: 5px;
-  vertical-align: middle;
 `;
 
 export default ProfilePage;
