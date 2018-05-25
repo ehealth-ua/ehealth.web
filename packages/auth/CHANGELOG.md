@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.18.0"></a>
+# [0.18.0](https://github.com/edenlabllc/ehealth.web/compare/v0.17.1...v0.18.0) (2018-05-25)
+
+
+### Bug Fixes
+
+* **auth:** add back link in Sign-in DS ([b47203d](https://github.com/edenlabllc/ehealth.web/commit/b47203d))
+* **auth:** add block to Enter btn on Sign-In ([b42d950](https://github.com/edenlabllc/ehealth.web/commit/b42d950))
+* **auth:** add more btns in Otp Page ([9fcf57a](https://github.com/edenlabllc/ehealth.web/commit/9fcf57a))
+* **auth:** add Sign-up Btn ([f322cc0](https://github.com/edenlabllc/ehealth.web/commit/f322cc0))
+* **auth:** change back btn text in sign-in-ds-page ([4e2af3f](https://github.com/edenlabllc/ehealth.web/commit/4e2af3f))
+* **auth:** fix back link in UpdateFactorSignInPage ([30c4489](https://github.com/edenlabllc/ehealth.web/commit/30c4489))
+* **auth:** fix onClick handler on UpdateFactorSignInPage ([8ccd19f](https://github.com/edenlabllc/ehealth.web/commit/8ccd19f))
+* **auth:** fix redirect logic to cabinet after OTP Page ([587765a](https://github.com/edenlabllc/ehealth.web/commit/587765a))
+* **auth:** made Sign-in Button block ([53e4a52](https://github.com/edenlabllc/ehealth.web/commit/53e4a52))
+* **auth:** refactor ResetPassword Page and Form ([cb306b3](https://github.com/edenlabllc/ehealth.web/commit/cb306b3))
+* **auth:** remove  Group Btns in Otp ([8eb0aa9](https://github.com/edenlabllc/ehealth.web/commit/8eb0aa9))
+* **auth:** remove unnessary code of redux-form ([21129cf](https://github.com/edenlabllc/ehealth.web/commit/21129cf))
+* **auth:** remove unused styles ([d7ae3b0](https://github.com/edenlabllc/ehealth.web/commit/d7ae3b0))
+* **auth:** revert Sign-in form ([bfeb1a6](https://github.com/edenlabllc/ehealth.web/commit/bfeb1a6))
+* **auth:** use same btn blue color as in components ([18cdb0a](https://github.com/edenlabllc/ehealth.web/commit/18cdb0a))
+* **components:** add default btn margin ([cbebd24](https://github.com/edenlabllc/ehealth.web/commit/cbebd24))
+* **components:** edit FormBlock Style ([7c28c57](https://github.com/edenlabllc/ehealth.web/commit/7c28c57))
+* **components:** refactor ButtonGroup styles ([43fa34a](https://github.com/edenlabllc/ehealth.web/commit/43fa34a))
+
+
+### Features
+
+* **auth:** add new error type - 'user not found' ([b1720f2](https://github.com/edenlabllc/ehealth.web/commit/b1720f2))
+* **auth:** add server side errors to SignInDS Page ([91e5218](https://github.com/edenlabllc/ehealth.web/commit/91e5218))
+* **auth:** add SignInFailure Page ([11b7b86](https://github.com/edenlabllc/ehealth.web/commit/11b7b86))
+* **auth:** remove Back btn in OtpForm ([20f543c](https://github.com/edenlabllc/ehealth.web/commit/20f543c))
+* **auth:** use in Form component in Sign-in form ([7848338](https://github.com/edenlabllc/ehealth.web/commit/7848338))
+
+
+
+
+
 <a name="0.17.1"></a>
 ## [0.17.1](https://github.com/edenlabllc/ehealth.web/compare/v0.17.0...v0.17.1) (2018-05-23)
 
