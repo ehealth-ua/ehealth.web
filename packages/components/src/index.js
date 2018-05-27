@@ -9,6 +9,7 @@ export { default as Form, SUBMIT_ERROR } from "./Form";
 export { default as Link } from "./Link";
 export { default as Redirect } from "./Redirect";
 export { default as StateMachine } from "./StateMachine";
+export { default as StepForm } from "./StepForm";
 export { default as Switch } from "./Switch";
 export { default as Title } from "./Title";
 export { default as Validation, Validations } from "./Validation";
