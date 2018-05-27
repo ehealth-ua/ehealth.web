@@ -1,6 +1,16 @@
-import React from "react";
-import { Link } from "react-router";
-import { Field, Form, Validation, Validations } from "@ehealth/components";
+import React, { Component } from "react";
+import Composer from "react-composer";
+import {
+  Field,
+  Form,
+  Validation,
+  Validations,
+  Connect,
+  StateMachine,
+  Link,
+  Switch
+} from "@ehealth/components";
+import styled from "react-emotion/macro";
 
 import {
   Main,
@@ -9,8 +19,9 @@ import {
   NarrowContainer
 } from "../../../components/CenterLayout";
 import { H1 } from "../../../components/Title";
+import { sendOtp } from "../../../redux/cabinet";
 
-const SignUpOtpPage = ({ location }) => (
+const SignUpOtpPage = ({ router, location }) => (
   <Main>
     <Header>
       <H1>OTP-пароль</H1>
@@ -28,10 +39,77 @@ const SignUpOtpPage = ({ location }) => (
           <Validation.Submit message="Невірний код" />
         </Validations>
         <Form.Submit block>Відправити</Form.Submit>
-        <Link to={{ ...location, pathname: "/sign-up/user" }}>Назад</Link>
+        <Footer>
+          <Link to={{ ...location, pathname: "/sign-up/user" }}>Назад</Link>
+
+          <Composer
+            components={[
+              <Connect mapDispatchToProps={{ sendOtp }} />,
+              <Field
+                name="person.authentication_methods[0].phone_number"
+                subscription={{ value: true }}
+              />
+            ]}
+          >
+            {([{ sendOtp }, { input: { value: factor } }]) => (
+              <ResendLink
+                onClick={async () => {
+                  const { error, payload: { response } } = await sendOtp({
+                    factor,
+                    type: "SMS"
+                  });
+
+                  if (error) {
+                    router.push({
+                      ...location,
+                      pathname: `/sign-up/failure/${response.error.type}`
+                    });
+                  }
+                }}
+              />
+            )}
+          </Composer>
+        </Footer>
       </NarrowContainer>
     </Article>
   </Main>
 );
 
 export default SignUpOtpPage;
+
+const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ResendLink = ({ onClick }) => (
+  <StateMachine
+    initialState="pending"
+    transitions={{
+      async sending() {
+        await onClick();
+        return "sent";
+      },
+      async sent() {
+        await new Promise(r => setTimeout(r, 30000));
+        return "pending";
+      }
+    }}
+  >
+    {({ state, transition }) => (
+      <Link
+        disabled={state !== "pending"}
+        onClick={() => {
+          if (state === "pending") transition("sending");
+        }}
+      >
+        <Switch
+          value={state}
+          pending="Відправити знову"
+          sending="Відправляємо..."
+          sent="Відправлено"
+        />
+      </Link>
+    )}
+  </StateMachine>
+);
