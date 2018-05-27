@@ -14,7 +14,6 @@ import { formatDate, parseDate } from "@ehealth/utils";
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
 
 import { REACT_APP_API_URL } from "../../../env";
-import { getTokenData } from "../../../reducers";
 import { fetchDictionaries } from "../../../redux/dictionaries";
 import { createUrl } from "../../../helpers/url";
 import {
@@ -194,22 +193,19 @@ const SignUpPersonPage = ({ location }) => (
 export default SignUpPersonPage;
 
 const UserInfo = () => (
-  <Connect mapStateToProps={state => ({ tokenData: getTokenData(state) })}>
-    {({ tokenData }) => (
+  <Field name="person.email" subscription={{ value: true }}>
+    {({ input: { value: email } }) => (
       <DigitalSignature.Consumer>
-        {({ keyAvailable, ds: { privKeyOwnerInfo } }) =>
-          tokenData &&
-          keyAvailable && (
-            <p>
-              {tokenData.email}
-              <br />
-              ІПН: {privKeyOwnerInfo.subjDRFOCode}
-            </p>
-          )
-        }
+        {({ ds: { privKeyOwnerInfo } }) => (
+          <p>
+            {email}
+            <br />
+            ІПН: {privKeyOwnerInfo.subjDRFOCode}
+          </p>
+        )}
       </DigitalSignature.Consumer>
     )}
-  </Connect>
+  </Field>
 );
 
 const DigitalSignatureValidation = ({ validate, ...props }) => (

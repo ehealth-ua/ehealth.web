@@ -40,13 +40,6 @@ export default combineReducers({
 
 export const getLocation = state => state.routing.locationBeforeTransitions;
 export const getToken = state => state.session.token;
-export const getTokenData = state => {
-  try {
-    return jwtDecode(getToken(state));
-  } catch (err) {
-    return null;
-  }
-};
 
 export const getUser = state => state.data.user;
 export const getClientById = (state, id) =>

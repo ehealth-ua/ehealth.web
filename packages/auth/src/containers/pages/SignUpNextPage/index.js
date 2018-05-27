@@ -1,21 +1,19 @@
 import React, { Component } from "react";
-import merge from "lodash/merge";
-import DigitalSignature from "@ehealth/react-iit-digital-signature";
+import jwtDecode from "jwt-decode";
 import {
   Async,
   Connect,
-  Form,
+  StepForm,
   Redirect,
   SUBMIT_ERROR
 } from "@ehealth/components";
-import { pickProps } from "@ehealth/utils";
+import DigitalSignature from "@ehealth/react-iit-digital-signature";
 
 import {
   REACT_APP_DIGITAL_SIGNATURE_ENABLED,
   REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
   REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
 } from "../../../env";
-import { getTokenData } from "../../../reducers";
 import { fetchDictionaries } from "../../../redux/dictionaries";
 import { sendOtp, register } from "../../../redux/cabinet";
 import { login } from "../../../redux/session";
@@ -26,148 +24,140 @@ const ENTRIES_PAGES_MAPPING = [
   [["$.otp"], "/sign-up/otp"]
 ];
 
-const STEP_FORM_PROPS = ["initialValues", "step", "transitions", "onSubmit"];
-
-const SignUpNextPage = ({ children, location, router }) => (
-  <Connect
-    mapStateToProps={state => ({ tokenData: getTokenData(state) })}
-    mapDispatchToProps={{
-      fetchDictionaries,
-      sendOtp,
-      registerUser,
-      authorizeUser
-    }}
-  >
-    {({
-      tokenData,
-      fetchDictionaries,
-      sendOtp,
-      registerUser,
-      authorizeUser
-    }) => (
-      <Async await={fetchDictionaries}>
-        <DigitalSignature.Consumer>
-          {({ keyAvailable, ds }) =>
-            tokenData && keyAvailable ? (
-              <SignUpNextForm
-                initialValues={{
-                  person: {
-                    last_name: ds.privKeySubject.SN,
-                    email: tokenData.email,
-                    tax_id: ds.privKeyOwnerInfo.subjDRFOCode,
-                    emergency_contact: { phones: [{ type: "MOBILE" }] },
-                    authentication_methods: [{ type: "OTP" }]
-                  },
-                  local: {
-                    document: { type: "PASSPORT" },
-                    contactPhoneMatchesAuth: true
-                  }
-                }}
-                step={location.pathname.replace("/sign-up/", "")}
-                transitions={{
-                  person: () =>
-                    router.push({ ...location, pathname: "/sign-up/user" }),
-                  user: async ({ person }) => {
-                    try {
-                      const { error, payload: { response } } = await sendOtp({
-                        factor: person.authentication_methods[0].phone_number,
-                        type: "SMS"
-                      });
-
-                      if (error) throw response.error;
-                      router.push({ ...location, pathname: "/sign-up/otp" });
-                    } catch (error) {
-                      if (error.type === "validation_failed") {
-                        return { [SUBMIT_ERROR]: error.invalid };
-                      }
-
-                      router.push({
-                        ...location,
-                        pathname: `/sign-up/failure/${error.type}`
-                      });
-                    }
-                  }
-                }}
-                onSubmit={async ({ password, otp, ...personData }) => {
-                  try {
-                    const content = getPersonContent(personData);
-                    const signed_content = REACT_APP_DIGITAL_SIGNATURE_ENABLED
-                      ? ds.SignDataInternal(true, content, true)
-                      : btoa(unescape(encodeURIComponent(content)));
-
-                    await registerUser({
-                      signed_content,
-                      password,
-                      otp,
-                      drfo: ds.privKeyOwnerInfo.subjDRFOCode,
-                      given_name: encodeURIComponent(
-                        ds.privKeySubject.GivenName
-                      ),
-                      surname: encodeURIComponent(ds.privKeySubject.SN)
-                    });
-
-                    return authorizeUser();
-                  } catch (error) {
-                    if (error.type === "validation_failed") {
-                      const pathname = findErroredPage(error.invalid);
-
-                      if (pathname) {
-                        router.replace({ ...location, pathname });
-                        return { [SUBMIT_ERROR]: error.invalid };
-                      }
-                    }
-
-                    router.push({
-                      ...location,
-                      pathname: `/sign-up/failure/${error.type}`
-                    });
-                  }
-                }}
-              >
-                {children}
-              </SignUpNextForm>
-            ) : (
-              <Redirect to={{ ...location, pathname: "/sign-up/continue" }} />
-            )
-          }
-        </DigitalSignature.Consumer>
-      </Async>
-    )}
-  </Connect>
+const SignUpNextPage = props => (
+  <DigitalSignature.Consumer>
+    {({ keyAvailable, ds }) =>
+      keyAvailable ? (
+        <Connect
+          mapDispatchToProps={{
+            fetchDictionaries,
+            sendOtp,
+            registerUser,
+            authorizeUser
+          }}
+        >
+          {({ fetchDictionaries, ...actions }) => (
+            <Async await={fetchDictionaries}>
+              <SignUpNextForm {...actions} {...props} ds={ds} />
+            </Async>
+          )}
+        </Connect>
+      ) : (
+        <Redirect to={{ ...props.location, pathname: "/sign-up/continue" }} />
+      )
+    }
+  </DigitalSignature.Consumer>
 );
 
 export default SignUpNextPage;
 
 class SignUpNextForm extends Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return merge(prevState, { values: nextProps.initialValues });
-  }
-
-  state = {};
-
   render() {
-    const [_, props] = pickProps(this.props, STEP_FORM_PROPS);
-
     return (
-      <Form
-        {...props}
-        initialValues={this.state.values}
+      <StepForm
+        initialValues={this.initialValues}
+        forgetFields={["otp"]}
+        step={this.currentStep}
+        transitions={{
+          person: this.personTransition,
+          user: this.userTransition
+        }}
         onSubmit={this.handleSubmit}
-      />
+      >
+        {this.props.children}
+      </StepForm>
     );
   }
 
-  handleSubmit = (values, form) => {
-    const { step, transitions, onSubmit } = this.props;
-    const transition = transitions[step];
+  get initialValues() {
+    const { ds: { privKeySubject, privKeyOwnerInfo } } = this.props;
+    const { email } = this.tokenData;
 
-    this.setState({ values });
+    return {
+      person: {
+        last_name: privKeySubject.SN,
+        email,
+        tax_id: privKeyOwnerInfo.subjDRFOCode,
+        emergency_contact: { phones: [{ type: "MOBILE" }] },
+        authentication_methods: [{ type: "OTP" }]
+      },
+      local: {
+        document: { type: "PASSPORT" },
+        contactPhoneMatchesAuth: true
+      }
+    };
+  }
 
-    const { submitErrors } = form.getState();
+  get currentStep() {
+    return this.props.location.pathname.replace("/sign-up/", "");
+  }
 
-    return transition
-      ? transition(values, form) || submitErrors
-      : onSubmit(values, form);
+  get tokenData() {
+    try {
+      return jwtDecode(this.props.location.query.token);
+    } catch (e) {
+      return {};
+    }
+  }
+
+  personTransition = () => {
+    const { router, location } = this.props;
+    router.push({ ...location, pathname: "/sign-up/user" });
+  };
+
+  userTransition = async ({ person }) => {
+    const { sendOtp, router, location } = this.props;
+
+    try {
+      const { error, payload: { response } } = await sendOtp({
+        factor: person.authentication_methods[0].phone_number,
+        type: "SMS"
+      });
+
+      if (error) throw response.error;
+      router.push({ ...location, pathname: "/sign-up/otp" });
+    } catch (error) {
+      return this.handleFailure(error);
+    }
+  };
+
+  handleSubmit = async ({ password, otp, ...personData }) => {
+    const { ds, registerUser, authorizeUser } = this.props;
+
+    try {
+      const content = getPersonContent(personData);
+      const signed_content = REACT_APP_DIGITAL_SIGNATURE_ENABLED
+        ? ds.SignDataInternal(true, content, true)
+        : btoa(unescape(encodeURIComponent(content)));
+
+      await registerUser({
+        signed_content,
+        password,
+        otp,
+        drfo: ds.privKeyOwnerInfo.subjDRFOCode,
+        given_name: encodeURIComponent(ds.privKeySubject.GivenName),
+        surname: encodeURIComponent(ds.privKeySubject.SN)
+      });
+
+      return authorizeUser();
+    } catch (error) {
+      return this.handleFailure(error);
+    }
+  };
+
+  handleFailure = error => {
+    const { router, location } = this.props;
+
+    if (error.type === "validation_failed") {
+      const pathname = findErroredPage(error.invalid);
+
+      if (pathname) {
+        router.replace({ ...location, pathname });
+        return { [SUBMIT_ERROR]: error.invalid };
+      }
+    }
+
+    router.push({ ...location, pathname: `/sign-up/failure/${error.type}` });
   };
 }
 

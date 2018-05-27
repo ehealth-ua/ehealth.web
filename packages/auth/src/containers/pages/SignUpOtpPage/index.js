@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Composer from "react-composer";
 import {
   Field,
@@ -21,61 +22,73 @@ import {
 import { H1 } from "../../../components/Title";
 import { sendOtp } from "../../../redux/cabinet";
 
-const SignUpOtpPage = ({ router, location }) => (
-  <Main>
-    <Header>
-      <H1>OTP-пароль</H1>
-    </Header>
-    <Article>
-      <NarrowContainer>
-        <p>Будь ласка, введіть 4 цифри, отримані вами у СМС-повідомленні</p>
-        <Field.Input name="otp" placeholder="4 цифри з СМС" />
-        <Validations field="otp">
-          <Validation.Required message="Об'язкове поле" />
-          <Validation.Length
-            options={{ min: 4, max: 4 }}
-            message="Довжина становить 4 символи"
-          />
-          <Validation.Submit message="Невірний код" />
-        </Validations>
-        <Form.Submit block>Відправити</Form.Submit>
-        <Footer>
-          <Link to={{ ...location, pathname: "/sign-up/user" }}>Назад</Link>
+export default class SignUpOtpPage extends Component {
+  static contextTypes = {
+    reactFinalForm: PropTypes.object
+  };
 
-          <Composer
-            components={[
-              <Connect mapDispatchToProps={{ sendOtp }} />,
-              <Field
-                name="person.authentication_methods[0].phone_number"
-                subscription={{ value: true }}
+  componentDidMount() {
+    this.context.reactFinalForm.change("otp", "");
+  }
+
+  render() {
+    const { router, location } = this.props;
+
+    return (
+      <Main>
+        <Header>
+          <H1>OTP-пароль</H1>
+        </Header>
+        <Article>
+          <NarrowContainer>
+            <p>Будь ласка, введіть 4 цифри, отримані вами у СМС-повідомленні</p>
+            <Field.Input name="otp" placeholder="4 цифри з СМС" />
+            <Validations field="otp">
+              <Validation.Required message="Об'язкове поле" />
+              <Validation.Length
+                options={{ min: 4, max: 4 }}
+                message="Довжина становить 4 символи"
               />
-            ]}
-          >
-            {([{ sendOtp }, { input: { value: factor } }]) => (
-              <ResendLink
-                onClick={async () => {
-                  const { error, payload: { response } } = await sendOtp({
-                    factor,
-                    type: "SMS"
-                  });
+              <Validation.Submit message="Невірний код" />
+            </Validations>
+            <Form.Submit block>Відправити</Form.Submit>
+            <Footer>
+              <Link to={{ ...location, pathname: "/sign-up/user" }}>Назад</Link>
 
-                  if (error) {
-                    router.push({
-                      ...location,
-                      pathname: `/sign-up/failure/${response.error.type}`
-                    });
-                  }
-                }}
-              />
-            )}
-          </Composer>
-        </Footer>
-      </NarrowContainer>
-    </Article>
-  </Main>
-);
+              <Composer
+                components={[
+                  <Connect mapDispatchToProps={{ sendOtp }} />,
+                  <Field
+                    name="person.authentication_methods[0].phone_number"
+                    subscription={{ value: true }}
+                  />
+                ]}
+              >
+                {([{ sendOtp }, { input: { value: factor } }]) => (
+                  <ResendLink
+                    onClick={async () => {
+                      const { error, payload: { response } } = await sendOtp({
+                        factor,
+                        type: "SMS"
+                      });
 
-export default SignUpOtpPage;
+                      if (error) {
+                        router.push({
+                          ...location,
+                          pathname: `/sign-up/failure/${response.error.type}`
+                        });
+                      }
+                    }}
+                  />
+                )}
+              </Composer>
+            </Footer>
+          </NarrowContainer>
+        </Article>
+      </Main>
+    );
+  }
+}
 
 const Footer = styled.div`
   display: flex;

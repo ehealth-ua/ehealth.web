@@ -12,7 +12,6 @@ import {
 } from "@ehealth/components";
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
 
-import { getTokenData } from "../../../reducers";
 import {
   Main,
   Header,
@@ -189,12 +188,10 @@ export default SignUpUserPage;
 const UserInfo = () => (
   <Composer
     components={[
-      <Field name="person.second_name" />,
-      <Field name="person.first_name" />,
-      <Field name="person.last_name" />,
-      <Connect
-        mapStateToProps={state => ({ tokenData: getTokenData(state) })}
-      />,
+      <Field name="person.second_name" subscription={{ value: true }} />,
+      <Field name="person.first_name" subscription={{ value: true }} />,
+      <Field name="person.last_name" subscription={{ value: true }} />,
+      <Field name="person.email" subscription={{ value: true }} />,
       <DigitalSignature.Consumer />
     ]}
   >
@@ -202,19 +199,15 @@ const UserInfo = () => (
       { input: { value: secondName } },
       { input: { value: firstName } },
       { input: { value: lastName } },
-      { tokenData },
-      { keyAvailable, ds: { privKeyOwnerInfo } }
+      { input: { value: email } },
+      { ds: { privKeyOwnerInfo } }
     ]) => (
       <p>
         {secondName} {firstName} {lastName}
         <br />
-        {tokenData && (
-          <>
-            {tokenData.email}
-            <br />
-          </>
-        )}
-        {keyAvailable && <>ІПН: {privKeyOwnerInfo.subjDRFOCode}</>}
+        {email}
+        <br />
+        ІПН: {privKeyOwnerInfo.subjDRFOCode}
       </p>
     )}
   </Composer>
