@@ -46,7 +46,10 @@ const SignUpUserPage = ({ location, router }) => (
             options={/^(?=.*[a-zа-яёїієґ])(?=.*[A-ZА-ЯЁЇIЄҐ])(?=.*\d)/}
             message="Пароль повинен містити великі, малі літери та цифри"
           />
-          <Validation.Submit message="Пароль був використаний у системі раніше" />
+          <Validation.Submit
+            rule="password_used"
+            message="Пароль був використаний у системі раніше"
+          />
         </Validations>
         <Field.Input
           name="person.emergency_contact.first_name"
