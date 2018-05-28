@@ -170,7 +170,10 @@ const SignUpUserPage = ({ location, router }) => (
           label="Даю згоду на обробку персональних даних"
           name="person.process_disclosure_data_consent"
         />
-        <Field name="person.process_disclosure_data_consent">
+        <Field
+          name="person.process_disclosure_data_consent"
+          subscription={{ value: true }}
+        >
           {({ input: { value: consent } }) => (
             <Form.Submit disabled={!consent} block>
               Далі
