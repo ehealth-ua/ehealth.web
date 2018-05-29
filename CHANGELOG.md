@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.21.0"></a>
+# [0.21.0](https://github.com/edenlabllc/ehealth.web/compare/v0.20.0...v0.21.0) (2018-05-29)
+
+
+### Features
+
+* **components:** add HistoryState and SearchParams components ([cd46f08](https://github.com/edenlabllc/ehealth.web/commit/cd46f08))
+* **utils:** add parseSearchParams and stringifySearchParams functions ([845e1a3](https://github.com/edenlabllc/ehealth.web/commit/845e1a3))
+
+
+
+
+
 <a name="0.20.0"></a>
 # [0.20.0](https://github.com/edenlabllc/ehealth.web/compare/v0.19.0...v0.20.0) (2018-05-29)
 
