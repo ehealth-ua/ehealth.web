@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.20.0"></a>
+# [0.20.0](https://github.com/edenlabllc/ehealth.web/compare/v0.19.0...v0.20.0) (2018-05-29)
+
+
+### Features
+
+* **components:** add StateMachine component ([b592f8a](https://github.com/edenlabllc/ehealth.web/commit/b592f8a))
+* **components:** add StepForm component ([140ccf1](https://github.com/edenlabllc/ehealth.web/commit/140ccf1))
+
+
+
+
+
 <a name="0.19.0"></a>
 # [0.19.0](https://github.com/edenlabllc/ehealth.web/compare/v0.18.0...v0.19.0) (2018-05-25)
 

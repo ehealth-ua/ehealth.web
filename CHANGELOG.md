@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.20.0"></a>
+# [0.20.0](https://github.com/edenlabllc/ehealth.web/compare/v0.19.0...v0.20.0) (2018-05-29)
+
+
+### Bug Fixes
+
+* **auth:** prevent unnecessary updates from consent checkbox on SignUpUserPage ([5d68e6f](https://github.com/edenlabllc/ehealth.web/commit/5d68e6f)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+* **auth:** refactor SignUpNextPage, remove redirect on last registration step submit, add code reset on return to the OTP page ([e9e4c3a](https://github.com/edenlabllc/ehealth.web/commit/e9e4c3a)), closes [#3](https://github.com/edenlabllc/ehealth.web/issues/3)
+* **auth:** use correct rule for used password submit validation on SignUpUserPage ([e792014](https://github.com/edenlabllc/ehealth.web/commit/e792014))
+
+
+### Features
+
+* **auth:** add resend link to SignUpOtpPage ([facdf6b](https://github.com/edenlabllc/ehealth.web/commit/facdf6b))
+* **components:** add StateMachine component ([b592f8a](https://github.com/edenlabllc/ehealth.web/commit/b592f8a))
+* **components:** add StepForm component ([140ccf1](https://github.com/edenlabllc/ehealth.web/commit/140ccf1))
+
+
+
+
+
 <a name="0.19.0"></a>
 # [0.19.0](https://github.com/edenlabllc/ehealth.web/compare/v0.18.0...v0.19.0) (2018-05-25)
 
