@@ -8,7 +8,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new RestLink({
     uri: REACT_APP_API_URL,
-    credentials: "same-origin"
+    credentials: "include"
   })
 });
 
