@@ -1,12 +1,8 @@
 import React from "react";
-<<<<<<< HEAD
-import { Title, Link } from "@ehealth/components";
-=======
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import { Title, Link, CabinetTable, Switch } from "@ehealth/components";
->>>>>>> feat(patient-account): add HomePage
 import { ArrowRight } from "@ehealth/icons";
 
 import Tabs from "../components/Tabs";
@@ -31,33 +27,6 @@ const HomePage = () => (
         {
           title: "Моя декларація",
           content: (
-<<<<<<< HEAD
-            <>
-              <p>
-                Декларація відсутня. Для підписання декларації, виконайте
-                наступні кроки
-              </p>
-              <OrderedList>
-                {[
-                  "Оберіть лікаря",
-                  "Створіть запит на декларацію",
-                  "Очікуйте на підтвердження"
-                ]}
-              </OrderedList>
-              <Line />
-
-              <Link
-                to="/search"
-                size="small"
-                upperCase
-                spaced
-                bold
-                icon={<ArrowRight height="15px" fill="#2292f2" />}
-              >
-                крок 1. оберіть лікаря
-              </Link>
-            </>
-=======
             <Query query={DeclarationQuery}>
               {({ loading, error, data = [] }) => {
                 if (!data.declarations) return <NoDeclarationList />;
@@ -68,7 +37,6 @@ const HomePage = () => (
                 );
               }}
             </Query>
->>>>>>> feat(patient-account): add HomePage
           )
         },
         { title: "Мої рецепти", content: "Сторінка в процесі розробки" }
