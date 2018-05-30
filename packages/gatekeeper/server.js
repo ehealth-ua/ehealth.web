@@ -10,6 +10,7 @@ const {
   API_URL,
   CLIENT_ID,
   CLIENT_SECRET,
+  COOKIE_DOMAIN,
   AUTH_COOKIE_NAME = "authorization",
   META_COOKIE_NAME = "meta",
   REDIRECT_URL = "/"
@@ -38,6 +39,7 @@ app.get("*", async (req, res) => {
     const secure = NODE_ENV !== "development";
 
     res.cookie(AUTH_COOKIE_NAME, value, {
+      domain: COOKIE_DOMAIN,
       expires,
       secure,
       httpOnly: true,
@@ -45,6 +47,7 @@ app.get("*", async (req, res) => {
     });
 
     res.cookie(META_COOKIE_NAME, user_id, {
+      domain: COOKIE_DOMAIN,
       expires,
       secure,
       sameSite: true
