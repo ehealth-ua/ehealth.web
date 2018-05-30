@@ -42,15 +42,13 @@ app.get("*", async (req, res) => {
       domain: COOKIE_DOMAIN,
       expires,
       secure,
-      httpOnly: true,
-      sameSite: true
+      httpOnly: true
     });
 
     res.cookie(META_COOKIE_NAME, user_id, {
       domain: COOKIE_DOMAIN,
       expires,
-      secure,
-      sameSite: true
+      secure
     });
 
     res.redirect(REDIRECT_URL);
