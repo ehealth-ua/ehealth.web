@@ -5,6 +5,7 @@ export { default as CircleIcon } from "./CircleIcon";
 export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
 export { default as ChevronRightIcon } from "./ChevronRightIcon";
 export { default as CalendarIcon } from "./CalendarIcon";
+export { default as MozLogoIcon } from "./MozLogoIcon";
 export { default as EhealthLogoIcon } from "./EhealthLogoIcon";
 export { default as InfoIcon } from "./InfoIcon";
 export { default as PencilIcon } from "./PencilIcon";
