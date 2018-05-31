@@ -15,7 +15,8 @@ const Wrapper = styled.div`
   right: 0;
   padding: 40px;
   background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 18px rgba(174, 174, 174, 0.75);
+  border: 1px solid rgba(72, 128, 237, 0.15);
 `;
 
 const Inner = styled.div`
