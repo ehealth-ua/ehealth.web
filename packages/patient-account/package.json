@@ -27,7 +27,7 @@
     "eject": "react-scripts eject"
   },
   "proxy": {
-    "/api": {
+    "/(api|reports)": {
       "target": "http://api.dev.asclepius.com.ua/"
     },
     "/auth/redirect": {

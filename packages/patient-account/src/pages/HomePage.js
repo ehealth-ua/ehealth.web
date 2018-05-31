@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "react-emotion/macro";
-import { Title, Link, CabinetTable } from "@ehealth/components";
+import { Title, Link } from "@ehealth/components";
 import { ArrowRight } from "@ehealth/icons";
 
 import Tabs from "../components/Tabs";
@@ -30,7 +29,7 @@ const HomePage = () => (
               <Line />
 
               <Link
-                to="/"
+                to="/search"
                 size="small"
                 upperCase
                 spaced
