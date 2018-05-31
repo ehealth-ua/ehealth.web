@@ -186,5 +186,4 @@ export const Option = styled.li`
   cursor: default;
   padding: 10px 50px 10px 10px;
   line-height: 16px;
-  word-break: break-all;
 `;
