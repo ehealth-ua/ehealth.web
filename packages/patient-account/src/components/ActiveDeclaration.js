@@ -16,17 +16,17 @@ const ActiveDeclaration = ({ active, blur = false }) => {
           Розірвати декларацію
         </Link>
         <Title.H3>
-          Статус декларації:
+          Статус декларації:{" "}
           <Switch
             value={status}
             pending_verification={
               <>
-                <b> {DECLARATION_STATUSES[status]}</b> <CircleIcon />
+                <b>{DECLARATION_STATUSES[status]}</b> <CircleIcon />
               </>
             }
             active={
               <>
-                <b> {DECLARATION_STATUSES[status]}</b>{" "}
+                <b>{DECLARATION_STATUSES[status]}</b>{" "}
                 <CircleIcon fill="#c9f032" />
               </>
             }
