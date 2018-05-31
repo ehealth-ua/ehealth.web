@@ -29,11 +29,12 @@ const HomePage = () => (
           content: (
             <Query query={DeclarationQuery}>
               {({ loading, error, data = [] }) => {
-                if (!data.declarations) return <NoDeclarationList />;
+                if (!loading && error && !data.declarations)
+                  return <NoDeclarationList />;
                 return (
-                  <>
+                  !loading && (
                     <PatientDeclarations data={data.declarations.data} />
-                  </>
+                  )
                 );
               }}
             </Query>
