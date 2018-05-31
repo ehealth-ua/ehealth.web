@@ -4,7 +4,7 @@ import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
 import { ArrowRight, CircleIcon, MozLogoIcon } from "@ehealth/icons";
 import DECLARATION_STATUSES from "../helpers/statuses";
-import { DeclarationHeader } from "./DeclarationPreview";
+import { DeclarationHeader } from "../pages/DeclarationPage";
 
 const ActiveDeclaration = ({ active, blur = false }) => {
   const { status, start_date, id } = active;
@@ -31,7 +31,6 @@ const ActiveDeclaration = ({ active, blur = false }) => {
               </>
             }
           />
-          <b />
         </Title.H3>
       </Flex>
     </Wrapper>
