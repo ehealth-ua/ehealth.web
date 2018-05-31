@@ -1,3 +1,5 @@
+import { titleCase } from "@ehealth/utils";
+
 const streetTypeObj = {
   LINE: "лінія",
   PASS: "провулок",
@@ -44,21 +46,24 @@ const getFullAddress = ({
   apartment
 }) => {
   const getStreet = [streetTypeObj[street_type], street].join(" ");
-  const getSettlement = [settlementTypeObj[settlement_type], settlement].join(
-    " "
-  );
-  const getAppartment = !apartment ? `кв.${apartment}` : null;
+  const getSettlement = [
+    settlementTypeObj[settlement_type],
+    titleCase(settlement)
+  ].join(" ");
   const address = [
     zip,
     country,
-    `${area} область`,
-    region,
+    area && area.toLowerCase() !== `м.${settlement}`.toLowerCase()
+      ? `${titleCase(area)} область`
+      : null,
+    region && `${titleCase(region)} район`,
     getSettlement,
     getStreet,
     building,
-    getAppartment
+    apartment && `кв.${apartment}`
   ]
     .filter(Boolean)
+    .slice(0, -1)
     .join(", ");
   if (!address) return null;
   return address;
