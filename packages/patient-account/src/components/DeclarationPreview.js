@@ -3,17 +3,19 @@ import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import format from "date-fns/format";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 
 import { MozLogoIcon } from "@ehealth/icons";
-import { Title, Link } from "@ehealth/components";
+import { Title } from "@ehealth/components";
 
 import DefinitionListView from "../components/DefinitionListView";
 
 const DeclarationQuery = gql`
-  query {
+  query Declaration($id: ID!) {
     declaration(id: $id)
       @rest(
-        path: "/cabinet/declarations/2f7353f1-0234-4407-b53a-41e6f4bbebcb"
+        path: "/cabinet/declarations/:id"
         params: { id: $id }
         type: "DeclarationPayload"
       ) {
@@ -22,8 +24,8 @@ const DeclarationQuery = gql`
   }
 `;
 
-const DeclarationPreview = () => (
-  <Query query={DeclarationQuery}>
+const DeclarationPreview = ({ router: { route } }) => (
+  <Query query={DeclarationQuery} variables={{ id: route.match.params.id }}>
     {({ loading, error, data }) => {
       if (!data.declaration) return null;
       const {
@@ -256,7 +258,7 @@ const DeclarationPreview = () => (
   </Query>
 );
 
-export default DeclarationPreview;
+export default withRouter(DeclarationPreview);
 
 export const DeclarationHeader = ({ id, signed_at, wrap }) => {
   const start_block = (
@@ -272,7 +274,13 @@ export const DeclarationHeader = ({ id, signed_at, wrap }) => {
       </Left>
     </Flex>
   );
-  return wrap ? <Shadow>{start_block}</Shadow> : start_block;
+  return wrap ? (
+    <Link to={`/declarations/${id}`}>
+      <Shadow>{start_block}</Shadow>
+    </Link>
+  ) : (
+    start_block
+  );
 };
 
 const Shadow = styled.div`
