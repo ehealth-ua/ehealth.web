@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { prop, ifProp } from "styled-tools";
+import { prop, ifProp, switchProp } from "styled-tools";
 
 import RouterLink from "./RouterLink";
 
@@ -25,7 +25,12 @@ const ButtonContainer = styled.button`
   color: #fff;
   cursor: default;
   font-weight: 700;
-  font-size: ${prop("theme.button.fontSize", 12)}px;
+  font-size: ${switchProp("size", {
+    xs: prop("theme.button.sizes.xs", "10px"),
+    small: prop("theme.button.sizes.small", "14px"),
+    medium: prop("theme.button.sizes.medium", "18px"),
+    large: prop("theme.button.sizes.large", "22px")
+  })};
   letter-spacing: ${prop("theme.button.letterSpacing", 2.4)}px;
   width: ${ifProp("block", "100%")};
   padding: ${prop("theme.button.paddingVertical", 18)}px
