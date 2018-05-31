@@ -9,7 +9,7 @@ const InviteAcceptForm = ({
   onSubmit = () => {},
   submitting
 }) => (
-  <Form className={styles.main} onSubmit={handleSubmit(onSubmit)}>
+  <Form className={styles.main} onSubmit={onSubmit}>
     <div>
       <Field.Checkbox
         label="Погоджуюсь з Регламентом функціонування системи eHealth"

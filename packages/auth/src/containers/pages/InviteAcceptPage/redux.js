@@ -5,11 +5,12 @@ import {
 } from "../../../redux/requests";
 import { getLocation } from "../../../reducers";
 import { push } from "react-router-redux";
+import { SubmissionError } from "redux-form";
+import error_messages from "../../../helpers/errors";
 
 export const onSubmit = id => (dispatch, getState) =>
   dispatch(performActionWithRequest(id, APPROVE_REQUEST_ACTION)).then(
     action => {
-      if (action.error) return action;
       const state = getState();
       const location = getLocation(state);
 
