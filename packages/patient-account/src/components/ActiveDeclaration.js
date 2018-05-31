@@ -4,22 +4,13 @@ import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
 import { ArrowRight, CircleIcon, MozLogoIcon } from "@ehealth/icons";
 import DECLARATION_STATUSES from "../helpers/statuses";
+import { DeclarationHeader } from "./DeclarationPreview";
 
 const ActiveDeclaration = ({ active, blur = false }) => {
-  const { status, start_date } = active;
+  const { status, start_date, id } = active;
   return (
     <Wrapper blur={blur}>
-      <Preview>
-        <MozLogoIcon height="100px" />
-        <div>
-          <Heading>Декларація</Heading>
-          <Description>
-            про вибір лікаря з надання первинної допомоги
-            <br />
-            № {active.declaration_number} від {start_date}
-          </Description>
-        </div>
-      </Preview>
+      <DeclarationHeader id={id} signed_at={start_date} wrap />
       <Flex>
         <Link to="/" color="red" bold upperCase>
           Розірвати декларацію
@@ -51,32 +42,6 @@ export default ActiveDeclaration;
 const Wrapper = styled.div`
   opacity: ${ifProp("blur", "0.5")};
   user-select: ${ifProp("blur", "none")};
-`;
-
-const Heading = styled.h1`
-  font-size: 32px;
-  color: #292b37;
-  text-transform: uppercase;
-  text-align: left;
-  font-weight: bold;
-  margin: 0;
-`;
-
-const Description = styled.h4`
-  font-size: 16px;
-  color: #292b37;
-  text-transform: inherit;
-  text-align: left;
-  font-weight: bold;
-  margin: 0;
-`;
-
-const Preview = styled.div`
-  display: flex;
-  text-align: center;
-  box-shadow: 0 0 9px rgba(72, 128, 273, 0.75);
-  margin: 9px 9px 40px;
-  padding: 40px;
 `;
 
 const Flex = styled.div`
