@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.23.0"></a>
+# [0.23.0](https://github.com/edenlabllc/ehealth.web/compare/v0.22.0...v0.23.0) (2018-06-01)
+
+
+### Features
+
+* **components:** add font-size switch to btn component ([9d3e551](https://github.com/edenlabllc/ehealth.web/commit/9d3e551))
+
+
+
+
+
 <a name="0.22.0"></a>
 # [0.22.0](https://github.com/edenlabllc/ehealth.web/compare/v0.21.3...v0.22.0) (2018-06-01)
 

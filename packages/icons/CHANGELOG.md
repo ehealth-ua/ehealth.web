@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.23.0"></a>
+# [0.23.0](https://github.com/edenlabllc/ehealth.web/compare/v0.22.0...v0.23.0) (2018-06-01)
+
+
+### Bug Fixes
+
+* **icons:** remove ArrowRight ([03207e3](https://github.com/edenlabllc/ehealth.web/commit/03207e3))
+* **icons:** rename to ArrowRightIcon ([9465e6e](https://github.com/edenlabllc/ehealth.web/commit/9465e6e))
+* **icons:** user fillRule attr in MozLogoIcon ([90461c1](https://github.com/edenlabllc/ehealth.web/commit/90461c1))
+
+
+### Features
+
+* **icons:** add CircleIcon component ([8ee60dd](https://github.com/edenlabllc/ehealth.web/commit/8ee60dd))
+* **icons:** add CircleIMozLogoIcon ([54c486b](https://github.com/edenlabllc/ehealth.web/commit/54c486b))
+
+
+
+
+
 <a name="0.22.0"></a>
 # [0.22.0](https://github.com/edenlabllc/ehealth.web/compare/v0.21.3...v0.22.0) (2018-06-01)
 

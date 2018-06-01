@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.23.0"></a>
+# [0.23.0](https://github.com/edenlabllc/ehealth.web/compare/v0.22.0...v0.23.0) (2018-06-01)
+
+
+### Bug Fixes
+
+* **components:** add declaration statuses, remove unnecessary wrapping, refactor ([733ed7a](https://github.com/edenlabllc/ehealth.web/commit/733ed7a))
+* **components:** edit margin-bottom in Form component ([0f8949b](https://github.com/edenlabllc/ehealth.web/commit/0f8949b))
+* **icons:** remove ArrowRight ([03207e3](https://github.com/edenlabllc/ehealth.web/commit/03207e3))
+* **icons:** rename to ArrowRightIcon ([9465e6e](https://github.com/edenlabllc/ehealth.web/commit/9465e6e))
+* **icons:** user fillRule attr in MozLogoIcon ([90461c1](https://github.com/edenlabllc/ehealth.web/commit/90461c1))
+* **patient-account:** refactor ActiveDeclaration ([17fc4b0](https://github.com/edenlabllc/ehealth.web/commit/17fc4b0))
+* **patient-account:** refactor HomePage ([dc55e1f](https://github.com/edenlabllc/ehealth.web/commit/dc55e1f))
+* **patient-account:** use components not block ([de16613](https://github.com/edenlabllc/ehealth.web/commit/de16613))
+
+
+### Features
+
+* **components:** add font-size switch to btn component ([9d3e551](https://github.com/edenlabllc/ehealth.web/commit/9d3e551))
+* **icons:** add CircleIcon component ([8ee60dd](https://github.com/edenlabllc/ehealth.web/commit/8ee60dd))
+* **icons:** add CircleIMozLogoIcon ([54c486b](https://github.com/edenlabllc/ehealth.web/commit/54c486b))
+* **patient-account:** add ActiveDectaration block ([0a2bfcf](https://github.com/edenlabllc/ehealth.web/commit/0a2bfcf))
+* **patient-account:** add DeclarationPage to routes ([2e12b93](https://github.com/edenlabllc/ehealth.web/commit/2e12b93))
+* **patient-account:** add DeclarationPreview component ([da9c2a5](https://github.com/edenlabllc/ehealth.web/commit/da9c2a5))
+* **patient-account:** add declarations history and active declaration components ([2c001bf](https://github.com/edenlabllc/ehealth.web/commit/2c001bf))
+* **patient-account:** add declation statuses to helpers ([e2603b2](https://github.com/edenlabllc/ehealth.web/commit/e2603b2))
+* **patient-account:** add empty home page with steps ([91bed5c](https://github.com/edenlabllc/ehealth.web/commit/91bed5c))
+* **patient-account:** add FixedBlock component ([b5c6c83](https://github.com/edenlabllc/ehealth.web/commit/b5c6c83))
+* **patient-account:** add HomePage ([2ed9573](https://github.com/edenlabllc/ehealth.web/commit/2ed9573))
+* **patient-account:** add NoDeclarationList block ([1d498b5](https://github.com/edenlabllc/ehealth.web/commit/1d498b5))
+* **patient-account:** add Patient Declaration preview component ([00cd99d](https://github.com/edenlabllc/ehealth.web/commit/00cd99d))
+* **patient-account:** add PatientDeclarations block ([ab22976](https://github.com/edenlabllc/ehealth.web/commit/ab22976))
+* **patient-account:** declaration page ([2c2a493](https://github.com/edenlabllc/ehealth.web/commit/2c2a493))
+* **patient-account:** fix box-shadow on FixedBlock component ([8872bcf](https://github.com/edenlabllc/ehealth.web/commit/8872bcf))
+
+
+
+
+
 <a name="0.22.0"></a>
 # [0.22.0](https://github.com/edenlabllc/ehealth.web/compare/v0.21.3...v0.22.0) (2018-06-01)
 
