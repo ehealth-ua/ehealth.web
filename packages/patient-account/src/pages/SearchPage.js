@@ -18,122 +18,107 @@ import {
 } from "@ehealth/utils";
 import isEqual from "lodash/isEqual";
 
-class InputsWithQuery extends Component {
-  state = { searchParams: null };
-  shouldComponentUpdate(nextProps) {
-    return !isEqual(
-      Object.entries(nextProps).filter(
-        ([key, value]) => typeof value !== "function"
-      ),
-      Object.entries(this.props).filter(
-        ([key, value]) => typeof value !== "function"
-      )
-    );
+const InputsWithQuery = props => {
+  const { specialityTypes, addSearchData, searchParams } = props;
+
+  let settlementRegion;
+  let settlementName;
+  let specialityName = "";
+
+  const fullName = props.fullName || searchParams.fullName || "";
+  const divisionName = props.divisionName || searchParams.divisionName || "";
+  const settlement = props.settlement || searchParams.settlement || {};
+  const speciality = props.speciality || searchParams.speciality || "";
+
+  if (typeof settlement === "object" && Object.keys(settlement).length) {
+    settlementRegion = settlement.region || searchParams.region || "";
+    settlementName = settlement.settlement || searchParams.settlement || "";
+  } else {
+    settlementRegion = "";
+    settlementName = "";
   }
-  render() {
-    const { specialityTypes, addSearchData, searchParams } = this.props;
+  Object.entries(specialityTypes).map(
+    ([key, value]) =>
+      specialityTypes[key] === speciality ? (specialityName = key) : null
+  );
 
-    let settlementRegion = "";
-    let settlementName = "";
-    let specialityName = "";
-
-    const fullName = this.props.fullName || searchParams.fullName || "";
-    const divisionName =
-      this.props.divisionName || searchParams.divisionName || "";
-    const settlement = this.props.settlement || searchParams.settlement || "";
-    const speciality = this.props.speciality || searchParams.speciality || "";
-
-    if (settlement && Object.keys(settlement).length) {
-      settlementRegion = settlement.region || searchParams.region || "";
-      settlementName = settlement.settlement || searchParams.settlement || "";
-    }
-    Object.entries(specialityTypes).map(
-      ([key, value]) =>
-        specialityTypes[key] === speciality ? (specialityName = key) : null
-    );
-
-    return (
-      <Query
-        query={gql`
-          query(
-            $fullName: String!
-            $divisionName: String!
-            $specialityName: String!
-            $settlementName: String!
-            $settlementRegion: String!
-          ) {
-            search(
-              fullName: $fullName
-              divisionName: $divisionName
-              specialityName: $specialityName
-              settlementName: $settlementName
-              settlementRegion: $settlementRegion
-            )
-              @rest(
-                path: "/stats/employees?employee_type=DOCTOR&full_name=:fullName&speciality=:specialityName&division_name=:divisionName&settlement=:settlementName&region=:settlementRegion&is_available=true&page=1&page_size=50"
-                type: "SearchPayload"
-              ) {
-              data
-            }
+  return (
+    <Query
+      query={gql`
+        query(
+          $fullName: String!
+          $divisionName: String!
+          $specialityName: String!
+          $settlementName: String!
+          $settlementRegion: String!
+        ) {
+          search(
+            fullName: $fullName
+            divisionName: $divisionName
+            specialityName: $specialityName
+            settlementName: $settlementName
+            settlementRegion: $settlementRegion
+          )
+            @rest(
+              path: "/stats/employees?employee_type=DOCTOR&full_name=:fullName&speciality=:specialityName&division_name=:divisionName&settlement=:settlementName&region=:settlementRegion&is_available=true&page=1&page_size=50"
+              type: "SearchPayload"
+            ) {
+            data
           }
-        `}
-        variables={{
-          fullName,
-          divisionName,
-          settlementName,
-          settlementRegion,
-          specialityName
-        }}
-      >
-        {({ loading, error, data }) => {
-          if (!data.search) return null;
-          addSearchData(data.search);
-          return (
-            <>
-              <FlexItem>
-                <Field.Input
-                  label={<b>Назва відділення</b>}
-                  placeholder="Відділення"
-                  name="divisionName"
-                  value={divisionName}
-                />
-              </FlexItem>
-              <FlexItem>
-                <Field.Input
-                  label={<b>Повне ім'я лікаря</b>}
-                  placeholder="Прізвище, ім'я, по-батькові"
-                  name="fullName"
-                  value={fullName}
-                />
-              </FlexItem>
-              <FlexItem>
-                <Field.Select
-                  name="speciality"
-                  label={<b>Спеціальність</b>}
-                  placeholder="Виберіть спеціальність"
-                  itemToString={item => item}
-                  items={Object.entries(specialityTypes).map(
-                    ([key, value]) => value
-                  )}
-                  renderItem={item => item}
-                />
-              </FlexItem>
-            </>
-          );
-        }}
-      </Query>
-    );
-  }
-}
+        }
+      `}
+      variables={{
+        fullName,
+        divisionName,
+        settlementName,
+        settlementRegion,
+        specialityName
+      }}
+    >
+      {({ loading, error, data }) => {
+        if (!data.search) return null;
+        addSearchData(data.search);
+        return (
+          <>
+            <FlexItem>
+              <Field.Input
+                label={<b>Назва відділення</b>}
+                placeholder="Відділення"
+                name="divisionName"
+                value={divisionName}
+              />
+            </FlexItem>
+            <FlexItem>
+              <Field.Input
+                label={<b>Повне ім'я лікаря</b>}
+                placeholder="Прізвище, ім'я, по-батькові"
+                name="fullName"
+                value={fullName}
+              />
+            </FlexItem>
+            <FlexItem>
+              <Field.Select
+                name="speciality"
+                label={<b>Спеціальність</b>}
+                placeholder="Виберіть спеціальність"
+                itemToString={item => item}
+                items={Object.entries(specialityTypes).map(
+                  ([key, value]) => value
+                )}
+                renderItem={item => item}
+              />
+            </FlexItem>
+          </>
+        );
+      }}
+    </Query>
+  );
+};
 
 class SelectWithQuery extends Component {
   state = {
     settlement: ""
   };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(nextState, this.state);
-  }
 
   render() {
     return (
@@ -160,11 +145,10 @@ class SelectWithQuery extends Component {
                 name="settlement"
                 label={<b>Населений пункт</b>}
                 placeholder="Введіть населений пункт"
-                itemToString={item => item && titleCase(item.settlement)}
-                items={settlements.map(({ name, district, id, type }) => ({
+                itemToString={item => (item ? titleCase(item.settlement) : "")}
+                items={settlements.map(({ name, district, type }) => ({
                   settlement: name,
                   settlement_type: type,
-                  settlement_id: id,
                   region: district || undefined
                 }))}
                 onInputValueChange={settlement => {
