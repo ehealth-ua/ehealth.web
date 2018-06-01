@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.22.0"></a>
+# [0.22.0](https://github.com/edenlabllc/ehealth.web/compare/v0.21.3...v0.22.0) (2018-06-01)
+
+
+### Bug Fixes
+
+* **components:** remove break-all in SelectField component ([6fbeb66](https://github.com/edenlabllc/ehealth.web/commit/6fbeb66))
+* **components:** remove SCU from FormAutoFetch ([f515b85](https://github.com/edenlabllc/ehealth.web/commit/f515b85))
+
+
+### Features
+
+* **components:** Add FormAutoFetch component ([5837a1b](https://github.com/edenlabllc/ehealth.web/commit/5837a1b))
+* **components:** Add FormAutoFetch component ([995ca81](https://github.com/edenlabllc/ehealth.web/commit/995ca81))
+
+
+
+
+
 <a name="0.21.0"></a>
 # [0.21.0](https://github.com/edenlabllc/ehealth.web/compare/v0.20.0...v0.21.0) (2018-05-29)
 

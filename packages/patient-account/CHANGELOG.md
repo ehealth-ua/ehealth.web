@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.22.0"></a>
+# [0.22.0](https://github.com/edenlabllc/ehealth.web/compare/v0.21.3...v0.22.0) (2018-06-01)
+
+
+### Bug Fixes
+
+* **patient-account:** change key name in DefinitionList ([487ddb2](https://github.com/edenlabllc/ehealth.web/commit/487ddb2))
+* **patient-account:** Optimizing performance of SearchPage ([2b3031f](https://github.com/edenlabllc/ehealth.web/commit/2b3031f))
+* **patient-component:** some improvements in SearchPage ([1599250](https://github.com/edenlabllc/ehealth.web/commit/1599250))
+
+
+### Features
+
+* **patient-account:** Add SearchPage, EmployeePage, DivisionPage ([1d92866](https://github.com/edenlabllc/ehealth.web/commit/1d92866))
+
+
+
+
+
 <a name="0.21.3"></a>
 ## [0.21.3](https://github.com/edenlabllc/ehealth.web/compare/v0.21.2...v0.21.3) (2018-05-30)
 
