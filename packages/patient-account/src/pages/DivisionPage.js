@@ -39,12 +39,12 @@ const DivisionPage = ({ match, history }) => (
             <DefinitionListView
               labels={{
                 taxId: "ЄДРПОУ",
-                medzaklad: "Медзаклад",
+                legalEntityName: "Медзаклад",
                 contacts: "Контакти"
               }}
               data={{
                 taxId: legalEntity.edrpou,
-                medzaklad: legalEntity.name,
+                legalEntityName: legalEntity.name,
                 contacts: (
                   <>
                     {contacts.phones.map((item, i) => (
