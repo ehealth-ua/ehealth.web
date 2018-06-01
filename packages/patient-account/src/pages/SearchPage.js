@@ -131,6 +131,10 @@ class SelectWithQuery extends Component {
     settlement: ""
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(nextState, this.state);
+  }
+
   render() {
     return (
       <Query
@@ -184,6 +188,10 @@ export default class SearchPage extends Component {
   state = {
     search: []
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(nextState, this.state);
+  }
 
   addSearchData({ data }) {
     this.setState({
