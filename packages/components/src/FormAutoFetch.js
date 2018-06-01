@@ -1,15 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { FormSpy } from "react-final-form";
 import debounce from "lodash/debounce";
 import isObject from "lodash/isObject";
 import { HistoryState } from "@ehealth/components";
-import { shallowEqual } from "shouldcomponentupdate-children";
 
-export default class FormAutoFetch extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(nextProps, this.props, nextState, this.setState);
-  }
-
+export default class FormAutoFetch extends PureComponent {
   renderFnDebounced = debounce(this.renderFn, this.props.debounce, {
     leading: true
   });
