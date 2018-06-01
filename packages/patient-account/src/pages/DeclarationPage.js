@@ -32,40 +32,45 @@ const DeclarationPage = ({ router: { route } }) => (
       if (!data.declaration) return null;
       const {
         id,
-        signed_at,
+        signed_at: signedAt,
         status,
         person: {
-          last_name,
-          first_name,
-          second_name,
-          birth_date,
-          birth_settlement,
-          birth_country,
+          last_name: lastName,
+          first_name: firstName,
+          second_name: secondName,
+          birth_date: birthDate,
+          birth_settlement: birthSettlement,
+          birth_country: birthCountry,
           gender,
-          tax_id,
+          tax_id: taxId,
           phones: [{ number }],
-          emergency_contact,
-          confidant_person,
+          emergency_contact: emergencyContact,
+          confidant_person: confidantPerson,
           employee
         },
         employee: {
           position,
-          party: employee_full_name,
-          doctor: { specialities, science_degree, qualifications, educations }
+          party: employeeFullName,
+          doctor: {
+            specialities,
+            science_degree: scienceDegree,
+            qualifications,
+            educations
+          }
         },
         legal_entity: {
-          name: legal_entity_name,
-          phones: [{ number: legal_entity_phone }]
+          name: legalEntityName,
+          phones: [{ number: legalEntityPhone }]
         },
         division: {
-          name: division_name,
-          phones: [{ number: division_phone }],
+          name: divisionName,
+          phones: [{ number: divisionPhone }],
           addresses: [
             {
               area,
-              settlement_type,
+              settlement_type: settlementType,
               settlement,
-              street_type,
+              street_type: streetType,
               street,
               building,
               apartment
@@ -76,28 +81,28 @@ const DeclarationPage = ({ router: { route } }) => (
       return (
         <>
           <Shadow>
-            <DeclarationHeader id={id} signed_at={signed_at} />
+            <DeclarationHeader id={id} signed_at={signedAt} />
             <DefinitionListSection>
               <SubTitle>Пацієнт</SubTitle>
               <Flex>
                 <FlexItem>
                   <DefinitionListView
                     labels={{
-                      last_name: "Прізвище",
-                      first_name: "Ім'я",
-                      second_name: "По-батькові",
-                      birth_date: "Дата народження",
-                      birth_country: "Країна народження",
-                      birth_settlement: "Місто народження",
+                      lastName: "Прізвище",
+                      firstName: "Ім'я",
+                      secondName: "По-батькові",
+                      birthDate: "Дата народження",
+                      birthCountry: "Країна народження",
+                      birthSettlement: "Місто народження",
                       gender: "Стать"
                     }}
                     data={{
-                      last_name,
-                      first_name,
-                      second_name,
-                      birth_date,
-                      birth_settlement,
-                      birth_country,
+                      lastName,
+                      firstName,
+                      secondName,
+                      birthDate,
+                      birthSettlement,
+                      birthCountry,
                       gender
                     }}
                   />
@@ -105,11 +110,11 @@ const DeclarationPage = ({ router: { route } }) => (
                 <FlexItem>
                   <DefinitionListView
                     labels={{
-                      tax_id: "Номер облікової картки",
+                      taxId: "Номер облікової картки",
                       number: "Контактний номер телефону"
                     }}
                     data={{
-                      tax_id,
+                      taxId,
                       number
                     }}
                   />
@@ -124,24 +129,25 @@ const DeclarationPage = ({ router: { route } }) => (
                   number: "Контактний номер телефону"
                 }}
                 data={{
-                  full_name: `${emergency_contact.first_name} ${
-                    emergency_contact.second_name
-                  } ${emergency_contact.last_name}`,
-                  number: emergency_contact.phones[0].number
+                  full_name: `${emergencyContact.first_name} ${
+                    emergencyContact.second_name
+                  } ${emergencyContact.last_name}`,
+                  number: emergencyContact.phones[0].number
                 }}
               />
             </DefinitionListSection>
-            {confidant_person && (
+            {console.log("confidantPerson", confidantPerson)}
+            {confidantPerson && (
               <DefinitionListSection>
                 <SubTitle>Законні представники пацієнта</SubTitle>
-                {confidant_person.map(
+                {confidantPerson.map(
                   ({
-                    first_name,
-                    second_name,
-                    last_name,
+                    first_name: firstName,
+                    second_name: secondName,
+                    last_name: lastName,
                     phones: [{ number }],
-                    documents_person,
-                    documents_relationship
+                    documents_person: documentsPerson,
+                    documents_relationship: documentsRelationship
                   }) => (
                     <Flex>
                       <FlexItem>
@@ -153,10 +159,10 @@ const DeclarationPage = ({ router: { route } }) => (
                               "Документ, що посвідчує особу законного представника"
                           }}
                           data={{
-                            full_name: `${first_name} ${second_name} ${last_name}`,
+                            full_name: `${firstName} ${secondName} ${lastName}`,
                             number,
-                            document: `${documents_person[0].type} ${
-                              documents_person[0].number
+                            document: `${documentsPerson[0].type} ${
+                              documentsPerson[0].number
                             }`
                           }}
                         />
@@ -168,9 +174,9 @@ const DeclarationPage = ({ router: { route } }) => (
                               "Документ, що посвідчує повноваження законного представника"
                           }}
                           data={{
-                            document: `${documents_relationship[0].type} #${
-                              documents_relationship[0].number
-                            } від ${documents_relationship[0].issued_at}`
+                            document: `${documentsRelationship[0].type} #${
+                              documentsRelationship[0].number
+                            } від ${documentsRelationship[0].issued_at}`
                           }}
                         />
                       </FlexItem>
@@ -183,26 +189,26 @@ const DeclarationPage = ({ router: { route } }) => (
               <SubTitle>Лікар</SubTitle>
               <DefinitionListView
                 labels={{
-                  full_name: "ПІБ",
+                  fullName: "ПІБ",
                   position: "Посада",
-                  science_degree: "Спеціальність",
+                  scienceDegree: "Спеціальність",
                   specialities: "Спеціальність за посадою",
                   level: "Рівень спеціалізації",
                   qualifications: "Тип кваліфікації",
-                  issued_at: "Ким та коли видано"
+                  issuedAt: "Ким та коли видано"
                 }}
                 data={{
-                  full_name: `${employee_full_name.first_name} ${
-                    employee_full_name.second_name
-                  } ${employee_full_name.last_name}`,
+                  fullName: `${employeeFullName.first_name} ${
+                    employeeFullName.second_name
+                  } ${employeeFullName.last_name}`,
                   position,
-                  science_degree: science_degree.speciality,
+                  scienceDegree: scienceDegree.speciality,
                   specialities: specialities[0].speciality,
                   level: specialities[0].level,
                   qualifications: `${qualifications[0].type} ${
                     qualifications[0].certificate_number
                   }`,
-                  issued_at: `${qualifications[0].institution_name} від ${
+                  issuedAt: `${qualifications[0].institution_name} від ${
                     qualifications[0].issued_date
                   }`
                 }}
@@ -214,28 +220,28 @@ const DeclarationPage = ({ router: { route } }) => (
                 <FlexItem>
                   <DefinitionListView
                     labels={{
-                      division_name: "Назва відділення",
-                      legal_entity_name: "Назва меличного закладу",
-                      legal_entity_phone: "Телефон меличного закладу"
+                      divisionName: "Назва відділення",
+                      legalEntityName: "Назва меличного закладу",
+                      legalEntityPhone: "Телефон меличного закладу"
                     }}
                     data={{
-                      division_name,
-                      legal_entity_name,
-                      legal_entity_phone
+                      divisionName,
+                      legalEntityName,
+                      legalEntityPhone
                     }}
                   />
                 </FlexItem>
                 <FlexItem>
                   <DefinitionListView
                     labels={{
-                      division_phone: "Контактний номер телефону відділення",
-                      division_address: "Адреса відділення"
+                      divisionPhone: "Контактний номер телефону відділення",
+                      divisionAddress: "Адреса відділення"
                     }}
                     data={{
-                      division_phone,
-                      division_address: (
+                      divisionPhone,
+                      divisionAddress: (
                         <>
-                          {area} {settlement_type} {settlement} {street_type}{" "}
+                          {area} {settlementType} {settlement} {streetType}{" "}
                           {street}
                           {", "}
                           {building}
@@ -250,8 +256,8 @@ const DeclarationPage = ({ router: { route } }) => (
             </DefinitionListSection>
             <DefinitionListSection>
               <DefinitionListView
-                labels={{ signed_at: "Дата ухвалення" }}
-                data={{ signed_at: format(signed_at, "DD.MM.YYYY") }}
+                labels={{ signedAt: "Дата ухвалення" }}
+                data={{ signedAt: format(signedAt, "DD.MM.YYYY") }}
               />
             </DefinitionListSection>
           </Shadow>

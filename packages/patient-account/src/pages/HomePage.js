@@ -6,9 +6,8 @@ import { Title, Link, CabinetTable, Switch } from "@ehealth/components";
 import { ArrowRight } from "@ehealth/icons";
 
 import Tabs from "../components/Tabs";
-
-import PatientDeclarations from "../blocks/PatientDeclarations";
-import NoDeclarationList from "../blocks/NoDeclarationList";
+import PatientDeclarations from "../components/PatientDeclarations";
+import NoDeclarationList from "../components/NoDeclarationList";
 
 const DeclarationQuery = gql`
   query {
