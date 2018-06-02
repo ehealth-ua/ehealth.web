@@ -58,7 +58,7 @@ class SignInDSPage extends Component {
       query.client_id
     );
 
-    // whith not valid client_id
+    // with not valid client_id
     if (response.error && response.error.type === "not_found") {
       return router.push(`/sign-in/failure/invalid_client_id`);
     }
