@@ -32,6 +32,18 @@ export const onSubmit = ({ code }) => async (dispatch, getState) => {
         redirectUri: query.redirect_uri
       })
     );
+    if (error) {
+      switch (payload.response.error.message) {
+        case "The redirection URI provided does not match a pre-registered value.":
+          return dispatch(push(`/sign-in/failure/wrong_url`));
+        case "Invalid client id.":
+          return dispatch(push(`/sign-in/failure/invalid_client_id`));
+        case "User blocked.":
+          return dispatch(push(`/sign-in/failure/access_denied`));
+        default:
+      }
+    }
+    console.log("payload", payload);
     return window && (window.location = payload.headers.get("location"));
   }
   return dispatch(fetchUserData(token)).then(action => {

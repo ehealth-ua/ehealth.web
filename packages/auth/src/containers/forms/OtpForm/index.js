@@ -5,7 +5,7 @@ import { reduxForm, Field } from "redux-form";
 import { reduxFormValidate, ErrorMessage } from "react-nebo15-validate";
 
 import FieldInput from "../../../components/reduxForm/FieldInput";
-import Button from "../../../components/Button";
+import Button, { ButtonsGroup } from "../../../components/Button";
 import ColoredText from "../../../components/ColoredText";
 import { FormBlock } from "../../../components/Form";
 
@@ -60,55 +60,60 @@ class OtpForm extends Component {
               </ErrorMessage>
             </Field>
           </div>
-
           <Button disabled={submitting} type="submit" color={btnColor} block>
             Ввести
           </Button>
           <div>
             {repeat && (
-              <Button
-                theme="link"
-                onClick={() =>
-                  this.onClickResend().then(action => {
-                    if (!action) return this.setState({ otp_timeout: true });
-                    const { payload: { response = {} }, error } = action;
-                    if (error && error.message === "Token expired") {
-                      return this.setState({ token_expires: true });
-                    }
-                    if (
-                      error &&
-                      error.message === "Sending OTP timeout. Try later."
-                    ) {
-                      return this.setState({ token_expires: true });
-                    }
-                    return action;
-                  })
-                }
-                disabled={sent || isSending || otp_timeout || token_expires}
-              >
-                {sent && !otp_timeout && !token_expires && "Відправлено"}
-                {isSending &&
-                  !otp_timeout &&
-                  !token_expires &&
-                  "Відправляємо..."}
-                {!sent &&
-                  !otp_timeout &&
-                  !isSending &&
-                  !token_expires &&
-                  "Відправити знову"}
-                {otp_timeout &&
-                  !token_expires && (
+              <ButtonsGroup>
+                <Button theme="link" onClick={router.goBack}>
+                  Назад
+                </Button>
+                <Button
+                  theme="link"
+                  onClick={() =>
+                    this.onClickResend().then(action => {
+                      if (!action) return this.setState({ otp_timeout: true });
+                      const { payload: { response = {} }, error } = action;
+                      if (error && error.message === "Token expired") {
+                        return this.setState({ token_expires: true });
+                      }
+                      if (
+                        error &&
+                        error.message === "Sending OTP timeout. Try later."
+                      ) {
+                        return this.setState({ token_expires: true });
+                      }
+                      return action;
+                    })
+                  }
+                  disabled={sent || isSending || otp_timeout || token_expires}
+                >
+                  {sent && !otp_timeout && !token_expires && "Відправлено"}
+                  {isSending &&
+                    !otp_timeout &&
+                    !token_expires &&
+                    "Відправляємо..."}
+                  {!sent &&
+                    !otp_timeout &&
+                    !isSending &&
+                    !token_expires &&
+                    "Відправити знову"}
+                  {otp_timeout &&
+                    !token_expires && (
+                      <ColoredText color="red">
+                        Перевищено кількість спроб авторизації. Спробуйте
+                        пізніше
+                      </ColoredText>
+                    )}
+                  {token_expires && (
                     <ColoredText color="red">
-                      Перевищено кількість спроб авторизації. Спробуйте пізніше
+                      Термін cecії користувача вичерпано. Радимо повернутися до
+                      попереднього кроку
                     </ColoredText>
                   )}
-                {token_expires && (
-                  <ColoredText color="red">
-                    Термін cecії користувача вичерпано. Радимо повернутися до
-                    попереднього кроку
-                  </ColoredText>
-                )}
-              </Button>
+                </Button>
+              </ButtonsGroup>
             )}
           </div>
         </FormBlock>

@@ -43,17 +43,17 @@ const FactorForm = ({
         </Field>
       </div>
       <ButtonsGroup>
-        <Button disabled={submitting} type="submit" color={btnColor}>
+        <Button block disabled={submitting} type="submit" color={btnColor}>
           Ввести
         </Button>
-        <Button
-          disabled={submitting}
-          theme="link"
-          onClick={() => router.goBack()}
-        >
-          Назад
-        </Button>
       </ButtonsGroup>
+      <Button
+        disabled={submitting}
+        theme="link"
+        onClick={() => router.goBack()}
+      >
+        Назад
+      </Button>
     </FormBlock>
   </form>
 );

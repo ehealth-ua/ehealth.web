@@ -34,7 +34,7 @@ const SignInPage = ({
             <SignInForm onSubmit={onSubmit} initialValues={{ email }} />
             <Button
               color="blue"
-              onClick={() => router.push(`sign-in/digital-signature?${search}`)}
+              onClick={() => router.push(`/sign-in/digital-signature${search}`)}
               block
             >
               увійти за допомогою ЕЦП

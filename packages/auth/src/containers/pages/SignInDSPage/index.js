@@ -24,7 +24,7 @@ import { login } from "../../../redux/session";
 
 class SignInDSPage extends Component {
   render() {
-    const { router } = this.props;
+    const { router, location } = this.props;
     return (
       <Main>
         <Header>
@@ -36,7 +36,7 @@ class SignInDSPage extends Component {
               за допомогою <br /> Електронного Цифрового Підпису
             </p>
             <DigitalSignatureForm onSubmit={this.handleSubmit} />
-            <Button theme="link" onClick={() => router.goBack()} block>
+            <Button theme="link" to={`/sign-in/${location.search}`} block>
               Увійти за допомогою email
             </Button>
           </NarrowContainer>
@@ -54,9 +54,15 @@ class SignInDSPage extends Component {
       location: { query },
       router
     } = this.props;
-    const { error, payload: { data: { token } } } = await getNonce(
+    const { payload: { data: { token } = {}, response = {} } } = await getNonce(
       query.client_id
     );
+
+    // whith not valid client_id
+    if (response.error && response.error.type === "not_found") {
+      return router.push(`/sign-in/failure/invalid_client_id`);
+    }
+
     login(token);
     const content = JSON.stringify({ jwt: token });
     const signed_content = REACT_APP_DIGITAL_SIGNATURE_ENABLED
@@ -84,7 +90,7 @@ class SignInDSPage extends Component {
     });
     if (token_error) {
       if (error_body.type === "validation_failed") {
-        return { [SUBMIT_ERROR]: error.invalid };
+        return { [SUBMIT_ERROR]: token_error.invalid };
       }
       return router.push(`/sign-in/failure/${error_body.type}`);
     }
@@ -96,6 +102,20 @@ class SignInDSPage extends Component {
         clientId: query.client_id,
         redirectUri: query.redirect_uri
       }).then(({ payload, error }) => {
+        if (error) {
+          switch (payload.response.error.message) {
+            case "The redirection URI provided does not match a pre-registered value.":
+              return router.push(`/sign-in/failure/wrong_url`);
+            case "Invalid client id.":
+              return router.push("/sign-in/failure/invalid_client_id");
+            case "Requested scope is empty. Scope not passed or user has no roles or global roles.":
+              return router.push("/sign-in/failure/global_user_scope_error");
+            case "User blocked.": {
+              return router.push("/sign-in/failure/access_denied");
+            }
+            default:
+          }
+        }
         return window && (window.location = payload.headers.get("location"));
       });
     }

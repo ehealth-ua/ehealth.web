@@ -39,11 +39,6 @@ const PasswordExpiredOtpPage = ({
           btnColor="green"
           repeat
         />
-        <ButtonsGroup>
-          <Button theme="link" onClick={() => router.goBack()}>
-            Назад
-          </Button>
-        </ButtonsGroup>
       </NarrowContainer>
     </Article>
   </Main>
