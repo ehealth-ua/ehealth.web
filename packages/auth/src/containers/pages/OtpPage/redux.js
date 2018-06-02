@@ -41,6 +41,7 @@ export const onSubmit = ({ code }) => async (dispatch, getState) => {
         case "User blocked.":
           return dispatch(push(`/sign-in/failure/access_denied`));
         default:
+          dispatch(push(`/sign-in/failure`));
       }
     }
     console.log("payload", payload);

@@ -56,8 +56,8 @@ const SignInFailurePage = ({ params, location }) => (
         default={
           <>
             <p>Упс. Щось пішло не так. Повторіть спробу пізніше.</p>
-            <Button color="blue" to="/sign-u">
-              Реєстрація
+            <Button to={{ ...location, pathname: "/sign-in" }} color="blue">
+              Повернутися
             </Button>
           </>
         }

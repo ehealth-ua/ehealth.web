@@ -114,6 +114,7 @@ class SignInDSPage extends Component {
               return router.push("/sign-in/failure/access_denied");
             }
             default:
+              dispatch(push(`/sign-in/failure`));
           }
         }
         return window && (window.location = payload.headers.get("location"));
