@@ -44,7 +44,7 @@ export const onSubmit = ({ code }) => async (dispatch, getState) => {
           dispatch(push(`/sign-in/failure`));
       }
     }
-    console.log("payload", payload);
+
     return window && (window.location = payload.headers.get("location"));
   }
   return dispatch(fetchUserData(token)).then(action => {
@@ -62,14 +62,20 @@ export const onSubmit = ({ code }) => async (dispatch, getState) => {
   });
 };
 
-export const onResend = () => dispatch =>
+export const onResend = () => (dispatch, getState) =>
   dispatch(otpResendOtp()).then(action => {
+    const state = getState();
+    const location = getLocation(state);
     if (action.error) {
-      const { message } = action.payload.response.error;
-      if (message === "Sending OTP timeout. Try later.") {
-        return false;
+      const { error } = action.payload.response;
+      switch (error.message) {
+        case "Sending OTP timeout. Try later.":
+          return false;
+        case "Invalid token type":
+          return dispatch(
+            push({ ...location, path: "/sign-in/failure/invalid_token_type" })
+          );
       }
-      return action;
     }
     dispatch(login(action.payload.value));
     return action;
