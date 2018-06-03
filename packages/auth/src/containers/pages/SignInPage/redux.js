@@ -42,6 +42,9 @@ export const onSubmit = ({ email, password, client_id }) => (
     const { next_step } = action.meta;
     dispatch(login(action.payload.value));
 
+    const state = getState();
+    const location = getLocation(state);
+
     switch (next_step) {
       case "REQUEST_APPS": {
         return dispatch(fetchUserData(action.payload.value)).then(action => {
@@ -50,22 +53,15 @@ export const onSubmit = ({ email, password, client_id }) => (
               email: { accountPasswordMismatch: true }
             });
           }
-          const state = getState();
-          const location = getLocation(state);
-
           return dispatch(push({ ...location, pathname: "/accept" }));
         });
       }
 
       case "REQUEST_OTP": {
-        const state = getState();
-        const location = getLocation(state);
         return dispatch(push({ ...location, pathname: "/otp-send" }));
       }
 
       case "REQUEST_FACTOR": {
-        const state = getState();
-        const location = getLocation(state);
         return dispatch(push({ ...location, pathname: "/request-factor" }));
       }
 
