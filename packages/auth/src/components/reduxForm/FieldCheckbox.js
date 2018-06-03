@@ -6,7 +6,7 @@ import FieldInput from "./FieldInput";
 
 const FieldCheckbox = props => (
   <FieldInput
-    Component={Checkbox}
+    component={Checkbox}
     {...props}
     type="checkbox"
     checked={props.input.value}

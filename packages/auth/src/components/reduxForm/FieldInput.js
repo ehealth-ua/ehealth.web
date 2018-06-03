@@ -3,7 +3,7 @@ import React from "react";
 import Input from "../Input";
 
 const FieldInput = ({
-  Component = Input,
+  component: Component = Input,
   input,
   meta: { active, dirty, error, submitFailed },
   ...props
