@@ -42,10 +42,10 @@
   text-align: center;
 }
 
-.view i {
+.view > svg {
   display: inline-block;
   vertical-align: middle;
-  opacity: 0;
+  opacity: 1;
   width: 18px;
   font-size: 14px;
   color: #44e240;

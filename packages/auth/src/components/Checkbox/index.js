@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-
-import Icon from "../Icon";
+import { CheckRightIcon } from "@ehealth/icons";
 
 import styles from "./styles.module.css";
 
@@ -37,10 +36,7 @@ const Checkbox = ({
         }}
       />
     }
-    <span className={styles.view}>
-      <Icon name="check-left" />
-    </span>
-
+    <span className={styles.view}>{checked && <CheckRightIcon />}</span>
     <span className={styles.label}>{labelText}</span>
   </label>
 );
