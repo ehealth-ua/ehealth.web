@@ -51,7 +51,7 @@ class SignInDSPage extends Component {
       createSessionToken,
       login,
       authorize,
-      location: { query },
+      location: { query, search },
       router
     } = this.props;
     const { payload: { data: { token } = {}, response = {} } } = await getNonce(
@@ -92,7 +92,7 @@ class SignInDSPage extends Component {
       if (error_body.type === "validation_failed") {
         return { [SUBMIT_ERROR]: token_error.invalid };
       }
-      return router.push(`/sign-in/failure/${error_body.type}`);
+      return router.push(`/sign-in/failure/${error_body.type}${search}`);
     }
 
     login(value);
@@ -110,11 +110,8 @@ class SignInDSPage extends Component {
               return router.push("/sign-in/failure/invalid_client_id");
             case "Requested scope is empty. Scope not passed or user has no roles or global roles.":
               return router.push("/sign-in/failure/global_user_scope_error");
-            case "User blocked.": {
-              return router.push("/sign-in/failure/access_denied");
-            }
             default:
-              dispatch(push(`/sign-in/failure`));
+              router.push(`/sign-in/failure`);
           }
         }
         return window && (window.location = payload.headers.get("location"));

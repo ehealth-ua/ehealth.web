@@ -27,11 +27,6 @@ const UpdateFactorOtpPage = ({
     <Article>
       <NarrowContainer>
         <OtpForm onSubmit={onSubmit} onResend={onResend} repeat />
-        <ButtonsGroup>
-          <Button theme="link" onClick={() => router.goBack()}>
-            Назад
-          </Button>
-        </ButtonsGroup>
       </NarrowContainer>
     </Article>
   </Main>

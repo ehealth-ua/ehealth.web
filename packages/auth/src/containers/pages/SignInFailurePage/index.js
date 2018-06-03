@@ -39,7 +39,7 @@ const SignInFailurePage = ({ params, location }) => (
             <p>Зверніться до служби підтримки</p>
           </>
         }
-        access_denied={
+        user_blocked={
           <>
             <H2 textTransform="uppercase" color="red">
               Користувача заблоковано
