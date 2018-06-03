@@ -1,5 +1,6 @@
 export { default as ArrowRightIcon } from "./ArrowRightIcon";
 export { default as CheckRightIcon } from "./CheckRightIcon";
+export { default as CheckLeftIcon } from "./CheckLeftIcon";
 export { default as KeyIcon } from "./KeyIcon";
 export { default as CircleIcon } from "./CircleIcon";
 export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
