@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CheckLeftIcon = props => (
+const CheckLeftIcon = props => (
   <svg {...props} width="21" height="15" viewBox="0 0 21 15">
     <path
       fill="#13ce66"
@@ -8,3 +8,5 @@ export const CheckLeftIcon = props => (
     />
   </svg>
 );
+
+export default CheckLeftIcon;
