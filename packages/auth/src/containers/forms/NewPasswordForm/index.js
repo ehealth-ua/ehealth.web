@@ -23,6 +23,9 @@ const NewPasswordForm = ({ handleSubmit, submitting }) => (
           <ErrorMessage when="length">
             Повинен складатися хоча б з 12 символів
           </ErrorMessage>
+          <ErrorMessage when="password_used">
+            Даний пароль уже використовувався раніше. Спробуйте інший
+          </ErrorMessage>
         </Field>
       </div>
       <div>
