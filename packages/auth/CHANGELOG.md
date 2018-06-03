@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.24.0"></a>
+# [0.24.0](https://github.com/edenlabllc/ehealth.web/compare/v0.23.0...v0.24.0) (2018-06-03)
+
+
+### Bug Fixes
+
+* **auth:** add invalid token type error ([782d666](https://github.com/edenlabllc/ehealth.web/commit/782d666))
+* **auth:** add maping error of already used password ([cf193f4](https://github.com/edenlabllc/ehealth.web/commit/cf193f4))
+* **auth:** bug fixes ([13f7432](https://github.com/edenlabllc/ehealth.web/commit/13f7432))
+* **auth:** fix prop name for normal working Checkox component ([73e91b1](https://github.com/edenlabllc/ehealth.web/commit/73e91b1))
+* **auth:** replace icon with svg in Checkbox component ([dce4ebc](https://github.com/edenlabllc/ehealth.web/commit/dce4ebc))
+* **components:** add z-index to error msg label ([a27a1ff](https://github.com/edenlabllc/ehealth.web/commit/a27a1ff))
+
+
+
+
+
 <a name="0.23.0"></a>
 # [0.23.0](https://github.com/edenlabllc/ehealth.web/compare/v0.22.0...v0.23.0) (2018-06-01)
 

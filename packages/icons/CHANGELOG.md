@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.24.0"></a>
+# [0.24.0](https://github.com/edenlabllc/ehealth.web/compare/v0.23.0...v0.24.0) (2018-06-03)
+
+
+### Features
+
+* **icons:** add CheckLeftIcon ([d7ae1ea](https://github.com/edenlabllc/ehealth.web/commit/d7ae1ea))
+
+
+
+
+
 <a name="0.23.0"></a>
 # [0.23.0](https://github.com/edenlabllc/ehealth.web/compare/v0.22.0...v0.23.0) (2018-06-01)
 
