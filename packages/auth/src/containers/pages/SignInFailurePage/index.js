@@ -33,6 +33,14 @@ const SignInFailurePage = ({ params, location }) => (
             <p>Зверніться до служби підтримки</p>
           </>
         }
+        invalid_token_type={
+          <>
+            <p>Упс. Щось пішло не так. Повторіть спробу.</p>
+            <Button to={{ ...location, pathname: "/sign-in" }} color="blue">
+              Повернутися до входу
+            </Button>
+          </>
+        }
         global_user_scope_error={
           <>
             <p>У даного користувача недостатньо прав для доступу</p>
