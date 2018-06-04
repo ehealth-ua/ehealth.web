@@ -14,6 +14,17 @@ class InviteLayout extends Component {
     return this.props.routes[this.props.routes.length - 1].inviteStatuses || [];
   }
 
+  renderEmailError() {
+    return (
+      <section className={styles.main} id="invite-layout">
+        <H1>
+          Помилка! <br />
+          Ця email-адреса вже зайнята іншим користувачем
+        </H1>
+      </section>
+    );
+  }
+
   renderNotFound() {
     return (
       <section className={styles.main} id="invite-layout">
@@ -37,8 +48,15 @@ class InviteLayout extends Component {
   }
 
   render() {
-    const { request, children } = this.props;
+    const { request, children, router: { location } } = this.props;
+
     if (!request) return this.renderNotFound();
+    if (
+      location.state &&
+      location.state.action.message ===
+        "Email is already used by another person"
+    )
+      return this.renderEmailError();
     if (this.routeScopes.indexOf(request.status) === -1)
       return this.renderError();
     return children;

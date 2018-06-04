@@ -13,6 +13,11 @@ export const onSubmit = id => (dispatch, getState) =>
     action => {
       const state = getState();
       const location = getLocation(state);
+      if (action.error) {
+        location.state = {
+          action: action.payload.response.error
+        };
+      }
 
       return dispatch([
         push({
