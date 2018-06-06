@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "react-emotion/macro";
 import { EhealthLogoIcon } from "@ehealth/icons";
 import UserNav from "./UserNav";
@@ -7,7 +8,9 @@ const Layout = ({ children }) => (
   <>
     <Wrapper>
       <Header>
-        <EhealthLogoIcon height="45" />
+        <Link to="/">
+          <EhealthLogoIcon height="45" />
+        </Link>
         <UserNav />
       </Header>
       <section>{children}</section>
