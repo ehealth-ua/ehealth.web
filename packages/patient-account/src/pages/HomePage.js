@@ -18,7 +18,7 @@ const DeclarationQuery = gql`
   }
 `;
 
-const HomePage = () => (
+const HomePage = props => (
   <>
     <Title.H1>особистий кабінет</Title.H1>
     <Tabs>
@@ -32,7 +32,10 @@ const HomePage = () => (
                   return <NoDeclarationList />;
                 return (
                   !loading && (
-                    <PatientDeclarations data={data.declarations.data} />
+                    <PatientDeclarations
+                      data={data.declarations.data}
+                      {...props}
+                    />
                   )
                 );
               }}

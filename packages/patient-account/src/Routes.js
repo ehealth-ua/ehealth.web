@@ -12,10 +12,10 @@ import DivisionPage from "./pages/DivisionPage";
 const Routes = () => (
   <Layout>
     <Switch>
-      <Route exact path="/" component={HomePage} />
+      <Route exact path="/(declarations)?" component={HomePage} />
+      <Route exact path="/declarations/:id" component={DeclarationPage} />
       <Route exact path="/profile" component={ProfilePage} />
       <Route exact path="/profile/edit" component={ProfileEditPage} />
-      <Route exact path="/declarations/:id" component={DeclarationPage} />
 
       <Route exact path="/search" component={SearchPage} />
       <Route exact path="/search/employee/:id" component={EmployeePage} />

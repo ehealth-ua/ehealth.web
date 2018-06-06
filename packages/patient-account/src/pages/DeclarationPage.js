@@ -28,7 +28,7 @@ const DeclarationQuery = gql`
   }
 `;
 
-const DeclarationPage = ({ router: { route } }) => (
+const DeclarationPage = ({ router: { route, history } }) => (
   <Query query={DeclarationQuery} variables={{ id: route.match.params.id }}>
     {({ loading, error, data }) => {
       if (!data.declaration) return null;
@@ -144,7 +144,6 @@ const DeclarationPage = ({ router: { route } }) => (
                 }}
               />
             </DefinitionListSection>
-            {console.log("confidantPerson", confidantPerson)}
             {confidantPerson && (
               <DefinitionListSection>
                 <SubTitle>Законні представники пацієнта</SubTitle>
@@ -274,7 +273,7 @@ const DeclarationPage = ({ router: { route } }) => (
             </DefinitionListSection>
           </Shadow>
           <FixedBlock>
-            <Link size="small" upperCase bold to="/">
+            <Link size="small" upperCase bold onClick={history.goBack}>
               Повернутись
             </Link>
             <Switch
