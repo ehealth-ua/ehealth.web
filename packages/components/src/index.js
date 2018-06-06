@@ -16,3 +16,4 @@ export { default as StepForm } from "./StepForm";
 export { default as Switch } from "./Switch";
 export { default as Title } from "./Title";
 export { default as Validation, Validations } from "./Validation";
+export { default as withHistoryState } from "./withHistoryState";
