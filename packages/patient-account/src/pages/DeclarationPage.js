@@ -3,8 +3,10 @@ import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import format from "date-fns/format";
+import ReactDOM from "react-dom";
 import { Link as RouterLink } from "react-router-dom";
 import { withRouter } from "react-router";
+import { injectGlobal } from "react-emotion/macro";
 
 import { MozLogoIcon, CircleIcon } from "@ehealth/icons";
 import { Title, Button, Link, Switch } from "@ehealth/components";
@@ -32,8 +34,10 @@ const DeclarationPage = ({ router: { route } }) => (
       if (!data.declaration) return null;
       const {
         id,
+        declaration_number: declarationNumber,
         signed_at: signedAt,
         status,
+        content,
         person: {
           last_name: lastName,
           first_name: firstName,
@@ -81,7 +85,11 @@ const DeclarationPage = ({ router: { route } }) => (
       return (
         <>
           <Shadow>
-            <DeclarationHeader id={id} signed_at={signedAt} />
+            <DeclarationHeader
+              id={id}
+              declaration_number={declarationNumber}
+              signed_at={signedAt}
+            />
             <DefinitionListSection>
               <SubTitle>Пацієнт</SubTitle>
               <Flex>
@@ -100,7 +108,7 @@ const DeclarationPage = ({ router: { route } }) => (
                       lastName,
                       firstName,
                       secondName,
-                      birthDate,
+                      birthDate: format(birthDate, "DD.MM.YYYY"),
                       birthSettlement,
                       birthCountry,
                       gender
@@ -176,7 +184,10 @@ const DeclarationPage = ({ router: { route } }) => (
                           data={{
                             document: `${documentsRelationship[0].type} #${
                               documentsRelationship[0].number
-                            } від ${documentsRelationship[0].issued_at}`
+                            } від ${format(
+                              documentsRelationship[0].issued_at,
+                              "DD.MM.YYYY"
+                            )}`
                           }}
                         />
                       </FlexItem>
@@ -208,9 +219,10 @@ const DeclarationPage = ({ router: { route } }) => (
                   qualifications: `${qualifications[0].type} ${
                     qualifications[0].certificate_number
                   }`,
-                  issuedAt: `${qualifications[0].institution_name} від ${
-                    qualifications[0].issued_date
-                  }`
+                  issuedAt: `${qualifications[0].institution_name} від ${format(
+                    qualifications[0].issued_date,
+                    "DD.MM.YYYY"
+                  )}`
                 }}
               />
             </DefinitionListSection>

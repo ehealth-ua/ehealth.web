@@ -7,10 +7,15 @@ import DECLARATION_STATUSES from "../helpers/statuses";
 import { DeclarationHeader } from "../pages/DeclarationPage";
 
 const ActiveDeclaration = ({ active, blur = false }) => {
-  const { status, start_date, id } = active;
+  const { status, start_date, id, declaration_number } = active;
   return (
     <Wrapper blur={blur}>
-      <DeclarationHeader id={id} signed_at={start_date} wrap />
+      <DeclarationHeader
+        id={id}
+        declaration_number={declaration_number}
+        signed_at={start_date}
+        wrap
+      />
       <Flex>
         <Link to="/" color="red" bold upperCase>
           Розірвати декларацію

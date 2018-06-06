@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import styled from "react-emotion/macro";
+import format from "date-fns/format";
 
 import { CabinetTable, Link } from "@ehealth/components";
 import DECLARATION_STATUSES from "../helpers/statuses";
@@ -48,7 +49,7 @@ class PatientDeclarations extends React.Component {
               legal_entity: { name: legal_entity_name },
               details
             }) => ({
-              start_date,
+              start_date: format(start_date, "DD.MM.YYYY"),
               status: DECLARATION_STATUSES[status],
               division_name,
               employee: (
