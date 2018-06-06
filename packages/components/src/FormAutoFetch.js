@@ -5,15 +5,6 @@ import isObject from "lodash/isObject";
 import { HistoryState } from "@ehealth/components";
 
 export default class FormAutoFetch extends PureComponent {
-  renderFnDebounced = debounce(this.renderFn, this.props.debounce, {
-    leading: true
-  });
-
-  renderFn(stateAndHelpers) {
-    const { children, render = children } = this.props;
-    return render(stateAndHelpers);
-  }
-
   render() {
     return (
       <HistoryState>
@@ -35,5 +26,14 @@ export default class FormAutoFetch extends PureComponent {
         )}
       </HistoryState>
     );
+  }
+
+  renderFnDebounced = debounce(this.renderFn, this.props.debounce, {
+    leading: true
+  });
+
+  renderFn(stateAndHelpers) {
+    const { children, render = children } = this.props;
+    return render(stateAndHelpers);
   }
 }
