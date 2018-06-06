@@ -20,7 +20,7 @@ const NoDeclarationList = () => (
     <Line />
 
     <Link
-      to="/"
+      to="/search"
       size="small"
       upperCase
       spaced
