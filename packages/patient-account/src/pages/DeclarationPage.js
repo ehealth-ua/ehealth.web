@@ -281,7 +281,13 @@ const DeclarationPage = ({ router: { route } }) => (
               value={status}
               active={
                 <>
-                  <Button size="small" upperCase bold>
+                  <Button
+                    size="small"
+                    upperCase
+                    bold
+                    onClick={() => window.print()}
+                  >
+                    {" "}
                     Роздрукувати декларацію
                   </Button>
                 </>
@@ -294,6 +300,13 @@ const DeclarationPage = ({ router: { route } }) => (
               }
             />
           </FixedBlock>
+          {ReactDOM.createPortal(
+            <div
+              id="print-root"
+              dangerouslySetInnerHTML={{ __html: content }}
+            />,
+            document.body
+          )}
         </>
       );
     }}
@@ -302,7 +315,25 @@ const DeclarationPage = ({ router: { route } }) => (
 
 export default withRouter(DeclarationPage);
 
-export const DeclarationHeader = ({ id, signed_at, wrap }) => {
+injectGlobal`
+  @media screen {
+    #print-root {
+      display: none;
+    }
+  }
+  @media print {
+    #root {
+      display: none;
+    }
+  }
+`;
+
+export const DeclarationHeader = ({
+  id,
+  declaration_number,
+  signed_at,
+  wrap
+}) => {
   const start_block = (
     <Flex>
       <MozLogoIcon height="100px" />
@@ -311,7 +342,7 @@ export const DeclarationHeader = ({ id, signed_at, wrap }) => {
         <H3>
           про вибір лікаря з надання первинної допомоги
           <br />
-          № {id} від {format(signed_at, "DD.MM.YYYY")}
+          № {declaration_number} від {format(signed_at, "DD.MM.YYYY")}
         </H3>
       </Left>
     </Flex>
