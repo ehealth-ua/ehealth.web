@@ -6,26 +6,19 @@ import { withRouter } from "react-router-dom";
 import { Title, Link } from "@ehealth/components";
 
 import DefinitionListView from "../components/DefinitionListView";
+import { CabinetTable } from "@ehealth/components";
+import { getFullName, getSpecialities } from "@ehealth/utils";
+
+import DivisionDetailsQuery from "../qraphql/DivisionDetailsQuery.graphql";
 
 const DivisionPage = ({ match, history }) => (
-  <Query
-    query={gql`
-      query($id: String!) {
-        division(id: $id)
-          @rest(
-            path: "/divisions?id=:id"
-            type: "DivisionPayload"
-            endpoint: "stats"
-          ) {
-          data
-        }
-      }
-    `}
-    variables={{ id: match.params.id }}
-  >
+  <Query query={DivisionDetailsQuery} variables={{ id: match.params.id }}>
     {({ loading, error, data }) => {
       const { division } = data;
       if (!division) return null;
+
+      const { data: employees } = data.employees;
+      const { data: [{ values: specialityTypes }] } = data.specialities;
 
       const {
         data: [{ name, contacts, legal_entity: legalEntity }]
@@ -58,6 +51,27 @@ const DivisionPage = ({ match, history }) => (
               }}
             />
           </DefinitionListSection>
+          {employees.length ? (
+            <CabinetTable
+              data={employees}
+              header={{
+                name: (
+                  <>
+                    ПІБ<br />лікаря
+                  </>
+                ),
+                job: "Спеціальність",
+                action: "Дія"
+              }}
+              renderRow={({ id, party }) => ({
+                name: getFullName(party),
+                job: getSpecialities(party.specialities, specialityTypes),
+                action: <Link to={`/employee/${id}`}>Показати деталі</Link>
+              })}
+              rowKeyExtractor={({ id }) => id}
+            />
+          ) : null}
+          <br />
           <Link onClick={() => history.goBack()} size="xs" upperCase bold>
             Назад до результатів пошуку
           </Link>
