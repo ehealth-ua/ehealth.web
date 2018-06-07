@@ -7,7 +7,9 @@ import {
 } from "react-google-maps";
 import InfoBox from "react-google-maps/lib/components/addons/InfoBox";
 import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
+import styled from "react-emotion/macro";
 
+import { ArrowRightIcon } from "@ehealth/icons";
 import { Link } from "@ehealth/components";
 
 export const GoogleMapsWrapper = withScriptjs(
@@ -19,7 +21,6 @@ export const GoogleMapsWrapper = withScriptjs(
       activeItemId,
       hoverItemId,
       onMapChange,
-      onMarkerClick,
       onMarkerOver,
       onMarkerOut
     } = props;
@@ -69,7 +70,6 @@ export const GoogleMapsWrapper = withScriptjs(
                     }
               }
               onMouseOver={() => onMarkerOver(id)}
-              onClick={() => onMarkerClick(id)}
             />
           ))}
         </MarkerClusterer>
@@ -87,7 +87,6 @@ export const GoogleMapsWrapper = withScriptjs(
               scaledSize: { x: 33, y: 47 },
               anchor: { x: 17, y: 60 }
             }}
-            onClick={() => onMarkerClick(activeItemId)}
           />
         )}
 
@@ -140,15 +139,37 @@ const SearchMapTooltip = ({
   contacts: { phones: [phone] },
   onMouseLeave
 }) => (
-  <div onMouseLeave={onMouseLeave}>
-    <div>
+  <Popup onMouseLeave={onMouseLeave}>
+    <Title>
       {name} ({legalEntity.name})
-    </div>
+    </Title>
     <div>{address.settlement}</div>
     <div>
       {address.street}, {address.building}
     </div>
-    <div>Тел.: {phone.number}</div>
-    <Link to={`/${id}`}>Детальніше</Link>
-  </div>
+    <Phone>Тел.: {phone.number}</Phone>
+    <Link
+      to={`/division/${id}`}
+      icon={<ArrowRightIcon height="14px" fill="#2292f2" />}
+    >
+      Детальніше
+    </Link>
+  </Popup>
 );
+
+const Popup = styled.div`
+  width: 200px;
+  background: #fff;
+  padding: 20px;
+  font-size: 14px;
+`;
+
+const Title = styled.b`
+  display: block;
+  font-weight: "bold";
+  margin-bottom: 5px;
+`;
+
+const Phone = styled.div`
+  margin: 5px 0;
+`;
