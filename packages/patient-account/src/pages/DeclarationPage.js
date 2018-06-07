@@ -13,6 +13,7 @@ import { Title, Button, Link, Switch } from "@ehealth/components";
 
 import DefinitionListView from "../components/DefinitionListView";
 import FixedBlock from "../components/FixedBlock";
+import DictionaryValue from "../components/DictionaryValue";
 import DECLARATION_STATUSES from "../helpers/statuses";
 
 const DeclarationQuery = gql`
@@ -111,7 +112,12 @@ const DeclarationPage = ({ router: { route, history } }) => (
                       birthDate: format(birthDate, "DD.MM.YYYY"),
                       birthSettlement,
                       birthCountry,
-                      gender
+                      gender: (
+                        <DictionaryValue
+                          name="GENDER"
+                          render={v => v[gender]}
+                        />
+                      )
                     }}
                   />
                 </FlexItem>
@@ -168,9 +174,15 @@ const DeclarationPage = ({ router: { route, history } }) => (
                           data={{
                             full_name: `${firstName} ${secondName} ${lastName}`,
                             number,
-                            document: `${documentsPerson[0].type} ${
-                              documentsPerson[0].number
-                            }`
+                            document: (
+                              <>
+                                <DictionaryValue
+                                  name="DOCUMENT_TYPE"
+                                  render={v => v[documentsPerson[0].type]}
+                                />{" "}
+                                #{documentsPerson[0].number}
+                              </>
+                            )
                           }}
                         />
                       </FlexItem>
@@ -181,12 +193,19 @@ const DeclarationPage = ({ router: { route, history } }) => (
                               "Документ, що посвідчує повноваження законного представника"
                           }}
                           data={{
-                            document: `${documentsRelationship[0].type} #${
-                              documentsRelationship[0].number
-                            } від ${format(
-                              documentsRelationship[0].issued_at,
-                              "DD.MM.YYYY"
-                            )}`
+                            document: (
+                              <>
+                                <DictionaryValue
+                                  name="DOCUMENT_RELATIONSHIP_TYPE"
+                                  render={v => v[documentsRelationship[0].type]}
+                                />{" "}
+                                #{documentsRelationship[0].number} від{" "}
+                                {format(
+                                  documentsRelationship[0].issued_at,
+                                  "DD.MM.YYYY"
+                                )}
+                              </>
+                            )
                           }}
                         />
                       </FlexItem>
@@ -211,13 +230,39 @@ const DeclarationPage = ({ router: { route, history } }) => (
                   fullName: `${employeeFullName.first_name} ${
                     employeeFullName.second_name
                   } ${employeeFullName.last_name}`,
-                  position,
-                  scienceDegree: scienceDegree.speciality,
-                  specialities: specialities[0].speciality,
-                  level: specialities[0].level,
-                  qualifications: `${qualifications[0].type} ${
-                    qualifications[0].certificate_number
-                  }`,
+                  position: (
+                    <DictionaryValue
+                      name="POSITION"
+                      render={v => v[position]}
+                    />
+                  ),
+                  scienceDegree: (
+                    <DictionaryValue
+                      name="SPECIALITY_TYPE"
+                      render={v => v[scienceDegree.speciality]}
+                    />
+                  ),
+                  specialities: (
+                    <DictionaryValue
+                      name="SPECIALITY_TYPE"
+                      render={v => v[specialities[0].speciality]}
+                    />
+                  ),
+                  level: (
+                    <DictionaryValue
+                      name="SPECIALITY_LEVEL"
+                      render={v => v[specialities[0].level]}
+                    />
+                  ),
+                  qualifications: (
+                    <>
+                      <DictionaryValue
+                        name="QUALIFICATION_TYPE"
+                        render={v => v[qualifications[0].type]}
+                      />{" "}
+                      #{qualifications[0].certificate_number}
+                    </>
+                  ),
                   issuedAt: `${qualifications[0].institution_name} від ${format(
                     qualifications[0].issued_date,
                     "DD.MM.YYYY"
@@ -252,7 +297,17 @@ const DeclarationPage = ({ router: { route, history } }) => (
                       divisionPhone,
                       divisionAddress: (
                         <>
-                          {area} {settlementType} {settlement} {streetType}{" "}
+                          {area}
+                          {" область "}
+                          <DictionaryValue
+                            name="SETTLEMENT_TYPE"
+                            render={v => v[settlementType]}
+                          />{" "}
+                          {settlement}{" "}
+                          <DictionaryValue
+                            name="STREET_TYPE"
+                            render={v => v[streetType]}
+                          />{" "}
                           {street}
                           {", "}
                           {building}
