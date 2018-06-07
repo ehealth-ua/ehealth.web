@@ -57,9 +57,16 @@ injectGlobal`
 
   body {
     color: #3c4858;
-    font: 400 12px/1.6 "GothamPro", sans-serif;
+    font: 400 12px/1.6 "GothamPro", sans-serif !important;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
+    margin: 0 auto !important;
+  }
+
+  @media print {
+    body {
+      width: 1074px;
+    }
   }
 
   a {
