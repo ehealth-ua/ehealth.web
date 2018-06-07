@@ -3,7 +3,6 @@ import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import styled from "react-emotion/macro";
 import { Route } from "react-router-dom";
-// import { withRouter } from "react-router";
 
 import { CabinetTable, Link } from "@ehealth/components";
 import ActiveDeclaration from "../components/ActiveDeclaration";
