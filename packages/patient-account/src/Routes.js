@@ -16,10 +16,10 @@ const Routes = () => (
       <Route exact path="/declarations/:id" component={DeclarationPage} />
       <Route exact path="/profile" component={ProfilePage} />
       <Route exact path="/profile/edit" component={ProfileEditPage} />
-
-      <Route exact path="/search" component={SearchPage} />
-      <Route exact path="/search/employee/:id" component={EmployeePage} />
-      <Route exact path="/search/division/:id" component={DivisionPage} />
+      <Route exact path="/declarations/:id" component={DeclarationPage} />
+      <Route path="/search" component={SearchPage} />
+      <Route exact path="/employee/:id" component={EmployeePage} />
+      <Route exact path="/division/:id" component={DivisionPage} />
     </Switch>
   </Layout>
 );
