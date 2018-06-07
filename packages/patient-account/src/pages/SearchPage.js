@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { gql } from "graphql.macro";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Title,
   Field,
@@ -21,6 +21,11 @@ import { MapIcon, ListIcon } from "@ehealth/icons";
 import isEqual from "lodash/isEqual";
 
 import DivisionsMap from "../components/DivisionsMap";
+
+import SpecialitiesQuery from "../qraphql/SpecialitiesQuery.graphql";
+import SettlementQuery from "../qraphql/SettlementQuery.graphql";
+import SearchEmployeeQuery from "../qraphql/SearchEmployeeQuery.graphql";
+import SearchDivisionsByMapQuery from "../qraphql/SearchDivisionsByMapQuery.graphql";
 
 const DEFAULT_CENTER = { lat: 50.4021368, lng: 30.4525107 };
 const DEFAULT_ZOOM = 9;
@@ -51,29 +56,7 @@ const InputsWithQuery = props => {
 
   return (
     <Query
-      query={gql`
-        query(
-          $fullName: String!
-          $divisionName: String!
-          $specialityName: String!
-          $settlementName: String!
-          $settlementRegion: String!
-        ) {
-          search(
-            fullName: $fullName
-            divisionName: $divisionName
-            specialityName: $specialityName
-            settlementName: $settlementName
-            settlementRegion: $settlementRegion
-          )
-            @rest(
-              path: "/stats/employees?employee_type=DOCTOR&full_name=:fullName&speciality=:specialityName&division_name=:divisionName&settlement=:settlementName&region=:settlementRegion&is_available=true&page=1&page_size=50"
-              type: "SearchPayload"
-            ) {
-            data
-          }
-        }
-      `}
+      query={SearchEmployeeQuery}
       variables={{
         fullName,
         divisionName,
@@ -130,17 +113,7 @@ class SelectWithQuery extends Component {
   render() {
     return (
       <Query
-        query={gql`
-          query($settlement: String!) {
-            settlements(settlement: $settlement)
-              @rest(
-                path: "/uaddresses/settlements?name=:settlement&page=1&page_size=20"
-                type: "SettlementsPayload"
-              ) {
-              data
-            }
-          }
-        `}
+        query={SettlementQuery}
         variables={{ settlement: this.state.settlement }}
       >
         {({ loading, error, data }) => {
@@ -171,163 +144,116 @@ class SelectWithQuery extends Component {
   }
 }
 
-class SearchPage extends Component {
-  constructor(props) {
-    super(props);
-    this.addSearchData = this.addSearchData.bind(this);
-  }
+const Table = ({ search, specialityTypes }) => {
+  return !search.length ? (
+    "Нічого не знайдено"
+  ) : (
+    <CabinetTable
+      data={search}
+      header={{
+        name: (
+          <>
+            ПІБ<br />лікаря
+          </>
+        ),
+        job: "Спеціальність",
+        divisionName: (
+          <>
+            Назва<br />відділення
+          </>
+        ),
+        address: "Адреса",
+        legalEntityName: "Медзаклад",
+        action: "Дія"
+      }}
+      renderRow={({
+        id,
+        party,
+        division: { id: divisionId, name: divisionName, addresses },
+        legal_entity: { name: legalEntityName }
+      }) => ({
+        name: getFullName(party),
+        job: getSpecialities(party.specialities, specialityTypes),
+        divisionName: (
+          <Link to={`/division/${divisionId}`}>{divisionName}</Link>
+        ),
+        address: getFullAddress(addresses),
+        legalEntityName,
+        action: <Link to={`/employee/${id}`}>Показати деталі</Link>
+      })}
+      rowKeyExtractor={({ id }) => id}
+    />
+  );
+};
+
+class DivisionsMapView extends Component {
   state = {
-    search: [],
     bounds: {},
-    opened: false
+    hoverItemId: null
   };
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
+    return !isEqual(nextState, this.state);
   }
 
   render() {
-    const { settlementName, search, hoverItemId, opened } = this.state;
-    const activeItemId = 0;
+    const { hoverItemId, bounds } = this.state;
+    const { north = "", east = "", south = "", west = "" } = bounds;
     return (
       <Query
-        query={gql`
-          query {
-            specialities
-              @rest(
-                path: "/dictionaries?name=SPECIALITY_TYPE"
-                type: "SpecialitiesPayload"
-              ) {
-              data
-            }
-            divisions
-              @rest(
-                path: "/divisions"
-                type: "DivisionsPayload"
-                endpoint: "stats"
-              ) {
-              data
-            }
-          }
-        `}
+        query={SearchDivisionsByMapQuery}
+        variables={{
+          north,
+          east,
+          south,
+          west,
+          page: 1,
+          page_size: 50
+        }}
       >
         {({ loading, error, data }) => {
-          if (!data.specialities && !data.divisions) return null;
-          const { data: [{ values: specialityTypes }] } = data.specialities;
+          if (!data.divisions) return null;
           const { data: divisions } = data.divisions;
+          let lng_radius = 0.00003, // degrees of longitude separation
+            lat_to_lng = 111.23 / 71.7, // lat to long proportion in Warsaw
+            angle = 0.5, // starting angle, in radians
+            step = 2 * Math.PI / divisions.length,
+            lat_radius = lng_radius / lat_to_lng;
+
+          const filteredDivisions = divisions
+            .filter(
+              item => item.coordinates.latitude && item.coordinates.longitude
+            )
+            .map(item => {
+              angle += step;
+              return {
+                ...item,
+                coordinates: {
+                  latitude:
+                    item.coordinates.latitude + Math.sin(angle) * lat_radius,
+                  longitude:
+                    item.coordinates.longitude + Math.cos(angle) * lng_radius
+                }
+              };
+            });
           return (
-            <>
-              <Title.H1>Крок 1. Оберіть лікаря</Title.H1>
-              <Form
-                onSubmit={() => null /* NOT USED, but required */}
-                subscription={{} /* No need to subscribe to anything */}
-              >
-                <FormAutoFetch debounce={500}>
-                  {({ values, searchParams }) => (
-                    <FlexContainer>
-                      <SelectWithQuery
-                        addSettlement={this.addSettlement}
-                        settlementName={settlementName}
-                      />
-                      <InputsWithQuery
-                        {...values}
-                        searchParams={searchParams}
-                        specialityTypes={specialityTypes}
-                        addSearchData={this.addSearchData}
-                      />
-                      <FlexIcon
-                        onClick={() => {
-                          this.setState({ opened: !opened });
-                        }}
-                      >
-                        {!opened ? (
-                          <IconWrapper>
-                            <MapIcon width={30} height={30} />
-                          </IconWrapper>
-                        ) : (
-                          <IconWrapper>
-                            <ListIcon width={30} height={30} />
-                          </IconWrapper>
-                        )}
-                      </FlexIcon>
-                    </FlexContainer>
-                  )}
-                </FormAutoFetch>
-              </Form>
-              {!opened ? (
-                !search.length ? (
-                  "Нічого не знайдено"
-                ) : (
-                  <CabinetTable
-                    data={search}
-                    header={{
-                      name: (
-                        <>
-                          ПІБ<br />лікаря
-                        </>
-                      ),
-                      job: "Спеціальність",
-                      divisionName: (
-                        <>
-                          Назва<br />відділення
-                        </>
-                      ),
-                      address: "Адреса",
-                      legalEntityName: "Медзаклад",
-                      action: "Дія"
-                    }}
-                    renderRow={({
-                      id,
-                      party,
-                      division: {
-                        id: divisionId,
-                        name: divisionName,
-                        addresses
-                      },
-                      legal_entity: { name: legalEntityName }
-                    }) => ({
-                      name: getFullName(party),
-                      job: getSpecialities(party.specialities, specialityTypes),
-                      divisionName: (
-                        <Link to={`/search/division/${divisionId}`}>
-                          {divisionName}
-                        </Link>
-                      ),
-                      address: getFullAddress(addresses),
-                      legalEntityName,
-                      action: (
-                        <Link to={`/search/employee/${id}`}>
-                          Показати деталі
-                        </Link>
-                      )
-                    })}
-                    rowKeyExtractor={({ id }) => id}
-                  />
-                )
-              ) : (
-                <DivisionsMap
-                  center={this.center}
-                  zoom={this.zoom}
-                  items={divisions.filter(
-                    item =>
-                      item.coordinates.latitude && item.coordinates.longitude
-                  )}
-                  activeItemId={activeItemId}
-                  hoverItemId={hoverItemId}
-                  onMapChange={({ bounds, center, zoom }) => {
-                    const { lat, lng } = center.toJSON();
-                    this.setState({ bounds: bounds.toJSON() });
-                    this.props.setSearchParamsImmediate(
-                      { lat, lng, zoom },
-                      "replace"
-                    );
-                  }}
-                  onMarkerClick={this.setActiveItem}
-                  onMarkerOver={hoverItemId => this.setState({ hoverItemId })}
-                  onMarkerOut={() => this.setState({ hoverItemId: null })}
-                />
-              )}
-            </>
+            <DivisionsMap
+              center={this.center}
+              zoom={this.zoom}
+              items={filteredDivisions}
+              activeItemId={0}
+              hoverItemId={hoverItemId}
+              onMapChange={({ bounds, center, zoom }) => {
+                const { lat, lng } = center.toJSON();
+                this.setState({ bounds: bounds.toJSON() });
+                this.props.setSearchParamsImmediate(
+                  { lat, lng, zoom },
+                  "replace"
+                );
+              }}
+              onMarkerOver={hoverItemId => this.setState({ hoverItemId })}
+              onMarkerOut={() => this.setState({ hoverItemId: null })}
+            />
           );
         }}
       </Query>
@@ -345,6 +271,98 @@ class SearchPage extends Component {
     const { zoom } = this.props.searchParams;
     return parseInt(zoom, 10) || DEFAULT_ZOOM;
   }
+}
+
+const DivisionsMapWithHistory = withHistoryState(DivisionsMapView);
+
+class SearchPage extends Component {
+  constructor(props) {
+    super(props);
+    this.addSearchData = this.addSearchData.bind(this);
+  }
+
+  state = {
+    search: []
+  };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(nextState, this.state);
+  }
+
+  render() {
+    const { search } = this.state;
+    return (
+      <Query query={SpecialitiesQuery}>
+        {({ loading, data }) => {
+          if (!data.specialities) return null;
+          const { data: [{ values: specialityTypes }] } = data.specialities;
+          return (
+            <Router>
+              <>
+                <Title.H1>Крок 1. Оберіть лікаря</Title.H1>
+                <Form
+                  onSubmit={() => null /* NOT USED, but required */}
+                  subscription={{} /* No need to subscribe to anything */}
+                >
+                  <FlexWrap>
+                    <FormAutoFetch debounce={500}>
+                      {({ values, searchParams }) => (
+                        <FlexInputsContainer>
+                          <SelectWithQuery addSettlement={this.addSettlement} />
+                          <InputsWithQuery
+                            {...values}
+                            searchParams={searchParams}
+                            specialityTypes={specialityTypes}
+                            addSearchData={this.addSearchData}
+                          />
+                        </FlexInputsContainer>
+                      )}
+                    </FormAutoFetch>
+                    <Icon>
+                      <Route
+                        render={({ location }) => {
+                          return !location.pathname.match(/\bmap\b/) ? (
+                            <Link to={"/search/map"}>
+                              <MapIcon
+                                width={30}
+                                height={30}
+                                fill="currentColor"
+                              />
+                            </Link>
+                          ) : (
+                            <Link to={"/search"}>
+                              <ListIcon
+                                width={30}
+                                height={30}
+                                fill="currentColor"
+                              />
+                            </Link>
+                          );
+                        }}
+                      />
+                    </Icon>
+                  </FlexWrap>
+                </Form>
+                <Switch>
+                  <CustomRoute
+                    exact
+                    path="/search"
+                    component={Table}
+                    passedProps={{ search, specialityTypes }}
+                  />
+                  <CustomRoute
+                    exact
+                    path="/search/map"
+                    component={DivisionsMapWithHistory}
+                  />
+                </Switch>
+              </>
+            </Router>
+          );
+        }}
+      </Query>
+    );
+  }
 
   addSearchData({ data }) {
     this.setState({
@@ -353,9 +371,21 @@ class SearchPage extends Component {
   }
 }
 
-export default withHistoryState(SearchPage);
+export default SearchPage;
 
-const FlexContainer = styled.div`
+const CustomRoute = ({ component: Component, passedProps, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => <Component {...props} {...passedProps} />}
+  />
+);
+
+const FlexWrap = styled.div`
+  position: relative;
+  padding-right: 100px;
+`;
+
+const FlexInputsContainer = styled.div`
   display: flex;
   margin: 0 -10px;
 `;
@@ -366,16 +396,10 @@ const FlexItem = styled.div`
   margin: 0 10px;
 `;
 
-const FlexIcon = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  width: 10%;
-  margin-right: 10px;
-`;
-
-const IconWrapper = styled.div`
-  margin-bottom: 20px;
+const Icon = styled.div`
+  position: absolute;
+  right: 0;
+  top: 32px;
   line-height: 0;
   user-select: none;
 `;
