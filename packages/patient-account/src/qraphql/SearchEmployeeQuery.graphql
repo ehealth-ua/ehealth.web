@@ -1,0 +1,21 @@
+query(
+  $fullName: String!
+  $divisionName: String!
+  $specialityName: String!
+  $settlementName: String!
+  $settlementRegion: String!
+) {
+  search(
+    fullName: $fullName
+    divisionName: $divisionName
+    specialityName: $specialityName
+    settlementName: $settlementName
+    settlementRegion: $settlementRegion
+  )
+    @rest(
+      path: "/stats/employees?employee_type=DOCTOR&full_name=:fullName&speciality=:specialityName&division_name=:divisionName&settlement=:settlementName&region=:settlementRegion&is_available=true&page=1&page_size=50"
+      type: "SearchPayload"
+    ) {
+    data
+  }
+}

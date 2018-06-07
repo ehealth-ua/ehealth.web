@@ -1,0 +1,24 @@
+query(
+  $north: Number!
+  $east: Number!
+  $south: Number!
+  $west: Number!
+  $page: Number!
+  $page_size: Number!
+) {
+  divisions(
+    north: $north
+    east: $east
+    south: $south
+    west: $west
+    page: $page
+    page_size: $page_size
+  )
+    @rest(
+      path: "/divisions?north=:north&east=:east&south=:south&west=:west&page=:page&page_size=:page_size&type=CLINIC"
+      type: "DivisionsPayload"
+      endpoint: "stats"
+    ) {
+    data
+  }
+}

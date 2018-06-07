@@ -1,0 +1,9 @@
+query {
+  specialities
+    @rest(
+      path: "/dictionaries?name=SPECIALITY_TYPE"
+      type: "SpecialitiesPayload"
+    ) {
+    data
+  }
+}
