@@ -214,11 +214,11 @@ class DivisionsMapView extends Component {
         {({ loading, error, data }) => {
           if (!data.divisions) return null;
           const { data: divisions } = data.divisions;
-          let lng_radius = 0.00003, // degrees of longitude separation
-            lat_to_lng = 111.23 / 71.7, // lat to long proportion in Warsaw
+          let lngRadius = 0.00003, // degrees of longitude separation
+            latToLng = 111.23 / 71.7, // lat to long proportion in Warsaw
             angle = 0.5, // starting angle, in radians
             step = 2 * Math.PI / divisions.length,
-            lat_radius = lng_radius / lat_to_lng;
+            latRadius = lngRadius / latToLng;
 
           const filteredDivisions = divisions
             .filter(
@@ -230,9 +230,9 @@ class DivisionsMapView extends Component {
                 ...item,
                 coordinates: {
                   latitude:
-                    item.coordinates.latitude + Math.sin(angle) * lat_radius,
+                    item.coordinates.latitude + Math.sin(angle) * latRadius,
                   longitude:
-                    item.coordinates.longitude + Math.cos(angle) * lng_radius
+                    item.coordinates.longitude + Math.cos(angle) * lngRadius
                 }
               };
             });
