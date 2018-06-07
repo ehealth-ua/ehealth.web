@@ -5,6 +5,7 @@ import { gql } from "graphql.macro";
 import { withRouter } from "react-router-dom";
 import { getFullName, getSpecialities, getDictValue } from "@ehealth/utils";
 import { Title, Link, Button } from "@ehealth/components";
+import DictionaryValue from "../components/DictionaryValue";
 
 import DefinitionListView from "../components/DefinitionListView";
 
@@ -16,32 +17,14 @@ const EmployeePage = ({ match, history }) => (
           @rest(path: "/stats/employees/:id", type: "EmployeesPayload") {
           data
         }
-        dictionaries @rest(path: "/dictionaries", type: "DictionariesPayload") {
-          data
-        }
       }
     `}
     variables={{ id: match.params.id }}
   >
     {({ loading, error, data }) => {
-      const { employee, dictionaries } = data;
-      if (!employee && !dictionaries) return null;
+      const { employee } = data;
+      if (!employee) return null;
 
-      const specialityTypes = data.dictionaries.data.find(
-        item => item.name === "SPECIALITY_TYPE"
-      );
-      const countryTypes = data.dictionaries.data.find(
-        item => item.name === "COUNTRY"
-      );
-      const educationTypes = data.dictionaries.data.find(
-        item => item.name === "EDUCATION_DEGREE"
-      );
-      const qualificationTypes = data.dictionaries.data.find(
-        item => item.name === "QUALIFICATION_TYPE"
-      );
-      const scienceDegreeTypes = data.dictionaries.data.find(
-        item => item.name === "SCIENCE_DEGREE"
-      );
       const { data: employeeData } = employee;
       const {
         party: {
@@ -55,7 +38,7 @@ const EmployeePage = ({ match, history }) => (
       } = employeeData;
       return (
         <>
-          <Title.H1>Крок 2. Відправте запит на деклацацію</Title.H1>
+          <Title.H1>Крок 2. Відправте запит на декларацію</Title.H1>
           <DefinitionListSection>
             <SubTitle>
               {getFullName(employeeData.party)}
@@ -80,12 +63,18 @@ const EmployeePage = ({ match, history }) => (
                     <Text>{item.speciality}</Text>
                     <Text>{item.institution_name}</Text>
                     <Text>
-                      {getDictValue(educationTypes.values, item.degree)} <br />
+                      <DictionaryValue
+                        name="EDUCATION_DEGREE"
+                        render={v => v[item.degree]}
+                      />
+                      <br />
                       Диплом №{item.diploma_number} від {item.issued_date}
                     </Text>
                     <Text>
-                      {getDictValue(countryTypes.values, item.country)},{" "}
-                      {item.city}
+                      <DictionaryValue
+                        name="COUNTRY"
+                        render={v => v[item.country]}
+                      />, {item.city}
                     </Text>
                   </Text>
                 )),
@@ -94,7 +83,10 @@ const EmployeePage = ({ match, history }) => (
                     <Text>{item.speciality}</Text>
                     <Text>{item.certificate_number}</Text>
                     <Text>
-                      {getDictValue(qualificationTypes.values, item.type)}{" "}
+                      <DictionaryValue
+                        name="QUALIFICATION_TYPE"
+                        render={v => v[item.type]}
+                      />
                       <br />
                       Сертифікат №{item.diploma_number} від {item.issued_date}
                     </Text>
@@ -103,31 +95,30 @@ const EmployeePage = ({ match, history }) => (
                 scienceDegree: (
                   <Text>
                     <Text>
-                      {getDictValue(
-                        specialityTypes.values,
-                        scienceDegree.speciality
-                      )}
+                      <DictionaryValue
+                        name="SPECIALITY_TYPE"
+                        render={v => v[scienceDegree.speciality]}
+                      />
                     </Text>
 
                     <Text>{scienceDegree.institution_name}</Text>
                     <Text>
-                      {getDictValue(
-                        scienceDegreeTypes.values,
-                        scienceDegree.degree
-                      )}{" "}
+                      <DictionaryValue
+                        name="SCIENCE_DEGREE"
+                        render={v => v[scienceDegree.degree]}
+                      />{" "}
                       <br />
                       Диплом №{scienceDegree.diploma_number} від{" "}
                       {scienceDegree.issued_date}
                     </Text>
                     <Text>
-                      {getDictValue(countryTypes.values, scienceDegree.country)},{" "}
-                      {scienceDegree.city}
+                      <DictionaryValue
+                        name="COUNTRY"
+                        render={v => v[scienceDegree.country]}
+                      />{" "}
+                      , {scienceDegree.city}
                     </Text>
                   </Text>
-                ),
-                specialities: getSpecialities(
-                  specialities,
-                  specialityTypes.values
                 ),
                 workingExperience,
                 aboutMyself
