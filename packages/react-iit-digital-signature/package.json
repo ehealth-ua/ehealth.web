@@ -5,6 +5,7 @@
   "description": "EUSignCP digital signature library React component bingings",
   "main": "src",
   "dependencies": {
+    "@ehealth/postmessage-client": "file:../postmessage-client",
     "load-js": "^3.0.2"
   },
   "peerDependencies": {
