@@ -1,0 +1,7 @@
+{
+  "name": "@ehealth/postmessage-client",
+  "version": "0.24.0",
+  "private": true,
+  "description": "",
+  "main": "src/index.js"
+}
