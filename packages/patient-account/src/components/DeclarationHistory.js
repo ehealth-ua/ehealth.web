@@ -7,6 +7,19 @@ import DECLARATION_STATUSES from "../helpers/statuses";
 const DeclarationHistory = ({ data }) => (
   <CabinetTable
     data={data}
+    header={{
+      start_date: "Дата ухвалення декларації",
+      status: "Статус",
+      division_name: "Назва відділення",
+      employee: (
+        <Fragment>
+          ПІБ<br /> лікаря
+        </Fragment>
+      ),
+      // doctor_contact: "Контакті дані лікаря",
+      legal_entity_name: "Медзаклад",
+      action: "Дія"
+    }}
     renderRow={({
       id: declaration_id,
       start_date,
@@ -31,19 +44,6 @@ const DeclarationHistory = ({ data }) => (
         </Link>
       )
     })}
-    header={{
-      start_date: "Дата ухвалення декларації",
-      status: "Статус",
-      division_name: "Назва відділення",
-      employee: (
-        <Fragment>
-          ПІБ<br /> лікаря
-        </Fragment>
-      ),
-      doctor_contact: "Контакті дані лікаря",
-      legal_entity_name: "Медзаклад",
-      action: "Дія"
-    }}
   />
 );
 
