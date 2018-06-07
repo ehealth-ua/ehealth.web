@@ -2,6 +2,7 @@ import React from "react";
 import { Form as FinalForm, FormSpy } from "react-final-form";
 import createFocusDecorator from "final-form-focus";
 import setFieldData from "final-form-set-field-data";
+import arrayMutators from "final-form-arrays";
 import styled from "react-emotion/macro";
 import { prop } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
@@ -30,7 +31,7 @@ const Form = ({ innerRef, ...props }) => {
   return (
     <FinalForm
       decorators={[focusOnErrors, ...decorators]}
-      mutators={{ setFieldData, ...mutators }}
+      mutators={{ setFieldData, ...arrayMutators, ...mutators }}
       subscription={{}}
       {...finalFormProps}
     >
