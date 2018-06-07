@@ -8,7 +8,7 @@ import RouterLink from "./RouterLink";
 
 const Link = props => {
   const [
-    { children, ...linkProps },
+    { children, size, ...linkProps },
     { icon, iconReverse, ...textProps }
   ] = pickValidProps(props);
 
@@ -16,16 +16,23 @@ const Link = props => {
     props.href ? "a" : props.to ? RouterLink : "button"
   );
 
+  const content = [
+    <Text key="text" size={size} {...textProps}>
+      {children}
+    </Text>,
+    icon && (
+      <Icon key="icon" iconReverse={iconReverse}>
+        {icon}
+      </Icon>
+    )
+  ];
+
   return (
     <Component
       {...linkProps}
-      iconReverse={iconReverse}
       type={!(props.href || props.to) ? "button" : undefined}
     >
-      <Text {...textProps} hasIcon={!!icon} iconReverse={iconReverse}>
-        {children}
-      </Text>
-      {icon && <Icon iconReverse={iconReverse}>{icon}</Icon>}
+      {iconReverse ? content.reverse() : content}
     </Component>
   );
 };
@@ -36,7 +43,6 @@ const LinkContainer = styled.a`
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  flex-direction: ${ifProp("iconReverse", "row-reverse")};
   opacity: ${ifProp("disabled", "0.5")};
   padding: 0;
   text-decoration: none;
