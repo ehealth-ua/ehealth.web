@@ -3,237 +3,157 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-<a name="0.28.0"></a>
-# [0.28.0](https://github.com/edenlabllc/ehealth.web/compare/v0.26.0...v0.28.0) (2018-06-08)
-
-**Note:** Version bump only for package @ehealth/utils
-
-
-
-
-
 <a name="0.27.0"></a>
+
 # [0.27.0](https://github.com/edenlabllc/ehealth.web/compare/v0.26.0...v0.27.0) (2018-06-08)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.26.0"></a>
+
 # [0.26.0](https://github.com/edenlabllc/ehealth.web/compare/v0.25.0...v0.26.0) (2018-06-08)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.25.0"></a>
+
 # [0.25.0](https://github.com/edenlabllc/ehealth.web/compare/v0.24.1...v0.25.0) (2018-06-08)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.24.0"></a>
+
 # [0.24.0](https://github.com/edenlabllc/ehealth.web/compare/v0.23.0...v0.24.0) (2018-06-03)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.23.0"></a>
+
 # [0.23.0](https://github.com/edenlabllc/ehealth.web/compare/v0.22.0...v0.23.0) (2018-06-01)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.22.0"></a>
-# [0.22.0](https://github.com/edenlabllc/ehealth.web/compare/v0.21.3...v0.22.0) (2018-06-01)
 
+# [0.22.0](https://github.com/edenlabllc/ehealth.web/compare/v0.21.3...v0.22.0) (2018-06-01)
 
 ### Features
 
 * **components:** Add FormAutoFetch component ([5837a1b](https://github.com/edenlabllc/ehealth.web/commit/5837a1b))
 
-
-
-
-
 <a name="0.21.0"></a>
-# [0.21.0](https://github.com/edenlabllc/ehealth.web/compare/v0.20.0...v0.21.0) (2018-05-29)
 
+# [0.21.0](https://github.com/edenlabllc/ehealth.web/compare/v0.20.0...v0.21.0) (2018-05-29)
 
 ### Features
 
 * **utils:** add parseSearchParams and stringifySearchParams functions ([845e1a3](https://github.com/edenlabllc/ehealth.web/commit/845e1a3))
 
-
-
-
-
 <a name="0.20.0"></a>
+
 # [0.20.0](https://github.com/edenlabllc/ehealth.web/compare/v0.19.0...v0.20.0) (2018-05-29)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.19.0"></a>
+
 # [0.19.0](https://github.com/edenlabllc/ehealth.web/compare/v0.18.0...v0.19.0) (2018-05-25)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.18.0"></a>
+
 # [0.18.0](https://github.com/edenlabllc/ehealth.web/compare/v0.17.1...v0.18.0) (2018-05-25)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.17.0"></a>
+
 # [0.17.0](https://github.com/edenlabllc/ehealth.web/compare/v0.16.0...v0.17.0) (2018-05-23)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.16.0"></a>
-# [0.16.0](https://github.com/edenlabllc/ehealth.web/compare/v0.15.0...v0.16.0) (2018-05-22)
 
+# [0.16.0](https://github.com/edenlabllc/ehealth.web/compare/v0.15.0...v0.16.0) (2018-05-22)
 
 ### Features
 
 * **utils:** add pickValidProps function, add function predicate option to pickProps component ([cf8ae92](https://github.com/edenlabllc/ehealth.web/commit/cf8ae92))
 
-
-
-
-
 <a name="0.15.0"></a>
+
 # [0.15.0](https://github.com/edenlabllc/ehealth.web/compare/v0.14.1...v0.15.0) (2018-05-18)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.14.1"></a>
+
 ## [0.14.1](https://github.com/edenlabllc/ehealth.web/compare/v0.14.0...v0.14.1) (2018-05-18)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.14.0"></a>
-# [0.14.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.14.0) (2018-05-18)
 
+# [0.14.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.14.0) (2018-05-18)
 
 ### Bug Fixes
 
 * **utils:** fix imports ([b0dad4e](https://github.com/edenlabllc/ehealth.web/commit/b0dad4e))
-
 
 ### Features
 
 * **utils:** add helper functions for profile page ([f7e3279](https://github.com/edenlabllc/ehealth.web/commit/f7e3279))
 * **utils:** add settlement and street types in address ([9811921](https://github.com/edenlabllc/ehealth.web/commit/9811921))
 
-
-
-
-
 <a name="0.13.0"></a>
+
 # [0.13.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.13.0) (2018-05-16)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.12.0"></a>
+
 # [0.12.0](https://github.com/edenlabllc/ehealth.web/compare/v0.11.1...v0.12.0) (2018-05-15)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.11.0"></a>
+
 # [0.11.0](https://github.com/edenlabllc/ehealth.web/compare/v0.10.1...v0.11.0) (2018-05-14)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.10.0"></a>
+
 # [0.10.0](https://github.com/edenlabllc/ehealth.web/compare/v0.9.1...v0.10.0) (2018-05-13)
 
 **Note:** Version bump only for package @ehealth/utils
 
-
-
-
-
 <a name="0.6.0"></a>
-# 0.6.0 (2018-04-27)
 
+# 0.6.0 (2018-04-27)
 
 ### Bug Fixes
 
 * **utils:** ensure international format and limit phone length on parse ([9f82c6a](https://github.com/edenlabllc/ehealth.web/commit/9f82c6a))
-
 
 ### Features
 
 * **utils:** add date format and parse functions ([80212a9](https://github.com/edenlabllc/ehealth.web/commit/80212a9))
 * **utils:** add formatPhone and parsePhone functions ([95c9fe2](https://github.com/edenlabllc/ehealth.web/commit/95c9fe2))
 
-
-
-
 <a name="0.4.0"></a>
-# [0.4.0](https://github.com/edenlabllc/ehealth.web/compare/v0.3.4...v0.4.0) (2018-04-10)
 
+# [0.4.0](https://github.com/edenlabllc/ehealth.web/compare/v0.3.4...v0.4.0) (2018-04-10)
 
 ### Features
 
 * **utils:** add pickProps function ([82166be](https://github.com/edenlabllc/ehealth.web/commit/82166be))
 * **utils:** add switchFlags function ([6e7ea15](https://github.com/edenlabllc/ehealth.web/commit/6e7ea15))
 
-
-
-
 <a name="0.3.4"></a>
+
 ## [0.3.4](https://github.com/edenlabllc/ehealth.web/compare/v0.3.3...v0.3.4) (2018-04-02)
-
-
-
 
 **Note:** Version bump only for package @ehealth/utils
