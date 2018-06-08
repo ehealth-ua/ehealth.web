@@ -44,7 +44,7 @@ const PatientDeclarations = ({ data, match }) => {
         bold
         icon={<ArrowRightIcon height="15px" fill="#2292f2" />}
       >
-        крок 1. оберіть лікаря
+        Пошук лікаря
       </Link>
     </>
   );
