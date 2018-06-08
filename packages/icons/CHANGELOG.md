@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.26.0"></a>
+# [0.26.0](https://github.com/edenlabllc/ehealth.web/compare/v0.25.0...v0.26.0) (2018-06-08)
+
+
+### Bug Fixes
+
+* **icons:** change ListIcon and MapIcon ([4b73cc4](https://github.com/edenlabllc/ehealth.web/commit/4b73cc4))
+
+
+### Features
+
+* **icons:** add ListIcon and MapIcon ([4d6d7f7](https://github.com/edenlabllc/ehealth.web/commit/4d6d7f7))
+
+
+
+
+
 <a name="0.25.0"></a>
 # [0.25.0](https://github.com/edenlabllc/ehealth.web/compare/v0.24.1...v0.25.0) (2018-06-08)
 

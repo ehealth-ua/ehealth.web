@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.26.0"></a>
+# [0.26.0](https://github.com/edenlabllc/ehealth.web/compare/v0.25.0...v0.26.0) (2018-06-08)
+
+
+### Bug Fixes
+
+* **components:** fix shouldComponentUpdate in HistoryState ([00c1e35](https://github.com/edenlabllc/ehealth.web/commit/00c1e35))
+* **components:** Move non-react methods down ([511f7cf](https://github.com/edenlabllc/ehealth.web/commit/511f7cf))
+
+
+### Features
+
+* **components:** add withHistoryState Component ([98d7aa3](https://github.com/edenlabllc/ehealth.web/commit/98d7aa3))
+
+
+
+
+
 <a name="0.25.0"></a>
 # [0.25.0](https://github.com/edenlabllc/ehealth.web/compare/v0.24.1...v0.25.0) (2018-06-08)
 

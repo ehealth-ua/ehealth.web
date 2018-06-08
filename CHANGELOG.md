@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.26.0"></a>
+# [0.26.0](https://github.com/edenlabllc/ehealth.web/compare/v0.25.0...v0.26.0) (2018-06-08)
+
+
+### Bug Fixes
+
+* **components:** fix shouldComponentUpdate in HistoryState ([00c1e35](https://github.com/edenlabllc/ehealth.web/commit/00c1e35))
+* **components:** Move non-react methods down ([511f7cf](https://github.com/edenlabllc/ehealth.web/commit/511f7cf))
+* **icons:** change ListIcon and MapIcon ([4b73cc4](https://github.com/edenlabllc/ehealth.web/commit/4b73cc4))
+* **patient-account:** Add employees table on DivisionPage ([c853ac8](https://github.com/edenlabllc/ehealth.web/commit/c853ac8))
+* **patient-account:** Change employee and division route ([980d9fc](https://github.com/edenlabllc/ehealth.web/commit/980d9fc))
+* **patient-account:** fix code after review ([02b115d](https://github.com/edenlabllc/ehealth.web/commit/02b115d))
+* **patient-account:** fix graphql folder name ([0d209ea](https://github.com/edenlabllc/ehealth.web/commit/0d209ea))
+* **patient-account:** fix router ([aca026e](https://github.com/edenlabllc/ehealth.web/commit/aca026e))
+* **patient-account:** Refactor SearchPage/Divide the cluster of coordinates ([3fd7717](https://github.com/edenlabllc/ehealth.web/commit/3fd7717))
+* **patient-account:** remove withHistoryState ([12f3248](https://github.com/edenlabllc/ehealth.web/commit/12f3248))
+* **patient-account:** Styles for SearchMapTooltip ([130acae](https://github.com/edenlabllc/ehealth.web/commit/130acae))
+
+
+### Features
+
+* **components:** add withHistoryState Component ([98d7aa3](https://github.com/edenlabllc/ehealth.web/commit/98d7aa3))
+* **icons:** add ListIcon and MapIcon ([4d6d7f7](https://github.com/edenlabllc/ehealth.web/commit/4d6d7f7))
+* **patient-account:** add google maps ([9037ed6](https://github.com/edenlabllc/ehealth.web/commit/9037ed6))
+
+
+
+
+
 <a name="0.25.0"></a>
 # [0.25.0](https://github.com/edenlabllc/ehealth.web/compare/v0.24.1...v0.25.0) (2018-06-08)
 
