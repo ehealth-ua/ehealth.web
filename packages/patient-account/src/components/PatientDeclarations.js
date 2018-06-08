@@ -3,8 +3,10 @@ import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import styled from "react-emotion/macro";
 import { Route } from "react-router-dom";
-
+import { ArrowRightIcon } from "@ehealth/icons";
 import { CabinetTable, Link } from "@ehealth/components";
+
+import Line from "../components/Line";
 import ActiveDeclaration from "../components/ActiveDeclaration";
 import DeclarationHistory from "../components/DeclarationHistory";
 
@@ -33,6 +35,17 @@ const PatientDeclarations = ({ data, match }) => {
           return <DeclarationHistory {...props} data={data} />;
         }}
       />
+      <Line />
+      <Link
+        to="/search"
+        size="small"
+        upperCase
+        spaced
+        bold
+        icon={<ArrowRightIcon height="15px" fill="#2292f2" />}
+      >
+        крок 1. оберіть лікаря
+      </Link>
     </>
   );
 };
