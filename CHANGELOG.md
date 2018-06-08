@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.28.1"></a>
+## [0.28.1](https://github.com/edenlabllc/ehealth.web/compare/v0.27.1...v0.28.1) (2018-06-08)
+
+
+### Bug Fixes
+
+* **patient-account:** update package-lock.json ([023de85](https://github.com/edenlabllc/ehealth.web/commit/023de85))
+
+
+### Reverts
+
+* "chore(release): publish v0.27.1 [skip ci]" ([e7d9c09](https://github.com/edenlabllc/ehealth.web/commit/e7d9c09))
+* "Merge branch 'master' of https://github.com/edenlabllc/ehealth.web" ([7aa3e23](https://github.com/edenlabllc/ehealth.web/commit/7aa3e23))
+* "Reverting the last commit which messed the repo." ([a040e7d](https://github.com/edenlabllc/ehealth.web/commit/a040e7d))
+
+
+
+
+
 <a name="0.28.0"></a>
 # [0.28.0](https://github.com/edenlabllc/ehealth.web/compare/v0.26.0...v0.28.0) (2018-06-08)
 
