@@ -22,10 +22,10 @@ import isEqual from "lodash/isEqual";
 
 import DivisionsMap from "../components/DivisionsMap";
 
-import SpecialitiesQuery from "../qraphql/SpecialitiesQuery.graphql";
-import SettlementQuery from "../qraphql/SettlementQuery.graphql";
-import SearchEmployeeQuery from "../qraphql/SearchEmployeeQuery.graphql";
-import SearchDivisionsByMapQuery from "../qraphql/SearchDivisionsByMapQuery.graphql";
+import SpecialitiesQuery from "../graphql/SpecialitiesQuery.graphql";
+import SettlementQuery from "../graphql/SettlementQuery.graphql";
+import SearchEmployeeQuery from "../graphql/SearchEmployeeQuery.graphql";
+import SearchDivisionsByMapQuery from "../graphql/SearchDivisionsByMapQuery.graphql";
 
 const DEFAULT_CENTER = { lat: 50.4021368, lng: 30.4525107 };
 const DEFAULT_ZOOM = 9;
