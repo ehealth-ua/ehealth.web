@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.25.0"></a>
+# [0.25.0](https://github.com/edenlabllc/ehealth.web/compare/v0.24.1...v0.25.0) (2018-06-08)
+
+
+### Bug Fixes
+
+* **patient-account:** add back link from declaration preview page ([b37ae17](https://github.com/edenlabllc/ehealth.web/commit/b37ae17))
+* **patient-account:** add link to /search ([2958a52](https://github.com/edenlabllc/ehealth.web/commit/2958a52))
+* **patient-account:** change btn history show/hide btn ([a6fe2de](https://github.com/edenlabllc/ehealth.web/commit/a6fe2de))
+* **patient-account:** fix date formats and declaration number in preview ([fe1caf4](https://github.com/edenlabllc/ehealth.web/commit/fe1caf4))
+* **patient-account:** refactor EmployeePage using Dictionary component ([64a8cf6](https://github.com/edenlabllc/ehealth.web/commit/64a8cf6))
+* **patient-account:** style adaptation for declaration template ([2d20200](https://github.com/edenlabllc/ehealth.web/commit/2d20200))
+
+
+### Features
+
+* **patient-account:** add Dictionary mapping component to Decration Preview Page ([451839e](https://github.com/edenlabllc/ehealth.web/commit/451839e))
+* **patient-account:** add Dictionary value Query component ([44a5d4e](https://github.com/edenlabllc/ehealth.web/commit/44a5d4e))
+* **patient-account:** add link to home page for logo ([73ce577](https://github.com/edenlabllc/ehealth.web/commit/73ce577))
+* **patient-account:** add print active declaration btn ([c1f14e0](https://github.com/edenlabllc/ehealth.web/commit/c1f14e0))
+* **patient-account:** hide doctor contact column ([80b003f](https://github.com/edenlabllc/ehealth.web/commit/80b003f))
+
+
+
+
+
 <a name="0.24.1"></a>
 ## [0.24.1](https://github.com/edenlabllc/ehealth.web/compare/v0.24.0...v0.24.1) (2018-06-07)
 
