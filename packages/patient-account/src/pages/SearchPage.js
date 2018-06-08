@@ -282,82 +282,76 @@ class SearchPage extends Component {
   }
 
   state = {
-    search: []
+    search: [],
+    location: ""
   };
 
   shouldComponentUpdate(nextProps, nextState) {
     return !isEqual(nextState, this.state);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(nextProps, this.props)) {
+      this.setState({
+        location: nextProps.location.pathname
+      });
+    }
+  }
+
+  componentWillMount() {
+    this.setState({
+      location: this.props.location.pathname
+    });
+  }
+
   render() {
-    const { search } = this.state;
+    const { search, location } = this.state;
     return (
       <Query query={SpecialitiesQuery}>
         {({ loading, data }) => {
           if (!data.specialities) return null;
           const { data: [{ values: specialityTypes }] } = data.specialities;
           return (
-            <Router>
-              <>
-                <Title.H1>Крок 1. Оберіть лікаря</Title.H1>
-                <Form
-                  onSubmit={() => null /* NOT USED, but required */}
-                  subscription={{} /* No need to subscribe to anything */}
-                >
-                  <FlexWrap>
-                    <FormAutoFetch debounce={500}>
-                      {({ values, searchParams }) => (
-                        <FlexInputsContainer>
-                          <SelectWithQuery addSettlement={this.addSettlement} />
-                          <InputsWithQuery
-                            {...values}
-                            searchParams={searchParams}
-                            specialityTypes={specialityTypes}
-                            addSearchData={this.addSearchData}
-                          />
-                        </FlexInputsContainer>
-                      )}
-                    </FormAutoFetch>
-                    <Icon>
-                      <Route
-                        render={({ location }) => {
-                          return !location.pathname.match(/\bmap\b/) ? (
-                            <Link to={"/search/map"}>
-                              <MapIcon
-                                width={30}
-                                height={30}
-                                fill="currentColor"
-                              />
-                            </Link>
-                          ) : (
-                            <Link to={"/search"}>
-                              <ListIcon
-                                width={30}
-                                height={30}
-                                fill="currentColor"
-                              />
-                            </Link>
-                          );
-                        }}
-                      />
-                    </Icon>
-                  </FlexWrap>
-                </Form>
-                <Switch>
-                  <CustomRoute
-                    exact
-                    path="/search"
-                    component={Table}
-                    passedProps={{ search, specialityTypes }}
-                  />
-                  <CustomRoute
-                    exact
-                    path="/search/map"
-                    component={DivisionsMapWithHistory}
-                  />
-                </Switch>
-              </>
-            </Router>
+            <>
+              <Title.H1>Крок 1. Оберіть лікаря</Title.H1>
+              <Form
+                onSubmit={() => null /* NOT USED, but required */}
+                subscription={{} /* No need to subscribe to anything */}
+              >
+                <FlexWrap>
+                  <FormAutoFetch debounce={500}>
+                    {({ values, searchParams }) => (
+                      <FlexInputsContainer>
+                        <SelectWithQuery addSettlement={this.addSettlement} />
+                        <InputsWithQuery
+                          {...values}
+                          searchParams={searchParams}
+                          specialityTypes={specialityTypes}
+                          addSearchData={this.addSearchData}
+                        />
+                      </FlexInputsContainer>
+                    )}
+                  </FormAutoFetch>
+                  <Icon>
+                    {!location.match(/\bmap\b/) ? (
+                      <Link to={"/search/map"}>
+                        <MapIcon width={30} height={30} fill="currentColor" />
+                      </Link>
+                    ) : (
+                      <Link to={"/search"}>
+                        <ListIcon width={30} height={30} fill="currentColor" />
+                      </Link>
+                    )}
+                  </Icon>
+                </FlexWrap>
+              </Form>
+              {!location.match(/\bmap\b/) ? (
+                <Table search={search} specialityTypes={specialityTypes} />
+              ) : (
+                <DivisionsMapWithHistory />
+              )}
+              />
+            </>
           );
         }}
       </Query>
@@ -371,14 +365,7 @@ class SearchPage extends Component {
   }
 }
 
-export default SearchPage;
-
-const CustomRoute = ({ component: Component, passedProps, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => <Component {...props} {...passedProps} />}
-  />
-);
+export default withHistoryState(SearchPage);
 
 const FlexWrap = styled.div`
   position: relative;
