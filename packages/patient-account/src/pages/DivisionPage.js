@@ -9,7 +9,7 @@ import DefinitionListView from "../components/DefinitionListView";
 import { CabinetTable } from "@ehealth/components";
 import { getFullName, getSpecialities } from "@ehealth/utils";
 
-import DivisionDetailsQuery from "../qraphql/DivisionDetailsQuery.graphql";
+import DivisionDetailsQuery from "../graphql/DivisionDetailsQuery.graphql";
 
 const DivisionPage = ({ match, history }) => (
   <Query query={DivisionDetailsQuery} variables={{ id: match.params.id }}>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Title,
   Field,
@@ -92,10 +91,7 @@ const InputsWithQuery = props => {
                 label={<b>Спеціальність</b>}
                 placeholder="Виберіть спеціальність"
                 itemToString={item => item}
-                items={Object.entries(specialityTypes).map(
-                  ([key, value]) => value
-                )}
-                renderItem={item => item}
+                items={Object.values(specialityTypes)}
               />
             </FlexItem>
           </>
