@@ -350,7 +350,6 @@ class SearchPage extends Component {
               ) : (
                 <DivisionsMapWithHistory />
               )}
-              />
             </>
           );
         }}
