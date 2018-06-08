@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.28.2"></a>
+## [0.28.2](https://github.com/edenlabllc/ehealth.web/compare/v0.28.1...v0.28.2) (2018-06-08)
+
+
+### Bug Fixes
+
+* **patient-account:** dont include credentials querying public endpoints ([0e01445](https://github.com/edenlabllc/ehealth.web/commit/0e01445))
+
+
+
+
+
 <a name="0.28.1"></a>
 ## [0.28.1](https://github.com/edenlabllc/ehealth.web/compare/v0.27.1...v0.28.1) (2018-06-08)
 
