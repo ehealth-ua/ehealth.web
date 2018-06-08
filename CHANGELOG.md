@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.28.0"></a>
+# [0.28.0](https://github.com/edenlabllc/ehealth.web/compare/v0.26.0...v0.28.0) (2018-06-08)
+
+
+### Bug Fixes
+
+* **patient-account:** fix specialities dict ([ac70ecd](https://github.com/edenlabllc/ehealth.web/commit/ac70ecd))
+
+
+### Features
+
+* **patient-account:** add link to search ([d8ee254](https://github.com/edenlabllc/ehealth.web/commit/d8ee254))
+
+
+
+
+
 <a name="0.27.0"></a>
 # [0.27.0](https://github.com/edenlabllc/ehealth.web/compare/v0.26.0...v0.27.0) (2018-06-08)
 
