@@ -3,17 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-<a name="0.27.0"></a>
+<a name="0.28.0"></a>
+# [0.28.0](https://github.com/edenlabllc/ehealth.web/compare/v0.26.0...v0.28.0) (2018-06-08)
 
-# [0.27.0](https://github.com/edenlabllc/ehealth.web/compare/v0.26.0...v0.27.0) (2018-06-08)
+
+### Bug Fixes
+
+* **patient-account:** fix specialities dict ([ac70ecd](https://github.com/edenlabllc/ehealth.web/commit/ac70ecd))
+
 
 ### Features
 
 * **patient-account:** add link to search ([d8ee254](https://github.com/edenlabllc/ehealth.web/commit/d8ee254))
 
-<a name="0.26.0"></a>
 
+
+
+
+<a name="0.27.0"></a>
+# [0.27.0](https://github.com/edenlabllc/ehealth.web/compare/v0.26.0...v0.27.0) (2018-06-08)
+
+
+### Features
+
+* **patient-account:** add link to search ([d8ee254](https://github.com/edenlabllc/ehealth.web/commit/d8ee254))
+
+
+
+
+
+<a name="0.26.0"></a>
 # [0.26.0](https://github.com/edenlabllc/ehealth.web/compare/v0.25.0...v0.26.0) (2018-06-08)
+
 
 ### Bug Fixes
 
@@ -26,13 +47,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** remove withHistoryState ([12f3248](https://github.com/edenlabllc/ehealth.web/commit/12f3248))
 * **patient-account:** Styles for SearchMapTooltip ([130acae](https://github.com/edenlabllc/ehealth.web/commit/130acae))
 
+
 ### Features
 
 * **patient-account:** add google maps ([9037ed6](https://github.com/edenlabllc/ehealth.web/commit/9037ed6))
 
-<a name="0.25.0"></a>
 
+
+
+
+<a name="0.25.0"></a>
 # [0.25.0](https://github.com/edenlabllc/ehealth.web/compare/v0.24.1...v0.25.0) (2018-06-08)
+
 
 ### Bug Fixes
 
@@ -43,6 +69,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** refactor EmployeePage using Dictionary component ([64a8cf6](https://github.com/edenlabllc/ehealth.web/commit/64a8cf6))
 * **patient-account:** style adaptation for declaration template ([2d20200](https://github.com/edenlabllc/ehealth.web/commit/2d20200))
 
+
 ### Features
 
 * **patient-account:** add Dictionary mapping component to Decration Preview Page ([451839e](https://github.com/edenlabllc/ehealth.web/commit/451839e))
@@ -51,21 +78,31 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** add print active declaration btn ([c1f14e0](https://github.com/edenlabllc/ehealth.web/commit/c1f14e0))
 * **patient-account:** hide doctor contact column ([80b003f](https://github.com/edenlabllc/ehealth.web/commit/80b003f))
 
-<a name="0.24.1"></a>
 
+
+
+
+<a name="0.24.1"></a>
 ## [0.24.1](https://github.com/edenlabllc/ehealth.web/compare/v0.24.0...v0.24.1) (2018-06-07)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.24.0"></a>
 
+
+
+
+<a name="0.24.0"></a>
 # [0.24.0](https://github.com/edenlabllc/ehealth.web/compare/v0.23.0...v0.24.0) (2018-06-03)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.23.0"></a>
 
+
+
+
+<a name="0.23.0"></a>
 # [0.23.0](https://github.com/edenlabllc/ehealth.web/compare/v0.22.0...v0.23.0) (2018-06-01)
+
 
 ### Bug Fixes
 
@@ -73,6 +110,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** refactor ActiveDeclaration ([17fc4b0](https://github.com/edenlabllc/ehealth.web/commit/17fc4b0))
 * **patient-account:** refactor HomePage ([dc55e1f](https://github.com/edenlabllc/ehealth.web/commit/dc55e1f))
 * **patient-account:** use components not block ([de16613](https://github.com/edenlabllc/ehealth.web/commit/de16613))
+
 
 ### Features
 
@@ -90,9 +128,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** declaration page ([2c2a493](https://github.com/edenlabllc/ehealth.web/commit/2c2a493))
 * **patient-account:** fix box-shadow on FixedBlock component ([8872bcf](https://github.com/edenlabllc/ehealth.web/commit/8872bcf))
 
-<a name="0.22.0"></a>
 
+
+
+
+<a name="0.22.0"></a>
 # [0.22.0](https://github.com/edenlabllc/ehealth.web/compare/v0.21.3...v0.22.0) (2018-06-01)
+
 
 ### Bug Fixes
 
@@ -100,59 +142,87 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** Optimizing performance of SearchPage ([2b3031f](https://github.com/edenlabllc/ehealth.web/commit/2b3031f))
 * **patient-component:** some improvements in SearchPage ([1599250](https://github.com/edenlabllc/ehealth.web/commit/1599250))
 
+
 ### Features
 
 * **patient-account:** Add SearchPage, EmployeePage, DivisionPage ([1d92866](https://github.com/edenlabllc/ehealth.web/commit/1d92866))
 
-<a name="0.21.3"></a>
 
+
+
+
+<a name="0.21.3"></a>
 ## [0.21.3](https://github.com/edenlabllc/ehealth.web/compare/v0.21.2...v0.21.3) (2018-05-30)
+
 
 ### Bug Fixes
 
 * **patient-account:** always include request credentials ([64923c4](https://github.com/edenlabllc/ehealth.web/commit/64923c4))
 
-<a name="0.21.0"></a>
 
+
+
+
+<a name="0.21.0"></a>
 # [0.21.0](https://github.com/edenlabllc/ehealth.web/compare/v0.20.0...v0.21.0) (2018-05-29)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.20.0"></a>
 
+
+
+
+<a name="0.20.0"></a>
 # [0.20.0](https://github.com/edenlabllc/ehealth.web/compare/v0.19.0...v0.20.0) (2018-05-29)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.19.0"></a>
 
+
+
+
+<a name="0.19.0"></a>
 # [0.19.0](https://github.com/edenlabllc/ehealth.web/compare/v0.18.0...v0.19.0) (2018-05-25)
+
 
 ### Features
 
 * review Link component, add theming ability ([fbd1db2](https://github.com/edenlabllc/ehealth.web/commit/fbd1db2))
 
-<a name="0.18.0"></a>
 
+
+
+
+<a name="0.18.0"></a>
 # [0.18.0](https://github.com/edenlabllc/ehealth.web/compare/v0.17.1...v0.18.0) (2018-05-25)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.17.1"></a>
 
+
+
+
+<a name="0.17.1"></a>
 ## [0.17.1](https://github.com/edenlabllc/ehealth.web/compare/v0.17.0...v0.17.1) (2018-05-23)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.17.0"></a>
 
+
+
+
+<a name="0.17.0"></a>
 # [0.17.0](https://github.com/edenlabllc/ehealth.web/compare/v0.16.0...v0.17.0) (2018-05-23)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.16.0"></a>
 
+
+
+
+<a name="0.16.0"></a>
 # [0.16.0](https://github.com/edenlabllc/ehealth.web/compare/v0.15.0...v0.16.0) (2018-05-22)
+
 
 ### Bug Fixes
 
@@ -160,37 +230,53 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** Delete unnecessary props in UserNav component ([fa43feb](https://github.com/edenlabllc/ehealth.web/commit/fa43feb))
 * **patient-account:** fetch user name in UserNav Component ([d7bd747](https://github.com/edenlabllc/ehealth.web/commit/d7bd747))
 
+
 ### Features
 
 * **patient-account:** Add ProfileEdit page ([e318b8f](https://github.com/edenlabllc/ehealth.web/commit/e318b8f))
 * **patient-account:** Add UserNav component ([244b0a4](https://github.com/edenlabllc/ehealth.web/commit/244b0a4))
 
-<a name="0.15.1"></a>
 
+
+
+
+<a name="0.15.1"></a>
 ## [0.15.1](https://github.com/edenlabllc/ehealth.web/compare/v0.15.0...v0.15.1) (2018-05-18)
+
 
 ### Bug Fixes
 
 * update API domain ([82732d7](https://github.com/edenlabllc/ehealth.web/commit/82732d7))
 
-<a name="0.15.0"></a>
 
+
+
+
+<a name="0.15.0"></a>
 # [0.15.0](https://github.com/edenlabllc/ehealth.web/compare/v0.14.1...v0.15.0) (2018-05-18)
+
 
 ### Bug Fixes
 
 * **components:** edit font-size in OrderedList component ([43212b0](https://github.com/edenlabllc/ehealth.web/commit/43212b0))
 * **patient-account:** fix conflicts ([032315e](https://github.com/edenlabllc/ehealth.web/commit/032315e))
 
-<a name="0.14.1"></a>
 
+
+
+
+<a name="0.14.1"></a>
 ## [0.14.1](https://github.com/edenlabllc/ehealth.web/compare/v0.14.0...v0.14.1) (2018-05-18)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.14.0"></a>
 
+
+
+
+<a name="0.14.0"></a>
 # [0.14.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.14.0) (2018-05-18)
+
 
 ### Bug Fixes
 
@@ -201,6 +287,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** delete spinner ([081e7f2](https://github.com/edenlabllc/ehealth.web/commit/081e7f2))
 * **patient-account:** update development proxy address ([3eed62e](https://github.com/edenlabllc/ehealth.web/commit/3eed62e))
 
+
 ### Features
 
 * **patient-accont:** add data to profile page ([a8b79e7](https://github.com/edenlabllc/ehealth.web/commit/a8b79e7))
@@ -208,9 +295,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** add profile page ([13688aa](https://github.com/edenlabllc/ehealth.web/commit/13688aa))
 * **patient-account:** setup authorization credentials for link-rest ([da80bc3](https://github.com/edenlabllc/ehealth.web/commit/da80bc3))
 
-<a name="0.13.0"></a>
 
+
+
+
+<a name="0.13.0"></a>
 # [0.13.0](https://github.com/edenlabllc/ehealth.web/compare/v0.12.1...v0.13.0) (2018-05-16)
+
 
 ### Bug Fixes
 
@@ -219,23 +310,32 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **icons:** Rename Pencil icon ([46a1819](https://github.com/edenlabllc/ehealth.web/commit/46a1819))
 * **patient-account:** update development proxy address ([3eed62e](https://github.com/edenlabllc/ehealth.web/commit/3eed62e))
 
+
 ### Features
 
 * **patient-account:** add DefinitionList component ([9b3b793](https://github.com/edenlabllc/ehealth.web/commit/9b3b793))
 * **patient-account:** add profile page ([13688aa](https://github.com/edenlabllc/ehealth.web/commit/13688aa))
 * **patient-account:** setup authorization credentials for link-rest ([da80bc3](https://github.com/edenlabllc/ehealth.web/commit/da80bc3))
 
-<a name="0.12.1"></a>
 
+
+
+
+<a name="0.12.1"></a>
 ## [0.12.1](https://github.com/edenlabllc/ehealth.web/compare/v0.12.0...v0.12.1) (2018-05-15)
+
 
 ### Bug Fixes
 
 * **patient-account:** update package.json ([365e4ae](https://github.com/edenlabllc/ehealth.web/commit/365e4ae))
 
-<a name="0.12.0"></a>
 
+
+
+
+<a name="0.12.0"></a>
 # [0.12.0](https://github.com/edenlabllc/ehealth.web/compare/v0.11.1...v0.12.0) (2018-05-15)
+
 
 ### Features
 
@@ -246,25 +346,36 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **patient-account:** add OrderedList component ([5fea755](https://github.com/edenlabllc/ehealth.web/commit/5fea755))
 * **patient-account:** add Tabs component ([bcdee70](https://github.com/edenlabllc/ehealth.web/commit/bcdee70)), closes [#2](https://github.com/edenlabllc/ehealth.web/issues/2)
 
-<a name="0.11.1"></a>
 
+
+
+
+<a name="0.11.1"></a>
 ## [0.11.1](https://github.com/edenlabllc/ehealth.web/compare/v0.11.0...v0.11.1) (2018-05-14)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.11.0"></a>
 
+
+
+
+<a name="0.11.0"></a>
 # [0.11.0](https://github.com/edenlabllc/ehealth.web/compare/v0.10.1...v0.11.0) (2018-05-14)
 
 **Note:** Version bump only for package @ehealth/patient-account
 
-<a name="0.10.0"></a>
 
+
+
+
+<a name="0.10.0"></a>
 # [0.10.0](https://github.com/edenlabllc/ehealth.web/compare/v0.9.1...v0.10.0) (2018-05-13)
+
 
 ### Bug Fixes
 
 * **patient-account:** add missing nginx.conf ([57789c4](https://github.com/edenlabllc/ehealth.web/commit/57789c4))
+
 
 ### Features
 
