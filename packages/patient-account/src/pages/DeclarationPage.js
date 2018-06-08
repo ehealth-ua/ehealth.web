@@ -175,7 +175,7 @@ const DeclarationPage = ({ router: { route, history } }) => (
                                   name="DOCUMENT_TYPE"
                                   item={documentsPerson[0].type}
                                 />{" "}
-                                #{documentsPerson[0].number}
+                                №{documentsPerson[0].number}
                               </>
                             )
                           }}
@@ -194,7 +194,7 @@ const DeclarationPage = ({ router: { route, history } }) => (
                                   name="DOCUMENT_RELATIONSHIP_TYPE"
                                   item={documentsRelationship[0].type}
                                 />{" "}
-                                #{documentsRelationship[0].number} від{" "}
+                                №{documentsRelationship[0].number} від{" "}
                                 {format(
                                   documentsRelationship[0].issued_at,
                                   "DD.MM.YYYY"
@@ -250,7 +250,7 @@ const DeclarationPage = ({ router: { route, history } }) => (
                         name="QUALIFICATION_TYPE"
                         item={qualifications[0].type}
                       />{" "}
-                      #{qualifications[0].certificate_number}
+                      №{qualifications[0].certificate_number}
                     </>
                   ),
                   issuedAt: `${qualifications[0].institution_name} від ${format(
