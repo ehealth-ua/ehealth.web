@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { CabinetTable, Link } from "@ehealth/components";
 import format from "date-fns/format";
 
@@ -12,9 +12,9 @@ const DeclarationHistory = ({ data }) => (
       status: "Статус",
       division_name: "Назва відділення",
       employee: (
-        <Fragment>
+        <>
           ПІБ<br /> лікаря
-        </Fragment>
+        </>
       ),
       // doctor_contact: "Контакті дані лікаря",
       legal_entity_name: "Медзаклад",
