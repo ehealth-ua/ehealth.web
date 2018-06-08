@@ -12,7 +12,11 @@ import { getFullName, getSpecialities } from "@ehealth/utils";
 import DivisionDetailsQuery from "../graphql/DivisionDetailsQuery.graphql";
 
 const DivisionPage = ({ match, history }) => (
-  <Query query={DivisionDetailsQuery} variables={{ id: match.params.id }}>
+  <Query
+    query={DivisionDetailsQuery}
+    variables={{ id: match.params.id }}
+    context={{ credentials: "same-origin" }}
+  >
     {({ loading, error, data }) => {
       const { division } = data;
       if (!division) return null;

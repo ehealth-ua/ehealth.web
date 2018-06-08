@@ -20,6 +20,7 @@ const EmployeePage = ({ match, history }) => (
       }
     `}
     variables={{ id: match.params.id }}
+    context={{ credentials: "same-origin" }}
   >
     {({ loading, error, data }) => {
       const { employee } = data;

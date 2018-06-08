@@ -58,6 +58,7 @@ const InputsWithQuery = props => {
         settlementRegion,
         specialityName
       }}
+      context={{ credentials: "same-origin" }}
     >
       {({ loading, error, data }) => {
         if (!data.search) return null;
@@ -112,6 +113,7 @@ class SelectWithQuery extends Component {
       <Query
         query={SettlementQuery}
         variables={{ settlement: this.state.settlement }}
+        context={{ credentials: "same-origin" }}
       >
         {({ loading, error, data }) => {
           if (!data.settlements) return null;
@@ -212,6 +214,7 @@ class DivisionsMapView extends Component {
           page: 1,
           page_size: 50
         }}
+        context={{ credentials: "same-origin" }}
       >
         {({ loading, error, data }) => {
           if (!data.divisions) return null;
