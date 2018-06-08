@@ -10,18 +10,13 @@ import {
   Link,
   withHistoryState
 } from "@ehealth/components";
-import {
-  getFullName,
-  getFullAddress,
-  getSpecialities,
-  titleCase
-} from "@ehealth/utils";
+import { getFullName, getFullAddress, titleCase } from "@ehealth/utils";
 import { MapIcon, ListIcon } from "@ehealth/icons";
 import isEqual from "lodash/isEqual";
 
 import DivisionsMap from "../components/DivisionsMap";
+import DictionaryValue from "../components/DictionaryValue";
 
-import SpecialitiesQuery from "../graphql/SpecialitiesQuery.graphql";
 import SettlementQuery from "../graphql/SettlementQuery.graphql";
 import SearchEmployeeQuery from "../graphql/SearchEmployeeQuery.graphql";
 import SearchDivisionsByMapQuery from "../graphql/SearchDivisionsByMapQuery.graphql";
@@ -30,7 +25,7 @@ const DEFAULT_CENTER = { lat: 50.4021368, lng: 30.4525107 };
 const DEFAULT_ZOOM = 9;
 
 const InputsWithQuery = props => {
-  const { specialityTypes, addSearchData, searchParams } = props;
+  const { addSearchData, searchParams } = props;
 
   let settlementRegion;
   let settlementName;
@@ -48,10 +43,10 @@ const InputsWithQuery = props => {
     settlementRegion = "";
     settlementName = "";
   }
-  Object.entries(specialityTypes).map(
-    ([key, value]) =>
-      specialityTypes[key] === speciality ? (specialityName = key) : null
-  );
+  // Object.entries(specialityTypes).map(
+  //   ([key, value]) =>
+  //     specialityTypes[key] === speciality ? (specialityName = key) : null
+  // );
 
   return (
     <Query
@@ -86,12 +81,18 @@ const InputsWithQuery = props => {
               />
             </FlexItem>
             <FlexItem>
-              <Field.Select
-                name="speciality"
-                label={<b>Спеціальність</b>}
-                placeholder="Виберіть спеціальність"
-                itemToString={item => item}
-                items={Object.values(specialityTypes)}
+              <DictionaryValue
+                name="SPECIALITY_TYPE"
+                render={dict => (
+                  <Field.Select
+                    name="speciality"
+                    label={<b>Спеціальність</b>}
+                    placeholder="Виберіть спеціальність"
+                    itemToString={item => (item == null ? "" : dict[item])}
+                    items={Object.keys(dict)}
+                    renderItem={item => dict[item]}
+                  />
+                )}
               />
             </FlexItem>
           </>
@@ -140,7 +141,7 @@ class SelectWithQuery extends Component {
   }
 }
 
-const Table = ({ search, specialityTypes }) => {
+const Table = ({ search }) => {
   return !search.length ? (
     "Нічого не знайдено"
   ) : (
@@ -169,7 +170,12 @@ const Table = ({ search, specialityTypes }) => {
         legal_entity: { name: legalEntityName }
       }) => ({
         name: getFullName(party),
-        job: getSpecialities(party.specialities, specialityTypes),
+        job: (
+          <DictionaryValue
+            name="SPECIALITY_TYPE"
+            item={party.specialities[0].speciality}
+          />
+        ),
         divisionName: (
           <Link to={`/division/${divisionId}`}>{divisionName}</Link>
         ),
@@ -303,53 +309,44 @@ class SearchPage extends Component {
   render() {
     const { search, location } = this.state;
     return (
-      <Query query={SpecialitiesQuery}>
-        {({ loading, data }) => {
-          if (!data.specialities) return null;
-          const { data: [{ values: specialityTypes }] } = data.specialities;
-          return (
-            <>
-              <Title.H1>Крок 1. Оберіть лікаря</Title.H1>
-              <Form
-                onSubmit={() => null /* NOT USED, but required */}
-                subscription={{} /* No need to subscribe to anything */}
-              >
-                <FlexWrap>
-                  <FormAutoFetch debounce={500}>
-                    {({ values, searchParams }) => (
-                      <FlexInputsContainer>
-                        <SelectWithQuery addSettlement={this.addSettlement} />
-                        <InputsWithQuery
-                          {...values}
-                          searchParams={searchParams}
-                          specialityTypes={specialityTypes}
-                          addSearchData={this.addSearchData}
-                        />
-                      </FlexInputsContainer>
-                    )}
-                  </FormAutoFetch>
-                  <Icon>
-                    {!location.match(/\bmap\b/) ? (
-                      <Link to={"/search/map"}>
-                        <MapIcon width={30} height={30} fill="currentColor" />
-                      </Link>
-                    ) : (
-                      <Link to={"/search"}>
-                        <ListIcon width={30} height={30} fill="currentColor" />
-                      </Link>
-                    )}
-                  </Icon>
-                </FlexWrap>
-              </Form>
-              {!location.match(/\bmap\b/) ? (
-                <Table search={search} specialityTypes={specialityTypes} />
-              ) : (
-                <DivisionsMapWithHistory />
+      <>
+        <Title.H1>Крок 1. Оберіть лікаря</Title.H1>
+        <Form
+          onSubmit={() => null /* NOT USED, but required */}
+          subscription={{} /* No need to subscribe to anything */}
+        >
+          <FlexWrap>
+            <FormAutoFetch debounce={500}>
+              {({ values, searchParams }) => (
+                <FlexInputsContainer>
+                  <SelectWithQuery addSettlement={this.addSettlement} />
+                  <InputsWithQuery
+                    {...values}
+                    searchParams={searchParams}
+                    addSearchData={this.addSearchData}
+                  />
+                </FlexInputsContainer>
               )}
-            </>
-          );
-        }}
-      </Query>
+            </FormAutoFetch>
+            <Icon>
+              {!location.match(/\bmap\b/) ? (
+                <Link to={"/search/map"}>
+                  <MapIcon width={30} height={30} fill="currentColor" />
+                </Link>
+              ) : (
+                <Link to={"/search"}>
+                  <ListIcon width={30} height={30} fill="currentColor" />
+                </Link>
+              )}
+            </Icon>
+          </FlexWrap>
+        </Form>
+        {!location.match(/\bmap\b/) ? (
+          <Table search={search} />
+        ) : (
+          <DivisionsMapWithHistory />
+        )}
+      </>
     );
   }
 

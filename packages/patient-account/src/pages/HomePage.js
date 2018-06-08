@@ -28,7 +28,7 @@ const HomePage = props => (
           content: (
             <Query query={DeclarationQuery}>
               {({ loading, error, data = [] }) => {
-                if (!loading && error && !data.declarations)
+                if (!loading && !data.declarations.data.length)
                   return <NoDeclarationList />;
                 return (
                   !loading && (

@@ -3,7 +3,7 @@ import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 
-const DictionaryValue = ({ name, item }) => (
+const DictionaryValue = ({ name, item, render }) => (
   <Query
     fetchPolicy="cache-first"
     context={{ credentials: "same-origin" }}
@@ -17,10 +17,14 @@ const DictionaryValue = ({ name, item }) => (
   >
     {({ loading, error, data }) => {
       if (loading || error) return null;
+
       const { values } = data.dictionaries.data.find(
         dict => dict.name === name
       );
-      return values[item] ? values[item] : null;
+
+      const value = item !== undefined ? values[item] : values;
+
+      return typeof render === "function" ? render(value) : value;
     }}
   </Query>
 );
