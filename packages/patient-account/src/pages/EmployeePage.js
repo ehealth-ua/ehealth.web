@@ -65,16 +65,14 @@ const EmployeePage = ({ match, history }) => (
                     <Text>
                       <DictionaryValue
                         name="EDUCATION_DEGREE"
-                        render={v => v[item.degree]}
+                        item={item.degree}
                       />
                       <br />
                       Диплом №{item.diploma_number} від {item.issued_date}
                     </Text>
                     <Text>
-                      <DictionaryValue
-                        name="COUNTRY"
-                        render={v => v[item.country]}
-                      />, {item.city}
+                      <DictionaryValue name="COUNTRY" item={item.country} />,{" "}
+                      {item.city}
                     </Text>
                   </Text>
                 )),
@@ -85,7 +83,7 @@ const EmployeePage = ({ match, history }) => (
                     <Text>
                       <DictionaryValue
                         name="QUALIFICATION_TYPE"
-                        render={v => v[item.type]}
+                        item={item.type}
                       />
                       <br />
                       Сертифікат №{item.diploma_number} від {item.issued_date}
@@ -97,7 +95,7 @@ const EmployeePage = ({ match, history }) => (
                     <Text>
                       <DictionaryValue
                         name="SPECIALITY_TYPE"
-                        render={v => v[scienceDegree.speciality]}
+                        item={scienceDegree.speciality}
                       />
                     </Text>
 
@@ -105,7 +103,7 @@ const EmployeePage = ({ match, history }) => (
                     <Text>
                       <DictionaryValue
                         name="SCIENCE_DEGREE"
-                        render={v => v[scienceDegree.degree]}
+                        item={scienceDegree.degree}
                       />{" "}
                       <br />
                       Диплом №{scienceDegree.diploma_number} від{" "}
@@ -114,7 +112,7 @@ const EmployeePage = ({ match, history }) => (
                     <Text>
                       <DictionaryValue
                         name="COUNTRY"
-                        render={v => v[scienceDegree.country]}
+                        item={scienceDegree.country}
                       />{" "}
                       , {scienceDegree.city}
                     </Text>

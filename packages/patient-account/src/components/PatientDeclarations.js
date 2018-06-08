@@ -9,7 +9,7 @@ import ActiveDeclaration from "../components/ActiveDeclaration";
 import DeclarationHistory from "../components/DeclarationHistory";
 
 const PatientDeclarations = ({ data, match }) => {
-  const [active] = data.filter(
+  const active = data.find(
     ({ status }) => status === "active" || status === "pending_verification"
   );
   return (
@@ -17,16 +17,14 @@ const PatientDeclarations = ({ data, match }) => {
       <ActiveDeclaration active={active} />
       <ShowBlock>
         <Link
-          to={`${match.url === "/" ? "/declarations" : "/"}`}
+          to={match.url === "/" ? "/declarations" : "/"}
           upperCase
           bold
           center
         >
-          {`${
-            match.url === "/"
-              ? "Показати історію декларацій"
-              : "Cховати історію декларацій"
-          }`}
+          {match.url === "/"
+            ? "Показати історію декларацій"
+            : "Cховати історію декларацій"}
         </Link>
       </ShowBlock>
       <Route

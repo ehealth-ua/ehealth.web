@@ -33,9 +33,9 @@ const DeclarationHistory = ({ data }) => (
       status: DECLARATION_STATUSES[status],
       division_name,
       employee: (
-        <Fragment>
+        <>
           {last_name} {first_name} {second_name}
-        </Fragment>
+        </>
       ),
       legal_entity_name,
       action: (

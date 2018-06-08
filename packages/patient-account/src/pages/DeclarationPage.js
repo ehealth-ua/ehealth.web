@@ -112,12 +112,7 @@ const DeclarationPage = ({ router: { route, history } }) => (
                       birthDate: format(birthDate, "DD.MM.YYYY"),
                       birthSettlement,
                       birthCountry,
-                      gender: (
-                        <DictionaryValue
-                          name="GENDER"
-                          render={v => v[gender]}
-                        />
-                      )
+                      gender: <DictionaryValue name="GENDER" item={gender} />
                     }}
                   />
                 </FlexItem>
@@ -178,7 +173,7 @@ const DeclarationPage = ({ router: { route, history } }) => (
                               <>
                                 <DictionaryValue
                                   name="DOCUMENT_TYPE"
-                                  render={v => v[documentsPerson[0].type]}
+                                  item={documentsPerson[0].type}
                                 />{" "}
                                 #{documentsPerson[0].number}
                               </>
@@ -197,7 +192,7 @@ const DeclarationPage = ({ router: { route, history } }) => (
                               <>
                                 <DictionaryValue
                                   name="DOCUMENT_RELATIONSHIP_TYPE"
-                                  render={v => v[documentsRelationship[0].type]}
+                                  item={documentsRelationship[0].type}
                                 />{" "}
                                 #{documentsRelationship[0].number} від{" "}
                                 {format(
@@ -230,35 +225,30 @@ const DeclarationPage = ({ router: { route, history } }) => (
                   fullName: `${employeeFullName.first_name} ${
                     employeeFullName.second_name
                   } ${employeeFullName.last_name}`,
-                  position: (
-                    <DictionaryValue
-                      name="POSITION"
-                      render={v => v[position]}
-                    />
-                  ),
+                  position: <DictionaryValue name="POSITION" item={position} />,
                   scienceDegree: (
                     <DictionaryValue
                       name="SPECIALITY_TYPE"
-                      render={v => v[scienceDegree.speciality]}
+                      item={scienceDegree.speciality}
                     />
                   ),
                   specialities: (
                     <DictionaryValue
                       name="SPECIALITY_TYPE"
-                      render={v => v[specialities[0].speciality]}
+                      item={specialities[0].speciality}
                     />
                   ),
                   level: (
                     <DictionaryValue
                       name="SPECIALITY_LEVEL"
-                      render={v => v[specialities[0].level]}
+                      item={specialities[0].level}
                     />
                   ),
                   qualifications: (
                     <>
                       <DictionaryValue
                         name="QUALIFICATION_TYPE"
-                        render={v => v[qualifications[0].type]}
+                        item={qualifications[0].type}
                       />{" "}
                       #{qualifications[0].certificate_number}
                     </>
@@ -301,12 +291,12 @@ const DeclarationPage = ({ router: { route, history } }) => (
                           {" область "}
                           <DictionaryValue
                             name="SETTLEMENT_TYPE"
-                            render={v => v[settlementType]}
+                            item={settlementType}
                           />{" "}
                           {settlement}{" "}
                           <DictionaryValue
                             name="STREET_TYPE"
-                            render={v => v[streetType]}
+                            item={streetType}
                           />{" "}
                           {street}
                           {", "}
