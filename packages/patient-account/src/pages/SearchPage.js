@@ -365,7 +365,7 @@ class SearchPage extends Component {
   }
 }
 
-export default withHistoryState(SearchPage);
+export default SearchPage;
 
 const FlexWrap = styled.div`
   position: relative;
