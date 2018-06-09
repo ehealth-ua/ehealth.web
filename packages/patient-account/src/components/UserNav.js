@@ -5,6 +5,7 @@ import { css } from "emotion";
 import styled from "react-emotion/macro";
 import { Link } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
+import PersonQuery from "../graphql/PersonQuery.graphql";
 
 export default class UserNav extends Component {
   constructor(props) {
@@ -23,24 +24,16 @@ export default class UserNav extends Component {
   render() {
     const { hidden } = this.state;
     return (
-      <Query
-        query={gql`
-          query {
-            user @rest(path: "/cabinet/persons", type: "UserPayload") {
-              data
-            }
-          }
-        `}
-      >
+      <Query query={PersonQuery}>
         {({ loading, error, data }) => {
-          if (!data.user) return null;
-          const { data: user } = data.user;
+          if (!data.person) return null;
+          const { data: person } = data.person;
           return (
             <UserNavWrapper
               onMouseEnter={ev => this.handleTooltip(false)}
               onMouseLeave={ev => this.handleTooltip(true)}
             >
-              <User>{getFullName(user)}</User>
+              <User>{getFullName(person)}</User>
               <Tooltip isHidden={hidden}>
                 <TooltipInner>
                   <NavLink to="/profile" color="black">
