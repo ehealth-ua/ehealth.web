@@ -15,19 +15,7 @@ import DefinitionListView from "../components/DefinitionListView";
 import FixedBlock from "../components/FixedBlock";
 import DictionaryValue from "../components/DictionaryValue";
 import DECLARATION_STATUSES from "../helpers/statuses";
-
-const DeclarationQuery = gql`
-  query Declaration($id: ID!) {
-    declaration(id: $id)
-      @rest(
-        path: "/cabinet/declarations/:id"
-        params: { id: $id }
-        type: "DeclarationPayload"
-      ) {
-      data
-    }
-  }
-`;
+import DeclarationQuery from "../graphql/DeclarationQuery.graphql";
 
 const DeclarationPage = ({ router: { route, history } }) => (
   <Query query={DeclarationQuery} variables={{ id: route.match.params.id }}>
