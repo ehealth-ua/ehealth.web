@@ -8,6 +8,7 @@ import { ArrowRightIcon } from "@ehealth/icons";
 import { CabinetTable, Link } from "@ehealth/components";
 
 import Line from "../components/Line";
+import NoDeclarationList from "../components/NoDeclarationList";
 import ActiveDeclaration from "../components/ActiveDeclaration";
 import DeclarationHistory from "../components/DeclarationHistory";
 
@@ -17,37 +18,43 @@ const PatientDeclarations = ({ data, match }) => {
   );
   return (
     <>
-      <ActiveDeclaration active={active} />
-      <ShowBlock center>
-        <Link
-          to={match.url === "/" ? "/declarations" : "/"}
-          upperCase
-          bold
-          center
-        >
-          {match.url === "/"
-            ? "Показати історію декларацій"
-            : "Cховати історію декларацій"}
-        </Link>
-      </ShowBlock>
-      <Route
-        path="/declarations"
-        render={props => {
-          return <DeclarationHistory {...props} data={data} />;
-        }}
-      />
-      <ShowBlock>
-        <Link
-          to="/search"
-          size="small"
-          upperCase
-          spaced
-          bold
-          icon={<ArrowRightIcon height="15px" fill="#2292f2" />}
-        >
-          Пошук лікаря
-        </Link>
-      </ShowBlock>
+      {active ? <ActiveDeclaration active={active} /> : <NoDeclarationList />}
+      {data.length && (
+        <>
+          <ShowBlock center>
+            <Link
+              to={match.url === "/" ? "/declarations" : "/"}
+              upperCase
+              bold
+              center
+            >
+              {match.url === "/"
+                ? "Показати історію декларацій"
+                : "Cховати історію декларацій"}
+            </Link>
+          </ShowBlock>
+          <Route
+            path="/declarations"
+            render={props => {
+              return <DeclarationHistory {...props} data={data} />;
+            }}
+          />
+        </>
+      )}
+      {active && (
+        <ShowBlock>
+          <Link
+            to="/search"
+            size="small"
+            upperCase
+            spaced
+            bold
+            icon={<ArrowRightIcon height="15px" fill="#2292f2" />}
+          >
+            Пошук лікаря
+          </Link>
+        </ShowBlock>
+      )}
     </>
   );
 };
