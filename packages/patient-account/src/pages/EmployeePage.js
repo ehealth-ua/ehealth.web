@@ -1,24 +1,27 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import { gql } from "graphql.macro";
 import { withRouter } from "react-router-dom";
+
 import { getFullName, getSpecialities, getDictValue } from "@ehealth/utils";
+<<<<<<< HEAD
 import { Heading, Link, Button } from "@ehealth/components";
 import DictionaryValue from "../components/DictionaryValue";
+=======
+import { Title, Link, Button } from "@ehealth/components";
+>>>>>>> feat(patient-account): create declaraion_request flow
 
+import DictionaryValue from "../components/DictionaryValue";
 import DefinitionListView from "../components/DefinitionListView";
+
+import CreateDeclarationRequestMutation from "../graphql/CreateDeclarationRequestMutation.graphql";
+import EmployeeQuery from "../graphql/EmployeeQuery.graphql";
+import PersonQuery from "../graphql/PersonQuery.graphql";
 
 const EmployeePage = ({ match, history }) => (
   <Query
-    query={gql`
-      query($id: String!) {
-        employee(id: $id)
-          @rest(path: "/stats/employees/:id", type: "EmployeesPayload") {
-          data
-        }
-      }
-    `}
+    query={EmployeeQuery}
     variables={{ id: match.params.id }}
     context={{ credentials: "same-origin" }}
   >
@@ -32,10 +35,19 @@ const EmployeePage = ({ match, history }) => (
           specialities,
           educations,
           qualifications,
+<<<<<<< HEAD
           scienceDegree,
           workingExperience,
           aboutMyself
         }
+=======
+          science_degree: scienceDegree,
+          working_experience: workingExperience,
+          about_myself: aboutMyself
+        },
+        id: employee_id,
+        division: { id: division_id }
+>>>>>>> feat(patient-account): create declaraion_request flow
       } = employeeData;
 
       return (
@@ -125,7 +137,34 @@ const EmployeePage = ({ match, history }) => (
               }}
             />
           </DefinitionListSection>
-          <Button>Відправити запит на декларацію</Button>
+          <Query query={PersonQuery}>
+            {({ loading, error, data }) => {
+              if (!data.person) return null;
+              const { data: { id: person_id } } = data.person;
+              return (
+                <Mutation mutation={CreateDeclarationRequestMutation}>
+                  {(createDeclarationRequest, { loading, error }) => (
+                    <Button
+                      onClick={() =>
+                        createDeclarationRequest({
+                          variables: {
+                            input: {
+                              person_id,
+                              employee_id,
+                              division_id
+                              // scope: "family_doctor"
+                            }
+                          }
+                        })
+                      }
+                    >
+                      Відправити запит на декларацію
+                    </Button>
+                  )}
+                </Mutation>
+              );
+            }}
+          </Query>
         </>
       );
     }}
