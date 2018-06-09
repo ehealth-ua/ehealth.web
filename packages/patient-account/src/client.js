@@ -22,6 +22,10 @@ const client = new ApolloClient({
   link: new RestLink({
     uri: REACT_APP_API_URL,
     credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    endpoints: { stats: "/reports/stats" },
     fieldNameNormalizer,
     fieldNameDenormalizer
   }),
@@ -33,6 +37,9 @@ const client = new ApolloClient({
       errorPolicy: "all"
     }
   }
+
+    credentials: "include"
+  })
 });
 
 export default client;
