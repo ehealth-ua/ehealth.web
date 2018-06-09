@@ -7,16 +7,8 @@ import { ArrowRight } from "@ehealth/icons";
 
 import Tabs from "../components/Tabs";
 import PatientDeclarations from "../components/PatientDeclarations";
-import NoDeclarationList from "../components/NoDeclarationList";
-
-const DeclarationQuery = gql`
-  query {
-    declarations
-      @rest(path: "/cabinet/declarations", type: "DeclarationsPayload") {
-      data
-    }
-  }
-`;
+import DeclarationRequestsQuery from "../graphql/DeclarationRequestsQuery.graphql";
+import DeclarationsQuery from "../graphql/DeclarationsQuery.graphql";
 
 const HomePage = props => (
   <>
@@ -26,10 +18,8 @@ const HomePage = props => (
         {
           title: "Моя декларація",
           content: (
-            <Query query={DeclarationQuery}>
+            <Query query={DeclarationsQuery}>
               {({ loading, error, data = [] }) => {
-                if (!loading && !data.declarations.data.length)
-                  return <NoDeclarationList />;
                 return (
                   !loading && (
                     <PatientDeclarations
