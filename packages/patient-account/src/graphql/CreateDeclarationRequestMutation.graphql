@@ -1,0 +1,14 @@
+mutation CreateDeclarationRequestMutation(
+  $input: PublishablePostInput!
+  $encryptor: any
+) {
+  declarations(input: $input)
+    @rest(
+      type: "POST"
+      method: "POST"
+      path: "/cabinet/declaration_requests"
+      bodyBuilder: $encryptor
+    ) {
+    id
+  }
+}

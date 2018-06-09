@@ -1,0 +1,10 @@
+query DeclarationQuery($id: ID!) {
+  declaration(id: $id)
+    @rest(
+      path: "/cabinet/declarations/:id"
+      params: { id: $id }
+      type: "DeclarationPayload"
+    ) {
+    data
+  }
+}

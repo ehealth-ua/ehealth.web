@@ -1,0 +1,5 @@
+query PersonQuery {
+  person @rest(path: "/cabinet/persons", type: "UserPayload") {
+    data
+  }
+}

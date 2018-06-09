@@ -1,0 +1,6 @@
+query DeclarationsQuery {
+  declarations
+    @rest(path: "/cabinet/declarations", type: "DeclarationsPayload") {
+    data
+  }
+}

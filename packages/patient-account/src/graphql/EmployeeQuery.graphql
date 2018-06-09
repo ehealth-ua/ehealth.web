@@ -1,0 +1,6 @@
+query EmployeeQuery($id: String!) {
+  employee(id: $id)
+    @rest(path: "/stats/employees/:id", type: "EmployeePayload") {
+    data
+  }
+}
