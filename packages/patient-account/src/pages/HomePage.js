@@ -1,5 +1,8 @@
 import React from "react";
+
 import styled from "react-emotion/macro";
+import { Query } from "react-apollo";
+import { gql } from "graphql.macro";
 import { ifProp } from "styled-tools";
 import { Query } from "react-apollo";
 import { Route } from "react-router-dom";
