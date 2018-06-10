@@ -5,12 +5,7 @@ import { gql } from "graphql.macro";
 import { withRouter } from "react-router-dom";
 
 import { getFullName, getSpecialities, getDictValue } from "@ehealth/utils";
-<<<<<<< HEAD
-import { Heading, Link, Button } from "@ehealth/components";
-import DictionaryValue from "../components/DictionaryValue";
-=======
 import { Title, Link, Button } from "@ehealth/components";
->>>>>>> feat(patient-account): create declaraion_request flow
 
 import DictionaryValue from "../components/DictionaryValue";
 import DefinitionListView from "../components/DefinitionListView";
@@ -35,19 +30,10 @@ const EmployeePage = ({ match, history }) => (
           specialities,
           educations,
           qualifications,
-<<<<<<< HEAD
           scienceDegree,
           workingExperience,
           aboutMyself
         }
-=======
-          science_degree: scienceDegree,
-          working_experience: workingExperience,
-          about_myself: aboutMyself
-        },
-        id: employee_id,
-        division: { id: division_id }
->>>>>>> feat(patient-account): create declaraion_request flow
       } = employeeData;
 
       return (
