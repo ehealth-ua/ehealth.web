@@ -25,40 +25,51 @@ export const onSubmit = ({ code }) => async (dispatch, getState) => {
   const state = getState();
   const { query } = getLocation(state);
 
-  if (meta.next_step === "REQUEST_APPS") {
-    const { payload, error } = await dispatch(
-      authorize({
-        clientId: query.client_id,
-        redirectUri: query.redirect_uri
-      })
-    );
-    if (error) {
-      switch (payload.response.error.message) {
-        case "The redirection URI provided does not match a pre-registered value.":
-          return dispatch(push(`/sign-in/failure/wrong_url`));
-        case "Invalid client id.":
-          return dispatch(push(`/sign-in/failure/invalid_client_id`));
-        case "User blocked.":
-          return dispatch(push(`/sign-in/failure/access_denied`));
-        default:
-          dispatch(push(`/sign-in/failure`));
-      }
-    }
-
-    return window && (window.location = payload.headers.get("location"));
-  }
   return dispatch(fetchUserData(token)).then(action => {
     if (action.error) {
       return action;
     }
     const state = getState();
     const location = getLocation(state);
-    return dispatch(
-      push({
-        ...location,
-        pathname: location.query.invite ? "/invite/accept" : "/accept"
-      })
-    );
+
+    if (location.query.invite) {
+      return dispatch(
+        push({
+          ...location,
+          pathname: "/invite/accept"
+        })
+      );
+    } else if (meta.next_step === "REQUEST_APPS") {
+      return dispatch(
+        authorize({
+          clientId: query.client_id,
+          redirectUri: query.redirect_uri
+        })
+      ).then(({ payload, error }) => {
+        if (error) {
+          switch (payload.response.error.message) {
+            case "The redirection URI provided does not match a pre-registered value.":
+              return dispatch(push(`/sign-in/failure/wrong_url`));
+            case "Invalid client id.":
+              return dispatch(push(`/sign-in/failure/invalid_client_id`));
+            case "User blocked.":
+              return dispatch(push(`/sign-in/failure/access_denied`));
+            case "Requested scope is empty. Scope not passed or user has no roles or global roles.": {
+              return dispatch(push(`/sign-in/failure/global_user_scope_error`));
+            }
+            default:
+              return dispatch(push(`/sign-in/failure`));
+          }
+        }
+        return window && (window.location = payload.headers.get("location"));
+      });
+    } else
+      return dispatch(
+        push({
+          ...location,
+          pathname: "/accept"
+        })
+      );
   });
 };
 
