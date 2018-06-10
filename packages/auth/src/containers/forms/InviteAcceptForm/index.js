@@ -4,11 +4,7 @@ import Button from "../../../components/Button";
 
 import styles from "./styles.module.css";
 
-const InviteAcceptForm = ({
-  handleSubmit,
-  onSubmit = () => {},
-  submitting
-}) => (
+const InviteAcceptForm = ({ onSubmit, submitting }) => (
   <Form className={styles.main} onSubmit={onSubmit}>
     <div>
       <Field.Checkbox
@@ -18,9 +14,9 @@ const InviteAcceptForm = ({
       <Validation.Required field="confirm" message="Об'язкове поле" />
     </div>
     <div>
-      <Button disabled={submitting} type="submit" color="blue">
+      <Form.Submit disabled={submitting} type="submit" color="blue" block>
         прийняти запрошення
-      </Button>
+      </Form.Submit>
     </div>
   </Form>
 );
