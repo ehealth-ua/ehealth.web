@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.29.0"></a>
+# [0.29.0](https://github.com/edenlabllc/ehealth.web/compare/v0.28.5...v0.29.0) (2018-06-11)
+
+**Note:** Version bump only for package @ehealth/patient-account
+
+
+
+
+
 <a name="0.28.5"></a>
 ## [0.28.5](https://github.com/edenlabllc/ehealth.web/compare/v0.28.4...v0.28.5) (2018-06-11)
 

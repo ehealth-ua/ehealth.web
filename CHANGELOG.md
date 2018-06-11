@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.29.0"></a>
+# [0.29.0](https://github.com/edenlabllc/ehealth.web/compare/v0.28.5...v0.29.0) (2018-06-11)
+
+
+### Bug Fixes
+
+* update package-lock.json ([74a4274](https://github.com/edenlabllc/ehealth.web/commit/74a4274))
+* update vulnerable dependencies ([b303e03](https://github.com/edenlabllc/ehealth.web/commit/b303e03))
+
+
+### Features
+
+* **components:** add ArrayField component ([cf9cb80](https://github.com/edenlabllc/ehealth.web/commit/cf9cb80))
+* **icons:** add AddIcon and RemoveIcon components ([e1086dd](https://github.com/edenlabllc/ehealth.web/commit/e1086dd))
+
+
+
+
+
 <a name="0.28.5"></a>
 ## [0.28.5](https://github.com/edenlabllc/ehealth.web/compare/v0.28.4...v0.28.5) (2018-06-11)
 
