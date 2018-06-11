@@ -29,12 +29,11 @@ const InputsWithQuery = props => {
 
   let settlementRegion;
   let settlementName;
-  let specialityName = "";
 
   const fullName = props.fullName || searchParams.fullName || "";
   const divisionName = props.divisionName || searchParams.divisionName || "";
   const settlement = props.settlement || searchParams.settlement || {};
-  const speciality = props.speciality || searchParams.speciality || "";
+  const specialityName = props.speciality || searchParams.speciality || "";
 
   if (settlement && Object.keys(settlement).length) {
     settlementRegion = settlement.region || searchParams.region || "";
@@ -43,10 +42,6 @@ const InputsWithQuery = props => {
     settlementRegion = "";
     settlementName = "";
   }
-  // Object.entries(specialityTypes).map(
-  //   ([key, value]) =>
-  //     specialityTypes[key] === speciality ? (specialityName = key) : null
-  // );
 
   return (
     <Query
