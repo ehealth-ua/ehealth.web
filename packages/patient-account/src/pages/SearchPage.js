@@ -198,6 +198,11 @@ class DivisionsMapView extends Component {
   render() {
     const { hoverItemId, bounds } = this.state;
     const { north = "", east = "", south = "", west = "" } = bounds;
+    const {
+      divisionName = "",
+      settlement = "",
+      region = ""
+    } = this.props.searchParams;
     return (
       <Query
         query={SearchDivisionsByMapQuery}
@@ -206,6 +211,9 @@ class DivisionsMapView extends Component {
           east,
           south,
           west,
+          divisionName,
+          settlement,
+          region,
           page: 1,
           page_size: 50
         }}
