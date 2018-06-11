@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.28.5"></a>
+## [0.28.5](https://github.com/edenlabllc/ehealth.web/compare/v0.28.4...v0.28.5) (2018-06-11)
+
+
+### Bug Fixes
+
+* **patient-account:** Fix map search query ([a959e87](https://github.com/edenlabllc/ehealth.web/commit/a959e87))
+
+
+
+
+
 <a name="0.28.4"></a>
 ## [0.28.4](https://github.com/edenlabllc/ehealth.web/compare/v0.28.3...v0.28.4) (2018-06-11)
 
