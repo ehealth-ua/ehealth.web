@@ -1,59 +1,47 @@
-import React, { Component } from "react";
-import { Query } from "react-apollo";
-import { gql } from "graphql.macro";
-import { css } from "emotion";
+import React from "react";
 import styled from "react-emotion/macro";
-import { Link } from "@ehealth/components";
+import { Query } from "react-apollo";
+import { Link, Tooltip } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
+
 import PersonQuery from "../graphql/PersonQuery.graphql";
 
-export default class UserNav extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hidden: true
-    };
-  }
+const UserNav = () => (
+  <Query query={PersonQuery}>
+    {({ loading, error, data }) => {
+      if (loading || error) return null;
 
-  handleTooltip(hidden) {
-    this.setState({
-      hidden
-    });
-  }
+      const { data: person } = data.person;
 
-  render() {
-    const { hidden } = this.state;
-    return (
-      <Query query={PersonQuery}>
-        {({ loading, error, data }) => {
-          if (!data.person) return null;
-          const { data: person } = data.person;
-          return (
-            <UserNavWrapper
-              onMouseEnter={ev => this.handleTooltip(false)}
-              onMouseLeave={ev => this.handleTooltip(true)}
-            >
-              <User>{getFullName(person)}</User>
-              <Tooltip isHidden={hidden}>
-                <TooltipInner>
-                  <NavLink to="/profile" color="black">
-                    Мій профіль
-                  </NavLink>
-                  <NavLink to="/security" color="black">
-                    Безпека
-                  </NavLink>
-                  <NavLink to="/logout" bold>
-                    Вийти
-                  </NavLink>
-                </TooltipInner>
-              </Tooltip>
+      return (
+        <Tooltip
+          renderParent={({ getProps }) => (
+            <UserNavWrapper {...getProps({ refKey: "innerRef" })}>
+              <User>{getFullName(user)}</User>
             </UserNavWrapper>
-          );
-        }}
-      </Query>
-    );
-  }
-}
+          )}
+          renderOverlay={({ active, getProps }) =>
+            active && (
+              <Menu {...getProps()}>
+                <MenuItem to="/profile" color="black">
+                  Мій профіль
+                </MenuItem>
+                <MenuItem to="/security" color="black">
+                  Безпека
+                </MenuItem>
+                <MenuItem to="/logout" bold>
+                  Вийти
+                </MenuItem>
+              </Menu>
+            )
+          }
+        />
+      );
+    }}
+  </Query>
+);
+
+export default UserNav;
 
 const UserNavWrapper = styled.div`
   position: relative;
@@ -80,41 +68,14 @@ const User = styled.div`
   }
 `;
 
-const tooltipHidden = props =>
-  props.isHidden
-    ? css`
-        visibility: hidden;
-        opacity: 0;
-      `
-    : css`
-        visibility: visible;
-        opacity: 0.9;
-      `;
-
-const Tooltip = styled.div`
-  position: absolute;
-  top: 100%;
-  right: 0;
-  ${tooltipHidden};
-  &::after {
-    position: absolute;
-    top: -5px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 5px 5px 5px;
-    border-color: transparent transparent #fff transparent;
-    content: "";
-  }
-`;
-
-const TooltipInner = styled.div`
+const Menu = styled.div`
   padding: 10px 30px 30px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 `;
 
-const NavLink = styled(Link)`
+const MenuItem = styled(Link)`
+  display: block;
+  white-space: nowrap;
   margin-top: 20px;
 `;
