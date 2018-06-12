@@ -7,8 +7,9 @@ const TRANSLATE_VERTICAL = "translateY(-50%)";
 
 class Tooltip extends Component {
   static defaultProps = {
-    onMouseOver: () => {},
-    onMouseOut: () => {}
+    leaveTimeout: 100,
+    onMouseEnter: () => {},
+    onMouseLeave: () => {}
   };
 
   state = {
@@ -44,16 +45,20 @@ class Tooltip extends Component {
     return { active, getProps };
   }
 
-  getParentProps = ({ refKey = "ref", onMouseOver, onMouseOut, ...props }) => ({
+  getParentProps = ({
+    refKey = "ref",
+    onMouseEnter,
+    onMouseLeave,
+    ...props
+  } = {}) => ({
     [refKey]: e => (this.parent = e),
-    onMouseOver: composeEventHandlers(onMouseOver, this.onMouseOver),
-    onMouseOut: composeEventHandlers(onMouseOut, this.onMouseOut),
+    onMouseEnter: composeEventHandlers(onMouseEnter, this.onMouseEnter),
+    onMouseLeave: composeEventHandlers(onMouseLeave, this.onMouseLeave),
     ...props
   });
 
   getOverlayStateAndHelpers({ getProps, ...overlay }) {
     const { active, getOverlayProps } = this;
-
     return {
       active,
       getProps: compose(getProps, getOverlayProps),
@@ -61,8 +66,9 @@ class Tooltip extends Component {
     };
   }
 
-  getOverlayProps = ({ onMouseOut, ...props }) => ({
-    onMouseOut: composeEventHandlers(onMouseOut, this.onMouseOut),
+  getOverlayProps = ({ onMouseEnter, onMouseLeave, ...props } = {}) => ({
+    onMouseEnter: composeEventHandlers(onMouseEnter, this.onMouseEnter),
+    onMouseLeave: composeEventHandlers(onMouseLeave, this.onMouseLeave),
     ...props
   });
 
@@ -72,15 +78,26 @@ class Tooltip extends Component {
       : this.props.active;
   }
 
-  onMouseOver = props => {
+  onMouseEnter = props => {
+    if (this.mouseLeaveTimeout) clearTimeout(this.mouseLeaveTimeout);
+
     this.updateParentRect();
-    this.props.onMouseOver(props);
+    this.props.onMouseEnter(props);
     if (this.props.active === undefined) this.setState({ active: true });
   };
 
-  onMouseOut = event => {
-    this.props.onMouseOut(event);
-    if (this.props.active === undefined) this.setState({ active: false });
+  onMouseLeave = event => {
+    this.mouseLeaveTimeout = setTimeout(
+      () => this.onMouseLeaveImmediate(event),
+      this.props.leaveTimeout
+    );
+  };
+
+  onMouseLeaveImmediate = event => {
+    this.props.onMouseLeave(event);
+    if (this.props.active === undefined) {
+      this.setState({ active: false });
+    }
   };
 
   updateParentRect() {
@@ -112,7 +129,7 @@ const Overlay = ({
 }) => {
   if (!parentRect) return null;
 
-  const getProps = ({ style, ...props }) => ({
+  const getProps = ({ style, ...props } = {}) => ({
     style: { ...style, ...getOverlayStyle(position, parentRect, offset) },
     ...props
   });
