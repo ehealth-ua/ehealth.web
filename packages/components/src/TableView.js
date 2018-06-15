@@ -4,7 +4,7 @@ const TableView = ({
   data,
   header,
   renderRow = item => item,
-  rowKeyExtractor = (item, index) => item.key,
+  rowKeyExtractor = (item, index) => item.key || index,
   columnKeyExtractor = (name, index) => name,
   tableComponent: TableComponent = "table",
   headerComponent = "thead",
@@ -67,7 +67,6 @@ const TableBody = ({
   <BodyComponent>
     {data.map((item, index) => {
       const row = renderRow(item, index);
-
       return (
         <RowComponent key={rowKeyExtractor(item, index)}>
           {columns.map((name, index) => (
