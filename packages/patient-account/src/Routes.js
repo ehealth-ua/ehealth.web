@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import DeclarationPage from "./pages/DeclarationPage";
+import DeclarationRequestPage from "./pages/DeclarationRequestPage";
 import SearchPage from "./pages/SearchPage";
 import EmployeePage from "./pages/EmployeePage";
 import DivisionPage from "./pages/DivisionPage";
@@ -14,9 +15,13 @@ const Routes = () => (
     <Switch>
       <Route exact path="/(declarations)?" component={HomePage} />
       <Route exact path="/declarations/:id" component={DeclarationPage} />
+      <Route
+        exact
+        path="/declaration_requests/:id"
+        component={DeclarationRequestPage}
+      />
       <Route exact path="/profile" component={ProfilePage} />
       <Route exact path="/profile/edit" component={ProfileEditPage} />
-      <Route exact path="/declarations/:id" component={DeclarationPage} />
       <Route path="/search" component={SearchPage} />
       <Route exact path="/employee/:id" component={EmployeePage} />
       <Route exact path="/division/:id" component={DivisionPage} />
