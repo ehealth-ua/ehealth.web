@@ -2,9 +2,9 @@ import React from "react";
 import styled from "react-emotion/macro";
 
 const CircleIcon = ({
-  fill = "none",
+  fill,
   stroke = "#c9f032",
-  strokeWidth = "3",
+  strokeWidth = "5",
   ...rest
 }) => (
   <Svg viewBox="0 0 30 30" {...rest}>
@@ -15,7 +15,7 @@ const CircleIcon = ({
       style={{
         stroke,
         strokeWidth,
-        fill,
+        fill: fill || "none",
         verticalAlign: "middle",
         ...rest
       }}
