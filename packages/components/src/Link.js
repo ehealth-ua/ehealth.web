@@ -8,7 +8,7 @@ import RouterLink from "./RouterLink";
 
 const Link = props => {
   const [
-    { children, size, ...linkProps },
+    { children, size, color, ...linkProps },
     { icon, iconReverse, ...textProps }
   ] = pickValidProps(props);
 
@@ -17,7 +17,7 @@ const Link = props => {
   );
 
   const content = [
-    <Text key="text" size={size} {...textProps}>
+    <Text key="text" size={size} color={color} {...textProps}>
       {children}
     </Text>,
     icon && (
@@ -26,7 +26,6 @@ const Link = props => {
       </Icon>
     )
   ];
-
   return (
     <Component
       {...linkProps}
@@ -50,6 +49,7 @@ const LinkContainer = styled.a`
 
 const Text = styled.span`
   color: ${switchProp(prop("color", "blue"), {
+    red: prop("theme.link.colors.red", "#ff1751"),
     blue: prop("theme.link.colors.blue", "#2292f2"),
     black: prop("theme.link.colors.black", "#333")
   })};
