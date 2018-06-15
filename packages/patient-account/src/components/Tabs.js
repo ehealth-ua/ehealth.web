@@ -4,10 +4,6 @@ import { Slider, Slide } from "react-projector";
 import { ifProp } from "styled-tools";
 import { ResponsiveSlide } from "react-projector-responsive";
 
-const THEMES = {
-  large: "tabs_theme_large"
-};
-
 export default class Tabs extends React.Component {
   state = {
     activeTab: 0
@@ -18,24 +14,20 @@ export default class Tabs extends React.Component {
     const { activeTab } = this.state;
 
     return (
-      <div
-      // className={classnames("tabs", THEMES[theme])}
-      >
+      <>
         <TabControl
           activeTab={activeTab}
           onChange={this.changeTab}
           tabs={children.map(({ title }) => title)}
         />
-        <Content>
-          <Slider activeSlide={activeTab} onSlideChange={this.changeTab}>
-            {children.map(({ content }, index) => (
-              <Slide key={index} component={ResponsiveSlide}>
-                {content}
-              </Slide>
-            ))}
-          </Slider>
-        </Content>
-      </div>
+        <Slider activeSlide={activeTab} onSlideChange={this.changeTab}>
+          {children.map(({ content }, index) => (
+            <Slide key={index} component={ResponsiveSlide}>
+              <Content>{content}</Content>
+            </Slide>
+          ))}
+        </Slider>
+      </>
     );
   }
 
@@ -83,12 +75,14 @@ const TabNav = styled.ul`
     justify-content: space-around;
   }
 `;
+
 const TabItem = styled.li`
   cursor: pointer;
   margin: 0 5px 1px;
   padding: 16px 0;
   white-space: nowrap;
-  font-weight: 700;
+  font-weight: ${ifProp("active", "700")};
+  font-size: 16px;
   box-shadow: ${ifProp("active", "inset 0 -5px 0 #4880ed")};
 
   @media screen and (min-width: 768px) {
@@ -96,7 +90,8 @@ const TabItem = styled.li`
     margin-right: 10px;
   }
 `;
+
 const Content = styled.div`
-  position: relative;
-  margin-top: 60px;
+  margin-top: 25px;
+  padding: 10px 15px;
 `;
