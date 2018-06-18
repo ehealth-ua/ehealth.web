@@ -20,6 +20,8 @@ import Default from "./containers/layouts/Default";
 import FAQ from "./containers/layouts/FAQ";
 import InviteLayout from "./containers/layouts/InviteLayout";
 
+import SignPage from "./containers/pages/SignPage";
+
 import SignUpVerifyPage from "./containers/pages/SignUpVerifyPage";
 import SignUpConfirmationPage from "./containers/pages/SignUpConfirmationPage";
 import SignUpValidatePage from "./containers/pages/SignUpValidatePage";
@@ -101,6 +103,7 @@ export default class Routes extends Component {
             </Route>
 
             <Route component={Default}>
+              <Route path="sign" component={SignPage} />
               <Route path="sign-up" component={SignUpVerifyPage} />
               <Route
                 path="sign-up/confirmation"
