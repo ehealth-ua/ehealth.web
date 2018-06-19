@@ -8,7 +8,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new RestLink({
     uri: REACT_APP_API_URL,
-    endpoints: { stats: "/reports/stats" },
     credentials: "include"
   })
 });

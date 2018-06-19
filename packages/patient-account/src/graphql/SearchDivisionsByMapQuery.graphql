@@ -21,9 +21,8 @@ query(
     page_size: $page_size
   )
     @rest(
-      path: "/divisions?north=:north&east=:east&south=:south&west=:west&division_name=:divisionName&settlement=:settlement&region=:region&page=:page&page_size=:page_size&type=CLINIC"
+      path: "/reports/stats/divisions?north=:north&east=:east&south=:south&west=:west&division_name=:divisionName&settlement=:settlement&region=:region&page=:page&page_size=:page_size&type=CLINIC"
       type: "DivisionsPayload"
-      endpoint: "stats"
     ) {
     data
   }

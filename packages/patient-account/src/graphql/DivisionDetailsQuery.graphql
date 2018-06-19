@@ -1,9 +1,8 @@
 query($id: String!) {
   division(id: $id)
     @rest(
-      path: "/divisions?id=:id"
+      path: "/reports/stats/divisions?id=:id"
       type: "DivisionPayload"
-      endpoint: "stats"
     ) {
     data
   }
