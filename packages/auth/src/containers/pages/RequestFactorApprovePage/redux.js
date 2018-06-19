@@ -19,7 +19,6 @@ export const onSubmit = ({ code }) => async (dispatch, getState) =>
       return action;
     }
     dispatch(login(action.payload.value));
-
     const state = getState();
     const location = getLocation(state);
     if (location.query && location.query.password_update) {
@@ -36,9 +35,11 @@ export const onSubmit = ({ code }) => async (dispatch, getState) =>
           pathname: "/invite/accept"
         })
       );
-      // test for admin, mitril, uadressess
-      // return dispatch(push({ ...location, pathname: location.query.invite ? "/invite/accept" : "/accept" }) );
     }
+    // there is no flag for meta.next_step for patient-account
+    // so this is not working for admin, mitril, uadressess
+    // return dispatch(push({ ...location, pathname: "/accept" }) );
+
     return dispatch(
       authorize({
         clientId: location.query.client_id,
