@@ -1,26 +1,35 @@
-import React, { Fragment } from "react";
-import styled from "react-emotion/macro";
+import React from "react";
 import { FieldArray } from "react-final-form-arrays";
+import styled from "react-emotion/macro";
 import { AddIcon, RemoveIcon } from "@ehealth/icons";
 
-import Field from "./index";
 import Link from "../Link";
 
-const ArrayForm = ({ name, addText, children, render = children }) => (
-  <Field>
-    {() => (
-      <FieldArray name={name}>
-        {({ fields }) => (
-          <>
-            {fields.map((name, index) => (
-              <Container key={name}>
-                <Content>{render({ name, index })}</Content>
-                <Link
+const ArrayField = ({
+  label,
+  horizontal,
+  name,
+  addText,
+  disableAdd,
+  disableRemove,
+  children,
+  render = children
+}) => (
+    <FieldArray name={name}>
+      {({ fields }) => (
+        <>
+          {fields.map((name, index) => (
+            <Item key={name}>
+              {render({ name, index })}
+              {disableRemove || (
+                <RemoveLink
                   icon={<RemoveIcon />}
                   onClick={() => fields.remove(index)}
                 />
-              </Container>
-            ))}
+              )}
+            </Item>
+          ))}
+          {disableAdd || (
             <Link
               icon={<AddIcon />}
               onClick={() => fields.push()}
@@ -31,22 +40,20 @@ const ArrayForm = ({ name, addText, children, render = children }) => (
             >
               {addText}
             </Link>
-          </>
-        )}
-      </FieldArray>
-    )}
-  </Field>
+          )}
+        </>
+      )}
+    </FieldArray>
 );
 
-export default ArrayForm;
+export default ArrayField;
 
-const Container = styled.div`
-  display: flex;
-  align-items: flex-start;
-  padding: 15px 0 0;
-  margin-bottom: 10px;
+const Item = styled.div`
+  position: relative;
 `;
 
-const Content = styled.div`
-  flex: 1 1 auto;
+const RemoveLink = styled(Link)`
+  position: absolute;
+  top: 0;
+  left: 100%;
 `;
