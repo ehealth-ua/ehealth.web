@@ -5,7 +5,7 @@ import { approveFactor } from "../../../redux/factors";
 import { login } from "../../../redux/session";
 import { authorize } from "../../../redux/auth";
 
-export const onSubmit = ({ code }) => async (dispatch, getState) =>
+export const onSubmit = ({ code }) => (dispatch, getState) =>
   dispatch(approveFactor(parseInt(code, 10))).then(action => {
     if (action.error) {
       const { type } = action.payload.response.error;
