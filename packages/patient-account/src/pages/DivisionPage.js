@@ -3,7 +3,7 @@ import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import { withRouter } from "react-router-dom";
-import { Title, Link } from "@ehealth/components";
+import { Heading, Link } from "@ehealth/components";
 
 import DefinitionListView from "../components/DefinitionListView";
 import { CabinetTable } from "@ehealth/components";
@@ -30,7 +30,7 @@ const DivisionPage = ({ match, history }) => (
 
       return (
         <>
-          <Title.H1>КРОК 1. ОБЕРІТЬ ЛІКАРЯ</Title.H1>
+          <Heading.H1>КРОК 1. ОБЕРІТЬ ЛІКАРЯ</Heading.H1>
           <DefinitionListSection>
             <SubTitle>{name}</SubTitle>
             <DefinitionListView

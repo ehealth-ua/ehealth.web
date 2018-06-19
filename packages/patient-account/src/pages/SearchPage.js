@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import {
-  Title,
+  Heading,
   Field,
   Form,
   FormAutoFetch,
@@ -316,7 +316,7 @@ class SearchPage extends Component {
     const { search, location } = this.state;
     return (
       <>
-        <Title.H1>Крок 1. Оберіть лікаря</Title.H1>
+        <Heading.H1>Крок 1. Оберіть лікаря</Heading.H1>
         <Form
           onSubmit={() => null /* NOT USED, but required */}
           subscription={{} /* No need to subscribe to anything */}

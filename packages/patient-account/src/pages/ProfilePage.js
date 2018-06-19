@@ -3,7 +3,7 @@ import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import { getFullName, getFullAddress, getPhones } from "@ehealth/utils";
-import { Title, Link } from "@ehealth/components";
+import { Heading, Link } from "@ehealth/components";
 import { PencilIcon } from "@ehealth/icons";
 
 import DefinitionListView from "../components/DefinitionListView";
@@ -46,7 +46,7 @@ const ProfilePage = () => (
 
       return (
         <>
-          <Title.H1>мій профіль</Title.H1>
+          <Heading.H1>мій профіль</Heading.H1>
           <DefinitionListSection>
             <SubTitle>
               Персональні дані

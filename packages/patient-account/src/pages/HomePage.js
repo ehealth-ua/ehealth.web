@@ -1,27 +1,22 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { Query } from "react-apollo";
-import { gql } from "graphql.macro";
 import { ifProp } from "styled-tools";
-import { Title, Link, CabinetTable, Switch } from "@ehealth/components";
-import { ArrowRight } from "@ehealth/icons";
-
-import DeclarationItem from "../components/DeclarationItem";
-import Tabs from "../components/Tabs";
+import { Query } from "react-apollo";
+import { Route } from "react-router-dom";
+import { Heading, Link } from "@ehealth/components";
+import { ArrowRightIcon } from "@ehealth/icons";
 
 import DeclarationRequestsQuery from "../graphql/DeclarationRequestsQuery.graphql";
 import DeclarationsQuery from "../graphql/DeclarationsQuery.graphql";
 import NoDeclarationList from "../components/NoDeclarationList";
 import DeclarationHistory from "../components/DeclarationHistory";
-
-import { ArrowRightIcon } from "@ehealth/icons";
+import Tabs from "../components/Tabs";
+import DeclarationItem from "../components/DeclarationItem";
 import Line from "../components/Line";
 
-import { Route } from "react-router-dom";
-
-const HomePage = props => (
+const HomePage = ({ match }) => (
   <>
-    <Title.H1>особистий кабінет</Title.H1>
+    <Heading.H1>Особистий кабінет</Heading.H1>
     <Tabs>
       {[
         {
@@ -29,9 +24,8 @@ const HomePage = props => (
           content: (
             <Query query={DeclarationsQuery}>
               {({ loading, error, data }) => {
-                if (loading) return null;
+                if (loading || error) return null;
 
-                const { match } = props;
                 const {
                   declarations: { data: [declaration] },
                   declarationRequests: { data: [declarationRequest] },

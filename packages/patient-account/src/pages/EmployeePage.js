@@ -4,7 +4,7 @@ import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import { withRouter } from "react-router-dom";
 import { getFullName, getSpecialities, getDictValue } from "@ehealth/utils";
-import { Title, Link, Button } from "@ehealth/components";
+import { Heading, Link, Button } from "@ehealth/components";
 import DictionaryValue from "../components/DictionaryValue";
 
 import DefinitionListView from "../components/DefinitionListView";
@@ -39,7 +39,7 @@ const EmployeePage = ({ match, history }) => (
       } = employeeData;
       return (
         <>
-          <Title.H1>Крок 2. Відправте запит на декларацію</Title.H1>
+          <Heading.H1>Крок 2. Відправте запит на декларацію</Heading.H1>
           <DefinitionListSection>
             <SubTitle>
               {getFullName(employeeData.party)}
