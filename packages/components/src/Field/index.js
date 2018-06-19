@@ -11,6 +11,7 @@ import FileField from "./FileField";
 import { CheckboxField, RadioField } from "./CheckableField";
 import GroupField from "./GroupField";
 import ArrayField from "./ArrayField";
+import { Row, Col } from "./Grid";
 
 Field.Input = InputField;
 Field.Text = TextField;
@@ -23,5 +24,7 @@ Field.Checkbox = CheckboxField;
 Field.Radio = RadioField;
 Field.Group = GroupField;
 Field.Array = ArrayField;
+Field.Row = Row;
+Field.Col = Col;
 
 export default Field;
