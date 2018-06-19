@@ -28,9 +28,9 @@ class Parent extends Component {
 }
 
 class Child extends Component {
-  data = new Promise(resolve => {
-    this.fullfillData = resolve;
-  });
+  state = {
+    data: null
+  };
 
   signedData = new Promise((resolve, reject) => {
     this.fullfillSignedData = resolve;
@@ -42,7 +42,7 @@ class Child extends Component {
 
     this.client = new ChildClient({
       signData: data => {
-        this.fullfillData(data);
+        this.setState({ data });
         return this.signedData;
       }
     });
@@ -56,22 +56,14 @@ class Child extends Component {
 
   render() {
     const { children, render = children } = this.props;
-    const { signData } = this;
+    const { data } = this.state;
+    const {
+      fullfillSignedData: onSignSuccess,
+      rejectSignedData: onSignError
+    } = this;
 
-    return render({ signData });
+    return render({ data, onSignSuccess, onSignError });
   }
-
-  signData = async ds => {
-    const data = await this.data;
-    const content = JSON.stringify(data);
-
-    try {
-      const signedData = ds.SignDataInternal(true, content, true);
-      this.fullfillSignedData(signedData);
-    } catch (error) {
-      this.rejectSignedData(error);
-    }
-  };
 }
 
 export default { Parent, Child };
