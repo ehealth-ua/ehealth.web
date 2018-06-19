@@ -1,19 +1,7 @@
 import React from "react";
-import styled from "react-emotion/macro";
 
-import LabelText from "./LabelText";
+import FieldView from "./FieldView";
 
-const GroupField = ({ label, children }) => (
-  <Group>
-    <LabelText>{label}</LabelText>
-    {children}
-  </Group>
-);
+const GroupField = props => <FieldView {...props} wrapperIsLabel={false} />;
 
 export default GroupField;
-
-const Group = styled.div`
-  & + & {
-    display: block;
-  }
-`;

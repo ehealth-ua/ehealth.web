@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "react-emotion/macro";
 
-import Field from "./index";
-import LabelText from "./LabelText";
+import Field from "./Field";
+import FieldView from "./FieldView";
 import {
-  FieldWrapper,
-  InputWrapper,
   InputBorder,
   InputContent,
   InputPlaceholder,
@@ -14,6 +12,7 @@ import {
 
 export const FileField = ({
   label,
+  horizontal,
   placeholder,
   icon,
   multiple,
@@ -25,36 +24,31 @@ export const FileField = ({
       input: { value, onChange, onFocus, onBlur },
       meta: { active, errored, error, submitError }
     }) => (
-      <FieldWrapper>
-        <label>
-          {label && <LabelText>{label}</LabelText>}
-          <InputWrapper>
-            <Input
-              type="file"
-              multiple={multiple}
-              disabled={disabled}
-              onChange={event => {
-                const { files } = event.target;
-                const value = multiple ? Array.from(files) : files[0];
-                onChange(value);
-              }}
-              onFocus={onFocus}
-              onBlur={onBlur}
-            />
-            <InputBorder disabled={disabled} errored={errored} active={active}>
-              {(Array.isArray(value) && value.length > 0) || value ? (
-                <FileLabel>
-                  {multiple ? value.map(f => f.name).join(", ") : value.name}
-                </FileLabel>
-              ) : (
-                <InputPlaceholder>{placeholder}</InputPlaceholder>
-              )}
-              <Icon>{icon}</Icon>
-            </InputBorder>
-            {errored && <ErrorMessage>{error || submitError}</ErrorMessage>}
-          </InputWrapper>
-        </label>
-      </FieldWrapper>
+      <FieldView label={label} horizontal={horizontal}>
+        <Input
+          type="file"
+          multiple={multiple}
+          disabled={disabled}
+          onChange={event => {
+            const { files } = event.target;
+            const value = multiple ? Array.from(files) : files[0];
+            onChange(value);
+          }}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+        <InputBorder disabled={disabled} errored={errored} active={active}>
+          {(Array.isArray(value) && value.length > 0) || value ? (
+            <FileLabel>
+              {multiple ? value.map(f => f.name).join(", ") : value.name}
+            </FileLabel>
+          ) : (
+            <InputPlaceholder>{placeholder}</InputPlaceholder>
+          )}
+          <Icon>{icon}</Icon>
+        </InputBorder>
+        {errored && <ErrorMessage>{error || submitError}</ErrorMessage>}
+      </FieldView>
     )}
   </Field>
 );

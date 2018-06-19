@@ -4,6 +4,7 @@ import styled from "react-emotion/macro";
 import { AddIcon, RemoveIcon } from "@ehealth/icons";
 
 import Link from "../Link";
+import FieldView from "./FieldView";
 
 const ArrayField = ({
   label,
@@ -15,6 +16,7 @@ const ArrayField = ({
   children,
   render = children
 }) => (
+  <FieldView label={label} horizontal={horizontal} wrapperIsLabel={false}>
     <FieldArray name={name}>
       {({ fields }) => (
         <>
@@ -44,6 +46,7 @@ const ArrayField = ({
         </>
       )}
     </FieldArray>
+  </FieldView>
 );
 
 export default ArrayField;

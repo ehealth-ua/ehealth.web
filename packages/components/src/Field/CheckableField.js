@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "react-emotion/macro";
+import { prop } from "styled-tools";
 import { CheckRightIcon } from "@ehealth/icons";
 
-import Field from "./index";
-import LabelText from "./LabelText";
+import Field from "./Field";
 
 export const CheckboxField = ({ label, disabled, ...props }) => (
   <Field {...props} type="checkbox">
     {({ input, meta: { active, errored }, ...t }) => (
-      <FieldWrapper>
+      <Wrapper>
         <Input {...input} disabled={disabled} />
         <CheckBox active={active} errored={errored} disabled={disabled}>
           <CheckMark />
         </CheckBox>
-        <CheckableLabelText>{label}</CheckableLabelText>
-      </FieldWrapper>
+        <Label>{label}</Label>
+      </Wrapper>
     )}
   </Field>
 );
@@ -22,21 +22,21 @@ export const CheckboxField = ({ label, disabled, ...props }) => (
 export const RadioField = ({ label, disabled, ...props }) => (
   <Field {...props} type="radio">
     {({ input, meta: { active, errored } }) => (
-      <FieldWrapper>
+      <Wrapper>
         <Input {...input} disabled={disabled} />
         <RadioBox active={active} errored={errored} disabled={disabled}>
           <RadioMark />
         </RadioBox>
-        <CheckableLabelText>{label}</CheckableLabelText>
-      </FieldWrapper>
+        <Label>{label}</Label>
+      </Wrapper>
     )}
   </Field>
 );
 
-const FieldWrapper = styled.label`
+const Wrapper = styled.label`
   cursor: default;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   position: relative;
   user-select: none;
   margin-bottom: 23px;
@@ -60,7 +60,6 @@ const CheckBox = styled.div`
   color: ${props => (props.errored ? "#ff1f44" : "#44e240")};
   display: flex;
   flex-shrink: 0;
-  align-self: start;
   height: 34px;
   width: 34px;
   opacity: ${props => props.disabled && "0.5"};
@@ -91,6 +90,9 @@ const RadioMark = styled(CheckMark.withComponent("div"))`
   }
 `;
 
-const CheckableLabelText = styled(LabelText)`
+const Label = styled.div`
+  color: #3d3d3d;
+  font-size: ${prop("theme.input.labelFontSize", 12)}px;
+  text-align: left;
   margin: 0 10px;
 `;

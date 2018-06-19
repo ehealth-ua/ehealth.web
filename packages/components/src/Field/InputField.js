@@ -3,8 +3,8 @@ import styled from "react-emotion/macro";
 import { prop, ifProp } from "styled-tools";
 import { switchFlags } from "@ehealth/utils";
 
-import Field from "./index";
-import LabelText from "./LabelText";
+import Field from "./Field";
+import FieldView from "./FieldView";
 
 export const TextField = props => <InputField {...props} type="text" />;
 
@@ -18,7 +18,7 @@ export const PasswordField = props => <InputField {...props} type="password" />;
 
 export const InputField = ({
   label,
-  horizontal = false,
+  horizontal,
   prefix,
   postfix,
   disabled,
@@ -27,35 +27,17 @@ export const InputField = ({
 }) => (
   <Field {...props}>
     {({ input, meta: { active, errored, error } }) => (
-      <FieldWrapper horizontal={horizontal}>
-        {label && <LabelText>{label}</LabelText>}
-        <InputWrapper>
-          <InputBorder disabled={disabled} errored={errored} active={active}>
-            {prefix && <InputContent>{prefix}</InputContent>}
-            <InputComponent {...input} disabled={disabled} />
-            {postfix && <InputContent>{postfix}</InputContent>}
-          </InputBorder>
-          {errored && <ErrorMessage>{error}</ErrorMessage>}
-        </InputWrapper>
-      </FieldWrapper>
+      <FieldView label={label} horizontal={horizontal}>
+        <InputBorder disabled={disabled} errored={errored} active={active}>
+          {prefix && <InputContent>{prefix}</InputContent>}
+          <InputComponent {...input} disabled={disabled} />
+          {postfix && <InputContent>{postfix}</InputContent>}
+        </InputBorder>
+        {errored && <ErrorMessage>{error}</ErrorMessage>}
+      </FieldView>
     )}
   </Field>
 );
-
-export const FieldWrapper = styled.label`
-  position: relative;
-  width: 100%;
-  margin-bottom: ${prop("theme.form.fieldVerticalDistance", 20)}px;
-  display: ${ifProp("horizontal", "flex", "block")};
-  margin-bottom: ${prop("theme.input.marginBottom", 20)}px;
-  align-items: baseline;
-  flex-direction: ${ifProp("horizontal", "row", "column")};
-  justify-content: ${ifProp("horizontal", "space-between")};
-`;
-
-export const InputWrapper = styled.div`
-  position: relative;
-`;
 
 export const InputBorder = styled.div`
   background-color: #fefefe;
@@ -70,14 +52,14 @@ export const InputBorder = styled.div`
     )};
   color: ${ifProp("disabled", "#9e9e9e", "#3d3d3d")};
   display: flex;
-  font-size: ${prop("theme.input.fontSize", 14)}px;
-  line-height: ${prop("theme.input.lineHeight", 24)}px;
+  font-size: ${prop("theme.input.fontSize", 16)}px;
+  line-height: ${prop("theme.input.lineHeight", 22)}px;
 `;
 
 export const InputContent = styled.div`
-  padding: ${prop("theme.input.paddingTop", 4)}px
-    ${prop("theme.input.paddingHorizontal", 10)}px
-    ${prop("theme.input.paddingBottom", 5)}px;
+  padding: ${prop("theme.input.paddingTop", 14)}px
+    ${prop("theme.input.paddingHorizontal", 25)}px
+    ${prop("theme.input.paddingBottom", 14)}px;
   position: relative;
   text-align: left;
 `;

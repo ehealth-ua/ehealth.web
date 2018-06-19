@@ -5,16 +5,9 @@ import { ifProp } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
 import { CheckRightIcon } from "@ehealth/icons";
 
-import Field from "./index";
-import LabelText from "./LabelText";
-import {
-  FieldWrapper,
-  InputWrapper,
-  InputBorder,
-  Input,
-  InputContent,
-  ErrorMessage
-} from "./InputField";
+import Field from "./Field";
+import FieldView from "./FieldView";
+import { InputBorder, Input, InputContent, ErrorMessage } from "./InputField";
 
 const DOWNSHIFT_PROPS = [
   "itemToString",
@@ -33,6 +26,7 @@ const DOWNSHIFT_PROPS = [
 
 const SelectField = ({
   label,
+  horizontal,
   disabled,
   items = [],
   filterItems = (inputValue, item, index) => true,
@@ -43,7 +37,6 @@ const SelectField = ({
   <DownshiftField {...props}>
     {({
       getRootProps,
-      getLabelProps,
       getInputProps,
       getToggleButtonProps,
       getItemProps,
@@ -56,63 +49,58 @@ const SelectField = ({
       input: { onFocus, onBlur, ...input },
       meta: { active, errored, error }
     }) => (
-      <FieldWrapper {...getRootProps({ refKey: "innerRef" })}>
-        <label {...getLabelProps()}>
-          {label && <LabelText>{label}</LabelText>}
-          <InputWrapper>
-            <InputBorder disabled={disabled} errored={errored} active={active}>
-              <SelectInput
-                {...getInputProps({
-                  ...input,
-                  disabled,
-                  onFocus,
-                  onBlur,
-                  onKeyDown: event => {
-                    if (!isOpen && event.key === "Backspace") {
-                      clearSelection();
-                    }
-                  }
-                })}
-              />
-              <DropdownArrow
-                {...getToggleButtonProps({ open: isOpen, onFocus, onBlur })}
-              />
-            </InputBorder>
-            {errored && <ErrorMessage>{error}</ErrorMessage>}
-            {isOpen && (
-              <Dropdown>
-                {items
-                  .filter(
-                    (item, index) =>
-                      !inputValue || filterItems(inputValue, item, index)
-                  )
-                  .map((item, index) => {
-                    const active = item === selectedItem;
+      <FieldView {...getRootProps({ refKey: "innerRef", label, horizontal })}>
+        <InputBorder disabled={disabled} errored={errored} active={active}>
+          <SelectInput
+            {...getInputProps({
+              ...input,
+              disabled,
+              onFocus,
+              onBlur,
+              onKeyDown: event => {
+                if (!isOpen && event.key === "Backspace") {
+                  clearSelection();
+                }
+              }
+            })}
+          />
+          <DropdownArrow
+            {...getToggleButtonProps({ open: isOpen, onFocus, onBlur })}
+          />
+        </InputBorder>
+        {errored && <ErrorMessage>{error}</ErrorMessage>}
+        {isOpen && (
+          <Dropdown>
+            {items
+              .filter(
+                (item, index) =>
+                  !inputValue || filterItems(inputValue, item, index)
+              )
+              .map((item, index) => {
+                const active = item === selectedItem;
 
-                    return (
-                      <Option
-                        {...getItemProps({
-                          item,
-                          active,
-                          highlighted: index === highlightedIndex,
-                          key: keyExtractor(item, index),
-                          onClick: event => {
-                            if (active) {
-                              event.preventDefault();
-                              clearSelection();
-                            }
-                          }
-                        })}
-                      >
-                        {renderItem(item)}
-                      </Option>
-                    );
-                  })}
-              </Dropdown>
-            )}
-          </InputWrapper>
-        </label>
-      </FieldWrapper>
+                return (
+                  <Option
+                    {...getItemProps({
+                      item,
+                      active,
+                      highlighted: index === highlightedIndex,
+                      key: keyExtractor(item, index),
+                      onClick: event => {
+                        if (active) {
+                          event.preventDefault();
+                          clearSelection();
+                        }
+                      }
+                    })}
+                  >
+                    {renderItem(item)}
+                  </Option>
+                );
+              })}
+          </Dropdown>
+        )}
+      </FieldView>
     )}
   </DownshiftField>
 );
