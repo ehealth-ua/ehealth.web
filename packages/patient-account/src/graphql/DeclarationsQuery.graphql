@@ -1,6 +1,23 @@
 query DeclarationsQuery {
   declarations
-    @rest(path: "/cabinet/declarations", type: "DeclarationsPayload") {
+    @rest(
+      path: "/cabinet/declarations?status=active,pending_verification"
+      type: "DeclarationsPayload"
+    ) {
+    data
+  }
+  declarationRequests
+    @rest(
+      path: "/cabinet/declaration_requests?status=APPROVED"
+      type: "DeclarationRequestsPayload"
+    ) {
+    data
+  }
+  declarationHistory
+    @rest(
+      path: "/cabinet/declarations?status=terminated,closed,rejected"
+      type: "DeclarationHistoryPayload"
+    ) {
     data
   }
 }
