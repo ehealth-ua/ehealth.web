@@ -1,16 +1,6 @@
-<<<<<<< HEAD
-query DeclarationRequestsQuery($id: ID!) {
-  declarations(id: $id)
-    @rest(
-      path: "/cabinet/declaration_requests/:id"
-      params: { id: $id }
-      type: "DeclarationPayload"
-    ) {
-=======
 query DeclarationRequestsQuery {
   declaration_request
     @rest(path: "/cabinet/declaration_requests", type: "DeclarationPayload") {
->>>>>>> refactor(patient-account): rename declaration_requset queries
     data
   }
 }
