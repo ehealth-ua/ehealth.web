@@ -3,7 +3,7 @@ const DECLARATION_STATUSES = {
   active: "активна",
   closed: "припинена",
   pending_verification: "Очікує підтвердження",
-  APPROVED: "очікує підтвердження"
+  APPROVED: "очікує підпису"
 };
 
 export default DECLARATION_STATUSES;
