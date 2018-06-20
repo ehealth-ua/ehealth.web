@@ -63,7 +63,7 @@ const HomePage = props => (
 
                         {declarationHistory && (
                           <>
-                            <ShowBlock>
+                            <ShowBlock center>
                               <Link
                                 to={match.url === "/" ? "/declarations" : "/"}
                                 upperCase
@@ -88,41 +88,6 @@ const HomePage = props => (
                             />
                           </>
                         )}
-                        <Line />
-                        <Link
-                          to="/search"
-                          size="small"
-                          upperCase
-                          spaced
-                          bold
-                          icon={<ArrowRightIcon height="15px" fill="#2292f2" />}
-                        >
-                          Пошук лікаря
-                        </Link>
-
-                        <ShowBlock center>
-                          <Link
-                            to={match.url === "/" ? "/declarations" : "/"}
-                            upperCase
-                            bold
-                            center
-                          >
-                            {match.url === "/"
-                              ? "Показати історію декларацій"
-                              : "Cховати історію декларацій"}
-                          </Link>
-                        </ShowBlock>
-                        <Route
-                          path="/declarations"
-                          render={props => {
-                            return (
-                              <DeclarationHistory
-                                {...props}
-                                data={declarationHistory}
-                              />
-                            );
-                          }}
-                        />
                         <ShowBlock>
                           <Link
                             to="/search"
@@ -152,6 +117,7 @@ const HomePage = props => (
     </Tabs>
   </>
 );
+
 export default HomePage;
 
 const ShowBlock = styled.div`
