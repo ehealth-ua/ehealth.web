@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.32.0"></a>
+# [0.32.0](https://github.com/edenlabllc/ehealth.web/compare/v0.31.1...v0.32.0) (2018-06-20)
+
+
+### Features
+
+* **patient-account:** add queries to graphql folder ([c512fc9](https://github.com/edenlabllc/ehealth.web/commit/c512fc9))
+
+
+
+
+
 <a name="0.31.0"></a>
 # [0.31.0](https://github.com/edenlabllc/ehealth.web/compare/v0.30.0...v0.31.0) (2018-06-18)
 
