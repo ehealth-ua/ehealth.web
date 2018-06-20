@@ -2,6 +2,7 @@ import React from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
+import { ifProp } from "styled-tools";
 import { Title, Link, CabinetTable, Switch } from "@ehealth/components";
 import { ArrowRight } from "@ehealth/icons";
 
@@ -36,7 +37,6 @@ const HomePage = props => (
                   declarationRequests: { data: [declarationRequest] },
                   declarationHistory: { data: [...declarationHistory] }
                 } = data;
-
                 return (
                   <>
                     {declaration || declarationRequest ? (
@@ -99,6 +99,44 @@ const HomePage = props => (
                         >
                           Пошук лікаря
                         </Link>
+
+                        <ShowBlock center>
+                          <Link
+                            to={match.url === "/" ? "/declarations" : "/"}
+                            upperCase
+                            bold
+                            center
+                          >
+                            {match.url === "/"
+                              ? "Показати історію декларацій"
+                              : "Cховати історію декларацій"}
+                          </Link>
+                        </ShowBlock>
+                        <Route
+                          path="/declarations"
+                          render={props => {
+                            return (
+                              <DeclarationHistory
+                                {...props}
+                                data={declarationHistory}
+                              />
+                            );
+                          }}
+                        />
+                        <ShowBlock>
+                          <Link
+                            to="/search"
+                            size="small"
+                            upperCase
+                            spaced
+                            bold
+                            icon={
+                              <ArrowRightIcon height="15px" fill="#2292f2" />
+                            }
+                          >
+                            Пошук лікаря
+                          </Link>
+                        </ShowBlock>
                       </>
                     ) : (
                       <NoDeclarationList />
@@ -117,7 +155,7 @@ const HomePage = props => (
 export default HomePage;
 
 const ShowBlock = styled.div`
-  text-align: center;
+  text-align: ${ifProp("center", "center")};
   margin: 45px 0;
 `;
 
