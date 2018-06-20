@@ -51,9 +51,12 @@ const SignUpPersonPage = ({ location }) => (
             options={PERSON_NAME_PATTERN}
             message="Дозволені тільки літери українського алфавіту"
           />
+
           <DigitalSignatureValidation
             validate={(ds, value) =>
-              ds.privKeySubject.GivenName.includes(value)
+              ds.privKeySubject.GivenName.toUpperCase().includes(
+                value && value.toUpperCase()
+              )
             }
             message="Має збігатися з цифровим підписом"
           />
