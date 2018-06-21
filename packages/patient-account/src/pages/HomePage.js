@@ -25,7 +25,7 @@ const HomePage = ({ match }) => (
           title: "Моя декларація",
           content: (
             <Query query={DeclarationsQuery}>
-              {({ loading, error, data }) => {
+              {({ loading, error, data, refetch }) => {
                 if (loading || error) return null;
 
                 const {
@@ -41,7 +41,7 @@ const HomePage = ({ match }) => (
                           <>
                             <DeclarationItem
                               declaration={declaration}
-                              onReject={true}
+                              onReject={refetch}
                             />
                             <Line />
                           </>
