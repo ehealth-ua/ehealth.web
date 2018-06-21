@@ -10,12 +10,13 @@ import {
   Link,
   withHistoryState
 } from "@ehealth/components";
-import { getFullName, getFullAddress, titleCase } from "@ehealth/utils";
+import { getFullName, titleCase } from "@ehealth/utils";
 import { MapIcon, ListIcon } from "@ehealth/icons";
 import isEqual from "lodash/isEqual";
 
 import DivisionsMap from "../components/DivisionsMap";
 import DictionaryValue from "../components/DictionaryValue";
+import AddressView from "../components/AddressView";
 
 import SettlementQuery from "../graphql/SettlementQuery.graphql";
 import SearchEmployeeQuery from "../graphql/SearchEmployeeQuery.graphql";
@@ -128,7 +129,7 @@ class SelectWithQuery extends Component {
                 onInputValueChange={settlement => {
                   this.setState({ settlement });
                 }}
-                renderItem={address => getFullAddress(address)}
+                renderItem={address => <AddressView data={address} />}
               />
             </FlexItem>
           );
@@ -176,7 +177,7 @@ const Table = ({ search }) => {
         divisionName: (
           <Link to={`/division/${divisionId}`}>{divisionName}</Link>
         ),
-        address: getFullAddress(addresses),
+        address: <AddressView data={addresses} />,
         legalEntityName,
         action: <Link to={`/employee/${id}`}>Показати деталі</Link>
       })}
