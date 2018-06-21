@@ -1,6 +1,10 @@
 import React from "react";
 import { Button, Switch } from "@ehealth/components";
 
+import {
+  REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
+  REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
+} from "../../../env";
 import { Main, Header, Article } from "../../../components/CenterLayout";
 import { H1, H2 } from "../../../components/Title";
 
@@ -21,7 +25,17 @@ const SignUpFailurePage = ({ params, location }) => (
         tax_id_exists={
           <>
             <p>Користувач з таким ідентифікаційним номером вже існує.</p>
-            <Button to="/sign-in">Увійти</Button>
+            <Button
+              to={{
+                pathname: "/sign-in",
+                query: {
+                  client_id: REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
+                  redirect_uri: REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
+                }
+              }}
+            >
+              Увійти
+            </Button>
           </>
         }
         jwt_expired={
