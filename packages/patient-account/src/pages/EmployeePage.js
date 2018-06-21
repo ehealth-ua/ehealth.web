@@ -32,11 +32,12 @@ const EmployeePage = ({ match, history }) => (
           specialities,
           educations,
           qualifications,
-          science_degree: scienceDegree,
-          working_experience: workingExperience,
-          about_myself: aboutMyself
+          scienceDegree,
+          workingExperience,
+          aboutMyself
         }
       } = employeeData;
+
       return (
         <>
           <Heading.H1>Крок 2. Відправте запит на декларацію</Heading.H1>
@@ -62,14 +63,14 @@ const EmployeePage = ({ match, history }) => (
                 educations: educations.map((item, i) => (
                   <Text key={i}>
                     <Text>{item.speciality}</Text>
-                    <Text>{item.institution_name}</Text>
+                    <Text>{item.institutionName}</Text>
                     <Text>
                       <DictionaryValue
                         name="EDUCATION_DEGREE"
                         item={item.degree}
                       />
                       <br />
-                      Диплом №{item.diploma_number} від {item.issued_date}
+                      Диплом №{item.diplomaNumber} від {item.issuedDate}
                     </Text>
                     <Text>
                       <DictionaryValue name="COUNTRY" item={item.country} />,{" "}
@@ -80,14 +81,14 @@ const EmployeePage = ({ match, history }) => (
                 qualifications: qualifications.map((item, i) => (
                   <Text key={i}>
                     <Text>{item.speciality}</Text>
-                    <Text>{item.certificate_number}</Text>
+                    <Text>{item.certificateNumber}</Text>
                     <Text>
                       <DictionaryValue
                         name="QUALIFICATION_TYPE"
                         item={item.type}
                       />
                       <br />
-                      Сертифікат №{item.diploma_number} від {item.issued_date}
+                      Сертифікат №{item.diplomaNumber} від {item.issuedDate}
                     </Text>
                   </Text>
                 )),
@@ -100,15 +101,15 @@ const EmployeePage = ({ match, history }) => (
                       />
                     </Text>
 
-                    <Text>{scienceDegree.institution_name}</Text>
+                    <Text>{scienceDegree.institutionName}</Text>
                     <Text>
                       <DictionaryValue
                         name="SCIENCE_DEGREE"
                         item={scienceDegree.degree}
                       />{" "}
                       <br />
-                      Диплом №{scienceDegree.diploma_number} від{" "}
-                      {scienceDegree.issued_date}
+                      Диплом №{scienceDegree.diplomaNumber} від{" "}
+                      {scienceDegree.issuedDate}
                     </Text>
                     <Text>
                       <DictionaryValue

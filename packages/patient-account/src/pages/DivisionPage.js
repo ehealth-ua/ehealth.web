@@ -24,9 +24,7 @@ const DivisionPage = ({ match, history }) => (
       const { data: employees } = data.employees;
       const { data: [{ values: specialityTypes }] } = data.specialities;
 
-      const {
-        data: [{ name, contacts, legal_entity: legalEntity }]
-      } = division;
+      const { data: [{ name, contacts, legalEntity }] } = division;
 
       return (
         <>

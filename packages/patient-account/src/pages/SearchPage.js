@@ -122,7 +122,7 @@ class SelectWithQuery extends Component {
                 itemToString={item => (item ? titleCase(item.settlement) : "")}
                 items={settlements.map(({ name, district, type }) => ({
                   settlement: name,
-                  settlement_type: type,
+                  settlementType: type,
                   region: district || undefined
                 }))}
                 onInputValueChange={settlement => {
@@ -164,7 +164,7 @@ const Table = ({ search }) => {
         id,
         party,
         division: { id: divisionId, name: divisionName, addresses },
-        legal_entity: { name: legalEntityName }
+        legalEntity: { name: legalEntityName }
       }) => ({
         name: getFullName(party),
         job: (
@@ -215,7 +215,7 @@ class DivisionsMapView extends Component {
           settlement,
           region,
           page: 1,
-          page_size: 50
+          pageSize: 50
         }}
         context={{ credentials: "same-origin" }}
       >

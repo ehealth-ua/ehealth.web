@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
-import { Title, Link } from "@ehealth/components";
+import { Heading, Link } from "@ehealth/components";
 import { CircleIcon } from "@ehealth/icons";
 import DECLARATION_STATUSES from "../helpers/statuses";
 import { DeclarationHeader } from "../components/Declaration";
 
 const DeclarationItem = ({
-  declaration: { status, start_date, id, declaration_number },
+  declaration: { id, status, startDate, declarationNumber },
   blur,
   onReject,
   type
@@ -15,18 +15,18 @@ const DeclarationItem = ({
   <>
     <DeclarationHeader
       id={id}
-      declaration_number={declaration_number}
-      signed_at={start_date}
+      declarationNumber={declarationNumber}
+      signedAt={startDate}
       blur={blur}
       type={type}
       wrap
     />
     <Footer>
-      <Title.H3>
+      <Heading.H3>
         {onReject ? "Статус декларації: " : "Статус запиту: "}
         <b>{DECLARATION_STATUSES[status]}</b>{" "}
         <CircleIcon fill={status === "active" && "#c9f032"} />
-      </Title.H3>
+      </Heading.H3>
 
       {onReject && (
         <Link

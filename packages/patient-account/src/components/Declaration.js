@@ -1,16 +1,13 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { Query } from "react-apollo";
-import { gql } from "graphql.macro";
 import format from "date-fns/format";
 import ReactDOM from "react-dom";
 import { Link as RouterLink } from "react-router-dom";
-import { withRouter } from "react-router";
 import { ifProp } from "styled-tools";
 import { injectGlobal } from "react-emotion/macro";
 
 import { MozLogoIcon, CircleIcon } from "@ehealth/icons";
-import { Title, Button, Link, Switch } from "@ehealth/components";
+import { Heading, Button, Link, Switch } from "@ehealth/components";
 
 import DefinitionListView from "./DefinitionListView";
 import FixedBlock from "./FixedBlock";
@@ -20,35 +17,30 @@ import DECLARATION_STATUSES from "../helpers/statuses";
 const DeclarationBody = ({ history, data }) => {
   const {
     id,
-    declaration_number: declarationNumber,
-    signed_at: signedAt,
+    declarationNumber,
+    signedAt,
     status,
     content,
     person: {
-      last_name: lastName,
-      first_name: firstName,
-      second_name: secondName,
-      birth_date: birthDate,
-      birth_settlement: birthSettlement,
-      birth_country: birthCountry,
+      lastName,
+      firstName,
+      secondName,
+      birthDate,
+      birthSettlement,
+      birthCountry,
       gender,
-      tax_id: taxId,
+      taxId,
       phones: [{ number }],
-      emergency_contact: emergencyContact,
-      confidant_person: confidantPerson,
+      emergencyContact,
+      confidantPerson,
       employee
     },
     employee: {
       position,
-      party: employeeFullName,
-      doctor: {
-        specialities,
-        science_degree: scienceDegree,
-        qualifications,
-        educations
-      }
+      employeeFullName,
+      doctor: { specialities, scienceDegree, qualifications, educations }
     },
-    legal_entity: {
+    legalEntity: {
       name: legalEntityName,
       phones: [{ number: legalEntityPhone }]
     },
@@ -58,9 +50,9 @@ const DeclarationBody = ({ history, data }) => {
       addresses: [
         {
           area,
-          settlement_type: settlementType,
+          settlementType,
           settlement,
-          street_type: streetType,
+          streetType,
           street,
           building,
           apartment
@@ -68,13 +60,14 @@ const DeclarationBody = ({ history, data }) => {
       ]
     }
   } = data;
+
   return (
     <>
       <Shadow>
         <DeclarationHeader
           id={id}
-          declaration_number={declarationNumber}
-          signed_at={signedAt}
+          declarationNumber={declarationNumber}
+          signedAt={signedAt}
         />
         <DefinitionListSection>
           <SubTitle>Пацієнт</SubTitle>
@@ -119,13 +112,13 @@ const DeclarationBody = ({ history, data }) => {
           <SubTitle>Контактна особа у разі екстренного випадку</SubTitle>
           <DefinitionListView
             labels={{
-              full_name: "ПІБ",
+              fullName: "ПІБ",
               number: "Контактний номер телефону"
             }}
             data={{
-              full_name: `${emergencyContact.first_name} ${
-                emergencyContact.second_name
-              } ${emergencyContact.last_name}`,
+              fullName: `${emergencyContact.firstName} ${
+                emergencyContact.secondName
+              } ${emergencyContact.lastName}`,
               number: emergencyContact.phones[0].number
             }}
           />
@@ -136,12 +129,12 @@ const DeclarationBody = ({ history, data }) => {
             {confidantPerson.map(
               (
                 {
-                  first_name: firstName,
-                  second_name: secondName,
-                  last_name: lastName,
+                  firstName: firstName,
+                  secondName: secondName,
+                  lastName: lastName,
                   phones: [{ number }],
-                  documents_person: documentsPerson,
-                  documents_relationship: documentsRelationship
+                  documentsPerson: documentsPerson,
+                  documentsRelationship: documentsRelationship
                 },
                 item
               ) => (
@@ -149,13 +142,13 @@ const DeclarationBody = ({ history, data }) => {
                   <FlexItem>
                     <DefinitionListView
                       labels={{
-                        full_name: "ПІБ",
+                        fullName: "ПІБ",
                         number: "Контактний номер телефону",
                         document:
                           "Документ, що посвідчує особу законного представника"
                       }}
                       data={{
-                        full_name: `${firstName} ${secondName} ${lastName}`,
+                        fullName: `${firstName} ${secondName} ${lastName}`,
                         number,
                         document: (
                           <>
@@ -184,7 +177,7 @@ const DeclarationBody = ({ history, data }) => {
                             />{" "}
                             №{documentsRelationship[0].number} від{" "}
                             {format(
-                              documentsRelationship[0].issued_at,
+                              documentsRelationship[0].issuedAt,
                               "DD.MM.YYYY"
                             )}
                           </>
@@ -210,9 +203,9 @@ const DeclarationBody = ({ history, data }) => {
               issuedAt: "Ким та коли видано"
             }}
             data={{
-              fullName: `${employeeFullName.first_name} ${
-                employeeFullName.second_name
-              } ${employeeFullName.last_name}`,
+              fullName: `${employeeFullName.firstName} ${
+                employeeFullName.secondName
+              } ${employeeFullName.lastName}`,
               position: <DictionaryValue name="POSITION" item={position} />,
               scienceDegree: (
                 <DictionaryValue
@@ -238,11 +231,11 @@ const DeclarationBody = ({ history, data }) => {
                     name="QUALIFICATION_TYPE"
                     item={qualifications[0].type}
                   />{" "}
-                  №{qualifications[0].certificate_number}
+                  №{qualifications[0].certificateNumber}
                 </>
               ),
-              issuedAt: `${qualifications[0].institution_name} від ${format(
-                qualifications[0].issued_date,
+              issuedAt: `${qualifications[0].institutionName} від ${format(
+                qualifications[0].issuedDate,
                 "DD.MM.YYYY"
               )}`
             }}
@@ -322,10 +315,10 @@ const DeclarationBody = ({ history, data }) => {
             </>
           }
           terminated={
-            <Title.H3>
+            <Heading.H3>
               Статус декларації: <b>{DECLARATION_STATUSES[status]}</b>{" "}
               <CircleIcon stroke="#ec2257" strokeWidth="4" />
-            </Title.H3>
+            </Heading.H3>
           }
         />
       </FixedBlock>
@@ -354,15 +347,16 @@ injectGlobal`
 
 export const DeclarationHeader = ({
   id,
-  declaration_number,
-  signed_at,
+  declarationNumber,
+  signedAt,
   blur,
   type,
   wrap
 }) => {
   const routerLinkTo =
     type === "declarationRequest" ? "declaration_requests" : "declarations";
-  const start_block = (
+
+  const startBlock = (
     <Flex blur={blur}>
       <MozLogoIcon height="100px" />
       <Left>
@@ -370,17 +364,18 @@ export const DeclarationHeader = ({
         <H3>
           про вибір лікаря з надання первинної допомоги
           <br />
-          № {declaration_number} від {format(signed_at, "DD.MM.YYYY")}
+          № {declarationNumber} від {format(signedAt, "DD.MM.YYYY")}
         </H3>
       </Left>
     </Flex>
   );
+
   return wrap ? (
     <RouterLink to={`/${routerLinkTo}/${id}`}>
-      <Shadow>{start_block}</Shadow>
+      <Shadow>{startBlock}</Shadow>
     </RouterLink>
   ) : (
-    start_block
+    startBlock
   );
 };
 
@@ -396,6 +391,7 @@ const H1 = styled.h1`
   text-transform: uppercase;
   margin: 0;
 `;
+
 const H3 = styled.h3`
   font-size: 16px;
   color: #292b37;
