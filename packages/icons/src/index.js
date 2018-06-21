@@ -6,6 +6,7 @@ export { default as CheckRightIcon } from "./CheckRightIcon";
 export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
 export { default as ChevronRightIcon } from "./ChevronRightIcon";
 export { default as CircleIcon } from "./CircleIcon";
+export { default as CloseIcon } from "./CloseIcon";
 export { default as EhealthLogoIcon } from "./EhealthLogoIcon";
 export { default as InfoIcon } from "./InfoIcon";
 export { default as KeyIcon } from "./KeyIcon";
