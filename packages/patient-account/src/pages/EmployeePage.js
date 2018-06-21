@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { Query, Mutation } from "react-apollo";
-import { gql } from "graphql.macro";
 import { withRouter } from "react-router-dom";
 
-import { getFullName, getSpecialities, getDictValue } from "@ehealth/utils";
-import { Title, Link, Button } from "@ehealth/components";
+import { getFullName } from "@ehealth/utils";
+import { Heading, Link, Button } from "@ehealth/components";
 
 import DictionaryValue from "../components/DictionaryValue";
 import DefinitionListView from "../components/DefinitionListView";
@@ -33,7 +32,9 @@ const EmployeePage = ({ match, history }) => (
           scienceDegree,
           workingExperience,
           aboutMyself
-        }
+        },
+        id: employee_id,
+        division: { id: division_id }
       } = employeeData;
 
       return (
