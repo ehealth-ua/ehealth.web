@@ -1,35 +1,41 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { Link, Tooltip } from "@ehealth/components";
+import { Link, Match, Tooltip } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
 
 import PersonQuery from "../graphql/PersonQuery.graphql";
 
 const UserNav = () => (
   <Query query={PersonQuery}>
-    {({ loading, error, data }) => {
+    {({ loading, error, data: { person } }) => {
       if (loading || error) return null;
-
-      const { data: person } = data.person;
 
       return (
         <Tooltip
           renderParent={({ getProps }) => (
             <UserNavWrapper {...getProps({ refKey: "innerRef" })}>
-              <User>{getFullName(user)}</User>
+              <User>{getFullName(person.data)}</User>
             </UserNavWrapper>
           )}
           renderOverlay={({ active, getProps }) =>
             active && (
               <Menu {...getProps()}>
-                <MenuItem to="/profile" color="black">
-                  Мій профіль
-                </MenuItem>
-                <MenuItem to="/security" color="black">
-                  Безпека
-                </MenuItem>
-                <MenuItem to="/logout" bold>
+                <Match path="/profile">
+                  {({ to, active }) => (
+                    <MenuItem to={to} bold={active} color="black">
+                      Мій профіль
+                    </MenuItem>
+                  )}
+                </Match>
+                <Match path="/security">
+                  {({ to, active }) => (
+                    <MenuItem to={to} bold={active} color="black">
+                      Безпека
+                    </MenuItem>
+                  )}
+                </Match>
+                <MenuItem to="/logout" bold upperCase>
                   Вийти
                 </MenuItem>
               </Menu>
@@ -69,7 +75,9 @@ const User = styled.div`
 `;
 
 const Menu = styled.div`
-  padding: 10px 30px 30px;
+  min-width: 140px;
+  margin-top: 20px;
+  padding: 30px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 `;
@@ -77,5 +85,9 @@ const Menu = styled.div`
 const MenuItem = styled(Link)`
   display: block;
   white-space: nowrap;
-  margin-top: 20px;
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
