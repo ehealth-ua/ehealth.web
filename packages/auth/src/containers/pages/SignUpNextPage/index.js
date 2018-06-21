@@ -56,7 +56,6 @@ class SignUpNextForm extends Component {
     return (
       <StepForm
         initialValues={this.initialValues}
-        forgetFields={["otp"]}
         step={this.currentStep}
         transitions={{
           person: this.personTransition,

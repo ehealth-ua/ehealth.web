@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Flex, Box } from "grid-emotion";
 import { connect } from "react-redux";
 import debounce from "lodash/debounce";
 import subYears from "date-fns/sub_years";
@@ -134,18 +133,18 @@ const SignUpPersonPage = ({ location }) => (
           field="local.document.type"
           message="Об'язкове поле"
         />
-        <Flex justifyContent="space-between" alignItems="center">
-          <Box width={2 / 8} display="inherit">
+        <Field.Row>
+          <Field.Col width={1 / 3}>
             <Field.Input name="local.document.series" placeholder="Серія" />
-          </Box>
-          <Box width={5 / 8} display="inherit">
+          </Field.Col>
+          <Field.Col width={2 / 3}>
             <Field.Input name="local.document.number" placeholder="Номер" />
             <Validation.Required
               field="local.document.number"
               message="Об'язкове поле"
             />
-          </Box>
-        </Flex>
+          </Field.Col>
+        </Field.Row>
         <Field.Input
           name="local.document.issued_by"
           placeholder="Ким виданий"
@@ -161,14 +160,14 @@ const SignUpPersonPage = ({ location }) => (
           message="Невірна дата"
         />
         <Field.Group label="Стать">
-          <Flex my={10}>
-            <Box width={1 / 3}>
+          <Field.Row>
+            <Field.Col width={1 / 3}>
               <Field.Radio name="person.gender" label="Жіноча" value="FEMALE" />
-            </Box>
-            <Box width={1 / 3}>
+            </Field.Col>
+            <Field.Col width={1 / 3}>
               <Field.Radio name="person.gender" label="Чоловіча" value="MALE" />
-            </Box>
-          </Flex>
+            </Field.Col>
+          </Field.Row>
         </Field.Group>
         <Validation.Required field="person.gender" message="Об'язкове поле" />
         <AddressFields type="REGISTRATION" label="Адреса реєстрації" />
@@ -344,8 +343,8 @@ class AddressFields extends Component {
             message="Довжина становить 5 символів"
           />
         </Validations>
-        <Flex justifyContent="space-between">
-          <Box width={3 / 7} display="inherit">
+        <Field.Row>
+          <Field.Col width={1 / 2}>
             <Connect
               mapStateToProps={state => ({
                 streetTypes: Object.entries(
@@ -367,8 +366,8 @@ class AddressFields extends Component {
                 />
               )}
             </Connect>
-          </Box>
-          <Box width={3 / 7} display="inherit">
+          </Field.Col>
+          <Field.Col width={1 / 2}>
             <Field.Input
               name={`local.addresses[${type}].street`}
               placeholder="Назва вулиці"
@@ -378,10 +377,10 @@ class AddressFields extends Component {
               options={NAME_PATTERN}
               message="Дозволені тільки цифри та літери українського й англійського алфавіту"
             />
-          </Box>
-        </Flex>
-        <Flex justifyContent="space-between">
-          <Box width={3 / 7} display="inherit">
+          </Field.Col>
+        </Field.Row>
+        <Field.Row>
+          <Field.Col width={1 / 2}>
             <Field.Input
               name={`local.addresses[${type}].building`}
               placeholder="№ буд."
@@ -393,14 +392,14 @@ class AddressFields extends Component {
                 message="Невірний формат"
               />
             </Validations>
-          </Box>
-          <Box width={3 / 7} display="inherit">
+          </Field.Col>
+          <Field.Col width={1 / 2}>
             <Field.Input
               name={`local.addresses[${type}].apartment`}
               placeholder="№ квартири"
             />
-          </Box>
-        </Flex>
+          </Field.Col>
+        </Field.Row>
       </Field.Group>
     );
   }

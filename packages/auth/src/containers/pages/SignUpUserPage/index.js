@@ -1,5 +1,4 @@
 import React from "react";
-import { Flex, Box } from "grid-emotion";
 import { Link } from "react-router";
 import Composer from "react-composer";
 import { formatPhone, parsePhone } from "@ehealth/utils";
@@ -96,22 +95,22 @@ const SignUpUserPage = ({ location, router }) => (
           />
         </Validations>
         <Field.Group label="Бажаний метод зв'язку">
-          <Flex my={10}>
-            <Box width={1 / 3}>
+          <Field.Row>
+            <Field.Col width={1 / 3}>
               <Field.Radio
                 name="person.preferred_way_communication"
                 label="Телефон"
                 value="phone"
               />
-            </Box>
-            <Box width={1 / 3}>
+            </Field.Col>
+            <Field.Col width={1 / 3}>
               <Field.Radio
                 name="person.preferred_way_communication"
                 label="Email"
                 value="email"
               />
-            </Box>
-          </Flex>
+            </Field.Col>
+          </Field.Row>
         </Field.Group>
         <Field.Input name="person.secret" placeholder="Слово-пароль" />
         <Validations field="person.secret">
