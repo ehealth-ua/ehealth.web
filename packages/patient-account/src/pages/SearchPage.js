@@ -221,7 +221,8 @@ class DivisionsMapView extends Component {
         context={{ credentials: "same-origin" }}
       >
         {({ loading, error, data }) => {
-          if (!data.divisions) return null;
+          if (loading || error) return null;
+
           const { data: divisions } = data.divisions;
           let lngRadius = 0.00003, // degrees of longitude separation
             latToLng = 111.23 / 71.7, // lat to long proportion in Warsaw
