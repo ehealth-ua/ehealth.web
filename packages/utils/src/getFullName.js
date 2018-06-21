@@ -1,7 +1,4 @@
-const getFullName = ({
-  first_name: firstName,
-  second_name: secondName,
-  last_name: lastName
-}) => [firstName, secondName, lastName].filter(Boolean).join(" ");
+const getFullName = ({ firstName, secondName, lastName }) =>
+  [lastName, firstName, secondName].filter(Boolean).join(" ");
 
 export default getFullName;
