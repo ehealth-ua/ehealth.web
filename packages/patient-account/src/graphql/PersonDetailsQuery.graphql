@@ -1,0 +1,25 @@
+query PersonDetailsQuery {
+  person: personDetails
+    @rest(type: "PersonDetailsPayload", path: "/cabinet/persons/details") {
+    data @type(name: "Person") {
+      id
+      firstName
+      lastName
+      secondName
+      gender
+      email
+      taxId
+      secret
+      processDisclosureDataConsent
+      preferredWayCommunication
+      phones
+      emergencyContact
+      documents
+      birthSettlement
+      birthDate
+      birthCountry
+      authenticationMethods
+      addresses
+    }
+  }
+}

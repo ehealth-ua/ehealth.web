@@ -1,54 +1,58 @@
 import React from "react";
-import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { gql } from "graphql.macro";
-import { getFullName, getFullAddress, getPhones } from "@ehealth/utils";
 import { Heading, Link } from "@ehealth/components";
 import { PencilIcon } from "@ehealth/icons";
+import {
+  getDefinitions,
+  getFullName,
+  formatDate,
+  formatPhone
+} from "@ehealth/utils";
 
+import PersonDetailsQuery from "../graphql/PersonDetailsQuery.graphql";
+import Section from "../components/Section";
 import DefinitionListView from "../components/DefinitionListView";
+import DictionaryValue from "../components/DictionaryValue";
+import AddressView from "../components/AddressView";
+import ProfileAuthSection from "../components/ProfileAuthSection";
 
 const ProfilePage = () => (
-  <Query
-    query={gql`
-      query {
-        person @rest(path: "/cabinet/persons/details", type: "PersonPayload") {
-          data
-        }
-      }
-    `}
-  >
-    {({ loading, error, data }) => {
-      if (!data.person) return null;
-      const { data: person } = data.person;
-      const {
-        gender,
-        birth_date: birthDate,
-        birth_country: birthCountry,
-        birth_settlement: birthSettlement,
-        tax_id: taxId,
-        secret,
-        email,
-        preferred_way_communication: preferredWayCommunication
-      } = person;
+  <Query query={PersonDetailsQuery}>
+    {({ loading, error, data: { person } }) => {
+      if (loading || error) return null;
 
-      let passport = person.documents.map(
-        i => (i.type === "PASSPORT" ? i.number : null)
-      );
+      const documents = getDefinitions({
+        data: person.data.documents,
+        keyExtractor: ({ type }) => `documents.${type}`,
+        renderLabel: ({ type }) => (
+          <DictionaryValue name="DOCUMENT_TYPE" item={type} />
+        ),
+        renderItem: item => <DocumentItem data={item} />
+      });
 
-      let registrationAddress = person.addresses.filter(
-        i => (i.type === "REGISTRATION" ? i : null)
-      );
+      const addresses = getDefinitions({
+        data: person.data.addresses,
+        keyExtractor: ({ type }) => `addresses.${type}`,
+        renderLabel: ({ type }) => (
+          <>
+            Адреса <DictionaryValue name="ADDRESS_TYPE" item={type} />
+          </>
+        ),
+        renderItem: item => <AddressView data={item} />
+      });
 
-      let residenceAddress = person.addresses.filter(
-        i => (i.type === "RESIDENCE" ? i : null)
-      );
+      const phones = getDefinitions({
+        data: person.data.phones,
+        keyExtractor: ({ type }) => `phones.${type}`,
+        renderLabel: () => "Номер телефону",
+        renderItem: ({ number }) => formatPhone(number)
+      });
 
       return (
         <>
-          <Heading.H1>мій профіль</Heading.H1>
-          <DefinitionListSection>
-            <SubTitle>
+          <Heading.H1>Мій профіль</Heading.H1>
+          <Section>
+            <Heading.H3 weight="bold">
               Персональні дані
               <Link
                 to="/profile/edit"
@@ -59,7 +63,7 @@ const ProfilePage = () => (
               >
                 Редагувати профіль
               </Link>
-            </SubTitle>
+            </Heading.H3>
             <DefinitionListView
               labels={{
                 name: "ПІБ",
@@ -69,85 +73,63 @@ const ProfilePage = () => (
                 gender: "Стать"
               }}
               data={{
-                name: getFullName(person),
-                gender,
-                birthDate,
-                birthCountry,
-                birthSettlement
+                ...person.data,
+                name: getFullName(person.data),
+                birthDate: formatDate(person.data.birthDate),
+                gender: (
+                  <DictionaryValue name="GENDER" item={person.data.gender} />
+                )
               }}
             />
-          </DefinitionListSection>
-          <DefinitionListSection>
+          </Section>
+          <Section>
             <DefinitionListView
-              labels={{
-                taxId: "ІНН",
-                passport: "Паспорт"
-              }}
-              data={{ taxId, passport }}
+              labels={{ taxId: "ІПН", ...documents.labels }}
+              data={{ ...person.data, ...documents.items }}
             />
-          </DefinitionListSection>
-          <DefinitionListSection>
+          </Section>
+          <Section>
             <DefinitionListView
               labels={{
-                registrationAddress: "Адреса реєстрації",
-                residence: "Адреса проживання",
+                ...addresses.labels,
                 preferredWayCommunication: "Бажаний метод зв’язку",
                 secret: "Слово-пароль"
               }}
-              data={{
-                secret,
-                preferredWayCommunication,
-                registrationAddress: getFullAddress(registrationAddress[0]),
-                residence: getFullAddress(residenceAddress[0])
-              }}
+              data={{ ...person.data, ...addresses.items }}
             />
-          </DefinitionListSection>
-          <DefinitionListSection>
-            <SubTitle>Контактна особа у екстреному випадку</SubTitle>
+          </Section>
+          <Section>
+            <Heading.H3 weight="bold">
+              Контактна особа у екстреному випадку
+            </Heading.H3>
             <DefinitionListView
               labels={{
                 name: "ПІБ",
-                phone: "Номер телефону"
+                ...phones.labels
               }}
               data={{
-                name: getFullName(person.emergency_contact),
-                phone: getPhones(person.emergency_contact.phones)
+                name: getFullName(person.data.emergencyContact),
+                ...phones.items
               }}
             />
-          </DefinitionListSection>
-          <DefinitionListSection>
-            <SubTitle>Авторизація</SubTitle>
-            <DefinitionListView
-              labels={{
-                email: "Email",
-                phone: "Номер телефону"
-              }}
-              data={{
-                email,
-                phone: person.authentication_methods[0].phone_number
-              }}
-            />
-          </DefinitionListSection>
+          </Section>
+          <ProfileAuthSection data={person.data} />
         </>
       );
     }}
   </Query>
 );
 
-const DefinitionListSection = styled.div`
-  margin: 30px 0;
-  border-bottom: 1px solid #e7e7e9;
-  &:last-of-type {
-    border-bottom: none;
-  }
-`;
-
-const SubTitle = styled.h3`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  font-size: 16px;
-`;
-
 export default ProfilePage;
+
+const DocumentItem = ({ data: { number, issuedBy, issuedAt } }) => (
+  <>
+    {number}
+    {issuedBy && (
+      <>
+        <br />
+        виданий {issuedBy} {issuedAt && formatDate(issuedAt)}
+      </>
+    )}
+  </>
+);
