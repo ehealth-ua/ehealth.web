@@ -5,6 +5,7 @@
   "dependencies": {
     "@ehealth/components": "file:../components",
     "@ehealth/icons": "file:../icons",
+    "@ehealth/react-iit-digital-signature": "file:../react-iit-digital-signature",
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
     "apollo-link-rest": "^0.3.0",

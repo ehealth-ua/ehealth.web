@@ -1,0 +1,18 @@
+query SearchSettlementsQuery(
+  $name: String = ""
+  $region: String!
+  $pageSize: Int = 50
+) {
+  settlements(name: $name, region: $region, pageSize: $pageSize)
+    @rest(
+      path: "/uaddresses/search/settlements?name=:name&region=:region&page_size=:pageSize"
+      type: "SearchSettlementsPayload"
+    ) {
+    data @type(name: "Settlement") {
+      id
+      type
+      name
+      district
+    }
+  }
+}

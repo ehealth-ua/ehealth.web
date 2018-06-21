@@ -1,0 +1,12 @@
+mutation UpdatePerson($id: ID!, $input: UpdatePersonInput!) {
+  person: updatePerson(id: $id, input: $input)
+    @rest(
+      type: "UpdatePersonPayload"
+      path: "/cabinet/persons/:id"
+      method: "PATCH"
+    ) {
+    data @type(name: "Person") {
+      id
+    }
+  }
+}

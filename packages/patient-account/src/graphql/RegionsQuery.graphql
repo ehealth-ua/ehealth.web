@@ -1,0 +1,9 @@
+query RegionsQuery {
+  regions
+    @rest(type: "RegionsPayload", path: "/uaddresses/regions?page_size=30") {
+    data @type(name: "Region") {
+      id
+      name
+    }
+  }
+}

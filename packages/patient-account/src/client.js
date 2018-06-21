@@ -24,7 +24,15 @@ const client = new ApolloClient({
     credentials: "include",
     fieldNameNormalizer,
     fieldNameDenormalizer
-  })
+  }),
+  defaultOptions: {
+    query: {
+      errorPolicy: "all"
+    },
+    mutate: {
+      errorPolicy: "all"
+    }
+  }
 });
 
 export default client;
