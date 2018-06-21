@@ -92,7 +92,7 @@ const RadioMark = styled(CheckMark.withComponent("div"))`
 
 const Label = styled.div`
   color: #3d3d3d;
-  font-size: ${prop("theme.input.labelFontSize", 12)}px;
+  font-size: ${prop("theme.input.labelFontSize", 16)}px;
   text-align: left;
   margin: 0 10px;
 `;
