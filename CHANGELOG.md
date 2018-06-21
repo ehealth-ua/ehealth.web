@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.34.0"></a>
+# [0.34.0](https://github.com/edenlabllc/ehealth.web/compare/v0.33.0...v0.34.0) (2018-06-21)
+
+
+### Bug Fixes
+
+* **patient-account:** fix pageSize variable name in SearchDivisionsByMapQuery ([8780ba8](https://github.com/edenlabllc/ehealth.web/commit/8780ba8))
+* **patient-account:** review defininion lists on Profile page, move duplicated code into components ([ee22675](https://github.com/edenlabllc/ehealth.web/commit/ee22675))
+* **patient-account:** use /api prefix for /reports/stats endpoint ([ba7fd29](https://github.com/edenlabllc/ehealth.web/commit/ba7fd29))
+
+
+### Features
+
+* rename Title component to Heading, add ability to override Heading appearance with props ([8b66233](https://github.com/edenlabllc/ehealth.web/commit/8b66233))
+* **auth:** add content signing logic to Sign page ([7fa5915](https://github.com/edenlabllc/ehealth.web/commit/7fa5915))
+* **components:** add ability to disable item addition and removal in the ArrayField component ([e183056](https://github.com/edenlabllc/ehealth.web/commit/e183056))
+* **components:** add Field grid components ([88b53b7](https://github.com/edenlabllc/ehealth.web/commit/88b53b7))
+* **components:** add nil item filtering and ability to customize item keys to DefinitionList component ([609e938](https://github.com/edenlabllc/ehealth.web/commit/609e938))
+* **components:** move Field component into separate file, move FieldWrapper and FieldLabel into FieldView component, add horizontal Field appearance ([53dde70](https://github.com/edenlabllc/ehealth.web/commit/53dde70)), closes [#23](https://github.com/edenlabllc/ehealth.web/issues/23)
+* **components:** use Flex component as Heading base component ([bd19090](https://github.com/edenlabllc/ehealth.web/commit/bd19090))
+* **patient-account:** add AddressView component ([3faf48d](https://github.com/edenlabllc/ehealth.web/commit/3faf48d))
+* **patient-account:** add ProfileEdit page ([ce3121b](https://github.com/edenlabllc/ehealth.web/commit/ce3121b))
+* **patient-account:** add theme ([fb2584e](https://github.com/edenlabllc/ehealth.web/commit/fb2584e))
+* **patient-account:** adopt theme values into DefinitionList, use appropriate html tags for DefinitionList items ([5609355](https://github.com/edenlabllc/ehealth.web/commit/5609355))
+* **react-iit-digital-signature:** remove content signing logic from Signer.Child ([d7a7f8c](https://github.com/edenlabllc/ehealth.web/commit/d7a7f8c))
+* **utils:** add convertObjectKeys, fieldNameNormalizer and fieldNameDenormalizer functions ([4a8407c](https://github.com/edenlabllc/ehealth.web/commit/4a8407c))
+* **utils:** add getDefinitions function ([d4f470b](https://github.com/edenlabllc/ehealth.web/commit/d4f470b))
+
+
+
+
+
 <a name="0.33.0"></a>
 # [0.33.0](https://github.com/edenlabllc/ehealth.web/compare/v0.32.0...v0.33.0) (2018-06-20)
 

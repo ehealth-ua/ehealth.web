@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.34.0"></a>
+# [0.34.0](https://github.com/edenlabllc/ehealth.web/compare/v0.33.0...v0.34.0) (2018-06-21)
+
+
+### Features
+
+* **utils:** add convertObjectKeys, fieldNameNormalizer and fieldNameDenormalizer functions ([4a8407c](https://github.com/edenlabllc/ehealth.web/commit/4a8407c))
+* **utils:** add getDefinitions function ([d4f470b](https://github.com/edenlabllc/ehealth.web/commit/d4f470b))
+
+
+
+
+
 <a name="0.33.0"></a>
 # [0.33.0](https://github.com/edenlabllc/ehealth.web/compare/v0.32.0...v0.33.0) (2018-06-20)
 

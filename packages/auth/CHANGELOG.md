@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.34.0"></a>
+# [0.34.0](https://github.com/edenlabllc/ehealth.web/compare/v0.33.0...v0.34.0) (2018-06-21)
+
+
+### Features
+
+* **auth:** add content signing logic to Sign page ([7fa5915](https://github.com/edenlabllc/ehealth.web/commit/7fa5915))
+
+
+
+
+
 <a name="0.33.0"></a>
 # [0.33.0](https://github.com/edenlabllc/ehealth.web/compare/v0.32.0...v0.33.0) (2018-06-20)
 

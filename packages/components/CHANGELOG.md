@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.34.0"></a>
+# [0.34.0](https://github.com/edenlabllc/ehealth.web/compare/v0.33.0...v0.34.0) (2018-06-21)
+
+
+### Features
+
+* rename Title component to Heading, add ability to override Heading appearance with props ([8b66233](https://github.com/edenlabllc/ehealth.web/commit/8b66233))
+* **components:** add ability to disable item addition and removal in the ArrayField component ([e183056](https://github.com/edenlabllc/ehealth.web/commit/e183056))
+* **components:** add Field grid components ([88b53b7](https://github.com/edenlabllc/ehealth.web/commit/88b53b7))
+* **components:** add nil item filtering and ability to customize item keys to DefinitionList component ([609e938](https://github.com/edenlabllc/ehealth.web/commit/609e938))
+* **components:** move Field component into separate file, move FieldWrapper and FieldLabel into FieldView component, add horizontal Field appearance ([53dde70](https://github.com/edenlabllc/ehealth.web/commit/53dde70)), closes [#23](https://github.com/edenlabllc/ehealth.web/issues/23)
+* **components:** use Flex component as Heading base component ([bd19090](https://github.com/edenlabllc/ehealth.web/commit/bd19090))
+
+
+
+
+
 <a name="0.33.0"></a>
 # [0.33.0](https://github.com/edenlabllc/ehealth.web/compare/v0.32.0...v0.33.0) (2018-06-20)
 
