@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { prop, ifProp, switchProp, withProp } from "styled-tools";
+import { Flex } from "grid-emotion";
 
 const DEFAULT_FONT_SIZES = [22, 18, 16, 14, 14, 12];
 
 const H1 = props => (
-  <Heading textAlign="center" upperCase {...props} level={1} />
+  <Heading justifyContent="center" upperCase {...props} level={1} />
 );
 
 const H2 = props => <Heading weight="light" upperCase {...props} level={2} />;
@@ -23,7 +24,11 @@ const Heading = ({ level = 1, ...props }) => {
   return <Component level={level} {...props} />;
 };
 
-const BasicHeading = styled.h1`
+Heading.defaultProps = {
+  justifyContent: "space-between"
+};
+
+const BasicHeading = styled(Flex)`
   color: #454545;
   margin-top: 0;
   margin-bottom: 20px;
@@ -37,7 +42,6 @@ const BasicHeading = styled.h1`
     bold: 700
   })};
   text-transform: ${ifProp("upperCase", "uppercase")};
-  text-align: ${prop("textAlign")};
 `;
 
 Heading.H1 = H1;
