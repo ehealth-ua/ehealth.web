@@ -1,0 +1,16 @@
+mutation TerminateDeclarationQuery(
+  $id: ID!
+  $input: TerminateDeclarationInput!
+) {
+  declaration: terminateDeclaration(id: $id, input: $input)
+    @rest(
+      type: "TerminateDeclatationPayload"
+      path: "/cabinet/declarations/:id/actions/terminate"
+      method: "PATCH"
+    ) {
+    data @type(name: "Declaration") {
+      id
+      status
+    }
+  }
+}
