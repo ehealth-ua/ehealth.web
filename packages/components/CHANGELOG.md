@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.35.0"></a>
+# [0.35.0](https://github.com/edenlabllc/ehealth.web/compare/v0.34.0...v0.35.0) (2018-06-21)
+
+
+### Bug Fixes
+
+* **components:** add check for active status for the Overlay. Change mouse events. ([9bdfeb8](https://github.com/edenlabllc/ehealth.web/commit/9bdfeb8))
+
+
+### Features
+
+* **components:** add Match component ([4e18774](https://github.com/edenlabllc/ehealth.web/commit/4e18774))
+
+
+
+
+
 <a name="0.34.0"></a>
 # [0.34.0](https://github.com/edenlabllc/ehealth.web/compare/v0.33.0...v0.34.0) (2018-06-21)
 
