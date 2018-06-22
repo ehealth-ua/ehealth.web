@@ -8,38 +8,36 @@ const DeclarationHistory = ({ data }) => (
   <CabinetTable
     data={data}
     header={{
-      start_date: "Дата ухвалення декларації",
+      startDate: "Дата ухвалення декларації",
       status: "Статус",
-      division_name: "Назва відділення",
+      divisionName: "Назва відділення",
       employee: (
         <>
           ПІБ<br /> лікаря
         </>
       ),
-      // doctor_contact: "Контакті дані лікаря",
-      legal_entity_name: "Медзаклад",
+      legalEntityName: "Медзаклад",
       action: "Дія"
     }}
     renderRow={({
-      id: declaration_id,
-      start_date,
+      id,
+      startDate,
       status,
-      employee: { party: { last_name, first_name, second_name } },
-      division: { name: division_name },
-      legal_entity: { name: legal_entity_name },
-      details
+      employee: { party: { lastName, firstName, secondName } },
+      division: { name: divisionName },
+      legalEntity: { name: legalEntityName }
     }) => ({
-      start_date: format(start_date, "DD.MM.YYYY"),
+      startDate: format(startDate, "DD.MM.YYYY"),
       status: DECLARATION_STATUSES[status],
-      division_name,
+      divisionName,
       employee: (
         <>
-          {last_name} {first_name} {second_name}
+          {lastName} {firstName} {secondName}
         </>
       ),
-      legal_entity_name,
+      legalEntityName,
       action: (
-        <Link bold to={`/declarations/${declaration_id}`}>
+        <Link bold to={`/declarations/${id}`}>
           Показати деталі
         </Link>
       )
