@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.36.0"></a>
+# [0.36.0](https://github.com/edenlabllc/ehealth.web/compare/v0.35.0...v0.36.0) (2018-06-22)
+
+
+### Bug Fixes
+
+* edit appolo-link-rest configuration in package-lock.json ([3b137c0](https://github.com/edenlabllc/ehealth.web/commit/3b137c0))
+* **patient-account:** add watchQuery to defaultQuery ([a511029](https://github.com/edenlabllc/ehealth.web/commit/a511029))
+
+
+### Features
+
+* **patient-account:** add content-type header to Rest-Link constructor ([181dad7](https://github.com/edenlabllc/ehealth.web/commit/181dad7))
+* **patient-account:** allow to specify all error in Query and Mutation onError callback, leave config for setup appolo-link-error ([c3223b8](https://github.com/edenlabllc/ehealth.web/commit/c3223b8))
+* **patient-account:** create declaraion_request flow ([ff06c8e](https://github.com/edenlabllc/ehealth.web/commit/ff06c8e))
+* **patient-account:** create declaration request Mutation btn with not pretty mapping API error ([6c3d56e](https://github.com/edenlabllc/ehealth.web/commit/6c3d56e))
+* **patient-account:** create declaration start flow with error mapping ([b37107a](https://github.com/edenlabllc/ehealth.web/commit/b37107a))
+
+
+
+
+
 <a name="0.35.0"></a>
 # [0.35.0](https://github.com/edenlabllc/ehealth.web/compare/v0.34.0...v0.35.0) (2018-06-21)
 
