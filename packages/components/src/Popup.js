@@ -5,34 +5,24 @@ import styled from "react-emotion/macro";
 import { CloseIcon } from "@ehealth/icons";
 import { Link } from "@ehealth/components";
 
-const Popup = ({ onClose = () => {}, children }) => {
-  return (
-    <Overlay>
+const Popup = ({ onClose = () => {}, children }) =>
+  createPortal(
+    <>
       <Fade onClick={onClose} />
       <PopupWindow>
-        <Link onClick={onClose}>
-          <CloseButton />
-        </Link>
+        <CloseButton onClick={onClose}>
+          <CloseIcon />
+        </CloseButton>
 
         {children}
-
-        <LinkContainer>
-          <Link size="small" onClick={onClose}>
-            Повернутися
-          </Link>
-        </LinkContainer>
       </PopupWindow>
-    </Overlay>
+    </>,
+    window.document.body
   );
-};
 
 export default Popup;
 
-const Overlay = ({ children }) => {
-  return createPortal(children, window.document.body);
-};
-
-const CloseButton = styled(CloseIcon)`
+const CloseButton = styled.button`
   position: absolute;
   top: 28px;
   right: 30px;
@@ -58,12 +48,8 @@ const PopupWindow = styled.div`
   }
 `;
 
-const LinkContainer = styled.div`
-  margin: 4px 0;
-`;
-
 const Fade = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
