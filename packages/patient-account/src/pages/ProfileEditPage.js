@@ -23,6 +23,7 @@ import {
   parsePhone
 } from "@ehealth/utils";
 
+import { REACT_APP_SIGNER_URL } from "../env";
 import PersonDetailsQuery from "../graphql/PersonDetailsQuery.graphql";
 import RegionsQuery from "../graphql/RegionsQuery.graphql";
 import SearchSettlementsQuery from "../graphql/SearchSettlementsQuery.graphql";
@@ -47,7 +48,7 @@ const ProfileEditPage = ({ history }) => (
       {({ loading, error, data: { person } }) =>
         !(loading || error) && (
           <Signer.Parent
-            url="http://localhost:3000/sign"
+            url={REACT_APP_SIGNER_URL}
             features={{ width: 640, height: 589 }}
           >
             {({ signData }) => (
