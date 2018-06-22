@@ -3,7 +3,7 @@ import { ifProp } from "styled-tools";
 import { Mutation } from "react-apollo";
 import styled from "react-emotion/macro";
 
-import { Form, Field, Popup } from "@ehealth/components";
+import { Form, Field, Link, Popup } from "@ehealth/components";
 
 import TerminateQuery from "../graphql/TerminateDeclarationQuery.graphql";
 
@@ -39,6 +39,10 @@ const DeclarationReject = ({ onClose, id, onReject }) => (
 
             <Form.Submit size="small">Розірвати декларацію</Form.Submit>
           </RejectForm>
+
+          <Link size="small" onClick={onClose}>
+            Повернутися
+          </Link>
         </Popup>
       );
     }}
