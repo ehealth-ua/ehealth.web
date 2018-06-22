@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import { Link as RouterLink } from "react-router-dom";
 import { ifProp } from "styled-tools";
 import { injectGlobal } from "react-emotion/macro";
+import { Mutation } from "react-apollo";
 
 import { MozLogoIcon, CircleIcon } from "@ehealth/icons";
 import { Heading, Button, Link, Switch } from "@ehealth/components";
@@ -13,6 +14,8 @@ import DefinitionListView from "./DefinitionListView";
 import FixedBlock from "./FixedBlock";
 import DictionaryValue from "./DictionaryValue";
 import DECLARATION_STATUSES from "../helpers/statuses";
+
+import ApproveDeclarationRequestMutation from "../graphql/ApproveDeclarationRequestMutation.graphql";
 
 const DeclarationBody = ({ history, data }) => {
   const {
@@ -291,6 +294,30 @@ const DeclarationBody = ({ history, data }) => {
               Статус декларації: <b>{DECLARATION_STATUSES[status]}</b>{" "}
               <CircleIcon stroke="#ec2257" strokeWidth="4" />
             </Heading.H3>
+          }
+          NEW={
+            <Mutation mutation={ApproveDeclarationRequestMutation}>
+              {approveRequest => (
+                <Button
+                  size="small"
+                  upperCase
+                  bold
+                  onClick={async () => {
+                    try {
+                      await approveRequest({
+                        variables: { input: id }
+                      });
+                      history.push("/");
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }}
+                >
+                  {" "}
+                  Підтвердити запит на декларацію
+                </Button>
+              )}
+            </Mutation>
           }
         />
       </FixedBlock>

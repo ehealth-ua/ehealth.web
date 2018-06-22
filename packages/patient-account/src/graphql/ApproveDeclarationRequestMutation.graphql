@@ -1,0 +1,13 @@
+mutation ApproveDeclarationRequestMutation($input: ID!) {
+  declaration: approveRequest(input: $input)
+    @rest(
+      type: "ApproveDeclarationRequestPayload"
+      path: "/1111/cabinet/declaration_requests/:input/actions/approve"
+      method: "PATCH"
+    ) {
+    data @type(name: "Declaration") {
+      id
+      status
+    }
+  }
+}
