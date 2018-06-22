@@ -8,7 +8,7 @@ import { Link } from "@ehealth/components";
 const Popup = ({ onClose = () => {}, children }) => {
   return (
     <Overlay>
-      <Fade />
+      <Fade onClick={onClose} />
       <PopupWindow>
         <Link onClick={onClose}>
           <CloseButton />
