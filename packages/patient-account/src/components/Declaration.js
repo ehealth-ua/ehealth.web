@@ -15,7 +15,6 @@ import DictionaryValue from "./DictionaryValue";
 import DECLARATION_STATUSES from "../helpers/statuses";
 
 const DeclarationBody = ({ history, data }) => {
-  console.log(data);
   const {
     id,
     declarationNumber,
@@ -38,8 +37,9 @@ const DeclarationBody = ({ history, data }) => {
     },
     employee: {
       position,
+      speciality: { speciality } = {},
       party,
-      doctor: { specialities, scienceDegree, qualifications, educations }
+      doctor: { specialities: [{ speciality: _speciality } = {}] = [] } = {}
     },
     legalEntity: {
       name: legalEntityName,
@@ -197,48 +197,19 @@ const DeclarationBody = ({ history, data }) => {
             labels={{
               fullName: "ПІБ",
               position: "Посада",
-              scienceDegree: "Спеціальність",
-              specialities: "Спеціальність за посадою",
-              level: "Рівень спеціалізації",
-              qualifications: "Тип кваліфікації",
-              issuedAt: "Ким та коли видано"
+              specialities: "Спеціальність за посадою"
             }}
             data={{
               fullName: `${party.firstName} ${party.secondName} ${
                 party.lastName
               }`,
               position: <DictionaryValue name="POSITION" item={position} />,
-              scienceDegree: (
-                <DictionaryValue
-                  name="SPECIALITY_TYPE"
-                  item={scienceDegree.speciality}
-                />
-              ),
               specialities: (
                 <DictionaryValue
                   name="SPECIALITY_TYPE"
-                  item={specialities[0].speciality}
+                  item={speciality || _speciality}
                 />
-              ),
-              level: (
-                <DictionaryValue
-                  name="SPECIALITY_LEVEL"
-                  item={specialities[0].level}
-                />
-              ),
-              qualifications: (
-                <>
-                  <DictionaryValue
-                    name="QUALIFICATION_TYPE"
-                    item={qualifications[0].type}
-                  />{" "}
-                  №{qualifications[0].certificateNumber}
-                </>
-              ),
-              issuedAt: `${qualifications[0].institutionName} від ${format(
-                qualifications[0].issuedDate,
-                "DD.MM.YYYY"
-              )}`
+              )
             }}
           />
         </DefinitionListSection>
