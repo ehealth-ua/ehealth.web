@@ -15,6 +15,7 @@ import DictionaryValue from "./DictionaryValue";
 import DECLARATION_STATUSES from "../helpers/statuses";
 
 const DeclarationBody = ({ history, data }) => {
+  console.log(data);
   const {
     id,
     declarationNumber,
@@ -37,7 +38,7 @@ const DeclarationBody = ({ history, data }) => {
     },
     employee: {
       position,
-      employeeFullName,
+      party,
       doctor: { specialities, scienceDegree, qualifications, educations }
     },
     legalEntity: {
@@ -203,9 +204,9 @@ const DeclarationBody = ({ history, data }) => {
               issuedAt: "Ким та коли видано"
             }}
             data={{
-              fullName: `${employeeFullName.firstName} ${
-                employeeFullName.secondName
-              } ${employeeFullName.lastName}`,
+              fullName: `${party.firstName} ${party.secondName} ${
+                party.lastName
+              }`,
               position: <DictionaryValue name="POSITION" item={position} />,
               scienceDegree: (
                 <DictionaryValue
