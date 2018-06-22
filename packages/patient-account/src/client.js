@@ -24,7 +24,6 @@ const client = new ApolloClient({
     headers: {
       "Content-Type": "application/json"
     },
-    endpoints: { stats: "/reports/stats" },
     fieldNameNormalizer,
     fieldNameDenormalizer
   }),
