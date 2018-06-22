@@ -29,6 +29,10 @@ const client = new ApolloClient({
     fieldNameDenormalizer
   }),
   defaultOptions: {
+    watchQuery: {
+      fetchPolicy: "cache-and-network",
+      errorPolicy: "all"
+    },
     query: {
       errorPolicy: "all"
     },
