@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.36.1"></a>
+## [0.36.1](https://github.com/edenlabllc/ehealth.web/compare/v0.36.0...v0.36.1) (2018-06-22)
+
+
+### Bug Fixes
+
+* **patient-account:** get signer URL from env variable ([c3e6411](https://github.com/edenlabllc/ehealth.web/commit/c3e6411))
+
+
+
+
+
 <a name="0.36.0"></a>
 # [0.36.0](https://github.com/edenlabllc/ehealth.web/compare/v0.35.0...v0.36.0) (2018-06-22)
 
