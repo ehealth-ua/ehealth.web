@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "react-emotion/macro";
 import { CircleIcon } from "@ehealth/icons";
-import { Title, Link } from "@ehealth/components";
+import { Heading, Link } from "@ehealth/components";
 
 import DECLARATION_STATUSES from "../helpers/statuses";
 import { DeclarationHeader } from "../components/Declaration";
@@ -38,11 +38,11 @@ class DeclarationItem extends Component {
           wrap
         />
         <Footer>
-          <Title.H3>
+          <Heading.H3>
             {onReject ? "Статус декларації: " : "Статус запиту: "}
             <b>{DECLARATION_STATUSES[status]}</b>{" "}
             <CircleIcon fill={status === "active" && "#c9f032"} />
-          </Title.H3>
+          </Heading.H3>
 
           {onReject && (
             <Link
