@@ -12,12 +12,6 @@ class DeclarationItem extends Component {
     isRejectActive: false
   };
 
-  handleReject() {
-    this.setState({
-      isRejectActive: false
-    });
-  }
-
   render() {
     const { isRejectActive } = this.state;
     const {
@@ -60,7 +54,7 @@ class DeclarationItem extends Component {
           <DeclarationReject
             id={id}
             onReject={onReject}
-            onClose={this.handleReject.bind(this)}
+            onClose={() => this.setState({ isRejectActive: false })}
           />
         )}
       </>
