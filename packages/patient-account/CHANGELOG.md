@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.39.0"></a>
+# [0.39.0](https://github.com/edenlabllc/ehealth.web/compare/v0.38.0...v0.39.0) (2018-06-25)
+
+
+### Bug Fixes
+
+* **patient-account:** change Title to Heading component ([a3fc44d](https://github.com/edenlabllc/ehealth.web/commit/a3fc44d))
+
+
+### Features
+
+* **patient-account:** add DeclarationReject component ([746cf76](https://github.com/edenlabllc/ehealth.web/commit/746cf76))
+* **patient-account:** add returning link to the DeclarationReject component ([3e3b5a9](https://github.com/edenlabllc/ehealth.web/commit/3e3b5a9))
+* **patient-account:** integrate DeclarationReject component to the DeclarationItem, add refetch for updating declaration list after successful declaration reject ([fdfcdd3](https://github.com/edenlabllc/ehealth.web/commit/fdfcdd3))
+
+
+
+
+
 <a name="0.38.0"></a>
 # [0.38.0](https://github.com/edenlabllc/ehealth.web/compare/v0.37.0...v0.38.0) (2018-06-25)
 

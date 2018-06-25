@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.39.0"></a>
+# [0.39.0](https://github.com/edenlabllc/ehealth.web/compare/v0.38.0...v0.39.0) (2018-06-25)
+
+
+### Bug Fixes
+
+* **components:** add onClick listening for closing popup after clicking on faded part ([87cb30f](https://github.com/edenlabllc/ehealth.web/commit/87cb30f))
+
+
+### Features
+
+* **components:** add Popup component ([4dc3d71](https://github.com/edenlabllc/ehealth.web/commit/4dc3d71))
+
+
+
+
+
 <a name="0.38.0"></a>
 # [0.38.0](https://github.com/edenlabllc/ehealth.web/compare/v0.37.0...v0.38.0) (2018-06-25)
 
