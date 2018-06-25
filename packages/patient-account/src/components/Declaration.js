@@ -40,7 +40,7 @@ const DeclarationBody = ({ history, data }) => {
     },
     employee: {
       position,
-      speciality: { speciality } = {},
+      speciality = "",
       party,
       doctor: { specialities: [{ speciality: _speciality } = {}] = [] } = {}
     },
