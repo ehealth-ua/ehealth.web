@@ -313,7 +313,6 @@ const DeclarationBody = ({ history, data }) => {
                     }
                   }}
                 >
-                  {" "}
                   Підтвердити запит на декларацію
                 </Button>
               )}
