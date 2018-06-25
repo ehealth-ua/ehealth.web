@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.38.0"></a>
+# [0.38.0](https://github.com/edenlabllc/ehealth.web/compare/v0.37.0...v0.38.0) (2018-06-25)
+
+
+### Bug Fixes
+
+* **components:** set consistent font size for checkable field label ([dbe92e7](https://github.com/edenlabllc/ehealth.web/commit/dbe92e7))
+
+
+### Features
+
+* **components:** add custom Date validation ([cf40dd7](https://github.com/edenlabllc/ehealth.web/commit/cf40dd7))
+
+
+
+
+
 <a name="0.37.0"></a>
 # [0.37.0](https://github.com/edenlabllc/ehealth.web/compare/v0.36.3...v0.37.0) (2018-06-25)
 

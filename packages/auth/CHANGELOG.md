@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.38.0"></a>
+# [0.38.0](https://github.com/edenlabllc/ehealth.web/compare/v0.37.0...v0.38.0) (2018-06-25)
+
+
+### Bug Fixes
+
+* test date presence on date fields ([838a096](https://github.com/edenlabllc/ehealth.web/commit/838a096))
+* **auth:** add client_id and redirect_uri params to sign in link when trying to register existing user ([8d66da7](https://github.com/edenlabllc/ehealth.web/commit/8d66da7))
+* **auth:** replace grid-emotion components with field grid components ([85a07c2](https://github.com/edenlabllc/ehealth.web/commit/85a07c2))
+
+
+
+
+
 <a name="0.37.0"></a>
 # [0.37.0](https://github.com/edenlabllc/ehealth.web/compare/v0.36.3...v0.37.0) (2018-06-25)
 
