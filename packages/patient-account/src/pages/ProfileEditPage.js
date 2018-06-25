@@ -276,7 +276,7 @@ const DocumentFields = ({ name }) => (
       format={formatDate}
       parse={parseDate}
     />
-    <Validation.ISO8601 field={`${name}.issuedAt`} message="Невірна дата" />
+    <Validation.Date field={`${name}.issuedAt`} message="Невірна дата" />
   </Field.Group>
 );
 

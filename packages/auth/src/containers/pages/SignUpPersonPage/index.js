@@ -101,7 +101,7 @@ const SignUpPersonPage = ({ location }) => (
         />
         <Validations field="person.birth_date">
           <Validation.Required message="Об'язкове поле" />
-          <Validation.ISO8601 message="Невірна дата" />
+          <Validation.Date message="Невірна дата" />
           <Validation.After
             options={subYears(new Date(), 100).toISOString()}
             message="Невірна дата"
@@ -155,7 +155,7 @@ const SignUpPersonPage = ({ location }) => (
           format={formatDate}
           parse={parseDate}
         />
-        <Validation.ISO8601
+        <Validation.Date
           field="local.document.issued_at"
           message="Невірна дата"
         />
