@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.36.2"></a>
+## [0.36.2](https://github.com/edenlabllc/ehealth.web/compare/v0.36.1...v0.36.2) (2018-06-25)
+
+
+### Bug Fixes
+
+* **components:** Fix multiline bug in FileField ([1ff0230](https://github.com/edenlabllc/ehealth.web/commit/1ff0230))
+* **patient-account:** Add setSearchParams in FormAutoFetch ([ddbab8f](https://github.com/edenlabllc/ehealth.web/commit/ddbab8f))
+* **patient-account:** Change apostrophe to unicode symbol ([e29805a](https://github.com/edenlabllc/ehealth.web/commit/e29805a))
+* **patient-account:** Fix search by settlement ([6767a1d](https://github.com/edenlabllc/ehealth.web/commit/6767a1d))
+* **patient-account:** Remove constructor ([cffba33](https://github.com/edenlabllc/ehealth.web/commit/cffba33))
+
+
+
+
+
 <a name="0.36.1"></a>
 ## [0.36.1](https://github.com/edenlabllc/ehealth.web/compare/v0.36.0...v0.36.1) (2018-06-22)
 
