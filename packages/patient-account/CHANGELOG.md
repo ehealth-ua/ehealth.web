@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.37.0"></a>
+# [0.37.0](https://github.com/edenlabllc/ehealth.web/compare/v0.36.3...v0.37.0) (2018-06-25)
+
+
+### Bug Fixes
+
+* **patient-account:** add necessary response body for createDeclarationRequest ([4121e01](https://github.com/edenlabllc/ehealth.web/commit/4121e01))
+* **patient-account:** fill onto new api responce for declaration_request ([6599362](https://github.com/edenlabllc/ehealth.web/commit/6599362))
+* **patient-account:** fix path inside Mutation ([9550e11](https://github.com/edenlabllc/ehealth.web/commit/9550e11))
+* **patient-account:** remove fields from declartion preview  that are not in declaration_request responce ([93f50dc](https://github.com/edenlabllc/ehealth.web/commit/93f50dc))
+
+
+### Features
+
+* **patient-account:** add Approve Declaration Request functionality for Declaration Request with staus NEW ([2e3d716](https://github.com/edenlabllc/ehealth.web/commit/2e3d716))
+* **patient-account:** move to request details after creating request ([1fe61ba](https://github.com/edenlabllc/ehealth.web/commit/1fe61ba))
+
+
+
+
+
 <a name="0.36.2"></a>
 ## [0.36.2](https://github.com/edenlabllc/ehealth.web/compare/v0.36.1...v0.36.2) (2018-06-25)
 
