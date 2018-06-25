@@ -142,8 +142,8 @@ const InputsWithQuery = props => {
             </FlexItem>
             <FlexItem>
               <Field.Input
-                label={<b>Повне ім\'я лікаря</b>}
-                placeholder="Прізвище, ім'я, по-батькові"
+                label={<b>Повне ім&#700;я лікаря</b>}
+                placeholder="Прізвище, ім&#700;я, по-батькові"
                 name="fullName"
                 value={fullName}
               />
