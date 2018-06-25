@@ -20,7 +20,11 @@ export default class FormAutoFetch extends PureComponent {
                   }
                 });
               }
-              return this.renderFnDebounced({ values, searchParams });
+              return this.renderFnDebounced({
+                values,
+                searchParams,
+                setSearchParams
+              });
             }}
           </FormSpy>
         )}
