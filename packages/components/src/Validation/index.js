@@ -39,7 +39,11 @@ const CUSTOM_VALIDATORS = {
   Required: value =>
     (Array.isArray(value) && value.length > 0) ||
     (typeof value === "number" && !isNaN(value)) ||
-    Boolean(value)
+    Boolean(value),
+  Date: value => {
+    const date = Date.parse(value);
+    return !isNaN(date) && new Date(date).toISOString().startsWith(value);
+  }
 };
 
 const PREDEFINED_VALIDATORS = { ...VENDOR_VALIDATORS, ...CUSTOM_VALIDATORS };
