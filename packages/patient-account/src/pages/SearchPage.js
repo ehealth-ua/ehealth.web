@@ -28,11 +28,6 @@ const DEFAULT_CENTER = { lat: 50.4021368, lng: 30.4525107 };
 const DEFAULT_ZOOM = 9;
 
 class SearchPage extends Component {
-  constructor(props) {
-    super(props);
-    this.addSearchData = this.addSearchData.bind(this);
-  }
-
   state = {
     search: [],
     location: ""
@@ -106,11 +101,7 @@ class SearchPage extends Component {
     );
   }
 
-  addSearchData({ data }) {
-    this.setState({
-      search: data
-    });
-  }
+  addSearchData = ({ data }) => this.setState({ search: data });
 }
 
 export default SearchPage;
@@ -151,7 +142,7 @@ const InputsWithQuery = props => {
             </FlexItem>
             <FlexItem>
               <Field.Input
-                label={<b>Повне ім'я лікаря</b>}
+                label={<b>Повне ім\'я лікаря</b>}
                 placeholder="Прізвище, ім'я, по-батькові"
                 name="fullName"
                 value={fullName}
