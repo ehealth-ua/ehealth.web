@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.36.3"></a>
+## [0.36.3](https://github.com/edenlabllc/ehealth.web/compare/v0.36.2...v0.36.3) (2018-06-25)
+
+
+### Bug Fixes
+
+* **patient-account:** add comment to enable swithing between account and admin ([df782a0](https://github.com/edenlabllc/ehealth.web/commit/df782a0))
+* **patient-account:** refactoring pages with otp ([b667c03](https://github.com/edenlabllc/ehealth.web/commit/b667c03))
+* **patient-account:** remove unnesesary handleSubmit on InviteAcceptForm ([d18e8ad](https://github.com/edenlabllc/ehealth.web/commit/d18e8ad))
+
+
+
+
+
 <a name="0.36.2"></a>
 ## [0.36.2](https://github.com/edenlabllc/ehealth.web/compare/v0.36.1...v0.36.2) (2018-06-25)
 
