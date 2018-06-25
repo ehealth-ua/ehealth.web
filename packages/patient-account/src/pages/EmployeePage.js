@@ -158,7 +158,8 @@ class EmployeePage extends React.Component {
                                   } = await createDeclarationRequest({
                                     variables
                                   });
-                                  console.log(data);
+                                  const { id } = data.declarations.data;
+                                  history.push(`/declaration_requests/${id}`);
                                 } catch (e) {
                                   const {
                                     networkError: { result: { error } } = {}
