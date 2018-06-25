@@ -5,7 +5,7 @@ mutation ApproveDeclarationRequestMutation($input: ID!) {
       path: "/cabinet/declaration_requests/:input/actions/approve"
       method: "PATCH"
     ) {
-    data @type(name: "Declaration") {
+    data @type(name: "DeclarationRequest") {
       id
       status
     }
