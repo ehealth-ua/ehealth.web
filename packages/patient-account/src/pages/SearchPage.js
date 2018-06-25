@@ -8,11 +8,13 @@ import {
   FormAutoFetch,
   CabinetTable,
   Link,
-  withHistoryState
+  withHistoryState,
+  SearchParams
 } from "@ehealth/components";
 import { getFullName, titleCase } from "@ehealth/utils";
 import { MapIcon, ListIcon } from "@ehealth/icons";
 import isEqual from "lodash/isEqual";
+import debounce from "lodash/debounce";
 
 import DivisionsMap from "../components/DivisionsMap";
 import DictionaryValue from "../components/DictionaryValue";
@@ -25,24 +27,102 @@ import SearchDivisionsByMapQuery from "../graphql/SearchDivisionsByMapQuery.grap
 const DEFAULT_CENTER = { lat: 50.4021368, lng: 30.4525107 };
 const DEFAULT_ZOOM = 9;
 
+class SearchPage extends Component {
+  constructor(props) {
+    super(props);
+    this.addSearchData = this.addSearchData.bind(this);
+  }
+
+  state = {
+    search: [],
+    location: ""
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(nextProps, this.props)) {
+      this.setState({
+        location: nextProps.location.pathname
+      });
+    }
+  }
+
+  componentWillMount() {
+    this.setState({
+      location: this.props.location.pathname
+    });
+  }
+
+  render() {
+    const { search, location } = this.state;
+    return (
+      <>
+        <Heading.H1>Крок 1. Оберіть лікаря</Heading.H1>
+        <SearchParams>
+          {params => (
+            <Form
+              onSubmit={() => null /* NOT USED, but required */}
+              subscription={{} /* No need to subscribe to anything */}
+              initialValues={params}
+            >
+              <FlexWrap>
+                <FormAutoFetch debounce={500}>
+                  {({ values, setSearchParams }) => (
+                    <FlexInputsContainer>
+                      <SettlementSelectWithQuery
+                        addSettlement={this.addSettlement}
+                        setSearchParams={setSearchParams}
+                      />
+                      <InputsWithQuery
+                        {...values}
+                        searchParams={params}
+                        addSearchData={this.addSearchData}
+                      />
+                    </FlexInputsContainer>
+                  )}
+                </FormAutoFetch>
+                <Icon>
+                  {!location.match(/\bmap\b/) ? (
+                    <Link to={"/search/map"}>
+                      <MapIcon width={30} height={30} fill="currentColor" />
+                    </Link>
+                  ) : (
+                    <Link to={"/search"}>
+                      <ListIcon width={30} height={30} fill="currentColor" />
+                    </Link>
+                  )}
+                </Icon>
+              </FlexWrap>
+            </Form>
+          )}
+        </SearchParams>
+        <ContentWrapper>
+          {!location.match(/\bmap\b/) ? (
+            <Table search={search} />
+          ) : (
+            <DivisionsMapWithHistory />
+          )}
+        </ContentWrapper>
+      </>
+    );
+  }
+
+  addSearchData({ data }) {
+    this.setState({
+      search: data
+    });
+  }
+}
+
+export default SearchPage;
+
 const InputsWithQuery = props => {
   const { addSearchData, searchParams } = props;
 
-  let settlementRegion;
-  let settlementName;
-
-  const fullName = props.fullName || searchParams.fullName || "";
-  const divisionName = props.divisionName || searchParams.divisionName || "";
-  const settlement = props.settlement || searchParams.settlement || {};
-  const specialityName = props.speciality || searchParams.speciality || "";
-
-  if (settlement && Object.keys(settlement).length) {
-    settlementRegion = settlement.region || searchParams.region || "";
-    settlementName = settlement.settlement || searchParams.settlement || "";
-  } else {
-    settlementRegion = "";
-    settlementName = "";
-  }
+  const fullName = searchParams.fullName || "";
+  const divisionName = searchParams.divisionName || "";
+  const settlementName = searchParams.settlement || "";
+  const settlementRegion = searchParams.region || "";
+  const specialityName = searchParams.speciality || "";
 
   return (
     <Query
@@ -99,7 +179,7 @@ const InputsWithQuery = props => {
   );
 };
 
-class SelectWithQuery extends Component {
+class SettlementSelectWithQuery extends Component {
   state = {
     settlement: ""
   };
@@ -111,7 +191,7 @@ class SelectWithQuery extends Component {
         variables={{ settlement: this.state.settlement }}
         context={{ credentials: "same-origin" }}
       >
-        {({ loading, error, data }) => {
+        {({ loading, error, data, refetch }) => {
           if (!data.settlements) return null;
           const settlements = data.settlements.data;
           return (
@@ -120,15 +200,27 @@ class SelectWithQuery extends Component {
                 name="settlement"
                 label={<b>Населений пункт</b>}
                 placeholder="Введіть населений пункт"
-                itemToString={item => (item ? titleCase(item.settlement) : "")}
+                itemToString={(item = "") => {
+                  if (!item) return "";
+                  return typeof item === "string"
+                    ? titleCase(item)
+                    : titleCase(item.settlement);
+                }}
                 items={settlements.map(({ name, district, type }) => ({
                   settlement: name,
                   settlementType: type,
                   region: district || undefined
                 }))}
-                onInputValueChange={settlement => {
-                  this.setState({ settlement });
-                }}
+                onInputValueChange={debounce(settlement => {
+                  if (!settlement) {
+                    this.props.setSearchParams({
+                      settlement: null,
+                      settlementType: null,
+                      region: null
+                    });
+                  }
+                  return refetch({ settlement });
+                }, 500)}
                 renderItem={address => <AddressView data={address} />}
               />
             </FlexItem>
@@ -285,88 +377,6 @@ class DivisionsMapView extends Component {
 
 const DivisionsMapWithHistory = withHistoryState(DivisionsMapView);
 
-class SearchPage extends Component {
-  constructor(props) {
-    super(props);
-    this.addSearchData = this.addSearchData.bind(this);
-  }
-
-  state = {
-    search: [],
-    location: ""
-  };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(nextState, this.state);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (!isEqual(nextProps, this.props)) {
-      this.setState({
-        location: nextProps.location.pathname
-      });
-    }
-  }
-
-  componentWillMount() {
-    this.setState({
-      location: this.props.location.pathname
-    });
-  }
-
-  render() {
-    const { search, location } = this.state;
-    return (
-      <>
-        <Heading.H1>Крок 1. Оберіть лікаря</Heading.H1>
-        <Form
-          onSubmit={() => null /* NOT USED, but required */}
-          subscription={{} /* No need to subscribe to anything */}
-        >
-          <FlexWrap>
-            <FormAutoFetch debounce={500}>
-              {({ values, searchParams }) => (
-                <FlexInputsContainer>
-                  <SelectWithQuery addSettlement={this.addSettlement} />
-                  <InputsWithQuery
-                    {...values}
-                    searchParams={searchParams}
-                    addSearchData={this.addSearchData}
-                  />
-                </FlexInputsContainer>
-              )}
-            </FormAutoFetch>
-            <Icon>
-              {!location.match(/\bmap\b/) ? (
-                <Link to={"/search/map"}>
-                  <MapIcon width={30} height={30} fill="currentColor" />
-                </Link>
-              ) : (
-                <Link to={"/search"}>
-                  <ListIcon width={30} height={30} fill="currentColor" />
-                </Link>
-              )}
-            </Icon>
-          </FlexWrap>
-        </Form>
-        {!location.match(/\bmap\b/) ? (
-          <Table search={search} />
-        ) : (
-          <DivisionsMapWithHistory />
-        )}
-      </>
-    );
-  }
-
-  addSearchData({ data }) {
-    this.setState({
-      search: data
-    });
-  }
-}
-
-export default SearchPage;
-
 const FlexWrap = styled.div`
   position: relative;
   padding-right: 100px;
@@ -389,4 +399,8 @@ const Icon = styled.div`
   top: 32px;
   line-height: 0;
   user-select: none;
+`;
+
+const ContentWrapper = styled.div`
+  margin-top: 20px;
 `;
