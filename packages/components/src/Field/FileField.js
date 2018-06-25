@@ -64,6 +64,9 @@ const Input = styled.input`
 
 const FileLabel = styled(InputContent)`
   flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Icon = styled(InputContent)`
