@@ -3,7 +3,6 @@ import Downshift from "downshift";
 import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
-import { CheckRightIcon } from "@ehealth/icons";
 
 import Field from "./Field";
 import FieldView from "./FieldView";
