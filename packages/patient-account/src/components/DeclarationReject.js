@@ -3,7 +3,7 @@ import { ifProp } from "styled-tools";
 import { Mutation } from "react-apollo";
 import styled from "react-emotion/macro";
 
-import { Form, Field, Link, Popup } from "@ehealth/components";
+import { Form, Field, Link, Popup, Heading } from "@ehealth/components";
 
 import TerminateQuery from "../graphql/TerminateDeclarationQuery.graphql";
 
@@ -12,7 +12,7 @@ const DeclarationReject = ({ onClose, id, onReject }) => (
     {terminateDeclaration => {
       return (
         <Popup onClose={onClose}>
-          <H2>Розірвання декларації</H2>
+          <Heading.H1>Розірвання декларації</Heading.H1>
           <P red={true}>
             Ви зибраєтесь розірвати декларацію,<br /> цю дію не можна буде
             відмінити.
@@ -22,7 +22,7 @@ const DeclarationReject = ({ onClose, id, onReject }) => (
           <RejectForm
             onSubmit={async ({ reason }) => {
               try {
-                await terminateDeclaration({
+                const res = await terminateDeclaration({
                   variables: { id, input: { reason } }
                 });
                 onClose();
@@ -52,20 +52,15 @@ const DeclarationReject = ({ onClose, id, onReject }) => (
 export default DeclarationReject;
 
 const RejectForm = styled(Form)`
-  display: inline-block;
+  display: block;
   width: 421px;
+  margin: 0 auto;
 
   @media (max-width: 753px) {
     width: 90%;
   }
 `;
 
-const H2 = styled.h2`
-  font-size: 22px;
-  color: #292b37;
-  text-transform: uppercase;
-  margin: 67px 0 46px;
-`;
 const P = styled.p`
   font-size: 16px;
   line-height: 22px;

@@ -32,14 +32,13 @@ const PopupWindow = styled.div`
   position: absolute;
   text-align: center;
   width: 753px;
-  height: 652px;
   background-color: #fff;
   opacity: 1;
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
   box-shadow: 0 0 7px 5px rgba(227, 223, 223, 0.5);
-  padding: 45px 0 0 0;
+  padding: 60px;
 
   @media (max-width: 753px) {
     top: 0;
