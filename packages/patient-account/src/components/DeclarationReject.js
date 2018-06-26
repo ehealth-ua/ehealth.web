@@ -22,7 +22,7 @@ const DeclarationReject = ({ onClose, id, onReject }) => (
           <RejectForm
             onSubmit={async ({ reason }) => {
               try {
-                const res = await terminateDeclaration({
+                await terminateDeclaration({
                   variables: { id, input: { reason } }
                 });
                 onClose();
