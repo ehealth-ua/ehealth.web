@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.39.4"></a>
+## [0.39.4](https://github.com/edenlabllc/ehealth.web/compare/v0.39.3...v0.39.4) (2018-06-27)
+
+
+### Bug Fixes
+
+* **utils:** use dots instead of slashes as separator when formatting dates ([927c8e8](https://github.com/edenlabllc/ehealth.web/commit/927c8e8))
+
+
+
+
+
 <a name="0.39.3"></a>
 ## [0.39.3](https://github.com/edenlabllc/ehealth.web/compare/v0.39.2...v0.39.3) (2018-06-27)
 
