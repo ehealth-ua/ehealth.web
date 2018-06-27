@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.39.1"></a>
+## [0.39.1](https://github.com/edenlabllc/ehealth.web/compare/v0.39.0...v0.39.1) (2018-06-27)
+
+
+### Bug Fixes
+
+* **patient-account:** Fix map after normalize ([e8a8918](https://github.com/edenlabllc/ehealth.web/commit/e8a8918))
+* **patient-account:** Remove PHARMACIST and PHARMACIST2 from select ([8a4a8dd](https://github.com/edenlabllc/ehealth.web/commit/8a4a8dd))
+
+
+
+
+
 <a name="0.39.0"></a>
 # [0.39.0](https://github.com/edenlabllc/ehealth.web/compare/v0.38.0...v0.39.0) (2018-06-25)
 
