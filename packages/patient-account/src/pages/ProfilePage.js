@@ -41,8 +41,8 @@ const ProfilePage = () => (
         renderItem: item => <AddressView data={item} />
       });
 
-      const phones = getDefinitions({
-        data: person.data.phones,
+      const emergencyContactPhones = getDefinitions({
+        data: person.data.emergencyContact.phones,
         keyExtractor: ({ type }) => `phones.${type}`,
         renderLabel: () => "Номер телефону",
         renderItem: ({ number }) => formatPhone(number)
@@ -105,11 +105,11 @@ const ProfilePage = () => (
             <DefinitionListView
               labels={{
                 name: "ПІБ",
-                ...phones.labels
+                ...emergencyContactPhones.labels
               }}
               data={{
                 name: getFullName(person.data.emergencyContact),
-                ...phones.items
+                ...emergencyContactPhones.items
               }}
             />
           </Section>
