@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.39.3"></a>
+## [0.39.3](https://github.com/edenlabllc/ehealth.web/compare/v0.39.2...v0.39.3) (2018-06-27)
+
+
+### Bug Fixes
+
+* change name validation pattern to match that defined in json schema ([1f3a23c](https://github.com/edenlabllc/ehealth.web/commit/1f3a23c))
+
+
+
+
+
 <a name="0.39.2"></a>
 ## [0.39.2](https://github.com/edenlabllc/ehealth.web/compare/v0.39.1...v0.39.2) (2018-06-27)
 
