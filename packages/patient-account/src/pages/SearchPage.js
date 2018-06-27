@@ -157,7 +157,9 @@ const InputsWithQuery = props => {
                     label={<b>Спеціальність</b>}
                     placeholder="Виберіть спеціальність"
                     itemToString={item => (item == null ? "" : dict[item])}
-                    items={Object.keys(dict)}
+                    items={Object.keys(dict).filter(
+                      item => item !== "PHARMACIST" && item !== "PHARMACIST2"
+                    )}
                     renderItem={item => dict[item]}
                   />
                 )}
