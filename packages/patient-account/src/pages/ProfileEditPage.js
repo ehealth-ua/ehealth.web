@@ -34,7 +34,7 @@ import DictionaryValue from "../components/DictionaryValue";
 import ProfileAuthSection from "../components/ProfileAuthSection";
 
 const NAME_PATTERN =
-  '^(?!.*[ЫЪЭЁыъэё@%&$^#])[a-zA-ZА-ЯҐЇІЄа-яґїіє0-9№\\"!\\^\\*)\\]\\[(._-]*$';
+  '^(?!.*[ЫЪЭЁыъэё@%&$^#])[a-zA-ZА-ЯҐЇІЄа-яґїіє0-9№\\"!\\^\\*)\\]\\[(._-].*$';
 const BUILDING_PATTERN =
   "^[1-9]((?![ЫЪЭЁыъэё])()([А-ЯҐЇІЄа-яґїіє \\/\\'\\-0-9])){0,20}$";
 const PHONE_PATTERN = "^\\+380\\d{9}$";
