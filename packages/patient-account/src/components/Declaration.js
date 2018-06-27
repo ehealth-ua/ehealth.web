@@ -179,11 +179,12 @@ const DeclarationBody = ({ history, data }) => {
                               name="DOCUMENT_RELATIONSHIP_TYPE"
                               item={documentsRelationship[0].type}
                             />{" "}
-                            №{documentsRelationship[0].number} від{" "}
-                            {format(
-                              documentsRelationship[0].issuedAt,
-                              "DD.MM.YYYY"
-                            )}
+                            №{documentsRelationship[0].number}
+                            {documentsRelationship[0].issuedAt &&
+                              ` від ${format(
+                                documentsRelationship[0].issuedAt,
+                                "DD.MM.YYYY"
+                              )}`}
                           </>
                         )
                       }}
@@ -263,12 +264,14 @@ const DeclarationBody = ({ history, data }) => {
             </FlexItem>
           </Flex>
         </DefinitionListSection>
-        <DefinitionListSection>
-          <DefinitionListView
-            labels={{ signedAt: "Дата ухвалення" }}
-            data={{ signedAt: format(signedAt, "DD.MM.YYYY") }}
-          />
-        </DefinitionListSection>
+        {signedAt && (
+          <DefinitionListSection>
+            <DefinitionListView
+              labels={{ signedAt: "Дата ухвалення" }}
+              data={{ signedAt: format(signedAt, "DD.MM.YYYY") }}
+            />
+          </DefinitionListSection>
+        )}
       </Shadow>
       <FixedBlock>
         <Link size="small" upperCase bold onClick={history.goBack}>
@@ -362,7 +365,8 @@ export const DeclarationHeader = ({
         <H3>
           про вибір лікаря з надання первинної допомоги
           <br />
-          № {declarationNumber} від {format(signedAt, "DD.MM.YYYY")}
+          № {declarationNumber}
+          {signedAt && ` від ${format(signedAt, "DD.MM.YYYY")}`}
         </H3>
       </Left>
     </Flex>
