@@ -115,7 +115,7 @@ export const GoogleMapsWrapper = withScriptjs(
                 active={hoverItemId === activeItemId}
                 id={hoverItem.id}
                 name={hoverItem.name}
-                legalEntity={hoverItem.legal_entity}
+                legalEntity={hoverItem.legalEntity}
                 address={hoverItem.addresses.find(
                   ({ type }) => type === "RESIDENCE"
                 )}
