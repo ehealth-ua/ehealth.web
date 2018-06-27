@@ -89,7 +89,9 @@ export const InputPlaceholder = styled(InputContent)`
   flex: 1 1 auto;
 `;
 
-export const Textarea = Input.withComponent("textarea");
+export const Textarea = styled(Input.withComponent("textarea"))`
+  resize: ${ifProp("noResize", "none")};
+`;
 
 export const ErrorMessage = styled.div`
   background-color: #ff1f44;

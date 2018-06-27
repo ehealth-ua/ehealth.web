@@ -14,8 +14,8 @@ const DeclarationReject = ({ onClose, id, onReject }) => (
         <Popup onClose={onClose}>
           <Heading.H1>Розірвання декларації</Heading.H1>
           <P red={true}>
-            Ви зибраєтесь розірвати декларацію,<br /> цю дію не можна буде
-            відмінити.
+            Ви збираєтесь розірвати декларацію,<br />
+            цю дію не можна буде відмінити.
           </P>
           <P>Ви впевнені, що хочете розірвати декларацію?</P>
 
@@ -35,6 +35,8 @@ const DeclarationReject = ({ onClose, id, onReject }) => (
             <Field.MultilineText
               name="reason"
               placeholder="Причина розірвання (опціонально)"
+              rows="3"
+              noResize={true}
             />
 
             <Form.Submit size="small">Розірвати декларацію</Form.Submit>
