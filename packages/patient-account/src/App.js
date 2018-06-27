@@ -1,24 +1,24 @@
 import React from "react";
-import { ThemeProvider } from "emotion-theming";
-import { ApolloProvider } from "react-apollo";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider } from "emotion-theming";
 
 import "./globalStyles";
-import client from "./client";
 import theme from "./theme";
+import ErrorBoundary from "./ErrorBoundary";
+import DataProvider from "./DataProvider";
 import Routes from "./Routes";
 import Preload from "./Preload";
 
 const App = () => (
-  <ApolloProvider client={client}>
+  <Router>
     <ThemeProvider theme={theme}>
-      <Router>
-        <Preload>
+      <ErrorBoundary>
+        <DataProvider>
           <Routes />
-        </Preload>
-      </Router>
+        </DataProvider>
+      </ErrorBoundary>
     </ThemeProvider>
-  </ApolloProvider>
+  </Router>
 );
 
 export default App;
