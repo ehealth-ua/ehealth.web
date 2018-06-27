@@ -42,7 +42,9 @@ const CUSTOM_VALIDATORS = {
     Boolean(value),
   Date: value => {
     const date = Date.parse(value);
-    return !isNaN(date) && new Date(date).toISOString().startsWith(value);
+    return (
+      !value || (!isNaN(date) && new Date(date).toISOString().startsWith(value))
+    );
   }
 };
 
