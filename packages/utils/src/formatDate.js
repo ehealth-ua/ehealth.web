@@ -7,7 +7,7 @@ const formatDate = value => {
     digits
   );
 
-  return [day, month, year].filter(Boolean).join("/");
+  return [day, month, year].filter(Boolean).join(".");
 };
 
 export default formatDate;

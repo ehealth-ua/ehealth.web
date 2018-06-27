@@ -14,18 +14,18 @@ describe("formatDate", () => {
   });
 
   it("should format day and half of month", () => {
-    expect(formatDate("0-12")).toBe("12/0");
+    expect(formatDate("0-12")).toBe("12.0");
   });
 
   it("should format day and month", () => {
-    expect(formatDate("08-12")).toBe("12/08");
+    expect(formatDate("08-12")).toBe("12.08");
   });
 
   it("should format day, month and half of year", () => {
-    expect(formatDate("20-08-12")).toBe("12/08/20");
+    expect(formatDate("20-08-12")).toBe("12.08.20");
   });
 
   it("should format day, month and year", () => {
-    expect(formatDate("2012-08-12")).toBe("12/08/2012");
+    expect(formatDate("2012-08-12")).toBe("12.08.2012");
   });
 });
