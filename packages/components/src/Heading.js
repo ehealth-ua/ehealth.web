@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { prop, ifProp, switchProp, withProp } from "styled-tools";
-import { Flex } from "grid-emotion";
 
 const DEFAULT_FONT_SIZES = [22, 18, 16, 14, 14, 12];
 
@@ -28,7 +27,7 @@ Heading.defaultProps = {
   justifyContent: "space-between"
 };
 
-const BasicHeading = styled(Flex)`
+const BasicHeading = styled.div`
   color: #454545;
   margin-top: 0;
   margin-bottom: 20px;
