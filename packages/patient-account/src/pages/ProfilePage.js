@@ -8,6 +8,7 @@ import {
   formatDate,
   formatPhone
 } from "@ehealth/utils";
+import { Flex } from "grid-emotion";
 
 import PersonDetailsQuery from "../graphql/PersonDetailsQuery.graphql";
 import Section from "../components/Section";
@@ -52,18 +53,19 @@ const ProfilePage = () => (
         <>
           <Heading.H1>Мій профіль</Heading.H1>
           <Section>
-            <Heading.H3 weight="bold">
-              Персональні дані
+            <Flex justifyContent="space-between" alignItems="baseline">
+              <Heading.H3 weight="bold">Персональні дані</Heading.H3>
               <Link
                 to="/profile/edit"
                 size="xs"
                 upperCase
                 icon={<PencilIcon height="14" />}
                 iconReverse
+                bold
               >
                 Редагувати профіль
               </Link>
-            </Heading.H3>
+            </Flex>
             <DefinitionListView
               labels={{
                 name: "ПІБ",
