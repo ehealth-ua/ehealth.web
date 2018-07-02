@@ -45,7 +45,7 @@ export const getUser = ({ signed_content, ...headers }) =>
 
 export const sendOtp = body =>
   invoke({
-    endpoint: `${REACT_APP_API_URL}/api/send_otp`,
+    endpoint: `${REACT_APP_API_URL}/api/sms_verifications`,
     method: "POST",
     types: [
       "cabinet/SEND_OTP_REQUEST",
