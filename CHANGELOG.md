@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.39.6"></a>
+## [0.39.6](https://github.com/edenlabllc/ehealth.web/compare/v0.39.5...v0.39.6) (2018-07-02)
+
+
+### Bug Fixes
+
+* **auth:** update send OTP endpoint ([1bd7b1d](https://github.com/edenlabllc/ehealth.web/commit/1bd7b1d)), closes [#102](https://github.com/edenlabllc/ehealth.web/issues/102)
+
+
+
+
+
 <a name="0.39.5"></a>
 ## [0.39.5](https://github.com/edenlabllc/ehealth.web/compare/v0.39.4...v0.39.5) (2018-07-02)
 
