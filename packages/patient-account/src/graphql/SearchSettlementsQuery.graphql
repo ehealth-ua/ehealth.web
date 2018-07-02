@@ -1,7 +1,7 @@
 query SearchSettlementsQuery(
-  $name: String = ""
+  $name: String!
   $region: String!
-  $pageSize: Int = 50
+  $pageSize: String!
 ) {
   settlements(name: $name, region: $region, pageSize: $pageSize)
     @rest(

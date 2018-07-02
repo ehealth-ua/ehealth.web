@@ -305,7 +305,7 @@ const AddressFields = ({ name }) => (
       {({ input: { value: region } }) => (
         <Query
           query={SearchSettlementsQuery}
-          variables={{ region }}
+          variables={{ region, pageSize: 50 }}
           context={{ credentials: "same-origin" }}
           skip={!region}
         >
