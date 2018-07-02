@@ -282,7 +282,7 @@ const DocumentFields = ({ name }) => (
 
 const AddressFields = ({ name }) => (
   <>
-    <Query query={RegionsQuery}>
+    <Query query={RegionsQuery} context={{ credentials: "same-origin" }}>
       {({ loading, error, data: { regions } = {} }) =>
         !(loading || error) && (
           <Field.Select
@@ -306,6 +306,7 @@ const AddressFields = ({ name }) => (
         <Query
           query={SearchSettlementsQuery}
           variables={{ region }}
+          context={{ credentials: "same-origin" }}
           skip={!region}
         >
           {({ loading, error, data: { settlements } = {}, refetch }) => (
