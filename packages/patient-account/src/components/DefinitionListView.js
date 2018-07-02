@@ -26,6 +26,10 @@ const List = styled.dl`
   display: flex;
   flex-wrap: wrap;
   font-size: ${prop("theme.definitionList.fontSize")}px;
+  padding-right: calc(
+    100% - ${prop("theme.definitionList.labelWidth")}px -
+      ${prop("theme.definitionList.detailsWidth")}px
+  );
 `;
 
 const itemStyle = css`
@@ -44,11 +48,7 @@ const Label = styled.dt`
 `;
 
 const Details = styled.dd`
-  flex-basis: ${prop("theme.definitionList.detailsWidth")}px;
+  flex-basis: calc(100% - ${prop("theme.definitionList.labelWidth")}px);
   margin-left: 0;
-  margin-right: calc(
-    100% - ${prop("theme.definitionList.labelWidth")}px -
-      ${prop("theme.definitionList.detailsWidth")}px
-  );
   ${itemStyle};
 `;
