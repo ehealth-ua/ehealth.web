@@ -45,6 +45,7 @@ export default class SignUpOtpPage extends Component {
             <Field.Input name="otp" placeholder="4 цифри з СМС" />
             <Validations field="otp">
               <Validation.Required message="Об'язкове поле" />
+              <Validation.Numeric message="Дозволені тільки цифри" />
               <Validation.Length
                 options={{ min: 4, max: 4 }}
                 message="Довжина становить 4 символи"
