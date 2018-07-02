@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.39.5"></a>
+## [0.39.5](https://github.com/edenlabllc/ehealth.web/compare/v0.39.4...v0.39.5) (2018-07-02)
+
+
+### Bug Fixes
+
+* **auth:** validate OTP code numericality on the SignUpOtpPage ([ec47724](https://github.com/edenlabllc/ehealth.web/commit/ec47724))
+
+
+
+
+
 <a name="0.39.4"></a>
 ## [0.39.4](https://github.com/edenlabllc/ehealth.web/compare/v0.39.3...v0.39.4) (2018-06-27)
 
