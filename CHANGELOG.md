@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.40.1"></a>
+## [0.40.1](https://github.com/edenlabllc/ehealth.web/compare/v0.40.0...v0.40.1) (2018-07-03)
+
+
+### Bug Fixes
+
+* **auth:** change date format in the placeholder on the SignUpPersonPage ([c38e48e](https://github.com/edenlabllc/ehealth.web/commit/c38e48e))
+
+
+
+
+
 <a name="0.40.0"></a>
 # [0.40.0](https://github.com/edenlabllc/ehealth.web/compare/v0.39.9...v0.40.0) (2018-07-03)
 
