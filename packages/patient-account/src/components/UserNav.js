@@ -35,7 +35,7 @@ const UserNav = () => (
                     </MenuItem>
                   )}
                 </Match>
-                <MenuItem to="/logout" bold upperCase>
+                <MenuItem href="/auth/logout" bold upperCase>
                   Вийти
                 </MenuItem>
               </Menu>

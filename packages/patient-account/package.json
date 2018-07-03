@@ -32,7 +32,7 @@
     "/(api|reports)": {
       "target": "http://api.dev.asclepius.com.ua/"
     },
-    "/auth/redirect": {
+    "/auth": {
       "target": "http://localhost:4000/"
     }
   }
