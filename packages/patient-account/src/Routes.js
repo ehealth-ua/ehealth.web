@@ -9,6 +9,7 @@ import DeclarationRequestPage from "./pages/DeclarationRequestPage";
 import SearchPage from "./pages/SearchPage";
 import EmployeePage from "./pages/EmployeePage";
 import DivisionPage from "./pages/DivisionPage";
+import SecurityPage from "./pages/SecurityPage";
 
 const Routes = () => (
   <Layout>
@@ -25,6 +26,7 @@ const Routes = () => (
       <Route path="/search" component={SearchPage} />
       <Route exact path="/employee/:id" component={EmployeePage} />
       <Route exact path="/division/:id" component={DivisionPage} />
+      <Route exact path="/security" component={SecurityPage} />
     </Switch>
   </Layout>
 );

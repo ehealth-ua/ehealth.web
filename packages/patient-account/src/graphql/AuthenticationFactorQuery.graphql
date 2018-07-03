@@ -1,0 +1,11 @@
+query AuthenticationFactorQuery {
+  factor: authenticationFactor
+    @rest(
+      path: "/cabinet/authentication_factor"
+      type: "AuthenticationFactorPayload"
+    ) {
+    data @type(name: "AuthenticationFactor") {
+      factor
+    }
+  }
+}
