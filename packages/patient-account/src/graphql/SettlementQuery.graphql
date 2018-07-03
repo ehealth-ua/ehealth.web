@@ -1,7 +1,7 @@
 query($settlement: Settlement) {
   settlements(settlement: $settlement)
     @rest(
-      path: "/uaddresses/settlements?name=:settlement&page=1&page_size=20"
+      path: "/uaddresses/settlements?name=:settlement&page=1&page_size=30"
       type: "SettlementsPayload"
     ) {
     data
