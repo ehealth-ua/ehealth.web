@@ -94,7 +94,7 @@ const SignUpPersonPage = ({ location }) => (
         <Field.Input
           label="Дата народження"
           name="person.birth_date"
-          placeholder="ДД/ММ/РРРР"
+          placeholder="ДД.ММ.РРРР"
           format={formatDate}
           parse={parseDate}
           horizontal
