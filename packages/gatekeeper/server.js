@@ -20,7 +20,7 @@ const app = express();
 
 app.set("trust proxy", true);
 
-app.get("*", async (req, res) => {
+app.get("/auth/redirect", async (req, res) => {
   try {
     const { query: { code }, protocol, path } = req;
 
@@ -51,6 +51,16 @@ app.get("*", async (req, res) => {
       secure
     });
 
+    res.redirect(REDIRECT_URL);
+  } catch (error) {
+    res.status(error.meta.code).json(error);
+  }
+});
+
+app.get("/auth/logout", async (req, res) => {
+  try {
+    res.clearCookie(AUTH_COOKIE_NAME);
+    res.clearCookie(META_COOKIE_NAME);
     res.redirect(REDIRECT_URL);
   } catch (error) {
     res.status(error.meta.code).json(error);
