@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.40.0"></a>
+# [0.40.0](https://github.com/edenlabllc/ehealth.web/compare/v0.39.9...v0.40.0) (2018-07-03)
+
+
+### Features
+
+* **patient-account:** change logOut link ([f7df480](https://github.com/edenlabllc/ehealth.web/commit/f7df480))
+
+
+
+
+
 <a name="0.39.9"></a>
 ## [0.39.9](https://github.com/edenlabllc/ehealth.web/compare/v0.39.8...v0.39.9) (2018-07-02)
 
