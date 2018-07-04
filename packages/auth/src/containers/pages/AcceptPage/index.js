@@ -20,10 +20,86 @@ class AcceptPage extends Component {
     isLoading: false,
     error: null
   };
+  render() {
+    const {
+      client,
+      user,
+      scope,
+      location: { query: { client_id, redirect_uri } }
+    } = this.props;
+    console.log("scope", scope);
+    if (!client_id) return this.renderNotFoundClientId();
+    if (!client) return this.renderNotFoundClient();
+    if (!scope) return this.renderNotFoundScope();
+    if (scope === "cabinet") return this.approval("cabinet");
+    if (scope === "empty_roles") return this.renderNotFoundClientRole();
+    if (!redirect_uri) return this.renderNotFoundRedirectUri();
 
-  approval() {
-    const { location: { query }, scope } = this.props;
+    return (
+      <section className={styles.main} id="accept-page">
+        <header className={styles.header}>
+          Ви даєте доступ додатку <b>{client.name}</b> на наступні дії:
+          <ul className={styles.list}>
+            {scope.split(" ").map(i => (
+              <li key={i}>
+                • <DictionaryValue dictionary="SCOPES" value={i} />
+              </li>
+            ))}
+          </ul>
+        </header>
+        <article className={styles.content}>
+          <p>{user.email}</p>
+        </article>
+        {this.state.error && (
+          <article className={styles.error}>
+            <b>Помилка:</b>
+            {this.state.error.map(i => (
+              <div key={i.key}>
+                {i.value} ({i.key})
+              </div>
+            ))}
+          </article>
+        )}
+        <footer className={styles.footer}>
+          <div>
+            <Button
+              disabled={this.state.isLoading}
+              onClick={() => this.approval()}
+              color="blue"
+            >
+              прийняти та продовжити
+            </Button>
+          </div>
+          <div className={styles.links}>
+            <div>
+              <Button
+                rel="noopener noreferrer"
+                target="__blank"
+                to="https://ti-ukraine.org/news/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
+                theme="link"
+              >
+                Угода користувача
+              </Button>
+            </div>
+            <div>
+              <Button
+                rel="noopener noreferrer"
+                target="__blank"
+                to="https://ti-ukraine.org/news/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
+                theme="link"
+              >
+                Умови використання
+              </Button>
+            </div>
+          </div>
+        </footer>
+      </section>
+    );
+  }
 
+  approval(_scope) {
+    let { location: { query }, scope } = this.props;
+    if (_scope === "cabinet") scope = "";
     this.setState({ isLoading: true });
 
     this.props
@@ -111,82 +187,6 @@ class AcceptPage extends Component {
         <article className={styles.content}>
           <p>Не вказано адресу зворотнього визову</p>
         </article>
-      </section>
-    );
-  }
-
-  render() {
-    const {
-      client,
-      user,
-      scope,
-      location: { query: { client_id, redirect_uri } }
-    } = this.props;
-
-    if (!client_id) return this.renderNotFoundClientId();
-    if (!client) return this.renderNotFoundClient();
-    if (!scope) return this.renderNotFoundScope();
-    if (scope === "empty_roles") return this.renderNotFoundClientRole();
-    if (!redirect_uri) return this.renderNotFoundRedirectUri();
-
-    return (
-      <section className={styles.main} id="accept-page">
-        <header className={styles.header}>
-          Ви даєте доступ додатку <b>{client.name}</b> на наступні дії:
-          <ul className={styles.list}>
-            {scope.split(" ").map(i => (
-              <li key={i}>
-                • <DictionaryValue dictionary="SCOPES" value={i} />
-              </li>
-            ))}
-          </ul>
-        </header>
-        <article className={styles.content}>
-          <p>{user.email}</p>
-        </article>
-        {this.state.error && (
-          <article className={styles.error}>
-            <b>Помилка:</b>
-            {this.state.error.map(i => (
-              <div key={i.key}>
-                {i.value} ({i.key})
-              </div>
-            ))}
-          </article>
-        )}
-        <footer className={styles.footer}>
-          <div>
-            <Button
-              disabled={this.state.isLoading}
-              onClick={() => this.approval()}
-              color="blue"
-            >
-              прийняти та продовжити
-            </Button>
-          </div>
-          <div className={styles.links}>
-            <div>
-              <Button
-                rel="noopener noreferrer"
-                target="__blank"
-                to="https://ti-ukraine.org/news/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
-                theme="link"
-              >
-                Угода користувача
-              </Button>
-            </div>
-            <div>
-              <Button
-                rel="noopener noreferrer"
-                target="__blank"
-                to="https://ti-ukraine.org/news/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
-                theme="link"
-              >
-                Умови використання
-              </Button>
-            </div>
-          </div>
-        </footer>
       </section>
     );
   }
