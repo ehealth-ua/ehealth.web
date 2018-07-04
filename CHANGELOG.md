@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.41.1"></a>
+## [0.41.1](https://github.com/edenlabllc/ehealth.web/compare/v0.41.0...v0.41.1) (2018-07-04)
+
+
+### Bug Fixes
+
+* **components:** change condition in shouldComponentUpdate ([47461b7](https://github.com/edenlabllc/ehealth.web/commit/47461b7))
+* **patient-account:** change condition in shouldComponentUpdate method of DivisionMap ([cf1e821](https://github.com/edenlabllc/ehealth.web/commit/cf1e821))
+* **patient-account:** return back name variable default value in SearchSettlements query ([4982ad1](https://github.com/edenlabllc/ehealth.web/commit/4982ad1))
+
+
+
+
+
 <a name="0.41.0"></a>
 # [0.41.0](https://github.com/edenlabllc/ehealth.web/compare/v0.40.2...v0.41.0) (2018-07-04)
 

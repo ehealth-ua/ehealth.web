@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.41.1"></a>
+## [0.41.1](https://github.com/edenlabllc/ehealth.web/compare/v0.41.0...v0.41.1) (2018-07-04)
+
+
+### Bug Fixes
+
+* **components:** change condition in shouldComponentUpdate ([47461b7](https://github.com/edenlabllc/ehealth.web/commit/47461b7))
+
+
+
+
+
 <a name="0.41.0"></a>
 # [0.41.0](https://github.com/edenlabllc/ehealth.web/compare/v0.40.2...v0.41.0) (2018-07-04)
 
