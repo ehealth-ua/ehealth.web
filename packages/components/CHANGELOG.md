@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.40.2"></a>
+## [0.40.2](https://github.com/edenlabllc/ehealth.web/compare/v0.40.1...v0.40.2) (2018-07-04)
+
+
+### Bug Fixes
+
+* **components:** remove flex from Heading ([601473d](https://github.com/edenlabllc/ehealth.web/commit/601473d))
+* **patient-account:** add row and noResize props to MultilineText component ([3f843c2](https://github.com/edenlabllc/ehealth.web/commit/3f843c2))
+
+
+
+
+
 <a name="0.40.0"></a>
 # [0.40.0](https://github.com/edenlabllc/ehealth.web/compare/v0.39.9...v0.40.0) (2018-07-03)
 

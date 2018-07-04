@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.40.2"></a>
+## [0.40.2](https://github.com/edenlabllc/ehealth.web/compare/v0.40.1...v0.40.2) (2018-07-04)
+
+
+### Bug Fixes
+
+* **patient-account:** add row and noResize props to MultilineText component ([3f843c2](https://github.com/edenlabllc/ehealth.web/commit/3f843c2))
+* **patient-account:** remove dates from Header and Details when Declaration is not signed ([94538a9](https://github.com/edenlabllc/ehealth.web/commit/94538a9))
+* **patient-account:** wrap headding and Link with Flex ([cbd74ce](https://github.com/edenlabllc/ehealth.web/commit/cbd74ce))
+
+
+
+
+
 <a name="0.40.0"></a>
 # [0.40.0](https://github.com/edenlabllc/ehealth.web/compare/v0.39.9...v0.40.0) (2018-07-03)
 
