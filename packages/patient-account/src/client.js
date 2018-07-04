@@ -1,4 +1,4 @@
-import { ApolloClient } from "apollo-client";
+import { ApolloClient, ApolloError } from "apollo-client";
 import { InMemoryCache, defaultDataIdFromObject } from "apollo-cache-inmemory";
 import { concat } from "apollo-link";
 import { RestLink } from "apollo-link-rest";
@@ -14,7 +14,11 @@ export const createClient = ({ onError: handleError }) => {
     dataIdFromObject
   });
 
-  const errorLink = onError(({ networkError, operation }) => {
+  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+    const { message, statusCode, result } = networkError;
+
+    const error = statusCode ? result.error : { type: "network", message };
+
     let operationType;
 
     visit(operation.query, {
@@ -24,10 +28,7 @@ export const createClient = ({ onError: handleError }) => {
       }
     });
 
-    handleError({
-      error: networkError.result.error,
-      blocking: operationType === "query"
-    });
+    handleError({ error, blocking: operationType === "query" });
   });
 
   const restLink = new RestLink({
