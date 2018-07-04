@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.41.0"></a>
+# [0.41.0](https://github.com/edenlabllc/ehealth.web/compare/v0.40.2...v0.41.0) (2018-07-04)
+
+
+### Bug Fixes
+
+* **patient-account:** change pageSize in settlements ([ab09457](https://github.com/edenlabllc/ehealth.web/commit/ab09457))
+
+
+### Features
+
+* **patient-account:** add security page ([342820b](https://github.com/edenlabllc/ehealth.web/commit/342820b))
+
+
+
+
+
 <a name="0.40.2"></a>
 ## [0.40.2](https://github.com/edenlabllc/ehealth.web/compare/v0.40.1...v0.40.2) (2018-07-04)
 
