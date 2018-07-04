@@ -20,7 +20,10 @@ class HistoryState extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !(isEqual(nextProps, this.props) || isEqual(nextState, this.state));
+    return !(
+      isEqual(nextProps.location.search, this.props.location.search) &&
+      isEqual(nextState, this.state)
+    );
   }
 
   render() {
