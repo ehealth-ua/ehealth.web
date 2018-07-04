@@ -1,5 +1,5 @@
 query SearchSettlementsQuery(
-  $name: String!
+  $name: String = ""
   $region: String!
   $pageSize: String!
 ) {
