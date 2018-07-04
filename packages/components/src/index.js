@@ -5,6 +5,7 @@ export { default as CabinetTable } from "./CabinetTable";
 export { default as Connect } from "./Connect";
 export { default as DefinitionList } from "./DefinitionList";
 export { default as Field } from "./Field";
+export { default as ForceRedirect } from "./ForceRedirect";
 export { default as Form, SUBMIT_ERROR } from "./Form";
 export { default as FormAutoFetch } from "./FormAutoFetch";
 export { default as Heading } from "./Heading";
