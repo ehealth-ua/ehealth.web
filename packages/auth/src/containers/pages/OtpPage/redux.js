@@ -4,6 +4,7 @@ import { getLocation } from "../../../reducers";
 import { otpVerifyToken, otpResendOtp, authorize } from "../../../redux/auth";
 import { fetchUserData } from "../../../redux/user";
 import { login } from "../../../redux/session";
+import { REACT_APP_PATIENT_ACCOUNT_CLIENT_ID } from "../../../env";
 
 export const onSubmit = ({ code }) => async (dispatch, getState) => {
   const { payload: { value: token, details, response }, meta } = await dispatch(
@@ -39,7 +40,7 @@ export const onSubmit = ({ code }) => async (dispatch, getState) => {
           pathname: "/invite/accept"
         })
       );
-    } else if (meta.next_step === "REQUEST_APPS") {
+    } else if (query.client_id === REACT_APP_PATIENT_ACCOUNT_CLIENT_ID) {
       return dispatch(
         authorize({
           clientId: query.client_id,
