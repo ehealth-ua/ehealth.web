@@ -4,6 +4,7 @@ import { Query, Mutation } from "react-apollo";
 import isEqual from "lodash/isEqual";
 import debounce from "lodash/debounce";
 import { Signer } from "@ehealth/react-iit-digital-signature";
+import { Flex } from "grid-emotion";
 import {
   Heading,
   Link,
@@ -87,8 +88,11 @@ const ProfileEditPage = ({ history }) => (
                     }}
                   >
                     <Section>
-                      <Heading.H3 weight="bold">
-                        Персональні дані
+                      <Flex
+                        justifyContent="space-between"
+                        alignItems="baseline"
+                      >
+                        <Heading.H3 weight="bold">Персональні дані</Heading.H3>
                         <Link
                           to="/profile"
                           size="xs"
@@ -99,7 +103,7 @@ const ProfileEditPage = ({ history }) => (
                         >
                           Вийти з режиму редагування
                         </Link>
-                      </Heading.H3>
+                      </Flex>
                       <DefinitionListView
                         labels={{
                           name: "ПІБ",
