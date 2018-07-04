@@ -9,7 +9,7 @@ import DefinitionListView from "../components/DefinitionListView";
 import AuthenticationFactorQuery from "../graphql/AuthenticationFactorQuery.graphql";
 import { prop } from "styled-tools";
 import {
-  REACT_APP_UPDATE_FACTOR,
+  REACT_APP_UPDATE_FACTOR_URL,
   REACT_APP_CLIENT_ID,
   REACT_APP_OAUTH_REDIRECT_URI
 } from "../env";
@@ -31,7 +31,7 @@ const SecurityPage = () => (
               data={{
                 phone: (
                   <Link
-                    href={`${REACT_APP_UPDATE_FACTOR}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+                    href={`${REACT_APP_UPDATE_FACTOR_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
                     size="s"
                     upperCase
                     color="black"
