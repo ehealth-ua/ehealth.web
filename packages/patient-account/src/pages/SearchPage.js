@@ -278,7 +278,10 @@ class DivisionsMapView extends Component {
   };
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(nextState, this.state);
+    return !(
+      isEqual(nextProps.searchParams, this.props.searchParams) &&
+      isEqual(nextState, this.state)
+    );
   }
 
   render() {
@@ -306,7 +309,7 @@ class DivisionsMapView extends Component {
         context={{ credentials: "same-origin" }}
       >
         {({ loading, error, data }) => {
-          if (loading || error) return null;
+          if (error || !data.divisions) return null;
 
           const { data: divisions } = data.divisions;
           let lngRadius = 0.00003, // degrees of longitude separation
