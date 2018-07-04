@@ -23,11 +23,8 @@ const Heading = ({ level = 1, ...props }) => {
   return <Component level={level} {...props} />;
 };
 
-Heading.defaultProps = {
-  justifyContent: "space-between"
-};
-
 const BasicHeading = styled.div`
+  text-align: center;
   color: #454545;
   margin-top: 0;
   margin-bottom: 20px;
