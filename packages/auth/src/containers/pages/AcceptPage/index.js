@@ -27,7 +27,6 @@ class AcceptPage extends Component {
       scope,
       location: { query: { client_id, redirect_uri } }
     } = this.props;
-    console.log("scope", scope);
     if (!client_id) return this.renderNotFoundClientId();
     if (!client) return this.renderNotFoundClient();
     if (!scope) return this.renderNotFoundScope();
