@@ -24,8 +24,6 @@ const RequestFactorOtpPage = ({ onSubmit = () => {}, location }) => {
     <Main id="factor-approve-page">
       <Header>
         <H1>Введення коду</H1>
-        <br />
-        <br />
         <H2 textTransform="initial">Введіть код, що прийшов на телефон</H2>
       </Header>
       <Article>
