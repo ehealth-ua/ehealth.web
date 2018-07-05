@@ -64,7 +64,12 @@ const SelectField = ({
             })}
           />
           <DropdownArrow
-            {...getToggleButtonProps({ open: isOpen, onFocus, onBlur })}
+            {...getToggleButtonProps({
+              open: isOpen,
+              onFocus,
+              onBlur,
+              disabled
+            })}
           />
         </InputBorder>
         {errored && <ErrorMessage>{error}</ErrorMessage>}
@@ -142,7 +147,11 @@ export const DropdownArrow = styled(InputContent.withComponent("button"))`
     display: block;
     border-width: 5px 5px 0;
     border-style: solid;
-    border-color: #282828 transparent;
+    border-color: ${ifProp(
+      "disabled",
+      "#efefef transparent",
+      "#282828 transparent"
+    )};
     transform: ${ifProp("open", "rotate(180deg)")};
     transition: transform 0.2s ease;
     will-change: transform;
