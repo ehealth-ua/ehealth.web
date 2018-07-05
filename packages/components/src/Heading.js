@@ -5,7 +5,7 @@ import { prop, ifProp, switchProp, withProp } from "styled-tools";
 const DEFAULT_FONT_SIZES = [22, 18, 16, 14, 14, 12];
 
 const H1 = props => (
-  <Heading justifyContent="center" upperCase {...props} level={1} />
+  <Heading textAlign="center" upperCase {...props} level={1} />
 );
 
 const H2 = props => <Heading weight="light" upperCase {...props} level={2} />;
@@ -24,7 +24,6 @@ const Heading = ({ level = 1, ...props }) => {
 };
 
 const BasicHeading = styled.div`
-  text-align: center;
   color: #454545;
   margin-top: 0;
   margin-bottom: 20px;
@@ -37,6 +36,7 @@ const BasicHeading = styled.div`
     regular: 400,
     bold: 700
   })};
+  text-align: ${prop("textAlign")};
   text-transform: ${ifProp("upperCase", "uppercase")};
 `;
 
