@@ -59,8 +59,17 @@ app.get("/auth/redirect", async (req, res) => {
 
 app.get("/auth/logout", async (req, res) => {
   try {
-    res.clearCookie(AUTH_COOKIE_NAME);
-    res.clearCookie(META_COOKIE_NAME);
+    const secure = NODE_ENV !== "development";
+
+    res.clearCookie(AUTH_COOKIE_NAME, {
+      domain: COOKIE_DOMAIN,
+      secure,
+      httpOnly: true
+    });
+    res.clearCookie(META_COOKIE_NAME, {
+      domain: COOKIE_DOMAIN,
+      secure
+    });
     res.redirect(REDIRECT_URL);
   } catch (error) {
     res.status(error.meta.code).json(error);
