@@ -66,11 +66,13 @@ class SearchPage extends Component {
                       <SettlementSelectWithQuery
                         addSettlement={this.addSettlement}
                         setSearchParams={setSearchParams}
+                        location={this.state.location}
                       />
                       <InputsWithQuery
                         {...values}
                         searchParams={params}
                         addSearchData={this.addSearchData}
+                        location={this.state.location}
                       />
                     </FlexInputsContainer>
                   )}
@@ -107,7 +109,7 @@ class SearchPage extends Component {
 export default SearchPage;
 
 const InputsWithQuery = props => {
-  const { addSearchData, searchParams } = props;
+  const { addSearchData, searchParams, location } = props;
 
   const fullName = searchParams.fullName || "";
   const divisionName = searchParams.divisionName || "";
@@ -138,6 +140,7 @@ const InputsWithQuery = props => {
                 placeholder="Відділення"
                 name="divisionName"
                 value={divisionName}
+                disabled={location.match(/\bmap\b/)}
               />
             </FlexItem>
             <FlexItem>
@@ -146,6 +149,7 @@ const InputsWithQuery = props => {
                 placeholder="Прізвище, ім&#700;я, по-батькові"
                 name="fullName"
                 value={fullName}
+                disabled={location.match(/\bmap\b/)}
               />
             </FlexItem>
             <FlexItem>
@@ -161,6 +165,7 @@ const InputsWithQuery = props => {
                       item => item !== "PHARMACIST" && item !== "PHARMACIST2"
                     )}
                     renderItem={item => dict[item]}
+                    disabled={location.match(/\bmap\b/)}
                   />
                 )}
               />
@@ -178,6 +183,7 @@ class SettlementSelectWithQuery extends Component {
   };
 
   render() {
+    const { location } = this.props;
     return (
       <Query
         query={SettlementQuery}
@@ -215,6 +221,7 @@ class SettlementSelectWithQuery extends Component {
                   return refetch({ settlement });
                 }, 500)}
                 renderItem={address => <AddressView data={address} />}
+                disabled={location.match(/\bmap\b/)}
               />
             </FlexItem>
           );
@@ -392,7 +399,7 @@ const FlexItem = styled.div`
 const Icon = styled.div`
   position: absolute;
   right: 0;
-  top: 32px;
+  top: 43px;
   line-height: 0;
   user-select: none;
 `;
