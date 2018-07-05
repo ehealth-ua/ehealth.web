@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.43.0"></a>
+# [0.43.0](https://github.com/edenlabllc/ehealth.web/compare/v0.42.3...v0.43.0) (2018-07-05)
+
+
+### Features
+
+* **auth:** add new cabinet flow in approve-factor page ([f2bc0f6](https://github.com/edenlabllc/ehealth.web/commit/f2bc0f6))
+
+
+
+
+
 <a name="0.42.3"></a>
 ## [0.42.3](https://github.com/edenlabllc/ehealth.web/compare/v0.42.2...v0.42.3) (2018-07-05)
 
