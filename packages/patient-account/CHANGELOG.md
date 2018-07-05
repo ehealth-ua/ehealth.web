@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.42.2"></a>
+## [0.42.2](https://github.com/edenlabllc/ehealth.web/compare/v0.42.1...v0.42.2) (2018-07-05)
+
+
+### Bug Fixes
+
+* **patient-account:** add disabled prop on search inputs ([529d933](https://github.com/edenlabllc/ehealth.web/commit/529d933))
+
+
+
+
+
 <a name="0.42.1"></a>
 ## [0.42.1](https://github.com/edenlabllc/ehealth.web/compare/v0.42.0...v0.42.1) (2018-07-04)
 
