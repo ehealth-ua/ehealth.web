@@ -44,13 +44,13 @@ export const InputBorder = styled.div`
   border: 1px solid
     ${switchFlags(
       {
-        disabled: "#dadcde",
+        disabled: "#efefef",
         errored: "#ff1f44",
         active: "#11d8fb"
       },
       "#dedede"
     )};
-  color: ${ifProp("disabled", "#9e9e9e", "#3d3d3d")};
+  color: ${ifProp("disabled", "#efefef", "#3d3d3d")};
   display: flex;
   font-size: ${prop("theme.input.fontSize", 16)}px;
   line-height: ${prop("theme.input.lineHeight", 22)}px;
