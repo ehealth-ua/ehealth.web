@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.42.3"></a>
+## [0.42.3](https://github.com/edenlabllc/ehealth.web/compare/v0.42.2...v0.42.3) (2018-07-05)
+
+
+### Bug Fixes
+
+* **components:** add disabled prop on dropdown button in Select component ([cd7f167](https://github.com/edenlabllc/ehealth.web/commit/cd7f167))
+
+
+
+
+
 <a name="0.42.2"></a>
 ## [0.42.2](https://github.com/edenlabllc/ehealth.web/compare/v0.42.1...v0.42.2) (2018-07-05)
 
