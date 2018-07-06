@@ -141,6 +141,7 @@ const InputsWithQuery = props => {
                 name="divisionName"
                 value={divisionName}
                 disabled={location.match(/\bmap\b/)}
+                size="small"
               />
             </FlexItem>
             <FlexItem>
@@ -150,6 +151,7 @@ const InputsWithQuery = props => {
                 name="fullName"
                 value={fullName}
                 disabled={location.match(/\bmap\b/)}
+                size="small"
               />
             </FlexItem>
             <FlexItem>
@@ -166,6 +168,7 @@ const InputsWithQuery = props => {
                     )}
                     renderItem={item => dict[item]}
                     disabled={location.match(/\bmap\b/)}
+                    size="small"
                   />
                 )}
               />
@@ -222,6 +225,7 @@ class SettlementSelectWithQuery extends Component {
                 }, 500)}
                 renderItem={address => <AddressView data={address} />}
                 disabled={location.match(/\bmap\b/)}
+                size="small"
               />
             </FlexItem>
           );
@@ -399,7 +403,7 @@ const FlexItem = styled.div`
 const Icon = styled.div`
   position: absolute;
   right: 0;
-  top: 43px;
+  top: 32px;
   line-height: 0;
   user-select: none;
 `;

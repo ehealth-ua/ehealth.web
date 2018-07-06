@@ -45,17 +45,23 @@ const SelectField = ({
       selectedItem,
       openMenu,
       clearSelection,
-      input: { onFocus, onBlur, ...input },
+      input: { onFocus, onBlur, size, ...input },
       meta: { active, errored, error }
     }) => (
       <FieldView {...getRootProps({ refKey: "innerRef", label, horizontal })}>
-        <InputBorder disabled={disabled} errored={errored} active={active}>
+        <InputBorder
+          disabled={disabled}
+          errored={errored}
+          active={active}
+          size={size}
+        >
           <SelectInput
             {...getInputProps({
               ...input,
               disabled,
               onFocus,
               onBlur,
+              size,
               onKeyDown: event => {
                 if (!isOpen && event.key === "Backspace") {
                   clearSelection();

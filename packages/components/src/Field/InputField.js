@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { prop, ifProp } from "styled-tools";
+import { prop, ifProp, withProp } from "styled-tools";
 import { switchFlags } from "@ehealth/utils";
 
 import Field from "./Field";
@@ -19,6 +19,7 @@ export const PasswordField = props => <InputField {...props} type="password" />;
 export const InputField = ({
   label,
   horizontal,
+  size,
   prefix,
   postfix,
   disabled,
@@ -28,9 +29,14 @@ export const InputField = ({
   <Field {...props}>
     {({ input, meta: { active, errored, error } }) => (
       <FieldView label={label} horizontal={horizontal}>
-        <InputBorder disabled={disabled} errored={errored} active={active}>
+        <InputBorder
+          disabled={disabled}
+          errored={errored}
+          active={active}
+          size={size}
+        >
           {prefix && <InputContent>{prefix}</InputContent>}
-          <InputComponent {...input} disabled={disabled} />
+          <InputComponent {...input} disabled={disabled} size={size} />
           {postfix && <InputContent>{postfix}</InputContent>}
         </InputBorder>
         {errored && <ErrorMessage>{error}</ErrorMessage>}
@@ -52,14 +58,28 @@ export const InputBorder = styled.div`
     )};
   color: ${ifProp("disabled", "#efefef", "#3d3d3d")};
   display: flex;
-  font-size: ${prop("theme.input.fontSize", 16)}px;
+  font-size: ${withProp(
+    [prop("theme.input.fontSize"), "size"],
+    (fontSize, size = "medium") => `${fontSize[size]}px`
+  )};
   line-height: ${prop("theme.input.lineHeight", 22)}px;
 `;
 
 export const InputContent = styled.div`
-  padding: ${prop("theme.input.paddingTop", 14)}px
-    ${prop("theme.input.paddingHorizontal", 25)}px
-    ${prop("theme.input.paddingBottom", 14)}px;
+  padding: ${ifProp(
+    "size",
+    [
+      "theme.input.paddingTop",
+      "theme.input.paddingHorizontal",
+      "theme.input.paddingBottom"
+    ].map(item =>
+      withProp([prop(item), "size"], (padding, size) => `${padding[size]}px `)
+    ),
+    withProp(
+      [prop("theme.input.paddingDefault"), "size"],
+      ({ top, horizontal, bottom }) => `${top}px ${horizontal}px ${bottom}px`
+    )
+  )};
   position: relative;
   text-align: left;
 `;
