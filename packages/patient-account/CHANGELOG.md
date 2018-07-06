@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.44.0"></a>
+# [0.44.0](https://github.com/edenlabllc/ehealth.web/compare/v0.43.2...v0.44.0) (2018-07-06)
+
+
+### Features
+
+* **components:** add input size themization (connects [#120](https://github.com/edenlabllc/ehealth.web/issues/120)) ([88bd920](https://github.com/edenlabllc/ehealth.web/commit/88bd920))
+
+
+
+
+
 <a name="0.43.2"></a>
 ## [0.43.2](https://github.com/edenlabllc/ehealth.web/compare/v0.43.1...v0.43.2) (2018-07-05)
 
