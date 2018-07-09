@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { prop, ifProp, withProp } from "styled-tools";
+import { prop, ifProp, switchProp, withProp } from "styled-tools";
 import { switchFlags } from "@ehealth/utils";
 
 import Field from "./Field";
@@ -59,26 +59,25 @@ export const InputBorder = styled.div`
   color: ${ifProp("disabled", "#efefef", "#3d3d3d")};
   display: flex;
   font-size: ${withProp(
-    [prop("theme.input.fontSize"), "size"],
-    (fontSize, size = "medium") => `${fontSize[size]}px`
+    [
+      prop("size", "medium"),
+      prop("theme.input.fontSize", { small: 14, medium: 16 })
+    ],
+    (size, fontSize) => `${fontSize[size]}px`
   )};
   line-height: ${prop("theme.input.lineHeight", 22)}px;
 `;
 
 export const InputContent = styled.div`
-  padding: ${ifProp(
-    "size",
+  padding: ${withProp(
     [
-      "theme.input.paddingTop",
-      "theme.input.paddingHorizontal",
-      "theme.input.paddingBottom"
-    ].map(item =>
-      withProp([prop(item), "size"], (padding, size) => `${padding[size]}px `)
-    ),
-    withProp(
-      [prop("theme.input.paddingDefault"), "size"],
-      ({ top, horizontal, bottom }) => `${top}px ${horizontal}px ${bottom}px`
-    )
+      prop("size", "medium"),
+      prop("theme.input.paddingTop", { small: 6, medium: 14 }),
+      prop("theme.input.paddingHorizontal", { small: 19, medium: 25 }),
+      prop("theme.input.paddingBottom", { small: 6, medium: 14 })
+    ],
+    (size, ...paddings) =>
+      paddings.map(padding => `${padding[size]}px`).join(" ")
   )};
   position: relative;
   text-align: left;
