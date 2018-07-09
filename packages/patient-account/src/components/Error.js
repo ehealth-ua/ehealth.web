@@ -31,11 +31,10 @@ export default Error;
 const Layout = styled.div`
   text-align: center;
   max-width: 420px;
-  margin: 40% auto;
-  height: 100vh;
+  margin: 0 auto;
 `;
 
-const Number = styled.h4`
+const Number = styled(Heading.H1)`
   font-size: 80px;
   color: #70cffc;
   margin-bottom: 0;
