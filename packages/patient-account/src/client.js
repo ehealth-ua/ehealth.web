@@ -16,8 +16,14 @@ export const createClient = ({ onError: handleError }) => {
 
   const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
     const { message, statusCode, result } = networkError;
+    let error = statusCode ? result.error : { type: "network", message };
 
-    const error = statusCode ? result.error : { type: "network", message };
+    if (statusCode === 500) {
+      error = {
+        ...error,
+        type: "internal_server_error"
+      };
+    }
 
     let operationType;
 
