@@ -46,7 +46,7 @@ const SignInPage = ({
               <Button theme="link" to={`/update-password?${search}`}>
                 Змінити пароль
               </Button>
-              <Button theme="link" to="/reset">
+              <Button theme="link" to={`/reset?${search}`}>
                 Забули пароль?
               </Button>
               <Button theme="link" to={`/update-factor/${search}`}>
