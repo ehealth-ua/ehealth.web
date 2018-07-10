@@ -42,7 +42,10 @@ class ResetPasswordPage extends Component {
   }
 
   render() {
-    const { passwordRecoveryRequest } = this.props;
+    const {
+      passwordRecoveryRequest,
+      router: { location: { query: { client_id, redirect_uri } } }
+    } = this.props;
     return (
       <section className={styles.main} id="reset-password-in-page">
         <header className={styles.header}>
@@ -53,10 +56,15 @@ class ResetPasswordPage extends Component {
             <ResetPasswordForm
               onSubmit={async ({ email }) => {
                 this.setState({ email });
+
                 const {
-                  payload: { response },
-                  error
-                } = await passwordRecoveryRequest(email);
+                  payload: { error },
+                  response
+                } = await passwordRecoveryRequest(
+                  email,
+                  client_id,
+                  redirect_uri
+                );
                 if (error) {
                   if (response.error.type === "validation_failed") {
                     return {
@@ -81,7 +89,11 @@ class ResetPasswordPage extends Component {
                   const {
                     payload: { response },
                     error
-                  } = await passwordRecoveryRequest(this.state.email);
+                  } = await passwordRecoveryRequest(
+                    this.state.email,
+                    client_id,
+                    redirect_uri
+                  );
                   if (!error) {
                     this.setState({ timer: 10 });
                     return this.onClickResend();

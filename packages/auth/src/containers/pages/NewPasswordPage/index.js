@@ -16,6 +16,7 @@ class NewPasswordPage extends Component {
   };
 
   render() {
+    const { router: { location } } = this.props;
     return (
       <section className={styles.main} id="sign-in-page">
         <header className={styles.header}>
@@ -27,7 +28,7 @@ class NewPasswordPage extends Component {
             <div>
               <H3>Пароль успішно оновлено</H3>
               <div className={styles.description}>
-                <Button color="blue" to="/sign-in">
+                <Button color="blue" to={`/sign-in${location.search}`}>
                   Повернутися до входу
                 </Button>
               </div>
