@@ -60,9 +60,6 @@ const SignInPage = ({
               <Button theme="link" to={`/reset?${search}`}>
                 Забули пароль?
               </Button>
-              <Button theme="link" to={`/update-factor/${search}`}>
-                Змінити додатковий фактор авторизації
-              </Button>
             </ButtonsGroup>
           </NarrowContainer>
         )}
