@@ -11,6 +11,8 @@ import {
 import { syncHistoryWithStore } from "react-router-redux";
 import { useRedial } from "react-router-redial";
 
+import { REACT_APP_SIGN_UP_ENABLED } from "./env";
+
 import { getUser, getToken } from "./reducers";
 import { loadTokenFromStorage, isLoginned, logout } from "./redux/session";
 import { fetchUserData } from "./redux/user";
@@ -104,21 +106,32 @@ export default class Routes extends Component {
 
             <Route component={Default}>
               <Route path="sign" component={SignPage} />
-              <Route path="sign-up" component={SignUpVerifyPage} />
-              <Route
-                path="sign-up/confirmation"
-                component={SignUpConfirmationPage}
-              />
-              <Route path="/sign-up/continue" component={SignUpValidatePage} />
-              <Route component={SignUpNextPage}>
-                <Route path="/sign-up/person" component={SignUpPersonPage} />
-                <Route path="/sign-up/user" component={SignUpUserPage} />
-                <Route path="/sign-up/otp" component={SignUpOtpPage} />
-              </Route>
-              <Route
-                path="/sign-up/failure/:type"
-                component={SignUpFailurePage}
-              />
+
+              {REACT_APP_SIGN_UP_ENABLED && (
+                <>
+                  <Route path="sign-up" component={SignUpVerifyPage} />
+                  <Route
+                    path="sign-up/confirmation"
+                    component={SignUpConfirmationPage}
+                  />
+                  <Route
+                    path="/sign-up/continue"
+                    component={SignUpValidatePage}
+                  />
+                  <Route component={SignUpNextPage}>
+                    <Route
+                      path="/sign-up/person"
+                      component={SignUpPersonPage}
+                    />
+                    <Route path="/sign-up/user" component={SignUpUserPage} />
+                    <Route path="/sign-up/otp" component={SignUpOtpPage} />
+                  </Route>
+                  <Route
+                    path="/sign-up/failure/:type"
+                    component={SignUpFailurePage}
+                  />
+                </>
+              )}
 
               <Route path="invite" component={InviteLayout}>
                 <IndexRoute inviteStatuses={["NEW"]} component={InvitePage} />
