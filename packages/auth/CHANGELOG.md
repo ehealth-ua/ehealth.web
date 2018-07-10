@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.46.0"></a>
+# [0.46.0](https://github.com/edenlabllc/ehealth.web/compare/v0.45.0...v0.46.0) (2018-07-10)
+
+
+### Bug Fixes
+
+* **auth:** add search to reset password link ([6f0a136](https://github.com/edenlabllc/ehealth.web/commit/6f0a136))
+
+
+### Features
+
+* **auth:** add ability to hide DS button and registration link and page using feature flags ([5ba6036](https://github.com/edenlabllc/ehealth.web/commit/5ba6036)), closes [#137](https://github.com/edenlabllc/ehealth.web/issues/137)
+
+
+
+
+
 <a name="0.45.0"></a>
 # [0.45.0](https://github.com/edenlabllc/ehealth.web/compare/v0.44.1...v0.45.0) (2018-07-10)
 
