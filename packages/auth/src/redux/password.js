@@ -1,7 +1,7 @@
 import { REACT_APP_AUTH_URL } from "../env";
 import { invoke } from "./api";
 
-export const passwordRecoveryRequest = email =>
+export const passwordRecoveryRequest = (email, client_id, redirect_uri) =>
   invoke({
     endpoint: `${REACT_APP_AUTH_URL}/api/credentials_recovery_requests`,
     method: "POST",
@@ -15,7 +15,9 @@ export const passwordRecoveryRequest = email =>
     ],
     body: {
       credentials_recovery_request: {
-        email
+        email,
+        client_id,
+        redirect_uri
       }
     }
   });
