@@ -16,7 +16,7 @@ class NewPasswordPage extends Component {
   };
 
   render() {
-    const { router: { location } } = this.props;
+    const { router } = this.props;
     return (
       <section className={styles.main} id="sign-in-page">
         <header className={styles.header}>
@@ -28,7 +28,12 @@ class NewPasswordPage extends Component {
             <div>
               <H3>Пароль успішно оновлено</H3>
               <div className={styles.description}>
-                <Button color="blue" to={`/sign-in${location.search}`}>
+                <Button
+                  color="blue"
+                  onClick={() =>
+                    router.push({ ...router.location, pathname: "/sign-in" })
+                  }
+                >
                   Повернутися до входу
                 </Button>
               </div>
@@ -45,7 +50,12 @@ class NewPasswordPage extends Component {
                   <Button color="blue" to="/reset">
                     Відправити повторно
                   </Button>
-                  <Button theme="link" to="/sign-in">
+                  <Button
+                    theme="link"
+                    onClick={() =>
+                      router.push({ ...router.location, pathname: "/sign-in" })
+                    }
+                  >
                     Повернутися до входу
                   </Button>
                 </ButtonsGroup>
@@ -59,7 +69,12 @@ class NewPasswordPage extends Component {
                 Спробуйте перейти за посиланням у листі заново.
               </div>
               <div className={styles.description}>
-                <Button color="blue" to="/sign-in">
+                <Button
+                  color="blue"
+                  onClick={() =>
+                    router.push({ ...router.location, pathname: "/sign-in" })
+                  }
+                >
                   Повернутися до входу
                 </Button>
               </div>
