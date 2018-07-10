@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.46.1"></a>
+## [0.46.1](https://github.com/edenlabllc/ehealth.web/compare/v0.46.0...v0.46.1) (2018-07-10)
+
+
+### Bug Fixes
+
+* **auth:** remove Change 2FA from auth page ([0c492d8](https://github.com/edenlabllc/ehealth.web/commit/0c492d8))
+
+
+
+
+
 <a name="0.46.0"></a>
 # [0.46.0](https://github.com/edenlabllc/ehealth.web/compare/v0.45.0...v0.46.0) (2018-07-10)
 
