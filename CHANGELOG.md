@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.45.0"></a>
+# [0.45.0](https://github.com/edenlabllc/ehealth.web/compare/v0.44.1...v0.45.0) (2018-07-10)
+
+
+### Bug Fixes
+
+* **auth:** add new arg to password reset action ([04387a8](https://github.com/edenlabllc/ehealth.web/commit/04387a8))
+* **auth:** use router for spreading params ([5537699](https://github.com/edenlabllc/ehealth.web/commit/5537699))
+
+
+### Features
+
+* **auth:** send client_id and redirect_uri while resetting password(connected to [#2362](https://github.com/edenlabllc/ehealth.web/issues/2362)) ([a25fc4c](https://github.com/edenlabllc/ehealth.web/commit/a25fc4c))
+
+
+
+
+
 <a name="0.44.1"></a>
 ## [0.44.1](https://github.com/edenlabllc/ehealth.web/compare/v0.44.0...v0.44.1) (2018-07-09)
 
