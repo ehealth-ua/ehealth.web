@@ -3,7 +3,7 @@ import { ifProp } from "styled-tools";
 import { Mutation } from "react-apollo";
 import styled from "react-emotion/macro";
 
-import { Form, Field, Link, Popup, Heading } from "@ehealth/components";
+import { Form, Field, Link, Modal, Heading } from "@ehealth/components";
 
 import TerminateQuery from "../graphql/TerminateDeclarationQuery.graphql";
 
@@ -11,7 +11,7 @@ const DeclarationReject = ({ onClose, id, onReject }) => (
   <Mutation mutation={TerminateQuery}>
     {terminateDeclaration => {
       return (
-        <Popup onClose={onClose}>
+        <Modal width={760} onClose={onClose} backdrop>
           <Heading.H1>Розірвання декларації</Heading.H1>
           <P red={true}>
             Ви збираєтесь розірвати декларацію,<br />
@@ -45,7 +45,7 @@ const DeclarationReject = ({ onClose, id, onReject }) => (
           <Link size="small" onClick={onClose}>
             Повернутися
           </Link>
-        </Popup>
+        </Modal>
       );
     }}
   </Mutation>

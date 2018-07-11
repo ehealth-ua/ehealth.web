@@ -12,7 +12,7 @@ export { default as Heading } from "./Heading";
 export { default as HistoryState } from "./HistoryState";
 export { default as Link } from "./Link";
 export { default as Match } from "./Match";
-export { default as Popup } from "./Popup";
+export { default as Modal } from "./Modal";
 export { default as Redirect } from "./Redirect";
 export { default as SearchParams } from "./SearchParams";
 export { default as StateMachine } from "./StateMachine";
