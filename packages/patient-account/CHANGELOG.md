@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.46.2"></a>
+## [0.46.2](https://github.com/edenlabllc/ehealth.web/compare/v0.46.0...v0.46.2) (2018-07-11)
+
+
+### Bug Fixes
+
+* **patient-account:** change scenarios for 2FA ([402f42d](https://github.com/edenlabllc/ehealth.web/commit/402f42d))
+
+
+
+
+
 <a name="0.46.1"></a>
 ## [0.46.1](https://github.com/edenlabllc/ehealth.web/compare/v0.46.0...v0.46.1) (2018-07-10)
 
