@@ -4,7 +4,7 @@ import { Query, Mutation } from "react-apollo";
 import isEqual from "lodash/isEqual";
 import debounce from "lodash/debounce";
 import { Signer } from "@ehealth/react-iit-digital-signature";
-import { Flex } from "grid-emotion";
+import { Flex } from "rebass/emotion";
 import {
   Heading,
   Link,
