@@ -12,6 +12,19 @@ import DefinitionListView from "../components/DefinitionListView";
 import CreateDeclarationRequestMutation from "../graphql/CreateDeclarationRequestMutation.graphql";
 import EmployeeQuery from "../graphql/EmployeeQuery.graphql";
 import PersonQuery from "../graphql/PersonQuery.graphql";
+
+const ErrorMessages = {
+  default: "Щось пішло не так. Спробуйте обрати іншого лікаря.",
+  "Employee does not belong to legal entity.":
+    "Неможливо підписати декларацію. Лікар на разі не влаштований до лікарні.",
+  "Doctor speciality does not meet the patient's age requirement.":
+    "Спеціальність лікаря не відповідає вашому віковому діапазону.",
+  "Employee's speciality does not belong to a doctor: THERAPIST, PEDIATRICIAN, FAMILY_DOCTOR":
+    "Спеціальність працівника не належить до списку: терапевт, педіатр, сімейний лікар",
+  "Your scope does not allow to access this resource. Missing allowances: declaration_request:write":
+    "Ви не можете робити запити на декларацію. Зверніться до служби підтримки"
+};
+
 class EmployeePage extends React.Component {
   state = {
     error: false
@@ -165,8 +178,10 @@ class EmployeePage extends React.Component {
                                     networkError: { result: { error } } = {}
                                   } = e;
                                   if (error) {
+                                    console.log("error", error);
                                     this.declarationErrorHandler(
-                                      error.invalid[0].rules[0].description
+                                      error.message ||
+                                        error.invalid[0].rules[0].description
                                     );
                                   }
                                 }
@@ -187,30 +202,10 @@ class EmployeePage extends React.Component {
       </Query>
     );
   }
-  declarationErrorHandler(message) {
-    switch (message) {
-      case "Employee does not belong to legal entity.":
-        this.setState({
-          error:
-            "Неможливо підписати декларацію. Лікар на разі не влаштований до лікарні."
-        });
-        break;
-      case "Doctor speciality does not meet the patient's age requirement.":
-        this.setState({
-          error: "Спеціальність лікаря не відповідає вашому віковому діапазону."
-        });
-        break;
-      case "Employee's speciality does not belong to a doctor: THERAPIST, PEDIATRICIAN, FAMILY_DOCTOR":
-        this.setState({
-          error:
-            "Спеціальність працівника не належить до списку: терапевт, педіатр, сімейний лікар"
-        });
-        break;
-      default:
-        this.setState({
-          error: "Щось пішло не так. Спробуйте обрати іншого лікаря."
-        });
-    }
+  declarationErrorHandler(msg) {
+    this.setState({
+      error: ErrorMessages[msg] || ErrorMessages.default
+    });
   }
 }
 
