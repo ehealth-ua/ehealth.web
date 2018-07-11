@@ -8,6 +8,17 @@ import { fieldNameNormalizer, fieldNameDenormalizer } from "@ehealth/utils";
 
 import { REACT_APP_API_URL } from "./env";
 
+const STATUS_NAMES = {
+  400: "bad_request",
+  401: "unauthorized",
+  403: "forbidden",
+  404: "not_found",
+  409: "conflict",
+  422: "unprocessable_entity",
+  500: "internal_server_error",
+  503: "service_unavailable"
+};
+
 export const createClient = ({ onError: handleError }) => {
   const cache = new InMemoryCache({
     addTypename: false,
@@ -16,14 +27,10 @@ export const createClient = ({ onError: handleError }) => {
 
   const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
     const { message, statusCode, result } = networkError;
-    let error = statusCode ? result.error : { type: "network", message };
 
-    if (statusCode === 500) {
-      error = {
-        ...error,
-        type: "internal_server_error"
-      };
-    }
+    const error = statusCode
+      ? { ...result.error, type: STATUS_NAMES[statusCode] }
+      : { message, type: "network" };
 
     let operationType;
 

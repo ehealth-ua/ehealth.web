@@ -15,7 +15,7 @@ export default class ErrorBoundary extends Component {
   state = { error: null, blocking: false };
 
   componentDidCatch({ message }, info) {
-    const error = { type: "internal", message };
+    const error = { type: "client", message };
 
     this.setError({ error, blocking: true });
   }
@@ -29,20 +29,20 @@ export default class ErrorBoundary extends Component {
           <>
             <Switch
               value={error.type}
-              internal_server_error={<Error.ServerError />}
-              not_found={<Error.NotFound />}
-              internal={<Error.ClientError error={error} />}
-              access_denied={
-                <ForceRedirect
-                  to={`${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
-                />
-              }
+              client={<Error.ClientError error={error} />}
               network={
                 <>
                   {/* add notification here for failed to fetch*/}
                   {this.props.children}
                 </>
               }
+              unauthorized={
+                <ForceRedirect
+                  to={`${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+                />
+              }
+              not_found={<Error.NotFound />}
+              internal_server_error={<Error.ServerError />}
             />
           </>
         )}
