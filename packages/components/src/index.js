@@ -18,6 +18,7 @@ export { default as SearchParams } from "./SearchParams";
 export { default as StateMachine } from "./StateMachine";
 export { default as StepForm } from "./StepForm";
 export { default as Switch } from "./Switch";
+export { default as ThemeProvider } from "./ThemeProvider";
 export { default as Tooltip } from "./Tooltip";
 export { default as Validation, Validations } from "./Validation";
 export { default as withHistoryState } from "./withHistoryState";

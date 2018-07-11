@@ -8,7 +8,7 @@ import {
   formatDate,
   formatPhone
 } from "@ehealth/utils";
-import { Flex } from "grid-emotion";
+import { Flex } from "rebass/emotion";
 
 import PersonDetailsQuery from "../graphql/PersonDetailsQuery.graphql";
 import Section from "../components/Section";

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider } from "emotion-theming";
+import { ThemeProvider } from "@ehealth/components";
 
 import "./globalStyles";
 import theme from "./theme";

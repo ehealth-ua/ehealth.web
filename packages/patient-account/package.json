@@ -13,7 +13,6 @@
     "apollo-link-error": "^1.1.0",
     "apollo-link-rest": "^0.3.0",
     "emotion": "^9.2.5",
-    "emotion-theming": "^9.2.5",
     "graphql.macro": "^1.0.2",
     "react": "^16.3.2",
     "react-apollo": "^2.1.4",
