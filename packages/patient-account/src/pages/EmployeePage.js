@@ -2,9 +2,8 @@ import React from "react";
 import styled from "react-emotion/macro";
 import { Query, Mutation } from "react-apollo";
 import { withRouter } from "react-router-dom";
-
 import { getFullName } from "@ehealth/utils";
-import { Heading, Link, Button } from "@ehealth/components";
+import { Heading, Link, Button, Form, SUBMIT_ERROR } from "@ehealth/components";
 
 import DictionaryValue from "../components/DictionaryValue";
 import DefinitionListView from "../components/DefinitionListView";
@@ -13,17 +12,16 @@ import CreateDeclarationRequestMutation from "../graphql/CreateDeclarationReques
 import EmployeeQuery from "../graphql/EmployeeQuery.graphql";
 import PersonQuery from "../graphql/PersonQuery.graphql";
 
-const ErrorMessages = {
-  default: "Щось пішло не так. Спробуйте обрати іншого лікаря.",
-  "Employee does not belong to legal entity.":
-    "Неможливо підписати декларацію. Лікар на разі не влаштований до лікарні.",
-  "Doctor speciality does not meet the patient's age requirement.":
-    "Спеціальність лікаря не відповідає вашому віковому діапазону.",
-  "Employee's speciality does not belong to a doctor: THERAPIST, PEDIATRICIAN, FAMILY_DOCTOR":
-    "Спеціальність працівника не належить до списку: терапевт, педіатр, сімейний лікар",
-  "Your scope does not allow to access this resource. Missing allowances: declaration_request:write":
-    "Ви не можете робити запити на декларацію. Зверніться до служби підтримки"
-};
+// const ErrorMessages = {
+//   "Employee does not belong to legal entity.":
+//     "Неможливо підписати декларацію. Лікар на разі не влаштований до лікарні.",
+//   "Doctor speciality does not meet the patient's age requirement.":
+//     "Спеціальність лікаря не відповідає вашому віковому діапазону.",
+//   "Employee's speciality does not belong to a doctor: THERAPIST, PEDIATRICIAN, FAMILY_DOCTOR":
+//     "Спеціальність працівника не належить до списку: терапевт, педіатр, сімейний лікар",
+//   "Your scope does not allow to access this resource. Missing allowances: declaration_request:write":
+//     "Ви не можете робити запити на декларацію. Зверніться до служби підтримки"
+// };
 
 class EmployeePage extends React.Component {
   state = {
@@ -151,13 +149,9 @@ class EmployeePage extends React.Component {
                     <Mutation mutation={CreateDeclarationRequestMutation}>
                       {createDeclarationRequest => (
                         <>
-                          <Heading.H3>
-                            <RedText>{this.state.error}</RedText>
-                          </Heading.H3>
                           <Block>
-                            <Button
-                              disabled={this.state.error}
-                              onClick={async () => {
+                            <Form
+                              onSubmit={async () => {
                                 try {
                                   const variables = {
                                     input: {
@@ -173,22 +167,26 @@ class EmployeePage extends React.Component {
                                   });
                                   const { id } = data.declarations.data;
                                   history.push(`/declaration_requests/${id}`);
-                                } catch (e) {
-                                  const {
-                                    networkError: { result: { error } } = {}
-                                  } = e;
-                                  if (error) {
-                                    console.log("error", error);
-                                    this.declarationErrorHandler(
-                                      error.message ||
-                                        error.invalid[0].rules[0].description
-                                    );
-                                  }
+                                } catch ({ networkError }) {
+                                  return {
+                                    [SUBMIT_ERROR]:
+                                      networkError.result.error.invalid
+                                  };
                                 }
                               }}
                             >
-                              Відправити запит на декларацію
-                            </Button>
+                              <Form.Error
+                                wrong="Text"
+                                invalid={({ rule, params }) => "Text2"}
+                                default="Щось пішло не так. Спробуйте обрати іншого лікаря."
+                              />
+                              <Form.Submit
+                                size="small"
+                                disabled={this.state.error}
+                              >
+                                Відправити запит на декларацію
+                              </Form.Submit>
+                            </Form>
                           </Block>
                         </>
                       )}
