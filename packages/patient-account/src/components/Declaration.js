@@ -2,6 +2,12 @@ import React from "react";
 import styled from "react-emotion/macro";
 import format from "date-fns/format";
 import ReactDOM from "react-dom";
+import {
+  getDefinitions,
+  getFullName,
+  formatDate,
+  formatPhone
+} from "@ehealth/utils";
 import { Link as RouterLink } from "react-router-dom";
 import { ifProp } from "styled-tools";
 import { injectGlobal } from "react-emotion/macro";
@@ -9,11 +15,12 @@ import { Mutation } from "react-apollo";
 
 import { MozLogoIcon, CircleIcon } from "@ehealth/icons";
 import { Heading, Button, Link, Switch } from "@ehealth/components";
-
+import Section from "../components/Section";
 import DefinitionListView from "./DefinitionListView";
 import FixedBlock from "./FixedBlock";
 import DictionaryValue from "./DictionaryValue";
 import DECLARATION_STATUSES from "../helpers/statuses";
+import AddressView from "./AddressView";
 
 import ApproveDeclarationRequestMutation from "../graphql/ApproveDeclarationRequestMutation.graphql";
 
@@ -24,46 +31,38 @@ const DeclarationBody = ({ history, data }) => {
     signedAt,
     status,
     content,
-    person: {
-      lastName,
-      firstName,
-      secondName,
-      birthDate,
-      birthSettlement,
-      birthCountry,
-      gender,
-      taxId,
-      phones: [{ number }],
-      emergencyContact,
-      confidantPerson,
-      employee
-    },
-    employee: {
-      position,
-      speciality = "",
-      party,
-      doctor: { specialities: [{ speciality: _speciality } = {}] = [] } = {}
-    },
-    legalEntity: {
-      name: legalEntityName,
-      phones: [{ number: legalEntityPhone }]
-    },
-    division: {
-      name: divisionName,
-      phones: [{ number: divisionPhone }],
-      addresses: [
-        {
-          area,
-          settlementType,
-          settlement,
-          streetType,
-          street,
-          building,
-          apartment
-        }
-      ]
-    }
+    person,
+    employee,
+    legalEntity,
+    division
   } = data;
+
+  const divisionAddresses = getDefinitions({
+    data: division.addresses,
+    keyExtractor: ({ type }) => `addresses.${type}`,
+    renderLabel: ({ type }) => "Адреса відділення",
+    renderItem: item => <AddressView data={item} />
+  });
+
+  const personPhones = getDifinitionsPhones(
+    person.phones,
+    "Контактний номер телефону"
+  );
+
+  const emergencyContact = getDifinitionsPhones(
+    person.emergencyContact.phones,
+    "Контактний номер телефону"
+  );
+
+  const divisionPhones = getDifinitionsPhones(
+    division.phones,
+    "Контактний номер телефону відділення"
+  );
+
+  const legalEntityPhones = getDifinitionsPhones(
+    legalEntity.phones,
+    "Телефон меличного закладу"
+  );
 
   return (
     <>
@@ -73,8 +72,8 @@ const DeclarationBody = ({ history, data }) => {
           declarationNumber={declarationNumber}
           signedAt={signedAt}
         />
-        <DefinitionListSection>
-          <SubTitle>Пацієнт</SubTitle>
+        <Section>
+          <Heading.H3 weight="bold">Пацієнт</Heading.H3>
           <Flex>
             <FlexItem>
               <DefinitionListView
@@ -88,13 +87,9 @@ const DeclarationBody = ({ history, data }) => {
                   gender: "Стать"
                 }}
                 data={{
-                  lastName,
-                  firstName,
-                  secondName,
-                  birthDate: format(birthDate, "DD.MM.YYYY"),
-                  birthSettlement,
-                  birthCountry,
-                  gender: <DictionaryValue name="GENDER" item={gender} />
+                  ...person,
+                  birthDate: formatDate(person.birthDate),
+                  gender: <DictionaryValue name="GENDER" item={person.gender} />
                 }}
               />
             </FlexItem>
@@ -102,101 +97,41 @@ const DeclarationBody = ({ history, data }) => {
               <DefinitionListView
                 labels={{
                   taxId: "Номер облікової картки",
-                  number: "Контактний номер телефону"
+                  ...personPhones.labels
                 }}
                 data={{
-                  taxId,
-                  number
+                  ...person,
+                  ...personPhones.items
                 }}
               />
             </FlexItem>
           </Flex>
-        </DefinitionListSection>
-        <DefinitionListSection>
-          <SubTitle>Контактна особа у разі екстренного випадку</SubTitle>
+        </Section>
+        <Section>
+          <Heading.H3 weight="bold">
+            Контактна особа у разі екстренного випадку
+          </Heading.H3>
           <DefinitionListView
             labels={{
               fullName: "ПІБ",
-              number: "Контактний номер телефону"
+              ...emergencyContact.labels
             }}
             data={{
-              fullName: `${emergencyContact.firstName} ${
-                emergencyContact.secondName
-              } ${emergencyContact.lastName}`,
-              number: emergencyContact.phones[0].number
+              fullName: getFullName(person.emergencyContact),
+              ...emergencyContact.items
             }}
           />
-        </DefinitionListSection>
-        {confidantPerson && (
-          <DefinitionListSection>
-            <SubTitle>Законні представники пацієнта</SubTitle>
-            {confidantPerson.map(
-              (
-                {
-                  firstName: firstName,
-                  secondName: secondName,
-                  lastName: lastName,
-                  phones: [{ number }],
-                  documentsPerson: documentsPerson,
-                  documentsRelationship: documentsRelationship
-                },
-                item
-              ) => (
-                <Flex key={item}>
-                  <FlexItem>
-                    <DefinitionListView
-                      labels={{
-                        fullName: "ПІБ",
-                        number: "Контактний номер телефону",
-                        document:
-                          "Документ, що посвідчує особу законного представника"
-                      }}
-                      data={{
-                        fullName: `${firstName} ${secondName} ${lastName}`,
-                        number,
-                        document: (
-                          <>
-                            <DictionaryValue
-                              name="DOCUMENT_TYPE"
-                              item={documentsPerson[0].type}
-                            />{" "}
-                            №{documentsPerson[0].number}
-                          </>
-                        )
-                      }}
-                    />
-                  </FlexItem>
-                  <FlexItem>
-                    <DefinitionListView
-                      labels={{
-                        document:
-                          "Документ, що посвідчує повноваження законного представника"
-                      }}
-                      data={{
-                        document: (
-                          <>
-                            <DictionaryValue
-                              name="DOCUMENT_RELATIONSHIP_TYPE"
-                              item={documentsRelationship[0].type}
-                            />{" "}
-                            №{documentsRelationship[0].number}
-                            {documentsRelationship[0].issuedAt &&
-                              ` від ${format(
-                                documentsRelationship[0].issuedAt,
-                                "DD.MM.YYYY"
-                              )}`}
-                          </>
-                        )
-                      }}
-                    />
-                  </FlexItem>
-                </Flex>
-              )
-            )}
-          </DefinitionListSection>
+        </Section>
+        {person.confidantPerson && (
+          <Section>
+            <Heading.H3 weight="bold">Законні представники пацієнта</Heading.H3>
+            {person.confidantPerson.map((data, item) => (
+              <ConfidantItem {...data} key={item} />
+            ))}
+          </Section>
         )}
-        <DefinitionListSection>
-          <SubTitle>Лікар</SubTitle>
+        <Section>
+          <Heading.H3 weight="bold">Лікар</Heading.H3>
           <DefinitionListView
             labels={{
               fullName: "ПІБ",
@@ -204,73 +139,57 @@ const DeclarationBody = ({ history, data }) => {
               specialities: "Спеціальність за посадою"
             }}
             data={{
-              fullName: `${party.firstName} ${party.secondName} ${
-                party.lastName
-              }`,
-              position: <DictionaryValue name="POSITION" item={position} />,
+              fullName: getFullName(employee.party),
+              position: (
+                <DictionaryValue name="POSITION" item={employee.position} />
+              ),
               specialities: (
                 <DictionaryValue
                   name="SPECIALITY_TYPE"
-                  item={speciality || _speciality}
+                  item={getSpeciality(employee)}
                 />
               )
             }}
           />
-        </DefinitionListSection>
-        <DefinitionListSection>
-          <SubTitle>Відділення</SubTitle>
+        </Section>
+        <Section>
+          <Heading.H3 weight="bold">Відділення</Heading.H3>
           <Flex>
             <FlexItem>
               <DefinitionListView
                 labels={{
-                  divisionName: "Назва відділення",
-                  legalEntityName: "Назва меличного закладу",
-                  legalEntityPhone: "Телефон меличного закладу"
+                  name: "Назва відділення",
+                  legalEntityName: "Назва медичного закладу",
+                  ...legalEntityPhones.labels
                 }}
                 data={{
-                  divisionName,
-                  legalEntityName,
-                  legalEntityPhone
+                  ...division,
+                  legalEntityName: legalEntity.name,
+                  ...legalEntityPhones.items
                 }}
               />
             </FlexItem>
             <FlexItem>
               <DefinitionListView
                 labels={{
-                  divisionPhone: "Контактний номер телефону відділення",
-                  divisionAddress: "Адреса відділення"
+                  ...divisionPhones.labels,
+                  ...divisionAddresses.labels
                 }}
                 data={{
-                  divisionPhone,
-                  divisionAddress: (
-                    <>
-                      {area}
-                      {" область "}
-                      <DictionaryValue
-                        name="SETTLEMENT_TYPE"
-                        item={settlementType}
-                      />{" "}
-                      {settlement}{" "}
-                      <DictionaryValue name="STREET_TYPE" item={streetType} />{" "}
-                      {street}
-                      {", "}
-                      {building}
-                      {", кв. "}
-                      {apartment}
-                    </>
-                  )
+                  ...divisionPhones.items,
+                  ...divisionAddresses.items
                 }}
               />
             </FlexItem>
           </Flex>
-        </DefinitionListSection>
+        </Section>
         {signedAt && (
-          <DefinitionListSection>
+          <Section>
             <DefinitionListView
               labels={{ signedAt: "Дата ухвалення" }}
-              data={{ signedAt: format(signedAt, "DD.MM.YYYY") }}
+              data={{ signedAt: formatDate(signedAt) }}
             />
-          </DefinitionListSection>
+          </Section>
         )}
       </Shadow>
       <FixedBlock>
@@ -361,13 +280,13 @@ export const DeclarationHeader = ({
     <Flex blur={blur}>
       <MozLogoIcon height="100px" />
       <Left>
-        <H1>Декларація</H1>
-        <H3>
+        <Heading.H1>Декларація</Heading.H1>
+        <Heading.H3>
           про вибір лікаря з надання первинної допомоги
           <br />
           № {declarationNumber}
           {signedAt && ` від ${format(signedAt, "DD.MM.YYYY")}`}
-        </H3>
+        </Heading.H3>
       </Left>
     </Flex>
   );
@@ -387,30 +306,8 @@ const Shadow = styled.div`
   padding: 40px;
 `;
 
-const H1 = styled.h1`
-  font-size: 32px;
-  color: #292b37;
-  text-transform: uppercase;
-  margin: 0;
-`;
-
-const H3 = styled.h3`
-  font-size: 16px;
-  color: #292b37;
-  margin: 0;
-`;
-
 const Left = styled.div`
   margin-left: 20px;
-`;
-
-const DefinitionListSection = styled.div`
-  margin: 30px 0;
-  border-bottom: 1px solid #e7e7e9;
-
-  &:last-of-type {
-    border-bottom: none;
-  }
 `;
 
 const Flex = styled.div`
@@ -423,7 +320,117 @@ const FlexItem = styled.div`
   flex: 1 1 50%;
 `;
 
-const SubTitle = styled.h3`
-  margin-bottom: 30px;
-  font-size: 16px;
-`;
+const ConfidantItem = ({
+  documentsPerson,
+  documentsRelationship,
+  phones,
+  ...rest
+}) => {
+  const confidant = {
+    phones: getDifinitionsPhones(phones, "Контактний номер телефону"),
+    documentsPerson: getDefinitionsDocuments(
+      documentsPerson,
+      "documentsPerson"
+    ),
+    documentsRelationship: getDefinitionsDocuments(
+      documentsRelationship,
+      "documentsRelationship"
+    )
+  };
+
+  return (
+    <Flex>
+      <FlexItem>
+        <DefinitionListView
+          labels={{
+            fullName: "ПІБ",
+            ...confidant.phones.labels,
+            ...confidant.documentsPerson.labels
+          }}
+          data={{
+            fullName: getFullName(rest),
+            ...confidant.phones.items,
+            ...confidant.documentsPerson.items
+          }}
+        />
+      </FlexItem>
+      <FlexItem>
+        <DefinitionListView
+          labels={{
+            ...confidant.documentsRelationship.labels
+          }}
+          data={{
+            ...confidant.documentsRelationship.items
+          }}
+        />
+      </FlexItem>
+    </Flex>
+  );
+};
+
+const DocumentItem = ({
+  data: { number, issuedBy, issuedAt, type },
+  confidant
+}) => (
+  <>
+    {confidant && (
+      <>
+        <DictionaryValue
+          name={
+            confidant === "documentsRelationship"
+              ? "DOCUMENT_RELATIONSHIP_TYPE"
+              : "DOCUMENT_TYPE"
+          }
+          item={type}
+        />{" "}
+        №
+      </>
+    )}
+    {number}
+    {issuedBy && (
+      <>
+        <br />
+        виданий {issuedBy} {issuedAt && formatDate(issuedAt)}
+      </>
+    )}
+  </>
+);
+
+const getDefinitionsDocuments = (document, typeLabel) => {
+  return getDefinitions({
+    data: document,
+    keyExtractor: ({ type }) => `documents.${type}`,
+    renderLabel: ({ type }) => {
+      let label;
+      switch (typeLabel) {
+        case "documentsPerson":
+          label = "Документ, що посвідчує особу законного представника";
+          break;
+        case "documentsRelationship":
+          label = "Документ, що посвідчує повноваження законного представника";
+          break;
+        default:
+          label = <DictionaryValue name="DOCUMENT_TYPE" item={type} />;
+      }
+
+      return <>{label}</>;
+    },
+    renderItem: item => <DocumentItem data={item} confidant={typeLabel} />
+  });
+};
+
+const getDifinitionsPhones = (data, labels) =>
+  getDefinitions({
+    data: data,
+    keyExtractor: ({ type }) => `phones.${type}`,
+    renderLabel: () => labels,
+    renderItem: ({ number }) => formatPhone(number)
+  });
+
+const getSpeciality = data => {
+  if (data.speciality) return data.speciality;
+  const {
+    doctor: { specialities: [{ speciality: _speciality } = {}] = [] } = {}
+  } = data;
+  return _speciality;
+};
