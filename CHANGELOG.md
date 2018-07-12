@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.46.4"></a>
+## [0.46.4](https://github.com/edenlabllc/ehealth.web/compare/v0.46.3...v0.46.4) (2018-07-12)
+
+
+### Bug Fixes
+
+* **auth:** add IE9 on prod on browserlist ([63c6867](https://github.com/edenlabllc/ehealth.web/commit/63c6867))
+* **auth:** remove question sign from query ([95047fe](https://github.com/edenlabllc/ehealth.web/commit/95047fe))
+
+
+
+
+
 <a name="0.46.3"></a>
 ## [0.46.3](https://github.com/edenlabllc/ehealth.web/compare/v0.46.2...v0.46.3) (2018-07-12)
 
