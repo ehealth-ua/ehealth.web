@@ -200,11 +200,6 @@ class EmployeePage extends React.Component {
       </Query>
     );
   }
-  declarationErrorHandler(msg) {
-    this.setState({
-      error: ErrorMessages[msg] || ErrorMessages.default
-    });
-  }
 }
 
 const Block = styled.div`
@@ -232,10 +227,6 @@ const Text = styled.div`
   &:first-child {
     margin-top: 0;
   }
-`;
-
-const RedText = styled.div`
-  color: red;
 `;
 
 export default withRouter(EmployeePage);
