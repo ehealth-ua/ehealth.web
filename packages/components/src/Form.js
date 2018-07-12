@@ -8,6 +8,7 @@ import { prop } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
 
 import Button from "./Button";
+import Heading from "./Heading";
 
 const FINAL_FORM_PROPS = [
   "debug",
@@ -62,8 +63,31 @@ export const FormSubmit = ({ disabled, ...props }) => (
   </FormSpy>
 );
 
+export const FormError = props => (
+  <FormSpy subscription={{ submitErrors: true }}>
+    {({ submitErrors }) => {
+      if (!submitErrors) return null;
+
+      const { [SUBMIT_ERROR]: invalid } = submitErrors;
+      const { rules } = invalid.find(({ entry }) => entry === "$.data") || {};
+
+      if (!rules) return null;
+      const match = rules.find(({ rule }) => Object.keys(props).includes(rule));
+
+      const result = match ? props[match.rule] : props.default;
+
+      return typeof result === "function" ? (
+        result(match)
+      ) : (
+        <Heading.H3>{result}</Heading.H3>
+      );
+    }}
+  </FormSpy>
+);
+
 Form.Button = FormButton;
 Form.Submit = FormSubmit;
+Form.Error = FormError;
 
 export default Form;
 
