@@ -6,6 +6,7 @@ import arrayMutators from "final-form-arrays";
 import styled from "react-emotion/macro";
 import { prop } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
+import { Text } from "rebass/emotion";
 
 import Button from "./Button";
 import Heading from "./Heading";
@@ -79,7 +80,9 @@ export const FormError = props => (
       return typeof result === "function" ? (
         result(match)
       ) : (
-        <Heading.H3>{result}</Heading.H3>
+        <Heading.H3>
+          <Text color="red">{result}</Text>
+        </Heading.H3>
       );
     }}
   </FormSpy>

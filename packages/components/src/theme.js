@@ -10,7 +10,11 @@ export const placements = {
     transform: "translate(-50%, -50%)"
   }
 };
+const colors = {
+  red: "#ff0001"
+};
 
 export default {
-  placements
+  placements,
+  colors
 };
