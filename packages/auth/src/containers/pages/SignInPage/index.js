@@ -54,10 +54,10 @@ const SignInPage = ({
                   Зареєструватися
                 </Button>
               )}
-              <Button theme="link" to={`/update-password?${search}`}>
+              <Button theme="link" to={`/update-password/${search}`}>
                 Змінити пароль
               </Button>
-              <Button theme="link" to={`/reset?${search}`}>
+              <Button theme="link" to={`/reset/${search}`}>
                 Забули пароль?
               </Button>
             </ButtonsGroup>
