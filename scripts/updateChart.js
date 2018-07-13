@@ -10,7 +10,12 @@ const updateChart = () => {
   const { chartName, version } = getPackageInfo();
   if (!chartName) return;
 
-  const valuesPath = path.join(LERNA_ROOT_PATH, "charts", CHART, "values.yaml");
+  const valuesPath = path.join(
+    LERNA_ROOT_PATH,
+    "charts",
+    CHART,
+    "values-dev.yaml"
+  );
 
   if (!existsSync(valuesPath)) {
     throw new Error("Cannot find chart values file");

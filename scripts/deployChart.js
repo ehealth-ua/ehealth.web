@@ -14,7 +14,7 @@ const deployChart = () => {
     throw new Error("Cannot find chart directory");
   }
 
-  const valuesPath = path.join(chartPath, "values.yaml");
+  const valuesPath = path.join(chartPath, "values-dev.yaml");
 
   if (!existsSync(valuesPath)) {
     throw new Error("Cannot find chart values file");
