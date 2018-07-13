@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.46.5"></a>
+## [0.46.5](https://github.com/edenlabllc/ehealth.web/compare/v0.46.4...v0.46.5) (2018-07-13)
+
+
+### Bug Fixes
+
+* **patient-account:** dont rely on variable defaults in SearchSettlementsQuery ([0f71b3b](https://github.com/edenlabllc/ehealth.web/commit/0f71b3b))
+
+
+
+
+
 <a name="0.46.3"></a>
 ## [0.46.3](https://github.com/edenlabllc/ehealth.web/compare/v0.46.2...v0.46.3) (2018-07-12)
 
