@@ -12,17 +12,6 @@ import CreateDeclarationRequestMutation from "../graphql/CreateDeclarationReques
 import EmployeeQuery from "../graphql/EmployeeQuery.graphql";
 import PersonQuery from "../graphql/PersonQuery.graphql";
 
-// const ErrorMessages = {
-//   "Employee does not belong to legal entity.":
-//     "Неможливо підписати декларацію. Лікар на разі не влаштований до лікарні.",
-//   "Doctor speciality does not meet the patient's age requirement.":
-//     "Спеціальність лікаря не відповідає вашому віковому діапазону.",
-//   "Employee's speciality does not belong to a doctor: THERAPIST, PEDIATRICIAN, FAMILY_DOCTOR":
-//     "Спеціальність працівника не належить до списку: терапевт, педіатр, сімейний лікар",
-//   "Your scope does not allow to access this resource. Missing allowances: declaration_request:write":
-//     "Ви не можете робити запити на декларацію. Зверніться до служби підтримки"
-// };
-
 class EmployeePage extends React.Component {
   state = {
     error: false
@@ -176,8 +165,8 @@ class EmployeePage extends React.Component {
                               }}
                             >
                               <Form.Error
-                                wrong="Text"
-                                invalid={({ rule, params }) => "Text2"}
+                                invalid_age="Спеціальність лікаря не відповідає вашому віковому діапазону."
+                                employee_unemployed="Неможливо підписати декларацію. Лікар на разі не влаштований до лікарні."
                                 default="Щось пішло не так. Спробуйте обрати іншого лікаря."
                               />
                               <Form.Submit
