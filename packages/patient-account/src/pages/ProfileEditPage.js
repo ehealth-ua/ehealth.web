@@ -79,7 +79,6 @@ const ProfileEditPage = ({ history }) => (
                         };
 
                         await updatePerson({ variables, context });
-
                         history.push("/profile");
                       } catch (error) {
                         // TODO: Implement exception handling
@@ -309,7 +308,7 @@ const AddressFields = ({ name }) => (
       {({ input: { value: region } }) => (
         <Query
           query={SearchSettlementsQuery}
-          variables={{ region, pageSize: 50 }}
+          variables={{ region, name: "", pageSize: 50 }}
           context={{ credentials: "same-origin" }}
           skip={!region}
         >
