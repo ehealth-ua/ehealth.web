@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.48.0"></a>
+# [0.48.0](https://github.com/edenlabllc/ehealth.web/compare/v0.47.0...v0.48.0) (2018-07-16)
+
+
+### Features
+
+* **components:** Add flow types to few components ([268c6ec](https://github.com/edenlabllc/ehealth.web/commit/268c6ec))
+
+
+
+
+
 <a name="0.47.0"></a>
 # [0.47.0](https://github.com/edenlabllc/ehealth.web/compare/v0.46.5...v0.47.0) (2018-07-16)
 
