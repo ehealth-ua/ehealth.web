@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.48.1"></a>
+## [0.48.1](https://github.com/edenlabllc/ehealth.web/compare/v0.48.0...v0.48.1) (2018-07-16)
+
+
+### Bug Fixes
+
+* **patient-account:** change declaration component ([4512ebb](https://github.com/edenlabllc/ehealth.web/commit/4512ebb))
+* **patient-account:** change documents definitions in Declaration ([694bd68](https://github.com/edenlabllc/ehealth.web/commit/694bd68))
+
+
+
+
+
 <a name="0.48.0"></a>
 # [0.48.0](https://github.com/edenlabllc/ehealth.web/compare/v0.47.0...v0.48.0) (2018-07-16)
 
