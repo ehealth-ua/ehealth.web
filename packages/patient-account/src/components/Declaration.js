@@ -44,22 +44,22 @@ const DeclarationBody = ({ history, data }) => {
     renderItem: item => <AddressView data={item} />
   });
 
-  const personPhones = getDifinitionsPhones(
+  const personPhones = getPhonesDefinitions(
     person.phones,
     "Контактний номер телефону"
   );
 
-  const emergencyContact = getDifinitionsPhones(
+  const emergencyContact = getPhonesDefinitions(
     person.emergencyContact.phones,
     "Контактний номер телефону"
   );
 
-  const divisionPhones = getDifinitionsPhones(
+  const divisionPhones = getPhonesDefinitions(
     division.phones,
     "Контактний номер телефону відділення"
   );
 
-  const legalEntityPhones = getDifinitionsPhones(
+  const legalEntityPhones = getPhonesDefinitions(
     legalEntity.phones,
     "Телефон меличного закладу"
   );
@@ -326,17 +326,35 @@ const ConfidantItem = ({
   phones,
   ...rest
 }) => {
-  const confidant = {
-    phones: getDifinitionsPhones(phones, "Контактний номер телефону"),
-    documentsPerson: getDefinitionsDocuments(
-      documentsPerson,
-      "documentsPerson"
-    ),
-    documentsRelationship: getDefinitionsDocuments(
-      documentsRelationship,
-      "documentsRelationship"
+  const phonesDefinitions = getPhonesDefinitions(
+    phones,
+    "Контактний номер телефону"
+  );
+  const documents = getDefinitions({
+    data: documentsPerson,
+    keyExtractor: ({ type }) => `documents.${type}`,
+    renderLabel: ({ type }) =>
+      "Документ, що посвідчує особу законного представника",
+    renderItem: item => (
+      <>
+        <DictionaryValue name={"DOCUMENT_TYPE"} item={item.type} /> №
+        <DocumentItem data={item} />
+      </>
     )
-  };
+  });
+  const documentsRelationshipDefinitions = getDefinitions({
+    data: documentsRelationship,
+    keyExtractor: ({ type }) => `documents.${type}`,
+    renderLabel: ({ type }) =>
+      "Документ, що посвідчує повноваження законного представника",
+    renderItem: item => (
+      <>
+        <DictionaryValue name={"DOCUMENT_RELATIONSHIP_TYPE"} item={item.type} />{" "}
+        №
+        <DocumentItem data={item} />
+      </>
+    )
+  });
 
   return (
     <Flex>
@@ -344,23 +362,23 @@ const ConfidantItem = ({
         <DefinitionListView
           labels={{
             fullName: "ПІБ",
-            ...confidant.phones.labels,
-            ...confidant.documentsPerson.labels
+            ...phonesDefinitions.labels,
+            ...documents.labels
           }}
           data={{
             fullName: getFullName(rest),
-            ...confidant.phones.items,
-            ...confidant.documentsPerson.items
+            ...phonesDefinitions.items,
+            ...documents.items
           }}
         />
       </FlexItem>
       <FlexItem>
         <DefinitionListView
           labels={{
-            ...confidant.documentsRelationship.labels
+            ...documentsRelationshipDefinitions.labels
           }}
           data={{
-            ...confidant.documentsRelationship.items
+            ...documentsRelationshipDefinitions.items
           }}
         />
       </FlexItem>
@@ -368,24 +386,8 @@ const ConfidantItem = ({
   );
 };
 
-const DocumentItem = ({
-  data: { number, issuedBy, issuedAt, type },
-  confidant
-}) => (
+const DocumentItem = ({ data: { number, issuedBy, issuedAt } }) => (
   <>
-    {confidant && (
-      <>
-        <DictionaryValue
-          name={
-            confidant === "documentsRelationship"
-              ? "DOCUMENT_RELATIONSHIP_TYPE"
-              : "DOCUMENT_TYPE"
-          }
-          item={type}
-        />{" "}
-        №
-      </>
-    )}
     {number}
     {issuedBy && (
       <>
@@ -396,30 +398,7 @@ const DocumentItem = ({
   </>
 );
 
-const getDefinitionsDocuments = (document, typeLabel) => {
-  return getDefinitions({
-    data: document,
-    keyExtractor: ({ type }) => `documents.${type}`,
-    renderLabel: ({ type }) => {
-      let label;
-      switch (typeLabel) {
-        case "documentsPerson":
-          label = "Документ, що посвідчує особу законного представника";
-          break;
-        case "documentsRelationship":
-          label = "Документ, що посвідчує повноваження законного представника";
-          break;
-        default:
-          label = <DictionaryValue name="DOCUMENT_TYPE" item={type} />;
-      }
-
-      return <>{label}</>;
-    },
-    renderItem: item => <DocumentItem data={item} confidant={typeLabel} />
-  });
-};
-
-const getDifinitionsPhones = (data, labels) =>
+const getPhonesDefinitions = (data, labels) =>
   getDefinitions({
     data: data,
     keyExtractor: ({ type }) => `phones.${type}`,
