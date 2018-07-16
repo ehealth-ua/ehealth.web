@@ -1,18 +1,32 @@
 import React from "react";
 
+type Props = {
+  data: { value: React.Node },
+  header: { value: React.Node },
+  renderRow: React.Node,
+  rowKeyExtractor: () => mixed,
+  columnKeyExtractor: () => mixed,
+  tableComponent: React.Node,
+  headerComponent: React.Node,
+  bodyComponent: React.Node,
+  rowComponent: React.Node,
+  headerCellComponent: React.Node,
+  cellComponent: React.Node
+};
+
 const TableView = ({
   data,
   header,
   renderRow = item => item,
   rowKeyExtractor = (item, index) => item.key || index,
-  columnKeyExtractor = (name, index) => name,
+  columnKeyExtractor = name => name,
   tableComponent: TableComponent = "table",
   headerComponent = "thead",
   bodyComponent = "tbody",
   rowComponent = "tr",
   headerCellComponent = "th",
   cellComponent = "td"
-}) => (
+}: Props) => (
   <TableComponent>
     <TableHeader
       header={header}

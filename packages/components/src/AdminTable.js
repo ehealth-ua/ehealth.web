@@ -3,13 +3,21 @@ import styled from "react-emotion/macro";
 
 import TableView from "./TableView";
 
+type AdminTableProps = {
+  data: { value: React.Node },
+  header: { value: React.Node },
+  renderRow: React.Node,
+  rowKeyExtractor: () => mixed,
+  columnKeyExtractor: () => mixed
+};
+
 const AdminTable = ({
   data,
   header,
   renderRow,
   rowKeyExtractor,
   columnKeyExtractor
-}) => (
+}: AdminTableProps) => (
   <TableView
     data={data}
     header={header}

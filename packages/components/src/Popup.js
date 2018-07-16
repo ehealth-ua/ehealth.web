@@ -3,9 +3,15 @@ import { createPortal } from "react-dom";
 import styled from "react-emotion/macro";
 
 import { CloseIcon } from "@ehealth/icons";
-import { Link } from "@ehealth/components";
 
-const Popup = ({ onClose = () => {}, children }) =>
+type Props = {
+  /** The callback to call when the modal should be closed */
+  onClose: () => mixed,
+  /** The content of the modal */
+  children: React.Node
+};
+
+const Popup = ({ onClose = () => {}, children }: Props) =>
   createPortal(
     <>
       <Fade onClick={onClose} />

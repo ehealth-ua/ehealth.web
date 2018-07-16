@@ -2,13 +2,21 @@ import React from "react";
 import styled from "react-emotion/macro";
 import TableView from "./TableView";
 
+type CabinetTableProps = {
+  data: { value: React.Node },
+  header: { value: React.Node },
+  renderRow: React.Node,
+  rowKeyExtractor: () => mixed,
+  columnKeyExtractor: () => mixed
+};
+
 const CabinetTable = ({
   data,
   header,
   renderRow,
   rowKeyExtractor,
   columnKeyExtractor
-}) => (
+}: CabinetTableProps) => (
   <TableView
     data={data}
     header={header}

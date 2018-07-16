@@ -4,7 +4,20 @@ import { prop, ifProp, switchProp } from "styled-tools";
 
 import RouterLink from "./RouterLink";
 
-const Button = props => {
+type Props = {
+  /** Location */
+  to: string,
+  /** The button label */
+  children: string,
+  /** Set letterSpacing to 2.4px */
+  letterSpacing?: boolean,
+  /** Makes the button full width */
+  block?: boolean,
+  /** The scale to be used for the font size */
+  sizes?: "xs" | "small" | "medium" | "large"
+};
+
+const Button = (props: Props) => {
   const Component = ButtonContainer.withComponent(
     props.href ? "a" : props.to ? RouterLink : "button"
   );
