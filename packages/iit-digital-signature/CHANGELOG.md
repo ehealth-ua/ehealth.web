@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.48.2"></a>
+## [0.48.2](https://github.com/edenlabllc/ehealth.web/compare/v0.48.1...v0.48.2) (2018-07-16)
+
+
+### Bug Fixes
+
+* **iit-digital-signature:** transpile vendor code wrapper with babel ([4e5846f](https://github.com/edenlabllc/ehealth.web/commit/4e5846f)), closes [edenlabllc/ehealth.api#2652](https://github.com/edenlabllc/ehealth.api/issues/2652)
+
+
+
+
+
 <a name="0.48.0"></a>
 # [0.48.0](https://github.com/edenlabllc/ehealth.web/compare/v0.47.0...v0.48.0) (2018-07-16)
 
