@@ -5,7 +5,8 @@
       {
         "modules": false,
         "shippedProposals": true,
-        "exclude": ["transform-regenerator", "transform-async-to-generator"]
+        "exclude": ["transform-regenerator", "transform-async-to-generator"],
+        "useBuiltIns": "usage"
       }
     ]
   ],

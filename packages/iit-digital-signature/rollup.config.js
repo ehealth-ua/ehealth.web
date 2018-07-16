@@ -9,7 +9,7 @@ export default {
   plugins: [
     resolve(),
     commonjs(),
-    babel({ include: "src/**" }),
+    babel({ exclude: "node_modules/**" }),
     concat(),
     uglify()
   ],
