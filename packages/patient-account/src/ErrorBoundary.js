@@ -1,6 +1,12 @@
 import React, { createContext, Component } from "react";
-import { ForceRedirect, Switch } from "@ehealth/components";
+import {
+  ForceRedirect,
+  Switch,
+  Modal,
+  SelfDistract
+} from "@ehealth/components";
 import Error from "./components/Error";
+import { Text } from "rebass/emotion";
 import {
   REACT_APP_OAUTH_URL,
   REACT_APP_CLIENT_ID,
@@ -8,6 +14,22 @@ import {
 } from "./env";
 
 const { Provider, Consumer } = createContext(() => {});
+
+class DelayedComponent extends React.Component {
+  componentDidMount() {
+    const { onDismiss, delayTime } = this.props;
+    setTimeout(() => onDismiss(), delayTime);
+  }
+  render() {
+    return (
+      <Modal width={760} px={76} py={32} place="top" backdrop>
+        <Text color="red" fontSize="16" fontWeight="bold">
+          У вас немає доступу до даної операції
+        </Text>
+      </Modal>
+    );
+  }
+}
 
 export default class ErrorBoundary extends Component {
   static Consumer = Consumer;
@@ -19,6 +41,9 @@ export default class ErrorBoundary extends Component {
 
     this.setError({ error, blocking: true });
   }
+  onDismiss = () => {
+    this.setState({ error: null });
+  };
 
   render() {
     const { error, blocking } = this.state;
@@ -30,10 +55,18 @@ export default class ErrorBoundary extends Component {
             <Switch
               value={error.type}
               client={<Error.ClientError error={error} />}
+              forbidden={
+                <DelayedComponent delayTime={2000} onDismiss={this.onDismiss} />
+              }
               network={
                 <>
-                  {/* add notification here for failed to fetch*/}
-                  {this.props.children}
+                  {blocking ? (
+                    <Error.Client error={error} />
+                  ) : (
+                    <Modal width={760} p={4} place="top">
+                      Щось пішло не так...
+                    </Modal>
+                  )}
                 </>
               }
               unauthorized={

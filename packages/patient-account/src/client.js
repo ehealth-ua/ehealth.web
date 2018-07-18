@@ -28,6 +28,8 @@ export const createClient = ({ onError: handleError }) => {
   const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
     const { message, statusCode, result } = networkError;
 
+    if (statusCode === 422) return;
+
     const error = statusCode
       ? { ...result.error, type: STATUS_NAMES[statusCode] }
       : { message, type: "network" };
