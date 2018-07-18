@@ -1,0 +1,8 @@
+query DictionariesQuery {
+  dictionaries @rest(path: "/dictionaries", type: "DictionariesPayload") {
+    data @type(name: "Dictionary") {
+      name
+      values
+    }
+  }
+}

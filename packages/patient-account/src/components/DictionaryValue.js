@@ -1,22 +1,13 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { gql } from "graphql.macro";
+import DictionaryQuery from "../graphql/DictionaryQuery.graphql";
 
 const DictionaryValue = ({ name, item, children, render = children }) => (
   <Query
     fetchPolicy="cache-first"
     context={{ credentials: "same-origin" }}
-    query={gql`
-      query DictionariesQuery {
-        dictionaries @rest(path: "/dictionaries", type: "DictionariesPayload") {
-          data @type(name: "Dictionary") {
-            name
-            values
-          }
-        }
-      }
-    `}
+    query={DictionaryQuery}
   >
     {({ loading, error, data }) => {
       if (loading || error) return null;

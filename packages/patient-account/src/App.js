@@ -7,12 +7,15 @@ import "./globalStyles";
 import client from "./client";
 import theme from "./theme";
 import Routes from "./Routes";
+import Preload from "./Preload";
 
 const App = () => (
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
       <Router>
-        <Routes />
+        <Preload>
+          <Routes />
+        </Preload>
       </Router>
     </ThemeProvider>
   </ApolloProvider>
