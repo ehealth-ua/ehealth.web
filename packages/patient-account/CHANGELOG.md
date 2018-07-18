@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.50.0"></a>
+# [0.50.0](https://github.com/edenlabllc/ehealth.web/compare/v0.49.0...v0.50.0) (2018-07-18)
+
+
+### Bug Fixes
+
+* **patient-account:** add 500 error handling ([2bbd9e4](https://github.com/edenlabllc/ehealth.web/commit/2bbd9e4))
+* **patient-account:** remove error descriptions ([2519dcf](https://github.com/edenlabllc/ehealth.web/commit/2519dcf))
+* **patient-account:** remove wrapper for modal ([f7374c5](https://github.com/edenlabllc/ehealth.web/commit/f7374c5))
+* **patient-account:** use Form.Error component for 422 ([3568be3](https://github.com/edenlabllc/ehealth.web/commit/3568be3))
+
+
+### Features
+
+* add shared theme, add rebass primitives library ([b47fa2f](https://github.com/edenlabllc/ehealth.web/commit/b47fa2f))
+* bump emotion to 9.2.5 ([3ae9b2a](https://github.com/edenlabllc/ehealth.web/commit/3ae9b2a))
+* **patient-account:** add basic exception handling ([bcec67a](https://github.com/edenlabllc/ehealth.web/commit/bcec67a)), closes [#76](https://github.com/edenlabllc/ehealth.web/issues/76)
+* **patient-account:** cover 403 error ([d63acf2](https://github.com/edenlabllc/ehealth.web/commit/d63acf2))
+* **patient-account:** error blocks with Layout ([3bb4af1](https://github.com/edenlabllc/ehealth.web/commit/3bb4af1))
+* **patient-account:** handle Unauthorized exception ([bca1769](https://github.com/edenlabllc/ehealth.web/commit/bca1769))
+* **patient-account:** use  switcher for 404, 500 and internal errors ([6e53f38](https://github.com/edenlabllc/ehealth.web/commit/6e53f38))
+
+
+
+
+
 <a name="0.49.0"></a>
 # [0.49.0](https://github.com/edenlabllc/ehealth.web/compare/v0.48.4...v0.49.0) (2018-07-18)
 

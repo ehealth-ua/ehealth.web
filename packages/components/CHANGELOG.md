@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.50.0"></a>
+# [0.50.0](https://github.com/edenlabllc/ehealth.web/compare/v0.49.0...v0.50.0) (2018-07-18)
+
+
+### Bug Fixes
+
+* **components:** cover case with none invalid Form ([62e70b9](https://github.com/edenlabllc/ehealth.web/commit/62e70b9))
+
+
+### Features
+
+* add shared theme, add rebass primitives library ([b47fa2f](https://github.com/edenlabllc/ehealth.web/commit/b47fa2f))
+* bump emotion to 9.2.5 ([3ae9b2a](https://github.com/edenlabllc/ehealth.web/commit/3ae9b2a))
+* **components:** add animation to Modal component ([274a914](https://github.com/edenlabllc/ehealth.web/commit/274a914))
+* **components:** add ForceRedirect component ([8145935](https://github.com/edenlabllc/ehealth.web/commit/8145935))
+* **components:** add Form.Error component ([3cacad0](https://github.com/edenlabllc/ehealth.web/commit/3cacad0))
+* **components:** use rebass Text ([25bf33a](https://github.com/edenlabllc/ehealth.web/commit/25bf33a))
+
+
+
+
+
 <a name="0.49.0"></a>
 # [0.49.0](https://github.com/edenlabllc/ehealth.web/compare/v0.48.4...v0.49.0) (2018-07-18)
 
