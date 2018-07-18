@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.0"></a>
+# [0.49.0](https://github.com/edenlabllc/ehealth.web/compare/v0.48.4...v0.49.0) (2018-07-18)
+
+**Note:** Version bump only for package @ehealth/iit-digital-signature
+
+
+
+
+
 <a name="0.48.2"></a>
 ## [0.48.2](https://github.com/edenlabllc/ehealth.web/compare/v0.48.1...v0.48.2) (2018-07-16)
 

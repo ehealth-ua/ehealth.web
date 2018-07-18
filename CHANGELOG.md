@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.0"></a>
+# [0.49.0](https://github.com/edenlabllc/ehealth.web/compare/v0.48.4...v0.49.0) (2018-07-18)
+
+
+### Features
+
+* **patient-account:** add Preload component in App.js ([29dc533](https://github.com/edenlabllc/ehealth.web/commit/29dc533))
+
+
+
+
+
 <a name="0.48.4"></a>
 ## [0.48.4](https://github.com/edenlabllc/ehealth.web/compare/v0.48.3...v0.48.4) (2018-07-18)
 
