@@ -15,22 +15,6 @@ import {
 
 const { Provider, Consumer } = createContext(() => {});
 
-class DelayedComponent extends React.Component {
-  componentDidMount() {
-    const { onDismiss, delayTime } = this.props;
-    setTimeout(() => onDismiss(), delayTime);
-  }
-  render() {
-    return (
-      <Modal width={760} px={76} py={32} place="top" backdrop>
-        <Text color="red" fontSize="16" fontWeight="bold">
-          У вас немає доступу до даної операції
-        </Text>
-      </Modal>
-    );
-  }
-}
-
 export default class ErrorBoundary extends Component {
   static Consumer = Consumer;
 
@@ -41,9 +25,6 @@ export default class ErrorBoundary extends Component {
 
     this.setError({ error, blocking: true });
   }
-  onDismiss = () => {
-    this.setState({ error: null });
-  };
 
   render() {
     const { error, blocking } = this.state;
@@ -56,7 +37,13 @@ export default class ErrorBoundary extends Component {
               value={error.type}
               client={<Error.ClientError error={error} />}
               forbidden={
-                <DelayedComponent delayTime={2000} onDismiss={this.onDismiss} />
+                <>
+                  <Modal width={760} px={76} py={32} place="top" backdrop>
+                    <Text color="red" fontSize="16" fontWeight="bold">
+                      У вас немає доступу до даної операції
+                    </Text>
+                  </Modal>
+                </>
               }
               network={
                 <>
@@ -84,5 +71,11 @@ export default class ErrorBoundary extends Component {
     );
   }
 
-  setError = ({ error, blocking }) => this.setState({ error, blocking });
+  setError = ({ error, blocking }) => {
+    this.setState({ error, blocking });
+
+    if (!blocking) {
+      setTimeout(() => this.setState({ error: null }), 2000);
+    }
+  };
 }
