@@ -21,6 +21,7 @@ import Main from "./containers/layouts/Main";
 import Default from "./containers/layouts/Default";
 import FAQ from "./containers/layouts/FAQ";
 import InviteLayout from "./containers/layouts/InviteLayout";
+import DigitalSignatureProvider from "./containers/layouts/DigitalSignatureProvider";
 
 import SignPage from "./containers/pages/SignPage";
 
@@ -105,7 +106,9 @@ export default class Routes extends Component {
             </Route>
 
             <Route component={Default}>
-              <Route path="sign" component={SignPage} />
+              <Route component={DigitalSignatureProvider}>
+                <Route path="sign" component={SignPage} />
+              </Route>
 
               {REACT_APP_SIGN_UP_ENABLED && (
                 <>
@@ -114,22 +117,24 @@ export default class Routes extends Component {
                     path="sign-up/confirmation"
                     component={SignUpConfirmationPage}
                   />
-                  <Route
-                    path="/sign-up/continue"
-                    component={SignUpValidatePage}
-                  />
-                  <Route component={SignUpNextPage}>
+                  <Route component={DigitalSignatureProvider}>
                     <Route
-                      path="/sign-up/person"
-                      component={SignUpPersonPage}
+                      path="/sign-up/continue"
+                      component={SignUpValidatePage}
                     />
-                    <Route path="/sign-up/user" component={SignUpUserPage} />
-                    <Route path="/sign-up/otp" component={SignUpOtpPage} />
+                    <Route component={SignUpNextPage}>
+                      <Route
+                        path="/sign-up/person"
+                        component={SignUpPersonPage}
+                      />
+                      <Route path="/sign-up/user" component={SignUpUserPage} />
+                      <Route path="/sign-up/otp" component={SignUpOtpPage} />
+                    </Route>
+                    <Route
+                      path="/sign-up/failure/:type"
+                      component={SignUpFailurePage}
+                    />
                   </Route>
-                  <Route
-                    path="/sign-up/failure/:type"
-                    component={SignUpFailurePage}
-                  />
                 </>
               )}
 
@@ -151,6 +156,7 @@ export default class Routes extends Component {
                   component={InviteRejectPage}
                 />
               </Route>
+
               <Route path="sign-in" component={SignInPage} />
               <Route
                 path="sign-in/digital-signature"
@@ -188,6 +194,7 @@ export default class Routes extends Component {
               <Route path="update-factor" component={UpdateFactorSignInPage} />
               <Route path="reset" component={ResetPasswordPage} />
               <Route path="reset/:id" component={NewPasswordPage} />
+
               <Route onEnter={this.requireAuth}>
                 <Route path="accept" component={AcceptPage} />
                 <Route path="otp-send" component={OtpPage} />
@@ -215,6 +222,7 @@ export default class Routes extends Component {
                   component={UpdateFactorSuccessPage}
                 />
               </Route>
+
               <Route path="*" component={NotFoundPage} />
             </Route>
 
