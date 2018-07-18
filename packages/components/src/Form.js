@@ -70,6 +70,8 @@ export const FormError = props => (
       if (!submitErrors) return null;
 
       const { [SUBMIT_ERROR]: invalid } = submitErrors;
+      if (!invalid) return null;
+
       const { rules } = invalid.find(({ entry }) => entry === "$.data") || {};
 
       if (!rules) return null;
