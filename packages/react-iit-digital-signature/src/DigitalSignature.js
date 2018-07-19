@@ -1,7 +1,7 @@
 import React, { createContext, Component } from "react";
 import load from "load-js";
 
-const DigitalSignatureContext = createContext();
+const DigitalSignatureContext = createContext({});
 
 export default class DigitalSignature extends Component {
   static Consumer = ({ children, render = children }) => (

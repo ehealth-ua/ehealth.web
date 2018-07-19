@@ -158,10 +158,14 @@ export default class Routes extends Component {
               </Route>
 
               <Route path="sign-in" component={SignInPage} />
-              <Route
-                path="sign-in/digital-signature"
-                component={SignInDSPage}
-              />
+
+              <Route component={DigitalSignatureProvider}>
+                <Route
+                  path="sign-in/digital-signature"
+                  component={SignInDSPage}
+                />
+              </Route>
+
               <Route
                 path="/sign-in/failure/:type"
                 component={SignInFailurePage}
