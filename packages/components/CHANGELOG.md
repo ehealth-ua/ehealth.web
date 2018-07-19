@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.51.0"></a>
+# [0.51.0](https://github.com/edenlabllc/ehealth.web/compare/v0.50.0...v0.51.0) (2018-07-19)
+
+
+### Bug Fixes
+
+* **components:** add default entry to Form.Error ([2d8e795](https://github.com/edenlabllc/ehealth.web/commit/2d8e795))
+
+
+### Features
+
+* **components:** add entryKey param for getting form error ([50a274e](https://github.com/edenlabllc/ehealth.web/commit/50a274e))
+
+
+
+
+
 <a name="0.50.0"></a>
 # [0.50.0](https://github.com/edenlabllc/ehealth.web/compare/v0.49.0...v0.50.0) (2018-07-18)
 
