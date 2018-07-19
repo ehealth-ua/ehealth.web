@@ -246,7 +246,7 @@ const ProfileEditPage = ({ history }) => (
                     <Form.Error
                       entryKey="$.signed_content"
                       invalid="Підписання інформації має здійснюватись за домопогою власного цифрового підпису."
-                      default="Щось пішло не так. Спробуйте обрати іншого лікаря."
+                      default="Щось пішло не так. Спробуйте пізніше"
                     />
                     <Flex justifyContent="space-around" alignItems="baseline">
                       <Link to="/profile" size="small" upperCase bold spaced>
