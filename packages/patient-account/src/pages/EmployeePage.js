@@ -165,7 +165,6 @@ class EmployeePage extends React.Component {
                               }}
                             >
                               <Form.Error
-                                entryKey="$.data"
                                 invalid_age="Спеціальність лікаря не відповідає вашому віковому діапазону."
                                 employee_unemployed="Неможливо підписати декларацію. Лікар на разі не влаштований до лікарні."
                                 default="Щось пішло не так. Спробуйте обрати іншого лікаря."
