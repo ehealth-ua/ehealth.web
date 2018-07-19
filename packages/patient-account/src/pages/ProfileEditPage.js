@@ -1,5 +1,4 @@
 import React from "react";
-import { gql } from "graphql.macro";
 import { Query, Mutation } from "react-apollo";
 import isEqual from "lodash/isEqual";
 import debounce from "lodash/debounce";
@@ -11,7 +10,8 @@ import {
   Form,
   Field,
   Validation,
-  Validations
+  Validations,
+  SUBMIT_ERROR
 } from "@ehealth/components";
 import { PencilIcon } from "@ehealth/icons";
 import {
@@ -80,9 +80,10 @@ const ProfileEditPage = ({ history }) => (
 
                         await updatePerson({ variables, context });
                         history.push("/profile");
-                      } catch (error) {
-                        // TODO: Implement exception handling
-                        console.error(error);
+                      } catch ({ networkError }) {
+                        return {
+                          [SUBMIT_ERROR]: networkError.result.error.invalid
+                        };
                       }
                     }}
                   >
@@ -242,10 +243,17 @@ const ProfileEditPage = ({ history }) => (
                       </Field.Array>
                     </Section>
                     <ProfileAuthSection data={person.data} />
-                    <Link to="/profile" size="small" upperCase bold spaced>
-                      Вийти з режиму редагування
-                    </Link>{" "}
-                    <Form.Submit size="small">Зберегти зміни</Form.Submit>
+                    <Form.Error
+                      entryKey="$.signed_content"
+                      invalid="Підписання інформації має здійснюватись за домопогою власного цифрового підпису."
+                      default="Щось пішло не так. Спробуйте обрати іншого лікаря."
+                    />
+                    <Flex justifyContent="space-around" alignItems="baseline">
+                      <Link to="/profile" size="small" upperCase bold spaced>
+                        Вийти з режиму редагування
+                      </Link>{" "}
+                      <Form.Submit size="small">Зберегти зміни</Form.Submit>
+                    </Flex>
                   </Form>
                 )}
               </Mutation>
