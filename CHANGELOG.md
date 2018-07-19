@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.51.2"></a>
+## [0.51.2](https://github.com/edenlabllc/ehealth.web/compare/v0.51.1...v0.51.2) (2018-07-19)
+
+
+### Bug Fixes
+
+* **patient-account:** add missing graphql ([9392e55](https://github.com/edenlabllc/ehealth.web/commit/9392e55))
+
+
+
+
+
 <a name="0.51.1"></a>
 ## [0.51.1](https://github.com/edenlabllc/ehealth.web/compare/v0.51.0...v0.51.1) (2018-07-19)
 
