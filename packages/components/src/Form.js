@@ -64,7 +64,7 @@ export const FormSubmit = ({ disabled, ...props }) => (
   </FormSpy>
 );
 
-export const FormError = props => (
+export const FormError = ({ entryKey, ...props }) => (
   <FormSpy subscription={{ submitErrors: true }}>
     {({ submitErrors }) => {
       if (!submitErrors) return null;
@@ -72,7 +72,7 @@ export const FormError = props => (
       const { [SUBMIT_ERROR]: invalid } = submitErrors;
       if (!invalid) return null;
 
-      const { rules } = invalid.find(({ entry }) => entry === "$.data") || {};
+      const { rules } = invalid.find(({ entry }) => entry === entryKey) || {};
 
       if (!rules) return null;
       const match = rules.find(({ rule }) => Object.keys(props).includes(rule));
