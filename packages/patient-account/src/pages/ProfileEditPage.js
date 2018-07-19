@@ -244,7 +244,7 @@ const ProfileEditPage = ({ history }) => (
                     </Section>
                     <ProfileAuthSection data={person.data} />
                     <Form.Error
-                      entryKey="$.signed_content"
+                      entry="$.signed_content"
                       invalid="Підписання інформації має здійснюватись за домопогою власного цифрового підпису."
                       default="Щось пішло не так. Спробуйте пізніше"
                     />
