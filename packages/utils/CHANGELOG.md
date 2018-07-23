@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.51.3"></a>
+## [0.51.3](https://github.com/edenlabllc/ehealth.web/compare/v0.51.2...v0.51.3) (2018-07-23)
+
+
+### Bug Fixes
+
+* **utils:** fix format date ([638808e](https://github.com/edenlabllc/ehealth.web/commit/638808e))
+
+
+
+
+
 <a name="0.51.0"></a>
 # [0.51.0](https://github.com/edenlabllc/ehealth.web/compare/v0.50.0...v0.51.0) (2018-07-19)
 

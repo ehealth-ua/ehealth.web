@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.51.3"></a>
+## [0.51.3](https://github.com/edenlabllc/ehealth.web/compare/v0.51.2...v0.51.3) (2018-07-23)
+
+
+### Bug Fixes
+
+* **patient-account:** fix label legalEntityPhones ([ee6be85](https://github.com/edenlabllc/ehealth.web/commit/ee6be85))
+
+
+
+
+
 <a name="0.51.2"></a>
 ## [0.51.2](https://github.com/edenlabllc/ehealth.web/compare/v0.51.1...v0.51.2) (2018-07-19)
 
