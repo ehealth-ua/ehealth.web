@@ -61,7 +61,7 @@ const DeclarationBody = ({ history, data }) => {
 
   const legalEntityPhones = getPhonesDefinitions(
     legalEntity.phones,
-    "Телефон меличного закладу"
+    "Телефон медичного закладу"
   );
 
   return (
