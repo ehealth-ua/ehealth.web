@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.51.4"></a>
+## [0.51.4](https://github.com/edenlabllc/ehealth.web/compare/v0.51.3...v0.51.4) (2018-07-24)
+
+
+### Bug Fixes
+
+* **patient-account:** change securityPage flow ([812d378](https://github.com/edenlabllc/ehealth.web/commit/812d378))
+
+
+
+
+
 <a name="0.51.3"></a>
 ## [0.51.3](https://github.com/edenlabllc/ehealth.web/compare/v0.51.2...v0.51.3) (2018-07-23)
 
