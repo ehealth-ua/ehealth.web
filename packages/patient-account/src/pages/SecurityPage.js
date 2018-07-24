@@ -33,41 +33,42 @@ const SecurityPage = () => (
               Двоетапна перевірка{" "}
               {(factor.length === 0 || !isActive) && "не встановлена"}
             </Heading.H3>
-            {factor.length > 0 && (
-              <>
-                {isActive && phone ? (
-                  <DefinitionListView
-                    labels={{
-                      phone: "Номер телефону"
-                    }}
-                    data={{
-                      phone: (
-                        <Link
-                          href={`${REACT_APP_UPDATE_FACTOR_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
-                          size="s"
-                          upperCase
-                          color={"black"}
-                          icon={<PencilIcon height="14" />}
-                        >
-                          {phone}
-                        </Link>
-                      )
-                    }}
-                  />
-                ) : (
-                  <p>
-                    На жаль, другий фактор авторизації був скинутий.<br />
-                    Для того, щоб його задати повторно необхідно ще раз пройти
-                    процес{" "}
-                    <Link
-                      href={`${REACT_APP_OAUTH_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
-                    >
-                      авторизації
-                    </Link>
-                  </p>
-                )}
-              </>
-            )}
+            {factor.length > 0 &&
+              isActive && (
+                <>
+                  {phone ? (
+                    <DefinitionListView
+                      labels={{
+                        phone: "Номер телефону"
+                      }}
+                      data={{
+                        phone: (
+                          <Link
+                            href={`${REACT_APP_UPDATE_FACTOR_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+                            size="s"
+                            upperCase
+                            color={"black"}
+                            icon={<PencilIcon height="14" />}
+                          >
+                            {phone}
+                          </Link>
+                        )
+                      }}
+                    />
+                  ) : (
+                    <p>
+                      На жаль, другий фактор авторизації був скинутий.<br />
+                      Для того, щоб його задати повторно необхідно ще раз пройти
+                      процес{" "}
+                      <Link
+                        href={`${REACT_APP_OAUTH_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+                      >
+                        авторизації
+                      </Link>
+                    </p>
+                  )}
+                </>
+              )}
           </Section>
         </>
       );
