@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.51.5"></a>
+## [0.51.5](https://github.com/edenlabllc/ehealth.web/compare/v0.51.4...v0.51.5) (2018-07-24)
+
+
+### Bug Fixes
+
+* **components:** update Popup position ([#166](https://github.com/edenlabllc/ehealth.web/issues/166)) ([2eb141e](https://github.com/edenlabllc/ehealth.web/commit/2eb141e))
+
+
+
+
+
 <a name="0.51.4"></a>
 ## [0.51.4](https://github.com/edenlabllc/ehealth.web/compare/v0.51.3...v0.51.4) (2018-07-24)
 
