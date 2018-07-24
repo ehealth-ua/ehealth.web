@@ -43,7 +43,7 @@ const bounce = keyframes`
     opacity: 0;
   }
   to {
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     opacity: 1;
   }
 `;
