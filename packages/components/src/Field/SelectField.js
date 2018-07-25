@@ -74,7 +74,8 @@ const SelectField = ({
               open: isOpen,
               onFocus,
               onBlur,
-              disabled
+              disabled,
+              size
             })}
           />
         </InputBorder>
