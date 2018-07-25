@@ -26,6 +26,7 @@ const CircleIcon = ({
 const Svg = styled.svg`
   padding: 1px;
   vertical-align: middle;
+  width: 15px;
   height: 15px;
 `;
 

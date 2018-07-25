@@ -9,7 +9,7 @@ const Layout = ({ children }) => (
     <Wrapper>
       <Header>
         <Link to="/">
-          <EhealthLogoIcon height="45" />
+          <EhealthLogoIcon height="45" width="101" />
         </Link>
         <UserNav />
       </Header>

@@ -278,7 +278,7 @@ export const DeclarationHeader = ({
 
   const startBlock = (
     <Flex blur={blur}>
-      <MozLogoIcon height="100px" />
+      <MozLogoIcon height="100px" width="160px" />
       <Left>
         <Heading.H1>Декларація</Heading.H1>
         <Heading.H3>
