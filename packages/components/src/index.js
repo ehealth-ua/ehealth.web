@@ -9,6 +9,7 @@ export { default as ForceRedirect } from "./ForceRedirect";
 export { default as Form, SUBMIT_ERROR } from "./Form";
 export { default as FormAutoFetch } from "./FormAutoFetch";
 export { default as Heading } from "./Heading";
+export { default as Pagination } from "./Pagination";
 export { default as HistoryState } from "./HistoryState";
 export { default as Link } from "./Link";
 export { default as Match } from "./Match";

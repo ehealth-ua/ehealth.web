@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import Link from "./Link";
 import styled from "react-emotion/macro";
 import { withProps } from "recompose";
 import { stringifySearchParams } from "@ehealth/utils";
