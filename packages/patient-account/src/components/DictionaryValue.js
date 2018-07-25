@@ -16,7 +16,8 @@ const DictionaryValue = ({ name, item, children, render = children }) => (
         dict => dict.name === name
       );
 
-      const value = item !== undefined ? values[item] : values;
+      const value =
+        item !== undefined ? (values[item] ? values[item] : item) : values;
 
       return typeof render === "function" ? render(value) : value;
     }}
