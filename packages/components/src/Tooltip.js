@@ -102,13 +102,13 @@ class Tooltip extends Component {
 
   updateParentRect() {
     const {
-      x: documentX,
-      y: documentY
+      left: documentX,
+      top: documentY
     } = document.documentElement.getBoundingClientRect();
 
     const {
-      x: parentX,
-      y: parentY,
+      left: parentX,
+      top: parentY,
       width,
       height
     } = this.parent.getBoundingClientRect();
