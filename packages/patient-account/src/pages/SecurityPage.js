@@ -1,12 +1,23 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "react-emotion/macro";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import { gql } from "graphql.macro";
-import { Heading, Link } from "@ehealth/components";
+import {
+  Heading,
+  Link,
+  Button,
+  SearchParams,
+  Pagination,
+  Modal
+} from "@ehealth/components";
+import { getDefinitions } from "@ehealth/utils";
 import { PencilIcon } from "@ehealth/icons";
 import Section from "../components/Section";
 import DefinitionListView from "../components/DefinitionListView";
 import AuthenticationFactorQuery from "../graphql/AuthenticationFactorQuery.graphql";
+import ApprovalsRequestQuery from "../graphql/ApprovalsRequestQuery.graphql";
+import DictionaryValue from "../components/DictionaryValue";
+import DeleteApprovalMutation from "../graphql/DeleteApprovalMutation.graphql";
 import { prop } from "styled-tools";
 import {
   REACT_APP_UPDATE_FACTOR_URL,
@@ -37,24 +48,7 @@ const SecurityPage = () => (
               isActive && (
                 <>
                   {phone ? (
-                    <DefinitionListView
-                      labels={{
-                        phone: "Номер телефону"
-                      }}
-                      data={{
-                        phone: (
-                          <Link
-                            href={`${REACT_APP_UPDATE_FACTOR_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
-                            size="s"
-                            upperCase
-                            color={"black"}
-                            icon={<PencilIcon height="14" />}
-                          >
-                            {phone}
-                          </Link>
-                        )
-                      }}
-                    />
+                    <SecurityBlock phone={phone} />
                   ) : (
                     <p>
                       На жаль, другий фактор авторизації був скинутий.<br />
@@ -75,5 +69,150 @@ const SecurityPage = () => (
     }}
   </Query>
 );
+
+const SecurityBlock = ({ phone }) => (
+  <>
+    <DefinitionListView
+      labels={{
+        phone: "Номер телефону"
+      }}
+      data={{
+        phone: (
+          <Link
+            href={`${REACT_APP_UPDATE_FACTOR_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+            size="s"
+            upperCase
+            color={"black"}
+            icon={<PencilIcon height="14" />}
+          >
+            {phone}
+          </Link>
+        )
+      }}
+    />
+    <SearchParams>
+      {params => {
+        const { page = 1 } = params;
+        return (
+          <Query query={ApprovalsRequestQuery} variables={{ page }}>
+            {({ loading, error, data }) => {
+              if (loading || error || !data.approvals) return null;
+              const {
+                data: dataApprovals,
+                paging: { totalPages }
+              } = data.approvals;
+              const approvals = getDefinitions({
+                data: dataApprovals,
+                keyExtractor: ({ userId }) => `approvals.${userId}`,
+                renderLabel: ({ clientId }) => clientId,
+                renderItem: props => <ScopeView {...props} />
+              });
+              return (
+                <ApprovalsComponent>
+                  <Heading.H3 weight="bold">
+                    Доступ до персональних даних
+                  </Heading.H3>
+
+                  <DefinitionListView
+                    labels={{
+                      ...approvals.labels
+                    }}
+                    data={{
+                      ...approvals.items
+                    }}
+                  />
+                  <Pagination totalPages={totalPages} />
+                </ApprovalsComponent>
+              );
+            }}
+          </Query>
+        );
+      }}
+    </SearchParams>
+  </>
+);
+
+class ScopeView extends Component {
+  state = {
+    showModal: false
+  };
+
+  render() {
+    const { clientId, scope, id } = this.props;
+    const { showModal } = this.state;
+    return (
+      <>
+        {scope &&
+          scope.split(" ").map((item, index, array) => (
+            <span key={`${clientId}${index}`}>
+              <DictionaryValue name="SCOPES" item={item} />
+              {index < array.length - 1 && ", "}
+            </span>
+          ))}
+        <br />
+        <Link
+          color="red"
+          upperCase
+          bold
+          onClick={() => this.setState({ showModal: true })}
+        >
+          Видалити доступ
+        </Link>
+        {showModal && (
+          <Mutation mutation={DeleteApprovalMutation}>
+            {deleteApproval => (
+              <ConfirmModal
+                close={() => this.setState({ showModal: false })}
+                deleteApproval={deleteApproval}
+                id={id}
+                clientId={clientId}
+              />
+            )}
+          </Mutation>
+        )}
+      </>
+    );
+  }
+}
+
+const ConfirmModal = ({ close, deleteApproval, id, clientId }) => (
+  <Modal width={760} onClose={close}>
+    <Heading.H1>
+      {`
+        Ви впевненні що хочете видалити
+        доступ ${clientId}?`}
+    </Heading.H1>
+    <ControllButtonBlock>
+      <Button
+        onClick={async () => {
+          try {
+            await deleteApproval({
+              variables: { id: id }
+            });
+            window.location.reload();
+          } catch (error) {
+            console.log(error);
+          }
+        }}
+      >
+        Так
+      </Button>
+      <Button onClick={close}>Ні</Button>
+    </ControllButtonBlock>
+  </Modal>
+);
+
+const ApprovalsComponent = styled.div`
+  margin: 30px 0;
+  padding-top: 30px;
+  border-top: 1px solid #e7e7e9;
+`;
+
+const ControllButtonBlock = styled.div`
+  max-width: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+`;
 
 export default SecurityPage;

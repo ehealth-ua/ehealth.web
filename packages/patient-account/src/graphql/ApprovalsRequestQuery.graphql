@@ -1,0 +1,10 @@
+query ApprovalsRequestQuery($page: String!) {
+  approvals(page: $page)
+    @rest(
+      path: "/admin/apps?page=:page&page_size=10"
+      type: "ApprovalsPayload"
+    ) {
+    data
+    paging
+  }
+}

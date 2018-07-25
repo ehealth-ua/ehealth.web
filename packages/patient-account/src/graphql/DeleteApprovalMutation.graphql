@@ -1,0 +1,6 @@
+mutation DeleteApprovalMutation($id: ID!) {
+  approval: deleteApproval(id: $id)
+    @rest(type: "ApprovalsPayload", path: "/admin/apps/:id", method: "DELETE") {
+    data
+  }
+}
