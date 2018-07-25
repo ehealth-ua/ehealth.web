@@ -14,7 +14,9 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <ErrorBoundary>
         <DataProvider>
-          <Routes />
+          <Preload>
+            <Routes />
+          </Preload>
         </DataProvider>
       </ErrorBoundary>
     </ThemeProvider>
