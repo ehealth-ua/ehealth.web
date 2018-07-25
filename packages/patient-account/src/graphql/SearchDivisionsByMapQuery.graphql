@@ -3,9 +3,6 @@ query(
   $east: Int!
   $south: Int!
   $west: Int!
-  $divisionName: String!
-  $settlement: String!
-  $region: String!
   $page: Int!
   $pageSize: Int!
 ) {
@@ -14,15 +11,12 @@ query(
     east: $east
     south: $south
     west: $west
-    divisionName: $divisionName
-    settlement: $settlement
-    region: $region
     page: $page
     pageSize: $pageSize
   )
     @rest(
       type: "DivisionsPayload"
-      path: "/reports/stats/divisions?north=:north&east=:east&south=:south&west=:west&division_name=:divisionName&settlement=:settlement&region=:region&page=:page&page_size=:pageSize&type=CLINIC"
+      path: "/reports/stats/divisions?north=:north&east=:east&south=:south&west=:west&page=:page&page_size=:pageSize&type=CLINIC"
     ) {
     data
   }

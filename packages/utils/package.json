@@ -6,6 +6,7 @@
   "main": "src",
   "dependencies": {
     "@emotion/is-prop-valid": "^0.6.2",
+    "flat": "^4.1.0",
     "lodash": "^4.17.5"
   }
 }

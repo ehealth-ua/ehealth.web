@@ -1,19 +1,19 @@
 query(
   $fullName: String!
   $divisionName: String!
-  $specialityName: String!
-  $settlementName: String!
+  $speciality: String!
+  $settlement: String!
   $settlementRegion: String!
 ) {
   search(
     fullName: $fullName
     divisionName: $divisionName
-    specialityName: $specialityName
-    settlementName: $settlementName
+    speciality: $speciality
+    settlement: $settlement
     settlementRegion: $settlementRegion
   )
     @rest(
-      path: "/stats/employees?employee_type=DOCTOR&full_name=:fullName&speciality=:specialityName&division_name=:divisionName&settlement=:settlementName&region=:settlementRegion&is_available=true&page=1&page_size=50"
+      path: "/stats/employees?employee_type=DOCTOR&full_name=:fullName&speciality=:speciality&division_name=:divisionName&settlement=:settlement&region=:settlementRegion&is_available=true&page=1&page_size=50"
       type: "SearchPayload"
     ) {
     data
