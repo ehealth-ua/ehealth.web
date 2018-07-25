@@ -7,6 +7,7 @@ import styled from "react-emotion/macro";
 import { prop } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
 import { Text } from "rebass/emotion";
+import debounce from "lodash/debounce";
 
 import Button from "./Button";
 import Heading from "./Heading";
@@ -90,8 +91,21 @@ export const FormError = ({ entry = "$.data", ...props }) => (
   </FormSpy>
 );
 
+export const FormAutoSubmit = ({ delay = 500, onSubmit }) => {
+  const onSubmitDebounced = debounce(onSubmit, delay);
+  return (
+    <FormSpy
+      subscription={{ values: true }}
+      onChange={({ values }) => {
+        return onSubmitDebounced(values);
+      }}
+    />
+  );
+};
+
 Form.Button = FormButton;
 Form.Submit = FormSubmit;
+Form.AutoSubmit = FormAutoSubmit;
 Form.Error = FormError;
 
 export default Form;
