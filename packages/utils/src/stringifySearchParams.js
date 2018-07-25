@@ -1,8 +1,10 @@
 import isNil from "lodash/isNil";
+import flatten from "flat";
 
-const stringifySearchParams = params =>
-  new URLSearchParams(
-    Object.entries(params).filter(([key, value]) => !isNil(value))
+const stringifySearchParams = params => {
+  return new URLSearchParams(
+    Object.entries(flatten(params)).filter(([key, value]) => !isNil(value))
   ).toString();
+};
 
 export default stringifySearchParams;

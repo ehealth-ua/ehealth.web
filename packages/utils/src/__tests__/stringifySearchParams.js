@@ -1,6 +1,19 @@
 import stringifySearchParams from "../stringifySearchParams";
 
 describe("stringifySearchParams", () => {
+  it("should return query string from deep object", () => {
+    expect(
+      stringifySearchParams({
+        settlement: {
+          settlement: "Kyiv",
+          settlementType: "VILLAGE",
+          region: "Kyivskya oblast"
+        }
+      })
+    ).toBe(
+      "settlement.settlement=Kyiv&settlement.settlementType=VILLAGE&settlement.region=Kyivskya+oblast"
+    );
+  });
   it("should return query string from object", () => {
     expect(
       stringifySearchParams({
