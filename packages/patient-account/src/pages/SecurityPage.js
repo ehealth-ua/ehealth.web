@@ -95,7 +95,7 @@ const SecurityBlock = ({ phone }) => (
         const { page = 1 } = params;
         return (
           <Query query={ApprovalsRequestQuery} variables={{ page }}>
-            {({ loading, error, data }) => {
+            {({ loading, error, data, refetch }) => {
               if (loading || error || !data.approvals) return null;
               const {
                 data: dataApprovals,
@@ -105,7 +105,7 @@ const SecurityBlock = ({ phone }) => (
                 data: dataApprovals,
                 keyExtractor: ({ userId }) => `approvals.${userId}`,
                 renderLabel: ({ clientId }) => clientId,
-                renderItem: props => <ScopeView {...props} />
+                renderItem: props => <ScopeView {...props} onDelete={refetch} />
               });
               return (
                 <ApprovalsComponent>
@@ -138,7 +138,7 @@ class ScopeView extends Component {
   };
 
   render() {
-    const { clientId, scope, id } = this.props;
+    const { clientId, scope, id, onDelete } = this.props;
     const { showModal } = this.state;
     return (
       <>
@@ -166,6 +166,7 @@ class ScopeView extends Component {
                 deleteApproval={deleteApproval}
                 id={id}
                 clientId={clientId}
+                onDelete={onDelete}
               />
             )}
           </Mutation>
@@ -175,7 +176,7 @@ class ScopeView extends Component {
   }
 }
 
-const ConfirmModal = ({ close, deleteApproval, id, clientId }) => (
+const ConfirmModal = ({ close, deleteApproval, id, clientId, onDelete }) => (
   <Modal width={760} onClose={close}>
     <Heading.H1>
       {`
@@ -189,7 +190,7 @@ const ConfirmModal = ({ close, deleteApproval, id, clientId }) => (
             await deleteApproval({
               variables: { id: id }
             });
-            window.location.reload();
+            onDelete();
           } catch (error) {
             console.log(error);
           }
