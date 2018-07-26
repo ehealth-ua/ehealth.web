@@ -1,41 +1,56 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { Heading, Button } from "@ehealth/components";
+import { Heading, Button, Link } from "@ehealth/components";
+import { EhealthLogoIcon } from "@ehealth/icons";
 
-const ServerError = () => (
+const ErrorDefault = ({ number, text }) => (
   <Layout>
-    <Number>500</Number>
-    <Heading.H1>Упс... сталася помилка. Спробуйте пізніше</Heading.H1>
-  </Layout>
-);
-
-const NotFound = () => (
-  <Layout>
-    <Number>404</Number>
-    <Heading.H1>Сторінка, яку ви шукаєте відсутня</Heading.H1>
-  </Layout>
-);
-const ClientError = msg => (
-  <Layout>
-    <Heading.H1>Сталася помилка. Спробуйте пізніше</Heading.H1>
+    <Link href="/">
+      <EhealthLogoIcon height="45" />
+    </Link>
+    <ErrorTitle weight="bold">Помилка</ErrorTitle>
+    {number && <Number>{number}</Number>}
+    <ErrorText weight="bold">{text}</ErrorText>
+    <Link href="/">
+      <Button>Повернутись на головну</Button>
+    </Link>
   </Layout>
 );
 
 const Error = {};
-Error.ServerError = ServerError;
-Error.NotFound = NotFound;
-Error.ClientError = ClientError;
+Error.ServerError = () => (
+  <ErrorDefault text="Повторіть спробу пізніше" number="500" />
+);
+Error.NotFound = () => (
+  <ErrorDefault text="Сторінка, яку ви шукаєте відсутня" number="404" />
+);
+Error.ClientError = () => (
+  <ErrorDefault text="Сталася помилка. Спробуйте пізніше" />
+);
 
 export default Error;
 
 const Layout = styled.div`
   text-align: center;
   max-width: 420px;
+  padding-top: 50px;
   margin: 0 auto;
 `;
 
 const Number = styled(Heading.H1)`
-  font-size: 80px;
-  color: #70cffc;
-  margin-bottom: 0;
+  font-size: 85px;
+  font-weight: 200;
+  margin: 20px 0;
+`;
+
+const ButtonBack = styled(Button)`
+  margin-top: 50px;
+`;
+
+const ErrorTitle = styled(Heading.H2)`
+  margin-top: 70px;
+`;
+
+const ErrorText = styled(Heading.H2)`
+  margin-bottom: 50px;
 `;
