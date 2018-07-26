@@ -26,222 +26,218 @@ import SearchDivisionsByMapQuery from "../graphql/SearchDivisionsByMapQuery.grap
 const DEFAULT_CENTER = { lat: 50.4021368, lng: 30.4525107 };
 const DEFAULT_ZOOM = 9;
 
-const SearchPage = ({ location: { pathname } }) => (
+const SearchPage = () => (
   <>
     <Heading.H1>Крок 1. Оберіть лікаря</Heading.H1>
-    <SearchParams>
-      {({ searchParams, setSearchParamsImmediate }) => (
-        <>
-          <FlexWrap>
-            {!pathname.match(/\bmap\b/) && (
-              <Form
-                onSubmit={() => null /* NOT USED, but required */}
-                initialValues={searchParams}
-              >
-                <Form.AutoSubmit
-                  onSubmit={setSearchParamsImmediate}
-                  delay={1000}
-                />
-                <FlexInputsContainer>
-                  <SettlementSelectWithQuery pathname={pathname} />
-                  <InputsWithQuery pathname={pathname} />
-                </FlexInputsContainer>
-              </Form>
-            )}
-            <Icon>
-              {!pathname.match(/\bmap\b/) ? (
-                <Link to="/search/map" replace>
-                  <MapIcon width={30} height={30} fill="currentColor" />
-                </Link>
-              ) : (
-                <Link to="/search" replace>
-                  <ListIcon width={30} height={30} fill="currentColor" />
-                </Link>
-              )}
-            </Icon>
-          </FlexWrap>
-        </>
-      )}
-    </SearchParams>
-    <ContentWrapper>
-      <Route path="/search" component={Table} exact />
-      <Route path="/search/map" component={DivisionMap} />
-    </ContentWrapper>
+    <Route path="/search" component={SearchTable} exact />
+    <Route path="/search/map" component={DivisionMap} />
   </>
 );
 
 export default SearchPage;
 
-const InputsWithQuery = ({ pathname }) => (
-  <>
-    <FlexItem>
-      <Field.Input
-        label={<b>Назва відділення</b>}
-        placeholder="Відділення"
-        name="divisionName"
-        disabled={pathname.match(/\bmap\b/)}
-        size="small"
-      />
-    </FlexItem>
-    <FlexItem>
-      <Field.Input
-        label={<b>Повне ім&#700;я лікаря</b>}
-        placeholder="Прізвище, ім&#700;я, по-батькові"
-        name="fullName"
-        disabled={pathname.match(/\bmap\b/)}
-        size="small"
-      />
-    </FlexItem>
-    <FlexItem>
-      <DictionaryValue
-        name="SPECIALITY_TYPE"
-        render={dict => (
-          <Field.Select
-            name="speciality"
-            label={<b>Спеціальність</b>}
-            placeholder="Виберіть спеціальність"
-            itemToString={item => (item == null ? "" : dict[item])}
-            items={Object.keys(dict).filter(
-              item => item !== "PHARMACIST" && item !== "PHARMACIST2"
-            )}
-            renderItem={item => dict[item]}
-            disabled={pathname.match(/\bmap\b/)}
-            size="small"
-          />
-        )}
-      />
-    </FlexItem>
-  </>
-);
-
-const SettlementSelectWithQuery = ({ pathname }) => (
-  <Query
-    query={SettlementQuery}
-    variables={{ settlement: "" }}
-    context={{ credentials: "same-origin" }}
-  >
-    {({ loading, error, data: { settlements = {} }, refetch }) => (
-      <FlexItem>
-        <Field.Select
-          name="settlement"
-          label={<b>Населений пункт</b>}
-          placeholder="Введіть населений пункт"
-          itemToString={item => {
-            if (!item) return "";
-            return typeof item === "string"
-              ? titleCase(item)
-              : titleCase(item.settlement);
-          }}
-          items={
-            loading || error
-              ? []
-              : settlements.data.map(({ name, district, type, region }) => ({
-                  area: region || undefined,
-                  settlement: name,
-                  settlementType: type,
-                  region: district || undefined
-                }))
-          }
-          onInputValueChange={debounce(
-            settlement => refetch({ settlement }),
-            500
-          )}
-          renderItem={address => <AddressView data={address} />}
-          disabled={pathname.match(/\bmap\b/)}
-          size="small"
-        />
-      </FlexItem>
-    )}
-  </Query>
-);
-
-const Table = () => {
+const SearchTable = () => {
   return (
-    <SearchParams>
-      {({
-        searchParams: {
-          fullName = "",
-          divisionName = "",
-          speciality = "",
-          settlement: { settlement = "", region: settlementRegion = "" } = {}
-        }
-      }) => {
-        return (
-          <Query
-            query={SearchEmployeeQuery}
-            variables={{
-              fullName,
-              divisionName,
-              settlement,
-              settlementRegion,
-              speciality
-            }}
-            context={{ credentials: "same-origin" }}
-          >
-            {({ loading, error, data }) => {
-              if (!data.search) return null;
-              const { data: search } = data.search;
-              return !search.length ? (
-                "Нічого не знайдено"
-              ) : (
-                <CabinetTable
-                  data={search}
-                  header={{
-                    name: (
-                      <>
-                        ПІБ<br />лікаря
-                      </>
-                    ),
-                    job: "Спеціальність",
-                    divisionName: (
-                      <>
-                        Назва<br />відділення
-                      </>
-                    ),
-                    address: "Адреса",
-                    legalEntityName: "Медзаклад",
-                    action: "Дія"
-                  }}
-                  renderRow={({
-                    id,
-                    party,
-                    division: { id: divisionId, name: divisionName, addresses },
-                    legalEntity: { name: legalEntityName }
-                  }) => ({
-                    name: getFullName(party),
-                    job: (
-                      <DictionaryValue
-                        name="SPECIALITY_TYPE"
-                        item={party.specialities[0].speciality}
-                      />
-                    ),
-                    divisionName: (
-                      <Link to={`/division/${divisionId}`}>{divisionName}</Link>
-                    ),
-                    address: <AddressView data={addresses} />,
-                    legalEntityName,
-                    action: <Link to={`/employee/${id}`}>Показати деталі</Link>
-                  })}
-                  rowKeyExtractor={({ id }) => id}
-                />
-              );
-            }}
-          </Query>
-        );
-      }}
-    </SearchParams>
+    <>
+      <FormSearch />
+      <SearchParams>
+        {({
+          searchParams: {
+            fullName = "",
+            divisionName = "",
+            speciality = "",
+            settlement: { settlement = "", region: settlementRegion = "" } = {}
+          }
+        }) => {
+          return (
+            <Query
+              query={SearchEmployeeQuery}
+              variables={{
+                fullName,
+                divisionName,
+                settlement,
+                settlementRegion,
+                speciality
+              }}
+              context={{ credentials: "same-origin" }}
+            >
+              {({ loading, error, data }) => {
+                if (!data.search) return null;
+                const { data: search } = data.search;
+                return !search.length ? (
+                  "Нічого не знайдено"
+                ) : (
+                  <CabinetTable
+                    data={search}
+                    header={{
+                      name: (
+                        <>
+                          ПІБ<br />лікаря
+                        </>
+                      ),
+                      job: "Спеціальність",
+                      divisionName: (
+                        <>
+                          Назва<br />відділення
+                        </>
+                      ),
+                      address: "Адреса",
+                      legalEntityName: "Медзаклад",
+                      action: "Дія"
+                    }}
+                    renderRow={({
+                      id,
+                      party,
+                      division: {
+                        id: divisionId,
+                        name: divisionName,
+                        addresses
+                      },
+                      legalEntity: { name: legalEntityName }
+                    }) => ({
+                      name: getFullName(party),
+                      job: (
+                        <DictionaryValue
+                          name="SPECIALITY_TYPE"
+                          item={party.specialities[0].speciality}
+                        />
+                      ),
+                      divisionName: (
+                        <Link to={`/division/${divisionId}`}>
+                          {divisionName}
+                        </Link>
+                      ),
+                      address: <AddressView data={addresses} />,
+                      legalEntityName,
+                      action: (
+                        <Link to={`/employee/${id}`}>Показати деталі</Link>
+                      )
+                    })}
+                    rowKeyExtractor={({ id }) => id}
+                  />
+                );
+              }}
+            </Query>
+          );
+        }}
+      </SearchParams>
+    </>
   );
 };
 
-const DivisionMap = () => (
+const FormSearch = () => (
   <SearchParams>
     {({ searchParams, setSearchParamsImmediate }) => (
-      <DivisionsMapView
-        searchParams={searchParams}
-        setSearchParamsImmediate={setSearchParamsImmediate}
-      />
+      <FlexWrap>
+        <Form
+          onSubmit={() => null /* NOT USED, but required */}
+          initialValues={searchParams}
+        >
+          <Form.AutoSubmit onSubmit={setSearchParamsImmediate} delay={1000} />
+          <FlexInputsContainer>
+            <FlexItem>
+              <Query
+                query={SettlementQuery}
+                variables={{ settlement: "" }}
+                context={{ credentials: "same-origin" }}
+              >
+                {({ loading, error, data: { settlements = {} }, refetch }) => (
+                  <Field.Select
+                    name="settlement"
+                    label={<b>Населений пункт</b>}
+                    placeholder="Введіть населений пункт"
+                    itemToString={item => {
+                      if (!item) return "";
+                      return typeof item === "string"
+                        ? titleCase(item)
+                        : titleCase(item.settlement);
+                    }}
+                    items={
+                      loading || error
+                        ? []
+                        : settlements.data.map(
+                            ({ name, district, type, region }) => ({
+                              area: region || undefined,
+                              settlement: name,
+                              settlementType: type,
+                              region: district || undefined
+                            })
+                          )
+                    }
+                    onInputValueChange={debounce(
+                      settlement => refetch({ settlement }),
+                      500
+                    )}
+                    renderItem={address => <AddressView data={address} />}
+                    size="small"
+                  />
+                )}
+              </Query>
+            </FlexItem>
+            <FlexItem>
+              <Field.Input
+                label={<b>Назва відділення</b>}
+                placeholder="Відділення"
+                name="divisionName"
+                size="small"
+              />
+            </FlexItem>
+            <FlexItem>
+              <Field.Input
+                label={<b>Повне ім&#700;я лікаря</b>}
+                placeholder="Прізвище, ім&#700;я, по-батькові"
+                name="fullName"
+                size="small"
+              />
+            </FlexItem>
+            <FlexItem>
+              <DictionaryValue
+                name="SPECIALITY_TYPE"
+                render={dict => (
+                  <Field.Select
+                    name="speciality"
+                    label={<b>Спеціальність</b>}
+                    placeholder="Виберіть спеціальність"
+                    itemToString={item => (item == null ? "" : dict[item])}
+                    items={Object.keys(dict).filter(
+                      item => item !== "PHARMACIST" && item !== "PHARMACIST2"
+                    )}
+                    renderItem={item => dict[item]}
+                    size="small"
+                  />
+                )}
+              />
+            </FlexItem>
+          </FlexInputsContainer>
+          <Icon>
+            <Link to="/search/map" replace>
+              <MapIcon width={30} height={30} fill="currentColor" />
+            </Link>
+          </Icon>
+        </Form>
+      </FlexWrap>
     )}
   </SearchParams>
+);
+
+const DivisionMap = () => (
+  <>
+    <FlexWrap>
+      <Icon>
+        <Link to="/search" replace>
+          <ListIcon width={30} height={30} fill="currentColor" />
+        </Link>
+      </Icon>
+    </FlexWrap>
+    <SearchParams>
+      {({ searchParams, setSearchParamsImmediate }) => (
+        <DivisionsMapView
+          searchParams={searchParams}
+          setSearchParamsImmediate={setSearchParamsImmediate}
+        />
+      )}
+    </SearchParams>
+  </>
 );
 
 class DivisionsMapView extends Component {
@@ -353,8 +349,4 @@ const Icon = styled.div`
   top: 36px;
   line-height: 0;
   user-select: none;
-`;
-
-const ContentWrapper = styled.div`
-  margin-top: 20px;
 `;
