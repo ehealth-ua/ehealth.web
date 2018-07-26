@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.52.0"></a>
+# [0.52.0](https://github.com/edenlabllc/ehealth.web/compare/v0.51.6...v0.52.0) (2018-07-26)
+
+
+### Bug Fixes
+
+* **components:** add pagination component to index ([4fc2056](https://github.com/edenlabllc/ehealth.web/commit/4fc2056))
+
+
+
+
+
 <a name="0.51.6"></a>
 ## [0.51.6](https://github.com/edenlabllc/ehealth.web/compare/v0.51.5...v0.51.6) (2018-07-25)
 

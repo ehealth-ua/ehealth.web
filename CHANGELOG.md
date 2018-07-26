@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.52.0"></a>
+# [0.52.0](https://github.com/edenlabllc/ehealth.web/compare/v0.51.6...v0.52.0) (2018-07-26)
+
+
+### Bug Fixes
+
+* **components:** add pagination component to index ([4fc2056](https://github.com/edenlabllc/ehealth.web/commit/4fc2056))
+* **patient-account:** add Preload component to App ([5723122](https://github.com/edenlabllc/ehealth.web/commit/5723122))
+* **patient-account:** DictionaryValues render undefined to null ([55c1005](https://github.com/edenlabllc/ehealth.web/commit/55c1005))
+* **patient-account:** update aprovals list after deleteAprovalMutation ([a9e0445](https://github.com/edenlabllc/ehealth.web/commit/a9e0445))
+
+
+### Features
+
+* **patient-account:** add approvals list to SecurityPage ([52108eb](https://github.com/edenlabllc/ehealth.web/commit/52108eb))
+
+
+
+
+
 <a name="0.51.6"></a>
 ## [0.51.6](https://github.com/edenlabllc/ehealth.web/compare/v0.51.5...v0.51.6) (2018-07-25)
 
