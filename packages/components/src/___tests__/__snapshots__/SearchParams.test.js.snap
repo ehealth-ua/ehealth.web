@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchParams should render correctly 1`] = `<div />`;
+
+exports[`SearchParams should return object in render prop 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "searchParams": Object {},
+        "setSearchParamsImmediate": [Function],
+      },
+    ],
+  ],
+}
+`;
