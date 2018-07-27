@@ -10,7 +10,7 @@ import Pager from "./Pager";
 
 const Pagination = ({ totalPages }) => (
   <SearchParams>
-    {({ page }) => (
+    {({ searchParams: { page } }) => (
       <Pager currentPage={parseInt(page, 10)} totalPages={totalPages}>
         {({
           getPageProps,
@@ -80,8 +80,8 @@ const DirectionPage = ({ page, backward, ...props }) => (
 
 const PageLink = ({ page, children }) => (
   <SearchParams>
-    {params => (
-      <Link to={{ search: stringifySearchParams({ ...params, page }) }}>
+    {({ searchParams }) => (
+      <Link to={{ search: stringifySearchParams({ ...searchParams, page }) }}>
         {children || page}
       </Link>
     )}
