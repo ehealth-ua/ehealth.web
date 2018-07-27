@@ -63,6 +63,7 @@ export default class ErrorBoundary extends Component {
               }
               not_found={<Error.NotFound />}
               internal_server_error={<Error.ServerError />}
+              conflict={<Error.ConflictError />}
             />
           </>
         )}

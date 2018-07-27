@@ -27,6 +27,9 @@ Error.NotFound = () => (
 Error.ClientError = () => (
   <ErrorDefault text="Сталася помилка. Спробуйте пізніше" />
 );
+Error.ConflictError = () => (
+  <ErrorDefault text="Сталася помилка. Спробуйте пізніше" number="409" />
+);
 
 export default Error;
 
@@ -40,7 +43,8 @@ const Layout = styled.div`
 const Number = styled(Heading.H1)`
   font-size: 85px;
   font-weight: 200;
-  margin: 20px 0;
+  margin: 0 0 50px;
+  line-height: 85px;
 `;
 
 const ButtonBack = styled(Button)`
@@ -48,7 +52,7 @@ const ButtonBack = styled(Button)`
 `;
 
 const ErrorTitle = styled(Heading.H2)`
-  margin-top: 70px;
+  margin: 70px 0 40px;
 `;
 
 const ErrorText = styled(Heading.H2)`
