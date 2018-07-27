@@ -4,15 +4,34 @@ import { parseSearchParams, stringifySearchParams } from "@ehealth/utils";
 import compose from "recompose/compose";
 import isEqual from "lodash/isEqual";
 
-const setSearchParams = (params, method, location, history) => {
+type setSearchParamsProps = {
+  params: {},
+  method: string,
+  location: {},
+  history: {}
+};
+
+const setSearchParams = (
+  params,
+  method,
+  location,
+  history
+): setSearchParamsProps => {
   const search = compose(stringifySearchParams, parseSearchParams)(
     location.search
   );
   if (isEqual(stringifySearchParams(params), search)) return null;
-  history[method]({ ...location, search: stringifySearchParams(params) });
+  history[method]({
+    ...location,
+    search: stringifySearchParams(params)
+  });
 };
 
-const SearchParams = ({ children, render = children }) => (
+type SearchParamsProps = {
+  render: () => mixed
+};
+
+const SearchParams = ({ children, render = children }: SearchParamsProps) => (
   <Route
     render={({ location, history }) => {
       return render({
