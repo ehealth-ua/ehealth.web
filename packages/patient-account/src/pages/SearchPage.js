@@ -331,6 +331,7 @@ const FlexWrap = styled.div`
   position: relative;
   padding-right: 50px;
   height: 68px;
+  margin-bottom: 10px;
 `;
 
 const FlexInputsContainer = styled.div`
