@@ -91,8 +91,7 @@ const SecurityBlock = ({ phone }) => (
       }}
     />
     <SearchParams>
-      {params => {
-        const { page = 1 } = params;
+      {({ searchParams: { page = 1 } }) => {
         return (
           <Query query={ApprovalsRequestQuery} variables={{ page }}>
             {({ loading, error, data, refetch }) => {
