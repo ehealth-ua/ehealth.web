@@ -24,6 +24,7 @@ class EmployeePage extends React.Component {
         query={EmployeeQuery}
         variables={{ id: match.params.id }}
         context={{ credentials: "same-origin" }}
+        fetchPolicy="cache-first"
       >
         {({ loading, error, data }) => {
           const { employee } = data;
