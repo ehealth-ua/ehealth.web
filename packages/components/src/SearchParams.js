@@ -1,22 +1,16 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import type { Location, HistoryAction, RouterHistory } from "react-router-dom";
 import { parseSearchParams, stringifySearchParams } from "@ehealth/utils";
 import compose from "recompose/compose";
 import isEqual from "lodash/isEqual";
 
-type setSearchParamsProps = {
-  params: {},
-  method: string,
-  location: {},
-  history: {}
-};
-
 const setSearchParams = (
-  params,
-  method,
-  location,
-  history
-): setSearchParamsProps => {
+  params: {},
+  method: HistoryAction,
+  location: Location,
+  history: RouterHistory
+): void => {
   const search = compose(stringifySearchParams, parseSearchParams)(
     location.search
   );
@@ -28,7 +22,10 @@ const setSearchParams = (
 };
 
 type SearchParamsProps = {
-  render: () => mixed
+  children: (data: {
+    searchParams?: { value?: string },
+    setSearchParamsImmediate?: () => mixed
+  }) => React.Node
 };
 
 const SearchParams = ({ children, render = children }: SearchParamsProps) => (
