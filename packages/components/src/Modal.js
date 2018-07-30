@@ -7,7 +7,13 @@ import { complexStyle } from "styled-system";
 import { Fixed } from "rebass/emotion";
 import { CloseIcon } from "@ehealth/icons";
 
-const Modal = ({ backdrop, onClose, children, ...props }) =>
+type ModalProps = {
+  backdrop?: boolean,
+  onClose?: () => mixed,
+  children: React.Element<any>
+};
+
+const Modal = ({ backdrop, onClose, children, ...props }: ModalProps) =>
   createPortal(
     <>
       {backdrop && <Backdrop onClick={onClose} />}
