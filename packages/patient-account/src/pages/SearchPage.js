@@ -52,6 +52,7 @@ const SearchTable = () => {
           return (
             <Query
               query={SearchEmployeeQuery}
+              fetchPolicy="cache-first"
               variables={{
                 fullName,
                 divisionName,
@@ -138,6 +139,7 @@ const FormSearch = () => (
             <FlexItem>
               <Query
                 query={SettlementQuery}
+                fetchPolicy="cache-first"
                 variables={{ settlement: "" }}
                 context={{ credentials: "same-origin" }}
               >
@@ -260,6 +262,7 @@ class DivisionsMapView extends Component {
     return (
       <Query
         query={SearchDivisionsByMapQuery}
+        fetchPolicy="cache-first"
         variables={{
           north,
           east,
