@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import { Heading, Link } from "@ehealth/components";
 
 import DefinitionListView from "../components/DefinitionListView";
+import DictionaryValue from "../components/DictionaryValue";
 import { CabinetTable } from "@ehealth/components";
 import { getFullName, getSpecialities } from "@ehealth/utils";
 
@@ -16,6 +17,7 @@ const DivisionPage = ({ match, history }) => (
     query={DivisionDetailsQuery}
     variables={{ id: match.params.id }}
     context={{ credentials: "same-origin" }}
+    fetchPolicy="cache-first"
   >
     {({ loading, error, data }) => {
       const { division } = data;
@@ -67,7 +69,12 @@ const DivisionPage = ({ match, history }) => (
               }}
               renderRow={({ id, party }) => ({
                 name: getFullName(party),
-                job: getSpecialities(party.specialities, specialityTypes),
+                job: (
+                  <DictionaryValue
+                    name="SPECIALITY_TYPE"
+                    item={party.specialities[0].speciality}
+                  />
+                ),
                 action: <Link to={`/employee/${id}`}>Показати деталі</Link>
               })}
               rowKeyExtractor={({ id }) => id}
