@@ -12,6 +12,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { ifProp } from "styled-tools";
 import { injectGlobal } from "react-emotion/macro";
 import { Mutation } from "react-apollo";
+import printIframe from "print-iframe";
 
 import { MozLogoIcon, CircleIcon } from "@ehealth/icons";
 import { Heading, Button, Link, Switch } from "@ehealth/components";
@@ -204,7 +205,7 @@ const DeclarationBody = ({ history, data }) => {
                 size="small"
                 upperCase
                 bold
-                onClick={() => window.print()}
+                onClick={() => printIframe(content)}
               >
                 {" "}
                 Роздрукувати декларацію
