@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.52.3"></a>
+## [0.52.3](https://github.com/edenlabllc/ehealth.web/compare/v0.52.2...v0.52.3) (2018-07-31)
+
+
+### Bug Fixes
+
+* **patient-account:** add min-height to the FixedBlock for the equal view on Declaration and DeclarationRequest pages ([f1254a0](https://github.com/edenlabllc/ehealth.web/commit/f1254a0))
+* **patient-account:** add print-iframe package ([8ef8f78](https://github.com/edenlabllc/ehealth.web/commit/8ef8f78))
+* **patient-account:** change sending printout content to the print via print-iframe package ([f839ba9](https://github.com/edenlabllc/ehealth.web/commit/f839ba9))
+
+
+
+
+
 <a name="0.52.2"></a>
 ## [0.52.2](https://github.com/edenlabllc/ehealth.web/compare/v0.52.1...v0.52.2) (2018-07-31)
 
