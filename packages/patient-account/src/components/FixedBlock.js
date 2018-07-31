@@ -23,4 +23,5 @@ const Inner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  min-height: 58px;
 `;
