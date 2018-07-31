@@ -10,17 +10,17 @@ import Routes from "./Routes";
 import Preload from "./Preload";
 
 const App = () => (
-  <Router>
-    <ThemeProvider theme={theme}>
-      <ErrorBoundary>
-        <DataProvider>
+  <ThemeProvider theme={theme}>
+    <ErrorBoundary>
+      <DataProvider>
+        <Router>
           <Preload>
             <Routes />
           </Preload>
-        </DataProvider>
-      </ErrorBoundary>
-    </ThemeProvider>
-  </Router>
+        </Router>
+      </DataProvider>
+    </ErrorBoundary>
+  </ThemeProvider>
 );
 
 export default App;
