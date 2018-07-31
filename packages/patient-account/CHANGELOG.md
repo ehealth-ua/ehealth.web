@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.52.2"></a>
+## [0.52.2](https://github.com/edenlabllc/ehealth.web/compare/v0.52.1...v0.52.2) (2018-07-31)
+
+
+### Bug Fixes
+
+* **patient-account:** add data preloader on initial render ([ae5b50c](https://github.com/edenlabllc/ehealth.web/commit/ae5b50c))
+
+
+
+
+
 <a name="0.52.1"></a>
 ## [0.52.1](https://github.com/edenlabllc/ehealth.web/compare/v0.52.0...v0.52.1) (2018-07-31)
 
