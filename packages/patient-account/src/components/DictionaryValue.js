@@ -3,7 +3,18 @@ import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import DictionaryQuery from "../graphql/DictionaryQuery.graphql";
 
-const DictionaryValue = ({ name, item, children, render = children }) => (
+type DictProps = {
+  name: string,
+  item: string,
+  children: (data: { value: string }) => React.Node
+};
+
+const DictionaryValue = ({
+  name,
+  item,
+  children,
+  render = children
+}: DictProps) => (
   <Query
     fetchPolicy="cache-first"
     context={{ credentials: "same-origin" }}
