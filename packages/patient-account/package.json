@@ -15,6 +15,7 @@
     "emotion": "^9.2.5",
     "graphql": "^0.13.2",
     "graphql.macro": "^1.0.2",
+    "print-iframe": "0.0.4",
     "react": "^16.3.2",
     "react-apollo": "^2.1.4",
     "react-dom": "^16.3.2",
