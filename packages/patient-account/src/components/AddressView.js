@@ -3,6 +3,20 @@ import capitalize from "lodash/capitalize";
 
 import DictionaryValue from "./DictionaryValue";
 
+type AddressProps = {
+  data: {
+    zip?: string,
+    area: string,
+    region?: string,
+    settlementType: string,
+    settlement: string,
+    streetType: string,
+    street: string,
+    building: string,
+    apartment?: string
+  }
+};
+
 const AddressView = ({
   data: {
     zip,
@@ -15,7 +29,7 @@ const AddressView = ({
     building,
     apartment
   }
-}) => (
+}: AddressProps): React.Node => (
   <>
     {zip && <>{zip}, </>}
     {formatArea(area)}, {region && <>{normalizeName(region)} район, </>}
