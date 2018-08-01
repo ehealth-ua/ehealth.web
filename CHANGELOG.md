@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.53.0"></a>
+# [0.53.0](https://github.com/edenlabllc/ehealth.web/compare/v0.52.3...v0.53.0) (2018-08-01)
+
+
+### Bug Fixes
+
+* add config-chain to flowconfig ignore ([06035a9](https://github.com/edenlabllc/ehealth.web/commit/06035a9))
+* **components:** add flow type to Modal ([5b80856](https://github.com/edenlabllc/ehealth.web/commit/5b80856))
+* **components:** add flow types to SearchParams ([efaf78c](https://github.com/edenlabllc/ehealth.web/commit/efaf78c))
+* **components:** fix SearchParams flow types ([98721af](https://github.com/edenlabllc/ehealth.web/commit/98721af))
+* **components:** fix searchParams prop on Pagination ([bce4535](https://github.com/edenlabllc/ehealth.web/commit/bce4535))
+* **patient-account:** add caching to SearchPage queries ([d2a0061](https://github.com/edenlabllc/ehealth.web/commit/d2a0061))
+* **patient-account:** add caching to the EmployeePage ([ca4fdef](https://github.com/edenlabllc/ehealth.web/commit/ca4fdef))
+* **patient-account:** add view 409 errors ([00e883d](https://github.com/edenlabllc/ehealth.web/commit/00e883d))
+* **patient-account:** change view Error component ([477231d](https://github.com/edenlabllc/ehealth.web/commit/477231d))
+* **patient-account:** fix margin on SearchPage ([4cad03c](https://github.com/edenlabllc/ehealth.web/commit/4cad03c))
+* **patient-account:** fix searchParams prop on SecurityPage ([6a904c5](https://github.com/edenlabllc/ehealth.web/commit/6a904c5))
+* **patient-account:** fix specialities at DivisionPage ([01ef530](https://github.com/edenlabllc/ehealth.web/commit/01ef530))
+
+
+### Features
+
+* add react-router-dom flow-typed package ([419e1b4](https://github.com/edenlabllc/ehealth.web/commit/419e1b4))
+* add react-test-renderer ([664a2ae](https://github.com/edenlabllc/ehealth.web/commit/664a2ae))
+* **components:** add Form.AutoSubmit component ([20f9071](https://github.com/edenlabllc/ehealth.web/commit/20f9071))
+* **components:** add setSearchParamsImmediate to SearchParams component ([e769578](https://github.com/edenlabllc/ehealth.web/commit/e769578))
+* **components:** add tests to Form.AutoSubmit ([56fdea4](https://github.com/edenlabllc/ehealth.web/commit/56fdea4))
+* **components:** add tests to SearchParams component ([e86f86c](https://github.com/edenlabllc/ehealth.web/commit/e86f86c))
+
+
+
+
+
 <a name="0.52.3"></a>
 ## [0.52.3](https://github.com/edenlabllc/ehealth.web/compare/v0.52.2...v0.52.3) (2018-07-31)
 

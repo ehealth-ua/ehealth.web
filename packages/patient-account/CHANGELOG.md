@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.53.0"></a>
+# [0.53.0](https://github.com/edenlabllc/ehealth.web/compare/v0.52.3...v0.53.0) (2018-08-01)
+
+
+### Bug Fixes
+
+* **patient-account:** add caching to SearchPage queries ([d2a0061](https://github.com/edenlabllc/ehealth.web/commit/d2a0061))
+* **patient-account:** add caching to the EmployeePage ([ca4fdef](https://github.com/edenlabllc/ehealth.web/commit/ca4fdef))
+* **patient-account:** add view 409 errors ([00e883d](https://github.com/edenlabllc/ehealth.web/commit/00e883d))
+* **patient-account:** change view Error component ([477231d](https://github.com/edenlabllc/ehealth.web/commit/477231d))
+* **patient-account:** fix margin on SearchPage ([4cad03c](https://github.com/edenlabllc/ehealth.web/commit/4cad03c))
+* **patient-account:** fix searchParams prop on SecurityPage ([6a904c5](https://github.com/edenlabllc/ehealth.web/commit/6a904c5))
+* **patient-account:** fix specialities at DivisionPage ([01ef530](https://github.com/edenlabllc/ehealth.web/commit/01ef530))
+
+
+
+
+
 <a name="0.52.3"></a>
 ## [0.52.3](https://github.com/edenlabllc/ehealth.web/compare/v0.52.2...v0.52.3) (2018-07-31)
 
