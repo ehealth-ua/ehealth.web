@@ -12,19 +12,21 @@ class DataProvider extends Component {
   client = createClient({ onError: this.props.onError });
 
   async componentDidMount() {
-    await getDataFromTree(<ApolloProvider {...this.clientProps} />);
+    await getDataFromTree(<ApolloProvider {...this.providerProps} />);
 
     this.setState({ loading: false });
   }
 
   render() {
-    return this.state.loading ? null : <ApolloProvider {...this.clientProps} />;
+    return this.state.loading ? null : (
+      <ApolloProvider {...this.providerProps} />
+    );
   }
 
   get providerProps() {
     const { client } = this;
     const { children } = this.props;
-
+    console.log(client);
     return { client, children };
   }
 }
