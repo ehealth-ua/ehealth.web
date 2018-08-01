@@ -26,7 +26,7 @@ class DataProvider extends Component {
   get providerProps() {
     const { client } = this;
     const { children } = this.props;
-    console.log(client);
+
     return { client, children };
   }
 }
