@@ -1,0 +1,15 @@
+{
+  "name": "@ehealth/test-preset",
+  "version": "0.48.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@ehealth/env": "file:../env",
+    "jest-environment-jsdom": "^23.4.0",
+    "jest-environment-node": "^23.4.0",
+    "jest-preset-cucumber": "^0.1.0",
+    "jest-puppeteer": "^3.2.1",
+    "puppeteer": "^1.6.1"
+  }
+}
