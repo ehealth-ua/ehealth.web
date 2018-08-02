@@ -12,5 +12,11 @@ exports[`SearchParams should return object in render prop 1`] = `
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": <div />,
+    },
+  ],
 }
 `;
