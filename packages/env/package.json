@@ -6,6 +6,6 @@
   "main": "index.js",
   "dependencies": {
     "dotenv": "^5.0.1",
-    "dotenv-expand": "^4.2.0"
+    "lodash": "^4.17.5"
   }
 }
