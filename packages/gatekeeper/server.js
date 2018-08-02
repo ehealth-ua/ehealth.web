@@ -1,4 +1,4 @@
-require("@ehealth/env");
+require("@ehealth/env/load");
 
 const url = require("url");
 const express = require("express");
