@@ -2,6 +2,8 @@ const PHONE_REGEX = /(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/;
 
 const formatPhone = (value = "") => {
   const digits = value.replace(/[^\d]/g, "");
+
+  // [_result, _countryCode, areaCode, ...numberSegments]
   const [, , areaCode, ...numberSegments] = PHONE_REGEX.exec(digits);
 
   const code = ["+38", areaCode].filter(Boolean).join(" (");
