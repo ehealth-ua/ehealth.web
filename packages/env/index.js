@@ -4,10 +4,6 @@ const fromPairs = require("lodash/fromPairs");
 
 const parse = require("./lib/parse");
 
-if (process.env.NODE_ENV === undefined) {
-  process.env.NODE_ENV = "development";
-}
-
 const configRegistry = new Map();
 
 // Load environment variables from .env* files. Suppress warnings using silent
