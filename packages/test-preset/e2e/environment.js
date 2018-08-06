@@ -1,3 +1,4 @@
+const path = require("path");
 const PuppeteerEnvironment = require("jest-environment-puppeteer");
 const { load, unload } = require("@ehealth/env");
 
@@ -9,12 +10,16 @@ class E2eEnvironment extends PuppeteerEnvironment {
 
   async setup() {
     await super.setup();
-    load(this.config.rootDir, this.global.process.env);
+    load(this.projectRoot, this.global.process.env);
   }
 
   async teardown() {
-    unload(this.config.rootDir, this.global.process.env);
+    unload(this.projectRoot, this.global.process.env);
     await super.teardown();
+  }
+
+  get projectRoot() {
+    return path.resolve(this.config.rootDir, "..");
   }
 }
 
