@@ -1,0 +1,16 @@
+{
+  "transform": {
+    "^.+\\.(js|jsx|mjs)$": "@ehealth/test-preset/transforms/babel",
+    "^.+\\.css$": "@ehealth/test-preset/transforms/css",
+    "^.+\\.(graphql)$": "@ehealth/test-preset/transforms/graphql",
+    "^(?!.*\\.(js|jsx|mjs|css|json|graphql)$)": "@ehealth/test-preset/transforms/file"
+  },
+  "transformIgnorePatterns": [
+    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$",
+    "^.+\\.module\\.css$"
+  ],
+  "moduleNameMapper": {
+    "^react-native$": "react-native-web",
+    "^.+\\.module\\.css$": "identity-obj-proxy"
+  }
+}
