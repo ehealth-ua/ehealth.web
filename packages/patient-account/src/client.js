@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloError } from "apollo-client";
+import { ApolloClient } from "apollo-client";
 import { InMemoryCache, defaultDataIdFromObject } from "apollo-cache-inmemory";
 import { concat } from "apollo-link";
 import { RestLink } from "apollo-link-rest";

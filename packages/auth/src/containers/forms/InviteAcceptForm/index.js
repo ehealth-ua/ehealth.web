@@ -1,6 +1,5 @@
 import React from "react";
-import { Field, Form, Validation, Validations } from "@ehealth/components";
-import Button from "../../../components/Button";
+import { Field, Form, Validation } from "@ehealth/components";
 
 import styles from "./styles.module.css";
 

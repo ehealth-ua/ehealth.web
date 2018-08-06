@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { withRouter } from "react-router";
 import { Form, Validation, Validations, Field } from "@ehealth/components";
 
-import Button, { ButtonsGroup } from "../../../components/Button";
+import Button from "../../../components/Button";
 
 const ResetPasswordForm = ({ onSubmit, submitting, router }) => (
   <Form onSubmit={onSubmit}>

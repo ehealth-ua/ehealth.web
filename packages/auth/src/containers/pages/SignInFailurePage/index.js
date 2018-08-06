@@ -52,10 +52,10 @@ const SignInFailurePage = ({ params, location }) => (
             <H2 textTransform="uppercase" color="red">
               Користувача заблоковано
             </H2>
-            <p>
+            {/* <p>
               При виникненні запитань, будь ласка<br />
               <a href="">зверніться до служби підтримки</a>
-            </p>
+            </p> */}
             <Button to={{ ...location, pathname: "/sign-in" }} color="blue">
               Повернутися
             </Button>

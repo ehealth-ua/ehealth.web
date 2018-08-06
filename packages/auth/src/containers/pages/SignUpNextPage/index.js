@@ -238,7 +238,7 @@ const authorizeUser = () => async dispatch => {
 };
 
 const findErroredPage = invalid => {
-  const [_entries, path] =
+  const [, path] =
     ENTRIES_PAGES_MAPPING.find(([entries]) =>
       invalid.some(e => entries.includes(e.entry))
     ) || [];

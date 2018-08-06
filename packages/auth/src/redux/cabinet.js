@@ -1,5 +1,3 @@
-import { handleAction } from "redux-actions";
-
 import { REACT_APP_API_URL, REACT_APP_DIGITAL_SIGNATURE_ENABLED } from "../env";
 
 import { invoke } from "./api";

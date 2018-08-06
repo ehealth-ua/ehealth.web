@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import DictionaryQuery from "../graphql/DictionaryQuery.graphql";
 
@@ -34,4 +33,5 @@ const DictionaryValue = ({
     }}
   </Query>
 );
+
 export default DictionaryValue;

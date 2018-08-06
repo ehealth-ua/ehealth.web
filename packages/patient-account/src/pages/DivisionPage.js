@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { gql } from "graphql.macro";
 import { withRouter } from "react-router-dom";
 import { Heading, Link } from "@ehealth/components";
 
 import DefinitionListView from "../components/DefinitionListView";
 import DictionaryValue from "../components/DictionaryValue";
 import { CabinetTable } from "@ehealth/components";
-import { getFullName, getSpecialities } from "@ehealth/utils";
+import { getFullName } from "@ehealth/utils";
 
 import DivisionDetailsQuery from "../graphql/DivisionDetailsQuery.graphql";
 
@@ -24,7 +23,6 @@ const DivisionPage = ({ match, history }) => (
       if (!division) return null;
 
       const { data: employees } = data.employees;
-      const { data: [{ values: specialityTypes }] } = data.specialities;
 
       const { data: [{ name, contacts, legalEntity }] } = division;
 

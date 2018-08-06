@@ -47,10 +47,6 @@ const Number = styled(Heading.H1)`
   line-height: 85px;
 `;
 
-const ButtonBack = styled(Button)`
-  margin-top: 50px;
-`;
-
 const ErrorTitle = styled(Heading.H2)`
   margin: 70px 0 40px;
 `;

@@ -52,10 +52,10 @@ const SignUpFailurePage = ({ params, location }) => (
             <H2 textTransform="uppercase" color="red">
               Користувача заблоковано
             </H2>
-            <p>
+            {/* <p>
               При виникненні запитань, будь ласка<br />
               <a href="">зверніться до служби підтримки</a>
-            </p>
+            </p> */}
             <Button to={{ ...location, pathname: "/sign-up/continue" }}>
               Повернутися
             </Button>
@@ -65,10 +65,10 @@ const SignUpFailurePage = ({ params, location }) => (
           <>
             <H2 textTransform="uppercase">Внутрішня помилка</H2>
             <p>Вибачте за тимчасові незручності</p>
-            <p>
+            {/* <p>
               При виникненні запитань, будь ласка<br />
               <a href="">зверніться до служби підтримки</a>
-            </p>
+            </p> */}
             <Button to={{ ...location, pathname: "/sign-up/continue" }}>
               Повернутися
             </Button>

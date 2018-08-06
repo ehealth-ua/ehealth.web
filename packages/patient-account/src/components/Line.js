@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "react-emotion/macro";
 import { ifProp, prop } from "styled-tools";
 

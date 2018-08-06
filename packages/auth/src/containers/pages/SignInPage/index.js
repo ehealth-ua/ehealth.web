@@ -2,7 +2,6 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { Form } from "@ehealth/components";
 
 import {
   REACT_APP_DIGITAL_SIGNATURE_SIGN_IN_ENABLED,

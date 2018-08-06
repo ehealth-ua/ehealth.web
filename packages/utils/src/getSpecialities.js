@@ -7,6 +7,7 @@ const getSpecialities = (userSpecialities, specialityTypes) => {
     if (userSpeciality && userSpeciality.speciality === key) {
       speciality = value;
     }
+    return null;
   });
   return speciality;
 };

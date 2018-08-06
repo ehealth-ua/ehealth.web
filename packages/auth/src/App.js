@@ -2,7 +2,6 @@ import React from "react";
 import Helmet from "react-helmet";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@ehealth/components";
-import DigitalSignature from "@ehealth/react-iit-digital-signature";
 
 import "./global.css";
 import store from "./store";

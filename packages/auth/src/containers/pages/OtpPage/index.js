@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 
 import { H1 } from "../../../components/Title";
 import OtpForm from "../../forms/OtpForm";
-import Button, { ButtonsGroup } from "../../../components/Button";
+import Button from "../../../components/Button";
 
 import { onSubmit, onResend } from "./redux";
 import styles from "./styles.module.css";

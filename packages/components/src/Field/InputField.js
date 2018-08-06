@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { prop, ifProp, switchProp, withProp } from "styled-tools";
+import { prop, ifProp, withProp } from "styled-tools";
 import { switchFlags } from "@ehealth/utils";
 
 import Field from "./Field";

@@ -3,7 +3,6 @@ import { reduxForm, Field } from "redux-form";
 import { reduxFormValidate } from "react-nebo15-validate";
 
 import FieldInput from "../../../components/reduxForm/FieldInput";
-import { ButtonsGroup } from "../../../components/Button";
 import { Button } from "@ehealth/components";
 import { FormBlock } from "../../../components/Form";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { prop, ifProp, withProp } from "styled-tools";
+import { prop } from "styled-tools";
 import { Flex, Box } from "rebass/emotion";
 
 export const Row = styled(Flex)`

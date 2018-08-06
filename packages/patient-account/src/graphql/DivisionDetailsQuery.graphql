@@ -1,22 +1,12 @@
 query($id: String!) {
   division(id: $id)
-    @rest(
-      path: "/reports/stats/divisions?id=:id"
-      type: "DivisionPayload"
-    ) {
+    @rest(path: "/reports/stats/divisions?id=:id", type: "DivisionPayload") {
     data
   }
   employees(id: $id)
     @rest(
       path: "/stats/employees?employee_type=DOCTOR&division_id=:id&is_available=true&page=1&page_size=50"
       type: "SearchPayload"
-    ) {
-    data
-  }
-  specialities
-    @rest(
-      path: "/dictionaries?name=SPECIALITY_TYPE"
-      type: "SpecialitiesPayload"
     ) {
     data
   }

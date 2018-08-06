@@ -86,10 +86,7 @@ class ResetPasswordPage extends Component {
                 theme="link"
                 disabled={this.state.timer > 0}
                 onClick={async () => {
-                  const {
-                    payload: { response },
-                    error
-                  } = await passwordRecoveryRequest(
+                  const { error } = await passwordRecoveryRequest(
                     this.state.email,
                     client_id,
                     redirect_uri

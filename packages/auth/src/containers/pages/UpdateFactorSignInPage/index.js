@@ -15,36 +15,29 @@ import SignInForm from "../../forms/SignInForm";
 
 import { onSubmit } from "./redux";
 
-const UpdateFactorSignInPage = ({ onSubmit = () => {}, location, router }) => {
-  const invite =
-    location.query && location.query.invite
-      ? `invite=${location.query.invite}`
-      : false;
+const UpdateFactorSignInPage = ({ onSubmit = () => {}, location, router }) => (
+  <Main id="update-factor-page">
+    <Header>
+      <H1>Зміна фактора авторизації</H1>
+    </Header>
 
-  return (
-    <Main id="update-factor-page">
-      <Header>
-        <H1>Зміна фактора авторизації</H1>
-      </Header>
-
-      <Article>
-        <NarrowContainer>
-          <SignInForm
-            onSubmit={onSubmit}
-            initialValues={{
-              email: location.query.email
-            }}
-          />
-          <ButtonsGroup>
-            <Button theme="link" onClick={router.goBack}>
-              Назад
-            </Button>
-          </ButtonsGroup>
-        </NarrowContainer>
-      </Article>
-    </Main>
-  );
-};
+    <Article>
+      <NarrowContainer>
+        <SignInForm
+          onSubmit={onSubmit}
+          initialValues={{
+            email: location.query.email
+          }}
+        />
+        <ButtonsGroup>
+          <Button theme="link" onClick={router.goBack}>
+            Назад
+          </Button>
+        </ButtonsGroup>
+      </NarrowContainer>
+    </Article>
+  </Main>
+);
 
 export default compose(withRouter, connect(null, { onSubmit }))(
   UpdateFactorSignInPage

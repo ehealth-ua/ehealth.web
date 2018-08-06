@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { push } from "react-router-redux";
 import { compose } from "redux";
 import { withRouter } from "react-router";
 import {
@@ -24,7 +23,7 @@ import { login } from "../../../redux/session";
 
 class SignInDSPage extends Component {
   render() {
-    const { router, location } = this.props;
+    const { location } = this.props;
     return (
       <Main>
         <Header>
@@ -47,7 +46,6 @@ class SignInDSPage extends Component {
   handleSubmit = async ds => {
     const {
       getNonce,
-      getCabinetToken,
       createSessionToken,
       login,
       authorize,
@@ -73,11 +71,7 @@ class SignInDSPage extends Component {
       : ds.privKeyOwnerInfo.subjDRFOCode;
 
     const {
-      payload: {
-        value,
-        details: { redirect_uri, client_id } = {},
-        response: { error: error_body } = {}
-      },
+      payload: { value, response: { error: error_body } = {} },
       meta: { next_step } = {},
       error: token_error
     } = await createSessionToken({

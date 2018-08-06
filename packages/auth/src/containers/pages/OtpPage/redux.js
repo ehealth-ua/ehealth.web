@@ -7,7 +7,7 @@ import { login } from "../../../redux/session";
 import { REACT_APP_PATIENT_ACCOUNT_CLIENT_ID } from "../../../env";
 
 export const onSubmit = ({ code }) => async (dispatch, getState) => {
-  const { payload: { value: token, details, response }, meta } = await dispatch(
+  const { payload: { value: token, response } } = await dispatch(
     otpVerifyToken(parseInt(code, 10))
   );
   if (response && response.error) {
@@ -87,6 +87,8 @@ export const onResend = () => (dispatch, getState) =>
           return dispatch(
             push({ ...location, path: "/sign-in/failure/invalid_token_type" })
           );
+        default:
+          return;
       }
     }
     dispatch(login(action.payload.value));

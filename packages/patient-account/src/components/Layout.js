@@ -42,10 +42,3 @@ const Footer = styled.footer`
   padding: 40px 0;
   border-top: 3px solid #a9da16;
 `;
-
-const User = styled.div`
-  color: #4880ed;
-  font-size: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-`;

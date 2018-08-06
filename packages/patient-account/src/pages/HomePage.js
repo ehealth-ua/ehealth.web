@@ -1,14 +1,11 @@
 import React from "react";
 import { Query } from "react-apollo";
-import { gql } from "graphql.macro";
 import { ifProp } from "styled-tools";
 import { Route } from "react-router-dom";
 import styled from "react-emotion/macro";
 import { ArrowRightIcon } from "@ehealth/icons";
-import { Heading, Link, CabinetTable, Switch } from "@ehealth/components";
-import { ArrowRight } from "@ehealth/icons";
+import { Heading, Link } from "@ehealth/components";
 
-import DeclarationRequestsQuery from "../graphql/DeclarationRequestsQuery.graphql";
 import DeclarationsQuery from "../graphql/DeclarationsQuery.graphql";
 import NoDeclarationList from "../components/NoDeclarationList";
 import DeclarationHistory from "../components/DeclarationHistory";

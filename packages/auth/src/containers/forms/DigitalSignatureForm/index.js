@@ -1,6 +1,6 @@
 import React from "react";
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
-import { Field, Form, Validation, Validations } from "@ehealth/components";
+import { Field, Form, Validation } from "@ehealth/components";
 import { KeyIcon } from "@ehealth/icons";
 
 const DigitalSignatureForm = ({ onSubmit }) => (

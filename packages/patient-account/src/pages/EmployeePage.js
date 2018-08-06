@@ -3,7 +3,7 @@ import styled from "react-emotion/macro";
 import { Query, Mutation } from "react-apollo";
 import { withRouter } from "react-router-dom";
 import { getFullName } from "@ehealth/utils";
-import { Heading, Link, Button, Form, SUBMIT_ERROR } from "@ehealth/components";
+import { Heading, Link, Form, SUBMIT_ERROR } from "@ehealth/components";
 
 import DictionaryValue from "../components/DictionaryValue";
 import DefinitionListView from "../components/DefinitionListView";
@@ -98,6 +98,12 @@ class EmployeePage extends React.Component {
                         </Text>
                       </Text>
                     )),
+                    specialities: (
+                      <DictionaryValue
+                        name="SPECIALITY_TYPE"
+                        item={specialities["0"].speciality}
+                      />
+                    ),
                     scienceDegree: (
                       <Text>
                         <Text>

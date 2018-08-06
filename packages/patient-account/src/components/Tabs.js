@@ -10,7 +10,7 @@ export default class Tabs extends React.Component {
   };
 
   render() {
-    const { theme, children } = this.props;
+    const { children } = this.props;
     const { activeTab } = this.state;
 
     return (

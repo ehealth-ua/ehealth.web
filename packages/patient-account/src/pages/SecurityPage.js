@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "react-emotion/macro";
 import { Query, Mutation } from "react-apollo";
-import { gql } from "graphql.macro";
 import {
   Heading,
   Link,
@@ -18,7 +17,6 @@ import AuthenticationFactorQuery from "../graphql/AuthenticationFactorQuery.grap
 import ApprovalsRequestQuery from "../graphql/ApprovalsRequestQuery.graphql";
 import DictionaryValue from "../components/DictionaryValue";
 import DeleteApprovalMutation from "../graphql/DeleteApprovalMutation.graphql";
-import { prop } from "styled-tools";
 import {
   REACT_APP_UPDATE_FACTOR_URL,
   REACT_APP_OAUTH_URL,

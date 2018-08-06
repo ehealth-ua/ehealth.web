@@ -2,7 +2,6 @@
 // https://medium.com/netscape/connecting-react-component-to-redux-store-with-render-callback-53fd044bb42b
 // https://gist.github.com/go1t/2c40beee8ad751342d6978f1f11b9b7a#file-connect-jsx
 
-import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 

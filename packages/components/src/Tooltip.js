@@ -150,7 +150,7 @@ const getOverlayStyle = (position, parentRect, offset) => {
       top = y - offset;
       transform = TRANSLATE_HORIZONTAL;
       break;
-    case "right":
+    case "left":
       left = x - offset;
       top = y + height / 2;
       transform = TRANSLATE_VERTICAL;
@@ -164,6 +164,8 @@ const getOverlayStyle = (position, parentRect, offset) => {
       left = x + width + offset;
       top = y + height / 2;
       transform = TRANSLATE_VERTICAL;
+      break;
+    default:
       break;
   }
 

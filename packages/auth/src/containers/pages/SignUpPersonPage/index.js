@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import debounce from "lodash/debounce";
 import subYears from "date-fns/sub_years";
 import {
@@ -13,7 +12,6 @@ import { formatDate, parseDate } from "@ehealth/utils";
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
 
 import { REACT_APP_API_URL } from "../../../env";
-import { fetchDictionaries } from "../../../redux/dictionaries";
 import { createUrl } from "../../../helpers/url";
 import {
   Main,

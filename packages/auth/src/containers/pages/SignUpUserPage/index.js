@@ -2,13 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import Composer from "react-composer";
 import { formatPhone, parsePhone } from "@ehealth/utils";
-import {
-  Connect,
-  Field,
-  Form,
-  Validation,
-  Validations
-} from "@ehealth/components";
+import { Field, Form, Validation, Validations } from "@ehealth/components";
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
 
 import {

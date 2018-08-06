@@ -74,7 +74,7 @@ class OtpForm extends Component {
                   onClick={() =>
                     this.onClickResend().then(action => {
                       if (!action) return this.setState({ otp_timeout: true });
-                      const { payload: { response = {} }, error } = action;
+                      const { error } = action;
                       if (error && error.message === "Token expired") {
                         return this.setState({ token_expires: true });
                       }

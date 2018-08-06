@@ -10,7 +10,6 @@ import {
   NarrowContainer
 } from "../../../components/CenterLayout";
 import { H2 } from "../../../components/Title";
-import Button, { ButtonsGroup } from "../../../components/Button";
 import OtpForm from "../../forms/OtpForm";
 
 import { onSubmit, onResend } from "./redux";
