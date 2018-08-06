@@ -10,7 +10,12 @@ const SignInForm = ({ handleSubmit, submitting, btnColor = "blue" }) => (
   <form onSubmit={handleSubmit}>
     <FormBlock>
       <div>
-        <Field placeholder="E-mail" name="email" component={FieldInput} />
+        <Field
+          placeholder="E-mail"
+          name="email"
+          component={FieldInput}
+          data-test="email"
+        />
       </div>
       <div>
         <Field
@@ -18,10 +23,17 @@ const SignInForm = ({ handleSubmit, submitting, btnColor = "blue" }) => (
           placeholder="Пароль"
           name="password"
           component={FieldInput}
+          data-test="password"
         />
       </div>
       <div>
-        <Button disabled={submitting} type="submit" color={btnColor} block>
+        <Button
+          disabled={submitting}
+          type="submit"
+          color={btnColor}
+          block
+          data-test="submit"
+        >
           увійти
         </Button>
       </div>
