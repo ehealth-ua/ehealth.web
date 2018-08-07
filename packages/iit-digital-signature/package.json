@@ -8,12 +8,12 @@
     "build": "npx -n --max-old-space-size=4096 rollup --config"
   },
   "dependencies": {
-    "@babel/polyfill": "7.0.0-beta.44",
+    "@babel/polyfill": "7.0.0-beta.46",
     "lodash-es": "^4.17.10",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.0.0-beta.44",
+    "@babel/preset-env": "7.0.0-beta.46",
     "fast-async": "^7.0.0",
     "rollup": "^0.58.2",
     "rollup-plugin-babel": "^4.0.0-beta.4",
