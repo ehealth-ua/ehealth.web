@@ -1,0 +1,11 @@
+schemaVersion: 2.0.0
+commandTests:
+  - name: start
+    command: timeout
+    args: ["-t", "3", "npm", "--prefix", "main", "start"]
+    expectedOutput:
+      - "Listening on http://0.0.0.0:.*"
+fileExistenceTests:
+  - name: server.js
+    path: /usr/src/app/main/server.js
+    shouldExist: true
