@@ -1,0 +1,18 @@
+schemaVersion: 2.0.0
+commandTests:
+  - name: nginx.conf
+    command: nginx
+    args: ["-t"]
+    expectedError:
+      - "nginx: the configuration file /etc/nginx/nginx.conf syntax is ok"
+      - "nginx: configuration file /etc/nginx/nginx.conf test is successful"
+fileExistenceTests:
+  - name: nginx.conf
+    path: /etc/nginx/nginx.conf
+    shouldExist: true
+  - name: index.html
+    path: /usr/share/nginx/html/index.html
+    shouldExist: true
+  - name: static
+    path: /usr/share/nginx/html/static
+    shouldExist: true
