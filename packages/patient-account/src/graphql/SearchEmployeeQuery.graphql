@@ -4,6 +4,8 @@ query(
   $speciality: String!
   $settlement: String!
   $settlementRegion: String!
+  $page: String!
+  $pageSize: String!
 ) {
   search(
     fullName: $fullName
@@ -11,11 +13,14 @@ query(
     speciality: $speciality
     settlement: $settlement
     settlementRegion: $settlementRegion
+    page: $page
+    pageSize: $pageSize
   )
     @rest(
-      path: "/stats/employees?employee_type=DOCTOR&full_name=:fullName&speciality=:speciality&division_name=:divisionName&settlement=:settlement&region=:settlementRegion&is_available=true&page=1&page_size=50"
+      path: "/stats/employees?employee_type=DOCTOR&full_name=:fullName&speciality=:speciality&division_name=:divisionName&settlement=:settlement&region=:settlementRegion&is_available=true&page=:page&page_size=:pageSize"
       type: "SearchPayload"
     ) {
     data
+    paging
   }
 }

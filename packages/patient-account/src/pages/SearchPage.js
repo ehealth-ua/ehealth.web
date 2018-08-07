@@ -8,11 +8,12 @@ import {
   Form,
   CabinetTable,
   Link,
-  SearchParams
+  SearchParams,
+  Pagination
 } from "@ehealth/components";
 import { getFullName, titleCase } from "@ehealth/utils";
 import { MapIcon, ListIcon } from "@ehealth/icons";
-import isEqual from "lodash/isEqual";
+import { isEqual, omit } from "lodash";
 import debounce from "lodash/debounce";
 
 import DivisionsMap from "../components/DivisionsMap";
@@ -47,6 +48,8 @@ const SearchTable = () => {
             fullName = "",
             divisionName = "",
             speciality = "",
+            page = "1",
+            pageSize = "10",
             settlement: { settlement = "", region: settlementRegion = "" } = {}
           }
         }) => {
@@ -59,68 +62,69 @@ const SearchTable = () => {
                 divisionName,
                 settlement,
                 settlementRegion,
-                speciality
+                speciality,
+                page,
+                pageSize
               }}
               context={{ credentials: "same-origin" }}
             >
               {({ loading, error, data }) => {
                 if (loading || error) return <Spinner />;
-                const { data: search } = data.search;
+                const { data: search, paging } = data.search;
                 return !search.length ? (
                   "Нічого не знайдено"
                 ) : (
-                  <CabinetTable
-                    data={search}
-                    header={{
-                      name: (
-                        <>
-                          ПІБ
-                          <br />
-                          лікаря
-                        </>
-                      ),
-                      job: "Спеціальність",
-                      divisionName: (
-                        <>
-                          Назва
-                          <br />
-                          відділення
-                        </>
-                      ),
-                      address: "Адреса",
-                      legalEntityName: "Медзаклад",
-                      action: "Дія"
-                    }}
-                    renderRow={({
-                      id,
-                      party,
-                      division: {
-                        id: divisionId,
-                        name: divisionName,
-                        addresses
-                      },
-                      legalEntity: { name: legalEntityName }
-                    }) => ({
-                      name: getFullName(party),
-                      job: (
-                        <DictionaryValue
-                          name="SPECIALITY_TYPE"
-                          item={party.specialities[0].speciality}
-                        />
-                      ),
-                      divisionName: (
-                        <Link to={`/division/${divisionId}`}>
-                          {divisionName}
-                        </Link>
-                      ),
-                      address: <AddressView data={addresses} />,
-                      legalEntityName,
-                      action: (
-                        <Link to={`/employee/${id}`}>Показати деталі</Link>
-                      )
-                    })}
-                    rowKeyExtractor={({ id }) => id}
-                  />
+                  <>
+                    <CabinetTable
+                      data={search}
+                      header={{
+                        name: (
+                          <>
+                            ПІБ<br />лікаря
+                          </>
+                        ),
+                        job: "Спеціальність",
+                        divisionName: (
+                          <>
+                            Назва<br />відділення
+                          </>
+                        ),
+                        address: "Адреса",
+                        legalEntityName: "Медзаклад",
+                        action: "Дія"
+                      }}
+                      renderRow={({
+                        id,
+                        party,
+                        division: {
+                          id: divisionId,
+                          name: divisionName,
+                          addresses
+                        },
+                        legalEntity: { name: legalEntityName }
+                      }) => ({
+                        name: getFullName(party),
+                        job: (
+                          <DictionaryValue
+                            name="SPECIALITY_TYPE"
+                            item={party.specialities[0].speciality}
+                          />
+                        ),
+                        divisionName: (
+                          <Link to={`/division/${divisionId}`}>
+                            {divisionName}
+                          </Link>
+                        ),
+                        address: <AddressView data={addresses} />,
+                        legalEntityName,
+                        action: (
+                          <Link to={`/employee/${id}`}>Показати деталі</Link>
+                        )
+                      })}
+                      rowKeyExtractor={({ id }) => id}
+                    />
+                    <Pagination totalPages={paging.totalPages} />
+                  </>
                 );
               }}
             </Query>
@@ -139,7 +143,18 @@ const FormSearch = () => (
           onSubmit={() => null /* NOT USED, but required */}
           initialValues={searchParams}
         >
-          <Form.AutoSubmit onSubmit={setSearchParamsImmediate} delay={1000} />
+          <Form.AutoSubmit
+            onSubmit={values => {
+              const clearPage = !isEqual(
+                omit(values, ["page"]),
+                omit(searchParams, ["page"])
+              )
+                ? { page: 1 }
+                : {};
+              return setSearchParamsImmediate({ ...values, ...clearPage });
+            }}
+            delay={1000}
+          />
           <FlexInputsContainer>
             <FlexItem>
               <Query
@@ -319,7 +334,7 @@ const filteredDivisions = divisions => {
   let lngRadius = 0.00003, // degrees of longitude separation
     latToLng = 111.23 / 71.7, // lat to long proportion in Warsaw
     angle = 0.5, // starting angle, in radians
-    step = (2 * Math.PI) / divisions.length,
+    step = 2 * Math.PI / divisions.length,
     latRadius = lngRadius / latToLng;
   return divisions
     .filter(item => item.coordinates.latitude && item.coordinates.longitude)
