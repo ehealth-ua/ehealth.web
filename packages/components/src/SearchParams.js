@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import type { Location, HistoryAction, RouterHistory } from "react-router-dom";
 import { parseSearchParams, stringifySearchParams } from "@ehealth/utils";
 import compose from "recompose/compose";
-import isEqual from "lodash/isEqual";
+import { isEqual, omit } from "lodash";
 
 const setSearchParams = (
   params: {},
@@ -11,10 +11,9 @@ const setSearchParams = (
   location: Location,
   history: RouterHistory
 ): void => {
-  const search = compose(stringifySearchParams, parseSearchParams)(
-    location.search
-  );
-  if (isEqual(stringifySearchParams(params), search)) return null;
+  const search = parseSearchParams(location.search);
+
+  if (isEqual(params, search)) return null;
   history[method]({
     ...location,
     search: stringifySearchParams(params)
