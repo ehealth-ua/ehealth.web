@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.53.4"></a>
+## [0.53.4](https://github.com/edenlabllc/ehealth.web/compare/v0.53.3...v0.53.4) (2018-08-07)
+
+
+### Bug Fixes
+
+* **auth:** fix centering ([0595582](https://github.com/edenlabllc/ehealth.web/commit/0595582))
+* **auth:** pass variable to array ([f109118](https://github.com/edenlabllc/ehealth.web/commit/f109118))
+* **utils:** add comments ([9973d68](https://github.com/edenlabllc/ehealth.web/commit/9973d68))
+
+
+
+
+
 <a name="0.53.3"></a>
 ## [0.53.3](https://github.com/edenlabllc/ehealth.web/compare/v0.53.2...v0.53.3) (2018-08-03)
 
