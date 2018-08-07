@@ -1,6 +1,7 @@
 .points {
   display: block;
   margin-top: 12px;
+  padding: 0;
 }
 .points li {
   display: inline-block;
