@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
+    "@ehealth/admin": "file:packages/admin",
     "@ehealth/auth": "file:packages/auth",
     "@ehealth/gatekeeper": "file:packages/gatekeeper",
     "@ehealth/iit-digital-signature": "file:packages/iit-digital-signature",
