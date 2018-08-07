@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.54.0"></a>
+# [0.54.0](https://github.com/edenlabllc/ehealth.web/compare/v0.53.4...v0.54.0) (2018-08-07)
+
+
+### Bug Fixes
+
+* rebuild package-lock.json, deduplicate dependecies ([ad534e5](https://github.com/edenlabllc/ehealth.web/commit/ad534e5))
+* **env:** set default NODE_ENV on the provided environment object ([6f13eee](https://github.com/edenlabllc/ehealth.web/commit/6f13eee))
+* **gatekeeper:** add error middleware ([5e885f2](https://github.com/edenlabllc/ehealth.web/commit/5e885f2))
+* **test-preset:** load env config from package root in e2e tests ([147bc06](https://github.com/edenlabllc/ehealth.web/commit/147bc06))
+
+
+### Features
+
+* **env:** add the option to specify an object to load configs into ([f4d9776](https://github.com/edenlabllc/ehealth.web/commit/f4d9776))
+* **test-preset:** add transforms ([fc7a2b2](https://github.com/edenlabllc/ehealth.web/commit/fc7a2b2))
+* **test-preset:** move test configs into package, setup e2e testing infrastructure ([111357d](https://github.com/edenlabllc/ehealth.web/commit/111357d)), closes [#78](https://github.com/edenlabllc/ehealth.web/issues/78)
+
+
+
+
+
 <a name="0.53.4"></a>
 ## [0.53.4](https://github.com/edenlabllc/ehealth.web/compare/v0.53.3...v0.53.4) (2018-08-07)
 

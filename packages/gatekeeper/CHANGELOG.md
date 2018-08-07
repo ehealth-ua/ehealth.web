@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.54.0"></a>
+# [0.54.0](https://github.com/edenlabllc/ehealth.web/compare/v0.53.4...v0.54.0) (2018-08-07)
+
+
+### Bug Fixes
+
+* rebuild package-lock.json, deduplicate dependecies ([ad534e5](https://github.com/edenlabllc/ehealth.web/commit/ad534e5))
+* **gatekeeper:** add error middleware ([5e885f2](https://github.com/edenlabllc/ehealth.web/commit/5e885f2))
+
+
+
+
+
 <a name="0.53.0"></a>
 # [0.53.0](https://github.com/edenlabllc/ehealth.web/compare/v0.52.3...v0.53.0) (2018-08-01)
 
