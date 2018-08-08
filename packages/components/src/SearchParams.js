@@ -11,7 +11,6 @@ const setSearchParams = (
   history: RouterHistory
 ): void => {
   const search = parseSearchParams(location.search);
-  console.log("​search", search);
 
   if (isEqual(params, search)) return null;
   history[method]({
