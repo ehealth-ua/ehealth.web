@@ -33,6 +33,7 @@ import Section from "../components/Section";
 import DefinitionListView from "../components/DefinitionListView";
 import DictionaryValue from "../components/DictionaryValue";
 import ProfileAuthSection from "../components/ProfileAuthSection";
+import Spinner from "../components/Spinner";
 
 const NAME_PATTERN =
   '^(?!.*[ЫЪЭЁыъэё@%&$^#])[a-zA-ZА-ЯҐЇІЄа-яґїіє0-9№\\"!\\^\\*)\\]\\[(._-].*$';
@@ -44,10 +45,22 @@ const PERSON_NAME_PATTERN = "^(?!.*[ЫЪЭЁыъэё@%&$^#])[А-ЯҐЇІЄа-я�
 const ProfileEditPage = ({ history }) => (
   <>
     <Heading.H1>Мій профіль</Heading.H1>
-
+    <Flex justifyContent="space-between" alignItems="baseline">
+      <Heading.H3 weight="bold">Персональні дані</Heading.H3>
+      <Link
+        to="/profile"
+        size="xs"
+        upperCase
+        bold
+        icon={<PencilIcon height="14" />}
+        iconReverse
+      >
+        Вийти з режиму редагування
+      </Link>
+    </Flex>
     <Query query={PersonDetailsQuery}>
       {({ loading, error, data: { person } }) =>
-        !(loading || error) && (
+        !(loading || error) ? (
           <Signer.Parent
             url={REACT_APP_SIGNER_URL}
             features={{ width: 640, height: 589 }}
@@ -88,22 +101,6 @@ const ProfileEditPage = ({ history }) => (
                     }}
                   >
                     <Section>
-                      <Flex
-                        justifyContent="space-between"
-                        alignItems="baseline"
-                      >
-                        <Heading.H3 weight="bold">Персональні дані</Heading.H3>
-                        <Link
-                          to="/profile"
-                          size="xs"
-                          upperCase
-                          bold
-                          icon={<PencilIcon height="14" />}
-                          iconReverse
-                        >
-                          Вийти з режиму редагування
-                        </Link>
-                      </Flex>
                       <DefinitionListView
                         labels={{
                           name: "ПІБ",
@@ -259,6 +256,8 @@ const ProfileEditPage = ({ history }) => (
               </Mutation>
             )}
           </Signer.Parent>
+        ) : (
+          <Spinner />
         )
       }
     </Query>

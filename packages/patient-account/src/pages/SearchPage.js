@@ -18,6 +18,7 @@ import debounce from "lodash/debounce";
 import DivisionsMap from "../components/DivisionsMap";
 import DictionaryValue from "../components/DictionaryValue";
 import AddressView from "../components/AddressView";
+import Spinner from "../components/Spinner";
 
 import SettlementQuery from "../graphql/SettlementQuery.graphql";
 import SearchEmployeeQuery from "../graphql/SearchEmployeeQuery.graphql";
@@ -63,7 +64,7 @@ const SearchTable = () => {
               context={{ credentials: "same-origin" }}
             >
               {({ loading, error, data }) => {
-                if (!data.search) return null;
+                if (!data.search || loading) return <Spinner />;
                 const { data: search } = data.search;
                 return !search.length ? (
                   "Нічого не знайдено"
@@ -73,13 +74,17 @@ const SearchTable = () => {
                     header={{
                       name: (
                         <>
-                          ПІБ<br />лікаря
+                          ПІБ
+                          <br />
+                          лікаря
                         </>
                       ),
                       job: "Спеціальність",
                       divisionName: (
                         <>
-                          Назва<br />відділення
+                          Назва
+                          <br />
+                          відділення
                         </>
                       ),
                       address: "Адреса",
@@ -314,7 +319,7 @@ const filteredDivisions = divisions => {
   let lngRadius = 0.00003, // degrees of longitude separation
     latToLng = 111.23 / 71.7, // lat to long proportion in Warsaw
     angle = 0.5, // starting angle, in radians
-    step = 2 * Math.PI / divisions.length,
+    step = (2 * Math.PI) / divisions.length,
     latRadius = lngRadius / latToLng;
   return divisions
     .filter(item => item.coordinates.latitude && item.coordinates.longitude)

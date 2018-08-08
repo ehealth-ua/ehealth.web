@@ -12,6 +12,7 @@ import {
 import { getDefinitions } from "@ehealth/utils";
 import { PencilIcon } from "@ehealth/icons";
 import Section from "../components/Section";
+import Spinner from "../components/Spinner";
 import DefinitionListView from "../components/DefinitionListView";
 import AuthenticationFactorQuery from "../graphql/AuthenticationFactorQuery.graphql";
 import ApprovalsRequestQuery from "../graphql/ApprovalsRequestQuery.graphql";
@@ -28,7 +29,9 @@ const SecurityPage = () => (
   <Query query={AuthenticationFactorQuery}>
     {({ loading, error, data }) => {
       if (loading || error || !data.factor) return null;
-      const { factor: { data: factor } } = data;
+      const {
+        factor: { data: factor }
+      } = data;
       let isActive, phone;
       if (factor.length > 0) {
         [{ isActive, factor: phone }] = factor;
@@ -49,7 +52,8 @@ const SecurityPage = () => (
                     <SecurityBlock phone={phone} />
                   ) : (
                     <p>
-                      На жаль, другий фактор авторизації був скинутий.<br />
+                      На жаль, другий фактор авторизації був скинутий.
+                      <br />
                       Для того, щоб його задати повторно необхідно ще раз пройти
                       процес{" "}
                       <Link
@@ -93,7 +97,7 @@ const SecurityBlock = ({ phone }) => (
         return (
           <Query query={ApprovalsRequestQuery} variables={{ page }}>
             {({ loading, error, data, refetch }) => {
-              if (loading || error || !data.approvals) return null;
+              if (loading || error || !data.approvals) return <Spinner />;
               const {
                 data: dataApprovals,
                 paging: { totalPages }

@@ -12,6 +12,7 @@ import DeclarationHistory from "../components/DeclarationHistory";
 import Tabs from "../components/Tabs";
 import DeclarationItem from "../components/DeclarationItem";
 import Line from "../components/Line";
+import Spinner from "../components/Spinner";
 
 const HomePage = ({ match }) => (
   <>
@@ -23,12 +24,18 @@ const HomePage = ({ match }) => (
           content: (
             <Query query={DeclarationsQuery}>
               {({ loading, error, data, refetch }) => {
-                if (loading || error) return null;
+                if (loading || error) return <Spinner />;
 
                 const {
-                  declarations: { data: [declaration] },
-                  declarationRequests: { data: [declarationRequest] },
-                  declarationHistory: { data: [...declarationHistory] }
+                  declarations: {
+                    data: [declaration]
+                  },
+                  declarationRequests: {
+                    data: [declarationRequest]
+                  },
+                  declarationHistory: {
+                    data: [...declarationHistory]
+                  }
                 } = data;
                 return (
                   <>

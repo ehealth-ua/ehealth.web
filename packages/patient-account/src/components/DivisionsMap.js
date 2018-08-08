@@ -1,11 +1,12 @@
 import React from "react";
 import { GoogleMapsWrapper } from "./MapView";
+import Spinner from "../components/Spinner";
 
 const DivisionsMap = props => (
   <GoogleMapsWrapper
     {...props}
     googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyAEnlhRXQtwPRZhIvJ6bhNrfBJFP_XAZ6s`}
-    loadingElement={<div>loading</div>}
+    loadingElement={<Spinner />}
     containerElement={
       <div style={{ position: "relative", width: "100%", height: 600 }} />
     }
