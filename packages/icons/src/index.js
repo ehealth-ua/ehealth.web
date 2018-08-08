@@ -15,3 +15,4 @@ export { default as MapIcon } from "./MapIcon";
 export { default as MozLogoIcon } from "./MozLogoIcon";
 export { default as PencilIcon } from "./PencilIcon";
 export { default as RemoveIcon } from "./RemoveIcon";
+export { default as SpinnerIcon } from "./SpinnerIcon";
