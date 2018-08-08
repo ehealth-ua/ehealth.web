@@ -7,7 +7,7 @@ const TRANSLATE_VERTICAL = "translateY(-50%)";
 
 class Tooltip extends Component {
   static defaultProps = {
-    leaveTimeout: 100,
+    leaveTimeout: 300,
     onMouseEnter: () => {},
     onMouseLeave: () => {}
   };
@@ -61,7 +61,10 @@ class Tooltip extends Component {
     const { active, getOverlayProps } = this;
     return {
       active,
-      getProps: compose(getProps, getOverlayProps),
+      getProps: compose(
+        getProps,
+        getOverlayProps
+      ),
       ...overlay
     };
   }
