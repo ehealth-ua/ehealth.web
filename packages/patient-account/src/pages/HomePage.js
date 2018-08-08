@@ -4,7 +4,7 @@ import { ifProp } from "styled-tools";
 import { Route } from "react-router-dom";
 import styled from "react-emotion/macro";
 import { ArrowRightIcon } from "@ehealth/icons";
-import { Heading, Link } from "@ehealth/components";
+import { Heading, Link, Pagination, SearchParams } from "@ehealth/components";
 
 import DeclarationsQuery from "../graphql/DeclarationsQuery.graphql";
 import NoDeclarationList from "../components/NoDeclarationList";
@@ -22,94 +22,105 @@ const HomePage = ({ match }) => (
         {
           title: "Моя декларація",
           content: (
-            <Query query={DeclarationsQuery}>
-              {({ loading, error, data, refetch }) => {
-                if (loading || error) return <Spinner />;
+            <SearchParams>
+              {({ searchParams: { page = "1", pageSize = "10" } }) => (
+                <Query query={DeclarationsQuery} variables={{ page, pageSize }}>
+                  {({ loading, error, data, refetch }) => {
+                    if (loading || error) return <Spinner />;
 
-                const {
-                  declarations: {
-                    data: [declaration]
-                  },
-                  declarationRequests: {
-                    data: [declarationRequest]
-                  },
-                  declarationHistory: {
-                    data: [...declarationHistory]
-                  }
-                } = data;
-                return (
-                  <>
-                    {declaration || declarationRequest ? (
+                    const {
+                      declarations: { data: [declaration] },
+                      declarationRequests: { data: [declarationRequest] },
+                      declarationHistory: {
+                        data: [...declarationHistory],
+                        paging: historyPaging
+                      }
+                    } = data;
+                    return (
                       <>
-                        {declaration && (
+                        {declaration || declarationRequest ? (
                           <>
-                            <DeclarationItem
-                              declaration={declaration}
-                              onReject={refetch}
-                            />
-                            <Line />
-                          </>
-                        )}
-                        {declarationRequest && (
-                          <>
-                            <RequestTitle>Запит на декларацію</RequestTitle>
-                            <DeclarationItem
-                              declaration={declarationRequest}
-                              blur={true}
-                              type="declarationRequest"
-                            />
-                          </>
-                        )}
+                            {declaration && (
+                              <>
+                                <DeclarationItem
+                                  declaration={declaration}
+                                  onReject={refetch}
+                                />
+                                <Line />
+                              </>
+                            )}
+                            {declarationRequest && (
+                              <>
+                                <RequestTitle>Запит на декларацію</RequestTitle>
+                                <DeclarationItem
+                                  declaration={declarationRequest}
+                                  blur={true}
+                                  type="declarationRequest"
+                                />
+                              </>
+                            )}
 
-                        {declarationHistory && (
-                          <>
-                            <ShowBlock center>
+                            {declarationHistory && (
+                              <>
+                                <ShowBlock center>
+                                  <Link
+                                    to={
+                                      match.url === "/" ? "/declarations" : "/"
+                                    }
+                                    upperCase
+                                    bold
+                                    center
+                                  >
+                                    {match.url === "/"
+                                      ? "Показати історію декларацій"
+                                      : "Cховати історію декларацій"}
+                                  </Link>
+                                </ShowBlock>
+                                <Route
+                                  path="/declarations"
+                                  render={props => {
+                                    return (
+                                      <>
+                                        <DeclarationHistory
+                                          {...props}
+                                          data={declarationHistory}
+                                        />
+                                        <Pagination
+                                          totalPages={historyPaging.totalPages}
+                                        />
+                                      </>
+                                    );
+                                  }}
+                                />
+                              </>
+                            )}
+                            <ShowBlock>
                               <Link
-                                to={match.url === "/" ? "/declarations" : "/"}
+                                to="/search"
+                                size="small"
                                 upperCase
+                                spaced
                                 bold
-                                center
+                                icon={
+                                  <ArrowRightIcon
+                                    height="15px"
+                                    fill="#2292f2"
+                                  />
+                                }
                               >
-                                {match.url === "/"
-                                  ? "Показати історію декларацій"
-                                  : "Cховати історію декларацій"}
+                                Пошук лікаря
                               </Link>
                             </ShowBlock>
-                            <Route
-                              path="/declarations"
-                              render={props => {
-                                return (
-                                  <DeclarationHistory
-                                    {...props}
-                                    data={declarationHistory}
-                                  />
-                                );
-                              }}
-                            />
                           </>
+                        ) : (
+                          <NoDeclarationList />
                         )}
-                        <ShowBlock>
-                          <Link
-                            to="/search"
-                            size="small"
-                            upperCase
-                            spaced
-                            bold
-                            icon={
-                              <ArrowRightIcon height="15px" fill="#2292f2" />
-                            }
-                          >
-                            Пошук лікаря
-                          </Link>
-                        </ShowBlock>
                       </>
-                    ) : (
-                      <NoDeclarationList />
-                    )}
-                  </>
-                );
-              }}
-            </Query>
+                    );
+                  }}
+                </Query>
+              )}
+            </SearchParams>
           )
         },
         { title: "Мої рецепти", content: "Сторінка в процесі розробки" }
