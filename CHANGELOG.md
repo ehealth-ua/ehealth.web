@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.56.2"></a>
+## [0.56.2](https://github.com/edenlabllc/ehealth.web/compare/v0.56.1...v0.56.2) (2018-08-08)
+
+
+### Bug Fixes
+
+* **components:** change setSearchParams in SearchParams ([fec6826](https://github.com/edenlabllc/ehealth.web/commit/fec6826))
+* **components:** remove console ([8eb8190](https://github.com/edenlabllc/ehealth.web/commit/8eb8190))
+* **components:** remove lodash/omit import ([488daf6](https://github.com/edenlabllc/ehealth.web/commit/488daf6))
+* **patient-account:** add pagination on declaration history page ([6ae4923](https://github.com/edenlabllc/ehealth.web/commit/6ae4923))
+* **patient-account:** add pagination on SearchPage ([8306d33](https://github.com/edenlabllc/ehealth.web/commit/8306d33))
+* **patient-account:** separate import of lodash packages ([97e2d0b](https://github.com/edenlabllc/ehealth.web/commit/97e2d0b))
+
+
+
+
+
 <a name="0.56.1"></a>
 ## [0.56.1](https://github.com/edenlabllc/ehealth.web/compare/v0.56.0...v0.56.1) (2018-08-08)
 
