@@ -8,6 +8,7 @@ import DefinitionListView from "../components/DefinitionListView";
 import DictionaryValue from "../components/DictionaryValue";
 import { CabinetTable } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
+import Spinner from "../components/Spinner";
 
 import DivisionDetailsQuery from "../graphql/DivisionDetailsQuery.graphql";
 
@@ -22,7 +23,7 @@ const DivisionPage = ({ match, history }) => (
     >
       {({ loading, error, data }) => {
         const { division } = data;
-        if (!division) return null;
+        if (loading || error) return <Spinner />;
 
         const { data: employees } = data.employees;
 

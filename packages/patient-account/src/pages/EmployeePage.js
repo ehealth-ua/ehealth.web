@@ -31,7 +31,7 @@ class EmployeePage extends React.Component {
         >
           {({ loading, error, data }) => {
             const { employee } = data;
-            if (!employee || loading) return <Spinner />;
+            if (loading || error) return <Spinner />;
 
             const { data: employeeData } = employee;
             const {

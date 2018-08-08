@@ -26,7 +26,7 @@ const DeclarationRequestPage = ({
 }) => (
   <Query query={DeclarationRequestQuery} variables={{ id }}>
     {({ loading, error, data }) => {
-      if (!data.declaration || loading) return <Spinner />;
+      if (loading || error) return <Spinner />;
       return <Declaration history={history} data={data.declaration.data} />;
     }}
   </Query>

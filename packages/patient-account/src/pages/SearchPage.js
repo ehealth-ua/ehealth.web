@@ -64,7 +64,7 @@ const SearchTable = () => {
               context={{ credentials: "same-origin" }}
             >
               {({ loading, error, data }) => {
-                if (!data.search || loading) return <Spinner />;
+                if (loading || error) return <Spinner />;
                 const { data: search } = data.search;
                 return !search.length ? (
                   "Нічого не знайдено"

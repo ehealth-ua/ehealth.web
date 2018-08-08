@@ -59,8 +59,9 @@ const ProfileEditPage = ({ history }) => (
       </Link>
     </Flex>
     <Query query={PersonDetailsQuery}>
-      {({ loading, error, data: { person } }) =>
-        !(loading || error) ? (
+      {({ loading, error, data: { person } }) => {
+        if (loading || error) return <Spinner />;
+        return (
           <Signer.Parent
             url={REACT_APP_SIGNER_URL}
             features={{ width: 640, height: 589 }}
@@ -256,10 +257,8 @@ const ProfileEditPage = ({ history }) => (
               </Mutation>
             )}
           </Signer.Parent>
-        ) : (
-          <Spinner />
-        )
-      }
+        );
+      }}
     </Query>
   </>
 );

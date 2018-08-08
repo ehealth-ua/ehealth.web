@@ -28,7 +28,7 @@ import {
 const SecurityPage = () => (
   <Query query={AuthenticationFactorQuery}>
     {({ loading, error, data }) => {
-      if (loading || error || !data.factor) return null;
+      if (loading || error) return null;
       const {
         factor: { data: factor }
       } = data;
@@ -97,7 +97,7 @@ const SecurityBlock = ({ phone }) => (
         return (
           <Query query={ApprovalsRequestQuery} variables={{ page }}>
             {({ loading, error, data, refetch }) => {
-              if (loading || error || !data.approvals) return <Spinner />;
+              if (loading || error) return <Spinner />;
               const {
                 data: dataApprovals,
                 paging: { totalPages }
