@@ -13,7 +13,8 @@ import {
 } from "@ehealth/components";
 import { getFullName, titleCase } from "@ehealth/utils";
 import { MapIcon, ListIcon } from "@ehealth/icons";
-import { isEqual, omit } from "lodash";
+import isEqual from "lodash/isEqual";
+import omit from "lodash/omit";
 import debounce from "lodash/debounce";
 
 import DivisionsMap from "../components/DivisionsMap";
@@ -80,13 +81,17 @@ const SearchTable = () => {
                       header={{
                         name: (
                           <>
-                            ПІБ<br />лікаря
+                            ПІБ
+                            <br />
+                            лікаря
                           </>
                         ),
                         job: "Спеціальність",
                         divisionName: (
                           <>
-                            Назва<br />відділення
+                            Назва
+                            <br />
+                            відділення
                           </>
                         ),
                         address: "Адреса",
@@ -334,7 +339,7 @@ const filteredDivisions = divisions => {
   let lngRadius = 0.00003, // degrees of longitude separation
     latToLng = 111.23 / 71.7, // lat to long proportion in Warsaw
     angle = 0.5, // starting angle, in radians
-    step = 2 * Math.PI / divisions.length,
+    step = (2 * Math.PI) / divisions.length,
     latRadius = lngRadius / latToLng;
   return divisions
     .filter(item => item.coordinates.latitude && item.coordinates.longitude)
