@@ -11,7 +11,7 @@ export default class StepForm extends Component {
   };
 
   render() {
-    const [props] = pickProps(this.props, STEP_FORM_PROPS);
+    const [, props] = pickProps(this.props, STEP_FORM_PROPS);
 
     return (
       <Form
