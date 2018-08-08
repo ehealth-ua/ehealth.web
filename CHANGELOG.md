@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.56.0"></a>
+# [0.56.0](https://github.com/edenlabllc/ehealth.web/compare/v0.55.2...v0.56.0) (2018-08-08)
+
+
+### Bug Fixes
+
+* **icons:** rename spinner icon ([0dc829c](https://github.com/edenlabllc/ehealth.web/commit/0dc829c))
+* **patient-account:** change conditions in query ([0683ef8](https://github.com/edenlabllc/ehealth.web/commit/0683ef8))
+
+
+### Features
+
+* **icons:** add spinner icon ([fc54d8a](https://github.com/edenlabllc/ehealth.web/commit/fc54d8a))
+* **patient-account:** add Spinner component ([2714157](https://github.com/edenlabllc/ehealth.web/commit/2714157))
+* **patient-account:** add spinner to all pages ([671565b](https://github.com/edenlabllc/ehealth.web/commit/671565b))
+
+
+
+
+
 <a name="0.55.2"></a>
 ## [0.55.2](https://github.com/edenlabllc/ehealth.web/compare/v0.55.1...v0.55.2) (2018-08-08)
 

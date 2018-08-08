@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/auth",
-  "version": "0.55.2",
+  "version": "0.56.0",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "7.0.0-beta.44",
