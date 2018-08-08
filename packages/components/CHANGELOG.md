@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.55.2"></a>
+## [0.55.2](https://github.com/edenlabllc/ehealth.web/compare/v0.55.1...v0.55.2) (2018-08-08)
+
+
+### Bug Fixes
+
+* **components:** fix typo in the StepForm component ([2ecb55d](https://github.com/edenlabllc/ehealth.web/commit/2ecb55d)), closes [#192](https://github.com/edenlabllc/ehealth.web/issues/192)
+
+
+
+
+
 <a name="0.55.1"></a>
 ## [0.55.1](https://github.com/edenlabllc/ehealth.web/compare/v0.55.0...v0.55.1) (2018-08-07)
 
