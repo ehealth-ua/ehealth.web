@@ -1,6 +1,11 @@
 import React from "react";
 
-const Spinner = ({ width = 30, height = 30, color = "#4880ed", ...props }) => {
+const SpinnerIcon = ({
+  width = 30,
+  height = 30,
+  color = "#4880ed",
+  ...props
+}) => {
   return (
     <svg
       {...props}
@@ -29,4 +34,4 @@ const Spinner = ({ width = 30, height = 30, color = "#4880ed", ...props }) => {
   );
 };
 
-export default Spinner;
+export default SpinnerIcon;
