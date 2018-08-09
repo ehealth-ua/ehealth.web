@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.56.3"></a>
+## [0.56.3](https://github.com/edenlabllc/ehealth.web/compare/v0.56.2...v0.56.3) (2018-08-09)
+
+
+### Bug Fixes
+
+* **components:** move Spinner to components package ([7ce2dae](https://github.com/edenlabllc/ehealth.web/commit/7ce2dae))
+* **patient-account:** change imports of spinner component ([14132cb](https://github.com/edenlabllc/ehealth.web/commit/14132cb))
+
+
+
+
+
 <a name="0.56.2"></a>
 ## [0.56.2](https://github.com/edenlabllc/ehealth.web/compare/v0.56.1...v0.56.2) (2018-08-08)
 

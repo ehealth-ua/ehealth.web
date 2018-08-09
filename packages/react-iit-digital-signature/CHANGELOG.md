@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.56.3"></a>
+## [0.56.3](https://github.com/edenlabllc/ehealth.web/compare/v0.56.2...v0.56.3) (2018-08-09)
+
+
+### Bug Fixes
+
+* **react-iit-digital-signature:** add Spinner until library is initialized ([7507e08](https://github.com/edenlabllc/ehealth.web/commit/7507e08))
+
+
+
+
+
 <a name="0.56.0"></a>
 # [0.56.0](https://github.com/edenlabllc/ehealth.web/compare/v0.55.2...v0.56.0) (2018-08-08)
 
