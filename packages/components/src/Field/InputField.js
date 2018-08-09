@@ -23,6 +23,7 @@ export const InputField = ({
   prefix,
   postfix,
   disabled,
+  color,
   inputComponent: InputComponent = Input,
   ...props
 }) => (
@@ -34,6 +35,7 @@ export const InputField = ({
           errored={errored}
           active={active}
           size={size}
+          color={color}
         >
           {prefix && <InputContent>{prefix}</InputContent>}
           <InputComponent {...input} disabled={disabled} size={size} />
@@ -56,7 +58,10 @@ export const InputBorder = styled.div`
       },
       "#dedede"
     )};
-  color: ${ifProp("disabled", "#efefef", "#3d3d3d")};
+  color: ${withProp(
+    ["color", "disabled"],
+    (color, disabled) => `${color ? color : disabled ? "efefef" : "#3d3d3d"}`
+  )};
   display: flex;
   font-size: ${withProp(
     [
