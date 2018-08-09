@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.57.0"></a>
+# [0.57.0](https://github.com/edenlabllc/ehealth.web/compare/v0.56.3...v0.57.0) (2018-08-09)
+
+
+### Bug Fixes
+
+* **polyfill:** add package to package-lock.json ([dc71390](https://github.com/edenlabllc/ehealth.web/commit/dc71390))
+* **polyfill:** fix dependencies in package.json ([2642b67](https://github.com/edenlabllc/ehealth.web/commit/2642b67))
+* **polyfill:** update features in getPolyfillString ([588a3df](https://github.com/edenlabllc/ehealth.web/commit/588a3df))
+
+
+### Features
+
+* add new polyfill-service, delete old polyfills ([cd04a73](https://github.com/edenlabllc/ehealth.web/commit/cd04a73))
+* add polyfill pkg to package.json ([893ca22](https://github.com/edenlabllc/ehealth.web/commit/893ca22))
+* **polyfill:** add server polyfill ([18de200](https://github.com/edenlabllc/ehealth.web/commit/18de200))
+
+
+
+
+
 <a name="0.56.3"></a>
 ## [0.56.3](https://github.com/edenlabllc/ehealth.web/compare/v0.56.2...v0.56.3) (2018-08-09)
 
