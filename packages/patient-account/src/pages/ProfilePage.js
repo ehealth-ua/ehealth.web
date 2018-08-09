@@ -1,6 +1,6 @@
 import React from "react";
 import { Query } from "react-apollo";
-import { Heading, Link } from "@ehealth/components";
+import { Heading, Link, Spinner } from "@ehealth/components";
 import { PencilIcon } from "@ehealth/icons";
 import {
   getDefinitions,
@@ -16,7 +16,6 @@ import DefinitionListView from "../components/DefinitionListView";
 import DictionaryValue from "../components/DictionaryValue";
 import AddressView from "../components/AddressView";
 import ProfileAuthSection from "../components/ProfileAuthSection";
-import Spinner from "../components/Spinner";
 
 const ProfilePage = () => (
   <>

@@ -4,7 +4,13 @@ import { ifProp } from "styled-tools";
 import { Route } from "react-router-dom";
 import styled from "react-emotion/macro";
 import { ArrowRightIcon } from "@ehealth/icons";
-import { Heading, Link, Pagination, SearchParams } from "@ehealth/components";
+import {
+  Heading,
+  Link,
+  Pagination,
+  SearchParams,
+  Spinner
+} from "@ehealth/components";
 
 import DeclarationsQuery from "../graphql/DeclarationsQuery.graphql";
 import NoDeclarationList from "../components/NoDeclarationList";
@@ -12,7 +18,6 @@ import DeclarationHistory from "../components/DeclarationHistory";
 import Tabs from "../components/Tabs";
 import DeclarationItem from "../components/DeclarationItem";
 import Line from "../components/Line";
-import Spinner from "../components/Spinner";
 
 const HomePage = ({ match }) => (
   <>
@@ -29,8 +34,12 @@ const HomePage = ({ match }) => (
                     if (loading || error) return <Spinner />;
 
                     const {
-                      declarations: { data: [declaration] },
-                      declarationRequests: { data: [declarationRequest] },
+                      declarations: {
+                        data: [declaration]
+                      },
+                      declarationRequests: {
+                        data: [declarationRequest]
+                      },
                       declarationHistory: {
                         data: [...declarationHistory],
                         paging: historyPaging

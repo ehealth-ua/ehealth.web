@@ -8,6 +8,7 @@ import {
   Form,
   CabinetTable,
   Link,
+  Spinner,
   SearchParams,
   Pagination
 } from "@ehealth/components";
@@ -20,7 +21,6 @@ import debounce from "lodash/debounce";
 import DivisionsMap from "../components/DivisionsMap";
 import DictionaryValue from "../components/DictionaryValue";
 import AddressView from "../components/AddressView";
-import Spinner from "../components/Spinner";
 
 import SettlementQuery from "../graphql/SettlementQuery.graphql";
 import SearchEmployeeQuery from "../graphql/SearchEmployeeQuery.graphql";

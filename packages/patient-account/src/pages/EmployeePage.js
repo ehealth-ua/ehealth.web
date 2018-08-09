@@ -3,11 +3,16 @@ import styled from "react-emotion/macro";
 import { Query, Mutation } from "react-apollo";
 import { withRouter } from "react-router-dom";
 import { getFullName } from "@ehealth/utils";
-import { Heading, Link, Form, SUBMIT_ERROR } from "@ehealth/components";
+import {
+  Heading,
+  Link,
+  Form,
+  Spinner,
+  SUBMIT_ERROR
+} from "@ehealth/components";
 
 import DictionaryValue from "../components/DictionaryValue";
 import DefinitionListView from "../components/DefinitionListView";
-import Spinner from "../components/Spinner";
 
 import CreateDeclarationRequestMutation from "../graphql/CreateDeclarationRequestMutation.graphql";
 import EmployeeQuery from "../graphql/EmployeeQuery.graphql";

@@ -9,6 +9,7 @@ import {
   Link,
   Form,
   Field,
+  Spinner,
   Validation,
   Validations,
   SUBMIT_ERROR
@@ -33,7 +34,6 @@ import Section from "../components/Section";
 import DefinitionListView from "../components/DefinitionListView";
 import DictionaryValue from "../components/DictionaryValue";
 import ProfileAuthSection from "../components/ProfileAuthSection";
-import Spinner from "../components/Spinner";
 
 const NAME_PATTERN =
   '^(?!.*[ЫЪЭЁыъэё@%&$^#])[a-zA-ZА-ЯҐЇІЄа-яґїіє0-9№\\"!\\^\\*)\\]\\[(._-].*$';

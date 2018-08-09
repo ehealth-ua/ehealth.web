@@ -1,6 +1,6 @@
 import React from "react";
 import { GoogleMapsWrapper } from "./MapView";
-import Spinner from "../components/Spinner";
+import { Spinner } from "@ehealth/components";
 
 const DivisionsMap = props => (
   <GoogleMapsWrapper

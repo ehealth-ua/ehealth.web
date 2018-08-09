@@ -6,9 +6,8 @@ import { Heading, Link } from "@ehealth/components";
 
 import DefinitionListView from "../components/DefinitionListView";
 import DictionaryValue from "../components/DictionaryValue";
-import { CabinetTable } from "@ehealth/components";
+import { CabinetTable, Spinner } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
-import Spinner from "../components/Spinner";
 
 import DivisionDetailsQuery from "../graphql/DivisionDetailsQuery.graphql";
 

@@ -3,7 +3,7 @@ import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 
 import Declaration from "../components/Declaration";
-import Spinner from "../components/Spinner";
+import { Spinner } from "@ehealth/components";
 
 const DeclarationRequestQuery = gql`
   query Declaration($id: ID!) {

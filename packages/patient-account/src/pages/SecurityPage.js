@@ -7,12 +7,12 @@ import {
   Button,
   SearchParams,
   Pagination,
-  Modal
+  Modal,
+  Spinner
 } from "@ehealth/components";
 import { getDefinitions } from "@ehealth/utils";
 import { PencilIcon } from "@ehealth/icons";
 import Section from "../components/Section";
-import Spinner from "../components/Spinner";
 import DefinitionListView from "../components/DefinitionListView";
 import AuthenticationFactorQuery from "../graphql/AuthenticationFactorQuery.graphql";
 import ApprovalsRequestQuery from "../graphql/ApprovalsRequestQuery.graphql";
