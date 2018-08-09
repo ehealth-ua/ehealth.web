@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { prop, ifProp, withProp } from "styled-tools";
+import RocketMask from "react-rocket-mask";
 import { switchFlags } from "@ehealth/utils";
 
 import Field from "./Field";
@@ -15,6 +16,17 @@ export const MultilineTextField = props => (
 export const NumberField = props => <InputField {...props} type="number" />;
 
 export const PasswordField = props => <InputField {...props} type="password" />;
+
+export const MaskField = props => (
+  <InputField
+    {...props}
+    inputComponent={props => (
+      <InputContent>
+        <RocketMask {...props} />
+      </InputContent>
+    )}
+  />
+);
 
 export const InputField = ({
   label,
