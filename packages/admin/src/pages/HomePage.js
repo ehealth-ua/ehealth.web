@@ -1,5 +1,6 @@
-// import React from "react";
+import React from "react";
+import Layout from "../components/Layout";
 
-const HomePage = props => "Hello, world!";
+const HomePage = props => <Layout>Hello, admin!</Layout>;
 
 export default HomePage;
