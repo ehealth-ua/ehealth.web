@@ -1,5 +1,6 @@
 import React, { createContext, Component } from "react";
 import load from "load-js";
+import { Spinner } from "@ehealth/components";
 
 const DigitalSignatureContext = createContext({});
 
@@ -7,14 +8,16 @@ export default class DigitalSignature extends Component {
   static Consumer = ({ children, render = children }) => (
     <DigitalSignatureContext.Consumer>
       {({ initialized, keyAvailable, authorityIndex, ds, readPrivateKey }) =>
-        initialized
-          ? render({
-              keyAvailable,
-              authorityIndex,
-              ds,
-              readPrivateKey
-            })
-          : null
+        initialized ? (
+          render({
+            keyAvailable,
+            authorityIndex,
+            ds,
+            readPrivateKey
+          })
+        ) : (
+          <Spinner />
+        )
       }
     </DigitalSignatureContext.Consumer>
   );
