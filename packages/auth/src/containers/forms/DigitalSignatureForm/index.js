@@ -30,9 +30,6 @@ const DigitalSignatureForm = ({ onSubmit }) => (
             item == null ? undefined : ds.authorities.indexOf(item)
           }
           itemToString={item => (item == null ? "" : item.issuerCNs[0])}
-          filterItems={(inputValue, { issuerCNs: [name] }) =>
-            name.toLowerCase().includes(inputValue.toLowerCase())
-          }
           renderItem={({ issuerCNs: [name] }) => name}
         />
         <Validation.Required field="authorityIndex" message="Об'язкове поле" />
