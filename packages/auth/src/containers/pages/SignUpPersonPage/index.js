@@ -36,7 +36,12 @@ const SignUpPersonPage = ({ location }) => (
       <UserInfo />
       <H2>Для продовження, додайте персональні дані</H2>
       <NarrowContainer>
-        <Field.Input name="person.last_name" label="Прізвище" disabled />
+        <Field.Input
+          name="person.last_name"
+          label="Прізвище"
+          color="#292929"
+          disabled
+        />
         <Field.Input
           name="person.first_name"
           label="Ім'я"
