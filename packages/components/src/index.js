@@ -15,6 +15,7 @@ export { default as Modal } from "./Modal";
 export { default as Redirect } from "./Redirect";
 export { default as SearchParams } from "./SearchParams";
 export { default as StateMachine } from "./StateMachine";
+export { default as Spinner } from "./Spinner";
 export { default as StepForm } from "./StepForm";
 export { default as Switch } from "./Switch";
 export { default as ThemeProvider } from "./ThemeProvider";
