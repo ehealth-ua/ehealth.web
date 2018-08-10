@@ -6,6 +6,7 @@ import { switchFlags } from "@ehealth/utils";
 
 import Field from "./Field";
 import FieldView from "./FieldView";
+import FieldLabelView from "./FieldLabelView";
 
 export const TextField = props => <InputField {...props} type="text" />;
 
@@ -28,6 +29,10 @@ export const MaskField = props => (
   />
 );
 
+export const LabelInInputField = props => (
+  <InputField {...props} fieldComponent={FieldLabelView} />
+);
+
 export const InputField = ({
   label,
   horizontal,
@@ -37,11 +42,17 @@ export const InputField = ({
   disabled,
   color,
   inputComponent: InputComponent = Input,
+  fieldComponent: FieldComponent = FieldView,
   ...props
 }) => (
   <Field {...props}>
     {({ input, meta: { active, errored, error } }) => (
-      <FieldView label={label} horizontal={horizontal}>
+      <FieldComponent
+        label={label}
+        horizontal={horizontal}
+        active={active}
+        value={!!input.value}
+      >
         <InputBorder
           disabled={disabled}
           errored={errored}
@@ -54,7 +65,7 @@ export const InputField = ({
           {postfix && <InputContent>{postfix}</InputContent>}
         </InputBorder>
         {errored && <ErrorMessage>{error}</ErrorMessage>}
-      </FieldView>
+      </FieldComponent>
     )}
   </Field>
 );
