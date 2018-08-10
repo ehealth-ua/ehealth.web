@@ -46,7 +46,7 @@ const SignUpUserPage = ({ location, router }) => (
         <Field.Input
           name="person.emergency_contact.first_name"
           placeholder="Введіть ім'я"
-          label="Контактна особа у разі екстренного зв'язку"
+          label="Контактна особа для екстреного зв'язку"
         />
         <Validations field="person.emergency_contact.first_name">
           <Validation.Required message="Об'язкове поле" />
@@ -192,11 +192,21 @@ const UserInfo = () => (
     ]}
   >
     {([
-      { input: { value: secondName } },
-      { input: { value: firstName } },
-      { input: { value: lastName } },
-      { input: { value: email } },
-      { ds: { privKeyOwnerInfo } }
+      {
+        input: { value: secondName }
+      },
+      {
+        input: { value: firstName }
+      },
+      {
+        input: { value: lastName }
+      },
+      {
+        input: { value: email }
+      },
+      {
+        ds: { privKeyOwnerInfo }
+      }
     ]) => (
       <p>
         {secondName} {firstName} {lastName}
