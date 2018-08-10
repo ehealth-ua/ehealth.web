@@ -1,5 +1,6 @@
 FROM node:10-alpine as builder
 ENV NODE_ENV production
+RUN apk --no-cache add build-base python
 RUN npm install npm@6 --global --quiet
 RUN mkdir -p /opt/target/packages
 WORKDIR /opt/src
@@ -14,6 +15,7 @@ RUN npx npm-package-filter --only $SCOPE --type=package-lock --output /opt/targe
 FROM node:10-alpine
 EXPOSE 5000
 ENV NODE_ENV production
+RUN apk --no-cache add build-base python
 RUN npm install npm@6 --global --quiet
 WORKDIR /usr/src/app
 COPY --from=builder /opt/target .

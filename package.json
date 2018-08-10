@@ -9,7 +9,7 @@
     "@ehealth/iit-proxy": "file:packages/iit-proxy",
     "@ehealth/patient-account": "file:packages/patient-account",
     "lerna": "3.0.0-beta.21",
-    "npm-package-filter": "^0.1.0"
+    "npm-package-filter": "^0.1.2"
   },
   "devDependencies": {
     "@ehealth/test-preset": "file:packages/test-preset",
