@@ -1,5 +1,6 @@
 import React from "react";
 import { Field as FinalFormField } from "react-final-form";
+import { OnChange } from "react-final-form-listeners";
 import { pickProps } from "@ehealth/utils";
 
 const FINAL_FORM_FIELD_PROPS = [
@@ -32,6 +33,20 @@ const Field = ({ children, render = children, type, ...props }) => {
     />
   );
 };
+
+export const ListenerChange = ({ field, becomes, set, to }) => (
+  <Field name={set} subscription={{}}>
+    {({ input: { onChange } }) => (
+      <OnChange name={field}>
+        {value => {
+          if (value === becomes) {
+            onChange(to);
+          }
+        }}
+      </OnChange>
+    )}
+  </Field>
+);
 
 export default Field;
 

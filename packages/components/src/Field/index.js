@@ -1,4 +1,4 @@
-import Field from "./Field";
+import Field, { ListenerChange } from "./Field";
 import {
   InputField,
   TextField,
@@ -30,5 +30,6 @@ Field.Group = GroupField;
 Field.Array = ArrayField;
 Field.Row = Row;
 Field.Col = Col;
+Field.ListenerChange = ListenerChange;
 
 export default Field;
