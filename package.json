@@ -28,7 +28,7 @@
     "test:unit": "jest --config jest.config.unit.js",
     "test:e2e": "jest --config jest.config.e2e.js",
     "precommit": "pretty-quick --staged",
-    "version": "lerna version --no-push",
+    "release": "lerna version --no-push",
     "image:build": "lerna run image:build --stream",
     "image:test": "lerna run image:test --stream",
     "image:build-and-test": "lerna run image:build-and-test --stream",
