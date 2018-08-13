@@ -9,8 +9,8 @@ cache:
 env:
   global:
     - TRUNK_BRANCH="master"
-    - DOCKER_HUB_ACCOUNT="edenlabllc"
-    - CHART="fe"
+    - DOCKER_REPOSITORY="edenlabllc"
+    - HELM_CHART="fe"
     - secure:
         g0ucSJW6qgwUa9BPockDpCVb2nhkvzaEmZvh0EIkr+10bImhI086g+ytiqxxBCbIzL7qSOtp+Sr8iwZwrwk6qI16sGmTzvy/BOtSSL2fevapdhgQRXn7JDaaj19pQ8xgo3hkyjkGsHr22/27uD88AlwG8Wv0nhV5oH0Kb/reOjv1QrF+oRtjVrpRRw0PL5rFLYZ/JZ7kkdVI+pp2aDTIEJs/QxSsJ602fokuLbwdrNKeo3BQEnzY95Z0TYaj9Rvl8nI3a/LECNeKABHLVhn0t4qXQBqIZmR/3Il3QOA1eUAoNarsZsuGKweEnKYbj0X6F19tjRupYdHY25W42MUxvun4VJ/AzXLRaa4KdiCAGn5k99jlpIUHOu+NnnUSppac+39qoepridJ4vPiqhNpHHTtfui6eKvF3WSx+znzwM41c1jv/bjZ9SfYuvoXLbCyQzgZrCJEDP3iRJpaTkasfXTdwSmAIbHDVZEU1jic1zLYIyjxzuGG2oV0c37M5AgdzsL/HiqOSVh5zetMH2N76MbQ4bjUtm7+pjUpD5Vinuya6VmHe8vIQwe3aDPEiNozE5XD6uABtHIYcsGTky2a319GOiCWNHpT4/7r3kqpqMQIdNnhfQq7TWoaGz77L7RaBIdsmqDQ3C2xF/3FoGlr1Vv8Olm0v2fWQTXIyJKv7th8=
     - secure:
@@ -21,23 +21,22 @@ before_install:
   - npm i -g npm@6.0.1
 install:
   - npm ci
-script: npm run test:unit
-before_deploy:
-  - git config --global user.email "deploy@travis-ci.org" &&
-    git config --global user.name "Deployment Bot" &&
-    git config --global credential.helper "store"
-  - echo "https://${GITHUB_TOKEN}:@github.com" > $HOME/.git-credentials
-  - git checkout $TRAVIS_BRANCH
-  - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-  - openssl aes-256-cbc -K $encrypted_d422cd97315f_key -iv $encrypted_d422cd97315f_iv -in eHealth-d14f79f426fb.json.enc -out eHealth-d14f79f426fb.json -d
-  - gcloud auth activate-service-account --key-file=$TRAVIS_BUILD_DIR/eHealth-d14f79f426fb.json &&
-    gcloud container clusters get-credentials dev --zone europe-west1-d --project ehealth-162117
-  - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-  - git clone https://github.com/edenlabllc/ehealth.charts.git charts
-deploy:
-  provider: script
-  script: 'npm run publish -- --yes -m "chore(release): publish %s [skip ci]"'
-  skip_cleanup: true
-  on:
-    condition: "$TRAVIS_BRANCH =~ (^$TRUNK_BRANCH|[[:digit:]]-stable)$"
-after_deploy: npm run update-chart && npm run deploy-chart
+script: skip
+jobs:
+  include:
+    - stage: unit tests
+      script: npm run test:unit
+    - stage: build and release
+      if: "$TRAVIS_BRANCH =~ (^$TRUNK_BRANCH|[[:digit:]]-stable)$"
+      script:
+        - ./ci/prepare-release.sh || travis_terminate 1
+        - "npm run version -- --yes -m 'chore(release): publish %s [skip ci]' || travis_terminate 1"
+        - npm run image:build-and-test -- --concurrency 1 --since origin/HEAD || travis_terminate 1
+        - npm run image:push -- --since origin/HEAD -- -- --latest=`[ "$TRAVIS_BRANCH" = "$TRUNK_BRANCH" ] && echo true || echo false` || travis_terminate 1
+        - git push --follow-tags --no-verify origin $TRAVIS_BRANCH || travis_terminate 1
+    - stage: deploy
+      if: "$TRAVIS_BRANCH =~ (^$TRUNK_BRANCH|[[:digit:]]-stable)$"
+      script:
+        - ./ci/prepare-deploy.sh || travis_terminate 1
+        - npm run chart:update -- --since origin/HEAD || travis_terminate 1
+        - npm run chart:deploy || travis_terminate 1
