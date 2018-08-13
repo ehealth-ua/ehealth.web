@@ -54,8 +54,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "image:build": "ehealth-scripts image build",
+    "image:test": "ehealth-scripts image test",
+    "image:build-and-test": "npm run image:build && npm run image:test",
+    "image:push": "ehealth-scripts image push",
+    "chart:update": "ehealth-scripts chart update"
   },
   "proxy": {
     "/(api|oauth)": {

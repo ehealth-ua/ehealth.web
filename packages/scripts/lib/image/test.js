@@ -1,8 +1,8 @@
 const path = require("path");
 const { existsSync } = require("fs");
 
-const getPackageInfo = require("../utils/getPackageInfo");
-const exec = require("../utils/exec");
+const getPackageInfo = require("../getPackageInfo");
+const exec = require("../exec");
 
 const DOCKER_SOCKET_PATH = "/var/run/docker.sock";
 const TEST_CONFIG_NAME = "image_test_config.yaml";
@@ -11,10 +11,13 @@ const TEST_RUNTIME_VERSION = "v1.0.0";
 
 const testImage = () => {
   const { imageName, version } = getPackageInfo();
-  if (!imageName) return;
+
+  if (!imageName) throw new Error("Unable to test image: Dockerfile not found");
 
   const testConfigPath = path.join(process.cwd(), TEST_CONFIG_NAME);
-  if (!existsSync(testConfigPath)) return;
+
+  if (!existsSync(testConfigPath))
+    throw new Error("Unable to test image: test config file not found");
 
   exec(`
 docker run \
@@ -26,5 +29,3 @@ docker run \
 };
 
 module.exports = testImage;
-
-if (require.main === module) testImage();

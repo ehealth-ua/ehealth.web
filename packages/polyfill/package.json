@@ -6,7 +6,12 @@
   "main": "server.js",
   "bin": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "image:build": "ehealth-scripts image build",
+    "image:test": "ehealth-scripts image test",
+    "image:build-and-test": "npm run image:build && npm run image:test",
+    "image:push": "ehealth-scripts image push",
+    "chart:update": "ehealth-scripts chart update"
   },
   "dependencies": {
     "@ehealth/env": "file:../env",

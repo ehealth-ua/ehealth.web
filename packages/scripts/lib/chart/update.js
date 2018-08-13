@@ -1,25 +1,20 @@
 const path = require("path");
 const { existsSync, readFileSync, writeFileSync } = require("fs");
+const Project = require("@lerna/project");
 const YAWN = require("yawn-yaml/cjs");
 
-const getPackageInfo = require("../utils/getPackageInfo");
+const getPackageInfo = require("../getPackageInfo");
 
-const { LERNA_ROOT_PATH, CHART } = process.env;
-
-const updateChart = () => {
+const updateChart = ({ chart }) => {
+  const { rootPath } = new Project();
   const { chartName, version } = getPackageInfo();
+
   if (!chartName) return;
 
-  const valuesPath = path.join(
-    LERNA_ROOT_PATH,
-    "charts",
-    CHART,
-    "values-dev.yaml"
-  );
+  const valuesPath = path.join(rootPath, "charts", chart, "values-dev.yaml");
 
-  if (!existsSync(valuesPath)) {
-    throw new Error("Cannot find chart values file");
-  }
+  if (!existsSync(valuesPath))
+    throw new Error("Unable to update chart: values file not found");
 
   const yawn = new YAWN(readFileSync(valuesPath, { encoding: "utf8" }));
   const values = yawn.json;
@@ -31,5 +26,3 @@ const updateChart = () => {
 };
 
 module.exports = updateChart;
-
-if (require.main === module) updateChart();
