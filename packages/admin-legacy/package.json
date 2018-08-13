@@ -3,7 +3,6 @@
   "version": "0.58.0",
   "private": true,
   "dependencies": {
-    "@babel/polyfill": "7.0.0-beta.44",
     "@ehealth/components": "file:../components",
     "@ehealth/icons": "file:../icons",
     "@ehealth/react-iit-digital-signature": "file:../react-iit-digital-signature",

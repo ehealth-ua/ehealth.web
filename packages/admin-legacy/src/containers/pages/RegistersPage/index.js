@@ -194,21 +194,10 @@ const RegistersPage = ({ registers = [], paging = {}, location }) => (
           )}
         />
       </ListTable>
-<<<<<<< HEAD
-      {paging.total_pages > 1 && (
-        <Pagination
-          currentPage={paging.page_number}
-          totalPage={paging.total_pages}
-          location={location}
-          cb={() => {}}
-        />
-      )}
-=======
       <Pagination
         currentPage={paging.page_number}
         totalPages={paging.total_pages}
       />
->>>>>>> f082487... fix(admin): change call a Pagination component on list
     </div>
   </div>
 );
