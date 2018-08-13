@@ -9,7 +9,7 @@
     "@ehealth/iit-digital-signature": "file:packages/iit-digital-signature",
     "@ehealth/iit-proxy": "file:packages/iit-proxy",
     "@ehealth/patient-account": "file:packages/patient-account",
-    "lerna": "3.0.0-beta.21",
+    "lerna": "^3.0.2",
     "npm-package-filter": "^0.1.2"
   },
   "devDependencies": {
