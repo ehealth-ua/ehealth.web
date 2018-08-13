@@ -323,7 +323,9 @@ const AddressFields = ({ name }) => (
               name={`${name}.settlement`}
               disabled={!region}
               placeholder="Назва населеного пункту"
-              itemToString={item => (item === null ? "" : item.name)}
+              itemToString={item =>
+                item === null || item === "" ? "" : item.name
+              }
               items={loading || error ? [] : settlements.data}
               onInputValueChange={debounce(name => refetch({ name }), 500)}
               renderItem={({ type, name, district }) => (
@@ -395,6 +397,12 @@ const AddressFields = ({ name }) => (
         <Field.Input name={`${name}.apartment`} placeholder="№ квартири" />
       </Field.Col>
     </Field.Row>
+    <Field.ListenerChange
+      field={`${name}.area`}
+      becomes={null}
+      set={`${name}.settlement`}
+      to={""}
+    />
   </>
 );
 
