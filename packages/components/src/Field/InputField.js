@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { prop, ifProp, withProp } from "styled-tools";
-import RocketMask from "react-rocket-mask";
+import MaskedInput from "react-text-mask";
 import { switchFlags } from "@ehealth/utils";
 
 import Field from "./Field";
@@ -19,14 +19,7 @@ export const NumberField = props => <InputField {...props} type="number" />;
 export const PasswordField = props => <InputField {...props} type="password" />;
 
 export const MaskField = props => (
-  <InputField
-    {...props}
-    inputComponent={props => (
-      <InputContent>
-        <RocketMask {...props} />
-      </InputContent>
-    )}
-  />
+  <InputField {...props} inputComponent={MaskContent} />
 );
 
 export const LabelInInputField = props => (
@@ -139,6 +132,12 @@ export const InputPlaceholder = styled(InputContent)`
 export const Textarea = styled(Input.withComponent("textarea"))`
   resize: ${ifProp("noResize", "none")};
 `;
+
+export const MaskContent = props => (
+  <InputContent>
+    <MaskedInput {...props} />
+  </InputContent>
+);
 
 export const ErrorMessage = styled.div`
   background-color: #ff1f44;
