@@ -27,7 +27,7 @@ jobs:
     - stage: unit tests
       script: npm run test:unit
     - stage: build and release
-      if: "$TRAVIS_BRANCH =~ (^$TRUNK_BRANCH|[[:digit:]]-stable)$"
+      if: branch = env(TRUNK_BRANCH) OR branch =~ /^(\d+\.)?\d+-stable$/
       script:
         - ./ci/prepare-release.sh || travis_terminate 1
         - "npm run version -- --yes -m 'chore(release): publish %s [skip ci]' || travis_terminate 1"
@@ -35,7 +35,7 @@ jobs:
         - npm run image:push -- --since origin/HEAD -- -- --latest=`[ "$TRAVIS_BRANCH" = "$TRUNK_BRANCH" ] && echo true || echo false` || travis_terminate 1
         - git push --follow-tags --no-verify origin $TRAVIS_BRANCH || travis_terminate 1
     - stage: deploy
-      if: "$TRAVIS_BRANCH =~ (^$TRUNK_BRANCH|[[:digit:]]-stable)$"
+      if: branch = env(TRUNK_BRANCH) OR branch =~ /^(\d+\.)?\d+-stable$/
       script:
         - ./ci/prepare-deploy.sh || travis_terminate 1
         - npm run chart:update -- --since origin/HEAD || travis_terminate 1
