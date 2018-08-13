@@ -23,7 +23,7 @@
     "react-emotion": "^9.2.5",
     "react-final-form": "^3.4.0",
     "react-helmet": "^5.2.0",
-    "react-nebo15-validate": "^0.1.13",
+    "react-nebo15-validate": "^0.1.14",
     "react-redux": "^5.0.7",
     "react-router": "^3.2.1",
     "react-router-redial": "^0.3.6",

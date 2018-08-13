@@ -1,0 +1,275 @@
+/* stylelint-disable */
+@font-face {
+  font-family: "Geometria";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/Geometria.eot");
+  src: url("/fonts/Geometria.eot") format("embedded-opentype"),
+    url("/fonts/Geometria.woff2") format("woff2"),
+    url("/fonts/Geometria.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Geometria";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/Geometria-Bold.eot");
+  src: url("/fonts/Geometria-Bold.eot") format("embedded-opentype"),
+    url("/fonts/Geometria-Bold.woff2") format("woff2"),
+    url("/fonts/Geometria-Bold.woff") format("woff");
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+html {
+  background: #2d2b4a;
+}
+
+body {
+  background-image: linear-gradient(-30deg, #3d72b4 -10%, #2d2b4a 50%);
+  color: #454545;
+  min-height: 100vh;
+}
+
+textarea,
+input,
+body {
+  font: 400 12px/140% "Geometria", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #3d3d3d;
+}
+
+img,
+fieldset,
+a img {
+  border: none;
+}
+
+input,
+textarea {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+input,
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+input[type="submit"],
+button {
+  cursor: pointer;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button {
+  font-family: "Geometria", sans-serif;
+  -webkit-appearance: none;
+  background: none;
+  display: inline-block;
+  color: inherit;
+  font-size: inherit;
+}
+
+div,
+input,
+textarea,
+select,
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+span,
+a:focus {
+  outline: none;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* stylelint-enable */
+.main {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 30px 30px 16px;
+  background-image: linear-gradient(-30deg, #3d72b4 -10%, #2d2b4a 50%);
+}
+
+.main main {
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1 1 auto;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+.main .content {
+  flex: 1 1 auto;
+  padding: 60px 50px;
+  max-width: 1040px;
+  overflow: hidden;
+}
+
+.main .footer {
+  text-align: center;
+  color: #fff;
+  font-size: 38px;
+  padding-top: 16px;
+}
+
+.main .footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.main > header {
+  flex: 0 0 auto;
+}
+
+.main > footer {
+  flex: 0 0 auto;
+}
+
+:global(.nowrap) {
+  white-space: nowrap;
+}
+
+:global(.break-all) {
+  word-break: break-all;
+}
+
+@media (max-width: 860px) {
+  .main {
+    padding: 0 0 16px;
+  }
+  .main main {
+    flex-flow: column nowrap;
+  }
+  .main .content {
+    padding: 30px;
+  }
+}

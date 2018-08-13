@@ -1,0 +1,70 @@
+.header {
+  position: relative;
+}
+
+.header__btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.filter {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  line-height: 0;
+}
+
+.filter > div {
+  flex: 1 1 50%;
+  margin-right: 20px;
+}
+
+.filter > div:last-child {
+  margin-right: 0;
+}
+
+.showBy {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .showBy {
+    margin-top: 20px;
+  }
+}
+
+.table {
+  margin-top: 30px;
+}
+
+.table div {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+
+.table div:global(.nobr) {
+  white-space: nowrap;
+}
+
+.table div:global(.rtl) {
+  direction: rtl;
+}
+
+.status {
+  color: #22a4ff;
+}
+
+.status_verified {
+  color: #13db63;
+}
+
+.pagination {
+  margin-top: 43px;
+  text-align: center;
+}

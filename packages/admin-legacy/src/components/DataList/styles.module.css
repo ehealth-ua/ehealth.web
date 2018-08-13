@@ -1,0 +1,35 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  line-height: 22px;
+  font-size: 16px;
+}
+
+.list .dt {
+  flex-basis: 150px;
+  padding-right: 5px;
+}
+
+.list .dd {
+  flex-basis: calc(100% - 150px);
+}
+
+.list .dt,
+.list .dd {
+  margin-bottom: 26px;
+}
+
+.list .dt:last-of-type,
+.list .dd:last-of-type {
+  margin-bottom: 0;
+}
+
+.list_theme_min {
+  font-size: 14px;
+}
+
+.list_theme_min .dt,
+.list_theme_min .dd {
+  margin-bottom: 5px;
+}

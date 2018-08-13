@@ -1,0 +1,131 @@
+.label-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.group-input {
+  position: relative;
+  display: flex;
+  width: 100%;
+  background-color: #fefefe;
+  border: 1px solid #dedede;
+}
+
+.group-input.active {
+  border-color: #dedede;
+}
+
+.group-input.active .prefix-wrapper,
+.group-input.active .postfix-wrapper {
+  color: rgba(61, 61, 61, 0.5);
+}
+
+.group-input.active .required-label {
+  border-bottom-color: #dedede;
+}
+
+.group-input.error {
+  border-color: #ff1f44;
+}
+
+.group-input.error .prefix-wrapper,
+.group-input.error .postfix-wrapper {
+  color: #ff1f44;
+}
+
+.group-input.error .required-label {
+  border-bottom-color: #ff1f44;
+}
+
+.group-input.disabled {
+  border-color: #dadcde;
+}
+
+.group-input.theme-light {
+  border-color: #dadcde;
+}
+
+.group-input.theme-disabled {
+  border-color: #dadcde;
+}
+
+.group-input.theme-disabled .input {
+  color: rgba(61, 61, 61, 0.5);
+}
+
+.input {
+  min-height: 35px;
+  color: #3d3d3d;
+  font-size: 14px;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+}
+
+.input::placeholder {
+  color: rgba(61, 61, 61, 0.5);
+}
+
+input.input,
+textarea.input {
+  padding: 5px 10px 6px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+.prefix-wrapper {
+  position: relative;
+  padding: 0 11px;
+  padding-right: 0;
+  line-height: 32px;
+  color: rgba(61, 61, 61, 0.5);
+  border-right: none;
+  font-size: 14px;
+}
+
+.postfix-wrapper {
+  height: 35px;
+  padding: 0 11px;
+  padding-left: 0;
+  line-height: 32px;
+  color: rgba(61, 61, 61, 0.5);
+  border-left: none;
+  font-size: 14px;
+}
+
+.label-text {
+  margin-bottom: 10px;
+  color: #3d3d3d;
+  font-size: 12px;
+}
+
+.label-bold {
+  font-weight: bold;
+}
+
+.required-label {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  width: 0;
+  height: 0;
+  transform: rotate(45deg);
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #dedede;
+  border-left: 5px solid transparent;
+}
+
+.error-label {
+  position: absolute;
+  top: 100%;
+  right: -1px;
+  padding: 8px 15px 7px 13px;
+  color: #fff;
+  background-color: #ff1f44;
+  font-size: 10px;
+  line-height: 1.4;
+  z-index: 1000;
+}

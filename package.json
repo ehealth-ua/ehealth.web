@@ -2,6 +2,7 @@
   "private": true,
   "dependencies": {
     "@ehealth/admin": "file:packages/admin",
+    "@ehealth/admin-legacy": "file:packages/admin-legacy",
     "@ehealth/auth": "file:packages/auth",
     "@ehealth/gatekeeper": "file:packages/gatekeeper",
     "@ehealth/polyfill": "file:packages/polyfill",

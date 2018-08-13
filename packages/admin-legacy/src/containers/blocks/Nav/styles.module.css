@@ -1,0 +1,120 @@
+.nav {
+  padding: 47px 0 0 37px;
+  font-weight: 300;
+}
+
+.nav .down {
+  margin-top: 20px;
+}
+
+.nav .down li.active i {
+  color: #fa6431;
+}
+
+.nav .down li::before {
+  display: none;
+}
+
+.nav .down svg {
+  color: #2c3456;
+  margin-right: 12px;
+}
+
+.nav .logout {
+  cursor: pointer;
+}
+
+.nav .logout svg {
+  margin-right: 8px;
+}
+
+.nav li {
+  line-height: 32px;
+}
+
+.nav li::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 14px;
+  background-color: #2d294c;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.nav li.active > a {
+  font-weight: 700;
+}
+
+.nav li.active::before {
+  background-color: #fa6431;
+}
+
+.nav li ul {
+  margin-left: 20px;
+}
+
+.nav a {
+  display: inline-block;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #fff;
+  line-height: 2;
+}
+
+@media (max-width: 860px) {
+  html.navIsOpen {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 860px) {
+  .nav {
+    position: fixed;
+    z-index: 10;
+    top: 84px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px 0 0;
+    opacity: 0;
+    background-color: #2b4060;
+    text-align: center;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    will-change: opacity;
+  }
+  .nav.open {
+    opacity: 0.9;
+    visibility: visible;
+  }
+  .nav .down {
+    margin: 0;
+  }
+  .nav .down::before {
+    content: "";
+    display: inline-block;
+    width: 60px;
+    height: 1px;
+    background-color: #2d294c;
+    border: none;
+    margin: 0;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  .nav li {
+    padding: 0;
+  }
+  .nav li a {
+    width: 100%;
+  }
+  .nav li::before {
+    display: none;
+  }
+  .nav li ul {
+    margin: 0;
+  }
+  .nav li i {
+    display: none;
+  }
+}

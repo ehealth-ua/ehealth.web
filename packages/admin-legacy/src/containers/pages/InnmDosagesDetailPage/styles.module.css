@@ -1,0 +1,50 @@
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.row > div {
+  flex: 1 1 50%;
+}
+
+.row .right {
+  text-align: right;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.address small {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.documents {
+  margin-top: 14px;
+}
+
+.edrpou {
+  float: right;
+  font-size: 13px;
+  line-height: 32px;
+  color: #929499;
+  text-transform: uppercase;
+}
+
+.buttons {
+  width: 630px;
+  margin-top: 40px;
+}
+
+.buttons__row {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 30px;
+  justify-content: space-between;
+}
+
+.buttons__column {
+  flex: 0 1 48%;
+}

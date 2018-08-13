@@ -1,0 +1,80 @@
+.pagination {
+  display: block;
+  margin: 20px auto;
+  max-width: 440px;
+}
+
+.g-pagination {
+  margin: 10px auto;
+  display: inline-block;
+}
+
+.g-pagination ul {
+  display: inline-block;
+}
+
+.g-pagination .page {
+  display: inline-block;
+  border: 1px solid #cbcbcb;
+  text-align: center;
+  user-select: none;
+}
+
+.g-pagination .page.truncated {
+  border: none;
+  width: 34px;
+}
+
+.g-pagination .page.truncated:hover {
+  background: none;
+  border: none;
+}
+
+.g-pagination .page.truncated + .truncated {
+  display: none;
+}
+
+.g-pagination .page a {
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  display: block;
+  min-width: 26px;
+  font-size: 12px;
+  line-height: 20px;
+  padding: 4px;
+}
+
+.g-pagination .page + .page {
+  margin-left: 10px;
+}
+
+.g-pagination .page.s-current,
+.g-pagination .page:hover {
+  border: #eee 1px solid;
+  background: #f7f6f6;
+  font-weight: 700;
+}
+
+.g-pagination .g-pagination-prev {
+  margin-right: 10px;
+}
+
+.g-pagination .g-pagination-next {
+  margin-left: 10px;
+}
+
+.g-pagination .g-pagination-prev.s-hidden,
+.g-pagination .g-pagination-next.s-hidden {
+  visibility: hidden;
+}
+
+.g-pagination .g-pagination-prev a,
+.g-pagination .g-pagination-next a {
+  width: 48px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+}

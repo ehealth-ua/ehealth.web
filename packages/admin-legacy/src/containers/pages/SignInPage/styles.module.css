@@ -1,0 +1,58 @@
+.main {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  background: url("/images/bg-login.jpg") center no-repeat;
+  background-size: cover;
+}
+
+.main__content {
+  margin: auto;
+  width: 548px;
+  background-color: #2b4060;
+  padding: 72px;
+}
+
+.header {
+  margin-bottom: 52px;
+}
+
+.header img {
+  height: 42px;
+}
+
+.form {
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.button {
+  display: inline-block;
+  min-width: 210px;
+  height: 60px;
+  margin-top: 18px;
+  padding: 0 20px;
+  box-shadow: 0 0 3px #d9d9d9, inset 0 1px 0 rgba(255, 255, 255, 0.21);
+  background-color: #44dacc;
+  background-image: linear-gradient(20deg, #ff4800 0%, #ffa54d 100%);
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 60px;
+  text-decoration: none;
+}
+
+.button:disabled {
+  opacity: 0.5;
+}
+
+.button:hover {
+  background-image: linear-gradient(100deg, #ff4800 0%, #ffa54d 100%);
+}
+
+.error {
+  color: #fff;
+  font-size: 14px;
+}

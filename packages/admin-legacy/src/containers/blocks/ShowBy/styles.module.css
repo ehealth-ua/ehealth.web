@@ -1,0 +1,26 @@
+.main {
+  text-align: right;
+}
+
+.main .text {
+  margin-right: 15px;
+}
+
+.main .button {
+  display: inline-block;
+  min-width: 34px;
+  min-height: 34px;
+  margin-right: -1px;
+  background-color: #fff;
+  border: #eee 1px solid;
+  border-radius: 0;
+}
+
+.main .button_active {
+  font-weight: 700;
+  background-color: #f7f6f6;
+}
+
+.main .button:last-child {
+  margin-right: 0;
+}

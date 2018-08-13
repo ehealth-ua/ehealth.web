@@ -1,0 +1,19 @@
+.checkbox {
+  flex-basis: 100%;
+  margin-top: 10px;
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .checkbox {
+    flex-basis: 50%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .fullWidth {
+    flex-basis: 100%;
+  }
+}

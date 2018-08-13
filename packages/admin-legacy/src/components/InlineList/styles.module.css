@@ -1,0 +1,8 @@
+.list {
+  display: inline-block;
+}
+
+.list li {
+  display: inline-block;
+  padding-right: 5px;
+}

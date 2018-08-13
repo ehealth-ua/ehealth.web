@@ -1,0 +1,8 @@
+.list {
+  font-size: 13px;
+}
+
+.list li {
+  display: inline-block;
+  margin: 0 20px 10px 0;
+}

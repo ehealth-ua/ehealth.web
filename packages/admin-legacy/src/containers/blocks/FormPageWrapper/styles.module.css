@@ -1,0 +1,17 @@
+.back {
+  display: inline-block;
+  padding-right: 17px;
+  color: #1fb6f5;
+  cursor: pointer;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.title {
+  display: inline-block;
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}

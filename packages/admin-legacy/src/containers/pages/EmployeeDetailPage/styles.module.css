@@ -1,0 +1,12 @@
+.main {
+  max-width: 630px;
+}
+
+.strong {
+  font-weight: 700;
+}
+
+.buttons {
+  margin-top: 40px;
+  width: 300px;
+}

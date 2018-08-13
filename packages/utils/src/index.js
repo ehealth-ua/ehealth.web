@@ -3,6 +3,7 @@ export { default as getDefinitions } from "./getDefinitions";
 export { default as getDictValue } from "./getDictValue";
 export { default as getFullName } from "./getFullName";
 export { default as getPhones } from "./getPhones";
+export { default as getCookie } from "./getCookie";
 export { default as getSpecialities } from "./getSpecialities";
 export { default as fieldNameDenormalizer } from "./fieldNameDenormalizer";
 export { default as fieldNameNormalizer } from "./fieldNameNormalizer";

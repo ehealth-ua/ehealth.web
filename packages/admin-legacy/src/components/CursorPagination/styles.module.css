@@ -1,0 +1,37 @@
+.paging {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  border-radius: 16px;
+  border: 1px solid #dfdede;
+  width: 100px;
+  height: 36px;
+  line-height: 34px;
+  margin: 0 auto;
+}
+
+.paging__item {
+  flex: 1 1 auto;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.paging__item a {
+  display: block;
+  color: #dfdede;
+}
+
+.paging__item a:hover {
+  color: #555;
+}
+
+.paging__item:first-child {
+  border-right: #dfdede 1px solid;
+}
+
+.paging__item_disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

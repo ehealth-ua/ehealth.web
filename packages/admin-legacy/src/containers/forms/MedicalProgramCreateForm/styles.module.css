@@ -1,0 +1,7 @@
+.form {
+  max-width: 400px;
+}
+
+.form > div {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,25 @@
+.form {
+  max-width: 400px;
+}
+
+.form > div {
+  margin-bottom: 20px;
+}
+
+.buttonGroup {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.button {
+  margin: 0 20px;
+}
+
+.button:first-child {
+  margin-left: 0;
+}
+
+.label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}

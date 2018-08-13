@@ -1,0 +1,293 @@
+.select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  user-select: none;
+  font-size: 12px;
+}
+
+.select .placeholder {
+  color: #999;
+}
+
+.select.disabled .control {
+  opacity: 0.5;
+  background-color: #f5f5f5;
+  pointer-events: none;
+}
+
+.select.error .control {
+  box-shadow: 0 0 0 1px #ff1f44;
+}
+
+.select.active .control {
+  box-shadow: 0 0 0 1px #11d8fb;
+}
+
+.select .wrap {
+  position: relative;
+}
+
+.select .control {
+  padding: 4px 30px 4px 4px;
+  box-shadow: 0 0 0 1px #dedede;
+  min-height: 35px;
+}
+
+.select .control__input {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 6px 0 4px 6px;
+}
+
+.select .control__input input {
+  text-overflow: ellipsis;
+  width: 80px;
+}
+
+.select .control__input_multiple_no {
+  width: 100%;
+}
+
+.select .control__input_multiple_no input {
+  width: 100%;
+}
+
+.select .control__input_multiple_no input::placeholder {
+  opacity: 0.5;
+}
+
+.select .control__placeholder {
+  padding: 6px 0 4px 6px;
+  opacity: 0.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.select .control__selected {
+  position: relative;
+  display: inline;
+  text-overflow: ellipsis;
+  line-height: 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.select .control__selected_multiple li {
+  display: inline-block;
+  padding: 0 16px 0 10px;
+  background-color: #f5f7f9;
+  font-size: 10px;
+  line-height: 24px;
+  vertical-align: middle;
+  margin: 2px 2px 0 0;
+  position: relative;
+}
+
+.select .control__selected_multiple_no {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-top: 6px;
+  padding-left: 6px;
+}
+
+.select .control__selected_multiple_no li {
+  width: 100%;
+}
+
+.select .label {
+  margin-bottom: 11px;
+}
+
+.select .label__bold {
+  font-weight: bold;
+}
+
+.select .list {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  margin-top: 1px;
+  box-shadow: 0 0 0 1px #dedede;
+  background-color: #fff;
+  z-index: -1;
+}
+
+.select .list li {
+  position: relative;
+  padding: 10px 50px 10px 10px;
+  line-height: 16px;
+  word-break: break-all;
+  cursor: pointer;
+}
+
+.select .list li:hover {
+  background-color: #f5f5f5;
+}
+
+.select .list li.active {
+  color: #11d8fb;
+}
+
+.select .list li.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.select .list li.disabled:hover {
+  background: none;
+}
+
+.select .list li .icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #44e240;
+}
+
+.select .list li:first-child::before,
+.select .list li:first-child::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #fff;
+  z-index: 2;
+}
+
+.select .list li:first-child::after {
+  top: -6px;
+  border-bottom-color: #dedede;
+  z-index: 1;
+}
+
+.select .list li:first-child:hover::before {
+  border-bottom-color: #f5f5f5;
+}
+
+.select.top .list {
+  bottom: 37px;
+}
+
+.select.top .list li:first-child::before,
+.select.top .list li:first-child::after {
+  display: none;
+}
+
+.select.top .list li:last-child::before,
+.select.top .list li:last-child::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: -5px;
+  right: 10px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #fff;
+  z-index: 2;
+}
+
+.select.top .list li:last-child::after {
+  bottom: -6px;
+  border-top-color: #dedede;
+  z-index: 1;
+}
+
+.select.top .list li:last-child:hover::before {
+  border-top-color: #f5f5f5;
+}
+
+.select.open .list {
+  top: auto;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  max-height: 252px;
+  overflow-x: auto;
+}
+
+.select.open .arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.arrow {
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #282828;
+  z-index: 2;
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+.error-label {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  padding: 8px 15px 7px 13px;
+  color: #fff;
+  background-color: #ff1f44;
+  font-size: 10px;
+  line-height: 1.4;
+  z-index: 0;
+}
+
+.close {
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  top: 0;
+  width: 9px;
+  height: 12px;
+  opacity: 0.3;
+  z-index: 3;
+  transition: opacity 0.5s;
+  margin-top: 6px;
+}
+
+.close:hover {
+  opacity: 1;
+}
+
+.close::before,
+.close::after {
+  position: absolute;
+  left: 1px;
+  content: " ";
+  height: 10px;
+  width: 1px;
+  background-color: #333;
+}
+
+.close::before {
+  transform: rotate(45deg);
+}
+
+.close::after {
+  transform: rotate(-45deg);
+}
+
+.hiddenInput {
+  display: block;
+  height: 0;
+  width: 0;
+  text-indent: -9999px;
+}

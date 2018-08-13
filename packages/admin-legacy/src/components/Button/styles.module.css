@@ -1,0 +1,257 @@
+.button {
+  display: inline-block;
+  padding: 18px 28px;
+  line-height: 1.2;
+  color: #fff;
+  background: #ff5a00 linear-gradient(20deg, #ff4800 0%, #ffa54d 100%);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: inset 0 -2px 0 0 #ff1800, inset 0 1px 0 rgba(255, 255, 255, 0.11);
+  user-select: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-image: linear-gradient(20deg, #ffa54d 0% #ff4800 100%);
+}
+
+.button:active,
+.button.active {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #ff1800, inset 0 1px 0 rgba(255, 255, 255, 0.11);
+}
+
+.button:disabled,
+.button.disabled {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #ff1800;
+}
+
+.button.theme-border {
+  color: #3d3d3d;
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #ff1800;
+}
+
+.button.theme-border.inherit-color {
+  color: #ff5a00;
+}
+
+.button.theme-border:hover {
+  color: #fff;
+  background-color: rgba(255, 90, 0, 0.8);
+  box-shadow: inset 0 0 0 2px #ff5a00;
+}
+
+.button.theme-border:active,
+.button.theme-border.active {
+  color: #fff;
+  background-color: #ff5a00;
+  box-shadow: none;
+}
+
+.button.color-blue {
+  background: #22adf1 linear-gradient(0deg, #1ba4f7 0%, #41d3d7 100%);
+  box-shadow: inset 0 -2px 0 0 #1582c9;
+}
+
+.button.color-blue:hover {
+  background-image: linear-gradient(180deg, #1ba4f7 0%, #41d3d7 100%);
+}
+
+.button.color-blue:active,
+.button.color-blue.active {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #1582c9;
+}
+
+.button.color-blue:disabled,
+.button.color-blue.disabled {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #1582c9;
+}
+
+.button.color-blue.theme-border {
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #22adf1;
+}
+
+.button.color-blue.theme-border.inherit-color {
+  color: #22adf1;
+}
+
+.button.color-blue.theme-border:hover {
+  background: rgba(34, 173, 241, 0.8);
+}
+
+.button.color-blue.theme-border:active,
+.button.color-blue.theme-border.active {
+  box-shadow: none;
+}
+
+.button.color-green {
+  background: #55eb3f linear-gradient(0deg, #4de936 0%, #7ef36d 100%);
+  box-shadow: inset 0 -2px 0 0 #47c132;
+}
+
+.button.color-green:hover {
+  background-image: linear-gradient(180deg, #4de936 0%, #7ef36d 100%);
+}
+
+.button.color-green:active,
+.button.color-green.active {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #47c132;
+}
+
+.button.color-green:disabled,
+.button.color-green.disabled {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #47c132;
+}
+
+.button.color-green.theme-border {
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #55eb3f;
+}
+
+.button.color-green.theme-border.inherit-color {
+  color: #55eb3f;
+}
+
+.button.color-green.theme-border:hover {
+  background: rgba(85, 235, 63, 0.8);
+}
+
+.button.color-green.theme-border:active,
+.button.color-green.theme-border.active {
+  box-shadow: none;
+}
+
+.button.size-small {
+  padding: 12px 20px;
+  font-size: 10px;
+}
+
+.button.size-small.theme-fill {
+  box-shadow: none;
+}
+
+.button.size-small:active,
+.button.size-small.active {
+  box-shadow: none;
+}
+
+.button:disabled,
+.button.disabled {
+  opacity: 0.5;
+  background-image: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+.button.theme-link {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  box-shadow: none;
+  text-transform: none;
+  font-weight: 400;
+  color: #11d8fb;
+}
+
+.button.theme-link:hover,
+.button.theme-link.hover,
+.button.theme-link.active {
+  text-decoration: underline;
+}
+
+.button.theme-link:disabled,
+.button.theme-link.disabled {
+  opacity: 1;
+  color: #c6d1d7;
+}
+
+.button.theme-link.size-small {
+  font-size: 10px;
+}
+
+.button.block {
+  width: 100%;
+}
+
+.button .icon {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.theme-border.color-red,
+.theme-fill.color-red {
+  background: #f65082 linear-gradient(0deg, #f5477c 0%, #f86995 100%);
+  box-shadow: inset 0 -2px 0 0 #d74472;
+}
+
+.theme-border.color-red:hover,
+.theme-fill.color-red:hover {
+  background-image: linear-gradient(180deg, #f5477c 0%, #f86995 100%);
+}
+
+.theme-border.color-red:active,
+.theme-border.color-red.active,
+.theme-fill.color-red:active,
+.theme-fill.color-red.active {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #d74472;
+}
+
+.theme-border.color-red:disabled,
+.theme-border.color-red.disabled,
+.theme-fill.color-red:disabled,
+.theme-fill.color-red.disabled {
+  background-image: none;
+  box-shadow: inset 0 2px 0 0 #d74472;
+}
+
+.theme-border.color-red.theme-border,
+.theme-fill.color-red.theme-border {
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #f65082;
+}
+
+.theme-border.color-red.theme-border.inherit-color,
+.theme-fill.color-red.theme-border.inherit-color {
+  color: #f65082;
+}
+
+.theme-border.color-red.theme-border:hover,
+.theme-fill.color-red.theme-border:hover {
+  background: rgba(245, 71, 124, 0.8);
+}
+
+.theme-border.color-red.theme-border:active,
+.theme-border.color-red.theme-border.active,
+.theme-fill.color-red.theme-border:active,
+.theme-fill.color-red.theme-border.active {
+  box-shadow: none;
+}
+
+.theme-link.color-red {
+  box-shadow: none;
+  background: none;
+  color: #d74472;
+}
+
+.buttonsGroup {
+  margin-left: -40px;
+  margin-top: -20px;
+}
+
+.buttonsGroup .buttonsGroupItem {
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 20px;
+}

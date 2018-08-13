@@ -1,0 +1,48 @@
+.grey {
+  opacity: 0.5;
+}
+
+.forwardLink {
+  float: right;
+}
+
+.link {
+  float: right;
+  color: #5691f0;
+  cursor: pointer;
+}
+
+.divisionList {
+  margin-bottom: 10px;
+}
+
+.docLinkWrapper {
+  margin-bottom: 10px;
+  font-size: 26px;
+}
+
+.docLink {
+  margin-left: 15px;
+  font-size: 14px;
+  color: #22a4ff;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.docLink:hover {
+  text-decoration: underline;
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.row > div {
+  flex: 1 1 auto;
+}
+
+.row .right {
+  text-align: right;
+}

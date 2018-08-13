@@ -1,0 +1,42 @@
+.main__nav {
+  display: inline;
+}
+
+.button {
+  font-size: 14px;
+  font-weight: 700;
+  color: #22a4ff;
+}
+
+.button_default {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 400;
+}
+
+.button span {
+  display: inline-block;
+  padding: 0 5px;
+  font-size: 16px;
+}
+
+.button_active span {
+  transform: rotate(180deg);
+}
+
+.more {
+  display: none;
+  margin-top: 20px;
+}
+
+.more_show {
+  display: inline-block;
+}
+
+.more_show_block {
+  display: block;
+}
+
+.more_nav {
+  margin-top: 0;
+}

@@ -1,0 +1,43 @@
+.wrap {
+  cursor: pointer;
+  user-select: none;
+}
+
+.wrap input {
+  display: none;
+}
+
+.view {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 18px;
+  background-color: white;
+  border: 1px solid #c9c9c9;
+  border-radius: 100%;
+  text-align: center;
+}
+
+.view::before {
+  content: "";
+  vertical-align: middle;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #44e242;
+  opacity: 0;
+  border-radius: 100%;
+}
+
+input:disabled + .view {
+  opacity: 0.5;
+}
+
+input:checked + .view::before {
+  opacity: 1;
+}
+
+.label {
+  margin-left: 10px;
+  font-size: 12px;
+}

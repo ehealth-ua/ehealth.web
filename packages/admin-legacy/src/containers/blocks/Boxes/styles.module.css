@@ -1,0 +1,13 @@
+.boxes {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.boxes > div {
+  margin-right: 100px;
+}
+
+.boxes > div:last-child {
+  margin-right: 0;
+  flex: 1 1 auto;
+}

@@ -1,0 +1,20 @@
+.root {
+  background-color: #fff;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+  border: 2px solid #e81a50;
+  width: 600px;
+  padding: 25px;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5000;
+}
+
+.message {
+  margin-bottom: 20px;
+}
+
+.error {
+  margin-bottom: 10px;
+}

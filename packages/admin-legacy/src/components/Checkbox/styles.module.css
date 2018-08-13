@@ -1,0 +1,71 @@
+.wrap {
+  position: relative;
+  line-height: 1;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+}
+
+.wrap input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.view {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 16px;
+  color: #44e240;
+  background-color: #fff;
+  border: 1px solid #c9c9c9;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.view svg {
+  display: inline-block;
+  vertical-align: middle;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+input:disabled + .view {
+  opacity: 0.5;
+}
+
+input:focus + .view {
+  border-color: #11d8fb;
+}
+
+.checked .view svg {
+  opacity: 1;
+}
+
+.label {
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: middle;
+}
+
+.isError .view {
+  border-color: #ff1f44;
+}
+
+.isError i {
+  color: #ff1f44;
+}
+
+.group {
+  display: inline-block;
+  position: relative;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+.group .wrap {
+  margin-top: 10px;
+  margin-left: 10px;
+}

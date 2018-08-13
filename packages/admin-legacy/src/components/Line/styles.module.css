@@ -1,0 +1,9 @@
+.line {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 0;
+  width: 100%;
+  height: 1px;
+  border: none;
+  background-color: #dedede;
+}

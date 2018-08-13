@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "react-emotion/macro";
 
 import { SpinnerIcon } from "@ehealth/icons";

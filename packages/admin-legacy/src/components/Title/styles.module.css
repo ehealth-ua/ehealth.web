@@ -1,0 +1,43 @@
+.h1 {
+  color: #454545;
+  font-size: 22px;
+  line-height: 22px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.h2 {
+  color: #454545;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.h3 {
+  color: #454545;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.h4 {
+  color: #454545;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.h5 {
+  color: #3d3d3d;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.h6 {
+  color: #454545;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
