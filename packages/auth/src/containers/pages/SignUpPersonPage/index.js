@@ -94,10 +94,12 @@ const SignUpPersonPage = ({ location }) => (
             message="Дозволені тільки цифри та літери українського й англійського алфавіту"
           />
         </Validations>
-        <Field.Input
+        <Field.MaskField
           label="Дата народження"
           name="person.birth_date"
           placeholder="ДД.ММ.РРРР"
+          guide={false}
+          mask={[/\d/, /\d/, ".", /\d/, /\d/, ".", /\d/, /\d/, /\d/, /\d/]}
           format={formatDate}
           parse={parseDate}
           horizontal
@@ -152,9 +154,11 @@ const SignUpPersonPage = ({ location }) => (
           name="local.document.issued_by"
           placeholder="Ким виданий"
         />
-        <Field.Input
+        <Field.MaskField
           name="local.document.issued_at"
           placeholder="Дата видачі"
+          guide={false}
+          mask={[/\d/, /\d/, ".", /\d/, /\d/, ".", /\d/, /\d/, /\d/, /\d/]}
           format={formatDate}
           parse={parseDate}
         />

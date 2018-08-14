@@ -279,9 +279,11 @@ const DocumentFields = ({ name }) => (
     <Field.Text name={`${name}.number`} placeholder="Серія і номер" />
     <Validation.Required field={`${name}.number`} message="Об'язкове поле" />
     <Field.Text name={`${name}.issuedBy`} placeholder="Ким виданий" />
-    <Field.Input
+    <Field.MaskField
       name={`${name}.issuedAt`}
       placeholder="Дата видачі"
+      guide={false}
+      mask={[/\d/, /\d/, ".", /\d/, /\d/, ".", /\d/, /\d/, /\d/, /\d/]}
       format={formatDate}
       parse={parseDate}
     />
