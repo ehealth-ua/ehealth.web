@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.58.1"></a>
+## [0.58.1](https://github.com/edenlabllc/ehealth.web/compare/v0.58.0...v0.58.1) (2018-08-15)
+
+
+### Bug Fixes
+
+* clarify test projects matchers ([5aa8fc8](https://github.com/edenlabllc/ehealth.web/commit/5aa8fc8))
+* **admin-legacy:** add flag SKIP_PREFLIGHT_CHECK in .env ([4af5adc](https://github.com/edenlabllc/ehealth.web/commit/4af5adc))
+* **admin-legacy:** add missing Dockerfile ([3100233](https://github.com/edenlabllc/ehealth.web/commit/3100233))
+* **admin-legacy:** add missing nginx.conf file ([de3eb5b](https://github.com/edenlabllc/ehealth.web/commit/de3eb5b))
+* **admin-legacy:** add missing REACT_APP_POLYFILL_URL env variable ([8b00f0a](https://github.com/edenlabllc/ehealth.web/commit/8b00f0a))
+* **gatekeeper:** remove lines after rebase ([1c8a6f6](https://github.com/edenlabllc/ehealth.web/commit/1c8a6f6))
+* **gatekeeper:** revert to right logic ([180949a](https://github.com/edenlabllc/ehealth.web/commit/180949a))
+* **polyfill:** replace polyfill-service with polyfill-library and custom server implementation ([8545586](https://github.com/edenlabllc/ehealth.web/commit/8545586))
+
+
+### Reverts
+
+* "chore: remove polyfill dependency from root package.json" ([f24d96c](https://github.com/edenlabllc/ehealth.web/commit/f24d96c))
+
+
+
+
+
 <a name="0.58.0"></a>
 # [0.58.0](https://github.com/edenlabllc/ehealth.web/compare/v0.57.1...v0.58.0) (2018-08-13)
 

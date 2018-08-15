@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/scripts",
-  "version": "0.0.0",
+  "version": "0.58.1",
   "private": true,
   "description": "",
   "main": "index.js",
