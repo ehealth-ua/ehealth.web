@@ -16,7 +16,7 @@
   "dependencies": {
     "@ehealth/env": "file:../env",
     "express": "^4.16.3",
-    "express-async-errors": "^3.0.0",
-    "polyfill-service": "^3.25.1"
+    "polyfill-library": "3.26.0-0",
+    "shrink-ray-current": "^2.1.2"
   }
 }

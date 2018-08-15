@@ -1,29 +1,32 @@
 require("@ehealth/env/load");
-const url = require("url");
 const express = require("express");
-require("express-async-errors");
-const polyfill = require("polyfill-service");
+const shrinkRay = require("shrink-ray-current");
+const polyfill = require("polyfill-library");
 
 const { PORT } = process.env;
 
 const app = express();
 
-app.get("/polyfill:min(.min)?.js", async (req, res) => {
-  const script = await polyfill.getPolyfillString({
-    uaString: req.headers["user-agent"],
+app.use(shrinkRay({ brotli: { quality: 11 } }));
+
+app.get("/polyfill:min(.min)?.js", (req, res) => {
+  const script = polyfill.getPolyfillString({
+    uaString: req.header("user-agent"),
     minify: req.params.min === ".min",
     features: {
       default: {},
       "Object.entries": {}
-    }
+    },
+    stream: true
   });
 
   res.set({
     "Content-Type": "application/javascript;charset=utf-8",
-    "Content-Length": script.length
+    "Content-Length": script.length,
+    Vary: "User-Agent"
   });
-  res.write(script);
-  res.end();
+
+  script.pipe(res);
 });
 
 app.listen(PORT, () => {
