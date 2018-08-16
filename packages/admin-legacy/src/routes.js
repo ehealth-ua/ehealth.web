@@ -105,9 +105,7 @@ import { isAuthorized, getScope } from "./reducers";
 import { getCookie } from "@ehealth/utils";
 
 export default class Routes extends Component {
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
+  static contextTypes = { store: PropTypes.object.isRequired };
 
   render() {
     const { store } = this.context;
@@ -144,7 +142,7 @@ export default class Routes extends Component {
         )}
       >
         <Route component={App}>
-          <Route component={Main}>
+          <Route component={Main} onEnter={this.requireAuth()}>
             <Route path="/" component={PreloadData}>
               <IndexRedirect to="dashboard" />
               <Route path="dashboard" component={DashboardPage} />
@@ -336,6 +334,13 @@ export default class Routes extends Component {
 
     if (!hasScope(requiredScope, availableScope)) {
       replace({ pathname: "/401" });
+    }
+    return next();
+  };
+
+  requireAuth = () => (nextState, replace, next) => {
+    if (!getCookie("meta")) {
+      replace({ pathname: "/sign-in" });
     }
     return next();
   };
