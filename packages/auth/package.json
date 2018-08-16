@@ -49,5 +49,10 @@
     "image:build-and-test": "npm run image:build && npm run image:test",
     "image:push": "ehealth-scripts image push",
     "chart:update": "ehealth-scripts chart update"
+  },
+  "proxy": {
+    "/polyfill(.min)?.js": {
+      "target": "http://localhost:4001/"
+    }
   }
 }

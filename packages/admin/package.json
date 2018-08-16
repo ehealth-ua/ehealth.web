@@ -25,6 +25,9 @@
   "proxy": {
     "/auth": {
       "target": "http://localhost:4000/"
+    },
+    "/polyfill(.min)?.js": {
+      "target": "http://localhost:4001/"
     }
   }
 }
