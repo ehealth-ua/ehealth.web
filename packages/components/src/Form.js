@@ -73,12 +73,25 @@ export const FormError = ({ entry = "$.data", ...props }) => (
       const { [SUBMIT_ERROR]: invalid } = submitErrors;
       if (!invalid) return null;
 
-      const { rules } = invalid.find(i => i.entry === entry) || {};
+      const { rules } =
+        invalid.find(
+          i =>
+            Array.isArray(entry) ? entry.includes(i.entry) : i.entry === entry
+        ) || {};
 
-      if (!rules) return null;
-      const match = rules.find(({ rule }) => Object.keys(props).includes(rule));
+      const rulesMatch = rules
+        ? rules
+        : invalid.reduce((prev, item) => [...prev, ...item.rules], []);
 
-      const result = match ? props[match.rule] : props.default;
+      const match = rulesMatch.find(({ rule }) =>
+        Object.keys(props).includes(rule)
+      );
+
+      const result = rules
+        ? match
+          ? props[match.rule]
+          : props.default
+        : rulesMatch.reduce((prev, item) => `${item.description}. ${prev}`, "");
 
       return typeof result === "function" ? (
         result(match)
