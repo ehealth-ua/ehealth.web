@@ -68,41 +68,6 @@ const HomePage = ({ match }) => (
                                 />
                               </>
                             )}
-
-                            {declarationHistory && (
-                              <>
-                                <ShowBlock center>
-                                  <Link
-                                    to={
-                                      match.url === "/" ? "/declarations" : "/"
-                                    }
-                                    upperCase
-                                    bold
-                                    center
-                                  >
-                                    {match.url === "/"
-                                      ? "Показати історію декларацій"
-                                      : "Cховати історію декларацій"}
-                                  </Link>
-                                </ShowBlock>
-                                <Route
-                                  path="/declarations"
-                                  render={props => {
-                                    return (
-                                      <>
-                                        <DeclarationHistory
-                                          {...props}
-                                          data={declarationHistory}
-                                        />
-                                        <Pagination
-                                          totalPages={historyPaging.totalPages}
-                                        />
-                                      </>
-                                    );
-                                  }}
-                                />
-                              </>
-                            )}
                             <ShowBlock>
                               <Link
                                 to="/search"
@@ -123,6 +88,38 @@ const HomePage = ({ match }) => (
                           </>
                         ) : (
                           <NoDeclarationList />
+                        )}
+                        {declarationHistory && (
+                          <>
+                            <ShowBlock center>
+                              <Link
+                                to={match.url === "/" ? "/declarations" : "/"}
+                                upperCase
+                                bold
+                                center
+                              >
+                                {match.url === "/"
+                                  ? "Показати історію декларацій"
+                                  : "Cховати історію декларацій"}
+                              </Link>
+                            </ShowBlock>
+                            <Route
+                              path="/declarations"
+                              render={props => {
+                                return (
+                                  <>
+                                    <DeclarationHistory
+                                      {...props}
+                                      data={declarationHistory}
+                                    />
+                                    <Pagination
+                                      totalPages={historyPaging.totalPages}
+                                    />
+                                  </>
+                                );
+                              }}
+                            />
+                          </>
                         )}
                       </>
                     );
