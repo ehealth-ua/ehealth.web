@@ -1,13 +1,14 @@
-query($id: String!) {
+query($id: String!, $page: String!, $pageSize: String!) {
   division(id: $id)
     @rest(path: "/reports/stats/divisions?id=:id", type: "DivisionPayload") {
     data
   }
-  employees(id: $id)
+  employees(id: $id, page: $page, pageSize: $pageSize)
     @rest(
-      path: "/stats/employees?employee_type=DOCTOR&division_id=:id&is_available=true&page=1&page_size=50"
+      path: "/stats/employees?employee_type=DOCTOR&division_id=:id&is_available=true&page=:page&page_size=:pageSize"
       type: "SearchPayload"
     ) {
     data
+    paging
   }
 }
