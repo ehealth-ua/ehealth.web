@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { reduxForm, Field, getFormValues } from "redux-form";
 
-import { REACT_APP_SIGN_URL } from "../../../env";
+import { REACT_APP_SIGNER_URL } from "../../../env";
 
 import FieldInput from "../../../components/reduxForm/FieldInput";
 import FieldSelect from "../../../components/reduxForm/FieldSelect";
@@ -120,7 +120,9 @@ class ContractForm extends React.Component {
       approveContract
     } = this.props;
 
-    const { values: { BACKWARD, FORWARD } } = paymentMethod;
+    const {
+      values: { BACKWARD, FORWARD }
+    } = paymentMethod;
     const fullName = obj =>
       [obj.last_name, obj.first_name, obj.second_name].join(" ");
     const data = {
@@ -257,7 +259,7 @@ class ContractForm extends React.Component {
         </form>
         {this.state.approve && (
           <Signer.Parent
-            url={REACT_APP_SIGN_URL}
+            url={REACT_APP_SIGNER_URL}
             features={{ width: 640, height: 589 }}
           >
             {({ signData }) => (
@@ -333,7 +335,7 @@ class ContractForm extends React.Component {
         )}
         {this.state.decline && (
           <Signer.Parent
-            url={REACT_APP_SIGN_URL}
+            url={REACT_APP_SIGNER_URL}
             features={{ width: 640, height: 589 }}
           >
             {({ signData }) => (
