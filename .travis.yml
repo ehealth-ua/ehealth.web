@@ -40,5 +40,5 @@ jobs:
         (branch = env(TRUNK_BRANCH) OR branch =~ /^(\d+\.)?\d+-stable$/) AND type = push
       script:
         - ./ci/prepare-deploy.sh || travis_terminate 1
-        - npm run chart:update -- --since origin/HEAD || travis_terminate 1
+        - npm run chart:update || travis_terminate 1
         - npm run chart:deploy || travis_terminate 1

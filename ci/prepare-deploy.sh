@@ -5,4 +5,6 @@ gcloud container clusters get-credentials dev --zone europe-west1-d --project eh
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 git config --global credential.helper "store"
 echo "https://${GITHUB_TOKEN}:@github.com" > $HOME/.git-credentials
+git checkout $TRAVIS_BRANCH
+git pull origin $TRAVIS_BRANCH
 git clone https://github.com/edenlabllc/ehealth.charts.git charts
