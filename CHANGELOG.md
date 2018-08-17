@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.59.5"></a>
+## [0.59.5](https://github.com/edenlabllc/ehealth.web/compare/v0.59.4...v0.59.5) (2018-08-17)
+
+
+### Bug Fixes
+
+* **admin-legacy:** add proxy in nginx.conf ([9b87558](https://github.com/edenlabllc/ehealth.web/commit/9b87558))
+* **admin-legacy:** turn off image test ([fbf061a](https://github.com/edenlabllc/ehealth.web/commit/fbf061a))
+
+
+
+
+
 <a name="0.59.4"></a>
 ## [0.59.4](https://github.com/edenlabllc/ehealth.web/compare/v0.59.3...v0.59.4) (2018-08-17)
 
