@@ -62,7 +62,7 @@
     "chart:update": "ehealth-scripts chart update"
   },
   "proxy": {
-    "/(api|oauth)": {
+    "/api": {
       "target": "http://api.dev.asclepius.com.ua/"
     },
     "/auth": {
