@@ -1,12 +1,13 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
+import "moment/locale/uk";
 
 import "./react-datepicker-cssmodules.css";
 
 import Input from "../Input";
 
-export const Component = ({
+const Component = ({
   input,
   onBlur,
   maxDate,
@@ -18,7 +19,7 @@ export const Component = ({
 }) => (
   <DatePicker
     {...input}
-    locale="uk-UA"
+    locale="uk"
     maxDate={maxDate}
     onChange={params => params && onChange(params.format(dateModelFormat))}
     onBlur={() => onBlur(value)}
@@ -29,7 +30,7 @@ export const Component = ({
   />
 );
 
-export const ComponentInput = ({ dateFormat, ...rest }) => (
+const ComponentInput = ({ dateFormat, ...rest }) => (
   <Input component={Component} {...rest} dateFormat={dateFormat} />
 );
 

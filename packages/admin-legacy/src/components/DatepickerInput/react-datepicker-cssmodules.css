@@ -129,7 +129,6 @@
 }
 
 .react-datepicker__navigation {
-  line-height: 1.7rem;
   text-align: center;
   cursor: pointer;
   position: absolute;
@@ -137,6 +136,7 @@
   width: 0;
   border: 0.45rem solid transparent;
   z-index: 1;
+  font-size: 0;
 }
 
 .react-datepicker__navigation--previous {
