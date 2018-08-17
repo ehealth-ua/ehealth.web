@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.59.4"></a>
+## [0.59.4](https://github.com/edenlabllc/ehealth.web/compare/v0.59.3...v0.59.4) (2018-08-17)
+
+
+### Bug Fixes
+
+* **patient-account:** add pagination on DivisionPage ([7bece98](https://github.com/edenlabllc/ehealth.web/commit/7bece98))
+
+
+
+
+
 <a name="0.59.3"></a>
 ## [0.59.3](https://github.com/edenlabllc/ehealth.web/compare/v0.59.2...v0.59.3) (2018-08-16)
 
