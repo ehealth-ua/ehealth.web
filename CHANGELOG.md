@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.59.7"></a>
+## [0.59.7](https://github.com/edenlabllc/ehealth.web/compare/v0.59.6...v0.59.7) (2018-08-20)
+
+
+### Bug Fixes
+
+* **admin-legacy:** change REACT_APP_SIGN_URL to REACT_APP_SIGNER_URL ([6900d7e](https://github.com/edenlabllc/ehealth.web/commit/6900d7e))
+
+
+
+
+
 <a name="0.59.6"></a>
 ## [0.59.6](https://github.com/edenlabllc/ehealth.web/compare/v0.59.5...v0.59.6) (2018-08-20)
 
