@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.59.9"></a>
+## [0.59.9](https://github.com/edenlabllc/ehealth.web/compare/v0.59.8...v0.59.9) (2018-08-20)
+
+
+### Bug Fixes
+
+* **admin-legacy:** delete string scope from link on SignIn ([25c7778](https://github.com/edenlabllc/ehealth.web/commit/25c7778))
+
+
+
+
+
 <a name="0.59.8"></a>
 ## [0.59.8](https://github.com/edenlabllc/ehealth.web/compare/v0.59.7...v0.59.8) (2018-08-20)
 
