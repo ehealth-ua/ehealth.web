@@ -40,7 +40,8 @@ class MedicationDetailPage extends React.Component {
   }
 
   render() {
-    const { medication = {} } = this.props;
+    if (!this.props.medication) return null;
+    const { medication } = this.props;
 
     return (
       <div id="medication-detail-page">
