@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.59.10"></a>
+## [0.59.10](https://github.com/edenlabllc/ehealth.web/compare/v0.59.9...v0.59.10) (2018-08-20)
+
+
+### Bug Fixes
+
+* **patient-account:** show patient declaration history if it exist ([fe41302](https://github.com/edenlabllc/ehealth.web/commit/fe41302))
+
+
+
+
+
 <a name="0.59.8"></a>
 ## [0.59.8](https://github.com/edenlabllc/ehealth.web/compare/v0.59.7...v0.59.8) (2018-08-20)
 

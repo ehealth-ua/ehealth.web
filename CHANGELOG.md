@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.59.10"></a>
+## [0.59.10](https://github.com/edenlabllc/ehealth.web/compare/v0.59.9...v0.59.10) (2018-08-20)
+
+
+### Bug Fixes
+
+* **admin-legacy:** fix error on medication details ([1b50b2d](https://github.com/edenlabllc/ehealth.web/commit/1b50b2d))
+* **patient-account:** show patient declaration history if it exist ([fe41302](https://github.com/edenlabllc/ehealth.web/commit/fe41302))
+
+
+
+
+
 <a name="0.59.9"></a>
 ## [0.59.9](https://github.com/edenlabllc/ehealth.web/compare/v0.59.8...v0.59.9) (2018-08-20)
 
