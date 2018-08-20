@@ -1,4 +1,4 @@
-import Field, { ListenerChange } from "./Field";
+import Field from "./Field";
 import {
   InputField,
   TextField,
@@ -9,6 +9,7 @@ import {
   LabelInInputField
 } from "./InputField";
 import SelectField from "./SelectField";
+import ListenerField from "./ListenerField";
 import FileField from "./FileField";
 import { CheckboxField, RadioField } from "./CheckableField";
 import GroupField from "./GroupField";
@@ -30,6 +31,6 @@ Field.Group = GroupField;
 Field.Array = ArrayField;
 Field.Row = Row;
 Field.Col = Col;
-Field.ListenerChange = ListenerChange;
+Field.Listener = ListenerField;
 
 export default Field;
