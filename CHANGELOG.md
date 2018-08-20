@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.59.8"></a>
+## [0.59.8](https://github.com/edenlabllc/ehealth.web/compare/v0.59.7...v0.59.8) (2018-08-20)
+
+
+### Bug Fixes
+
+* **components:** parse unknown error in component FormError ([86efa55](https://github.com/edenlabllc/ehealth.web/commit/86efa55))
+* **patient-account:** show error about confidant person on EmployeePage ([f7a111e](https://github.com/edenlabllc/ehealth.web/commit/f7a111e))
+
+
+
+
+
 <a name="0.59.7"></a>
 ## [0.59.7](https://github.com/edenlabllc/ehealth.web/compare/v0.59.6...v0.59.7) (2018-08-20)
 
