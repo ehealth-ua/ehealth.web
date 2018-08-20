@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.60.0"></a>
+# [0.60.0](https://github.com/edenlabllc/ehealth.web/compare/v0.59.9...v0.60.0) (2018-08-20)
+
+
+### Bug Fixes
+
+* **auth:** add color props to disabled field SignUpPersonPage ([3011770](https://github.com/edenlabllc/ehealth.web/commit/3011770))
+* **auth:** change label on input SignUpUserPage ([0a2d294](https://github.com/edenlabllc/ehealth.web/commit/0a2d294))
+* **auth:** delete filterItems on select ds issuerCNs ([3ef719d](https://github.com/edenlabllc/ehealth.web/commit/3ef719d))
+
+
+
+
+
 <a name="0.59.8"></a>
 ## [0.59.8](https://github.com/edenlabllc/ehealth.web/compare/v0.59.7...v0.59.8) (2018-08-20)
 

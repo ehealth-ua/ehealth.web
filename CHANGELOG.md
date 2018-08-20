@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.60.0"></a>
+# [0.60.0](https://github.com/edenlabllc/ehealth.web/compare/v0.59.9...v0.60.0) (2018-08-20)
+
+
+### Bug Fixes
+
+* add to package-lock.json react-final-form-listeners and react-text-mask ([c002f4f](https://github.com/edenlabllc/ehealth.web/commit/c002f4f))
+* **admin-legacy:** fix error on medication details ([1b50b2d](https://github.com/edenlabllc/ehealth.web/commit/1b50b2d))
+* **auth:** add color props to disabled field SignUpPersonPage ([3011770](https://github.com/edenlabllc/ehealth.web/commit/3011770))
+* **auth:** change label on input SignUpUserPage ([0a2d294](https://github.com/edenlabllc/ehealth.web/commit/0a2d294))
+* **auth:** delete filterItems on select ds issuerCNs ([3ef719d](https://github.com/edenlabllc/ehealth.web/commit/3ef719d))
+* **components:** add MaskField base text-mask ([7cf44e9](https://github.com/edenlabllc/ehealth.web/commit/7cf44e9))
+* **components:** add props color to InputField ([f784090](https://github.com/edenlabllc/ehealth.web/commit/f784090))
+* **components:** change direction to right in LabelInInputField component ([6cd2cca](https://github.com/edenlabllc/ehealth.web/commit/6cd2cca))
+* **components:** rename Field.ListenerChange to Field.Listener ([db7586e](https://github.com/edenlabllc/ehealth.web/commit/db7586e))
+* **patient-account:** change call Field.Listener in ProfileEditPage ([3d82e2e](https://github.com/edenlabllc/ehealth.web/commit/3d82e2e))
+* **patient-account:** show patient declaration history if it exist ([fe41302](https://github.com/edenlabllc/ehealth.web/commit/fe41302))
+
+
+### Features
+
+* **components:** add LabelInInputField component ([0c09416](https://github.com/edenlabllc/ehealth.web/commit/0c09416))
+* **components:** add ListenerChange to Field component ([aef49a0](https://github.com/edenlabllc/ehealth.web/commit/aef49a0))
+* **components:** add MaskField base rocket-mask ([e9c2c2b](https://github.com/edenlabllc/ehealth.web/commit/e9c2c2b))
+* **patient-account:** use ListenerChange in ProfileEdit to area and settlement ([4e089e4](https://github.com/edenlabllc/ehealth.web/commit/4e089e4))
+
+
+
+
+
 <a name="0.59.10"></a>
 ## [0.59.10](https://github.com/edenlabllc/ehealth.web/compare/v0.59.9...v0.59.10) (2018-08-20)
 

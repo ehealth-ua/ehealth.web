@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.60.0"></a>
+# [0.60.0](https://github.com/edenlabllc/ehealth.web/compare/v0.59.9...v0.60.0) (2018-08-20)
+
+
+### Bug Fixes
+
+* **components:** add MaskField base text-mask ([7cf44e9](https://github.com/edenlabllc/ehealth.web/commit/7cf44e9))
+* **components:** add props color to InputField ([f784090](https://github.com/edenlabllc/ehealth.web/commit/f784090))
+* **components:** change direction to right in LabelInInputField component ([6cd2cca](https://github.com/edenlabllc/ehealth.web/commit/6cd2cca))
+* **components:** rename Field.ListenerChange to Field.Listener ([db7586e](https://github.com/edenlabllc/ehealth.web/commit/db7586e))
+
+
+### Features
+
+* **components:** add LabelInInputField component ([0c09416](https://github.com/edenlabllc/ehealth.web/commit/0c09416))
+* **components:** add ListenerChange to Field component ([aef49a0](https://github.com/edenlabllc/ehealth.web/commit/aef49a0))
+* **components:** add MaskField base rocket-mask ([e9c2c2b](https://github.com/edenlabllc/ehealth.web/commit/e9c2c2b))
+
+
+
+
+
 <a name="0.59.8"></a>
 ## [0.59.8](https://github.com/edenlabllc/ehealth.web/compare/v0.59.7...v0.59.8) (2018-08-20)
 
