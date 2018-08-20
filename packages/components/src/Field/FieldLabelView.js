@@ -48,14 +48,17 @@ export const FieldLabel = styled.div`
   )};
   position: absolute;
   z-index: 2;
-  transition: all 0.4s;
   left: ${withProp(
     ["active", "value"],
-    (active, value) => `${!value && !active ? "25px" : "7px"}`
+    (active, value) => `${!value && !active ? "25px" : "auto"}`
+  )};
+  right: ${withProp(
+    ["active", "value"],
+    (active, value) => `${!value && !active ? "auto" : "5px"}`
   )};
   top: ${withProp(
     ["active", "value"],
-    (active, value) => `${!value && !active ? "14px" : "2px"}`
+    (active, value) => `${!value && !active ? "14px" : "3px"}`
   )};
   font-size: ${withProp(
     ["active", "value"],
