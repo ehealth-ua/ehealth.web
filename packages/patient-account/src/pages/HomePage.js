@@ -89,7 +89,7 @@ const HomePage = ({ match }) => (
                         ) : (
                           <NoDeclarationList />
                         )}
-                        {declarationHistory && (
+                        {!!declarationHistory.length && (
                           <>
                             <ShowBlock center>
                               <Link
