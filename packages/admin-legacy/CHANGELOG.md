@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.59.6"></a>
+## [0.59.6](https://github.com/edenlabllc/ehealth.web/compare/v0.59.5...v0.59.6) (2018-08-20)
+
+
+### Bug Fixes
+
+* **admin-legacy:** fix styles and locale of datepicker ([9037697](https://github.com/edenlabllc/ehealth.web/commit/9037697))
+
+
+
+
+
 <a name="0.59.5"></a>
 ## [0.59.5](https://github.com/edenlabllc/ehealth.web/compare/v0.59.4...v0.59.5) (2018-08-17)
 
