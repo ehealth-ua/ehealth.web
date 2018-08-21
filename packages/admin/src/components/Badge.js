@@ -1,20 +1,25 @@
 import React from "react";
 import system from "system-components/emotion";
-import { Badge as RebassBadge } from "rebass/emotion";
 
 const Badge = system(
   {
-    is: RebassBadge,
     fontSize: 10,
+    fontWeight: "bold",
+    color: "white",
+    lineHeight: 1,
     px: "5px",
+    pt: "6px",
+    pb: "4px",
     minWidth: 20,
-    minHeight: 20
+    minHeight: 20,
+    borderRadius: 2,
+    bg: "blue"
   },
   `
-  text-transform: uppercase;
-  padding-top: 6px;
-  padding-bottom: 5px;
-`
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+  `
 );
 
 export default Badge;
