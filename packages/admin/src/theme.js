@@ -7,7 +7,8 @@ const colors = {
   font: {
     red: "#ED1C24",
     blue: "#2EA2F8",
-    carbon: "#354052",
+    carbon: "rgb(53, 82, 62)",
+    carbon50: "rgba(53, 82, 62, 0.5)",
     green: "#1BB934"
   },
   gray: "#DFE1E5",
@@ -85,6 +86,12 @@ const btnStylesCreator = (name, fontColor = colors.white) => {
         colors[name][2][1]
       } 100%)`,
       borderColor: colors[name + "Border"][2]
+    },
+    "&:disabled": {
+      backgroundImage: "none",
+      backgroundColor: "#E9EDF1",
+      borderColor: "#DFE3E9",
+      color: colors.font.carbon50
     }
   };
 };
