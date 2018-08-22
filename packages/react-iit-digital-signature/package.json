@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/react-iit-digital-signature",
-  "version": "0.60.0",
+  "version": "0.61.0",
   "private": true,
   "description": "EUSignCP digital signature library React component bingings",
   "main": "src",
