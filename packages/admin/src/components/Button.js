@@ -23,13 +23,6 @@ const Button = system(
   padding: 5px 20px;
   outline: none;
   line-height: 1;
-
-  &:disabled {
-    background-image: none;
-    background-color: #E9EDF1;
-    border-color: #DFE3E9;
-    color: rgba(53,82,62, 0.5);
-  }
 `
 );
 
