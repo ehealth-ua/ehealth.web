@@ -67,6 +67,28 @@ const colors = {
   orangeBorder: ["#F36A19", "#EA6211", "#E25D0E", "#EA6211"]
 };
 
+const btnStylesCreator = color => {
+  return {
+    backgroundImage: `linear-gradient(0deg, ${colors[color][0][0]} 0%, ${
+      colors[color][0][1]
+    } 100%)`,
+    borderColor: colors[color + "Border"][0],
+    color: "#FFF",
+    "&:hover": {
+      backgroundImage: `linear-gradient(0deg, ${colors[color][1][0]} 0%, ${
+        colors[color][1][1]
+      } 100%)`,
+      borderColor: colors[color + "Border"][1]
+    },
+    "&:active": {
+      backgroundImage: `linear-gradient(0deg, ${colors[color][2][0]} 0%, ${
+        colors[color][2][1]
+      } 100%)`,
+      borderColor: colors[color + "Border"][2]
+    }
+  };
+};
+
 const theme = {
   ...colors,
 
@@ -93,120 +115,12 @@ const theme = {
         borderColor: "#E9EDF1"
       }
     },
-    green: {
-      backgroundImage: `linear-gradient(0deg, ${colors.green[0][0]} 0%, ${
-        colors.green[0][1]
-      } 100%)`,
-      borderColor: colors.greenBorder[0],
-      color: "#FFF",
-      "&:hover": {
-        backgroundImage: `linear-gradient(0deg, ${colors.green[0][0]} 0%, ${
-          colors.green[0][1]
-        } 100%)`,
-        borderColor: colors.greenBorder[1]
-      },
-      "&:active": {
-        backgroundImage: `linear-gradient(0deg, ${colors.green[0][0]} 0%, ${
-          colors.green[0][1]
-        } 100%)`,
-        borderColor: colors.greenBorder[2]
-      }
-    },
-    blue: {
-      backgroundImage: `linear-gradient(0deg, ${colors.blue[0][0]} 0%, ${
-        colors.blue[0][1]
-      } 100%)`,
-      borderColor: colors.blueBorder[0],
-      color: "#FFF",
-      "&:hover": {
-        backgroundImage: `linear-gradient(0deg, ${colors.blue[0][0]} 0%, ${
-          colors.blue[0][1]
-        } 100%)`,
-        borderColor: colors.blueBorder[1]
-      },
-      "&:active": {
-        backgroundImage: `linear-gradient(0deg, ${colors.blue[0][0]} 0%, ${
-          colors.blue[0][1]
-        } 100%)`,
-        borderColor: colors.blueBorder[2]
-      }
-    },
-    purple: {
-      backgroundImage: `linear-gradient(0deg, ${colors.purple[0][0]} 0%, ${
-        colors.purple[0][1]
-      } 100%)`,
-      borderColor: colors.purpleBorder[0],
-      color: "#FFF",
-      "&:hover": {
-        backgroundImage: `linear-gradient(0deg, ${colors.purple[0][0]} 0%, ${
-          colors.purple[0][1]
-        } 100%)`,
-        borderColor: colors.purpleBorder[1]
-      },
-      "&:active": {
-        backgroundImage: `linear-gradient(0deg, ${colors.purple[0][0]} 0%, ${
-          colors.purple[0][1]
-        } 100%)`,
-        borderColor: colors.purpleBorder[2]
-      }
-    },
-    red: {
-      backgroundImage: `linear-gradient(0deg, ${colors.red[0][0]} 0%, ${
-        colors.red[0][1]
-      } 100%)`,
-      borderColor: colors.redBorder[0],
-      color: "#FFF",
-      "&:hover": {
-        backgroundImage: `linear-gradient(0deg, ${colors.red[0][0]} 0%, ${
-          colors.red[0][1]
-        } 100%)`,
-        borderColor: colors.redBorder[1]
-      },
-      "&:active": {
-        backgroundImage: `linear-gradient(0deg, ${colors.red[0][0]} 0%, ${
-          colors.red[0][1]
-        } 100%)`,
-        borderColor: colors.redBorder[2]
-      }
-    },
-    carbon: {
-      backgroundImage: `linear-gradient(0deg, ${colors.carbon[0][0]} 0%, ${
-        colors.carbon[0][1]
-      } 100%)`,
-      borderColor: colors.carbonBorder[0],
-      color: "#FFF",
-      "&:hover": {
-        backgroundImage: `linear-gradient(0deg, ${colors.carbon[1][0]} 0%, ${
-          colors.carbon[1][1]
-        } 100%)`,
-        borderColor: colors.carbonBorder[1]
-      },
-      "&:active": {
-        backgroundImage: `linear-gradient(0deg, ${colors.carbon[2][0]} 0%, ${
-          colors.carbon[2][1]
-        } 100%)`,
-        borderColor: colors.carbonBorder[2]
-      }
-    },
-    orange: {
-      backgroundImage: `linear-gradient(0deg, ${colors.orange[0][0]} 0%, ${
-        colors.orange[0][1]
-      } 100%)`,
-      borderColor: colors.orangeBorder[0],
-      color: "#FFF",
-      "&:hover": {
-        backgroundImage: `linear-gradient(0deg, ${colors.orange[1][0]} 0%, ${
-          colors.orange[1][1]
-        } 100%)`,
-        borderColor: colors.orangeBorder[1]
-      },
-      "&:active": {
-        backgroundImage: `linear-gradient(0deg, ${colors.orange[2][0]} 0%, ${
-          colors.orange[2][1]
-        } 100%)`,
-        borderColor: colors.orangeBorder[2]
-      }
-    }
+    green: btnStylesCreator("green"),
+    blue: btnStylesCreator("blue"),
+    purple: btnStylesCreator("purple"),
+    red: btnStylesCreator("red"),
+    carbon: btnStylesCreator("carbon"),
+    orange: btnStylesCreator("orange")
   }
 };
 
