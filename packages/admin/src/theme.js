@@ -19,7 +19,7 @@ const colors = {
     ["#E0E4E8", "#F2F7FA"],
     ["#EAEEF3", "#FFFFFF"]
   ],
-  lightBorder: "#CED0DA",
+  lightBorder: ["#CED0DA", "#CED0DA", "#CED0DA", "#CED0DA"],
 
   green: [
     ["#39B54A", "#34AA44"],
@@ -67,24 +67,24 @@ const colors = {
   orangeBorder: ["#F36A19", "#EA6211", "#E25D0E", "#EA6211"]
 };
 
-const btnStylesCreator = color => {
+const btnStylesCreator = (name, fontColor = colors.white) => {
   return {
-    backgroundImage: `linear-gradient(0deg, ${colors[color][0][0]} 0%, ${
-      colors[color][0][1]
+    backgroundImage: `linear-gradient(0deg, ${colors[name][0][0]} 0%, ${
+      colors[name][0][1]
     } 100%)`,
-    borderColor: colors[color + "Border"][0],
-    color: "#FFF",
+    borderColor: colors[name + "Border"][0],
+    color: fontColor,
     "&:hover": {
-      backgroundImage: `linear-gradient(0deg, ${colors[color][1][0]} 0%, ${
-        colors[color][1][1]
+      backgroundImage: `linear-gradient(0deg, ${colors[name][1][0]} 0%, ${
+        colors[name][1][1]
       } 100%)`,
-      borderColor: colors[color + "Border"][1]
+      borderColor: colors[name + "Border"][1]
     },
     "&:active": {
-      backgroundImage: `linear-gradient(0deg, ${colors[color][2][0]} 0%, ${
-        colors[color][2][1]
+      backgroundImage: `linear-gradient(0deg, ${colors[name][2][0]} 0%, ${
+        colors[name][2][1]
       } 100%)`,
-      borderColor: colors[color + "Border"][2]
+      borderColor: colors[name + "Border"][2]
     }
   };
 };
@@ -93,28 +93,7 @@ const theme = {
   ...colors,
 
   buttonStyles: {
-    light: {
-      backgroundImage: `linear-gradient(0deg, ${colors.light[0][0]} 0%, ${
-        colors.light[0][1]
-      } 100%)`,
-      borderColor: "#CED0DA",
-      color: "#354052",
-      "&:hover": {
-        backgroundImage: `linear-gradient(0deg, ${colors.light[0][0]} 0%, ${
-          colors.light[0][1]
-        } 100%)`
-      },
-      "&:active": {
-        backgroundImage: `linear-gradient(0deg, ${colors.light[0][0]} 0%, ${
-          colors.light[0][1]
-        } 100%)`
-      },
-      "&:disabled": {
-        backgroundImage: "none",
-        backgroundColor: "#E9EDF1",
-        borderColor: "#E9EDF1"
-      }
-    },
+    light: btnStylesCreator("light", colors.carbon),
     green: btnStylesCreator("green"),
     blue: btnStylesCreator("blue"),
     purple: btnStylesCreator("purple"),
