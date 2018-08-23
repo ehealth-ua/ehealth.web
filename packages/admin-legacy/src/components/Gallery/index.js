@@ -13,6 +13,10 @@ const PERSON_TYPE = {
   "confidant_person.1.SECONDARY.RELATIONSHIP.": "Друга довірена особа: "
 };
 
+const TAX_ID = {
+  tax_id: "ІПН"
+};
+
 class Gallery extends React.Component {
   state = {
     lightboxIsOpen: false,
@@ -48,9 +52,11 @@ class Gallery extends React.Component {
       document_type,
       document_relationship_type
     } = this.props;
+
     const mergedDocs = {
       ...document_relationship_type.values,
-      ...document_type.values
+      ...document_type.values,
+      ...TAX_ID
     };
 
     const MERGED_TYPES = {};
