@@ -22,6 +22,7 @@
     "react-text-mask": "^5.4.3",
     "rebass": "^2.0.1",
     "recompose": "^0.27.1",
+    "styled-system": "^3.0.2",
     "styled-tools": "^0.5.0",
     "validator": "^9.4.1"
   },
