@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.62.0"></a>
+# [0.62.0](https://github.com/edenlabllc/ehealth.web/compare/v0.61.0...v0.62.0) (2018-08-23)
+
+
+### Bug Fixes
+
+* **admin:** remove styled-system ([b2ff674](https://github.com/edenlabllc/ehealth.web/commit/b2ff674))
+
+
+### Features
+
+* update package-lock file ([bd46984](https://github.com/edenlabllc/ehealth.web/commit/bd46984))
+* **admin:** add colors to theme ([7f5abfb](https://github.com/edenlabllc/ehealth.web/commit/7f5abfb))
+* **admin:** add disable and alfa carbon ([5c9bb2f](https://github.com/edenlabllc/ehealth.web/commit/5c9bb2f))
+* **admin:** add fonts ([1ca5c54](https://github.com/edenlabllc/ehealth.web/commit/1ca5c54))
+* **admin:** add globalStyles ([6ad7105](https://github.com/edenlabllc/ehealth.web/commit/6ad7105))
+* **admin:** add styled-system ([36cdf51](https://github.com/edenlabllc/ehealth.web/commit/36cdf51))
+* **admin:** btn component ([49234cf](https://github.com/edenlabllc/ehealth.web/commit/49234cf))
+* **admin:** update theme with buttons styles ([fe0e422](https://github.com/edenlabllc/ehealth.web/commit/fe0e422))
+* **components:** add styled-system ([44bee6c](https://github.com/edenlabllc/ehealth.web/commit/44bee6c))
+
+
+
+
+
 <a name="0.61.0"></a>
 # [0.61.0](https://github.com/edenlabllc/ehealth.web/compare/v0.60.0...v0.61.0) (2018-08-22)
 
