@@ -15,7 +15,9 @@ app.get("/polyfill:min(.min)?.js", (req, res) => {
     minify: req.params.min === ".min",
     features: {
       default: {},
-      "Object.entries": {}
+      es6: {},
+      es7: {},
+      es2017: {}
     },
     stream: true
   });
