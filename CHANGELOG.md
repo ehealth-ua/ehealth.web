@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.62.2"></a>
+## [0.62.2](https://github.com/edenlabllc/ehealth.web/compare/v0.62.1...v0.62.2) (2018-08-23)
+
+
+### Bug Fixes
+
+* **polyfill:** update config for IE support ([56c4352](https://github.com/edenlabllc/ehealth.web/commit/56c4352))
+
+
+
+
+
 <a name="0.62.1"></a>
 ## [0.62.1](https://github.com/edenlabllc/ehealth.web/compare/v0.62.0...v0.62.1) (2018-08-23)
 
