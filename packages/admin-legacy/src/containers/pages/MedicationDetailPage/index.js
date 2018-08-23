@@ -126,9 +126,9 @@ class MedicationDetailPage extends React.Component {
                           if (key === 0) return null;
                           return (
                             <div key={key}>
-                              <p>{medication.ingredients[0].name}</p>
+                              <p>{i.name}</p>
                               <br />
-                              <p>{medication.ingredients[0].id}</p>
+                              <p>{i.id}</p>
                               <p>
                                 {`${i.dosage.denumerator_value} `}
                                 <DictionaryValue
