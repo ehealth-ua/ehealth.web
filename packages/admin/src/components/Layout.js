@@ -3,17 +3,18 @@ import { Link } from "react-router-dom";
 import styled from "react-emotion/macro";
 import { EhealthLogoIcon } from "@ehealth/icons";
 
+import Nav from "./Nav";
+
 const Layout = ({ children }) => (
-  <>
-    <Wrapper>
-      <Sidebar>
-        <Link to="/">
-          <Logo />
-        </Link>
-      </Sidebar>
-      <Content>{children}</Content>
-    </Wrapper>
-  </>
+  <Wrapper>
+    <Sidebar>
+      <Link to="/">
+        <Logo />
+      </Link>
+      <Nav />
+    </Sidebar>
+    <Content>{children}</Content>
+  </Wrapper>
 );
 
 export default Layout;
@@ -25,7 +26,7 @@ const Wrapper = styled.section`
 
 const Sidebar = styled.aside`
   flex: 0 0 270px;
-  padding: 30px;
+  padding: 45px 30px;
   background-image: linear-gradient(0deg, #017696, #1c4886);
 `;
 
@@ -36,7 +37,6 @@ const Content = styled.section`
 
 const Logo = styled(EhealthLogoIcon)`
   display: flex;
-  margin: 0 auto;
-  height: 45px;
-  width: 101px;
+  margin-left: 20px;
+  height: 33px;
 `;
