@@ -6,6 +6,7 @@
     "@ehealth/components": "file:../components",
     "@ehealth/icons": "file:../icons",
     "emotion": "^9.2.5",
+    "js-cookie": "^2.2.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-emotion": "^9.2.5",
