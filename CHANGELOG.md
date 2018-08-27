@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.64.0"></a>
+# [0.64.0](https://github.com/edenlabllc/ehealth.web/compare/v0.63.0...v0.64.0) (2018-08-27)
+
+
+### Features
+
+* **components:** add Tabs component ([#251](https://github.com/edenlabllc/ehealth.web/issues/251)) ([4a00ea2](https://github.com/edenlabllc/ehealth.web/commit/4a00ea2))
+
+
+
+
+
 <a name="0.63.0"></a>
 # [0.63.0](https://github.com/edenlabllc/ehealth.web/compare/v0.62.2...v0.63.0) (2018-08-23)
 
