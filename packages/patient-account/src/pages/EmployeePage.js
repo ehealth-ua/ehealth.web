@@ -26,7 +26,7 @@ class EmployeePage extends React.Component {
   render() {
     const { match, history } = this.props;
     return (
-      <>
+      <div data-test="employee">
         <Heading.H1>Крок 2. Відправте запит на декларацію</Heading.H1>
         <Query
           query={EmployeeQuery}
@@ -197,6 +197,7 @@ class EmployeePage extends React.Component {
                                 <Form.Submit
                                   size="small"
                                   disabled={this.state.error}
+                                  data-test="request"
                                 >
                                   Відправити запит на декларацію
                                 </Form.Submit>
@@ -212,7 +213,7 @@ class EmployeePage extends React.Component {
             );
           }}
         </Query>
-      </>
+      </div>
     );
   }
 }

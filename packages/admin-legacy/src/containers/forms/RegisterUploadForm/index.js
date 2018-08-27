@@ -50,7 +50,11 @@ class RegisterUploadForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, data: { registerTypes }, submitting } = this.props;
+    const {
+      handleSubmit,
+      data: { registerTypes },
+      submitting
+    } = this.props;
     const { file, file_name } = this.state;
 
     return (

@@ -30,11 +30,11 @@ const DEFAULT_CENTER = { lat: 50.4021368, lng: 30.4525107 };
 const DEFAULT_ZOOM = 9;
 
 const SearchPage = () => (
-  <>
+  <div data-test="search">
     <Heading.H1>Крок 1. Оберіть лікаря</Heading.H1>
     <Route path="/search" component={SearchTable} exact />
     <Route path="/search/map" component={DivisionMap} />
-  </>
+  </div>
 );
 
 export default SearchPage;
@@ -123,7 +123,9 @@ const SearchTable = () => {
                         address: <AddressView data={addresses} />,
                         legalEntityName,
                         action: (
-                          <Link to={`/employee/${id}`}>Показати деталі</Link>
+                          <Link to={`/employee/${id}`} dataTest="details">
+                            Показати деталі
+                          </Link>
                         )
                       })}
                       rowKeyExtractor={({ id }) => id}
@@ -231,6 +233,7 @@ const FormSearch = () => (
                     )}
                     renderItem={item => dict[item]}
                     size="small"
+                    dataTestButton="specialities"
                   />
                 )}
               />

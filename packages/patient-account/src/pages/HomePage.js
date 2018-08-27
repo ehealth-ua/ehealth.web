@@ -20,7 +20,7 @@ import DeclarationItem from "../components/DeclarationItem";
 import Line from "../components/Line";
 
 const HomePage = ({ match }) => (
-  <>
+  <div data-test="home">
     <Heading.H1>Особистий кабінет</Heading.H1>
     <Tabs>
       {[
@@ -72,6 +72,7 @@ const HomePage = ({ match }) => (
                               <Link
                                 to="/search"
                                 size="small"
+                                dataTest="searchLink"
                                 upperCase
                                 spaced
                                 bold
@@ -132,7 +133,7 @@ const HomePage = ({ match }) => (
         { title: "Мої рецепти", content: "Сторінка в процесі розробки" }
       ]}
     </Tabs>
-  </>
+  </div>
 );
 
 export default HomePage;

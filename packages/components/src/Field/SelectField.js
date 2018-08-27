@@ -27,6 +27,7 @@ const SelectField = ({
   label,
   horizontal,
   disabled,
+  dataTestButton,
   items = [],
   filterItems = (inputValue, item, index) => true,
   renderItem = item => item,
@@ -77,6 +78,7 @@ const SelectField = ({
               disabled,
               size
             })}
+            data-test={dataTestButton}
           />
         </InputBorder>
         {errored && <ErrorMessage>{error}</ErrorMessage>}
@@ -104,6 +106,7 @@ const SelectField = ({
                         }
                       }
                     })}
+                    data-test={item}
                   >
                     {renderItem(item)}
                   </Option>

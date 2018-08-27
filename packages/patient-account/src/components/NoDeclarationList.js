@@ -26,6 +26,7 @@ const NoDeclarationList = () => (
       spaced
       bold
       icon={<ArrowRightIcon height="15px" fill="#2292f2" />}
+      dataTest="searchLink"
     >
       крок 1. оберіть лікаря
     </Link>

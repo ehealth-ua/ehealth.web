@@ -76,7 +76,8 @@ class Nav extends React.Component {
                       activeClassName={styles.active}
                     >
                       <Link id="pending-employees-nav" to="/pending-employees">
-                        Співробітники<br />
+                        Співробітники
+                        <br />
                         на розгляді
                       </Link>
                     </NavItem>
@@ -295,7 +296,8 @@ class Nav extends React.Component {
                 id="reset-authentication-method-nav"
                 to="/reset-authentication-method"
               >
-                Скинути метод<br />
+                Скинути метод
+                <br />
                 авторизації
               </Link>
             </NavItem>

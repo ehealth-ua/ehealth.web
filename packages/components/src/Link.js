@@ -30,6 +30,7 @@ const Link = props => {
     <Component
       {...linkProps}
       type={!(props.href || props.to) ? "button" : undefined}
+      data-test={props.dataTest}
     >
       {iconReverse ? content.reverse() : content}
     </Component>

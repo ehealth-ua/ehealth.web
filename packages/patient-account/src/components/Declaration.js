@@ -66,7 +66,7 @@ const DeclarationBody = ({ history, data }) => {
   );
 
   return (
-    <>
+    <div data-test="request">
       <Shadow>
         <DeclarationHeader
           id={id}
@@ -235,6 +235,7 @@ const DeclarationBody = ({ history, data }) => {
                       console.log(error);
                     }
                   }}
+                  data-test="approve"
                 >
                   Підтвердити запит на декларацію
                 </Button>
@@ -247,7 +248,7 @@ const DeclarationBody = ({ history, data }) => {
         <div id="print-root" dangerouslySetInnerHTML={{ __html: content }} />,
         document.body
       )}
-    </>
+    </div>
   );
 };
 
@@ -284,8 +285,7 @@ export const DeclarationHeader = ({
         <Heading.H1>Декларація</Heading.H1>
         <Heading.H3>
           про вибір лікаря з надання первинної допомоги
-          <br />
-          № {declarationNumber}
+          <br />№ {declarationNumber}
           {signedAt && ` від ${format(signedAt, "DD.MM.YYYY")}`}
         </Heading.H3>
       </Left>
@@ -351,8 +351,7 @@ const ConfidantItem = ({
     renderItem: item => (
       <>
         <DictionaryValue name={"DOCUMENT_RELATIONSHIP_TYPE"} item={item.type} />{" "}
-        №
-        <DocumentItem data={item} />
+        №<DocumentItem data={item} />
       </>
     )
   });

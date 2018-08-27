@@ -22,7 +22,11 @@ class DeclarationItem extends Component {
     } = this.props;
 
     return (
-      <>
+      <div
+        data-test={
+          type === "declarationRequest" ? "declarationRequest" : "declaration"
+        }
+      >
         <DeclarationHeader
           id={id}
           declarationNumber={declarationNumber}
@@ -57,7 +61,7 @@ class DeclarationItem extends Component {
             onClose={() => this.setState({ isRejectActive: false })}
           />
         )}
-      </>
+      </div>
     );
   }
 }

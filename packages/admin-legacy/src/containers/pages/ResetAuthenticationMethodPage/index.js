@@ -80,6 +80,7 @@ class ResetAuthenticationMethodPage extends Component {
   };
 }
 
-export default connect(null, { resetAuthMethod, reset })(
-  ResetAuthenticationMethodPage
-);
+export default connect(
+  null,
+  { resetAuthMethod, reset }
+)(ResetAuthenticationMethodPage);
