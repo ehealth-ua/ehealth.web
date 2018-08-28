@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "react-emotion/macro";
 import YearPicker from "./YearPicker";
 import DayPicker from "./DayPicker";
 import MonthPicker from "./MonthPicker";
+import { Container } from "./Body";
 import { Switch } from "@ehealth/components";
 
 class Datepicker extends React.Component {
@@ -22,7 +22,7 @@ class Datepicker extends React.Component {
 
   render() {
     return (
-      <Calendar>
+      <Container>
         <Switch
           value={this.state.mode}
           year={
@@ -56,7 +56,7 @@ class Datepicker extends React.Component {
             </>
           }
         />
-      </Calendar>
+      </Container>
     );
   }
 
@@ -94,13 +94,3 @@ class Datepicker extends React.Component {
 }
 
 export default Datepicker;
-
-const Calendar = styled.div`
-  max-width: 300px;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 14px;
-  color: #354052;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(72, 60, 60, 0.2);
-`;
