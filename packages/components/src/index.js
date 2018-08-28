@@ -3,6 +3,7 @@ export { default as Async } from "./Async";
 export { default as Button } from "./Button";
 export { default as CabinetTable } from "./CabinetTable";
 export { default as Connect } from "./Connect";
+export { default as DatePicker } from "./DatePicker";
 export { default as DefinitionList } from "./DefinitionList";
 export { default as Field } from "./Field";
 export { default as ForceRedirect } from "./ForceRedirect";

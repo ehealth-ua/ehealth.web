@@ -10,6 +10,7 @@ import {
 } from "./InputField";
 import SelectField from "./SelectField";
 import ListenerField from "./ListenerField";
+import DatePickerField from "./DatePickerField";
 import FileField from "./FileField";
 import { CheckboxField, RadioField } from "./CheckableField";
 import GroupField from "./GroupField";
@@ -32,5 +33,6 @@ Field.Array = ArrayField;
 Field.Row = Row;
 Field.Col = Col;
 Field.Listener = ListenerField;
+Field.DatePicker = DatePickerField;
 
 export default Field;
