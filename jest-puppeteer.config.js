@@ -1,7 +1,3 @@
 module.exports = {
-  launch: {
-    headless: false
-    // slowMo: 5,
-    // devtools: false
-  }
+  launch: process.env.DEBUG ? { headless: true, slowMo: 10 } : {}
 };
