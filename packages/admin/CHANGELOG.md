@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.66.0"></a>
+# [0.66.0](https://github.com/edenlabllc/ehealth.web/compare/v0.64.0...v0.66.0) (2018-08-28)
+
+
+### Features
+
+* **admin:** add Ability component ([d8cd8b3](https://github.com/edenlabllc/ehealth.web/commit/d8cd8b3))
+* **admin:** add Nav component ([d4ee027](https://github.com/edenlabllc/ehealth.web/commit/d4ee027)), closes [#202](https://github.com/edenlabllc/ehealth.web/issues/202)
+
+
+
+
+
 <a name="0.65.0"></a>
 # [0.65.0](https://github.com/edenlabllc/ehealth.web/compare/v0.64.0...v0.65.0) (2018-08-28)
 

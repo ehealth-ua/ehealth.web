@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.66.0"></a>
+# [0.66.0](https://github.com/edenlabllc/ehealth.web/compare/v0.64.0...v0.66.0) (2018-08-28)
+
+
+### Features
+
+* **components:** add react-values dependency ([a275e19](https://github.com/edenlabllc/ehealth.web/commit/a275e19))
+* **components:** add white color to Link component ([f041f45](https://github.com/edenlabllc/ehealth.web/commit/f041f45))
+* **components:** add year and month picker ([e624bc3](https://github.com/edenlabllc/ehealth.web/commit/e624bc3))
+* **components:** datepicker base component ([521cb8b](https://github.com/edenlabllc/ehealth.web/commit/521cb8b))
+* **patient-account:** declaration request E2E test ([982e27f](https://github.com/edenlabllc/ehealth.web/commit/982e27f))
+
+
+
+
+
 <a name="0.65.0"></a>
 # [0.65.0](https://github.com/edenlabllc/ehealth.web/compare/v0.64.0...v0.65.0) (2018-08-28)
 

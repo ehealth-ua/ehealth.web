@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.66.0"></a>
+# [0.66.0](https://github.com/edenlabllc/ehealth.web/compare/v0.64.0...v0.66.0) (2018-08-28)
+
+
+### Features
+
+* **patient-account:** declaration request E2E test ([982e27f](https://github.com/edenlabllc/ehealth.web/commit/982e27f))
+
+
+
+
+
 <a name="0.65.0"></a>
 # [0.65.0](https://github.com/edenlabllc/ehealth.web/compare/v0.64.0...v0.65.0) (2018-08-28)
 
