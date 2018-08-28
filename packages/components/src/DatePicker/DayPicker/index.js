@@ -1,8 +1,9 @@
 import React from "react";
 import Dayzed from "dayzed";
+
 import DayPanel from "./DayPanel";
 import { Button, Title, Header } from "../Header";
-import { monthNamesFull } from "../contants";
+import { MONTH_NAMES } from "../constants";
 
 const DayPicker = ({
   offset,
@@ -33,7 +34,7 @@ const DayPicker = ({
                     getCurrentMonth(calendar.month);
                   }}
                 >
-                  {monthNamesFull[calendar.month]}{" "}
+                  {MONTH_NAMES[calendar.month]}{" "}
                 </Title>
                 <Title onClick={() => switchMode("year")}>
                   {calendar.year}

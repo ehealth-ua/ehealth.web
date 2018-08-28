@@ -1,4 +1,5 @@
 import React from "react";
+
 import { List, Item } from "../Body";
 
 const DayList = ({ calendar, getDateProps }) => (

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+
 import { Button, Title, Header } from "../Header";
 import YearsList from "./YearsList";
 
 class YearPicker extends Component {
   state = {
     selectedYear: this.props.selectedYear
-      ? +this.props.selectedYear
+      ? parseInt(this.props.selectedYear, 10)
       : new Date().getFullYear()
   };
 

@@ -1,4 +1,4 @@
-export const monthNamesFull = [
+export const MONTH_NAMES = [
   "Січень",
   "Лютий",
   "Березень",
@@ -13,4 +13,4 @@ export const monthNamesFull = [
   "Грудень"
 ];
 
-export const weekdayNamesShort = ["ПН", "ВТ", "СР", "ЧТ", "ПН", "СБ", "НД"];
+export const WEEKDAY_NAMES = ["ПН", "ВТ", "СР", "ЧТ", "ПН", "СБ", "НД"];

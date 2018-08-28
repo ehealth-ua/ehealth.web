@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "react-emotion/macro";
+
 import DayList from "./DayList";
 import { List, Item } from "../Body";
-
-import { weekdayNamesShort } from "../contants";
+import { WEEKDAY_NAMES } from "../constants";
 
 const DayPanel = ({ calendar, getDateProps }) => {
   return (
     <>
       <List week>
-        {weekdayNamesShort.map((weekday, idx) => (
+        {WEEKDAY_NAMES.map((weekday, idx) => (
           <Item
             key={`${calendar.month}-${calendar.year}-${weekday}-${idx}`}
             {...(idx === 0 ? { "data-test": "firstDayOfWeek" } : {})}
