@@ -65,6 +65,7 @@ const SecurityPage = () => (
                   )}
                 </>
               )}
+            <ApprovalsBlock />
           </Section>
         </>
       );
@@ -72,65 +73,66 @@ const SecurityPage = () => (
   </Query>
 );
 
-const SecurityBlock = ({ phone }) => (
-  <>
-    <DefinitionListView
-      labels={{
-        phone: "Номер телефону"
-      }}
-      data={{
-        phone: (
-          <Link
-            href={`${REACT_APP_UPDATE_FACTOR_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
-            size="s"
-            upperCase
-            color={"black"}
-            icon={<PencilIcon height="14" />}
-          >
-            {phone}
-          </Link>
-        )
-      }}
-    />
-    <SearchParams>
-      {({ searchParams: { page = 1 } }) => {
-        return (
-          <Query query={ApprovalsRequestQuery} variables={{ page }}>
-            {({ loading, error, data, refetch }) => {
-              if (loading || error) return <Spinner />;
-              const {
-                data: dataApprovals,
-                paging: { totalPages }
-              } = data.approvals;
-              const approvals = getDefinitions({
-                data: dataApprovals,
-                keyExtractor: ({ userId }) => `approvals.${userId}`,
-                renderLabel: ({ clientId }) => clientId,
-                renderItem: props => <ScopeView {...props} onDelete={refetch} />
-              });
-              return (
-                <ApprovalsComponent>
-                  <Heading.H3 weight="bold">
-                    Доступ до персональних даних
-                  </Heading.H3>
+const ApprovalsBlock = () => (
+  <SearchParams>
+    {({ searchParams: { page = 1 } }) => {
+      return (
+        <Query query={ApprovalsRequestQuery} variables={{ page }}>
+          {({ loading, error, data, refetch }) => {
+            if (loading || error) return <Spinner />;
+            const {
+              data: dataApprovals,
+              paging: { totalPages }
+            } = data.approvals;
+            const approvals = getDefinitions({
+              data: dataApprovals,
+              keyExtractor: ({ clientId }) => `approvals.${clientId}`,
+              renderLabel: ({ clientName }) => (
+                <Heading.H4 weight="bold" upperCase color="red">
+                  {clientName}
+                </Heading.H4>
+              ),
+              renderItem: props => <ScopeView {...props} onDelete={refetch} />
+            });
+            return (
+              <ApprovalsComponent>
+                <Heading.H3 weight="bold">
+                  Доступ до персональних даних
+                </Heading.H3>
 
-                  <DefinitionListView
-                    labels={{
-                      ...approvals.labels
-                    }}
-                    data={{
-                      ...approvals.items
-                    }}
-                  />
-                  <Pagination totalPages={totalPages} />
-                </ApprovalsComponent>
-              );
-            }}
-          </Query>
-        );
-      }}
-    </SearchParams>
-  </>
+                <DefinitionListView
+                  labels={approvals.labels}
+                  data={approvals.items}
+                />
+                <Pagination totalPages={totalPages} />
+              </ApprovalsComponent>
+            );
+          }}
+        </Query>
+      );
+    }}
+  </SearchParams>
+);
+
+const SecurityBlock = ({ phone }) => (
+  <DefinitionListView
+    labels={{
+      phone: "Номер телефону"
+    }}
+    data={{
+      phone: (
+        <Link
+          href={`${REACT_APP_UPDATE_FACTOR_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+          size="s"
+          upperCase
+          color={"black"}
+          icon={<PencilIcon height="14" />}
+        >
+          {phone}
+        </Link>
+      )
+    }}
+  />
 );
 
 class ScopeView extends Component {
@@ -139,7 +141,7 @@ class ScopeView extends Component {
   };
 
   render() {
-    const { clientId, scope, id, onDelete } = this.props;
+    const { clientName, clientId, scope, id, onDelete } = this.props;
     const { showModal } = this.state;
     return (
       <>
@@ -166,7 +168,7 @@ class ScopeView extends Component {
                 close={() => this.setState({ showModal: false })}
                 deleteApproval={deleteApproval}
                 id={id}
-                clientId={clientId}
+                clientName={clientName}
                 onDelete={onDelete}
               />
             )}
@@ -177,12 +179,12 @@ class ScopeView extends Component {
   }
 }
 
-const ConfirmModal = ({ close, deleteApproval, id, clientId, onDelete }) => (
-  <Modal width={760} onClose={close}>
+const ConfirmModal = ({ close, deleteApproval, id, clientName, onDelete }) => (
+  <Modal width={760} onClose={close} placement="center" backdrop>
     <Heading.H1>
       {`
         Ви впевненні що хочете видалити
-        доступ ${clientId}?`}
+        доступ ${clientName}?`}
     </Heading.H1>
     <ControllButtonBlock>
       <Button
