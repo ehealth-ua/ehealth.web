@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.70.2"></a>
+## [0.70.2](https://github.com/edenlabllc/ehealth.web/compare/v0.70.1...v0.70.2) (2018-08-29)
+
+
+### Bug Fixes
+
+* **patient-account:** manage approvals in SecurityPage ([64a87bf](https://github.com/edenlabllc/ehealth.web/commit/64a87bf))
+
+
+
+
+
 <a name="0.70.1"></a>
 ## [0.70.1](https://github.com/edenlabllc/ehealth.web/compare/v0.70.0...v0.70.1) (2018-08-29)
 
