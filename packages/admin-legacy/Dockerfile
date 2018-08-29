@@ -11,7 +11,7 @@ RUN npx lerna exec --scope $SCOPE mv nginx.conf /opt/target/
 RUN npx lerna run --scope $SCOPE build
 RUN npx lerna exec --scope $SCOPE mv build /opt/target/
 
-FROM nginx:alpine
+FROM nginx:stable-alpine
 EXPOSE 80
 RUN apk --no-cache add jq
 COPY --from=builder /opt/target/nginx.conf /etc/nginx/nginx.conf
