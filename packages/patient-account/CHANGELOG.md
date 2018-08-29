@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.68.0"></a>
+# [0.68.0](https://github.com/edenlabllc/ehealth.web/compare/v0.67.0...v0.68.0) (2018-08-29)
+
+
+### Bug Fixes
+
+* use nginx:stable-alpine Docker image as base ([e60c0cc](https://github.com/edenlabllc/ehealth.web/commit/e60c0cc))
+
+
+
+
+
 <a name="0.67.0"></a>
 # [0.67.0](https://github.com/edenlabllc/ehealth.web/compare/v0.66.0...v0.67.0) (2018-08-28)
 

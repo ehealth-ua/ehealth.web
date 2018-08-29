@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.68.0"></a>
+# [0.68.0](https://github.com/edenlabllc/ehealth.web/compare/v0.67.0...v0.68.0) (2018-08-29)
+
+
+### Bug Fixes
+
+* fix styled-system versions ([f8c8376](https://github.com/edenlabllc/ehealth.web/commit/f8c8376))
+* use nginx:stable-alpine Docker image as base ([e60c0cc](https://github.com/edenlabllc/ehealth.web/commit/e60c0cc))
+
+
+### Features
+
+* **admin:** establish spacing and fontSizes in the theme ([0355ef8](https://github.com/edenlabllc/ehealth.web/commit/0355ef8))
+
+
+
+
+
 <a name="0.67.0"></a>
 # [0.67.0](https://github.com/edenlabllc/ehealth.web/compare/v0.66.0...v0.67.0) (2018-08-28)
 
