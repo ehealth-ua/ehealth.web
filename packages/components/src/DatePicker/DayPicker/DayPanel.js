@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "react-emotion/macro";
 
 import DayList from "./DayList";
 import { List, Item } from "../Body";

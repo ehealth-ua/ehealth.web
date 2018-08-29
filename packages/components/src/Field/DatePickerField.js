@@ -1,8 +1,5 @@
 import React from "react";
-import Field from "./Field";
 import DatePicker from "../DatePicker";
-import { TextField, ErrorMessage } from "./InputField";
-import FieldView from "./FieldView";
 
 class DatePickerField extends React.Component {
   state = {
@@ -26,9 +23,8 @@ class DatePickerField extends React.Component {
   };
 
   render() {
-    const { props, state } = this;
-    const { selectedDate, date, firstDayOfWeek, showOutsideDays } = state;
-    const { label, horizontal } = props;
+    const { state } = this;
+    const { selectedDate } = state;
     return (
       <>
         <DatePicker
