@@ -5,8 +5,7 @@ import {
   MultilineTextField,
   NumberField,
   PasswordField,
-  MaskField,
-  LabelInInputField
+  MaskField
 } from "./InputField";
 import SelectField from "./SelectField";
 import ListenerField from "./ListenerField";
@@ -19,7 +18,6 @@ import { Row, Col } from "./Grid";
 
 Field.Input = InputField;
 Field.MaskField = MaskField;
-Field.LabelInInputField = LabelInInputField;
 Field.Text = TextField;
 Field.MultilineText = MultilineTextField;
 Field.Number = NumberField;

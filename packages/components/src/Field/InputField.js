@@ -22,10 +22,6 @@ export const MaskField = props => (
   <InputField {...props} inputComponent={MaskContent} />
 );
 
-export const LabelInInputField = props => (
-  <InputField {...props} fieldComponent={FieldLabelView} />
-);
-
 export const InputField = ({
   label,
   horizontal,
@@ -34,14 +30,17 @@ export const InputField = ({
   postfix,
   disabled,
   color,
+  placeholder,
   inputComponent: InputComponent = Input,
-  fieldComponent: FieldComponent = FieldView,
+  fieldComponent: FieldComponent = placeholder && !label
+    ? FieldLabelView
+    : FieldView,
   ...props
 }) => (
   <Field {...props}>
     {({ input, meta: { active, errored, error } }) => (
       <FieldComponent
-        label={label}
+        label={label || placeholder}
         horizontal={horizontal}
         active={active}
         value={!!input.value}
@@ -54,7 +53,12 @@ export const InputField = ({
           color={color}
         >
           {prefix && <InputContent>{prefix}</InputContent>}
-          <InputComponent {...input} disabled={disabled} size={size} />
+          <InputComponent
+            {...input}
+            placeholder={label ? placeholder : null}
+            disabled={disabled}
+            size={size}
+          />
           {postfix && <InputContent>{postfix}</InputContent>}
         </InputBorder>
         {errored && <ErrorMessage>{error}</ErrorMessage>}
