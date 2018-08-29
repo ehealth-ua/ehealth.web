@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.70.0"></a>
+# [0.70.0](https://github.com/edenlabllc/ehealth.web/compare/v0.68.0...v0.70.0) (2018-08-29)
+
+
+### Features
+
+* **admin:** add Pagination component ([#260](https://github.com/edenlabllc/ehealth.web/issues/260)) ([a0a565f](https://github.com/edenlabllc/ehealth.web/commit/a0a565f))
+* **admin:** dropdown component ([b907d50](https://github.com/edenlabllc/ehealth.web/commit/b907d50))
+
+
+
+
+
 <a name="0.69.0"></a>
 # [0.69.0](https://github.com/edenlabllc/ehealth.web/compare/v0.68.0...v0.69.0) (2018-08-29)
 
