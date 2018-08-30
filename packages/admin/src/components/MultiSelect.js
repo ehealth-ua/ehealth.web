@@ -138,7 +138,6 @@ const MultiSelect = ({
                 }
               }
             })}
-            style={{ minHeight: "30px", padding: "0 5px" }}
           />
         </MultiSelectInput>
         <SelectList
@@ -165,6 +164,10 @@ const MultiSelectInput = styled.div`
   min-height: 36px;
   box-sizing: border-box;
   padding: ${ifProp("leftPadding", "0 0 0 15px", "0 0 2px 0")};
+  input {
+    min-height: 30px;
+    padding: 0 5px;
+  }
 `;
 
 const Container = styled.div`
