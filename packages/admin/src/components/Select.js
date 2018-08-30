@@ -5,66 +5,61 @@ import { ifProp } from "styled-tools";
 
 import SelectList from "./SelectList";
 
-export class Select extends Component {
-  render() {
-    const {
-      items = [],
-      handleChange = () => {},
-      placeHolder = "Вибрати"
-    } = this.props;
-    return (
-      <Downshift
-        onChange={selection => handleChange(selection)}
-        itemToString={item => (item ? item.value : "")}
-      >
-        {({
-          getRootProps,
-          getInputProps,
-          getItemProps,
-          getToggleButtonProps,
-          isOpen,
-          inputValue,
-          selectedItem,
-          toggleMenu,
-          clearSelection
-        }) => (
-          <Container {...getRootProps({ refKey: "innerRef" })}>
-            <SelectInput
-              onClick={() => {
-                toggleMenu();
-              }}
-            >
-              <input
-                placeholder={placeHolder}
-                {...getInputProps({
-                  onChange: e => {
-                    if (e.target.value === "") {
-                      clearSelection();
-                    }
-                  }
-                })}
-              />
-              <ControllerButton
-                {...getToggleButtonProps({
-                  onClick(event) {
-                    event.stopPropagation();
-                  }
-                })}
-                isOpen={isOpen}
-              />
-            </SelectInput>
-            <SelectList
-              isOpen={isOpen}
-              itemsList={items}
-              getItemProps={getItemProps}
-              inputValue={inputValue}
-            />
-          </Container>
-        )}
-      </Downshift>
-    );
-  }
-}
+const Select = ({
+  items = [],
+  handleChange = () => {},
+  placeHolder = "Вибрати"
+}) => (
+  <Downshift
+    onChange={selection => handleChange(selection)}
+    itemToString={item => (item ? item.value : "")}
+  >
+    {({
+      getRootProps,
+      getInputProps,
+      getItemProps,
+      getToggleButtonProps,
+      isOpen,
+      inputValue,
+      selectedItem,
+      toggleMenu,
+      clearSelection
+    }) => (
+      <Container {...getRootProps({ refKey: "innerRef" })}>
+        <SelectInput
+          onClick={() => {
+            toggleMenu();
+          }}
+        >
+          <input
+            placeholder={placeHolder}
+            {...getInputProps({
+              onChange: e => {
+                if (e.target.value === "") {
+                  clearSelection();
+                }
+              }
+            })}
+          />
+          <ControllerButton
+            {...getToggleButtonProps({
+              onClick(event) {
+                event.stopPropagation();
+              }
+            })}
+            isOpen={isOpen}
+          />
+        </SelectInput>
+        <SelectList
+          isOpen={isOpen}
+          itemsList={items}
+          getItemProps={getItemProps}
+          inputValue={inputValue}
+        />
+      </Container>
+    )}
+  </Downshift>
+);
 
 export default Select;
 

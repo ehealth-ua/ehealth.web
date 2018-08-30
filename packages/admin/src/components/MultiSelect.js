@@ -95,68 +95,62 @@ class MultiDownshift extends Component {
   }
 }
 
-class MultiSelect extends Component {
-  render() {
-    const {
-      items = [],
-      handleChange = () => {},
-      placeHolder = "Вибрати"
-    } = this.props;
-
-    return (
-      <MultiDownshift
-        onChange={selectedItems => handleChange(selectedItems)}
-        itemToString={() => ""}
-      >
-        {({
-          getRootProps,
-          getInputProps,
-          getRemoveButtonProps,
-          removeItem,
-          isOpen,
-          inputValue,
-          selectedItems,
-          getItemProps,
-          toggleMenu
-        }) => (
-          <Container {...getRootProps({ refKey: "innerRef" })}>
-            <MultiSelectInput
-              onClick={() => {
-                toggleMenu();
-              }}
-              leftPadding={!selectedItems.length}
-            >
-              {selectedItems.length > 0
-                ? selectedItems.map(item => (
-                    <SelectedItem key={item.value}>
-                      <span>{item.value}</span>
-                      <CloseButton {...getRemoveButtonProps({ item })} />
-                    </SelectedItem>
-                  ))
-                : placeHolder}
-              <input
-                {...getInputProps({
-                  onKeyUp(event) {
-                    if (event.key === "Backspace" && !inputValue) {
-                      removeItem(selectedItems[selectedItems.length - 1]);
-                    }
-                  }
-                })}
-                style={{ minHeight: "30px", padding: "0 5px" }}
-              />
-            </MultiSelectInput>
-            <SelectList
-              isOpen={isOpen}
-              itemsList={items}
-              getItemProps={getItemProps}
-              inputValue={inputValue}
-            />
-          </Container>
-        )}
-      </MultiDownshift>
-    );
-  }
-}
+const MultiSelect = ({
+  items = [],
+  handleChange = () => {},
+  placeHolder = "Вибрати"
+}) => (
+  <MultiDownshift
+    onChange={selectedItems => handleChange(selectedItems)}
+    itemToString={() => ""}
+  >
+    {({
+      getRootProps,
+      getInputProps,
+      getRemoveButtonProps,
+      removeItem,
+      isOpen,
+      inputValue,
+      selectedItems,
+      getItemProps,
+      toggleMenu
+    }) => (
+      <Container {...getRootProps({ refKey: "innerRef" })}>
+        <MultiSelectInput
+          onClick={() => {
+            toggleMenu();
+          }}
+          leftPadding={!selectedItems.length}
+        >
+          {selectedItems.length > 0
+            ? selectedItems.map(item => (
+                <SelectedItem key={item.value}>
+                  <span>{item.value}</span>
+                  <CloseButton {...getRemoveButtonProps({ item })} />
+                </SelectedItem>
+              ))
+            : placeHolder}
+          <input
+            {...getInputProps({
+              onKeyUp(event) {
+                if (event.key === "Backspace" && !inputValue) {
+                  removeItem(selectedItems[selectedItems.length - 1]);
+                }
+              }
+            })}
+            style={{ minHeight: "30px", padding: "0 5px" }}
+          />
+        </MultiSelectInput>
+        <SelectList
+          isOpen={isOpen}
+          itemsList={items}
+          getItemProps={getItemProps}
+          inputValue={inputValue}
+        />
+      </Container>
+    )}
+  </MultiDownshift>
+);
 
 export default MultiSelect;
 
