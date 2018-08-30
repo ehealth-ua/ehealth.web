@@ -45,7 +45,7 @@ const SignUpUserPage = ({ location, router }) => (
         </Validations>
         <Field.Input
           name="person.emergency_contact.first_name"
-          placeholder="Введіть ім'я"
+          placeholder="Ім'я"
           label="Контактна особа для екстреного зв'язку"
         />
         <Validations field="person.emergency_contact.first_name">
@@ -57,7 +57,7 @@ const SignUpUserPage = ({ location, router }) => (
         </Validations>
         <Field.Input
           name="person.emergency_contact.last_name"
-          placeholder="Введіть прізвище"
+          placeholder="Прізвище"
         />
         <Validations field="person.emergency_contact.last_name">
           <Validation.Required message="Об'язкове поле" />
@@ -68,7 +68,7 @@ const SignUpUserPage = ({ location, router }) => (
         </Validations>
         <Field.Input
           name="person.emergency_contact.second_name"
-          placeholder="Введіть по-батькові"
+          placeholder="По-батькові"
         />
         <Validation.Matches
           field="person.emergency_contact.second_name"

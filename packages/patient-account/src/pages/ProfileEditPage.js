@@ -202,7 +202,7 @@ const ProfileEditPage = ({ history }) => (
                       <Field.Group label="ПІБ" horizontal>
                         <Field.Text
                           name="person.emergencyContact.firstName"
-                          placeholder="Введіть ім'я"
+                          placeholder="Ім'я"
                         />
                         <Validations field="person.emergencyContact.firstName">
                           <Validation.Required message="Об'язкове поле" />
@@ -213,7 +213,7 @@ const ProfileEditPage = ({ history }) => (
                         </Validations>
                         <Field.Text
                           name="person.emergencyContact.lastName"
-                          placeholder="Введіть прізвище"
+                          placeholder="Прізвище"
                         />
                         <Validations field="person.emergencyContact.lastName">
                           <Validation.Required message="Об'язкове поле" />
@@ -224,7 +224,7 @@ const ProfileEditPage = ({ history }) => (
                         </Validations>
                         <Field.Text
                           name="person.emergencyContact.secondName"
-                          placeholder="Введіть по-батькові"
+                          placeholder="По-батькові"
                         />
                         <Validation.Matches
                           field="person.emergencyContact.secondName"
