@@ -43,51 +43,52 @@ const SignUpUserPage = ({ location, router }) => (
             message="Пароль був використаний у системі раніше"
           />
         </Validations>
-        <Field.Input
-          name="person.emergency_contact.first_name"
-          placeholder="Ім'я"
-          label="Контактна особа для екстреного зв'язку"
-        />
-        <Validations field="person.emergency_contact.first_name">
-          <Validation.Required message="Об'язкове поле" />
+        <Field.Group label="Контактна особа для екстреного зв'язку">
+          <Field.Input
+            name="person.emergency_contact.first_name"
+            placeholder="Ім'я"
+          />
+          <Validations field="person.emergency_contact.first_name">
+            <Validation.Required message="Об'язкове поле" />
+            <Validation.Matches
+              options={PERSON_NAME_PATTERN}
+              message="Дозволені тільки літери українського алфавіту"
+            />
+          </Validations>
+          <Field.Input
+            name="person.emergency_contact.last_name"
+            placeholder="Прізвище"
+          />
+          <Validations field="person.emergency_contact.last_name">
+            <Validation.Required message="Об'язкове поле" />
+            <Validation.Matches
+              options={PERSON_NAME_PATTERN}
+              message="Дозволені тільки літери українського алфавіту"
+            />
+          </Validations>
+          <Field.Input
+            name="person.emergency_contact.second_name"
+            placeholder="По-батькові"
+          />
           <Validation.Matches
+            field="person.emergency_contact.second_name"
             options={PERSON_NAME_PATTERN}
             message="Дозволені тільки літери українського алфавіту"
           />
-        </Validations>
-        <Field.Input
-          name="person.emergency_contact.last_name"
-          placeholder="Прізвище"
-        />
-        <Validations field="person.emergency_contact.last_name">
-          <Validation.Required message="Об'язкове поле" />
-          <Validation.Matches
-            options={PERSON_NAME_PATTERN}
-            message="Дозволені тільки літери українського алфавіту"
+          <Field.Input
+            name="person.emergency_contact.phones[0].number"
+            label="Номер телефону контактної особи"
+            format={formatPhone}
+            parse={parsePhone}
           />
-        </Validations>
-        <Field.Input
-          name="person.emergency_contact.second_name"
-          placeholder="По-батькові"
-        />
-        <Validation.Matches
-          field="person.emergency_contact.second_name"
-          options={PERSON_NAME_PATTERN}
-          message="Дозволені тільки літери українського алфавіту"
-        />
-        <Field.Input
-          name="person.emergency_contact.phones[0].number"
-          label="Номер телефону контактної особи"
-          format={formatPhone}
-          parse={parsePhone}
-        />
-        <Validations field="person.emergency_contact.phones[0].number">
-          <Validation.Required message="Об'язкове поле" />
-          <Validation.Matches
-            options={PHONE_PATTERN}
-            message="Невірний номер телефону"
-          />
-        </Validations>
+          <Validations field="person.emergency_contact.phones[0].number">
+            <Validation.Required message="Об'язкове поле" />
+            <Validation.Matches
+              options={PHONE_PATTERN}
+              message="Невірний номер телефону"
+            />
+          </Validations>
+        </Field.Group>
         <Field.Group label="Бажаний метод зв'язку">
           <Field.Row>
             <Field.Col width={1 / 3}>
