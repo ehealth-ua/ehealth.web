@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.71.0"></a>
+# [0.71.0](https://github.com/edenlabllc/ehealth.web/compare/v0.70.3...v0.71.0) (2018-08-31)
+
+**Note:** Version bump only for package @ehealth/postmessage-client
+
+
+
+
+
 <a name="0.70.0"></a>
 # [0.70.0](https://github.com/edenlabllc/ehealth.web/compare/v0.68.0...v0.70.0) (2018-08-29)
 
