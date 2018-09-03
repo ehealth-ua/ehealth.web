@@ -24,6 +24,10 @@ export const onSubmit = (
   },
   active
 ) => dispatch => {
+  const first = mapIngredient(one, 0, active);
+  const rest = ingredients.map((ingredient, index) =>
+    mapIngredient(ingredient, index + 1, active)
+  );
   const values = {
     name,
     code_atc,
@@ -42,11 +46,8 @@ export const onSubmit = (
       numerator_unit,
       denumerator_unit
     },
-    ingredients: ingredients
-      .map((ingredient, index) => mapIngredient(ingredient, index, active))
-      .concat(mapIngredient(one, ingredients.length, active))
+    ingredients: [first, ...rest]
   };
-
   return dispatch(createMedication(values)).then(({ error, payload }) => {
     if (!error) return dispatch(push(`/medications/${payload.data.id}`));
   });

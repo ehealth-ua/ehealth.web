@@ -8,12 +8,14 @@ export const onSubmit = (
   { form: { name: form }, name, ingredients = [], one: { ingredients: one } },
   active
 ) => dispatch => {
+  const first = mapIngredient(one, 0, active);
+  const rest = ingredients.map((ingredient, index) =>
+    mapIngredient(ingredient, index + 1, active)
+  );
   const values = {
     form,
     name,
-    ingredients: ingredients
-      .map((ingredient, index) => mapIngredient(ingredient, index, active))
-      .concat(mapIngredient(one, ingredients.length, active))
+    ingredients: [first, ...rest]
   };
 
   return dispatch(createInnmDosage(values)).then(({ error, payload }) => {
