@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.71.2"></a>
+## [0.71.2](https://github.com/edenlabllc/ehealth.web/compare/v0.71.1...v0.71.2) (2018-09-03)
+
+
+### Bug Fixes
+
+* **auth:** fix sign in link on sign up page ([807435f](https://github.com/edenlabllc/ehealth.web/commit/807435f))
+
+
+
+
+
 <a name="0.71.1"></a>
 ## [0.71.1](https://github.com/edenlabllc/ehealth.web/compare/v0.71.0...v0.71.1) (2018-09-03)
 
