@@ -18,6 +18,11 @@ import {
 import { H1 } from "../../../components/Title";
 import { verifyEmail } from "../../../redux/cabinet";
 
+import {
+  REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI,
+  REACT_APP_CLIENT_ID
+} from "../../../env";
+
 const SignUpVerifyPage = ({ router, verifyEmail }) => (
   <Main>
     <Header>
@@ -28,7 +33,10 @@ const SignUpVerifyPage = ({ router, verifyEmail }) => (
       <NarrowContainer>
         <Form
           onSubmit={async ({ email }) => {
-            const { error, payload: { response } } = await verifyEmail({
+            const {
+              error,
+              payload: { response }
+            } = await verifyEmail({
               email
             });
 
@@ -53,10 +61,18 @@ const SignUpVerifyPage = ({ router, verifyEmail }) => (
         </Form>
       </NarrowContainer>
       <p>
-        Вже зареєстровані? <Link to="/sign-in">Авторизуйтеся</Link>
+        Вже зареєстровані?{" "}
+        <Link
+          to={`/sign-in?client_id=${REACT_APP_CLIENT_ID}&scope=&redirect_uri=${REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI}`}
+        >
+          Авторизуйтеся
+        </Link>
       </p>
     </Article>
   </Main>
 );
 
-export default connect(null, { verifyEmail })(SignUpVerifyPage);
+export default connect(
+  null,
+  { verifyEmail }
+)(SignUpVerifyPage);
