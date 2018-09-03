@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.71.1"></a>
+## [0.71.1](https://github.com/edenlabllc/ehealth.web/compare/v0.71.0...v0.71.1) (2018-09-03)
+
+
+### Bug Fixes
+
+* **admin-legacy:** medication create fix ([5713538](https://github.com/edenlabllc/ehealth.web/commit/5713538))
+
+
+
+
+
 <a name="0.71.0"></a>
 # [0.71.0](https://github.com/edenlabllc/ehealth.web/compare/v0.70.3...v0.71.0) (2018-08-31)
 
