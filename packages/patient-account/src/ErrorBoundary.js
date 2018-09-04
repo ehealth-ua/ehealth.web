@@ -33,7 +33,7 @@ export default class ErrorBoundary extends Component {
               client={<Error.ClientError error={error} />}
               forbidden={
                 <>
-                  <Modal width={760} px={76} py={32} place="top" backdrop>
+                  <Modal width={760} px={76} py={32} placement="top" backdrop>
                     <Text color="red" fontSize="16" fontWeight="bold">
                       У вас немає доступу до даної операції
                     </Text>
@@ -45,7 +45,7 @@ export default class ErrorBoundary extends Component {
                   {blocking ? (
                     <Error.Client error={error} />
                   ) : (
-                    <Modal width={760} p={4} place="top">
+                    <Modal width={760} p={4} placement="top">
                       Щось пішло не так...
                     </Modal>
                   )}

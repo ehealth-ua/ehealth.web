@@ -1,9 +1,8 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import styled from "react-emotion/macro";
-import { keyframes } from "react-emotion";
 import system from "system-components/emotion";
-import { complexStyle } from "styled-system";
+import { variant } from "styled-system";
 import { Fixed } from "rebass/emotion";
 import { CloseIcon } from "@ehealth/icons";
 
@@ -37,23 +36,6 @@ const CloseButton = styled.button`
   right: 30px;
 `;
 
-const placement = complexStyle({
-  prop: "placement",
-  alias: "place",
-  key: "placements"
-});
-
-const bounce = keyframes`
-  from {
-    transform: translate(-50%, -100%);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-  }
-`;
-
 const Window = system(
   {
     is: Fixed,
@@ -62,15 +44,17 @@ const Window = system(
     maxWidth: "100vw",
     maxHeight: "100vh",
     textAlign: "center",
-    place: "center"
+    placement: "center"
   },
   `
     box-shadow: 0 0 7px 5px rgba(227, 223, 223, 0.5);
     overflow: auto;
-    animation: ${bounce} .5s ease forwards;
   `,
   "width",
-  placement
+  variant({
+    prop: "placement",
+    key: "placements"
+  })
 );
 
 const Backdrop = system({

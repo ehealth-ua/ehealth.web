@@ -42,7 +42,7 @@ const PopupWindow = styled.div`
   opacity: 1;
   top: 50px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   box-shadow: 0 0 7px 5px rgba(227, 223, 223, 0.5);
   padding: 60px;
 
