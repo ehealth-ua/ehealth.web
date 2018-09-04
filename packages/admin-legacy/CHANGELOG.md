@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.71.4"></a>
+## [0.71.4](https://github.com/edenlabllc/ehealth.web/compare/v0.71.3...v0.71.4) (2018-09-04)
+
+
+### Bug Fixes
+
+* **admin-legacy:** change port ([349d1cd](https://github.com/edenlabllc/ehealth.web/commit/349d1cd))
+* **admin-legacy:** fix declaration scopes ([23e27dd](https://github.com/edenlabllc/ehealth.web/commit/23e27dd))
+
+
+
+
+
 <a name="0.71.3"></a>
 ## [0.71.3](https://github.com/edenlabllc/ehealth.web/compare/v0.71.2...v0.71.3) (2018-09-04)
 
