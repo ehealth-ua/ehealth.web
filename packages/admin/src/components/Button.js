@@ -6,8 +6,8 @@ const Button = system(
     border: 1,
     fontSize: 1,
     lineHeight: 1,
-    px: 3,
-    py: 1,
+    px: 4,
+    py: 2,
     variant: "light"
   },
   `
