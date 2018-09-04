@@ -1,14 +1,11 @@
-import buttons from "./buttons";
-import colors from "./colors";
+export { default as buttons } from "./buttons";
+export { default as colors } from "./colors";
 
-const fontSizes = [12, 14, 16, 18, 20];
-const space = [0, 5, 15, 20, 30, 40, 55];
-
-const theme = {
-  buttons,
-  colors,
-  fontSizes,
-  space
+export const fonts = {
+  0: '"GothamPro", sans-serif',
+  sans: '"GothamPro", sans-serif'
 };
 
-export default theme;
+export const fontSizes = [12, 14, 16, 18, 20];
+
+export const space = [0, 5, 10, 15, 20, 30, 40, 55];

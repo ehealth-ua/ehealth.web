@@ -56,8 +56,6 @@ injectGlobal`
   }
 
   body {
-    color: #3c4858;
-    font: 400 12px/1.6 "GothamPro", sans-serif;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
