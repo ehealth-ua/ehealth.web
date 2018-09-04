@@ -1,10 +1,26 @@
 import React from "react";
 import { Field } from "@ehealth/components";
 
-import * as FieldView from "./FieldView";
-import * as InputView from "./InputView";
+import * as FieldView from "../FieldView";
+import * as InputView from "../InputView";
 
-const InputField = ({ label, hint, warning, prefix, postfix, ...props }) => (
+export const TextField = props => <InputField {...props} type="text" />;
+
+export const TextareaField = props => <InputField {...props} is="textarea" />;
+
+export const NumberField = props => <InputField {...props} type="number" />;
+
+export const PasswordField = props => <InputField {...props} type="password" />;
+
+const InputField = ({
+  label,
+  hint,
+  warning,
+  prefix,
+  postfix,
+  is = "input",
+  ...props
+}) => (
   <Field {...props}>
     {({ input, meta: { state, errored, error } }) => (
       <FieldView.Wrapper is="label">
@@ -17,7 +33,7 @@ const InputField = ({ label, hint, warning, prefix, postfix, ...props }) => (
 
         <InputView.Border state={state}>
           {prefix && <InputView.Content px={2}>{prefix}</InputView.Content>}
-          <InputView.Content {...input} is="input" />
+          <InputView.Content {...input} is={is} />
           {postfix && <InputView.Content px={2}>{postfix}</InputView.Content>}
         </InputView.Border>
 
