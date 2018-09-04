@@ -55,16 +55,9 @@ class PendingDeclarationDetailPage extends React.Component {
 
         <DeclarationScans declaration={declaration} />
 
-        <ShowWithScope scope="declaration:write">
-          <div>
-            <ButtonsGroup>
-              <Button
-                theme="border"
-                onClick={() => this.setState({ showRejectConfirm: true })}
-                color="red"
-              >
-                Відхилити
-              </Button>
+        <ButtonsGroup>
+          <ShowWithScope scope="declaration:reject">
+            <div>
               <Button
                 theme="border"
                 onClick={() => this.setState({ showApproveConfirm: true })}
@@ -72,28 +65,38 @@ class PendingDeclarationDetailPage extends React.Component {
               >
                 Прийняти
               </Button>
-            </ButtonsGroup>
-            <Confirm
-              title="Прийняти декларацію?"
-              active={this.state.showApproveConfirm}
-              theme="success"
-              cancel="Скасувати"
-              confirm="Так"
-              onCancel={() => this.setState({ showApproveConfirm: false })}
-              onConfirm={() => this.approve()}
-            />
-
-            <Confirm
-              title="Відхилити декларацію?"
-              active={this.state.showRejectConfirm}
-              theme="error"
-              cancel="Скасувати"
-              confirm="Так"
-              onCancel={() => this.setState({ showRejectConfirm: false })}
-              onConfirm={() => this.reject()}
-            />
-          </div>
-        </ShowWithScope>
+              <Confirm
+                title="Прийняти декларацію?"
+                active={this.state.showApproveConfirm}
+                theme="success"
+                cancel="Скасувати"
+                confirm="Так"
+                onCancel={() => this.setState({ showApproveConfirm: false })}
+                onConfirm={() => this.approve()}
+              />
+            </div>
+          </ShowWithScope>
+          <ShowWithScope scope="declaration:approve">
+            <div>
+              <Button
+                theme="border"
+                onClick={() => this.setState({ showRejectConfirm: true })}
+                color="red"
+              >
+                Відхилити
+              </Button>
+              <Confirm
+                title="Відхилити декларацію?"
+                active={this.state.showRejectConfirm}
+                theme="error"
+                cancel="Скасувати"
+                confirm="Так"
+                onCancel={() => this.setState({ showRejectConfirm: false })}
+                onConfirm={() => this.reject()}
+              />
+            </div>
+          </ShowWithScope>
+        </ButtonsGroup>
       </div>
     );
   }
