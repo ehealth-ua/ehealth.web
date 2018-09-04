@@ -1,0 +1,10 @@
+{
+  "name": "@ehealth/system-tools",
+  "version": "0.71.1",
+  "private": true,
+  "description": "> TODO: description",
+  "main": "src",
+  "dependencies": {
+    "styled-system": "^3.0.2"
+  }
+}
