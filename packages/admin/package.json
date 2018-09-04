@@ -6,6 +6,7 @@
     "@ehealth/components": "file:../components",
     "@ehealth/icons": "file:../icons",
     "@ehealth/utils": "file:../utils",
+    "@ehealth/system-tools": "file:../system-tools",
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
     "apollo-link": "^1.2.2",

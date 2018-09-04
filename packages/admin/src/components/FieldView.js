@@ -1,0 +1,55 @@
+import system from "system-components/emotion";
+import { variant } from "@ehealth/system-tools";
+
+export const Wrapper = system(
+  {
+    flexDirection: "column",
+    alignItems: "stretch"
+  },
+  "space",
+  `
+    display: flex;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  `
+);
+
+export const Header = system(
+  {
+    mb: 2
+  },
+  `
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  `
+);
+
+export const Footer = system({
+  is: Header,
+  mt: 1,
+  mb: 1,
+  height: 20
+});
+
+export const Label = system(
+  {
+    color: "blueberrySoda",
+    fontSize: 1
+  },
+  "space"
+);
+
+export const Message = system(
+  {
+    color: "shiningKnight",
+    fontSize: 0
+  },
+  variant({
+    prop: "state",
+    key: "fields.message.states"
+  }),
+  "space"
+);
