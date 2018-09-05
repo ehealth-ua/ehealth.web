@@ -17,7 +17,7 @@ export const fetchUserData = token => dispatch =>
 
 export const fetchUser = userId =>
   invoke({
-    endpoint: `${REACT_APP_AUTH_URL}/admin/users/${userId}`,
+    endpoint: `${REACT_APP_AUTH_URL}/oauth/users/${userId}`,
     method: "GET",
     types: [
       "user/FETCH_USER_REQUEST",

@@ -7,7 +7,7 @@ import { invoke } from "./api";
 export const fetchClientById = id =>
   invoke(
     {
-      endpoint: `${REACT_APP_AUTH_URL}/admin/clients/${id}/details`,
+      endpoint: `${REACT_APP_AUTH_URL}/oauth/clients/${id}/details`,
       method: "GET",
       types: [
         "client/FETCH_CLIENT_REQUEST",
