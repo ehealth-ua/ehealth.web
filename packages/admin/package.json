@@ -1,12 +1,12 @@
 {
   "name": "@ehealth/admin",
-  "version": "0.72.0",
+  "version": "0.73.0",
   "private": true,
   "dependencies": {
     "@ehealth/components": "file:../components",
     "@ehealth/icons": "file:../icons",
-    "@ehealth/utils": "file:../utils",
     "@ehealth/system-tools": "file:../system-tools",
+    "@ehealth/utils": "file:../utils",
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
     "apollo-link": "^1.2.2",

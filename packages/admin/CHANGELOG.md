@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.73.0"></a>
+# [0.73.0](https://github.com/edenlabllc/ehealth.web/compare/v0.72.0...v0.73.0) (2018-09-05)
+
+
+### Bug Fixes
+
+* **admin:** adjust Button default paddings ([2c9b603](https://github.com/edenlabllc/ehealth.web/commit/2c9b603))
+* **admin:** fix theme import ([b611e66](https://github.com/edenlabllc/ehealth.web/commit/b611e66))
+
+
+### Features
+
+* **admin:** add FieldView and InputView components ([0f675a4](https://github.com/edenlabllc/ehealth.web/commit/0f675a4))
+* **admin:** add font-family to theme ([06201a8](https://github.com/edenlabllc/ehealth.web/commit/06201a8))
+* **admin:** add InputField component ([5614747](https://github.com/edenlabllc/ehealth.web/commit/5614747)), closes [#218](https://github.com/edenlabllc/ehealth.web/issues/218)
+* **admin:** add textarea and different input types, refactor input components ([a7b5148](https://github.com/edenlabllc/ehealth.web/commit/a7b5148)), closes [#222](https://github.com/edenlabllc/ehealth.web/issues/222)
+
+
+
+
+
 <a name="0.72.0"></a>
 # [0.72.0](https://github.com/edenlabllc/ehealth.web/compare/v0.71.4...v0.72.0) (2018-09-05)
 
