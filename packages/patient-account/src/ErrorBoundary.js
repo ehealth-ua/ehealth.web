@@ -43,7 +43,7 @@ export default class ErrorBoundary extends Component {
               network={
                 <>
                   {blocking ? (
-                    <Error.Client error={error} />
+                    <Error.ClientError error={error} />
                   ) : (
                     <Modal width={760} p={4} placement="top">
                       Щось пішло не так...
