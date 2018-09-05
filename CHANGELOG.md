@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.72.0"></a>
+# [0.72.0](https://github.com/edenlabllc/ehealth.web/compare/v0.71.4...v0.72.0) (2018-09-05)
+
+
+### Bug Fixes
+
+* **patient-account:** fix error name ([d923ec9](https://github.com/edenlabllc/ehealth.web/commit/d923ec9))
+
+
+### Features
+
+* **admin:** error handling ([c3d839a](https://github.com/edenlabllc/ehealth.web/commit/c3d839a))
+
+
+
+
+
 <a name="0.71.4"></a>
 ## [0.71.4](https://github.com/edenlabllc/ehealth.web/compare/v0.71.3...v0.71.4) (2018-09-04)
 
