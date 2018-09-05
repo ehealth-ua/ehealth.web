@@ -21,21 +21,33 @@ const TableView = ({
   rowKeyExtractor = (item, index) => item.key || index,
   columnKeyExtractor = name => name,
   tableComponent: TableComponent = "table",
+  tableHeader: TableHeaderView = TableHeader,
+  tableBody: TableBodyView = TableBody,
   headerComponent = "thead",
   bodyComponent = "tbody",
   rowComponent = "tr",
   headerCellComponent = "th",
-  cellComponent = "td"
+  cellComponent = "td",
+  sortElements,
+  onSort,
+  sortParams,
+  filterRow = null,
+  onFilter
 }: Props) => (
   <TableComponent>
-    <TableHeader
+    <TableHeaderView
       header={header}
       columnKeyExtractor={columnKeyExtractor}
       headerComponent={headerComponent}
       rowComponent={rowComponent}
       headerCellComponent={headerCellComponent}
+      sortElements={sortElements}
+      onSort={onSort}
+      sortParams={sortParams}
+      filterRow={filterRow}
+      onFilter={onFilter}
     />
-    <TableBody
+    <TableBodyView
       columns={Object.keys(header)}
       data={data}
       renderRow={renderRow}
@@ -44,6 +56,7 @@ const TableView = ({
       bodyComponent={bodyComponent}
       rowComponent={rowComponent}
       cellComponent={cellComponent}
+      filterRow={filterRow}
     />
   </TableComponent>
 );
