@@ -1,4 +1,5 @@
 export { default as convertObjectKeys } from "./convertObjectKeys";
+export { default as checkLastInList } from "./checkLastInList";
 export { default as getDefinitions } from "./getDefinitions";
 export { default as getDictValue } from "./getDictValue";
 export { default as getFullName } from "./getFullName";
@@ -8,6 +9,7 @@ export { default as getSpecialities } from "./getSpecialities";
 export { default as filterPropertiesByValue } from "./filterPropertiesByValue";
 export { default as fieldNameDenormalizer } from "./fieldNameDenormalizer";
 export { default as fieldNameNormalizer } from "./fieldNameNormalizer";
+export { default as filterTableColumn } from "./filterTableColumn";
 export { default as formatDate } from "./formatDate";
 export { default as formatPhone } from "./formatPhone";
 export { default as parseDate } from "./parseDate";
