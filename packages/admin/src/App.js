@@ -4,13 +4,22 @@ import { ThemeProvider } from "@ehealth/components";
 
 import "./globalStyles";
 import theme from "./theme";
+import ErrorBoundary from "./ErrorBoundary";
+import DataProvider from "./DataProvider";
 import Routes from "./Routes";
+import Preload from "./Preload";
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <Router>
-      <Routes />
-    </Router>
+    <ErrorBoundary>
+      <DataProvider>
+        <Router>
+          <Preload>
+            <Routes />
+          </Preload>
+        </Router>
+      </DataProvider>
+    </ErrorBoundary>
   </ThemeProvider>
 );
 
