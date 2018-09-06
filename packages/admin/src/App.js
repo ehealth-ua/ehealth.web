@@ -1,23 +1,30 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "@reach/router";
 import { ThemeProvider } from "@ehealth/components";
 
 import "./globalStyles";
 import * as theme from "./theme";
 import ErrorBoundary from "./ErrorBoundary";
 import DataProvider from "./DataProvider";
-import Routes from "./Routes";
 import Preload from "./Preload";
+
+import Layout from "./components/Layout";
+import HomePage from "./pages/HomePage";
+import PatientsPage from "./pages/PatientsPage";
+
+const NotFound = () => <p>Sorry, nothing here</p>;
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <ErrorBoundary>
       <DataProvider>
-        <Router>
-          <Preload>
-            <Routes />
-          </Preload>
-        </Router>
+        <Layout>
+          <Router>
+            <HomePage path="/" />
+            <PatientsPage path="patients/*" />
+            <NotFound default />
+          </Router>
+        </Layout>
       </DataProvider>
     </ErrorBoundary>
   </ThemeProvider>

@@ -12,7 +12,8 @@ class DataProvider extends Component {
   client = createClient({ onError: this.props.onError });
 
   async componentDidMount() {
-    await getDataFromTree(<ApolloProvider {...this.providerProps} />);
+    // TODO: Need to find proper workaround with this
+    // await getDataFromTree(<ApolloProvider {...this.providerProps} />);
 
     this.setState({ loading: false });
   }

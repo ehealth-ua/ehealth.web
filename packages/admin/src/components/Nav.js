@@ -1,25 +1,18 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
-import { BooleanValue } from "react-values";
-import { Match, Link } from "@ehealth/components";
+import { Match } from "@reach/router";
 import { ChevronBottomIcon } from "@ehealth/icons";
 
 import Ability from "./Ability";
+import Link from "./Link";
 
 const Nav = () => (
   <NavContainer>
     <NavList>
-      <Ability loose action="read" resources={["contract", "contract_request"]}>
-        <NavSection title="Контракти">
-          <Ability action="read" resource="contract">
-            <NavLink to="/contracts">Перелік контрактів</NavLink>
-          </Ability>
-          <Ability action="read" resource="contract_request">
-            <NavLink to="/contract_requests">
-              Запити на укладення контрактів
-            </NavLink>
-          </Ability>
+      <Ability action="read" resource="person">
+        <NavSection title="Паціенти">
+          <NavLink to="/patients">Пошук паціентів</NavLink>
         </NavSection>
       </Ability>
     </NavList>
@@ -28,11 +21,17 @@ const Nav = () => (
 
 export default Nav;
 
-const NavLink = ({ to, children, ...props }) => (
-  <Match path={to} {...props}>
-    {({ active, ...props }) => (
-      <NavItem active={active}>
-        <Link color="white" {...props}>
+const NavLink = ({ to, children }) => (
+  <Match path={`${to}/*`}>
+    {({ match }) => (
+      <NavItem isCurrent={match && match.uri === to}>
+        <Link
+          to={to}
+          color="white"
+          fontWeight={match && match.uri === to && "bold"}
+          display="inline"
+          verticalAlign="baseline"
+        >
           {children}
         </Link>
       </NavItem>
@@ -42,21 +41,18 @@ const NavLink = ({ to, children, ...props }) => (
 
 const NavSection = ({ title, children }) => (
   <NavItem>
-    <BooleanValue>
-      {({ value: expanded, toggle }) => (
-        <>
-          <Link
-            color="white"
-            onClick={toggle}
-            icon={<ChevronIcon open={expanded} />}
-          >
-            {title}
-          </Link>
-
-          {expanded && <NavList>{children}</NavList>}
-        </>
-      )}
-    </BooleanValue>
+    <details>
+      <Link
+        is="summary"
+        color="white"
+        display="inline"
+        verticalAlign="baseline"
+      >
+        {title}
+        <ChevronIcon width="7" height="7" />
+      </Link>
+      <NavList>{children}</NavList>
+    </details>
   </NavItem>
 );
 
@@ -70,18 +66,20 @@ const NavList = styled.ul`
 `;
 
 const NavItem = styled.li`
-  font-size: 12px;
-  font-weight: ${ifProp("active", "700", "400")};
+  font-weight: ${ifProp("isCurrent", "700", "400")};
   line-height: 16px;
   list-style-image: radial-gradient(
     circle closest-side,
-    ${ifProp("active", "#ff7800", "#fff")},
-    ${ifProp("active", "#ff7800", "#fff")} 90%,
+    ${ifProp("isCurrent", "#ff7800", "#fff")},
+    ${ifProp("isCurrent", "#ff7800", "#fff")} 90%,
     transparent 100%
   );
   margin-top: 15px;
 `;
 
-const ChevronIcon = styled(ChevronBottomIcon)(
-  ifProp("open", { transform: "rotate(180deg)" })
-);
+const ChevronIcon = styled(ChevronBottomIcon)`
+  margin-left: 10px;
+  details[open] & {
+    transform: rotate(180deg);
+  }
+`;

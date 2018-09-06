@@ -86,5 +86,8 @@ injectGlobal`
   button {
     outline: none;
   }
-
+  
+  summary::-webkit-details-marker {
+    display: none;
+  }
 `;
