@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 import styled from "react-emotion/macro";
+import { ifProp } from "styled-tools";
 import { EhealthLogoIcon } from "@ehealth/icons";
 
 import Nav from "./Nav";
@@ -33,6 +34,7 @@ const Sidebar = styled.aside`
 const Content = styled.section`
   width: 100%;
   padding: 50px;
+  overflow: hidden;
 `;
 
 const Logo = styled(EhealthLogoIcon)`
