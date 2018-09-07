@@ -7,7 +7,7 @@ import * as fromInnmDosages from "../../../redux/innm-dosages";
 export const onSubmit = (
   {
     name,
-    code_atc,
+    code_atc = [],
     package_qty,
     package_min_qty,
     certificate,
@@ -20,7 +20,8 @@ export const onSubmit = (
       denumerator_unit: { name: denumerator_unit }
     },
     ingredients = [],
-    one: { ingredients: one }
+    one: { ingredients: one },
+    defaultCodeAtc
   },
   active
 ) => dispatch => {
@@ -30,7 +31,7 @@ export const onSubmit = (
   );
   const values = {
     name,
-    code_atc,
+    code_atc: [defaultCodeAtc, ...code_atc],
     package_qty: parseFloat(package_qty, 10),
     package_min_qty: parseFloat(package_min_qty, 10),
     certificate,

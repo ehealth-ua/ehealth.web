@@ -20,6 +20,7 @@ import Button from "../../../components/Button";
 import Line from "../../../components/Line";
 
 import RenderIngredient from "./renderIngredient";
+import RenderCodeAtc from "./renderCodeAtc";
 
 import styles from "./styles.module.css";
 
@@ -40,6 +41,7 @@ class MedicationsCreateForm extends React.Component {
       active: value
     });
   }
+
   onSearchChange(value) {
     this.setState({
       innms_search: value
@@ -76,12 +78,13 @@ class MedicationsCreateForm extends React.Component {
           </FormRow>
           <FormRow>
             <Field
-              name="code_atc"
+              name="defaultCodeAtc"
               labelText="Код АТХ"
               component={FieldInput}
               disabled={disabled}
               placeholder="Введіть код АТХ"
             />
+            <FieldArray name="code_atc" component={RenderCodeAtc} />
           </FormRow>
           <FormRow>
             <FormColumn>
@@ -368,7 +371,7 @@ export default compose(
       name: {
         required: true
       },
-      code_atc: {
+      defaultCodeAtc: {
         required: true
       },
       form: {
