@@ -7,6 +7,7 @@
     "@ehealth/gatekeeper": "file:packages/gatekeeper",
     "@ehealth/iit-digital-signature": "file:packages/iit-digital-signature",
     "@ehealth/iit-proxy": "file:packages/iit-proxy",
+    "@ehealth/mock-server": "file:packages/mock-server",
     "@ehealth/patient-account": "file:packages/patient-account",
     "@ehealth/polyfill": "file:packages/polyfill",
     "lerna": "^3.0.2",

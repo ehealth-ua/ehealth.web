@@ -1,0 +1,28 @@
+{
+  "name": "@ehealth/mock-server",
+  "version": "0.73.0",
+  "private": true,
+  "description": "",
+  "main": "server.js",
+  "bin": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "image:build": "ehealth-scripts image build",
+    "image:test": "ehealth-scripts image test",
+    "image:build-and-test": "npm run image:build && npm run image:test",
+    "image:push": "ehealth-scripts image push",
+    "chart:update": "ehealth-scripts chart update"
+  },
+  "dependencies": {
+    "@ehealth/env": "file:../env",
+    "apollo-server-express": "^2.0.6",
+    "chokidar": "^2.0.4",
+    "express": "^4.16.3",
+    "faker": "^4.1.0",
+    "graphql": "^14.0.0",
+    "graphql-import": "^0.6.0",
+    "graphql-iso-date": "^3.5.0",
+    "graphql-type-json": "^0.2.1",
+    "lodash": "^4.17.10"
+  }
+}
