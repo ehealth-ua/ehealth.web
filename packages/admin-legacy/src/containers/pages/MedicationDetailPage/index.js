@@ -70,7 +70,12 @@ class MedicationDetailPage extends React.Component {
         <Line width={630} />
         <DataList
           list={[
-            { name: "Код АТХ", value: medication.code_atc },
+            {
+              name: "Код АТХ",
+              value: Array.isArray(medication.code_atc)
+                ? medication.code_atc.join(" ")
+                : medication.code_atc
+            },
             {
               name: "Форма",
               value: (
