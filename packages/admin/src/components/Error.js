@@ -1,21 +1,19 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { Link } from "@reach/router";
 
 import { Heading } from "@ehealth/components";
 import { EhealthLogoIcon } from "@ehealth/icons";
 
 import Button from "./Button";
+import Link from "./Link";
 
 const ErrorDefault = ({ number, text }) => (
   <Layout>
-    <Link to="/">
-      <EhealthLogoIcon height="100" />
-    </Link>
+    <EhealthLogoIcon height="100" />
     <ErrorTitle weight="bold">Помилка</ErrorTitle>
     {number && <Number>{number}</Number>}
     <ErrorText weight="bold">{text}</ErrorText>
-    <Link to="/">
+    <Link is="a" href="/">
       <Button variant="blue">Повернутись на головну</Button>
     </Link>
   </Layout>
