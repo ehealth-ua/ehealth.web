@@ -22,7 +22,8 @@ import {
   formatDate,
   parseDate,
   formatPhone,
-  parsePhone
+  parsePhone,
+  filterPropertiesByValue
 } from "@ehealth/utils";
 
 import { REACT_APP_SIGNER_URL } from "../env";
@@ -78,7 +79,9 @@ const ProfileEditPage = ({ history }) => (
                           fieldNameDenormalizer
                         );
 
-                        const { signedContent, meta } = await signData(person);
+                        const { signedContent, meta } = await signData(
+                          filterPropertiesByValue(person, "")
+                        );
 
                         const variables = {
                           id,
