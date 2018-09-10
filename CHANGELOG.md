@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.76.0"></a>
+# [0.76.0](https://github.com/edenlabllc/ehealth.web/compare/v0.75.0...v0.76.0) (2018-09-10)
+
+
+### Bug Fixes
+
+* use consistent graphql version across all packages ([5259433](https://github.com/edenlabllc/ehealth.web/commit/5259433))
+* **admin-legacy:** change codeAtc from string to array in medications create ([5d3a939](https://github.com/edenlabllc/ehealth.web/commit/5d3a939))
+* **admin-legacy:** change view codeAtc in MedicationDetailPage ([1aedff7](https://github.com/edenlabllc/ehealth.web/commit/1aedff7))
+* **auth:** fix resend password ([874917b](https://github.com/edenlabllc/ehealth.web/commit/874917b))
+* **components:** change function onChange in ListenerField ([195e47e](https://github.com/edenlabllc/ehealth.web/commit/195e47e))
+* **patient-account:** del props becomes in Field.Listener on ProfileEditPage ([783efdd](https://github.com/edenlabllc/ehealth.web/commit/783efdd))
+* **patient-account:** use filterPropertiesByValue for person on form submit in ProfileEditPage ([4e853c5](https://github.com/edenlabllc/ehealth.web/commit/4e853c5))
+
+
+### Features
+
+* **admin:** Clipboard component ([c8890bd](https://github.com/edenlabllc/ehealth.web/commit/c8890bd))
+* **mock-server:** add mock server ([8c2c665](https://github.com/edenlabllc/ehealth.web/commit/8c2c665)), closes [#279](https://github.com/edenlabllc/ehealth.web/issues/279)
+* **mock-server:** add Person type definitions ([cfd2685](https://github.com/edenlabllc/ehealth.web/commit/cfd2685))
+* **utils:**  filter properties in object by value ([dde07de](https://github.com/edenlabllc/ehealth.web/commit/dde07de))
+
+
+
+
+
 <a name="0.75.0"></a>
 # [0.75.0](https://github.com/edenlabllc/ehealth.web/compare/v0.74.0...v0.75.0) (2018-09-07)
 
