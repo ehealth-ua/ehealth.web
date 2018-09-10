@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { SUBMIT_ERROR } from "@ehealth/components";
+import { SUBMIT_ERROR, StateMachine, Link, Switch } from "@ehealth/components";
 import { passwordRecoveryRequest } from "../../../redux/password";
 
 import { H1, H3 } from "../../../components/Title";
@@ -14,13 +14,10 @@ import styles from "./styles.module.css";
 class ResetPasswordPage extends Component {
   constructor(props) {
     super(props);
-    this.onClickResend = this.onClickResend.bind(this);
     this.state = {
       isSend: false,
-      email: "",
-      timer: ""
+      email: ""
     };
-    this.interval = null;
   }
 
   componentWillUnmount() {
@@ -28,23 +25,16 @@ class ResetPasswordPage extends Component {
       isSend: false,
       email: ""
     });
-    clearInterval(this.interval);
-  }
-
-  onClickResend() {
-    this.interval = setInterval(() => {
-      this.state.timer > 1
-        ? this.setState({ timer: this.state.timer - 1 })
-        : this.setState({ timer: 0 });
-
-      if (this.state.timer === 0) clearInterval(this.interval);
-    }, 1000);
   }
 
   render() {
     const {
       passwordRecoveryRequest,
-      router: { location: { query: { client_id, redirect_uri } } }
+      router: {
+        location: {
+          query: { client_id, redirect_uri }
+        }
+      }
     } = this.props;
     return (
       <section className={styles.main} id="reset-password-in-page">
@@ -67,9 +57,7 @@ class ResetPasswordPage extends Component {
                 );
                 if (error) {
                   if (response.error.type === "validation_failed") {
-                    return {
-                      [SUBMIT_ERROR]: response.error.invalid
-                    };
+                    return { [SUBMIT_ERROR]: response.error.invalid };
                   }
                 } else this.setState({ isSend: true });
               }}
@@ -82,25 +70,15 @@ class ResetPasswordPage extends Component {
               <H3>На ваш email було надісладно листа для відновлення паролю</H3>
             </div>
             <ButtonsGroup>
-              <Button
-                theme="link"
-                disabled={this.state.timer > 0}
+              <ResendLink
                 onClick={async () => {
-                  const { error } = await passwordRecoveryRequest(
+                  await passwordRecoveryRequest(
                     this.state.email,
                     client_id,
                     redirect_uri
                   );
-                  if (!error) {
-                    this.setState({ timer: 10 });
-                    return this.onClickResend();
-                  }
                 }}
-              >
-                {this.state.timer
-                  ? `Надіслати повторно через ${this.state.timer} сек`
-                  : "Надіслати повторно"}
-              </Button>
+              />
             </ButtonsGroup>
           </div>
         )}
@@ -109,6 +87,42 @@ class ResetPasswordPage extends Component {
   }
 }
 
-export default compose(withRouter, connect(null, { passwordRecoveryRequest }))(
-  ResetPasswordPage
+const ResendLink = ({ onClick }) => (
+  <StateMachine
+    initialState="pending"
+    transitions={{
+      async sending() {
+        await onClick();
+        return "sent";
+      },
+      async sent() {
+        await new Promise(r => setTimeout(r, 10000));
+        return "pending";
+      }
+    }}
+  >
+    {({ state, transition }) => (
+      <Link
+        disabled={state !== "pending"}
+        onClick={() => {
+          if (state === "pending") transition("sending");
+        }}
+      >
+        <Switch
+          value={state}
+          pending="Відправити знову"
+          sending="Відправляємо..."
+          sent="Відправлено"
+        />
+      </Link>
+    )}
+  </StateMachine>
 );
+
+export default compose(
+  withRouter,
+  connect(
+    null,
+    { passwordRecoveryRequest }
+  )
+)(ResetPasswordPage);
