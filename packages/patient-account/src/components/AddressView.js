@@ -34,19 +34,29 @@ const AddressView = ({
     {zip && <>{zip}, </>}
     {formatArea(area)}, {region && <>{normalizeName(region)} район, </>}
     <>
-      <DictionaryValue name="SETTLEMENT_TYPE" item={settlementType} />&nbsp;
+      <DictionaryValue name="SETTLEMENT_TYPE" item={settlementType} />
+      &nbsp;
       {normalizeName(settlement)}
-    </>,{" "}
+    </>
+    ,{" "}
     <>
       {street && (
         <>
-          <DictionaryValue name="STREET_TYPE" item={streetType} />{" "}
-          {normalizeName(street)}&nbsp;
+          {streetType && (
+            <DictionaryValue name="STREET_TYPE" item={streetType} />
+          )}{" "}
+          {normalizeName(street)}
+          &nbsp;
         </>
       )}
       {building}
     </>
-    {apartment && <>, кв.&nbsp;{apartment}</>}
+    {apartment && (
+      <>
+        , кв.&nbsp;
+        {apartment}
+      </>
+    )}
   </>
 );
 
