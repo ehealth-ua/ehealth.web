@@ -399,12 +399,7 @@ const AddressFields = ({ name }) => (
         <Field.Input name={`${name}.apartment`} placeholder="№ квартири" />
       </Field.Col>
     </Field.Row>
-    <Field.Listener
-      field={`${name}.area`}
-      becomes={null}
-      set={`${name}.settlement`}
-      to={""}
-    />
+    <Field.Listener field={`${name}.area`} set={`${name}.settlement`} to={""} />
   </>
 );
 
