@@ -1,0 +1,71 @@
+"""
+This is Person (MPI) details. In order to obtain details user must have a scope **person:read**
+"""
+type Person {
+  id: ID!
+  ""
+  firstName: String! @fake(locale: "uk", method: "name.firstName", args: [1])
+  lastName: String! @fake(locale: "uk", method: "name.lastName", args: [1])
+  secondName: String @fake(locale: "uk", method: "name.firstName", args: [0])
+  birthDate: Date! @fake(locale: "uk", method: "date.past", args: [100])
+  gender: PersonGender!
+  status: PersonStatus!
+  birthCountry: String!
+  birthSettlement: String!
+  unzr: String
+  taxId: String
+    @fake(
+      locale: "uk"
+      method: "random.number"
+      args: [{ min: 1000000000, max: 9999999999 }]
+    )
+  authenticationMethod: AuthenticationMethod!
+  documents: [Document]
+  insertedAt: DateTime! @fake(locale: "uk", method: "date.past")
+}
+
+enum PersonStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum PersonGender {
+  MALE
+  FEMALE
+}
+
+type AuthenticationMethod {
+  type: String!
+  phoneNumber: String
+}
+
+type Document {
+  type: String
+  number: String
+  issuedBy: String @fake(locale: "uk", method: "company.companyName")
+  issuedAt: Date @fake(locale: "uk", method: "date.past")
+}
+
+input PersonFilter {
+  taxId: String
+  unzr: String
+  phoneNumber: String
+  personal: PersonPersonalFilter
+}
+
+input PersonPersonalFilter {
+  firstName: String!
+  lastName: String!
+  birthDate: Date!
+}
+
+enum PersonOrderBy {
+  taxId_ASC
+  taxId_DESC
+  unzr_ASC
+  unzr_DESC
+  birthDate_ASC
+  birthDate_DESC
+  insertedAt_ASC
+  insertedAt_DESC
+}

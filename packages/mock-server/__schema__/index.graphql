@@ -1,2 +1,15 @@
 # import * from "scalars.graphql"
 # import * from "directives.graphql"
+
+# import * from "persons.graphql"
+
+type Query {
+  "the filter must be used to get exactly one person knowing id"
+  person(id: ID!): Person
+  "the filter should be used in order to get a list of persons by parametrs"
+  persons(filter: PersonFilter, orderBy: PersonOrderBy): [Person]
+}
+
+type Mutation {
+  resetPersonAuthenticationMethod(id: ID!): Person
+}
