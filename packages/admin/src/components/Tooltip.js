@@ -1,13 +1,19 @@
 import React from "react";
 import styled from "react-emotion/macro";
-import { css } from "react-emotion";
+import { css, keyframes } from "react-emotion";
 import { Manager, Reference, Popper } from "react-popper";
+import { ifProp } from "styled-tools";
 
-const Tooltip = ({ content, component: Component }) => (
+const Tooltip = ({
+  content,
+  component: Component,
+  disableHover,
+  showTooltip
+}) => (
   <Manager>
     <Reference>
       {({ ref }) => (
-        <Target innerRef={ref}>
+        <Target innerRef={ref} disableHover={disableHover}>
           <Component />
         </Target>
       )}
@@ -27,7 +33,12 @@ const Tooltip = ({ content, component: Component }) => (
       }}
     >
       {({ ref, style, placement, arrowProps, ...props }) => (
-        <TooltipWrapper style={style} innerRef={ref} placement={placement}>
+        <TooltipWrapper
+          style={style}
+          innerRef={ref}
+          placement={placement}
+          showTooltip={showTooltip}
+        >
           {content}
           <Arrow
             style={{
@@ -45,6 +56,22 @@ const Tooltip = ({ content, component: Component }) => (
   </Manager>
 );
 
+const bounce = keyframes`
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    
+  }
+  50% {
+    opacity: 1;
+    visibility: visible;
+  }
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+`;
+
 const TooltipWrapper = styled.div`
   max-width: 450px;
   margin: 7px;
@@ -59,14 +86,18 @@ const TooltipWrapper = styled.div`
   opacity: 0;
   visibility: hidden;
   transition: all 100ms;
+  animation: ${ifProp("showTooltip", `${bounce} 1.5s ease forwards`)};
 `;
 
 const Target = styled.div`
   display: inline-block;
-  &:hover + ${TooltipWrapper} {
+  ${props =>
+    !props.disableHover
+      ? `&:hover + ${TooltipWrapper} {
     opacity: 1;
     visibility: visible;
-  }
+  }`
+      : null};
 `;
 
 const arrowPosition = ({ placement }) => {
