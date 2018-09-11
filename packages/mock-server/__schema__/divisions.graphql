@@ -1,0 +1,27 @@
+"""
+Division contains details about places where services are provided
+
+In order to obtain details user must have a scope **division:read**
+"""
+type Division {
+  id: ID!
+  name: String!
+  addresses: [Address]!
+  phones: [Phone]!
+  email: String!
+  status: DivisionStatus!
+  type: LegalEntityType!
+  mountainGroup: Boolean!
+  legalEntity: legalEntity!
+}
+
+enum DivisionStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum DivisionType {
+  CLINIC
+  AMBULANT_CLINIC
+  FAP
+}

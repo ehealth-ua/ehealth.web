@@ -1,15 +1,33 @@
 # import * from "scalars.graphql"
 # import * from "directives.graphql"
 
+# import * from "addresses.graphql"
+# import * from "declarations.graphql"
+# import * from "divisions.graphql"
+# import * from "employees.graphql"
+# import * from "legal_entities.graphql"
 # import * from "persons.graphql"
+# import * from "phones.graphql"
 
 type Query {
   "the filter must be used to get exactly one person knowing id"
   person(id: ID!): Person
   "the filter should be used in order to get a list of persons by parametrs"
   persons(filter: PersonFilter, orderBy: PersonOrderBy): [Person]
+  "the filter must be used to get exactly one declaration knowing its' id"
+  declaration(id: ID!): Declaration
+  "the filter must be used to get exactly one declaration knowing its' number"
+  declarationByNumber(number: String!): Declaration
+  "the filter must be used to get list of declarations which belong to the patient knowing patient ID"
+  declarations(
+    filter: DeclarationFilter
+    orderBy: DeclarationOrderBy
+  ): [Declaration]
 }
 
 type Mutation {
   resetPersonAuthenticationMethod(id: ID!): Person
+  terminateDeclaration(id: ID!, reasonDescription: String): Declaration
+  approveDeclaration(id: ID!): Declaration
+  rejectDeclaration(id: ID!): Declaration
 }

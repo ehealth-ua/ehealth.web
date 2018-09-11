@@ -1,0 +1,22 @@
+"""
+ADDRESS contain info about both type of addresses REGISTRATION and RESIDENCE
+"""
+type Address {
+  type: AddressType!
+  country: String!
+  area: String!
+  region: String
+  settlement: String!
+  settlementType: String!
+  settlementId: ID!
+  streetType: String
+  street: String
+  building: String!
+  apartment: String
+  zip: String!
+}
+
+enum AddressType {
+  ACTIVE
+  CLOSED
+}

@@ -1,0 +1,25 @@
+"""
+Legal Entity contains data about medical service providers, pharamcies and MISes.
+In order to obtain details user must have a scope **legal_entity:read**
+"""
+type LegalEntity {
+  id: ID!
+  name: String!
+  shortName: String
+  publicName: String
+  type: LegalEntityType!
+  edrpou: String!
+  status: LegalEntityStatus!
+  addresses: [Address]!
+}
+
+enum LegalEntityType {
+  MIS
+  MSP
+  PHARMACY
+}
+
+enum LegalEntityStatus {
+  ACTIVE
+  CLOSED
+}

@@ -1,0 +1,42 @@
+"""
+Employee details contain information about Party (personal data) and Employee (proffesional data)
+"""
+type Employee {
+  id: ID!
+  position: String!
+  startDate: Date!
+  endDate: Date
+  status: EmployeeStatus!
+  employeeType: String!
+  party: Party!
+  doctor: Doctor
+  division: Division
+  legalEntity: LegalEntity!
+}
+
+enum EmployeeStatus {
+  NEW
+  APPROVED
+  DISMISSED
+}
+
+type Party {
+  firstName: String!
+  lastName: String!
+  secondName: String
+}
+
+type Doctor {
+  specialities: [Speciality]
+}
+
+type Speciality {
+  speciality: String!
+  specialityOfficio: Boolean!
+  level: String!
+  qualificationType: String!
+  attestationName: String!
+  attestationDate: Date!
+  validToDate: Date
+  certificateNumber: String!
+}

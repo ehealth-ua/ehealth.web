@@ -3,7 +3,6 @@ This is Person (MPI) details. In order to obtain details user must have a scope 
 """
 type Person {
   id: ID!
-  ""
   firstName: String! @fake(locale: "uk", method: "name.firstName", args: [1])
   lastName: String! @fake(locale: "uk", method: "name.lastName", args: [1])
   secondName: String @fake(locale: "uk", method: "name.firstName", args: [0])
@@ -12,6 +11,7 @@ type Person {
   status: PersonStatus!
   birthCountry: String!
   birthSettlement: String!
+  "the unique number in Unified State Register"
   unzr: String
   taxId: String
     @fake(
@@ -19,9 +19,15 @@ type Person {
       method: "random.number"
       args: [{ min: 1000000000, max: 9999999999 }]
     )
-  authenticationMethod: AuthenticationMethod!
+  authenticationMethod: [AuthenticationMethod]!
   documents: [Document]
+  attachedDocuments: [attachedDocuments]
   insertedAt: DateTime! @fake(locale: "uk", method: "date.past")
+  addresses: [Address]!
+  "the way how a patient wants to be reached"
+  preferredWayCommunication: PersonPreferredWayCommunication
+  phones: [Phone]
+  declarations: [Declaration]
 }
 
 enum PersonStatus {
@@ -34,16 +40,36 @@ enum PersonGender {
   FEMALE
 }
 
+enum PersonPreferredWayCommunication {
+  EMAIL
+  PHONE
+}
+
+enum PersonAuthenticationMethodType {
+  OTP
+  OFFLINE
+  NA
+}
+
 type AuthenticationMethod {
-  type: String!
+  type: PersonAuthenticationMethodType!
   phoneNumber: String
 }
 
 type Document {
+  "Dictionary DOCUMENT_TYPE"
   type: String
+  "document issue number"
   number: String
+  "authority which issued the document"
   issuedBy: String @fake(locale: "uk", method: "company.companyName")
+  "the date when document was issued"
   issuedAt: Date @fake(locale: "uk", method: "date.past")
+}
+
+type attachedDocuments {
+  type: String!
+  url: String!
 }
 
 input PersonFilter {

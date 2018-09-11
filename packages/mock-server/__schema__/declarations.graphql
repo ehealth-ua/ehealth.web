@@ -1,0 +1,43 @@
+"""
+Declaration combines data about Patient, Employee, LegalEntity and Division.
+
+In order to obtain details user must have a scope `declaration:read`.
+"""
+type Declaration {
+  "declaration ID in UUID format"
+  id: ID!
+  "unique human redable number of declaration"
+  declarationNumber: String!
+  startDate: Date!
+  endDate: Date!
+  signedAt: DateTime! @fake(locale: "uk", method: "date.past")
+  status: DeclarationStatus!
+  "type of declaration, as for now it's only one type =`family_doctor`"
+  scope: String!
+  declarationRequestId: ID!
+  reason: String
+  reasonDescription: String
+  legalEntity: LegalEntity!
+  person: Person!
+  division: Division!
+  employee: Employee!
+}
+
+enum DeclarationStatus {
+  PENDING_VERIFICATION
+  REJECTED
+  TERMINATED
+  ACTIVE
+}
+
+enum DeclarationOrderBy {
+  startDate_ASC
+  startDate_DESC
+  status_ASC
+  status_DESC
+}
+
+input DeclarationFilter {
+  personId: ID
+  status: DeclarationStatus
+}
