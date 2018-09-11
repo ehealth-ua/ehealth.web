@@ -35,5 +35,20 @@ Scenario: Get Person Details (AUTHENTICATION_METHOD)
   Given I am on the DECLARATIONS tab
   Then I should see Declarations filtered by PersonId
   And input field with DeclarationFilter 
-  And grid with columns declarationNumber, legalEntityName, legalEntityEdrpou, startDate, status, divisionName, divisionAddress, details, patientName (hidden), declarationId (hidden)
+  And grid DECLARATION_LIST with columns declarationNumber, legalEntityName, legalEntityEdrpou, startDate, status, divisionName, divisionAddress, details, patientName (hidden), declarationId (hidden)
   And I should be able to sort by status_ASC or status_DESC or startDate_ASC or startDate_DESC
+
+Scenario: Search declarations by status (DECALRATIONS)
+  Given I am on the DECALRATIONS tab
+  When I choose STATUS from drop-down list 
+  Then I should see DECLARATION_LIST filtered by STATUS
+
+Scenario: Search declarations by ID (DECALRATIONS)
+  Given I am on the DECALRATIONS tab
+  When I fill DECLARATION_SEARCH field with correct existing ID
+  Then I should see DECLARATION_LIST filtered by ID
+
+Scenario: Search declarations by DECLARATION_NUMBER (DECALRATIONS)
+  Given I am on the DECALRATIONS tab
+  When I fill DECLARATION_SEARCH field with correct existing DECLARATION_NUMBER
+  Then I should see DECLARATION_LIST filtered by DECLARATION_NUMBER
