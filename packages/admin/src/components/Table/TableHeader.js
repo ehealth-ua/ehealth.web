@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+//@flow
+
+import * as React from "react";
 import styled from "react-emotion/macro";
 import { css } from "react-emotion";
 import { ifProp } from "styled-tools";
@@ -6,6 +8,33 @@ import { CaretDownIcon, CaretUpIcon } from "@ehealth/icons";
 import { filterTableColumn } from "@ehealth/utils";
 import TableDropDownControll from "./TableDropDownControll";
 import { TableCell } from "./AdminTable";
+
+type TableHeaderType = {
+  header: HeaderData,
+  columnKeyExtractor: (string, number) => string,
+  filterTableColumn: (Array<HeaderDataWithStatus | any>, string) => boolean,
+  headerComponent: React.ElementType,
+  rowComponent: React.ElementType,
+  headerCellComponent: React.ElementType,
+  sortElements: Array<string>,
+  sortParams: SortParamsType,
+  onSort: SortParamsType => mixed,
+  filterRow: Array<HeaderDataWithStatus | any>,
+  onFilter: () => mixed
+};
+
+type HeaderData = { [string]: string };
+
+type HeaderDataWithStatus = {|
+  name: string,
+  status: boolean,
+  title: string
+|};
+
+type SortParamsType = {
+  sortEncrease: boolean,
+  sortBy: string
+};
 
 const TableHeader = ({
   header,
@@ -19,7 +48,7 @@ const TableHeader = ({
   onSort,
   filterRow,
   onFilter
-}) => (
+}: TableHeaderType) => (
   <HeaderComponent>
     <RowComponent>
       {Object.entries(header)
@@ -58,7 +87,11 @@ const TableHeader = ({
           );
         })}
 
-      <TableDropDownControll data={filterRow} onChange={onFilter} />
+      <TableDropDownControll
+        data={filterRow}
+        onChange={onFilter}
+        columnKeyExtractor={columnKeyExtractor}
+      />
     </RowComponent>
   </HeaderComponent>
 );

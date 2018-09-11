@@ -1,32 +1,52 @@
-import React, { Component } from "react";
+//@flow
+import * as React from "react";
 import styled from "react-emotion/macro";
 
-class TableHeaderCellWithResize extends Component {
+type CellWithResizeProps = {
+  onClick: () => mixed,
+  children: React.Node
+};
+
+type CellWithResizeState = {
+  minWidth: number,
+  cellWidth: number,
+  startX: number
+};
+
+type EventType = any;
+
+class TableHeaderCellWithResize extends React.Component<
+  CellWithResizeProps,
+  CellWithResizeState
+> {
   state = {
     minWidth: 50,
-    cellWidth: null,
-    startX: null
+    cellWidth: 0,
+    startX: 0
   };
 
   componentDidMount() {
-    const { currentlyResizing, minWidth } = this.state;
+    const { minWidth } = this.state;
+    // $FlowFixMe https://github.com/facebook/flow/issues/6832
+    const { current: { clientWidth = 0 } = {} } = this.cell;
     this.setState({
-      cellWidth: Math.max(this.cell.current.clientWidth, minWidth + 100),
+      cellWidth: Math.max(clientWidth, minWidth + 100),
       startX: 0
     });
   }
 
   render() {
+    const { onClick, children } = this.props;
     const { cellWidth } = this.state;
     return (
       <TableHeaderCell
         style={{
           width: `${cellWidth}px`
         }}
-        onClick={this.props.onClick}
+        onClick={onClick}
         innerRef={this.cell}
       >
-        {this.props.children}
+        {children}
         <ResizeHandler
           onMouseDown={e => this.resizeColumnStart(e, false)}
           onTouchStart={e => this.resizeColumnStart(e, true)}
@@ -37,9 +57,10 @@ class TableHeaderCellWithResize extends Component {
 
   cell = React.createRef();
 
-  resizeColumnStart = (event, isTouch) => {
+  resizeColumnStart = (event: EventType, isTouch: boolean) => {
     event.stopPropagation();
     const { minWidth } = this.state;
+
     const cellWidth = event.target.parentElement.getBoundingClientRect().width;
 
     let pageX;
@@ -68,10 +89,10 @@ class TableHeaderCellWithResize extends Component {
     );
   };
 
-  resizeColumnMoving = event => {
+  resizeColumnMoving = (event: EventType) => {
     event.stopPropagation();
     const { minWidth, cellWidth, startX } = this.state;
-    let pageX;
+    let pageX = 0;
     if (event.type === "touchmove") {
       pageX = event.changedTouches[0].pageX;
     } else if (event.type === "mousemove") {
@@ -84,7 +105,7 @@ class TableHeaderCellWithResize extends Component {
     });
   };
 
-  resizeColumnEnd = event => {
+  resizeColumnEnd = (event: EventType) => {
     event.stopPropagation();
     const isTouch = event.type === "touchend" || event.type === "touchcancel";
 

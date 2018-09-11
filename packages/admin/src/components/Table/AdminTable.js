@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+//@flow
+import * as React from "react";
 import styled from "react-emotion/macro";
 import { css } from "react-emotion";
 import { ifNotProp } from "styled-tools";
@@ -8,7 +9,70 @@ import TableHeaderCellWithResize from "./TableHeaderCellWithResize";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 
-class AdminTable extends Component {
+type HeaderData = { [string]: string };
+
+type HeaderDataWithStatus = {|
+  name: string,
+  status: boolean,
+  title: string
+|};
+
+type AdminTableProps = {|
+  data: { value: React.Node },
+  header: HeaderData,
+  renderRow: { value: React.Node },
+  rowKeyExtractor: () => mixed,
+  columnKeyExtractor?: () => mixed,
+  sortElements: string[],
+  onSort: () => mixed,
+  sortParams: string[],
+  defaultFilter?: (data: HeaderData) => Array<HeaderDataWithStatus | any>
+|};
+
+type AdminTableState = {|
+  filterRow?: Array<HeaderDataWithStatus | null>
+|};
+
+/**
+ * @example Use AdminTable
+ * ```jsx
+ * <LocationParams>
+ *   {({
+ *     locationParams: { sort = "", ...searchParamsRest },
+ *     setLocationParams
+ *   }) => {
+ *     const [sortBy, orderBy] = sort.split("_");
+ *     return (
+ *       <AdminTable
+ *         data={data}
+ *         header={{
+ *           id: "ID",
+ *           divisionName: "Назва",
+ *           status: "Статус",
+ *           action: "Дія"
+ *         }}
+ *         renderRow={({  name , id, startDate, status }) => ({
+ *           id,
+ *           divisionName: name,
+ *           status: DECLARATION_STATUSES[status],
+ *           action: <Link to={`declaration/${id}`}>Показати деталі</Link>
+ *         })}
+ *         sortElements={["status", "id"]}
+ *         sortParams={{ sortBy, sortEncrease: orderBy === "desc" }}
+ *         onSort={({ sortBy, sortEncrease, ...props }) =>
+ *           setLocationParams({
+ *             ...searchParamsRest,
+ *             sort: [sortBy, sortEncrease ? "desc" : "asc"].join("_")
+ *           })
+ *         }
+ *       />
+ *     );
+ *   }}
+ * </LocationParams>
+ * ```
+ */
+
+class AdminTable extends React.Component<AdminTableProps, AdminTableState> {
   state = {
     filterRow: []
   };
@@ -69,12 +133,15 @@ class AdminTable extends Component {
     );
   }
 
-  defaultFilter = header =>
-    Object.entries(header).map(([name, title]) => ({
-      name,
-      title,
-      status: true
-    }));
+  defaultFilter = (header: HeaderData): Array<HeaderDataWithStatus | any> =>
+    Object.entries(header).map(
+      ([name, title]) =>
+        ({
+          name,
+          title,
+          status: true
+        }: HeaderDataWithStatus)
+    );
 }
 
 export default AdminTable;
