@@ -24,8 +24,8 @@ type Props = {|
 type State = {|
   mode: string,
   offset: number,
-  selectedYear: number,
-  currentYear: string,
+  selectedYear: ?number,
+  currentYear: number,
   currentMonth: number
 |};
 
@@ -34,10 +34,27 @@ class Datepicker extends Component<Props, State> {
     mode: "day",
     offset: 0,
     selectedYear: null,
-    currentYear: new Date().getFullYear(),
-    currentMonth: 0
+    currentYear: parseInt(new Date().getFullYear(), 10),
+    currentMonth: parseInt(new Date().getMonth(), 10)
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      nextProps.selected.getFullYear() !== this.props.selected.getFullYear()
+    ) {
+      this.choiseYear(nextProps.selected.getFullYear());
+    }
+
+    if (nextProps.selected.getMonth() !== this.props.selected.getMonth()) {
+      this.choiseMonth(nextProps.selected.getMonth());
+    }
+
+    return true;
+  }
+  componentWillMount() {
+    this.choiseYear(this.props.selected.getFullYear());
+    this.choiseMonth(this.props.selected.getMonth());
+  }
   render() {
     return (
       <Container>
@@ -81,10 +98,10 @@ class Datepicker extends Component<Props, State> {
   };
 
   choiseMonth = (month: number): void => {
-    this.setState(({ offset }) => ({
+    this.setState(({ offset, currentMonth }) => ({
       currentMonth: month,
       mode: "day",
-      offset: offset + month - this.state.currentMonth
+      offset: offset + (month - currentMonth)
     }));
   };
 
@@ -93,11 +110,15 @@ class Datepicker extends Component<Props, State> {
   };
 
   increase = (): void => {
-    this.setState({ offset: this.state.offset + 1 });
+    this.setState(({ offset }) => ({
+      offset: offset + 1
+    }));
   };
 
   decrease = (): void => {
-    this.setState({ offset: this.state.offset - 1 });
+    this.setState(({ offset }) => ({
+      offset: offset - 1
+    }));
   };
 
   switchMode = (mode: string): void => {

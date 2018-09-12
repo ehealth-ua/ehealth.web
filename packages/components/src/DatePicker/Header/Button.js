@@ -2,7 +2,7 @@ import styled from "react-emotion/macro";
 import { css } from "react-emotion";
 
 const iconDirection = props =>
-  props.direction !== "forward"
+  props.direction === "forward"
     ? css`
         border-width: 6px 0 6px 10.4px;
         border-color: transparent transparent transparent #ced0da;

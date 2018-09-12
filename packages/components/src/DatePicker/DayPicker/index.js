@@ -17,7 +17,7 @@ const DayPicker = ({
     {({ calendars, getDateProps, getBackProps, getForwardProps }) => {
       if (calendars.length) {
         return calendars.map(calendar => (
-          <div key={`${calendar.month}-${calendar.year}`}>
+          <React.Fragment key={`${calendar.month}-${calendar.year}`}>
             <Header data-test="monthYear">
               <Button
                 {...getBackProps({
@@ -25,7 +25,7 @@ const DayPicker = ({
                   "data-test": "backMonth"
                 })}
                 onClick={decrease}
-                direction="forward"
+                direction="backward"
               />
               <div>
                 <Title
@@ -46,11 +46,11 @@ const DayPicker = ({
                   "data-test": "forwardMonth"
                 })}
                 onClick={increase}
-                direction="backward"
+                direction="forward"
               />
             </Header>
             <DayPanel calendar={calendar} getDateProps={getDateProps} />
-          </div>
+          </React.Fragment>
         ));
       }
       return null;
