@@ -5,3 +5,4 @@ export {
   NumberField as Number,
   PasswordField as Password
 } from "./InputField";
+export { default as DatePicker } from "./DateField";

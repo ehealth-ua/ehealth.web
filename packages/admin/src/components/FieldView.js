@@ -3,6 +3,7 @@ import { variant } from "@ehealth/system-tools";
 
 export const Wrapper = system(
   {
+    position: "relative",
     flexDirection: "column",
     alignItems: "stretch"
   },

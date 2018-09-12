@@ -22,9 +22,11 @@
     "react-emotion": "^9.2.5",
     "react-popper": "^1.0.2",
     "react-scripts": "2.0.0-next.66cc7a90",
+    "react-text-mask": "^5.4.3",
     "rebass": "^2.1.0",
     "styled-system": "^3.0.2",
-    "system-components": "^3.0.0"
+    "system-components": "^3.0.0",
+    "text-mask-addons": "^3.8.0"
   },
   "scripts": {
     "start": "react-scripts start",

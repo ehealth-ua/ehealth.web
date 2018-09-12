@@ -27,6 +27,7 @@ export const Content = system(
   `
     background: none;
     border: none;
+    width: auto;
     overflow: hidden;
     color: inherit;
     flex: 1 1 auto;
