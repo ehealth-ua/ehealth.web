@@ -1,7 +1,7 @@
 """
 
 """
-type SignedContent {
+input SignedContent {
   signedRequest: String!
   signedContentEncoding: SignedContentEncoding!
 }
