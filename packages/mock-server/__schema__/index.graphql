@@ -8,6 +8,7 @@
 # import * from "legal_entities.graphql"
 # import * from "persons.graphql"
 # import * from "phones.graphql"
+# import * from "signed_content.graphql"
 
 type Query {
   "the filter must be used to get exactly one person knowing id"
