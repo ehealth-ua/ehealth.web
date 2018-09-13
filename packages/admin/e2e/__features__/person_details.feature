@@ -3,6 +3,7 @@ Feature: Test Person Details Page in NHS admin panel
  
 Background: User is authorized and on PERSON_DETAILS_PAGE
   Given I navigate to the login page
+  And I approve scopes
   When I submit username and password
   Then I should be logged in
   And I navigate to the PERSON_DETAILS_PAGE 

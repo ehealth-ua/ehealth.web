@@ -5,6 +5,7 @@ Feature: Test Declaration Details Page in NHS admin panel
 Background: User is authorized and on DECLARATION_DETAILS_PAGE
   Given I navigate to the login page
   When I submit username and password
+  And I approve scopes
   Then I should be logged in
   And I navigate to the PERSON_DETAILS_PAGE
   And I navigate to DECLARATIONS tab
@@ -13,6 +14,7 @@ Background: User is authorized and on DECLARATION_DETAILS_PAGE
 Scenario: Get Person Details
   Given I am on the DECLARATION_DETAILS_PAGE
   Then I should see header with id, declarationNumber and status
+  And I see tabs GENERAL_INFO, LEGAL_ENTITY, DIVISION, EMPLOYEE, PATIENT, DOCUMENTS
   And if status='ACTIVE' 
   Then I should see button TERMINATE
   And if status='PENDING_VERIFICATION'
