@@ -8,7 +8,8 @@ export const Border = system(
     borderColor: "silverCity",
     color: "darkAndStormy",
     fontSize: 1,
-    lineHeight: 1
+    lineHeight: 1,
+    flexWrap: "nowrap"
   },
   variant({
     prop: "state",
@@ -21,13 +22,11 @@ export const Border = system(
 
 export const Content = system(
   {
-    py: 2,
-    px: 3
+    py: 2
   },
   `
     background: none;
     border: none;
-    width: auto;
     overflow: hidden;
     color: inherit;
     flex: 1 1 auto;
@@ -38,17 +37,10 @@ export const Content = system(
     position: relative;
     text-align: left;
 
-    &:nth-child(n+2):nth-last-child(n+2) {
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    &:nth-child(2):nth-last-child(1) {
-      padding-left: 0;
-    }
-
     &:disabled {
       -webkit-text-fill-color: inherit;
     }
-  `
+  `,
+  "space",
+  "width"
 );

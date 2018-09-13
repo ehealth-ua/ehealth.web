@@ -32,9 +32,14 @@ const InputField = ({
         )}
 
         <InputView.Border state={state}>
-          {prefix && <InputView.Content px={2}>{prefix}</InputView.Content>}
-          <InputView.Content {...input} is={is} />
-          {postfix && <InputView.Content px={2}>{postfix}</InputView.Content>}
+          {prefix && <InputView.Content pl={2}>{prefix}</InputView.Content>}
+          <InputView.Content
+            {...input}
+            is={is}
+            pl={prefix ? 2 : 3}
+            pr={postfix ? 2 : 3}
+          />
+          {postfix && <InputView.Content pr={2}>{postfix}</InputView.Content>}
         </InputView.Border>
 
         <FieldView.Footer>
