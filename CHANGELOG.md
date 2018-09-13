@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.77.1"></a>
+## [0.77.1](https://github.com/edenlabllc/ehealth.web/compare/v0.77.0...v0.77.1) (2018-09-13)
+
+
+### Bug Fixes
+
+* rebuild package-lock.json ([cfc60af](https://github.com/edenlabllc/ehealth.web/commit/cfc60af))
+* upgrade graphql to 0.13.2 ([35c2170](https://github.com/edenlabllc/ehealth.web/commit/35c2170))
+
+
+
+
+
 <a name="0.77.0"></a>
 # [0.77.0](https://github.com/edenlabllc/ehealth.web/compare/v0.76.1...v0.77.0) (2018-09-13)
 
