@@ -109,7 +109,7 @@ type Archive {
   place: String
 }
 
-type MergedFromLegalEntity {
+type LegalEntityLegacyConnection {
   mergedFromLegalEntity: LegalEntity
   isActive: Boolean
   base: String!
