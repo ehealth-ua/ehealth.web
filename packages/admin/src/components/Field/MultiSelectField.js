@@ -30,7 +30,7 @@ const MultiSelect = ({
       toggleMenu
     }) => (
       <MultiSelectView.Container {...getRootProps({ refKey: "innerRef" })}>
-        <InputView.Border css="flex-wrap:wrap;">
+        <InputView.Border flexWrap="wrap">
           {selectedItems.map(item => (
             <MultiSelectView.SelectedItem key={item.value}>
               <span>{item.value}</span>
@@ -41,6 +41,8 @@ const MultiSelect = ({
           ))}
           <InputView.Content
             is="input"
+            px={2}
+            width={0}
             {...getInputProps({
               placeHolder: selectedItems.length > 0 ? "" : placeHolder,
               onFocus: toggleMenu,
