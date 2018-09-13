@@ -1,10 +1,9 @@
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache, defaultDataIdFromObject } from "apollo-cache-inmemory";
 import { concat } from "apollo-link";
-import { RestLink } from "apollo-link-rest";
+import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { visit, BREAK } from "graphql";
-import { fieldNameNormalizer, fieldNameDenormalizer } from "@ehealth/utils";
 
 import { REACT_APP_API_URL } from "./env";
 
@@ -25,6 +24,7 @@ export const createClient = ({ onError: handleError }) => {
     dataIdFromObject
   });
 
+  // TODO: we should reconsider error handling since we are using GraphQL endpoint
   const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
     const { message, statusCode, result } = networkError;
 
@@ -46,19 +46,14 @@ export const createClient = ({ onError: handleError }) => {
     handleError({ error, blocking: operationType === "query" });
   });
 
-  const restLink = new RestLink({
+  const httpLink = new HttpLink({
     uri: REACT_APP_API_URL,
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    fieldNameNormalizer,
-    fieldNameDenormalizer
+    credentials: "include"
   });
 
   return new ApolloClient({
     cache,
-    link: concat(errorLink, restLink),
+    link: concat(errorLink, httpLink),
     defaultOptions
   });
 };
