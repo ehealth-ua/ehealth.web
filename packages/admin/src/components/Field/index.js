@@ -6,3 +6,4 @@ export {
   PasswordField as Password
 } from "./InputField";
 export { default as DatePicker } from "./DateField";
+export { default as RangePicker } from "./RangeDateField";
