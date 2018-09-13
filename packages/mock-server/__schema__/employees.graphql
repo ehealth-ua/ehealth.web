@@ -20,10 +20,18 @@ enum EmployeeStatus {
   DISMISSED
 }
 
+enum Gender {
+  MALE
+  FEMALE
+}
+
 type Party {
   firstName: String!
   lastName: String!
   secondName: String
+  birthDate: Date!
+  gender: Gender!
+  phones: [Phone]
 }
 
 type Doctor {

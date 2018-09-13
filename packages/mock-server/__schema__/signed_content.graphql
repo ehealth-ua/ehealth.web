@@ -1,0 +1,11 @@
+"""
+
+"""
+type SignedContent {
+  signedRequest: String!
+  SignedContentEncoding: SignedContentEncoding!
+}
+
+enum SignedContentEncoding {
+  BASE64
+}

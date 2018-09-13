@@ -12,17 +12,33 @@
 type Query {
   "the filter must be used to get exactly one person knowing id"
   person(id: ID!): Person
+
   "the filter should be used in order to get a list of persons by parametrs"
   persons(filter: PersonFilter, orderBy: PersonOrderBy): [Person]
+
   "the filter must be used to get exactly one declaration knowing its' id"
   declaration(id: ID!): Declaration
+
   "the filter must be used to get exactly one declaration knowing its' number"
   declarationByNumber(number: String!): Declaration
+
   "the filter must be used to get list of declarations which belong to the patient knowing patient ID"
   declarations(
     filter: DeclarationFilter
     orderBy: DeclarationOrderBy
   ): [Declaration]
+
+  "the filter must be used to get exactly one legal entity knowing its' ID"
+  legalEntity(id: ID!): LegalEntity
+
+  "the filter must be used to get exactly one legal entity knowing its' EDRPOU"
+  legalEntityByEdrpou(edrpou: String!): LegalEntity
+
+  "the filter must be used to get list of legal entities"
+  legalEntities(
+    filter: LegalEntityFilter
+    orderBy: LegalEntityOrderBy
+  ): [LegalEntity]
 }
 
 type Mutation {
@@ -30,4 +46,7 @@ type Mutation {
   terminateDeclaration(id: ID!, reasonDescription: String): Declaration
   approveDeclaration(id: ID!): Declaration
   rejectDeclaration(id: ID!): Declaration
+  nhsVerifyLegalEntity(id: ID!): LegalEntity
+  deactivateLegalEntity(id: ID!): LegalEntity
+  mergeLegalEntities(signedContent: SignedContent!): LegalEntity
 }
