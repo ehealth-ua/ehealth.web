@@ -22,15 +22,13 @@ export const Border = system(
 
 export const Content = system(
   {
-    py: 2
+    py: 2,
+    flex: "1 1 auto"
   },
   `
     background: none;
     border: none;
-    width: auto;
-    overflow: hidden;
     color: inherit;
-    flex: 1 1 auto;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;

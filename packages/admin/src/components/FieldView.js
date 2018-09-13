@@ -5,7 +5,8 @@ export const Wrapper = system(
   {
     position: "relative",
     flexDirection: "column",
-    alignItems: "stretch"
+    alignItems: "stretch",
+    maxWidth: "auto"
   },
   "space",
   `
