@@ -1,3 +1,4 @@
+// @flow
 import React from "react";
 import MaskedInput from "react-text-mask";
 import styled from "react-emotion/macro";
@@ -12,9 +13,19 @@ import * as InputView from "../InputView";
 
 const autoCorrectedDatePipe = createAutoCorrectedDatePipe("dd/mm/yyyy");
 
-class DateField extends React.Component {
+type DateFieldState = {|
+  isOpen: boolean
+|};
+
+type DateFieldProps = {|
+  name: string,
+  label?: string,
+  hint?: string,
+  warning?: string
+|};
+
+class DateField extends React.Component<DateFieldProps, DateFieldState> {
   state = {
-    date: new Date(),
     isOpen: false
   };
 
@@ -41,13 +52,12 @@ class DateField extends React.Component {
                 )}
 
                 <InputView.Border state={state}>
-                  <InputView.Content px={2}>
+                  <InputView.Content px={2} flex="none">
                     <CalendarIcon />
                   </InputView.Content>
                   <InputView.Content>
                     <MaskedInput
                       {...input}
-                      id={this.inputId}
                       onKeyPress={this.handleKeyPress}
                       mask={[
                         /\d/,
@@ -76,12 +86,10 @@ class DateField extends React.Component {
               </FieldView.Wrapper>
               {this.state.isOpen && (
                 <DatePicker
-                  ref={ref => (this.date = ref)}
                   selected={selectedDate || new Date()}
                   onDateSelected={({ selected, selectable, date }) =>
                     this.handleOnDateSelected(selected, selectable, date, input)
                   }
-                  onFocus={this.handleFocus}
                 />
               )}
             </Container>
@@ -119,7 +127,7 @@ class DateField extends React.Component {
     input.onChange(date.toLocaleDateString("en-GB"));
   };
 
-  handleFocus = e => {
+  handleFocus = () => {
     this.setState({
       isOpen: true
     });
