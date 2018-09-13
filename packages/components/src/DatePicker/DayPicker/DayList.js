@@ -30,7 +30,7 @@ const DayList = ({ calendar, getDateProps }) => (
             currentMonth={!(!prevMonth && !nextMonth)}
             today={today}
           >
-            {selectable ? date.getDate() : "X"}
+            {date.getDate()}
           </Item>
         );
       })

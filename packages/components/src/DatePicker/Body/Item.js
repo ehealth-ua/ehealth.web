@@ -25,6 +25,11 @@ const Item = styled.button`
   &:hover {
     color: ${ifProp("selected", "#fff", "#2292f2")};
   }
+  &[disabled] {
+    background: #eaeaea;
+    color: #333;
+    cursor: not-allowed;
+  }
 `;
 
 export default Item;
