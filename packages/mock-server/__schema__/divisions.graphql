@@ -12,7 +12,7 @@ type Division {
   status: DivisionStatus!
   type: LegalEntityType!
   mountainGroup: Boolean!
-  legalEntity: legalEntity!
+  legalEntity: LegalEntity!
 }
 
 enum DivisionStatus {
