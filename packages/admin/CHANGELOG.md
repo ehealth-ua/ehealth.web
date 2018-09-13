@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.77.0"></a>
+# [0.77.0](https://github.com/edenlabllc/ehealth.web/compare/v0.76.1...v0.77.0) (2018-09-13)
+
+
+### Bug Fixes
+
+* **admin:** add min-width for Dropdown component ([d307b35](https://github.com/edenlabllc/ehealth.web/commit/d307b35))
+* **admin:** delete TableDropdown component ([369d2d5](https://github.com/edenlabllc/ehealth.web/commit/369d2d5))
+
+
+### Features
+
+* **admin:** add AdminTable component ([7a53d5e](https://github.com/edenlabllc/ehealth.web/commit/7a53d5e))
+* **admin:** add declaration details feature ([c498b19](https://github.com/edenlabllc/ehealth.web/commit/c498b19))
+* **admin:** add features for legal entities ([b4a47a4](https://github.com/edenlabllc/ehealth.web/commit/b4a47a4))
+* **admin:** add flow type for table components ([3660021](https://github.com/edenlabllc/ehealth.web/commit/3660021))
+* **admin:** add helpers for statuses in table ([9013de1](https://github.com/edenlabllc/ehealth.web/commit/9013de1))
+* **admin:** add more scenarios to person details feature ([304ffd5](https://github.com/edenlabllc/ehealth.web/commit/304ffd5))
+* **admin:** add person features ([ec05fde](https://github.com/edenlabllc/ehealth.web/commit/ec05fde))
+
+
+
+
+
 <a name="0.76.0"></a>
 # [0.76.0](https://github.com/edenlabllc/ehealth.web/compare/v0.75.0...v0.76.0) (2018-09-10)
 
