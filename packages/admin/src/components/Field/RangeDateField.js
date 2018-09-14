@@ -167,7 +167,7 @@ const Calendar = ({
         input.value.length === 10 && new Date(parseDate(input.value));
       return (
         <Container onFocus={onFocus} onBlur={onBlur}>
-          <FieldView.Wrapper is="label" maxWidth={80}>
+          <FieldView.Wrapper is="label" maxWidth={85}>
             <MaskedInput
               {...input}
               name={`date_${name}_start_date`}
