@@ -10,7 +10,7 @@
     "@ehealth/mock-server": "file:packages/mock-server",
     "@ehealth/patient-account": "file:packages/patient-account",
     "@ehealth/polyfill": "file:packages/polyfill",
-    "lerna": "^3.0.2",
+    "lerna": "3.0.6",
     "npm-package-filter": "^0.1.2"
   },
   "devDependencies": {
