@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.79.0"></a>
+# [0.79.0](https://github.com/edenlabllc/ehealth.web/compare/v0.78.0...v0.79.0) (2018-09-14)
+
+
+### Bug Fixes
+
+* update package-lock ([b065544](https://github.com/edenlabllc/ehealth.web/commit/b065544))
+* **admin:** clean DateField ([1f811af](https://github.com/edenlabllc/ehealth.web/commit/1f811af))
+* **admin:** increase max-width ([c0fd588](https://github.com/edenlabllc/ehealth.web/commit/c0fd588))
+* **admin:** move flex and maxWidth to defaultProps ([51bf721](https://github.com/edenlabllc/ehealth.web/commit/51bf721))
+* **admin:** RangeDateField ([fe66af2](https://github.com/edenlabllc/ehealth.web/commit/fe66af2))
+* **components:** fix Datepicker styles, add disabled styles ([c1ec298](https://github.com/edenlabllc/ehealth.web/commit/c1ec298))
+* **components:** fix styles and some logic in DatePicker ([005cc35](https://github.com/edenlabllc/ehealth.web/commit/005cc35))
+* **icon:** optimize calendar icon ([1412968](https://github.com/edenlabllc/ehealth.web/commit/1412968))
+* **icons:** change calendar icon ([cc9766a](https://github.com/edenlabllc/ehealth.web/commit/cc9766a))
+* downgrade lerna to 3.0.6 ([85c3229](https://github.com/edenlabllc/ehealth.web/commit/85c3229))
+
+
+### Features
+
+* **admin:** combine field and datepicker ([37ff83e](https://github.com/edenlabllc/ehealth.web/commit/37ff83e))
+
+
+
+
+
 <a name="0.78.0"></a>
 # [0.78.0](https://github.com/edenlabllc/ehealth.web/compare/v0.77.1...v0.78.0) (2018-09-13)
 

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.79.0"></a>
+# [0.79.0](https://github.com/edenlabllc/ehealth.web/compare/v0.78.0...v0.79.0) (2018-09-14)
+
+**Note:** Version bump only for package @ehealth/gatekeeper
+
+
+
+
+
 <a name="0.78.0"></a>
 # [0.78.0](https://github.com/edenlabllc/ehealth.web/compare/v0.77.1...v0.78.0) (2018-09-13)
 

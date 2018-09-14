@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.79.0"></a>
+# [0.79.0](https://github.com/edenlabllc/ehealth.web/compare/v0.78.0...v0.79.0) (2018-09-14)
+
+
+### Bug Fixes
+
+* **admin:** clean DateField ([1f811af](https://github.com/edenlabllc/ehealth.web/commit/1f811af))
+* **admin:** increase max-width ([c0fd588](https://github.com/edenlabllc/ehealth.web/commit/c0fd588))
+* **admin:** move flex and maxWidth to defaultProps ([51bf721](https://github.com/edenlabllc/ehealth.web/commit/51bf721))
+* **admin:** RangeDateField ([fe66af2](https://github.com/edenlabllc/ehealth.web/commit/fe66af2))
+
+
+### Features
+
+* **admin:** combine field and datepicker ([37ff83e](https://github.com/edenlabllc/ehealth.web/commit/37ff83e))
+
+
+
+
+
 <a name="0.78.0"></a>
 # [0.78.0](https://github.com/edenlabllc/ehealth.web/compare/v0.77.1...v0.78.0) (2018-09-13)
 
