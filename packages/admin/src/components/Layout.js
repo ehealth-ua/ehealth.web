@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "@reach/router";
-import styled from "react-emotion/macro";
-import { ifProp } from "styled-tools";
 import { EhealthLogoIcon } from "@ehealth/icons";
+import styled from "react-emotion/macro";
+import system from "system-components/emotion";
+import { gradient } from "@ehealth/system-tools";
 
 import Nav from "./Nav";
 
@@ -10,7 +11,7 @@ const Layout = ({ children }) => (
   <Wrapper>
     <Sidebar>
       <Link to="/">
-        <Logo />
+        <Icon />
       </Link>
       <Nav />
     </Sidebar>
@@ -20,25 +21,44 @@ const Layout = ({ children }) => (
 
 export default Layout;
 
-const Wrapper = styled.section`
-  display: flex;
-  min-height: 100vh;
-`;
+const Wrapper = system(
+  {
+    is: "main",
+    display: "flex",
+    boxShadow: "0 0 15px 0 rgba(0,0,0,0.31)",
+    m: 4
+  },
+  {
+    flexGrow: 1
+  }
+);
 
-const Sidebar = styled.aside`
-  flex: 0 0 270px;
-  padding: 45px 30px;
-  background-image: linear-gradient(0deg, #017696, #1c4886);
-`;
+const Sidebar = system(
+  {
+    is: "aside",
+    flexBasis: 220,
+    px: 5,
+    py: 6,
+    linearGradient: [["-45deg", "enchantedBlue", "darkMidnightBlue"]]
+  },
+  {
+    flexShrink: 0
+  },
+  gradient
+);
 
-const Content = styled.section`
-  width: 100%;
-  padding: 50px;
-  overflow: hidden;
-`;
+const Icon = system({
+  is: EhealthLogoIcon,
+  ml: 4,
+  width: 75
+});
 
-const Logo = styled(EhealthLogoIcon)`
-  display: flex;
-  margin-left: 20px;
-  height: 33px;
-`;
+const Content = system({
+  is: "section",
+  bg: "white",
+  display: "flex",
+  flexDirection: "column",
+  p: 2,
+  overflow: "hidden",
+  width: "100%"
+});

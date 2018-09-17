@@ -1,6 +1,7 @@
 const colors = {
   black: "#000",
   white: "#fff",
+  gunPowder: "#484852",
   wallsOfSantorini: "#E9EDF1",
   silverCity: "#DFE3E9",
   shiningKnight: "#9AA0A9",
@@ -8,7 +9,9 @@ const colors = {
   darkAndStormy: "#354052",
   redPigment: "#ED1C24",
   darkPastelGreen: "#1BB934",
-  rockmanBlue: "#2EA2F8"
+  rockmanBlue: "#2EA2F8",
+  darkMidnightBlue: "#003076",
+  enchantedBlue: "#007796"
 };
 
 export default colors;

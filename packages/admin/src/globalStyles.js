@@ -1,4 +1,5 @@
 import { injectGlobal } from "react-emotion/macro";
+import { colors } from "./theme";
 
 injectGlobal`
   @font-face {
@@ -45,24 +46,11 @@ injectGlobal`
   }
 
   html {
-    background-color: #fff;
-    box-sizing: border-box;
-  }
-
-  *,
-  *::before,
-  *::after {
-    box-sizing: inherit;
+    background-color: ${colors.gunPowder};
   }
 
   body {
     -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-  }
-
-  a {
-    color: #5893f0;
-    text-decoration: none;
   }
 
   ul,
@@ -86,7 +74,7 @@ injectGlobal`
   button {
     outline: none;
   }
-  
+
   summary::-webkit-details-marker {
     display: none;
   }
