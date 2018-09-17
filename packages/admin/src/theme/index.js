@@ -10,4 +10,6 @@ export const fonts = {
 
 export const fontSizes = [12, 14, 16, 18, 20];
 
+export const radii = [0, 4];
+
 export const space = [0, 5, 10, 15, 20, 30, 40, 55];

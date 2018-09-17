@@ -11,7 +11,10 @@ const colors = {
   darkPastelGreen: "#1BB934",
   rockmanBlue: "#2EA2F8",
   darkMidnightBlue: "#003076",
-  enchantedBlue: "#007796"
+  enchantedBlue: "#007796",
+  boysenberryShadow: "#F1F3F9",
+  hintOfCandela: "#D6DDE6",
+  biroBlue: "#333C48"
 };
 
 export default colors;
