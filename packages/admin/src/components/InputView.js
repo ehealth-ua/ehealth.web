@@ -9,7 +9,8 @@ export const Border = system(
     color: "darkAndStormy",
     fontSize: 1,
     lineHeight: 1,
-    flexWrap: "nowrap"
+    flexWrap: "nowrap",
+    position: "static"
   },
   variant({
     prop: "state",

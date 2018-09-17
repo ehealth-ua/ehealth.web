@@ -1,5 +1,5 @@
 import styled from "react-emotion/macro";
-import { ifProp } from "styled-tools";
+import { ifProp, prop } from "styled-tools";
 
 import { CheckRightIcon } from "@ehealth/icons";
 
@@ -25,6 +25,8 @@ const List = styled.div`
   max-width: 400px;
   min-width: 200px;
   box-shadow: 0 2px 4px rgba(72, 60, 60, 0.2);
+  position: ${ifProp("absolute", "absolute")};
+  top: ${prop("top")};
 `;
 
 const Icon = styled(CheckRightIcon)`
