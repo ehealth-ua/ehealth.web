@@ -4,7 +4,7 @@ import Downshift from "downshift";
 import { RemoveItemIcon } from "@ehealth/icons";
 
 import Dropdown from "../Dropdown";
-import MultiDownshift from "../MultiDownshift";
+import { MultiDownshift } from "./DownshiftField";
 
 import * as MultiSelectView from "../MultiSelectView";
 import * as FieldView from "../FieldView";
