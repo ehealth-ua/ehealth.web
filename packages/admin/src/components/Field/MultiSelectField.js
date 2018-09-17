@@ -1,23 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import Downshift from "downshift";
-import styled from "react-emotion/macro";
-import { ifProp } from "styled-tools";
 
-import * as MultiSelectView from "../MultiSelectView";
-import SelectList from "../SelectList";
+import { RemoveItemIcon } from "@ehealth/icons";
+
+import Dropdown from "../Dropdown";
 import MultiDownshift from "../MultiDownshift";
 
+import * as MultiSelectView from "../MultiSelectView";
+import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
 
 const MultiSelect = ({
+  label,
+  hint,
+  warning,
   items = [],
-  handleChange = () => {},
-  placeHolder = "Вибрати"
+  placeHolder = "Вибрати",
+  name,
+  ...props
 }) => (
-  <MultiDownshift
-    onChange={selectedItems => handleChange(selectedItems)}
-    itemToString={() => ""}
-  >
+  <MultiDownshift itemToString={() => ""} name={name}>
     {({
       getRootProps,
       getInputProps,
@@ -27,41 +29,78 @@ const MultiSelect = ({
       inputValue,
       selectedItems,
       getItemProps,
-      toggleMenu
-    }) => (
-      <MultiSelectView.Container {...getRootProps({ refKey: "innerRef" })}>
-        <InputView.Border flexWrap="wrap">
-          {selectedItems.map(item => (
-            <MultiSelectView.SelectedItem key={item.value}>
-              <span>{item.value}</span>
-              <MultiSelectView.CloseButton
-                {...getRemoveButtonProps({ item })}
-              />
-            </MultiSelectView.SelectedItem>
-          ))}
-          <InputView.Content
-            is="input"
-            px={2}
-            width={0}
-            {...getInputProps({
-              placeHolder: selectedItems.length > 0 ? "" : placeHolder,
-              onFocus: toggleMenu,
-              onKeyUp(event) {
-                if (event.key === "Backspace" && !inputValue) {
-                  removeItem(selectedItems[selectedItems.length - 1]);
+      toggleMenu,
+      meta: { active, errored, error }
+    }) => {
+      return (
+        <FieldView.Wrapper
+          {...getRootProps({
+            refKey: "innerRef"
+          })}
+        >
+          {label && (
+            <FieldView.Header>
+              <FieldView.Label>{label}</FieldView.Label>
+              {hint && <FieldView.Message>{hint}</FieldView.Message>}
+            </FieldView.Header>
+          )}
+          <InputView.Border position="relative" flexWrap="wrap">
+            {selectedItems.map(item => (
+              <MultiSelectView.SelectedItem key={item.value}>
+                {item.value}
+                <MultiSelectView.RemoveItem {...getRemoveButtonProps({ item })}>
+                  <RemoveItemIcon />
+                </MultiSelectView.RemoveItem>
+              </MultiSelectView.SelectedItem>
+            ))}
+            <InputView.Content
+              {...getInputProps({
+                is: "input",
+                px: 2,
+                width: 0,
+                placeholder: selectedItems.length > 0 ? "" : placeHolder,
+                onFocus: toggleMenu,
+                onKeyUp(event) {
+                  if (event.key === "Backspace" && !inputValue) {
+                    removeItem(selectedItems[selectedItems.length - 1]);
+                  }
                 }
-              }
-            })}
-          />
-        </InputView.Border>
-        <SelectList
-          isOpen={isOpen}
-          itemsList={items}
-          getItemProps={getItemProps}
-          inputValue={inputValue}
-        />
-      </MultiSelectView.Container>
-    )}
+              })}
+            />
+            <Dropdown.List isOpen={isOpen} absolute top="100%">
+              {isOpen
+                ? items
+                    .filter(
+                      item =>
+                        !inputValue ||
+                        item.value
+                          .toLowerCase()
+                          .includes(inputValue.toLowerCase())
+                    )
+                    .map(
+                      (item, index) =>
+                        !selectedItems.includes(item) && (
+                          <Dropdown.Item
+                            {...getItemProps({
+                              key: item.value,
+                              index,
+                              item
+                            })}
+                          >
+                            {item.value}
+                          </Dropdown.Item>
+                        )
+                    )
+                : null}
+            </Dropdown.List>
+          </InputView.Border>
+
+          <FieldView.Footer>
+            <FieldView.Message>{errored ? error : warning}</FieldView.Message>
+          </FieldView.Footer>
+        </FieldView.Wrapper>
+      );
+    }}
   </MultiDownshift>
 );
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Downshift from "downshift";
 
+import { Field } from "@ehealth/components";
+
 class MultiDownshift extends Component {
   state = { selectedItems: [] };
 
@@ -66,27 +68,41 @@ class MultiDownshift extends Component {
     };
   };
 
-  getStateAndHelpers(downshift) {
+  getStateAndHelpers(downshift, meta) {
     const { selectedItems } = this.state;
     const { getRemoveButtonProps, removeItem } = this;
     return {
       getRemoveButtonProps,
       removeItem,
       selectedItems,
+      meta,
       ...downshift
     };
   }
+
+  componentDidUpdate() {
+    this.setValuesToForm(this.state.selectedItems);
+  }
+
   render() {
     const { render, children = render, ...props } = this.props;
     return (
-      <Downshift
-        {...props}
-        stateReducer={this.stateReducer}
-        onChange={this.handleSelection}
-        selectedItem={null}
-      >
-        {downshift => children(this.getStateAndHelpers(downshift))}
-      </Downshift>
+      <Field {...props}>
+        {({ input, meta }) => {
+          this.setValuesToForm = input.onChange;
+
+          return (
+            <Downshift
+              {...props}
+              stateReducer={this.stateReducer}
+              onChange={this.handleSelection}
+              selectedItem={this.state.selectedItems}
+            >
+              {downshift => children(this.getStateAndHelpers(downshift, meta))}
+            </Downshift>
+          );
+        }}
+      </Field>
     );
   }
 }
