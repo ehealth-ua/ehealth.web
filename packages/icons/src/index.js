@@ -24,6 +24,7 @@ export { default as MozLogoIcon } from "./MozLogoIcon";
 export { default as PdfIcon } from "./PdfIcon";
 export { default as PencilIcon } from "./PencilIcon";
 export { default as RemoveIcon } from "./RemoveIcon";
+export { default as RemoveItemIcon } from "./RemoveItemIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as SpinnerIcon } from "./SpinnerIcon";
 export { default as ThinAddIcon } from "./ThinAddIcon";
