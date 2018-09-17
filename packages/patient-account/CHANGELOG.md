@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.79.1"></a>
+## [0.79.1](https://github.com/edenlabllc/ehealth.web/compare/v0.79.0...v0.79.1) (2018-09-17)
+
+
+### Bug Fixes
+
+* make consistent system-components and dependents ([6ebcb25](https://github.com/edenlabllc/ehealth.web/commit/6ebcb25))
+
+
+
+
+
 <a name="0.79.0"></a>
 # [0.79.0](https://github.com/edenlabllc/ehealth.web/compare/v0.78.0...v0.79.0) (2018-09-14)
 
