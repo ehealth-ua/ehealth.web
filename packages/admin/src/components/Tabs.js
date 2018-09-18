@@ -24,7 +24,7 @@ import { ifProp } from "styled-tools";
 */
 
 const NavItem = ({ to, ...props }) => (
-  <Match path={`${to}`}>
+  <Match path={to}>
     {({ match }) => (
       <TabItem active={match && match.path === to}>
         <NavLink to={to} {...props} />
