@@ -1,6 +1,14 @@
 import system from "system-components/emotion";
 import { variant } from "@ehealth/system-tools";
 
+import Dropdown from "./Dropdown";
+
+export const List = system({
+  is: Dropdown.List,
+  position: "absolute",
+  top: "100%"
+});
+
 export const SelectedItem = system({
   display: "flex",
   alignItems: "center",

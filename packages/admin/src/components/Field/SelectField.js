@@ -1,7 +1,7 @@
 import React from "react";
 
 import Dropdown from "../Dropdown";
-import { DropdownArrow } from "../MultiSelectView";
+import { DropdownArrow, List } from "../MultiSelectView";
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
 import { SingleDownshift } from "./DownshiftField";
@@ -54,7 +54,7 @@ const SelectField = ({ label, hint, warning, items = [], ...props }) => (
               open: isOpen
             })}
           />
-          <Dropdown.List isOpen={isOpen} absolute top="100%">
+          <List isOpen={isOpen} absolute top="100%">
             {isOpen
               ? items
                   .filter(
@@ -76,7 +76,7 @@ const SelectField = ({ label, hint, warning, items = [], ...props }) => (
                     </Dropdown.Item>
                   ))
               : null}
-          </Dropdown.List>
+          </List>
         </InputView.Border>
 
         <FieldView.Footer>

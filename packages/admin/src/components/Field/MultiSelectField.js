@@ -67,7 +67,7 @@ const MultiSelect = ({
                 }
               })}
             />
-            <Dropdown.List isOpen={isOpen} absolute top="100%">
+            <MultiSelectView.List isOpen={isOpen}>
               {isOpen
                 ? items
                     .filter(
@@ -92,7 +92,7 @@ const MultiSelect = ({
                         )
                     )
                 : null}
-            </Dropdown.List>
+            </MultiSelectView.List>
           </InputView.Border>
 
           <FieldView.Footer>
