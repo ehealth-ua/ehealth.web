@@ -4,6 +4,7 @@ import { Query } from "react-apollo";
 import { Flex, Box } from "rebass/emotion";
 
 import { Form } from "@ehealth/components";
+import { AdminSearchIcon } from "@ehealth/icons";
 
 import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
@@ -23,6 +24,10 @@ import PatientDeclarationQuery from "../../graphql/PatientDeclarationQuery.graph
 import { getFullName } from "@ehealth/utils";
 
 const filterData = (type, arr) => arr.filter(t => t.type === type);
+
+const declarationStatuses = Object.entries(DECLARATION_STATUSES).map(
+  ([name, value]) => ({ value, name })
+);
 
 const Details = ({ id }) => (
   <Query query={PatientQuery} variables={{ id }}>
@@ -139,7 +144,7 @@ const AuthInfo = ({ authInfo }) =>
       <Box>
         <Form
           onSubmit={() => {
-            alert("Sumbit");
+            alert("Submit");
           }}
         >
           <Button variant="green">Скинути метод аутентифікації</Button>
@@ -169,15 +174,25 @@ const DeclarationsInfo = ({ id }) => (
 
             return (
               <>
-                <Box p={5}>
-                  <Form onSubmit={values => setLocationParams(values)}>
-                    <Field.Text
-                      name="declarationId"
-                      label="Пошук декларації"
-                      placeholder="Введіть ID або номер декларації"
-                    />
-                  </Form>
-                </Box>
+                <Form onSubmit={values => setLocationParams(values)}>
+                  <Flex>
+                    <Box p={5} width={460}>
+                      <Field.Text
+                        name="declarationId"
+                        label="Пошук декларації"
+                        placeholder="Введіть ID або номер декларації"
+                        postfix={<AdminSearchIcon color="#CED0DA" />}
+                      />
+                    </Box>
+                    <Box py={5}>
+                      <Field.Select
+                        name="status"
+                        label="Статус декларації"
+                        items={declarationStatuses}
+                      />
+                    </Box>
+                  </Flex>
+                </Form>
                 <AdminTable
                   data={declarations}
                   header={{
