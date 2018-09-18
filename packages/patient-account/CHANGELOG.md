@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.80.2"></a>
+## [0.80.2](https://github.com/edenlabllc/ehealth.web/compare/v0.80.1...v0.80.2) (2018-09-18)
+
+
+### Bug Fixes
+
+* **patient-account:** change empty string to null in filterProperties on ProfileEditPage ([25e62dd](https://github.com/edenlabllc/ehealth.web/commit/25e62dd))
+
+
+
+
+
 <a name="0.80.1"></a>
 ## [0.80.1](https://github.com/edenlabllc/ehealth.web/compare/v0.80.0...v0.80.1) (2018-09-18)
 
