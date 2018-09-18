@@ -26,10 +26,10 @@ const Item = system(
     is: Flex,
     flexWrap: "nowrap",
     fontSize: 0,
-    color: "#333"
+    color: "#333",
+    mb: 4
   },
   `
-    margin-bottom: 20px;
     &:last-of-type {
       margin-bottom: 0;
     }
