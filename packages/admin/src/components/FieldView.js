@@ -6,16 +6,16 @@ export const Wrapper = system(
     position: "relative",
     flexDirection: "column",
     alignItems: "stretch",
-    maxWidth: "auto"
+    maxWidth: "100%"
   },
-  "space",
   `
     display: flex;
 
     &:last-child {
       margin-bottom: 0;
     }
-  `
+  `,
+  "space"
 );
 
 export const Header = system(
