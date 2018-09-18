@@ -27,7 +27,10 @@ type Person {
   "the way how a patient wants to be reached"
   preferredWayCommunication: PersonPreferredWayCommunication
   phones: [Phone]
-  declarations: [Declaration]
+  declarations(
+    filter: DeclarationFilter
+    orderBy: DeclarationOrderBy
+  ): [Declaration]
 }
 
 enum PersonStatus {
@@ -82,7 +85,7 @@ input PersonFilter {
 input PersonPersonalFilter {
   firstName: String!
   lastName: String!
-  birthDate: Date!
+  birthDate: Date! @fake(locale: "uk", method: "date.past", args: [100])
 }
 
 enum PersonOrderBy {

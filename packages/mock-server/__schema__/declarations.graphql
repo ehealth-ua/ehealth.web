@@ -8,8 +8,8 @@ type Declaration {
   id: ID!
   "unique human redable number of declaration"
   declarationNumber: String!
-  startDate: Date!
-  endDate: Date!
+  startDate: Date! @fake(locale: "uk", method: "date.past", args: [100])
+  endDate: Date! @fake(locale: "uk", method: "date.past", args: [100])
   signedAt: DateTime! @fake(locale: "uk", method: "date.past")
   status: DeclarationStatus!
   "type of declaration, as for now it's only one type =`family_doctor`"
@@ -38,6 +38,6 @@ enum DeclarationOrderBy {
 }
 
 input DeclarationFilter {
-  personId: ID
+  declarationId: ID
   status: DeclarationStatus
 }

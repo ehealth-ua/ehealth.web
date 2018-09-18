@@ -1,6 +1,6 @@
 type Phone {
   "Dictionary PHONE_TYPE type of phone Land Line or Mobile. At least one of type must be present. Each type can be represented only once."
-  type: String!
+  type: PhoneType!
   "phone number in format '+38/'"
   number: String!
 }

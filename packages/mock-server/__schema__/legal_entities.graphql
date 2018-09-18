@@ -65,19 +65,19 @@ enum MisVerified {
 type License {
   licenseNumber: String
   issuedBy: String!
-  issuedDate: Date!
-  expiryDate: Date
-  activeFromDate: Date!
+  issuedDate: Date! @fake(locale: "uk", method: "date.past", args: [100])
+  expiryDate: Date @fake(locale: "uk", method: "date.past", args: [100])
+  activeFromDate: Date! @fake(locale: "uk", method: "date.past", args: [100])
   whatLicensed: String
   orderNo: String!
 }
 
 type Accreditation {
   category: String!
-  issued_date: Date
-  expiry_date: Date
+  issued_date: Date @fake(locale: "uk", method: "date.past", args: [100])
+  expiry_date: Date @fake(locale: "uk", method: "date.past", args: [100])
   order_no: String!
-  order_date: Date
+  order_date: Date @fake(locale: "uk", method: "date.past", args: [100])
 }
 
 type medicalServiceProvider {
@@ -104,7 +104,7 @@ enum LegalEntityOrderBy {
 
 type Archive {
   "the date when paper documents were transferred to archive"
-  date: Date
+  date: Date @fake(locale: "uk", method: "date.past", args: [100])
   "the address of building where paper documents are"
   place: String
 }

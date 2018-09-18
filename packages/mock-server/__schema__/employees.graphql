@@ -4,8 +4,8 @@ Employee details contain information about Party (personal data) and Employee (p
 type Employee {
   id: ID!
   position: String!
-  startDate: Date!
-  endDate: Date
+  startDate: Date! @fake(locale: "uk", method: "date.past", args: [100])
+  endDate: Date @fake(locale: "uk", method: "date.past", args: [100])
   status: EmployeeStatus!
   employeeType: String!
   party: Party!
@@ -45,6 +45,6 @@ type Speciality {
   qualificationType: String!
   attestationName: String!
   attestationDate: Date!
-  validToDate: Date
+  validToDate: Date @fake(locale: "uk", method: "date.past", args: [100])
   certificateNumber: String!
 }
