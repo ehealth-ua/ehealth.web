@@ -1,4 +1,5 @@
 export { default as AddIcon } from "./AddIcon";
+export { default as AdminSearchIcon } from "./AdminSearchIcon";
 export { default as ArrowRightIcon } from "./ArrowRightIcon";
 export { default as ArrowLeftIcon } from "./ArrowLeftIcon";
 export { default as BackIcon } from "./BackIcon";
