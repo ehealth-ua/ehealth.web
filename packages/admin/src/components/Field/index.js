@@ -7,3 +7,5 @@ export {
 } from "./InputField";
 export { default as DatePicker } from "./DateField";
 export { default as RangePicker } from "./RangeDateField";
+export { default as Select } from "./SelectField";
+export { default as MultiSelect } from "./MultiSelectField";
