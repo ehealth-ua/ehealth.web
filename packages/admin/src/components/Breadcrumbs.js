@@ -1,14 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Match } from "@reach/router";
 import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
 
-import { Match } from "@ehealth/components";
-
 const Item = ({ to, ...props }) => (
-  <Match path={to} exact>
-    {({ to, active }) => (
-      <Breadcrumb active={active}>
+  <Match path={`${to}`}>
+    {({ match }) => (
+      <Breadcrumb active={match && match.path === to}>
         <Link to={to} {...props} />
       </Breadcrumb>
     )}
@@ -47,4 +45,5 @@ const Breadcrumb = styled.li`
 `;
 
 const Breadcrumbs = { List, Item };
+
 export default Breadcrumbs;
