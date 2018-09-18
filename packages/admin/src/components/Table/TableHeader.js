@@ -113,11 +113,12 @@ const CaretUpAndDownIcon = () => (
 );
 
 const Content = styled.div`
+  position: relative;
   display: flex;
+  overflow: hidden;
   justify-content: space-between;
   align-items: center;
-  overflow: hidden;
-  position: relative;
+  text-align: left;
 `;
 
 const Icon = styled.span`

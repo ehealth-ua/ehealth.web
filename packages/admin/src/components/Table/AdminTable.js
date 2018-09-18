@@ -148,7 +148,7 @@ export default AdminTable;
 
 const TableWrapper = styled.div`
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const TableRoot = styled.table`
