@@ -1,8 +1,8 @@
 const DECLARATION_STATUSES = {
-  terminated: "розірвана",
-  active: "активна",
-  closed: "припинена",
-  pending_verification: "очікує підтвердження",
+  TERMINATED: "розірвана",
+  ACTIVE: "активна",
+  REJECTED: "припинена",
+  PENDING_VERIFICATION: "очікує підтвердження",
   APPROVED: "очікує підпису"
 };
 
