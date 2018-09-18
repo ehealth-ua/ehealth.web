@@ -80,7 +80,7 @@ const ProfileEditPage = ({ history }) => (
                         );
 
                         const { signedContent, meta } = await signData(
-                          filterPropertiesByValue(person, "")
+                          filterPropertiesByValue(person, null)
                         );
 
                         const variables = {
