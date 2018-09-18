@@ -7,7 +7,7 @@ import Details from "./Details";
 const PatientsPage = () => (
   <Router>
     <List path="/" />
-    <Details path=":patientId" />
+    <Details path=":id/*" />
   </Router>
 );
 

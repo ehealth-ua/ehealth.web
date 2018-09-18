@@ -1,0 +1,21 @@
+query PatientQuery($id: ID!) {
+  person(id: $id) {
+    id
+    status
+    firstName
+    secondName
+    lastName
+    birthDate
+    birthCountry
+    taxId
+    unzr
+    phones {
+      type
+      number
+    }
+    authenticationMethod {
+      type
+      phoneNumber
+    }
+  }
+}

@@ -1,0 +1,54 @@
+query PatientDeclarationQuery(
+  $id: ID!
+  $filter: DeclarationFilter
+  $orderBy: DeclarationOrderBy
+) {
+  person(id: $id) {
+    id
+    declarations(filter: $filter, orderBy: $orderBy) {
+      id
+      declarationNumber
+      startDate
+      endDate
+      signedAt
+      status
+      scope
+      declarationRequestId
+      reason
+      reasonDescription
+      legalEntity {
+        id
+        name
+        shortName
+        publicName
+        type
+        edrpou
+        status
+        addresses {
+          type
+          country
+          area
+          region
+          settlement
+          settlementType
+          settlementId
+          streetType
+          street
+          building
+          apartment
+          zip
+        }
+      }
+      person {
+        id
+      }
+      division {
+        id
+        name
+      }
+      employee {
+        id
+      }
+    }
+  }
+}
