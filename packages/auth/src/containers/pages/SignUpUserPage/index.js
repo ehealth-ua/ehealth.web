@@ -43,6 +43,25 @@ const SignUpUserPage = ({ location, router }) => (
             message="Пароль був використаний у системі раніше"
           />
         </Validations>
+        <Field.Password
+          name="confirm_password"
+          placeholder="повторити пароль"
+        />
+        <Validations field="confirm_password">
+          <Validation.Required message="Об'язкове поле" />
+          <Validation.Length
+            options={{ min: 12 }}
+            message="Не менше 12 символів"
+          />
+          <Validation.Matches
+            options={/^(?=.*[a-zа-яёїієґ])(?=.*[A-ZА-ЯЁЇIЄҐ])(?=.*\d)/}
+            message="Пароль повинен містити великі, малі літери та цифри"
+          />
+          <Validation
+            validate={(value, { password } = {}) => value === password}
+            message="Паролі повинні співпадати"
+          />
+        </Validations>
         <Field.Group label="Контактна особа для екстреного зв'язку">
           <Field.Input
             name="person.emergency_contact.first_name"
