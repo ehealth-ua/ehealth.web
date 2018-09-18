@@ -4,9 +4,9 @@ import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
 
 const Item = ({ to, ...props }) => (
-  <Match path={`${to}`}>
+  <Match path={to}>
     {({ match }) => (
-      <Breadcrumb active={match && match.path === to}>
+      <Breadcrumb active={match}>
         <Link to={to} {...props} />
       </Breadcrumb>
     )}
