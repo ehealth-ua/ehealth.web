@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.80.1"></a>
+## [0.80.1](https://github.com/edenlabllc/ehealth.web/compare/v0.80.0...v0.80.1) (2018-09-18)
+
+
+### Bug Fixes
+
+* add styled fonts sans prop to theme ([695e5b4](https://github.com/edenlabllc/ehealth.web/commit/695e5b4))
+
+
+
+
+
 <a name="0.80.0"></a>
 # [0.80.0](https://github.com/edenlabllc/ehealth.web/compare/v0.79.1...v0.80.0) (2018-09-18)
 
