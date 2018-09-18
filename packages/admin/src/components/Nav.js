@@ -24,11 +24,11 @@ export default Nav;
 const NavLink = ({ to, children }) => (
   <Match path={`${to}/*`}>
     {({ match }) => (
-      <NavItem isCurrent={match && match.uri === to}>
+      <NavItem isCurrent={match}>
         <Link
           to={to}
           color="white"
-          fontWeight={match && match.uri === to && "bold"}
+          fontWeight={match && "bold"}
           display="inline"
           verticalAlign="baseline"
         >
