@@ -1,9 +1,26 @@
 import React, { Component } from "react";
 import { Field } from "@ehealth/components";
-
 import { Wrapper, Option, Circle } from "../RadioView";
 
-export class RadioField extends Component {
+/**
+ * @example
+ *
+ * ```jsx
+ * <Form {...props}>
+ *   <RadioField name="radioselect">
+ *     <Option>Value 1</Option>
+ *     <Option selected>Value 2</Option>
+ *     <Option>Value 3</Option>
+ *   </RadioField>
+ *   <Form.Submit block>Далі</Form.Submit>
+ * </Form>
+ * ```
+ *
+ * Optional prop for RadioField: horizontal for changing view
+ * Optional props for Option: selected, disabled (can use both)
+ */
+
+export default class RadioField extends Component {
   state = {
     selected: this.props.children.findIndex(({ props }) => props.selected)
   };
