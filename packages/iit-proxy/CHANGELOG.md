@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.81.0"></a>
+# [0.81.0](https://github.com/edenlabllc/ehealth.web/compare/v0.80.2...v0.81.0) (2018-09-18)
+
+**Note:** Version bump only for package @ehealth/iit-proxy
+
+
+
+
+
 <a name="0.80.0"></a>
 # [0.80.0](https://github.com/edenlabllc/ehealth.web/compare/v0.79.1...v0.80.0) (2018-09-18)
 

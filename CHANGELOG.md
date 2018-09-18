@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.81.0"></a>
+# [0.81.0](https://github.com/edenlabllc/ehealth.web/compare/v0.80.2...v0.81.0) (2018-09-18)
+
+
+### Features
+
+* **admin:** add MultiSelect component ([53f5264](https://github.com/edenlabllc/ehealth.web/commit/53f5264))
+* **admin:** add Select component ([0c3b22b](https://github.com/edenlabllc/ehealth.web/commit/0c3b22b))
+* **admin:** add Select component, add DownshiftField wrappers for Select and MultiSelect components ([47008ca](https://github.com/edenlabllc/ehealth.web/commit/47008ca))
+* **admin:** add SelectList component, which using in Select and Multiselect components ([87f46aa](https://github.com/edenlabllc/ehealth.web/commit/87f46aa))
+* **icons:** add RemoveItem icon for MultiSelect ([6d5848d](https://github.com/edenlabllc/ehealth.web/commit/6d5848d))
+
+
+
+
+
 <a name="0.80.2"></a>
 ## [0.80.2](https://github.com/edenlabllc/ehealth.web/compare/v0.80.1...v0.80.2) (2018-09-18)
 
