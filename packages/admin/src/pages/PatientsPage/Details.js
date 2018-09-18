@@ -26,7 +26,7 @@ import { getFullName } from "@ehealth/utils";
 const filterData = (type, arr) => arr.filter(t => t.type === type);
 
 const declarationStatuses = Object.entries(DECLARATION_STATUSES).map(
-  ([name, value]) => ({ value, name })
+  ([name, value]) => ({ name, value })
 );
 
 const Details = ({ id }) => (
@@ -156,14 +156,19 @@ const AuthInfo = ({ authInfo }) =>
 const DeclarationsInfo = ({ id }) => (
   <LocationParams>
     {({
-      locationParams: { sort = "", declarationId, ...searchParamsRest },
+      locationParams: { orderBy, declarationId, status },
       setLocationParams
     }) => {
-      const [sortBy, orderBy] = sort.split("_");
+      const [sortBy, order] =
+        typeof orderBy === "string" ? orderBy.split("_") : [];
       return (
         <Query
           query={PatientDeclarationQuery}
-          variables={{ id, filter: { declarationId } }}
+          variables={{
+            id,
+            filter: { declarationId, status: status && status.name },
+            orderBy
+          }}
         >
           {({ loading, error, data }) => {
             if (loading) return "Loading...";
@@ -174,7 +179,15 @@ const DeclarationsInfo = ({ id }) => (
 
             return (
               <>
-                <Form onSubmit={values => setLocationParams(values)}>
+                <Form
+                  onSubmit={() => null /* NOT USED, but required */}
+                  initialValues={{ declarationId, status }}
+                >
+                  <Form.AutoSubmit
+                    onSubmit={values => {
+                      setLocationParams(values);
+                    }}
+                  />
                   <Flex>
                     <Box p={5} width={460}>
                       <Field.Text
@@ -227,10 +240,12 @@ const DeclarationsInfo = ({ id }) => (
                     )
                   })}
                   sortElements={["startDate", "status"]}
-                  sortParams={{ sortBy, sortEncrease: orderBy === "DESC" }}
-                  onSort={({ sortBy, sortEncrease, ...props }) =>
+                  sortParams={{
+                    sortBy,
+                    sortEncrease: order === "DESC"
+                  }}
+                  onSort={({ sortBy, sortEncrease }) =>
                     setLocationParams({
-                      ...searchParamsRest,
                       orderBy: [sortBy, sortEncrease ? "DESC" : "ASC"].join("_")
                     })
                   }
