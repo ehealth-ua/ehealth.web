@@ -1,5 +1,5 @@
 import styled from "react-emotion/macro";
-import { ifProp, prop } from "styled-tools";
+import { ifProp } from "styled-tools";
 
 import { CheckRightIcon } from "@ehealth/icons";
 
