@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.83.0"></a>
+# [0.83.0](https://github.com/edenlabllc/ehealth.web/compare/v0.82.0...v0.83.0) (2018-09-18)
+
+
+### Bug Fixes
+
+* **admin:** add additional comparison ([c138168](https://github.com/edenlabllc/ehealth.web/commit/c138168))
+* **admin:** add centering in Badge component ([0af3e4d](https://github.com/edenlabllc/ehealth.web/commit/0af3e4d))
+* **admin:** add icon to input ([745c374](https://github.com/edenlabllc/ehealth.web/commit/745c374))
+* **admin:** add Select and MultiSelect to index ([bc91328](https://github.com/edenlabllc/ehealth.web/commit/bc91328))
+* **admin:** add zIndex to Dropdown list ([940fa85](https://github.com/edenlabllc/ehealth.web/commit/940fa85))
+* **admin:** change keys in statuses according to API ([a8d781e](https://github.com/edenlabllc/ehealth.web/commit/a8d781e))
+* **admin:** change overflow in Table component ([416207e](https://github.com/edenlabllc/ehealth.web/commit/416207e))
+* **admin:** fix fontWeight inheritance ([f7d98e5](https://github.com/edenlabllc/ehealth.web/commit/f7d98e5))
+* **admin:** fix maxWidth ([2afcfec](https://github.com/edenlabllc/ehealth.web/commit/2afcfec))
+* **admin:** fix table sorting, add initialValues to the form ([bd03460](https://github.com/edenlabllc/ehealth.web/commit/bd03460))
+* **admin:** move mb to default props ([ddc41eb](https://github.com/edenlabllc/ehealth.web/commit/ddc41eb))
+* **admin:** remove flex as default from prefix and postfix ([d820ad0](https://github.com/edenlabllc/ehealth.web/commit/d820ad0))
+* **admin:** remove unnecessary compare in tabs ([28c3147](https://github.com/edenlabllc/ehealth.web/commit/28c3147))
+* **admin:** remove unnecessary comparison ([e97d4f1](https://github.com/edenlabllc/ehealth.web/commit/e97d4f1))
+* **admin:** remove unnecessary template string ([787726b](https://github.com/edenlabllc/ehealth.web/commit/787726b))
+* **admin:** remove unnecessary template string and compare ([aa569d5](https://github.com/edenlabllc/ehealth.web/commit/aa569d5))
+* **admin:** remove unused fields and rename query ([dfb1ed4](https://github.com/edenlabllc/ehealth.web/commit/dfb1ed4))
+* **admin:** use [@reach](https://github.com/reach)/router in Breadcrumbs ([76060e6](https://github.com/edenlabllc/ehealth.web/commit/76060e6))
+* **mock-server:** add fake dates in schemas ([735f594](https://github.com/edenlabllc/ehealth.web/commit/735f594))
+
+
+### Features
+
+* **admin:** add AddressView component ([8433dfa](https://github.com/edenlabllc/ehealth.web/commit/8433dfa))
+* **admin:** add DefinitionListView component ([91f846f](https://github.com/edenlabllc/ehealth.web/commit/91f846f))
+* **admin:** PatientDetails page ([6a5f4ff](https://github.com/edenlabllc/ehealth.web/commit/6a5f4ff))
+* **icons:** add AdminSearchIcon ([ded9b24](https://github.com/edenlabllc/ehealth.web/commit/ded9b24))
+
+
+
+
+
 <a name="0.82.0"></a>
 # [0.82.0](https://github.com/edenlabllc/ehealth.web/compare/v0.81.0...v0.82.0) (2018-09-18)
 

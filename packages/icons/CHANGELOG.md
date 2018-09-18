@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.83.0"></a>
+# [0.83.0](https://github.com/edenlabllc/ehealth.web/compare/v0.82.0...v0.83.0) (2018-09-18)
+
+
+### Features
+
+* **icons:** add AdminSearchIcon ([ded9b24](https://github.com/edenlabllc/ehealth.web/commit/ded9b24))
+
+
+
+
+
 <a name="0.82.0"></a>
 # [0.82.0](https://github.com/edenlabllc/ehealth.web/compare/v0.81.0...v0.82.0) (2018-09-18)
 
