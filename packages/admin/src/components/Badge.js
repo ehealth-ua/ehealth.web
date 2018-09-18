@@ -7,6 +7,7 @@ const Badge = system(
     fontWeight: "bold",
     color: "white",
     lineHeight: 1,
+    textAlign: "center",
     px: "5px",
     pt: "6px",
     pb: "4px",
