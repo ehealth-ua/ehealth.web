@@ -9,6 +9,9 @@ const theme = {
     fontSize: 14,
     labelWidth: 200,
     detailsWidth: 420
+  },
+  fonts: {
+    sans: '"GothamPro", sans-serif'
   }
 };
 

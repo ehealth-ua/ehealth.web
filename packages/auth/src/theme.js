@@ -12,6 +12,9 @@ const theme = {
   },
   form: {
     fieldVerticalDistance: 23
+  },
+  fonts: {
+    sans: '"GothamPro", sans-serif'
   }
 };
 
