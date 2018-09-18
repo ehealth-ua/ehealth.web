@@ -11,6 +11,7 @@ const Item = styled.div`
   align-items: center;
   padding: 15px;
   font-size: 14px;
+  font-weight: normal;
   border-top: 1px solid #dfe3e9;
   color: ${ifProp("on", "#2EA2F8", "#354052")};
   background: ${ifProp("on", "#F1F4F8", "#fff")};
