@@ -1,4 +1,4 @@
-query PatientDeclarationQuery(
+query PatientDeclarationsQuery(
   $id: ID!
   $filter: DeclarationFilter
   $orderBy: DeclarationOrderBy
@@ -39,15 +39,9 @@ query PatientDeclarationQuery(
           zip
         }
       }
-      person {
-        id
-      }
       division {
         id
         name
-      }
-      employee {
-        id
       }
     }
   }

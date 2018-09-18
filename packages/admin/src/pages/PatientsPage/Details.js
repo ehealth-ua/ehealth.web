@@ -19,7 +19,7 @@ import DefinitionListView from "../../components/DefinitionListView";
 import DECLARATION_STATUSES from "../../helpers/statuses";
 
 import PatientQuery from "../../graphql/PatientQuery.graphql";
-import PatientDeclarationQuery from "../../graphql/PatientDeclarationQuery.graphql";
+import PatientDeclarationsQuery from "../../graphql/PatientDeclarationsQuery.graphql";
 
 import { getFullName } from "@ehealth/utils";
 
@@ -163,7 +163,7 @@ const DeclarationsInfo = ({ id }) => (
         typeof orderBy === "string" ? orderBy.split("_") : [];
       return (
         <Query
-          query={PatientDeclarationQuery}
+          query={PatientDeclarationsQuery}
           variables={{
             id,
             filter: { declarationId, status: status && status.name },
