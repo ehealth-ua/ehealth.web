@@ -14,6 +14,7 @@ export { default as ChevronRightIcon } from "./ChevronRightIcon";
 export { default as CircleIcon } from "./CircleIcon";
 export { default as CloseIcon } from "./CloseIcon";
 export { default as DocIcon } from "./DocIcon";
+export { default as DropDownArrow } from "./DropDownArrow";
 export { default as DropDownButton } from "./DropDownButton";
 export { default as EhealthLogoIcon } from "./EhealthLogoIcon";
 export { default as ExitIcon } from "./ExitIcon";
