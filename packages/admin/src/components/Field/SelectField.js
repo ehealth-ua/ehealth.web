@@ -1,12 +1,31 @@
 import React from "react";
 
 import Dropdown from "../Dropdown";
-import { DropdownArrow, List } from "../MultiSelectView";
+import { DropdownButton, List } from "../MultiSelectView";
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
 import { SingleDownshift } from "./DownshiftField";
 
-const SelectField = ({ label, hint, warning, items = [], ...props }) => (
+import { DropDownArrow } from "@ehealth/icons";
+
+/**
+ * @example
+ *
+ * ```jsx
+ * <Form {...props}>
+ *   <Select items={items} name="singleSelectName" />
+ *   <Form.Submit block>Далі</Form.Submit>
+ * </Form>
+ * ```
+ *
+ * Optional prop "type" with possible values "disabled" and "select"
+ *
+ * Without "type" select works with search field and filter in List
+ * With type="select" select works like classic select field, without search and filtering, and with gradient background
+ * With type="disabled" select will be disabled
+ */
+
+const SelectField = ({ label, hint, warning, items = [], type, ...props }) => (
   <SingleDownshift {...props} itemToString={item => (item ? item.value : "")}>
     {({
       getRootProps,
@@ -37,6 +56,7 @@ const SelectField = ({ label, hint, warning, items = [], ...props }) => (
               px: 2,
               width: 0,
               ...input,
+              type,
               onKeyDown: event => {
                 if (!isOpen && event.key === "Backspace") {
                   clearSelection();
@@ -49,34 +69,39 @@ const SelectField = ({ label, hint, warning, items = [], ...props }) => (
               }
             })}
           />
-          <DropdownArrow
+          <DropdownButton
             {...getToggleButtonProps({
-              open: isOpen
+              open: isOpen,
+              type
             })}
-          />
-          <List isOpen={isOpen} absolute top="100%">
-            {isOpen
-              ? items
-                  .filter(
-                    item =>
-                      !inputValue ||
-                      item.value
-                        .toLowerCase()
-                        .includes(inputValue.toLowerCase())
-                  )
-                  .map((item, index) => (
-                    <Dropdown.Item
-                      {...getItemProps({
-                        key: item.value,
-                        index,
-                        item
-                      })}
-                    >
-                      {item.value}
-                    </Dropdown.Item>
-                  ))
-              : null}
-          </List>
+          >
+            <DropDownArrow />
+          </DropdownButton>
+          {isOpen && (
+            <List isOpen={isOpen} absolute top="100%">
+              {items
+                .filter(
+                  item =>
+                    !type
+                      ? !inputValue ||
+                        item.value
+                          .toLowerCase()
+                          .includes(inputValue.toLowerCase())
+                      : item
+                )
+                .map((item, index) => (
+                  <Dropdown.Item
+                    {...getItemProps({
+                      key: item.value,
+                      index,
+                      item
+                    })}
+                  >
+                    {item.value}
+                  </Dropdown.Item>
+                ))}
+            </List>
+          )}
         </InputView.Border>
 
         <FieldView.Footer>
