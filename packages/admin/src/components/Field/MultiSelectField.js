@@ -27,6 +27,7 @@ const MultiSelect = ({
       selectedItems,
       getItemProps,
       toggleMenu,
+      highlightedIndex,
       meta: { active, errored, error }
     }) => {
       return (
@@ -81,7 +82,8 @@ const MultiSelect = ({
                             {...getItemProps({
                               key: item.value,
                               index,
-                              item
+                              item,
+                              on: highlightedIndex === index
                             })}
                           >
                             {item.value}

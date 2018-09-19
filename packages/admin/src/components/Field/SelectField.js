@@ -6,7 +6,7 @@ import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
 import { SingleDownshift } from "./DownshiftField";
 
-import { DropDownArrow } from "@ehealth/icons";
+import { ChevronBottomIcon } from "@ehealth/icons";
 
 /**
  * @example
@@ -75,7 +75,7 @@ const SelectField = ({ label, hint, warning, items = [], type, ...props }) => (
               type
             })}
           >
-            <DropDownArrow />
+            <ChevronBottomIcon color="#a8aab7" />
           </DropdownButton>
           {isOpen && (
             <List isOpen={isOpen} absolute top="100%">
@@ -94,7 +94,8 @@ const SelectField = ({ label, hint, warning, items = [], type, ...props }) => (
                     {...getItemProps({
                       key: item.value,
                       index,
-                      item
+                      item,
+                      on: highlightedIndex === index
                     })}
                   >
                     {item.value}
