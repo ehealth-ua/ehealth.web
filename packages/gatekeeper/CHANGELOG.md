@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.83.1"></a>
+## [0.83.1](https://github.com/edenlabllc/ehealth.web/compare/v0.83.0...v0.83.1) (2018-09-19)
+
+
+### Bug Fixes
+
+* **admin-legacy:** update local secret ([d04b7ea](https://github.com/edenlabllc/ehealth.web/commit/d04b7ea))
+
+
+
+
+
 <a name="0.83.0"></a>
 # [0.83.0](https://github.com/edenlabllc/ehealth.web/compare/v0.82.0...v0.83.0) (2018-09-18)
 
