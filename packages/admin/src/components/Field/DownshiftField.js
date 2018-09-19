@@ -84,7 +84,7 @@ export class MultiDownshift extends Component {
   }
 
   render() {
-    const { render, children = render, ...props } = this.props;
+    const { children, render = children, ...props } = this.props;
     return (
       <Field {...props}>
         {({ input, meta }) => {
@@ -96,9 +96,10 @@ export class MultiDownshift extends Component {
               stateReducer={this.stateReducer}
               onChange={this.handleSelection}
               selectedItem={this.state.selectedItems}
-            >
-              {downshift => children(this.getStateAndHelpers(downshift, meta))}
-            </Downshift>
+              render={downshift =>
+                render(this.getStateAndHelpers(downshift, meta))
+              }
+            />
           );
         }}
       </Field>
