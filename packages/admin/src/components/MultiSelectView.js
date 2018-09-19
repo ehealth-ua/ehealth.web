@@ -1,4 +1,5 @@
 import system from "system-components/emotion";
+import { variant } from "@ehealth/system-tools";
 
 import Dropdown from "./Dropdown";
 
@@ -28,7 +29,7 @@ export const RemoveItem = system({
   ml: 2
 });
 
-export const DropdownArrow = system(
+export const DropdownButton = system(
   {
     is: "button",
     position: "absolute",
@@ -38,17 +39,8 @@ export const DropdownArrow = system(
     height: "100%",
     cursor: "pointer"
   },
-  `
-    &::after {
-      content: "";
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      border: 1px solid #a8aab7;
-      border-width: 1px 1px 0 0;
-      transform: rotate(135deg);
-      margin: 0 10px;
-      vertical-align: middle;
-    }
-  `
+  variant({
+    prop: "type",
+    key: "inputs.button"
+  })
 );

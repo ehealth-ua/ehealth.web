@@ -26,8 +26,11 @@ export const Content = system(
     py: 2,
     flex: "1 1 auto"
   },
+  variant({
+    prop: "type",
+    key: "inputs.field"
+  }),
   `
-    background: none;
     border: none;
     color: inherit;
     font-family: inherit;
