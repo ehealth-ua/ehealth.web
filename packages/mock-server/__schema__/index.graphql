@@ -49,5 +49,12 @@ type Mutation {
   rejectDeclaration(id: ID!): Declaration
   nhsVerifyLegalEntity(id: ID!): LegalEntity
   deactivateLegalEntity(id: ID!): LegalEntity
-  mergeLegalEntities(signedContent: SignedContent!): LegalEntity
+  mergeLegalEntities(signedContent: SignedContent!): LegalEntityMergeJob
+}
+
+type Subscription {
+  legalEntityMergeJobs(
+    filter: LegalEntityMergeJobFilter
+    orderBy: LegalEntityMergeJobOrderBy
+  ): [LegalEntityMergeJob]
 }

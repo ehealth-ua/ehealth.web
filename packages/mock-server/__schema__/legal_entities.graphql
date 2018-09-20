@@ -41,9 +41,9 @@ type LegalEntity {
   # employees: [Employee]!
   # divisions: [Division]
   mergedFromLegalEntities(
-    filter: LegalEntityLegacyConnectionFilter
-    sort: LegalEntityLegacyConnectionOrderBy
-  ): [LegalEntityLegacyConnection]
+    filter: LegalEntityMergeConnectionFilter
+    sort: LegalEntityMergeConnectionOrderBy
+  ): [LegalEntityMergeConnection]
 }
 
 enum LegalEntityType {
@@ -109,7 +109,7 @@ type Archive {
   place: String
 }
 
-type LegalEntityLegacyConnection {
+type LegalEntityMergeConnection {
   mergedFromLegalEntity: LegalEntity
   isActive: Boolean
   base: String!
@@ -127,4 +127,28 @@ enum LegalEntityLegacyConnectionOrderBy {
   isActive_DESC
   insertedAt_DESC
   insertedAt_ASC
+}
+
+type LegalEntityMergeJob {
+  id: ID!
+  status: LegalEntityMergeJobStatus!
+  startedAt: DateTime!
+  endedAt: DateTime
+  mergedFromLegalEntity: LegalEntity!
+  mergedToLegalEntity: LegalEntity!
+}
+
+enum LegalEntityMergeJobStatus {
+  PENDING
+  ERROR
+  PROCESSED
+}
+
+input LegalEntityMergeJobFilter {
+  status: LegalEntityMergeJobStatus
+}
+
+enum LegalEntityMergeJobOrderBy {
+  startedAt_ASC
+  startedAt_DESC
 }
