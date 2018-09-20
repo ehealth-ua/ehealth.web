@@ -25,3 +25,11 @@ enum DivisionType {
   AMBULANT_CLINIC
   FAP
 }
+
+input DivisionFilter {
+  name: String
+}
+
+input DivisionOrderBy {
+  name: String
+}
