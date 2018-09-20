@@ -1,11 +1,6 @@
 import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: ${ifProp("horizontal", "row", "column")};
-`;
-
 export const Circle = styled.span`
   display: inline-block;
   width: 16px;
@@ -37,8 +32,7 @@ export const Circle = styled.span`
   }
 `;
 
-export const Option = styled.label`
-  margin: 7px 0 7px 14px;
+export const Label = styled.label`
   color: ${ifProp("disabled", "#9299a3")};
   cursor: pointer;
   user-select: none;
