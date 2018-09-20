@@ -16,7 +16,7 @@ import AddressView from "../../components/AddressView";
 import LocationParams from "../../components/LocationParams";
 import DefinitionListView from "../../components/DefinitionListView";
 
-import DECLARATION_STATUSES from "../../helpers/statuses";
+import STATUSES from "../../helpers/statuses";
 
 import PatientQuery from "../../graphql/PatientQuery.graphql";
 import PatientDeclarationsQuery from "../../graphql/PatientDeclarationsQuery.graphql";
@@ -25,7 +25,7 @@ import { getFullName } from "@ehealth/utils";
 
 const filterData = (type, arr) => arr.filter(t => t.type === type);
 
-const declarationStatuses = Object.entries(DECLARATION_STATUSES).map(
+const declarationStatuses = Object.entries(STATUSES.DECLARATION).map(
   ([name, value]) => ({ name, value })
 );
 
@@ -42,6 +42,7 @@ const Details = ({ id }) => (
         lastName,
         birthDate,
         birthCountry,
+        birthSettlement,
         taxId,
         unzr,
         phones,
@@ -56,6 +57,7 @@ const Details = ({ id }) => (
         fullName: getFullName({ firstName, secondName, lastName }),
         birthDate,
         birthCountry,
+        birthSettlement,
         taxId,
         unzr,
         mobilePhone: mobilePhone && mobilePhone.number,
@@ -74,7 +76,7 @@ const Details = ({ id }) => (
                 id,
                 status: (
                   <Badge bg="darkPastelGreen" minWidth={100}>
-                    {status}
+                    {STATUSES.PERSON[status]}
                   </Badge>
                 )
               }}
@@ -107,6 +109,7 @@ const UserInfo = ({ userInfo }) => (
         fullName: "ПІБ пацієнта",
         birthDate: "Дата народження",
         birthCountry: "Країна народження",
+        birthSettlement: "Місце народження",
         taxId: "ІНН",
         unzr: (
           <>
@@ -141,15 +144,17 @@ const AuthInfo = ({ authInfo }) =>
         }}
         data={authInfo}
       />
-      <Box>
-        <Form
-          onSubmit={() => {
-            alert("Submit");
-          }}
-        >
-          <Button variant="green">Скинути метод аутентифікації</Button>
-        </Form>
-      </Box>
+      {authInfo.type !== "NA" && (
+        <Box>
+          <Form
+            onSubmit={() => {
+              alert("Submit");
+            }}
+          >
+            <Button variant="green">Скинути метод аутентифікації</Button>
+          </Form>
+        </Box>
+      )}
     </Box>
   ) : null;
 
@@ -176,7 +181,6 @@ const DeclarationsInfo = ({ id }) => (
             const {
               person: { declarations }
             } = data;
-
             return (
               <>
                 <Form
@@ -226,19 +230,26 @@ const DeclarationsInfo = ({ id }) => (
                     legalEntity: { edrpou, name, addresses },
                     division: { name: divisionName },
                     status
-                  }) => ({
-                    id,
-                    declarationNumber,
-                    startDate,
-                    name,
-                    edrpou,
-                    divisionName,
-                    address: <AddressView data={addresses} />,
-                    status: DECLARATION_STATUSES[status],
-                    action: (
-                      <Link to={`/declaration/${id}`}>Показати деталі</Link>
-                    )
-                  })}
+                  }) => {
+                    const [activeAddress] = addresses.filter(
+                      a => a.type === "ACTIVE"
+                    );
+                    return {
+                      id,
+                      declarationNumber,
+                      startDate,
+                      name,
+                      edrpou,
+                      divisionName,
+                      address: activeAddress && (
+                        <AddressView data={activeAddress} />
+                      ),
+                      status: STATUSES.DECLARATION[status],
+                      action: (
+                        <Link to={`/declarations/${id}`}>Показати деталі</Link>
+                      )
+                    };
+                  }}
                   sortElements={["startDate", "status"]}
                   sortParams={{
                     sortBy,
