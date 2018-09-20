@@ -39,5 +39,6 @@ enum DeclarationOrderBy {
 
 input DeclarationFilter {
   declarationId: ID
+  declarationNumber: String
   status: DeclarationStatus
 }
