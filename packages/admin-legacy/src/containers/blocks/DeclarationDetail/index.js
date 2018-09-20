@@ -21,7 +21,8 @@ import styles from "./styles.module.css";
 
 const DATE_FORMAT = "DD/MM/YYYY";
 
-const DeclarationDetail = ({ declaration = {}, onTerminate, router }) => {
+const DeclarationDetail = ({ declaration, onTerminate, router }) => {
+  if (!Object.keys(declaration).length) return null;
   const fullName = [
     declaration.person.last_name,
     declaration.person.first_name,
@@ -242,7 +243,8 @@ const DeclarationDetail = ({ declaration = {}, onTerminate, router }) => {
                       місто {declaration.legal_entity.addresses[0].settlement},
                     </p>
                     <p>
-                      {declaration.legal_entity.addresses[0].street},&nbsp;
+                      {declaration.legal_entity.addresses[0].street}
+                      ,&nbsp;
                       {declaration.legal_entity.addresses[0].building}
                     </p>
                   </div>
