@@ -34,7 +34,7 @@ const AddressView = ({
     {formatArea(area)}, {region && <>{normalizeName(region)} район, </>}
     <>
       {/* TODO: Add Dictionary*/}
-      settlementType &nbsp;
+      {settlementType} &nbsp;
       {normalizeName(settlement)}
     </>
     ,{" "}
@@ -42,7 +42,7 @@ const AddressView = ({
       {street && (
         <>
           {/* TODO: Add Dictionary*/}
-          {streetType && streetType} {normalizeName(street)}
+          {streetType} {normalizeName(street)}
           &nbsp;
         </>
       )}
