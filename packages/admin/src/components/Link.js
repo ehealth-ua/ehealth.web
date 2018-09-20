@@ -8,6 +8,7 @@ const Link = system(
     display: "inline-block",
     verticalAlign: "middle",
     fontSize: 0,
+    fontWeight: "normal",
     color: "rockmanBlue"
   },
   `
