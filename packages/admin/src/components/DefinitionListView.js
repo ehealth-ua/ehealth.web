@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box } from "rebass/emotion";
+import { Flex, Box, Text } from "rebass/emotion";
 import system from "system-components/emotion";
 
 import { DefinitionList } from "@ehealth/components";
@@ -13,7 +13,13 @@ const DefinitionListView = ({ title, labels, data, color, labelWidth }) => (
         <Box width={labelWidth ? labelWidth : "150px"}>
           <Text fontWeight={700}>{label}</Text>
         </Box>
-        <Box>{value}</Box>
+        <Box
+          width={
+            labelWidth ? `calc(100% - ${labelWidth})` : "calc(100% - 150px)"
+          }
+        >
+          {value}
+        </Box>
       </Item>
     )}
   />
@@ -35,7 +41,3 @@ const Item = system(
     }
   `
 );
-
-const Text = system({
-  fontWeight: "bold"
-});
