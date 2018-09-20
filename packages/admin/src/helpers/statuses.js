@@ -1,4 +1,4 @@
-const DECLARATION_STATUSES = {
+const DECLARATION = {
   TERMINATED: "розірвана",
   ACTIVE: "активна",
   REJECTED: "припинена",
@@ -6,4 +6,14 @@ const DECLARATION_STATUSES = {
   APPROVED: "очікує підпису"
 };
 
-export default DECLARATION_STATUSES;
+const PERSON = {
+  ACTIVE: "активна",
+  INACTIVE: "неактивна"
+};
+
+const STATUSES = {
+  PERSON,
+  DECLARATION
+};
+
+export default STATUSES;
