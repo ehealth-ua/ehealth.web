@@ -1,0 +1,83 @@
+query DeclarationQuery($id: ID!) {
+  declaration(id: $id) {
+    id
+    declarationNumber
+    startDate
+    endDate
+    status
+    reason
+    scope
+    declarationRequestId
+    legalEntity {
+      id
+      publicName
+      edrpou
+      addresses {
+        type
+        country
+        area
+        region
+        settlement
+        settlementType
+        settlementId
+        streetType
+        street
+        building
+        apartment
+        zip
+      }
+    }
+    person {
+      id
+      firstName
+      lastName
+      secondName
+      birthDate
+      birthCountry
+      birthSettlement
+      taxId
+      phones {
+        number
+      }
+    }
+    division {
+      id
+      name
+      email
+      mountainGroup
+      addresses {
+        type
+        country
+        area
+        region
+        settlement
+        settlementType
+        settlementId
+        streetType
+        street
+        building
+        apartment
+        zip
+      }
+      phones {
+        type
+        number
+      }
+    }
+    employee {
+      id
+      position
+      party {
+        firstName
+        lastName
+        secondName
+      }
+      doctor {
+        specialities {
+          speciality
+          specialityOfficio
+        }
+      }
+    }
+  }
+}
