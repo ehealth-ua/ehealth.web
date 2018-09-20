@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.83.2"></a>
+## [0.83.2](https://github.com/edenlabllc/ehealth.web/compare/v0.83.1...v0.83.2) (2018-09-20)
+
+
+### Bug Fixes
+
+* **admin-legacy:** fix declaration page crash ([956bad0](https://github.com/edenlabllc/ehealth.web/commit/956bad0))
+
+
+
+
+
 <a name="0.83.1"></a>
 ## [0.83.1](https://github.com/edenlabllc/ehealth.web/compare/v0.83.0...v0.83.1) (2018-09-19)
 
