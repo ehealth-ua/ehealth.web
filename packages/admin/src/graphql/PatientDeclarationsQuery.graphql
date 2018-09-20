@@ -10,12 +10,9 @@ query PatientDeclarationsQuery(
       declarationNumber
       startDate
       endDate
-      signedAt
       status
       scope
       declarationRequestId
-      reason
-      reasonDescription
       legalEntity {
         id
         name
