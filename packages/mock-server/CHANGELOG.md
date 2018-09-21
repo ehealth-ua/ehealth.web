@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.84.0"></a>
+# [0.84.0](https://github.com/edenlabllc/ehealth.web/compare/v0.83.2...v0.84.0) (2018-09-21)
+
+
+### Bug Fixes
+
+* **mock-server:** use correct LegalEntityMerge types ([7a210e7](https://github.com/edenlabllc/ehealth.web/commit/7a210e7))
+
+
+### Features
+
+* **mock-server:** add LegalEntityMergeJob type ([62fdc44](https://github.com/edenlabllc/ehealth.web/commit/62fdc44))
+
+
+
+
+
 <a name="0.83.0"></a>
 # [0.83.0](https://github.com/edenlabllc/ehealth.web/compare/v0.82.0...v0.83.0) (2018-09-18)
 
