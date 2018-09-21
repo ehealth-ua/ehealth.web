@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.85.0"></a>
+# [0.85.0](https://github.com/edenlabllc/ehealth.web/compare/v0.84.0...v0.85.0) (2018-09-21)
+
+
+### Bug Fixes
+
+* **admin:** add birthSettlement to query ([08b551f](https://github.com/edenlabllc/ehealth.web/commit/08b551f))
+* **admin:** add default value to labelWidth ([5f1cf87](https://github.com/edenlabllc/ehealth.web/commit/5f1cf87))
+* **admin:** fix settlementType ([289e134](https://github.com/edenlabllc/ehealth.web/commit/289e134))
+* **admin:** fix statuses and address ([d3a799b](https://github.com/edenlabllc/ehealth.web/commit/d3a799b))
+* **admin:** remove unused fields ([3ffc263](https://github.com/edenlabllc/ehealth.web/commit/3ffc263))
+* **admin:** use Text from rebass, fix second column width ([fb8a671](https://github.com/edenlabllc/ehealth.web/commit/fb8a671))
+
+
+### Features
+
+* **admin:** add fontWeight as default prop in Link ([e958973](https://github.com/edenlabllc/ehealth.web/commit/e958973))
+* **admin:** add person statuses ([9d35f37](https://github.com/edenlabllc/ehealth.web/commit/9d35f37))
+* **admin:** declaration details page ([87ce640](https://github.com/edenlabllc/ehealth.web/commit/87ce640))
+* **icons:** add PositiveIcon ([44b1686](https://github.com/edenlabllc/ehealth.web/commit/44b1686))
+* **mock-server:** add declarationNumber as declaration filter ([f2d0eb3](https://github.com/edenlabllc/ehealth.web/commit/f2d0eb3))
+
+
+
+
+
 <a name="0.84.0"></a>
 # [0.84.0](https://github.com/edenlabllc/ehealth.web/compare/v0.83.2...v0.84.0) (2018-09-21)
 

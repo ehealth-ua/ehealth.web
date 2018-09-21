@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.85.0"></a>
+# [0.85.0](https://github.com/edenlabllc/ehealth.web/compare/v0.84.0...v0.85.0) (2018-09-21)
+
+
+### Features
+
+* **mock-server:** add declarationNumber as declaration filter ([f2d0eb3](https://github.com/edenlabllc/ehealth.web/commit/f2d0eb3))
+
+
+
+
+
 <a name="0.84.0"></a>
 # [0.84.0](https://github.com/edenlabllc/ehealth.web/compare/v0.83.2...v0.84.0) (2018-09-21)
 
