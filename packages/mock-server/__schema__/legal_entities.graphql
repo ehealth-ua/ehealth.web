@@ -116,11 +116,11 @@ type LegalEntityMergeConnection {
   insertedAt: DateTime! @fake(locale: "uk", method: "date.past")
 }
 
-input LegalEntityLegacyConnectionFilter {
+input LegalEntityMergeConnectionFilter {
   edrpou: String!
 }
 
-enum LegalEntityLegacyConnectionOrderBy {
+enum LegalEntityMergeConnectionOrderBy {
   edrpou_ASC
   edrpou_DESC
   isActive_ASC
