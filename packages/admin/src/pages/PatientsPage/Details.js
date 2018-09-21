@@ -1,6 +1,6 @@
 import React from "react";
 import { Router } from "@reach/router";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import { Flex, Box } from "rebass/emotion";
 
 import { Form } from "@ehealth/components";
@@ -19,6 +19,7 @@ import DefinitionListView from "../../components/DefinitionListView";
 import STATUSES from "../../helpers/statuses";
 
 import PatientQuery from "../../graphql/PatientQuery.graphql";
+import ResetAuthMethod from "../../graphql/ResetAuthMethod.graphql";
 import PatientDeclarationsQuery from "../../graphql/PatientDeclarationsQuery.graphql";
 
 import { getFullName } from "@ehealth/utils";
@@ -134,7 +135,7 @@ const UserInfo = ({ userInfo }) => (
   </Box>
 );
 
-const AuthInfo = ({ authInfo }) =>
+const AuthInfo = ({ id, authInfo }) =>
   authInfo ? (
     <Box p={5}>
       <DefinitionListView
@@ -146,13 +147,20 @@ const AuthInfo = ({ authInfo }) =>
       />
       {authInfo.type !== "NA" && (
         <Box>
-          <Form
-            onSubmit={() => {
-              alert("Submit");
-            }}
-          >
-            <Button variant="green">Скинути метод аутентифікації</Button>
-          </Form>
+          <Mutation mutation={ResetAuthMethod}>
+            {resetPersonAuthenticationMethod => (
+              <Button
+                variant="green"
+                onClick={() =>
+                  resetPersonAuthenticationMethod({
+                    variables: { id }
+                  })
+                }
+              >
+                Скинути метод аутентифікації
+              </Button>
+            )}
+          </Mutation>
         </Box>
       )}
     </Box>
