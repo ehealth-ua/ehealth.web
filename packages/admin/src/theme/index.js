@@ -2,6 +2,7 @@ export { default as buttons } from "./buttons";
 export { default as colors } from "./colors";
 export { default as fields } from "./fields";
 export { default as inputs } from "./inputs";
+export { default as radios } from "./radios";
 
 export const fonts = {
   0: '"GothamPro", sans-serif',

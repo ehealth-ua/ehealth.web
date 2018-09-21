@@ -1,5 +1,7 @@
 import React from "react";
-import { Label, Circle } from "../RadioView";
+import { RadioIcon } from "@ehealth/icons";
+
+import { Label } from "../RadioView";
 
 export const RadioField = ({
   selected = false,
@@ -20,7 +22,7 @@ export const RadioField = ({
         disabled
       }}
     />
-    <Circle selected={selected} disabled={disabled} />
+    <RadioIcon selected={selected} disabled={disabled} />
     {children}
   </Label>
 );
