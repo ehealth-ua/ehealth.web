@@ -18,3 +18,9 @@
 .error {
   margin-bottom: 10px;
 }
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}

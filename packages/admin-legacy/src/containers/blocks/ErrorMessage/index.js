@@ -2,6 +2,7 @@ import React from "react";
 
 import { connect } from "react-redux";
 import Portal from "react-portal";
+import { CloseIcon } from "@ehealth/icons";
 
 import { dismissError } from "../../../redux/error";
 
@@ -16,14 +17,12 @@ const ErrorMessage = ({
   error: { message, invalid },
   dismissError
 }) => (
-  <Portal
-    isOpened={isErrored}
-    onClose={dismissError}
-    closeOnEsc
-    closeOnOutsideClick
-  >
+  <Portal isOpened={isErrored} onClose={dismissError} closeOnEsc>
     <div className={styles.root}>
       <H3>An error has occured</H3>
+      <span className={styles.close}>
+        <CloseIcon width="15" height="15" onClick={dismissError} />
+      </span>
       <p className={styles.message}>{message}</p>
       {invalid && (
         <ShowMore name="Details" show_block>
