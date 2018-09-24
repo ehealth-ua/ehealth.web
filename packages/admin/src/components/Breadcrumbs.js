@@ -1,48 +1,67 @@
 import React from "react";
-import { Link, Match } from "@reach/router";
-import styled from "react-emotion/macro";
-import { ifProp } from "styled-tools";
+import * as Reach from "@reach/router";
+import system from "system-components/emotion";
+import { ChevronBottomIcon } from "@ehealth/icons";
+
+/**
+ * @example
+ *
+ * ```jsx
+ * <Breadcrumbs.List>
+ *  <Breadcrumbs.Item to="/">Пошук пацієнтів</Breadcrumbs.Item>
+ *  <Breadcrumbs.Item>Деталі пацієнта</Breadcrumbs.Item>
+ * </Breadcrumbs.List>
+ * ```
+ */
 
 const Item = ({ to, ...props }) => (
-  <Match path={to}>
-    {({ match }) => (
-      <Breadcrumb active={match}>
+  <Breadcrumb>
+    {to ? (
+      <>
         <Link to={to} {...props} />
-      </Breadcrumb>
+        <Arrow />
+      </>
+    ) : (
+      props.children
     )}
-  </Match>
+  </Breadcrumb>
 );
 
-const List = styled.ul`
-  display: flex;
-  flex-flow: row wrap;
-  padding: 0;
-  list-style: none;
-`;
+const List = system({
+  is: "ul",
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  p: 0
+});
 
-const Breadcrumb = styled.li`
-  font-size: 14px;
-  font-weight: 200;
-  color: #354052;
-  white-space: nowrap;
-  margin-bottom: 10px;
-  &:not(:last-of-type)::after {
-    content: "";
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-right: 1px solid #848c98;
-    border-top: 1px solid #848c98;
-    transform: rotate(45deg);
-    margin: 0 10px;
-    vertical-align: middle;
-  }
-  a {
-    text-decoration: none;
-    color: ${ifProp("active", "#354052", "#848c98")};
-    pointer-events: ${ifProp("active", "none")};
-  }
-`;
+const Breadcrumb = system({
+  fontSize: "14px",
+  color: "#354052",
+  mb: 2
+});
+
+const Link = system(
+  {
+    is: Reach.Link,
+    color: "#848c98"
+  },
+  `
+  text-decoration: none
+`
+);
+
+const Arrow = system(
+  {
+    is: ChevronBottomIcon,
+    color: "#a1a7af",
+    mx: 2,
+    verticalAlign: "middle"
+  },
+  `
+    transform: rotate(270deg)
+  `
+);
 
 const Breadcrumbs = { List, Item };
 
