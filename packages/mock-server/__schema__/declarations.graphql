@@ -31,10 +31,10 @@ enum DeclarationStatus {
 }
 
 enum DeclarationOrderBy {
-  startDate_ASC
-  startDate_DESC
-  status_ASC
-  status_DESC
+  START_DATE_ASC
+  START_DATE_DESC
+  STATUS_ASC
+  STATUS_DESC
 }
 
 input DeclarationFilter {

@@ -89,12 +89,12 @@ input PersonPersonalFilter {
 }
 
 enum PersonOrderBy {
-  taxId_ASC
-  taxId_DESC
-  unzr_ASC
-  unzr_DESC
-  birthDate_ASC
-  birthDate_DESC
-  insertedAt_ASC
-  insertedAt_DESC
+  TAX_ID_ASC
+  TAX_ID_DESC
+  UNZR_ASC
+  UNZR_DESC
+  BIRTH_DATE_ASC
+  BIRTH_DATE_DESC
+  INSERTED_AT_ASC
+  INSERTED_AT_DESC
 }

@@ -92,14 +92,14 @@ input LegalEntityFilter {
 }
 
 enum LegalEntityOrderBy {
-  edrpou_ASC
-  edrpou_DESC
-  status_ASC
-  status_DESC
-  nhsVerified_ASC
-  nhsVerified_DESC
-  insertedAt_ASC
-  insertedAt_DESC
+  EDRPOU_ASC
+  EDRPOU_DESC
+  STATUS_ASC
+  STATUS_DESC
+  NHS_VERIFIED_ASC
+  NHS_VERIFIED_DESC
+  INSERTED_AT_ASC
+  INSERTED_AT_DESC
 }
 
 type Archive {
@@ -121,12 +121,12 @@ input LegalEntityMergeConnectionFilter {
 }
 
 enum LegalEntityMergeConnectionOrderBy {
-  edrpou_ASC
-  edrpou_DESC
-  isActive_ASC
-  isActive_DESC
-  insertedAt_DESC
-  insertedAt_ASC
+  EDRPOU_ASC
+  EDRPOU_DESC
+  IS_ACTIVE_ASC
+  IS_ACTIVE_DESC
+  INSERTED_AT_DESC
+  INSERTED_AT_ASC
 }
 
 type LegalEntityMergeJob {
@@ -149,6 +149,6 @@ input LegalEntityMergeJobFilter {
 }
 
 enum LegalEntityMergeJobOrderBy {
-  startedAt_ASC
-  startedAt_DESC
+  STARTED_AT_ASC
+  STARTED_AT_DESC
 }
