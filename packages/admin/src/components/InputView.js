@@ -41,6 +41,9 @@ export const Content = system(
       -webkit-text-fill-color: inherit;
     }
   `,
+  "display",
+  "justifyContent",
+  "alignItems",
   "space",
   "width"
 );

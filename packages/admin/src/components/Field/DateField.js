@@ -1,17 +1,16 @@
 // @flow
 import React from "react";
 import MaskedInput from "react-text-mask";
-import styled from "react-emotion/macro";
 import createAutoCorrectedDatePipe from "text-mask-addons/dist/createAutoCorrectedDatePipe";
 
 import { Field, DatePicker } from "@ehealth/components";
 import { CalendarIcon } from "@ehealth/icons";
-import { parseDate } from "@ehealth/utils";
+import { formatDate, parseDate } from "@ehealth/utils";
 
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
 
-const autoCorrectedDatePipe = createAutoCorrectedDatePipe("dd/mm/yyyy");
+const autoCorrectedDatePipe = createAutoCorrectedDatePipe("dd.mm.yyyy");
 
 type DateFieldState = {|
   isOpen: boolean
@@ -35,67 +34,79 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
 
   render() {
     const { label, hint, warning, ...props } = this.props;
+    const { isOpen } = this.state;
 
     return (
-      <Field {...props}>
-        {({ input, meta: { state, errored, error } }) => {
-          const selectedDate =
-            input.value.length === 10 && new Date(parseDate(input.value));
-          return (
-            <Container onFocus={this.handleFocus} onBlur={this.handleBlur}>
-              <FieldView.Wrapper is="label">
-                {label && (
-                  <FieldView.Header>
-                    <FieldView.Label>{label}</FieldView.Label>
-                    {hint && <FieldView.Message>{hint}</FieldView.Message>}
-                  </FieldView.Header>
-                )}
+      <FieldView.Wrapper
+        is="label"
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+      >
+        {label && (
+          <FieldView.Header>
+            <FieldView.Label>{label}</FieldView.Label>
+            {hint && <FieldView.Message>{hint}</FieldView.Message>}
+          </FieldView.Header>
+        )}
 
-                <InputView.Border state={state}>
-                  <InputView.Content px={2} flex="none">
-                    <CalendarIcon />
-                  </InputView.Content>
-                  <InputView.Content>
-                    <MaskedInput
-                      {...input}
-                      onKeyPress={this.handleKeyPress}
-                      mask={[
-                        /\d/,
-                        /\d/,
-                        "/",
-                        /\d/,
-                        /\d/,
-                        "/",
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        /\d/
-                      ]}
-                      guide={false}
-                      pipe={autoCorrectedDatePipe}
-                      placeholder="ДД/ММ/РР"
-                    />
-                  </InputView.Content>
-                </InputView.Border>
-
-                <FieldView.Footer>
-                  <FieldView.Message state={state}>
-                    {errored ? error : warning}
-                  </FieldView.Message>
-                </FieldView.Footer>
-              </FieldView.Wrapper>
-              {this.state.isOpen && (
-                <DatePicker
-                  selected={selectedDate || new Date()}
-                  onDateSelected={({ selected, selectable, date }) =>
-                    this.handleOnDateSelected(selected, selectable, date, input)
-                  }
+        <Field format={formatDate} parse={parseDate} {...props}>
+          {({ input, meta: { state, errored, error } }) => (
+            <>
+              <InputView.Border state={state}>
+                <InputView.Content
+                  pl={2}
+                  py={0}
+                  flex="none"
+                  display="flex"
+                  alignItems="center"
+                >
+                  <CalendarIcon />
+                </InputView.Content>
+                <InputView.Content
+                  is={MaskedInput}
+                  width={0}
+                  pl={2}
+                  pr={3}
+                  placeholder="ДД.ММ.РРРР"
+                  mask={[
+                    /\d/,
+                    /\d/,
+                    ".",
+                    /\d/,
+                    /\d/,
+                    ".",
+                    /\d/,
+                    /\d/,
+                    /\d/,
+                    /\d/
+                  ]}
+                  guide={false}
+                  {...input}
+                  onKeyPress={this.handleKeyPress}
+                  pipe={autoCorrectedDatePipe}
                 />
-              )}
-            </Container>
-          );
-        }}
-      </Field>
+              </InputView.Border>
+
+              <FieldView.Footer>
+                <FieldView.Message state={state}>
+                  {errored ? error : warning}
+                </FieldView.Message>
+              </FieldView.Footer>
+            </>
+          )}
+        </Field>
+
+        {isOpen && (
+          <Field {...props}>
+            {({ input: { value, onChange } }) => (
+              <DatePicker
+                selected={this.getSelectedDate(value)}
+                onDateSelected={this.handleDateSelect(onChange)}
+              />
+            )}
+          </Field>
+        )}
+      </FieldView.Wrapper>
     );
   }
 
@@ -118,13 +129,16 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
     this.timeoutIds = [];
   }
 
-  handleOnDateSelected = (selected, selectable, date, input) => {
-    if (!selectable) {
-      return;
-    }
+  getSelectedDate(value) {
+    const parsedDate = Date.parse(value);
+    return new Date(isNaN(parsedDate) ? Date.now() : parsedDate);
+  }
+
+  handleDateSelect = onFieldChange => ({ selectable, date }) => {
+    if (!selectable) return;
 
     this.setState({ isOpen: false });
-    input.onChange(date.toLocaleDateString("en-GB"));
+    onFieldChange(date.toISOString().substr(0, 10));
   };
 
   handleFocus = () => {
@@ -149,7 +163,3 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
 }
 
 export default DateField;
-
-const Container = styled.div`
-  position: relative;
-`;
