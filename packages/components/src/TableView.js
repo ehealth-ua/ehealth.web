@@ -28,9 +28,9 @@ const TableView = ({
   rowComponent = "tr",
   headerCellComponent = "th",
   cellComponent = "td",
-  sortElements,
-  onSort,
-  sortParams,
+  sortableFields,
+  sortingParams,
+  onSortingChange,
   filterRow = null,
   onFilter
 }: Props) => (
@@ -41,9 +41,9 @@ const TableView = ({
       headerComponent={headerComponent}
       rowComponent={rowComponent}
       headerCellComponent={headerCellComponent}
-      sortElements={sortElements}
-      onSort={onSort}
-      sortParams={sortParams}
+      sortableFields={sortableFields}
+      sortingParams={sortingParams}
+      onSortingChange={onSortingChange}
       filterRow={filterRow}
       onFilter={onFilter}
     />

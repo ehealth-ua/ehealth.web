@@ -1,27 +1,13 @@
 //@flow
-
 import * as React from "react";
 import styled from "react-emotion/macro";
 import { css } from "react-emotion";
 import { ifProp } from "styled-tools";
+import { Switch } from "@ehealth/components";
 import { CaretDownIcon, CaretUpIcon } from "@ehealth/icons";
 import { filterTableColumn } from "@ehealth/utils";
-import TableDropDownControll from "./TableDropDownControll";
-import { TableCell } from "./AdminTable";
 
-type TableHeaderType = {
-  header: HeaderData,
-  columnKeyExtractor: (string, number) => string,
-  filterTableColumn: (Array<HeaderDataWithStatus | any>, string) => boolean,
-  headerComponent: React.ElementType,
-  rowComponent: React.ElementType,
-  headerCellComponent: React.ElementType,
-  sortElements: Array<string>,
-  sortParams: SortParamsType,
-  onSort: SortParamsType => mixed,
-  filterRow: Array<HeaderDataWithStatus | any>,
-  onFilter: () => mixed
-};
+import TableDropDownControll from "./TableDropDownControll";
 
 type HeaderData = { [string]: string };
 
@@ -31,9 +17,23 @@ type HeaderDataWithStatus = {|
   title: string
 |};
 
-type SortParamsType = {
-  sortEncrease: boolean,
-  sortBy: string
+export type SortingParams = {|
+  name?: string,
+  order?: "ASC" | "DESC"
+|};
+
+type TableHeaderType = {
+  header: HeaderData,
+  columnKeyExtractor: (string, number) => string,
+  filterTableColumn: (Array<HeaderDataWithStatus | any>, string) => boolean,
+  headerComponent: React.ElementType,
+  rowComponent: React.ElementType,
+  headerCellComponent: React.ElementType,
+  sortableFields?: string[],
+  sortingParams?: SortingParams,
+  onSortingChange?: SortingParams => mixed,
+  filterRow: Array<HeaderDataWithStatus | any>,
+  onFilter: () => mixed
 };
 
 const TableHeader = ({
@@ -43,9 +43,9 @@ const TableHeader = ({
   headerComponent: HeaderComponent,
   rowComponent: RowComponent,
   headerCellComponent: HeaderCellComponent,
-  sortElements,
-  sortParams: { sortEncrease, sortBy },
-  onSort,
+  sortableFields = [],
+  sortingParams = {},
+  onSortingChange = () => {},
   filterRow,
   onFilter
 }: TableHeaderType) => (
@@ -56,31 +56,30 @@ const TableHeader = ({
           filterTableColumn(filterRow, headerName)
         )
         .map(([name, content], index) => {
-          const sortStatus = sortElements.includes(name);
+          const isSortable = sortableFields.includes(name);
           return (
             <HeaderCellComponent
               key={columnKeyExtractor(name, index)}
               onClick={
-                sortStatus
+                isSortable
                   ? () =>
-                      onSort({
-                        sortBy: name,
-                        sortEncrease: !sortEncrease
+                      onSortingChange({
+                        name,
+                        order: sortingParams.order === "ASC" ? "DESC" : "ASC"
                       })
-                  : () => {}
+                  : undefined
               }
             >
               <ContentBlock
                 content={content}
-                prefix={sortStatus}
+                prefix={isSortable}
                 icon={
-                  sortBy !== name ? (
-                    <CaretUpAndDownIcon />
-                  ) : sortEncrease ? (
-                    <CaretUpIcon />
-                  ) : (
-                    <CaretDownIcon />
-                  )
+                  <Switch
+                    value={sortingParams.name === name && sortingParams.order}
+                    ASC={<CaretUpIcon />}
+                    DESC={<CaretDownIcon />}
+                    default={<CaretUpAndDownIcon />}
+                  />
                 }
               />
             </HeaderCellComponent>

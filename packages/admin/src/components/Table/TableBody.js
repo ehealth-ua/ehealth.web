@@ -20,6 +20,7 @@ type TableBodyType = {
   filterTableColumn: (Array<HeaderDataWithStatus | any>, any) => mixed,
   filterRow: Array<HeaderDataWithStatus | any>
 };
+
 const TableBody = ({
   columns,
   data,

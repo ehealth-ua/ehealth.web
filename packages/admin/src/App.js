@@ -8,8 +8,8 @@ import ErrorBoundary from "./ErrorBoundary";
 import DataProvider from "./DataProvider";
 
 import Layout from "./components/Layout";
-import HomePage from "./pages/HomePage";
-import PatientsPage from "./pages/PatientsPage";
+import Home from "./pages/Home";
+import Patients from "./pages/Patients";
 import Declarations from "./pages/Declarations";
 
 const NotFound = () => <p>Sorry, nothing here</p>;
@@ -20,8 +20,8 @@ const App = () => (
       <DataProvider>
         <Layout>
           <Router>
-            <HomePage path="/" />
-            <PatientsPage path="patients/*" />
+            <Home path="/" />
+            <Patients path="patients/*" />
             <Declarations path="declarations/*" />
             <NotFound default />
           </Router>

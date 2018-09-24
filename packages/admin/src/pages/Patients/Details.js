@@ -5,13 +5,18 @@ import { Flex, Box } from "rebass/emotion";
 
 import { Form } from "@ehealth/components";
 import { AdminSearchIcon } from "@ehealth/icons";
+import {
+  parseSortingParams,
+  stringifySortingParams,
+  getFullName
+} from "@ehealth/utils";
 
 import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
 import * as Field from "../../components/Field";
-import { AdminTable } from "../../components/Table";
+import Table from "../../components/Table";
 import AddressView from "../../components/AddressView";
 import LocationParams from "../../components/LocationParams";
 import DefinitionListView from "../../components/DefinitionListView";
@@ -21,8 +26,6 @@ import STATUSES from "../../helpers/statuses";
 import PatientQuery from "../../graphql/PatientQuery.graphql";
 import ResetAuthMethod from "../../graphql/ResetAuthMethod.graphql";
 import PatientDeclarationsQuery from "../../graphql/PatientDeclarationsQuery.graphql";
-
-import { getFullName } from "@ehealth/utils";
 
 const filterData = (type, arr) => arr.filter(t => t.type === type);
 
@@ -172,8 +175,6 @@ const DeclarationsInfo = ({ id }) => (
       locationParams: { orderBy, declarationId, status },
       setLocationParams
     }) => {
-      const [sortBy, order] =
-        typeof orderBy === "string" ? orderBy.split("_") : [];
       return (
         <Query
           query={PatientDeclarationsQuery}
@@ -218,7 +219,7 @@ const DeclarationsInfo = ({ id }) => (
                     </Box>
                   </Flex>
                 </Form>
-                <AdminTable
+                <Table
                   data={declarations}
                   header={{
                     id: "ID декларації",
@@ -258,14 +259,11 @@ const DeclarationsInfo = ({ id }) => (
                       )
                     };
                   }}
-                  sortElements={["startDate", "status"]}
-                  sortParams={{
-                    sortBy,
-                    sortEncrease: order === "DESC"
-                  }}
-                  onSort={({ sortBy, sortEncrease }) =>
+                  sortableFields={["startDate", "status"]}
+                  sortingParams={parseSortingParams(orderBy)}
+                  onSortingChange={sortingParams =>
                     setLocationParams({
-                      orderBy: [sortBy, sortEncrease ? "DESC" : "ASC"].join("_")
+                      orderBy: stringifySortingParams(sortingParams)
                     })
                   }
                 />
