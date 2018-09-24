@@ -14,7 +14,8 @@ const colors = {
   enchantedBlue: "#007796",
   boysenberryShadow: "#F1F3F9",
   hintOfCandela: "#D6DDE6",
-  biroBlue: "#333C48"
+  biroBlue: "#333C48",
+  januaryDawn: "#DFE2E5"
 };
 
 export default colors;
