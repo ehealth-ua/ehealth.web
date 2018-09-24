@@ -1,0 +1,16 @@
+query SearchPersonsQuery($filter: PersonFilter, $orderBy: PersonOrderBy) {
+  persons(filter: $filter, orderBy: $orderBy) {
+    id
+    firstName
+    lastName
+    secondName
+    birthDate
+    unzr
+    taxId
+    insertedAt
+    authenticationMethods: authenticationMethod {
+      type
+      phoneNumber
+    }
+  }
+}
