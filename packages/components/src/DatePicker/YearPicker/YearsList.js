@@ -2,7 +2,7 @@ import React from "react";
 
 import { List, Item } from "../Body";
 
-const YearsList = ({ selectedYear, choiseYear }) => {
+const YearsList = ({ selectedYear, chooseYear }) => {
   const startYear = selectedYear - 15;
   const yearsArray = Array.from(
     new Array(16),
@@ -11,7 +11,7 @@ const YearsList = ({ selectedYear, choiseYear }) => {
   return (
     <List>
       {yearsArray.map(year => (
-        <Item key={year} col={4} onClick={() => choiseYear(year)}>
+        <Item key={year} col={4} onClick={() => chooseYear(year)}>
           {year}
         </Item>
       ))}

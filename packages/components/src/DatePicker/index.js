@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+// @flow
+import * as React from "react";
+import { Switch } from "@ehealth/components";
 
 import YearPicker from "./YearPicker";
 import DayPicker from "./DayPicker";
 import MonthPicker from "./MonthPicker";
 import { Container } from "./Body";
 
-import { Switch } from "@ehealth/components";
-
-type Props = {|
+type DatepickerProps = {|
   date?: Date,
   selected?: Date | Date[],
   monthsToDisplay?: number,
@@ -21,15 +21,17 @@ type Props = {|
   onOffsetChanged: () => mixed
 |};
 
-type State = {|
-  mode: string,
+type DatepickerMode = "day" | "month" | "year";
+
+type DatepickerState = {|
+  mode: DatepickerMode,
   offset: number,
   selectedYear: ?number,
   currentYear: number,
   currentMonth: number
 |};
 
-class Datepicker extends Component<Props, State> {
+class Datepicker extends React.Component<DatepickerProps, DatepickerState> {
   state = {
     mode: "day",
     offset: 0,
@@ -38,23 +40,23 @@ class Datepicker extends Component<Props, State> {
     currentMonth: parseInt(new Date().getMonth(), 10)
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
+  componentWillUpdate(nextProps: DatepickerProps, nextState: DatepickerState) {
     if (
       nextProps.selected.getFullYear() !== this.props.selected.getFullYear()
     ) {
-      this.choiseYear(nextProps.selected.getFullYear());
+      this.chooseYear(nextProps.selected.getFullYear());
     }
 
     if (nextProps.selected.getMonth() !== this.props.selected.getMonth()) {
-      this.choiseMonth(nextProps.selected.getMonth());
+      this.chooseMonth(nextProps.selected.getMonth());
     }
+  }
 
-    return true;
-  }
   componentWillMount() {
-    this.choiseYear(this.props.selected.getFullYear());
-    this.choiseMonth(this.props.selected.getMonth());
+    this.chooseYear(this.props.selected.getFullYear());
+    this.chooseMonth(this.props.selected.getMonth());
   }
+
   render() {
     return (
       <Container>
@@ -63,14 +65,14 @@ class Datepicker extends Component<Props, State> {
           year={
             <YearPicker
               selectedYear={this.state.selectedYear}
-              choiseYear={this.choiseYear}
+              chooseYear={this.chooseYear}
               switchMode={this.switchMode}
             />
           }
           month={
             <MonthPicker
               currentMonth={this.state.currentMonth}
-              choiseMonth={this.choiseMonth}
+              chooseMonth={this.chooseMonth}
               switchMode={this.switchMode}
             />
           }
@@ -89,7 +91,7 @@ class Datepicker extends Component<Props, State> {
     );
   }
 
-  choiseYear = (year: number): void => {
+  chooseYear = (year: number): void => {
     this.setState(({ currentYear }) => ({
       selectedYear: year,
       mode: "day",
@@ -97,7 +99,7 @@ class Datepicker extends Component<Props, State> {
     }));
   };
 
-  choiseMonth = (month: number): void => {
+  chooseMonth = (month: number): void => {
     this.setState(({ offset, currentMonth }) => ({
       currentMonth: month,
       mode: "day",
@@ -121,7 +123,7 @@ class Datepicker extends Component<Props, State> {
     }));
   };
 
-  switchMode = (mode: string): void => {
+  switchMode = (mode: DatepickerMode): void => {
     this.setState({ mode });
   };
 }

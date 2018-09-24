@@ -12,15 +12,15 @@ class YearPicker extends Component {
 
   render() {
     const { selectedYear } = this.state;
-    const { choiseYear } = this.props;
+    const { chooseYear } = this.props;
     return (
       <>
         <Header data-test="yearsHeader">
           <Button onClick={this.decreaseYear} direction="backward" />
-          <Title onClick={() => choiseYear(selectedYear)}>{selectedYear}</Title>
+          <Title onClick={() => chooseYear(selectedYear)}>{selectedYear}</Title>
           <Button onClick={this.increaseYear} direction="forward" />
         </Header>
-        <YearsList choiseYear={choiseYear} selectedYear={selectedYear} />
+        <YearsList chooseYear={chooseYear} selectedYear={selectedYear} />
       </>
     );
   }
