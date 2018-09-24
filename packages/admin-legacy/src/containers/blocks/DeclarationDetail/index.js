@@ -36,7 +36,7 @@ const DeclarationDetail = ({ declaration, onTerminate, router }) => {
         meta={[{ property: "og:title", content: `Декларація ${fullName}` }]}
       />
 
-      <BackLink onClick={() => router.goBack()}>
+      <BackLink onClick={() => router.push("/declarations")}>
         Повернутися до списку декларацій
       </BackLink>
 

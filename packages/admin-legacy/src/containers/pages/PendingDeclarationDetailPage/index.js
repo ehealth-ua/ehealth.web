@@ -31,16 +31,26 @@ class PendingDeclarationDetailPage extends React.Component {
   };
 
   approve() {
+    const {
+      router,
+      params: { id },
+      approveDeclaration
+    } = this.props;
     this.setState({ showApproveConfirm: false });
-    this.props.approveDeclaration(this.props.params.id).then(() => {
-      this.props.router.goBack();
+    approveDeclaration(id).then(() => {
+      router.push(`/declarations/${id}`);
     });
   }
 
   reject() {
+    const {
+      router,
+      params: { id },
+      rejectDeclaration
+    } = this.props;
     this.setState({ showRejectConfirm: false });
-    this.props.rejectDeclaration(this.props.params.id).then(() => {
-      this.props.router.goBack();
+    rejectDeclaration(id).then(() => {
+      router.push(`/declarations/${id}`);
     });
   }
 
