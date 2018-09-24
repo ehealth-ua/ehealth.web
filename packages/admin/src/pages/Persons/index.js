@@ -4,7 +4,7 @@ import { Router, Redirect } from "@reach/router";
 import Search from "./Search";
 import Details from "./Details";
 
-const Patients = ({ uri }) => (
+const Persons = ({ uri }) => (
   <Router>
     <Redirect from="/" to={`${uri}/search`} />
     <Search path="search/*" />
@@ -12,4 +12,4 @@ const Patients = ({ uri }) => (
   </Router>
 );
 
-export default Patients;
+export default Persons;

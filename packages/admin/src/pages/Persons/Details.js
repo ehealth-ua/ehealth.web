@@ -23,9 +23,9 @@ import DefinitionListView from "../../components/DefinitionListView";
 
 import STATUSES from "../../helpers/statuses";
 
-import PatientQuery from "../../graphql/PatientQuery.graphql";
-import ResetAuthMethod from "../../graphql/ResetAuthMethod.graphql";
-import PatientDeclarationsQuery from "../../graphql/PatientDeclarationsQuery.graphql";
+import PersonQuery from "../../graphql/PersonQuery.graphql";
+import ResetAuthMethodMutation from "../../graphql/ResetAuthMethodMutation.graphql";
+import PersonDeclarationsQuery from "../../graphql/PersonDeclarationsQuery.graphql";
 
 const filterData = (type, arr) => arr.filter(t => t.type === type);
 
@@ -34,7 +34,7 @@ const declarationStatuses = Object.entries(STATUSES.DECLARATION).map(
 );
 
 const Details = ({ id }) => (
-  <Query query={PatientQuery} variables={{ id }}>
+  <Query query={PersonQuery} variables={{ id }}>
     {({ loading, error, data }) => {
       if (loading) return "Loading...";
       if (error) return `Error! ${error.message}`;
@@ -150,7 +150,7 @@ const AuthInfo = ({ id, authInfo }) =>
       />
       {authInfo.type !== "NA" && (
         <Box>
-          <Mutation mutation={ResetAuthMethod}>
+          <Mutation mutation={ResetAuthMethodMutation}>
             {resetPersonAuthenticationMethod => (
               <Button
                 variant="green"
@@ -177,7 +177,7 @@ const DeclarationsInfo = ({ id }) => (
     }) => {
       return (
         <Query
-          query={PatientDeclarationsQuery}
+          query={PersonDeclarationsQuery}
           variables={{
             id,
             filter: { declarationId, status: status && status.name },

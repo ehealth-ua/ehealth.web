@@ -9,7 +9,7 @@ import DataProvider from "./DataProvider";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import Patients from "./pages/Patients";
+import Persons from "./pages/Persons";
 import Declarations from "./pages/Declarations";
 
 const NotFound = () => <p>Sorry, nothing here</p>;
@@ -21,7 +21,7 @@ const App = () => (
         <Layout>
           <Router>
             <Home path="/" />
-            <Patients path="patients/*" />
+            <Persons path="persons/*" />
             <Declarations path="declarations/*" />
             <NotFound default />
           </Router>

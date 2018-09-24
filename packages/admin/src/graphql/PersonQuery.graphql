@@ -1,4 +1,4 @@
-query PatientQuery($id: ID!) {
+query PersonQuery($id: ID!) {
   person(id: $id) {
     id
     status

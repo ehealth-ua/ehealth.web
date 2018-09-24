@@ -1,4 +1,4 @@
-query PatientDeclarationsQuery(
+query PersonDeclarationsQuery(
   $id: ID!
   $filter: DeclarationFilter
   $orderBy: DeclarationOrderBy

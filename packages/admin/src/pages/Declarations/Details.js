@@ -261,7 +261,7 @@ const Patient = ({
       data={{
         id,
         link: (
-          <Link to={`/patients/${id}`} fontWeight={700}>
+          <Link to={`/persons/${id}`} fontWeight={700}>
             Показати детальну інформацію
           </Link>
         )

@@ -12,7 +12,7 @@ const Nav = () => (
     <NavList>
       <Ability action="read" resource="person">
         <NavSection title="Паціенти">
-          <NavLink to="/patients">Пошук паціентів</NavLink>
+          <NavLink to="/persons">Пошук паціентів</NavLink>
         </NavSection>
       </Ability>
     </NavList>
