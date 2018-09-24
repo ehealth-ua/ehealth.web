@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.88.1"></a>
+## [0.88.1](https://github.com/edenlabllc/ehealth.web/compare/v0.88.0...v0.88.1) (2018-09-24)
+
+
+### Bug Fixes
+
+* **admin-legacy:** go to declaration after approve or reject pending declaration ([45b51c7](https://github.com/edenlabllc/ehealth.web/commit/45b51c7))
+
+
+
+
+
 <a name="0.88.0"></a>
 # [0.88.0](https://github.com/edenlabllc/ehealth.web/compare/v0.86.0...v0.88.0) (2018-09-24)
 
