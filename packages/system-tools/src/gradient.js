@@ -20,7 +20,7 @@ const transformColorStop = colors => colorStop => {
 
   if (Array.isArray(colorStop)) {
     const [color, length] = colorStop;
-    return [getColor(color), length].join(" ");
+    return [getColor(color), util.px(length)].join(" ");
   } else {
     return getColor(colorStop);
   }
@@ -40,7 +40,23 @@ export const radialGradient = gradientStyle({
   key: "gradients"
 });
 
+export const repeatingLinearGradient = gradientStyle({
+  prop: "repeatingLinearGradient",
+  cssProperty: "backgroundImage",
+  cssFunction: "repeating-linear-gradient",
+  key: "gradients"
+});
+
+export const repeatingRadialGradient = gradientStyle({
+  prop: "repeatingRadialGradient",
+  cssProperty: "backgroundImage",
+  cssFunction: "repeating-radial-gradient",
+  key: "gradients"
+});
+
 export default compose(
   linearGradient,
-  radialGradient
+  radialGradient,
+  repeatingLinearGradient,
+  repeatingRadialGradient
 );
