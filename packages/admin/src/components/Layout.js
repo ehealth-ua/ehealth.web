@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
 import { EhealthLogoIcon } from "@ehealth/icons";
-import styled from "react-emotion/macro";
 import system from "system-components/emotion";
 import { gradient } from "@ehealth/system-tools";
 

@@ -1,11 +1,8 @@
 import React from "react";
-import Downshift from "downshift";
-
 import { RemoveItemIcon } from "@ehealth/icons";
 
-import Dropdown from "../Dropdown";
 import { MultiDownshift } from "./DownshiftField";
-
+import Dropdown from "../Dropdown";
 import * as MultiSelectView from "../MultiSelectView";
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";

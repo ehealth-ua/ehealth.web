@@ -59,7 +59,6 @@ class TableHeaderCellWithResize extends React.Component<
 
   resizeColumnStart = (event: EventType, isTouch: boolean) => {
     event.stopPropagation();
-    const { minWidth } = this.state;
 
     const cellWidth = event.target.parentElement.getBoundingClientRect().width;
 

@@ -1,10 +1,15 @@
 //@flow
-
 import * as React from "react";
 import styled from "react-emotion/macro";
 import Dropdown from "../Dropdown";
 import { DropDownButton } from "@ehealth/icons";
 import { checkLastInList } from "@ehealth/utils";
+
+type HeaderDataWithStatus = {|
+  name: string,
+  status: boolean,
+  title: string
+|};
 
 type TableDropDownControllType = {
   onChange: () => mixed,
@@ -19,12 +24,6 @@ type TableDropdownType = {
   onChange: string => mixed,
   columnKeyExtractor: (string, number) => string
 };
-
-type HeaderDataWithStatus = {|
-  name: string,
-  status: boolean,
-  title: string
-|};
 
 const TableDropDownControll = ({
   onChange,

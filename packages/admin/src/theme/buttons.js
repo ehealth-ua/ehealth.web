@@ -1,7 +1,6 @@
-const colors = {
-  white: "#fff",
-  carbon: "rgb(53, 82, 62)",
+import colors from "./colors";
 
+const buttonColors = {
   light: [
     ["#F2F4F7", "#FFFFFF"],
     ["#EAEEF3", "#FFFFFF"],
@@ -57,22 +56,22 @@ const colors = {
 };
 
 const btnStylesCreator = (name, fontColor = colors.white) => ({
-  backgroundImage: `linear-gradient(0deg, ${colors[name][0][0]} 0%, ${
-    colors[name][0][1]
+  backgroundImage: `linear-gradient(0deg, ${buttonColors[name][0][0]} 0%, ${
+    buttonColors[name][0][1]
   } 100%)`,
-  borderColor: colors[name + "Border"][0],
+  borderColor: buttonColors[name + "Border"][0],
   color: fontColor,
   "&:hover": {
-    backgroundImage: `linear-gradient(0deg, ${colors[name][1][0]} 0%, ${
-      colors[name][1][1]
+    backgroundImage: `linear-gradient(0deg, ${buttonColors[name][1][0]} 0%, ${
+      buttonColors[name][1][1]
     } 100%)`,
-    borderColor: colors[name + "Border"][1]
+    borderColor: buttonColors[name + "Border"][1]
   },
   "&:active": {
-    backgroundImage: `linear-gradient(0deg, ${colors[name][2][0]} 0%, ${
-      colors[name][2][1]
+    backgroundImage: `linear-gradient(0deg, ${buttonColors[name][2][0]} 0%, ${
+      buttonColors[name][2][1]
     } 100%)`,
-    borderColor: colors[name + "Border"][2]
+    borderColor: buttonColors[name + "Border"][2]
   },
   "&:disabled": {
     backgroundImage: "none",
@@ -83,7 +82,7 @@ const btnStylesCreator = (name, fontColor = colors.white) => ({
 });
 
 const buttons = {
-  light: btnStylesCreator("light", colors.carbon),
+  light: btnStylesCreator("light", colors.darkAndStormy),
   green: btnStylesCreator("green"),
   blue: btnStylesCreator("blue"),
   purple: btnStylesCreator("purple"),

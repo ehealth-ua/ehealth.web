@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ApolloProvider, getDataFromTree } from "react-apollo";
+import { ApolloProvider /*, getDataFromTree */ } from "react-apollo";
 
 import ErrorBoundary from "./ErrorBoundary";
 import { createClient } from "./client";

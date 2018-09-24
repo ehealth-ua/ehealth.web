@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Downshift from "downshift";
-import { pickProps } from "@ehealth/utils";
 import { Field } from "@ehealth/components";
 
 export class MultiDownshift extends Component {

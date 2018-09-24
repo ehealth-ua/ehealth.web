@@ -1,6 +1,5 @@
-import React from "react";
-import * as Reach from "@reach/router";
 import system from "system-components/emotion";
+import * as Reach from "@reach/router";
 
 const Link = system(
   {
