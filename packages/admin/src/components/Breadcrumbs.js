@@ -36,6 +36,7 @@ const List = system({
 });
 
 const Breadcrumb = system({
+  is: "li",
   fontSize: "14px",
   color: "#354052",
   mb: 2
