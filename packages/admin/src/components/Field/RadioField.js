@@ -1,7 +1,6 @@
 import React from "react";
+import system from "system-components/emotion";
 import { RadioIcon } from "@ehealth/icons";
-
-import { Label } from "../RadioView";
 
 export const RadioField = ({
   selected = false,
@@ -28,3 +27,16 @@ export const RadioField = ({
 );
 
 export default RadioField;
+
+export const Label = system(
+  {
+    is: "label"
+  },
+  ({ disabled }) => ({
+    color: disabled && "#9299a3",
+    cursor: "pointer"
+  }),
+  `
+    user-select: none
+  `
+);
