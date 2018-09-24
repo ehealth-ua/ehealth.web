@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.86.0"></a>
+# [0.86.0](https://github.com/edenlabllc/ehealth.web/compare/v0.85.1...v0.86.0) (2018-09-24)
+
+
+### Features
+
+* **admin:** add resetAuthMethod mutation ([a1cd531](https://github.com/edenlabllc/ehealth.web/commit/a1cd531))
+
+
+
+
+
 <a name="0.85.1"></a>
 ## [0.85.1](https://github.com/edenlabllc/ehealth.web/compare/v0.85.0...v0.85.1) (2018-09-21)
 
