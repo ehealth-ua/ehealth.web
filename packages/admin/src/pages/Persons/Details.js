@@ -1,9 +1,10 @@
 import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
-import { Flex, Box } from "rebass/emotion";
+import { Flex, Box, Heading, Text } from "rebass/emotion";
+import { BooleanValue } from "react-values";
 
-import { Form } from "@ehealth/components";
+import { Form, Modal } from "@ehealth/components";
 import { AdminSearchIcon } from "@ehealth/icons";
 import {
   parseSortingParams,
@@ -152,16 +153,47 @@ const AuthInfo = ({ id, authInfo }) =>
         <Box>
           <Mutation mutation={ResetAuthMethodMutation}>
             {resetPersonAuthenticationMethod => (
-              <Button
-                variant="green"
-                onClick={() =>
-                  resetPersonAuthenticationMethod({
-                    variables: { id }
-                  })
-                }
-              >
-                Скинути метод аутентифікації
-              </Button>
+              <BooleanValue>
+                {({ value: opened, toggle }) => (
+                  <>
+                    <Button variant="green" disabled={opened} onClick={toggle}>
+                      Скинути метод аутентифікації
+                    </Button>
+                    {opened && (
+                      <Modal width={760} backdrop>
+                        <Heading as="h1" fontWeight="normal" mb={6}>
+                          Зміна методу аутентифікації
+                        </Heading>
+                        <Text lineHeight={2} textAlign="center" mb={6}>
+                          Увага! <br />
+                          Після підтвердження, метод аутентифікації буде змінено
+                          на невизначений
+                        </Text>
+                        <Flex justifyContent="center">
+                          <Box mx={2}>
+                            <Button variant="blue" onClick={toggle}>
+                              Повернутися
+                            </Button>
+                          </Box>
+                          <Box mx={2}>
+                            <Button
+                              variant="green"
+                              onClick={async () => {
+                                await resetPersonAuthenticationMethod({
+                                  variables: { id }
+                                });
+                                toggle();
+                              }}
+                            >
+                              Скинути метод аутентифікації
+                            </Button>
+                          </Box>
+                        </Flex>
+                      </Modal>
+                    )}
+                  </>
+                )}
+              </BooleanValue>
             )}
           </Mutation>
         </Box>

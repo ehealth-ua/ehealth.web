@@ -23,6 +23,7 @@
     "react-popper": "^1.0.2",
     "react-scripts": "2.0.0-next.66cc7a90",
     "react-text-mask": "^5.4.3",
+    "react-values": "^0.3.0",
     "rebass": "^3.0.0-8",
     "styled-system": "^3.1.3",
     "system-components": "^3.0.1",
