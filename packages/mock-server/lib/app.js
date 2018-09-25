@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 const { importSchema } = require("graphql-import");
 const { ApolloServer } = require("apollo-server-express");
-const { WHITE_LIST_ORIGINS } = process.env;
+const { WHITE_LIST_ORIGINS = "" } = process.env;
 
 const resolvers = require("./resolvers");
 const schemaDirectives = require("./directives");
