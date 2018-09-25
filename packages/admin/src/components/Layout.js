@@ -25,7 +25,8 @@ const Wrapper = system(
     is: "main",
     display: "flex",
     boxShadow: "0 0 15px 0 rgba(0,0,0,0.31)",
-    m: 4
+    m: 4,
+    minHeight: "calc(100vh - 40px)"
   },
   {
     flexGrow: 1
