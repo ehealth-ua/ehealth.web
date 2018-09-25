@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.90.0"></a>
+# [0.90.0](https://github.com/edenlabllc/ehealth.web/compare/v0.88.1...v0.90.0) (2018-09-25)
+
+
+### Bug Fixes
+
+* **admin:** change DateField to return ISO date, fix DateField appearance ([ddca645](https://github.com/edenlabllc/ehealth.web/commit/ddca645))
+* **admin:** change default font to Montserrat ([a1f6521](https://github.com/edenlabllc/ehealth.web/commit/a1f6521))
+* **admin:** change styles according to new font-family and body styles ([9cbb877](https://github.com/edenlabllc/ehealth.web/commit/9cbb877))
+* **admin:** fix more typos ([0653aa0](https://github.com/edenlabllc/ehealth.web/commit/0653aa0))
+* **admin:** fix typo, use hyphens in URLs ([17c2d48](https://github.com/edenlabllc/ehealth.web/commit/17c2d48))
+* **admin:** move box-sizing styles up ([bd33669](https://github.com/edenlabllc/ehealth.web/commit/bd33669))
+* **admin-legacy:** add redirect to sign in page in case 401 error ([4222fb8](https://github.com/edenlabllc/ehealth.web/commit/4222fb8))
+* **components:** delete Root component ([244cf82](https://github.com/edenlabllc/ehealth.web/commit/244cf82))
+* **components:** fix Modal positioning ([bc0310a](https://github.com/edenlabllc/ehealth.web/commit/bc0310a))
+* **icons:** remove default width and height from ChevronBottomIcon ([c0ca39d](https://github.com/edenlabllc/ehealth.web/commit/c0ca39d))
+
+
+### Features
+
+* **admin:** add alternate Tabs component ([0c9295b](https://github.com/edenlabllc/ehealth.web/commit/0c9295b))
+* **admin:** add Details component ([7d1e5da](https://github.com/edenlabllc/ehealth.web/commit/7d1e5da))
+* **admin:** add persons search page ([7d327da](https://github.com/edenlabllc/ehealth.web/commit/7d327da)), closes [#285](https://github.com/edenlabllc/ehealth.web/issues/285)
+* **admin:** remove cyrillic-ext and remove italic from import ([b0cec8b](https://github.com/edenlabllc/ehealth.web/commit/b0cec8b))
+* **admin:** show Modal when press reset auth method ([0a709a2](https://github.com/edenlabllc/ehealth.web/commit/0a709a2))
+
+
+
+
+
 <a name="0.89.0"></a>
 # [0.89.0](https://github.com/edenlabllc/ehealth.web/compare/v0.88.1...v0.89.0) (2018-09-25)
 

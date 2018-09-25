@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.90.0"></a>
+# [0.90.0](https://github.com/edenlabllc/ehealth.web/compare/v0.88.1...v0.90.0) (2018-09-25)
+
+
+### Bug Fixes
+
+* **components:** delete Root component ([244cf82](https://github.com/edenlabllc/ehealth.web/commit/244cf82))
+* **components:** fix Modal positioning ([bc0310a](https://github.com/edenlabllc/ehealth.web/commit/bc0310a))
+
+
+
+
+
 <a name="0.89.0"></a>
 # [0.89.0](https://github.com/edenlabllc/ehealth.web/compare/v0.88.1...v0.89.0) (2018-09-25)
 
