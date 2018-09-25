@@ -1,12 +1,10 @@
 import React from "react";
 
 import Dropdown from "../Dropdown";
-import { DropdownButton, List } from "../MultiSelectView";
+import { List, DropdownButton, DropdownIcon } from "../MultiSelectView";
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
 import { SingleDownshift } from "./DownshiftField";
-
-import { ChevronBottomIcon } from "@ehealth/icons";
 
 /**
  * @example
@@ -25,7 +23,16 @@ import { ChevronBottomIcon } from "@ehealth/icons";
  * With type="disabled" select will be disabled
  */
 
-const SelectField = ({ label, hint, warning, items = [], type, ...props }) => (
+const SelectField = ({
+  label,
+  hint,
+  warning,
+  items = [],
+  type,
+  filterItems = (inputValue, item) =>
+    item.value.toLowerCase().includes(inputValue.toLowerCase()),
+  ...props
+}) => (
   <SingleDownshift {...props} itemToString={item => (item ? item.value : "")}>
     {({
       getRootProps,
@@ -75,20 +82,12 @@ const SelectField = ({ label, hint, warning, items = [], type, ...props }) => (
               type
             })}
           >
-            <ChevronBottomIcon color="#a8aab7" />
+            <DropdownIcon />
           </DropdownButton>
           {isOpen && (
-            <List isOpen={isOpen} absolute top="100%">
+            <List>
               {items
-                .filter(
-                  item =>
-                    !type
-                      ? !inputValue ||
-                        item.value
-                          .toLowerCase()
-                          .includes(inputValue.toLowerCase())
-                      : item
-                )
+                .filter(item => type || filterItems(inputValue, item))
                 .map((item, index) => (
                   <Dropdown.Item
                     {...getItemProps({

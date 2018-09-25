@@ -14,6 +14,8 @@ const MultiSelect = ({
   items = [],
   placeHolder = "Вибрати",
   name,
+  filterItems = (inputValue, item) =>
+    item.value.toLowerCase().includes(inputValue.toLowerCase()),
   ...props
 }) => (
   <MultiDownshift itemToString={() => ""} name={name}>
@@ -64,33 +66,27 @@ const MultiSelect = ({
               }
             })}
           />
-          <MultiSelectView.List isOpen={isOpen}>
-            {isOpen
-              ? items
-                  .filter(
-                    item =>
-                      !inputValue ||
-                      item.value
-                        .toLowerCase()
-                        .includes(inputValue.toLowerCase())
-                  )
-                  .map(
-                    (item, index) =>
-                      !selectedItems.includes(item) && (
-                        <Dropdown.Item
-                          {...getItemProps({
-                            key: item.value,
-                            index,
-                            item,
-                            on: highlightedIndex === index
-                          })}
-                        >
-                          {item.value}
-                        </Dropdown.Item>
-                      )
-                  )
-              : null}
-          </MultiSelectView.List>
+          {isOpen && (
+            <MultiSelectView.List>
+              {items
+                .filter(item => !inputValue || filterItems(inputValue, item))
+                .map(
+                  (item, index) =>
+                    !selectedItems.includes(item) && (
+                      <Dropdown.Item
+                        {...getItemProps({
+                          key: item.value,
+                          index,
+                          item,
+                          on: highlightedIndex === index
+                        })}
+                      >
+                        {item.value}
+                      </Dropdown.Item>
+                    )
+                )}
+            </MultiSelectView.List>
+          )}
         </InputView.Border>
 
         <FieldView.Footer>
