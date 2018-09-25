@@ -29,14 +29,14 @@ const Search = ({ uri }) => (
       Пошук пацієнтів
     </Heading>
     <Tabs.Nav>
-      <Tabs.Link to="./by_person_data">За даними</Tabs.Link>
-      <Tabs.Link to="./by_decalration">За номером декларації</Tabs.Link>
+      <Tabs.Link to="./by-person-data">За даними</Tabs.Link>
+      <Tabs.Link to="./by-declaration">За номером декларації</Tabs.Link>
     </Tabs.Nav>
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
         <>
           <Router>
-            <Redirect from="/" to={`${uri}/by_person_data`} />
+            <Redirect from="/" to={`${uri}/by-person-data`} />
             <SearchByPersonDataForm
               path="by-person-data"
               initialValues={locationParams}
