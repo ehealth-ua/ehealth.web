@@ -14,7 +14,6 @@ export { default as Link } from "./Link";
 export { default as Match } from "./Match";
 export { default as Modal } from "./Modal";
 export { default as Pager } from "./Pager";
-export { default as Root } from "./Root";
 export { default as Redirect } from "./Redirect";
 export { default as SearchParams } from "./SearchParams";
 export { default as StateMachine } from "./StateMachine";
