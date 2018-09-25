@@ -1,4 +1,5 @@
 import React from "react";
+import matchSorter from "match-sorter";
 import { RemoveItemIcon } from "@ehealth/icons";
 
 import { MultiDownshift } from "./DownshiftField";
@@ -14,8 +15,7 @@ const MultiSelect = ({
   items = [],
   placeHolder = "Вибрати",
   name,
-  filterItems = (inputValue, item) =>
-    item.value.toLowerCase().includes(inputValue.toLowerCase()),
+  filterKey,
   ...props
 }) => (
   <MultiDownshift itemToString={() => ""} name={name}>
@@ -45,8 +45,8 @@ const MultiSelect = ({
         )}
         <InputView.Border position="relative" flexWrap="wrap">
           {selectedItems.map(item => (
-            <MultiSelectView.SelectedItem key={item.value}>
-              {item.value}
+            <MultiSelectView.SelectedItem key={item}>
+              {filterKey ? item[filterKey] : item}
               <MultiSelectView.RemoveItem {...getRemoveButtonProps({ item })}>
                 <RemoveItemIcon />
               </MultiSelectView.RemoveItem>
@@ -68,23 +68,25 @@ const MultiSelect = ({
           />
           {isOpen && (
             <MultiSelectView.List>
-              {items
-                .filter(item => !inputValue || filterItems(inputValue, item))
-                .map(
-                  (item, index) =>
-                    !selectedItems.includes(item) && (
-                      <Dropdown.Item
-                        {...getItemProps({
-                          key: item.value,
-                          index,
-                          item,
-                          on: highlightedIndex === index
-                        })}
-                      >
-                        {item.value}
-                      </Dropdown.Item>
-                    )
-                )}
+              {matchSorter(
+                items,
+                inputValue,
+                filterKey && { keys: [filterKey] }
+              ).map(
+                (item, index) =>
+                  !selectedItems.includes(item) && (
+                    <Dropdown.Item
+                      {...getItemProps({
+                        key: index,
+                        index,
+                        item,
+                        on: highlightedIndex === index
+                      })}
+                    >
+                      {filterKey ? item[filterKey] : item}
+                    </Dropdown.Item>
+                  )
+              )}
             </MultiSelectView.List>
           )}
         </InputView.Border>

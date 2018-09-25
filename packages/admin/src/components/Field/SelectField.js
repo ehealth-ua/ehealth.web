@@ -1,26 +1,33 @@
 import React from "react";
+import matchSorter from "match-sorter";
 
 import Dropdown from "../Dropdown";
 import { List, DropdownButton, DropdownIcon } from "../MultiSelectView";
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
 import { SingleDownshift } from "./DownshiftField";
-
+import { ChevronBottomIcon } from "@ehealth/icons";
 /**
+ *
  * @example
  *
  * ```jsx
  * <Form {...props}>
- *   <Select items={items} name="singleSelectName" />
+ *   <Select items={clinics} name="clinics" />
+ *   <Select items={doctors} name="doctors" disabled />
  *   <Form.Submit block>Далі</Form.Submit>
  * </Form>
  * ```
+ * Possible values for items prop are Array of Strings and Array of Objects
  *
- * Optional prop "type" with possible values "disabled" and "select"
+ * For passing an Array of Objects, you must specify the key for filtering in filterKey prop.
+ * @example below will be filtering by doctors.name key
+ * const doctors = [{name: "John Doe", speciality: "Family Doctor", clinic: "Doe & Doe"}, {...}]
+ * <Field.Select items={doctors} name="doctors" filterKey="name" />
  *
+ * Optional prop "type" with possible value "select"
  * Without "type" select works with search field and filter in List
  * With type="select" select works like classic select field, without search and filtering, and with gradient background
- * With type="disabled" select will be disabled
  */
 
 const SelectField = ({
@@ -29,11 +36,13 @@ const SelectField = ({
   warning,
   items = [],
   type,
-  filterItems = (inputValue, item) =>
-    item.value.toLowerCase().includes(inputValue.toLowerCase()),
+  filterKey,
   ...props
 }) => (
-  <SingleDownshift {...props} itemToString={item => (item ? item.value : "")}>
+  <SingleDownshift
+    {...props}
+    itemToString={item => (filterKey ? (item ? item[filterKey] : "") : item)}
+  >
     {({
       getRootProps,
       getInputProps,
@@ -45,7 +54,7 @@ const SelectField = ({
       selectedItem,
       openMenu,
       clearSelection,
-      input: { onFocus, onBlur, size, ...input },
+      input: { onFocus, onBlur, size, disabled, ...input },
       meta: { active, errored, error }
     }) => (
       <FieldView.Wrapper {...getRootProps({ refKey: "innerRef" })}>
@@ -62,6 +71,7 @@ const SelectField = ({
               is: "input",
               px: 2,
               width: 0,
+              disabled,
               ...input,
               type,
               onKeyDown: event => {
@@ -79,6 +89,7 @@ const SelectField = ({
           <DropdownButton
             {...getToggleButtonProps({
               open: isOpen,
+              disabled,
               type
             })}
           >
@@ -86,20 +97,22 @@ const SelectField = ({
           </DropdownButton>
           {isOpen && (
             <List>
-              {items
-                .filter(item => type || filterItems(inputValue, item))
-                .map((item, index) => (
-                  <Dropdown.Item
-                    {...getItemProps({
-                      key: item.value,
-                      index,
-                      item,
-                      on: highlightedIndex === index
-                    })}
-                  >
-                    {item.value}
-                  </Dropdown.Item>
-                ))}
+              {matchSorter(
+                items,
+                !type && inputValue,
+                filterKey && { keys: [filterKey] }
+              ).map((item, index) => (
+                <Dropdown.Item
+                  {...getItemProps({
+                    key: item,
+                    index,
+                    item,
+                    on: highlightedIndex === index
+                  })}
+                >
+                  {filterKey ? item[filterKey] : item}
+                </Dropdown.Item>
+              ))}
             </List>
           )}
         </InputView.Border>
