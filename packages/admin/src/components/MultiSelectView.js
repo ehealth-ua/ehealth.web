@@ -30,23 +30,19 @@ export const RemoveItem = system({
   ml: 2
 });
 
-export const DropdownButton = system(
-  {
-    is: "button",
-    position: "absolute",
-    right: 0,
-    top: 0,
-    width: "47px",
-    height: "100%",
-    cursor: "pointer"
-  },
-  variant({
-    prop: "type",
-    key: "inputs.button"
-  })
-);
+export const DropdownButton = system({
+  is: "button",
+  position: "absolute",
+  right: 0,
+  top: 0,
+  width: "47px",
+  height: "100%",
+  cursor: "pointer"
+});
 
 export const DropdownIcon = system({
   is: ChevronBottomIcon,
-  color: "jacarandaLight"
+  color: "jacarandaLight",
+  width: "7px",
+  height: "4px"
 });

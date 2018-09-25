@@ -1,5 +1,5 @@
 import system from "system-components/emotion";
-import { variant } from "@ehealth/system-tools";
+import { variant, boolean } from "@ehealth/system-tools";
 
 export const Border = system(
   {
@@ -29,6 +29,10 @@ export const Content = system(
   variant({
     prop: "type",
     key: "inputs.field"
+  }),
+  boolean({
+    prop: "disabled",
+    key: "inputs.field.disabled"
   }),
   `
     border: none;

@@ -16,11 +16,6 @@ const inputs = {
       pointerEvents: "none",
       bg: "#E9EDF1"
     }
-  },
-  button: {
-    disabled: {
-      pointerEvents: "none"
-    }
   }
 };
 
