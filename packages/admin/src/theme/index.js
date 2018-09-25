@@ -5,8 +5,8 @@ export { default as inputs } from "./inputs";
 export { default as radios } from "./radios";
 
 export const fonts = {
-  0: '"GothamPro", sans-serif',
-  sans: '"GothamPro", sans-serif'
+  0: '"Montserrat", sans-serif',
+  sans: '"Montserrat", sans-serif'
 };
 
 export const fontSizes = [12, 14, 16, 18, 20];
