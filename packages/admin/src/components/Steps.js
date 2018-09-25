@@ -60,9 +60,9 @@ const List = system(
     display: "flex",
     mb: 4
   },
-  `
-    counter-reset: step;
-  `
+  {
+    counterReset: "step"
+  }
 );
 
 const Steps = { List, Item };
