@@ -1,67 +1,69 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import styled from "react-emotion/macro";
-import { ifProp, prop } from "styled-tools";
+import React from "react";
+import * as Reach from "@reach/router";
+import system from "system-components/emotion";
+import { mixed, boolean } from "@ehealth/system-tools";
 
-import { Match } from "@ehealth/components";
-
-const Container = ({ children }) => (
-  <List>
-    {React.Children.map(children, (item, index) => {
-      const { to, children } = item.props;
-      const stepNumber = index + 1;
-      return (
-        <Match path={to} exact>
-          {({ to, active }) =>
-            React.cloneElement(item, {
-              stepNumber,
-              active,
-              children: (
-                <Link to={to}>
-                  Крок {stepNumber}. {children}
-                </Link>
-              )
-            })
-          }
-        </Match>
-      );
-    })}
-  </List>
+export const Item = ({ to, ...props }) => (
+  <Reach.Match path={to}>
+    {({ match }) => <Link to={to} active={!!match} {...props} />}
+  </Reach.Match>
 );
 
-const List = styled.ul`
-  display: flex;
-  flex-flow: row no-wrap;
-  max-width: 870px;
-  padding: 0;
-  list-style: none;
-`;
+const Link = system(
+  {
+    is: Reach.Link,
+    display: "flex",
+    overflow: "hidden",
+    mr: 2,
+    color: "darkAndStormy",
+    fontSize: 2,
+    alignItems: "center"
+  },
+  {
+    textDecoration: "none",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis"
+  },
+  ({ active, ...props }) => ({
+    "&::before": mixed({
+      counterIncrement: "step",
+      content: '"Крок " counter(step) ". "',
+      mr: 1
+    })(props),
+    "&::after": mixed({
+      order: "-1",
+      content: "counter(step)",
+      color: active ? "romanSilver" : "white",
+      display: "inline-block",
+      minWidth: "28px",
+      height: "28px",
+      lineHeight: "27px",
+      mr: 2,
+      textAlign: "center",
+      borderRadius: "50%",
+      bg: active ? "white" : "freshBlueOfBelAir",
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderColor: active ? "callaLily" : "white"
+    })(props)
+  }),
+  boolean({
+    prop: "active",
+    pointerEvents: "none",
+    color: "romanSilver"
+  })
+);
 
-const Item = styled.li`
-  font-size: 14px;
-  margin-right: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const List = system(
+  {
+    is: "nav",
+    display: "flex",
+    mb: 4
+  },
+  `
+    counter-reset: step;
+  `
+);
 
-  &::before {
-    content: "${prop("stepNumber")}";
-    color: ${ifProp("active", "#848c98", "#fff")};
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    line-height: 26px;
-    margin-right: 12px;
-    text-align: center;
-    border-radius: 50%;
-    background-color: ${ifProp("active", "#fff", "#2ea1f8")};
-    border: 1px solid ${ifProp("active", "#e6eaee", "#fff")};
-  }
-  a {
-    color: ${ifProp("active", "#848c98", "#354052")};
-    pointer-events: ${ifProp("active", "none")};
-  }
-`;
-
-const Steps = { Container, Item };
+const Steps = { List, Item };
 export default Steps;

@@ -15,7 +15,10 @@ const colors = {
   boysenberryShadow: "#F1F3F9",
   hintOfCandela: "#D6DDE6",
   biroBlue: "#333C48",
-  januaryDawn: "#DFE2E5"
+  januaryDawn: "#DFE2E5",
+  callaLily: "#E6EAEE",
+  romanSilver: "#848C98",
+  freshBlueOfBelAir: "#2EA1F8"
 };
 
 export default colors;
