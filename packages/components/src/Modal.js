@@ -3,7 +3,6 @@ import { createPortal } from "react-dom";
 import styled from "react-emotion/macro";
 import system from "system-components/emotion";
 import { variant } from "styled-system";
-import { Fixed } from "rebass/emotion";
 import { CloseIcon } from "@ehealth/icons";
 
 type ModalProps = {
@@ -38,7 +37,7 @@ const CloseButton = styled.button`
 
 const Window = system(
   {
-    is: Fixed,
+    position: "fixed",
     p: 5,
     bg: "white",
     maxWidth: "100vw",
@@ -47,7 +46,7 @@ const Window = system(
     placement: "center"
   },
   `
-    box-shadow: 0 0 7px 5px rgba(227, 223, 223, 0.5);
+    box-shadow: 0 0 7px 5px rgba(0, 0, 0, 0.1);
     overflow: auto;
   `,
   "width",
@@ -58,7 +57,7 @@ const Window = system(
 );
 
 const Backdrop = system({
-  is: Fixed,
+  position: "fixed",
   bg: "rgba(255, 255, 255, 0.5)",
   top: 0,
   right: 0,
