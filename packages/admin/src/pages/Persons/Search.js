@@ -38,12 +38,12 @@ const Search = ({ uri }) => (
           <Router>
             <Redirect from="/" to={`${uri}/by_person_data`} />
             <SearchByPersonDataForm
-              path="by_person_data"
+              path="by-person-data"
               initialValues={locationParams}
               onSubmit={setLocationParams}
             />
             <SearchByDeclarationForm
-              path="by_decalration"
+              path="by-declaration"
               initialValues={locationParams}
               onSubmit={setLocationParams}
             />
