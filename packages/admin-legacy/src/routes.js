@@ -135,8 +135,11 @@ export default class Routes extends Component {
             onAborted: () => {
               dispatch(hideLoading());
             },
-            onError: () => {
+            onError: ({ payload: { status } }) => {
               dispatch(hideLoading());
+              if (status === 401) {
+                history.push("/sign-in");
+              }
             }
           })
         )}
