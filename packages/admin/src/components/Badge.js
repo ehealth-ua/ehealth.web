@@ -7,7 +7,7 @@ const Badge = system(
     color: "white",
     lineHeight: 1,
     textAlign: "center",
-    p: "5px",
+    p: 1,
     minWidth: 20,
     minHeight: 20,
     borderRadius: 2,

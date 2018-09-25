@@ -1,5 +1,5 @@
 import { injectGlobal } from "react-emotion/macro";
-import { colors } from "./theme";
+import { colors, fonts } from "./theme";
 
 injectGlobal`
   html {
@@ -8,14 +8,13 @@ injectGlobal`
 
   body {
     -webkit-font-smoothing: antialiased;
-    font-family: "Montserrat", sans-serif;
+    font-family: ${fonts.sans};
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-  }
-  
-  body *, body *::after, body *::before  {
+    & *, & *::after, & *::before  {
       box-sizing: border-box
+    }
   }
 
   ul,
