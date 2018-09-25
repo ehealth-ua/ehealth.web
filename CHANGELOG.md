@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.89.0"></a>
+# [0.89.0](https://github.com/edenlabllc/ehealth.web/compare/v0.88.1...v0.89.0) (2018-09-25)
+
+
+### Bug Fixes
+
+* **admin:** change DateField to return ISO date, fix DateField appearance ([ddca645](https://github.com/edenlabllc/ehealth.web/commit/ddca645))
+* **admin:** fix more typos ([0653aa0](https://github.com/edenlabllc/ehealth.web/commit/0653aa0))
+* **admin:** fix typo, use hyphens in URLs ([17c2d48](https://github.com/edenlabllc/ehealth.web/commit/17c2d48))
+* **icons:** remove default width and height from ChevronBottomIcon ([c0ca39d](https://github.com/edenlabllc/ehealth.web/commit/c0ca39d))
+
+
+### Features
+
+* **admin:** add alternate Tabs component ([0c9295b](https://github.com/edenlabllc/ehealth.web/commit/0c9295b))
+* **admin:** add Details component ([7d1e5da](https://github.com/edenlabllc/ehealth.web/commit/7d1e5da))
+* **admin:** add persons search page ([7d327da](https://github.com/edenlabllc/ehealth.web/commit/7d327da)), closes [#285](https://github.com/edenlabllc/ehealth.web/issues/285)
+
+
+
+
+
 <a name="0.88.1"></a>
 ## [0.88.1](https://github.com/edenlabllc/ehealth.web/compare/v0.88.0...v0.88.1) (2018-09-24)
 
