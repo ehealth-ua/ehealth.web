@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const { importSchema } = require("graphql-import");
 const { ApolloServer } = require("apollo-server-express");
+const { WHITE_LIST_ORIGINS } = process.env;
 
 const resolvers = require("./resolvers");
 const schemaDirectives = require("./directives");
@@ -21,7 +22,17 @@ const createApplication = () => {
     mockEntireSchema: false
   });
 
-  apolloServer.applyMiddleware({ app });
+  const cors = {
+    origin: WHITE_LIST_ORIGINS.split(",").map(
+      origin => new RegExp(`^(?:${origin})$`)
+    ),
+    credentials: true
+  };
+
+  apolloServer.applyMiddleware({
+    app,
+    cors
+  });
 
   return app;
 };
