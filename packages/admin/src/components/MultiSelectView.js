@@ -1,6 +1,7 @@
 import system from "system-components/emotion";
 import { variant } from "@ehealth/system-tools";
 
+import { ChevronBottomIcon } from "@ehealth/icons";
 import Dropdown from "./Dropdown";
 
 export const List = system({
@@ -44,3 +45,8 @@ export const DropdownButton = system(
     key: "inputs.button"
   })
 );
+
+export const DropdownIcon = system({
+  is: ChevronBottomIcon,
+  color: "jacarandaLight"
+});
