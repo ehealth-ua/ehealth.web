@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.91.0"></a>
+# [0.91.0](https://github.com/edenlabllc/ehealth.web/compare/v0.88.1...v0.91.0) (2018-09-25)
+
+
+### Bug Fixes
+
+* **mock-server:** use default value in WHITE_LIST_ORIGINS ([0ddb821](https://github.com/edenlabllc/ehealth.web/commit/0ddb821))
+
+
+### Features
+
+* **mock-server:** add cors middleware to apolloServer ([39699bc](https://github.com/edenlabllc/ehealth.web/commit/39699bc))
+
+
+
+
+
 <a name="0.90.0"></a>
 # [0.90.0](https://github.com/edenlabllc/ehealth.web/compare/v0.88.1...v0.90.0) (2018-09-25)
 
