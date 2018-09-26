@@ -3,6 +3,7 @@ export { default as colors } from "./colors";
 export { default as fields } from "./fields";
 export { default as inputs } from "./inputs";
 export { default as radios } from "./radios";
+export { default as status } from "./status";
 
 export const fonts = {
   0: '"Montserrat", sans-serif',
