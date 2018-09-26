@@ -7,9 +7,9 @@ type Address {
   area: String!
   region: String
   settlement: String!
-  settlementType: String!
+  settlementType: SettlementType!
   settlementId: ID!
-  streetType: String
+  streetType: StreetType!
   street: String
   building: String!
   apartment: String
@@ -19,4 +19,37 @@ type Address {
 enum AddressType {
   ACTIVE
   CLOSED
+}
+
+enum StreetType {
+  TRACT
+  STREET
+  STATION
+  SQUARE
+  SELECTION_BASE
+  ROAD
+  RIVER_SIDE
+  PASSAGE
+  PASS
+  MILITARY_BASE
+  MICRODISTRICT
+  MAIDAN
+  LINE
+  HOUSING_AREA
+  HIGHWAY
+  FORESTRY
+  ENTRANCE
+  BOULEVARD
+  BLOCK
+  BLIND_STREET
+  AVENUE
+  ASCENT
+  ALLEY
+}
+
+enum SettlementType {
+  VILLAGE
+  TOWNSHIP
+  SETTLEMENT
+  CITY
 }
