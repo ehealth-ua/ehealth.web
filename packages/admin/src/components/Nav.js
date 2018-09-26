@@ -15,6 +15,9 @@ const Nav = () => (
           <NavLink to="/persons">Пошук паціентів</NavLink>
         </NavSection>
       </Ability>
+      <Ability action="read" resource="person">
+        <NavLink to="/legal-entities">Медзаклади</NavLink>
+      </Ability>
     </NavList>
   </NavContainer>
 );
