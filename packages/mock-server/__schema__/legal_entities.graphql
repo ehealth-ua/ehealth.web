@@ -89,6 +89,8 @@ input LegalEntityFilter {
   nhsVerified: Boolean
   area: String
   settlement: String
+  id: ID
+  edrpou: String
 }
 
 enum LegalEntityOrderBy {
