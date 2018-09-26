@@ -5,7 +5,7 @@ import { css } from "react-emotion";
 import { ifProp } from "styled-tools";
 import { Switch } from "@ehealth/components";
 import { CaretDownIcon, CaretUpIcon } from "@ehealth/icons";
-import { filterTableColumn } from "@ehealth/utils";
+import { filterTableColumn as filterTableDefaultColumn } from "@ehealth/utils";
 
 import TableDropDownControll from "./TableDropDownControll";
 
@@ -39,7 +39,7 @@ type TableHeaderType = {
 const TableHeader = ({
   header,
   columnKeyExtractor,
-  filterTableColumn = filterTableColumn,
+  filterTableColumn = filterTableDefaultColumn,
   headerComponent: HeaderComponent,
   rowComponent: RowComponent,
   headerCellComponent: HeaderCellComponent,

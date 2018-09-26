@@ -1,6 +1,6 @@
 //@flow
 import * as React from "react";
-import { filterTableColumn } from "@ehealth/utils";
+import { filterTableColumn as filterTableDefaultColumn } from "@ehealth/utils";
 
 type HeaderDataWithStatus = {|
   name: string,
@@ -30,7 +30,7 @@ const TableBody = ({
   bodyComponent: BodyComponent,
   rowComponent: RowComponent,
   cellComponent: CellComponent,
-  filterTableColumn = filterTableColumn,
+  filterTableColumn = filterTableDefaultColumn,
   filterRow
 }: TableBodyType) => (
   <BodyComponent>
