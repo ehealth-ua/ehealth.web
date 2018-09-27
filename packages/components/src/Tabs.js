@@ -3,7 +3,7 @@ import * as ReachRouter from "@reach/router";
 import system from "system-components/emotion";
 import { gradient, boolean } from "@ehealth/system-tools";
 
-export const Nav = system(
+const Nav = system(
   {
     is: "nav",
     mb: 4,
@@ -24,7 +24,7 @@ export const Nav = system(
   }
 );
 
-export const Item = system(
+const Item = system(
   {
     borderBottom: 3,
     borderColor: "transparent",
@@ -47,8 +47,12 @@ export const Item = system(
   })
 );
 
-export const Link = props => (
+const Link = props => (
   <ReachRouter.Match path={props.to}>
     {({ match }) => <Item is={ReachRouter.Link} {...props} active={!!match} />}
   </ReachRouter.Match>
 );
+
+const Tabs = { Link, Item, Nav };
+
+export default Tabs;

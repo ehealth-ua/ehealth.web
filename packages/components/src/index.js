@@ -23,4 +23,5 @@ export { default as Switch } from "./Switch";
 export { default as ThemeProvider } from "./ThemeProvider";
 export { default as Tooltip } from "./Tooltip";
 export { default as TableView } from "./TableView";
+export { default as Tabs } from "./Tabs";
 export { default as Validation, Validations } from "./Validation";
