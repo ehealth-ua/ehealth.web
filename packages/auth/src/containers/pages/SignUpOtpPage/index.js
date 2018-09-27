@@ -8,11 +8,10 @@ import {
   Validations,
   Connect,
   StateMachine,
-  Link,
   Switch
 } from "@ehealth/components";
 import styled from "react-emotion/macro";
-
+import { Link } from "react-router";
 import {
   Main,
   Header,
@@ -65,10 +64,18 @@ export default class SignUpOtpPage extends Component {
                   />
                 ]}
               >
-                {([{ sendOtp }, { input: { value: factor } }]) => (
+                {([
+                  { sendOtp },
+                  {
+                    input: { value: factor }
+                  }
+                ]) => (
                   <ResendLink
                     onClick={async () => {
-                      const { error, payload: { response } } = await sendOtp({
+                      const {
+                        error,
+                        payload: { response }
+                      } = await sendOtp({
                         factor,
                         type: "SMS"
                       });

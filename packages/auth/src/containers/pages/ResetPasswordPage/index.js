@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
-import { SUBMIT_ERROR, StateMachine, Link, Switch } from "@ehealth/components";
+import { withRouter, Link } from "react-router";
+import { SUBMIT_ERROR, StateMachine, Switch } from "@ehealth/components";
 import { passwordRecoveryRequest } from "../../../redux/password";
 
 import { H1, H3 } from "../../../components/Title";
