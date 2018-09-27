@@ -7,6 +7,8 @@
   "dependencies": {
     "@ehealth/icons": "file:../icons",
     "@ehealth/utils": "file:../utils",
+    "@ehealth/system-tools": "file:../system-tools",
+    "@reach/router": "^1.1.1",
     "dayzed": "^2.2.0",
     "downshift": "^1.31.3",
     "emotion": "^9.2.5",

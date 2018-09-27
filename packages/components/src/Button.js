@@ -1,8 +1,7 @@
 import React from "react";
+import * as Reach from "@reach/router";
 import styled from "react-emotion/macro";
 import { prop, ifProp, switchProp } from "styled-tools";
-
-import RouterLink from "./RouterLink";
 
 type Props = {
   /** Location */
@@ -19,7 +18,7 @@ type Props = {
 
 const Button = (props: Props) => {
   const Component = ButtonContainer.withComponent(
-    props.href ? "a" : props.to ? RouterLink : "button"
+    props.href ? "a" : props.to ? Reach.Link : "button"
   );
 
   return <Component {...props} />;

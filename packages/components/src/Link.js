@@ -1,10 +1,9 @@
 import React from "react";
+import * as Reach from "@reach/router";
 import styled from "react-emotion/macro";
 import { css } from "react-emotion";
 import { prop, ifProp, switchProp } from "styled-tools";
 import { pickValidProps } from "@ehealth/utils";
-
-import RouterLink from "./RouterLink";
 
 const Link = props => {
   const [
@@ -13,7 +12,7 @@ const Link = props => {
   ] = pickValidProps(props);
 
   const Component = LinkContainer.withComponent(
-    props.href ? "a" : props.to ? RouterLink : "button"
+    props.href ? "a" : props.to ? Reach.Link : "button"
   );
 
   const content = [
