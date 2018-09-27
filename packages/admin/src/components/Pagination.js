@@ -4,11 +4,11 @@ import { ifProp } from "styled-tools";
 import { withProps } from "recompose";
 
 import { stringifySearchParams } from "@ehealth/utils";
-import { Pager, SearchParams, Link } from "@ehealth/components";
+import { Pager, LocationParams, Link } from "@ehealth/components";
 
 const Pagination = ({ totalPages }) => (
-  <SearchParams>
-    {({ searchParams: { page } }) => (
+  <LocationParams>
+    {({ locationParams: { page } }) => (
       <Pager currentPage={parseInt(page, 10)} totalPages={totalPages}>
         {({
           getPageProps,
@@ -57,7 +57,7 @@ const Pagination = ({ totalPages }) => (
         )}
       </Pager>
     )}
-  </SearchParams>
+  </LocationParams>
 );
 
 export default Pagination;
@@ -75,13 +75,13 @@ const DirectionPage = ({ page, backward, ...props }) => (
 );
 
 const PageLink = ({ page, children }) => (
-  <SearchParams>
-    {({ searchParams }) => (
-      <Link to={{ search: stringifySearchParams({ ...searchParams, page }) }}>
+  <LocationParams>
+    {({ locationParams }) => (
+      <Link to={{ search: stringifySearchParams({ ...locationParams, page }) }}>
         {children || page}
       </Link>
     )}
-  </SearchParams>
+  </LocationParams>
 );
 
 const Container = styled.ul`
