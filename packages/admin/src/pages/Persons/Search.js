@@ -2,7 +2,7 @@ import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
-import { Form, Validation } from "@ehealth/components";
+import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
 import {
   parseSortingParams,
   stringifySortingParams,
@@ -13,9 +13,7 @@ import {
 } from "@ehealth/utils";
 import { getIn } from "final-form";
 
-import * as Tabs from "../../components/AlternateTabs";
 import * as Field from "../../components/Field";
-import LocationParams from "../../components/LocationParams";
 import SearchPersonsQuery from "../../graphql/SearchPersonsQuery.graphql";
 import Details from "../../components/Details";
 import Table from "../../components/Table";

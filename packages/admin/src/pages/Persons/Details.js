@@ -4,7 +4,7 @@ import { Query, Mutation } from "react-apollo";
 import { Flex, Box, Heading, Text } from "rebass/emotion";
 import { BooleanValue } from "react-values";
 
-import { Form, Modal } from "@ehealth/components";
+import { Form, Modal, LocationParams } from "@ehealth/components";
 import { AdminSearchIcon } from "@ehealth/icons";
 import {
   parseSortingParams,
@@ -19,7 +19,6 @@ import Button from "../../components/Button";
 import * as Field from "../../components/Field";
 import Table from "../../components/Table";
 import AddressView from "../../components/AddressView";
-import LocationParams from "../../components/LocationParams";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import STATUSES from "../../helpers/statuses";
