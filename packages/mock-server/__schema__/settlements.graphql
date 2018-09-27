@@ -1,0 +1,23 @@
+"""
+Settlement details contain information about Settlement and area
+"""
+type Settlements {
+  id: ID!
+  district: String
+  districtId: ID
+  koatuu: String!
+  mountainGroup: Boolean!
+  name: String!
+  parentSettlement: String
+  parentSettlementId: ID
+  region: String!
+  regionId: ID!
+  type: SettlementType!
+}
+
+enum SettlementType {
+  VILLAGE
+  TOWNSHIP
+  SETTLEMENT
+  CITY
+}

@@ -9,6 +9,7 @@
 # import * from "persons.graphql"
 # import * from "phones.graphql"
 # import * from "signed_content.graphql"
+# import * from "settlements.graphql"
 
 type Query {
   "the filter must be used to get exactly one person knowing id"
@@ -40,6 +41,8 @@ type Query {
     filter: LegalEntityFilter
     orderBy: LegalEntityOrderBy
   ): [LegalEntity]
+
+  settlements(name: String): [Settlements]
 }
 
 type Mutation {
