@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LocationParams should render correctly 1`] = `<div />`;
+
+exports[`LocationParams should return object in render prop 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "locationParams": Object {},
+        "setLocationParams": [Function],
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": <div />,
+    },
+  ],
+}
+`;
