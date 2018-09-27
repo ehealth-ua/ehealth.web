@@ -37,6 +37,7 @@ const SelectField = ({
   items = [],
   type,
   filterKey,
+  filter = matchSorter,
   ...props
 }) => (
   <SingleDownshift
@@ -97,7 +98,7 @@ const SelectField = ({
           </DropdownButton>
           {isOpen && (
             <List>
-              {matchSorter(
+              {filter(
                 items,
                 !type && inputValue,
                 filterKey && { keys: [filterKey] }
