@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { Query, Mutation } from "react-apollo";
-import { withRouter } from "react-router-dom";
 import { getFullName } from "@ehealth/utils";
 import {
   Heading,
@@ -24,13 +23,13 @@ class EmployeePage extends React.Component {
   };
 
   render() {
-    const { match, history } = this.props;
+    const { id, navigate } = this.props;
     return (
       <div data-test="employee">
         <Heading.H1>Крок 2. Відправте запит на декларацію</Heading.H1>
         <Query
           query={EmployeeQuery}
-          variables={{ id: match.params.id }}
+          variables={{ id }}
           context={{ credentials: "same-origin" }}
           fetchPolicy="cache-first"
         >
@@ -57,7 +56,11 @@ class EmployeePage extends React.Component {
                 <DefinitionListSection>
                   <SubTitle>
                     {getFullName(employeeData.party)}
-                    <Link onClick={() => history.goBack()} size="xs" upperCase>
+                    <Link
+                      onClick={() => window.history.go(-1)}
+                      size="xs"
+                      upperCase
+                    >
                       Назад до результатів пошуку
                     </Link>
                   </SubTitle>
@@ -175,7 +178,7 @@ class EmployeePage extends React.Component {
                                       variables
                                     });
                                     const { id } = data.declarations.data;
-                                    history.push(`/declaration_requests/${id}`);
+                                    navigate(`/declaration_requests/${id}`);
                                   } catch ({ networkError }) {
                                     return {
                                       [SUBMIT_ERROR]:
@@ -245,4 +248,4 @@ const Text = styled.div`
   }
 `;
 
-export default withRouter(EmployeePage);
+export default EmployeePage;

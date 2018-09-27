@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { Link, Match, Tooltip } from "@ehealth/components";
+import { Match } from "@reach/router";
+import { Tooltip, Link } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
 
 import PersonQuery from "../graphql/PersonQuery.graphql";
@@ -22,15 +23,15 @@ const UserNav = () => (
             active && (
               <Menu {...getProps()}>
                 <Match path="/profile">
-                  {({ to, active }) => (
-                    <MenuItem to={to} bold={active} color="black">
+                  {({ match }) => (
+                    <MenuItem to="/profile" bold={match} color="black">
                       Мій профіль
                     </MenuItem>
                   )}
                 </Match>
                 <Match path="/security">
-                  {({ to, active }) => (
-                    <MenuItem to={to} bold={active} color="black">
+                  {({ match }) => (
+                    <MenuItem to="/security" bold={match} color="black">
                       Безпека
                     </MenuItem>
                   )}

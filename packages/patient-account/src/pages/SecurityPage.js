@@ -5,7 +5,7 @@ import {
   Heading,
   Link,
   Button,
-  SearchParams,
+  LocationParams,
   Pagination,
   Modal,
   Spinner
@@ -74,8 +74,8 @@ const SecurityPage = () => (
 );
 
 const ApprovalsBlock = () => (
-  <SearchParams>
-    {({ searchParams: { page = 1 } }) => {
+  <LocationParams>
+    {({ locationParams: { page = 1 } }) => {
       return (
         <Query query={ApprovalsRequestQuery} variables={{ page }}>
           {({ loading, error, data, refetch }) => {
@@ -111,7 +111,7 @@ const ApprovalsBlock = () => (
         </Query>
       );
     }}
-  </SearchParams>
+  </LocationParams>
 );
 
 const SecurityBlock = ({ phone }) => (

@@ -18,16 +18,11 @@ const DeclarationRequestQuery = gql`
   }
 `;
 
-const DeclarationRequestPage = ({
-  match: {
-    params: { id }
-  },
-  history
-}) => (
+const DeclarationRequestPage = ({ id, navigate }) => (
   <Query query={DeclarationRequestQuery} variables={{ id }}>
     {({ loading, error, data }) => {
       if (loading || error) return <Spinner />;
-      return <Declaration history={history} data={data.declaration.data} />;
+      return <Declaration navigate={navigate} data={data.declaration.data} />;
     }}
   </Query>
 );

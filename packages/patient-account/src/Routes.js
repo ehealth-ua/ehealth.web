@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Router } from "@reach/router";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
@@ -13,21 +13,17 @@ import SecurityPage from "./pages/SecurityPage";
 
 const Routes = () => (
   <Layout>
-    <Switch>
-      <Route exact path="/(declarations)?" component={HomePage} />
-      <Route exact path="/declarations/:id" component={DeclarationPage} />
-      <Route
-        exact
-        path="/declaration_requests/:id"
-        component={DeclarationRequestPage}
-      />
-      <Route exact path="/profile" component={ProfilePage} />
-      <Route exact path="/profile/edit" component={ProfileEditPage} />
-      <Route path="/search" component={SearchPage} />
-      <Route exact path="/employee/:id" component={EmployeePage} />
-      <Route exact path="/division/:id" component={DivisionPage} />
-      <Route exact path="/security" component={SecurityPage} />
-    </Switch>
+    <Router>
+      <HomePage path="/*" />
+      <DeclarationPage path="/declarations/:id" />
+      <DeclarationRequestPage path="/declaration_requests/:id" />
+      <ProfilePage path="/profile" />
+      <ProfileEditPage path="/profile/edit" />
+      <SearchPage path="/search/*" />
+      <EmployeePage path="/employee/:id" />
+      <DivisionPage path="/division/:id" />
+      <SecurityPage path="/security" />
+    </Router>
   </Layout>
 );
 

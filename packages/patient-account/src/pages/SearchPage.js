@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { Route } from "react-router-dom";
+import { Router } from "@reach/router";
 import {
   Heading,
   Field,
   Form,
-  CabinetTable,
   Link,
+  CabinetTable,
   Spinner,
-  SearchParams,
+  LocationParams,
   Pagination
 } from "@ehealth/components";
 import { getFullName, titleCase } from "@ehealth/utils";
@@ -32,133 +32,133 @@ const DEFAULT_ZOOM = 9;
 const SearchPage = () => (
   <div data-test="search">
     <Heading.H1>Крок 1. Оберіть лікаря</Heading.H1>
-    <Route path="/search" component={SearchTable} exact />
-    <Route path="/search/map" component={DivisionMap} />
+    <Router>
+      <Search path="/" />
+      <DivisionMap path="/map" />
+    </Router>
   </div>
 );
 
 export default SearchPage;
 
-const SearchTable = () => {
-  return (
-    <>
-      <FormSearch />
-      <SearchParams>
-        {({
-          searchParams: {
-            fullName = "",
-            divisionName = "",
-            speciality = "",
-            page = "1",
-            pageSize = "10",
-            settlement: { settlement = "", region: settlementRegion = "" } = {}
-          }
-        }) => {
-          return (
-            <Query
-              query={SearchEmployeeQuery}
-              fetchPolicy="cache-first"
-              variables={{
-                fullName,
-                divisionName,
-                settlement,
-                settlementRegion,
-                speciality,
-                page,
-                pageSize
-              }}
-              context={{ credentials: "same-origin" }}
-            >
-              {({ loading, error, data }) => {
-                if (loading || error) return <Spinner />;
-                const { data: search, paging } = data.search;
-                return !search.length ? (
-                  "Нічого не знайдено"
-                ) : (
-                  <>
-                    <CabinetTable
-                      data={search}
-                      header={{
-                        name: (
-                          <>
-                            ПІБ
-                            <br />
-                            лікаря
-                          </>
-                        ),
-                        job: "Спеціальність",
-                        divisionName: (
-                          <>
-                            Назва
-                            <br />
-                            відділення
-                          </>
-                        ),
-                        address: "Адреса",
-                        legalEntityName: "Медзаклад",
-                        action: "Дія"
-                      }}
-                      renderRow={({
-                        id,
-                        party,
-                        division: {
-                          id: divisionId,
-                          name: divisionName,
-                          addresses
-                        },
-                        legalEntity: { name: legalEntityName }
-                      }) => ({
-                        name: getFullName(party),
-                        job: (
-                          <DictionaryValue
-                            name="SPECIALITY_TYPE"
-                            item={party.specialities[0].speciality}
-                          />
-                        ),
-                        divisionName: (
-                          <Link to={`/division/${divisionId}`}>
-                            {divisionName}
-                          </Link>
-                        ),
-                        address: <AddressView data={addresses} />,
-                        legalEntityName,
-                        action: (
-                          <Link to={`/employee/${id}`} dataTest="details">
-                            Показати деталі
-                          </Link>
-                        )
-                      })}
-                      rowKeyExtractor={({ id }) => id}
-                    />
-                    <Pagination totalPages={paging.totalPages} />
-                  </>
-                );
-              }}
-            </Query>
-          );
-        }}
-      </SearchParams>
-    </>
-  );
-};
+const Search = () => (
+  <>
+    <FormSearch />
+    <LocationParams>
+      {({
+        locationParams: {
+          fullName = "",
+          divisionName = "",
+          speciality = "",
+          page = "1",
+          pageSize = "10",
+          settlement: { settlement = "", region: settlementRegion = "" } = {}
+        }
+      }) => {
+        return (
+          <Query
+            query={SearchEmployeeQuery}
+            fetchPolicy="cache-first"
+            variables={{
+              fullName,
+              divisionName,
+              settlement,
+              settlementRegion,
+              speciality,
+              page,
+              pageSize
+            }}
+            context={{ credentials: "same-origin" }}
+          >
+            {({ loading, error, data }) => {
+              if (loading || error) return <Spinner />;
+              const { data: search, paging } = data.search;
+              return !search.length ? (
+                "Нічого не знайдено"
+              ) : (
+                <>
+                  <CabinetTable
+                    data={search}
+                    header={{
+                      name: (
+                        <>
+                          ПІБ
+                          <br />
+                          лікаря
+                        </>
+                      ),
+                      job: "Спеціальність",
+                      divisionName: (
+                        <>
+                          Назва
+                          <br />
+                          відділення
+                        </>
+                      ),
+                      address: "Адреса",
+                      legalEntityName: "Медзаклад",
+                      action: "Дія"
+                    }}
+                    renderRow={({
+                      id,
+                      party,
+                      division: {
+                        id: divisionId,
+                        name: divisionName,
+                        addresses
+                      },
+                      legalEntity: { name: legalEntityName }
+                    }) => ({
+                      name: getFullName(party),
+                      job: (
+                        <DictionaryValue
+                          name="SPECIALITY_TYPE"
+                          item={party.specialities[0].speciality}
+                        />
+                      ),
+                      divisionName: (
+                        <Link to={`/division/${divisionId}`}>
+                          {divisionName}
+                        </Link>
+                      ),
+                      address: <AddressView data={addresses} />,
+                      legalEntityName,
+                      action: (
+                        <Link to={`/employee/${id}`} dataTest="details">
+                          Показати деталі
+                        </Link>
+                      )
+                    })}
+                    rowKeyExtractor={({ id }) => id}
+                  />
+                  <Pagination totalPages={paging.totalPages} />
+                </>
+              );
+            }}
+          </Query>
+        );
+      }}
+    </LocationParams>
+  </>
+);
 
 const FormSearch = () => (
-  <SearchParams>
-    {({ searchParams, setSearchParamsImmediate }) => (
+  <LocationParams>
+    {({ locationParams, setLocationParams }) => (
       <FlexWrap>
         <Form
           onSubmit={() => null /* NOT USED, but required */}
-          initialValues={searchParams}
+          initialValues={locationParams}
         >
           <Form.AutoSubmit
             onSubmit={values => {
               const clearPage = !isEqual(
                 omit(values, ["page"]),
-                omit(searchParams, ["page"])
+                omit(locationParams, ["page"])
               )
                 ? { page: 1 }
                 : {};
-              return setSearchParamsImmediate({ ...values, ...clearPage });
+              return setLocationParams({ ...values, ...clearPage });
             }}
             delay={1000}
           />
@@ -247,7 +247,7 @@ const FormSearch = () => (
         </Form>
       </FlexWrap>
     )}
-  </SearchParams>
+  </LocationParams>
 );
 
 const DivisionMap = () => (
@@ -259,14 +259,14 @@ const DivisionMap = () => (
         </Link>
       </Icon>
     </FlexWrap>
-    <SearchParams>
-      {({ searchParams, setSearchParamsImmediate }) => (
+    <LocationParams>
+      {({ locationParams, setLocationParams }) => (
         <DivisionsMapView
-          searchParams={searchParams}
-          setSearchParamsImmediate={setSearchParamsImmediate}
+          locationParams={locationParams}
+          setLocationParams={setLocationParams}
         />
       )}
-    </SearchParams>
+    </LocationParams>
   </>
 );
 
@@ -278,14 +278,14 @@ class DivisionsMapView extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return !(
-      isEqual(nextProps.searchParams, this.props.searchParams) &&
+      isEqual(nextProps.locationParams, this.props.locationParams) &&
       isEqual(nextState, this.state)
     );
   }
 
   render() {
     const { hoverItemId, bounds } = this.state;
-    const { setSearchParamsImmediate } = this.props;
+    const { setLocationParams } = this.props;
     const { north = "", east = "", south = "", west = "" } = bounds;
     return (
       <Query
@@ -314,7 +314,7 @@ class DivisionsMapView extends Component {
               onMapChange={({ bounds, center, zoom }) => {
                 const { lat, lng } = center.toJSON();
                 this.setState({ bounds: bounds.toJSON() });
-                setSearchParamsImmediate({ lat, lng, zoom }, "replace");
+                setLocationParams({ lat, lng, zoom }, "replace");
               }}
               onMarkerOver={hoverItemId => this.setState({ hoverItemId })}
               onMarkerOut={() => this.setState({ hoverItemId: null })}
@@ -326,14 +326,14 @@ class DivisionsMapView extends Component {
   }
 
   get center() {
-    let { lat, lng } = this.props.searchParams;
+    let { lat, lng } = this.props.locationParams;
     [lat, lng] = [lat, lng].map(n => parseFloat(n, 10));
 
     return [lat, lng].every(v => !isNaN(v)) ? { lat, lng } : DEFAULT_CENTER;
   }
 
   get zoom() {
-    const { zoom } = this.props.searchParams;
+    const { zoom } = this.props.locationParams;
     return parseInt(zoom, 10) || DEFAULT_ZOOM;
   }
 }

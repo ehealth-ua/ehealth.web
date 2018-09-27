@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { withRouter } from "react-router-dom";
 import { Heading, Link } from "@ehealth/components";
 
 import DefinitionListView from "../components/DefinitionListView";
@@ -9,22 +8,22 @@ import DictionaryValue from "../components/DictionaryValue";
 import {
   CabinetTable,
   Spinner,
-  SearchParams,
+  LocationParams,
   Pagination
 } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
 
 import DivisionDetailsQuery from "../graphql/DivisionDetailsQuery.graphql";
 
-const DivisionPage = ({ match, history }) => (
+const DivisionPage = ({ id }) => (
   <>
     <Heading.H1>КРОК 1. ОБЕРІТЬ ЛІКАРЯ</Heading.H1>
-    <SearchParams>
-      {({ searchParams: { page = "1", pageSize = "10" } }) => (
+    <LocationParams>
+      {({ locationParams: { page = "1", pageSize = "10" } }) => (
         <Query
           query={DivisionDetailsQuery}
           variables={{
-            id: match.params.id,
+            id,
             page: page,
             pageSize: pageSize
           }}
@@ -103,7 +102,12 @@ const DivisionPage = ({ match, history }) => (
                   </>
                 ) : null}
                 <br />
-                <Link onClick={() => history.goBack()} size="xs" upperCase bold>
+                <Link
+                  onClick={() => window.history.go(-1)}
+                  size="xs"
+                  upperCase
+                  bold
+                >
                   Назад до результатів пошуку
                 </Link>
               </>
@@ -111,7 +115,7 @@ const DivisionPage = ({ match, history }) => (
           }}
         </Query>
       )}
-    </SearchParams>
+    </LocationParams>
   </>
 );
 
@@ -143,4 +147,4 @@ const EmailLink = styled.a`
   margin-top: 7px;
 `;
 
-export default withRouter(DivisionPage);
+export default DivisionPage;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ApolloProvider, getDataFromTree } from "react-apollo";
+import { ApolloProvider /*, getDataFromTree */ } from "react-apollo";
 
 import ErrorBoundary from "./ErrorBoundary";
 import { createClient } from "./client";
@@ -12,7 +12,8 @@ class DataProvider extends Component {
   client = createClient({ onError: this.props.onError });
 
   async componentDidMount() {
-    await getDataFromTree(<ApolloProvider {...this.providerProps} />);
+    // TODO: Fix me after PR - https://github.com/apollographql/react-apollo/issues/2139
+    // https: await getDataFromTree(<ApolloProvider {...this.providerProps} />);
 
     this.setState({ loading: false });
   }

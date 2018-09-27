@@ -1,9 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@ehealth/components";
 
 import "./globalStyles";
-import theme from "./theme";
+import * as theme from "./theme";
 import ErrorBoundary from "./ErrorBoundary";
 import DataProvider from "./DataProvider";
 import Routes from "./Routes";
@@ -13,11 +12,9 @@ const App = () => (
   <ThemeProvider theme={theme}>
     <ErrorBoundary>
       <DataProvider>
-        <Router>
-          <Preload>
-            <Routes />
-          </Preload>
-        </Router>
+        <Preload>
+          <Routes />
+        </Preload>
       </DataProvider>
     </ErrorBoundary>
   </ThemeProvider>

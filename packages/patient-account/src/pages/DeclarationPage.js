@@ -5,17 +5,12 @@ import DeclarationQuery from "../graphql/DeclarationQuery.graphql";
 import Declaration from "../components/Declaration";
 import { Spinner } from "@ehealth/components";
 
-const DeclarationPage = ({
-  match: {
-    params: { id }
-  },
-  history
-}) => (
+const DeclarationPage = ({ id, navigate }) => (
   <Query query={DeclarationQuery} variables={{ id }}>
     {({ loading, error, data: { declaration } }) => {
       if (loading || error) return <Spinner />;
 
-      return <Declaration history={history} data={declaration.data} />;
+      return <Declaration navigate={navigate} data={declaration.data} />;
     }}
   </Query>
 );

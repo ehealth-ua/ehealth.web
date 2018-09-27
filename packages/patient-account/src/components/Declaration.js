@@ -8,7 +8,7 @@ import {
   formatDate,
   formatPhone
 } from "@ehealth/utils";
-import { Link as RouterLink } from "react-router-dom";
+import * as Reach from "@reach/router";
 import { ifProp } from "styled-tools";
 import { injectGlobal } from "react-emotion/macro";
 import { Mutation } from "react-apollo";
@@ -25,7 +25,7 @@ import AddressView from "./AddressView";
 
 import ApproveDeclarationRequestMutation from "../graphql/ApproveDeclarationRequestMutation.graphql";
 
-const DeclarationBody = ({ history, data }) => {
+const DeclarationBody = ({ navigate, data }) => {
   const {
     id,
     declarationNumber,
@@ -194,7 +194,7 @@ const DeclarationBody = ({ history, data }) => {
         )}
       </Shadow>
       <FixedBlock>
-        <Link size="small" upperCase bold onClick={history.goBack}>
+        <Link size="small" upperCase bold onClick={() => window.history.go(-1)}>
           Повернутись
         </Link>
         <Switch
@@ -230,7 +230,7 @@ const DeclarationBody = ({ history, data }) => {
                       await approveRequest({
                         variables: { input: id }
                       });
-                      history.push("/");
+                      navigate("/");
                     } catch (error) {
                       console.log(error);
                     }
@@ -293,9 +293,9 @@ export const DeclarationHeader = ({
   );
 
   return wrap ? (
-    <RouterLink to={`/${routerLinkTo}/${id}`}>
+    <Reach.Link to={`/${routerLinkTo}/${id}`}>
       <Shadow>{startBlock}</Shadow>
-    </RouterLink>
+    </Reach.Link>
   ) : (
     startBlock
   );
