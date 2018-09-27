@@ -1,24 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { MemoryRouter } from "react-router-dom";
+import LocationParams from "../LocationParams";
 
-import SearchParams from "../SearchParams";
-
-describe("SearchParams", () => {
+describe("LocationParams", () => {
   it("should render correctly", () => {
     const component = renderer.create(
-      <MemoryRouter>
-        <SearchParams>{() => <div />}</SearchParams>
-      </MemoryRouter>
+      <LocationParams>{() => <div />}</LocationParams>
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
   it("should return object in render prop", () => {
     const render = jest.fn(() => <div />);
     const component = renderer.create(
-      <MemoryRouter>
-        <SearchParams>{render}</SearchParams>
-      </MemoryRouter>
+      <LocationParams>{render}</LocationParams>
     );
     expect(render).toHaveBeenCalledTimes(1);
     expect(render).toMatchSnapshot();
