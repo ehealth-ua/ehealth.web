@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.92.2"></a>
+## [0.92.2](https://github.com/edenlabllc/ehealth.web/compare/v0.92.1...v0.92.2) (2018-09-28)
+
+
+### Bug Fixes
+
+* **components:** add snapshot of LocationParams test ([996a1e5](https://github.com/edenlabllc/ehealth.web/commit/996a1e5))
+* **components:** change name of test and remove MemoryRouter ([e880642](https://github.com/edenlabllc/ehealth.web/commit/e880642))
+* **components:** rename variable ([bf87abb](https://github.com/edenlabllc/ehealth.web/commit/bf87abb))
+
+
+
+
+
 <a name="0.92.0"></a>
 # [0.92.0](https://github.com/edenlabllc/ehealth.web/compare/v0.91.1...v0.92.0) (2018-09-28)
 

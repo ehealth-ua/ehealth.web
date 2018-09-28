@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.92.2"></a>
+## [0.92.2](https://github.com/edenlabllc/ehealth.web/compare/v0.92.1...v0.92.2) (2018-09-28)
+
+
+### Bug Fixes
+
+* **auth:** use router link from react-router ([d4cb4fc](https://github.com/edenlabllc/ehealth.web/commit/d4cb4fc))
+
+
+
+
+
 <a name="0.92.0"></a>
 # [0.92.0](https://github.com/edenlabllc/ehealth.web/compare/v0.91.1...v0.92.0) (2018-09-28)
 
