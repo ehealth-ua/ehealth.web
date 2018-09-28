@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.92.0"></a>
+# [0.92.0](https://github.com/edenlabllc/ehealth.web/compare/v0.91.1...v0.92.0) (2018-09-28)
+
+
+### Bug Fixes
+
+* **admin:** fix typos ([14d5e3b](https://github.com/edenlabllc/ehealth.web/commit/14d5e3b))
+
+
+### Features
+
+* **admin:** add async jobs feature definitions ([0331e91](https://github.com/edenlabllc/ehealth.web/commit/0331e91))
+
+
+
+
+
 <a name="0.91.1"></a>
 ## [0.91.1](https://github.com/edenlabllc/ehealth.web/compare/v0.91.0...v0.91.1) (2018-09-26)
 
