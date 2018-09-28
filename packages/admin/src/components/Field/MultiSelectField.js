@@ -15,8 +15,9 @@ const MultiSelect = ({
   items = [],
   placeHolder = "Вибрати",
   name,
-  filterKey,
-  filter,
+  filterOptions,
+  filter = matchSorter,
+  renderItem = item => item,
   ...props
 }) => (
   <MultiDownshift itemToString={() => ""} name={name}>
@@ -31,8 +32,6 @@ const MultiSelect = ({
       getItemProps,
       toggleMenu,
       highlightedIndex,
-      list = (filter && filter(items)) ||
-        matchSorter(items, inputValue, filterKey && { keys: [filterKey] }),
       meta: { active, errored, error }
     }) => (
       <FieldView.Wrapper
@@ -49,7 +48,7 @@ const MultiSelect = ({
         <InputView.Border position="relative" flexWrap="wrap">
           {selectedItems.map(item => (
             <MultiSelectView.SelectedItem key={item}>
-              {filterKey ? item[filterKey] : item}
+              {renderItem(item)}
               <MultiSelectView.RemoveItem {...getRemoveButtonProps({ item })}>
                 <RemoveItemIcon />
               </MultiSelectView.RemoveItem>
@@ -71,7 +70,7 @@ const MultiSelect = ({
           />
           {isOpen && (
             <MultiSelectView.List>
-              {list.map(
+              {filter(items, inputValue, filterOptions).map(
                 (item, index) =>
                   !selectedItems.includes(item) && (
                     <Dropdown.Item
@@ -82,7 +81,7 @@ const MultiSelect = ({
                         on: highlightedIndex === index
                       })}
                     >
-                      {filterKey ? item[filterKey] : item}
+                      {renderItem(item)}
                     </Dropdown.Item>
                   )
               )}

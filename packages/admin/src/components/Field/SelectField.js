@@ -13,17 +13,30 @@ import { ChevronBottomIcon } from "@ehealth/icons";
  *
  * ```jsx
  * <Form {...props}>
- *   <Select items={clinics} name="clinics" />
- *   <Select items={doctors} name="doctors" disabled />
+ *   <Field.Select items={doctors} name="doctors" disabled />
  *   <Form.Submit block>Далі</Form.Submit>
  * </Form>
  * ```
- * Possible values for items prop are Array of Strings and Array of Objects
  *
- * For passing an Array of Objects, you must specify the key for filtering in filterKey prop.
- * @example below will be filtering by doctors.name key
+ * For passing an Array of Objects to the items prop,
+ * you must specify the key in renderItem, itemToString and, for custom filtering, in filterOptions.
+ *
+ * @example below will be filtering by doctors.name key and show the doctors.name value in the select list
  * const doctors = [{name: "John Doe", speciality: "Family Doctor", clinic: "Doe & Doe"}, {...}]
- * <Field.Select items={doctors} name="doctors" filterKey="name" />
+ * <Field.Select
+ *   items={doctors}
+ *   name="doctors"
+ *   renderItem={item => item.name }
+ *   itemToString={item => {
+ *     if (!item) return "";
+ *     return typeof item === "string"
+ *       ? item
+ *       : item.name
+ *   }}
+ *   filterOptions={
+ *    { keys: ["name"] }
+ *   }
+ * />
  *
  * Optional prop "type" with possible value "select"
  * Without "type" select works with search field and filter in List
@@ -36,14 +49,12 @@ const SelectField = ({
   warning,
   items = [],
   type,
-  filterKey,
-  filter,
+  filterOptions,
+  filter = matchSorter,
+  renderItem = item => item,
   ...props
 }) => (
-  <SingleDownshift
-    {...props}
-    itemToString={item => (filterKey ? (item ? item[filterKey] : "") : item)}
-  >
+  <SingleDownshift {...props}>
     {({
       getRootProps,
       getInputProps,
@@ -55,12 +66,6 @@ const SelectField = ({
       selectedItem,
       openMenu,
       clearSelection,
-      list = (filter && filter(items)) ||
-        matchSorter(
-          items,
-          !type && inputValue,
-          filterKey && { keys: [filterKey] }
-        ),
       input: { onFocus, onBlur, size, disabled, ...input },
       meta: { active, errored, error }
     }) => (
@@ -104,18 +109,20 @@ const SelectField = ({
           </DropdownButton>
           {isOpen && (
             <List>
-              {list.map((item, index) => (
-                <Dropdown.Item
-                  {...getItemProps({
-                    key: item,
-                    index,
-                    item,
-                    on: highlightedIndex === index
-                  })}
-                >
-                  {filterKey ? item[filterKey] : item}
-                </Dropdown.Item>
-              ))}
+              {filter(items, !type && inputValue, filterOptions).map(
+                (item, index) => (
+                  <Dropdown.Item
+                    {...getItemProps({
+                      key: item,
+                      index,
+                      item,
+                      on: highlightedIndex === index
+                    })}
+                  >
+                    {renderItem(item)}
+                  </Dropdown.Item>
+                )
+              )}
             </List>
           )}
         </InputView.Border>
