@@ -37,6 +37,7 @@ const SelectField = ({
   items = [],
   type,
   filterKey,
+  filter,
   ...props
 }) => (
   <SingleDownshift
@@ -54,7 +55,7 @@ const SelectField = ({
       selectedItem,
       openMenu,
       clearSelection,
-      list = (props.filter && props.filter(items)) ||
+      list = (filter && filter(items)) ||
         matchSorter(
           items,
           !type && inputValue,

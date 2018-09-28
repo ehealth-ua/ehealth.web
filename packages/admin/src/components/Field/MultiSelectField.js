@@ -16,6 +16,7 @@ const MultiSelect = ({
   placeHolder = "Вибрати",
   name,
   filterKey,
+  filter,
   ...props
 }) => (
   <MultiDownshift itemToString={() => ""} name={name}>
@@ -30,7 +31,7 @@ const MultiSelect = ({
       getItemProps,
       toggleMenu,
       highlightedIndex,
-      list = (props.filter && props.filter(items)) ||
+      list = (filter && filter(items)) ||
         matchSorter(items, inputValue, filterKey && { keys: [filterKey] }),
       meta: { active, errored, error }
     }) => (
