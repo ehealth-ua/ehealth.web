@@ -11,9 +11,15 @@ const PERSON = {
   INACTIVE: "неактивна"
 };
 
+const LEGALENTITY = {
+  ACTIVE: "активний",
+  CLOSED: "неактивний"
+};
+
 const STATUSES = {
   PERSON,
-  DECLARATION
+  DECLARATION,
+  LEGALENTITY
 };
 
 export default STATUSES;
