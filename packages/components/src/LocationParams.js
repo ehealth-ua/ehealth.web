@@ -9,8 +9,8 @@ const LocationParams = ({ children, render = children }) => (
       render({
         locationParams: parseSearchParams(location.search),
         setLocationParams: params => {
-          const parseParams = parseSearchParams(location.search);
-          if (Object.entries(params).length && !isEqual(parseParams, params)) {
+          const parsedParams = parseSearchParams(location.search);
+          if (Object.entries(params).length && !isEqual(parsedParams, params)) {
             const query = stringifySearchParams(params);
             navigate(`${location.pathname}?${query}`);
           }
