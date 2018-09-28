@@ -37,7 +37,6 @@ const SelectField = ({
   items = [],
   type,
   filterKey,
-  filter = matchSorter,
   ...props
 }) => (
   <SingleDownshift
@@ -55,6 +54,12 @@ const SelectField = ({
       selectedItem,
       openMenu,
       clearSelection,
+      list = (props.filter && props.filter(items)) ||
+        matchSorter(
+          items,
+          !type && inputValue,
+          filterKey && { keys: [filterKey] }
+        ),
       input: { onFocus, onBlur, size, disabled, ...input },
       meta: { active, errored, error }
     }) => (
@@ -98,11 +103,7 @@ const SelectField = ({
           </DropdownButton>
           {isOpen && (
             <List>
-              {filter(
-                items,
-                !type && inputValue,
-                filterKey && { keys: [filterKey] }
-              ).map((item, index) => (
+              {list.map((item, index) => (
                 <Dropdown.Item
                   {...getItemProps({
                     key: item,

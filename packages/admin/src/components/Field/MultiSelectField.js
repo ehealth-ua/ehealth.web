@@ -30,6 +30,8 @@ const MultiSelect = ({
       getItemProps,
       toggleMenu,
       highlightedIndex,
+      list = (props.filter && props.filter(items)) ||
+        matchSorter(items, inputValue, filterKey && { keys: [filterKey] }),
       meta: { active, errored, error }
     }) => (
       <FieldView.Wrapper
@@ -68,11 +70,7 @@ const MultiSelect = ({
           />
           {isOpen && (
             <MultiSelectView.List>
-              {matchSorter(
-                items,
-                inputValue,
-                filterKey && { keys: [filterKey] }
-              ).map(
+              {list.map(
                 (item, index) =>
                   !selectedItems.includes(item) && (
                     <Dropdown.Item
