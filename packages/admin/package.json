@@ -15,6 +15,7 @@
     "apollo-link-http": "^1.5.4",
     "date-fns": "^1.29.0",
     "emotion": "^9.2.5",
+    "final-form-calculate": "^1.2.1",
     "graphql": "0.13.2",
     "js-cookie": "^2.2.0",
     "react": "^16.4.2",
