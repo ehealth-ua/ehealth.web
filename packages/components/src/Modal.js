@@ -38,7 +38,7 @@ const CloseButton = styled.button`
 const Window = system(
   {
     position: "fixed",
-    p: 5,
+    p: 7,
     bg: "white",
     maxWidth: "100vw",
     maxHeight: "100vh",
