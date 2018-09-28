@@ -1,0 +1,15 @@
+query SettlementsQuery($name: String) {
+  settlements(name: $name) {
+    id
+    district
+    districtId
+    koatuu
+    mountainGroup
+    name
+    parentSettlement
+    parentSettlementId
+    region
+    regionId
+    type
+  }
+}
