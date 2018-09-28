@@ -11,6 +11,6 @@ Background: User is authorized and on JOB_PARAGRAPH and MERGED_LEGAL_ENTITIES PA
 
 Scenario: Get MERGED_LEGAL_ENTITIES_JOBS List
   Given I am on the MERGED_LEGAL_ENTITIES_JOBS page
-  Then I should see drop-down filer by STATUS, input filters by mergedFromEdrpou, mergedToEdrpou
-  And I see tabs table with columns id, name, status, startTime, executionTime, mergedFromName, mergedFromEdrpou, mergedToName, mergedToEdrpou
-  And I should be able to filter by startedAt_ASC, startedAt_DESC
+  Then I should see drop-down filter by STATUS, input filters by mergedFromEdrpou, mergedToEdrpou
+  And I see table with columns id, name, status, startTime, executionTime, mergedFromName, mergedFromEdrpou, mergedToName, mergedToEdrpou
+  And I should be able to filter by STARTET_AT_ASC, STARTET_AT_DESC
