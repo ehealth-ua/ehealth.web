@@ -1,5 +1,6 @@
 import React, { createContext, Component } from "react";
-import { ForceRedirect, Switch, Modal } from "@ehealth/components";
+import { Switch, Modal } from "@ehealth/components";
+import { Redirect } from "@reach/router";
 import Error from "./components/Error";
 import { Text } from "rebass/emotion";
 import {
@@ -51,7 +52,7 @@ export default class ErrorBoundary extends Component {
               </>
             }
             unauthorized={
-              <ForceRedirect
+              <Redirect
                 to={`${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
               />
             }
