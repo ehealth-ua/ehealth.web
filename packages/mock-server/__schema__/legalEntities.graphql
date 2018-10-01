@@ -74,10 +74,10 @@ type License {
 
 type Accreditation {
   category: String!
-  issued_date: Date @fake(locale: "uk", method: "date.past", args: [100])
-  expiry_date: Date @fake(locale: "uk", method: "date.past", args: [100])
-  order_no: String!
-  order_date: Date @fake(locale: "uk", method: "date.past", args: [100])
+  issuedDate: Date @fake(locale: "uk", method: "date.past", args: [100])
+  expiryDate: Date @fake(locale: "uk", method: "date.past", args: [100])
+  orderNo: String!
+  orderDate: Date @fake(locale: "uk", method: "date.past", args: [100])
 }
 
 type medicalServiceProvider {

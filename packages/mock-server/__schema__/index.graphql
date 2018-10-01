@@ -5,10 +5,10 @@
 # import * from "declarations.graphql"
 # import * from "divisions.graphql"
 # import * from "employees.graphql"
-# import * from "legal_entities.graphql"
+# import * from "legalEntities.graphql"
 # import * from "persons.graphql"
 # import * from "phones.graphql"
-# import * from "signed_content.graphql"
+# import * from "signedContent.graphql"
 # import * from "settlements.graphql"
 
 type Query {
