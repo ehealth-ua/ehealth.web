@@ -19,7 +19,7 @@ const Item = ({ to, ...props }) => (
     {to ? (
       <>
         <Link to={to} {...props} />
-        <Arrow />
+        <Arrow width={7} />
       </>
     ) : (
       props.children
