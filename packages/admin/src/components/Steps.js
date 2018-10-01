@@ -15,14 +15,15 @@ const Link = system(
     display: "flex",
     overflow: "hidden",
     mr: 2,
-    color: "darkAndStormy",
+    color: "romanSilver",
     fontSize: 2,
     alignItems: "center"
   },
   {
     textDecoration: "none",
     whiteSpace: "nowrap",
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
+    pointerEvents: "none"
   },
   ({ active, ...props }) => ({
     "&::before": mixed({
@@ -33,7 +34,7 @@ const Link = system(
     "&::after": mixed({
       order: "-1",
       content: "counter(step)",
-      color: active ? "romanSilver" : "white",
+      color: active ? "white" : "romanSilver",
       display: "inline-block",
       minWidth: "28px",
       height: "28px",
@@ -41,16 +42,16 @@ const Link = system(
       mr: 2,
       textAlign: "center",
       borderRadius: "50%",
-      bg: active ? "white" : "freshBlueOfBelAir",
+      bg: active ? "freshBlueOfBelAir" : "white",
       borderWidth: "1px",
       borderStyle: "solid",
-      borderColor: active ? "callaLily" : "white"
+      borderColor: active ? "white" : "callaLily"
     })(props)
   }),
   boolean({
     prop: "active",
-    pointerEvents: "none",
-    color: "romanSilver"
+    color: "darkAndStormy",
+    pointerEvents: "visible"
   })
 );
 
