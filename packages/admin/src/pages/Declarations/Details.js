@@ -1,20 +1,28 @@
 import React from "react";
 import { Router } from "@reach/router";
-import { Query } from "react-apollo";
-import { Box } from "rebass/emotion";
+import { Query, Mutation } from "react-apollo";
+import { Flex, Box, Heading } from "rebass/emotion";
+import { BooleanValue } from "react-values";
 
 import { PositiveIcon } from "@ehealth/icons";
 import { getFullName, getPhones } from "@ehealth/utils";
+import { Form, Modal, Switch } from "@ehealth/components";
 
 import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
 import Badge from "../../components/Badge";
+import Button from "../../components/Button";
+import * as Field from "../../components/Field";
 import AddressView from "../../components/AddressView";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import STATUSES from "../../helpers/statuses";
 
 import DeclarationQuery from "../../graphql/DeclarationQuery.graphql";
+import TerminateDeclarationMutation from "../../graphql/TerminateDeclarationMutation.graphql";
+import RejectDeclarationMutation from "../../graphql/RejectDeclarationMutation.graphql";
+import ApproveDeclarationMutation from "../../graphql/ApproveDeclarationMutation.graphql";
 
 const Details = ({ id }) => (
   <Query query={DeclarationQuery} variables={{ id }}>
@@ -47,24 +55,149 @@ const Details = ({ id }) => (
       return (
         <>
           <Box p={6}>
-            <DefinitionListView
-              labels={{
-                id: "ID пацієнта",
-                declarationRequestId: "ID запиту",
-                status: "Статус"
-              }}
-              data={{
-                id,
-                declarationRequestId,
-                status: (
-                  <Badge bg="darkPastelGreen" minWidth={100}>
-                    {STATUSES.DECLARATION[status]}
-                  </Badge>
-                )
-              }}
-              color="#7F8FA4"
-              labelWidth="100px"
-            />
+            <Box mb={10}>
+              <Breadcrumbs.List>
+                <Breadcrumbs.Item to="/declarations">
+                  Пошук декларацій
+                </Breadcrumbs.Item>
+                <Breadcrumbs.Item>Деталі декларації</Breadcrumbs.Item>
+              </Breadcrumbs.List>
+            </Box>
+            <Flex justifyContent="space-between" alignItems="flex-end">
+              <Box>
+                <DefinitionListView
+                  labels={{
+                    id: "ID пацієнта",
+                    declarationRequestId: "ID запиту",
+                    status: "Статус"
+                  }}
+                  data={{
+                    id,
+                    declarationRequestId,
+                    status: (
+                      <Badge bg="darkPastelGreen" minWidth={100}>
+                        {STATUSES.DECLARATION[status]}
+                      </Badge>
+                    )
+                  }}
+                  color="#7F8FA4"
+                  labelWidth="100px"
+                />
+              </Box>
+              <Box>
+                <Switch
+                  value={status}
+                  ACTIVE={
+                    <Popup
+                      variant="red"
+                      buttonText="Розірвати декларацію"
+                      title="Розірвання декларації"
+                    >
+                      {toggle => (
+                        <Mutation mutation={TerminateDeclarationMutation}>
+                          {terminateDeclaration => (
+                            <Form
+                              onSubmit={async reasonDescription => {
+                                await terminateDeclaration({
+                                  variables: { id, reasonDescription }
+                                });
+                                toggle();
+                              }}
+                            >
+                              <Field.Textarea
+                                name="reasonDescription"
+                                placeholder="Вкажіть причину розірвання декларації"
+                                rows={5}
+                              />
+                              <Flex justifyContent="center">
+                                <Box mr={20}>
+                                  <Button variant="blue" onClick={toggle}>
+                                    Повернутися
+                                  </Button>
+                                </Box>
+                                <Button type="submit" variant="red">
+                                  Розірвати декларацію
+                                </Button>
+                              </Flex>
+                            </Form>
+                          )}
+                        </Mutation>
+                      )}
+                    </Popup>
+                  }
+                  PENDING_VERIFICATION={
+                    <Flex>
+                      <Box mr={20}>
+                        <Popup
+                          variant="red"
+                          buttonText="Відхилити"
+                          title="Відхилення декларації"
+                        >
+                          {toggle => (
+                            <Mutation mutation={RejectDeclarationMutation}>
+                              {rejectDeclaration => (
+                                <Flex justifyContent="center">
+                                  <Box mr={20}>
+                                    <Button variant="blue" onClick={toggle}>
+                                      Повернутися
+                                    </Button>
+                                  </Box>
+                                  <Button
+                                    onClick={async () => {
+                                      await rejectDeclaration({
+                                        variables: {
+                                          id
+                                        }
+                                      });
+                                      toggle();
+                                    }}
+                                    variant="red"
+                                  >
+                                    Відхилити декларацію
+                                  </Button>
+                                </Flex>
+                              )}
+                            </Mutation>
+                          )}
+                        </Popup>
+                      </Box>
+                      <Popup
+                        variant="green"
+                        buttonText="Затвердити"
+                        title="Затвердження декларації"
+                      >
+                        {toggle => (
+                          <Mutation mutation={ApproveDeclarationMutation}>
+                            {approveDeclaration => (
+                              <Flex justifyContent="center">
+                                <Box mr={20}>
+                                  <Button variant="blue" onClick={toggle}>
+                                    Повернутися
+                                  </Button>
+                                </Box>
+                                <Button
+                                  onClick={async () => {
+                                    await approveDeclaration({
+                                      variables: {
+                                        id
+                                      }
+                                    });
+                                    toggle();
+                                  }}
+                                  variant="green"
+                                >
+                                  Затвердити декларацію
+                                </Button>
+                              </Flex>
+                            )}
+                          </Mutation>
+                        )}
+                      </Popup>
+                    </Flex>
+                  }
+                />
+              </Box>
+            </Flex>
           </Box>
           <Tabs.Nav>
             <Tabs.NavItem to="./">Загальна інформація</Tabs.NavItem>
@@ -88,6 +221,26 @@ const Details = ({ id }) => (
       );
     }}
   </Query>
+);
+
+const Popup = ({ variant, buttonText, title, children, render = children }) => (
+  <BooleanValue>
+    {({ value: opened, toggle }) => (
+      <>
+        <Button variant={variant} disabled={opened} onClick={toggle}>
+          {buttonText}
+        </Button>
+        {opened && (
+          <Modal width={760} backdrop>
+            <Heading as="h1" fontWeight="normal" mb={6}>
+              {title}
+            </Heading>
+            {render(toggle)}
+          </Modal>
+        )}
+      </>
+    )}
+  </BooleanValue>
 );
 
 const GeneralInfo = ({ general }) => (
