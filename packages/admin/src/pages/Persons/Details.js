@@ -14,10 +14,11 @@ import {
 
 import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
+import Table from "../../components/Table";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
 import * as Field from "../../components/Field";
-import Table from "../../components/Table";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import AddressView from "../../components/AddressView";
 import DefinitionListView from "../../components/DefinitionListView";
 
@@ -55,7 +56,7 @@ const Details = ({ id }) => (
 
       const [mobilePhone] = filterData("MOBILE", phones);
       const [landLinePhone] = filterData("LAND_LINE", phones);
-      const [authInfo] = filterData("OTP", authenticationMethod);
+      const authInfo = authenticationMethod[0];
 
       const userInfo = {
         fullName: getFullName({ firstName, secondName, lastName }),
@@ -71,6 +72,14 @@ const Details = ({ id }) => (
       return (
         <>
           <Box p={6}>
+            <Box mb={10}>
+              <Breadcrumbs.List>
+                <Breadcrumbs.Item to="/persons">
+                  Пошук пацієнтів
+                </Breadcrumbs.Item>
+                <Breadcrumbs.Item>Деталі пацієнта</Breadcrumbs.Item>
+              </Breadcrumbs.List>
+            </Box>
             <DefinitionListView
               labels={{
                 id: "ID пацієнта",
