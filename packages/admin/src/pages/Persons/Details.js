@@ -254,13 +254,17 @@ const DeclarationsInfo = ({ id }) => (
                       <Field.Select
                         name="status"
                         label="Статус декларації"
-                        items={declarationStatuses}
+                        items={[
+                          { value: "всі статуси", name: undefined },
+                          ...declarationStatuses
+                        ]}
                         renderItem={item => item.value}
                         itemToString={item => {
-                          if (!item) return "";
+                          if (!item) return "всі статуси";
                           return typeof item === "string" ? item : item.value;
                         }}
                         filterOptions={{ keys: ["value"] }}
+                        type="select"
                       />
                     </Box>
                   </Flex>
