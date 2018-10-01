@@ -51,7 +51,7 @@ Scenario: Terminate Declaration
   And Declaration status=ACTIVE
   Then I should see button TERMINATE declaration
   And I press it
-  Then I see window with input field and button BACK and FORWARD
+  Then I see popup with input field and button BACK and FORWARD
   And I fill input field with text
   And I press FORWARD
   Then I return to same tab
@@ -62,7 +62,7 @@ Scenario: APPROVE Declaration
   And Declaration status=PENDING_VERIFICATION
   Then I should see button APPROVE declaration
   And I press it
-  Then I see window with text notifications and buttons BACK and FORWARD
+  Then I see popup with text notifications and buttons BACK and FORWARD
   And I press FORWARD
   Then I return to same tab
   And I see Declaration status=ACTIVE
@@ -72,7 +72,7 @@ Scenario: REJECT Declaration
   And Declaration status=PENDING_VERIFICATION
   Then I should see button REJECT declaration
   And I press it
-  Then I see window with text notifications and buttons BACK and FORWARD
+  Then I see popup with text notifications and buttons BACK and FORWARD
   And I press FORWARD
   Then I return to same tab
   And I see Declaration status=REJECTED
