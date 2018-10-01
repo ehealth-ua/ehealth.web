@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.93.0"></a>
+# [0.93.0](https://github.com/edenlabllc/ehealth.web/compare/v0.92.4...v0.93.0) (2018-10-01)
+
+
+### Bug Fixes
+
+* **admin:** add breadcrumbs to Persons page ([e498131](https://github.com/edenlabllc/ehealth.web/commit/e498131))
+* **admin:** fix declaration details features ([c174a3c](https://github.com/edenlabllc/ehealth.web/commit/c174a3c))
+* **admin:** use reach router redirect ([6350f81](https://github.com/edenlabllc/ehealth.web/commit/6350f81))
+* **components:** add arrow width ([818a258](https://github.com/edenlabllc/ehealth.web/commit/818a258))
+* **components:** invert active/non-active styles ([ff41f02](https://github.com/edenlabllc/ehealth.web/commit/ff41f02))
+
+
+### Features
+
+* **admin:** add Approve, Reject, Terminate mutations ([546db11](https://github.com/edenlabllc/ehealth.web/commit/546db11))
+
+
+
+
+
 <a name="0.92.4"></a>
 ## [0.92.4](https://github.com/edenlabllc/ehealth.web/compare/v0.92.3...v0.92.4) (2018-09-28)
 
