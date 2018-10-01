@@ -255,6 +255,12 @@ const DeclarationsInfo = ({ id }) => (
                         name="status"
                         label="Статус декларації"
                         items={declarationStatuses}
+                        renderItem={item => item.value}
+                        itemToString={item => {
+                          if (!item) return "";
+                          return typeof item === "string" ? item : item.value;
+                        }}
+                        filterOptions={{ keys: ["value"] }}
                       />
                     </Box>
                   </Flex>
