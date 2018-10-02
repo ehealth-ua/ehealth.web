@@ -14,10 +14,3 @@ type Settlements {
   regionId: ID!
   type: SettlementType!
 }
-
-enum SettlementType {
-  VILLAGE
-  TOWNSHIP
-  SETTLEMENT
-  CITY
-}

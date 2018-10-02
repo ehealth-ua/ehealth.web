@@ -39,7 +39,7 @@ type LegalEntity {
   "employee with employee_type='OWNER and isActive=true"
   owner: Employee!
   # employees: [Employee]!
-  # divisions: [Division]
+  divisions: [Division]
   mergedFromLegalEntities(
     filter: LegalEntityMergeConnectionFilter
     sort: LegalEntityMergeConnectionOrderBy
