@@ -4,14 +4,22 @@ import { Query } from "react-apollo";
 import system from "system-components/emotion";
 
 import LegalEntityQuery from "../../graphql/LegalEntityQuery.graphql";
-import { Box } from "rebass/emotion";
+import { Flex, Box } from "rebass/emotion";
+import format from "date-fns/format";
 
-import { PositiveIcon } from "@ehealth/icons";
-import { getFullName, getPhones } from "@ehealth/utils";
+import { PositiveIcon, AdminSearchIcon, AdminAddIcon } from "@ehealth/icons";
+import {
+  getFullName,
+  getPhones,
+  parseSortingParams,
+  stringifySortingParams
+} from "@ehealth/utils";
+import { LocationParams, Form } from "@ehealth/components";
 
+import Link from "../../components/Link";
 import Table from "../../components/Table";
 import Tabs from "../../components/Tabs";
-import Link from "../../components/Link";
+import * as Field from "../../components/Field";
 import Badge from "../../components/Badge";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
@@ -82,30 +90,28 @@ const Details = ({ id }) => (
             <Tabs.NavItem to="./contracts">Контракти</Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
-            <Box p={5}>
-              <Router>
-                <GeneralInfo
-                  path="/"
-                  edrpou={edrpou}
-                  name={name}
-                  addresses={addresses}
-                  phones={phones}
-                  email={email}
-                  type={type}
-                  ownerPropertyType={ownerPropertyType}
-                  kveds={kveds}
-                  misVerified={misVerified}
-                  nhsVerified={nhsVerified}
-                />
-                <License path="/licenses" license={medicalServiceProvider} />
-                <RelatedLegalEntities
-                  path="/related-legal-entities"
-                  legalEntity={mergedFromLegalEntities}
-                />
-                <Owner path="/owner" owner={owner} />
-                <Divisions path="/divisions" divisions={divisions} />
-              </Router>
-            </Box>
+            <Router>
+              <GeneralInfo
+                path="/"
+                edrpou={edrpou}
+                name={name}
+                addresses={addresses}
+                phones={phones}
+                email={email}
+                type={type}
+                ownerPropertyType={ownerPropertyType}
+                kveds={kveds}
+                misVerified={misVerified}
+                nhsVerified={nhsVerified}
+              />
+              <License path="/licenses" license={medicalServiceProvider} />
+              <RelatedLegalEntities
+                path="/related-legal-entities"
+                legalEntity={mergedFromLegalEntities}
+              />
+              <Owner path="/owner" owner={owner} />
+              <Divisions path="/divisions" divisions={divisions} />
+            </Router>
           </Tabs.Content>
         </>
       );
@@ -123,7 +129,7 @@ const GeneralInfo = ({
   nhsVerified,
   ...props
 }) => (
-  <>
+  <Box p={5}>
     <DefinitionListView
       labels={{
         edrpou: "ЄДРПОУ",
@@ -162,12 +168,12 @@ const GeneralInfo = ({
         nhsVerified: nhsVerified && <PositiveIcon />
       }}
     />
-  </>
+  </Box>
 );
 const License = ({ license: { accreditation, licenses = [] } }) => {
   const { issuedDate, expiryDate } = accreditation;
   return (
-    <>
+    <Box p={5}>
       <DefinitionListView
         labels={{
           category: "Акредитація",
@@ -196,31 +202,111 @@ const License = ({ license: { accreditation, licenses = [] } }) => {
           {array.length - 1 !== index && <Line />}
         </React.Fragment>
       ))}
-    </>
+    </Box>
   );
 };
-const RelatedLegalEntities = ({ legalEntity }) => <>RelatedLegalEntities</>;
+const RelatedLegalEntities = ({ id }) => (
+  <LocationParams>
+    {({ locationParams, setLocationParams }) => (
+      <Query
+        query={LegalEntityQuery}
+        variables={{
+          id,
+          ...locationParams
+        }}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return "Loading...";
+          if (error) return `Error! ${error.message}`;
+          const {
+            legalEntity: { mergedFromLegalEntities }
+          } = data;
+          const { orderBy } = locationParams;
+          return (
+            <>
+              <Form onSubmit={setLocationParams} initialValues={locationParams}>
+                <Box p={5} width={460}>
+                  <Field.Text
+                    name="filter.edrpou"
+                    label="Знайти підпорядкований медзаклад"
+                    placeholder="Введіть ЄДРПОУ медзакладу"
+                    postfix={<AdminSearchIcon color="#CED0DA" />}
+                  />
+                </Box>
+              </Form>
+              <Link to="../../add">
+                <Flex mb={2}>
+                  <Box mr={2}>
+                    <AdminAddIcon width={16} height={16} />
+                  </Box>{" "}
+                  Додати підпорядкований медзаклад
+                </Flex>
+              </Link>
+              <Table
+                data={mergedFromLegalEntities}
+                header={{
+                  name: "Назва Медзакладу",
+                  edrpou: "ЄДРПОУ",
+                  base: "Основа",
+                  insertedAt: "Додано",
+                  status: "Статус"
+                }}
+                renderRow={({
+                  base,
+                  insertedAt,
+                  mergedFromLegalEntity: { edrpou, name },
+                  isActive
+                }) => ({
+                  base,
+                  insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                  name,
+                  edrpou,
+                  status: (
+                    <Badge
+                      name={isActive ? "ACTIVE" : "CLOSED"}
+                      type="LEGALENTITY"
+                      display="block"
+                    />
+                  )
+                })}
+                sortableFields={["edrpou", "insertedAt"]}
+                sortingParams={parseSortingParams(orderBy)}
+                onSortingChange={sortingParams =>
+                  setLocationParams({
+                    orderBy: stringifySortingParams(sortingParams)
+                  })
+                }
+              />
+            </>
+          );
+        }}
+      </Query>
+    )}
+  </LocationParams>
+);
 
 const Owner = ({ owner: { party, id, position, doctor } }) => (
-  <DefinitionListView
-    labels={{
-      party: "ПІБ",
-      speciality: "Спеціальність",
-      position: "Посада",
-      id: <GreyTitle>Id</GreyTitle>
-    }}
-    data={{
-      party: getFullName(party),
-      speciality: doctor.specialities.map(({ speciality }, index, array) => (
-        <React.Fragment key={index}>
-          {speciality}
-          {array.length - 1 !== index && ", "}
-        </React.Fragment>
-      )),
-      position,
-      id: <GreyTitle>{id}</GreyTitle>
-    }}
-  />
+  <Box p={5}>
+    <DefinitionListView
+      labels={{
+        party: "ПІБ",
+        speciality: "Спеціальність",
+        position: "Посада",
+        id: <GreyTitle>Id</GreyTitle>
+      }}
+      data={{
+        party: getFullName(party),
+        speciality: doctor.specialities.map(({ speciality }, index, array) => (
+          <React.Fragment key={index}>
+            {speciality}
+            {array.length - 1 !== index && ", "}
+          </React.Fragment>
+        )),
+        position,
+        id: <GreyTitle>{id}</GreyTitle>
+      }}
+    />
+  </Box>
 );
 const Divisions = ({ divisions }) => <>Divisions</>;
 

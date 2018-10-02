@@ -1,4 +1,8 @@
-query LegalEntityQuery($id: ID!) {
+query LegalEntityQuery(
+  $id: ID!
+  $filter: LegalEntityMergeConnectionFilter
+  $orderBy: LegalEntityMergeConnectionOrderBy
+) {
   legalEntity(id: $id) {
     id
     status
@@ -62,13 +66,14 @@ query LegalEntityQuery($id: ID!) {
         }
       }
     }
-    mergedFromLegalEntities {
+    mergedFromLegalEntities(filter: $filter, orderBy: $orderBy) {
       isActive
       base
       insertedAt
       mergedFromLegalEntity {
         id
         name
+        edrpou
       }
     }
     divisions {
