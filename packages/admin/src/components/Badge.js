@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import system from "system-components/emotion";
 import statuses from "../helpers/statuses";
 import { variant } from "@ehealth/system-tools";

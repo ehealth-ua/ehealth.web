@@ -1,41 +1,23 @@
 import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
-import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
-import {
-  Form,
-  LocationParams,
-  Validations,
-  Validation
-} from "@ehealth/components";
-import {
-  parseSortingParams,
-  stringifySortingParams,
-  formatPhone,
-  parsePhone,
-  getFullName,
-  formatDate
-} from "@ehealth/utils";
+import { Form, LocationParams } from "@ehealth/components";
+import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import { PositiveIcon, AdminSearchIcon } from "@ehealth/icons";
-import { getIn } from "final-form";
 import createDecorator from "final-form-calculate";
-
-import { titleCase } from "@ehealth/utils";
 
 import debounce from "lodash/debounce";
 import isEmpty from "lodash/isEmpty";
+import STATUSES from "../../helpers/statuses";
 
 import * as Field from "../../components/Field";
-
-import SearchLegalEntitiesQuery from "../../graphql/SearchLegalEntitiesQuery.graphql";
-import SettlementsQuery from "../../graphql/SettlementsQuery.graphql";
-import Details from "../../components/Details";
 import Table from "../../components/Table";
 import Link from "../../components/Link";
 import AddressView from "../../components/AddressView";
 import Badge from "../../components/Badge";
 
-import STATUSES from "../../helpers/statuses";
+import SearchLegalEntitiesQuery from "../../graphql/SearchLegalEntitiesQuery.graphql";
+import SettlementsQuery from "../../graphql/SettlementsQuery.graphql";
 
 const legalEntityStatus = Object.entries(STATUSES.LEGAL_ENTITY_STATUS).map(
   ([key, value]) => ({
@@ -55,7 +37,7 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { code, settlement, nhsVerified, ...filterRest } = {}
+          filter: { code, settlement, nhsVerified } = {}
         } = locationParams;
         const regId = new RegExp(ID_PATTERN);
         const testID = regId.test(code);
@@ -147,83 +129,76 @@ const Search = ({ uri }) => (
 
 export default Search;
 
-const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => {
-  const {
-    filter: { settlement: { settlement = "" } = {} } = {}
-  } = initialValues;
-  return (
-    <Form
-      onSubmit={() => null /* NOT USED, but required */}
-      initialValues={initialValues}
-      decorators={[resetValue]}
-    >
-      <Form.AutoSubmit onSubmit={setLocationParams} />
-      <Flex mx={-1}>
-        <Box px={1} width={1 / 2}>
-          <Field.Text
-            name="filter.code"
-            label="Пошук медзакладу за ЄДРПОУ"
-            placeholder="ЄДРПОУ або ID медзакладу"
-            postfix={<AdminSearchIcon color="#CED0DA" />}
-          />
-        </Box>
-      </Flex>
-      <Flex mx={-1}>
-        <Box px={1} width={1 / 3}>
-          <Query
-            query={SettlementsQuery}
-            fetchPolicy="cache-first"
-            variables={{ name: "" }}
-            context={{ credentials: "same-origin" }}
-          >
-            {({ loading, error, data: { settlements = [{}] }, refetch }) => {
-              return (
-                <Field.Select
-                  name="filter.settlement"
-                  label="Населений пункт"
-                  placeholder="Введіть населений пункт"
-                  itemToString={item => {
-                    if (!item) return "";
-                    return typeof item === "string" ? item : item.settlement;
-                  }}
-                  items={settlements.map(
-                    ({ name, district, type, region }) => ({
-                      area: region || undefined,
-                      settlement: name,
-                      settlementType: type,
-                      region: district || undefined
-                    })
-                  )}
-                  onInputValueChange={debounce(
-                    settlement => refetch({ name: settlement }),
-                    500
-                  )}
-                  filterOptions={{ keys: ["settlement"] }}
-                  renderItem={address => <AddressView data={address} />}
-                  size="small"
-                />
-              );
-            }}
-          </Query>
-        </Box>
+const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
+  <Form
+    onSubmit={() => null /* NOT USED, but required */}
+    initialValues={initialValues}
+    decorators={[resetValue]}
+  >
+    <Form.AutoSubmit onSubmit={setLocationParams} />
+    <Flex mx={-1}>
+      <Box px={1} width={1 / 2}>
+        <Field.Text
+          name="filter.code"
+          label="Пошук медзакладу за ЄДРПОУ"
+          placeholder="ЄДРПОУ або ID медзакладу"
+          postfix={<AdminSearchIcon color="#CED0DA" />}
+        />
+      </Box>
+    </Flex>
+    <Flex mx={-1}>
+      <Box px={1} width={1 / 3}>
+        <Query
+          query={SettlementsQuery}
+          fetchPolicy="cache-first"
+          variables={{ name: "" }}
+          context={{ credentials: "same-origin" }}
+        >
+          {({ loading, error, data: { settlements = [{}] }, refetch }) => {
+            return (
+              <Field.Select
+                name="filter.settlement"
+                label="Населений пункт"
+                placeholder="Введіть населений пункт"
+                itemToString={item => {
+                  if (!item) return "";
+                  return typeof item === "string" ? item : item.settlement;
+                }}
+                items={settlements.map(({ name, district, type, region }) => ({
+                  area: region || undefined,
+                  settlement: name,
+                  settlementType: type,
+                  region: district || undefined
+                }))}
+                onInputValueChange={debounce(
+                  settlement => refetch({ name: settlement }),
+                  500
+                )}
+                filterOptions={{ keys: ["settlement"] }}
+                renderItem={address => <AddressView data={address} />}
+                size="small"
+              />
+            );
+          }}
+        </Query>
+      </Box>
 
-        <Box px={1} width={1 / 3}>
-          {/*Todo: Use Select with dictionary LEGAL_ENTITY_STATUS*/}
-          <Field.Select
-            type="select"
-            name="filter.nhsVerified"
-            label="Статус верифікації"
-            placeholder="Оберіть статус верифікації"
-            itemToString={({ value }) => value}
-            items={legalEntityStatus}
-            renderItem={({ value }) => value}
-            size="small"
-          />
-        </Box>
-      </Flex>
-    </Form>
-  );
-};
+      <Box px={1} width={1 / 3}>
+        {/*Todo: Use Select with dictionary LEGAL_ENTITY_STATUS*/}
+        <Field.Select
+          type="select"
+          name="filter.nhsVerified"
+          label="Статус верифікації"
+          placeholder="Оберіть статус верифікації"
+          itemToString={({ value }) => value}
+          items={legalEntityStatus}
+          renderItem={({ value }) => value}
+          size="small"
+        />
+      </Box>
+    </Flex>
+  </Form>
+);
 
 const resetValue = createDecorator(
   {
