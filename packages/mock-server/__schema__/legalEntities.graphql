@@ -42,7 +42,7 @@ type LegalEntity {
   divisions: [Division]
   mergedFromLegalEntities(
     filter: LegalEntityMergeConnectionFilter
-    sort: LegalEntityMergeConnectionOrderBy
+    orderBy: LegalEntityMergeConnectionOrderBy
   ): [LegalEntityMergeConnection]
 }
 
