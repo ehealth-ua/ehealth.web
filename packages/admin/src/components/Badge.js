@@ -1,23 +1,37 @@
+import React, { Component } from "react";
 import system from "system-components/emotion";
+import statuses from "../helpers/statuses";
+import { variant } from "@ehealth/system-tools";
 
-const Badge = system(
+const Badge = ({ name, type, ...props }) => (
+  <Item status={name} title={statuses[type][name]} {...props}>
+    {statuses[type][name]}
+  </Item>
+);
+
+export const Item = system(
   {
-    fontSize: 10,
-    fontWeight: "bold",
-    color: "white",
-    lineHeight: 1,
-    textAlign: "center",
+    bg: "darkPastelGreen",
+    display: "inline-block",
     p: 1,
+    overflow: "hidden",
+    borderRadius: 2,
+    color: "white",
+    textAlign: "center",
     minWidth: 20,
     minHeight: 20,
-    borderRadius: 2,
-    bg: "blue"
+    fontSize: 10,
+    lineHeight: 1
   },
-  `
-    display: inline-block;
-    vertical-align: middle;
-    text-transform: uppercase;
-  `
+  {
+    textOverflow: "ellipsis",
+    textTransform: "uppercase",
+    verticalAlign: "middle"
+  },
+  variant({
+    prop: "status",
+    key: "status.bg.states"
+  })
 );
 
 export default Badge;

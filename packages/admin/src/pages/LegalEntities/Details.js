@@ -12,7 +12,7 @@ import { getFullName, getPhones } from "@ehealth/utils";
 import Table from "../../components/Table";
 import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
-import StatusBlock from "../../components/StatusBlock";
+import Badge from "../../components/Badge";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import DefinitionListView from "../../components/DefinitionListView";
@@ -61,11 +61,7 @@ const Details = ({ id }) => (
               data={{
                 id,
                 status: (
-                  <StatusBlock
-                    name={status}
-                    type="LEGALENTITY"
-                    minWidth={100}
-                  />
+                  <Badge name={status} type="LEGALENTITY" minWidth={100} />
                 )
               }}
               color="#7F8FA4"

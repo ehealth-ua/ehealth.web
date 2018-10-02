@@ -33,7 +33,7 @@ import Details from "../../components/Details";
 import Table from "../../components/Table";
 import Link from "../../components/Link";
 import AddressView from "../../components/AddressView";
-import StatusBlock from "../../components/StatusBlock";
+import Badge from "../../components/Badge";
 
 import STATUSES from "../../helpers/statuses";
 
@@ -104,7 +104,13 @@ const Search = ({ uri }) => (
                     }) => ({
                       ...legalEntity,
                       nhsVerified: nhsVerified && <PositiveIcon />,
-                      status: <StatusBlock type="LEGALENTITY" name={status} />,
+                      status: (
+                        <Badge
+                          type="LEGALENTITY"
+                          name={status}
+                          display="block"
+                        />
+                      ),
                       addresses: (
                         <>
                           {addresses

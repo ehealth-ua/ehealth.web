@@ -2,8 +2,8 @@ const status = {
   bg: {
     states: {
       ACTIVE: { bg: "darkPastelGreen" },
-      CLOSED: { bg: "shiningKnight", color: "blueberrySoda" },
-      CLOSED: { bg: "shiningKnight", color: "blueberrySoda" },
+      CLOSED: { bg: "silverCity", color: "blueberrySoda" },
+      INACTIVE: { bg: "silverCity", color: "blueberrySoda" },
       PENDING_VERIFICATION: { bg: "orangePastel" }
     }
   }
