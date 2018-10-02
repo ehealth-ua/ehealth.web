@@ -113,7 +113,7 @@ const SelectField = ({
                 (item, index) => (
                   <Dropdown.Item
                     {...getItemProps({
-                      key: item,
+                      key: index,
                       index,
                       item,
                       on: highlightedIndex === index
