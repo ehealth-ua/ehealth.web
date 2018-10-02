@@ -1,8 +1,8 @@
 // @flow
-import React from "react";
+import * as React from "react";
 import MaskedInput from "react-text-mask";
 import createAutoCorrectedDatePipe from "text-mask-addons/dist/createAutoCorrectedDatePipe";
-
+import format from "date-fns/format";
 import { Field, DatePicker } from "@ehealth/components";
 import { CalendarIcon } from "@ehealth/icons";
 import { formatDate, parseDate } from "@ehealth/utils";
@@ -37,64 +37,66 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
     const { isOpen } = this.state;
 
     return (
-      <FieldView.Wrapper
-        is="label"
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
-      >
-        {label && (
-          <FieldView.Header>
-            <FieldView.Label>{label}</FieldView.Label>
-            {hint && <FieldView.Message>{hint}</FieldView.Message>}
-          </FieldView.Header>
-        )}
-
-        <Field format={formatDate} parse={parseDate} {...props}>
-          {({ input, meta: { state, errored, error } }) => (
-            <>
-              <InputView.Border state={state}>
-                <InputView.Content
-                  pl={2}
-                  py={0}
-                  flex="none"
-                  display="flex"
-                  alignItems="center"
-                >
-                  <CalendarIcon />
-                </InputView.Content>
-                <InputView.Content
-                  is={MaskedInput}
-                  width={0}
-                  pl={2}
-                  pr={3}
-                  placeholder="ДД.ММ.РРРР"
-                  mask={[
-                    /\d/,
-                    /\d/,
-                    ".",
-                    /\d/,
-                    /\d/,
-                    ".",
-                    /\d/,
-                    /\d/,
-                    /\d/,
-                    /\d/
-                  ]}
-                  guide={false}
-                  {...input}
-                  onKeyPress={this.handleKeyPress}
-                  pipe={autoCorrectedDatePipe}
-                />
-              </InputView.Border>
-
-              <FieldView.Footer>
-                <FieldView.Message state={state}>
-                  {errored ? error : warning}
-                </FieldView.Message>
-              </FieldView.Footer>
-            </>
+      <FieldView.Wrapper>
+        <label
+          onClick={this.handleClick}
+          onBlur={this.handleBlur}
+          ref={label => (this.label = label)}
+        >
+          {label && (
+            <FieldView.Header>
+              <FieldView.Label>{label}</FieldView.Label>
+              {hint && <FieldView.Message>{hint}</FieldView.Message>}
+            </FieldView.Header>
           )}
-        </Field>
+
+          <Field format={formatDate} parse={parseDate} {...props}>
+            {({ input, meta: { state, errored, error } }) => (
+              <>
+                <InputView.Border state={state}>
+                  <InputView.Content
+                    pl={2}
+                    py={0}
+                    flex="none"
+                    display="flex"
+                    alignItems="center"
+                  >
+                    <CalendarIcon />
+                  </InputView.Content>
+                  <InputView.Content
+                    is={MaskedInput}
+                    width={0}
+                    pl={2}
+                    pr={3}
+                    placeholder="ДД.ММ.РРРР"
+                    mask={[
+                      /\d/,
+                      /\d/,
+                      ".",
+                      /\d/,
+                      /\d/,
+                      ".",
+                      /\d/,
+                      /\d/,
+                      /\d/,
+                      /\d/
+                    ]}
+                    guide={false}
+                    {...input}
+                    onKeyPress={this.handleKeyPress}
+                    pipe={autoCorrectedDatePipe}
+                  />
+                </InputView.Border>
+
+                <FieldView.Footer>
+                  <FieldView.Message state={state}>
+                    {errored ? error : warning}
+                  </FieldView.Message>
+                </FieldView.Footer>
+              </>
+            )}
+          </Field>
+        </label>
 
         {isOpen && (
           <Field {...props}>
@@ -110,10 +112,12 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
     );
   }
 
-  timeoutIds = [];
+  label: ?HTMLLabelElement;
 
-  internalSetTimeout = (fn, time) => {
-    const id = setTimeout(() => {
+  timeoutIds: TimeoutID[] = [];
+
+  internalSetTimeout = (fn: () => mixed, time?: number): void => {
+    const id: TimeoutID = setTimeout(() => {
       this.timeoutIds = this.timeoutIds.filter(i => i !== id);
       fn();
     }, time);
@@ -129,21 +133,30 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
     this.timeoutIds = [];
   }
 
-  getSelectedDate(value) {
+  getSelectedDate(value: string) {
     const parsedDate = Date.parse(value);
     return new Date(isNaN(parsedDate) ? Date.now() : parsedDate);
   }
 
-  handleDateSelect = onFieldChange => ({ selectable, date }) => {
+  handleDateSelect = (onFieldChange: string => mixed) => ({
+    selectable,
+    date
+  }: {
+    selectable: boolean,
+    date: Date
+  }) => {
     if (!selectable) return;
 
     this.setState({ isOpen: false });
-    onFieldChange(date.toISOString().substr(0, 10));
+    if (this.label) {
+      this.label.focus();
+    }
+    onFieldChange(format(date, "YYYY-MM-DD"));
   };
 
-  handleFocus = () => {
+  handleClick = () => {
     this.setState({
-      isOpen: true
+      isOpen: !this.state.isOpen
     });
   };
 
@@ -159,7 +172,8 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
     });
   };
 
-  handleKeyPress = e => e.key === "Enter" && this.setState({ isOpen: false });
+  handleKeyPress = (e: SyntheticKeyboardEvent<>) =>
+    e.key === "Enter" && this.setState({ isOpen: false });
 }
 
 export default DateField;
