@@ -1,0 +1,99 @@
+query LegalEntityQuery($id: ID!) {
+  legalEntity(id: $id) {
+    id
+    status
+    edrpou
+    name
+    addresses {
+      type
+      area
+      region
+      settlement
+      settlementType
+      settlementId
+      streetType
+      street
+      building
+      apartment
+    }
+    phones {
+      type
+      number
+    }
+    email
+    type
+    ownerPropertyType
+    kveds
+    misVerified
+    nhsVerified
+    medicalServiceProvider {
+      licenses {
+        licenseNumber
+        issuedBy
+        issuedDate
+        expiryDate
+        activeFromDate
+        whatLicensed
+        orderNo
+      }
+      accreditation {
+        category
+        issuedDate
+        expiryDate
+        orderNo
+        orderDate
+      }
+    }
+    owner {
+      id
+      position
+      startDate
+      endDate
+      status
+      employeeType
+      party {
+        firstName
+        lastName
+        secondName
+      }
+      doctor {
+        specialities {
+          speciality
+        }
+      }
+    }
+    mergedFromLegalEntities {
+      isActive
+      base
+      insertedAt
+      mergedFromLegalEntity {
+        id
+        name
+      }
+    }
+    divisions {
+      id
+      name
+      addresses {
+        type
+        area
+        region
+        settlement
+        settlementType
+        settlementId
+        streetType
+        street
+        building
+        apartment
+      }
+      phones {
+        type
+        number
+      }
+      email
+      status
+      type
+      mountainGroup
+    }
+  }
+}
