@@ -1,0 +1,24 @@
+query SearchLegalEntitiesQuery(
+  $filter: LegalEntityFilter
+  $orderBy: LegalEntityOrderBy
+) {
+  legalEntities(filter: $filter, orderBy: $orderBy) {
+    id
+    name
+    edrpou
+    addresses {
+      type
+      area
+      region
+      settlement
+      settlementType
+      settlementId
+      streetType
+      street
+      building
+      apartment
+    }
+    nhsVerified
+    status
+  }
+}
