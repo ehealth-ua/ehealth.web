@@ -16,10 +16,23 @@ const LEGALENTITY = {
   CLOSED: "неактивний"
 };
 
+const LEGAL_ENTITY_STATUS = {
+  VERIFIED: "верифіковано",
+  NOT_VERIFIED: "не верифіковано"
+};
+
+const LEGAL_ENTITY_TYPE = {
+  PHARMACY: "Аптека",
+  MSP: "заклад з надання медичних послуг",
+  MIS: "Medical Information system"
+};
+
 const STATUSES = {
   PERSON,
   DECLARATION,
-  LEGALENTITY
+  LEGALENTITY,
+  LEGAL_ENTITY_STATUS,
+  LEGAL_ENTITY_TYPE
 };
 
 export default STATUSES;
