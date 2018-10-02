@@ -1,0 +1,5 @@
+mutation DeactivateLegalEntityMutation($id: ID!) {
+  legalEntity: deactivateLegalEntity(id: $id) {
+    id
+  }
+}

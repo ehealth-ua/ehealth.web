@@ -1,10 +1,11 @@
 import React from "react";
 import { Router } from "@reach/router";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import system from "system-components/emotion";
+import { BooleanValue } from "react-values";
 
 import LegalEntityQuery from "../../graphql/LegalEntityQuery.graphql";
-import { Flex, Box } from "rebass/emotion";
+import { Flex, Box, Heading } from "rebass/emotion";
 import format from "date-fns/format";
 
 import { PositiveIcon, AdminSearchIcon, AdminAddIcon } from "@ehealth/icons";
@@ -14,8 +15,9 @@ import {
   parseSortingParams,
   stringifySortingParams
 } from "@ehealth/utils";
-import { LocationParams, Form } from "@ehealth/components";
+import { LocationParams, Form, Modal, Switch } from "@ehealth/components";
 
+import Button from "../../components/Button";
 import Link from "../../components/Link";
 import Table from "../../components/Table";
 import Tabs from "../../components/Tabs";
@@ -26,6 +28,9 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import STATUSES from "../../helpers/statuses";
+
+import DeactivateLegalEntityMutation from "../../graphql/DeactivateLegalEntityMutation.graphql";
+import NhsVerifyLegalEntityMutation from "../../graphql/NhsVerifyLegalEntityMutation.graphql";
 
 const Details = ({ id }) => (
   <Query query={LegalEntityQuery} variables={{ id }}>
@@ -50,6 +55,8 @@ const Details = ({ id }) => (
         divisions,
         medicalServiceProvider
       } = legalEntity;
+      const statusAction = !nhsVerified ? "NHS_CLOSED" : status;
+
       return (
         <>
           <Box p={6}>
@@ -61,21 +68,102 @@ const Details = ({ id }) => (
                 <Breadcrumbs.Item>Деталі медзакладу</Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
-            <DefinitionListView
-              labels={{
-                id: "ID медзакладу",
-                status: "Статус"
-              }}
-              data={{
-                id,
-                status: (
-                  <Badge name={status} type="LEGALENTITY" minWidth={100} />
-                )
-              }}
-              color="#7F8FA4"
-              labelWidth="100px"
-            />
+            <Flex justifyContent="space-between" alignItems="flex-end">
+              <Box>
+                <DefinitionListView
+                  labels={{
+                    id: "ID медзакладу",
+                    status: "Статус"
+                  }}
+                  data={{
+                    id,
+                    status: (
+                      <Badge name={status} type="LEGALENTITY" minWidth={100} />
+                    )
+                  }}
+                  color="#7F8FA4"
+                  labelWidth="100px"
+                />
+              </Box>
+              <Switch
+                value={statusAction}
+                ACTIVE={
+                  <Popup
+                    variant="red"
+                    buttonText="Закрити медзаклад"
+                    title="Закрити медзаклад"
+                  >
+                    {toggle => (
+                      <Mutation mutation={DeactivateLegalEntityMutation}>
+                        {deactivateLegalEntity => (
+                          <Flex justifyContent="center">
+                            <Box mr={20}>
+                              <Button variant="blue" onClick={toggle}>
+                                Повернутися
+                              </Button>
+                            </Box>
+                            <Button
+                              onClick={async () => {
+                                await deactivateLegalEntity({
+                                  variables: {
+                                    id
+                                  }
+                                });
+                                toggle();
+                              }}
+                              variant="red"
+                            >
+                              Закрити медзаклад
+                            </Button>
+                          </Flex>
+                        )}
+                      </Mutation>
+                    )}
+                  </Popup>
+                }
+                NHS_CLOSED={
+                  <Flex>
+                    <Box mr={20}>
+                      <Popup
+                        variant="green"
+                        buttonText="Верифікація"
+                        title="Верифікація медзакладу"
+                      >
+                        {toggle => (
+                          <Mutation mutation={NhsVerifyLegalEntityMutation}>
+                            {nhsVerifyLegalEntity => (
+                              <Flex justifyContent="center">
+                                <Box mr={20}>
+                                  <Button variant="blue" onClick={toggle}>
+                                    Повернутися
+                                  </Button>
+                                </Box>
+                                <Button
+                                  onClick={async () => {
+                                    await nhsVerifyLegalEntity({
+                                      variables: {
+                                        id
+                                      }
+                                    });
+                                    toggle();
+                                  }}
+                                  variant="green"
+                                >
+                                  Верифікувати медзаклад
+                                </Button>
+                              </Flex>
+                            )}
+                          </Mutation>
+                        )}
+                      </Popup>
+                    </Box>
+                  </Flex>
+                }
+                CLOSED={null}
+              />
+            </Flex>
           </Box>
+
           <Tabs.Nav>
             <Tabs.NavItem to="./">Загальна інформація</Tabs.NavItem>
             <Tabs.NavItem to="./licenses">Ліцензії</Tabs.NavItem>
@@ -143,7 +231,7 @@ const GeneralInfo = ({
         ...props,
         addresses: addresses
           .filter(a => a.type === "ACTIVE")
-          .map(item => <AddressView data={item} />),
+          .map((item, key) => <AddressView data={item} key={key} />),
         phones: getPhones(phones),
         type: STATUSES.LEGAL_ENTITY_TYPE[type]
       }}
@@ -159,10 +247,10 @@ const GeneralInfo = ({
       data={{
         ownerPropertyType,
         kveds: kveds.map((el, key, arr) => (
-          <>
+          <React.Fragment key={key}>
             {el}
             {key !== arr.length - 1 && ", "}
-          </>
+          </React.Fragment>
         )),
         misVerified: misVerified && <PositiveIcon />,
         nhsVerified: nhsVerified && <PositiveIcon />
@@ -309,6 +397,26 @@ const Owner = ({ owner: { party, id, position, doctor } }) => (
   </Box>
 );
 const Divisions = ({ divisions }) => <>Divisions</>;
+
+const Popup = ({ variant, buttonText, title, children, render = children }) => (
+  <BooleanValue>
+    {({ value: opened, toggle }) => (
+      <>
+        <Button variant={variant} disabled={opened} onClick={toggle}>
+          {buttonText}
+        </Button>
+        {opened && (
+          <Modal width={760} backdrop>
+            <Heading as="h1" fontWeight="normal" mb={6}>
+              {title}
+            </Heading>
+            {render(toggle)}
+          </Modal>
+        )}
+      </>
+    )}
+  </BooleanValue>
+);
 
 const Line = system({
   is: "figure",

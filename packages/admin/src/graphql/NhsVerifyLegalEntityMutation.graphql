@@ -1,0 +1,5 @@
+mutation NhsVerifyLegalEntityMutation($id: ID!) {
+  legalEntity: nhsVerifyLegalEntity(id: $id) {
+    id
+  }
+}
