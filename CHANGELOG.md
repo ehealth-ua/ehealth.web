@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.95.0"></a>
+# [0.95.0](https://github.com/edenlabllc/ehealth.web/compare/v0.94.1...v0.95.0) (2018-10-02)
+
+
+### Bug Fixes
+
+* **admin:** use StatusBlock from Badge, add color status to theme ([1fc4ae7](https://github.com/edenlabllc/ehealth.web/commit/1fc4ae7))
+* **mock-server:** change snake case to camelCase in shema ([fb864ec](https://github.com/edenlabllc/ehealth.web/commit/fb864ec))
+* **mock-server:** delete enum from settlements, uncomment divisions in legalEntities ([056f151](https://github.com/edenlabllc/ehealth.web/commit/056f151))
+
+
+### Features
+
+* **admin:** add graphql query for settlements ([6957c92](https://github.com/edenlabllc/ehealth.web/commit/6957c92))
+* **admin:** add LegalEntity details ([b93fdfd](https://github.com/edenlabllc/ehealth.web/commit/b93fdfd))
+* **admin:** add LegalEntity list ([577b045](https://github.com/edenlabllc/ehealth.web/commit/577b045))
+* **admin:** add page LegalEntities to router and navigation ([40d4a32](https://github.com/edenlabllc/ehealth.web/commit/40d4a32))
+* **admin:** add pkj final-form-calculate for decorate final form ([8fd1153](https://github.com/edenlabllc/ehealth.web/commit/8fd1153))
+* **admin:** add StatusBlock component for render status cell in Table ([83f1d73](https://github.com/edenlabllc/ehealth.web/commit/83f1d73))
+* **admin:** add statuses for LegalEntities ([ec72095](https://github.com/edenlabllc/ehealth.web/commit/ec72095))
+* **admin:** add title to cell in TableBody ([8c63b9d](https://github.com/edenlabllc/ehealth.web/commit/8c63b9d))
+* **mock-server:** Add settlements to schema ([fc70d1e](https://github.com/edenlabllc/ehealth.web/commit/fc70d1e))
+* **mock-server:** Add StreetType and SettlementType for Addresses ([ad3bfb3](https://github.com/edenlabllc/ehealth.web/commit/ad3bfb3))
+
+
+
+
+
 <a name="0.94.1"></a>
 ## [0.94.1](https://github.com/edenlabllc/ehealth.web/compare/v0.94.0...v0.94.1) (2018-10-02)
 

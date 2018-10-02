@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.95.0"></a>
+# [0.95.0](https://github.com/edenlabllc/ehealth.web/compare/v0.94.1...v0.95.0) (2018-10-02)
+
+
+### Bug Fixes
+
+* **mock-server:** change snake case to camelCase in shema ([fb864ec](https://github.com/edenlabllc/ehealth.web/commit/fb864ec))
+* **mock-server:** delete enum from settlements, uncomment divisions in legalEntities ([056f151](https://github.com/edenlabllc/ehealth.web/commit/056f151))
+
+
+### Features
+
+* **mock-server:** Add settlements to schema ([fc70d1e](https://github.com/edenlabllc/ehealth.web/commit/fc70d1e))
+* **mock-server:** Add StreetType and SettlementType for Addresses ([ad3bfb3](https://github.com/edenlabllc/ehealth.web/commit/ad3bfb3))
+
+
+
+
+
 <a name="0.94.0"></a>
 # [0.94.0](https://github.com/edenlabllc/ehealth.web/compare/v0.93.2...v0.94.0) (2018-10-02)
 
