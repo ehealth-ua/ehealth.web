@@ -2,6 +2,8 @@ import React from "react";
 import { Location } from "@reach/router";
 import { parseSearchParams, stringifySearchParams } from "@ehealth/utils";
 import isEqual from "lodash/isEqual";
+import pickBy from "lodash/pickBy";
+import isNil from "lodash/isNil";
 
 const LocationParams = ({ children, render = children }) => (
   <Location
@@ -9,8 +11,12 @@ const LocationParams = ({ children, render = children }) => (
       render({
         locationParams: parseSearchParams(location.search),
         setLocationParams: params => {
-          const parsedParams = parseSearchParams(location.search);
-          if (Object.entries(params).length && !isEqual(parsedParams, params)) {
+          const parsedLocationSearch = parseSearchParams(location.search);
+          const parsedParams = pickBy(params, v => !isNil(v));
+          if (
+            Object.entries(params).length &&
+            !isEqual(parsedLocationSearch, parsedParams)
+          ) {
             const query = stringifySearchParams(params);
             navigate(`${location.pathname}?${query}`);
           }

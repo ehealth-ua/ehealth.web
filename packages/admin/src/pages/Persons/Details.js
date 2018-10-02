@@ -236,11 +236,7 @@ const DeclarationsInfo = ({ id }) => (
                   onSubmit={() => null /* NOT USED, but required */}
                   initialValues={{ declarationId, status }}
                 >
-                  <Form.AutoSubmit
-                    onSubmit={values => {
-                      setLocationParams(values);
-                    }}
-                  />
+                  <Form.AutoSubmit onSubmit={setLocationParams} />
                   <Flex>
                     <Box p={5} width={460}>
                       <Field.Text
