@@ -27,7 +27,11 @@ type TableProps = {|
   sortableFields: string[],
   sortingParams: SortingParams,
   onSortingChange: SortingParams => mixed,
-  defaultFilter?: (data: HeaderData) => Array<HeaderDataWithStatus | any>
+  tableName?: string,
+  defaultFilter?: (
+    data: HeaderData,
+    tableName?: string
+  ) => Array<HeaderDataWithStatus | any>
 |};
 
 type TableState = {|
@@ -66,6 +70,7 @@ type TableState = {|
  *             sort: [sortBy, sortEncrease ? "desc" : "asc"].join("_")
  *           })
  *         }
+ *         tableName="name"
  *       />
  *     );
  *   }}
@@ -78,10 +83,13 @@ class Table extends React.Component<TableProps, TableState> {
   };
 
   componentDidMount() {
-    const { header, defaultFilter = this.defaultFilter } = this.props;
-
+    const {
+      header,
+      defaultFilter = this.defaultFilter,
+      tableName
+    } = this.props;
     this.setState({
-      filterRow: defaultFilter(header)
+      filterRow: defaultFilter(header, tableName)
     });
   }
 
@@ -94,7 +102,8 @@ class Table extends React.Component<TableProps, TableState> {
       columnKeyExtractor,
       sortableFields,
       sortingParams,
-      onSortingChange
+      onSortingChange,
+      tableName
     } = this.props;
 
     const { filterRow } = this.state;
@@ -121,21 +130,28 @@ class Table extends React.Component<TableProps, TableState> {
           filterRow={filterRow}
           onFilter={name => {
             const { filterRow = [] } = this.state;
-            this.setState({
-              filterRow: filterRow.map(
-                item =>
-                  item && item.name === name
-                    ? { ...item, status: !item.status }
-                    : item
-              )
-            });
+            this.setState(
+              {
+                filterRow: filterRow.map(
+                  item =>
+                    item && item.name === name
+                      ? { ...item, status: !item.status }
+                      : item
+                )
+              },
+              () => this.setStorage(tableName, this.state.filterRow)
+            );
           }}
         />
       </TableWrapper>
     );
   }
 
-  defaultFilter = (header: HeaderData): Array<HeaderDataWithStatus | any> =>
+  defaultFilter = (
+    header: HeaderData,
+    tableName?: string
+  ): Array<HeaderDataWithStatus | any> =>
+    JSON.parse(localStorage.getItem(tableName)) ||
     Object.entries(header).map(
       ([name, title]) =>
         ({
@@ -144,6 +160,10 @@ class Table extends React.Component<TableProps, TableState> {
           status: true
         }: HeaderDataWithStatus)
     );
+
+  setStorage = (name: string, items: Array<any>) => {
+    localStorage.setItem(name, JSON.stringify(items));
+  };
 }
 
 export default Table;
@@ -164,9 +184,10 @@ const TableRoot = styled.table`
 `;
 
 const TableHeaderComponent = styled.thead`
-  background-color: #f5f7f9;
-  font-size: 10px;
+  background-image: linear-gradient(0deg, #f2f4f7 0%, #ffffff 100%);
+  font-size: 12px;
   user-select: none;
+  color: #7f8fa4;
 `;
 
 const TableBodyComponent = styled.tbody`

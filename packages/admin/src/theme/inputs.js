@@ -16,6 +16,14 @@ const inputs = {
       pointerEvents: "none",
       bg: "#E9EDF1"
     }
+  },
+  divider: {
+    active: {
+      pr: 2,
+      borderStyle: "solid",
+      borderWidth: "0 1px 0 0",
+      borderColor: "januaryDawn"
+    }
   }
 };
 

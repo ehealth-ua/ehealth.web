@@ -2,11 +2,13 @@ import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
+import format from "date-fns/format";
 import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
 import {
   parseSortingParams,
   stringifySortingParams,
   formatPhone,
+  formatUnzr,
   parsePhone,
   getFullName,
   formatDate
@@ -65,12 +67,17 @@ const Search = ({ uri }) => (
                     birthDate,
                     taxId,
                     authenticationMethods,
+                    insertedAt,
                     ...person
                   }) => ({
                     ...person,
                     fullName: getFullName(person),
                     birthDate: formatDate(birthDate),
                     taxId: taxId || "—",
+                    insertedAt: format(
+                      new Date(insertedAt),
+                      "DD.MM.YYYY, HH:mm"
+                    ),
                     authenticationMethods: (
                       <AuthnMethodsList data={authenticationMethods} />
                     ),
@@ -87,6 +94,7 @@ const Search = ({ uri }) => (
                       orderBy: stringifySortingParams(sortingParams)
                     })
                   }
+                  tableName="persons/search"
                 />
               ) : null
             }
@@ -139,16 +147,26 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
       </Box>
     </Flex>
     <Details summary="розширений пошук">
+      <Box fontSize={0} pb={2}>
+        Для пошуку, заповніть будь-яке з наведених полів
+      </Box>
       <Flex mx={-1}>
         <Box px={1} width={1 / 3} borderLeft="1">
           <Field.Text
             name="filter.unzr"
             label="ID Запису в ЄДР"
             placeholder="МЕ123456"
+            format={formatUnzr}
+            divider
           />
         </Box>
         <Box px={1} width={1 / 3} borderLeft="1">
-          <Field.Text name="filter.taxId" label="ІНН" placeholder="123456789" />
+          <Field.Text
+            name="filter.taxId"
+            label="ІНН"
+            placeholder="123456789"
+            divider
+          />
         </Box>
         <Box px={1} width={1 / 3}>
           <Field.Text

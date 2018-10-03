@@ -129,7 +129,6 @@ const TableHeaderCell = styled.th`
   padding: 14px 20px;
   text-shadow: 1px 1px 2px #fff, 0 0 0 #929499;
   border-right: 1px solid #eee;
-  text-transform: uppercase;
   border-collapse: collapse;
   position: relative;
 `;
