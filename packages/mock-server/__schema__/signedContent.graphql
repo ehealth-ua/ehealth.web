@@ -2,7 +2,7 @@
 
 """
 input SignedContent {
-  signedRequest: String!
+  signedContent: String!
   signedContentEncoding: SignedContentEncoding!
 }
 
