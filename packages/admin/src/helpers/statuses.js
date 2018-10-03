@@ -2,8 +2,7 @@ const DECLARATION = {
   TERMINATED: "розірвана",
   ACTIVE: "активна",
   REJECTED: "припинена",
-  PENDING_VERIFICATION: "очікує підтвердження",
-  APPROVED: "очікує підпису"
+  PENDING_VERIFICATION: "очікує підтвердження"
 };
 
 const PERSON = {

@@ -87,11 +87,7 @@ const Details = ({ id }) => (
               }}
               data={{
                 id,
-                status: (
-                  <Badge bg="darkPastelGreen" minWidth={100}>
-                    {STATUSES.PERSON[status]}
-                  </Badge>
-                )
+                status: <Badge name={status} type="PERSON" minWidth={100} />
               }}
               color="#7F8FA4"
               labelWidth="100px"
@@ -299,7 +295,13 @@ const DeclarationsInfo = ({ id }) => (
                       address: activeAddress && (
                         <AddressView data={activeAddress} />
                       ),
-                      status: STATUSES.DECLARATION[status],
+                      status: (
+                        <Badge
+                          name={status}
+                          type="DECLARATION"
+                          display="block"
+                        />
+                      ),
                       action: (
                         <Link to={`/declarations/${id}`}>Показати деталі</Link>
                       )

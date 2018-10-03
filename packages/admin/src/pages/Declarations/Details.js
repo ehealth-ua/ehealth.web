@@ -75,9 +75,7 @@ const Details = ({ id }) => (
                     id,
                     declarationRequestId,
                     status: (
-                      <Badge bg="darkPastelGreen" minWidth={100}>
-                        {STATUSES.DECLARATION[status]}
-                      </Badge>
+                      <Badge name={status} type="DECLARATION" minWidth={100} />
                     )
                   }}
                   color="#7F8FA4"
