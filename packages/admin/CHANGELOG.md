@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.98.0"></a>
+# [0.98.0](https://github.com/edenlabllc/ehealth.web/compare/v0.97.1...v0.98.0) (2018-10-03)
+
+
+### Features
+
+* **admin:** add Divisions tab on LegalEntities details ([26445f0](https://github.com/edenlabllc/ehealth.web/commit/26445f0))
+
+
+
+
+
 <a name="0.97.1"></a>
 ## [0.97.1](https://github.com/edenlabllc/ehealth.web/compare/v0.97.0...v0.97.1) (2018-10-03)
 
