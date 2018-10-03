@@ -151,18 +151,28 @@ class Table extends React.Component<TableProps, TableState> {
     header: HeaderData,
     tableName?: string
   ): Array<HeaderDataWithStatus | any> =>
-    JSON.parse(localStorage.getItem(tableName)) ||
     Object.entries(header).map(
       ([name, title]) =>
         ({
           name,
           title,
-          status: true
+          status: this.checkStorage(name, tableName)
         }: HeaderDataWithStatus)
     );
 
+  checkStorage = (name: string, tableName: string) => {
+    const storageItems = localStorage.getItem(tableName);
+    return !(storageItems && storageItems.split(",").includes(name));
+  };
+
   setStorage = (name: string, items: Array<any>) => {
-    localStorage.setItem(name, JSON.stringify(items));
+    localStorage.setItem(
+      name,
+      items
+        .filter(item => !item.status && item.name)
+        .map(item => item.name)
+        .join(",")
+    );
   };
 }
 

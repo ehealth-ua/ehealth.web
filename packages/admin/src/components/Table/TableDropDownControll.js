@@ -37,7 +37,7 @@ const TableDropDownControll = ({
   <ButtonDropDownWrapper>
     <details>
       <ButtonContent>
-        <DropDownButton />
+        <DropDownButton color="#2EA2F8" />
       </ButtonContent>
 
       <TableDropdown
