@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.98.1"></a>
+## [0.98.1](https://github.com/edenlabllc/ehealth.web/compare/v0.98.0...v0.98.1) (2018-10-03)
+
+
+### Bug Fixes
+
+* **admin:** create related legal entities ([a9239ca](https://github.com/edenlabllc/ehealth.web/commit/a9239ca))
+* **admin:** fix typo in features ([7a42dcb](https://github.com/edenlabllc/ehealth.web/commit/7a42dcb))
+
+
+
+
+
 <a name="0.98.0"></a>
 # [0.98.0](https://github.com/edenlabllc/ehealth.web/compare/v0.97.1...v0.98.0) (2018-10-03)
 
