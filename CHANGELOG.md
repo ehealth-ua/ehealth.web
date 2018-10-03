@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.97.1"></a>
+## [0.97.1](https://github.com/edenlabllc/ehealth.web/compare/v0.97.0...v0.97.1) (2018-10-03)
+
+
+### Bug Fixes
+
+* **admin:** use new Badge component in pages ([85eb9ff](https://github.com/edenlabllc/ehealth.web/commit/85eb9ff))
+
+
+
+
+
 <a name="0.97.0"></a>
 # [0.97.0](https://github.com/edenlabllc/ehealth.web/compare/v0.96.0...v0.97.0) (2018-10-03)
 
