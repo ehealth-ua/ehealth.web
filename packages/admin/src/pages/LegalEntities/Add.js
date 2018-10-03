@@ -3,6 +3,8 @@ import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
 import { Flex, Box, Text } from "rebass/emotion";
 import system from "system-components/emotion";
+import isEmpty from "lodash/isEmpty";
+
 import { getFullName } from "@ehealth/utils";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { AdminSearchIcon, PositiveIcon } from "@ehealth/icons";
@@ -76,33 +78,35 @@ const Search = ({ onSubmit, initialValues, data }) => (
         />
       </Box>
     </Form>
-    {Object.entries(data).length && (
-      <Table
-        data={[data]}
-        header={{
-          id: "ID Медзакладу",
-          name: "Назва Медзакладу",
-          edrpou: "ЄДРПОУ",
-          nhsVerified: "Верифікований НСЗУ",
-          status: "Статус"
-        }}
-        renderRow={({ status, nhsVerified, ...legalEntity }) => ({
-          ...legalEntity,
-          nhsVerified: nhsVerified && <PositiveIcon />,
-          status: <Badge name={status} type="LEGALENTITY" display="block" />
-        })}
-      />
+    {!isEmpty(data) && (
+      <>
+        <Table
+          data={[data]}
+          header={{
+            id: "ID Медзакладу",
+            name: "Назва Медзакладу",
+            edrpou: "ЄДРПОУ",
+            nhsVerified: "Верифікований НСЗУ",
+            status: "Статус"
+          }}
+          renderRow={({ status, nhsVerified, ...legalEntity }) => ({
+            ...legalEntity,
+            nhsVerified: nhsVerified && <PositiveIcon />,
+            status: <Badge name={status} type="LEGALENTITY" display="block" />
+          })}
+        />
+        <Flex px={5} mt={5}>
+          <Box mr={3}>
+            <Button variant="blue" onClick={() => window.history.go(-1)}>
+              Повернутися
+            </Button>
+          </Box>
+          <Link to={"./reason"}>
+            <Button variant="green">Далі</Button>
+          </Link>
+        </Flex>
+      </>
     )}
-    <Flex px={5} mt={5}>
-      <Box mr={3}>
-        <Button variant="blue" onClick={() => window.history.go(-1)}>
-          Повернутися
-        </Button>
-      </Box>
-      <Link to={"./reason"}>
-        <Button variant="green">Далі</Button>
-      </Link>
-    </Flex>
   </>
 );
 
@@ -241,8 +245,8 @@ const Sign = ({
                     variant="green"
                     onClick={async () => {
                       const mergedLegalEntities = {
-                        merge_from_legal_entity: legalEntityFrom,
-                        merge_to_legal_entity: legalEntityTo,
+                        merged_from_legal_entity: legalEntityFrom,
+                        merged_to_legal_entity: legalEntityTo,
                         base
                       };
                       const { signedContent } = await signData(

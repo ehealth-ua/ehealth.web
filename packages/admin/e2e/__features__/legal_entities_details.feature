@@ -66,7 +66,7 @@ Scenario: ADD_NEW_RELATED_LEGAL_ENTITY
   Then I see window with EDRPOU filter
   And I fill in with correct values 
   And I submit form
-  Then I see preview with LEGAL_ENTITY_DETAILS (id, status, nhsVerified, name, edrpou, owner.firstName, owner.secondName, owner.lastName) and buttton ADD
+  Then I see preview with LEGAL_ENTITY_DETAILS (id, status, nhsVerified, name, edrpou, owner.firstName, owner.secondName, owner.lastName) and button ADD
   And I press button
   Then I see required input BASE field and button ADD_WITH_DS
   And I fill with text 

@@ -3,8 +3,6 @@ import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
 import system from "system-components/emotion";
 import { BooleanValue } from "react-values";
-
-import LegalEntityQuery from "../../graphql/LegalEntityQuery.graphql";
 import { Flex, Box, Heading } from "rebass/emotion";
 import format from "date-fns/format";
 
@@ -17,22 +15,22 @@ import {
 } from "@ehealth/utils";
 import { LocationParams, Form, Modal, Switch } from "@ehealth/components";
 
-import Button from "../../components/Button";
 import Link from "../../components/Link";
-import Table from "../../components/Table";
 import Tabs from "../../components/Tabs";
+import Table from "../../components/Table";
 import Badge from "../../components/Badge";
+import Button from "../../components/Button";
 import Ability from "../../components/Ability";
 import * as Field from "../../components/Field";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import DefinitionListView from "../../components/DefinitionListView";
-import Ability from "../../components/Ability";
 
 import STATUSES from "../../helpers/statuses";
 
 import DeactivateLegalEntityMutation from "../../graphql/DeactivateLegalEntityMutation.graphql";
 import NhsVerifyLegalEntityMutation from "../../graphql/NhsVerifyLegalEntityMutation.graphql";
+import LegalEntityQuery from "../../graphql/LegalEntityQuery.graphql";
 
 const Details = ({ id }) => (
   <Query query={LegalEntityQuery} variables={{ id }}>
