@@ -21,8 +21,9 @@ import Button from "../../components/Button";
 import Link from "../../components/Link";
 import Table from "../../components/Table";
 import Tabs from "../../components/Tabs";
-import * as Field from "../../components/Field";
 import Badge from "../../components/Badge";
+import Ability from "../../components/Ability";
+import * as Field from "../../components/Field";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import DefinitionListView from "../../components/DefinitionListView";
@@ -168,9 +169,11 @@ const Details = ({ id }) => (
           <Tabs.Nav>
             <Tabs.NavItem to="./">Загальна інформація</Tabs.NavItem>
             <Tabs.NavItem to="./licenses">Ліцензії</Tabs.NavItem>
-            <Tabs.NavItem to="./related-legal-entities">
-              Підпорядковані медзаклади
-            </Tabs.NavItem>
+            <Ability action="read" resource="related_legal_entities">
+              <Tabs.NavItem to="./related-legal-entities">
+                Підпорядковані медзаклади
+              </Tabs.NavItem>
+            </Ability>
             <Tabs.NavItem to="./owner">Власник</Tabs.NavItem>
             <Ability action="read" resource="division">
               <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
@@ -297,83 +300,88 @@ const License = ({ license: { accreditation, licenses = [] } }) => {
   );
 };
 const RelatedLegalEntities = ({ id }) => (
-  <LocationParams>
-    {({ locationParams, setLocationParams }) => (
-      <Query
-        query={LegalEntityQuery}
-        variables={{
-          id,
-          ...locationParams
-        }}
-      >
-        {({ loading, error, data }) => {
-          if (loading) return "Loading...";
-          if (error) return `Error! ${error.message}`;
-          const {
-            legalEntity: { mergedFromLegalEntities }
-          } = data;
-          const { orderBy } = locationParams;
-          return (
-            <>
-              <Form onSubmit={setLocationParams} initialValues={locationParams}>
-                <Box p={5} width={460}>
-                  <Field.Text
-                    name="filter.edrpou"
-                    label="Знайти підпорядкований медзаклад"
-                    placeholder="Введіть ЄДРПОУ медзакладу"
-                    postfix={<AdminSearchIcon color="#CED0DA" />}
-                  />
-                </Box>
-              </Form>
-              <Link to="../../add">
-                <Flex mb={2}>
-                  <Box mr={2}>
-                    <AdminAddIcon width={16} height={16} />
-                  </Box>{" "}
-                  Додати підпорядкований медзаклад
-                </Flex>
-              </Link>
-              <Table
-                data={mergedFromLegalEntities}
-                header={{
-                  name: "Назва Медзакладу",
-                  edrpou: "ЄДРПОУ",
-                  base: "Основа",
-                  insertedAt: "Додано",
-                  status: "Статус"
-                }}
-                renderRow={({
-                  base,
-                  insertedAt,
-                  mergedFromLegalEntity: { edrpou, name },
-                  isActive
-                }) => ({
-                  base,
-                  insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
-                  name,
-                  edrpou,
-                  status: (
-                    <Badge
-                      name={isActive ? "ACTIVE" : "CLOSED"}
-                      type="LEGALENTITY"
-                      display="block"
+  <Ability action="read" resource="related_legal_entities">
+    <LocationParams>
+      {({ locationParams, setLocationParams }) => (
+        <Query
+          query={LegalEntityQuery}
+          variables={{
+            id,
+            ...locationParams
+          }}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return "Loading...";
+            if (error) return `Error! ${error.message}`;
+            const {
+              legalEntity: { mergedFromLegalEntities }
+            } = data;
+            const { orderBy } = locationParams;
+            return (
+              <>
+                <Form
+                  onSubmit={setLocationParams}
+                  initialValues={locationParams}
+                >
+                  <Box p={5} width={460}>
+                    <Field.Text
+                      name="filter.edrpou"
+                      label="Знайти підпорядкований медзаклад"
+                      placeholder="Введіть ЄДРПОУ медзакладу"
+                      postfix={<AdminSearchIcon color="#CED0DA" />}
                     />
-                  )
-                })}
-                sortableFields={["edrpou", "insertedAt"]}
-                sortingParams={parseSortingParams(orderBy)}
-                onSortingChange={sortingParams =>
-                  setLocationParams({
-                    orderBy: stringifySortingParams(sortingParams)
-                  })
-                }
-              />
-            </>
-          );
-        }}
-      </Query>
-    )}
-  </LocationParams>
+                  </Box>
+                </Form>
+                <Link to="../add">
+                  <Flex mb={2}>
+                    <Box mr={2}>
+                      <AdminAddIcon width={16} height={16} />
+                    </Box>{" "}
+                    Додати підпорядкований медзаклад
+                  </Flex>
+                </Link>
+                <Table
+                  data={mergedFromLegalEntities}
+                  header={{
+                    name: "Назва Медзакладу",
+                    edrpou: "ЄДРПОУ",
+                    base: "Основа",
+                    insertedAt: "Додано",
+                    status: "Статус"
+                  }}
+                  renderRow={({
+                    base,
+                    insertedAt,
+                    mergedFromLegalEntity: { edrpou, name },
+                    isActive
+                  }) => ({
+                    base,
+                    insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                    name,
+                    edrpou,
+                    status: (
+                      <Badge
+                        name={isActive ? "ACTIVE" : "CLOSED"}
+                        type="LEGALENTITY"
+                        display="block"
+                      />
+                    )
+                  })}
+                  sortableFields={["edrpou", "insertedAt"]}
+                  sortingParams={parseSortingParams(orderBy)}
+                  onSortingChange={sortingParams =>
+                    setLocationParams({
+                      orderBy: stringifySortingParams(sortingParams)
+                    })
+                  }
+                />
+              </>
+            );
+          }}
+        </Query>
+      )}
+    </LocationParams>
+  </Ability>
 );
 
 const Owner = ({ owner: { party, id, position, doctor } }) => (

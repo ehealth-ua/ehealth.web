@@ -18,7 +18,6 @@ const colors = {
   januaryDawn: "#DFE2E5",
   callaLily: "#E6EAEE",
   romanSilver: "#848C98",
-  freshBlueOfBelAir: "#2EA1F8",
   jacarandaLight: "#A8AAB7",
   orangePastel: "#F7981C"
 };

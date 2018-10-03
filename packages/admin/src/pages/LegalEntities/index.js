@@ -10,7 +10,7 @@ const LegalEntities = ({ uri }) => (
     <Redirect from="/" to={`${uri}/search`} />
     <Search path="search/*" />
     <Details path=":id/*" />
-    <Add path="/add" />
+    <Add path=":id/add/*" />
   </Router>
 );
 

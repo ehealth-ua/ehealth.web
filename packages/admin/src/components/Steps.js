@@ -16,7 +16,7 @@ const Link = system(
     overflow: "hidden",
     mr: 2,
     color: "romanSilver",
-    fontSize: 2,
+    fontSize: 1,
     alignItems: "center"
   },
   {
@@ -42,7 +42,7 @@ const Link = system(
       mr: 2,
       textAlign: "center",
       borderRadius: "50%",
-      bg: active ? "freshBlueOfBelAir" : "white",
+      bg: active ? "rockmanBlue" : "white",
       borderWidth: "1px",
       borderStyle: "solid",
       borderColor: active ? "white" : "callaLily"

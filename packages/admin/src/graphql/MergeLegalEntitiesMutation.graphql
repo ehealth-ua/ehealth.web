@@ -1,0 +1,5 @@
+mutation MergeLegalEntitiesMutation($signedContent: SignedContent!) {
+  person: mergeLegalEntities(signedContent: $signedContent) {
+    id
+  }
+}
