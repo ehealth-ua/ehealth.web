@@ -26,6 +26,7 @@ import Badge from "../../components/Badge";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import DefinitionListView from "../../components/DefinitionListView";
+import Ability from "../../components/Ability";
 
 import STATUSES from "../../helpers/statuses";
 
@@ -171,7 +172,9 @@ const Details = ({ id }) => (
               Підпорядковані медзаклади
             </Tabs.NavItem>
             <Tabs.NavItem to="./owner">Власник</Tabs.NavItem>
-            <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
+            <Ability action="read" resource="division">
+              <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
+            </Ability>
             <Tabs.NavItem to="./requests-for-contract">
               Запити на контракт
             </Tabs.NavItem>
@@ -396,7 +399,46 @@ const Owner = ({ owner: { party, id, position, doctor } }) => (
     />
   </Box>
 );
-const Divisions = ({ divisions }) => <>Divisions</>;
+
+const Divisions = ({ divisions, id }) => (
+  <Ability action="read" resource="division">
+    <LocationParams>
+      {({ locationParams, setLocationParams }) => (
+        <>
+          <Form onSubmit={setLocationParams} initialValues={locationParams}>
+            <Box p={5} width={460}>
+              <Field.Text
+                name="filter.name"
+                label="Знайти відділення"
+                placeholder="Введіть назву відділення"
+                postfix={<AdminSearchIcon color="#CED0DA" />}
+              />
+            </Box>
+          </Form>
+
+          <Table
+            data={divisions}
+            header={{
+              name: "Назва Медзакладу",
+              addresses: "Адреса",
+              mountainGroup: "Гірський регіон",
+              phones: "Телефон",
+              email: "Email"
+            }}
+            renderRow={({ mountainGroup, addresses, phones, ...props }) => ({
+              ...props,
+              mountainGroup: mountainGroup && <PositiveIcon />,
+              addresses: addresses
+                .filter(a => a.type === "ACTIVE")
+                .map((item, key) => <AddressView data={item} key={key} />),
+              phones: getPhones(phones)
+            })}
+          />
+        </>
+      )}
+    </LocationParams>
+  </Ability>
+);
 
 const Popup = ({ variant, buttonText, title, children, render = children }) => (
   <BooleanValue>
