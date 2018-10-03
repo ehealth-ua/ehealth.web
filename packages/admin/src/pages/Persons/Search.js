@@ -13,6 +13,7 @@ import {
   getFullName,
   formatDate
 } from "@ehealth/utils";
+import { ResetIcon } from "@ehealth/icons";
 import { getIn } from "final-form";
 
 import * as Field from "../../components/Field";
@@ -49,53 +50,68 @@ const Search = ({ uri }) => (
             />
           </Router>
           <Query query={SearchPersonsQuery} variables={locationParams}>
-            {({ loading, error, data: { persons = [] } }) =>
+            {({ loading, error, data: { persons = [] }, refetch }) =>
               !error && persons.length > 0 ? (
-                <Table
-                  data={persons}
-                  header={{
-                    fullName: "ПІБ пацієнта",
-                    birthDate: "Дата народження",
-                    taxId: "ІПН",
-                    unzr: "ID запису в ЄДР",
-                    authenticationMethods: "Метод аутентифікації",
-                    insertedAt: "Додано",
-                    action: "Дія"
-                  }}
-                  renderRow={({
-                    id,
-                    birthDate,
-                    taxId,
-                    authenticationMethods,
-                    insertedAt,
-                    ...person
-                  }) => ({
-                    ...person,
-                    fullName: getFullName(person),
-                    birthDate: formatDate(birthDate),
-                    taxId: taxId || "—",
-                    insertedAt: format(
-                      new Date(insertedAt),
-                      "DD.MM.YYYY, HH:mm"
-                    ),
-                    authenticationMethods: (
-                      <AuthnMethodsList data={authenticationMethods} />
-                    ),
-                    action: (
-                      <Link to={`../${id}`} fontWeight="bold">
-                        Показати деталі
-                      </Link>
-                    )
-                  })}
-                  sortableFields={["birthDate", "taxId", "unzr", "insertedAt"]}
-                  sortingParams={parseSortingParams(locationParams.orderBy)}
-                  onSortingChange={sortingParams =>
-                    setLocationParams({
-                      orderBy: stringifySortingParams(sortingParams)
-                    })
-                  }
-                  tableName="persons/search"
-                />
+                <>
+                  <Box mb={2} css={{ textAlign: "right" }}>
+                    <ResetIcon
+                      onClick={() => {
+                        localStorage.removeItem("persons/search");
+                        refetch();
+                      }}
+                    />
+                  </Box>
+                  <Table
+                    data={persons}
+                    header={{
+                      fullName: "ПІБ пацієнта",
+                      birthDate: "Дата народження",
+                      taxId: "ІПН",
+                      unzr: "ID запису в ЄДР",
+                      authenticationMethods: "Метод аутентифікації",
+                      insertedAt: "Додано",
+                      action: "Дія"
+                    }}
+                    renderRow={({
+                      id,
+                      birthDate,
+                      taxId,
+                      authenticationMethods,
+                      insertedAt,
+                      ...person
+                    }) => ({
+                      ...person,
+                      fullName: getFullName(person),
+                      birthDate: formatDate(birthDate),
+                      taxId: taxId || "—",
+                      insertedAt: format(
+                        new Date(insertedAt),
+                        "DD.MM.YYYY, HH:mm"
+                      ),
+                      authenticationMethods: (
+                        <AuthnMethodsList data={authenticationMethods} />
+                      ),
+                      action: (
+                        <Link to={`../${id}`} fontWeight="bold">
+                          Показати деталі
+                        </Link>
+                      )
+                    })}
+                    sortableFields={[
+                      "birthDate",
+                      "taxId",
+                      "unzr",
+                      "insertedAt"
+                    ]}
+                    sortingParams={parseSortingParams(locationParams.orderBy)}
+                    onSortingChange={sortingParams =>
+                      setLocationParams({
+                        orderBy: stringifySortingParams(sortingParams)
+                      })
+                    }
+                    tableName="persons/search"
+                  />
+                </>
               ) : null
             }
           </Query>

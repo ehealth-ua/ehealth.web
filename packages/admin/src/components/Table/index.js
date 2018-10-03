@@ -4,6 +4,7 @@ import styled from "react-emotion/macro";
 import { css } from "react-emotion";
 import { ifNotProp } from "styled-tools";
 import { TableView } from "@ehealth/components";
+import isEqual from "lodash/isEqual";
 
 import TableHeaderCellWithResize from "./TableHeaderCellWithResize";
 import TableHeader from "./TableHeader";
@@ -91,6 +92,20 @@ class Table extends React.Component<TableProps, TableState> {
     this.setState({
       filterRow: defaultFilter(header, tableName)
     });
+  }
+
+  componentDidUpdate({ data: updateData }) {
+    const { data: prevData } = this.props;
+    if (!isEqual(updateData, prevData)) {
+      const {
+        header,
+        defaultFilter = this.defaultFilter,
+        tableName
+      } = this.props;
+      this.setState({
+        filterRow: defaultFilter(header, tableName)
+      });
+    }
   }
 
   render() {

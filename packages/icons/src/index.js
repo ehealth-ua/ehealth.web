@@ -29,6 +29,7 @@ export { default as PositiveIcon } from "./PositiveIcon";
 export { default as RadioIcon } from "./RadioIcon";
 export { default as RemoveIcon } from "./RemoveIcon";
 export { default as RemoveItemIcon } from "./RemoveItemIcon";
+export { default as ResetIcon } from "./ResetIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as SpinnerIcon } from "./SpinnerIcon";
 export { default as ThinAddIcon } from "./ThinAddIcon";
