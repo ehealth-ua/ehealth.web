@@ -47,10 +47,22 @@ export const Content = system(
     &:disabled {
       -webkit-text-fill-color: inherit;
     }
+
+    &::placeholder {
+      color: inherit;
+      opacity: 0.5;
+    }
   `,
   "display",
   "justifyContent",
   "alignItems",
   "space",
   "width"
+);
+
+export const Divider = system(
+  boolean({
+    prop: "active",
+    key: "inputs.divider.active"
+  })
 );

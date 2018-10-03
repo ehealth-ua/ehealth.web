@@ -38,7 +38,7 @@ export const Footer = system({
 
 export const Label = system(
   {
-    color: "blueberrySoda",
+    color: "darkAndStormy",
     fontSize: 1
   },
   "space"

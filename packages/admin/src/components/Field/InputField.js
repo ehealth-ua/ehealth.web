@@ -18,6 +18,7 @@ const InputField = ({
   warning,
   prefix,
   postfix,
+  divider,
   is = "input",
   ...props
 }) => (
@@ -31,25 +32,26 @@ const InputField = ({
           </FieldView.Header>
         )}
 
-        <InputView.Border state={state}>
-          {prefix && (
-            <InputView.Content pl={2} flex="none">
-              {prefix}
-            </InputView.Content>
-          )}
-          <InputView.Content
-            {...input}
-            is={is}
-            pl={prefix ? 2 : 3}
-            pr={postfix ? 2 : 3}
-          />
-          {postfix && (
-            <InputView.Content pr={2} flex="none">
-              {postfix}
-            </InputView.Content>
-          )}
-        </InputView.Border>
-
+        <InputView.Divider active={divider}>
+          <InputView.Border state={state}>
+            {prefix && (
+              <InputView.Content pl={2} flex="none">
+                {prefix}
+              </InputView.Content>
+            )}
+            <InputView.Content
+              {...input}
+              is={is}
+              pl={prefix ? 2 : 3}
+              pr={postfix ? 2 : 3}
+            />
+            {postfix && (
+              <InputView.Content pr={2} flex="none">
+                {postfix}
+              </InputView.Content>
+            )}
+          </InputView.Border>
+        </InputView.Divider>
         <FieldView.Footer>
           <FieldView.Message state={state}>
             {errored ? error : warning}
