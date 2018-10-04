@@ -158,7 +158,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
           <Field.Text
             name="filter.unzr"
             label="ID Запису в ЄДР"
-            placeholder="МЕ123456"
+            placeholder="19650930-65465"
             format={formatUnzr}
             divider
           />

@@ -393,6 +393,7 @@ const Patient = ({
     phones,
     birthCountry,
     birthSettlement,
+    unzr,
     ...fullName
   }
 }) => (
@@ -403,6 +404,7 @@ const Patient = ({
         birthDate: "Дата народження",
         birthCountry: "Країна народження",
         birthSettlement: "Місце народження",
+        unzr: "ID запису в ЄДР",
         taxId: "ІНН",
         phones: "Номер телефону"
       }}
@@ -411,6 +413,7 @@ const Patient = ({
         birthDate,
         birthCountry,
         birthSettlement,
+        unzr,
         taxId,
         phones: getPhones(phones)
       }}

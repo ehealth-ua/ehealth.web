@@ -39,6 +39,7 @@ query DeclarationQuery($id: ID!) {
       phones {
         number
       }
+      unzr
     }
     division {
       id
