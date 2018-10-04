@@ -60,7 +60,7 @@ const bounce = keyframes`
   0% {
     opacity: 0;
     visibility: hidden;
-    
+
   }
   50% {
     opacity: 1;
@@ -133,6 +133,7 @@ const arrowPosition = ({ placement }) => {
 
 const Arrow = styled.div`
   position: absolute;
+  z-index: 50;
   margin: -6px;
   ${arrowPosition};
   width: 12px;

@@ -3,13 +3,17 @@ import * as React from "react";
 import styled from "react-emotion/macro";
 import { css } from "react-emotion";
 import { ifNotProp } from "styled-tools";
-import { TableView } from "@ehealth/components";
+import { Flex } from "rebass/emotion";
 import isEqual from "lodash/isEqual";
+
+import { TableView } from "@ehealth/components";
+import { ResetIcon } from "@ehealth/icons";
 
 import TableHeaderCellWithResize from "./TableHeaderCellWithResize";
 import TableHeader from "./TableHeader";
 import type { SortingParams } from "./TableHeader";
 import TableBody from "./TableBody";
+import Tooltip from "../Tooltip";
 
 type HeaderData = { [string]: string };
 
@@ -124,41 +128,58 @@ class Table extends React.Component<TableProps, TableState> {
     const { filterRow } = this.state;
 
     return (
-      <TableWrapper>
-        <TableView
-          data={data}
-          header={header}
-          renderRow={renderRow}
-          rowKeyExtractor={rowKeyExtractor}
-          columnKeyExtractor={columnKeyExtractor}
-          tableComponent={TableRoot}
-          headerComponent={TableHeaderComponent}
-          bodyComponent={TableBodyComponent}
-          rowComponent={TableRow}
-          headerCellComponent={TableHeaderCellWithResize}
-          cellComponent={TableCell}
-          tableHeader={TableHeader}
-          tableBody={TableBody}
-          sortableFields={sortableFields}
-          sortingParams={sortingParams}
-          onSortingChange={onSortingChange}
-          filterRow={filterRow}
-          onFilter={name => {
-            const { filterRow = [] } = this.state;
-            this.setState(
-              {
-                filterRow: filterRow.map(
-                  item =>
-                    item && item.name === name
-                      ? { ...item, status: !item.status }
-                      : item
-                )
-              },
-              () => this.setStorage(tableName, this.state.filterRow)
-            );
-          }}
-        />
-      </TableWrapper>
+      <>
+        <Flex mb={2} justifyContent="flex-end">
+          <Tooltip
+            content="Скинути поточні налаштування"
+            component={() => (
+              <ResetIcon
+                onClick={() => {
+                  localStorage.removeItem(tableName);
+                  this.setState({
+                    filterRow: this.defaultFilter(header, tableName)
+                  });
+                }}
+              />
+            )}
+          />
+        </Flex>
+        <TableWrapper>
+          <TableView
+            data={data}
+            header={header}
+            renderRow={renderRow}
+            rowKeyExtractor={rowKeyExtractor}
+            columnKeyExtractor={columnKeyExtractor}
+            tableComponent={TableRoot}
+            headerComponent={TableHeaderComponent}
+            bodyComponent={TableBodyComponent}
+            rowComponent={TableRow}
+            headerCellComponent={TableHeaderCellWithResize}
+            cellComponent={TableCell}
+            tableHeader={TableHeader}
+            tableBody={TableBody}
+            sortableFields={sortableFields}
+            sortingParams={sortingParams}
+            onSortingChange={onSortingChange}
+            filterRow={filterRow}
+            onFilter={name => {
+              const { filterRow = [] } = this.state;
+              this.setState(
+                {
+                  filterRow: filterRow.map(
+                    item =>
+                      item && item.name === name
+                        ? { ...item, status: !item.status }
+                        : item
+                  )
+                },
+                () => this.setStorage(tableName, this.state.filterRow)
+              );
+            }}
+          />
+        </TableWrapper>
+      </>
     );
   }
 
