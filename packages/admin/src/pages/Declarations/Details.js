@@ -301,6 +301,7 @@ const Division = ({
       <DefinitionListView
         labels={{
           name: "Назва",
+          type: "Тип",
           addresses: "Адреса",
           mountainGroup: "Гірський регіон",
           phones: "Номер телефону",

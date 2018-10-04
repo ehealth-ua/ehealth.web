@@ -43,6 +43,7 @@ query DeclarationQuery($id: ID!) {
     division {
       id
       name
+      type
       email
       mountainGroup
       addresses {
