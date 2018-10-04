@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.100.0"></a>
+# [0.100.0](https://github.com/edenlabllc/ehealth.web/compare/v0.99.1...v0.100.0) (2018-10-04)
+
+
+### Features
+
+* **admin:** add tab documents in declaration details ([3e08716](https://github.com/edenlabllc/ehealth.web/commit/3e08716))
+* **icons:** add icon for view documents in admin ([5bde848](https://github.com/edenlabllc/ehealth.web/commit/5bde848))
+
+
+
+
+
 <a name="0.99.1"></a>
 ## [0.99.1](https://github.com/edenlabllc/ehealth.web/compare/v0.99.0...v0.99.1) (2018-10-04)
 
