@@ -54,12 +54,14 @@ const Details = ({ id }) => (
 
       const general = {
         declarationNumber,
+        declarationRequestId,
         startDate,
         endDate,
         status: STATUSES.DECLARATION[status],
         scope,
         reason
       };
+
       return (
         <>
           <Box p={6}>
@@ -75,13 +77,13 @@ const Details = ({ id }) => (
               <Box>
                 <DefinitionListView
                   labels={{
-                    id: "ID пацієнта",
-                    declarationRequestId: "ID запиту",
+                    id: "ID декларації",
+                    declarationNumber: "Номер декларації",
                     status: "Статус"
                   }}
                   data={{
                     id,
-                    declarationRequestId,
+                    declarationNumber,
                     status: (
                       <Badge name={status} type="DECLARATION" minWidth={100} />
                     )
@@ -254,7 +256,7 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
 const GeneralInfo = ({ general }) => (
   <DefinitionListView
     labels={{
-      declarationNumber: "Номер декларації",
+      declarationRequestId: "ID запиту",
       startDate: "Початкова дата дії декларації",
       endDate: "Кінцева дата дії декларації",
       status: "Статус",
