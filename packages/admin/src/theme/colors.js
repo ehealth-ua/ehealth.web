@@ -10,6 +10,7 @@ const colors = {
   redPigment: "#ED1C24",
   darkPastelGreen: "#1BB934",
   rockmanBlue: "#2EA2F8",
+  bluePastel: "#4A90E2",
   darkMidnightBlue: "#003076",
   enchantedBlue: "#007796",
   boysenberryShadow: "#F1F3F9",

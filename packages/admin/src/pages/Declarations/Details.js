@@ -1,12 +1,19 @@
 import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
-import { Flex, Box, Heading } from "rebass/emotion";
+import { Flex, Box, Heading, Text } from "rebass/emotion";
 import { BooleanValue } from "react-values";
+import system from "system-components/emotion";
 
-import { PositiveIcon } from "@ehealth/icons";
+import {
+  PositiveIcon,
+  MenuTileIcon,
+  MenuListIcon,
+  DefaultImageIcon
+} from "@ehealth/icons";
 import { getFullName, getPhones } from "@ehealth/utils";
 import { Form, Modal, Switch } from "@ehealth/components";
+import { mixed } from "@ehealth/system-tools";
 
 import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
@@ -18,6 +25,7 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import STATUSES from "../../helpers/statuses";
+import documents from "../../helpers/documents";
 
 import DeclarationQuery from "../../graphql/DeclarationQuery.graphql";
 import TerminateDeclarationMutation from "../../graphql/TerminateDeclarationMutation.graphql";
@@ -203,6 +211,7 @@ const Details = ({ id }) => (
             <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
             <Tabs.NavItem to="./employee">Лікар</Tabs.NavItem>
             <Tabs.NavItem to="./patient">Пацієнт</Tabs.NavItem>
+            <Tabs.NavItem to="./documents">Документи</Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
             <Box p={5}>
@@ -212,6 +221,7 @@ const Details = ({ id }) => (
                 <Division path="/divisions" division={division} />
                 <Employee path="/employee" employee={employee} />
                 <Patient path="/patient" patient={person} />
+                <Documents path="/documents" documents={documents} />
               </Router>
             </Box>
           </Tabs.Content>
@@ -422,5 +432,80 @@ const Patient = ({
     />
   </>
 );
+
+const Documents = ({ documents }) => (
+  <BooleanValue>
+    {({ value: opened, toggle }) => (
+      <>
+        <Flex alignItems="center" justifyContent="flex-end">
+          <ButtonIcon pointerEvents={opened} onClick={toggle}>
+            <MenuTileIcon />
+          </ButtonIcon>
+          <ButtonIcon pointerEvents={!opened} onClick={toggle}>
+            <MenuListIcon />
+          </ButtonIcon>
+        </Flex>
+
+        <Flex flexWrap="wrap" flexDirection={!opened ? "column" : "row"}>
+          {documents.map(({ src, alt }) => (
+            <Box m="2">
+              <SaveLink
+                href={src}
+                target="_blank"
+                flexDirection={opened ? "column" : "row"}
+                alignItems={!opened ? "center" : "flex-start"}
+              >
+                {opened ? (
+                  <BorderBox>
+                    <img src={src} alt={alt} width="100%" height="100%" />
+                  </BorderBox>
+                ) : (
+                  <Box m={1} color="shiningKnight">
+                    <DefaultImageIcon />
+                  </Box>
+                )}
+                <Text color="rockmanBlue" lineHeight="1">
+                  {alt}
+                </Text>
+              </SaveLink>
+            </Box>
+          ))}
+        </Flex>
+      </>
+    )}
+  </BooleanValue>
+);
+
+const ButtonIcon = system(
+  {
+    m: 1
+  },
+  { cursor: "pointer" },
+  props =>
+    mixed({
+      pointerEvents: !props.pointerEvents ? "auto" : "none",
+      color: !props.pointerEvents ? "bluePastel" : "shiningKnight"
+    })(props)
+);
+
+const SaveLink = system(
+  {
+    is: "a",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    lineHeight: 0
+  },
+  { textDecoration: "none" }
+);
+
+const BorderBox = system({
+  border: 1,
+  width: 125,
+  height: 125,
+  m: 2,
+  ml: 0,
+  borderColor: "silverCity"
+});
 
 export default Details;
