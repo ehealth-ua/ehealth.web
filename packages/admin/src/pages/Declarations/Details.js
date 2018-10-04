@@ -483,11 +483,14 @@ const Documents = ({ documents }) => (
 
 const ButtonIcon = system(
   {
-    m: 1
+    p: 2,
+    borderRadius: 2,
+    lineHeight: 0
   },
   { cursor: "pointer" },
   props =>
     mixed({
+      bg: props.pointerEvents && "silverCity",
       pointerEvents: !props.pointerEvents ? "auto" : "none",
       color: !props.pointerEvents ? "bluePastel" : "shiningKnight"
     })(props)
