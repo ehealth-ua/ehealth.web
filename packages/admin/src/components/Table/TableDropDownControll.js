@@ -28,16 +28,18 @@ type TableDropdownType = {
 const TableDropDownControll = ({
   onChange,
   data,
-  columnKeyExtractor,
+  columnKeyExtractor = name => name,
   // $FlowFixMe https://github.com/facebook/flow/issues/6832
   buttonComponent: ButtonDropDownWrapper = ButtonDropDown,
   // $FlowFixMe https://github.com/facebook/flow/issues/6832
-  buttonContent: ButtonContent = Icon
+  buttonContent: ButtonContent = Icon,
+  description = "Додати показник"
 }: TableDropDownControllType) => (
   <ButtonDropDownWrapper>
     <details>
       <ButtonContent>
         <DropDownButton color="#2EA2F8" />
+        <Description>{description}</Description>
       </ButtonContent>
 
       <TableDropdown
@@ -68,16 +70,12 @@ const TableDropdown = ({
   </List>
 );
 
-const ButtonDropDown = styled.th`
-  position: relative;
-  width: 30px;
+const ButtonDropDown = styled.div`
   padding: 14px 0px;
 `;
 
 const Icon = styled.summary`
-  display: block;
-  line-height: 2px;
-  font-size: 0;
+  display: flex;
   list-style-type: none;
   cursor: pointer;
   &:focus {
@@ -85,11 +83,18 @@ const Icon = styled.summary`
   }
 `;
 
+const Description = styled.span`
+  margin-left: 10px;
+  color: #2ea2f8;
+  font-size: 12px;
+  font-weight: 700;
+`;
+
 const List = styled(Dropdown.List)`
   position: absolute;
   left: auto;
-  right: 0;
-  top: 100%;
+  right: 20px;
+  z-index: 50;
 `;
 
 export default TableDropDownControll;

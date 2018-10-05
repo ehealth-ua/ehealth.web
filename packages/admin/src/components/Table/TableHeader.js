@@ -7,8 +7,6 @@ import { Switch } from "@ehealth/components";
 import { CaretDownIcon, CaretUpIcon } from "@ehealth/icons";
 import { filterTableColumn as filterTableDefaultColumn } from "@ehealth/utils";
 
-import TableDropDownControll from "./TableDropDownControll";
-
 type HeaderData = { [string]: string };
 
 type HeaderDataWithStatus = {|
@@ -32,8 +30,7 @@ type TableHeaderType = {
   sortableFields?: string[],
   sortingParams?: SortingParams,
   onSortingChange?: SortingParams => mixed,
-  filterRow: Array<HeaderDataWithStatus | any>,
-  onFilter: () => mixed
+  filterRow: Array<HeaderDataWithStatus | any>
 };
 
 const TableHeader = ({
@@ -46,8 +43,7 @@ const TableHeader = ({
   sortableFields = [],
   sortingParams = {},
   onSortingChange = () => {},
-  filterRow,
-  onFilter
+  filterRow
 }: TableHeaderType) => (
   <HeaderComponent>
     <RowComponent>
@@ -85,12 +81,6 @@ const TableHeader = ({
             </HeaderCellComponent>
           );
         })}
-
-      <TableDropDownControll
-        data={filterRow}
-        onChange={onFilter}
-        columnKeyExtractor={columnKeyExtractor}
-      />
     </RowComponent>
   </HeaderComponent>
 );

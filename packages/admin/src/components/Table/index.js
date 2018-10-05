@@ -9,10 +9,11 @@ import isEqual from "lodash/isEqual";
 import { TableView } from "@ehealth/components";
 import { ResetIcon } from "@ehealth/icons";
 
-import TableHeaderCellWithResize from "./TableHeaderCellWithResize";
+import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
 import type { SortingParams } from "./TableHeader";
-import TableBody from "./TableBody";
+import TableDropDownControll from "./TableDropDownControll";
+import TableHeaderCellWithResize from "./TableHeaderCellWithResize";
 import Tooltip from "../Tooltip";
 
 type HeaderData = { [string]: string };
@@ -129,7 +130,7 @@ class Table extends React.Component<TableProps, TableState> {
 
     return (
       <>
-        <Flex mb={2} justifyContent="flex-end">
+        <Flex mb={2} justifyContent="space-between" alignItems="center">
           <Tooltip
             content="Скинути поточні налаштування"
             component={() => (
@@ -142,6 +143,26 @@ class Table extends React.Component<TableProps, TableState> {
                 }}
               />
             )}
+            height="16px"
+          />
+
+          <TableDropDownControll
+            data={filterRow}
+            onChange={name => {
+              const { filterRow = [] } = this.state;
+              this.setState(
+                {
+                  filterRow: filterRow.map(
+                    item =>
+                      item && item.name === name
+                        ? { ...item, status: !item.status }
+                        : item
+                  )
+                },
+                () => this.setStorage(tableName, this.state.filterRow)
+              );
+            }}
+            columnKeyExtractor={columnKeyExtractor}
           />
         </Flex>
         <TableWrapper>
@@ -163,20 +184,6 @@ class Table extends React.Component<TableProps, TableState> {
             sortingParams={sortingParams}
             onSortingChange={onSortingChange}
             filterRow={filterRow}
-            onFilter={name => {
-              const { filterRow = [] } = this.state;
-              this.setState(
-                {
-                  filterRow: filterRow.map(
-                    item =>
-                      item && item.name === name
-                        ? { ...item, status: !item.status }
-                        : item
-                  )
-                },
-                () => this.setStorage(tableName, this.state.filterRow)
-              );
-            }}
           />
         </TableWrapper>
       </>
