@@ -120,7 +120,7 @@ const UserInfo = ({ userInfo }) => (
         birthCountry: "Країна народження",
         birthSettlement: "Місце народження",
         taxId: "ІНН",
-        unzr: "ID запису в ЄДР",
+        unzr: "ID Запису в ЄДДР",
         mobilePhone: (
           <>
             Мобільний номер

@@ -60,7 +60,7 @@ const Search = ({ uri }) => (
                     fullName: "ПІБ пацієнта",
                     birthDate: "Дата народження",
                     taxId: "ІПН",
-                    unzr: "ID запису в ЄДР",
+                    unzr: "ID Запису в ЄДДР",
                     authenticationMethods: "Метод аутентифікації",
                     insertedAt: "Додано",
                     action: "Дія"
@@ -157,7 +157,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
         <Box px={1} width={1 / 3} borderLeft="1">
           <Field.Text
             name="filter.unzr"
-            label="ID Запису в ЄДР"
+            label="ID Запису в ЄДДР"
             placeholder="19650930-65465"
             format={formatUnzr}
             divider

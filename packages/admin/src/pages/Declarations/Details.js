@@ -406,7 +406,7 @@ const Patient = ({
         birthDate: "Дата народження",
         birthCountry: "Країна народження",
         birthSettlement: "Місце народження",
-        unzr: "ID запису в ЄДР",
+        unzr: "ID Запису в ЄДДР",
         taxId: "ІНН",
         phones: "Номер телефону"
       }}
