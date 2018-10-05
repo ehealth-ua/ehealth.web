@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.100.2"></a>
+## [0.100.2](https://github.com/edenlabllc/ehealth.web/compare/v0.100.1...v0.100.2) (2018-10-05)
+
+
+### Bug Fixes
+
+* **admin:** change declaration details general tab props ([25fef5c](https://github.com/edenlabllc/ehealth.web/commit/25fef5c))
+* **admin:** changing style in buttons controll which use in documents tab ([f7be13c](https://github.com/edenlabllc/ehealth.web/commit/f7be13c))
+
+
+
+
+
 <a name="0.100.1"></a>
 ## [0.100.1](https://github.com/edenlabllc/ehealth.web/compare/v0.100.0...v0.100.1) (2018-10-04)
 
