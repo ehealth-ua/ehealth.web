@@ -14,15 +14,12 @@
     "chart:update": "ehealth-scripts chart update"
   },
   "dependencies": {
+    "@ehealth-ua/schema": "^0.1.1",
     "@ehealth/env": "file:../env",
-    "apollo-server-express": "^2.0.6",
-    "chokidar": "^2.0.4",
-    "express": "^4.16.3",
+    "apollo-server": "^2.1.0",
     "faker": "^4.1.0",
     "graphql": "0.13.2",
-    "graphql-import": "^0.6.0",
     "graphql-iso-date": "^3.5.0",
-    "graphql-type-json": "^0.2.1",
-    "lodash": "^4.17.10"
+    "graphql-type-json": "^0.2.1"
   }
 }

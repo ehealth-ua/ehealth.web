@@ -1,16 +1,28 @@
 require("@ehealth/env/load");
-const http = require("http");
+const { ApolloServer } = require("apollo-server");
+const { document: typeDefs } = require("@ehealth-ua/schema");
 
-const { NODE_ENV, PORT } = process.env;
+const resolvers = require("./lib/resolvers");
+const schemaDirectives = require("./lib/directives");
 
-const { createApplication } = require("./lib/app");
-const { runSchemaReloader } = require("./lib/reloader");
+const { PORT, WHITE_LIST_ORIGINS = "" } = process.env;
 
-let app = createApplication();
-const server = http.createServer(app);
+const cors = {
+  origin: WHITE_LIST_ORIGINS.split(",").map(
+    origin => new RegExp(`^(?:${origin})$`)
+  ),
+  credentials: true
+};
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  schemaDirectives,
+  cors,
+  mocks: true,
+  mockEntireSchema: false
+});
 
 server.listen(PORT, () => {
   console.log(`Listening on http://0.0.0.0:${PORT}`);
-
-  if (NODE_ENV === "development") runSchemaReloader({ server, app });
 });

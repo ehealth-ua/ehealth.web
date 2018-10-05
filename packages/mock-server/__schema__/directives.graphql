@@ -1,7 +1,0 @@
-directive @fake(
-  locale: String
-  format: String
-  method: String
-  args: JSON
-  probability: Float
-) on FIELD_DEFINITION
