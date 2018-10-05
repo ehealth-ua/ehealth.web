@@ -8,12 +8,13 @@ const Tooltip = ({
   content,
   component: Component,
   disableHover,
-  showTooltip
+  showTooltip,
+  height
 }) => (
   <Manager>
     <Reference>
       {({ ref }) => (
-        <Target innerRef={ref} disableHover={disableHover}>
+        <Target innerRef={ref} disableHover={disableHover} height={height}>
           <Component />
         </Target>
       )}
@@ -91,6 +92,7 @@ const TooltipWrapper = styled.div`
 
 const Target = styled.div`
   display: inline-block;
+  height: ${props => props.height};
   ${props =>
     !props.disableHover
       ? `&:hover + ${TooltipWrapper} {
