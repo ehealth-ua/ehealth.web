@@ -116,6 +116,7 @@ const Search = ({ uri }) => (
                         orderBy: stringifySortingParams(sortingParams)
                       })
                     }
+                    tableName="legal-entities/search"
                   />
                 ) : null
               }

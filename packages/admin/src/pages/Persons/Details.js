@@ -59,7 +59,6 @@ const Details = ({ id }) => (
       const authInfo = authenticationMethod[0];
 
       const userInfo = {
-        fullName: getFullName({ firstName, secondName, lastName }),
         birthDate,
         birthCountry,
         birthSettlement,
@@ -83,10 +82,12 @@ const Details = ({ id }) => (
             <DefinitionListView
               labels={{
                 id: "ID пацієнта",
+                fullName: "ПІБ пацієнта",
                 status: "Статус"
               }}
               data={{
                 id,
+                fullName: getFullName({ firstName, secondName, lastName }),
                 status: <Badge name={status} type="PERSON" minWidth={100} />
               }}
               color="#7F8FA4"
@@ -115,7 +116,6 @@ const UserInfo = ({ userInfo }) => (
   <Box p={5}>
     <DefinitionListView
       labels={{
-        fullName: "ПІБ пацієнта",
         birthDate: "Дата народження",
         birthCountry: "Країна народження",
         birthSettlement: "Місце народження",
@@ -310,6 +310,7 @@ const DeclarationsInfo = ({ id }) => (
                       orderBy: stringifySortingParams(sortingParams)
                     })
                   }
+                  hiddenFields="id"
                 />
               </>
             );

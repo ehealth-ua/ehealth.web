@@ -77,7 +77,7 @@ type TableState = {|
  *           })
  *         }
  *         tableName="name"
- *         filteredFields="id,divisionName"
+ *         hiddenFields="id,divisionName"
  *       />
  *     );
  *   }}
@@ -94,11 +94,11 @@ class Table extends React.Component<TableProps, TableState> {
       header,
       defaultFilter = this.defaultFilter,
       tableName,
-      filteredFields = ""
+      hiddenFields = ""
     } = this.props;
 
     localStorage.getItem(tableName) === null &&
-      localStorage.setItem(tableName, filteredFields);
+      localStorage.setItem(tableName, hiddenFields);
 
     this.setState({
       filterRow: defaultFilter(header, tableName)
@@ -130,7 +130,7 @@ class Table extends React.Component<TableProps, TableState> {
       sortingParams,
       onSortingChange,
       tableName,
-      filteredFields = ""
+      hiddenFields = ""
     } = this.props;
 
     const { filterRow } = this.state;
@@ -143,20 +143,18 @@ class Table extends React.Component<TableProps, TableState> {
             component={() => (
               <ResetIcon
                 onClick={() => {
-                  localStorage.setItem(tableName, filteredFields);
+                  localStorage.setItem(tableName, hiddenFields);
                   this.setState({
                     filterRow: this.defaultFilter(header, tableName)
                   });
                 }}
               />
             )}
-            height="16px"
           />
 
           <TableDropDownControll
             data={filterRow}
             onChange={name => {
-              const { filterRow = [] } = this.state;
               this.setState(
                 {
                   filterRow: filterRow.map(
