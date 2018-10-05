@@ -50,6 +50,7 @@ class TableHeaderCellWithResize extends React.Component<
         <ResizeHandler
           onMouseDown={e => this.resizeColumnStart(e, false)}
           onTouchStart={e => this.resizeColumnStart(e, true)}
+          onClick={e => e.stopPropagation()}
         />
       </TableHeaderCell>
     );
