@@ -94,6 +94,7 @@ const List = styled(Dropdown.List)`
   position: absolute;
   left: auto;
   right: 20px;
+  margin-top: 10px;
   z-index: 50;
 `;
 
