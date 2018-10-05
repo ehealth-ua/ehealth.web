@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.100.3"></a>
+## [0.100.3](https://github.com/edenlabllc/ehealth.web/compare/v0.100.2...v0.100.3) (2018-10-05)
+
+
+### Bug Fixes
+
+* **admin:** change ЄДР to ЄДДР ([f819caa](https://github.com/edenlabllc/ehealth.web/commit/f819caa))
+
+
+
+
+
 <a name="0.100.2"></a>
 ## [0.100.2](https://github.com/edenlabllc/ehealth.web/compare/v0.100.1...v0.100.2) (2018-10-05)
 
