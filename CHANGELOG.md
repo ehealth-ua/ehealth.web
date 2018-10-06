@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.101.0"></a>
+# [0.101.0](https://github.com/edenlabllc/ehealth.web/compare/v0.100.4...v0.101.0) (2018-10-06)
+
+
+### Bug Fixes
+
+* add missing graphql-tag dependency to package-lock.json ([b10ceb7](https://github.com/edenlabllc/ehealth.web/commit/b10ceb7))
+* deduplicate dependencies in package-lock.json ([4d46916](https://github.com/edenlabllc/ehealth.web/commit/4d46916))
+
+
+### Features
+
+* **mock-server:** move schema into external package ([63a1e4b](https://github.com/edenlabllc/ehealth.web/commit/63a1e4b)), closes [edenlabllc/ehealth.api#3236](https://github.com/edenlabllc/ehealth.api/issues/3236)
+
+
+
+
+
 <a name="0.100.4"></a>
 ## [0.100.4](https://github.com/edenlabllc/ehealth.web/compare/v0.100.3...v0.100.4) (2018-10-05)
 
