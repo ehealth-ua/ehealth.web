@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.101.2"></a>
+## [0.101.2](https://github.com/edenlabllc/ehealth.web/compare/v0.101.1...v0.101.2) (2018-10-08)
+
+
+### Bug Fixes
+
+* **admin:** revert bold in Badge component ([fcb6404](https://github.com/edenlabllc/ehealth.web/commit/fcb6404))
+
+
+
+
+
 <a name="0.101.1"></a>
 ## [0.101.1](https://github.com/edenlabllc/ehealth.web/compare/v0.101.0...v0.101.1) (2018-10-08)
 
