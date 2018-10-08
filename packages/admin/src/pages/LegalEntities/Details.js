@@ -55,7 +55,8 @@ const Details = ({ id }) => (
         divisions,
         medicalServiceProvider
       } = legalEntity;
-      const statusAction = !nhsVerified ? "NHS_CLOSED" : status;
+      const statusAction =
+        status === "ACTIVE" && (nhsVerified ? status : "NHS_VERIFY_CLOSED");
 
       return (
         <>
@@ -121,17 +122,17 @@ const Details = ({ id }) => (
                     )}
                   </Popup>
                 }
-                NHS_CLOSED={
+                NHS_VERIFY_CLOSED={
                   <Flex>
                     <Box mr={20}>
                       <Popup
-                        variant="green"
-                        buttonText="Верифікація"
-                        title="Верифікація медзакладу"
+                        variant="red"
+                        buttonText="Закрити медзаклад"
+                        title="Закрити медзаклад"
                       >
                         {toggle => (
-                          <Mutation mutation={NhsVerifyLegalEntityMutation}>
-                            {nhsVerifyLegalEntity => (
+                          <Mutation mutation={DeactivateLegalEntityMutation}>
+                            {deactivateLegalEntity => (
                               <Flex justifyContent="center">
                                 <Box mr={20}>
                                   <Button variant="blue" onClick={toggle}>
@@ -140,16 +141,16 @@ const Details = ({ id }) => (
                                 </Box>
                                 <Button
                                   onClick={async () => {
-                                    await nhsVerifyLegalEntity({
+                                    await deactivateLegalEntity({
                                       variables: {
                                         id
                                       }
                                     });
                                     toggle();
                                   }}
-                                  variant="green"
+                                  variant="red"
                                 >
-                                  Верифікувати медзаклад
+                                  Закрити медзаклад
                                 </Button>
                               </Flex>
                             )}
@@ -157,9 +158,40 @@ const Details = ({ id }) => (
                         )}
                       </Popup>
                     </Box>
+                    <Popup
+                      variant="green"
+                      buttonText="Верифікація"
+                      title="Верифікація медзакладу"
+                    >
+                      {toggle => (
+                        <Mutation mutation={NhsVerifyLegalEntityMutation}>
+                          {nhsVerifyLegalEntity => (
+                            <Flex justifyContent="center">
+                              <Box mr={20}>
+                                <Button variant="blue" onClick={toggle}>
+                                  Повернутися
+                                </Button>
+                              </Box>
+                              <Button
+                                onClick={async () => {
+                                  await nhsVerifyLegalEntity({
+                                    variables: {
+                                      id
+                                    }
+                                  });
+                                  toggle();
+                                }}
+                                variant="green"
+                              >
+                                Верифікувати медзаклад
+                              </Button>
+                            </Flex>
+                          )}
+                        </Mutation>
+                      )}
+                    </Popup>
                   </Flex>
                 }
-                CLOSED={null}
               />
             </Flex>
           </Box>
