@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.101.3"></a>
+## [0.101.3](https://github.com/edenlabllc/ehealth.web/compare/v0.101.2...v0.101.3) (2018-10-08)
+
+
+### Bug Fixes
+
+* **admin:** fix legalEntities page according to features ([3db6a54](https://github.com/edenlabllc/ehealth.web/commit/3db6a54))
+
+
+
+
+
 <a name="0.101.2"></a>
 ## [0.101.2](https://github.com/edenlabllc/ehealth.web/compare/v0.101.1...v0.101.2) (2018-10-08)
 
