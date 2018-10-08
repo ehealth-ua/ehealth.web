@@ -21,6 +21,7 @@ export const Item = system(
     minWidth: 20,
     minHeight: 20,
     fontSize: 10,
+    fontWeight: "bold",
     lineHeight: 1
   },
   {
