@@ -5,6 +5,7 @@ import { Form, LocationParams } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import { PositiveIcon, AdminSearchIcon } from "@ehealth/icons";
 import createDecorator from "final-form-calculate";
+import format from "date-fns/format";
 
 import debounce from "lodash/debounce";
 import isEmpty from "lodash/isEmpty";
@@ -75,6 +76,7 @@ const Search = ({ uri }) => (
                       edrpou: "ЄДРПОУ",
                       addresses: "Адреса",
                       nhsVerified: "Верифікований НСЗУ",
+                      insertedAt: "Додано",
                       status: "Статус",
                       action: "Дія"
                     }}
@@ -82,10 +84,12 @@ const Search = ({ uri }) => (
                       addresses,
                       nhsVerified,
                       status,
+                      insertedAt,
                       ...legalEntity
                     }) => ({
                       ...legalEntity,
                       nhsVerified: nhsVerified && <PositiveIcon />,
+                      insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
                       status: (
                         <Badge
                           type="LEGALENTITY"
@@ -108,7 +112,12 @@ const Search = ({ uri }) => (
                         </Link>
                       )
                     })}
-                    sortableFields={["edrpou", "status"]}
+                    sortableFields={[
+                      "edrpou",
+                      "status",
+                      "insertedAt",
+                      "nhsVerified"
+                    ]}
                     sortingParams={parseSortingParams(locationParams.orderBy)}
                     onSortingChange={sortingParams =>
                       setLocationParams({

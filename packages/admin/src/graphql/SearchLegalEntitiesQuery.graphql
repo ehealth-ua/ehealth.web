@@ -19,6 +19,7 @@ query SearchLegalEntitiesQuery(
       apartment
     }
     nhsVerified
+    insertedAt
     status
   }
 }
