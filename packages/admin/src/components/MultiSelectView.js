@@ -1,5 +1,5 @@
 import system from "system-components/emotion";
-import { variant } from "@ehealth/system-tools";
+import { boolean } from "@ehealth/system-tools";
 
 import { ChevronBottomIcon } from "@ehealth/icons";
 import Dropdown from "./Dropdown";
@@ -30,15 +30,21 @@ export const RemoveItem = system({
   ml: 2
 });
 
-export const DropdownButton = system({
-  is: "button",
-  position: "absolute",
-  right: 0,
-  top: 0,
-  width: "47px",
-  height: "100%",
-  cursor: "pointer"
-});
+export const DropdownButton = system(
+  {
+    is: "button",
+    position: "absolute",
+    right: 0,
+    top: 0,
+    px: 3,
+    height: "100%",
+    cursor: "pointer"
+  },
+  boolean({
+    prop: "type",
+    key: "inputs.button.fullWidth"
+  })
+);
 
 export const DropdownIcon = system({
   is: ChevronBottomIcon,

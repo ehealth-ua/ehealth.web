@@ -24,6 +24,12 @@ const inputs = {
       borderWidth: "0 1px 0 0",
       borderColor: "januaryDawn"
     }
+  },
+  button: {
+    fullWidth: {
+      width: "100%",
+      textAlign: "right"
+    }
   }
 };
 
