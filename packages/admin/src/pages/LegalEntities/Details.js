@@ -199,7 +199,7 @@ const Details = ({ id }) => (
               <License path="/licenses" license={medicalServiceProvider} />
               <RelatedLegalEntities
                 path="/related-legal-entities"
-                legalEntity={mergedFromLegalEntities}
+                status={status}
               />
               <Owner path="/owner" owner={owner} />
               <Divisions path="/divisions" divisions={divisions} />
@@ -297,7 +297,7 @@ const License = ({ license: { accreditation, licenses = [] } }) => {
     </Box>
   );
 };
-const RelatedLegalEntities = ({ id }) => (
+const RelatedLegalEntities = ({ id, status }) => (
   <Ability action="read" resource="related_legal_entities">
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
@@ -330,14 +330,16 @@ const RelatedLegalEntities = ({ id }) => (
                     />
                   </Box>
                 </Form>
-                <Link to="../add">
-                  <Flex mb={2}>
-                    <Box mr={2}>
-                      <AdminAddIcon width={16} height={16} />
-                    </Box>{" "}
-                    Додати підпорядкований медзаклад
-                  </Flex>
-                </Link>
+                {status && (
+                  <Link to="../add">
+                    <Flex mb={2}>
+                      <Box mr={2}>
+                        <AdminAddIcon width={16} height={16} />
+                      </Box>{" "}
+                      Додати підпорядкований медзаклад
+                    </Flex>
+                  </Link>
+                )}
                 <Table
                   data={mergedFromLegalEntities}
                   header={{
@@ -365,13 +367,14 @@ const RelatedLegalEntities = ({ id }) => (
                       />
                     )
                   })}
-                  sortableFields={["edrpou", "insertedAt"]}
+                  sortableFields={["edrpou", "insertedAt, status"]}
                   sortingParams={parseSortingParams(orderBy)}
                   onSortingChange={sortingParams =>
                     setLocationParams({
                       orderBy: stringifySortingParams(sortingParams)
                     })
                   }
+                  tableName="mergedFromLegalEntities"
                 />
               </>
             );

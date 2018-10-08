@@ -86,20 +86,23 @@ const Search = ({ onSubmit, initialValues, data }) => (
             id: "ID Медзакладу",
             name: "Назва Медзакладу",
             edrpou: "ЄДРПОУ",
+            owner: "Керівник",
             nhsVerified: "Верифікований НСЗУ",
             status: "Статус"
           }}
-          renderRow={({ status, nhsVerified, ...legalEntity }) => ({
+          renderRow={({ status, nhsVerified, owner, ...legalEntity }) => ({
             ...legalEntity,
+            owner: getFullName(owner.party),
             nhsVerified: nhsVerified && <PositiveIcon />,
             status: <Badge name={status} type="LEGALENTITY" display="block" />
           })}
+          tableName="legalEntity/Add"
         />
         <Flex px={5} mt={5}>
           <Box mr={3}>
-            <Button variant="blue" onClick={() => window.history.go(-1)}>
-              Повернутися
-            </Button>
+            <Link to="../related-legal-entities">
+              <Button variant="blue">Повернутися</Button>
+            </Link>
           </Box>
           <Link to={"./reason"}>
             <Button variant="green">Далі</Button>
@@ -239,42 +242,49 @@ const Sign = ({
                 }}
                 data={{ base }}
               />
-              <Tooltip
-                component={() => (
-                  <Button
-                    variant="green"
-                    onClick={async () => {
-                      const mergedLegalEntities = {
-                        merged_from_legal_entity: legalEntityFrom,
-                        merged_to_legal_entity: legalEntityTo,
-                        base
-                      };
-                      const { signedContent } = await signData(
-                        mergedLegalEntities
-                      );
-                      await mergeLegalEntities({
-                        variables: {
-                          signedContent: {
-                            signedContent,
-                            signedContentEncoding: "BASE64"
-                          }
-                        }
-                      });
-                      navigate("/jobs");
-                    }}
-                  >
-                    Підписати
+              <Flex>
+                <Box mr={3}>
+                  <Button variant="blue" onClick={() => window.history.go(-1)}>
+                    Повернутися
                   </Button>
-                )}
-                content={
-                  <>
-                    Увага! <br />
-                    Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність власних намірів
-                    , а також що зміст правочину ВІДПОВІДАЄ ВАШІЇЙ ВОЛІ,
-                    ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ ОСОБИСТО ВАМИ.
-                  </>
-                }
-              />
+                </Box>
+                <Tooltip
+                  component={() => (
+                    <Button
+                      variant="green"
+                      onClick={async () => {
+                        const mergedLegalEntities = {
+                          merged_from_legal_entity: legalEntityFrom,
+                          merged_to_legal_entity: legalEntityTo,
+                          base
+                        };
+                        const { signedContent } = await signData(
+                          mergedLegalEntities
+                        );
+                        await mergeLegalEntities({
+                          variables: {
+                            signedContent: {
+                              signedContent,
+                              signedContentEncoding: "BASE64"
+                            }
+                          }
+                        });
+                        navigate("/jobs");
+                      }}
+                    >
+                      Підписати
+                    </Button>
+                  )}
+                  content={
+                    <>
+                      Увага! <br />
+                      Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність власних
+                      намірів , а також що зміст правочину ВІДПОВІДАЄ ВАШІЇЙ
+                      ВОЛІ, ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ ОСОБИСТО ВАМИ.
+                    </>
+                  }
+                />
+              </Flex>
             </>
           )}
         </Mutation>
