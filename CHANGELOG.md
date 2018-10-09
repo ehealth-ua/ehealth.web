@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.101.4"></a>
+## [0.101.4](https://github.com/edenlabllc/ehealth.web/compare/v0.101.3...v0.101.4) (2018-10-09)
+
+
+### Bug Fixes
+
+* **admin:** add to table on legalEntities list column insertedAt ([997c846](https://github.com/edenlabllc/ehealth.web/commit/997c846))
+* **admin:** change flow deactive, verify legalEntities ([a259a38](https://github.com/edenlabllc/ehealth.web/commit/a259a38))
+
+
+
+
+
 <a name="0.101.3"></a>
 ## [0.101.3](https://github.com/edenlabllc/ehealth.web/compare/v0.101.2...v0.101.3) (2018-10-08)
 
