@@ -43,6 +43,7 @@ export const Content = system(
     outline: none;
     position: relative;
     text-align: left;
+    text-overflow: ellipsis;
 
     &:disabled {
       -webkit-text-fill-color: inherit;

@@ -81,7 +81,8 @@ const SelectField = ({
           <InputView.Content
             {...getInputProps({
               is: "input",
-              px: 2,
+              pl: 2,
+              pr: 4,
               width: 0,
               disabled,
               ...input,

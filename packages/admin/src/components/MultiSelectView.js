@@ -38,7 +38,8 @@ export const DropdownButton = system(
     top: 0,
     px: 3,
     height: "100%",
-    cursor: "pointer"
+    cursor: "pointer",
+    lineHeight: 0
   },
   boolean({
     prop: "type",
