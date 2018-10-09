@@ -72,10 +72,7 @@ const Details = ({ id }) => (
             <Flex justifyContent="space-between" alignItems="flex-end">
               <Box>
                 <DefinitionListView
-                  labels={{
-                    id: "ID медзакладу",
-                    status: "Статус"
-                  }}
+                  labels={{ id: "ID медзакладу", status: "Статус" }}
                   data={{
                     id,
                     status: (
@@ -353,7 +350,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                   onSubmit={setLocationParams}
                   initialValues={locationParams}
                 >
-                  <Box p={5} width={460}>
+                  <Box px={5} pt={5} width={460}>
                     <Field.Text
                       name="filter.edrpou"
                       label="Знайти підпорядкований медзаклад"
@@ -362,7 +359,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                     />
                   </Box>
                 </Form>
-                {status && (
+                {status === "ACTIVE" && (
                   <Link to="../add">
                     <Flex mb={2}>
                       <Box mr={2}>
@@ -379,7 +376,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                     edrpou: "ЄДРПОУ",
                     base: "Основа",
                     insertedAt: "Додано",
-                    status: "Статус"
+                    isActive: "Статус"
                   }}
                   renderRow={({
                     base,
@@ -391,7 +388,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                     insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
                     name,
                     edrpou,
-                    status: (
+                    isActive: (
                       <Badge
                         name={isActive ? "ACTIVE" : "CLOSED"}
                         type="LEGALENTITY"
@@ -399,7 +396,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                       />
                     )
                   })}
-                  sortableFields={["edrpou", "insertedAt, status"]}
+                  sortableFields={["edrpou", "insertedAt", "isActive"]}
                   sortingParams={parseSortingParams(orderBy)}
                   onSortingChange={sortingParams =>
                     setLocationParams({
@@ -503,7 +500,7 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
 
 const Line = system({
   is: "figure",
-  bg: "shiningKnight",
+  bg: "januaryDawn",
   my: 5,
   mx: 0,
   height: "1px",

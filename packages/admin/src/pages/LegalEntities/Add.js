@@ -24,13 +24,19 @@ import MergeLegalEntitiesMutation from "../../graphql/MergeLegalEntitiesMutation
 
 import { REACT_APP_SIGNER_URL } from "../../env";
 
-const Add = () => (
+const Add = ({ location: { state } }) => (
   <>
     <Box pt={5} px={5}>
       <Steps.List>
-        <Steps.Item to="./">Знайдіть медзаклад</Steps.Item>
-        <Steps.Item to="./reason">Вкажіть підставу</Steps.Item>
-        <Steps.Item to="./sign">Підтвердіть з ЕЦП</Steps.Item>
+        <Steps.Item to="./" state={state}>
+          Знайдіть медзаклад
+        </Steps.Item>
+        <Steps.Item to="./reason" state={state}>
+          Вкажіть підставу
+        </Steps.Item>
+        <Steps.Item to="./sign" state={state}>
+          Підтвердіть з ЕЦП
+        </Steps.Item>
       </Steps.List>
     </Box>
     <LocationParams>
@@ -56,7 +62,7 @@ const Add = () => (
                   onSubmit={setLocationParams}
                   legalEntity={legalEntityByEdrpou}
                 />
-                <Sign path="/sign" />
+                <Sign path="/sign" legalEntity={legalEntityByEdrpou} />
               </Router>
             );
           }}
@@ -66,7 +72,12 @@ const Add = () => (
   </>
 );
 
-const Search = ({ onSubmit, initialValues, data }) => (
+const Search = ({
+  onSubmit,
+  initialValues,
+  data,
+  location: { state: base }
+}) => (
   <>
     <Form onSubmit={onSubmit} initialValues={initialValues}>
       <Box px={5} width={460}>
@@ -104,7 +115,7 @@ const Search = ({ onSubmit, initialValues, data }) => (
               <Button variant="blue">Повернутися</Button>
             </Link>
           </Box>
-          <Link to={"./reason"}>
+          <Link to="./reason" state={base}>
             <Button variant="green">Далі</Button>
           </Link>
         </Flex>
@@ -114,14 +125,14 @@ const Search = ({ onSubmit, initialValues, data }) => (
 );
 
 const Reason = ({
-  id: legalEntityToId,
   legalEntity: {
     owner,
     id: legalEntityFromId,
     name: legalEntityFromName,
     edrpou: legalEntityFromEdrpou
   },
-  navigate
+  navigate,
+  location: { state: base }
 }) => (
   <Box pt={1} px={5}>
     <DefinitionListView
@@ -146,156 +157,154 @@ const Reason = ({
       color="#7F8FA4"
     />
     <Box width={460} pt={2}>
-      <Query query={LegalEntityQuery} variables={{ id: legalEntityToId }}>
-        {({ loading, error, data }) => {
-          if (loading) return "Loading...";
-          if (error) return `Error! ${error.message}`;
-          const {
-            legalEntity: { id, name, edrpou }
-          } = data;
-          const legalEntityTo = { id, name, edrpou };
-          const legalEntityFrom = {
-            id: legalEntityFromId,
-            name: legalEntityFromName,
-            edrpou: legalEntityFromEdrpou
-          };
-          return (
-            <Form
-              onSubmit={async ({ base }) => {
-                navigate("../sign", {
-                  state: {
-                    legalEntityFrom,
-                    legalEntityTo,
-                    base
-                  }
-                });
-              }}
-            >
-              <Field.Textarea
-                name="base"
-                rows={6}
-                label="Вкажіть підставу підпорядкування"
-                placeholder="Приклад: Наказ КМУ № 73465"
-              />
-              <Validation.Required
-                field="base"
-                message="Обов&#700;язкове поле"
-              />
-              <Flex>
-                <Box mr={3}>
-                  <Button variant="blue" onClick={() => window.history.go(-1)}>
-                    Повернутися
-                  </Button>
-                </Box>
-                <Button variant="green">Далі</Button>
-              </Flex>
-            </Form>
-          );
+      <Form
+        onSubmit={async ({ base }) => {
+          navigate("../sign", { state: { base } });
         }}
-      </Query>
+        initialValues={base}
+      >
+        <Field.Textarea
+          name="base"
+          rows={6}
+          label="Вкажіть підставу підпорядкування"
+          placeholder="Приклад: Наказ КМУ № 73465"
+        />
+        <Validation.Required field="base" message="Обов&#700;язкове поле" />
+        <Flex>
+          <Box mr={3}>
+            <Link to="../" state={base}>
+              <Button variant="blue">Повернутися</Button>
+            </Link>
+          </Box>
+          <Button variant="green">Далі</Button>
+        </Flex>
+      </Form>
     </Box>
   </Box>
 );
 
 const Sign = ({
+  id: legalEntityToId,
+  legalEntity: {
+    id: legalEntityFromId,
+    name: legalEntityFromName,
+    edrpou: legalEntityFromEdrpou
+  },
   location: {
-    state: { legalEntityFrom, legalEntityTo, base }
+    state: { base }
   },
   navigate
 }) => (
-  <Box px={5}>
-    <Signer.Parent
-      url={REACT_APP_SIGNER_URL}
-      features={{ width: 640, height: 589 }}
-    >
-      {({ signData }) => (
-        <Mutation mutation={MergeLegalEntitiesMutation}>
-          {mergeLegalEntities => (
-            <>
-              <Text fontSize={1} fontWeight="bold" mb={3}>
-                Основний медзаклад
-              </Text>
-              <DefinitionListView
-                labels={{
-                  edrpou: "ЄДРПОУ",
-                  name: "Назва",
-                  id: "ID медзакладу"
-                }}
-                data={legalEntityTo}
-              />
-              <Line />
-              <Text fontSize={1} fontWeight="bold" mb={3}>
-                Підпорядкований медзаклад
-              </Text>
-              <DefinitionListView
-                labels={{
-                  edrpou: "ЄДРПОУ",
-                  name: "Назва",
-                  id: "ID медзакладу"
-                }}
-                data={legalEntityFrom}
-              />
-              <Line />
-              <DefinitionListView
-                labels={{
-                  base: "Підстава підпорядкування"
-                }}
-                data={{ base }}
-              />
-              <Flex>
-                <Box mr={3}>
-                  <Button variant="blue" onClick={() => window.history.go(-1)}>
-                    Повернутися
-                  </Button>
-                </Box>
-                <Tooltip
-                  component={() => (
-                    <Button
-                      variant="green"
-                      onClick={async () => {
-                        const mergedLegalEntities = {
-                          merged_from_legal_entity: legalEntityFrom,
-                          merged_to_legal_entity: legalEntityTo,
-                          base
-                        };
-                        const { signedContent } = await signData(
-                          mergedLegalEntities
-                        );
-                        await mergeLegalEntities({
-                          variables: {
-                            signedContent: {
-                              signedContent,
-                              signedContentEncoding: "BASE64"
-                            }
-                          }
-                        });
-                        navigate("/jobs");
+  <Query query={LegalEntityQuery} variables={{ id: legalEntityToId }}>
+    {({ loading, error, data }) => {
+      if (loading) return "Loading...";
+      if (error) return `Error! ${error.message}`;
+      const {
+        legalEntity: { id, name, edrpou }
+      } = data;
+      const legalEntityTo = { id, name, edrpou };
+      const legalEntityFrom = {
+        id: legalEntityFromId,
+        name: legalEntityFromName,
+        edrpou: legalEntityFromEdrpou
+      };
+      return (
+        <Box px={5}>
+          <Signer.Parent
+            url={REACT_APP_SIGNER_URL}
+            features={{ width: 640, height: 589 }}
+          >
+            {({ signData }) => (
+              <Mutation mutation={MergeLegalEntitiesMutation}>
+                {mergeLegalEntities => (
+                  <>
+                    <Text fontSize={1} fontWeight="bold" mb={3}>
+                      Основний медзаклад
+                    </Text>
+                    <DefinitionListView
+                      labels={{
+                        edrpou: "ЄДРПОУ",
+                        name: "Назва",
+                        id: "ID медзакладу"
                       }}
-                    >
-                      Підписати
-                    </Button>
-                  )}
-                  content={
-                    <>
-                      Увага! <br />
-                      Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність власних
-                      намірів , а також що зміст правочину ВІДПОВІДАЄ ВАШІЇЙ
-                      ВОЛІ, ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ ОСОБИСТО ВАМИ.
-                    </>
-                  }
-                />
-              </Flex>
-            </>
-          )}
-        </Mutation>
-      )}
-    </Signer.Parent>
-  </Box>
+                      data={legalEntityTo}
+                    />
+                    <Line />
+                    <Text fontSize={1} fontWeight="bold" mb={3}>
+                      Підпорядкований медзаклад
+                    </Text>
+                    <DefinitionListView
+                      labels={{
+                        edrpou: "ЄДРПОУ",
+                        name: "Назва",
+                        id: "ID медзакладу"
+                      }}
+                      data={legalEntityFrom}
+                    />
+                    <Line />
+                    <DefinitionListView
+                      labels={{
+                        base: "Підстава підпорядкування"
+                      }}
+                      data={{ base }}
+                    />
+                    <Flex>
+                      <Box mr={3}>
+                        <Link to="../reason" state={{ base }}>
+                          <Button variant="blue">Повернутися</Button>
+                        </Link>
+                      </Box>
+                      <Tooltip
+                        component={() => (
+                          <Button
+                            variant="green"
+                            onClick={async () => {
+                              const mergedLegalEntities = {
+                                merged_from_legal_entity: legalEntityFrom,
+                                merged_to_legal_entity: legalEntityTo,
+                                base
+                              };
+                              const { signedContent } = await signData(
+                                mergedLegalEntities
+                              );
+                              await mergeLegalEntities({
+                                variables: {
+                                  signedContent: {
+                                    signedContent,
+                                    signedContentEncoding: "BASE64"
+                                  }
+                                }
+                              });
+                              navigate("/jobs");
+                            }}
+                          >
+                            Підписати
+                          </Button>
+                        )}
+                        content={
+                          <>
+                            Увага! <br />
+                            Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність власних
+                            намірів , а також що зміст правочину ВІДПОВІДАЄ
+                            ВАШІЇЙ ВОЛІ, ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ ОСОБИСТО ВАМИ.
+                          </>
+                        }
+                      />
+                    </Flex>
+                  </>
+                )}
+              </Mutation>
+            )}
+          </Signer.Parent>
+        </Box>
+      );
+    }}
+  </Query>
 );
 
 const Line = system({
   is: "figure",
-  bg: "shiningKnight",
+  bg: "januaryDawn",
   my: 5,
   mx: 0,
   height: "1px",

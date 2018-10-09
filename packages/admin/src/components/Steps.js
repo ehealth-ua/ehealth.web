@@ -23,7 +23,7 @@ const Link = system(
     textDecoration: "none",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
-    pointerEvents: "none"
+    pointerEvents: "visible"
   },
   ({ active, ...props }) => ({
     "&::before": mixed({
@@ -51,7 +51,7 @@ const Link = system(
   boolean({
     prop: "active",
     color: "darkAndStormy",
-    pointerEvents: "visible"
+    pointerEvents: "none"
   })
 );
 

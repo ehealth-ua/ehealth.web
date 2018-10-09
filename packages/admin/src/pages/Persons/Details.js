@@ -230,7 +230,7 @@ const DeclarationsInfo = ({ id }) => (
                 >
                   <Form.AutoSubmit onSubmit={setLocationParams} />
                   <Flex>
-                    <Box p={5} width={460}>
+                    <Box px={5} pt={5} width={460}>
                       <Field.Text
                         name="declarationId"
                         label="Пошук декларації"
@@ -238,7 +238,7 @@ const DeclarationsInfo = ({ id }) => (
                         postfix={<AdminSearchIcon color="#CED0DA" />}
                       />
                     </Box>
-                    <Box py={5}>
+                    <Box pt={5}>
                       <Field.Select
                         name="status"
                         label="Статус декларації"
