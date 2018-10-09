@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.101.6"></a>
+## [0.101.6](https://github.com/edenlabllc/ehealth.web/compare/v0.101.5...v0.101.6) (2018-10-09)
+
+
+### Bug Fixes
+
+* **admin:** fix paddings, sorting in table and steps ([893b783](https://github.com/edenlabllc/ehealth.web/commit/893b783))
+
+
+
+
+
 <a name="0.101.5"></a>
 ## [0.101.5](https://github.com/edenlabllc/ehealth.web/compare/v0.101.4...v0.101.5) (2018-10-09)
 
