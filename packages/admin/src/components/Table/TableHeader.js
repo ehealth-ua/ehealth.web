@@ -5,7 +5,10 @@ import { css } from "react-emotion";
 import { ifProp } from "styled-tools";
 import { Switch } from "@ehealth/components";
 import { CaretDownIcon, CaretUpIcon } from "@ehealth/icons";
-import { filterTableColumn as filterTableDefaultColumn } from "@ehealth/utils";
+import {
+  filterTableColumn as filterTableDefaultColumn,
+  stringifySortingParams
+} from "@ehealth/utils";
 
 type HeaderData = { [string]: string };
 
@@ -43,7 +46,8 @@ const TableHeader = ({
   sortableFields = [],
   sortingParams = {},
   onSortingChange = () => {},
-  filterRow
+  filterRow,
+  switchSorting = switchSortingParams
 }: TableHeaderType) => (
   <HeaderComponent>
     <RowComponent>
@@ -58,11 +62,7 @@ const TableHeader = ({
               key={columnKeyExtractor(name, index)}
               onClick={
                 isSortable
-                  ? () =>
-                      onSortingChange({
-                        name,
-                        order: sortingParams.order === "ASC" ? "DESC" : "ASC"
-                      })
+                  ? () => switchSorting(name, sortingParams, onSortingChange)
                   : undefined
               }
             >
@@ -84,6 +84,26 @@ const TableHeader = ({
     </RowComponent>
   </HeaderComponent>
 );
+
+const switchSortingParams = (name, order, onSortingChange) => {
+  const sortParams = stringifySortingParams(order);
+  switch (sortParams) {
+    case stringifySortingParams({ name, order: "ASC" }):
+      onSortingChange({
+        name,
+        order: "DESC"
+      });
+      break;
+    case stringifySortingParams({ name, order: "DESC" }):
+      onSortingChange();
+      break;
+    default:
+      onSortingChange({
+        name,
+        order: "ASC"
+      });
+  }
+};
 
 const ContentBlock = ({ content, icon, prefix }) => (
   <Content>
