@@ -25,7 +25,9 @@ class AcceptPage extends Component {
       client,
       user,
       scope,
-      location: { query: { client_id, redirect_uri } }
+      location: {
+        query: { client_id, redirect_uri }
+      }
     } = this.props;
     if (!client_id) return this.renderNotFoundClientId();
     if (!client) return this.renderNotFoundClient();
@@ -40,7 +42,7 @@ class AcceptPage extends Component {
           Ви даєте доступ додатку <b>{client.name}</b> на наступні дії:
           <ul className={styles.list}>
             {scope.split(" ").map(i => (
-              <li key={i}>
+              <li key={i} className={styles.listItem}>
                 • <DictionaryValue dictionary="SCOPES" value={i} />
               </li>
             ))}
@@ -97,7 +99,10 @@ class AcceptPage extends Component {
   }
 
   approval(_scope) {
-    let { location: { query }, scope } = this.props;
+    let {
+      location: { query },
+      scope
+    } = this.props;
     if (_scope === "cabinet") scope = "";
     this.setState({ isLoading: true });
 
