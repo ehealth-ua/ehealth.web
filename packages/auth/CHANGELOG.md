@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.102.2"></a>
+## [0.102.2](https://github.com/edenlabllc/ehealth.web/compare/v0.102.1...v0.102.2) (2018-10-10)
+
+
+### Bug Fixes
+
+* **auth:** fix item in list of possibilities ([0fa0e64](https://github.com/edenlabllc/ehealth.web/commit/0fa0e64))
+
+
+
+
+
 <a name="0.102.0"></a>
 # [0.102.0](https://github.com/edenlabllc/ehealth.web/compare/v0.101.7...v0.102.0) (2018-10-09)
 
