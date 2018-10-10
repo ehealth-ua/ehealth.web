@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.102.1"></a>
+## [0.102.1](https://github.com/edenlabllc/ehealth.web/compare/v0.102.0...v0.102.1) (2018-10-10)
+
+
+### Bug Fixes
+
+* **admin:** fix mergeLegalEntities steps flow ([1faf054](https://github.com/edenlabllc/ehealth.web/commit/1faf054))
+
+
+
+
+
 <a name="0.102.0"></a>
 # [0.102.0](https://github.com/edenlabllc/ehealth.web/compare/v0.101.7...v0.102.0) (2018-10-09)
 
