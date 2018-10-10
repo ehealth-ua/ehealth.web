@@ -3,15 +3,21 @@ import * as Reach from "@reach/router";
 import system from "system-components/emotion";
 import { mixed, boolean } from "@ehealth/system-tools";
 
-export const Item = ({ to, ...props }) => (
+export const Item = ({ to, disabled, ...props }) => (
   <Reach.Match path={to}>
-    {({ match }) => <Link to={to} active={!!match} {...props} />}
+    {({ match }) => (
+      <Link
+        to={to}
+        active={!!match}
+        is={disabled || !!match ? "div" : Reach.Link}
+        {...props}
+      />
+    )}
   </Reach.Match>
 );
 
 const Link = system(
   {
-    is: Reach.Link,
     display: "flex",
     overflow: "hidden",
     mr: 2,
@@ -22,8 +28,7 @@ const Link = system(
   {
     textDecoration: "none",
     whiteSpace: "nowrap",
-    textOverflow: "ellipsis",
-    pointerEvents: "visible"
+    textOverflow: "ellipsis"
   },
   ({ active, ...props }) => ({
     "&::before": mixed({
@@ -50,8 +55,7 @@ const Link = system(
   }),
   boolean({
     prop: "active",
-    color: "darkAndStormy",
-    pointerEvents: "none"
+    color: "darkAndStormy"
   })
 );
 

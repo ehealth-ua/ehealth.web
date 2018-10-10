@@ -24,17 +24,21 @@ import MergeLegalEntitiesMutation from "../../graphql/MergeLegalEntitiesMutation
 
 import { REACT_APP_SIGNER_URL } from "../../env";
 
-const Add = ({ location: { state } }) => (
+const Add = ({
+  location: {
+    state: { base }
+  }
+}) => (
   <>
     <Box pt={5} px={5}>
       <Steps.List>
-        <Steps.Item to="./" state={state}>
+        <Steps.Item to="./" state={{ base }}>
           Знайдіть медзаклад
         </Steps.Item>
-        <Steps.Item to="./reason" state={state}>
+        <Steps.Item to="./reason" state={{ base }} disabled={!base}>
           Вкажіть підставу
         </Steps.Item>
-        <Steps.Item to="./sign" state={state}>
+        <Steps.Item to="./sign" state={{ base }} disabled={!base}>
           Підтвердіть з ЕЦП
         </Steps.Item>
       </Steps.List>
