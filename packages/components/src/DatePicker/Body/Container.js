@@ -3,8 +3,8 @@ import styled from "react-emotion/macro";
 const Container = styled.div`
   position: absolute;
   top: 100%;
-  left: 0;
-  z-index: 1;
+  right: 0;
+  z-index: 1000;
   min-width: 300px;
   max-width: 300px;
   margin: 0 auto;

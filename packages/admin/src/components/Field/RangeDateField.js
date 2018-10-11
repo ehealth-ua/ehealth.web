@@ -1,28 +1,69 @@
 // @flow
-import React from "react";
+import * as React from "react";
 import MaskedInput from "react-text-mask";
-import styled from "react-emotion/macro";
 import createAutoCorrectedDatePipe from "text-mask-addons/dist/createAutoCorrectedDatePipe";
-
+import format from "date-fns/format";
+import Composer from "react-composer";
 import { Field, DatePicker } from "@ehealth/components";
 import { CalendarIcon } from "@ehealth/icons";
-import { parseDate } from "@ehealth/utils";
+import { formatDate, parseDate } from "@ehealth/utils";
 
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
 
-const autoCorrectedDatePipe = createAutoCorrectedDatePipe("dd/mm/yyyy");
+/* @example
+*  <>
+*     <Field.RangePicker
+*       rangeNames={[
+*         "filter.personal.startDateFrom",
+*         "filter.personal.startDateTo"
+*       ]}
+*       label="Початок дії контракту"
+*     />
+*     <Validation
+*       field="filter.personal.startDateFrom"
+*       validate={validateRequiredObjectField("filter.personal")}
+*       message="Обов&#700;язкове поле"
+*     />
+*     <Validation
+*       field="filter.personal.startDateTo"
+*       validate={validateRequiredObjectField("filter.personal")}
+*       message="Обов&#700;язкове поле"
+*     />
+*   </>
+*   <>
+*     <Field.RangePicker
+*       rangeNames={[
+*         "filter.personal.endDateFrom",
+*         "filter.personal.endDateTo"
+*       ]}
+*       label="Кінець дії контракту"
+*     />
+*     <Validation
+*       field="filter.personal.endDateFrom"
+*       validate={validateRequiredObjectField("filter.personal")}
+*       message="Обов&#700;язкове поле"
+*     />
+*     <Validation
+*       field="filter.personal.endDateTo"
+*       validate={validateRequiredObjectField("filter.personal")}
+*       message="Обов&#700;язкове поле"
+*     />
+*   </>
+*/
+
+const autoCorrectedDatePipe = createAutoCorrectedDatePipe("dd.mm.yyyy");
 
 type RangeDateFieldState = {|
-  opened: "none" | "start" | "end",
-  from: ?Date,
-  to: ?Date
+  opened: "none" | "start" | "end"
 |};
 
 type RangeDateFieldProps = {|
   name: string,
   label?: string,
-  hint?: string
+  hint?: string,
+  warning?: string,
+  rangeNames: string[]
 |};
 
 class RangeDateField extends React.Component<
@@ -30,9 +71,7 @@ class RangeDateField extends React.Component<
   RangeDateFieldState
 > {
   state = {
-    opened: "none",
-    from: null,
-    to: null
+    opened: "none"
   };
 
   componentWillUnmount() {
@@ -40,7 +79,12 @@ class RangeDateField extends React.Component<
   }
 
   render() {
-    const { name, label, hint, ...props } = this.props;
+    const {
+      rangeNames: [start, end],
+      label,
+      hint,
+      ...props
+    } = this.props;
     return (
       <FieldView.Wrapper>
         {label && (
@@ -49,50 +93,116 @@ class RangeDateField extends React.Component<
             {hint && <FieldView.Message>{hint}</FieldView.Message>}
           </FieldView.Header>
         )}
-        <InputView.Border>
-          <InputView.Content px={2} flex="none">
-            <CalendarIcon />
-          </InputView.Content>
-          <InputView.Content>
-            <Calendar
-              name="from"
-              {...props}
-              onFocus={() => this.setState({ opened: "start" })}
-              onBlur={this.handleBlur}
-              handleOnDateSelected={this.handleOnDateSelected}
-              handleKeyPress={this.handleKeyPress}
-              maxDate={this.state.to}
-              opened={this.state.opened === "start"}
-            />
-          </InputView.Content>
-          <InputView.Content>{" - "}</InputView.Content>
-          <InputView.Content>
-            <Calendar
-              name="to"
-              {...props}
-              onFocus={() => this.setState({ opened: "end" })}
-              onBlur={this.handleBlur}
-              handleOnDateSelected={this.handleOnDateSelected}
-              handleKeyPress={this.handleKeyPress}
-              minDate={this.state.from}
-              opened={this.state.opened === "end"}
-            />
-          </InputView.Content>
-        </InputView.Border>
+        <Composer
+          components={[
+            <Field name={start} {...props} />,
+            <Field name={end} {...props} />
+          ]}
+        >
+          {([propsFrom, propsTo]) => (
+            <>
+              <InputView.Border
+                state={propsFrom.meta.state || propsTo.meta.state}
+              >
+                <InputView.Content
+                  pl={2}
+                  py={0}
+                  flex="none"
+                  display="flex"
+                  alignItems="center"
+                >
+                  <CalendarIcon />
+                </InputView.Content>
+                <Calendar
+                  name={start}
+                  label="from"
+                  onFocus={() =>
+                    this.setState({
+                      opened: "start"
+                    })
+                  }
+                  onBlur={this.handleBlur}
+                  handleDateSelect={this.handleDateSelect}
+                  getSelectedDate={this.getSelectedDate}
+                  handleKeyPress={this.handleKeyPress}
+                  maxDate={this.getMinMaxDate(propsTo.input.value)}
+                  opened={this.state.opened === "start"}
+                  {...propsFrom}
+                />
+                <InputView.Content>{"-"}</InputView.Content>
+                <Calendar
+                  name={end}
+                  label="to"
+                  onFocus={() =>
+                    this.setState({
+                      opened: "end"
+                    })
+                  }
+                  onBlur={this.handleBlur}
+                  handleDateSelect={this.handleDateSelect}
+                  getSelectedDate={this.getSelectedDate}
+                  handleKeyPress={this.handleKeyPress}
+                  minDate={this.getMinMaxDate(propsFrom.input.value)}
+                  opened={this.state.opened === "end"}
+                  {...propsTo}
+                />
+              </InputView.Border>
+              <FieldView.Footer>
+                <FieldView.Message
+                  state={propsFrom.meta.state || propsTo.meta.state}
+                >
+                  {(propsFrom.meta.errored && propsFrom.meta.error) ||
+                    (propsTo.meta.errored && propsTo.meta.error)}
+                </FieldView.Message>
+              </FieldView.Footer>
+            </>
+          )}
+        </Composer>
       </FieldView.Wrapper>
     );
   }
 
-  onChange = (field, value) => {
-    this.setState({
-      [field]: value
-    });
+  getSelectedDate(value: string) {
+    const parsedDate = Date.parse(value);
+    return new Date(isNaN(parsedDate) ? Date.now() : parsedDate);
+  }
+
+  getMinMaxDate(value: string) {
+    if (!value) return null;
+    return new Date(Date.parse(value));
+  }
+
+  handleDateSelect = (onFieldChange: string => mixed) => ({
+    selectable,
+    date
+  }: {
+    selectable: boolean,
+    date: Date
+  }) => {
+    if (!selectable) return;
+
+    this.setState({ opened: "none" });
+    onFieldChange(format(date, "YYYY-MM-DD"));
   };
 
-  timeoutIds = [];
+  handleBlur = () => {
+    this.internalSetTimeout(() => {
+      if (
+        document.hasFocus() &&
+        document.activeElement === document.body &&
+        document.activeElement !== document.documentElement
+      ) {
+        this.setState({ opened: "none" });
+      }
+    });
+  };
+  handleKeyPress = (e: SyntheticKeyboardEvent<>) =>
+    e.key === "Enter" && this.setState({ opened: "none" });
 
-  internalSetTimeout = (fn, time) => {
-    const id = setTimeout(() => {
+  timeoutIds: TimeoutID[] = [];
+
+  internalSetTimeout = (fn: () => mixed, time?: number): void => {
+    const id: TimeoutID = setTimeout(() => {
       this.timeoutIds = this.timeoutIds.filter(i => i !== id);
       fn();
     }, time);
@@ -107,89 +217,62 @@ class RangeDateField extends React.Component<
 
     this.timeoutIds = [];
   }
-
-  handleOnDateSelected = (selected, selectable, date, input, name) => {
-    if (!selectable) return;
-
-    this.onChange(name, date);
-    input.onChange(date.toLocaleDateString("en-GB"));
-    this.setState({ opened: "none" });
-  };
-
-  handleBlur = () => {
-    this.internalSetTimeout(() => {
-      if (
-        document.hasFocus() &&
-        document.activeElement === document.body &&
-        document.activeElement !== document.documentElement
-      ) {
-        this.setState({ opened: "none" });
-      }
-    });
-  };
-
-  handleKeyPress = e => {
-    e.key === "Enter" && this.setState({ opened: "none" });
-  };
 }
 
 export default RangeDateField;
 
-const Container = styled.div`
-  position: relative;
-`;
-
 type CalendarProps = {|
   name: string,
-  minDate: Date,
-  maxDate: Date,
+  minDate?: Date | null,
+  maxDate?: Date | null,
   opened: boolean,
   onFocus: () => mixed,
   onBlur: () => mixed,
-  handleKeyPress: () => mixed,
-  handleOnDateSelected: () => mixed
+  getSelectedDate: string => mixed,
+  handleKeyPress: (SyntheticKeyboardEvent<>) => mixed,
+  handleDateSelect: string => mixed => mixed
 |};
 
 const Calendar = ({
-  name,
   minDate,
   maxDate,
   opened,
   onFocus,
   onBlur,
   handleKeyPress,
-  handleOnDateSelected,
+  handleDateSelect,
+  getSelectedDate,
   ...props
 }: CalendarProps) => (
-  <Field {...props} name={name}>
-    {({ input: { name, ...input } }) => {
-      const selectedDate =
-        input.value.length === 10 && new Date(parseDate(input.value));
-      return (
-        <Container onFocus={onFocus} onBlur={onBlur}>
-          <FieldView.Wrapper is="label" maxWidth={85}>
-            <MaskedInput
-              {...input}
-              name={`date_${name}_start_date`}
-              onKeyPress={handleKeyPress}
-              mask={[/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/]}
-              guide={false}
-              pipe={autoCorrectedDatePipe}
-              placeholder="ДД/ММ/РР"
-            />
-          </FieldView.Wrapper>
-          {opened && (
-            <DatePicker
-              selected={selectedDate || new Date()}
-              onDateSelected={({ selected, selectable, date }) =>
-                handleOnDateSelected(selected, selectable, date, input, name)
-              }
-              minDate={minDate}
-              maxDate={maxDate}
-            />
-          )}
-        </Container>
-      );
-    }}
-  </Field>
+  <FieldView.Wrapper maxWidth={100} px={2}>
+    <label onFocus={onFocus} onBlur={onBlur}>
+      <Field format={formatDate} parse={parseDate} {...props}>
+        {({ input }) => (
+          <InputView.Content
+            {...input}
+            is={MaskedInput}
+            onKeyPress={handleKeyPress}
+            placeholder="ДД.ММ.РРРР"
+            mask={[/\d/, /\d/, ".", /\d/, /\d/, ".", /\d/, /\d/, /\d/, /\d/]}
+            guide={false}
+            pipe={autoCorrectedDatePipe}
+            width="100%"
+            autocomplete="off"
+          />
+        )}
+      </Field>
+    </label>
+    {opened && (
+      <Field {...props}>
+        {({ input: { value, onChange } }) => (
+          <DatePicker
+            selected={getSelectedDate(value)}
+            onDateSelected={handleDateSelect(onChange)}
+            minDate={minDate}
+            maxDate={maxDate}
+          />
+        )}
+      </Field>
+    )}
+  </FieldView.Wrapper>
 );
