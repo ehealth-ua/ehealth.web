@@ -129,7 +129,7 @@ class RangeDateField extends React.Component<
                   opened={this.state.opened === "start"}
                   {...propsFrom}
                 />
-                <InputView.Content>{"-"}</InputView.Content>
+                <InputView.Content>-</InputView.Content>
                 <Calendar
                   name={end}
                   label="to"
