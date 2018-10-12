@@ -14,3 +14,9 @@ export const createUrl = (endpoint, options) => {
 export const stripProtocol = url => {
   return url && url.replace(/(^\w+:|^)\/\//, "");
 };
+
+export const backUrl = router => {
+  const { location } = router;
+  const index = location["pathname"].indexOf("/", 1);
+  return location["pathname"].slice(1, index);
+};

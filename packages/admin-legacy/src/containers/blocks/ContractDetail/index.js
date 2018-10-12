@@ -19,6 +19,7 @@ import DictionaryValue from "../DictionaryValue";
 import ShowWithScope from "../ShowWithScope";
 
 import { CONTRACT_STATUS } from "../../../helpers/enums";
+import { backUrl } from "../../../helpers/url";
 
 import styles from "./styles.module.css";
 
@@ -48,7 +49,11 @@ const PrintLink = ({
 
 class ContractDetail extends React.Component {
   componentWillMount() {
-    const { contract: { id, status }, getPrintoutContent, type } = this.props;
+    const {
+      contract: { id, status },
+      getPrintoutContent,
+      type
+    } = this.props;
     if (
       type === "contract" ||
       (type === "contractRequest" && status === "PENDING_NHS_SIGN")
@@ -71,6 +76,9 @@ class ContractDetail extends React.Component {
     const contractorDivisions =
       contract.contractor_divisions &&
       contract.contractor_divisions.filter(Boolean);
+
+    const backLocationPath = backUrl(router);
+
     return (
       <div>
         <Helmet
@@ -78,7 +86,7 @@ class ContractDetail extends React.Component {
           meta={[{ property: "og:title", content: "Деталі контракту" }]}
         />
 
-        <BackLink onClick={() => router.goBack()}>
+        <BackLink onClick={() => router.push(`/${backLocationPath}`)}>
           Назад до списку запитів
         </BackLink>
 

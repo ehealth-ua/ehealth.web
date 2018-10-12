@@ -1,7 +1,6 @@
 import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import { provideHooks } from "redial";
 
 import ContractDetail from "../../blocks/ContractDetail";
@@ -77,7 +76,6 @@ class ContractRequestsDetailsPage extends React.Component {
 }
 
 export default compose(
-  withRouter,
   provideHooks({
     fetch: ({ dispatch, params: { id } }) => dispatch(fetchContractRequest(id))
   }),

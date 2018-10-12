@@ -16,6 +16,7 @@ import BackLink from "../BackLink";
 import AddressesList from "../AddressesList";
 import DictionaryValue from "../DictionaryValue";
 import ShowWithScope from "../ShowWithScope";
+import { backUrl } from "../../../helpers/url";
 
 import styles from "./styles.module.css";
 
@@ -29,14 +30,15 @@ const DeclarationDetail = ({ declaration, onTerminate, router }) => {
     declaration.person.second_name
   ].join(" ");
 
+  const backLocationPath = backUrl(router);
+
   return (
     <div>
       <Helmet
         title={`Декларація ${fullName}`}
         meta={[{ property: "og:title", content: `Декларація ${fullName}` }]}
       />
-
-      <BackLink onClick={() => router.push("/declarations")}>
+      <BackLink onClick={() => router.push(`/${backLocationPath}`)}>
         Повернутися до списку декларацій
       </BackLink>
 
