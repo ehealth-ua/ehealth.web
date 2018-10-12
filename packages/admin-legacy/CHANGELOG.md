@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.102.6"></a>
+## [0.102.6](https://github.com/edenlabllc/ehealth.web/compare/v0.102.5...v0.102.6) (2018-10-12)
+
+
+### Bug Fixes
+
+* **admin-legacy:** removed an incorrect return to the last page from details page ([97d8b7c](https://github.com/edenlabllc/ehealth.web/commit/97d8b7c))
+
+
+
+
+
 <a name="0.102.5"></a>
 ## [0.102.5](https://github.com/edenlabllc/ehealth.web/compare/v0.102.4...v0.102.5) (2018-10-12)
 
