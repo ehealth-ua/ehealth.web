@@ -27,6 +27,7 @@
 
 .group-input.error {
   border-color: #ff1f44;
+  z-index: 1;
 }
 
 .group-input.error .prefix-wrapper,
