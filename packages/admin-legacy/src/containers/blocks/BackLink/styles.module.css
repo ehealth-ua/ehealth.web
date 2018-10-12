@@ -25,6 +25,7 @@
 .back_icon_right .back__icon {
   float: right;
   transform: rotate(180deg);
+  line-height: 1;
 }
 
 .back_icon_right .back__content {
