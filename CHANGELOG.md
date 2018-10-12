@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.102.7"></a>
+## [0.102.7](https://github.com/edenlabllc/ehealth.web/compare/v0.102.6...v0.102.7) (2018-10-12)
+
+
+### Bug Fixes
+
+* **admin-legacy:** added font-size property for improve title at clinics page ([47adbd2](https://github.com/edenlabllc/ehealth.web/commit/47adbd2))
+* **admin-legacy:** added font-size property for improve title at clinics page ([910a69d](https://github.com/edenlabllc/ehealth.web/commit/910a69d))
+* **admin-legacy:** improve error field's UI ([721889d](https://github.com/edenlabllc/ehealth.web/commit/721889d))
+
+
+
+
+
 <a name="0.102.6"></a>
 ## [0.102.6](https://github.com/edenlabllc/ehealth.web/compare/v0.102.5...v0.102.6) (2018-10-12)
 
