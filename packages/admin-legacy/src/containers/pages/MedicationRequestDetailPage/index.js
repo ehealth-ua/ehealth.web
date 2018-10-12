@@ -1,6 +1,5 @@
 import React from "react";
 import { compose } from "redux";
-import { withRouter } from "react-router";
 import { provideHooks } from "redial";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
@@ -58,26 +57,34 @@ const MedicationRequestDetailPage = ({
 
     <DetailMain>
       <H1>I. Загальна інформація</H1>
-
       <DataList
         list={[
           { name: "ID рецепту", value: id },
           { name: "Статус", value: status },
           { name: "Номер рецепту", value: request_number },
-          { name: "Дата створення", value: format(created_at, "DD/MM/YYYY") },
-          { name: "Дата початку", value: format(started_at, "DD/MM/YYYY") },
-          { name: "Дата закінчення", value: format(ended_at, "DD/MM/YYYY") },
+          {
+            name: "Дата створення",
+            value: created_at && format(created_at, "DD/MM/YYYY")
+          },
+          {
+            name: "Дата початку",
+            value: started_at && format(started_at, "DD/MM/YYYY")
+          },
+          {
+            name: "Дата закінчення",
+            value: ended_at && format(ended_at, "DD/MM/YYYY")
+          },
           {
             name: "Відпуск дійсний з",
-            value: format(dispense_valid_from, "DD/MM/YYYY")
+            value:
+              dispense_valid_from && format(dispense_valid_from, "DD/MM/YYYY")
           },
           {
             name: "Відпуск дійсний по",
-            value: format(dispense_valid_to, "DD/MM/YYYY")
+            value: dispense_valid_to && format(dispense_valid_to, "DD/MM/YYYY")
           }
         ]}
       />
-
       <Line />
 
       <H1>II. Інформація про медичний заклад</H1>
@@ -137,7 +144,10 @@ const MedicationRequestDetailPage = ({
             name: "Форма",
             value: <DictionaryValue dictionary="MEDICATION_FORM" value={form} />
           },
-          { name: "Дозування", value: <Container container={dosage} /> },
+          {
+            name: "Дозування",
+            value: dosage && <Container container={dosage} />
+          },
           { name: "Кількість препарату", value: medication_qty }
         ]}
       />
@@ -157,7 +167,6 @@ const MedicationRequestDetailPage = ({
 );
 
 export default compose(
-  withRouter,
   provideHooks({
     fetch: ({ dispatch, params: { id } }) =>
       dispatch(fetchMedicationRequest(id))
