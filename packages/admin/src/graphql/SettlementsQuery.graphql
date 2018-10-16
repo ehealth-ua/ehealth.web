@@ -1,15 +1,17 @@
-query SettlementsQuery($name: String) {
-  settlements(name: $name) {
-    id
-    district
-    districtId
-    koatuu
-    mountainGroup
-    name
-    parentSettlement
-    parentSettlementId
-    region
-    regionId
-    type
+query SettlementsQuery($filter: SettlementFilter) {
+  settlements(filter: $filter) {
+    nodes {
+      id
+      district
+      districtId
+      koatuu
+      mountainGroup
+      name
+      parentSettlement
+      parentSettlementId
+      region
+      regionId
+      type
+    }
   }
 }

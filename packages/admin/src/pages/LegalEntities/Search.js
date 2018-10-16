@@ -66,10 +66,12 @@ const Search = ({ uri }) => (
                   : undefined
               }}
             >
-              {({ loading, error, data: { legalEntities = [] } }) =>
-                !error && legalEntities.length > 0 ? (
+              {({ loading, error, data: { legalEntities = [] } }) => {
+                if (loading) return null;
+                const { nodes } = legalEntities;
+                return !error && nodes.length > 0 ? (
                   <Table
-                    data={legalEntities}
+                    data={nodes}
                     header={{
                       id: "ID",
                       name: "Назва Медзакладу",
@@ -127,8 +129,8 @@ const Search = ({ uri }) => (
                     }
                     tableName="legal-entities/search"
                   />
-                ) : null
-              }
+                ) : null;
+              }}
             </Query>
           </>
         );
@@ -165,6 +167,8 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
           context={{ credentials: "same-origin" }}
         >
           {({ loading, error, data: { settlements = [{}] }, refetch }) => {
+            if (loading) return null;
+            const { nodes } = settlements;
             return (
               <Field.Select
                 name="filter.settlement"
@@ -174,7 +178,7 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
                   if (!item) return "";
                   return typeof item === "string" ? item : item.settlement;
                 }}
-                items={settlements.map(({ name, district, type, region }) => ({
+                items={nodes.map(({ name, district, type, region }) => ({
                   area: region || undefined,
                   settlement: name,
                   settlementType: type,

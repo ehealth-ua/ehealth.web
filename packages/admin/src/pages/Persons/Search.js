@@ -52,10 +52,12 @@ const Search = ({ uri }) => (
             />
           </Router>
           <Query query={SearchPersonsQuery} variables={locationParams}>
-            {({ loading, error, data: { persons = [] }, refetch }) =>
-              !error && persons.length > 0 ? (
+            {({ loading, error, data: { persons = [] }, refetch }) => {
+              if (loading) return null;
+              const { nodes } = persons;
+              return !error && nodes.length > 0 ? (
                 <Table
-                  data={persons}
+                  data={nodes}
                   header={{
                     fullName: "ПІБ пацієнта",
                     birthDate: "Дата народження",
@@ -99,8 +101,8 @@ const Search = ({ uri }) => (
                   }
                   tableName="persons/search"
                 />
-              ) : null
-            }
+              ) : null;
+            }}
           </Query>
         </>
       )}
