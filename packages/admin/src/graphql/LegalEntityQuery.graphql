@@ -1,7 +1,7 @@
 query LegalEntityQuery(
   $id: ID!
-  $filter: LegalEntityMergeConnectionFilter
-  $orderBy: LegalEntityMergeConnectionOrderBy
+  $filter: RelatedLegalEntityFilter
+  $orderBy: RelatedLegalEntityOrderBy
 ) {
   legalEntity(id: $id) {
     id
@@ -67,38 +67,42 @@ query LegalEntityQuery(
       }
     }
     mergedFromLegalEntities(filter: $filter, orderBy: $orderBy) {
-      isActive
-      base
-      insertedAt
-      mergedFromLegalEntity {
-        id
-        name
-        edrpou
+      nodes {
+        isActive
+        reason
+        insertedAt
+        mergedFromLegalEntity {
+          id
+          name
+          edrpou
+        }
       }
     }
     divisions {
-      id
-      name
-      addresses {
+      nodes {
+        id
+        name
+        addresses {
+          type
+          area
+          region
+          settlement
+          settlementType
+          settlementId
+          streetType
+          street
+          building
+          apartment
+        }
+        phones {
+          type
+          number
+        }
+        email
+        status
         type
-        area
-        region
-        settlement
-        settlementType
-        settlementId
-        streetType
-        street
-        building
-        apartment
+        mountainGroup
       }
-      phones {
-        type
-        number
-      }
-      email
-      status
-      type
-      mountainGroup
     }
   }
 }
