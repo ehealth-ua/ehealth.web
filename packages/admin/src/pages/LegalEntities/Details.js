@@ -50,11 +50,12 @@ const Details = ({ id }) => (
         kveds,
         misVerified,
         nhsVerified,
-        mergedFromLegalEntities,
         owner,
-        divisions,
         medicalServiceProvider
       } = legalEntity;
+      const divisions = legalEntity.divisions["nodes"];
+      const mergedFromLegalEntities =
+        legalEntity.mergedFromLegalEntities["nodes"];
       const statusAction =
         status === "ACTIVE" && (nhsVerified ? status : "NHS_VERIFY_CLOSED");
 
