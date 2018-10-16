@@ -1,4 +1,13 @@
+import React from "react";
 import system from "system-components/emotion";
+import { RemoveItemIcon } from "@ehealth/icons";
+
+export const ResetButton = ({ children, ...props }) => (
+  <Container {...props}>
+    <Reset />
+    {children}
+  </Container>
+);
 
 const Button = system(
   {
@@ -16,6 +25,28 @@ const Button = system(
     outline: none;
   `
 );
+
+const Container = system(
+  {
+    is: "button",
+    display: "flex",
+    alignItems: "center",
+    color: "rockmanBlue",
+    fontSize: 0,
+    fontWeight: 700,
+    lineHeight: 1,
+    py: 2
+  },
+  {
+    cursor: "pointer"
+  }
+);
+
+const Reset = system({
+  is: RemoveItemIcon,
+  color: "rockmanBlue",
+  mr: 2
+});
 
 Button.displayName = "Button";
 
