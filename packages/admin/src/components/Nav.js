@@ -11,6 +11,11 @@ const Nav = () => (
   <NavContainer>
     <NavList>
       <Ability action="read" resource="person">
+        <NavSection title="Контракти">
+          <NavLink to="/contract-requests">
+            Запити на укладення контрактів
+          </NavLink>
+        </NavSection>
         <NavSection title="Паціенти">
           <NavLink to="/persons">Пошук паціентів</NavLink>
         </NavSection>

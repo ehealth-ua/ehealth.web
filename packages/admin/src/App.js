@@ -9,6 +9,7 @@ import DataProvider from "./DataProvider";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
+import ContractRequests from "./pages/ContractRequests";
 import Persons from "./pages/Persons";
 import Declarations from "./pages/Declarations";
 import LegalEntities from "./pages/LegalEntities";
@@ -22,6 +23,7 @@ const App = () => (
         <Layout>
           <Router>
             <Home path="/" />
+            <ContractRequests path="contract-requests/*" />
             <Persons path="persons/*" />
             <Declarations path="declarations/*" />
             <LegalEntities path="legal-entities/*" />
