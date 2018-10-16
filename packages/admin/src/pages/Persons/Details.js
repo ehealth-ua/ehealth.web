@@ -51,12 +51,12 @@ const Details = ({ id }) => (
         taxId,
         unzr,
         phones,
-        authenticationMethod
+        authenticationMethods
       } = data.person;
 
       const [mobilePhone] = filterData("MOBILE", phones);
       const [landLinePhone] = filterData("LAND_LINE", phones);
-      const authInfo = authenticationMethod[0];
+      const authInfo = authenticationMethods[0];
 
       const userInfo = {
         birthDate,
@@ -278,8 +278,8 @@ const DeclarationsInfo = ({ id }) => (
                     division: { name: divisionName },
                     status
                   }) => {
-                    const [activeAddress] = addresses.filter(
-                      a => a.type === "ACTIVE"
+                    const [residenceAddress] = addresses.filter(
+                      a => a.type === "RESIDENCE"
                     );
                     return {
                       id,
@@ -288,8 +288,8 @@ const DeclarationsInfo = ({ id }) => (
                       name,
                       edrpou,
                       divisionName,
-                      address: activeAddress && (
-                        <AddressView data={activeAddress} />
+                      address: residenceAddress && (
+                        <AddressView data={residenceAddress} />
                       ),
                       status: (
                         <Badge

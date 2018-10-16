@@ -270,7 +270,9 @@ const GeneralInfo = ({ general }) => (
 const LegalEntity = ({
   legalEntity: { edrpou, publicName, addresses, id }
 }) => {
-  const [activeAddress] = addresses.filter(a => a.type === "ACTIVE");
+  const [registrationAddress] = addresses.filter(
+    a => a.type === "REGISTRATION"
+  );
   return (
     <>
       <DefinitionListView
@@ -282,7 +284,9 @@ const LegalEntity = ({
         data={{
           edrpou,
           publicName,
-          addresses: activeAddress && <AddressView data={activeAddress} />
+          addresses: registrationAddress && (
+            <AddressView data={registrationAddress} />
+          )
         }}
       />
       <DefinitionListView
@@ -307,7 +311,7 @@ const LegalEntity = ({
 const Division = ({
   division: { id, addresses, phones, mountainGroup, ...division }
 }) => {
-  const [activeAddress] = addresses.filter(a => a.type === "ACTIVE");
+  const [residenceAddress] = addresses.filter(a => a.type === "RESIDENCE");
   return (
     <>
       <DefinitionListView
@@ -320,7 +324,9 @@ const Division = ({
           email: "Email"
         }}
         data={{
-          addresses: activeAddress && <AddressView data={activeAddress} />,
+          addresses: residenceAddress && (
+            <AddressView data={residenceAddress} />
+          ),
           phones: getPhones(phones),
           mountainGroup: mountainGroup ? <PositiveIcon /> : null,
           ...division

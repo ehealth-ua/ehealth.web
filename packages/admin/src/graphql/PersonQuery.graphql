@@ -14,7 +14,7 @@ query PersonQuery($id: ID!) {
       type
       number
     }
-    authenticationMethod {
+    authenticationMethods {
       type
       phoneNumber
     }

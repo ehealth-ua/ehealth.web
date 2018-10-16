@@ -1,7 +1,7 @@
 mutation ResetAuthMethodMutation($id: ID!) {
   person: resetPersonAuthenticationMethod(id: $id) {
     id
-    authenticationMethod {
+    authenticationMethods {
       type
       phoneNumber
     }

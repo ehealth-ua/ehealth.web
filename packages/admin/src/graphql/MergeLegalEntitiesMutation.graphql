@@ -1,5 +1,9 @@
 mutation MergeLegalEntitiesMutation($signedContent: SignedContent!) {
-  legalEntity: mergeLegalEntities(signedContent: $signedContent) {
-    id
+  mergeLegalEntities: mergeLegalEntities(
+    input: { signedContent: $signedContent }
+  ) {
+    legalEntityMergeJob {
+      id
+    }
   }
 }

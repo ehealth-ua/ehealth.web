@@ -53,9 +53,7 @@ const Details = ({ id }) => (
         owner,
         medicalServiceProvider
       } = legalEntity;
-      const divisions = legalEntity.divisions["nodes"];
-      const mergedFromLegalEntities =
-        legalEntity.mergedFromLegalEntities["nodes"];
+      const { nodes: divisions } = legalEntity.divisions;
       const statusAction =
         status === "ACTIVE" && (nhsVerified ? status : "NHS_VERIFY_CLOSED");
 
@@ -342,7 +340,9 @@ const RelatedLegalEntities = ({ id, status }) => (
             if (loading) return "Loading...";
             if (error) return `Error! ${error.message}`;
             const {
-              legalEntity: { mergedFromLegalEntities }
+              legalEntity: {
+                mergedFromLegalEntities: { nodes }
+              }
             } = data;
             const { orderBy } = locationParams;
             return (
@@ -371,7 +371,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                   </Link>
                 )}
                 <Table
-                  data={mergedFromLegalEntities}
+                  data={nodes}
                   header={{
                     name: "Назва Медзакладу",
                     edrpou: "ЄДРПОУ",
@@ -468,7 +468,7 @@ const Divisions = ({ divisions, id }) => (
               ...props,
               mountainGroup: mountainGroup && <PositiveIcon />,
               addresses: addresses
-                .filter(a => a.type === "ACTIVE")
+                .filter(a => a.type === "RESIDENCE")
                 .map((item, key) => <AddressView data={item} key={key} />),
               phones: getPhones(phones)
             })}

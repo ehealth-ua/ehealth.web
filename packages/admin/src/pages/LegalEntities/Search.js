@@ -66,12 +66,12 @@ const Search = ({ uri }) => (
                   : undefined
               }}
             >
-              {({ loading, error, data: { legalEntities = [] } }) => {
+              {({ loading, error, data }) => {
                 if (loading) return null;
-                const { nodes } = legalEntities;
-                return !error && nodes.length > 0 ? (
+                const { nodes: legalEntities = [] } = data.legalEntities;
+                return !error && legalEntities.length > 0 ? (
                   <Table
-                    data={nodes}
+                    data={legalEntities}
                     header={{
                       id: "ID",
                       name: "Назва Медзакладу",
@@ -102,7 +102,7 @@ const Search = ({ uri }) => (
                       addresses: (
                         <>
                           {addresses
-                            .filter(a => a.type === "ACTIVE")
+                            .filter(a => a.type === "REGISTRATION")
                             .map(item => (
                               <AddressView data={item} />
                             ))}
@@ -166,9 +166,9 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
           variables={{ name: "" }}
           context={{ credentials: "same-origin" }}
         >
-          {({ loading, error, data: { settlements = [{}] }, refetch }) => {
+          {({ loading, error, data, refetch }) => {
             if (loading) return null;
-            const { nodes } = settlements;
+            const { nodes: settlements = [{}] } = data.settlements;
             return (
               <Field.Select
                 name="filter.settlement"
@@ -178,7 +178,7 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
                   if (!item) return "";
                   return typeof item === "string" ? item : item.settlement;
                 }}
-                items={nodes.map(({ name, district, type, region }) => ({
+                items={settlements.map(({ name, district, type, region }) => ({
                   area: region || undefined,
                   settlement: name,
                   settlementType: type,
