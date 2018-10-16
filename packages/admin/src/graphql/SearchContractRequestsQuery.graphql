@@ -1,0 +1,22 @@
+query SearchContractRequestsQuery(
+  $filter: ContractRequestFilter
+  $orderBy: ContractRequestOrderBy
+) {
+  contractRequests(filter: $filter, orderBy: $orderBy) {
+    nodes {
+      id
+      contractNumber
+      startDate
+      endDate
+      status
+      contractorLegalEntity {
+        id
+        edrpou
+        name
+      }
+      contractorOwner {
+        id
+      }
+    }
+  }
+}
