@@ -3,7 +3,6 @@ import { compose } from "redux";
 import format from "date-fns/format";
 import { connect } from "react-redux";
 import { provideHooks } from "redial";
-import { withRouter } from "react-router";
 
 import Helmet from "react-helmet";
 
@@ -23,9 +22,12 @@ import styles from "./styles.module.css";
 
 import { BackIcon } from "@ehealth/icons";
 
+import { backUrl } from "../../../helpers/url";
+
 class EmployeeDetailPage extends React.Component {
   render() {
     const {
+      router,
       employee: {
         id,
         status,
@@ -50,6 +52,8 @@ class EmployeeDetailPage extends React.Component {
 
     const fullName = `${last_name} ${first_name} ${second_name}`;
 
+    const backLocationPath = backUrl(router);
+
     return (
       <div id="employee-detail-page">
         <Helmet
@@ -59,7 +63,7 @@ class EmployeeDetailPage extends React.Component {
           ]}
         />
 
-        <BackLink to="/employees">
+        <BackLink onClick={() => router.push(`/${backLocationPath}`)}>
           Повернутися до списку співробітників
         </BackLink>
 
@@ -165,7 +169,7 @@ class EmployeeDetailPage extends React.Component {
 
           <div className={styles.buttons}>
             <Button
-              onClick={() => this.props.router.goBack()}
+              onClick={() => router.push(`/${backLocationPath}`)}
               theme="border"
               color="blue"
               icon={<BackIcon width="20" height="12" />}
@@ -181,7 +185,6 @@ class EmployeeDetailPage extends React.Component {
 }
 
 export default compose(
-  withRouter,
   provideHooks({
     fetch: ({ dispatch, params: { id } }) => dispatch(fetchEmployee(id))
   }),

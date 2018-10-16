@@ -21,13 +21,17 @@ import styles from "./styles.module.css";
 
 import { BackIcon } from "@ehealth/icons";
 
+import { backUrl } from "../../../helpers/url";
+
 class PendingEmployeeDetailPage extends React.Component {
   render() {
-    const { employee = {} } = this.props;
+    const { employee = {}, router } = this.props;
 
     const fullName = `${employee.party.last_name} ${
       employee.party.first_name
     } ${employee.party.second_name}`;
+
+    const backLocationPath = backUrl(router);
 
     return (
       <div id="pending-employee-detail-page">
@@ -38,7 +42,7 @@ class PendingEmployeeDetailPage extends React.Component {
           ]}
         />
 
-        <BackLink to="/pending-employees">
+        <BackLink onClick={() => router.push(`/${backLocationPath}`)}>
           Повернутися до списку співробітників
         </BackLink>
 
@@ -116,7 +120,7 @@ class PendingEmployeeDetailPage extends React.Component {
 
           <div className={styles.buttons}>
             <Button
-              onClick={() => this.props.history.goBack()}
+              onClick={() => router.push(`${backLocationPath}`)}
               theme="border"
               color="blue"
               icon={<BackIcon width="20" height="12" />}
