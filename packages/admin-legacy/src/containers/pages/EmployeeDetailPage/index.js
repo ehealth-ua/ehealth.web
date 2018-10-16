@@ -63,7 +63,7 @@ class EmployeeDetailPage extends React.Component {
           ]}
         />
 
-        <BackLink onClick={() => router.push(`/${backLocationPath}`)}>
+        <BackLink onClick={() => router.push(backLocationPath)}>
           Повернутися до списку співробітників
         </BackLink>
 
@@ -169,7 +169,7 @@ class EmployeeDetailPage extends React.Component {
 
           <div className={styles.buttons}>
             <Button
-              onClick={() => router.push(`/${backLocationPath}`)}
+              onClick={() => router.push(backLocationPath)}
               theme="border"
               color="blue"
               icon={<BackIcon width="20" height="12" />}

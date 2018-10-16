@@ -86,7 +86,7 @@ class ContractDetail extends React.Component {
           meta={[{ property: "og:title", content: "Деталі контракту" }]}
         />
 
-        <BackLink onClick={() => router.push(`/${backLocationPath}`)}>
+        <BackLink onClick={() => router.push(backLocationPath)}>
           Назад до списку запитів
         </BackLink>
 

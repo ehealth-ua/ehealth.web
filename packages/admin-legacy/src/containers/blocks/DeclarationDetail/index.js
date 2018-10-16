@@ -38,7 +38,7 @@ const DeclarationDetail = ({ declaration, onTerminate, router }) => {
         title={`Декларація ${fullName}`}
         meta={[{ property: "og:title", content: `Декларація ${fullName}` }]}
       />
-      <BackLink onClick={() => router.push(`/${backLocationPath}`)}>
+      <BackLink onClick={() => router.push(backLocationPath)}>
         Повернутися до списку декларацій
       </BackLink>
 

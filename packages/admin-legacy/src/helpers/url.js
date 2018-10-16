@@ -18,5 +18,5 @@ export const stripProtocol = url => {
 export const backUrl = router => {
   const { location } = router;
   const index = location["pathname"].indexOf("/", 1);
-  return location["pathname"].slice(1, index);
+  return `/${location["pathname"].slice(1, index)}`;
 };
