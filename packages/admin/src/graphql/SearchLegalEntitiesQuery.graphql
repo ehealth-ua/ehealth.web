@@ -2,7 +2,7 @@ query SearchLegalEntitiesQuery(
   $filter: LegalEntityFilter
   $orderBy: LegalEntityOrderBy
 ) {
-  legalEntities(filter: $filter, orderBy: $orderBy) {
+  legalEntities(first: 10, filter: $filter, orderBy: $orderBy) {
     nodes {
       id
       name
