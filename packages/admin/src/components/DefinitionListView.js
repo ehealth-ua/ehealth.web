@@ -10,17 +10,21 @@ const DefinitionListView = ({
   labels,
   data,
   color,
+  flexDirection,
+  marginBetween,
   labelWidth = 150
 }) => (
   <DefinitionList
     labels={labels}
     data={data}
     renderItem={({ label, value }) => (
-      <Item color={color}>
+      <Item color={color} flexDirection={flexDirection}>
         <Box width={labelWidth}>
           <Text fontWeight={700}>{label}</Text>
         </Box>
-        <Box width={`calc(100% - ${px(labelWidth)})`}>{value}</Box>
+        <Box width={`calc(100% - ${px(labelWidth)})`} my={marginBetween}>
+          {value}
+        </Box>
       </Item>
     )}
   />
@@ -34,7 +38,8 @@ const Item = system(
     flexWrap: "nowrap",
     fontSize: 0,
     color: "#333",
-    mb: 4
+    mb: 4,
+    flexDirection: "row"
   },
   `
     &:last-of-type {
