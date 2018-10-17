@@ -1,7 +1,7 @@
 {
   "projects": {
     "ehealth": {
-      "schemaPath": "./schema.json",
+      "schemaPath": "./packages/mock-server/schema.json",
       "extensions": {
         "endpoints": {
           "dev": {
