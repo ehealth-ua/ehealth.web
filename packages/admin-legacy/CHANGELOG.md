@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.102.10"></a>
+## [0.102.10](https://github.com/edenlabllc/ehealth.web/compare/v0.102.9...v0.102.10) (2018-10-17)
+
+
+### Bug Fixes
+
+* **admin-legacy:** improved links in dictionary ([fe21c51](https://github.com/edenlabllc/ehealth.web/commit/fe21c51))
+
+
+
+
+
 <a name="0.102.8"></a>
 ## [0.102.8](https://github.com/edenlabllc/ehealth.web/compare/v0.102.6...v0.102.8) (2018-10-16)
 
