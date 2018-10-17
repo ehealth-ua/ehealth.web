@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.103.0"></a>
+# [0.103.0](https://github.com/edenlabllc/ehealth.web/compare/v0.102.10...v0.103.0) (2018-10-17)
+
+
+### Bug Fixes
+
+* **admin:** add param to SearchLegalEntitiesQuery ([e288b72](https://github.com/edenlabllc/ehealth.web/commit/e288b72))
+* move .graphqlconfig to the root of project and rebuild schema ([1d0aa7d](https://github.com/edenlabllc/ehealth.web/commit/1d0aa7d))
+
+
+### Features
+
+* **mock-server:** Add remote schema to mock-server ([edd72a2](https://github.com/edenlabllc/ehealth.web/commit/edd72a2))
+
+
+
+
+
 <a name="0.102.10"></a>
 ## [0.102.10](https://github.com/edenlabllc/ehealth.web/compare/v0.102.9...v0.102.10) (2018-10-17)
 
