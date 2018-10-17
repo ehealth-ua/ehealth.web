@@ -79,7 +79,7 @@ class DictionariesPage extends React.Component {
                     <Button
                       id={`edit-template-button-${dictionaryName}`}
                       theme="link"
-                      to={`/dictionaries/${dictionaryName}`}
+                      to={`/dictionaries/${encodeURIComponent(dictionaryName)}`}
                     >
                       Переглянути словник
                     </Button>
