@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "ehealth": {
+      "schemaPath": "./schema.json",
+      "extensions": {
+        "endpoints": {
+          "dev": {
+            "url": "https://api.dev.asclepius.com.ua/graphql",
+            "headers": {
+              "Authorization": "Bearer ${env:AUTH_TOKEN_ENV}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

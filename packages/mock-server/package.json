@@ -16,10 +16,13 @@
   "dependencies": {
     "@ehealth-ua/schema": "^0.2.1",
     "@ehealth/env": "file:../env",
+    "apollo-link-context": "^1.0.9",
+    "apollo-link-http": "^1.5.5",
     "apollo-server": "^2.1.0",
     "faker": "^4.1.0",
     "graphql": "0.13.2",
     "graphql-iso-date": "^3.5.0",
-    "graphql-type-json": "^0.2.1"
+    "graphql-type-json": "^0.2.1",
+    "node-fetch": "^2.2.0"
   }
 }
