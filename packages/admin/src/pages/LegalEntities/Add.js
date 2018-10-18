@@ -283,8 +283,12 @@ const Sign = ({
                               );
                               await mergeLegalEntities({
                                 variables: {
-                                  signedContent,
-                                  signedContentEncoding: "BASE64"
+                                  input: {
+                                    signedContent: {
+                                      content: signedContent,
+                                      encoding: "BASE64"
+                                    }
+                                  }
                                 }
                               });
                               navigate("/jobs");

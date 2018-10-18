@@ -1,15 +1,5 @@
-mutation MergeLegalEntitiesMutation(
-  $signedContent: String!
-  $signedContentEncoding: SignedContentEncoding!
-) {
-  mergeLegalEntities: mergeLegalEntities(
-    input: {
-      signedContent: {
-        content: $signedContent
-        encoding: $signedContentEncoding
-      }
-    }
-  ) {
+mutation MergeLegalEntitiesMutation($input: MergeLegalEntitiesInput!) {
+  mergeLegalEntities(input: $input) {
     legalEntityMergeJob {
       id
     }
