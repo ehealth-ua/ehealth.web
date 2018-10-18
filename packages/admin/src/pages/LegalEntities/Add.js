@@ -3,7 +3,6 @@ import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
 import { Flex, Box, Text } from "rebass/emotion";
 import system from "system-components/emotion";
-import isEmpty from "lodash/isEmpty";
 
 import { getFullName } from "@ehealth/utils";
 import { LocationParams, Form, Validation } from "@ehealth/components";
@@ -19,126 +18,118 @@ import * as Field from "../../components/Field";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import LegalEntityQuery from "../../graphql/LegalEntityQuery.graphql";
-import LegalEntityByEdrpouQuery from "../../graphql/LegalEntityByEdrpouQuery.graphql";
+import SearchLegalEntitiesQuery from "../../graphql/SearchLegalEntitiesQuery.graphql";
 import MergeLegalEntitiesMutation from "../../graphql/MergeLegalEntitiesMutation.graphql";
 
 import { REACT_APP_SIGNER_URL } from "../../env";
 
-const Add = ({
-  location: {
-    state: { base }
-  }
-}) => (
+const Add = ({ location: { state } }) => (
   <>
     <Box pt={5} px={5}>
       <Steps.List>
-        <Steps.Item to="./" state={{ base }}>
+        <Steps.Item to="./" state={state}>
           Знайдіть медзаклад
         </Steps.Item>
-        <Steps.Item to="./reason" state={{ base }} disabled={!base}>
+        <Steps.Item to="./reason" state={state} disabled={state && !state.base}>
           Вкажіть підставу
         </Steps.Item>
-        <Steps.Item to="./sign" state={{ base }} disabled={!base}>
+        <Steps.Item to="./sign" state={state} disabled={state && !state.base}>
           Підтвердіть з ЕЦП
         </Steps.Item>
       </Steps.List>
     </Box>
-    <LocationParams>
-      {({ locationParams: { edrpou, orderBy }, setLocationParams }) => (
-        <Query
-          query={LegalEntityByEdrpouQuery}
-          variables={{ edrpou: edrpou || "" }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`;
-            const { legalEntityByEdrpou } = data;
-            return (
-              <Router>
-                <Search
-                  path="/"
-                  initialValues={{ edrpou, orderBy }}
-                  onSubmit={setLocationParams}
-                  data={legalEntityByEdrpou}
-                />
-                <Reason
-                  path="/reason"
-                  onSubmit={setLocationParams}
-                  legalEntity={legalEntityByEdrpou}
-                />
-                <Sign path="/sign" legalEntity={legalEntityByEdrpou} />
-              </Router>
-            );
-          }}
-        </Query>
-      )}
-    </LocationParams>
+    <Router>
+      <Search path="/" />
+      <Reason path="/reason" />
+      <Sign path="/sign" />
+    </Router>
   </>
 );
 
-const Search = ({
-  onSubmit,
-  initialValues,
-  data,
-  location: { state: base }
-}) => (
-  <>
-    <Form onSubmit={onSubmit} initialValues={initialValues}>
-      <Box px={5} width={460}>
-        <Field.Text
-          name="edrpou"
-          label="Знайти підпорядкований медзаклад"
-          placeholder="Введіть ЄДРПОУ медзакладу"
-          postfix={<AdminSearchIcon color="#CED0DA" />}
-        />
-      </Box>
-    </Form>
-    {!isEmpty(data) && (
+const Search = ({ location: { state } }) => (
+  <LocationParams>
+    {({ locationParams: { filter, orderBy }, setLocationParams }) => (
       <>
-        <Table
-          data={[data]}
-          header={{
-            id: "ID Медзакладу",
-            name: "Назва Медзакладу",
-            edrpou: "ЄДРПОУ",
-            owner: "Керівник",
-            nhsVerified: "Верифікований НСЗУ",
-            status: "Статус"
-          }}
-          renderRow={({ status, nhsVerified, owner, ...legalEntity }) => ({
-            ...legalEntity,
-            owner: getFullName(owner.party),
-            nhsVerified: nhsVerified && <PositiveIcon />,
-            status: <Badge name={status} type="LEGALENTITY" display="block" />
-          })}
-          tableName="legalEntity/Add"
-        />
-        <Flex px={5} mt={5}>
-          <Box mr={3}>
-            <Link to="../related-legal-entities">
-              <Button variant="blue">Повернутися</Button>
-            </Link>
+        <Form onSubmit={setLocationParams} initialValues={{ filter, orderBy }}>
+          <Box px={5} width={460}>
+            <Field.Text
+              name="filter.edrpou"
+              label="Знайти підпорядкований медзаклад"
+              placeholder="Введіть ЄДРПОУ медзакладу"
+              postfix={<AdminSearchIcon color="#CED0DA" />}
+            />
           </Box>
-          <Link to="./reason" state={base}>
-            <Button variant="green">Далі</Button>
-          </Link>
-        </Flex>
+        </Form>
+        <Query
+          query={SearchLegalEntitiesQuery}
+          variables={{ filter }}
+          skip={!filter}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return null;
+            if (error) return `Error! ${error.message}`;
+            const { nodes: legalEntities } = data.legalEntities;
+            const [legalEntity] = legalEntities;
+            return legalEntities.length ? (
+              <>
+                <Table
+                  data={legalEntities}
+                  header={{
+                    id: "ID Медзакладу",
+                    name: "Назва Медзакладу",
+                    edrpou: "ЄДРПОУ",
+                    owner: "Керівник",
+                    type: "Тип",
+                    nhsVerified: "Верифікований НСЗУ",
+                    status: "Статус"
+                  }}
+                  renderRow={({
+                    status,
+                    nhsVerified,
+                    owner,
+                    ...legalEntity
+                  }) => ({
+                    ...legalEntity,
+                    // owner: getFullName(owner.party),
+                    nhsVerified: nhsVerified && <PositiveIcon />,
+                    status: (
+                      <Badge name={status} type="LEGALENTITY" display="block" />
+                    )
+                  })}
+                  tableName="legalEntity/Add"
+                />
+                <Flex px={5} mt={5}>
+                  <Box mr={3}>
+                    <Link to="../related-legal-entities">
+                      <Button variant="blue">Повернутися</Button>
+                    </Link>
+                  </Box>
+                  <Link to="./reason" state={{ legalEntity, ...state }}>
+                    <Button variant="green">Далі</Button>
+                  </Link>
+                </Flex>
+              </>
+            ) : null;
+          }}
+        </Query>
       </>
     )}
-  </>
+  </LocationParams>
 );
 
 const Reason = ({
-  legalEntity: {
-    owner,
-    id: legalEntityFromId,
-    name: legalEntityFromName,
-    edrpou: legalEntityFromEdrpou
-  },
   navigate,
-  location: { state: base }
+  location: {
+    state: {
+      base,
+      legalEntity: { owner, id, name, edrpou }
+    }
+  }
 }) => (
   <Box pt={1} px={5}>
+    <Text fontSize={1} fontWeight="bold" mb={3}>
+      Підпорядкований медзаклад
+    </Text>
     <DefinitionListView
       labels={{
         edrpou: "ЄДРПОУ",
@@ -146,9 +137,9 @@ const Reason = ({
         owner: "Власник"
       }}
       data={{
-        edrpou: legalEntityFromEdrpou,
-        name: legalEntityFromName,
-        owner: getFullName(owner.party)
+        edrpou,
+        name
+        // owner: getFullName(owner.party)
       }}
     />
     <DefinitionListView
@@ -156,16 +147,18 @@ const Reason = ({
         id: "ID медзакладу"
       }}
       data={{
-        id: legalEntityFromId
+        id
       }}
       color="#7F8FA4"
     />
     <Box width={460} pt={2}>
       <Form
         onSubmit={async ({ base }) => {
-          navigate("../sign", { state: { base } });
+          navigate("../sign", {
+            state: { base, legalEntity: { owner, id, name, edrpou } }
+          });
         }}
-        initialValues={base}
+        initialValues={{ base }}
       >
         <Field.Textarea
           name="base"
@@ -176,7 +169,10 @@ const Reason = ({
         <Validation.Required field="base" message="Обов&#700;язкове поле" />
         <Flex>
           <Box mr={3}>
-            <Link to="../" state={base}>
+            <Link
+              to="../"
+              state={{ base, legalEntity: { owner, id, name, edrpou } }}
+            >
               <Button variant="blue">Повернутися</Button>
             </Link>
           </Box>
@@ -189,13 +185,16 @@ const Reason = ({
 
 const Sign = ({
   id: legalEntityToId,
-  legalEntity: {
-    id: legalEntityFromId,
-    name: legalEntityFromName,
-    edrpou: legalEntityFromEdrpou
-  },
   location: {
-    state: { base }
+    state: {
+      base,
+      legalEntity: {
+        id: legalEntityFromId,
+        name: legalEntityFromName,
+        edrpou: legalEntityFromEdrpou,
+        owner
+      }
+    }
   },
   navigate
 }) => (
@@ -254,7 +253,18 @@ const Sign = ({
                     />
                     <Flex>
                       <Box mr={3}>
-                        <Link to="../reason" state={{ base }}>
+                        <Link
+                          to="../reason"
+                          state={{
+                            base,
+                            legalEntity: {
+                              id: legalEntityFromId,
+                              name: legalEntityFromName,
+                              edrpou: legalEntityFromEdrpou,
+                              owner
+                            }
+                          }}
+                        >
                           <Button variant="blue">Повернутися</Button>
                         </Link>
                       </Box>
@@ -273,10 +283,8 @@ const Sign = ({
                               );
                               await mergeLegalEntities({
                                 variables: {
-                                  signedContent: {
-                                    signedContent,
-                                    signedContentEncoding: "BASE64"
-                                  }
+                                  signedContent,
+                                  signedContentEncoding: "BASE64"
                                 }
                               });
                               navigate("/jobs");

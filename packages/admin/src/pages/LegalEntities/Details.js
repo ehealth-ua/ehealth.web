@@ -53,7 +53,7 @@ const Details = ({ id }) => (
         owner,
         medicalServiceProvider
       } = legalEntity;
-      const { nodes: divisions } = legalEntity.divisions;
+      // const { nodes: divisions } = legalEntity.divisions;
       const statusAction =
         status === "ACTIVE" && (nhsVerified ? status : "NHS_VERIFY_CLOSED");
 
@@ -229,8 +229,8 @@ const Details = ({ id }) => (
                 path="/related-legal-entities"
                 status={status}
               />
-              <Owner path="/owner" owner={owner} />
-              <Divisions path="/divisions" divisions={divisions} />
+              {/*<Owner path="/owner" owner={owner} />*/}
+              {/*<Divisions path="/divisions" divisions={divisions} />*/}
             </Router>
           </Tabs.Content>
         </>

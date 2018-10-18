@@ -1,8 +1,6 @@
-query LegalEntityQuery(
-  $id: ID!
-  $filter: RelatedLegalEntityFilter
-  $orderBy: RelatedLegalEntityOrderBy
-) {
+query LegalEntityQuery($id: ID!) #  $filter: RelatedLegalEntityFilter
+#  $orderBy: RelatedLegalEntityOrderBy
+{
   legalEntity(id: $id) {
     id
     status
@@ -30,79 +28,79 @@ query LegalEntityQuery(
     kveds
     misVerified
     nhsVerified
-    medicalServiceProvider {
-      licenses {
-        licenseNumber
-        issuedBy
-        issuedDate
-        expiryDate
-        activeFromDate
-        whatLicensed
-        orderNo
-      }
-      accreditation {
-        category
-        issuedDate
-        expiryDate
-        orderNo
-        orderDate
-      }
-    }
-    owner {
-      id
-      position
-      startDate
-      endDate
-      status
-      employeeType
-      party {
-        firstName
-        lastName
-        secondName
-      }
-      doctor {
-        specialities {
-          speciality
-        }
-      }
-    }
-    mergedFromLegalEntities(filter: $filter, orderBy: $orderBy) {
-      nodes {
-        isActive
-        reason
-        insertedAt
-        mergedFromLegalEntity {
-          id
-          name
-          edrpou
-        }
-      }
-    }
-    divisions {
-      nodes {
-        id
-        name
-        addresses {
-          type
-          area
-          region
-          settlement
-          settlementType
-          settlementId
-          streetType
-          street
-          building
-          apartment
-        }
-        phones {
-          type
-          number
-        }
-        email
-        status
-        type
-        mountainGroup
-      }
-    }
+    #    medicalServiceProvider {
+    #      licenses {
+    #        licenseNumber
+    #        issuedBy
+    #        issuedDate
+    #        expiryDate
+    #        activeFromDate
+    #        whatLicensed
+    #        orderNo
+    #      }
+    #      accreditation {
+    #        category
+    #        issuedDate
+    #        expiryDate
+    #        orderNo
+    #        orderDate
+    #      }
+    #    }
+    #    owner {
+    #      id
+    #      position
+    #      startDate
+    #      endDate
+    #      status
+    #      employeeType
+    #      party {
+    #        firstName
+    #        lastName
+    #        secondName
+    #      }
+    #      doctor {
+    #        specialities {
+    #          speciality
+    #        }
+    #      }
+    #    }
+    #    mergedFromLegalEntities(filter: $filter, orderBy: $orderBy) {
+    #      nodes {
+    #        isActive
+    #        reason
+    #        insertedAt
+    #        mergedFromLegalEntity {
+    #          id
+    #          name
+    #          edrpou
+    #        }
+    #      }
+    #    }
+    #    divisions {
+    #      nodes {
+    #        id
+    #        name
+    #        addresses {
+    #          type
+    #          area
+    #          region
+    #          settlement
+    #          settlementType
+    #          settlementId
+    #          streetType
+    #          street
+    #          building
+    #          apartment
+    #        }
+    #        phones {
+    #          type
+    #          number
+    #        }
+    #        email
+    #        status
+    #        type
+    #        mountainGroup
+    #      }
+    #    }
   }
 }
