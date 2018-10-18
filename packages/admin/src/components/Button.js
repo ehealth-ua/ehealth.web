@@ -38,13 +38,15 @@ const Container = system(
     py: 2
   },
   {
-    cursor: "pointer"
+    cursor: "pointer",
+    whiteSpace: "nowrap"
   }
 );
 
 const Reset = system({
   is: RemoveItemIcon,
   color: "rockmanBlue",
+  minWidth: "8px",
   mr: 2
 });
 

@@ -10,12 +10,14 @@ import Link from "./Link";
 const Nav = () => (
   <NavContainer>
     <NavList>
-      <Ability action="read" resource="person">
-        <NavSection title="Контракти">
+      <NavSection title="Контракти">
+        <Ability action="read" resource="contract_request">
           <NavLink to="/contract-requests">
             Запити на укладення контрактів
           </NavLink>
-        </NavSection>
+        </Ability>
+      </NavSection>
+      <Ability action="read" resource="person">
         <NavSection title="Паціенти">
           <NavLink to="/persons">Пошук паціентів</NavLink>
         </NavSection>

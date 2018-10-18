@@ -2,8 +2,9 @@ import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
 import { getIn } from "final-form";
+import isEmpty from "lodash/isEmpty";
 
-import { Form, Validation, LocationParams } from "@ehealth/components";
+import { Form, LocationParams } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import { AdminSearchIcon } from "@ehealth/icons";
 
@@ -28,69 +29,105 @@ const Search = ({ uri }) => (
 
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
+        const {
+          filter: {
+            contractNumber,
+            status,
+            startDateFrom,
+            startDateTo,
+            endDateFrom,
+            endDateTo
+          } = {}
+        } = locationParams;
+
+        const filteredParams = {
+          contractNumber: isEmpty(contractNumber) ? undefined : contractNumber,
+          status: isEmpty(status) ? undefined : status.name,
+          startDateFrom: isEmpty(startDateFrom) ? undefined : startDateFrom,
+          startDateTo: isEmpty(startDateTo) ? undefined : startDateTo,
+          endDateFrom: isEmpty(endDateFrom) ? undefined : endDateFrom,
+          endDateTo: isEmpty(endDateTo) ? undefined : endDateTo
+        };
+
         return (
           <>
-            <SearchContractRequestsForm
-              initialValues={locationParams}
-              onSubmit={setLocationParams}
-            />
-
             <Query
               query={SearchContractRequestsQuery}
-              variables={locationParams}
+              variables={{
+                ...locationParams,
+                filter: !isEmpty(locationParams.filter)
+                  ? filteredParams
+                  : undefined
+              }}
             >
-              {({ loading, error, data: { contractRequests = {} }, refetch }) =>
-                !error &&
-                contractRequests.nodes &&
-                contractRequests.nodes.length > 0 ? (
-                  <Table
-                    data={contractRequests.nodes}
-                    header={{
-                      id: "ID запиту на контракт",
-                      contractNumber: "Номер контракту",
-                      status: "Статус",
-                      startDate: "Контракт діє з",
-                      endDate: "Контракт діє по",
-                      details: "Деталі"
-                    }}
-                    renderRow={({
-                      id,
-                      contractNumber,
-                      status,
-                      startDate,
-                      endDate,
-                      details,
-                      ...contractRequests
-                    }) => ({
-                      id,
-                      contractNumber,
-                      startDate,
-                      endDate,
-                      ...contractRequests,
-                      status: (
-                        <Badge
-                          type="CONTRACT_REQUEST"
-                          name={status}
-                          display="block"
-                        />
-                      ),
-                      details: (
-                        <Link to={`../${id}`} fontWeight="bold">
-                          Показати деталі
-                        </Link>
-                      )
-                    })}
-                    sortableFields={["status", "startDate", "endDate"]}
-                    sortingParams={parseSortingParams(locationParams.orderBy)}
-                    onSortingChange={sortingParams =>
-                      setLocationParams({
-                        orderBy: stringifySortingParams(sortingParams)
-                      })
-                    }
-                    tableName="contractrequests/search"
+              {({
+                loading,
+                error,
+                data: {
+                  contractRequests: { nodes: contractRequests = [] } = {}
+                },
+                refetch
+              }) => (
+                <>
+                  <SearchContractRequestsForm
+                    initialValues={locationParams}
+                    onSubmit={setLocationParams}
+                    refetch={refetch}
                   />
-                ) : null
-              }
+                  {!error &&
+                    contractRequests.length > 0 && (
+                      <Table
+                        data={contractRequests}
+                        header={{
+                          id: "ID запиту на контракт",
+                          contractNumber: "Номер контракту",
+                          status: "Статус",
+                          startDate: "Контракт діє з",
+                          endDate: "Контракт діє по",
+                          details: "Деталі"
+                        }}
+                        renderRow={({
+                          id,
+                          contractNumber,
+                          status,
+                          startDate,
+                          endDate,
+                          details,
+                          ...contractRequests
+                        }) => ({
+                          id,
+                          contractNumber,
+                          startDate,
+                          endDate,
+                          ...contractRequests,
+                          status: (
+                            <Badge
+                              type="CONTRACT_REQUEST"
+                              name={status}
+                              display="block"
+                            />
+                          ),
+                          details: (
+                            <Link to={`../${id}`} fontWeight="bold">
+                              Показати деталі
+                            </Link>
+                          )
+                        })}
+                        sortableFields={["status", "startDate", "endDate"]}
+                        sortingParams={parseSortingParams(
+                          locationParams.orderBy
+                        )}
+                        onSortingChange={sortingParams =>
+                          setLocationParams({
+                            ...locationParams,
+                            orderBy: stringifySortingParams(sortingParams)
+                          })
+                        }
+                        tableName="contractrequests/search"
+                      />
+                    )}
+                </>
+              )}
             </Query>
           </>
         );
@@ -101,12 +138,7 @@ const Search = ({ uri }) => (
 
 export default Search;
 
-const validateRequiredObjectField = objectPath => (value, allValues) => {
-  const object = getIn(allValues, objectPath) || {};
-  return !(Object.values(object).some(v => v) && !value);
-};
-
-const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
+const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
   <Form onSubmit={onSubmit} initialValues={initialValues}>
     <Flex mx={-1}>
       <Box px={1} width={3 / 5}>
@@ -133,7 +165,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 6}>
         <Field.Select
-          name="status"
+          name="filter.status"
           label="Статус контракту"
           items={[
             { value: "всі статуси", name: undefined },
@@ -154,51 +186,28 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
           rangeNames={["filter.startDateFrom", "filter.startDateTo"]}
           label="Початок дії контракту"
         />
-        <Validation
-          field="filter.startDateFrom"
-          validate={validateRequiredObjectField("filter.personal")}
-          message="Обов&#700;язкове поле"
-        />
-        <Validation
-          field="filter.startDateTo"
-          validate={validateRequiredObjectField("filter.personal")}
-          message="Обов&#700;язкове поле"
-        />
       </Box>
       <Box px={1} width={2 / 6}>
         <Field.RangePicker
           rangeNames={["filter.endDateFrom", "filter.endDateTo"]}
           label="Кінець дії контракту"
         />
-        <Validation
-          field="filter.endDateFrom"
-          validate={validateRequiredObjectField("filter.personal")}
-          message="Обов&#700;язкове поле"
-        />
-        <Validation
-          field="filter.endDateTo"
-          validate={validateRequiredObjectField("filter.personal")}
-          message="Обов&#700;язкове поле"
-        />
       </Box>
     </Flex>
     <Flex mx={-1}>
-      <Box px={1} width={1 / 6}>
+      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
         <Button variant="blue">Шукати</Button>
       </Box>
-      <Box px={1} width={1 / 6}>
-        <ResetSearch />
+      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
+        <ResetButton
+          onClick={() => {
+            onSubmit({ ...initialValues, filter: null });
+            refetch({ filter: undefined });
+          }}
+        >
+          Скинути пошук
+        </ResetButton>
       </Box>
     </Flex>
   </Form>
-);
-
-const ResetSearch = () => (
-  <LocationParams>
-    {({ locationParams, setLocationParams }) => (
-      <ResetButton onClick={() => setLocationParams({ filter: null })}>
-        Скинути пошук
-      </ResetButton>
-    )}
-  </LocationParams>
 );
