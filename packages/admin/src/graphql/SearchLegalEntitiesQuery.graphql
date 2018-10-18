@@ -5,6 +5,7 @@ query SearchLegalEntitiesQuery(
   legalEntities(first: 10, filter: $filter, orderBy: $orderBy) {
     nodes {
       id
+      databaseId
       name
       edrpou
       addresses {

@@ -30,10 +30,14 @@ const Add = ({ location: { state } }) => (
         <Steps.Item to="./" state={state}>
           Знайдіть медзаклад
         </Steps.Item>
-        <Steps.Item to="./reason" state={state} disabled={state && !state.base}>
+        <Steps.Item
+          to="./reason"
+          state={state}
+          disabled={state && !state.reason}
+        >
           Вкажіть підставу
         </Steps.Item>
-        <Steps.Item to="./sign" state={state} disabled={state && !state.base}>
+        <Steps.Item to="./sign" state={state} disabled={state && !state.reason}>
           Підтвердіть з ЕЦП
         </Steps.Item>
       </Steps.List>
@@ -75,7 +79,7 @@ const Search = ({ location: { state } }) => (
                 <Table
                   data={legalEntities}
                   header={{
-                    id: "ID Медзакладу",
+                    databaseId: "ID Медзакладу",
                     name: "Назва Медзакладу",
                     edrpou: "ЄДРПОУ",
                     owner: "Керівник",
@@ -121,12 +125,13 @@ const Reason = ({
   navigate,
   location: {
     state: {
-      base,
-      legalEntity: { owner, id, name, edrpou }
+      reason,
+      legalEntity: { owner, databaseId, name, edrpou }
     }
   }
 }) => (
   <Box pt={1} px={5}>
+    {console.log(databaseId)}
     <Text fontSize={1} fontWeight="bold" mb={3}>
       Підпорядкований медзаклад
     </Text>
@@ -144,34 +149,37 @@ const Reason = ({
     />
     <DefinitionListView
       labels={{
-        id: "ID медзакладу"
+        databaseId: "ID медзакладу"
       }}
       data={{
-        id
+        databaseId
       }}
       color="#7F8FA4"
     />
     <Box width={460} pt={2}>
       <Form
-        onSubmit={async ({ base }) => {
+        onSubmit={async ({ reason }) => {
           navigate("../sign", {
-            state: { base, legalEntity: { owner, id, name, edrpou } }
+            state: { reason, legalEntity: { owner, databaseId, name, edrpou } }
           });
         }}
-        initialValues={{ base }}
+        initialValues={{ reason }}
       >
         <Field.Textarea
-          name="base"
+          name="reason"
           rows={6}
           label="Вкажіть підставу підпорядкування"
           placeholder="Приклад: Наказ КМУ № 73465"
         />
-        <Validation.Required field="base" message="Обов&#700;язкове поле" />
+        <Validation.Required field="reason" message="Обов&#700;язкове поле" />
         <Flex>
           <Box mr={3}>
             <Link
               to="../"
-              state={{ base, legalEntity: { owner, id, name, edrpou } }}
+              state={{
+                reason,
+                legalEntity: { owner, databaseId, name, edrpou }
+              }}
             >
               <Button variant="blue">Повернутися</Button>
             </Link>
@@ -187,9 +195,9 @@ const Sign = ({
   id: legalEntityToId,
   location: {
     state: {
-      base,
+      reason,
       legalEntity: {
-        id: legalEntityFromId,
+        databaseId: legalEntityFromId,
         name: legalEntityFromName,
         edrpou: legalEntityFromEdrpou,
         owner
@@ -203,9 +211,9 @@ const Sign = ({
       if (loading) return "Loading...";
       if (error) return `Error! ${error.message}`;
       const {
-        legalEntity: { id, name, edrpou }
+        legalEntity: { databaseId, name, edrpou }
       } = data;
-      const legalEntityTo = { id, name, edrpou };
+      const legalEntityTo = { id: databaseId, name, edrpou };
       const legalEntityFrom = {
         id: legalEntityFromId,
         name: legalEntityFromName,
@@ -247,16 +255,16 @@ const Sign = ({
                     <Line />
                     <DefinitionListView
                       labels={{
-                        base: "Підстава підпорядкування"
+                        reason: "Підстава підпорядкування"
                       }}
-                      data={{ base }}
+                      data={{ reason }}
                     />
                     <Flex>
                       <Box mr={3}>
                         <Link
                           to="../reason"
                           state={{
-                            base,
+                            reason,
                             legalEntity: {
                               id: legalEntityFromId,
                               name: legalEntityFromName,
@@ -276,7 +284,7 @@ const Sign = ({
                               const mergedLegalEntities = {
                                 merged_from_legal_entity: legalEntityFrom,
                                 merged_to_legal_entity: legalEntityTo,
-                                base
+                                reason
                               };
                               const { signedContent } = await signData(
                                 mergedLegalEntities
