@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.105.0"></a>
+# [0.105.0](https://github.com/edenlabllc/ehealth.web/compare/v0.104.0...v0.105.0) (2018-10-19)
+
+
+### Bug Fixes
+
+* **admin:** change view table in legalEntities search page ([e3702e0](https://github.com/edenlabllc/ehealth.web/commit/e3702e0))
+
+
+### Features
+
+* **component:** add whiteSpaceNoWrap prop to TableView ([99dd4c9](https://github.com/edenlabllc/ehealth.web/commit/99dd4c9))
+
+
+
+
+
 <a name="0.104.0"></a>
 # [0.104.0](https://github.com/edenlabllc/ehealth.web/compare/v0.103.3...v0.104.0) (2018-10-19)
 
