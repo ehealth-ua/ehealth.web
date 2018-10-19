@@ -1,10 +1,8 @@
 import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
-import { getIn } from "final-form";
-import isEmpty from "lodash/isEmpty";
 
-import { Form, LocationParams } from "@ehealth/components";
+import { Form, Validation, LocationParams } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import { AdminSearchIcon } from "@ehealth/icons";
 
@@ -21,6 +19,11 @@ const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
   ([name, value]) => ({ name, value })
 );
 
+const EDRPOU_PATTERN = "^[0-9]{8,10}$";
+const CONTRACT_REQUEST_PATTERN =
+  "^[0-9A-Za-zА-ЯҐЇІЄа-яґїіє]{4}-[0-9A-Za-zА-ЯҐЇІЄа-яґїіє]{4}-[0-9A-Za-zА-ЯҐЇІЄа-яґїіє]{4}$";
+const SEARCH_REQUEST_PATTERN = `(${EDRPOU_PATTERN})|(${CONTRACT_REQUEST_PATTERN})`;
+
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
@@ -30,24 +33,16 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: {
-            contractNumber,
-            status,
-            startDateFrom,
-            startDateTo,
-            endDateFrom,
-            endDateTo
-          } = {}
+          filter: { status = {} } = {},
+          filter,
+          searchRequest = ""
         } = locationParams;
 
-        const filteredParams = {
-          contractNumber: isEmpty(contractNumber) ? undefined : contractNumber,
-          status: isEmpty(status) ? undefined : status.name,
-          startDateFrom: isEmpty(startDateFrom) ? undefined : startDateFrom,
-          startDateTo: isEmpty(startDateTo) ? undefined : startDateTo,
-          endDateFrom: isEmpty(endDateFrom) ? undefined : endDateFrom,
-          endDateTo: isEmpty(endDateTo) ? undefined : endDateTo
-        };
+        const edrpouReg = new RegExp(EDRPOU_PATTERN);
+        const edrpouTest = edrpouReg.test(searchRequest);
+        const contractRequest = edrpouTest
+          ? { edrpou: searchRequest }
+          : { contractNumber: searchRequest };
 
         return (
           <>
@@ -55,9 +50,11 @@ const Search = ({ uri }) => (
               query={SearchContractRequestsQuery}
               variables={{
                 ...locationParams,
-                filter: !isEmpty(locationParams.filter)
-                  ? filteredParams
-                  : undefined
+                filter: {
+                  ...filter,
+                  ...contractRequest,
+                  status: status.name
+                }
               }}
             >
               {({
@@ -86,19 +83,8 @@ const Search = ({ uri }) => (
                           endDate: "Контракт діє по",
                           details: "Деталі"
                         }}
-                        renderRow={({
+                        renderRow={({ id, status, ...contractRequests }) => ({
                           id,
-                          contractNumber,
-                          status,
-                          startDate,
-                          endDate,
-                          details,
-                          ...contractRequests
-                        }) => ({
-                          id,
-                          contractNumber,
-                          startDate,
-                          endDate,
                           ...contractRequests,
                           status: (
                             <Badge
@@ -143,10 +129,15 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
     <Flex mx={-1}>
       <Box px={1} width={3 / 5}>
         <Field.Text
-          name="filter.contractNumber"
+          name="searchRequest"
           label="Пошук запиту"
           placeholder="ЄДРПОУ або Номер контракту"
           postfix={<AdminSearchIcon color="#CED0DA" />}
+        />
+        <Validation.Matches
+          field="searchRequest"
+          options={SEARCH_REQUEST_PATTERN}
+          message="Невірний номер"
         />
       </Box>
 
@@ -167,16 +158,13 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
         <Field.Select
           name="filter.status"
           label="Статус контракту"
-          items={[
-            { value: "всі статуси", name: undefined },
-            ...contractStatuses
-          ]}
+          placeholder="test"
+          items={[{ value: "всі статуси" }, ...contractStatuses]}
           renderItem={item => item.value}
           itemToString={item => {
             if (!item) return "всі статуси";
             return typeof item === "string" ? item : item.value;
           }}
-          filterOptions={{ keys: ["value"] }}
           type="select"
         />
       </Box>
@@ -201,8 +189,8 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
       <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
         <ResetButton
           onClick={() => {
-            onSubmit({ ...initialValues, filter: null });
-            refetch({ filter: undefined });
+            onSubmit({ ...initialValues, filter: null, searchRequest: null });
+            refetch({ filter: undefined, searchRequest: undefined });
           }}
         >
           Скинути пошук
