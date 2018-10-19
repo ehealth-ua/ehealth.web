@@ -2,7 +2,7 @@
 import * as React from "react";
 import styled from "react-emotion/macro";
 import { css } from "react-emotion";
-import { ifNotProp } from "styled-tools";
+import { ifProp } from "styled-tools";
 import { Flex } from "rebass/emotion";
 import isEqual from "lodash/isEqual";
 
@@ -130,7 +130,8 @@ class Table extends React.Component<TableProps, TableState> {
       sortingParams,
       onSortingChange,
       tableName,
-      hiddenFields = ""
+      hiddenFields = "",
+      whiteSpaceNoWrap
     } = this.props;
 
     const { filterRow } = this.state;
@@ -189,6 +190,7 @@ class Table extends React.Component<TableProps, TableState> {
             sortingParams={sortingParams}
             onSortingChange={onSortingChange}
             filterRow={filterRow}
+            whiteSpaceNoWrap={whiteSpaceNoWrap}
           />
         </TableWrapper>
       </>
@@ -272,7 +274,7 @@ export const TableCell = styled.td`
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  ${ifNotProp(
+  ${ifProp(
     "whiteSpaceNoWrap",
     css`
       white-space: nowrap;

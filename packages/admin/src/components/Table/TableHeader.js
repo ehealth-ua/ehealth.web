@@ -74,7 +74,12 @@ const TableHeader = ({
                     value={sortingParams.name === name && sortingParams.order}
                     ASC={<CaretUpIcon />}
                     DESC={<CaretDownIcon />}
-                    default={<CaretUpAndDownIcon />}
+                    default={
+                      <>
+                        <CaretUpIcon />
+                        <CaretDownIcon />
+                      </>
+                    }
                   />
                 }
               />
@@ -112,15 +117,6 @@ const ContentBlock = ({ content, icon, prefix }) => (
   </Content>
 );
 
-const CaretUpAndDownIcon = () => (
-  <>
-    <CaretUpIcon />
-    <Icon key="icon" iconDown>
-      <CaretDownIcon />
-    </Icon>
-  </>
-);
-
 const Content = styled.div`
   position: relative;
   display: flex;
@@ -130,15 +126,14 @@ const Content = styled.div`
   text-align: left;
 `;
 
-const Icon = styled.span`
-  line-height: 2px;
-  display: block;
-  ${ifProp(
-    "iconDown",
-    css`
-      margin-top: 3px;
-    `
-  )};
+const Icon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 16px;
+  position: absolute;
+  right: 0;
 `;
 
 export default TableHeader;

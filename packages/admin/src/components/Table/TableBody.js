@@ -18,7 +18,8 @@ type TableBodyType = {
   rowComponent: React.ElementType,
   cellComponent: React.ElementType,
   filterTableColumn: (Array<HeaderDataWithStatus | any>, any) => mixed,
-  filterRow: Array<HeaderDataWithStatus | any>
+  filterRow: Array<HeaderDataWithStatus | any>,
+  whiteSpaceNoWrap: string[]
 };
 
 const TableBody = ({
@@ -31,7 +32,8 @@ const TableBody = ({
   rowComponent: RowComponent,
   cellComponent: CellComponent,
   filterTableColumn = filterTableDefaultColumn,
-  filterRow
+  filterRow,
+  whiteSpaceNoWrap = []
 }: TableBodyType) => (
   <BodyComponent>
     {data.map((item, index) => {
@@ -44,9 +46,7 @@ const TableBody = ({
               <CellComponent
                 key={columnKeyExtractor(name, index)}
                 title={typeof row[name] === "string" && row[name]}
-                whiteSpaceNoWrap={
-                  typeof row[name] === "string" && row[name].includes(" ")
-                }
+                whiteSpaceNoWrap={whiteSpaceNoWrap.includes(name)}
               >
                 {row[name]}
               </CellComponent>

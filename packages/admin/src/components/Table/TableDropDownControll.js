@@ -33,7 +33,7 @@ const TableDropDownControll = ({
   buttonComponent: ButtonDropDownWrapper = ButtonDropDown,
   // $FlowFixMe https://github.com/facebook/flow/issues/6832
   buttonContent: ButtonContent = Icon,
-  description = "Додати показник"
+  description = "Додати параметр"
 }: TableDropDownControllType) => (
   <ButtonDropDownWrapper>
     <details>
