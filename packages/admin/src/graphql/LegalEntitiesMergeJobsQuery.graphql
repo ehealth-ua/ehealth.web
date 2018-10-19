@@ -1,0 +1,31 @@
+query LegalEntitiesMergeJobsQuery(
+  $first: Int!
+  $filter: LegalEntityMergeJobFilter
+  $orderBy: LegalEntityMergeJobOrderBy
+) {
+  legalEntityMergeJobs(first: $first, filter: $filter, orderBy: $orderBy) {
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+    nodes {
+      id
+      databaseId
+      startedAt
+      endedAt
+      status
+      mergedFromLegalEntity {
+        edrpou
+        id
+        name
+      }
+      mergedToLegalEntity {
+        edrpou
+        id
+        name
+      }
+    }
+  }
+}
