@@ -203,7 +203,7 @@
                     "name": "LegalEntityMergeJobOrderBy",
                     "ofType": null
                   },
-                  "defaultValue": "STARTED_AT_ASC"
+                  "defaultValue": "STARTED_AT_DESC"
                 }
               ],
               "type": {
@@ -1632,6 +1632,18 @@
               "deprecationReason": null
             },
             {
+              "name": "result",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "startedAt",
               "description": null,
               "args": [],
@@ -1774,11 +1786,52 @@
           "fields": null,
           "inputFields": [
             {
+              "name": "mergedFromLegalEntity",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "MergeeLegalEntityFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "mergedToLegalEntity",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "MergeeLegalEntityFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "status",
               "description": null,
               "type": {
                 "kind": "ENUM",
                 "name": "LegalEntityMergeJobStatus",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MergeeLegalEntityFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "edrpou",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               },
               "defaultValue": null
@@ -2986,7 +3039,7 @@
   "extensions": {
     "graphql-config": {
       "source": "https://api.dev.asclepius.com.ua/graphql",
-      "timestamp": "Wed Oct 17 2018 14:08:04 GMT+0300 (Eastern European Summer Time)"
+      "timestamp": "Fri Oct 19 2018 19:27:58 GMT+0300 (Eastern European Summer Time)"
     }
   }
 }
