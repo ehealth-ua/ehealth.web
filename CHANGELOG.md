@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.104.0"></a>
+# [0.104.0](https://github.com/edenlabllc/ehealth.web/compare/v0.103.3...v0.104.0) (2018-10-19)
+
+
+### Features
+
+* **admin:** add ContractRequests Search page ([ca62095](https://github.com/edenlabllc/ehealth.web/commit/ca62095))
+* **admin:** add graphql query for the Contract Request list ([c10f1b0](https://github.com/edenlabllc/ehealth.web/commit/c10f1b0))
+* **admin:** add route and navigation link to the Contract Request list ([8f4631b](https://github.com/edenlabllc/ehealth.web/commit/8f4631b))
+
+
+
+
+
 <a name="0.103.3"></a>
 ## [0.103.3](https://github.com/edenlabllc/ehealth.web/compare/v0.103.2...v0.103.3) (2018-10-18)
 
