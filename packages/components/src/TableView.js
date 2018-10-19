@@ -32,7 +32,8 @@ const TableView = ({
   sortingParams,
   onSortingChange,
   filterRow = null,
-  onFilter
+  onFilter,
+  whiteSpaceNoWrap
 }: Props) => (
   <TableComponent>
     <TableHeaderView
@@ -57,6 +58,7 @@ const TableView = ({
       rowComponent={rowComponent}
       cellComponent={cellComponent}
       filterRow={filterRow}
+      whiteSpaceNoWrap={whiteSpaceNoWrap}
     />
   </TableComponent>
 );
