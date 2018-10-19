@@ -37,13 +37,21 @@ const CONTRACT_REQUEST = {
   SIGNED: "підписаний"
 };
 
+const MERGE_LEGAL_ENTITIES_JOBS = {
+  FAILED: "Помилка",
+  FAILED_WITH_ERROR: "Помилка системи",
+  PENDING: "В процесі виконання",
+  PROCESSED: "Виконана"
+};
+
 const STATUSES = {
   PERSON,
   DECLARATION,
   LEGALENTITY,
   LEGAL_ENTITY_STATUS,
   LEGAL_ENTITY_TYPE,
-  CONTRACT_REQUEST
+  CONTRACT_REQUEST,
+  MERGE_LEGAL_ENTITIES_JOBS
 };
 
 export default STATUSES;

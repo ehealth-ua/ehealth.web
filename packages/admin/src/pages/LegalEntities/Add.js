@@ -299,7 +299,7 @@ const Sign = ({
                                   }
                                 }
                               });
-                              navigate("/jobs");
+                              navigate("/legal-entity-merge-jobs");
                             }}
                           >
                             Підписати
