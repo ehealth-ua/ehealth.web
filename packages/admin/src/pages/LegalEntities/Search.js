@@ -87,10 +87,16 @@ const Search = ({ uri }) => (
                       nhsVerified,
                       status,
                       insertedAt,
+                      databaseId,
                       ...legalEntity
                     }) => ({
                       ...legalEntity,
-                      nhsVerified: nhsVerified && <PositiveIcon />,
+                      id: databaseId,
+                      nhsVerified: nhsVerified && (
+                        <Flex justifyContent="center">
+                          <PositiveIcon />
+                        </Flex>
+                      ),
                       insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
                       status: (
                         <Badge
@@ -110,7 +116,7 @@ const Search = ({ uri }) => (
                       ),
                       action: (
                         <Link to={`../${legalEntity.id}`} fontWeight="bold">
-                          Показати деталі
+                          Деталі
                         </Link>
                       )
                     })}
@@ -128,6 +134,8 @@ const Search = ({ uri }) => (
                       })
                     }
                     tableName="legal-entities/search"
+                    whiteSpaceNoWrap={["id"]}
+                    hiddenFields="insertedAt"
                   />
                 ) : null;
               }}
