@@ -128,7 +128,7 @@ const Search = ({ uri }) => (
                         />
                       )
                     })}
-                    sortableFields={["startedAt", "endedAt"]}
+                    sortableFields={["startedAt"]}
                     sortingParams={parseSortingParams(orderBy)}
                     onSortingChange={sortingParams =>
                       setLocationParams({
