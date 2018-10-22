@@ -1,0 +1,7 @@
+mutation SignContractRequestMutation($input: SignContractRequestInput!) {
+  signContractRequest(input: $input) {
+    contractRequest {
+      id
+    }
+  }
+}
