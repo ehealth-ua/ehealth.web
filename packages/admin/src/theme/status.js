@@ -10,7 +10,13 @@ const status = {
       FAILED: { bg: "silverCity", color: "blueberrySoda" },
       FAILED_WITH_ERROR: { bg: "silverCity", color: "blueberrySoda" },
       PENDING_VERIFICATION: { bg: "orangePastel" },
-      PENDING: { bg: "orangePastel" }
+      PENDING: { bg: "orangePastel" },
+      NEW: { bg: "bluePastel" },
+      IN_PROCESS: { bg: "orangePastel" },
+      DECLINED: { bg: "redPigment" },
+      APPROVED: { bg: "darkPastelGreen" },
+      PENDING_NHS_SIGN: { bg: "shiningKnight", fontSize: 8 },
+      NHS_SIGNED: { bg: "darkAndStormy" }
     }
   }
 };
