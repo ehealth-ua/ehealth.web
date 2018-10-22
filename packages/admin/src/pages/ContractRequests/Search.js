@@ -27,7 +27,7 @@ const SEARCH_REQUEST_PATTERN = `(${EDRPOU_PATTERN})|(${CONTRACT_REQUEST_PATTERN}
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
-      Перелік запитів на укладення контракту
+      Перелік заяв на укладення договору
     </Heading>
 
     <LocationParams>
@@ -76,11 +76,11 @@ const Search = ({ uri }) => (
                       <Table
                         data={contractRequests}
                         header={{
-                          id: "ID запиту на контракт",
-                          contractNumber: "Номер контракту",
+                          id: "ID заяви на укладення договору",
+                          contractNumber: "Номер договору",
                           status: "Статус",
-                          startDate: "Контракт діє з",
-                          endDate: "Контракт діє по",
+                          startDate: "Договір діє з",
+                          endDate: "Договір діє по",
                           details: "Деталі"
                         }}
                         renderRow={({ id, status, ...contractRequests }) => ({
@@ -131,7 +131,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
         <Field.Text
           name="searchRequest"
           label="Пошук запиту"
-          placeholder="ЄДРПОУ або Номер контракту"
+          placeholder="ЄДРПОУ або Номер договору"
           postfix={<AdminSearchIcon color="#CED0DA" />}
         />
         <Validation.Matches
@@ -157,7 +157,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
       <Box px={1} width={1 / 6}>
         <Field.Select
           name="filter.status"
-          label="Статус контракту"
+          label="Статус договору"
           placeholder="test"
           items={[{ value: "всі статуси" }, ...contractStatuses]}
           renderItem={item => item.value}
@@ -172,13 +172,13 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
       <Box px={1} width={2 / 6}>
         <Field.RangePicker
           rangeNames={["filter.startDateFrom", "filter.startDateTo"]}
-          label="Початок дії контракту"
+          label="Початок дії договору"
         />
       </Box>
       <Box px={1} width={2 / 6}>
         <Field.RangePicker
           rangeNames={["filter.endDateFrom", "filter.endDateTo"]}
-          label="Кінець дії контракту"
+          label="Кінець дії договору"
         />
       </Box>
     </Flex>

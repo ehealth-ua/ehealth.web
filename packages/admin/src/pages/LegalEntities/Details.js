@@ -205,9 +205,9 @@ const Details = ({ id }) => (
               <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
             </Ability>
             <Tabs.NavItem to="./requests-for-contract">
-              Запити на контракт
+              Заяви на укладення договору
             </Tabs.NavItem>
-            <Tabs.NavItem to="./contracts">Контракти</Tabs.NavItem>
+            <Tabs.NavItem to="./contracts">Договори</Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
             <Router>
