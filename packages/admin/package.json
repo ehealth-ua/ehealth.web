@@ -18,6 +18,7 @@
     "final-form-calculate": "^1.2.1",
     "graphql": "0.13.2",
     "js-cookie": "^2.2.0",
+    "print-iframe": "0.0.4",
     "react": "^16.4.2",
     "react-apollo": "^2.1.11",
     "react-composer": "^5.0.0",
