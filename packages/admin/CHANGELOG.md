@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.106.0"></a>
+# [0.106.0](https://github.com/edenlabllc/ehealth.web/compare/v0.105.0...v0.106.0) (2018-10-22)
+
+
+### Bug Fixes
+
+* **admin:** add executionTime field ([2f1ec0e](https://github.com/edenlabllc/ehealth.web/commit/2f1ec0e))
+* **admin:** remove sort by endedAt field ([6b602d9](https://github.com/edenlabllc/ehealth.web/commit/6b602d9))
+* **admin:** rename contracts ([545d6f2](https://github.com/edenlabllc/ehealth.web/commit/545d6f2))
+
+
+### Features
+
+* **admin:** add LegalEntitiesMergeJobs search page ([a8fc355](https://github.com/edenlabllc/ehealth.web/commit/a8fc355))
+* **admin:** add LegalEntitiesMergeJobsQuery ([7442f71](https://github.com/edenlabllc/ehealth.web/commit/7442f71))
+
+
+
+
+
 <a name="0.105.0"></a>
 # [0.105.0](https://github.com/edenlabllc/ehealth.web/compare/v0.104.0...v0.105.0) (2018-10-19)
 
