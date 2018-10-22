@@ -1,0 +1,23 @@
+query ContractRequestQuery($id: ID!) {
+  contractRequest(id: $id) {
+    id
+    databaseId
+    status
+    nhsPaymentMethod
+    nhsSignerBase
+    nhsSigner {
+      id
+    }
+    nhsContractPrice
+    issueCity
+    contractorLegalEntity {
+      edrpou
+      name
+      id
+    }
+    printoutContent
+    assignee {
+      id
+    }
+  }
+}
