@@ -1,0 +1,7 @@
+mutation DeclineContractRequestMutation($input: DeclineContractRequestInput!) {
+  declineContractRequest(input: $input) {
+    contractRequest {
+      id
+    }
+  }
+}
