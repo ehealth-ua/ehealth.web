@@ -3,6 +3,7 @@ import { Flex, Box, Heading } from "rebass/emotion";
 import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
 import format from "date-fns/format";
+import differenceInSeconds from "date-fns/difference_in_seconds";
 
 import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
 import { AdminSearchIcon } from "@ehealth/icons";
@@ -97,6 +98,7 @@ const Search = ({ uri }) => (
                       mergedFromLegalEntityEdrpou: "ЄДРПОУ медзакладу",
                       startedAt: "Початкова дата",
                       endedAt: "Кінцева дата",
+                      executionTime: "Час виконання",
                       status: "Статус задачі"
                     }}
                     renderRow={({
@@ -111,6 +113,7 @@ const Search = ({ uri }) => (
                       },
                       startedAt,
                       endedAt,
+                      executionTime,
                       status
                     }) => ({
                       databaseId,
@@ -120,6 +123,10 @@ const Search = ({ uri }) => (
                       mergedFromLegalEntityEdrpou,
                       startedAt: format(startedAt, "DD.MM.YYYY, HH:mm"),
                       endedAt: format(endedAt, "DD.MM.YYYY, HH:mm"),
+                      executionTime: `${differenceInSeconds(
+                        endedAt,
+                        startedAt
+                      )} с`,
                       status: (
                         <Badge
                           type="MERGE_LEGAL_ENTITIES_JOBS"
