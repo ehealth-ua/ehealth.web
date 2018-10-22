@@ -29,6 +29,7 @@ export { default as MozLogoIcon } from "./MozLogoIcon";
 export { default as PdfIcon } from "./PdfIcon";
 export { default as PencilIcon } from "./PencilIcon";
 export { default as PositiveIcon } from "./PositiveIcon";
+export { default as PrinterIcon } from "./PrinterIcon";
 export { default as RadioIcon } from "./RadioIcon";
 export { default as RemoveIcon } from "./RemoveIcon";
 export { default as RemoveItemIcon } from "./RemoveItemIcon";
