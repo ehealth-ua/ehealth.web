@@ -274,10 +274,15 @@ export const TableCell = styled.td`
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-right: 1px solid #e0e0e0;
   ${ifProp(
     "whiteSpaceNoWrap",
     css`
       white-space: nowrap;
     `
   )};
+
+  &:last-child {
+    border-right: none;
+  }
 `;

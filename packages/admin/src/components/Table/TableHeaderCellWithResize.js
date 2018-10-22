@@ -132,6 +132,14 @@ const TableHeaderCell = styled.th`
   border-right: 1px solid #eee;
   border-collapse: collapse;
   position: relative;
+
+  &:last-child {
+    border-right: none;
+
+    div:last-child {
+      display: none;
+    }
+  }
 `;
 
 const ResizeHandler = styled.div`
