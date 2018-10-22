@@ -1,0 +1,7 @@
+mutation ApproveContractRequestMutation($input: ApproveContractRequestInput!) {
+  approveContractRequest(input: $input) {
+    contractRequest {
+      id
+    }
+  }
+}

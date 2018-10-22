@@ -1,0 +1,7 @@
+mutation UpdateContractRequestMutation($input: UpdateContractRequestInput!) {
+  contractRequest: updateContractRequest(input: $input) {
+    contractRequest {
+      id
+    }
+  }
+}
