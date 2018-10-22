@@ -37,7 +37,7 @@ const SEARCH_FIELDS = [
       },
       {
         name: "contract_number",
-        title: "За номером контракту"
+        title: "За номером договору"
       },
       {
         name: "contractor_legal_entity_id",
@@ -69,7 +69,7 @@ const SEARCH_FIELDS = [
     component: SearchFilterField,
     detailed: true,
     hasSelect: false,
-    labelText: "За номером контракту",
+    labelText: "За номером договору",
     placeholder: "Введіть номер",
     filters: [
       {
@@ -149,14 +149,14 @@ const SEARCH_FIELDS = [
 const ContractsListPage = ({ contracts = [], paging = {}, location }) => (
   <div id="contracts-list-page">
     <Helmet
-      title="Перелік контрактів"
-      meta={[{ property: "og:title", content: "Перелік контрактів" }]}
+      title="Перелік договорів"
+      meta={[{ property: "og:title", content: "Перелік договорів" }]}
     />
 
-    <H1>Перелік контрактів</H1>
+    <H1>Перелік договорів</H1>
 
     <div>
-      <H2>Пошук контрактів</H2>
+      <H2>Пошук договорів</H2>
       <SearchForm fields={SEARCH_FIELDS} location={location} />
     </div>
 
@@ -169,7 +169,7 @@ const ContractsListPage = ({ contracts = [], paging = {}, location }) => (
         columns={[
           {
             key: "id",
-            title: "ID контракту"
+            title: "ID договору"
           },
           {
             key: "legalEntityId",
@@ -177,7 +177,7 @@ const ContractsListPage = ({ contracts = [], paging = {}, location }) => (
           },
           {
             key: "contractNumber",
-            title: "Номер контракту"
+            title: "Номер договору"
           },
           {
             key: "startDate",
@@ -191,7 +191,7 @@ const ContractsListPage = ({ contracts = [], paging = {}, location }) => (
           },
           {
             key: "suspended",
-            title: "Дія контракту"
+            title: "Дія договору"
           },
           { key: "status", title: "Статус" },
           { key: "action", title: "Дія", width: 100 }

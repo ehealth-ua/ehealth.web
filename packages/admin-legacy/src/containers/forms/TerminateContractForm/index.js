@@ -42,7 +42,7 @@ const TerminateFormView = ({
         </div>
         <div className={styles.button}>
           <Button type="submit" size="middle" color="red">
-            Завершити контракт
+            Завершити договір
           </Button>
         </div>
       </div>
@@ -81,7 +81,7 @@ export default class TerminateContractForm extends React.Component {
                 })
               }
             >
-              Завершити контракт
+              Завершити договір
             </Button>
           </div>
           {this.state.terminate && (

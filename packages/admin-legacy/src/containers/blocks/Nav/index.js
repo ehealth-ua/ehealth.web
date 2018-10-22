@@ -168,12 +168,12 @@ class Nav extends React.Component {
             </ShowMore>
           </li>
           <li>
-            <ShowMore nav name="Контракти">
+            <ShowMore nav name="Договори">
               <ul>
                 <ShowWithScope scope="contract:read">
                   <NavItem to="contracts" activeClassName={styles.active}>
                     <Link id="contracts-nav" to="/contracts">
-                      Перелік контрактів
+                      Перелік договорів
                     </Link>
                   </NavItem>
                 </ShowWithScope>
@@ -183,7 +183,7 @@ class Nav extends React.Component {
                     activeClassName={styles.active}
                   >
                     <Link id="contract-requests-nav" to="/contract-requests">
-                      Запити на контракт
+                      Заяви на <br /> укладення договору
                     </Link>
                   </NavItem>
                 </ShowWithScope>

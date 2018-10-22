@@ -31,7 +31,7 @@ const DivisionEmployeesPage = ({ contract, router, divisionId }) => {
       />
 
       <BackLink onClick={() => router.goBack()}>
-        Назад до деталів контракту
+        Назад до деталів договору
       </BackLink>
 
       <Line />

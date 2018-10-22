@@ -82,12 +82,12 @@ class ContractDetail extends React.Component {
     return (
       <div>
         <Helmet
-          title={"Деталі контракту"}
-          meta={[{ property: "og:title", content: "Деталі контракту" }]}
+          title={"Деталі договору"}
+          meta={[{ property: "og:title", content: "Деталі договору" }]}
         />
 
         <BackLink onClick={() => router.push(backLocationPath)}>
-          Назад до списку запитів
+          Назад до списку заяв
         </BackLink>
 
         <Line />
@@ -118,7 +118,7 @@ class ContractDetail extends React.Component {
         <DataList
           list={[
             {
-              name: <b>Дія контракту</b>,
+              name: <b>Дія договору</b>,
               value: contract.is_suspended && <b>Призупинено</b>
             },
             {
@@ -126,11 +126,11 @@ class ContractDetail extends React.Component {
               value: contract.status && CONTRACT_STATUS[contract.status].title
             },
             {
-              name: "Номер контракту",
+              name: "Номер договору",
               value: contract.contract_number
             },
             {
-              name: "ID контракту",
+              name: "ID договору",
               value: contract.id
             }
           ]}

@@ -37,7 +37,7 @@ const SEARCH_FIELDS = [
       },
       {
         name: "contract_number",
-        title: "За номером контракту"
+        title: "За номером договору"
       },
       {
         name: "contractor_legal_entity_id",
@@ -50,7 +50,7 @@ const SEARCH_FIELDS = [
     component: SearchFilterField,
     detailed: true,
     hasSelect: false,
-    labelText: "ID контракту",
+    labelText: "ID договору",
     placeholder: "Введіть ID",
     filters: [
       {
@@ -63,7 +63,7 @@ const SEARCH_FIELDS = [
     component: SearchFilterField,
     detailed: true,
     hasSelect: false,
-    labelText: "За номером контракту",
+    labelText: "За номером договору",
     placeholder: "Введіть номер",
     filters: [
       {
@@ -109,14 +109,14 @@ const ContractRequestsListPage = ({
 }) => (
   <div id="contracts-list-page">
     <Helmet
-      title="Перелік контрактів"
-      meta={[{ property: "og:title", content: "Перелік контрактів" }]}
+      title="Перелік договорів"
+      meta={[{ property: "og:title", content: "Перелік договорів" }]}
     />
 
-    <H1>Перелік запитів на контракти</H1>
+    <H1>Заяви на укладення договору</H1>
 
     <div>
-      <H2>Пошук запитів на контракти</H2>
+      <H2>Пошук заяв на укладення договору</H2>
       <SearchForm fields={SEARCH_FIELDS} location={location} />
     </div>
 
@@ -129,7 +129,7 @@ const ContractRequestsListPage = ({
         columns={[
           {
             key: "id",
-            title: "ID контракту"
+            title: "ID договору"
           },
           {
             key: "legalEntityId",
@@ -137,7 +137,7 @@ const ContractRequestsListPage = ({
           },
           {
             key: "contractNumber",
-            title: "Номер контракту"
+            title: "Номер договору"
           },
           {
             key: "startDate",

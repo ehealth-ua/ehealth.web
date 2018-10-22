@@ -149,11 +149,11 @@ export default class ReportsList extends React.Component {
                   <DataList
                     list={[
                       {
-                        name: "ID контракту",
+                        name: "ID договору",
                         value: item.contract_id
                       },
                       {
-                        name: "Номер контракту",
+                        name: "Номер договору",
                         value: item.contract_number
                       }
                     ]}
