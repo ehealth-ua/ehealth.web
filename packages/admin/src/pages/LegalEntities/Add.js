@@ -9,6 +9,7 @@ import { LocationParams, Form, Validation } from "@ehealth/components";
 import { AdminSearchIcon, PositiveIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
+import Line from "../../components/Line";
 import Badge from "../../components/Badge";
 import Table from "../../components/Table";
 import Steps from "../../components/Steps";
@@ -325,14 +326,5 @@ const Sign = ({
     }}
   </Query>
 );
-
-const Line = system({
-  is: "figure",
-  bg: "januaryDawn",
-  my: 5,
-  mx: 0,
-  height: "1px",
-  w: "100%"
-});
 
 export default Add;

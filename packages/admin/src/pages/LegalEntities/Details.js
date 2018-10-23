@@ -15,6 +15,7 @@ import {
 } from "@ehealth/utils";
 import { LocationParams, Form, Modal, Switch } from "@ehealth/components";
 
+import Line from "../../components/Line";
 import Link from "../../components/Link";
 import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
@@ -498,15 +499,6 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
     )}
   </BooleanValue>
 );
-
-const Line = system({
-  is: "figure",
-  bg: "januaryDawn",
-  my: 5,
-  mx: 0,
-  height: "1px",
-  w: "100%"
-});
 
 const GreyTitle = system({
   color: "shiningKnight",
