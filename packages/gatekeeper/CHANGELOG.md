@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.106.1"></a>
+## [0.106.1](https://github.com/edenlabllc/ehealth.web/compare/v0.106.0...v0.106.1) (2018-10-23)
+
+
+### Bug Fixes
+
+* **admin:** fix admin 401 error handling ([d0aed15](https://github.com/edenlabllc/ehealth.web/commit/d0aed15))
+
+
+
+
+
 <a name="0.106.0"></a>
 # [0.106.0](https://github.com/edenlabllc/ehealth.web/compare/v0.105.0...v0.106.0) (2018-10-22)
 
