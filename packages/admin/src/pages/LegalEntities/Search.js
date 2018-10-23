@@ -167,43 +167,43 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
       </Box>
     </Flex>
     <Flex mx={-1}>
-      <Box px={1} width={1 / 3}>
-        <Query
-          query={SettlementsQuery}
-          fetchPolicy="cache-first"
-          variables={{ name: "" }}
-          context={{ credentials: "same-origin" }}
-        >
-          {({ loading, error, data, refetch }) => {
-            if (loading) return null;
-            const { nodes: settlements = [{}] } = data.settlements;
-            return (
-              <Field.Select
-                name="filter.settlement"
-                label="Населений пункт"
-                placeholder="Введіть населений пункт"
-                itemToString={item => {
-                  if (!item) return "";
-                  return typeof item === "string" ? item : item.settlement;
-                }}
-                items={settlements.map(({ name, district, type, region }) => ({
-                  area: region || undefined,
-                  settlement: name,
-                  settlementType: type,
-                  region: district || undefined
-                }))}
-                onInputValueChange={debounce(
-                  settlement => refetch({ name: settlement }),
-                  500
-                )}
-                filterOptions={{ keys: ["settlement"] }}
-                renderItem={address => <AddressView data={address} />}
-                size="small"
-              />
-            );
-          }}
-        </Query>
-      </Box>
+      {/*<Box px={1} width={1 / 3}>*/}
+      {/*<Query*/}
+      {/*query={SettlementsQuery}*/}
+      {/*fetchPolicy="cache-first"*/}
+      {/*variables={{ name: "" }}*/}
+      {/*context={{ credentials: "same-origin" }}*/}
+      {/*>*/}
+      {/*{({ loading, error, data, refetch }) => {*/}
+      {/*if (loading) return null;*/}
+      {/*const { nodes: settlements = [{}] } = data.settlements;*/}
+      {/*return (*/}
+      {/*<Field.Select*/}
+      {/*name="filter.settlement"*/}
+      {/*label="Населений пункт"*/}
+      {/*placeholder="Введіть населений пункт"*/}
+      {/*itemToString={item => {*/}
+      {/*if (!item) return "";*/}
+      {/*return typeof item === "string" ? item : item.settlement;*/}
+      {/*}}*/}
+      {/*items={settlements.map(({ name, district, type, region }) => ({*/}
+      {/*area: region || undefined,*/}
+      {/*settlement: name,*/}
+      {/*settlementType: type,*/}
+      {/*region: district || undefined*/}
+      {/*}))}*/}
+      {/*onInputValueChange={debounce(*/}
+      {/*settlement => refetch({ name: settlement }),*/}
+      {/*500*/}
+      {/*)}*/}
+      {/*filterOptions={{ keys: ["settlement"] }}*/}
+      {/*renderItem={address => <AddressView data={address} />}*/}
+      {/*size="small"*/}
+      {/*/>*/}
+      {/*);*/}
+      {/*}}*/}
+      {/*</Query>*/}
+      {/*</Box>*/}
 
       <Box px={1} width={1 / 3}>
         {/*Todo: Use Select with dictionary LEGAL_ENTITY_STATUS*/}
