@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.106.3"></a>
+## [0.106.3](https://github.com/edenlabllc/ehealth.web/compare/v0.106.2...v0.106.3) (2018-10-23)
+
+
+### Bug Fixes
+
+* **admin:** add nav scopes ([83f20fd](https://github.com/edenlabllc/ehealth.web/commit/83f20fd))
+
+
+
+
+
 <a name="0.106.2"></a>
 ## [0.106.2](https://github.com/edenlabllc/ehealth.web/compare/v0.106.1...v0.106.2) (2018-10-23)
 
