@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.107.0"></a>
+# [0.107.0](https://github.com/edenlabllc/ehealth.web/compare/v0.106.3...v0.107.0) (2018-10-23)
+
+
+### Features
+
+* **icons:** add PrinterIcon to icons pkg ([b37bac5](https://github.com/edenlabllc/ehealth.web/commit/b37bac5))
+
+
+
+
+
 <a name="0.106.0"></a>
 # [0.106.0](https://github.com/edenlabllc/ehealth.web/compare/v0.105.0...v0.106.0) (2018-10-22)
 

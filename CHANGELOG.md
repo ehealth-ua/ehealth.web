@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.107.0"></a>
+# [0.107.0](https://github.com/edenlabllc/ehealth.web/compare/v0.106.3...v0.107.0) (2018-10-23)
+
+
+### Features
+
+* **admin:** add contract request statuses in helpers and theme ([29f1e39](https://github.com/edenlabllc/ehealth.web/commit/29f1e39))
+* **admin:** add Decline ContractRequest ([bc3c889](https://github.com/edenlabllc/ehealth.web/commit/bc3c889))
+* **admin:** add Line to components ([eb85fe6](https://github.com/edenlabllc/ehealth.web/commit/eb85fe6))
+* **admin:** add part of Details for ContractRequest ([c1e14c0](https://github.com/edenlabllc/ehealth.web/commit/c1e14c0))
+* **admin:** add print-iframe pkg to package.json ([76abf11](https://github.com/edenlabllc/ehealth.web/commit/76abf11))
+* **admin:** add Sign ContractRequest ([0bca5f1](https://github.com/edenlabllc/ehealth.web/commit/0bca5f1))
+* **admin:** Approve and Update ContractRequest ([347afd9](https://github.com/edenlabllc/ehealth.web/commit/347afd9))
+* **icons:** add PrinterIcon to icons pkg ([b37bac5](https://github.com/edenlabllc/ehealth.web/commit/b37bac5))
+
+
+
+
+
 <a name="0.106.3"></a>
 ## [0.106.3](https://github.com/edenlabllc/ehealth.web/compare/v0.106.2...v0.106.3) (2018-10-23)
 
