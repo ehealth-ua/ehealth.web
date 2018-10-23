@@ -34,12 +34,13 @@ import NhsVerifyLegalEntityMutation from "../../graphql/NhsVerifyLegalEntityMuta
 import LegalEntityQuery from "../../graphql/LegalEntityQuery.graphql";
 
 const Details = ({ id }) => (
-  <Query query={LegalEntityQuery} variables={{ id }}>
+  <Query query={LegalEntityQuery} variables={{ id, first: 10 }}>
     {({ loading, error, data: { legalEntity } }) => {
       if (loading) return "Loading...";
       if (error) return `Error! ${error.message}`;
       const {
         id,
+        databaseId,
         status,
         edrpou,
         name,
@@ -72,9 +73,9 @@ const Details = ({ id }) => (
             <Flex justifyContent="space-between" alignItems="flex-end">
               <Box>
                 <DefinitionListView
-                  labels={{ id: "ID медзакладу", status: "Статус" }}
+                  labels={{ databaseId: "ID медзакладу", status: "Статус" }}
                   data={{
-                    id,
+                    databaseId,
                     status: (
                       <Badge name={status} type="LEGALENTITY" minWidth={100} />
                     )
@@ -334,6 +335,7 @@ const RelatedLegalEntities = ({ id, status }) => (
           query={LegalEntityQuery}
           variables={{
             id,
+            first: 10,
             ...locationParams
           }}
         >
@@ -376,17 +378,17 @@ const RelatedLegalEntities = ({ id, status }) => (
                   header={{
                     name: "Назва Медзакладу",
                     edrpou: "ЄДРПОУ",
-                    base: "Основа",
+                    reason: "Основа",
                     insertedAt: "Додано",
                     isActive: "Статус"
                   }}
                   renderRow={({
-                    base,
+                    reason,
                     insertedAt,
-                    mergedFromLegalEntity: { edrpou, name },
+                    mergedFrom: { edrpou, name },
                     isActive
                   }) => ({
-                    base,
+                    reason,
                     insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
                     name,
                     edrpou,
@@ -398,7 +400,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                       />
                     )
                   })}
-                  sortableFields={["edrpou", "insertedAt", "isActive"]}
+                  sortableFields={["insertedAt", "isActive"]}
                   sortingParams={parseSortingParams(orderBy)}
                   onSortingChange={sortingParams =>
                     setLocationParams({
