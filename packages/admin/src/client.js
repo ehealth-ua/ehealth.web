@@ -24,13 +24,12 @@ export const createClient = ({ onError: handleError }) => {
     dataIdFromObject
   });
 
-  const errorLink = onError(({ graphQLErrors, operation }) => {
+  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
     const getGraphqlError = () => {
       if (graphQLErrors) {
         for (let err of graphQLErrors) {
           return {
             message: err.message,
-            type: STATUS_NAMES[err.extensions.exception.statusCode],
             statusCode: err.extensions.exception.statusCode
           };
         }
@@ -40,11 +39,11 @@ export const createClient = ({ onError: handleError }) => {
 
     const graphqlError = getGraphqlError();
 
-    const { message, statusCode, type } = graphqlError;
+    const { message, statusCode } = graphqlError || networkError;
 
     if (statusCode === 422) return;
 
-    const error = { message, type: type };
+    const error = { message, type: STATUS_NAMES[statusCode] };
 
     let operationType;
 
