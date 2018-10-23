@@ -1,5 +1,6 @@
 import React from "react";
+import { Redirect } from "@reach/router";
 
-const Home = () => <div>Hello, admin!!!</div>;
+const Home = () => <Redirect to="legal-entities/search" />;
 
 export default Home;
