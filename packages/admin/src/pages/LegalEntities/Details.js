@@ -55,7 +55,7 @@ const Details = ({ id }) => (
         owner,
         medicalServiceProvider
       } = legalEntity;
-      // const { nodes: divisions } = legalEntity.divisions;
+      const { nodes: divisions } = legalEntity.divisions;
       const statusAction =
         status === "ACTIVE" && (nhsVerified ? status : "NHS_VERIFY_CLOSED");
 
@@ -232,7 +232,7 @@ const Details = ({ id }) => (
                 status={status}
               />
               {/*<Owner path="/owner" owner={owner} />*/}
-              {/*<Divisions path="/divisions" divisions={divisions} />*/}
+              <Divisions path="/divisions" divisions={divisions} />
             </Router>
           </Tabs.Content>
         </>
@@ -462,7 +462,7 @@ const Divisions = ({ divisions, id }) => (
             data={divisions}
             header={{
               name: "Назва Медзакладу",
-              addresses: "Адреса",
+              // addresses: "Адреса",
               mountainGroup: "Гірський регіон",
               phones: "Телефон",
               email: "Email"
@@ -470,9 +470,9 @@ const Divisions = ({ divisions, id }) => (
             renderRow={({ mountainGroup, addresses, phones, ...props }) => ({
               ...props,
               mountainGroup: mountainGroup && <PositiveIcon />,
-              addresses: addresses
-                .filter(a => a.type === "RESIDENCE")
-                .map((item, key) => <AddressView data={item} key={key} />),
+              // addresses: addresses
+              //   .filter(a => a.type === "RESIDENCE")
+              //   .map((item, key) => <AddressView data={item} key={key} />),
               phones: getPhones(phones)
             })}
           />
