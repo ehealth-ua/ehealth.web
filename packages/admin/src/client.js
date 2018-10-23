@@ -24,15 +24,27 @@ export const createClient = ({ onError: handleError }) => {
     dataIdFromObject
   });
 
-  // TODO: we should reconsider error handling since we are using GraphQL endpoint
-  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
-    const { message, statusCode, result } = networkError;
+  const errorLink = onError(({ graphQLErrors, operation }) => {
+    const getGraphqlError = () => {
+      if (graphQLErrors) {
+        for (let err of graphQLErrors) {
+          return {
+            message: err.message,
+            type: STATUS_NAMES[err.extensions.exception.statusCode],
+            statusCode: err.extensions.exception.statusCode
+          };
+        }
+      }
+      return null;
+    };
+
+    const graphqlError = getGraphqlError();
+
+    const { message, statusCode, type } = graphqlError;
 
     if (statusCode === 422) return;
 
-    const error = statusCode
-      ? { ...result.error, type: STATUS_NAMES[statusCode] }
-      : { message, type: "network" };
+    const error = { message, type: type };
 
     let operationType;
 
