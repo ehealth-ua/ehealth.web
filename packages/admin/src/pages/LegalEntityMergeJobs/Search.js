@@ -92,13 +92,14 @@ const Search = ({ uri }) => (
                     data={legalEntityMergeJobs}
                     header={{
                       databaseId: "ID",
-                      mergedToLegalEntityName: "Назва медзакладу",
-                      mergedToLegalEntityEdrpou: "ЄДРПОУ медзакладу",
-                      mergedFromLegalEntityName: "Основний медзаклад",
-                      mergedFromLegalEntityEdrpou: "ЄДРПОУ медзакладу",
-                      startedAt: "Початкова дата",
-                      endedAt: "Кінцева дата",
-                      executionTime: "Час виконання",
+                      mergedToLegalEntityName: "Основний медзаклад",
+                      mergedToLegalEntityEdrpou: "ЄДРПОУ основного медзакладу",
+                      mergedFromLegalEntityName:
+                        "Назва підпорядкованого медзакладу",
+                      mergedFromLegalEntityEdrpou:
+                        "ЄДРПОУ підпорядкованого медзакладу",
+                      startedAt: "Час старту задачі",
+                      executionTime: "Час виконання задачі",
                       status: "Статус задачі"
                     }}
                     renderRow={({
@@ -122,7 +123,6 @@ const Search = ({ uri }) => (
                       mergedFromLegalEntityName,
                       mergedFromLegalEntityEdrpou,
                       startedAt: format(startedAt, "DD.MM.YYYY, HH:mm"),
-                      endedAt: format(endedAt, "DD.MM.YYYY, HH:mm"),
                       executionTime: `${differenceInSeconds(
                         endedAt,
                         startedAt
@@ -161,13 +161,13 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 1.5}>
         <Field.Text
-          name="filter.mergedToLegalEntity.code"
+          name="filter.mergedFromLegalEntity.code"
           label="Знайти підпорядкований медзаклад"
           placeholder="ЄДРПОУ медзакладу"
           postfix={<AdminSearchIcon color="#CED0DA" />}
         />
         <Validation.Matches
-          field="filter.mergedToLegalEntity.code"
+          field="filter.mergedFromLegalEntity.code"
           options={EDRPOU_PATTERN}
           message="Невірний номер"
         />
@@ -196,13 +196,13 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 1.5}>
         <Field.Text
-          name="filter.mergedFromLegalEntity.code"
+          name="filter.mergedToLegalEntity.code"
           label="Знайти основний медзаклад"
           placeholder="ЄДРПОУ медзакладу"
           postfix={<AdminSearchIcon color="#CED0DA" />}
         />
         <Validation.Matches
-          field="filter.mergedFromLegalEntity.code"
+          field="filter.mergedToLegalEntity.code"
           options={EDRPOU_PATTERN}
           message="Невірний номер"
         />
