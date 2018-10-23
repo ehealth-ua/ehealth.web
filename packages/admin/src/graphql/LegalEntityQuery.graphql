@@ -32,24 +32,24 @@ query LegalEntityQuery(
     kveds
     misVerified
     nhsVerified
-    #    medicalServiceProvider {
-    #      licenses {
-    #        licenseNumber
-    #        issuedBy
-    #        issuedDate
-    #        expiryDate
-    #        activeFromDate
-    #        whatLicensed
-    #        orderNo
-    #      }
-    #      accreditation {
-    #        category
-    #        issuedDate
-    #        expiryDate
-    #        orderNo
-    #        orderDate
-    #      }
-    #    }
+    medicalServiceProvider {
+      licenses {
+        licenseNumber
+        issuedBy
+        issuedDate
+        expiryDate
+        activeFromDate
+        whatLicensed
+        orderNo
+      }
+      accreditation {
+        category
+        issuedDate
+        expiryDate
+        orderNo
+        orderDate
+      }
+    }
     #    owner {
     #      id
     #      position
@@ -80,31 +80,31 @@ query LegalEntityQuery(
         }
       }
     }
-    #    divisions {
-    #      nodes {
-    #        id
-    #        name
-    #        addresses {
-    #          type
-    #          area
-    #          region
-    #          settlement
-    #          settlementType
-    #          settlementId
-    #          streetType
-    #          street
-    #          building
-    #          apartment
-    #        }
-    #        phones {
-    #          type
-    #          number
-    #        }
-    #        email
-    #        status
-    #        type
-    #        mountainGroup
-    #      }
-    #    }
+    divisions(first: $first) {
+      nodes {
+        databaseId
+        name
+        #        addresses {
+        #          type
+        #          area
+        #          region
+        #          settlement
+        #          settlementType
+        #          settlementId
+        #          streetType
+        #          street
+        #          building
+        #          apartment
+        #        }
+        phones {
+          type
+          number
+        }
+        email
+        status
+        type
+        mountainGroup
+      }
+    }
   }
 }
