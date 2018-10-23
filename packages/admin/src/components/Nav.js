@@ -27,13 +27,15 @@ const Nav = () => (
       <Ability action="read" resource="legal_entity">
         <NavLink to="/legal-entities">Медзаклади</NavLink>
       </Ability>
-      <NavSection title="Задачі в процесі виконання">
-        <Ability action="merge" resource="legal_entity">
-          <NavLink to="/legal-entity-merge-jobs">
-            Підпорядкування медзакладів
-          </NavLink>
-        </Ability>
-      </NavSection>
+      <Ability action="merge" resources={["legal_entity"]} loose>
+        <NavSection title="Задачі в процесі виконання">
+          <Ability action="merge" resource="legal_entity">
+            <NavLink to="/legal-entity-merge-jobs">
+              Підпорядкування медзакладів
+            </NavLink>
+          </Ability>
+        </NavSection>
+      </Ability>
     </NavList>
   </NavContainer>
 );
