@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.108.0"></a>
+# [0.108.0](https://github.com/edenlabllc/ehealth.web/compare/v0.107.1...v0.108.0) (2018-10-23)
+
+
+### Bug Fixes
+
+* **admin:** fix 401 network error handling ([86f2f25](https://github.com/edenlabllc/ehealth.web/commit/86f2f25))
+* **admin:** hide settlement search ([f6fdaec](https://github.com/edenlabllc/ehealth.web/commit/f6fdaec))
+* **admin:** uncomment divisions in LegalEntityDetails ([cc14d47](https://github.com/edenlabllc/ehealth.web/commit/cc14d47))
+* **admin:** uncomment query fields ([90b8aa9](https://github.com/edenlabllc/ehealth.web/commit/90b8aa9))
+
+
+
+
+
 <a name="0.107.1"></a>
 ## [0.107.1](https://github.com/edenlabllc/ehealth.web/compare/v0.107.0...v0.107.1) (2018-10-23)
 
