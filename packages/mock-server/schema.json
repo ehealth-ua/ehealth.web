@@ -76,7 +76,7 @@
                     "name": "LegalEntityOrderBy",
                     "ofType": null
                   },
-                  "defaultValue": "INSERTED_AT_ASC"
+                  "defaultValue": "INSERTED_AT_DESC"
                 }
               ],
               "type": {
@@ -982,6 +982,18 @@
               "deprecationReason": null
             },
             {
+              "name": "owner",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Employee",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "ownerPropertyType",
               "description": null,
               "args": [],
@@ -1150,6 +1162,16 @@
             {
               "kind": "OBJECT",
               "name": "LegalEntity",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Division",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Employee",
               "ofType": null
             },
             {
@@ -1647,6 +1669,22 @@
               "deprecationReason": null
             },
             {
+              "name": "id",
+              "description": "The ID of an object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "isActive",
               "description": null,
               "args": [],
@@ -1748,7 +1786,13 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [],
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            }
+          ],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -2267,6 +2311,22 @@
               "deprecationReason": null
             },
             {
+              "name": "id",
+              "description": "The ID of an object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "isActive",
               "description": null,
               "args": [],
@@ -2360,7 +2420,13 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [],
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            }
+          ],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -4760,7 +4826,7 @@
   "extensions": {
     "graphql-config": {
       "source": "https://api.dev.asclepius.com.ua/graphql",
-      "timestamp": "Tue Oct 23 2018 16:17:37 GMT+0300 (Eastern European Summer Time)"
+      "timestamp": "Tue Oct 23 2018 23:26:24 GMT+0300 (Eastern European Summer Time)"
     }
   }
 }
