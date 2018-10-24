@@ -140,6 +140,10 @@ class ContractDetail extends React.Component {
                   ? "ID заяви на укладення договору"
                   : "ID договору",
               value: contract.id
+            },
+            {
+              name: "ID попередньої заяви",
+              value: contract.previous_request_id
             }
           ]}
         />
