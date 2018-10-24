@@ -87,7 +87,9 @@ class ContractDetail extends React.Component {
         />
 
         <BackLink onClick={() => router.push(backLocationPath)}>
-          Назад до списку заяв
+          {type === "contractRequest"
+            ? "Назад до списку заяв"
+            : "Назад до списку договорів"}
         </BackLink>
 
         <Line />
@@ -122,7 +124,10 @@ class ContractDetail extends React.Component {
               value: contract.is_suspended && <b>Призупинено</b>
             },
             {
-              name: "Статус запиту",
+              name:
+                type === "contractRequest"
+                  ? "Статус запиту"
+                  : "Статус договору",
               value: contract.status && CONTRACT_STATUS[contract.status].title
             },
             {
@@ -130,7 +135,10 @@ class ContractDetail extends React.Component {
               value: contract.contract_number
             },
             {
-              name: "ID договору",
+              name:
+                type === "contractRequest"
+                  ? "ID заяви на укладення договору"
+                  : "ID договору",
               value: contract.id
             }
           ]}

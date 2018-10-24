@@ -50,7 +50,7 @@ const SEARCH_FIELDS = [
     component: SearchFilterField,
     detailed: true,
     hasSelect: false,
-    labelText: "ID договору",
+    labelText: "ID заяви",
     placeholder: "Введіть ID",
     filters: [
       {
@@ -129,7 +129,7 @@ const ContractRequestsListPage = ({
         columns={[
           {
             key: "id",
-            title: "ID договору"
+            title: "ID заяви"
           },
           {
             key: "legalEntityId",
