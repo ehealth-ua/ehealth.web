@@ -328,6 +328,16 @@
                 "ofType": null
               },
               "defaultValue": null
+            },
+            {
+              "name": "type",
+              "description": null,
+              "type": {
+                "kind": "ENUM",
+                "name": "LegalEntityType",
+                "ofType": null
+              },
+              "defaultValue": null
             }
           ],
           "interfaces": null,
@@ -352,6 +362,35 @@
           "inputFields": null,
           "interfaces": null,
           "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "LegalEntityType",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "MSP",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "NHS",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PHARMACY",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
           "possibleTypes": null
         },
         {
@@ -1906,6 +1945,18 @@
               "deprecationReason": null
             },
             {
+              "name": "DRUGSTORE",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "DRUGSTORE_POINT",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "FAP",
               "description": null,
               "isDeprecated": false,
@@ -3301,35 +3352,6 @@
             },
             {
               "name": "CLOSED",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "possibleTypes": null
-        },
-        {
-          "kind": "ENUM",
-          "name": "LegalEntityType",
-          "description": null,
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
-          "enumValues": [
-            {
-              "name": "MIS",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "MSP",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "PHARMACY",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -4826,7 +4848,7 @@
   "extensions": {
     "graphql-config": {
       "source": "https://api.dev.asclepius.com.ua/graphql",
-      "timestamp": "Tue Oct 23 2018 23:26:24 GMT+0300 (Eastern European Summer Time)"
+      "timestamp": "Wed Oct 24 2018 13:54:16 GMT+0300 (Eastern European Summer Time)"
     }
   }
 }
