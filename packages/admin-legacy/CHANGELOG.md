@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.109.0"></a>
+# [0.109.0](https://github.com/edenlabllc/ehealth.web/compare/v0.108.4...v0.109.0) (2018-10-24)
+
+
+### Bug Fixes
+
+* **admin-legacy:** fix fields naming according to type ([2efc694](https://github.com/edenlabllc/ehealth.web/commit/2efc694))
+
+
+### Features
+
+* **admin-legacy:** add previous_request_id in ContractDetails ([868010b](https://github.com/edenlabllc/ehealth.web/commit/868010b))
+
+
+
+
+
 <a name="0.108.0"></a>
 # [0.108.0](https://github.com/edenlabllc/ehealth.web/compare/v0.107.1...v0.108.0) (2018-10-23)
 
