@@ -207,7 +207,10 @@ const Sign = ({
   },
   navigate
 }) => (
-  <Query query={LegalEntityQuery} variables={{ id: legalEntityToId }}>
+  <Query
+    query={LegalEntityQuery}
+    variables={{ id: legalEntityToId, first: 10 }}
+  >
     {({ loading, error, data }) => {
       if (loading) return "Loading...";
       if (error) return `Error! ${error.message}`;
