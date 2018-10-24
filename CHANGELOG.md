@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.110.3"></a>
+## [0.110.3](https://github.com/edenlabllc/ehealth.web/compare/v0.110.2...v0.110.3) (2018-10-24)
+
+
+### Bug Fixes
+
+* **admin:** add noThrow to redirect from home page ([a4cebd6](https://github.com/edenlabllc/ehealth.web/commit/a4cebd6))
+
+
+
+
+
 <a name="0.110.2"></a>
 ## [0.110.2](https://github.com/edenlabllc/ehealth.web/compare/v0.110.1...v0.110.2) (2018-10-24)
 
