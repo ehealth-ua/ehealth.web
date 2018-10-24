@@ -23,6 +23,7 @@ import SearchLegalEntitiesQuery from "../../graphql/SearchLegalEntitiesQuery.gra
 import MergeLegalEntitiesMutation from "../../graphql/MergeLegalEntitiesMutation.graphql";
 
 import { REACT_APP_SIGNER_URL } from "../../env";
+import STATUSES from "../../helpers/statuses";
 
 const Add = ({ location: { state } }) => (
   <>
@@ -92,10 +93,12 @@ const Search = ({ location: { state } }) => (
                     status,
                     nhsVerified,
                     owner,
+                    type,
                     ...legalEntity
                   }) => ({
                     ...legalEntity,
-                    // owner: getFullName(owner.party),
+                    type: STATUSES.LEGAL_ENTITY_TYPE[type],
+                    owner: getFullName(owner.party),
                     nhsVerified: nhsVerified && <PositiveIcon />,
                     status: (
                       <Badge name={status} type="LEGALENTITY" display="block" />

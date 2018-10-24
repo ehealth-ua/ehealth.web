@@ -23,7 +23,7 @@ const LEGAL_ENTITY_STATUS = {
 const LEGAL_ENTITY_TYPE = {
   PHARMACY: "Аптека",
   MSP: "Заклад з надання медичних послуг",
-  MIS: "Medical Information system"
+  NHS: "Національна служба здоров'я України"
 };
 
 const CONTRACT_REQUEST = {

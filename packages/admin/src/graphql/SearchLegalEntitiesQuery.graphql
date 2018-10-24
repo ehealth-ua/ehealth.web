@@ -24,6 +24,13 @@ query SearchLegalEntitiesQuery(
       insertedAt
       status
       type
+      owner {
+        party {
+          firstName
+          lastName
+          secondName
+        }
+      }
     }
   }
 }
