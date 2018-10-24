@@ -1,7 +1,6 @@
 import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
-import system from "system-components/emotion";
 import { BooleanValue } from "react-values";
 import { Flex, Box, Heading } from "rebass/emotion";
 import format from "date-fns/format";
@@ -231,7 +230,7 @@ const Details = ({ id }) => (
                 path="/related-legal-entities"
                 status={status}
               />
-              {/*<Owner path="/owner" owner={owner} />*/}
+              <Owner path="/owner" owner={owner} />
               <Divisions path="/divisions" divisions={divisions} />
             </Router>
           </Tabs.Content>
@@ -264,7 +263,7 @@ const GeneralInfo = ({
       data={{
         ...props,
         addresses: addresses
-          .filter(a => a.type === "ACTIVE")
+          .filter(a => a.type === "REGISTRATION")
           .map((item, key) => <AddressView data={item} key={key} />),
         phones: getPhones(phones),
         type: STATUSES.LEGAL_ENTITY_TYPE[type]
@@ -274,9 +273,7 @@ const GeneralInfo = ({
     <DefinitionListView
       labels={{
         ownerPropertyType: "Тип власності",
-        kveds: "КВЕДи",
-        misVerified: <GreyTitle>Верифікація МІС</GreyTitle>,
-        nhsVerified: <GreyTitle>Верифікація НСЗУ</GreyTitle>
+        kveds: "КВЕДи"
       }}
       data={{
         ownerPropertyType,
@@ -285,10 +282,19 @@ const GeneralInfo = ({
             {el}
             {key !== arr.length - 1 && ", "}
           </React.Fragment>
-        )),
+        ))
+      }}
+    />
+    <DefinitionListView
+      labels={{
+        misVerified: "Верифікація МІС",
+        nhsVerified: "Верифікація НСЗУ"
+      }}
+      data={{
         misVerified: misVerified && <PositiveIcon />,
         nhsVerified: nhsVerified && <PositiveIcon />
       }}
+      color="blueberrySoda"
     />
   </Box>
 );
@@ -373,42 +379,44 @@ const RelatedLegalEntities = ({ id, status }) => (
                     </Flex>
                   </Link>
                 )}
-                <Table
-                  data={nodes}
-                  header={{
-                    name: "Назва Медзакладу",
-                    edrpou: "ЄДРПОУ",
-                    reason: "Основа",
-                    insertedAt: "Додано",
-                    isActive: "Статус"
-                  }}
-                  renderRow={({
-                    reason,
-                    insertedAt,
-                    mergedFrom: { edrpou, name },
-                    isActive
-                  }) => ({
-                    reason,
-                    insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
-                    name,
-                    edrpou,
-                    isActive: (
-                      <Badge
-                        name={isActive ? "ACTIVE" : "CLOSED"}
-                        type="LEGALENTITY"
-                        display="block"
-                      />
-                    )
-                  })}
-                  sortableFields={["insertedAt", "isActive"]}
-                  sortingParams={parseSortingParams(orderBy)}
-                  onSortingChange={sortingParams =>
-                    setLocationParams({
-                      orderBy: stringifySortingParams(sortingParams)
-                    })
-                  }
-                  tableName="mergedFromLegalEntities"
-                />
+                {nodes.length ? (
+                  <Table
+                    data={nodes}
+                    header={{
+                      name: "Назва Медзакладу",
+                      edrpou: "ЄДРПОУ",
+                      reason: "Основа",
+                      insertedAt: "Додано",
+                      isActive: "Статус"
+                    }}
+                    renderRow={({
+                      reason,
+                      insertedAt,
+                      mergedFrom: { edrpou, name },
+                      isActive
+                    }) => ({
+                      reason,
+                      insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                      name,
+                      edrpou,
+                      isActive: (
+                        <Badge
+                          name={isActive ? "ACTIVE" : "CLOSED"}
+                          type="LEGALENTITY"
+                          display="block"
+                        />
+                      )
+                    })}
+                    sortableFields={["insertedAt", "isActive"]}
+                    sortingParams={parseSortingParams(orderBy)}
+                    onSortingChange={sortingParams =>
+                      setLocationParams({
+                        orderBy: stringifySortingParams(sortingParams)
+                      })
+                    }
+                    tableName="mergedFromLegalEntities"
+                  />
+                ) : null}
               </>
             );
           }}
@@ -418,37 +426,44 @@ const RelatedLegalEntities = ({ id, status }) => (
   </Ability>
 );
 
-const Owner = ({ owner: { party, id, position, doctor } }) => (
+const Owner = ({
+  owner: { party, databaseId, position, additionalInfo: doctor }
+}) => (
   <Box p={5}>
     <DefinitionListView
       labels={{
         party: "ПІБ",
         speciality: "Спеціальність",
-        position: "Посада",
-        id: <GreyTitle>Id</GreyTitle>
+        position: "Посада"
       }}
       data={{
         party: getFullName(party),
-        speciality: doctor.specialities.map(({ speciality }, index, array) => (
-          <React.Fragment key={index}>
-            {speciality}
-            {array.length - 1 !== index && ", "}
-          </React.Fragment>
-        )),
-        position,
-        id: <GreyTitle>{id}</GreyTitle>
+        speciality:
+          doctor.specialities &&
+          doctor.specialities.map(({ speciality }, index, array) => (
+            <React.Fragment key={index}>
+              {speciality}
+              {array.length - 1 !== index && ", "}
+            </React.Fragment>
+          )),
+        position
       }}
+    />
+    <DefinitionListView
+      labels={{ databaseId: "Id" }}
+      data={{ databaseId }}
+      color="blueberrySoda"
     />
   </Box>
 );
 
-const Divisions = ({ divisions, id }) => (
+const Divisions = ({ divisions }) => (
   <Ability action="read" resource="division">
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
         <>
           <Form onSubmit={setLocationParams} initialValues={locationParams}>
-            <Box p={5} width={460}>
+            <Box px={5} pt={5} width={460}>
               <Field.Text
                 name="filter.name"
                 label="Знайти відділення"
@@ -462,7 +477,7 @@ const Divisions = ({ divisions, id }) => (
             data={divisions}
             header={{
               name: "Назва Медзакладу",
-              // addresses: "Адреса",
+              addresses: "Адреса",
               mountainGroup: "Гірський регіон",
               phones: "Телефон",
               email: "Email"
@@ -470,9 +485,9 @@ const Divisions = ({ divisions, id }) => (
             renderRow={({ mountainGroup, addresses, phones, ...props }) => ({
               ...props,
               mountainGroup: mountainGroup && <PositiveIcon />,
-              // addresses: addresses
-              //   .filter(a => a.type === "RESIDENCE")
-              //   .map((item, key) => <AddressView data={item} key={key} />),
+              addresses: addresses
+                .filter(a => a.type === "RESIDENCE")
+                .map((item, key) => <AddressView data={item} key={key} />),
               phones: getPhones(phones)
             })}
           />
@@ -501,10 +516,5 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
     )}
   </BooleanValue>
 );
-
-const GreyTitle = system({
-  color: "shiningKnight",
-  fontWeight: 500
-});
 
 export default Details;

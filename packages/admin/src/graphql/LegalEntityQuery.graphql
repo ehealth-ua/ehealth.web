@@ -50,24 +50,25 @@ query LegalEntityQuery(
         orderDate
       }
     }
-    #    owner {
-    #      id
-    #      position
-    #      startDate
-    #      endDate
-    #      status
-    #      employeeType
-    #      party {
-    #        firstName
-    #        lastName
-    #        secondName
-    #      }
-    #      doctor {
-    #        specialities {
-    #          speciality
-    #        }
-    #      }
-    #    }
+    owner {
+      id
+      databaseId
+      position
+      startDate
+      endDate
+      status
+      employeeType
+      party {
+        firstName
+        lastName
+        secondName
+      }
+      additionalInfo {
+        specialities {
+          speciality
+        }
+      }
+    }
     mergedFromLegalEntities(first: $first, filter: $filter, orderBy: $orderBy) {
       nodes {
         isActive
@@ -84,25 +85,24 @@ query LegalEntityQuery(
       nodes {
         databaseId
         name
-        #        addresses {
-        #          type
-        #          area
-        #          region
-        #          settlement
-        #          settlementType
-        #          settlementId
-        #          streetType
-        #          street
-        #          building
-        #          apartment
-        #        }
+        addresses {
+          type
+          area
+          region
+          settlement
+          settlementType
+          settlementId
+          streetType
+          street
+          building
+          apartment
+        }
         phones {
           type
           number
         }
         email
         status
-        type
         mountainGroup
       }
     }

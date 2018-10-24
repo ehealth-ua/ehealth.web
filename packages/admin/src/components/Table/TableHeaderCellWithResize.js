@@ -123,6 +123,16 @@ class TableHeaderCellWithResize extends React.Component<
 
 export default TableHeaderCellWithResize;
 
+const ResizeHandler = styled.div`
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  right: -5px;
+  top: 0;
+  cursor: col-resize;
+  z-index: 999;
+`;
+
 const TableHeaderCell = styled.th`
   color: #929499;
   cursor: default;
@@ -136,18 +146,8 @@ const TableHeaderCell = styled.th`
   &:last-child {
     border-right: none;
 
-    div:last-child {
+    ${ResizeHandler}:last-child {
       display: none;
     }
   }
-`;
-
-const ResizeHandler = styled.div`
-  width: 10px;
-  height: 100%;
-  position: absolute;
-  right: -5px;
-  top: 0px;
-  cursor: col-resize;
-  z-index: 999;
 `;
