@@ -16,13 +16,13 @@ const LEGALENTITY = {
 };
 
 const LEGAL_ENTITY_STATUS = {
-  VERIFIED: "верифіковано",
-  NOT_VERIFIED: "не верифіковано"
+  VERIFIED: "Верифіковано",
+  NOT_VERIFIED: "Не верифіковано"
 };
 
 const LEGAL_ENTITY_TYPE = {
   PHARMACY: "Аптека",
-  MSP: "заклад з надання медичних послуг",
+  MSP: "Заклад з надання медичних послуг",
   MIS: "Medical Information system"
 };
 

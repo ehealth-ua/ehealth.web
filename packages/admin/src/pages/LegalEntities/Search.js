@@ -26,6 +26,12 @@ const legalEntityStatus = Object.entries(STATUSES.LEGAL_ENTITY_STATUS).map(
     value
   })
 );
+const legalEntityType = Object.entries(STATUSES.LEGAL_ENTITY_TYPE).map(
+  ([key, value]) => ({
+    key,
+    value
+  })
+);
 const ID_PATTERN =
   "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
 
@@ -38,7 +44,7 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { code, settlement, nhsVerified } = {}
+          filter: { code, settlement, nhsVerified, type } = {}
         } = locationParams;
         const regId = new RegExp(ID_PATTERN);
         const testID = regId.test(code);
@@ -48,7 +54,8 @@ const Search = ({ uri }) => (
           ...sendCodeParams,
           nhsVerified: isEmpty(nhsVerified) ? undefined : nhsVerified.key,
           settlement: isEmpty(settlement) ? undefined : settlement.settlement,
-          area: isEmpty(settlement) ? undefined : settlement.area
+          area: isEmpty(settlement) ? undefined : settlement.area,
+          type: isEmpty(type) ? undefined : type.key
         };
 
         return (
@@ -74,7 +81,8 @@ const Search = ({ uri }) => (
                     data={legalEntities}
                     header={{
                       id: "ID",
-                      name: "Назва Медзакладу",
+                      name: "Назва медзакладу",
+                      type: "Тип медзакладу",
                       edrpou: "ЄДРПОУ",
                       addresses: "Адреса",
                       nhsVerified: "Верифікований НСЗУ",
@@ -88,10 +96,12 @@ const Search = ({ uri }) => (
                       status,
                       insertedAt,
                       databaseId,
+                      type,
                       ...legalEntity
                     }) => ({
                       ...legalEntity,
                       id: databaseId,
+                      type: STATUSES.LEGAL_ENTITY_TYPE[type],
                       nhsVerified: nhsVerified && (
                         <Flex justifyContent="center">
                           <PositiveIcon />
@@ -205,15 +215,40 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
       {/*</Query>*/}
       {/*</Box>*/}
 
-      <Box px={1} width={1 / 3}>
+      <Box px={1} width={1 / 4}>
+        {/*Todo: Use Select with dictionary LEGAL_ENTITY_TYPE*/}
+        <Field.Select
+          type="select"
+          name="filter.type"
+          label="Тип медзакладу"
+          placeholder="Показати всі"
+          itemToString={item => {
+            if (!item) return "Показати всі";
+            return typeof item === "string" ? item : item.value;
+          }}
+          items={[
+            { value: "Показати всі", name: undefined },
+            ...legalEntityType
+          ]}
+          renderItem={({ value }) => value}
+          size="small"
+        />
+      </Box>
+      <Box px={1} width={1 / 4}>
         {/*Todo: Use Select with dictionary LEGAL_ENTITY_STATUS*/}
         <Field.Select
           type="select"
           name="filter.nhsVerified"
           label="Статус верифікації"
-          placeholder="Оберіть статус верифікації"
-          itemToString={({ value }) => value}
-          items={legalEntityStatus}
+          placeholder="Всі статуси"
+          itemToString={item => {
+            if (!item) return "Всі статуси";
+            return typeof item === "string" ? item : item.value;
+          }}
+          items={[
+            { value: "Всі статуси", name: undefined },
+            ...legalEntityStatus
+          ]}
           renderItem={({ value }) => value}
           size="small"
         />
