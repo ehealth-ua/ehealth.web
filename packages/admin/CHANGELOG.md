@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.108.4"></a>
+## [0.108.4](https://github.com/edenlabllc/ehealth.web/compare/v0.108.3...v0.108.4) (2018-10-24)
+
+
+### Bug Fixes
+
+* **admin:** add "first" variable to LegalEntityQuery ([2a00849](https://github.com/edenlabllc/ehealth.web/commit/2a00849))
+
+
+
+
+
 <a name="0.108.3"></a>
 ## [0.108.3](https://github.com/edenlabllc/ehealth.web/compare/v0.108.2...v0.108.3) (2018-10-24)
 
