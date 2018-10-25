@@ -6,7 +6,7 @@ import system from "system-components/emotion";
 
 import { getFullName } from "@ehealth/utils";
 import { LocationParams, Form, Validation } from "@ehealth/components";
-import { AdminSearchIcon, PositiveIcon } from "@ehealth/icons";
+import { AdminSearchIcon, PositiveIcon, CircleIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
 import Line from "../../components/Line";
@@ -99,7 +99,11 @@ const Search = ({ location: { state } }) => (
                     ...legalEntity,
                     type: STATUSES.LEGAL_ENTITY_TYPE[type],
                     owner: getFullName(owner.party),
-                    nhsVerified: nhsVerified && <PositiveIcon />,
+                    nhsVerified: nhsVerified ? (
+                      <PositiveIcon />
+                    ) : (
+                      <CircleIcon stroke="#1bb934" />
+                    ),
                     status: (
                       <Badge name={status} type="LEGALENTITY" display="block" />
                     )
