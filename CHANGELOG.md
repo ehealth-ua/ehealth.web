@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.110.7"></a>
+## [0.110.7](https://github.com/edenlabllc/ehealth.web/compare/v0.110.6...v0.110.7) (2018-10-25)
+
+
+### Bug Fixes
+
+* **admin-legacy:** add new feminitive statuses for Contract Requests, add link to the previous contract request ([#421](https://github.com/edenlabllc/ehealth.web/issues/421)) ([5cae7f1](https://github.com/edenlabllc/ehealth.web/commit/5cae7f1))
+
+
+
+
+
 <a name="0.110.6"></a>
 ## [0.110.6](https://github.com/edenlabllc/ehealth.web/compare/v0.110.5...v0.110.6) (2018-10-25)
 
