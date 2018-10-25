@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.110.8"></a>
+## [0.110.8](https://github.com/edenlabllc/ehealth.web/compare/v0.110.7...v0.110.8) (2018-10-25)
+
+
+### Bug Fixes
+
+* **admin:** hide execution time for LE Job with status Pending ([35feac3](https://github.com/edenlabllc/ehealth.web/commit/35feac3))
+
+
+
+
+
 <a name="0.110.6"></a>
 ## [0.110.6](https://github.com/edenlabllc/ehealth.web/compare/v0.110.5...v0.110.6) (2018-10-25)
 
