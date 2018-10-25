@@ -18,7 +18,10 @@ import AddressesList from "../AddressesList";
 import DictionaryValue from "../DictionaryValue";
 import ShowWithScope from "../ShowWithScope";
 
-import { CONTRACT_STATUS } from "../../../helpers/enums";
+import {
+  CONTRACT_STATUS,
+  CONTRACT_REQUEST_STATUS
+} from "../../../helpers/enums";
 import { backUrl } from "../../../helpers/url";
 
 import styles from "./styles.module.css";
@@ -125,10 +128,12 @@ class ContractDetail extends React.Component {
             },
             {
               name:
-                type === "contractRequest"
-                  ? "Статус запиту"
-                  : "Статус договору",
-              value: contract.status && CONTRACT_STATUS[contract.status].title
+                type === "contractRequest" ? "Статус заяви" : "Статус договору",
+              value:
+                contract.status &&
+                (type === "contractRequest"
+                  ? CONTRACT_REQUEST_STATUS[contract.status].title
+                  : CONTRACT_STATUS[contract.status].title)
             },
             {
               name: "Номер договору",
@@ -143,7 +148,14 @@ class ContractDetail extends React.Component {
             },
             {
               name: "ID попередньої заяви",
-              value: contract.previous_request_id
+              value: contract.previous_request_id && (
+                <BackLink
+                  iconPosition="right"
+                  to={`/contract-requests/${contract.previous_request_id}`}
+                >
+                  {contract.previous_request_id}
+                </BackLink>
+              )
             }
           ]}
         />

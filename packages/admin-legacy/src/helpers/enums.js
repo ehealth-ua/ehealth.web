@@ -72,3 +72,38 @@ export const CONTRACT_STATUS = {
     color: "blue"
   }
 };
+
+export const CONTRACT_REQUEST_STATUS = {
+  NEW: {
+    title: "Нова",
+    color: "yellow"
+  },
+  DECLINED: {
+    title: "Відмінена",
+    color: "red"
+  },
+  TERMINATED: {
+    title: "Завершена",
+    color: "red"
+  },
+  APPROVED: {
+    title: "Підтверджена",
+    color: "blue"
+  },
+  PENDING_NHS_SIGN: {
+    title: "Очікує на підписання від НСЗУ",
+    color: "green"
+  },
+  NHS_SIGNED: {
+    title: "Підписана НСЗУ",
+    color: "green"
+  },
+  SIGNED: {
+    title: "Підписана",
+    color: "green"
+  },
+  VERIFIED: {
+    title: "Веріфікована",
+    color: "blue"
+  }
+};

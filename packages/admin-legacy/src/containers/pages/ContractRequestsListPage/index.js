@@ -22,7 +22,7 @@ import uuidValidate from "../../../helpers/validators/uuid-validate";
 
 import { fetchContractRequests } from "./redux";
 
-import { CONTRACT_STATUS } from "../../../helpers/enums";
+import { CONTRACT_REQUEST_STATUS } from "../../../helpers/enums";
 
 const DATE_FORMAT = "DD.MM.YYYY";
 
@@ -168,8 +168,8 @@ const ContractRequestsListPage = ({
             startDate: format(start_date, DATE_FORMAT),
             endDate: format(end_date, DATE_FORMAT),
             status: (
-              <ColoredText color={CONTRACT_STATUS[status].color}>
-                {CONTRACT_STATUS[status].title}
+              <ColoredText color={CONTRACT_REQUEST_STATUS[status].color}>
+                {CONTRACT_REQUEST_STATUS[status].title}
               </ColoredText>
             ),
             action: (
