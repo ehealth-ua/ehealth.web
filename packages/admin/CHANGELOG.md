@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.110.4"></a>
+## [0.110.4](https://github.com/edenlabllc/ehealth.web/compare/v0.110.3...v0.110.4) (2018-10-25)
+
+
+### Bug Fixes
+
+* **admin:** add dash to the execution time, if result is negative ([9257cb0](https://github.com/edenlabllc/ehealth.web/commit/9257cb0))
+* **admin:** remove autosubmit from edrpou field, add search and reset buttons, add icon for nhs unverified ([b160e13](https://github.com/edenlabllc/ehealth.web/commit/b160e13))
+* **admin:** update position for verified icon in LE Add table ([70b6242](https://github.com/edenlabllc/ehealth.web/commit/70b6242))
+* **admin:** update stroke param for Unverified icon, add icon for not mountain region and to the first tab on LE details page ([067bbb1](https://github.com/edenlabllc/ehealth.web/commit/067bbb1))
+
+
+
+
+
 <a name="0.110.3"></a>
 ## [0.110.3](https://github.com/edenlabllc/ehealth.web/compare/v0.110.2...v0.110.3) (2018-10-24)
 
