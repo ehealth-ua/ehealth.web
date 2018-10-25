@@ -99,10 +99,14 @@ const Search = ({ location: { state } }) => (
                     ...legalEntity,
                     type: STATUSES.LEGAL_ENTITY_TYPE[type],
                     owner: getFullName(owner.party),
-                    nhsVerified: nhsVerified ? (
-                      <PositiveIcon />
-                    ) : (
-                      <CircleIcon stroke="#1bb934" strokeWidth="4" />
+                    nhsVerified: (
+                      <Flex justifyContent="center">
+                        {nhsVerified ? (
+                          <PositiveIcon />
+                        ) : (
+                          <CircleIcon stroke="#1bb934" strokeWidth="4" />
+                        )}
+                      </Flex>
                     ),
                     status: (
                       <Badge name={status} type="LEGALENTITY" display="block" />
