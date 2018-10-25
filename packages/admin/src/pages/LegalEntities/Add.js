@@ -102,7 +102,7 @@ const Search = ({ location: { state } }) => (
                     nhsVerified: nhsVerified ? (
                       <PositiveIcon />
                     ) : (
-                      <CircleIcon stroke="#1bb934" />
+                      <CircleIcon stroke="#1bb934" strokeWidth="4" />
                     ),
                     status: (
                       <Badge name={status} type="LEGALENTITY" display="block" />

@@ -5,7 +5,12 @@ import { BooleanValue } from "react-values";
 import { Flex, Box, Heading } from "rebass/emotion";
 import format from "date-fns/format";
 
-import { PositiveIcon, AdminSearchIcon, AdminAddIcon } from "@ehealth/icons";
+import {
+  PositiveIcon,
+  AdminSearchIcon,
+  AdminAddIcon,
+  CircleIcon
+} from "@ehealth/icons";
 import {
   getFullName,
   getPhones,
@@ -291,8 +296,16 @@ const GeneralInfo = ({
         nhsVerified: "Верифікація НСЗУ"
       }}
       data={{
-        misVerified: misVerified && <PositiveIcon />,
-        nhsVerified: nhsVerified && <PositiveIcon />
+        misVerified: misVerified ? (
+          <PositiveIcon />
+        ) : (
+          <CircleIcon stroke="#1bb934" strokeWidth="4" />
+        ),
+        nhsVerified: nhsVerified ? (
+          <PositiveIcon />
+        ) : (
+          <CircleIcon stroke="#1bb934" strokeWidth="4" />
+        )
       }}
       color="blueberrySoda"
     />
@@ -490,7 +503,15 @@ const Divisions = ({ divisions }) => (
             }}
             renderRow={({ mountainGroup, addresses, phones, ...props }) => ({
               ...props,
-              mountainGroup: mountainGroup && <PositiveIcon />,
+              mountainGroup: (
+                <Flex justifyContent="center">
+                  {mountainGroup ? (
+                    <PositiveIcon />
+                  ) : (
+                    <CircleIcon stroke="#1bb934" strokeWidth="4" />
+                  )}
+                </Flex>
+              ),
               addresses: addresses
                 .filter(a => a.type === "RESIDENCE")
                 .map((item, key) => <AddressView data={item} key={key} />),

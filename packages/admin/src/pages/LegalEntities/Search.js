@@ -113,7 +113,7 @@ const Search = ({ uri }) => (
                               {nhsVerified ? (
                                 <PositiveIcon />
                               ) : (
-                                <CircleIcon stroke="#1bb934" />
+                                <CircleIcon stroke="#1bb934" strokeWidth="4" />
                               )}
                             </Flex>
                           ),
