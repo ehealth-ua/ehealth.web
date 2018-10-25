@@ -3,7 +3,7 @@ import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
 import { Form, LocationParams } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
-import { PositiveIcon, AdminSearchIcon } from "@ehealth/icons";
+import { PositiveIcon, AdminSearchIcon, CircleIcon } from "@ehealth/icons";
 import createDecorator from "final-form-calculate";
 import format from "date-fns/format";
 
@@ -16,6 +16,7 @@ import Table from "../../components/Table";
 import Link from "../../components/Link";
 import AddressView from "../../components/AddressView";
 import Badge from "../../components/Badge";
+import Button, { ResetButton } from "../../components/Button";
 
 import SearchLegalEntitiesQuery from "../../graphql/SearchLegalEntitiesQuery.graphql";
 import SettlementsQuery from "../../graphql/SettlementsQuery.graphql";
@@ -52,105 +53,117 @@ const Search = ({ uri }) => (
 
         const filteredParams = {
           ...sendCodeParams,
-          nhsVerified: isEmpty(nhsVerified) ? undefined : nhsVerified.key,
+          nhsVerified: isEmpty(nhsVerified)
+            ? undefined
+            : nhsVerified.key === "true",
           settlement: isEmpty(settlement) ? undefined : settlement.settlement,
           area: isEmpty(settlement) ? undefined : settlement.area,
           type: isEmpty(type) ? undefined : type.key
         };
 
         return (
-          <>
-            <SearchLegalEntitiesForm
-              initialValues={locationParams}
-              setLocationParams={setLocationParams}
-            />
-            <Query
-              query={SearchLegalEntitiesQuery}
-              variables={{
-                ...locationParams,
-                filter: !isEmpty(locationParams.filter)
-                  ? filteredParams
-                  : undefined
-              }}
-            >
-              {({ loading, error, data }) => {
-                if (loading) return null;
-                const { nodes: legalEntities = [] } = data.legalEntities;
-                return !error && legalEntities.length > 0 ? (
-                  <Table
-                    data={legalEntities}
-                    header={{
-                      id: "ID",
-                      name: "Назва медзакладу",
-                      type: "Тип медзакладу",
-                      edrpou: "ЄДРПОУ",
-                      addresses: "Адреса",
-                      nhsVerified: "Верифікований НСЗУ",
-                      insertedAt: "Додано",
-                      status: "Статус",
-                      action: "Дія"
-                    }}
-                    renderRow={({
-                      addresses,
-                      nhsVerified,
-                      status,
-                      insertedAt,
-                      databaseId,
-                      type,
-                      ...legalEntity
-                    }) => ({
-                      ...legalEntity,
-                      id: databaseId,
-                      type: STATUSES.LEGAL_ENTITY_TYPE[type],
-                      nhsVerified: nhsVerified && (
-                        <Flex justifyContent="center">
-                          <PositiveIcon />
-                        </Flex>
-                      ),
-                      insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
-                      status: (
-                        <Badge
-                          type="LEGALENTITY"
-                          name={status}
-                          display="block"
-                        />
-                      ),
-                      addresses: (
-                        <>
-                          {addresses
-                            .filter(a => a.type === "REGISTRATION")
-                            .map(item => (
-                              <AddressView data={item} />
-                            ))}
-                        </>
-                      ),
-                      action: (
-                        <Link to={`../${legalEntity.id}`} fontWeight="bold">
-                          Деталі
-                        </Link>
-                      )
-                    })}
-                    sortableFields={[
-                      "edrpou",
-                      "status",
-                      "insertedAt",
-                      "nhsVerified"
-                    ]}
-                    sortingParams={parseSortingParams(locationParams.orderBy)}
-                    onSortingChange={sortingParams =>
-                      setLocationParams({
-                        ...locationParams,
-                        orderBy: stringifySortingParams(sortingParams)
-                      })
-                    }
-                    tableName="legal-entities/search"
-                    whiteSpaceNoWrap={["id"]}
-                    hiddenFields="insertedAt"
+          <Query
+            query={SearchLegalEntitiesQuery}
+            variables={{
+              ...locationParams,
+              filter: !isEmpty(locationParams.filter)
+                ? filteredParams
+                : undefined
+            }}
+          >
+            {({ loading, error, data, refetch }) => {
+              if (loading) return null;
+              const { nodes: legalEntities = [] } = data.legalEntities;
+              return (
+                <>
+                  <SearchLegalEntitiesForm
+                    initialValues={locationParams}
+                    setLocationParams={setLocationParams}
+                    refetch={refetch}
                   />
-                ) : null;
-              }}
-            </Query>
-          </>
+                  {!error &&
+                    legalEntities.length > 0 && (
+                      <Table
+                        data={legalEntities}
+                        header={{
+                          id: "ID",
+                          name: "Назва медзакладу",
+                          type: "Тип медзакладу",
+                          edrpou: "ЄДРПОУ",
+                          addresses: "Адреса",
+                          nhsVerified: "Верифікований НСЗУ",
+                          insertedAt: "Додано",
+                          status: "Статус",
+                          action: "Дія"
+                        }}
+                        renderRow={({
+                          addresses,
+                          nhsVerified,
+                          status,
+                          insertedAt,
+                          databaseId,
+                          type,
+                          ...legalEntity
+                        }) => ({
+                          ...legalEntity,
+                          id: databaseId,
+                          type: STATUSES.LEGAL_ENTITY_TYPE[type],
+                          nhsVerified: (
+                            <Flex justifyContent="center">
+                              {nhsVerified ? (
+                                <PositiveIcon />
+                              ) : (
+                                <CircleIcon stroke="#1bb934" />
+                              )}
+                            </Flex>
+                          ),
+                          insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                          status: (
+                            <Badge
+                              type="LEGALENTITY"
+                              name={status}
+                              display="block"
+                            />
+                          ),
+                          addresses: (
+                            <>
+                              {addresses
+                                .filter(a => a.type === "REGISTRATION")
+                                .map(item => (
+                                  <AddressView data={item} />
+                                ))}
+                            </>
+                          ),
+                          action: (
+                            <Link to={`../${legalEntity.id}`} fontWeight="bold">
+                              Деталі
+                            </Link>
+                          )
+                        })}
+                        sortableFields={[
+                          "edrpou",
+                          "status",
+                          "insertedAt",
+                          "nhsVerified"
+                        ]}
+                        sortingParams={parseSortingParams(
+                          locationParams.orderBy
+                        )}
+                        onSortingChange={sortingParams =>
+                          setLocationParams({
+                            ...locationParams,
+                            orderBy: stringifySortingParams(sortingParams)
+                          })
+                        }
+                        tableName="legal-entities/search"
+                        whiteSpaceNoWrap={["id"]}
+                        hiddenFields="insertedAt"
+                      />
+                    )}
+                </>
+              );
+            }}
+          </Query>
         );
       }}
     </LocationParams>
@@ -159,13 +172,16 @@ const Search = ({ uri }) => (
 
 export default Search;
 
-const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
+const SearchLegalEntitiesForm = ({
+  initialValues,
+  setLocationParams,
+  refetch
+}) => (
   <Form
-    onSubmit={() => null /* NOT USED, but required */}
+    onSubmit={setLocationParams}
     initialValues={initialValues}
     decorators={[resetValue]}
   >
-    <Form.AutoSubmit onSubmit={setLocationParams} />
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
         <Field.Text
@@ -252,6 +268,25 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
           renderItem={({ value }) => value}
           size="small"
         />
+      </Box>
+    </Flex>
+    <Flex mx={-1}>
+      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
+        <Button variant="blue">Шукати</Button>
+      </Box>
+      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
+        <ResetButton
+          onClick={() => {
+            setLocationParams({
+              ...initialValues,
+              filter: null,
+              searchRequest: null
+            });
+            refetch({ filter: undefined, searchRequest: undefined });
+          }}
+        >
+          Скинути пошук
+        </ResetButton>
       </Box>
     </Flex>
   </Form>
