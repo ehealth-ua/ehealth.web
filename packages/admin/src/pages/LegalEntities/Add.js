@@ -66,68 +66,70 @@ const Search = ({ location: { state } }) => (
             />
           </Box>
         </Form>
-        <Query
-          query={SearchLegalEntitiesQuery}
-          variables={{ filter }}
-          skip={!filter}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return null;
-            if (error) return `Error! ${error.message}`;
-            const { nodes: legalEntities } = data.legalEntities;
-            const [legalEntity] = legalEntities;
-            return legalEntities.length ? (
-              <>
-                <Table
-                  data={legalEntities}
-                  header={{
-                    databaseId: "ID Медзакладу",
-                    name: "Назва Медзакладу",
-                    edrpou: "ЄДРПОУ",
-                    owner: "Керівник",
-                    type: "Тип",
-                    nhsVerified: "Верифікований НСЗУ",
-                    status: "Статус"
-                  }}
-                  renderRow={({
-                    status,
-                    nhsVerified,
-                    owner,
-                    type,
-                    ...legalEntity
-                  }) => ({
-                    ...legalEntity,
-                    type: STATUSES.LEGAL_ENTITY_TYPE[type],
-                    owner: owner && getFullName(owner.party),
-                    nhsVerified: (
-                      <Flex justifyContent="center">
-                        {nhsVerified ? (
-                          <PositiveIcon />
-                        ) : (
-                          <CircleIcon stroke="#1bb934" strokeWidth="4" />
-                        )}
-                      </Flex>
-                    ),
-                    status: (
-                      <Badge name={status} type="LEGALENTITY" display="block" />
-                    )
-                  })}
-                  tableName="legalEntity/Add"
-                />
-                <Flex px={5} mt={5}>
-                  <Box mr={3}>
-                    <Link to="../related-legal-entities">
-                      <Button variant="blue">Повернутися</Button>
+        {filter && (
+          <Query query={SearchLegalEntitiesQuery} variables={{ filter }}>
+            {({ loading, error, data }) => {
+              if (loading) return null;
+              if (error) return `Error! ${error.message}`;
+              const { nodes: legalEntities } = data.legalEntities;
+              const [legalEntity] = legalEntities;
+              return legalEntities.length ? (
+                <>
+                  <Table
+                    data={legalEntities}
+                    header={{
+                      databaseId: "ID Медзакладу",
+                      name: "Назва Медзакладу",
+                      edrpou: "ЄДРПОУ",
+                      owner: "Керівник",
+                      type: "Тип",
+                      nhsVerified: "Верифікований НСЗУ",
+                      status: "Статус"
+                    }}
+                    renderRow={({
+                      status,
+                      nhsVerified,
+                      owner,
+                      type,
+                      ...legalEntity
+                    }) => ({
+                      ...legalEntity,
+                      type: STATUSES.LEGAL_ENTITY_TYPE[type],
+                      owner: owner && getFullName(owner.party),
+                      nhsVerified: (
+                        <Flex justifyContent="center">
+                          {nhsVerified ? (
+                            <PositiveIcon />
+                          ) : (
+                            <CircleIcon stroke="#1bb934" strokeWidth="4" />
+                          )}
+                        </Flex>
+                      ),
+                      status: (
+                        <Badge
+                          name={status}
+                          type="LEGALENTITY"
+                          display="block"
+                        />
+                      )
+                    })}
+                    tableName="legalEntity/Add"
+                  />
+                  <Flex px={5} mt={5}>
+                    <Box mr={3}>
+                      <Link to="../related-legal-entities">
+                        <Button variant="blue">Повернутися</Button>
+                      </Link>
+                    </Box>
+                    <Link to="./reason" state={{ legalEntity, ...state }}>
+                      <Button variant="green">Далі</Button>
                     </Link>
-                  </Box>
-                  <Link to="./reason" state={{ legalEntity, ...state }}>
-                    <Button variant="green">Далі</Button>
-                  </Link>
-                </Flex>
-              </>
-            ) : null;
-          }}
-        </Query>
+                  </Flex>
+                </>
+              ) : null;
+            }}
+          </Query>
+        )}
       </>
     )}
   </LocationParams>
