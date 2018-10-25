@@ -123,10 +123,10 @@ const Search = ({ uri }) => (
                       mergedFromLegalEntityName,
                       mergedFromLegalEntityEdrpou,
                       startedAt: format(startedAt, "DD.MM.YYYY, HH:mm"),
-                      executionTime: `${differenceInSeconds(
-                        endedAt,
-                        startedAt
-                      )} с`,
+                      executionTime:
+                        differenceInSeconds(endedAt, startedAt) > 0
+                          ? `${differenceInSeconds(endedAt, startedAt)} с`
+                          : "-",
                       status: (
                         <Badge
                           type="MERGE_LEGAL_ENTITIES_JOBS"
