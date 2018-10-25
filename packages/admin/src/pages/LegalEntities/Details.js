@@ -356,29 +356,35 @@ const RelatedLegalEntities = ({ id, status }) => (
             const { orderBy } = locationParams;
             return (
               <>
-                <Form
-                  onSubmit={setLocationParams}
-                  initialValues={locationParams}
-                >
-                  <Box px={5} pt={5} width={460}>
-                    <Field.Text
-                      name="filter.edrpou"
-                      label="Знайти підпорядкований медзаклад"
-                      placeholder="Введіть ЄДРПОУ медзакладу"
-                      postfix={<AdminSearchIcon color="#CED0DA" />}
-                    />
+                <Flex>
+                  <Box px={1} width={3 / 5}>
+                    <Form
+                      onSubmit={setLocationParams}
+                      initialValues={locationParams}
+                    >
+                      <Box px={5} pt={5} width={460}>
+                        <Field.Text
+                          name="filter.edrpou"
+                          label="Знайти підпорядкований медзаклад"
+                          placeholder="Введіть ЄДРПОУ медзакладу"
+                          postfix={<AdminSearchIcon color="#CED0DA" />}
+                        />
+                      </Box>
+                    </Form>
                   </Box>
-                </Form>
-                {status === "ACTIVE" && (
-                  <Link to="../add">
-                    <Flex mb={2}>
-                      <Box mr={2}>
-                        <AdminAddIcon width={16} height={16} />
-                      </Box>{" "}
-                      Додати підпорядкований медзаклад
-                    </Flex>
-                  </Link>
-                )}
+                  <Box px={1} width={2 / 5} css={{ textAlign: "right" }}>
+                    {status === "ACTIVE" && (
+                      <Link to="../add">
+                        <Flex mb={2}>
+                          <Box mr={2}>
+                            <AdminAddIcon width={16} height={16} />
+                          </Box>{" "}
+                          Додати підпорядкований медзаклад
+                        </Flex>
+                      </Link>
+                    )}
+                  </Box>
+                </Flex>
                 {nodes.length ? (
                   <Table
                     data={nodes}
