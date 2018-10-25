@@ -206,7 +206,7 @@ const Details = ({ id }) => (
                 Підпорядковані медзаклади
               </Tabs.NavItem>
             </Ability>
-            <Tabs.NavItem to="./owner">Власник</Tabs.NavItem>
+            {owner && <Tabs.NavItem to="./owner">Власник</Tabs.NavItem>}
             <Ability action="read" resource="division">
               <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
             </Ability>

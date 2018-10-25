@@ -98,7 +98,7 @@ const Search = ({ location: { state } }) => (
                   }) => ({
                     ...legalEntity,
                     type: STATUSES.LEGAL_ENTITY_TYPE[type],
-                    owner: getFullName(owner.party),
+                    owner: owner && getFullName(owner.party),
                     nhsVerified: (
                       <Flex justifyContent="center">
                         {nhsVerified ? (
