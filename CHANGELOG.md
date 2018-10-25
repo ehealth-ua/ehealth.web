@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.110.6"></a>
+## [0.110.6](https://github.com/edenlabllc/ehealth.web/compare/v0.110.5...v0.110.6) (2018-10-25)
+
+
+### Bug Fixes
+
+* **admin:** hide LE Table if filter is empty ([286724d](https://github.com/edenlabllc/ehealth.web/commit/286724d))
+
+
+
+
+
 <a name="0.110.5"></a>
 ## [0.110.5](https://github.com/edenlabllc/ehealth.web/compare/v0.110.4...v0.110.5) (2018-10-25)
 
