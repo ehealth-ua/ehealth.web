@@ -124,9 +124,9 @@ const Search = ({ uri }) => (
                       mergedFromLegalEntityEdrpou,
                       startedAt: format(startedAt, "DD.MM.YYYY, HH:mm"),
                       executionTime:
-                        differenceInSeconds(endedAt, startedAt) > 0
-                          ? `${differenceInSeconds(endedAt, startedAt)} с`
-                          : "-",
+                        status === "PENDING"
+                          ? "-"
+                          : `${differenceInSeconds(endedAt, startedAt)} с`,
                       status: (
                         <Badge
                           type="MERGE_LEGAL_ENTITIES_JOBS"
