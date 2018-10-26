@@ -34,7 +34,7 @@ const Container = system(
     color: "rockmanBlue",
     fontSize: 0,
     fontWeight: 700,
-    lineHeight: 1,
+    lineHeight: 1.2,
     py: 2
   },
   {

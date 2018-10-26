@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
-import { Form, LocationParams } from "@ehealth/components";
+import { Form, LocationParams, Validation } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import { PositiveIcon, AdminSearchIcon, CircleIcon } from "@ehealth/icons";
 import createDecorator from "final-form-calculate";
@@ -35,6 +35,11 @@ const legalEntityType = Object.entries(STATUSES.LEGAL_ENTITY_TYPE).map(
 );
 const ID_PATTERN =
   "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
+
+const EDRPOU_PATTERN = "^[0-9]{8,10}$";
+const LEGALENTITY_ID_PATTERN =
+  "^[0-9A-Za-zА]{8}-[0-9A-Za-zА]{4}-[0-9A-Za-zА]{4}-[0-9A-Za-zА]{4}-[0-9A-Za-zА]{12}$";
+const SEARCH_REQUEST_PATTERN = `(${EDRPOU_PATTERN})|(${LEGALENTITY_ID_PATTERN})`;
 
 const Search = ({ uri }) => (
   <Box p={6}>
@@ -189,6 +194,12 @@ const SearchLegalEntitiesForm = ({
           label="Пошук медзакладу за ЄДРПОУ"
           placeholder="ЄДРПОУ або ID медзакладу"
           postfix={<AdminSearchIcon color="#CED0DA" />}
+          autocomplete="off"
+        />
+        <Validation.Matches
+          field="filter.code"
+          options={SEARCH_REQUEST_PATTERN}
+          message="Невірний номер"
         />
       </Box>
     </Flex>
@@ -271,10 +282,10 @@ const SearchLegalEntitiesForm = ({
       </Box>
     </Flex>
     <Flex mx={-1}>
-      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
+      <Box px={1} width={[1 / 2, 1 / 4, 1 / 12]}>
         <Button variant="blue">Шукати</Button>
       </Box>
-      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
+      <Box px={1} width={[1 / 2, 1 / 4, 1 / 12]}>
         <ResetButton
           onClick={() => {
             setLocationParams({
