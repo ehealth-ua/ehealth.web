@@ -59,7 +59,6 @@ const Details = ({ id }) => (
         owner,
         medicalServiceProvider
       } = legalEntity;
-      const { nodes: divisions } = legalEntity.divisions;
       const statusAction =
         status === "ACTIVE" && (nhsVerified ? status : "NHS_VERIFY_CLOSED");
 
@@ -210,10 +209,10 @@ const Details = ({ id }) => (
             <Ability action="read" resource="division">
               <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
             </Ability>
-            <Tabs.NavItem to="./requests-for-contract">
-              Заяви на укладення договору
-            </Tabs.NavItem>
-            <Tabs.NavItem to="./contracts">Договори</Tabs.NavItem>
+            {/*<Tabs.NavItem to="./requests-for-contract">*/}
+            {/*Заяви на укладення договору*/}
+            {/*</Tabs.NavItem>*/}
+            {/*<Tabs.NavItem to="./contracts">Договори</Tabs.NavItem>*/}
           </Tabs.Nav>
           <Tabs.Content>
             <Router>
@@ -236,7 +235,7 @@ const Details = ({ id }) => (
                 status={status}
               />
               <Owner path="/owner" owner={owner} />
-              <Divisions path="/divisions" divisions={divisions} />
+              <Divisions path="/divisions" />
             </Router>
           </Tabs.Content>
         </>
@@ -355,7 +354,7 @@ const RelatedLegalEntities = ({ id, status }) => (
           variables={{
             id,
             first: 10,
-            ...locationParams
+            mergeLegalEntityFilter: locationParams
           }}
         >
           {({ loading, error, data }) => {
@@ -377,7 +376,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                     >
                       <Box px={5} pt={5} width={460}>
                         <Field.Text
-                          name="filter.edrpou"
+                          name="mergedFromLegalEntity.edrpou"
                           label="Знайти підпорядкований медзаклад"
                           placeholder="Введіть ЄДРПОУ медзакладу"
                           postfix={<AdminSearchIcon color="#CED0DA" />}
@@ -411,7 +410,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                     renderRow={({
                       reason,
                       insertedAt,
-                      mergedFrom: { edrpou, name },
+                      mergedFromLegalEntity: { edrpou, name },
                       isActive
                     }) => ({
                       reason,
@@ -476,49 +475,80 @@ const Owner = ({
   </Box>
 );
 
-const Divisions = ({ divisions }) => (
+const Divisions = ({ id }) => (
   <Ability action="read" resource="division">
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
-        <>
-          <Form onSubmit={setLocationParams} initialValues={locationParams}>
-            <Box px={5} pt={5} width={460}>
-              <Field.Text
-                name="filter.name"
-                label="Знайти відділення"
-                placeholder="Введіть назву відділення"
-                postfix={<AdminSearchIcon color="#CED0DA" />}
-              />
-            </Box>
-          </Form>
-
-          <Table
-            data={divisions}
-            header={{
-              name: "Назва Медзакладу",
-              addresses: "Адреса",
-              mountainGroup: "Гірський регіон",
-              phones: "Телефон",
-              email: "Email"
-            }}
-            renderRow={({ mountainGroup, addresses, phones, ...props }) => ({
-              ...props,
-              mountainGroup: (
-                <Flex justifyContent="center">
-                  {mountainGroup ? (
-                    <PositiveIcon />
-                  ) : (
-                    <CircleIcon stroke="#1bb934" strokeWidth="4" />
-                  )}
-                </Flex>
-              ),
-              addresses: addresses
-                .filter(a => a.type === "RESIDENCE")
-                .map((item, key) => <AddressView data={item} key={key} />),
-              phones: getPhones(phones)
-            })}
-          />
-        </>
+        <Query
+          query={LegalEntityQuery}
+          variables={{
+            id,
+            first: 10,
+            divisionFilter: locationParams
+          }}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return "Loading...";
+            if (error) return `Error! ${error.message}`;
+            const {
+              legalEntity: {
+                divisions: { nodes: divisions }
+              }
+            } = data;
+            return (
+              <>
+                <Form
+                  onSubmit={setLocationParams}
+                  initialValues={locationParams}
+                >
+                  <Box px={5} pt={5} width={460}>
+                    <Field.Text
+                      name="name"
+                      label="Знайти відділення"
+                      placeholder="Введіть назву відділення"
+                      postfix={<AdminSearchIcon color="#CED0DA" />}
+                    />
+                  </Box>
+                </Form>
+                {divisions.length ? (
+                  <Table
+                    data={divisions}
+                    header={{
+                      name: "Назва Медзакладу",
+                      addresses: "Адреса",
+                      mountainGroup: "Гірський регіон",
+                      phones: "Телефон",
+                      email: "Email"
+                    }}
+                    renderRow={({
+                      mountainGroup,
+                      addresses,
+                      phones,
+                      ...props
+                    }) => ({
+                      ...props,
+                      mountainGroup: (
+                        <Flex justifyContent="center">
+                          {mountainGroup ? (
+                            <PositiveIcon />
+                          ) : (
+                            <CircleIcon stroke="#1bb934" strokeWidth="4" />
+                          )}
+                        </Flex>
+                      ),
+                      addresses: addresses
+                        .filter(a => a.type === "RESIDENCE")
+                        .map((item, key) => (
+                          <AddressView data={item} key={key} />
+                        )),
+                      phones: getPhones(phones)
+                    })}
+                  />
+                ) : null}
+              </>
+            );
+          }}
+        </Query>
       )}
     </LocationParams>
   </Ability>

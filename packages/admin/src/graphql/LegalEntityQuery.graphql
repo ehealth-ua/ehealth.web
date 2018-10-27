@@ -1,6 +1,7 @@
 query LegalEntityQuery(
   $id: ID!
-  $filter: RelatedLegalEntityFilter
+  $mergeLegalEntityFilter: MergeeLegalEntityFilter
+  $divisionFilter: DivisionFilter
   $orderBy: RelatedLegalEntityOrderBy
   $first: Int
 ) {
@@ -69,19 +70,23 @@ query LegalEntityQuery(
         }
       }
     }
-    mergedFromLegalEntities(first: $first, filter: $filter, orderBy: $orderBy) {
+    mergedFromLegalEntities(
+      first: $first
+      filter: $mergeLegalEntityFilter
+      orderBy: $orderBy
+    ) {
       nodes {
         isActive
         reason
         insertedAt
-        mergedFrom {
+        mergedFromLegalEntity {
           id
           name
           edrpou
         }
       }
     }
-    divisions(first: $first) {
+    divisions(first: $first, filter: $divisionFilter) {
       nodes {
         databaseId
         name
