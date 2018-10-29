@@ -24,6 +24,7 @@ import InviteLayout from "./containers/layouts/InviteLayout";
 import DigitalSignatureProvider from "./containers/layouts/DigitalSignatureProvider";
 
 import SignPage from "./containers/pages/SignPage";
+import StampPage from "./containers/pages/StampPage";
 
 import SignUpVerifyPage from "./containers/pages/SignUpVerifyPage";
 import SignUpConfirmationPage from "./containers/pages/SignUpConfirmationPage";
@@ -108,6 +109,7 @@ export default class Routes extends Component {
             <Route component={Default}>
               <Route component={DigitalSignatureProvider}>
                 <Route path="sign" component={SignPage} />
+                <Route path="stamp" component={StampPage} />
               </Route>
 
               {REACT_APP_SIGN_UP_ENABLED && (
