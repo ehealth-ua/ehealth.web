@@ -15,7 +15,7 @@ import Button from "../../components/Button";
 import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
 import SignContractRequestMutation from "../../graphql/SignContractRequestMutation.graphql";
 
-import { REACT_APP_SIGNER_URL } from "../../env";
+import { REACT_APP_STAMP_URL } from "../../env";
 
 const PrintOutContent = ({ id, navigate, ...props }) => {
   return (
@@ -33,7 +33,6 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
           contractRequest,
           status
         } = data;
-
         return (
           <>
             <Portal content={content} />
@@ -54,10 +53,10 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                     value={status}
                     PENDING_NHS_SIGN={
                       <Signer.Parent
-                        url={REACT_APP_SIGNER_URL}
+                        url={REACT_APP_STAMP_URL}
                         features={{
                           width: 640,
-                          height: 589
+                          height: 670
                         }}
                       >
                         {({ signData }) => (
