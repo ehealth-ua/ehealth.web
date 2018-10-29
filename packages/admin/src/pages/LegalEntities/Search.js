@@ -281,11 +281,11 @@ const SearchLegalEntitiesForm = ({
         />
       </Box>
     </Flex>
-    <Flex mx={-1}>
-      <Box px={1} width={[1 / 2, 1 / 4, 1 / 12]}>
+    <Flex mx={-1} justifyContent="flex-start">
+      <Box px={1}>
         <Button variant="blue">Шукати</Button>
       </Box>
-      <Box px={1} width={[1 / 2, 1 / 4, 1 / 12]}>
+      <Box px={1}>
         <ResetButton
           onClick={() => {
             setLocationParams({
