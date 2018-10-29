@@ -1,6 +1,6 @@
 query LegalEntityQuery(
   $id: ID!
-  $mergeLegalEntityFilter: MergeeLegalEntityFilter
+  $mergeLegalEntityFilter: RelatedLegalEntityFilter
   $divisionFilter: DivisionFilter
   $orderBy: RelatedLegalEntityOrderBy
   $first: Int
