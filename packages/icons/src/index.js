@@ -36,4 +36,5 @@ export { default as RemoveItemIcon } from "./RemoveItemIcon";
 export { default as ResetIcon } from "./ResetIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as SpinnerIcon } from "./SpinnerIcon";
+export { default as StampIcon } from "./StampIcon";
 export { default as ThinAddIcon } from "./ThinAddIcon";
