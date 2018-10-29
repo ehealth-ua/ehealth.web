@@ -349,96 +349,91 @@ const RelatedLegalEntities = ({ id, status }) => (
   <Ability action="read" resource="related_legal_entities">
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
-        <Query
-          query={LegalEntityQuery}
-          variables={{
-            id,
-            first: 10,
-            mergeLegalEntityFilter: locationParams
-          }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`;
-            const {
-              legalEntity: {
-                mergedFromLegalEntities: { nodes }
-              }
-            } = data;
-            const { orderBy } = locationParams;
-            return (
-              <>
-                <Flex>
-                  <Box px={1} width={3 / 5}>
-                    <Form
-                      onSubmit={setLocationParams}
-                      initialValues={locationParams}
-                    >
-                      <Box px={5} pt={5} width={460}>
-                        <Field.Text
-                          name="mergedFromLegalEntity.edrpou"
-                          label="Знайти підпорядкований медзаклад"
-                          placeholder="Введіть ЄДРПОУ медзакладу"
-                          postfix={<AdminSearchIcon color="#CED0DA" />}
-                        />
-                      </Box>
-                    </Form>
-                  </Box>
-                  <Box px={1} width={2 / 5} css={{ textAlign: "right" }}>
-                    {status === "ACTIVE" && (
-                      <Link to="../add">
-                        <Flex mb={2}>
-                          <Box mr={2}>
-                            <AdminAddIcon width={16} height={16} />
-                          </Box>{" "}
-                          Додати підпорядкований медзаклад
-                        </Flex>
-                      </Link>
-                    )}
-                  </Box>
-                </Flex>
-                {nodes.length ? (
-                  <Table
-                    data={nodes}
-                    header={{
-                      name: "Назва Медзакладу",
-                      edrpou: "ЄДРПОУ",
-                      reason: "Основа",
-                      insertedAt: "Додано",
-                      isActive: "Статус"
-                    }}
-                    renderRow={({
-                      reason,
-                      insertedAt,
-                      mergedFromLegalEntity: { edrpou, name },
-                      isActive
-                    }) => ({
-                      reason,
-                      insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
-                      name,
-                      edrpou,
-                      isActive: (
-                        <Badge
-                          name={isActive ? "ACTIVE" : "CLOSED"}
-                          type="LEGALENTITY"
-                          display="block"
-                        />
-                      )
-                    })}
-                    sortableFields={["insertedAt", "isActive"]}
-                    sortingParams={parseSortingParams(orderBy)}
-                    onSortingChange={sortingParams =>
-                      setLocationParams({
-                        orderBy: stringifySortingParams(sortingParams)
-                      })
-                    }
-                    tableName="mergedFromLegalEntities"
+        <>
+          <Flex>
+            <Box px={1} width={3 / 5}>
+              <Form onSubmit={setLocationParams} initialValues={locationParams}>
+                <Box px={5} pt={5} width={460}>
+                  <Field.Text
+                    name="mergedFromLegalEntity.edrpou"
+                    label="Знайти підпорядкований медзаклад"
+                    placeholder="Введіть ЄДРПОУ медзакладу"
+                    postfix={<AdminSearchIcon color="#CED0DA" />}
                   />
-                ) : null}
-              </>
-            );
-          }}
-        </Query>
+                </Box>
+              </Form>
+            </Box>
+            <Box px={1} width={2 / 5} css={{ textAlign: "right" }}>
+              {status === "ACTIVE" && (
+                <Link to="../add">
+                  <Flex mb={2}>
+                    <Box mr={2}>
+                      <AdminAddIcon width={16} height={16} />
+                    </Box>{" "}
+                    Додати підпорядкований медзаклад
+                  </Flex>
+                </Link>
+              )}
+            </Box>
+          </Flex>
+          <Query
+            query={LegalEntityQuery}
+            variables={{
+              id,
+              first: 10,
+              mergeLegalEntityFilter: locationParams
+            }}
+          >
+            {({ loading, error, data }) => {
+              if (loading) return "Loading...";
+              if (error) return `Error! ${error.message}`;
+              const {
+                legalEntity: {
+                  mergedFromLegalEntities: { nodes }
+                }
+              } = data;
+              const { orderBy } = locationParams;
+              return nodes.length ? (
+                <Table
+                  data={nodes}
+                  header={{
+                    name: "Назва Медзакладу",
+                    edrpou: "ЄДРПОУ",
+                    reason: "Основа",
+                    insertedAt: "Додано",
+                    isActive: "Статус"
+                  }}
+                  renderRow={({
+                    reason,
+                    insertedAt,
+                    mergedFromLegalEntity: { edrpou, name },
+                    isActive
+                  }) => ({
+                    reason,
+                    insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                    name,
+                    edrpou,
+                    isActive: (
+                      <Badge
+                        name={isActive ? "ACTIVE" : "CLOSED"}
+                        type="LEGALENTITY"
+                        display="block"
+                      />
+                    )
+                  })}
+                  sortableFields={["insertedAt", "isActive"]}
+                  sortingParams={parseSortingParams(orderBy)}
+                  onSortingChange={sortingParams =>
+                    setLocationParams({
+                      orderBy: stringifySortingParams(sortingParams)
+                    })
+                  }
+                  tableName="mergedFromLegalEntities"
+                />
+              ) : null;
+            }}
+          </Query>
+        </>
       )}
     </LocationParams>
   </Ability>
@@ -479,76 +474,71 @@ const Divisions = ({ id }) => (
   <Ability action="read" resource="division">
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
-        <Query
-          query={LegalEntityQuery}
-          variables={{
-            id,
-            first: 10,
-            divisionFilter: locationParams
-          }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`;
-            const {
-              legalEntity: {
-                divisions: { nodes: divisions }
-              }
-            } = data;
-            return (
-              <>
-                <Form
-                  onSubmit={setLocationParams}
-                  initialValues={locationParams}
-                >
-                  <Box px={5} pt={5} width={460}>
-                    <Field.Text
-                      name="name"
-                      label="Знайти відділення"
-                      placeholder="Введіть назву відділення"
-                      postfix={<AdminSearchIcon color="#CED0DA" />}
-                    />
-                  </Box>
-                </Form>
-                {divisions.length ? (
-                  <Table
-                    data={divisions}
-                    header={{
-                      name: "Назва Медзакладу",
-                      addresses: "Адреса",
-                      mountainGroup: "Гірський регіон",
-                      phones: "Телефон",
-                      email: "Email"
-                    }}
-                    renderRow={({
-                      mountainGroup,
-                      addresses,
-                      phones,
-                      ...props
-                    }) => ({
-                      ...props,
-                      mountainGroup: (
-                        <Flex justifyContent="center">
-                          {mountainGroup ? (
-                            <PositiveIcon />
-                          ) : (
-                            <CircleIcon stroke="#1bb934" strokeWidth="4" />
-                          )}
-                        </Flex>
-                      ),
-                      addresses: addresses
-                        .filter(a => a.type === "RESIDENCE")
-                        .map((item, key) => (
-                          <AddressView data={item} key={key} />
-                        )),
-                      phones: getPhones(phones)
-                    })}
-                  />
-                ) : null}
-              </>
-            );
-          }}
-        </Query>
+        <>
+          <Form onSubmit={setLocationParams} initialValues={locationParams}>
+            <Box px={5} pt={5} width={460}>
+              <Field.Text
+                name="name"
+                label="Знайти відділення"
+                placeholder="Введіть назву відділення"
+                postfix={<AdminSearchIcon color="#CED0DA" />}
+              />
+            </Box>
+          </Form>
+          <Query
+            query={LegalEntityQuery}
+            variables={{
+              id,
+              first: 10,
+              divisionFilter: locationParams
+            }}
+          >
+            {({ loading, error, data }) => {
+              if (loading) return "Loading...";
+              if (error) return `Error! ${error.message}`;
+              const {
+                legalEntity: {
+                  divisions: { nodes: divisions }
+                }
+              } = data;
+              return divisions.length ? (
+                <Table
+                  data={divisions}
+                  header={{
+                    name: "Назва Медзакладу",
+                    addresses: "Адреса",
+                    mountainGroup: "Гірський регіон",
+                    phones: "Телефон",
+                    email: "Email"
+                  }}
+                  renderRow={({
+                    mountainGroup,
+                    addresses,
+                    phones,
+                    ...props
+                  }) => ({
+                    ...props,
+                    mountainGroup: (
+                      <Flex justifyContent="center">
+                        {mountainGroup ? (
+                          <PositiveIcon />
+                        ) : (
+                          <CircleIcon stroke="#1bb934" strokeWidth="4" />
+                        )}
+                      </Flex>
+                    ),
+                    addresses: addresses
+                      .filter(a => a.type === "RESIDENCE")
+                      .map((item, key) => (
+                        <AddressView data={item} key={key} />
+                      )),
+                    phones: getPhones(phones)
+                  })}
+                />
+              ) : null;
+            }}
+          </Query>
+        </>
       )}
     </LocationParams>
   </Ability>
