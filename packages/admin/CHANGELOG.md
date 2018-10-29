@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.110.10"></a>
+## [0.110.10](https://github.com/edenlabllc/ehealth.web/compare/v0.110.9...v0.110.10) (2018-10-29)
+
+
+### Bug Fixes
+
+* **admin:** add validation in search legalentity ([72d722f](https://github.com/edenlabllc/ehealth.web/commit/72d722f))
+
+
+
+
+
 <a name="0.110.9"></a>
 ## [0.110.9](https://github.com/edenlabllc/ehealth.web/compare/v0.110.8...v0.110.9) (2018-10-27)
 
