@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.112.0"></a>
+# [0.112.0](https://github.com/edenlabllc/ehealth.web/compare/v0.111.0...v0.112.0) (2018-10-30)
+
+
+### Features
+
+* **admin-legacy:** add assign contract request feature ([71806d6](https://github.com/edenlabllc/ehealth.web/commit/71806d6))
+
+
+
+
+
 <a name="0.111.1"></a>
 ## [0.111.1](https://github.com/edenlabllc/ehealth.web/compare/v0.111.0...v0.111.1) (2018-10-30)
 
