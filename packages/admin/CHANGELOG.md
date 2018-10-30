@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.114.0"></a>
+# [0.114.0](https://github.com/edenlabllc/ehealth.web/compare/v0.113.0...v0.114.0) (2018-10-30)
+
+
+### Features
+
+* **admin:** add logout link ([fae1637](https://github.com/edenlabllc/ehealth.web/commit/fae1637))
+
+
+
+
+
 <a name="0.113.0"></a>
 # [0.113.0](https://github.com/edenlabllc/ehealth.web/compare/v0.112.0...v0.113.0) (2018-10-30)
 
