@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
-import { Match } from "@reach/router";
+import * as Reach from "@reach/router";
 import { ChevronBottomIcon } from "@ehealth/icons";
 
 import Ability from "./Ability";
@@ -36,18 +36,21 @@ const Nav = () => (
           </Ability>
         </NavSection>
       </Ability>
+      <NavLink href="/auth/logout">Вийти</NavLink>
     </NavList>
   </NavContainer>
 );
 
 export default Nav;
 
-const NavLink = ({ to, children }) => (
-  <Match path={`${to}/*`}>
+const NavLink = ({ to, href, children }) => (
+  <Reach.Match path={`${to}/*`}>
     {({ match }) => (
       <NavItem isCurrent={match}>
         <Link
           to={to}
+          is={to ? Reach.Link : "a"}
+          href={href}
           color="white"
           fontWeight={match && "bold"}
           display="inline"
@@ -57,7 +60,7 @@ const NavLink = ({ to, children }) => (
         </Link>
       </NavItem>
     )}
-  </Match>
+  </Reach.Match>
 );
 
 const NavSection = ({ title, children }) => (
