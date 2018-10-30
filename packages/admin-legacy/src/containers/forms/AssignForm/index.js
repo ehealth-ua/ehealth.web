@@ -12,7 +12,8 @@ import styles from "./styles.module.css";
 
 class AssignForm extends React.Component {
   state = {
-    employees: []
+    employees: [],
+    errorMessage: null
   };
   async componentDidMount() {
     try {
@@ -44,10 +45,14 @@ class AssignForm extends React.Component {
             }))}
             labelBold
             onChange={async (e, value) => {
-              await this.props.assignContract(id, {
+              const {
+                payload: { message }
+              } = await this.props.assignContract(id, {
                 employee_id: value
               });
+              this.setState({ errorMessage: message });
             }}
+            error={this.state.errorMessage}
           />
         </div>
       </Form>
