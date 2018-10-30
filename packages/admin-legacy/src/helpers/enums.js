@@ -105,5 +105,9 @@ export const CONTRACT_REQUEST_STATUS = {
   VERIFIED: {
     title: "Веріфікована",
     color: "blue"
+  },
+  IN_PROCESS: {
+    title: "Обробляється",
+    color: "orange"
   }
 };

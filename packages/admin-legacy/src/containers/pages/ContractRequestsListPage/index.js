@@ -91,6 +91,7 @@ const SEARCH_FIELDS = [
     name: "status",
     options: [
       { title: "Новий", name: "NEW" },
+      { title: "Обробляється", name: "IN_PROCESS" },
       { title: "Відмінений", name: "DECLINED" },
       { title: "Завершений", name: "TERMINATED" },
       { title: "Підтверджений", name: "APPROVED" },

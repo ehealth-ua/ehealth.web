@@ -211,6 +211,28 @@ export const approveContract = (id, body) =>
     body
   });
 
+export const assignContract = (id, body) =>
+  invoke({
+    endpoint: createUrl(`/api/contract_requests/${id}/actions/assign`),
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json"
+    },
+    types: [
+      "contracts/ASSIGN_CONTRACT_REQUEST",
+      {
+        type: "contracts/ASSIGN_CONTRACT_SUCCESS",
+        payload: (action, state, res) =>
+          res.json().then(json => normalize(json.data, contract))
+      },
+      {
+        type: "contracts/ASSIGN_CONTRACT_FAILURE",
+        payload: (action, state, res) => res.json().then(json => json.error)
+      }
+    ],
+    body
+  });
+
 export const signNhs = (id, body) =>
   invoke({
     endpoint: createUrl(`/api/contract_requests/${id}/actions/sign_nhs`),
@@ -284,7 +306,8 @@ export default handleActions(
       "contracts/DECLINE_CONTRACT_SUCCESS",
       "contracts/APPROVE_CONTRACT_SUCCESS",
       "contracts/SIGN_NHS_CONTRACT_SUCCESS",
-      "contracts/TERMINATE_CONTRACT_SUCCESS"
+      "contracts/TERMINATE_CONTRACT_SUCCESS",
+      "contracts/ASSIGN_CONTRACT_SUCCESS"
     )]: (state, action) => ({
       ...state,
       [action.payload.result]: {

@@ -13,6 +13,8 @@ import InlineList from "../../../components/InlineList";
 import WorkingHours from "../../../components/WorkingHours";
 import { H1 } from "../../../components/Title";
 
+import AssignForm from "../../forms/AssignForm";
+
 import BackLink from "../BackLink";
 import AddressesList from "../AddressesList";
 import DictionaryValue from "../DictionaryValue";
@@ -164,7 +166,38 @@ class ContractDetail extends React.Component {
             }
           ]}
         />
-
+        {type === "contractRequest" &&
+        (contract.status === "NEW" || contract.status === "IN_PROCESS") ? (
+          <div>
+            <Line />
+            <DataList
+              list={[
+                {
+                  name: "Додати виконавця",
+                  value: (
+                    <AssignForm
+                      id={contract.id}
+                      assigneeId={contract.assignee_id}
+                      initialValues={{ employee_id: contract.assignee_id }}
+                    />
+                  )
+                }
+              ]}
+            />
+          </div>
+        ) : type === "contractRequest" && contract.assignee_id ? (
+          <div>
+            <Line />
+            <DataList
+              list={[
+                {
+                  name: "ID виконавця",
+                  value: contract.assignee_id
+                }
+              ]}
+            />
+          </div>
+        ) : null}
         <Line />
         <div
           className={classnames({
