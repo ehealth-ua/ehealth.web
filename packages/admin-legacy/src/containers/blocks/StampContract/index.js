@@ -1,11 +1,11 @@
 import React from "react";
 import { Signer } from "@ehealth/react-iit-digital-signature";
-import { REACT_APP_SIGNER_URL } from "../../../env";
+import { REACT_APP_STAMP_URL } from "../../../env";
 
 import Button from "../../../components/Button";
 import styles from "./styles.module.css";
 
-export default class SignContract extends React.Component {
+export default class StampContract extends React.Component {
   state = {
     contract: {}
   };
@@ -55,7 +55,7 @@ export default class SignContract extends React.Component {
             openSignForm();
           }}
         >
-          Оформити, наклавши ЕЦП
+          Оформити, наклавши ЕЦП та Цифрову Печатку
         </Button>
         {isOpenedSignForm && (
           <div>
@@ -66,8 +66,8 @@ export default class SignContract extends React.Component {
               title="contract"
             />
             <Signer.Parent
-              url={REACT_APP_SIGNER_URL}
-              features={{ width: 640, height: 589 }}
+              url={REACT_APP_STAMP_URL}
+              features={{ width: 640, height: 670 }}
             >
               {({ signData }) => (
                 <div>
@@ -87,17 +87,15 @@ export default class SignContract extends React.Component {
                       <Button
                         size="middle"
                         color="orange"
-                        onClick={() =>
-                          signData(contract).then(({ signedContent }) => {
-                            signedContent &&
-                              signNhs(contract.id, {
-                                signed_content: signedContent,
-                                signed_content_encoding: "base64"
-                              });
-                          })
-                        }
+                        onClick={async () => {
+                          const { signedContent } = await signData(contract);
+                          await signNhs(contract.id, {
+                            signed_content: signedContent,
+                            signed_content_encoding: "base64"
+                          });
+                        }}
                       >
-                        Затвердити, наклавши ЕЦП
+                        Затвердити, наклавши ЕЦП та Цифрову Печатку
                       </Button>
                     </div>
                   </div>

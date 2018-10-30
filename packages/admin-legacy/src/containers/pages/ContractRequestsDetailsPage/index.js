@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { provideHooks } from "redial";
 
 import ContractDetail from "../../blocks/ContractDetail";
-import SignContract from "../../blocks/SignContract";
+import StampContract from "../../blocks/StampContract";
 import ContractForm from "../../forms/ContractForm";
 
 import { getContract } from "../../../reducers";
@@ -57,7 +57,7 @@ class ContractRequestsDetailsPage extends React.Component {
           />
         )}
         {contract.status === "PENDING_NHS_SIGN" && (
-          <SignContract
+          <StampContract
             contract={contract}
             signNhs={this.props.signNhs}
             openSignForm={this.openSignForm}
