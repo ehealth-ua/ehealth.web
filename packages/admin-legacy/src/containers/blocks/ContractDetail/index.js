@@ -149,12 +149,17 @@ class ContractDetail extends React.Component {
             {
               name: "ID попередньої заяви",
               value: contract.previous_request_id && (
-                <BackLink
-                  iconPosition="right"
-                  to={`/contract-requests/${contract.previous_request_id}`}
-                >
-                  {contract.previous_request_id}
-                </BackLink>
+                <div className={styles.row}>
+                  <div>{contract.previous_request_id}</div>
+                  <div className={styles.right}>
+                    <BackLink
+                      iconPosition="right"
+                      to={`/contract-requests/${contract.previous_request_id}`}
+                    >
+                      Перейти до заяви
+                    </BackLink>
+                  </div>
+                </div>
               )
             }
           ]}
