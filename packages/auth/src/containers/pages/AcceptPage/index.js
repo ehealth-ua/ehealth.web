@@ -54,11 +54,14 @@ class AcceptPage extends Component {
         {this.state.error && (
           <article className={styles.error}>
             <b>Помилка:</b>
-            {this.state.error.map(i => (
-              <div key={i.key}>
-                {i.value} ({i.key})
-              </div>
-            ))}
+            {this.state.error.map(
+              i =>
+                typeof i.value === "string" && (
+                  <div key={i.key}>
+                    {i.value} ({i.key})
+                  </div>
+                )
+            )}
           </article>
         )}
         <footer className={styles.footer}>
