@@ -8,7 +8,8 @@ const Tooltip = ({
   content,
   component: Component,
   disableHover,
-  showTooltip
+  showTooltip,
+  placement = "auto"
 }) => (
   <Manager>
     <Reference>
@@ -20,7 +21,7 @@ const Tooltip = ({
     </Reference>
 
     <Popper
-      placement="auto"
+      placement={placement}
       positionFixed
       modifiers={{
         flip: {

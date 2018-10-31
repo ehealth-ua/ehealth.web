@@ -25,6 +25,7 @@ import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
+import Tooltip from "../../components/Tooltip";
 import Ability from "../../components/Ability";
 import * as Field from "../../components/Field";
 import AddressView from "../../components/AddressView";
@@ -57,7 +58,8 @@ const Details = ({ id }) => (
         misVerified,
         nhsVerified,
         owner,
-        medicalServiceProvider
+        medicalServiceProvider,
+        mergedToLegalEntity
       } = legalEntity;
       const statusAction =
         status === "ACTIVE" && (nhsVerified ? status : "NHS_VERIFY_CLOSED");
@@ -233,6 +235,7 @@ const Details = ({ id }) => (
               <RelatedLegalEntities
                 path="/related-legal-entities"
                 status={status}
+                mergedToLegalEntity={mergedToLegalEntity}
               />
               <Owner path="/owner" owner={owner} />
               <Divisions path="/divisions" />
@@ -345,13 +348,13 @@ const License = ({ license: { accreditation, licenses = [] } }) => {
     </Box>
   );
 };
-const RelatedLegalEntities = ({ id, status }) => (
+const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
   <Ability action="read" resource="related_legal_entities">
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
         <>
-          <Flex>
-            <Box px={1} width={3 / 5}>
+          <Flex justifyContent="space-between">
+            <Box px={1}>
               <Form onSubmit={setLocationParams} initialValues={locationParams}>
                 <Box px={5} pt={5} width={460}>
                   <Field.Text
@@ -363,9 +366,22 @@ const RelatedLegalEntities = ({ id, status }) => (
                 </Box>
               </Form>
             </Box>
-            <Box px={1} width={2 / 5} css={{ textAlign: "right" }}>
-              {status === "ACTIVE" && (
-                <Link to="../add">
+            <Box pt={5} pl={4} css={{ textAlign: "right" }}>
+              {mergedToLegalEntity ? (
+                <Tooltip
+                  placement="top"
+                  content="Увага, медзаклад було реорганізовано"
+                  component={() => (
+                    <Link
+                      to={`../../${mergedToLegalEntity.mergedToLegalEntity.id}`}
+                      fontWeight="bold"
+                    >
+                      Перейти до основного закладу
+                    </Link>
+                  )}
+                />
+              ) : status === "ACTIVE" ? (
+                <Link to="../add" fontWeight="bold">
                   <Flex mb={2}>
                     <Box mr={2}>
                       <AdminAddIcon width={16} height={16} />
@@ -373,7 +389,7 @@ const RelatedLegalEntities = ({ id, status }) => (
                     Додати підпорядкований медзаклад
                   </Flex>
                 </Link>
-              )}
+              ) : null}
             </Box>
           </Flex>
           <Query

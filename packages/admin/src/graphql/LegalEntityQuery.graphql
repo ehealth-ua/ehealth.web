@@ -70,6 +70,11 @@ query LegalEntityQuery(
         }
       }
     }
+    mergedToLegalEntity {
+      mergedToLegalEntity {
+        id
+      }
+    }
     mergedFromLegalEntities(
       first: $first
       filter: $mergeLegalEntityFilter
