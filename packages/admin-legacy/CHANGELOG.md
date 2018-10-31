@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.115.0"></a>
+# [0.115.0](https://github.com/edenlabllc/ehealth.web/compare/v0.114.2...v0.115.0) (2018-10-31)
+
+
+### Features
+
+* **admin-legacy:** change using sign contract requests to using digital stamp ([0797f4d](https://github.com/edenlabllc/ehealth.web/commit/0797f4d))
+
+
+
+
+
 <a name="0.114.2"></a>
 ## [0.114.2](https://github.com/edenlabllc/ehealth.web/compare/v0.114.1...v0.114.2) (2018-10-30)
 
