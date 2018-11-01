@@ -2,6 +2,9 @@ import React from "react";
 import { Link, Match } from "@reach/router";
 import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
+import { css } from "react-emotion";
+
+import { SmallChevronLeftIcon, SmallChevronRightIcon } from "@ehealth/icons";
 
 /**
  * @example
@@ -23,6 +26,8 @@ import { ifProp } from "styled-tools";
  * </Tabs.Content>
 */
 
+const PADDING_X = 45;
+
 const NavItem = ({ to, ...props }) => (
   <Match path={to}>
     {({ match }) => (
@@ -33,15 +38,96 @@ const NavItem = ({ to, ...props }) => (
   </Match>
 );
 
-const Nav = styled.ul`
+class Nav extends React.Component {
+  state = {
+    withControls: false,
+    leftActive: false,
+    rightActive: true
+  };
+
+  wrapper = React.createRef();
+  container = React.createRef();
+
+  componentDidMount() {
+    this.container.current.scrollWidth > this.wrapper.current.scrollWidth &&
+      this.setState({
+        withControls: true
+      });
+  }
+
+  handleArrowClick(step = 0) {
+    this.container.current.scrollLeft += step;
+
+    this.setState({
+      leftActive: !!this.container.current.scrollLeft,
+      rightActive:
+        this.container.current.scrollWidth -
+          this.container.current.scrollLeft +
+          PADDING_X * 2 !==
+        this.wrapper.current.scrollWidth
+    });
+  }
+
+  render() {
+    const { withControls, leftActive, rightActive } = this.state;
+    return (
+      <Wrapper innerRef={this.wrapper}>
+        {withControls && (
+          <Arrow
+            onClick={() => this.handleArrowClick(-50)}
+            disabled={!leftActive}
+          >
+            <SmallChevronLeftIcon />
+          </Arrow>
+        )}
+        <Container innerRef={this.container}>{this.props.children}</Container>
+        {withControls && (
+          <Arrow
+            right
+            onClick={() => this.handleArrowClick(50)}
+            disabled={!rightActive}
+          >
+            <SmallChevronRightIcon />
+          </Arrow>
+        )}
+      </Wrapper>
+    );
+  }
+}
+
+const Arrow = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 12px;
+  padding: 0;
+  ${ifProp(
+    "right",
+    css`
+      right: 15px;
+    `,
+    css`
+      left: 15px;
+    `
+  )};
+  color: ${ifProp("disabled", "#ced0da", "#2ea2f8")};
+`;
+
+const Wrapper = styled.div`
+  position: relative;
   display: flex;
-  flex-flow: row wrap;
-  list-style: none;
-  padding: 20px 20px 0;
-  margin-bottom: 0;
   background-color: #fafbfc;
   border: 1px solid #dfe2e5;
+  padding: 5px ${PADDING_X}px 0;
+`;
+
+const Container = styled.ul`
+  display: flex;
+  flex-flow: row nowrap;
+  list-style: none;
+  margin-bottom: -1px;
   font-size: 14px;
+  overflow: hidden;
 `;
 
 const TabItem = styled.li`

@@ -38,6 +38,8 @@ export { default as ResetIcon } from "./ResetIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as SpinnerIcon } from "./SpinnerIcon";
 export { default as StampIcon } from "./StampIcon";
+export { default as SmallChevronLeftIcon } from "./SmallChevronLeftIcon";
+export { default as SmallChevronRightIcon } from "./SmallChevronRightIcon";
 export { default as ThinAddIcon } from "./ThinAddIcon";
 export { default as TriangleLeftIcon } from "./TriangleLeftIcon";
 export { default as TriangleRightIcon } from "./TriangleRightIcon";
