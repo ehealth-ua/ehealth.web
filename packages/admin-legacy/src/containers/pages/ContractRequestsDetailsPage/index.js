@@ -42,7 +42,7 @@ class ContractRequestsDetailsPage extends React.Component {
           isOpenSignForm={this.state.isOpenSignForm}
           type="contractRequest"
         />
-        {contract.status === "NEW" && (
+        {contract.status === "IN_PROCESS" && (
           <ContractForm
             contract={contract}
             onSubmit={v => updateContract(id, v)}
