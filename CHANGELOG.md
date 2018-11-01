@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.117.1"></a>
+## [0.117.1](https://github.com/edenlabllc/ehealth.web/compare/v0.117.0...v0.117.1) (2018-11-01)
+
+
+### Bug Fixes
+
+* **admin-legacy:** change status view ContractForm in ContractRequestsDetailsPage ([d5a3cc0](https://github.com/edenlabllc/ehealth.web/commit/d5a3cc0))
+* **auth:** change using SignDataInternal in DigitalStamp ([2cae01a](https://github.com/edenlabllc/ehealth.web/commit/2cae01a))
+
+
+
+
+
 <a name="0.117.0"></a>
 # [0.117.0](https://github.com/edenlabllc/ehealth.web/compare/v0.116.0...v0.117.0) (2018-10-31)
 
