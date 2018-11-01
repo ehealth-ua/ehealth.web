@@ -45,8 +45,12 @@ class StampPage extends Component {
                   <DigitalSignatureForm
                     onSubmit={ds => {
                       try {
-                        this.submitFormSuccess(ds, data, signedContent =>
-                          this.setState({ sign: signedContent })
+                        this.submitFormSuccess(
+                          ds,
+                          data,
+                          false,
+                          (signedContent, meta) =>
+                            this.setState({ sign: signedContent })
                         );
                       } catch (error) {
                         onSignError(error);
@@ -60,6 +64,7 @@ class StampPage extends Component {
                         this.submitFormSuccess(
                           ds,
                           sign,
+                          true,
                           (signedContent, meta) =>
                             onSignSuccess({ signedContent, meta })
                         );
@@ -77,11 +82,11 @@ class StampPage extends Component {
     );
   }
 
-  submitFormSuccess = (ds, data, success = () => {}) => {
-    const content = JSON.stringify(data);
+  submitFormSuccess = (ds, data, status = true, success = () => {}) => {
+    const content = !status ? JSON.stringify(data) : data;
 
     const signedContent = REACT_APP_DIGITAL_SIGNATURE_ENABLED
-      ? ds.SignDataInternal(true, content, true)
+      ? ds.SignDataInternal(true, content, status)
       : btoa(unescape(encodeURIComponent(content)));
 
     let meta;
