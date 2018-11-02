@@ -22,7 +22,10 @@ import { onSubmit } from "./redux";
 
 const SignInPage = ({
   onSubmit = () => {},
-  location: { search, query: { client_id, redirect_uri, email } },
+  location: {
+    search,
+    query: { client_id, redirect_uri, email }
+  },
   router
 }) => (
   <Main id="sign-in-page">
@@ -66,4 +69,10 @@ const SignInPage = ({
   </Main>
 );
 
-export default compose(withRouter, connect(null, { onSubmit }))(SignInPage);
+export default compose(
+  withRouter,
+  connect(
+    null,
+    { onSubmit }
+  )
+)(SignInPage);

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, Switch } from "@ehealth/components";
+import { Link } from "react-router";
 
+import { Switch } from "@ehealth/components";
+import Button from "../../../components/Button";
 import { REACT_APP_DIGITAL_SIGNATURE_ENABLED } from "../../../env";
 import { getToken } from "../../../reducers";
 import { setData, logoutAction } from "../../../redux/session";
@@ -22,14 +24,19 @@ class SignUpValidatePage extends Component {
 
   async componentDidMount() {
     const {
-      location: { query: { token } },
+      location: {
+        query: { token }
+      },
       setData,
       logoutAction,
       validateEmail
     } = this.props;
 
     await setData({ token });
-    const { error, payload: { data, response } } = await validateEmail();
+    const {
+      error,
+      payload: { data, response }
+    } = await validateEmail();
 
     if (error) {
       await logoutAction();
@@ -59,14 +66,18 @@ class SignUpValidatePage extends Component {
               <>
                 <p>Час дії посилання вичерпався.</p>
                 <p>Будь ласка, відправте форму повторно.</p>
-                <Button to="/sign-up">Відправити повторно</Button>
+                <Link to="/sign-up">
+                  <Button>Відправити повторно</Button>
+                </Link>
               </>
             }
             email_exists={
               <>
                 <p>Ви вже скористались цим посиланням.</p>
                 <p>Будь ласка, увійдіть.</p>
-                <Button to="/sign-in">Увійти</Button>
+                <Link to="/sign-in">
+                  <Button>Увійти</Button>
+                </Link>
               </>
             }
             access_denied={
@@ -89,7 +100,10 @@ class SignUpValidatePage extends Component {
       ? ds.SignDataInternal(true, content, true)
       : btoa(unescape(encodeURIComponent(content)));
 
-    const { error, payload: { response } } = await getUser({
+    const {
+      error,
+      payload: { response }
+    } = await getUser({
       signed_content,
       drfo: ds.privKeyOwnerInfo.subjDRFOCode
     });
@@ -105,9 +119,12 @@ class SignUpValidatePage extends Component {
   };
 }
 
-export default connect(state => ({ token: getToken(state) }), {
-  setData,
-  logoutAction,
-  validateEmail,
-  getUser
-})(SignUpValidatePage);
+export default connect(
+  state => ({ token: getToken(state) }),
+  {
+    setData,
+    logoutAction,
+    validateEmail,
+    getUser
+  }
+)(SignUpValidatePage);

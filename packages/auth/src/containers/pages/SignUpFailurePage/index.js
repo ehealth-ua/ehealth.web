@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Switch } from "@ehealth/components";
-
+import { Switch } from "@ehealth/components";
+import { Link } from "react-router";
+import Button from "../../../components/Button";
 import {
   REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
   REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
@@ -42,9 +43,9 @@ const SignUpFailurePage = ({ params, location }) => (
           <>
             <p>Час заповнення форми вичерпався.</p>
             <p>Будь ласка, відправте форму повторно.</p>
-            <Button to={{ ...location, pathname: "/sign-up/continue" }}>
-              Відправити повторно
-            </Button>
+            <Link to={{ ...location, pathname: "/sign-up/continue" }}>
+              <Button>Відправити повторно</Button>
+            </Link>
           </>
         }
         access_denied={

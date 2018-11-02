@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { withRouter } from "react-router";
+import { withRouter, Link } from "react-router";
 import {
   REACT_APP_DIGITAL_SIGNATURE_ENABLED,
   REACT_APP_CLIENT_ID
 } from "../../../env";
 
-import { Button, SUBMIT_ERROR } from "@ehealth/components";
-
+import { SUBMIT_ERROR } from "@ehealth/components";
+import Button from "../../../components/Button";
 import {
   Main,
   Header,
@@ -35,9 +35,11 @@ class SignInDSPage extends Component {
               за допомогою <br /> Електронного Цифрового Підпису
             </p>
             <DigitalSignatureForm onSubmit={this.handleSubmit} />
-            <Button theme="link" to={`/sign-in/${location.search}`} block>
-              Увійти за допомогою email
-            </Button>
+            <Link to={`/sign-in/${location.search}`}>
+              <Button theme="link" block>
+                Увійти за допомогою email
+              </Button>
+            </Link>
           </NarrowContainer>
         </Article>
       </Main>
@@ -52,9 +54,9 @@ class SignInDSPage extends Component {
       location: { query, search },
       router
     } = this.props;
-    const { payload: { data: { token } = {}, response = {} } } = await getNonce(
-      query.client_id
-    );
+    const {
+      payload: { data: { token } = {}, response = {} }
+    } = await getNonce(query.client_id);
 
     // with not valid client_id
     if (response.error && response.error.type === "not_found") {
@@ -116,10 +118,13 @@ class SignInDSPage extends Component {
 
 export default compose(
   withRouter,
-  connect(null, {
-    getNonce,
-    createSessionToken,
-    login,
-    authorize
-  })
+  connect(
+    null,
+    {
+      getNonce,
+      createSessionToken,
+      login,
+      authorize
+    }
+  )
 )(SignInDSPage);
