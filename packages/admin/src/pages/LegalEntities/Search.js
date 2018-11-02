@@ -12,6 +12,7 @@ import isEmpty from "lodash/isEmpty";
 import STATUSES from "../../helpers/statuses";
 
 import * as Field from "../../components/Field";
+import Pagination from "../../components/Pagination";
 import Table from "../../components/Table";
 import Link from "../../components/Link";
 import AddressView from "../../components/AddressView";
@@ -50,7 +51,9 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { code, settlement, nhsVerified, type } = {}
+          filter: { code, settlement, nhsVerified, type } = {},
+          first,
+          last
         } = locationParams;
         const regId = new RegExp(ID_PATTERN);
         const testID = regId.test(code);
@@ -65,11 +68,14 @@ const Search = ({ uri }) => (
           area: isEmpty(settlement) ? undefined : settlement.area,
           type: isEmpty(type) ? undefined : type.key
         };
-
+        const itemsCountDefault = 10;
         return (
           <Query
             query={SearchLegalEntitiesQuery}
+            fetchPolicy="network-only"
             variables={{
+              first:
+                isEmpty(first) && isEmpty(last) ? itemsCountDefault : undefined,
               ...locationParams,
               filter: !isEmpty(locationParams.filter)
                 ? filteredParams
@@ -78,7 +84,10 @@ const Search = ({ uri }) => (
           >
             {({ loading, error, data, refetch }) => {
               if (loading) return null;
-              const { nodes: legalEntities = [] } = data.legalEntities;
+              const {
+                nodes: legalEntities = [],
+                pageInfo
+              } = data.legalEntities;
               return (
                 <>
                   <SearchLegalEntitiesForm
@@ -88,82 +97,91 @@ const Search = ({ uri }) => (
                   />
                   {!error &&
                     legalEntities.length > 0 && (
-                      <Table
-                        data={legalEntities}
-                        header={{
-                          id: "ID",
-                          name: "Назва медзакладу",
-                          type: "Тип медзакладу",
-                          edrpou: "ЄДРПОУ",
-                          addresses: "Адреса",
-                          nhsVerified: "Верифікований НСЗУ",
-                          insertedAt: "Додано",
-                          status: "Статус",
-                          action: "Дія"
-                        }}
-                        renderRow={({
-                          addresses,
-                          nhsVerified,
-                          status,
-                          insertedAt,
-                          databaseId,
-                          type,
-                          ...legalEntity
-                        }) => ({
-                          ...legalEntity,
-                          id: databaseId,
-                          type: STATUSES.LEGAL_ENTITY_TYPE[type],
-                          nhsVerified: (
-                            <Flex justifyContent="center">
-                              {nhsVerified ? (
-                                <PositiveIcon />
-                              ) : (
-                                <CircleIcon stroke="#1bb934" strokeWidth="4" />
-                              )}
-                            </Flex>
-                          ),
-                          insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
-                          status: (
-                            <Badge
-                              type="LEGALENTITY"
-                              name={status}
-                              display="block"
-                            />
-                          ),
-                          addresses: (
-                            <>
-                              {addresses
-                                .filter(a => a.type === "REGISTRATION")
-                                .map(item => (
-                                  <AddressView data={item} />
-                                ))}
-                            </>
-                          ),
-                          action: (
-                            <Link to={`../${legalEntity.id}`} fontWeight="bold">
-                              Деталі
-                            </Link>
-                          )
-                        })}
-                        sortableFields={[
-                          "edrpou",
-                          "status",
-                          "insertedAt",
-                          "nhsVerified"
-                        ]}
-                        sortingParams={parseSortingParams(
-                          locationParams.orderBy
-                        )}
-                        onSortingChange={sortingParams =>
-                          setLocationParams({
-                            ...locationParams,
-                            orderBy: stringifySortingParams(sortingParams)
-                          })
-                        }
-                        tableName="legal-entities/search"
-                        whiteSpaceNoWrap={["id"]}
-                        hiddenFields="insertedAt"
-                      />
+                      <>
+                        <Table
+                          data={legalEntities}
+                          header={{
+                            id: "ID",
+                            name: "Назва медзакладу",
+                            type: "Тип медзакладу",
+                            edrpou: "ЄДРПОУ",
+                            addresses: "Адреса",
+                            nhsVerified: "Верифікований НСЗУ",
+                            insertedAt: "Додано",
+                            status: "Статус",
+                            action: "Дія"
+                          }}
+                          renderRow={({
+                            addresses,
+                            nhsVerified,
+                            status,
+                            insertedAt,
+                            databaseId,
+                            type,
+                            ...legalEntity
+                          }) => ({
+                            ...legalEntity,
+                            id: databaseId,
+                            type: STATUSES.LEGAL_ENTITY_TYPE[type],
+                            nhsVerified: (
+                              <Flex justifyContent="center">
+                                {nhsVerified ? (
+                                  <PositiveIcon />
+                                ) : (
+                                  <CircleIcon
+                                    stroke="#1bb934"
+                                    strokeWidth="4"
+                                  />
+                                )}
+                              </Flex>
+                            ),
+                            insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                            status: (
+                              <Badge
+                                type="LEGALENTITY"
+                                name={status}
+                                display="block"
+                              />
+                            ),
+                            addresses: (
+                              <>
+                                {addresses
+                                  .filter(a => a && a.type === "REGISTRATION")
+                                  .map(
+                                    item => item && <AddressView data={item} />
+                                  )}
+                              </>
+                            ),
+                            action: (
+                              <Link
+                                to={`../${legalEntity.id}`}
+                                fontWeight="bold"
+                              >
+                                Деталі
+                              </Link>
+                            )
+                          })}
+                          sortableFields={[
+                            "edrpou",
+                            "status",
+                            "insertedAt",
+                            "nhsVerified"
+                          ]}
+                          sortingParams={parseSortingParams(
+                            locationParams.orderBy
+                          )}
+                          onSortingChange={sortingParams =>
+                            setLocationParams({
+                              ...locationParams,
+                              orderBy: stringifySortingParams(sortingParams)
+                            })
+                          }
+                          tableName="legal-entities/search"
+                          whiteSpaceNoWrap={["id"]}
+                          hiddenFields="insertedAt"
+                        />
+                        <Pagination {...pageInfo} />
+                      </>
                     )}
                 </>
               );
