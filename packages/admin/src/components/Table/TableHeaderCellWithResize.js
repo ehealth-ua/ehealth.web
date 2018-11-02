@@ -27,12 +27,26 @@ class TableHeaderCellWithResize extends React.Component<
 
   componentDidMount() {
     const { minWidth } = this.state;
+    const { storageForSizes, header } = this.props;
     // $FlowFixMe https://github.com/facebook/flow/issues/6832
-    const { current: { clientWidth = 0 } = {} } = this.cell;
+    const { current: { clientWidth = 0, textContent } = {} } = this.cell;
     this.setState({
       cellWidth: Math.max(clientWidth, minWidth + 100),
       startX: 0
     });
+
+    this.setDefaultCellWidth(storageForSizes, header, textContent);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { cellWidth } = this.state;
+
+    if (prevState.cellWidth !== cellWidth) {
+      const { textContent } = this.cell.current;
+      const { storageForSizes, header } = this.props;
+
+      this.setUpdatedCellWidth(storageForSizes, header, textContent, cellWidth);
+    }
   }
 
   render() {
@@ -119,9 +133,61 @@ class TableHeaderCellWithResize extends React.Component<
     document.removeEventListener("mouseup", this.resizeColumnEnd);
     document.removeEventListener("mouseleave", this.resizeColumnEnd);
   };
+
+  getDefaultCellWidth(items) {
+    return Object.values(items).map(item => {
+      return { [item]: this.state.cellWidth };
+    });
+  }
+
+  setDefaultCellWidth(storageName, items, cellName) {
+    if (localStorage.getItem(storageName) === null) {
+      localStorage.setItem(
+        storageName,
+        JSON.stringify(this.getDefaultCellWidth(items))
+      );
+    } else {
+      const storage = localStorage.getItem(storageName);
+
+      isValidJson(storage) &&
+        JSON.parse(storage).find(item => {
+          item[cellName] &&
+            this.setState({
+              cellWidth: item[cellName]
+            });
+        });
+    }
+  }
+
+  setUpdatedCellWidth(storageName, items, cellName, cellWidth) {
+    const storage = localStorage.getItem(storageName);
+
+    const updateHeader =
+      (isValidJson(storage) &&
+        JSON.parse(storage).map(item => {
+          return item[cellName] === undefined
+            ? item
+            : { [cellName]: cellWidth };
+        })) ||
+      this.getDefaultCellWidth(items);
+
+    localStorage.setItem(storageName, JSON.stringify(updateHeader));
+  }
 }
 
 export default TableHeaderCellWithResize;
+
+const isValidJson = item => {
+  if (typeof item !== "string") {
+    return false;
+  }
+  try {
+    JSON.parse(item);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 
 const ResizeHandler = styled.div`
   width: 10px;

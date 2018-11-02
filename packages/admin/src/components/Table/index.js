@@ -133,7 +133,6 @@ class Table extends React.Component<TableProps, TableState> {
       hiddenFields = "",
       whiteSpaceNoWrap
     } = this.props;
-
     const { filterRow } = this.state;
 
     return (
@@ -145,6 +144,7 @@ class Table extends React.Component<TableProps, TableState> {
               <ResetIcon
                 onClick={() => {
                   localStorage.setItem(tableName, hiddenFields);
+                  localStorage.removeItem(`${tableName}-cell-sizes`);
                   this.setState({
                     filterRow: this.defaultFilter(header, tableName)
                   });
@@ -182,7 +182,13 @@ class Table extends React.Component<TableProps, TableState> {
             headerComponent={TableHeaderComponent}
             bodyComponent={TableBodyComponent}
             rowComponent={TableRow}
-            headerCellComponent={TableHeaderCellWithResize}
+            headerCellComponent={props => (
+              <TableHeaderCellWithResize
+                storageForSizes={`${tableName}-cell-sizes`}
+                header={header}
+                {...props}
+              />
+            )}
             cellComponent={TableCell}
             tableHeader={TableHeader}
             tableBody={TableBody}
