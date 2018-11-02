@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@ehealth/env": "file:../env",
+    "@ehealth/polyfill-library": "file:../polyfill-library",
     "express": "^4.16.3",
-    "polyfill-library": "3.26.0-0",
     "shrink-ray-current": "^2.1.2"
   }
 }

@@ -1,8 +1,8 @@
 require("@ehealth/env/load");
 const express = require("express");
 const shrinkRay = require("shrink-ray-current");
-const polyfill = require("polyfill-library");
-
+const PolyfillLibrary = require("@ehealth/polyfill-library");
+const polyfillLibrary = new PolyfillLibrary();
 const { PORT } = process.env;
 
 const app = express();
@@ -10,7 +10,7 @@ const app = express();
 app.use(shrinkRay({ brotli: { quality: 11 } }));
 
 app.get("/polyfill:min(.min)?.js", (req, res) => {
-  const script = polyfill.getPolyfillString({
+  const script = polyfillLibrary.getPolyfillString({
     uaString: req.header("user-agent"),
     minify: req.params.min === ".min",
     features: {
