@@ -59,6 +59,7 @@ typings/
 # Production
 dist/
 build/
+__dist/
 
 # Misc
 .env.local
