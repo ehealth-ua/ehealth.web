@@ -1,154 +1,81 @@
 import React from "react";
-import styled from "react-emotion/macro";
-import { ifProp } from "styled-tools";
-import { withProps } from "recompose";
+import { Flex, Box, Heading, Text } from "rebass/emotion";
+import { LocationParams } from "@ehealth/components";
+import { TriangleLeftIcon, TriangleRightIcon } from "@ehealth/icons";
+import Button from "./Button";
+import system from "system-components/emotion";
 
-import { stringifySearchParams } from "@ehealth/utils";
-import { Pager, LocationParams, Link } from "@ehealth/components";
-
-const Pagination = ({ totalPages }) => (
+const Pagination = ({
+  endCursor,
+  hasNextPage,
+  hasPreviousPage,
+  startCursor,
+  itemsCountDefault = 10
+}) => (
   <LocationParams>
-    {({ locationParams: { page } }) => (
-      <Pager currentPage={parseInt(page, 10)} totalPages={totalPages}>
-        {({
-          getPageProps,
-          prevPage,
-          currentPage,
-          nextPage,
-          leftPages,
-          middlePages,
-          rightPages,
-          isFirstPage,
-          isLastPage,
-          isLeftRangeTruncated,
-          isRightRangeTruncated
-        }) => (
-          <Container>
-            <DirectionPage
-              {...getPageProps({ page: prevPage }, true)}
-              hide={isFirstPage}
-              backward
-            />
-            {leftPages.map(page => (
-              <Page
-                {...getPageProps({ page, key: page }, true)}
-                selected={page === currentPage}
-              />
-            ))}
-            {isLeftRangeTruncated && <Delimiter />}
-            {middlePages.map(page => (
-              <Page
-                {...getPageProps({ page, key: page }, true)}
-                selected={page === currentPage}
-              />
-            ))}
-            {isRightRangeTruncated && <Delimiter />}
-            {rightPages.map(page => (
-              <Page
-                {...getPageProps({ page, key: page }, true)}
-                selected={page === currentPage}
-              />
-            ))}
-            <DirectionPage
-              {...getPageProps({ page: nextPage }, true)}
-              hide={isLastPage}
-            />
-          </Container>
-        )}
-      </Pager>
-    )}
+    {({ locationParams, setLocationParams }) => {
+      const { first, last } = locationParams;
+      return (
+        <Flex alignItems="center" justifyContent="center" m="2">
+          {hasPreviousPage && (
+            <Box mr="1">
+              <Button
+                variant="none"
+                border="1px solid #e6eaee"
+                onClick={() => {
+                  setLocationParams({
+                    ...locationParams,
+                    before: startCursor,
+                    last: last || itemsCountDefault,
+                    after: null,
+                    first: null
+                  });
+                }}
+              >
+                <Wrapper>
+                  <TriangleLeftIcon />
+                  <Text ml="1" color="darkAndStormy">
+                    Назад
+                  </Text>
+                </Wrapper>
+              </Button>
+            </Box>
+          )}
+          {hasNextPage && (
+            <Button
+              variant="none"
+              border="1px solid #e6eaee"
+              onClick={() => {
+                setLocationParams({
+                  ...locationParams,
+                  after: endCursor,
+                  first: first || itemsCountDefault,
+                  before: null,
+                  last: null
+                });
+              }}
+            >
+              <Wrapper>
+                <Text mr="1" color="darkAndStormy">
+                  Вперед
+                </Text>
+                <TriangleRightIcon />
+              </Wrapper>
+            </Button>
+          )}
+        </Flex>
+      );
+    }}
   </LocationParams>
 );
+
+const Wrapper = system({
+  is: Flex,
+  alignItems: "center",
+  justifyContent: "center",
+  width: "70",
+  lineHeight: "1",
+  color: "silverCity"
+});
 
 export default Pagination;
-
-const Page = ({ page, ...props }) => (
-  <Item {...props}>
-    <PageLink page={page} />
-  </Item>
-);
-
-const DirectionPage = ({ page, backward, ...props }) => (
-  <DirectionItem backward={backward} {...props}>
-    <PageLink page={page}> </PageLink>
-  </DirectionItem>
-);
-
-const PageLink = ({ page, children }) => (
-  <LocationParams>
-    {({ locationParams }) => (
-      <Link to={{ search: stringifySearchParams({ ...locationParams, page }) }}>
-        {children || page}
-      </Link>
-    )}
-  </LocationParams>
-);
-
-const Container = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  list-style: none;
-`;
-
-const Item = styled.li`
-  border: 1px solid #e6eaee;
-  min-width: 35px;
-  height: 36px;
-  margin-left: -1px;
-  font-size: 14px;
-  text-align: center;
-  user-select: none;
-  box-sizing: border-box;
-
-  &:first-child {
-    margin-left: 0;
-  }
-
-  a {
-    text-align: center;
-    text-decoration: none;
-    color: ${ifProp("selected", "#354052", "#9a9fa8")};
-    display: block;
-    line-height: 34px;
-    pointer-events: ${ifProp("selected", "none")};
-  }
-`;
-
-const DirectionItem = styled(Item)`
-  position: relative;
-  visibility: ${props => props.hide && "hidden"};
-
-  a {
-    width: 100%;
-    height: 100%;
-  }
-
-  a::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: ${ifProp("backward", "5px 6px 5px 0", "5px 0 5px 6px")};
-    border-color: ${ifProp(
-      "backward",
-      "transparent #ced0da transparent transparent",
-      "transparent transparent transparent #ced0da"
-    )};
-  }
-`;
-
-const Delimiter = withProps({
-  children: "..."
-})(styled(Item)`
-  color: #ced0da;
-  font-weight: 900;
-  line-height: 35px;
-`);

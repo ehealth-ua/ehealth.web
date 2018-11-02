@@ -1,6 +1,7 @@
 //@flow
 import * as React from "react";
 import styled from "react-emotion/macro";
+import { Box } from "rebass/emotion";
 import Dropdown from "../Dropdown";
 import { DropDownButton } from "@ehealth/icons";
 import { checkLastInList } from "@ehealth/utils";
@@ -30,7 +31,7 @@ const TableDropDownControll = ({
   data,
   columnKeyExtractor = name => name,
   // $FlowFixMe https://github.com/facebook/flow/issues/6832
-  buttonComponent: ButtonDropDownWrapper = ButtonDropDown,
+  buttonComponent: ButtonDropDownWrapper = Box,
   // $FlowFixMe https://github.com/facebook/flow/issues/6832
   buttonContent: ButtonContent = Icon,
   description = "Додати параметр"
@@ -69,10 +70,6 @@ const TableDropdown = ({
     ))}
   </List>
 );
-
-const ButtonDropDown = styled.div`
-  padding: 14px 0px;
-`;
 
 const Icon = styled.summary`
   display: flex;

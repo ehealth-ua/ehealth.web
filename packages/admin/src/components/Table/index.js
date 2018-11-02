@@ -9,6 +9,7 @@ import isEqual from "lodash/isEqual";
 import { TableView } from "@ehealth/components";
 import { ResetIcon } from "@ehealth/icons";
 
+import ShowItems from "./ShowItems";
 import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
 import type { SortingParams } from "./TableHeader";
@@ -137,22 +138,23 @@ class Table extends React.Component<TableProps, TableState> {
 
     return (
       <>
-        <Flex mb={2} justifyContent="space-between" alignItems="center">
-          <Tooltip
-            content="Скинути поточні налаштування"
-            component={() => (
-              <ResetIcon
-                onClick={() => {
-                  localStorage.setItem(tableName, hiddenFields);
-                  localStorage.removeItem(`${tableName}-cell-sizes`);
-                  this.setState({
-                    filterRow: this.defaultFilter(header, tableName)
-                  });
-                }}
-              />
-            )}
-          />
-
+        <Flex mb={3} mt={5} justifyContent="space-between" alignItems="center">
+          <Flex alignItems="center">
+            <ShowItems />
+            <Tooltip
+              content="Скинути поточні налаштування"
+              component={() => (
+                <ResetIcon
+                  onClick={() => {
+                    localStorage.setItem(tableName, hiddenFields);
+                    this.setState({
+                      filterRow: this.defaultFilter(header, tableName)
+                    });
+                  }}
+                />
+              )}
+            />
+          </Flex>
           <TableDropDownControll
             data={filterRow}
             onChange={name => {
