@@ -1,5 +1,19 @@
-query SearchPersonsQuery($filter: PersonFilter, $orderBy: PersonOrderBy) {
-  persons(filter: $filter, orderBy: $orderBy) {
+query SearchPersonsQuery(
+  $filter: PersonFilter
+  $orderBy: PersonOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
+) {
+  persons(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
     nodes {
       id
       firstName
@@ -13,6 +27,12 @@ query SearchPersonsQuery($filter: PersonFilter, $orderBy: PersonOrderBy) {
         type
         phoneNumber
       }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
     }
   }
 }

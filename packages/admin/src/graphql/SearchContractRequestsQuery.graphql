@@ -1,8 +1,19 @@
 query SearchContractRequestsQuery(
   $filter: ContractRequestFilter
   $orderBy: ContractRequestOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
 ) {
-  contractRequests(filter: $filter, orderBy: $orderBy) {
+  contractRequests(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
     nodes {
       id
       contractNumber
@@ -17,6 +28,12 @@ query SearchContractRequestsQuery(
       contractorOwner {
         id
       }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
     }
   }
 }

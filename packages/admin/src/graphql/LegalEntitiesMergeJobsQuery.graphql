@@ -1,9 +1,19 @@
 query LegalEntitiesMergeJobsQuery(
-  $first: Int!
   $filter: LegalEntityMergeJobFilter
   $orderBy: LegalEntityMergeJobOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
 ) {
-  legalEntityMergeJobs(first: $first, filter: $filter, orderBy: $orderBy) {
+  legalEntityMergeJobs(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
     pageInfo {
       startCursor
       endCursor

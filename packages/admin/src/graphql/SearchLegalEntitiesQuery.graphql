@@ -1,8 +1,19 @@
 query SearchLegalEntitiesQuery(
   $filter: LegalEntityFilter
   $orderBy: LegalEntityOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
 ) {
-  legalEntities(first: 10, filter: $filter, orderBy: $orderBy) {
+  legalEntities(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
     nodes {
       id
       databaseId
@@ -31,6 +42,12 @@ query SearchLegalEntitiesQuery(
           secondName
         }
       }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
     }
   }
 }
