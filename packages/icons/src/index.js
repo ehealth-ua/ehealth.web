@@ -22,6 +22,7 @@ export { default as ExitIcon } from "./ExitIcon";
 export { default as InfoIcon } from "./InfoIcon";
 export { default as KeyIcon } from "./KeyIcon";
 export { default as ListIcon } from "./ListIcon";
+export { default as LogoutIcon } from "./LogoutIcon";
 export { default as MapIcon } from "./MapIcon";
 export { default as MenuListIcon } from "./MenuListIcon";
 export { default as MenuTileIcon } from "./MenuTileIcon";

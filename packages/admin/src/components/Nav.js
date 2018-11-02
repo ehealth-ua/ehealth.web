@@ -36,21 +36,18 @@ const Nav = () => (
           </Ability>
         </NavSection>
       </Ability>
-      <NavLink href="/auth/logout">Вийти</NavLink>
     </NavList>
   </NavContainer>
 );
 
 export default Nav;
 
-const NavLink = ({ to, href, children }) => (
+const NavLink = ({ to, children }) => (
   <Reach.Match path={`${to}/*`}>
     {({ match }) => (
       <NavItem isCurrent={match}>
         <Link
           to={to}
-          is={to ? Reach.Link : "a"}
-          href={href}
           color="white"
           fontWeight={match && "bold"}
           display="inline"
