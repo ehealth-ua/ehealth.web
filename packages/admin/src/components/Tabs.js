@@ -53,19 +53,8 @@ class Nav extends React.Component {
       this.setState({
         withControls: true
       });
-  }
 
-  handleArrowClick(step = 0) {
-    this.container.current.scrollLeft += step;
-
-    this.setState({
-      leftActive: !!this.container.current.scrollLeft,
-      rightActive:
-        this.container.current.scrollWidth -
-          this.container.current.scrollLeft +
-          PADDING_X * 2 !==
-        this.wrapper.current.scrollWidth
-    });
+    this.setChildOpacity();
   }
 
   render() {
@@ -92,6 +81,41 @@ class Nav extends React.Component {
         )}
       </Wrapper>
     );
+  }
+
+  handleArrowClick(step = 0) {
+    this.container.current.scrollLeft += step;
+
+    this.setState({
+      leftActive: !!this.container.current.scrollLeft,
+      rightActive:
+        this.container.current.scrollWidth -
+          this.container.current.scrollLeft +
+          PADDING_X * 2 !==
+        this.wrapper.current.scrollWidth
+    });
+
+    this.setChildOpacity();
+  }
+
+  setChildOpacity() {
+    const { scrollWidth } = this.wrapper.current;
+    const { scrollLeft } = this.container.current;
+
+    const visibleAreaEnd = scrollWidth - PADDING_X + scrollLeft;
+
+    [...this.container.current.children].map(child => {
+      if (
+        child.offsetLeft >= scrollLeft &&
+        child.offsetLeft + child.offsetWidth <= visibleAreaEnd
+      ) {
+        [...child.children].find(item => item.tagName === "A").style.opacity =
+          "1";
+      } else {
+        [...child.children].find(item => item.tagName === "A").style.opacity =
+          "0.5";
+      }
+    });
   }
 }
 
