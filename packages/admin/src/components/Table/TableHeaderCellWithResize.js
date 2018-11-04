@@ -27,25 +27,23 @@ class TableHeaderCellWithResize extends React.Component<
 
   componentDidMount() {
     const { minWidth } = this.state;
-    const { storageForSizes, header } = this.props;
+    const { storageForSizes, header, cellName } = this.props;
     // $FlowFixMe https://github.com/facebook/flow/issues/6832
-    const { current: { clientWidth = 0, textContent } = {} } = this.cell;
+    const { current: { clientWidth = 0 } = {} } = this.cell;
     this.setState({
       cellWidth: Math.max(clientWidth, minWidth + 100),
       startX: 0
     });
-
-    this.setDefaultCellWidth(storageForSizes, header, textContent);
+    this.setCellWidth(storageForSizes, header, cellName);
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { cellWidth } = this.state;
 
     if (prevState.cellWidth !== cellWidth) {
-      const { textContent } = this.cell.current;
-      const { storageForSizes, header } = this.props;
+      const { storageForSizes, header, cellName } = this.props;
 
-      this.setUpdatedCellWidth(storageForSizes, header, textContent, cellWidth);
+      this.updateCellWidth(storageForSizes, header, cellWidth, cellName);
     }
   }
 
@@ -134,17 +132,17 @@ class TableHeaderCellWithResize extends React.Component<
     document.removeEventListener("mouseleave", this.resizeColumnEnd);
   };
 
-  getDefaultCellWidth(items) {
-    return Object.values(items).map(item => {
+  getCellWidth(items) {
+    return Object.keys(items).map(item => {
       return { [item]: this.state.cellWidth };
     });
   }
 
-  setDefaultCellWidth(storageName, items, cellName) {
+  setCellWidth(storageName, items, cellName) {
     if (localStorage.getItem(storageName) === null) {
       localStorage.setItem(
         storageName,
-        JSON.stringify(this.getDefaultCellWidth(items))
+        JSON.stringify(this.getCellWidth(items))
       );
     } else {
       const storage = localStorage.getItem(storageName);
@@ -159,7 +157,7 @@ class TableHeaderCellWithResize extends React.Component<
     }
   }
 
-  setUpdatedCellWidth(storageName, items, cellName, cellWidth) {
+  updateCellWidth(storageName, items, cellWidth, cellName) {
     const storage = localStorage.getItem(storageName);
 
     const updateHeader =
@@ -169,7 +167,7 @@ class TableHeaderCellWithResize extends React.Component<
             ? item
             : { [cellName]: cellWidth };
         })) ||
-      this.getDefaultCellWidth(items);
+      this.getCellWidth(items);
 
     localStorage.setItem(storageName, JSON.stringify(updateHeader));
   }

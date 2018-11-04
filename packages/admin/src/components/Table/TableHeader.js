@@ -59,6 +59,7 @@ const TableHeader = ({
           const isSortable = sortableFields.includes(name);
           return (
             <HeaderCellComponent
+              cellName={name}
               key={columnKeyExtractor(name, index)}
               onClick={
                 isSortable
