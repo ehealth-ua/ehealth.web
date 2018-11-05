@@ -16,6 +16,7 @@ import type { SortingParams } from "./TableHeader";
 import TableDropDownControll from "./TableDropDownControll";
 import TableHeaderCellWithResize from "./TableHeaderCellWithResize";
 import Tooltip from "../Tooltip";
+import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 type HeaderData = { [string]: string };
 
@@ -140,7 +141,7 @@ class Table extends React.Component<TableProps, TableState> {
       <>
         <Flex mb={3} mt={5} justifyContent="space-between" alignItems="center">
           <Flex alignItems="center">
-            <ShowItems />
+            <ShowItems list={ITEMS_PER_PAGE} />
             <Tooltip
               content="Скинути поточні налаштування"
               component={() => (

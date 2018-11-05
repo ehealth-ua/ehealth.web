@@ -4,7 +4,7 @@ import { LocationParams } from "@ehealth/components";
 import system from "system-components/emotion";
 import Button from "../Button";
 
-const ShowItems = ({ count = ["10", "20", "50"] }) => (
+const ShowItems = ({ list = [] }) => (
   <LocationParams>
     {({ locationParams, setLocationParams }) => {
       const { first, last } = locationParams;
@@ -14,7 +14,7 @@ const ShowItems = ({ count = ["10", "20", "50"] }) => (
             показати
           </Text>
           <Box ml="1">
-            {count.map((item, key) => (
+            {list.map((item, key) => (
               <Button
                 key={key}
                 variant="none"
@@ -32,7 +32,9 @@ const ShowItems = ({ count = ["10", "20", "50"] }) => (
                   fontSize="12"
                   fontWeight="700"
                   color={
-                    item === first || item === last || (!key && !last && !first)
+                    item === parseInt(first) ||
+                    item === parseInt(last) ||
+                    (!key && !last && !first)
                       ? "silverCity"
                       : "blueberrySoda"
                   }

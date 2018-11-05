@@ -4,13 +4,14 @@ import { LocationParams } from "@ehealth/components";
 import { TriangleLeftIcon, TriangleRightIcon } from "@ehealth/icons";
 import Button from "./Button";
 import system from "system-components/emotion";
+import { ITEMS_PER_PAGE } from "../constants/pagination";
 
 const Pagination = ({
   endCursor,
   hasNextPage,
   hasPreviousPage,
   startCursor,
-  itemsCountDefault = 10
+  itemsCountDefault = ITEMS_PER_PAGE[0]
 }) => (
   <LocationParams>
     {({ locationParams, setLocationParams }) => {

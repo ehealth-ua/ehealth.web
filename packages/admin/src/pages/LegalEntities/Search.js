@@ -21,6 +21,7 @@ import Button, { ResetButton } from "../../components/Button";
 
 import SearchLegalEntitiesQuery from "../../graphql/SearchLegalEntitiesQuery.graphql";
 import SettlementsQuery from "../../graphql/SettlementsQuery.graphql";
+import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 const legalEntityStatus = Object.entries(STATUSES.LEGAL_ENTITY_STATUS).map(
   ([key, value]) => ({
@@ -68,14 +69,13 @@ const Search = ({ uri }) => (
           area: isEmpty(settlement) ? undefined : settlement.area,
           type: isEmpty(type) ? undefined : type.key
         };
-        const itemsCountDefault = 10;
         return (
           <Query
             query={SearchLegalEntitiesQuery}
             fetchPolicy="network-only"
             variables={{
               first:
-                isEmpty(first) && isEmpty(last) ? itemsCountDefault : undefined,
+                isEmpty(first) && isEmpty(last) ? ITEMS_PER_PAGE[0] : undefined,
               ...locationParams,
               filter: !isEmpty(locationParams.filter)
                 ? filteredParams
