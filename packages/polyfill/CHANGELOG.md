@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.120.0"></a>
+# [0.120.0](https://github.com/edenlabllc/ehealth.web/compare/v0.119.0...v0.120.0) (2018-11-05)
+
+
+### Bug Fixes
+
+* **polyfill:** change dependencies ([2d0f000](https://github.com/edenlabllc/ehealth.web/commit/2d0f000))
+
+
+
+
+
 <a name="0.119.0"></a>
 # [0.119.0](https://github.com/edenlabllc/ehealth.web/compare/v0.118.0...v0.119.0) (2018-11-05)
 

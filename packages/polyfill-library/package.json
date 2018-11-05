@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/polyfill-library",
-  "version": "0.0.0",
+  "version": "0.120.0",
   "description": "A polyfill combinator",
   "main": "lib/index.js",
   "scripts": {
@@ -36,11 +36,11 @@
     "useragent": "^2.1.12"
   },
   "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-preset-es2015": "^6.1.18",
     "Base64": "^1.0.0",
     "array.of": "^0.1.1",
     "audio-context-polyfill": "^1.0.0",
+    "babel-core": "^6.23.1",
+    "babel-preset-es2015": "^6.1.18",
     "diff": "1.4.0",
     "eslint": "^4.9.0",
     "event-source-polyfill": "^0.0.9",
