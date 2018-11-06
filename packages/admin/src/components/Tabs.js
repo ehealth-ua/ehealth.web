@@ -26,8 +26,6 @@ import { SmallChevronLeftIcon, SmallChevronRightIcon } from "@ehealth/icons";
  * </Tabs.Content>
 */
 
-const PADDING_X = 45;
-
 const NavItem = ({ to, ...props }) => (
   <Match path={to}>
     {({ match }) => (
@@ -41,83 +39,109 @@ const NavItem = ({ to, ...props }) => (
 class Nav extends React.Component {
   state = {
     withControls: false,
-    leftActive: false,
-    rightActive: true
+    isLeftArrowActive: true,
+    isRightArrowActive: true,
+    containerLeftX: 0,
+    containerRightX: 0
   };
 
   wrapper = React.createRef();
   container = React.createRef();
 
-  componentDidMount() {
-    this.container.current.scrollWidth > this.wrapper.current.scrollWidth &&
-      this.setState({
-        withControls: true
-      });
+  async componentDidMount() {
+    await this.setControlsObservers();
 
-    this.setChildOpacity();
+    this.setState({
+      containerRightX: await this.container.current.scrollWidth
+    });
   }
 
   render() {
-    const { withControls, leftActive, rightActive } = this.state;
+    const { withControls, isLeftArrowActive, isRightArrowActive } = this.state;
     return (
-      <Wrapper innerRef={this.wrapper}>
+      <Controls>
         {withControls && (
           <Arrow
-            onClick={() => this.handleArrowClick(-50)}
-            disabled={!leftActive}
+            onClick={() => this.handleArrowClick(50)}
+            disabled={!isLeftArrowActive}
           >
             <SmallChevronLeftIcon />
           </Arrow>
         )}
-        <Container innerRef={this.container}>{this.props.children}</Container>
+        <Wrapper innerRef={this.wrapper}>
+          <Container
+            style={{ left: `${this.state.containerLeftX}px` }}
+            innerRef={this.container}
+          >
+            {this.props.children}
+          </Container>
+        </Wrapper>
         {withControls && (
           <Arrow
             right
-            onClick={() => this.handleArrowClick(50)}
-            disabled={!rightActive}
+            onClick={() => this.handleArrowClick(-50)}
+            disabled={!isRightArrowActive}
           >
             <SmallChevronRightIcon />
           </Arrow>
         )}
-      </Wrapper>
+      </Controls>
     );
   }
 
-  handleArrowClick(step = 0) {
-    this.container.current.scrollLeft += step;
+  createObserver(stateKey, childElement) {
+    const observer = new IntersectionObserver(
+      children => {
+        this.setState({
+          [stateKey]:
+            children[0].intersectionRatio < 1 &&
+            children[0].boundingClientRect.y > 0
+        });
+      },
+      {
+        threshold: 1
+      }
+    );
 
-    this.setState({
-      leftActive: !!this.container.current.scrollLeft,
-      rightActive:
-        this.container.current.scrollWidth -
-          this.container.current.scrollLeft +
-          PADDING_X * 2 !==
-        this.wrapper.current.scrollWidth
-    });
-
-    this.setChildOpacity();
+    observer.observe(childElement);
   }
 
-  setChildOpacity() {
-    const { scrollWidth } = this.wrapper.current;
-    const { scrollLeft } = this.container.current;
+  async setControlsObservers() {
+    const { children } = await this.container.current;
+    const lastNavItem = children.length - 1;
 
-    const visibleAreaEnd = scrollWidth - PADDING_X + scrollLeft;
+    this.createObserver("withControls", this.container.current);
+    this.createObserver("isLeftArrowActive", children[0]);
+    this.createObserver("isRightArrowActive", children[lastNavItem]);
+  }
 
-    [...this.container.current.children].map(child => {
-      if (
-        child.offsetLeft >= scrollLeft &&
-        child.offsetLeft + child.offsetWidth <= visibleAreaEnd
-      ) {
-        [...child.children].find(item => item.tagName === "A").style.opacity =
-          "1";
-      } else {
-        [...child.children].find(item => item.tagName === "A").style.opacity =
-          "0.5";
-      }
+  handleArrowClick(step = 0) {
+    const { clientWidth: wrapperWidth } = this.wrapper.current;
+    const { containerLeftX, containerRightX } = this.state;
+
+    let nextStep;
+    if (step < 0) {
+      nextStep =
+        containerRightX + step < wrapperWidth
+          ? wrapperWidth - containerRightX
+          : step;
+    } else {
+      nextStep = containerLeftX + step > 0 ? -containerLeftX : step;
+    }
+
+    this.setState({
+      containerLeftX: containerLeftX + nextStep,
+      containerRightX: containerRightX + nextStep
     });
   }
 }
+
+const Controls = styled.div`
+  position: relative;
+  padding: 5px 45px 0;
+  background-color: #fafbfc;
+  border: 1px solid #dfe2e5;
+`;
 
 const Arrow = styled.button`
   position: absolute;
@@ -138,24 +162,20 @@ const Arrow = styled.button`
 `;
 
 const Wrapper = styled.div`
-  position: relative;
   display: flex;
-  background-color: #fafbfc;
-  border: 1px solid #dfe2e5;
-  padding: 5px ${PADDING_X}px 0;
+  overflow: hidden;
+  margin-bottom: -1px;
 `;
 
 const Container = styled.ul`
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
   list-style: none;
-  margin-bottom: -1px;
   font-size: 14px;
-  overflow: hidden;
 `;
 
 const TabItem = styled.li`
-  margin-bottom: -1px;
   background-color: ${ifProp("active", "#fff")};
   border: 1px solid ${ifProp("active", "#dfe2e5", "transparent")};
   border-bottom: 0;
