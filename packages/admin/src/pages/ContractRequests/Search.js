@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
+import isEmpty from "lodash/isEmpty";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
@@ -35,14 +36,23 @@ const Search = ({ uri }) => (
         const {
           filter: { status = {} } = {},
           filter,
-          searchRequest = ""
+          searchRequest = "",
+          date: { startFrom, startTo, endFrom, endTo } = {}
         } = locationParams;
 
         const edrpouReg = new RegExp(EDRPOU_PATTERN);
         const edrpouTest = edrpouReg.test(searchRequest);
-        const contractRequest = edrpouTest
-          ? { edrpou: searchRequest }
-          : { contractNumber: searchRequest };
+        const contractRequest =
+          !isEmpty(searchRequest) &&
+          (edrpouTest
+            ? { contractorLegalEntityEdrpou: searchRequest }
+            : { contractNumber: searchRequest });
+
+        const startDate = startFrom
+          ? `${startFrom}/${startTo || ".."}`
+          : undefined;
+
+        const endDate = endFrom ? `${endFrom}/${endTo || ".."}` : undefined;
 
         return (
           <>
@@ -52,9 +62,12 @@ const Search = ({ uri }) => (
                 ...locationParams,
                 filter: {
                   ...filter,
+                  startDate,
+                  endDate,
                   ...contractRequest,
                   status: status.name
-                }
+                },
+                first: 10
               }}
             >
               {({
@@ -171,13 +184,13 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
 
       <Box px={1} width={2 / 6}>
         <Field.RangePicker
-          rangeNames={["filter.startDateFrom", "filter.startDateTo"]}
+          rangeNames={["date.startFrom", "date.startTo"]}
           label="Початок дії договору"
         />
       </Box>
       <Box px={1} width={2 / 6}>
         <Field.RangePicker
-          rangeNames={["filter.endDateFrom", "filter.endDateTo"]}
+          rangeNames={["date.endFrom", "date.endTo"]}
           label="Кінець дії договору"
         />
       </Box>
@@ -189,8 +202,17 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
       <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
         <ResetButton
           onClick={() => {
-            onSubmit({ ...initialValues, filter: null, searchRequest: null });
-            refetch({ filter: undefined, searchRequest: undefined });
+            onSubmit({
+              ...initialValues,
+              filter: null,
+              searchRequest: null,
+              date: null
+            });
+            refetch({
+              filter: undefined,
+              searchRequest: undefined,
+              date: undefined
+            });
           }}
         >
           Скинути пошук
