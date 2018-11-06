@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.120.1"></a>
+## [0.120.1](https://github.com/edenlabllc/ehealth.web/compare/v0.120.0...v0.120.1) (2018-11-06)
+
+
+### Bug Fixes
+
+* **polyfill-library:** fix postinstall command ([cff3c34](https://github.com/edenlabllc/ehealth.web/commit/cff3c34))
+* add polyfill-library as dependency in package-lock ([f525977](https://github.com/edenlabllc/ehealth.web/commit/f525977))
+* **polyfill-library:** fix prettier bug ([2e33a14](https://github.com/edenlabllc/ehealth.web/commit/2e33a14))
+* rebuild package-lock ([bcd2202](https://github.com/edenlabllc/ehealth.web/commit/bcd2202))
+
+
+
+
+
 <a name="0.120.0"></a>
 # [0.120.0](https://github.com/edenlabllc/ehealth.web/compare/v0.119.0...v0.120.0) (2018-11-05)
 

@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/polyfill",
-  "version": "0.120.0",
+  "version": "0.120.1",
   "private": true,
   "description": "",
   "main": "server.js",
