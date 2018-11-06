@@ -1,1 +1,1 @@
-"isNaN" in Number;
+'isNaN' in Number

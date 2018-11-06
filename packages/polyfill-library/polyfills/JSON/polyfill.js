@@ -1,38 +1,26 @@
 /*! JSON v3.3.2 | http://bestiejs.github.io/json3 | Copyright 2012-2014, Kit Cambridge | http://kit.mit-license.org */
-(function() {
+;(function () {
   // Detect the `define` function exposed by asynchronous module loaders. The
   // strict `define` check is necessary for compatibility with `r.js`.
   var isLoader = typeof define === "function" && define.amd;
 
   // A set of types used to distinguish objects from primitives.
   var objectTypes = {
-    function: true,
-    object: true
+    "function": true,
+    "object": true
   };
 
   // Detect the `exports` object exposed by CommonJS implementations.
-  var freeExports =
-    objectTypes[typeof exports] && exports && !exports.nodeType && exports;
+  var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
 
   // Use the `global` object exposed by Node (including Browserify via
   // `insert-module-globals`), Narwhal, and Ringo as the default context,
   // and the `window` object in browsers. Rhino exports a `global` function
   // instead.
-  var root = (objectTypes[typeof window] && window) || this,
-    freeGlobal =
-      freeExports &&
-      objectTypes[typeof module] &&
-      module &&
-      !module.nodeType &&
-      typeof global == "object" &&
-      global;
+  var root = objectTypes[typeof window] && window || this,
+      freeGlobal = freeExports && objectTypes[typeof module] && module && !module.nodeType && typeof global == "object" && global;
 
-  if (
-    freeGlobal &&
-    (freeGlobal["global"] === freeGlobal ||
-      freeGlobal["window"] === freeGlobal ||
-      freeGlobal["self"] === freeGlobal)
-  ) {
+  if (freeGlobal && (freeGlobal["global"] === freeGlobal || freeGlobal["window"] === freeGlobal || freeGlobal["self"] === freeGlobal)) {
     root = freeGlobal;
   }
 
@@ -44,13 +32,13 @@
 
     // Native constructor aliases.
     var Number = context["Number"] || root["Number"],
-      String = context["String"] || root["String"],
-      Object = context["Object"] || root["Object"],
-      Date = context["Date"] || root["Date"],
-      SyntaxError = context["SyntaxError"] || root["SyntaxError"],
-      TypeError = context["TypeError"] || root["TypeError"],
-      Math = context["Math"] || root["Math"],
-      nativeJSON = context["JSON"] || root["JSON"];
+        String = context["String"] || root["String"],
+        Object = context["Object"] || root["Object"],
+        Date = context["Date"] || root["Date"],
+        SyntaxError = context["SyntaxError"] || root["SyntaxError"],
+        TypeError = context["TypeError"] || root["TypeError"],
+        Math = context["Math"] || root["Math"],
+        nativeJSON = context["JSON"] || root["JSON"];
 
     // Delegate to the native `stringify` and `parse` implementations.
     if (typeof nativeJSON == "object" && nativeJSON) {
@@ -60,27 +48,19 @@
 
     // Convenience aliases.
     var objectProto = Object.prototype,
-      getClass = objectProto.toString,
-      isProperty,
-      forEach,
-      undef;
+        getClass = objectProto.toString,
+        isProperty, forEach, undef;
 
     // Test the `Date#getUTC*` methods. Based on work by @Yaffle.
     var isExtended = new Date(-3509827334573292);
     try {
       // The `getUTCFullYear`, `Month`, and `Date` methods return nonsensical
       // results for certain dates in Opera >= 10.53.
-      isExtended =
-        isExtended.getUTCFullYear() == -109252 &&
-        isExtended.getUTCMonth() === 0 &&
-        isExtended.getUTCDate() === 1 &&
+      isExtended = isExtended.getUTCFullYear() == -109252 && isExtended.getUTCMonth() === 0 && isExtended.getUTCDate() === 1 &&
         // Safari < 2.0.2 stores the internal millisecond time value correctly,
         // but clips the values returned by the date methods to the range of
         // signed 32-bit integers ([-2 ** 31, 2 ** 31 - 1]).
-        isExtended.getUTCHours() == 10 &&
-        isExtended.getUTCMinutes() == 37 &&
-        isExtended.getUTCSeconds() == 6 &&
-        isExtended.getUTCMilliseconds() == 708;
+        isExtended.getUTCHours() == 10 && isExtended.getUTCMinutes() == 37 && isExtended.getUTCSeconds() == 6 && isExtended.getUTCMilliseconds() == 708;
     } catch (exception) {}
 
     // Internal: Determines whether the native `JSON.stringify` and `parse`
@@ -100,15 +80,13 @@
         // supported.
         isSupported = has("json-stringify") && has("json-parse");
       } else {
-        var value,
-          serialized = '{"a":[1,true,false,null,"\\u0000\\b\\n\\f\\r\\t"]}';
+        var value, serialized = '{"a":[1,true,false,null,"\\u0000\\b\\n\\f\\r\\t"]}';
         // Test `JSON.stringify`.
         if (name == "json-stringify") {
-          var stringify = exports.stringify,
-            stringifySupported = typeof stringify == "function" && isExtended;
+          var stringify = exports.stringify, stringifySupported = typeof stringify == "function" && isExtended;
           if (stringifySupported) {
             // A test function object with a custom `toJSON` method.
-            (value = function() {
+            (value = function () {
               return 1;
             }).toJSON = value;
             try {
@@ -150,23 +128,18 @@
                 stringify([undef, getClass, null]) == "[null,null,null]" &&
                 // Simple serialization test. FF 3.1b1 uses Unicode escape sequences
                 // where character escape codes are expected (e.g., `\b` => `\u0008`).
-                stringify({
-                  a: [value, true, false, null, "\x00\b\n\f\r\t"]
-                }) == serialized &&
+                stringify({ "a": [value, true, false, null, "\x00\b\n\f\r\t"] }) == serialized &&
                 // FF 3.1b1 and b2 ignore the `filter` and `width` arguments.
                 stringify(null, value) === "1" &&
                 stringify([1, 2], null, 1) == "[\n 1,\n 2\n]" &&
                 // JSON 2, Prototype <= 1.7, and older WebKit builds incorrectly
                 // serialize extended years.
-                stringify(new Date(-8.64e15)) ==
-                  '"-271821-04-20T00:00:00.000Z"' &&
+                stringify(new Date(-8.64e15)) == '"-271821-04-20T00:00:00.000Z"' &&
                 // The milliseconds are optional in ES 5, but required in 5.1.
-                stringify(new Date(8.64e15)) ==
-                  '"+275760-09-13T00:00:00.000Z"' &&
+                stringify(new Date(8.64e15)) == '"+275760-09-13T00:00:00.000Z"' &&
                 // Firefox <= 11.0 incorrectly serializes years prior to 0 as negative
                 // four-digit years instead of six-digit years. Credits: @Yaffle.
-                stringify(new Date(-621987552e5)) ==
-                  '"-000001-01-01T00:00:00.000Z"' &&
+                stringify(new Date(-621987552e5)) == '"-000001-01-01T00:00:00.000Z"' &&
                 // Safari <= 5.1.5 and Opera >= 10.53 incorrectly serialize millisecond
                 // values less than 1000. Credits: @Yaffle.
                 stringify(new Date(-1)) == '"1969-12-31T23:59:59.999Z"';
@@ -187,8 +160,7 @@
               if (parse("0") === 0 && !parse(false)) {
                 // Simple parsing test.
                 value = parse(serialized);
-                var parseSupported =
-                  value["a"].length == 5 && value["a"][0] === 1;
+                var parseSupported = value["a"].length == 5 && value["a"][0] === 1;
                 if (parseSupported) {
                   try {
                     // Safari <= 5.1.2 and FF 3.1b1 allow unescaped tabs in strings.
@@ -219,17 +191,17 @@
           isSupported = parseSupported;
         }
       }
-      return (has[name] = !!isSupported);
+      return has[name] = !!isSupported;
     }
 
     if (!has("json")) {
       // Common `[[Class]]` name aliases.
       var functionClass = "[object Function]",
-        dateClass = "[object Date]",
-        numberClass = "[object Number]",
-        stringClass = "[object String]",
-        arrayClass = "[object Array]",
-        booleanClass = "[object Boolean]";
+          dateClass = "[object Date]",
+          numberClass = "[object Number]",
+          stringClass = "[object String]",
+          arrayClass = "[object Array]",
+          booleanClass = "[object Boolean]";
 
       // Detect incomplete support for accessing string characters by index.
       var charIndexBuggy = has("bug-string-char-index");
@@ -242,40 +214,28 @@
         var Months = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
         // Internal: Calculates the number of days between the Unix epoch and the
         // first day of the given month.
-        var getDay = function(year, month) {
-          return (
-            Months[month] +
-            365 * (year - 1970) +
-            floor((year - 1969 + (month = +(month > 1))) / 4) -
-            floor((year - 1901 + month) / 100) +
-            floor((year - 1601 + month) / 400)
-          );
+        var getDay = function (year, month) {
+          return Months[month] + 365 * (year - 1970) + floor((year - 1969 + (month = +(month > 1))) / 4) - floor((year - 1901 + month) / 100) + floor((year - 1601 + month) / 400);
         };
       }
 
       // Internal: Determines if a property is a direct property of the given
       // object. Delegates to the native `Object#hasOwnProperty` method.
       if (!(isProperty = objectProto.hasOwnProperty)) {
-        isProperty = function(property) {
-          var members = {},
-            constructor;
-          if (
-            ((members.__proto__ = null),
-            (members.__proto__ = {
-              // The *proto* property cannot be set multiple times in recent
-              // versions of Firefox and SeaMonkey.
-              toString: 1
-            }),
-            members).toString != getClass
-          ) {
+        isProperty = function (property) {
+          var members = {}, constructor;
+          if ((members.__proto__ = null, members.__proto__ = {
+            // The *proto* property cannot be set multiple times in recent
+            // versions of Firefox and SeaMonkey.
+            "toString": 1
+          }, members).toString != getClass) {
             // Safari <= 2.0.3 doesn't implement `Object#hasOwnProperty`, but
             // supports the mutable *proto* property.
-            isProperty = function(property) {
+            isProperty = function (property) {
               // Capture and break the object's prototype chain (see section 8.6.2
               // of the ES 5.1 spec). The parenthesized expression prevents an
               // unsafe transformation by the Closure Compiler.
-              var original = this.__proto__,
-                result = property in ((this.__proto__ = null), this);
+              var original = this.__proto__, result = property in (this.__proto__ = null, this);
               // Restore the original prototype chain.
               this.__proto__ = original;
               return result;
@@ -285,12 +245,9 @@
             constructor = members.constructor;
             // Use the `constructor` property to simulate `Object#hasOwnProperty` in
             // other environments.
-            isProperty = function(property) {
+            isProperty = function (property) {
               var parent = (this.constructor || constructor).prototype;
-              return (
-                property in this &&
-                !(property in parent && this[property] === parent[property])
-              );
+              return property in this && !(property in parent && this[property] === parent[property]);
             };
           }
           members = null;
@@ -300,16 +257,13 @@
 
       // Internal: Normalizes the `for...in` iteration algorithm across
       // environments. Each enumerated key is yielded to a `callback` function.
-      forEach = function(object, callback) {
-        var size = 0,
-          Properties,
-          members,
-          property;
+      forEach = function (object, callback) {
+        var size = 0, Properties, members, property;
 
         // Tests for bugs in the current environment's `for...in` algorithm. The
         // `valueOf` property inherits the non-enumerable flag from
         // `Object.prototype` in older versions of IE, Netscape, and Mozilla.
-        (Properties = function() {
+        (Properties = function () {
           this.valueOf = 0;
         }).prototype.valueOf = 0;
 
@@ -326,86 +280,48 @@
         // Normalize the iteration algorithm.
         if (!size) {
           // A list of non-enumerable properties inherited from `Object.prototype`.
-          members = [
-            "valueOf",
-            "toString",
-            "toLocaleString",
-            "propertyIsEnumerable",
-            "isPrototypeOf",
-            "hasOwnProperty",
-            "constructor"
-          ];
+          members = ["valueOf", "toString", "toLocaleString", "propertyIsEnumerable", "isPrototypeOf", "hasOwnProperty", "constructor"];
           // IE <= 8, Mozilla 1.0, and Netscape 6.2 ignore shadowed non-enumerable
           // properties.
-          forEach = function(object, callback) {
-            var isFunction = getClass.call(object) == functionClass,
-              property,
-              length;
-            var hasProperty =
-              (!isFunction &&
-                typeof object.constructor != "function" &&
-                objectTypes[typeof object.hasOwnProperty] &&
-                object.hasOwnProperty) ||
-              isProperty;
+          forEach = function (object, callback) {
+            var isFunction = getClass.call(object) == functionClass, property, length;
+            var hasProperty = !isFunction && typeof object.constructor != "function" && objectTypes[typeof object.hasOwnProperty] && object.hasOwnProperty || isProperty;
             for (property in object) {
               // Gecko <= 1.0 enumerates the `prototype` property of functions under
               // certain conditions; IE does not.
-              if (
-                !(isFunction && property == "prototype") &&
-                hasProperty.call(object, property)
-              ) {
+              if (!(isFunction && property == "prototype") && hasProperty.call(object, property)) {
                 callback(property);
               }
             }
             // Manually invoke the callback for each non-enumerable property.
-            for (
-              length = members.length;
-              (property = members[--length]);
-              hasProperty.call(object, property) && callback(property)
-            );
+            for (length = members.length; property = members[--length]; hasProperty.call(object, property) && callback(property));
           };
         } else if (size == 2) {
           // Safari <= 2.0.4 enumerates shadowed properties twice.
-          forEach = function(object, callback) {
+          forEach = function (object, callback) {
             // Create a set of iterated properties.
-            var members = {},
-              isFunction = getClass.call(object) == functionClass,
-              property;
+            var members = {}, isFunction = getClass.call(object) == functionClass, property;
             for (property in object) {
               // Store each property name to prevent double enumeration. The
               // `prototype` property of functions is not enumerated due to cross-
               // environment inconsistencies.
-              if (
-                !(isFunction && property == "prototype") &&
-                !isProperty.call(members, property) &&
-                (members[property] = 1) &&
-                isProperty.call(object, property)
-              ) {
+              if (!(isFunction && property == "prototype") && !isProperty.call(members, property) && (members[property] = 1) && isProperty.call(object, property)) {
                 callback(property);
               }
             }
           };
         } else {
           // No bugs detected; use the standard `for...in` algorithm.
-          forEach = function(object, callback) {
-            var isFunction = getClass.call(object) == functionClass,
-              property,
-              isConstructor;
+          forEach = function (object, callback) {
+            var isFunction = getClass.call(object) == functionClass, property, isConstructor;
             for (property in object) {
-              if (
-                !(isFunction && property == "prototype") &&
-                isProperty.call(object, property) &&
-                !(isConstructor = property === "constructor")
-              ) {
+              if (!(isFunction && property == "prototype") && isProperty.call(object, property) && !(isConstructor = property === "constructor")) {
                 callback(property);
               }
             }
             // Manually invoke the callback for the `constructor` property due to
             // cross-environment inconsistencies.
-            if (
-              isConstructor ||
-              isProperty.call(object, (property = "constructor"))
-            ) {
+            if (isConstructor || isProperty.call(object, (property = "constructor"))) {
               callback(property);
             }
           };
@@ -434,7 +350,7 @@
         // Internal: Converts `value` into a zero-padded string such that its
         // length is at least equal to `width`. The `width` must be <= 6.
         var leadingZeroes = "000000";
-        var toPaddedString = function(width, value) {
+        var toPaddedString = function (width, value) {
           // The `|| 0` expression is necessary to work around a bug in
           // Opera <= 7.54u2 where `0 == -0`, but `String(-0) !== "0"`.
           return (leadingZeroes + (value || 0)).slice(-width);
@@ -445,31 +361,20 @@
         // their escaped equivalents. This is an implementation of the
         // `Quote(value)` operation defined in ES 5.1 section 15.12.3.
         var unicodePrefix = "\\u00";
-        var quote = function(value) {
-          var result = '"',
-            index = 0,
-            length = value.length,
-            useCharIndex = !charIndexBuggy || length > 10;
-          var symbols =
-            useCharIndex && (charIndexBuggy ? value.split("") : value);
+        var quote = function (value) {
+          var result = '"', index = 0, length = value.length, useCharIndex = !charIndexBuggy || length > 10;
+          var symbols = useCharIndex && (charIndexBuggy ? value.split("") : value);
           for (; index < length; index++) {
             var charCode = value.charCodeAt(index);
             // If the character is a control character, append its Unicode or
             // shorthand escape sequence; otherwise, append the character as-is.
             switch (charCode) {
-              case 8:
-              case 9:
-              case 10:
-              case 12:
-              case 13:
-              case 34:
-              case 92:
+              case 8: case 9: case 10: case 12: case 13: case 34: case 92:
                 result += Escapes[charCode];
                 break;
               default:
                 if (charCode < 32) {
-                  result +=
-                    unicodePrefix + toPaddedString(2, charCode.toString(16));
+                  result += unicodePrefix + toPaddedString(2, charCode.toString(16));
                   break;
                 }
                 result += useCharIndex ? symbols[index] : value.charAt(index);
@@ -480,31 +385,8 @@
 
         // Internal: Recursively serializes an object. Implements the
         // `Str(key, holder)`, `JO(value)`, and `JA(value)` operations.
-        var serialize = function(
-          property,
-          object,
-          callback,
-          properties,
-          whitespace,
-          indentation,
-          stack
-        ) {
-          var value,
-            className,
-            year,
-            month,
-            date,
-            time,
-            hours,
-            minutes,
-            seconds,
-            milliseconds,
-            results,
-            element,
-            index,
-            length,
-            prefix,
-            result;
+        var serialize = function (property, object, callback, properties, whitespace, indentation, stack) {
+          var value, className, year, month, date, time, hours, minutes, seconds, milliseconds, results, element, index, length, prefix, result;
           try {
             // Necessary for host object support.
             value = object[property];
@@ -521,22 +403,14 @@
                   // seconds, and milliseconds if the `getUTC*` methods are
                   // buggy. Adapted from @Yaffle's `date-shim` project.
                   date = floor(value / 864e5);
-                  for (
-                    year = floor(date / 365.2425) + 1970 - 1;
-                    getDay(year + 1, 0) <= date;
-                    year++
-                  );
-                  for (
-                    month = floor((date - getDay(year, 0)) / 30.42);
-                    getDay(year, month + 1) <= date;
-                    month++
-                  );
+                  for (year = floor(date / 365.2425) + 1970 - 1; getDay(year + 1, 0) <= date; year++);
+                  for (month = floor((date - getDay(year, 0)) / 30.42); getDay(year, month + 1) <= date; month++);
                   date = 1 + date - getDay(year, month);
                   // The `time` value specifies the time within the day (see ES
                   // 5.1 section 15.9.1.2). The formula `(A % B + B) % B` is used
                   // to compute `A modulo B`, as the `%` operator does not
                   // correspond to the `modulo` operation for negative numbers.
-                  time = ((value % 864e5) + 864e5) % 864e5;
+                  time = (value % 864e5 + 864e5) % 864e5;
                   // The hours, minutes, seconds, and milliseconds are obtained by
                   // decomposing the time within the day. See section 15.9.1.10.
                   hours = floor(time / 36e5) % 24;
@@ -553,37 +427,17 @@
                   milliseconds = value.getUTCMilliseconds();
                 }
                 // Serialize extended years correctly.
-                value =
-                  (year <= 0 || year >= 1e4
-                    ? (year < 0 ? "-" : "+") +
-                      toPaddedString(6, year < 0 ? -year : year)
-                    : toPaddedString(4, year)) +
-                  "-" +
-                  toPaddedString(2, month + 1) +
-                  "-" +
-                  toPaddedString(2, date) +
+                value = (year <= 0 || year >= 1e4 ? (year < 0 ? "-" : "+") + toPaddedString(6, year < 0 ? -year : year) : toPaddedString(4, year)) +
+                  "-" + toPaddedString(2, month + 1) + "-" + toPaddedString(2, date) +
                   // Months, dates, hours, minutes, and seconds should have two
                   // digits; milliseconds should have three.
-                  "T" +
-                  toPaddedString(2, hours) +
-                  ":" +
-                  toPaddedString(2, minutes) +
-                  ":" +
-                  toPaddedString(2, seconds) +
+                  "T" + toPaddedString(2, hours) + ":" + toPaddedString(2, minutes) + ":" + toPaddedString(2, seconds) +
                   // Milliseconds are optional in ES 5.0, but required in 5.1.
-                  "." +
-                  toPaddedString(3, milliseconds) +
-                  "Z";
+                  "." + toPaddedString(3, milliseconds) + "Z";
               } else {
                 value = null;
               }
-            } else if (
-              typeof value.toJSON == "function" &&
-              ((className != numberClass &&
-                className != stringClass &&
-                className != arrayClass) ||
-                isProperty.call(value, "toJSON"))
-            ) {
+            } else if (typeof value.toJSON == "function" && ((className != numberClass && className != stringClass && className != arrayClass) || isProperty.call(value, "toJSON"))) {
               // Prototype <= 1.6.1 adds non-standard `toJSON` methods to the
               // `Number`, `String`, `Date`, and `Array` prototypes. JSON 3
               // ignores all `toJSON` methods on these objects unless they are
@@ -615,7 +469,7 @@
           if (typeof value == "object") {
             // Check for cyclic structures. This is a linear search; performance
             // is inversely proportional to the number of unique nested objects.
-            for (length = stack.length; length--; ) {
+            for (length = stack.length; length--;) {
               if (stack[length] === value) {
                 // Cyclic structures cannot be serialized by `JSON.stringify`.
                 throw TypeError();
@@ -630,41 +484,16 @@
             if (className == arrayClass) {
               // Recursively serialize array elements.
               for (index = 0, length = value.length; index < length; index++) {
-                element = serialize(
-                  index,
-                  value,
-                  callback,
-                  properties,
-                  whitespace,
-                  indentation,
-                  stack
-                );
+                element = serialize(index, value, callback, properties, whitespace, indentation, stack);
                 results.push(element === undef ? "null" : element);
               }
-              result = results.length
-                ? whitespace
-                  ? "[\n" +
-                    indentation +
-                    results.join(",\n" + indentation) +
-                    "\n" +
-                    prefix +
-                    "]"
-                  : "[" + results.join(",") + "]"
-                : "[]";
+              result = results.length ? (whitespace ? "[\n" + indentation + results.join(",\n" + indentation) + "\n" + prefix + "]" : ("[" + results.join(",") + "]")) : "[]";
             } else {
               // Recursively serialize object members. Members are selected from
               // either a user-specified list of property names, or the object
               // itself.
-              forEach(properties || value, function(property) {
-                var element = serialize(
-                  property,
-                  value,
-                  callback,
-                  properties,
-                  whitespace,
-                  indentation,
-                  stack
-                );
+              forEach(properties || value, function (property) {
+                var element = serialize(property, value, callback, properties, whitespace, indentation, stack);
                 if (element !== undef) {
                   // According to ES 5.1 section 15.12.3: "If `gap` {whitespace}
                   // is not the empty string, let `member` {quote(property) + ":"}
@@ -672,21 +501,10 @@
                   // The "`space` character" refers to the literal space
                   // character, not the `space` {width} argument provided to
                   // `JSON.stringify`.
-                  results.push(
-                    quote(property) + ":" + (whitespace ? " " : "") + element
-                  );
+                  results.push(quote(property) + ":" + (whitespace ? " " : "") + element);
                 }
               });
-              result = results.length
-                ? whitespace
-                  ? "{\n" +
-                    indentation +
-                    results.join(",\n" + indentation) +
-                    "\n" +
-                    prefix +
-                    "}"
-                  : "{" + results.join(",") + "}"
-                : "{}";
+              result = results.length ? (whitespace ? "{\n" + indentation + results.join(",\n" + indentation) + "\n" + prefix + "}" : ("{" + results.join(",") + "}")) : "{}";
             }
             // Remove the object from the traversed object stack.
             stack.pop();
@@ -695,7 +513,7 @@
         };
 
         // Public: `JSON.stringify`. See ES 5.1 section 15.12.3.
-        exports.stringify = function(source, filter, width) {
+        exports.stringify = function (source, filter, width) {
           var whitespace, callback, properties, className;
           if (objectTypes[typeof filter] && filter) {
             if ((className = getClass.call(filter)) == functionClass) {
@@ -703,14 +521,7 @@
             } else if (className == arrayClass) {
               // Convert the property names array into a makeshift set.
               properties = {};
-              for (
-                var index = 0, length = filter.length, value;
-                index < length;
-                value = filter[index++],
-                  ((className = getClass.call(value)),
-                  className == stringClass || className == numberClass) &&
-                    (properties[value] = 1)
-              );
+              for (var index = 0, length = filter.length, value; index < length; value = filter[index++], ((className = getClass.call(value)), className == stringClass || className == numberClass) && (properties[value] = 1));
             }
           }
           if (width) {
@@ -718,11 +529,7 @@
               // Convert the `width` to an integer and create a string containing
               // `width` number of space characters.
               if ((width -= width % 1) > 0) {
-                for (
-                  whitespace = "", width > 10 && (width = 10);
-                  whitespace.length < width;
-                  whitespace += " "
-                );
+                for (whitespace = "", width > 10 && (width = 10); whitespace.length < width; whitespace += " ");
               }
             } else if (className == stringClass) {
               whitespace = width.length <= 10 ? width : width.slice(0, 10);
@@ -731,15 +538,7 @@
           // Opera <= 7.54u2 discards the values associated with empty string keys
           // (`""`) only if they are used directly within an object member list
           // (e.g., `!("" in { "": 1})`).
-          return serialize(
-            "",
-            ((value = {}), (value[""] = source), value),
-            callback,
-            properties,
-            whitespace,
-            "",
-            []
-          );
+          return serialize("", (value = {}, value[""] = source, value), callback, properties, whitespace, "", []);
         };
       }
 
@@ -764,7 +563,7 @@
         var Index, Source;
 
         // Internal: Resets the parser state and throws a `SyntaxError`.
-        var abort = function() {
+        var abort = function () {
           Index = Source = null;
           throw SyntaxError();
         };
@@ -772,31 +571,17 @@
         // Internal: Returns the next token, or `"$"` if the parser has reached
         // the end of the source string. A token may be a string, number, `null`
         // literal, or Boolean literal.
-        var lex = function() {
-          var source = Source,
-            length = source.length,
-            value,
-            begin,
-            position,
-            isSigned,
-            charCode;
+        var lex = function () {
+          var source = Source, length = source.length, value, begin, position, isSigned, charCode;
           while (Index < length) {
             charCode = source.charCodeAt(Index);
             switch (charCode) {
-              case 9:
-              case 10:
-              case 13:
-              case 32:
+              case 9: case 10: case 13: case 32:
                 // Skip whitespace tokens, including tabs, carriage returns, line
                 // feeds, and space characters.
                 Index++;
                 break;
-              case 123:
-              case 125:
-              case 91:
-              case 93:
-              case 58:
-              case 44:
+              case 123: case 125: case 91: case 93: case 58: case 44:
                 // Parse a punctuator token (`{`, `}`, `[`, `]`, `:`, or `,`) at
                 // the current position.
                 value = charIndexBuggy ? source.charAt(Index) : source[Index];
@@ -807,7 +592,7 @@
                 // begin parsing the string. String tokens are prefixed with the
                 // sentinel `@` character to distinguish them from punctuators and
                 // end-of-string tokens.
-                for (value = "@", Index++; Index < length; ) {
+                for (value = "@", Index++; Index < length;) {
                   charCode = source.charCodeAt(Index);
                   if (charCode < 32) {
                     // Unescaped ASCII control characters (those with a code unit
@@ -819,14 +604,7 @@
                     // escape sequence.
                     charCode = source.charCodeAt(++Index);
                     switch (charCode) {
-                      case 92:
-                      case 34:
-                      case 47:
-                      case 98:
-                      case 116:
-                      case 110:
-                      case 102:
-                      case 114:
+                      case 92: case 34: case 47: case 98: case 116: case 110: case 102: case 114:
                         // Revive escaped control characters.
                         value += Unescapes[charCode];
                         Index++;
@@ -840,21 +618,13 @@
                           charCode = source.charCodeAt(Index);
                           // A valid sequence comprises four hexdigits (case-
                           // insensitive) that form a single hexadecimal value.
-                          if (
-                            !(
-                              (charCode >= 48 && charCode <= 57) ||
-                              (charCode >= 97 && charCode <= 102) ||
-                              (charCode >= 65 && charCode <= 70)
-                            )
-                          ) {
+                          if (!(charCode >= 48 && charCode <= 57 || charCode >= 97 && charCode <= 102 || charCode >= 65 && charCode <= 70)) {
                             // Invalid Unicode escape sequence.
                             abort();
                           }
                         }
                         // Revive the escaped character.
-                        value += fromCharCode(
-                          "0x" + source.slice(begin, Index)
-                        );
+                        value += fromCharCode("0x" + source.slice(begin, Index));
                         break;
                       default:
                         // Invalid escape sequence.
@@ -894,35 +664,19 @@
                 // Parse an integer or floating-point value.
                 if (charCode >= 48 && charCode <= 57) {
                   // Leading zeroes are interpreted as octal literals.
-                  if (
-                    charCode == 48 &&
-                    ((charCode = source.charCodeAt(Index + 1)),
-                    charCode >= 48 && charCode <= 57)
-                  ) {
+                  if (charCode == 48 && ((charCode = source.charCodeAt(Index + 1)), charCode >= 48 && charCode <= 57)) {
                     // Illegal octal literal.
                     abort();
                   }
                   isSigned = false;
                   // Parse the integer component.
-                  for (
-                    ;
-                    Index < length &&
-                    ((charCode = source.charCodeAt(Index)),
-                    charCode >= 48 && charCode <= 57);
-                    Index++
-                  );
+                  for (; Index < length && ((charCode = source.charCodeAt(Index)), charCode >= 48 && charCode <= 57); Index++);
                   // Floats cannot contain a leading decimal point; however, this
                   // case is already accounted for by the parser.
                   if (source.charCodeAt(Index) == 46) {
                     position = ++Index;
                     // Parse the decimal component.
-                    for (
-                      ;
-                      position < length &&
-                      ((charCode = source.charCodeAt(position)),
-                      charCode >= 48 && charCode <= 57);
-                      position++
-                    );
+                    for (; position < length && ((charCode = source.charCodeAt(position)), charCode >= 48 && charCode <= 57); position++);
                     if (position == Index) {
                       // Illegal trailing decimal.
                       abort();
@@ -940,13 +694,7 @@
                       Index++;
                     }
                     // Parse the exponential component.
-                    for (
-                      position = Index;
-                      position < length &&
-                      ((charCode = source.charCodeAt(position)),
-                      charCode >= 48 && charCode <= 57);
-                      position++
-                    );
+                    for (position = Index; position < length && ((charCode = source.charCodeAt(position)), charCode >= 48 && charCode <= 57); position++);
                     if (position == Index) {
                       // Illegal empty exponent.
                       abort();
@@ -981,7 +729,7 @@
         };
 
         // Internal: Parses a JSON `value` token.
-        var get = function(value) {
+        var get = function (value) {
           var results, hasMembers;
           if (value == "$") {
             // Unexpected end of input.
@@ -996,7 +744,7 @@
             if (value == "[") {
               // Parses a JSON array, returning a new JavaScript array.
               results = [];
-              for (; ; hasMembers || (hasMembers = true)) {
+              for (;; hasMembers || (hasMembers = true)) {
                 value = lex();
                 // A closing square bracket marks the end of the array literal.
                 if (value == "]") {
@@ -1027,7 +775,7 @@
             } else if (value == "{") {
               // Parses a JSON object, returning a new JavaScript object.
               results = {};
-              for (; ; hasMembers || (hasMembers = true)) {
+              for (;; hasMembers || (hasMembers = true)) {
                 value = lex();
                 // A closing curly brace marks the end of the object literal.
                 if (value == "}") {
@@ -1050,12 +798,7 @@
                 // Leading commas are not permitted, object property names must be
                 // double-quoted strings, and a `:` must separate each property
                 // name and value.
-                if (
-                  value == "," ||
-                  typeof value != "string" ||
-                  (charIndexBuggy ? value.charAt(0) : value[0]) != "@" ||
-                  lex() != ":"
-                ) {
+                if (value == "," || typeof value != "string" || (charIndexBuggy ? value.charAt(0) : value[0]) != "@" || lex() != ":") {
                   abort();
                 }
                 results[value.slice(1)] = get(lex());
@@ -1069,7 +812,7 @@
         };
 
         // Internal: Updates a traversed object member.
-        var update = function(source, property, callback) {
+        var update = function (source, property, callback) {
           var element = walk(source, property, callback);
           if (element === undef) {
             delete source[property];
@@ -1081,19 +824,18 @@
         // Internal: Recursively traverses a parsed JSON object, invoking the
         // `callback` function for each value. This is an implementation of the
         // `Walk(holder, name)` operation defined in ES 5.1 section 15.12.2.
-        var walk = function(source, property, callback) {
-          var value = source[property],
-            length;
+        var walk = function (source, property, callback) {
+          var value = source[property], length;
           if (typeof value == "object" && value) {
             // `forEach` can't be used to traverse an array in Opera <= 8.54
             // because its `Object#hasOwnProperty` implementation returns `false`
             // for array indices (e.g., `![1, 2, 3].hasOwnProperty("0")`).
             if (getClass.call(value) == arrayClass) {
-              for (length = value.length; length--; ) {
+              for (length = value.length; length--;) {
                 update(value, length, callback);
               }
             } else {
-              forEach(value, function(property) {
+              forEach(value, function (property) {
                 update(value, property, callback);
               });
             }
@@ -1102,7 +844,7 @@
         };
 
         // Public: `JSON.parse`. See ES 5.1 section 15.12.2.
-        exports.parse = function(source, callback) {
+        exports.parse = function (source, callback) {
           var result, value;
           Index = 0;
           Source = "" + source;
@@ -1113,9 +855,7 @@
           }
           // Reset the parser state.
           Index = Source = null;
-          return callback && getClass.call(callback) == functionClass
-            ? walk(((value = {}), (value[""] = result), value), "", callback)
-            : result;
+          return callback && getClass.call(callback) == functionClass ? walk((value = {}, value[""] = result, value), "", callback) : result;
         };
       }
     }
@@ -1130,36 +870,33 @@
   } else {
     // Export for web browsers and JavaScript engines.
     var nativeJSON = root.JSON,
-      previousJSON = root["JSON3"],
-      isRestored = false;
+        previousJSON = root["JSON3"],
+        isRestored = false;
 
-    var JSON3 = runInContext(
-      root,
-      (root["JSON3"] = {
-        // Public: Restores the original value of the global `JSON` object and
-        // returns a reference to the `JSON3` object.
-        noConflict: function() {
-          if (!isRestored) {
-            isRestored = true;
-            root.JSON = nativeJSON;
-            root["JSON3"] = previousJSON;
-            nativeJSON = previousJSON = null;
-          }
-          return JSON3;
+    var JSON3 = runInContext(root, (root["JSON3"] = {
+      // Public: Restores the original value of the global `JSON` object and
+      // returns a reference to the `JSON3` object.
+      "noConflict": function () {
+        if (!isRestored) {
+          isRestored = true;
+          root.JSON = nativeJSON;
+          root["JSON3"] = previousJSON;
+          nativeJSON = previousJSON = null;
         }
-      })
-    );
+        return JSON3;
+      }
+    }));
 
     root.JSON = {
-      parse: JSON3.parse,
-      stringify: JSON3.stringify
+      "parse": JSON3.parse,
+      "stringify": JSON3.stringify
     };
   }
 
   // Export for asynchronous module loaders.
   if (isLoader) {
-    define(function() {
+    define(function () {
       return JSON3;
     });
   }
-}.call(this));
+}).call(this);

@@ -1,1 +1,1 @@
-"cosh" in Math;
+'cosh' in Math

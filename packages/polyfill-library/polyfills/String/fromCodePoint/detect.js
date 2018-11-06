@@ -1,1 +1,1 @@
-"fromCodePoint" in String && String.fromCodePoint.length === 1;
+'fromCodePoint' in String && String.fromCodePoint.length === 1

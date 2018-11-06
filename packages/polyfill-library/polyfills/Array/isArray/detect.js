@@ -1,1 +1,1 @@
-"isArray" in Array;
+'isArray' in Array

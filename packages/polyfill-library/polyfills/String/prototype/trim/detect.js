@@ -1,1 +1,1 @@
-"trim" in String.prototype;
+'trim' in String.prototype

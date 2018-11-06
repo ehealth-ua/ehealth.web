@@ -1,1 +1,1 @@
-"hypot" in Math;
+'hypot' in Math

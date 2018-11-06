@@ -1,4 +1,2 @@
 /* global Symbol */
-Object.defineProperty(Symbol, "isConcatSpreadable", {
-  value: Symbol("isConcatSpreadable")
-});
+Object.defineProperty(Symbol, 'isConcatSpreadable', { value: Symbol('isConcatSpreadable') });

@@ -1,1 +1,1 @@
-"getOwnPropertyNames" in Object;
+'getOwnPropertyNames' in Object

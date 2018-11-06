@@ -1,1 +1,1 @@
-"console" in this && "time" in this.console;
+'console' in this && 'time' in this.console

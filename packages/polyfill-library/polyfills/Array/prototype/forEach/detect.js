@@ -1,1 +1,1 @@
-"forEach" in Array.prototype;
+'forEach' in Array.prototype

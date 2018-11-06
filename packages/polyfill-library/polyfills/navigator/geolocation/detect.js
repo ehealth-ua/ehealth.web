@@ -1,1 +1,1 @@
-"navigator" in this && "geolocation" in this.navigator;
+'navigator' in this && 'geolocation' in this.navigator

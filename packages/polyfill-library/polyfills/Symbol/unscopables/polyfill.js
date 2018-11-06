@@ -1,2 +1,2 @@
 /* global Symbol */
-Object.defineProperty(Symbol, "unscopables", { value: Symbol("unscopables") });
+Object.defineProperty(Symbol, 'unscopables', { value: Symbol('unscopables') });

@@ -1,1 +1,1 @@
-"endsWith" in String.prototype;
+'endsWith' in String.prototype

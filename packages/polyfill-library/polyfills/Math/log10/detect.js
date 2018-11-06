@@ -1,1 +1,1 @@
-"log10" in Math;
+'log10' in Math

@@ -14,10 +14,9 @@
 | Object        | Return argument.                                                                                                                   |
 |----------------------------------------------------------------------------------------------------------------------------------------------------|
 */
-function ToObject(argument) {
-  // eslint-disable-line no-unused-vars
-  if (argument === null || argument === undefined) {
-    throw TypeError();
-  }
+function ToObject(argument) { // eslint-disable-line no-unused-vars
+	if (argument === null || argument === undefined) {
+		throw TypeError();
+	}
   return Object(argument);
 }

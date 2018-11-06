@@ -1,1 +1,1 @@
-"MIN_SAFE_INTEGER" in Number;
+'MIN_SAFE_INTEGER' in Number

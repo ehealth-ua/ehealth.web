@@ -1,1 +1,1 @@
-"isSafeInteger" in Number;
+'isSafeInteger' in Number

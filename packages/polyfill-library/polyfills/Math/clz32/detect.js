@@ -1,1 +1,1 @@
-"clz32" in Math;
+'clz32' in Math

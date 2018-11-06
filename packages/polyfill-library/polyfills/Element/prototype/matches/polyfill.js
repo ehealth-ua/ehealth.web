@@ -1,18 +1,12 @@
-Element.prototype.matches =
-  Element.prototype.webkitMatchesSelector ||
-  Element.prototype.oMatchesSelector ||
-  Element.prototype.msMatchesSelector ||
-  Element.prototype.mozMatchesSelector ||
-  function matches(selector) {
-    var element = this;
-    var elements = (element.document || element.ownerDocument).querySelectorAll(
-      selector
-    );
-    var index = 0;
+Element.prototype.matches = Element.prototype.webkitMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.mozMatchesSelector || function matches(selector) {
 
-    while (elements[index] && elements[index] !== element) {
-      ++index;
-    }
+	var element = this;
+	var elements = (element.document || element.ownerDocument).querySelectorAll(selector);
+	var index = 0;
 
-    return !!elements[index];
-  };
+	while (elements[index] && elements[index] !== element) {
+		++index;
+	}
+
+	return !!elements[index];
+};

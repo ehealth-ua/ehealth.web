@@ -1,1 +1,1 @@
-"Element" in this && "after" in Element.prototype;
+'Element' in this && 'after' in Element.prototype

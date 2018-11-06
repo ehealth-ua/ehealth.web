@@ -1,1 +1,1 @@
-"Symbol" in this && "split" in this.Symbol;
+'Symbol' in this && 'split' in this.Symbol

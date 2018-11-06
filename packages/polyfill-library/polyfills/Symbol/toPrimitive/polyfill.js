@@ -1,2 +1,2 @@
 /* global Symbol */
-Object.defineProperty(Symbol, "toPrimitive", { value: Symbol("toPrimitive") });
+Object.defineProperty(Symbol, 'toPrimitive', { value: Symbol('toPrimitive') });

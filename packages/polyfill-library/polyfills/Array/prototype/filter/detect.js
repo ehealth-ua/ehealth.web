@@ -1,1 +1,1 @@
-"filter" in Array.prototype;
+'filter' in Array.prototype

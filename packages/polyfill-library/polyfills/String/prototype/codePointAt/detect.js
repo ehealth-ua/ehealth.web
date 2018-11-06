@@ -1,1 +1,1 @@
-"codePointAt" in String.prototype;
+'codePointAt' in String.prototype

@@ -1,1 +1,1 @@
-"navigator" in this && "sendBeacon" in navigator;
+'navigator' in this && 'sendBeacon' in navigator

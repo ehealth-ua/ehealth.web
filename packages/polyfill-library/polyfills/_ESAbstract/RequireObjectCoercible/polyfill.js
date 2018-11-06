@@ -14,10 +14,9 @@
 | Object        | Return argument.                                                                                                                   |
 |----------------------------------------------------------------------------------------------------------------------------------------------------|
 */
-function RequireObjectCoercible(argument) {
-  // eslint-disable-line no-unused-vars
-  if (argument === null || argument === undefined) {
-    throw TypeError();
-  }
+function RequireObjectCoercible(argument) { // eslint-disable-line no-unused-vars
+	if (argument === null || argument === undefined) {
+		throw TypeError();
+	}
   return argument;
 }

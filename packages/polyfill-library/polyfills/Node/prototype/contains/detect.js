@@ -1,1 +1,1 @@
-document.contains;
+document.contains

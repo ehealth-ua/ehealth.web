@@ -1,1 +1,1 @@
-"Window" in this;
+'Window' in this

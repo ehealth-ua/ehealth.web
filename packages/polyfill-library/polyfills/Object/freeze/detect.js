@@ -1,1 +1,1 @@
-"freeze" in Object;
+'freeze' in Object

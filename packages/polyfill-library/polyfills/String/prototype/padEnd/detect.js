@@ -1,1 +1,1 @@
-"padEnd" in String.prototype;
+'padEnd' in String.prototype

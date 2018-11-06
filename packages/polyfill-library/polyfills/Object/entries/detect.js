@@ -1,1 +1,1 @@
-"entries" in Object;
+'entries' in Object

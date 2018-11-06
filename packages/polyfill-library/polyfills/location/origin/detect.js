@@ -1,1 +1,1 @@
-"location" in this && "origin" in this.location;
+'location' in this && 'origin' in this.location

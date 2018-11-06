@@ -1,1 +1,1 @@
-"every" in Array.prototype;
+'every' in Array.prototype

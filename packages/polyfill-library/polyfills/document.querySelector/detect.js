@@ -1,1 +1,1 @@
-"document" in this && "querySelector" in this.document;
+'document' in this && 'querySelector' in this.document

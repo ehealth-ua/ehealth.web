@@ -13,7 +13,6 @@
 | Object        | Return true.                                                                               |
 --------------------------------------------------------------------------------------------------------------
 */
-function ToBoolean(argument) {
-  // eslint-disable-line no-unused-vars
-  return Boolean(argument);
+function ToBoolean(argument) { // eslint-disable-line no-unused-vars
+	return Boolean(argument);
 }

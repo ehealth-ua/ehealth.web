@@ -7,45 +7,28 @@
 /*jslint indent: 2, vars: true, plusplus: true */
 /*global setTimeout, clearTimeout */
 
-(function(global) {
+(function (global) {
   "use strict";
 
   var setTimeout = global.setTimeout;
   var clearTimeout = global.clearTimeout;
 
-  var k = function() {};
+  var k = function () {
+  };
 
-  function XHRTransport(
-    xhr,
-    onStartCallback,
-    onProgressCallback,
-    onFinishCallback,
-    thisArg
-  ) {
-    this._internal = new XHRTransportInternal(
-      xhr,
-      onStartCallback,
-      onProgressCallback,
-      onFinishCallback,
-      thisArg
-    );
+  function XHRTransport(xhr, onStartCallback, onProgressCallback, onFinishCallback, thisArg) {
+    this._internal = new XHRTransportInternal(xhr, onStartCallback, onProgressCallback, onFinishCallback, thisArg);
   }
 
-  XHRTransport.prototype.open = function(url, withCredentials) {
+  XHRTransport.prototype.open = function (url, withCredentials) {
     this._internal.open(url, withCredentials);
   };
 
-  XHRTransport.prototype.cancel = function() {
+  XHRTransport.prototype.cancel = function () {
     this._internal.cancel();
   };
 
-  function XHRTransportInternal(
-    xhr,
-    onStartCallback,
-    onProgressCallback,
-    onFinishCallback,
-    thisArg
-  ) {
+  function XHRTransportInternal(xhr, onStartCallback, onProgressCallback, onFinishCallback, thisArg) {
     this.onStartCallback = onStartCallback;
     this.onProgressCallback = onProgressCallback;
     this.onFinishCallback = onFinishCallback;
@@ -59,7 +42,7 @@
     this.timeout = 0;
   }
 
-  XHRTransportInternal.prototype.onStart = function() {
+  XHRTransportInternal.prototype.onStart = function () {
     if (this.state === 1) {
       this.state = 2;
       var status = 0;
@@ -90,7 +73,7 @@
       this.onStartCallback.call(this.thisArg, status, statusText, contentType);
     }
   };
-  XHRTransportInternal.prototype.onProgress = function() {
+  XHRTransportInternal.prototype.onProgress = function () {
     this.onStart();
     if (this.state === 2 || this.state === 3) {
       this.state = 3;
@@ -113,7 +96,7 @@
       this.onProgressCallback.call(this.thisArg, chunk);
     }
   };
-  XHRTransportInternal.prototype.onFinish = function() {
+  XHRTransportInternal.prototype.onFinish = function () {
     // IE 8 fires "onload" without "onprogress
     this.onProgress();
     if (this.state === 3) {
@@ -125,9 +108,8 @@
       this.onFinishCallback.call(this.thisArg);
     }
   };
-  XHRTransportInternal.prototype.onReadyStateChange = function() {
-    if (this.xhr != undefined) {
-      // Opera 12
+  XHRTransportInternal.prototype.onReadyStateChange = function () {
+    if (this.xhr != undefined) { // Opera 12
       if (this.xhr.readyState === 4) {
         if (this.xhr.status === 0) {
           this.onFinish();
@@ -142,12 +124,11 @@
       }
     }
   };
-  XHRTransportInternal.prototype.onTimeout2 = function() {
+  XHRTransportInternal.prototype.onTimeout2 = function () {
     this.timeout = 0;
-    var tmp = /^data\:([^,]*?)(base64)?,([\S]*)$/.exec(this.url);
+    var tmp = (/^data\:([^,]*?)(base64)?,([\S]*)$/).exec(this.url);
     var contentType = tmp[1];
-    var data =
-      tmp[2] === "base64" ? global.atob(tmp[3]) : decodeURIComponent(tmp[3]);
+    var data = tmp[2] === "base64" ? global.atob(tmp[3]) : decodeURIComponent(tmp[3]);
     if (this.state === 1) {
       this.state = 2;
       this.onStartCallback.call(this.thisArg, 200, "OK", contentType);
@@ -161,20 +142,20 @@
       this.onFinishCallback.call(this.thisArg);
     }
   };
-  XHRTransportInternal.prototype.onTimeout1 = function() {
+  XHRTransportInternal.prototype.onTimeout1 = function () {
     this.timeout = 0;
     this.open(this.url, this.withCredentials);
   };
-  XHRTransportInternal.prototype.onTimeout0 = function() {
+  XHRTransportInternal.prototype.onTimeout0 = function () {
     var that = this;
-    this.timeout = setTimeout(function() {
+    this.timeout = setTimeout(function () {
       that.onTimeout0();
     }, 500);
     if (this.xhr.readyState === 3) {
       this.onProgress();
     }
   };
-  XHRTransportInternal.prototype.handleEvent = function(event) {
+  XHRTransportInternal.prototype.handleEvent = function (event) {
     if (event.type === "load") {
       this.onFinish();
     } else if (event.type === "error") {
@@ -192,7 +173,7 @@
       this.onReadyStateChange();
     }
   };
-  XHRTransportInternal.prototype.open = function(url, withCredentials) {
+  XHRTransportInternal.prototype.open = function (url, withCredentials) {
     this.cancel();
 
     this.url = url;
@@ -204,9 +185,9 @@
 
     var that = this;
 
-    var tmp = /^data\:([^,]*?)(?:;base64)?,[\S]*$/.exec(url);
+    var tmp = (/^data\:([^,]*?)(?:;base64)?,[\S]*$/).exec(url);
     if (tmp != undefined) {
-      this.timeout = setTimeout(function() {
+      this.timeout = setTimeout(function () {
         that.onTimeout2();
       }, 0);
       return;
@@ -215,39 +196,32 @@
     // loading indicator in Safari, Chrome < 14
     // loading indicator in Firefox
     // https://bugzilla.mozilla.org/show_bug.cgi?id=736723
-    if (
-      (!("ontimeout" in this.xhr) ||
-        "sendAsBinary" in this.xhr ||
-        "mozAnon" in this.xhr) &&
-      global.document != undefined &&
-      global.document.readyState != undefined &&
-      global.document.readyState !== "complete"
-    ) {
-      this.timeout = setTimeout(function() {
+    if ((!("ontimeout" in this.xhr) || ("sendAsBinary" in this.xhr) || ("mozAnon" in this.xhr)) && global.document != undefined && global.document.readyState != undefined && global.document.readyState !== "complete") {
+      this.timeout = setTimeout(function () {
         that.onTimeout1();
       }, 4);
       return;
     }
 
     // XDomainRequest#abort removes onprogress, onerror, onload
-    this.xhr.onload = function(event) {
-      that.handleEvent({ type: "load" });
+    this.xhr.onload = function (event) {
+      that.handleEvent({type: "load"});
     };
-    this.xhr.onerror = function() {
-      that.handleEvent({ type: "error" });
+    this.xhr.onerror = function () {
+      that.handleEvent({type: "error"});
     };
-    this.xhr.onabort = function() {
-      that.handleEvent({ type: "abort" });
+    this.xhr.onabort = function () {
+      that.handleEvent({type: "abort"});
     };
-    this.xhr.onprogress = function() {
-      that.handleEvent({ type: "progress" });
+    this.xhr.onprogress = function () {
+      that.handleEvent({type: "progress"});
     };
     // IE 8-9 (XMLHTTPRequest)
     // Firefox 3.5 - 3.6 - ? < 9.0
     // onprogress is not fired sometimes or delayed
     // see also #64
-    this.xhr.onreadystatechange = function() {
-      that.handleEvent({ type: "readystatechange" });
+    this.xhr.onreadystatechange = function () {
+      that.handleEvent({type: "readystatechange"});
     };
 
     this.xhr.open("GET", url, true);
@@ -274,14 +248,14 @@
       throw error1;
     }
 
-    if ("readyState" in this.xhr && global.opera != undefined) {
+    if (("readyState" in this.xhr) && global.opera != undefined) {
       // workaround for Opera issue with "progress" events
-      this.timeout = setTimeout(function() {
+      this.timeout = setTimeout(function () {
         that.onTimeout0();
       }, 0);
     }
   };
-  XHRTransportInternal.prototype.cancel = function() {
+  XHRTransportInternal.prototype.cancel = function () {
     if (this.state !== 0 && this.state !== 4) {
       this.state = 4;
       this.xhr.onload = k;
@@ -303,13 +277,13 @@
     this._data = {};
   }
 
-  Map.prototype.get = function(key) {
+  Map.prototype.get = function (key) {
     return this._data[key + "~"];
   };
-  Map.prototype.set = function(key, value) {
+  Map.prototype.set = function (key, value) {
     this._data[key + "~"] = value;
   };
-  Map.prototype["delete"] = function(key) {
+  Map.prototype["delete"] = function (key) {
     delete this._data[key + "~"];
   };
 
@@ -318,12 +292,12 @@
   }
 
   function throwError(e) {
-    setTimeout(function() {
+    setTimeout(function () {
       throw e;
     }, 0);
   }
 
-  EventTarget.prototype.dispatchEvent = function(event) {
+  EventTarget.prototype.dispatchEvent = function (event) {
     event.target = this;
     var type = event.type.toString();
     var listeners = this._listeners;
@@ -346,7 +320,7 @@
       }
     }
   };
-  EventTarget.prototype.addEventListener = function(type, callback) {
+  EventTarget.prototype.addEventListener = function (type, callback) {
     type = type.toString();
     var listeners = this._listeners;
     var typeListeners = listeners.get(type);
@@ -361,7 +335,7 @@
     }
     typeListeners.push(callback);
   };
-  EventTarget.prototype.removeEventListener = function(type, callback) {
+  EventTarget.prototype.removeEventListener = function (type, callback) {
     type = type.toString();
     var listeners = this._listeners;
     var typeListeners = listeners.get(type);
@@ -397,10 +371,8 @@
 
   var XHR = global.XMLHttpRequest;
   var XDR = global.XDomainRequest;
-  var isCORSSupported =
-    XHR != undefined && new XHR().withCredentials != undefined;
-  var Transport =
-    isCORSSupported || (XHR != undefined && XDR == undefined) ? XHR : XDR;
+  var isCORSSupported = XHR != undefined && (new XHR()).withCredentials != undefined;
+  var Transport = isCORSSupported || (XHR != undefined && XDR == undefined) ? XHR : XDR;
 
   var WAITING = -1;
   var CONNECTING = 0;
@@ -416,19 +388,15 @@
   var MINIMUM_DURATION = 1000;
   var MAXIMUM_DURATION = 18000000;
 
-  var getDuration = function(value, def) {
+  var getDuration = function (value, def) {
     var n = value;
     if (n !== n) {
       n = def;
     }
-    return n < MINIMUM_DURATION
-      ? MINIMUM_DURATION
-      : n > MAXIMUM_DURATION
-        ? MAXIMUM_DURATION
-        : n;
+    return (n < MINIMUM_DURATION ? MINIMUM_DURATION : (n > MAXIMUM_DURATION ? MAXIMUM_DURATION : n));
   };
 
-  var fire = function(that, f, event) {
+  var fire = function (that, f, event) {
     try {
       if (typeof f === "function") {
         f.call(that, event);
@@ -455,10 +423,7 @@
   function EventSourceInternal(es, url, options) {
     this.url = url.toString();
     this.readyState = CONNECTING;
-    this.withCredentials =
-      isCORSSupported &&
-      options != undefined &&
-      Boolean(options.withCredentials);
+    this.withCredentials = isCORSSupported && options != undefined && Boolean(options.withCredentials);
 
     this.es = es;
     this.initialRetry = getDuration(1000, 0);
@@ -467,18 +432,9 @@
     this.lastEventId = "";
     this.retry = this.initialRetry;
     this.wasActivity = false;
-    var CurrentTransport =
-      options != undefined && options.Transport != undefined
-        ? options.Transport
-        : Transport;
+    var CurrentTransport = options != undefined && options.Transport != undefined ? options.Transport : Transport;
     var xhr = new CurrentTransport();
-    this.transport = new XHRTransport(
-      xhr,
-      this.onStart,
-      this.onProgress,
-      this.onFinish,
-      this
-    );
+    this.transport = new XHRTransport(xhr, this.onStart, this.onProgress, this.onFinish, this);
     this.timeout = 0;
     this.currentState = WAITING;
     this.dataBuffer = [];
@@ -496,11 +452,7 @@
     this.onTimeout();
   }
 
-  EventSourceInternal.prototype.onStart = function(
-    status,
-    statusText,
-    contentType
-  ) {
+  EventSourceInternal.prototype.onStart = function (status, statusText, contentType) {
     if (this.currentState === CONNECTING) {
       if (contentType == undefined) {
         contentType = "";
@@ -517,17 +469,9 @@
       } else if (status !== 0) {
         var message = "";
         if (status !== 200) {
-          message =
-            "EventSource's response has a status " +
-            status +
-            " " +
-            statusText.replace(/\s+/g, " ") +
-            " that is not 200. Aborting the connection.";
+          message = "EventSource's response has a status " + status + " " + statusText.replace(/\s+/g, " ") + " that is not 200. Aborting the connection.";
         } else {
-          message =
-            "EventSource's response has a Content-Type specifying an unsupported type: " +
-            contentType.replace(/\s+/g, " ") +
-            ". Aborting the connection.";
+          message = "EventSource's response has a Content-Type specifying an unsupported type: " + contentType.replace(/\s+/g, " ") + ". Aborting the connection.";
         }
         throwError(new Error(message));
         this.close();
@@ -538,7 +482,7 @@
     }
   };
 
-  EventSourceInternal.prototype.onProgress = function(chunk) {
+  EventSourceInternal.prototype.onProgress = function (chunk) {
     if (this.currentState === OPEN) {
       var length = chunk.length;
       if (length !== 0) {
@@ -558,14 +502,7 @@
                 this.valueStart = position + 1;
               }
               var field = chunk.slice(this.fieldStart, this.valueStart - 1);
-              var value = chunk.slice(
-                this.valueStart +
-                  (this.valueStart < position &&
-                  chunk.charCodeAt(this.valueStart) === " ".charCodeAt(0)
-                    ? 1
-                    : 0),
-                position
-              );
+              var value = chunk.slice(this.valueStart + (this.valueStart < position && chunk.charCodeAt(this.valueStart) === " ".charCodeAt(0) ? 1 : 0), position);
               if (field === "data") {
                 this.dataBuffer.push(value);
               } else if (field === "id") {
@@ -573,20 +510,14 @@
               } else if (field === "event") {
                 this.eventTypeBuffer = value;
               } else if (field === "retry") {
-                this.initialRetry = getDuration(
-                  Number(value),
-                  this.initialRetry
-                );
+                this.initialRetry = getDuration(Number(value), this.initialRetry);
                 this.retry = this.initialRetry;
               } else if (field === "heartbeatTimeout") {
-                this.heartbeatTimeout = getDuration(
-                  Number(value),
-                  this.heartbeatTimeout
-                );
+                this.heartbeatTimeout = getDuration(Number(value), this.heartbeatTimeout);
                 if (this.timeout !== 0) {
                   clearTimeout(this.timeout);
                   var that = this;
-                  this.timeout = setTimeout(function() {
+                  this.timeout = setTimeout(function () {
                     that.onTimeout();
                   }, this.heartbeatTimeout);
                 }
@@ -633,7 +564,7 @@
     }
   };
 
-  EventSourceInternal.prototype.onFinish = function() {
+  EventSourceInternal.prototype.onFinish = function () {
     if (this.currentState === OPEN || this.currentState === CONNECTING) {
       this.currentState = WAITING;
       if (this.timeout !== 0) {
@@ -647,7 +578,7 @@
         this.retry = MAXIMUM_DURATION;
       }
       var that = this;
-      this.timeout = setTimeout(function() {
+      this.timeout = setTimeout(function () {
         that.onTimeout();
       }, this.retry);
       this.retry = this.retry * 2 + 1;
@@ -660,22 +591,16 @@
     }
   };
 
-  EventSourceInternal.prototype.onTimeout = function() {
+  EventSourceInternal.prototype.onTimeout = function () {
     this.timeout = 0;
     if (this.currentState !== WAITING) {
       if (!this.wasActivity) {
-        throwError(
-          new Error(
-            "No activity within " +
-              this.heartbeatTimeout +
-              " milliseconds. Reconnecting."
-          )
-        );
+        throwError(new Error("No activity within " + this.heartbeatTimeout + " milliseconds. Reconnecting."));
         this.transport.cancel();
       } else {
         this.wasActivity = false;
         var that = this;
-        this.timeout = setTimeout(function() {
+        this.timeout = setTimeout(function () {
           that.onTimeout();
         }, this.heartbeatTimeout);
       }
@@ -684,7 +609,7 @@
 
     this.wasActivity = false;
     var that = this;
-    this.timeout = setTimeout(function() {
+    this.timeout = setTimeout(function () {
       that.onTimeout();
     }, this.heartbeatTimeout);
 
@@ -698,13 +623,7 @@
 
     var s = this.url.slice(0, 5);
     if (s !== "data:" && s !== "blob:") {
-      s =
-        this.url +
-        ((this.url.indexOf("?", 0) === -1 ? "?" : "&") +
-          "lastEventId=" +
-          encodeURIComponent(this.lastEventId) +
-          "&r=" +
-          (Math.random() + 1).toString().slice(2));
+      s = this.url + ((this.url.indexOf("?", 0) === -1 ? "?" : "&") + "lastEventId=" + encodeURIComponent(this.lastEventId) + "&r=" + (Math.random() + 1).toString().slice(2));
     } else {
       s = this.url;
     }
@@ -716,7 +635,7 @@
     }
   };
 
-  EventSourceInternal.prototype.close = function() {
+  EventSourceInternal.prototype.close = function () {
     this.currentState = CLOSED;
     this.transport.cancel();
     if (this.timeout !== 0) {
@@ -736,7 +655,7 @@
 
   EventSource.prototype = new F();
 
-  EventSource.prototype.close = function() {
+  EventSource.prototype.close = function () {
     this._internal.close();
   };
 
@@ -745,19 +664,12 @@
     EventSource.prototype.withCredentials = undefined;
   }
 
-  var isEventSourceSupported = function() {
+  var isEventSourceSupported = function () {
     // Opera 12 fails this test, but this is fine.
-    return (
-      global.EventSource != undefined &&
-      "withCredentials" in global.EventSource.prototype
-    );
+    return global.EventSource != undefined && ("withCredentials" in global.EventSource.prototype);
   };
 
-  if (
-    Transport != undefined &&
-    (global.EventSource == undefined ||
-      (isCORSSupported && !isEventSourceSupported()))
-  ) {
+  if (Transport != undefined && (global.EventSource == undefined || (isCORSSupported && !isEventSourceSupported()))) {
     // Why replace a native EventSource ?
     // https://bugzilla.mozilla.org/show_bug.cgi?id=444328
     // https://bugzilla.mozilla.org/show_bug.cgi?id=831392
@@ -767,4 +679,5 @@
     global.NativeEventSource = global.EventSource;
     global.EventSource = EventSource;
   }
-})(typeof window !== "undefined" ? window : this);
+
+}(typeof window !== 'undefined' ? window : this));

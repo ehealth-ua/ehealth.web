@@ -1,1 +1,1 @@
-"Symbol" in this && "isConcatSpreadable" in this.Symbol;
+'Symbol' in this && 'isConcatSpreadable' in this.Symbol

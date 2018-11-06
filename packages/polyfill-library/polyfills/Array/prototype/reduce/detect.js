@@ -1,1 +1,1 @@
-"reduce" in Array.prototype;
+'reduce' in Array.prototype

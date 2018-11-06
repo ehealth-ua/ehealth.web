@@ -1,3 +1,3 @@
 Date.now = function now() {
-  return new Date().getTime();
+	return new Date().getTime();
 };

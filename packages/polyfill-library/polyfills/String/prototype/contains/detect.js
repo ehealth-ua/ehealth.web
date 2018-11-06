@@ -1,1 +1,1 @@
-"contains" in String.prototype;
+'contains' in String.prototype

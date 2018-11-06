@@ -1,1 +1,1 @@
-"isFinite" in Number;
+'isFinite' in Number

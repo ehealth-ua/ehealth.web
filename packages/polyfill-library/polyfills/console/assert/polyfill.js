@@ -1,1 +1,1 @@
-console.assert = function assert() {};
+console.assert = function assert() { };

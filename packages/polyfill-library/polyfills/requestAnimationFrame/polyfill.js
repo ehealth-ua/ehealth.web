@@ -1,45 +1,49 @@
-(function(global) {
-  var rafPrefix;
+(function (global) {
+	var rafPrefix;
 
-  if ("mozRequestAnimationFrame" in global) {
-    rafPrefix = "moz";
-  } else if ("webkitRequestAnimationFrame" in global) {
-    rafPrefix = "webkit";
-  }
+	if ('mozRequestAnimationFrame' in global) {
+		rafPrefix = 'moz';
 
-  if (rafPrefix) {
-    global.requestAnimationFrame = function(callback) {
-      return global[rafPrefix + "RequestAnimationFrame"](function() {
-        callback(performance.now());
-      });
-    };
-    global.cancelAnimationFrame = global[rafPrefix + "CancelAnimationFrame"];
-  } else {
-    var lastTime = Date.now();
+	} else if ('webkitRequestAnimationFrame' in global) {
+		rafPrefix = 'webkit';
 
-    global.requestAnimationFrame = function(callback) {
-      if (typeof callback !== "function") {
-        throw new TypeError(callback + " is not a function");
-      }
+	}
 
-      var currentTime = Date.now(),
-        delay = 16 + lastTime - currentTime;
+	if (rafPrefix) {
+		global.requestAnimationFrame = function (callback) {
+		    return global[rafPrefix + 'RequestAnimationFrame'](function () {
+		        callback(performance.now());
+		    });
+		};
+		global.cancelAnimationFrame = global[rafPrefix + 'CancelAnimationFrame'];
+	} else {
 
-      if (delay < 0) {
-        delay = 0;
-      }
+		var lastTime = Date.now();
 
-      lastTime = currentTime;
+		global.requestAnimationFrame = function (callback) {
+			if (typeof callback !== 'function') {
+				throw new TypeError(callback + ' is not a function');
+			}
 
-      return setTimeout(function() {
-        lastTime = Date.now();
+			var
+			currentTime = Date.now(),
+			delay = 16 + lastTime - currentTime;
 
-        callback(performance.now());
-      }, delay);
-    };
+			if (delay < 0) {
+				delay = 0;
+			}
 
-    global.cancelAnimationFrame = function(id) {
-      clearTimeout(id);
-    };
-  }
-})(this);
+			lastTime = currentTime;
+
+			return setTimeout(function () {
+				lastTime = Date.now();
+
+				callback(performance.now());
+			}, delay);
+		};
+
+		global.cancelAnimationFrame = function (id) {
+			clearTimeout(id);
+		};
+	}
+}(this));

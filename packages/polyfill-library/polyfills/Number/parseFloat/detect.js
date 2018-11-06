@@ -1,1 +1,1 @@
-"parseFloat" in Number;
+'parseFloat' in Number

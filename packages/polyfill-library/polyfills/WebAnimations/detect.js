@@ -1,1 +1,1 @@
-typeof document.head.animate === "function";
+typeof document.head.animate === "function"

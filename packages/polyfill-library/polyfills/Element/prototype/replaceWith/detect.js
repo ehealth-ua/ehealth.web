@@ -1,1 +1,1 @@
-"Element" in this && "replaceWith" in Element.prototype;
+'Element' in this && 'replaceWith' in Element.prototype

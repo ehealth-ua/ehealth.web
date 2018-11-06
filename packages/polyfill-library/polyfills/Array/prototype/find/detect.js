@@ -1,1 +1,1 @@
-"find" in Array.prototype;
+'find' in Array.prototype

@@ -1,1 +1,1 @@
-"includes" in Array.prototype;
+'includes' in Array.prototype

@@ -1,1 +1,1 @@
-"startsWith" in String.prototype;
+'startsWith' in String.prototype

@@ -1,1 +1,1 @@
-"getPrototypeOf" in Object;
+'getPrototypeOf' in Object

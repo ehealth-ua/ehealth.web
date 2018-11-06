@@ -1,1 +1,1 @@
-"EPSILON" in Number;
+'EPSILON' in Number

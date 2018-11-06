@@ -1,1 +1,1 @@
-"MAX_SAFE_INTEGER" in Number;
+'MAX_SAFE_INTEGER' in Number

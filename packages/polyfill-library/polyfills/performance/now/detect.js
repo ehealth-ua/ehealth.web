@@ -1,1 +1,1 @@
-"performance" in this && "now" in this.performance;
+'performance' in this && 'now' in this.performance

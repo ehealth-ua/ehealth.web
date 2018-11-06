@@ -1,1 +1,1 @@
-"padStart" in String.prototype;
+'padStart' in String.prototype

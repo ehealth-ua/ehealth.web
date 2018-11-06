@@ -1,3 +1,1 @@
-"Symbol" in this &&
-  "iterator" in this.Symbol &&
-  !!String.prototype[Symbol.iterator];
+'Symbol' in this && 'iterator' in this.Symbol && !!String.prototype[Symbol.iterator]

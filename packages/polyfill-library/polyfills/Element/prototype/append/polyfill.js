@@ -1,3 +1,3 @@
 Document.prototype.append = Element.prototype.append = function append() {
-  this.appendChild(_mutation(arguments));
+	this.appendChild(_mutation(arguments));
 };

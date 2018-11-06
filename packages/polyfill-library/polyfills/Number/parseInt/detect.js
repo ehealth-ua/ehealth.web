@@ -1,1 +1,1 @@
-"parseInt" in Number;
+'parseInt' in Number

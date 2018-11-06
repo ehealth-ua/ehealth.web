@@ -1,11 +1,13 @@
-(function(global) {
-  var startTime = Date.now();
+(function (global) {
 
-  if (!global.performance) {
+var startTime = Date.now();
+
+if (!global.performance) {
     global.performance = {};
-  }
+}
 
-  global.performance.now = function() {
+global.performance.now = function () {
     return Date.now() - startTime;
-  };
-})(this);
+};
+
+}(this));

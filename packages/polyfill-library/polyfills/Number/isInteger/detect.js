@@ -1,1 +1,1 @@
-"isInteger" in Number;
+'isInteger' in Number

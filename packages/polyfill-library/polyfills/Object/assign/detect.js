@@ -1,1 +1,1 @@
-"assign" in Object;
+'assign' in Object

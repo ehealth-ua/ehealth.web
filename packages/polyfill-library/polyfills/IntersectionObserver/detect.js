@@ -1,1 +1,2 @@
-"IntersectionObserver" in window && "IntersectionObserverEntry" in window;
+'IntersectionObserver' in window &&
+'IntersectionObserverEntry' in window

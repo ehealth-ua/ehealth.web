@@ -1,1 +1,1 @@
-"sinh" in Math;
+'sinh' in Math

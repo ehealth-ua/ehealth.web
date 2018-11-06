@@ -1,1 +1,1 @@
-"some" in Array.prototype;
+'some' in Array.prototype

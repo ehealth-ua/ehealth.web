@@ -1,1 +1,1 @@
-"Promise" in this && "finally" in Promise.prototype;
+'Promise' in this && 'finally' in Promise.prototype

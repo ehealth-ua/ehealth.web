@@ -1,1 +1,1 @@
-"contains" in Array.prototype;
+'contains' in Array.prototype

@@ -1,2 +1,2 @@
 /* global CreateMethodProperty */
-CreateMethodProperty(Array.prototype, "contains", Array.prototype.includes);
+CreateMethodProperty(Array.prototype, 'contains', Array.prototype.includes);

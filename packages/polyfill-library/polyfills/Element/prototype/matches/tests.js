@@ -2,51 +2,51 @@
 /* global proclaim */
 
 it("should return true if the element matches the tag selector", function() {
-  var el = document.body.appendChild(document.createElement("p"));
+	var el = document.body.appendChild(document.createElement("p"));
 
-  proclaim.equal(el.matches("p"), true);
+	proclaim.equal(el.matches("p"), true);
 
-  document.body.removeChild(el);
+	document.body.removeChild(el);
 });
 
 it("should return true if the element matches the class selector", function() {
-  var el = document.body.appendChild(document.createElement("p"));
+	var el = document.body.appendChild(document.createElement("p"));
 
-  el.className = "foo";
+	el.className = "foo";
 
-  proclaim.equal(el.matches(".foo"), true);
+	proclaim.equal(el.matches(".foo"), true);
 
-  document.body.removeChild(el);
+	document.body.removeChild(el);
 });
 
 it("should return true for more complex selectors", function() {
-  var el = document.body.appendChild(document.createElement("p"));
+	var el = document.body.appendChild(document.createElement("p"));
 
-  el.className = "foo";
+	el.className = "foo";
 
-  proclaim.equal(el.matches("p.foo"), true);
+	proclaim.equal(el.matches("p.foo"), true);
 });
 
 it("should not match non-matching selectors", function() {
-  var el = document.body.appendChild(document.createElement("p"));
+	var el = document.body.appendChild(document.createElement("p"));
 
-  el.className = "bar";
+	el.className = "bar";
 
-  proclaim.equal(el.matches("a.bar"), false);
+	proclaim.equal(el.matches("a.bar"), false);
 
-  document.body.removeChild(el);
+	document.body.removeChild(el);
 });
 
 it("should not match inner elements", function() {
-  var el = document.body.appendChild(document.createElement("p"));
+	var el = document.body.appendChild(document.createElement("p"));
 
-  var innerEl = document.createElement("a");
+	var innerEl = document.createElement("a");
 
-  el.appendChild(innerEl);
+	el.appendChild(innerEl);
 
-  proclaim.equal(el.matches("a"), false);
+	proclaim.equal(el.matches("a"), false);
 
-  document.body.removeChild(el);
+	document.body.removeChild(el);
 });
 
 /* Skipped: This exception is actually thrown by querySelector, and cannot be thrown by

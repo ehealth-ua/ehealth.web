@@ -1,1 +1,1 @@
-"defineProperties" in Object;
+'defineProperties' in Object

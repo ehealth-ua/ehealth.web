@@ -1,1 +1,1 @@
-"lastIndexOf" in Array.prototype;
+'lastIndexOf' in Array.prototype

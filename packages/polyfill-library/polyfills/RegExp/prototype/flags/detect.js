@@ -1,1 +1,1 @@
-"flags" in RegExp.prototype;
+'flags' in RegExp.prototype

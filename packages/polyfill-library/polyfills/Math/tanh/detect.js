@@ -1,1 +1,1 @@
-"tanh" in Math;
+'tanh' in Math
