@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.121.1"></a>
+## [0.121.1](https://github.com/edenlabllc/ehealth.web/compare/v0.121.0...v0.121.1) (2018-11-07)
+
+
+### Bug Fixes
+
+* update react-apollo, fix DataProvider error handling ([d9016a9](https://github.com/edenlabllc/ehealth.web/commit/d9016a9))
+
+
+
+
+
 <a name="0.121.0"></a>
 # [0.121.0](https://github.com/edenlabllc/ehealth.web/compare/v0.120.1...v0.121.0) (2018-11-07)
 
