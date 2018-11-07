@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.121.0"></a>
+# [0.121.0](https://github.com/edenlabllc/ehealth.web/compare/v0.120.1...v0.121.0) (2018-11-07)
+
+
+### Features
+
+* **icons:** add arrows for pagination on admin ([deb1cd9](https://github.com/edenlabllc/ehealth.web/commit/deb1cd9))
+
+
+
+
+
 <a name="0.120.0"></a>
 # [0.120.0](https://github.com/edenlabllc/ehealth.web/compare/v0.119.0...v0.120.0) (2018-11-05)
 

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.121.0"></a>
+# [0.121.0](https://github.com/edenlabllc/ehealth.web/compare/v0.120.1...v0.121.0) (2018-11-07)
+
+
+### Features
+
+* **admin:** add pageInfo to GraphQL query ([6fefecc](https://github.com/edenlabllc/ehealth.web/commit/6fefecc))
+* **admin:** add Pagination component to admin ([8292629](https://github.com/edenlabllc/ehealth.web/commit/8292629))
+* **admin:** create constants for pagination ([4d21725](https://github.com/edenlabllc/ehealth.web/commit/4d21725))
+* **admin:** use Pagination on Search LegalEntities ([f25f33b](https://github.com/edenlabllc/ehealth.web/commit/f25f33b))
+
+
+
+
+
 <a name="0.120.0"></a>
 # [0.120.0](https://github.com/edenlabllc/ehealth.web/compare/v0.119.0...v0.120.0) (2018-11-05)
 

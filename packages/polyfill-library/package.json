@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/polyfill-library",
-  "version": "0.120.1",
+  "version": "0.121.0",
   "description": "A polyfill combinator",
   "main": "lib/index.js",
   "scripts": {
