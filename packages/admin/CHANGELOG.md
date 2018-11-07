@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.122.0"></a>
+# [0.122.0](https://github.com/edenlabllc/ehealth.web/compare/v0.121.1...v0.122.0) (2018-11-07)
+
+
+### Bug Fixes
+
+* **admin:** update date ranges, check contractRequest for empty value, add first param ([201a7ec](https://github.com/edenlabllc/ehealth.web/commit/201a7ec))
+
+
+### Features
+
+* **admin:** add pagination to the Contract Requests Search ([a3e7972](https://github.com/edenlabllc/ehealth.web/commit/a3e7972))
+
+
+
+
+
 <a name="0.121.1"></a>
 ## [0.121.1](https://github.com/edenlabllc/ehealth.web/compare/v0.121.0...v0.121.1) (2018-11-07)
 
