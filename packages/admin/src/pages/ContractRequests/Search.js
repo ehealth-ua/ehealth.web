@@ -10,9 +10,11 @@ import { AdminSearchIcon } from "@ehealth/icons";
 import * as Field from "../../components/Field";
 import Link from "../../components/Link";
 import Table from "../../components/Table";
+import Pagination from "../../components/Pagination";
 import Button, { ResetButton } from "../../components/Button";
 import Badge from "../../components/Badge";
 import STATUSES from "../../helpers/statuses";
+import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 import SearchContractRequestsQuery from "../../graphql/SearchContractRequestsQuery.graphql";
 
@@ -37,7 +39,9 @@ const Search = ({ uri }) => (
           filter: { status = {} } = {},
           filter,
           searchRequest = "",
-          date: { startFrom, startTo, endFrom, endTo } = {}
+          date: { startFrom, startTo, endFrom, endTo } = {},
+          first,
+          last
         } = locationParams;
 
         const edrpouReg = new RegExp(EDRPOU_PATTERN);
@@ -59,6 +63,10 @@ const Search = ({ uri }) => (
             <Query
               query={SearchContractRequestsQuery}
               variables={{
+                first:
+                  isEmpty(first) && isEmpty(last)
+                    ? ITEMS_PER_PAGE[0]
+                    : undefined,
                 ...locationParams,
                 filter: {
                   ...filter,
@@ -66,67 +74,73 @@ const Search = ({ uri }) => (
                   endDate,
                   ...contractRequest,
                   status: status.name
-                },
-                first: 10
+                }
               }}
             >
-              {({
-                loading,
-                error,
-                data: {
-                  contractRequests: { nodes: contractRequests = [] } = {}
-                },
-                refetch
-              }) => (
-                <>
-                  <SearchContractRequestsForm
-                    initialValues={locationParams}
-                    onSubmit={setLocationParams}
-                    refetch={refetch}
-                  />
-                  {!error &&
-                    contractRequests.length > 0 && (
-                      <Table
-                        data={contractRequests}
-                        header={{
-                          id: "ID заяви на укладення договору",
-                          contractNumber: "Номер договору",
-                          status: "Статус",
-                          startDate: "Договір діє з",
-                          endDate: "Договір діє по",
-                          details: "Деталі"
-                        }}
-                        renderRow={({ id, status, ...contractRequests }) => ({
-                          id,
-                          ...contractRequests,
-                          status: (
-                            <Badge
-                              type="CONTRACT_REQUEST"
-                              name={status}
-                              display="block"
-                            />
-                          ),
-                          details: (
-                            <Link to={`../${id}`} fontWeight="bold">
-                              Показати деталі
-                            </Link>
-                          )
-                        })}
-                        sortableFields={["status", "startDate", "endDate"]}
-                        sortingParams={parseSortingParams(
-                          locationParams.orderBy
-                        )}
-                        onSortingChange={sortingParams =>
-                          setLocationParams({
-                            ...locationParams,
-                            orderBy: stringifySortingParams(sortingParams)
-                          })
-                        }
-                        tableName="contractrequests/search"
-                      />
-                    )}
-                </>
-              )}
+              {({ loading, error, data, refetch }) => {
+                const {
+                  nodes: contractRequests = [],
+                  pageInfo
+                } = data.contractRequests;
+
+                return (
+                  <>
+                    <SearchContractRequestsForm
+                      initialValues={locationParams}
+                      onSubmit={setLocationParams}
+                      refetch={refetch}
+                    />
+                    {!error &&
+                      contractRequests.length > 0 && (
+                        <>
+                          <Table
+                            data={contractRequests}
+                            header={{
+                              id: "ID заяви на укладення договору",
+                              contractNumber: "Номер договору",
+                              status: "Статус",
+                              startDate: "Договір діє з",
+                              endDate: "Договір діє по",
+                              details: "Деталі"
+                            }}
+                            renderRow={({
+                              id,
+                              status,
+                              ...contractRequests
+                            }) => ({
+                              id,
+                              ...contractRequests,
+                              status: (
+                                <Badge
+                                  type="CONTRACT_REQUEST"
+                                  name={status}
+                                  display="block"
+                                />
+                              ),
+                              details: (
+                                <Link to={`../${id}`} fontWeight="bold">
+                                  Показати деталі
+                                </Link>
+                              )
+                            })}
+                            sortableFields={["status", "startDate", "endDate"]}
+                            sortingParams={parseSortingParams(
+                              locationParams.orderBy
+                            )}
+                            onSortingChange={sortingParams =>
+                              setLocationParams({
+                                ...locationParams,
+                                orderBy: stringifySortingParams(sortingParams)
+                              })
+                            }
+                            tableName="contractrequests/search"
+                          />
+                          <Pagination {...pageInfo} />
+                        </>
+                      )}
+                  </>
+                );
+              }}
             </Query>
           </>
         );
