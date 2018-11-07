@@ -14,10 +14,109 @@ query ContractRequestQuery($id: ID!) {
       edrpou
       name
       id
+      databaseId
     }
     printoutContent
     assignee {
       id
+      party {
+        firstName
+        lastName
+        secondName
+      }
+    }
+    startDate
+    endDate
+    contractorRmspAmount
+    contractorLegalEntity {
+      id
+      name
+      edrpou
+      addresses {
+        type
+        area
+        region
+        settlement
+        settlementType
+        settlementId
+        streetType
+        street
+        building
+        apartment
+      }
+    }
+    contractorOwner {
+      databaseId
+      party {
+        firstName
+        lastName
+        secondName
+      }
+    }
+    contractorBase
+    contractorPaymentDetails {
+      bankName
+      mfo
+      payerAccount
+    }
+    contractorDivisions {
+      id
+      name
+      addresses {
+        type
+        area
+        region
+        settlement
+        settlementType
+        settlementId
+        streetType
+        street
+        building
+        apartment
+      }
+      phones {
+        type
+        number
+      }
+      email
+      mountainGroup
+    }
+    contractorEmployeeDivisions {
+      employee {
+        databaseId
+        party {
+          firstName
+          lastName
+          secondName
+        }
+        additionalInfo {
+          specialities {
+            speciality
+          }
+        }
+      }
+      staffUnits
+      declarationLimit
+      division {
+        id
+        name
+      }
+    }
+    externalContractors {
+      legalEntity {
+        name
+      }
+      contract {
+        number
+        issuedAt
+        expiresAt
+      }
+      divisions {
+        division {
+          name
+        }
+        medicalService
+      }
     }
   }
 }
