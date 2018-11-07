@@ -1,13 +1,14 @@
 import system from "system-components/emotion";
 import { boolean } from "@ehealth/system-tools";
 
-import { ChevronBottomIcon } from "@ehealth/icons";
+import { ChevronBottomIcon, AdminSearchIcon } from "@ehealth/icons";
 import Dropdown from "./Dropdown";
 
 export const List = system({
   is: Dropdown.List,
   position: "absolute",
   top: "100%",
+  width: "100%",
   zIndex: 10
 });
 
@@ -52,4 +53,11 @@ export const DropdownIcon = system({
   color: "jacarandaLight",
   width: "7px",
   height: "4px"
+});
+
+export const SearchIcon = system({
+  is: AdminSearchIcon,
+  color: "#CED0DA",
+  width: "14px",
+  height: "14px"
 });

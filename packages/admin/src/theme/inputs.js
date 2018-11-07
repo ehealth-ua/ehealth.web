@@ -30,6 +30,11 @@ const inputs = {
       width: "100%",
       textAlign: "right"
     }
+  },
+  select: {
+    visible: {
+      visibility: "visible"
+    }
   }
 };
 

@@ -51,6 +51,8 @@ const SelectField = ({
   type,
   filterOptions,
   filter = matchSorter,
+  hideErrors = false,
+  iconComponent: Icon = DropdownIcon,
   renderItem = item => item,
   ...props
 }) => (
@@ -106,7 +108,7 @@ const SelectField = ({
               type
             })}
           >
-            <DropdownIcon />
+            <Icon />
           </DropdownButton>
           {isOpen && (
             <List>
@@ -128,9 +130,11 @@ const SelectField = ({
           )}
         </InputView.Border>
 
-        <FieldView.Footer>
-          <FieldView.Message>{errored ? error : warning}</FieldView.Message>
-        </FieldView.Footer>
+        {!hideErrors && (
+          <FieldView.Footer>
+            <FieldView.Message>{errored ? error : warning}</FieldView.Message>
+          </FieldView.Footer>
+        )}
       </FieldView.Wrapper>
     )}
   </SingleDownshift>
