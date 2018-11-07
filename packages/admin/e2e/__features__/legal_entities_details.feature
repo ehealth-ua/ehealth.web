@@ -48,7 +48,8 @@ Scenario: Get LEGAL_ENTITY Details (OWNER)
 
 Scenario: Get LEGAL_ENTITY Details (DIVISION)
   Given I am on the DIVISION tab
-  Then I should see id, name, addresses, mountainGroup, phones, email
+  Then I should see input DivisionFilter 
+  And grid with fields id, name, addresses, mountainGroup, phones, email
 
 Scenario: Get LEGAL_ENTITY Details (RELATED_LEGAL_ENTITES)
   Given I am on the RELATED_LEGAL_ENTITES tab
