@@ -49,20 +49,23 @@ class Nav extends React.Component {
   container = React.createRef();
 
   async componentDidMount() {
+    const { scrollWidth } = await this.container.current;
+
     await this.setControlsObservers();
 
     this.setState({
-      containerRightX: await this.container.current.scrollWidth
+      containerRightX: scrollWidth
     });
   }
 
   render() {
+    const step = 50;
     const { withControls, isLeftArrowActive, isRightArrowActive } = this.state;
     return (
       <Controls>
         {withControls && (
           <Arrow
-            onClick={() => this.handleArrowClick(50)}
+            onClick={() => this.moveTabs(step)}
             disabled={!isLeftArrowActive}
           >
             <SmallChevronLeftIcon />
@@ -70,7 +73,7 @@ class Nav extends React.Component {
         )}
         <Wrapper innerRef={this.wrapper}>
           <Container
-            style={{ left: `${this.state.containerLeftX}px` }}
+            style={{ left: this.state.containerLeftX }}
             innerRef={this.container}
           >
             {this.props.children}
@@ -79,7 +82,7 @@ class Nav extends React.Component {
         {withControls && (
           <Arrow
             right
-            onClick={() => this.handleArrowClick(-50)}
+            onClick={() => this.moveTabs(-step)}
             disabled={!isRightArrowActive}
           >
             <SmallChevronRightIcon />
@@ -91,11 +94,10 @@ class Nav extends React.Component {
 
   createObserver(stateKey, childElement) {
     const observer = new IntersectionObserver(
-      children => {
+      ([item]) => {
         this.setState({
           [stateKey]:
-            children[0].intersectionRatio < 1 &&
-            children[0].boundingClientRect.y > 0
+            item.intersectionRatio < 1 && item.boundingClientRect.y > 0
         });
       },
       {
@@ -115,7 +117,7 @@ class Nav extends React.Component {
     this.createObserver("isRightArrowActive", children[lastNavItem]);
   }
 
-  handleArrowClick(step = 0) {
+  moveTabs(step = 0) {
     const { clientWidth: wrapperWidth } = this.wrapper.current;
     const { containerLeftX, containerRightX } = this.state;
 
