@@ -33,21 +33,23 @@ const TableView = ({
   onSortingChange,
   filterRow = null,
   onFilter,
-  whiteSpaceNoWrap
+  headless
 }: Props) => (
-  <TableComponent>
-    <TableHeaderView
-      header={header}
-      columnKeyExtractor={columnKeyExtractor}
-      headerComponent={headerComponent}
-      rowComponent={rowComponent}
-      headerCellComponent={headerCellComponent}
-      sortableFields={sortableFields}
-      sortingParams={sortingParams}
-      onSortingChange={onSortingChange}
-      filterRow={filterRow}
-      onFilter={onFilter}
-    />
+  <TableComponent headless={headless}>
+    {!headless && (
+      <TableHeaderView
+        header={header}
+        columnKeyExtractor={columnKeyExtractor}
+        headerComponent={headerComponent}
+        rowComponent={rowComponent}
+        headerCellComponent={headerCellComponent}
+        sortableFields={sortableFields}
+        sortingParams={sortingParams}
+        onSortingChange={onSortingChange}
+        filterRow={filterRow}
+        onFilter={onFilter}
+      />
+    )}
     <TableBodyView
       columns={Object.keys(header)}
       data={data}
@@ -58,7 +60,6 @@ const TableView = ({
       rowComponent={rowComponent}
       cellComponent={cellComponent}
       filterRow={filterRow}
-      whiteSpaceNoWrap={whiteSpaceNoWrap}
     />
   </TableComponent>
 );

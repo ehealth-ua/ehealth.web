@@ -2,7 +2,7 @@
 import * as React from "react";
 import styled from "react-emotion/macro";
 import { css } from "react-emotion";
-import { ifProp } from "styled-tools";
+import { ifProp, ifNotProp } from "styled-tools";
 import { Flex } from "rebass/emotion";
 import isEqual from "lodash/isEqual";
 
@@ -133,48 +133,56 @@ class Table extends React.Component<TableProps, TableState> {
       onSortingChange,
       tableName,
       hiddenFields = "",
-      whiteSpaceNoWrap
+      headless,
+      tableBody: Body = TableBody
     } = this.props;
     const { filterRow } = this.state;
 
     return (
       <>
-        <Flex mb={3} mt={5} justifyContent="space-between" alignItems="center">
-          <Flex alignItems="center">
-            <ShowItems list={ITEMS_PER_PAGE} />
-            <Tooltip
-              content="Скинути поточні налаштування"
-              component={() => (
-                <ResetIcon
-                  onClick={() => {
-                    localStorage.setItem(tableName, hiddenFields);
-                    localStorage.removeItem(`${tableName}-cell-sizes`);
-                    this.setState({
-                      filterRow: this.defaultFilter(header, tableName)
-                    });
-                  }}
-                />
-              )}
+        {!headless && (
+          <Flex
+            mb={3}
+            mt={5}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Flex alignItems="center">
+              <ShowItems list={ITEMS_PER_PAGE} />
+              <Tooltip
+                content="Скинути поточні налаштування"
+                component={() => (
+                  <ResetIcon
+                    onClick={() => {
+                      localStorage.setItem(tableName, hiddenFields);
+                      localStorage.removeItem(`${tableName}-cell-sizes`);
+                      this.setState({
+                        filterRow: this.defaultFilter(header, tableName)
+                      });
+                    }}
+                  />
+                )}
+              />
+            </Flex>
+            <TableDropDownControll
+              data={filterRow}
+              onChange={name => {
+                this.setState(
+                  {
+                    filterRow: filterRow.map(
+                      item =>
+                        item && item.name === name
+                          ? { ...item, status: !item.status }
+                          : item
+                    )
+                  },
+                  () => this.setStorage(tableName, this.state.filterRow)
+                );
+              }}
+              columnKeyExtractor={columnKeyExtractor}
             />
           </Flex>
-          <TableDropDownControll
-            data={filterRow}
-            onChange={name => {
-              this.setState(
-                {
-                  filterRow: filterRow.map(
-                    item =>
-                      item && item.name === name
-                        ? { ...item, status: !item.status }
-                        : item
-                  )
-                },
-                () => this.setStorage(tableName, this.state.filterRow)
-              );
-            }}
-            columnKeyExtractor={columnKeyExtractor}
-          />
-        </Flex>
+        )}
         <TableWrapper>
           <TableView
             data={data}
@@ -195,12 +203,12 @@ class Table extends React.Component<TableProps, TableState> {
             )}
             cellComponent={TableCell}
             tableHeader={TableHeader}
-            tableBody={TableBody}
+            tableBody={Body}
             sortableFields={sortableFields}
             sortingParams={sortingParams}
             onSortingChange={onSortingChange}
             filterRow={filterRow}
-            whiteSpaceNoWrap={whiteSpaceNoWrap}
+            headless={headless}
           />
         </TableWrapper>
       </>
@@ -243,14 +251,22 @@ const TableWrapper = styled.div`
   overflow: auto;
 `;
 
-const TableRoot = styled.table`
-  border: 1px solid #e0e0e0;
+export const TableRoot = styled.table`
+  border: ${ifProp("headless", "none", "1px solid #e0e0e0")};
   border-collapse: collapse;
   color: #3d3d3d;
   font-size: 12px;
-  line-height: 20px;
+  line-height: ${ifProp("headless", "0", "20px")};
   table-layout: fixed;
   width: 100%;
+  ${ifProp(
+    "headless",
+    `
+    td:last-of-type {
+      border-right: none;
+    }
+  `
+  )};
 `;
 
 const TableHeaderComponent = styled.thead`
@@ -258,13 +274,17 @@ const TableHeaderComponent = styled.thead`
   font-size: 12px;
   user-select: none;
   color: #7f8fa4;
+  display: ${ifProp("headless", "none")};
+  tr {
+    border-bottom: 1px solid #e0e0e0;
+  }
 `;
 
-const TableBodyComponent = styled.tbody`
+export const TableBodyComponent = styled.tbody`
   background-color: #fff;
 `;
 
-const TableRow = styled.tr`
+export const TableRow = styled.tr`
   ${TableBodyComponent} & {
     &:nth-child(2n) {
       background-color: #fcfcfc;
@@ -274,25 +294,31 @@ const TableRow = styled.tr`
       background-color: #f3fdff;
     }
   }
+  &:first-of-type {
+    td {
+      border-top: none;
+    }
+  }
 `;
 
 export const TableCell = styled.td`
   border-top: 1px solid #e0e0e0;
-  padding: 16px 20px;
   text-align: left;
   vertical-align: middle;
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
   border-right: 1px solid #e0e0e0;
-  ${ifProp(
+  ${ifNotProp(
     "whiteSpaceNoWrap",
     css`
       white-space: nowrap;
     `
   )};
-
-  &:last-child {
-    border-right: none;
-  }
+  ${ifNotProp(
+    "fullSize",
+    css`
+      padding: 16px 20px;
+    `
+  )};
 `;
