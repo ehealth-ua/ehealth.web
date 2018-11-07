@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.123.0"></a>
+# [0.123.0](https://github.com/edenlabllc/ehealth.web/compare/v0.122.1...v0.123.0) (2018-11-07)
+
+
+### Features
+
+* **admin:** add `input DivisionFilter` to `Division` tab `LEGAL_ENTITY Details` page ([011651b](https://github.com/edenlabllc/ehealth.web/commit/011651b))
+* **admin:** add features for `ContractRequest List` and `ContractRequest Details` ([b7f1fee](https://github.com/edenlabllc/ehealth.web/commit/b7f1fee))
+
+
+
+
+
 <a name="0.122.0"></a>
 # [0.122.0](https://github.com/edenlabllc/ehealth.web/compare/v0.121.1...v0.122.0) (2018-11-07)
 
