@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ApolloProvider /*, getDataFromTree */ } from "react-apollo";
+import { ApolloProvider, getDataFromTree } from "react-apollo";
 
 import ErrorBoundary from "./ErrorBoundary";
 import { createClient } from "./client";
@@ -12,8 +12,7 @@ class DataProvider extends Component {
   client = createClient({ onError: this.props.onError });
 
   async componentDidMount() {
-    // TODO: Need to find proper workaround with this
-    // await getDataFromTree(<ApolloProvider {...this.providerProps} />);
+    await getDataFromTree(<ApolloProvider {...this.providerProps} />);
 
     this.setState({ loading: false });
   }

@@ -18,7 +18,7 @@
     "graphql.macro": "^1.0.2",
     "print-iframe": "0.0.4",
     "react": "^16.4.2",
-    "react-apollo": "^2.1.4",
+    "react-apollo": "^2.2.4",
     "react-dom": "^16.4.2",
     "react-emotion": "^9.2.5",
     "react-google-maps": "^9.4.5",
