@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.126.0"></a>
+# [0.126.0](https://github.com/edenlabllc/ehealth.web/compare/v0.125.0...v0.126.0) (2018-11-08)
+
+
+### Bug Fixes
+
+* **admin:** fix pagination on Contracts and Legalentities pages ([e3633ec](https://github.com/edenlabllc/ehealth.web/commit/e3633ec))
+
+
+### Features
+
+* **admin:** add page search contracts ([0f1e1df](https://github.com/edenlabllc/ehealth.web/commit/0f1e1df))
+* **utils:** add formatDateInterval to utils pkg ([a7aaf83](https://github.com/edenlabllc/ehealth.web/commit/a7aaf83))
+
+
+
+
+
 <a name="0.125.0"></a>
 # [0.125.0](https://github.com/edenlabllc/ehealth.web/compare/v0.124.0...v0.125.0) (2018-11-08)
 
