@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.124.0"></a>
+# [0.124.0](https://github.com/edenlabllc/ehealth.web/compare/v0.123.2...v0.124.0) (2018-11-08)
+
+
+### Bug Fixes
+
+* **admin:** add empty line ([398c427](https://github.com/edenlabllc/ehealth.web/commit/398c427))
+* **admin:** move env var to .env ([9055ad1](https://github.com/edenlabllc/ehealth.web/commit/9055ad1))
+* **admin:** use fromPairs ([095d073](https://github.com/edenlabllc/ehealth.web/commit/095d073))
+
+
+### Features
+
+* **admin:** add feature flags ([f418419](https://github.com/edenlabllc/ehealth.web/commit/f418419))
+
+
+
+
+
 <a name="0.123.1"></a>
 ## [0.123.1](https://github.com/edenlabllc/ehealth.web/compare/v0.123.0...v0.123.1) (2018-11-08)
 
