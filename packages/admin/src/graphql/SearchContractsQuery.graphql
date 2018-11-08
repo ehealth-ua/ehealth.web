@@ -1,0 +1,42 @@
+query SearchContractsQuery(
+  $filter: ContractFilter
+  $orderBy: ContractOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
+) {
+  contracts(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
+    nodes {
+      id
+      databaseId
+      isSuspended
+      contractNumber
+      contractRequestId
+      startDate
+      endDate
+      status
+      contractorLegalEntity {
+        id
+        edrpou
+        name
+      }
+      contractorOwner {
+        id
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}

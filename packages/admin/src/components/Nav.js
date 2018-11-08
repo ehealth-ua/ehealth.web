@@ -21,6 +21,7 @@ const Nav = () => (
         >
           <NavSection title="Договори">
             <Ability action="read" resource="contract_request">
+              <NavLink to="/contracts">Перелік контрактів</NavLink>
               <NavLink to="/contract-requests">
                 Заяви на укладення договору
               </NavLink>
