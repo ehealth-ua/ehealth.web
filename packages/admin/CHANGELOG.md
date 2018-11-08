@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.126.1"></a>
+## [0.126.1](https://github.com/edenlabllc/ehealth.web/compare/v0.126.0...v0.126.1) (2018-11-08)
+
+
+### Bug Fixes
+
+* **admin:** add env.test, move variable to env.dev ([37ba3ef](https://github.com/edenlabllc/ehealth.web/commit/37ba3ef))
+
+
+
+
+
 <a name="0.126.0"></a>
 # [0.126.0](https://github.com/edenlabllc/ehealth.web/compare/v0.125.0...v0.126.0) (2018-11-08)
 
