@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.126.2"></a>
+## [0.126.2](https://github.com/edenlabllc/ehealth.web/compare/v0.126.1...v0.126.2) (2018-11-08)
+
+
+### Bug Fixes
+
+* **admin:** add check of REACT_APP_FEATURES env variable ([5c57761](https://github.com/edenlabllc/ehealth.web/commit/5c57761))
+
+
+
+
+
 <a name="0.126.1"></a>
 ## [0.126.1](https://github.com/edenlabllc/ehealth.web/compare/v0.126.0...v0.126.1) (2018-11-08)
 
