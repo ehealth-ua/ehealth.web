@@ -2,42 +2,53 @@ import React from "react";
 import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
 import * as Reach from "@reach/router";
+import { FlagsProvider, Flag } from "flag";
 import { ChevronBottomIcon } from "@ehealth/icons";
+
+import flags from "../flags";
 
 import Ability from "./Ability";
 import Link from "./Link";
 
 const Nav = () => (
-  <NavContainer>
-    <NavList>
-      <Ability action="read" resources={["contract_request", "contract"]} loose>
-        <NavSection title="Договори">
-          <Ability action="read" resource="contract_request">
-            <NavLink to="/contract-requests">
-              Заяви на укладення договору
-            </NavLink>
+  <FlagsProvider flags={flags}>
+    <NavContainer>
+      <NavList>
+        <Ability
+          action="read"
+          resources={["contract_request", "contract"]}
+          loose
+        >
+          <NavSection title="Договори">
+            <Ability action="read" resource="contract_request">
+              <NavLink to="/contract-requests">
+                Заяви на укладення договору
+              </NavLink>
+            </Ability>
+          </NavSection>
+        </Ability>
+        <Flag name="features.person">
+          <Ability action="read" resource="person">
+            <NavSection title="Паціенти">
+              <NavLink to="/persons">Пошук паціентів</NavLink>
+            </NavSection>
           </Ability>
-        </NavSection>
-      </Ability>
-      <Ability action="read" resource="person">
-        <NavSection title="Паціенти">
-          <NavLink to="/persons">Пошук паціентів</NavLink>
-        </NavSection>
-      </Ability>
-      <Ability action="read" resource="legal_entity">
-        <NavLink to="/legal-entities">Медзаклади</NavLink>
-      </Ability>
-      <Ability action="merge" resources={["legal_entity"]} loose>
-        <NavSection title="Задачі в процесі виконання">
-          <Ability action="merge" resource="legal_entity">
-            <NavLink to="/legal-entity-merge-jobs">
-              Підпорядкування медзакладів
-            </NavLink>
-          </Ability>
-        </NavSection>
-      </Ability>
-    </NavList>
-  </NavContainer>
+        </Flag>
+        <Ability action="read" resource="legal_entity">
+          <NavLink to="/legal-entities">Медзаклади</NavLink>
+        </Ability>
+        <Ability action="merge" resources={["legal_entity"]} loose>
+          <NavSection title="Задачі в процесі виконання">
+            <Ability action="merge" resource="legal_entity">
+              <NavLink to="/legal-entity-merge-jobs">
+                Підпорядкування медзакладів
+              </NavLink>
+            </Ability>
+          </NavSection>
+        </Ability>
+      </NavList>
+    </NavContainer>
+  </FlagsProvider>
 );
 
 export default Nav;
