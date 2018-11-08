@@ -118,5 +118,9 @@ query ContractRequestQuery($id: ID!) {
         medicalService
       }
     }
+    attachedDocuments {
+      type
+      url
+    }
   }
 }

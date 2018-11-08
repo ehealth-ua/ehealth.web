@@ -64,8 +64,21 @@ const Details = ({ id }) => (
         contractorLegalEntity,
         contractorOwner,
         contractorBase,
-        contractorPaymentDetails
+        contractorPaymentDetails,
+        contractorDivisions,
+        contractorEmployeeDivisions,
+        externalContractors,
+        attachedDocuments
       } = data.contractRequest;
+
+      const { party = "" } = assignee ? assignee : {};
+
+      const selectedAssignee =
+        status === "IN_PROCESS" || status === "NEW" ? (
+          <ModalSelect submitted={getFullName(party)} />
+        ) : (
+          assignee && getFullName(party)
+        );
 
       return (
         <>
@@ -78,10 +91,7 @@ const Details = ({ id }) => (
                 <Breadcrumbs.Item>Деталі запиту</Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
-            <Flex
-              justifyContent="space-between"
-              flexDirection={status === "NEW" && "column"}
-            >
+            <Flex justifyContent="space-between">
               <Box>
                 <DefinitionListView
                   labels={{
@@ -98,13 +108,7 @@ const Details = ({ id }) => (
                         minWidth={100}
                       />
                     ),
-                    assignee: assignee && (
-                      <ModalSelect
-                        submitted={
-                          status !== "NEW" && getFullName(assignee.party)
-                        }
-                      />
-                    )
+                    assignee: selectedAssignee
                   }}
                   color="#7F8FA4"
                   labelWidth="100px"
@@ -112,7 +116,6 @@ const Details = ({ id }) => (
               </Box>
               <Switch
                 value={status}
-                NEW=" "
                 IN_PROCESS={
                   <Flex alignItems="flex-end">
                     <Flex>
@@ -167,10 +170,22 @@ const Details = ({ id }) => (
                 contractorLegalEntity={contractorLegalEntity}
                 contractorPaymentDetails={contractorPaymentDetails}
               />
-              <Divisions path="/divisions" id={id} />
-              <Employees path="/employees" id={id} />
-              <ExternalContractors path="/external-contractors" id={id} />
-              <Documents path="/documents" documents={documents} />
+              <Divisions
+                path="/divisions"
+                contractorDivisions={contractorDivisions}
+              />
+              <Employees
+                path="/employees"
+                contractorEmployeeDivisions={contractorEmployeeDivisions}
+              />
+              <ExternalContractors
+                path="/external-contractors"
+                externalContractors={externalContractors}
+              />
+              <Documents
+                path="/documents"
+                attachedDocuments={attachedDocuments}
+              />
             </Router>
           </Tabs.Content>
         </>
@@ -199,7 +214,7 @@ const GeneralInfo = ({ contractorRmspAmount, ...dates }) => (
         contractorRmspAmount: (
           <>
             {contractorRmspAmount}
-            <GreyTitle>(станом на 01.01.2018)</GreyTitle>
+            <Grey>(станом на 01.01.2018)</Grey>
           </>
         )
       }}
@@ -218,31 +233,43 @@ const LegalEntity = ({
       labels={{
         edrpou: "ЄДРПОУ",
         name: "Назва",
-        addresses: "Адреса",
-        legalEntityId: <GreyTitle>ID медзакладу</GreyTitle>
+        addresses: "Адреса"
       }}
       data={{
-        legalEntityId: <GreyTitle>{legalEntityId}</GreyTitle>,
         name: name,
         edrpou: edrpou,
         addresses: addresses
-          .filter(a => a.type === "RESIDENCE")
+          .filter(a => a.type === "REGISTRATION")
           .map((item, key) => <AddressView data={item} key={key} />)
+      }}
+    />
+    <DefinitionListView
+      color="blueberrySoda"
+      labels={{
+        legalEntityId: "ID медзакладу"
+      }}
+      data={{
+        legalEntityId: legalEntityId
       }}
     />
     <Line />
     <DefinitionListView
       labels={{
         fullName: "ПІБ підписанта",
-        ownerId: <GreyTitle>ID підписанта</GreyTitle>,
         contractorBase: "Діє на основі"
       }}
       data={{
         fullName: contractorOwner && getFullName(contractorOwner.party),
-        ownerId: contractorOwner && (
-          <GreyTitle>{contractorOwner.databaseId}</GreyTitle>
-        ),
         contractorBase: contractorBase
+      }}
+    />
+    <DefinitionListView
+      color="blueberrySoda"
+      labels={{
+        ownerId: "ID підписанта"
+      }}
+      data={{
+        ownerId: contractorOwner && contractorOwner.databaseId
       }}
     />
     <Line />
@@ -253,261 +280,110 @@ const LegalEntity = ({
         payerAccount: "Номер рахунку"
       }}
       data={{
-        bankName: bankName,
-        mfo: mfo,
-        payerAccount: payerAccount
+        bankName,
+        mfo,
+        payerAccount
       }}
     />
   </Box>
 );
 
-const Divisions = ({ id }) => (
-  <LocationParams>
-    {({ locationParams, setLocationParams }) => {
-      const { first, last } = locationParams;
-
-      return (
-        <Query
-          query={ContractRequestQuery}
-          variables={{
-            id,
-            first:
-              isEmpty(first) && isEmpty(last) ? ITEMS_PER_PAGE[0] : undefined,
-            ...locationParams
-          }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`;
-
-            const {
-              contractRequest: {
-                contractorDivisions,
-                contractorDivisions: { pageInfo }
-              }
-            } = data;
-
-            return (
-              contractorDivisions &&
-              contractorDivisions.length > 0 && (
-                <>
-                  <Table
-                    data={contractorDivisions}
-                    header={{
-                      name: "Назва відділення",
-                      addresses: "Адреса",
-                      mountainGroup: "Гірський регіон",
-                      phones: "Телефон Email"
-                    }}
-                    renderRow={({
-                      name,
-                      addresses,
-                      mountainGroup,
-                      phones,
-                      email
-                    }) => ({
-                      name,
-                      mountainGroup: (
-                        <Flex justifyContent="center">
-                          {mountainGroup ? (
-                            <PositiveIcon />
-                          ) : (
-                            <CircleIcon stroke="#1bb934" strokeWidth="4" />
-                          )}
-                        </Flex>
-                      ),
-                      phones: (
-                        <>
-                          <Box>
-                            {phones
-                              .filter(a => a.type === "MOBILE")
-                              .map((item, key) => item.number)[0] ||
-                              phones[0].number}
-                          </Box>
-                          <Box>{email}</Box>
-                        </>
-                      ),
-                      addresses: addresses
-                        .filter(a => a.type === "REGISTRATION")
-                        .map((item, key) => (
-                          <AddressView data={item} key={key} />
-                        ))
-                    })}
-                    tableName="/contract-requests/divisions"
-                  />
-                  <Pagination {...pageInfo} />
-                </>
-              )
-            );
-          }}
-        </Query>
-      );
-    }}
-  </LocationParams>
-);
-
-const Employees = ({ id }) => (
-  <LocationParams>
-    {({ locationParams, setLocationParams }) => {
-      const { first, last } = locationParams;
-
-      return (
-        <Query
-          query={ContractRequestQuery}
-          variables={{
-            id,
-            first:
-              isEmpty(first) && isEmpty(last) ? ITEMS_PER_PAGE[0] : undefined,
-            ...locationParams
-          }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`;
-
-            const {
-              contractRequest: {
-                contractorEmployeeDivisions,
-                contractorEmployeeDivisions: { pageInfo }
-              }
-            } = data;
-            const { orderBy } = locationParams;
-
-            return (
-              // Temporary solution for invalid response: 'contractorEmployeeDivisions: [null]'
-              contractorEmployeeDivisions[0] !== null &&
-              contractorEmployeeDivisions &&
-              contractorEmployeeDivisions.length > 0 && (
-                <>
-                  <Table
-                    data={contractorEmployeeDivisions}
-                    header={{
-                      databaseId: "ID",
-                      divisionName: "Назва відділення",
-                      employeeName: "ПІБ працівника",
-                      speciality: "Спеціальність",
-                      staffUnits: "Штатна одиниця",
-                      declarationLimit: "Ліміт кількості декларацій"
-                    }}
-                    renderRow={({
-                      employee: {
-                        databaseId,
-                        party,
-                        additionalInfo: { specialities }
-                      },
-                      division: { name },
-                      ...contractorEmployeeDivisions
-                    }) => ({
-                      databaseId,
-                      divisionName: name,
-                      employeeName: getFullName(party),
-                      speciality: specialities[0].speciality,
-                      ...contractorEmployeeDivisions
-                    })}
-                    sortingParams={parseSortingParams(orderBy)}
-                    onSortingChange={sortingParams =>
-                      setLocationParams({
-                        ...locationParams,
-                        orderBy: stringifySortingParams(sortingParams)
-                      })
-                    }
-                    tableName="/contract-requests/employees"
-                  />
-                  <Pagination {...pageInfo} />
-                </>
-              )
-            );
-          }}
-        </Query>
-      );
-    }}
-  </LocationParams>
-);
-
-const ExternalContractors = ({ id }) => (
-  <LocationParams>
-    {({ locationParams, setLocationParams }) => {
-      const { first, last } = locationParams;
-
-      return (
-        <Query
-          query={ContractRequestQuery}
-          variables={{
-            id,
-            first:
-              isEmpty(first) && isEmpty(last) ? ITEMS_PER_PAGE[0] : undefined,
-            ...locationParams
-          }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`;
-
-            const {
-              contractRequest: {
-                externalContractors,
-                externalContractors: { pageInfo }
-              }
-            } = data;
-
-            return (
-              externalContractors &&
-              externalContractors.length > 0 && (
-                <>
-                  <ExternalContractorsTable data={externalContractors} />
-                  <Pagination {...pageInfo} />
-                </>
-              )
-            );
-          }}
-        </Query>
-      );
-    }}
-  </LocationParams>
-);
-
-const Documents = ({ documents }) => (
-  <BooleanValue>
-    {({ value: opened, toggle }) => (
-      <>
-        <Flex alignItems="center" justifyContent="flex-end">
-          <ButtonIcon pointerEvents={opened} onClick={toggle}>
-            <MenuTileIcon />
-          </ButtonIcon>
-          <ButtonIcon pointerEvents={!opened} onClick={toggle}>
-            <MenuListIcon />
-          </ButtonIcon>
-        </Flex>
-
-        <Flex flexWrap="wrap" flexDirection={!opened ? "column" : "row"}>
-          {documents.map(({ src, alt }) => (
-            <Box m="2">
-              <SaveLink
-                href={src}
-                target="_blank"
-                flexDirection={opened ? "column" : "row"}
-                alignItems={!opened ? "center" : "flex-start"}
-              >
-                {opened ? (
-                  <BorderBox>
-                    <img src={src} alt={alt} width="100%" height="100%" />
-                  </BorderBox>
-                ) : (
-                  <Box m={1} color="shiningKnight">
-                    <DefaultImageIcon />
-                  </Box>
-                )}
-                <Text color="rockmanBlue" lineHeight="1">
-                  {alt}
-                </Text>
-              </SaveLink>
+const Divisions = ({ contractorDivisions }) =>
+  contractorDivisions &&
+  contractorDivisions.length > 0 && (
+    <Table
+      data={contractorDivisions}
+      header={{
+        name: "Назва відділення",
+        addresses: "Адреса",
+        mountainGroup: "Гірський регіон",
+        phones: (
+          <>
+            Телефон <br />
+            Email
+          </>
+        )
+      }}
+      renderRow={({ name, addresses, mountainGroup, phones, email }) => ({
+        name,
+        mountainGroup: (
+          <Flex justifyContent="center">
+            {mountainGroup ? (
+              <PositiveIcon />
+            ) : (
+              <CircleIcon stroke="#1bb934" strokeWidth="4" />
+            )}
+          </Flex>
+        ),
+        phones: (
+          <>
+            <Box>
+              {phones
+                .filter(a => a.type === "MOBILE")
+                .map((item, key) => item.number)[0] || phones[0].number}
             </Box>
-          ))}
-        </Flex>
-      </>
-    )}
-  </BooleanValue>
-);
+            <Box>{email}</Box>
+          </>
+        ),
+        addresses: addresses
+          .filter(a => a.type === "RESIDENCE")
+          .map((item, key) => <AddressView data={item} key={key} />)
+      })}
+      tableName="/contract-requests/divisions"
+    />
+  );
+
+const Employees = ({ contractorEmployeeDivisions }) =>
+  contractorEmployeeDivisions &&
+  contractorEmployeeDivisions.length > 0 && (
+    <Table
+      data={contractorEmployeeDivisions}
+      header={{
+        databaseId: "ID",
+        divisionName: "Назва відділення",
+        employeeName: "ПІБ працівника",
+        speciality: "Спеціальність",
+        staffUnits: "Штатна одиниця",
+        declarationLimit: "Ліміт кількості декларацій"
+      }}
+      renderRow={({
+        employee: {
+          databaseId,
+          party,
+          additionalInfo: { specialities }
+        },
+        division: { name: divisionName },
+        ...contractorEmployeeDivisions
+      }) => ({
+        databaseId,
+        divisionName,
+        employeeName: getFullName(party),
+        speciality: specialities[0].speciality,
+        ...contractorEmployeeDivisions
+      })}
+      tableName="/contract-requests/employees"
+    />
+  );
+
+const ExternalContractors = ({ externalContractors }) =>
+  externalContractors &&
+  externalContractors.length > 0 && (
+    <ExternalContractorsTable data={externalContractors} />
+  );
+
+const Documents = ({ attachedDocuments }) =>
+  attachedDocuments.map(({ url, type }) => (
+    <Box m="2">
+      <SaveLink href={url} target="_blank">
+        <Box m={1} color="shiningKnight">
+          <DefaultImageIcon />
+        </Box>
+        <Text color="rockmanBlue" lineHeight="1">
+          {type}
+        </Text>
+      </SaveLink>
+    </Box>
+  ));
 
 const ExternalContractorsTable = ({ data }) => (
   <Table
@@ -552,65 +428,58 @@ const ExternalContractorsTable = ({ data }) => (
 
       return (
         <TableBodyComponent>
-          {data.map((item, index) => {
-            return (
-              <BooleanValue>
-                {({ value: opened, toggle }) => {
-                  const row = renderRow(item, toggle);
-                  return (
-                    <>
-                      <TableRow key={rowKeyExtractor(item, index)}>
-                        {columns
-                          .filter(bodyName =>
-                            filterTableColumn(filterRow, bodyName)
-                          )
-                          .map((name, index) => (
-                            <TableCell key={columnKeyExtractor(name, index)}>
-                              {row[name]}
-                            </TableCell>
-                          ))}
-                      </TableRow>
-                      {opened && (
-                        <TableRow
-                          key={`row_${rowKeyExtractor(item, index)}`}
+          {data.map((item, index) => (
+            <BooleanValue>
+              {({ value: opened, toggle }) => {
+                const row = renderRow(item, toggle);
+                return (
+                  <>
+                    <TableRow key={rowKeyExtractor(item, index)}>
+                      {columns
+                        .filter(bodyName =>
+                          filterTableColumn(filterRow, bodyName)
+                        )
+                        .map((name, index) => (
+                          <TableCell key={columnKeyExtractor(name, index)}>
+                            {row[name]}
+                          </TableCell>
+                        ))}
+                    </TableRow>
+                    {opened && (
+                      <TableRow
+                        key={`row_${rowKeyExtractor(item, index)}`}
+                        fullSize
+                      >
+                        <TableCell
+                          key={`cell_${rowKeyExtractor(item, index)}`}
+                          colspan={
+                            columns.filter(bodyName =>
+                              filterTableColumn(filterRow, bodyName)
+                            ).length
+                          }
                           fullSize
                         >
-                          <TableCell
-                            key={`cell_${rowKeyExtractor(item, index)}`}
-                            colspan={
-                              columns.filter(bodyName =>
-                                filterTableColumn(filterRow, bodyName)
-                              ).length
-                            }
-                            fullSize
-                          >
-                            <Table
-                              data={item.divisions}
-                              header={{
-                                name: "",
-                                medicalService: ""
-                              }}
-                              renderRow={({
-                                division: { name },
-                                medicalService
-                              }) => {
-                                return {
-                                  name,
-                                  medicalService
-                                };
-                              }}
-                              tableName="/contract-requests/ExternalContractorsTable"
-                              headless
-                            />
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </>
-                  );
-                }}
-              </BooleanValue>
-            );
-          })}
+                          <Table
+                            data={item.divisions}
+                            header={{
+                              name: "",
+                              medicalService: ""
+                            }}
+                            renderRow={({
+                              division: { name },
+                              medicalService
+                            }) => ({ name, medicalService })}
+                            tableName="/contract-requests/ExternalContractorsTable"
+                            headless
+                          />
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </>
+                );
+              }}
+            </BooleanValue>
+          ))}
         </TableBodyComponent>
       );
     }}
@@ -628,47 +497,45 @@ const PrintButton = ({ content, ...props }) => (
 
 const ModalSelect = ({ assignee, submitted }) => (
   <BooleanValue>
-    {({ value: opened, toggle }) => {
-      return (
-        <Form onSubmit={() => null}>
-          <Form.AutoSubmit onSubmit={() => null} />
-          <Manager>
-            <Reference>
-              {({ ref }) => (
-                <Flex innerRef={ref} alignItems="center">
-                  {submitted}
-                  <ButtonWrapper onClick={toggle}>
-                    {!submitted && <DropDownButton color="#2EA2F8" />}
-                    <ButtonText>
-                      {!submitted ? "Додати виконавця" : "Змінити"}
-                    </ButtonText>
-                  </ButtonWrapper>
-                </Flex>
-              )}
-            </Reference>
-            <Popper placement="bottom-start" positionFixed>
-              {({ ref, style }) => (
-                <ModalWrapper style={style} innerRef={ref} visible={opened}>
-                  <Field.Select
-                    items={assignee}
-                    name="performer"
-                    renderItem={item => item.name}
-                    itemToString={item => {
-                      if (!item) return "";
-                      return typeof item === "string" ? item : item.name;
-                    }}
-                    filterOptions={{ keys: ["name"] }}
-                    hideErrors
-                    iconComponent={SearchIcon}
-                    style={{ margin: "5px", border: "1px solid #DFE3E9" }}
-                  />
-                </ModalWrapper>
-              )}
-            </Popper>
-          </Manager>
-        </Form>
-      );
-    }}
+    {({ value: opened, toggle }) => (
+      <Form onSubmit={() => null}>
+        <Form.AutoSubmit onSubmit={() => null} />
+        <Manager>
+          <Reference>
+            {({ ref }) => (
+              <Flex innerRef={ref} alignItems="center">
+                {submitted}
+                <ButtonWrapper onClick={toggle}>
+                  {!submitted && <DropDownButton color="#2EA2F8" />}
+                  <ButtonText>
+                    {!submitted ? "Додати виконавця" : "Змінити"}
+                  </ButtonText>
+                </ButtonWrapper>
+              </Flex>
+            )}
+          </Reference>
+          <Popper placement="bottom-start" positionFixed>
+            {({ ref, style }) => (
+              <ModalWrapper style={style} innerRef={ref} visible={opened}>
+                <Field.Select
+                  items={assignee}
+                  name="performer"
+                  renderItem={item => item.name}
+                  itemToString={item => {
+                    if (!item) return "";
+                    return typeof item === "string" ? item : item.name;
+                  }}
+                  filterOptions={{ keys: ["name"] }}
+                  hideErrors
+                  iconComponent={SearchIcon}
+                  style={{ margin: "5px", border: "1px solid #DFE3E9" }}
+                />
+              </ModalWrapper>
+            )}
+          </Popper>
+        </Manager>
+      </Form>
+    )}
   </BooleanValue>
 );
 
@@ -713,7 +580,7 @@ const Wrapper = system(
   { cursor: "pointer" }
 );
 
-const GreyTitle = system({
+const Grey = system({
   color: "blueberrySoda"
 });
 
