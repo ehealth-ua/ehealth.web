@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.125.0"></a>
+# [0.125.0](https://github.com/edenlabllc/ehealth.web/compare/v0.124.0...v0.125.0) (2018-11-08)
+
+
+### Features
+
+* **admin:** add headless prop to the Table, update Table styles for creating inner tables without header ([ebd1c9a](https://github.com/edenlabllc/ehealth.web/commit/ebd1c9a))
+
+
+
+
+
 <a name="0.124.0"></a>
 # [0.124.0](https://github.com/edenlabllc/ehealth.web/compare/v0.123.2...v0.124.0) (2018-11-08)
 
