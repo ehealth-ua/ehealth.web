@@ -41,10 +41,12 @@ const Search = ({ uri }) => (
       {({ locationParams, setLocationParams }) => {
         const {
           filter: { status = {}, searchRequest } = {},
-          filter,
           date: { startFrom, startTo, endFrom, endTo } = {},
           first,
-          last
+          last,
+          after,
+          before,
+          orderBy
         } = locationParams;
 
         const edrpouReg = new RegExp(EDRPOU_PATTERN);
@@ -61,10 +63,15 @@ const Search = ({ uri }) => (
               query={SearchContractsQuery}
               variables={{
                 first:
-                  isEmpty(first) && isEmpty(last)
+                  !first && !last
                     ? ITEMS_PER_PAGE[0]
-                    : undefined,
-                ...locationParams,
+                    : first
+                      ? parseInt(first)
+                      : undefined,
+                last: last ? parseInt(last) : undefined,
+                after,
+                before,
+                orderBy,
                 filter: {
                   ...contract,
                   startDate: formatDateTimeInterval(startFrom, startTo),
@@ -93,7 +100,7 @@ const Search = ({ uri }) => (
                         <Table
                           data={contracts}
                           header={{
-                            id: "ID",
+                            databaseId: "ID",
                             edrpou: "ЄДРПОУ",
                             contractNumber: "Номер контракту",
                             startDate: "Контракт діє з",
@@ -105,12 +112,10 @@ const Search = ({ uri }) => (
                           renderRow={({
                             id,
                             status,
-                            databaseId,
                             isSuspended,
                             contractorLegalEntity: { edrpou },
                             ...contracts
                           }) => ({
-                            id: databaseId,
                             edrpou,
                             ...contracts,
                             isSuspended: (

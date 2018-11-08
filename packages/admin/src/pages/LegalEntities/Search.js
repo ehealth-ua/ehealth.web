@@ -54,7 +54,10 @@ const Search = ({ uri }) => (
         const {
           filter: { code, settlement, nhsVerified, type } = {},
           first,
-          last
+          last,
+          after,
+          before,
+          orderBy
         } = locationParams;
         const regId = new RegExp(ID_PATTERN);
         const testID = regId.test(code);
@@ -75,8 +78,15 @@ const Search = ({ uri }) => (
             fetchPolicy="network-only"
             variables={{
               first:
-                isEmpty(first) && isEmpty(last) ? ITEMS_PER_PAGE[0] : undefined,
-              ...locationParams,
+                !first && !last
+                  ? ITEMS_PER_PAGE[0]
+                  : first
+                    ? parseInt(first)
+                    : undefined,
+              last: last ? parseInt(last) : undefined,
+              after,
+              before,
+              orderBy,
               filter: !isEmpty(locationParams.filter)
                 ? filteredParams
                 : undefined

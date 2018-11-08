@@ -28,8 +28,8 @@ const Pagination = ({
                     ...locationParams,
                     before: startCursor,
                     last: last || itemsCountDefault,
-                    after: null,
-                    first: null
+                    after: undefined,
+                    first: undefined
                   });
                 }}
               >
@@ -51,8 +51,8 @@ const Pagination = ({
                   ...locationParams,
                   after: endCursor,
                   first: first || itemsCountDefault,
-                  before: null,
-                  last: null
+                  before: undefined,
+                  last: undefined
                 });
               }}
             >
