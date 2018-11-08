@@ -188,7 +188,7 @@ const ContractRequestsListPage = ({
     </ListTable>
     <Pagination
       currentPage={paging.page_number}
-      totalPage={paging.total_pages}
+      totalPages={paging.total_pages}
     />
   </div>
 );
