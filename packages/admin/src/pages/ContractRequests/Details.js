@@ -249,7 +249,7 @@ const LegalEntity = ({
         legalEntityId: "ID медзакладу"
       }}
       data={{
-        legalEntityId: legalEntityId
+        legalEntityId
       }}
     />
     <Line />
@@ -547,6 +547,7 @@ const ModalWrapper = system(
     color: "darkAndStormy"
   },
   {
+    zIndex: 100,
     visibility: "hidden",
     boxShadow: "0 1px 4px rgba(72, 60, 60, 0.2)"
   },
