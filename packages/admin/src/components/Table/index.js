@@ -148,6 +148,7 @@ class Table extends React.Component<TableProps, TableState> {
                 <ResetIcon
                   onClick={() => {
                     localStorage.setItem(tableName, hiddenFields);
+                    localStorage.removeItem(`${tableName}-cell-sizes`);
                     this.setState({
                       filterRow: this.defaultFilter(header, tableName)
                     });
