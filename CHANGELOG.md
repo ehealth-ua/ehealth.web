@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.123.2"></a>
+## [0.123.2](https://github.com/edenlabllc/ehealth.web/compare/v0.123.1...v0.123.2) (2018-11-08)
+
+
+### Bug Fixes
+
+* **admin-legacy:** fix contract request list pagination ([cf41525](https://github.com/edenlabllc/ehealth.web/commit/cf41525))
+
+
+
+
+
 <a name="0.123.1"></a>
 ## [0.123.1](https://github.com/edenlabllc/ehealth.web/compare/v0.123.0...v0.123.1) (2018-11-08)
 
