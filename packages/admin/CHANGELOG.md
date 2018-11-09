@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.130.0"></a>
+# [0.130.0](https://github.com/edenlabllc/ehealth.web/compare/v0.129.0...v0.130.0) (2018-11-09)
+
+
+### Features
+
+* **admin:** add search by assigneeName to the ContractRequestSearch form ([9de7185](https://github.com/edenlabllc/ehealth.web/commit/9de7185))
+
+
+
+
+
 <a name="0.129.0"></a>
 # [0.129.0](https://github.com/edenlabllc/ehealth.web/compare/v0.128.0...v0.129.0) (2018-11-09)
 
