@@ -64,13 +64,6 @@ const Details = ({ id }) => (
 
       const { party = "" } = assignee ? assignee : {};
 
-      const selectedAssignee =
-        status === "IN_PROCESS" || status === "NEW" ? (
-          <ModalSelect submitted={getFullName(party)} />
-        ) : (
-          assignee && getFullName(party)
-        );
-
       return (
         <>
           <Box p={6}>
@@ -99,7 +92,16 @@ const Details = ({ id }) => (
                         minWidth={100}
                       />
                     ),
-                    assignee: selectedAssignee
+                    assignee: (
+                      <Switch
+                        value={status}
+                        NEW={<ModalSelect submitted={getFullName(party)} />}
+                        IN_PROCESS={
+                          <ModalSelect submitted={getFullName(party)} />
+                        }
+                        default={assignee && getFullName(party)}
+                      />
+                    )
                   }}
                   color="#7F8FA4"
                   labelWidth="100px"
