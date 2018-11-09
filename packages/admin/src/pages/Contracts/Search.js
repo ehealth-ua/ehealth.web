@@ -34,7 +34,7 @@ const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
-      Перелік контрактів
+      Перелік договорів
     </Heading>
 
     <LocationParams>
@@ -102,9 +102,9 @@ const Search = ({ uri }) => (
                           header={{
                             databaseId: "ID",
                             edrpou: "ЄДРПОУ",
-                            contractNumber: "Номер контракту",
-                            startDate: "Контракт діє з",
-                            endDate: "Контракт діє по",
+                            contractNumber: "Номер договору",
+                            startDate: "Договір діє з",
+                            endDate: "Договір діє по",
                             isSuspended: "Призупинений",
                             status: "Статус",
                             details: "Деталі"
@@ -179,11 +179,11 @@ export default Search;
 const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
   <Form onSubmit={onSubmit} initialValues={initialValues}>
     <Flex mx={-1}>
-      <Box px={1} width={3 / 5}>
+      <Box px={1} width={1 / 2}>
         <Field.Text
           name="filter.searchRequest"
-          label="Пошук контракту"
-          placeholder="ЄДРПОУ або Номер контракту"
+          label="Пошук договору"
+          placeholder="ЄДРПОУ або Номер договору"
           postfix={<AdminSearchIcon color="#CED0DA" />}
         />
         <Validation.Matches
@@ -197,7 +197,7 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
       <Box px={1} width={1 / 6}>
         <Field.Select
           name="filter.status"
-          label="Статус контракту"
+          label="Статус договору"
           placeholder="test"
           items={[{ value: "всі статуси" }, ...contractStatuses]}
           renderItem={item => item.value}
@@ -209,24 +209,24 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
         />
       </Box>
 
-      <Box px={1} width={2 / 6}>
-        <Field.RangePicker
-          rangeNames={["date.startFrom", "date.startTo"]}
-          label="Початок дії контракту"
-        />
-      </Box>
-      <Box px={1} width={2 / 6}>
+      <Flex px={1}>
+        <Box mr={1}>
+          <Field.RangePicker
+            rangeNames={["date.startFrom", "date.startTo"]}
+            label="Початок дії договору"
+          />
+        </Box>
         <Field.RangePicker
           rangeNames={["date.endFrom", "date.endTo"]}
-          label="Кінець дії контракту"
+          label="Кінець дії договору"
         />
-      </Box>
+      </Flex>
     </Flex>
-    <Flex mx={-1}>
-      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
+    <Flex mx={-1} justifyContent="flex-start">
+      <Box px={1}>
         <Button variant="blue">Шукати</Button>
       </Box>
-      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
+      <Box px={1}>
         <ResetButton
           onClick={() => {
             onSubmit({
