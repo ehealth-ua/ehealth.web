@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/admin",
-  "version": "0.126.3",
+  "version": "0.127.0",
   "private": true,
   "dependencies": {
     "@ehealth/components": "file:../components",
