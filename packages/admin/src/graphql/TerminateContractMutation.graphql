@@ -1,0 +1,8 @@
+mutation TerminateContractMutation($input: TerminateContractInput!) {
+  contract: terminateContract(input: $input) {
+    contract {
+      id
+      status
+    }
+  }
+}
