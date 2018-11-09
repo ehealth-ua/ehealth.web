@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.129.0"></a>
+# [0.129.0](https://github.com/edenlabllc/ehealth.web/compare/v0.128.0...v0.129.0) (2018-11-09)
+
+
+### Bug Fixes
+
+* **admin:** remove unused import and components ([1429592](https://github.com/edenlabllc/ehealth.web/commit/1429592))
+* **admin:** rename nav item ([5612957](https://github.com/edenlabllc/ehealth.web/commit/5612957))
+* **mock-server:** update schema ([e93969b](https://github.com/edenlabllc/ehealth.web/commit/e93969b))
+
+
+### Features
+
+* **admin:** add contract details page ([be6132f](https://github.com/edenlabllc/ehealth.web/commit/be6132f))
+
+
+
+
+
 <a name="0.128.0"></a>
 # [0.128.0](https://github.com/edenlabllc/ehealth.web/compare/v0.127.1...v0.128.0) (2018-11-09)
 
