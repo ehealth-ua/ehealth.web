@@ -2,9 +2,15 @@ import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
+import format from "date-fns/format";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
-import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+import {
+  parseSortingParams,
+  stringifySortingParams,
+  formatDateTimeInterval,
+  getFullName
+} from "@ehealth/utils";
 import { AdminSearchIcon } from "@ehealth/icons";
 
 import * as Field from "../../components/Field";
@@ -14,6 +20,11 @@ import Pagination from "../../components/Pagination";
 import Button, { ResetButton } from "../../components/Button";
 import Badge from "../../components/Badge";
 import STATUSES from "../../helpers/statuses";
+import {
+  EDRPOU_PATTERN,
+  CONTRACT_PATTERN,
+  SEARCH_REQUEST_PATTERN
+} from "../../constants/contractRequests";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 import SearchContractRequestsQuery from "../../graphql/SearchContractRequestsQuery.graphql";
@@ -21,11 +32,6 @@ import SearchContractRequestsQuery from "../../graphql/SearchContractRequestsQue
 const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
   ([name, value]) => ({ name, value })
 );
-
-const EDRPOU_PATTERN = "^[0-9]{8,10}$";
-const CONTRACT_REQUEST_PATTERN =
-  "^[0-9A-Za-zА-ЯҐЇІЄа-яґїіє]{4}-[0-9A-Za-zА-ЯҐЇІЄа-яґїіє]{4}-[0-9A-Za-zА-ЯҐЇІЄа-яґїіє]{4}$";
-const SEARCH_REQUEST_PATTERN = `(${EDRPOU_PATTERN})|(${CONTRACT_REQUEST_PATTERN})`;
 
 const Search = ({ uri }) => (
   <Box p={6}>
@@ -36,12 +42,13 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { status = {} } = {},
-          filter,
-          searchRequest = "",
+          filter: { status = {}, searchRequest } = {},
           date: { startFrom, startTo, endFrom, endTo } = {},
           first,
-          last
+          last,
+          after,
+          before,
+          orderBy
         } = locationParams;
 
         const edrpouReg = new RegExp(EDRPOU_PATTERN);
@@ -52,37 +59,40 @@ const Search = ({ uri }) => (
             ? { contractorLegalEntityEdrpou: searchRequest }
             : { contractNumber: searchRequest });
 
-        const startDate = startFrom
-          ? `${startFrom}/${startTo || ".."}`
-          : undefined;
-
-        const endDate = endFrom ? `${endFrom}/${endTo || ".."}` : undefined;
-
         return (
           <>
             <Query
               query={SearchContractRequestsQuery}
               variables={{
                 first:
-                  isEmpty(first) && isEmpty(last)
+                  !first && !last
                     ? ITEMS_PER_PAGE[0]
-                    : undefined,
-                ...locationParams,
+                    : first
+                      ? parseInt(first)
+                      : undefined,
+                last: last ? parseInt(last) : undefined,
+                after,
+                before,
+                orderBy,
                 filter: {
-                  ...filter,
-                  startDate,
-                  endDate,
                   ...contractRequest,
+                  startDate: formatDateTimeInterval(startFrom, startTo),
+                  endDate: formatDateTimeInterval(endFrom, endTo),
                   status: status.name
                 }
               }}
             >
-              {({ loading, error, data, refetch }) => {
-                const {
-                  nodes: contractRequests = [],
-                  pageInfo
-                } = data.contractRequests;
-
+              {({
+                loading,
+                error,
+                data: {
+                  contractRequests: {
+                    nodes: contractRequests = [],
+                    pageInfo
+                  } = {}
+                } = {},
+                refetch
+              }) => {
                 return (
                   <>
                     <SearchContractRequestsForm
@@ -96,19 +106,37 @@ const Search = ({ uri }) => (
                           <Table
                             data={contractRequests}
                             header={{
-                              id: "ID заяви на укладення договору",
+                              databaseId: "ID заяви на укладення договору",
                               contractNumber: "Номер договору",
+                              edrpou: "ЄДРПОУ",
+                              contractorLegalEntityName: "Назва медзакладу",
+                              assigneeName: "Виконавець",
                               status: "Статус",
                               startDate: "Договір діє з",
                               endDate: "Договір діє по",
+                              insertedAt: "Додано",
                               details: "Деталі"
                             }}
                             renderRow={({
                               id,
                               status,
+                              contractorLegalEntity: {
+                                edrpou,
+                                name: contractorLegalEntityName
+                              },
+                              assignee,
+                              insertedAt,
                               ...contractRequests
                             }) => ({
-                              id,
+                              edrpou,
+                              contractorLegalEntityName,
+                              insertedAt: format(
+                                insertedAt,
+                                "DD.MM.YYYY, HH:mm"
+                              ),
+                              assigneeName: assignee
+                                ? getFullName(assignee.party)
+                                : undefined,
                               ...contractRequests,
                               status: (
                                 <Badge
@@ -123,7 +151,12 @@ const Search = ({ uri }) => (
                                 </Link>
                               )
                             })}
-                            sortableFields={["status", "startDate", "endDate"]}
+                            sortableFields={[
+                              "status",
+                              "startDate",
+                              "endDate",
+                              "insertedAt"
+                            ]}
                             sortingParams={parseSortingParams(
                               locationParams.orderBy
                             )}
@@ -154,15 +187,15 @@ export default Search;
 const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
   <Form onSubmit={onSubmit} initialValues={initialValues}>
     <Flex mx={-1}>
-      <Box px={1} width={3 / 5}>
+      <Box px={1} width={1 / 2}>
         <Field.Text
-          name="searchRequest"
+          name="filter.searchRequest"
           label="Пошук запиту"
           placeholder="ЄДРПОУ або Номер договору"
           postfix={<AdminSearchIcon color="#CED0DA" />}
         />
         <Validation.Matches
-          field="searchRequest"
+          field="filter.searchRequest"
           options={SEARCH_REQUEST_PATTERN}
           message="Невірний номер"
         />
@@ -196,24 +229,25 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
         />
       </Box>
 
-      <Box px={1} width={2 / 6}>
-        <Field.RangePicker
-          rangeNames={["date.startFrom", "date.startTo"]}
-          label="Початок дії договору"
-        />
-      </Box>
-      <Box px={1} width={2 / 6}>
+      <Flex px={1}>
+        <Box mr={1}>
+          <Field.RangePicker
+            rangeNames={["date.startFrom", "date.startTo"]}
+            label="Початок дії договору"
+          />
+        </Box>
+
         <Field.RangePicker
           rangeNames={["date.endFrom", "date.endTo"]}
           label="Кінець дії договору"
         />
-      </Box>
+      </Flex>
     </Flex>
-    <Flex mx={-1}>
-      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
+    <Flex mx={-1} justifyContent="flex-start">
+      <Box px={1}>
         <Button variant="blue">Шукати</Button>
       </Box>
-      <Box px={1} width={[1 / 2, 1 / 2, 1 / 6]}>
+      <Box px={1}>
         <ResetButton
           onClick={() => {
             onSubmit({

@@ -20,6 +20,15 @@ query SearchContractRequestsQuery(
       startDate
       endDate
       status
+      databaseId
+      assignee {
+        party {
+          firstName
+          secondName
+          lastName
+        }
+      }
+      insertedAt
       contractorLegalEntity {
         id
         edrpou
