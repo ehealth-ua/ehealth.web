@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.126.3"></a>
+## [0.126.3](https://github.com/edenlabllc/ehealth.web/compare/v0.126.2...v0.126.3) (2018-11-09)
+
+
+### Bug Fixes
+
+* **admin:** change style in Form and localization name of contract on Contract page ([77c291d](https://github.com/edenlabllc/ehealth.web/commit/77c291d))
+
+
+
+
+
 <a name="0.126.2"></a>
 ## [0.126.2](https://github.com/edenlabllc/ehealth.web/compare/v0.126.1...v0.126.2) (2018-11-08)
 
