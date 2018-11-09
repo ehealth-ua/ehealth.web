@@ -41,21 +41,14 @@ class Nav extends React.Component {
     withControls: false,
     isLeftArrowActive: true,
     isRightArrowActive: true,
-    containerLeftX: 0,
-    containerRightX: 0
+    containerLeftX: 0
   };
 
   wrapper = React.createRef();
   container = React.createRef();
 
   async componentDidMount() {
-    const { scrollWidth } = await this.container.current;
-
     await this.setControlsObservers();
-
-    this.setState({
-      containerRightX: scrollWidth
-    });
   }
 
   render() {
@@ -119,21 +112,18 @@ class Nav extends React.Component {
 
   moveTabs(step = 0) {
     const { clientWidth: wrapperWidth } = this.wrapper.current;
-    const { containerLeftX, containerRightX } = this.state;
+    const { clientWidth: tabsWidth } = this.container.current;
+    const { containerLeftX } = this.state;
 
-    let nextStep;
-    if (step < 0) {
-      nextStep =
-        containerRightX + step < wrapperWidth
-          ? wrapperWidth - containerRightX
-          : step;
-    } else {
-      nextStep = containerLeftX + step > 0 ? -containerLeftX : step;
-    }
+    const delta = tabsWidth - wrapperWidth + containerLeftX;
+
+    const rightStep = delta + step < 0 ? 0 - delta : step;
+    const leftStep = containerLeftX + step > 0 ? -containerLeftX : step;
+
+    const nextstep = step < 0 ? rightStep : leftStep;
 
     this.setState({
-      containerLeftX: containerLeftX + nextStep,
-      containerRightX: containerRightX + nextStep
+      containerLeftX: containerLeftX + nextstep
     });
   }
 }
