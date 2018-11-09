@@ -6,23 +6,18 @@ import system from "system-components/emotion";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { Manager, Reference, Popper } from "react-popper";
-import isEmpty from "lodash/isEmpty";
 
-import { LocationParams, Form, Switch } from "@ehealth/components";
-import { mixed, boolean } from "@ehealth/system-tools";
+import { Form, Switch } from "@ehealth/components";
+import { boolean } from "@ehealth/system-tools";
 import {
   PrinterIcon,
   PositiveIcon,
-  MenuTileIcon,
-  MenuListIcon,
   DefaultImageIcon,
   DropDownButton,
   CircleIcon
 } from "@ehealth/icons";
 import {
   getFullName,
-  parseSortingParams,
-  stringifySortingParams,
   filterTableColumn as filterTableDefaultColumn
 } from "@ehealth/utils";
 
@@ -36,15 +31,12 @@ import Table, {
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
 import * as Field from "../../components/Field";
-import Pagination from "../../components/Pagination";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { SearchIcon } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
-import documents from "../../helpers/documents";
 
 import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
-import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 const Details = ({ id }) => (
   <Query query={ContractRequestQuery} variables={{ id }}>
@@ -53,7 +45,6 @@ const Details = ({ id }) => (
       if (error) return `Error! ${error.message}`;
 
       const {
-        id,
         databaseId,
         status,
         assignee,
@@ -486,7 +477,7 @@ const ExternalContractorsTable = ({ data }) => (
   />
 );
 
-const PrintButton = ({ content, ...props }) => (
+const PrintButton = ({ content }) => (
   <Wrapper color="shiningKnight" onClick={() => printIframe(content)}>
     <Text color="rockmanBlue" fontWeight="bold" mr={1} fontSize="1">
       Дивитись друковану форму
@@ -585,21 +576,6 @@ const Grey = system({
   color: "blueberrySoda"
 });
 
-const ButtonIcon = system(
-  {
-    p: 2,
-    borderRadius: 2,
-    lineHeight: 0
-  },
-  { cursor: "pointer" },
-  props =>
-    mixed({
-      bg: props.pointerEvents && "silverCity",
-      pointerEvents: !props.pointerEvents ? "auto" : "none",
-      color: !props.pointerEvents ? "bluePastel" : "shiningKnight"
-    })(props)
-);
-
 const SaveLink = system(
   {
     is: "a",
@@ -610,14 +586,5 @@ const SaveLink = system(
   },
   { textDecoration: "none" }
 );
-
-const BorderBox = system({
-  border: 1,
-  width: 125,
-  height: 125,
-  m: 2,
-  ml: 0,
-  borderColor: "silverCity"
-});
 
 export default Details;
