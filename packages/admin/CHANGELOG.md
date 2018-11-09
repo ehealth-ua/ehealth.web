@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.131.0"></a>
+# [0.131.0](https://github.com/edenlabllc/ehealth.web/compare/v0.130.0...v0.131.0) (2018-11-09)
+
+
+### Features
+
+* **admin:** add assignee select and submit mutation to the ContractRequestDetails ([#468](https://github.com/edenlabllc/ehealth.web/issues/468)) ([bde4591](https://github.com/edenlabllc/ehealth.web/commit/bde4591))
+
+
+
+
+
 <a name="0.130.0"></a>
 # [0.130.0](https://github.com/edenlabllc/ehealth.web/compare/v0.129.0...v0.130.0) (2018-11-09)
 
