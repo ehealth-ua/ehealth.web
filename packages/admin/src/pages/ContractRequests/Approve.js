@@ -32,7 +32,6 @@ import { REACT_APP_SIGNER_URL } from "../../env";
 const nhsPaymentMethod = Object.entries(STATUSES.NHS_PAYMENT_METHOD).map(
   ([key, value]) => ({ key, value })
 );
-const miscellaneous = STATUSES.CONTRACT_REQUEST_UPDATE_MISCELLANEOUS;
 
 const Approve = ({ id, ...props }) => {
   return (
@@ -59,12 +58,17 @@ const Approve = ({ id, ...props }) => {
                 id,
                 status,
                 databaseId,
-                contractorLegalEntity: { id: legalEntityId, name, edrpou },
+                contractorLegalEntity: {
+                  databaseId: legalEntityId,
+                  name,
+                  edrpou
+                },
                 issueCity,
                 nhsContractPrice,
                 nhsPaymentMethod,
                 nhsSignerBase,
-                nhsSigner
+                nhsSigner,
+                miscellaneous
               } = contractRequest;
 
               return (
@@ -103,12 +107,13 @@ const Approve = ({ id, ...props }) => {
                         issueCity,
                         nhsContractPrice,
                         nhsPaymentMethod,
-                        nhsSigner
+                        nhsSigner,
+                        miscellaneous
                       }}
                       onSubmit={setLocationParams}
                       data={contractRequest}
                     />
-                    <Checking path="/check" />
+                    <Checking path="/check" data={contractRequest} />
                   </Router>
                 </>
               );
@@ -124,7 +129,7 @@ const Additional = ({
   onSubmit: setLocationParams,
   initialValues,
   navigate,
-  ...props
+  id
 }) => {
   const [initialNhsPaymentMethod] = nhsPaymentMethod.filter(
     ({ key }) => key !== initialValues.nhsPaymentMethod
@@ -206,10 +211,10 @@ const Additional = ({
                   />
                   <Validations field="nhsContractPrice">
                     <Validation.Required message="Об&#700;язкове поле" />
-                    <Validation.Matches
-                      options={"^(\\d{1,7})(\\.\\d{1,2})?$"}
-                      message="Не вірно вказана сума"
-                    />
+                    {/*<Validation.Matches*/}
+                    {/*options={"^(\\d{1,7})(\\.\\d{1,2})?$"}*/}
+                    {/*message="Не вірно вказана сума"*/}
+                    {/*/>*/}
                   </Validations>
                 </Box>
                 <Box width={2 / 5}>
@@ -241,6 +246,14 @@ const Additional = ({
                   message="Обов&#700;язкове поле"
                 />
               </Box>
+              <Box width={2 / 5}>
+                <Field.Textarea
+                  name="miscellaneous"
+                  label="Інші умови (залежно від виду медичних послуг)"
+                  placeholder="Перерахуйте умови (за наявності)"
+                  rows={5}
+                />
+              </Box>
               <Flex mt={5}>
                 <Box mr={3}>
                   <Link to="../">
@@ -249,21 +262,34 @@ const Additional = ({
                 </Box>
                 <LocationParams>
                   {({ locationParams }) => (
-                    <Mutation mutation={UpdateContractRequestMutation}>
+                    <Mutation
+                      mutation={UpdateContractRequestMutation}
+                      refetchQueries={() => [
+                        {
+                          query: ContractRequestQuery,
+                          variables: { id }
+                        }
+                      ]}
+                    >
                       {updateContractRequest => (
                         <ButtonWidth
                           variant="green"
                           onClick={async () => {
                             const {
-                              nhsSigner: { databaseId }
+                              nhsSigner: { id: nhsSignerId },
+                              nhsContractPrice
                             } = locationParams;
                             await updateContractRequest({
                               variables: {
                                 input: {
                                   ...locationParams,
+                                  id,
+                                  nhsContractPrice: parseInt(
+                                    nhsContractPrice,
+                                    10
+                                  ),
                                   nhsSigner: undefined,
-                                  nhsSignerId: databaseId,
-                                  miscellaneous
+                                  nhsSignerId
                                 }
                               }
                             });
@@ -284,54 +310,41 @@ const Additional = ({
     </Box>
   );
 };
-const Checking = ({ id, navigate }) => (
-  <Box m={5}>
-    <Line />
-    <Query
-      query={ContractRequestQuery}
-      variables={{
-        id
-      }}
-    >
-      {({ loading, error, data }) => {
-        if (loading) return "Loading...";
-        if (error) return `Error! ${error.message}`;
-        const {
-          contractRequest: {
-            nhsSigner,
-            nhsContractPrice,
-            nhsPaymentMethod,
+const Checking = ({ id, navigate, data }) => {
+  const {
+    nhsSigner,
+    nhsContractPrice,
+    nhsPaymentMethod,
+    ...contractRequest
+  } = data;
+  return (
+    <Box m={5}>
+      <Line />
+      <>
+        <DefinitionListView
+          labels={{
+            nhsSignerId: "Підписант зі сторони Замовника",
+            nhsSignerBase: "Що діє на підставі",
+            nhsContractPrice: "Сума контракту",
+            nhsPaymentMethod: "Спосіб оплати",
+            issueCity: "Місто укладення договору",
+            miscellaneous: "Інші умови"
+          }}
+          data={{
+            nhsSigner: nhsSigner && getFullName(nhsSigner.party),
+            nhsContractPrice: `${nhsContractPrice} грн`,
+            nhsPaymentMethod: STATUSES.NHS_PAYMENT_METHOD[nhsPaymentMethod],
             ...contractRequest
-          }
-        } = data;
-
-        return (
-          <>
-            <DefinitionListView
-              labels={{
-                nhsSignerId: "Підписант зі сторони Замовника",
-                nhsSignerBase: "Що діє на підставі",
-                nhsContractPrice: "Сума контракту",
-                nhsPaymentMethod: "Спосіб оплати",
-                issueCity: "Місто укладення договору"
-              }}
-              data={{
-                nhsSigner: nhsSigner && getFullName(nhsSigner.party),
-                nhsContractPrice: `${nhsContractPrice} грн`,
-                nhsPaymentMethod: STATUSES.NHS_PAYMENT_METHOD[nhsPaymentMethod],
-                ...contractRequest
-              }}
-              labelWidth="300px"
-              marginBetween={2}
-              flexDirection="column"
-            />
-            <Sign id={id} data={data.contractRequest} navigate={navigate} />
-          </>
-        );
-      }}
-    </Query>
-  </Box>
-);
+          }}
+          labelWidth="300px"
+          marginBetween={2}
+          flexDirection="column"
+        />
+        <Sign id={id} data={data} navigate={navigate} />
+      </>
+    </Box>
+  );
+};
 const Sign = ({ id, data, navigate }) => (
   <Signer.Parent
     url={REACT_APP_SIGNER_URL}

@@ -130,5 +130,6 @@ query ContractRequestQuery($id: ID!) {
       type
       url
     }
+    miscellaneous
   }
 }

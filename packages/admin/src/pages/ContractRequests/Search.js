@@ -191,7 +191,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
       <Box px={1} width={1 / 2}>
         <Field.Text
           name="filter.searchRequest"
-          label="Пошук запиту"
+          label="Пошук заяви"
           placeholder="ЄДРПОУ або Номер договору"
           postfix={<AdminSearchIcon color="#CED0DA" />}
         />
@@ -215,7 +215,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
       <Box px={1} width={1 / 6}>
         <Field.Select
           name="filter.status"
-          label="Статус договору"
+          label="Статус заяви"
           placeholder="test"
           items={[{ value: "всі статуси" }, ...contractStatuses]}
           renderItem={item => item.value}

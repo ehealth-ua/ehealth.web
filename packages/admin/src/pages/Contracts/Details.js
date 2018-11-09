@@ -145,7 +145,7 @@ const Details = ({ id }) => (
                             </Text>
                             <Field.Textarea
                               name="statusReason"
-                              placeholder="Вкажіть причину розірвання декларації"
+                              placeholder="Вкажіть причину розірвання договору"
                               rows={5}
                             />
                             <Flex justifyContent="center">
@@ -340,7 +340,7 @@ const LegalEntity = ({
 const Divisions = ({ id }) => (
   <LocationParams>
     {({ locationParams, setLocationParams }) => {
-      const { first, last, after, before } = locationParams;
+      const { first, last, after, before, name } = locationParams;
       return (
         <>
           <Form onSubmit={setLocationParams} initialValues={locationParams}>
@@ -366,7 +366,7 @@ const Divisions = ({ id }) => (
               last: last ? parseInt(last) : undefined,
               after,
               before,
-              divisionFilter: locationParams
+              divisionFilter: { name }
             }}
           >
             {({ loading, error, data }) => {

@@ -27,14 +27,14 @@ const LEGAL_ENTITY_TYPE = {
 };
 
 const CONTRACT_REQUEST = {
-  NEW: "новий",
-  IN_PROCESS: "заява обробляється",
-  DECLINED: "відмінений",
-  APPROVED: "підтверджений",
-  PENDING_NHS_SIGN: "очікує на підписання від НСЗУ",
-  NHS_SIGNED: "підписаний НСЗУ",
-  TERMINATED: "завершений",
-  SIGNED: "підписаний"
+  NEW: "НОВА",
+  IN_PROCESS: "ОБРОБЛЯЄТЬСЯ",
+  DECLINED: "ВІДМНІНЕНА",
+  APPROVED: "ПІДТВЕРДЖЕНА",
+  PENDING_NHS_SIGN: "ОЧІКУЄ НА ПІДПИСАННЯ НСЗУ",
+  NHS_SIGNED: "ПІДПИСАНА НСЗУ",
+  TERMINATED: "ЗАВЕРШЕНА",
+  SIGNED: "ПІДПИСАНА"
 };
 
 const CONTRACT = {
