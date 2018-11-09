@@ -42,7 +42,7 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { status = {}, searchRequest } = {},
+          filter: { status = {}, searchRequest, assigneeName } = {},
           date: { startFrom, startTo, endFrom, endTo } = {},
           first,
           last,
@@ -78,7 +78,8 @@ const Search = ({ uri }) => (
                   ...contractRequest,
                   startDate: formatDateTimeInterval(startFrom, startTo),
                   endDate: formatDateTimeInterval(endFrom, endTo),
-                  status: status.name
+                  status: status.name,
+                  assigneeName
                 }
               }}
             >
@@ -202,14 +203,11 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
       </Box>
 
       <Box px={1} width={2 / 5}>
-        <Field.Select
-          type="select"
+        <Field.Text
           name="filter.assigneeName"
           label="Виконавець"
           placeholder="Оберіть виконавця"
-          itemToString={value => value}
-          renderItem={value => value}
-          size="small"
+          postfix={<AdminSearchIcon color="#CED0DA" />}
         />
       </Box>
     </Flex>
