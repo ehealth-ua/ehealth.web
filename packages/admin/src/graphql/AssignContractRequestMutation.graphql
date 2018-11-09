@@ -1,0 +1,7 @@
+mutation AssignContractRequestMutation($input: AssignContractRequestInput!) {
+  contractRequest: assignContractRequest(input: $input) {
+    contractRequest {
+      id
+    }
+  }
+}

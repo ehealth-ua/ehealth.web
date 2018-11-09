@@ -1,6 +1,6 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import { Flex, Box, Text } from "rebass/emotion";
 import system from "system-components/emotion";
 import printIframe from "print-iframe";
@@ -37,6 +37,8 @@ import { SearchIcon } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
+import EmployeesQuery from "../../graphql/EmploeesQuery.graphql";
+import AssignContractRequestMutation from "../../graphql/AssignContractRequestMutation.graphql";
 
 const Details = ({ id }) => (
   <Query query={ContractRequestQuery} variables={{ id }}>
@@ -95,9 +97,11 @@ const Details = ({ id }) => (
                     assignee: (
                       <Switch
                         value={status}
-                        NEW={<ModalSelect submitted={getFullName(party)} />}
+                        NEW={
+                          <ModalSelect submitted={getFullName(party)} id={id} />
+                        }
                         IN_PROCESS={
-                          <ModalSelect submitted={getFullName(party)} />
+                          <ModalSelect submitted={getFullName(party)} id={id} />
                         }
                         default={assignee && getFullName(party)}
                       />
@@ -488,48 +492,92 @@ const PrintButton = ({ content }) => (
   </Wrapper>
 );
 
-const ModalSelect = ({ assignee, submitted }) => (
-  <BooleanValue>
-    {({ value: opened, toggle }) => (
-      <Form onSubmit={() => null}>
-        <Form.AutoSubmit onSubmit={() => null} />
-        <Manager>
-          <Reference>
-            {({ ref }) => (
-              <Flex innerRef={ref} alignItems="center">
-                {submitted}
-                <ButtonWrapper onClick={toggle}>
-                  {!submitted && <DropDownButton color="#2EA2F8" />}
-                  <ButtonText>
-                    {!submitted ? "Додати виконавця" : "Змінити"}
-                  </ButtonText>
-                </ButtonWrapper>
-              </Flex>
-            )}
-          </Reference>
-          <Popper placement="bottom-start" positionFixed>
-            {({ ref, style }) => (
-              <ModalWrapper style={style} innerRef={ref} visible={opened}>
-                <Field.Select
-                  items={assignee}
-                  name="performer"
-                  renderItem={item => item.name}
-                  itemToString={item => {
-                    if (!item) return "";
-                    return typeof item === "string" ? item : item.name;
+const ModalSelect = ({ submitted, id }) => (
+  <Query
+    query={EmployeesQuery}
+    variables={{
+      first: 50,
+      filter: {
+        employeeType: "NHS",
+        status: "APPROVED"
+      },
+      orderBy: "INSERTED_AT_DESC"
+    }}
+  >
+    {({
+      loading,
+      error,
+      data: { employees: { nodes: employees = [] } = {} } = {}
+    }) => (
+      <BooleanValue>
+        {({ value: opened, toggle }) => (
+          <Form onSubmit={() => null}>
+            <Mutation
+              mutation={AssignContractRequestMutation}
+              refetchQueries={() => [
+                {
+                  query: ContractRequestQuery,
+                  variables: { id }
+                }
+              ]}
+            >
+              {assignContractRequest => (
+                <Form.AutoSubmit
+                  onSubmit={async ({ assignee }) => {
+                    assignee &&
+                      (await assignContractRequest({
+                        variables: {
+                          input: {
+                            id,
+                            employeeId: assignee.id
+                          }
+                        }
+                      }).then(toggle));
                   }}
-                  filterOptions={{ keys: ["name"] }}
-                  hideErrors
-                  iconComponent={SearchIcon}
-                  style={{ margin: "5px", border: "1px solid #DFE3E9" }}
                 />
-              </ModalWrapper>
-            )}
-          </Popper>
-        </Manager>
-      </Form>
+              )}
+            </Mutation>
+            <Manager>
+              <Reference>
+                {({ ref }) => (
+                  <Flex innerRef={ref} alignItems="center">
+                    {submitted}
+                    <ButtonWrapper onClick={toggle}>
+                      {!submitted && <DropDownButton color="#2EA2F8" />}
+                      <ButtonText>
+                        {!submitted ? "Додати виконавця" : "Змінити"}
+                      </ButtonText>
+                    </ButtonWrapper>
+                  </Flex>
+                )}
+              </Reference>
+              <Popper placement="bottom-start" positionFixed>
+                {({ ref, style }) => (
+                  <ModalWrapper style={style} innerRef={ref} visible={opened}>
+                    <Field.Select
+                      name="assignee"
+                      items={employees}
+                      renderItem={item => getFullName(item.party)}
+                      itemToString={item => {
+                        if (!item) return "";
+                        return typeof item === "string"
+                          ? item
+                          : getFullName(item.party);
+                      }}
+                      filterOptions={{ keys: ["party.lastName"] }}
+                      hideErrors
+                      iconComponent={SearchIcon}
+                      style={{ margin: "5px", border: "1px solid #DFE3E9" }}
+                    />
+                  </ModalWrapper>
+                )}
+              </Popper>
+            </Manager>
+          </Form>
+        )}
+      </BooleanValue>
     )}
-  </BooleanValue>
+  </Query>
 );
 
 const ModalWrapper = system(
