@@ -7,6 +7,14 @@ query ContractRequestQuery($id: ID!) {
     nhsSignerBase
     nhsSigner {
       id
+      party {
+        firstName
+        lastName
+        secondName
+      }
+    }
+    nhsLegalEntity {
+      databaseId
     }
     nhsContractPrice
     issueCity

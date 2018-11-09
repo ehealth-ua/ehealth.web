@@ -10,6 +10,7 @@ import {
   Validation,
   Validations
 } from "@ehealth/components";
+import { getFullName } from "@ehealth/utils";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
 import Line from "../../components/Line";
@@ -22,6 +23,7 @@ import DefinitionListView from "../../components/DefinitionListView";
 import STATUSES from "../../helpers/statuses";
 
 import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
+import EmploeesQuery from "../../graphql/EmploeesQuery.graphql";
 import UpdateContractRequestMutation from "../../graphql/UpdateContractRequestMutation.graphql";
 import ApproveContractRequestMutation from "../../graphql/ApproveContractRequestMutation.graphql";
 
@@ -62,7 +64,7 @@ const Approve = ({ id, ...props }) => {
                 nhsContractPrice,
                 nhsPaymentMethod,
                 nhsSignerBase,
-                nhsSigner: { id: nhsSignerId }
+                nhsSigner
               } = contractRequest;
 
               return (
@@ -98,10 +100,10 @@ const Approve = ({ id, ...props }) => {
                       path="/"
                       initialValues={{
                         nhsSignerBase,
-                        nhsSignerId,
                         issueCity,
                         nhsContractPrice,
-                        nhsPaymentMethod
+                        nhsPaymentMethod,
+                        nhsSigner
                       }}
                       onSubmit={setLocationParams}
                       data={contractRequest}
@@ -129,123 +131,156 @@ const Additional = ({
   );
   return (
     <Box m={5}>
-      <Form
-        onSubmit={() => {}}
-        initialValues={{
-          ...initialValues,
-          nhsPaymentMethod: initialNhsPaymentMethod
+      <Query
+        query={EmploeesQuery}
+        variables={{
+          first: 50,
+          filter: {
+            employeeType: "NHS",
+            status: "APPROVED"
+          },
+          orderBy: "INSERTED_AT_DESC"
         }}
       >
-        <Form.AutoSubmit
-          onSubmit={({ nhsPaymentMethod: { key } = {}, ...values }) =>
-            setLocationParams({
-              ...values,
-              nhsPaymentMethod: key
-            })
-          }
-        />
-        <Flex>
-          <Box mr={5} width={2 / 5}>
-            <Field.Text
-              name="nhsSignerId"
-              label="Підписант зі сторони Замовника"
-              placeholder="Введіть підписанта"
-            />
-            <Validation.Required
-              field="nhsSignerId"
-              message="Обов&#700;язкове поле"
-            />
-          </Box>
-          <Box width={2 / 5}>
-            <Field.Text
-              name="nhsSignerBase"
-              label="Що діє на підставі"
-              placeholder="Оберіть підставу"
-            />
-            <Validation.Required
-              field="nhsSignerBase"
-              message="Обов&#700;язкове поле"
-            />
-          </Box>
-        </Flex>
-        <Flex>
-          <Box mr={5} width={2 / 5}>
-            <Field.Number
-              name="nhsContractPrice"
-              label="Сума контракту"
-              placeholder="1 - 1 000 000"
-              postfix="грн"
-            />
-            {/* TODO: on mock server posibble have value with minus */}
-            <Validations field="nhsContractPrice">
-              <Validation.Required message="Об&#700;язкове поле" />
-              {/* <Validation.Matches
-                options={"^(\\d{1,7})(\\.\\d{1,2})?$"}
-                message="Не вірно вказана сума"
-              /> */}
-            </Validations>
-          </Box>
-          <Box width={2 / 5}>
-            <Field.Select
-              type="select"
-              name="nhsPaymentMethod"
-              label="Спосіб оплати"
-              placeholder="Оберіть cпосіб"
-              items={nhsPaymentMethod}
-              itemToString={({ value }) => value}
-              renderItem={({ value }) => value}
-              size="small"
-              sendForm="key"
-            />
-            <Validation.Required
-              field="nhsPaymentMethod"
-              message="Обов&#700;язкове поле"
-            />
-          </Box>
-        </Flex>
-        <Box width={2 / 5}>
-          <Field.Text
-            name="issueCity"
-            label="Місто укладення договору"
-            placeholder="Введіть місто"
-          />
-          <Validation.Required
-            field="issueCity"
-            message="Обов&#700;язкове поле"
-          />
-        </Box>
-        <Flex mt={5}>
-          <Box mr={3}>
-            <Link to="../">
-              <ButtonWidth variant="blue">Повернутися</ButtonWidth>
-            </Link>
-          </Box>
-          <LocationParams>
-            {({ locationParams }) => (
-              <Mutation mutation={UpdateContractRequestMutation}>
-                {updateContractRequest => (
-                  <ButtonWidth
-                    variant="green"
-                    onClick={async () => {
-                      await updateContractRequest({
-                        variables: {
-                          input: {
-                            ...locationParams,
-                            miscellaneous
-                          }
-                        }
-                      });
-                      navigate("./check");
+        {({
+          loading,
+          error,
+          data: { employees: { nodes: employees = [] } = {} } = {}
+        }) => {
+          return (
+            <Form
+              onSubmit={() => {}}
+              initialValues={{
+                ...initialValues,
+                nhsPaymentMethod: initialNhsPaymentMethod
+              }}
+            >
+              <Form.AutoSubmit
+                onSubmit={({ nhsPaymentMethod: { key } = {}, ...values }) =>
+                  setLocationParams({
+                    ...values,
+                    nhsPaymentMethod: key
+                  })
+                }
+              />
+              <Flex>
+                <Box mr={5} width={2 / 5}>
+                  <Field.Select
+                    name="nhsSigner"
+                    label="Підписант зі сторони Замовника"
+                    placeholder="Введіть підписанта"
+                    items={employees}
+                    renderItem={item => getFullName(item.party)}
+                    itemToString={item => {
+                      return typeof item === "string"
+                        ? item
+                        : getFullName(item.party);
                     }}
-                  >
-                    Оновити
-                  </ButtonWidth>
-                )}
-              </Mutation>
-            )}
-          </LocationParams>
-        </Flex>
-      </Form>
+                    type="select"
+                  />
+
+                  <Validation.Required
+                    field="nhsSigner"
+                    message="Обов&#700;язкове поле"
+                  />
+                </Box>
+                <Box width={2 / 5}>
+                  <Field.Text
+                    name="nhsSignerBase"
+                    label="Що діє на підставі"
+                    placeholder="Оберіть підставу"
+                  />
+                  <Validation.Required
+                    field="nhsSignerBase"
+                    message="Обов&#700;язкове поле"
+                  />
+                </Box>
+              </Flex>
+              <Flex>
+                <Box mr={5} width={2 / 5}>
+                  <Field.Number
+                    name="nhsContractPrice"
+                    label="Сума контракту"
+                    placeholder="1 - 1 000 000"
+                    postfix="грн"
+                  />
+                  <Validations field="nhsContractPrice">
+                    <Validation.Required message="Об&#700;язкове поле" />
+                    <Validation.Matches
+                      options={"^(\\d{1,7})(\\.\\d{1,2})?$"}
+                      message="Не вірно вказана сума"
+                    />
+                  </Validations>
+                </Box>
+                <Box width={2 / 5}>
+                  <Field.Select
+                    type="select"
+                    name="nhsPaymentMethod"
+                    label="Спосіб оплати"
+                    placeholder="Оберіть cпосіб"
+                    items={nhsPaymentMethod}
+                    itemToString={({ value }) => value}
+                    renderItem={({ value }) => value}
+                    size="small"
+                    sendForm="key"
+                  />
+                  <Validation.Required
+                    field="nhsPaymentMethod"
+                    message="Обов&#700;язкове поле"
+                  />
+                </Box>
+              </Flex>
+              <Box width={2 / 5}>
+                <Field.Text
+                  name="issueCity"
+                  label="Місто укладення договору"
+                  placeholder="Введіть місто"
+                />
+                <Validation.Required
+                  field="issueCity"
+                  message="Обов&#700;язкове поле"
+                />
+              </Box>
+              <Flex mt={5}>
+                <Box mr={3}>
+                  <Link to="../">
+                    <ButtonWidth variant="blue">Повернутися</ButtonWidth>
+                  </Link>
+                </Box>
+                <LocationParams>
+                  {({ locationParams }) => (
+                    <Mutation mutation={UpdateContractRequestMutation}>
+                      {updateContractRequest => (
+                        <ButtonWidth
+                          variant="green"
+                          onClick={async () => {
+                            const {
+                              nhsSigner: { databaseId }
+                            } = locationParams;
+                            await updateContractRequest({
+                              variables: {
+                                input: {
+                                  ...locationParams,
+                                  nhsSigner: undefined,
+                                  nhsSignerId: databaseId,
+                                  miscellaneous
+                                }
+                              }
+                            });
+                            navigate("./check");
+                          }}
+                        >
+                          Оновити
+                        </ButtonWidth>
+                      )}
+                    </Mutation>
+                  )}
+                </LocationParams>
+              </Flex>
+            </Form>
+          );
+        }}
+      </Query>
     </Box>
   );
 };
@@ -263,7 +298,7 @@ const Checking = ({ id, navigate }) => (
         if (error) return `Error! ${error.message}`;
         const {
           contractRequest: {
-            nhsSigner: { id: nhsSignerId },
+            nhsSigner,
             nhsContractPrice,
             nhsPaymentMethod,
             ...contractRequest
@@ -281,7 +316,7 @@ const Checking = ({ id, navigate }) => (
                 issueCity: "Місто укладення договору"
               }}
               data={{
-                nhsSignerId,
+                nhsSigner: nhsSigner && getFullName(nhsSigner.party),
                 nhsContractPrice: `${nhsContractPrice} грн`,
                 nhsPaymentMethod: STATUSES.NHS_PAYMENT_METHOD[nhsPaymentMethod],
                 ...contractRequest
