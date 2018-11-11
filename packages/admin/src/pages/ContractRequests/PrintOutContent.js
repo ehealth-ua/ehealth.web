@@ -29,16 +29,14 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
         if (loading) return "Loading...";
         if (error) return `Error! ${error.message}`;
         const {
-          contractRequest: { printoutContent: content },
-          contractRequest,
-          status
+          contractRequest: { printoutContent: content, status, toSignContent }
         } = data;
         return (
           <>
             <Portal content={content} />
             <FixedWrapper>
               <Flex
-                width="620"
+                width="720"
                 justifyContent="space-between"
                 alignItems="center"
                 mx="auto"
@@ -66,12 +64,13 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                                 variant="green"
                                 onClick={async () => {
                                   const { signedContent } = await signData(
-                                    contractRequest
+                                    toSignContent
                                   );
 
                                   await signContractRequest({
                                     variables: {
                                       input: {
+                                        id,
                                         signedContent: {
                                           content: signedContent,
                                           encoding: "BASE64"
@@ -82,7 +81,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                                   navigate("../");
                                 }}
                               >
-                                Підписати, наклавши ЕЦП
+                                Підписати, наклавши ЕЦП та Печатку
                               </Button>
                             )}
                           </Mutation>
