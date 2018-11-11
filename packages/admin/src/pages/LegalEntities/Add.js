@@ -67,7 +67,10 @@ const Search = ({ location: { state } }) => (
           </Box>
         </Form>
         {filter && (
-          <Query query={SearchLegalEntitiesQuery} variables={{ filter }}>
+          <Query
+            query={SearchLegalEntitiesQuery}
+            variables={{ filter, first: 1 }}
+          >
             {({ loading, error, data }) => {
               if (loading) return null;
               if (error) return `Error! ${error.message}`;
