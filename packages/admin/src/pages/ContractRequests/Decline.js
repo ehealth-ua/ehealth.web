@@ -151,13 +151,14 @@ const Sign = ({
   }
 }) => (
   <Query query={ContractRequestQuery} variables={{ id }}>
-    {({ loading, error, data: { contractRequest } }) => {
+    {({ loading, error, data: { contractRequest }, refetch }) => {
       if (loading) return "Loading...";
       if (error) return `Error! ${error.message}`;
 
       const {
         id,
-        contractorLegalEntity: { id: legalEntityId, name, edrpou }
+        databaseId,
+        contractorLegalEntity: { databaseId: legalEntityId, name, edrpou }
       } = contractRequest;
 
       return (
@@ -191,21 +192,22 @@ const Sign = ({
                         <Button
                           variant="green"
                           onClick={async () => {
-                            //TODO: check data for sign
                             const { signedContent } = await signData({
-                              id,
-                              contractorLegalEntity: {
+                              id: databaseId,
+                              contractor_legal_entity: {
                                 id: legalEntityId,
                                 name,
                                 edrpou
                               },
-                              nextStatus: "DECLINED",
-                              statusReason: base,
+                              next_status: "DECLINED",
+                              status_reason: base,
+                              // TODO: check new text in decline
                               text: miscellaneous
                             });
                             await declineContractRequest({
                               variables: {
                                 input: {
+                                  id,
                                   signedContent: {
                                     content: signedContent,
                                     encoding: "BASE64"
@@ -213,6 +215,7 @@ const Sign = ({
                                 }
                               }
                             });
+                            await refetch();
                             navigate("../../");
                           }}
                         >
