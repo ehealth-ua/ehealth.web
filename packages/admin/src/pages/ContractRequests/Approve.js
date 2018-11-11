@@ -132,7 +132,7 @@ const Additional = ({
   id
 }) => {
   const [initialNhsPaymentMethod] = nhsPaymentMethod.filter(
-    ({ key }) => key !== initialValues.nhsPaymentMethod
+    ({ key }) => key === initialValues.nhsPaymentMethod
   );
   return (
     <Box m={5}>
@@ -175,8 +175,9 @@ const Additional = ({
                     label="Підписант зі сторони Замовника"
                     placeholder="Введіть підписанта"
                     items={employees}
-                    renderItem={item => getFullName(item.party)}
+                    renderItem={item => item && getFullName(item.party)}
                     itemToString={item => {
+                      if (!item) return "";
                       return typeof item === "string"
                         ? item
                         : getFullName(item.party);
@@ -279,6 +280,7 @@ const Additional = ({
                               nhsSigner: { id: nhsSignerId },
                               nhsContractPrice
                             } = locationParams;
+
                             await updateContractRequest({
                               variables: {
                                 input: {
@@ -293,6 +295,7 @@ const Additional = ({
                                 }
                               }
                             });
+
                             navigate("./check");
                           }}
                         >
@@ -310,6 +313,7 @@ const Additional = ({
     </Box>
   );
 };
+
 const Checking = ({ id, navigate, data }) => {
   const {
     nhsSigner,
@@ -320,32 +324,43 @@ const Checking = ({ id, navigate, data }) => {
   return (
     <Box m={5}>
       <Line />
-      <>
-        <DefinitionListView
-          labels={{
-            nhsSignerId: "Підписант зі сторони Замовника",
-            nhsSignerBase: "Що діє на підставі",
-            nhsContractPrice: "Сума контракту",
-            nhsPaymentMethod: "Спосіб оплати",
-            issueCity: "Місто укладення договору",
-            miscellaneous: "Інші умови"
-          }}
-          data={{
-            nhsSigner: nhsSigner && getFullName(nhsSigner.party),
-            nhsContractPrice: `${nhsContractPrice} грн`,
-            nhsPaymentMethod: STATUSES.NHS_PAYMENT_METHOD[nhsPaymentMethod],
-            ...contractRequest
-          }}
-          labelWidth="300px"
-          marginBetween={2}
-          flexDirection="column"
-        />
-        <Sign id={id} data={data} navigate={navigate} />
-      </>
+      <DefinitionListView
+        labels={{
+          nhsSigner: "Підписант зі сторони Замовника",
+          nhsSignerBase: "Що діє на підставі",
+          nhsContractPrice: "Сума контракту",
+          nhsPaymentMethod: "Спосіб оплати",
+          issueCity: "Місто укладення договору",
+          miscellaneous: "Інші умови"
+        }}
+        data={{
+          nhsSigner: nhsSigner && getFullName(nhsSigner.party),
+          nhsContractPrice: `${nhsContractPrice} грн`,
+          nhsPaymentMethod: STATUSES.NHS_PAYMENT_METHOD[nhsPaymentMethod],
+          ...contractRequest
+        }}
+        labelWidth="300px"
+        marginBetween={2}
+        flexDirection="column"
+      />
+
+      <Sign id={id} data={data} navigate={navigate} />
     </Box>
   );
 };
-const Sign = ({ id, data, navigate }) => (
+const Sign = ({
+  id,
+  data: {
+    contractorLegalEntity: {
+      databaseId: contractorLegalEntityId,
+      edrpou,
+      name
+    },
+    miscellaneous,
+    databaseId
+  },
+  navigate
+}) => (
   <Signer.Parent
     url={REACT_APP_SIGNER_URL}
     features={{
@@ -354,7 +369,15 @@ const Sign = ({ id, data, navigate }) => (
     }}
   >
     {({ signData }) => (
-      <Mutation mutation={ApproveContractRequestMutation}>
+      <Mutation
+        mutation={ApproveContractRequestMutation}
+        refetchQueries={() => [
+          {
+            query: ContractRequestQuery,
+            variables: { id }
+          }
+        ]}
+      >
         {approveContractRequest => (
           <Flex mt={5}>
             <Box mr={3}>
@@ -367,11 +390,21 @@ const Sign = ({ id, data, navigate }) => (
                 <Button
                   variant="green"
                   onClick={async () => {
-                    const { signedContent } = await signData(data);
+                    const { signedContent } = await signData({
+                      id: databaseId,
+                      contractor_legal_entity: {
+                        id: contractorLegalEntityId,
+                        edrpou,
+                        name
+                      },
+                      next_status: "APPROVED",
+                      text: miscellaneous
+                    });
 
                     await approveContractRequest({
                       variables: {
                         input: {
+                          id,
                           signedContent: {
                             content: signedContent,
                             encoding: "BASE64"
