@@ -133,13 +133,14 @@ const Details = ({ id }) => (
                     justifyContent="space-between"
                     alignItems="flex-end"
                   >
-                    {content && <PrintButton content={content} />}
+                    <PrintButton content={content} />
                     <Link to="./print-out-content">
-                      <Button variant="red">Розірвати контракт</Button>
+                      <Button variant="green">Підписати</Button>
                     </Link>
                   </Flex>
                 }
-                default={content && <PrintButton content={content} />}
+                NHS_SIGNED={<PrintButton content={content} />}
+                SIGNED={<PrintButton content={content} />}
               />
             </Flex>
           </Box>
