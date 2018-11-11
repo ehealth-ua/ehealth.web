@@ -16,6 +16,7 @@ query SearchContractRequestsQuery(
   ) {
     nodes {
       id
+      databaseId
       contractNumber
       startDate
       endDate
@@ -33,6 +34,7 @@ query SearchContractRequestsQuery(
         id
         edrpou
         name
+        databaseId
       }
       contractorOwner {
         id
