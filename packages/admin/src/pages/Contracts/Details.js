@@ -86,7 +86,7 @@ const Details = ({ id }) => (
                 <DefinitionListView
                   labels={{
                     databaseId: "ID договору",
-                    contractRequestId: "ID запиту",
+                    contractRequestId: "ID заяви",
                     contractNumber: "Номер договору",
                     status: "Статус",
                     isSuspended: "Призупинений"
@@ -395,6 +395,7 @@ const Divisions = ({ id }) => (
                       action: "Дія"
                     }}
                     renderRow={({
+                      databaseId,
                       name,
                       addresses,
                       mountainGroup,
@@ -428,7 +429,7 @@ const Divisions = ({ id }) => (
                         )),
                       action: (
                         <Link
-                          to={`../employees?division.name=${name}`}
+                          to={`../employees?division.databaseId=${databaseId}&division.name=${name}`}
                           fontWeight="bold"
                         >
                           Перейти до працівників
