@@ -274,10 +274,11 @@ const Additional = ({
                     >
                       {updateContractRequest => (
                         <ButtonWidth
+                          type="submit"
                           variant="green"
-                          onClick={async () => {
+                          onSubmit={async () => {
                             const {
-                              nhsSigner: { id: nhsSignerId },
+                              nhsSigner,
                               nhsContractPrice
                             } = locationParams;
 
@@ -291,7 +292,9 @@ const Additional = ({
                                     10
                                   ),
                                   nhsSigner: undefined,
-                                  nhsSignerId
+                                  nhsSignerId: nhsSigner
+                                    ? nhsSigner.id
+                                    : undefined
                                 }
                               }
                             });
