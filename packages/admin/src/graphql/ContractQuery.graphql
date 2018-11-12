@@ -124,6 +124,7 @@ query ContractQuery(
           additionalInfo {
             specialities {
               speciality
+              specialityOfficio
             }
           }
         }

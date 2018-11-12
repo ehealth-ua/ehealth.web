@@ -516,7 +516,9 @@ const Employees = ({ id }) => (
                         databaseId,
                         divisionName,
                         employeeName: getFullName(party),
-                        speciality: specialities[0].speciality,
+                        speciality: specialities.find(
+                          item => item.specialityOfficio && item
+                        ).speciality,
                         ...contractorEmployeeDivisions
                       })}
                       sortableFields={["staffUnits", "declarationLimit"]}
