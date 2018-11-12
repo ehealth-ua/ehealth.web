@@ -23,6 +23,7 @@ query SearchContractsQuery(
       startDate
       endDate
       status
+      insertedAt
       contractorLegalEntity {
         id
         edrpou

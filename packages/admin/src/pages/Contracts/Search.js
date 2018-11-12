@@ -2,6 +2,7 @@ import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
+import format from "date-fns/format";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
 import {
@@ -56,7 +57,6 @@ const Search = ({ uri }) => (
           (edrpouTest
             ? { contractorLegalEntityEdrpou: searchRequest }
             : { contractNumber: searchRequest });
-
         return (
           <>
             <Query
@@ -77,7 +77,7 @@ const Search = ({ uri }) => (
                   startDate: formatDateTimeInterval(startFrom, startTo),
                   endDate: formatDateTimeInterval(endFrom, endTo),
                   status: status.name,
-                  isSuspended: isSuspended === "false" ? "" : isSuspended
+                  isSuspended: convertIsSuspendedItem(isSuspended)
                 }
               }}
             >
@@ -107,6 +107,7 @@ const Search = ({ uri }) => (
                             startDate: "Договір діє з",
                             endDate: "Договір діє по",
                             isSuspended: "Призупинений",
+                            insertedAt: "Додано",
                             status: "Статус",
                             details: "Деталі"
                           }}
@@ -115,6 +116,7 @@ const Search = ({ uri }) => (
                             status,
                             isSuspended,
                             contractorLegalEntity: { edrpou },
+                            insertedAt,
                             ...contracts
                           }) => ({
                             edrpou,
@@ -131,6 +133,7 @@ const Search = ({ uri }) => (
                                 )}
                               </Flex>
                             ),
+                            insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
                             status: (
                               <Badge
                                 type="CONTRACT"
@@ -149,7 +152,8 @@ const Search = ({ uri }) => (
                             "startDate",
                             "endDate",
                             "isSuspended",
-                            "edrpou"
+                            "edrpou",
+                            "insertedAt"
                           ]}
                           sortingParams={parseSortingParams(
                             locationParams.orderBy
@@ -162,6 +166,7 @@ const Search = ({ uri }) => (
                           }
                           tableName="contract/search"
                           whiteSpaceNoWrap={["databaseId"]}
+                          hiddenFields="insertedAt"
                         />
                         <Pagination {...pageInfo} />
                       </>
@@ -262,4 +267,12 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
 );
 
 const renderIsSuspendedItem = item =>
-  !item ? "всі договори" : item === "true" ? "так" : "ні";
+  item === "" ? "всі договори" : item === "true" ? "так" : "ні";
+
+const convertIsSuspendedItem = item => {
+  try {
+    return JSON.parse(item);
+  } catch (error) {
+    return undefined;
+  }
+};
