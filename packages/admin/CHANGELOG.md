@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.132.1"></a>
+## [0.132.1](https://github.com/edenlabllc/ehealth.web/compare/v0.132.0...v0.132.1) (2018-11-12)
+
+
+### Bug Fixes
+
+* **admin:** add refetchQueries in sign CR ([892525c](https://github.com/edenlabllc/ehealth.web/commit/892525c))
+
+
+
+
+
 <a name="0.132.0"></a>
 # [0.132.0](https://github.com/edenlabllc/ehealth.web/compare/v0.131.4...v0.132.0) (2018-11-12)
 
