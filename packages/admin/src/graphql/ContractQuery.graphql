@@ -12,7 +12,10 @@ query ContractQuery(
     id
     databaseId
     contractNumber
-    contractRequestId
+    contractRequest {
+      id
+      databaseId
+    }
     isSuspended
     status
     nhsPaymentMethod

@@ -50,7 +50,10 @@ const Details = ({ id }) => (
         isSuspended,
         databaseId,
         contractNumber,
-        contractRequestId,
+        contractRequest: {
+          id: contractRequestId,
+          databaseId: contractRequestDatabaseId
+        },
         status,
         printoutContent: content,
         startDate,
@@ -93,7 +96,11 @@ const Details = ({ id }) => (
                   }}
                   data={{
                     databaseId,
-                    contractRequestId,
+                    contractRequestId: (
+                      <Link to={`/contract-requests/${contractRequestId}`}>
+                        {contractRequestDatabaseId}
+                      </Link>
+                    ),
                     contractNumber,
                     status: (
                       <Badge name={status} type="CONTRACT" minWidth={100} />
