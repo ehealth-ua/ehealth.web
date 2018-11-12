@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.131.4"></a>
+## [0.131.4](https://github.com/edenlabllc/ehealth.web/compare/v0.131.3...v0.131.4) (2018-11-12)
+
+
+### Bug Fixes
+
+* **admin:** add dababaseId as search arg, rename contractRequestId in Contract details ([f86d662](https://github.com/edenlabllc/ehealth.web/commit/f86d662))
+* **admin:** change query graphql in ContractRequest ([87193aa](https://github.com/edenlabllc/ehealth.web/commit/87193aa))
+* **admin:** change view button mutation in Switch in Contract Requests ([2ce8095](https://github.com/edenlabllc/ehealth.web/commit/2ce8095))
+* **admin:** fix mutation approve ContractRequests ([1404cc2](https://github.com/edenlabllc/ehealth.web/commit/1404cc2))
+* **admin:** fix mutation decline ContractRequests ([8582a52](https://github.com/edenlabllc/ehealth.web/commit/8582a52))
+* **admin:** fix mutation sign ContractRequests ([d854c89](https://github.com/edenlabllc/ehealth.web/commit/d854c89))
+
+
+
+
+
 <a name="0.131.3"></a>
 ## [0.131.3](https://github.com/edenlabllc/ehealth.web/compare/v0.131.2...v0.131.3) (2018-11-12)
 
