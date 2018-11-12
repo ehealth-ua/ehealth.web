@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.132.2"></a>
+## [0.132.2](https://github.com/edenlabllc/ehealth.web/compare/v0.132.1...v0.132.2) (2018-11-12)
+
+
+### Bug Fixes
+
+* **admin:** add whiteSpaceNoWrap to the Table component and Tables on Contract and ContractRequests pages ([#475](https://github.com/edenlabllc/ehealth.web/issues/475)) ([eb7c98a](https://github.com/edenlabllc/ehealth.web/commit/eb7c98a))
+
+
+
+
+
 <a name="0.132.0"></a>
 # [0.132.0](https://github.com/edenlabllc/ehealth.web/compare/v0.131.4...v0.132.0) (2018-11-12)
 
