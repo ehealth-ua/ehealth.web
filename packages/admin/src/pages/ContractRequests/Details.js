@@ -72,16 +72,16 @@ const Details = ({ id }) => (
             <Box py={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/contract-requests">
-                  Перелік запитів
+                  Перелік заяв
                 </Breadcrumbs.Item>
-                <Breadcrumbs.Item>Деталі запиту</Breadcrumbs.Item>
+                <Breadcrumbs.Item>Деталі заяви</Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
             <Flex justifyContent="space-between">
               <Box>
                 <DefinitionListView
                   labels={{
-                    id: "ID запиту",
+                    id: "ID заяви",
                     status: "Статус",
                     assignee: "Виконавець"
                   }}
