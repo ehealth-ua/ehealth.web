@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.132.4"></a>
+## [0.132.4](https://github.com/edenlabllc/ehealth.web/compare/v0.132.3...v0.132.4) (2018-11-12)
+
+
+### Bug Fixes
+
+* **admin:** add red color error in SelectField ([0898cb8](https://github.com/edenlabllc/ehealth.web/commit/0898cb8))
+* **admin:** add validation select inputs on update CR ([f8c1e54](https://github.com/edenlabllc/ehealth.web/commit/f8c1e54))
+
+
+
+
+
 <a name="0.132.3"></a>
 ## [0.132.3](https://github.com/edenlabllc/ehealth.web/compare/v0.132.2...v0.132.3) (2018-11-12)
 
