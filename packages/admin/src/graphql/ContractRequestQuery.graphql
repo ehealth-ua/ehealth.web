@@ -100,6 +100,7 @@ query ContractRequestQuery($id: ID!) {
         additionalInfo {
           specialities {
             speciality
+            specialityOfficio
           }
         }
       }
