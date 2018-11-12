@@ -79,7 +79,11 @@ const SelectField = ({
           </FieldView.Header>
         )}
 
-        <InputView.Border position="relative" flexWrap="wrap">
+        <InputView.Border
+          position="relative"
+          flexWrap="wrap"
+          borderColor={errored && "red"}
+        >
           <InputView.Content
             {...getInputProps({
               is: "input",
@@ -132,7 +136,9 @@ const SelectField = ({
 
         {!hideErrors && (
           <FieldView.Footer>
-            <FieldView.Message>{errored ? error : warning}</FieldView.Message>
+            <FieldView.Message color="red">
+              {errored ? error : warning}
+            </FieldView.Message>
           </FieldView.Footer>
         )}
       </FieldView.Wrapper>
