@@ -132,6 +132,8 @@ query ContractRequestQuery($id: ID!) {
       url
     }
     miscellaneous
+    toApproveContent
+    toDeclineContent
     toSignContent
   }
 }

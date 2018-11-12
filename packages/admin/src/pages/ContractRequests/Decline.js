@@ -14,14 +14,11 @@ import Button from "../../components/Button";
 import Tooltip from "../../components/Tooltip";
 import * as Field from "../../components/Field";
 import DefinitionListView from "../../components/DefinitionListView";
-import STATUSES from "../../helpers/statuses";
 
 import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
 import DeclineContractRequestMutation from "../../graphql/DeclineContractRequestMutation.graphql";
 
 import { REACT_APP_SIGNER_URL } from "../../env";
-
-const miscellaneous = STATUSES.CONTRACT_REQUEST_UPDATE_MISCELLANEOUS;
 
 const Decline = ({
   id,
@@ -50,10 +47,13 @@ const Decline = ({
               if (error) return `Error! ${error.message}`;
 
               const {
-                id,
                 status,
                 databaseId,
-                contractorLegalEntity: { id: legalEntityId, name, edrpou }
+                contractorLegalEntity: {
+                  databaseId: legalEntityId,
+                  name,
+                  edrpou
+                }
               } = contractRequest;
 
               return (
@@ -61,14 +61,14 @@ const Decline = ({
                   <OpacityBox>
                     <DefinitionListView
                       labels={{
-                        id: "ID запиту",
+                        databaseId: "ID заяви",
                         status: "Статус",
                         edrpou: "ЄДРПОУ",
                         name: "Назва",
                         legalEntityId: "ID медзакладу"
                       }}
                       data={{
-                        id: databaseId,
+                        databaseId,
                         status: (
                           <Badge
                             name={status}
@@ -151,94 +151,81 @@ const Sign = ({
   }
 }) => (
   <Query query={ContractRequestQuery} variables={{ id }}>
-    {({ loading, error, data: { contractRequest }, refetch }) => {
-      if (loading) return "Loading...";
-      if (error) return `Error! ${error.message}`;
-
-      const {
-        id,
-        databaseId,
-        contractorLegalEntity: { databaseId: legalEntityId, name, edrpou }
-      } = contractRequest;
-
-      return (
-        <Signer.Parent
-          url={REACT_APP_SIGNER_URL}
-          features={{ width: 640, height: 589 }}
-        >
-          {({ signData }) => (
-            <Mutation mutation={DeclineContractRequestMutation}>
-              {declineContractRequest => (
-                <>
-                  <DefinitionListView
-                    labels={{
-                      base: "Причина відхилення"
-                    }}
-                    data={{
-                      base
-                    }}
-                    labelWidth="300px"
-                    marginBetween={2}
-                    flexDirection="column"
-                  />
-                  <Flex mt={5}>
-                    <Box mr={3}>
-                      <Link to="../" state={{ base }}>
-                        <Button variant="blue">Повернутися</Button>
-                      </Link>
-                    </Box>
-                    <Tooltip
-                      component={() => (
-                        <Button
-                          variant="green"
-                          onClick={async () => {
-                            const { signedContent } = await signData({
-                              id: databaseId,
-                              contractor_legal_entity: {
-                                id: legalEntityId,
-                                name,
-                                edrpou
-                              },
-                              next_status: "DECLINED",
-                              status_reason: base,
-                              // TODO: check new text in decline
-                              text: miscellaneous
-                            });
-                            await declineContractRequest({
-                              variables: {
-                                input: {
-                                  id,
-                                  signedContent: {
-                                    content: signedContent,
-                                    encoding: "BASE64"
-                                  }
+    {({
+      loading,
+      error,
+      data: {
+        contractRequest: { toDeclineContent }
+      }
+    }) => (
+      <Signer.Parent
+        url={REACT_APP_SIGNER_URL}
+        features={{ width: 640, height: 589 }}
+      >
+        {({ signData }) => (
+          <Mutation
+            mutation={DeclineContractRequestMutation}
+            refetchQueries={() => [
+              {
+                query: ContractRequestQuery,
+                variables: { id }
+              }
+            ]}
+          >
+            {declineContractRequest => (
+              <>
+                <DefinitionListView
+                  labels={{
+                    base: "Причина відхилення"
+                  }}
+                  data={{
+                    base
+                  }}
+                  labelWidth="300px"
+                  marginBetween={2}
+                  flexDirection="column"
+                />
+                <Flex mt={5}>
+                  <Box mr={3}>
+                    <Link to="../" state={{ base }}>
+                      <Button variant="blue">Повернутися</Button>
+                    </Link>
+                  </Box>
+                  <Tooltip
+                    component={() => (
+                      <Button
+                        variant="green"
+                        onClick={async () => {
+                          const { signedContent } = await signData({
+                            ...toDeclineContent,
+                            status_reason: base
+                          });
+                          await declineContractRequest({
+                            variables: {
+                              input: {
+                                id,
+                                signedContent: {
+                                  content: signedContent,
+                                  encoding: "BASE64"
                                 }
                               }
-                            });
-                            await refetch();
-                            navigate("../../");
-                          }}
-                        >
-                          Затвердити, наклавши ЕЦП
-                        </Button>
-                      )}
-                      content={
-                        <>
-                          Увага! <br />
-                          Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність власних
-                          намірів , а також що зміст правочину ВІДПОВІДАЄ ВАШІЇЙ
-                          ВОЛІ, ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ ОСОБИСТО ВАМИ.
-                        </>
-                      }
-                    />
-                  </Flex>
-                </>
-              )}
-            </Mutation>
-          )}
-        </Signer.Parent>
-      );
-    }}
+                            }
+                          });
+                          navigate("../../");
+                        }}
+                      >
+                        Затвердити, наклавши ЕЦП
+                      </Button>
+                    )}
+                    content={toDeclineContent.text}
+                  />
+                </Flex>
+              </>
+            )}
+          </Mutation>
+        )}
+      </Signer.Parent>
+    )}
   </Query>
 );
 

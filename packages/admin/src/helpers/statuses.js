@@ -53,9 +53,6 @@ const NHS_PAYMENT_METHOD = {
   FORWARD: "Післяоплата"
 };
 
-const CONTRACT_REQUEST_UPDATE_MISCELLANEOUS =
-  "Цим повідомленням НСЗУ висловлює намір укласти договір про медичне обслуговування населення за програмою медичних гарантій на умовах, визначених в оголошенні про укладення договорів. Просимо заповнити проект договору з додатками, скріпити електронним цифровим підписом та надіслати до НСЗУ. У разі виникнення запитань щодо заповнення форми договору, будь ласка, звертайтеся за адресою електронної пошти: info@nszu.gov.ua, або за телефоном: (044) 229-92-54. З повагою, Голова НСЗУ, Олег ПЕТРЕНКО";
-
 const STATUSES = {
   CONTRACT,
   PERSON,
@@ -65,8 +62,7 @@ const STATUSES = {
   LEGAL_ENTITY_TYPE,
   CONTRACT_REQUEST,
   MERGE_LEGAL_ENTITIES_JOBS,
-  NHS_PAYMENT_METHOD,
-  CONTRACT_REQUEST_UPDATE_MISCELLANEOUS
+  NHS_PAYMENT_METHOD
 };
 
 export default STATUSES;
