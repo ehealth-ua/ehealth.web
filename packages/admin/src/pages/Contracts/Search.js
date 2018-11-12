@@ -40,7 +40,7 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { status = {}, searchRequest } = {},
+          filter: { status = {}, searchRequest, isSuspended } = {},
           date: { startFrom, startTo, endFrom, endTo } = {},
           first,
           last,
@@ -76,7 +76,8 @@ const Search = ({ uri }) => (
                   ...contract,
                   startDate: formatDateTimeInterval(startFrom, startTo),
                   endDate: formatDateTimeInterval(endFrom, endTo),
-                  status: status.name
+                  status: status.name,
+                  isSuspended: isSuspended === "false" ? "" : isSuspended
                 }
               }}
             >
@@ -192,6 +193,16 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
           message="Невірний номер"
         />
       </Box>
+      <Box px={1} width={2 / 5}>
+        <Field.Select
+          name="filter.isSuspended"
+          label="Призупинений"
+          items={["", "true", "false"]}
+          renderItem={item => renderIsSuspendedItem(item)}
+          itemToString={item => renderIsSuspendedItem(item)}
+          type="select"
+        />
+      </Box>
     </Flex>
     <Flex mx={-1}>
       <Box px={1} width={1 / 6}>
@@ -248,3 +259,6 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
     </Flex>
   </Form>
 );
+
+const renderIsSuspendedItem = item =>
+  !item ? "всі договори" : item === "true" ? "так" : "ні";
