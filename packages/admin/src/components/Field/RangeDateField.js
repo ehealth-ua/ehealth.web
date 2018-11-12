@@ -78,6 +78,8 @@ class RangeDateField extends React.Component<
     this.internalClearTimeouts();
   }
 
+  calendar = React.createRef();
+
   render() {
     const {
       rangeNames: [start, end],
@@ -103,6 +105,7 @@ class RangeDateField extends React.Component<
             <>
               <InputView.Border
                 state={propsFrom.meta.state || propsTo.meta.state}
+                innerRef={this.calendar}
               >
                 <InputView.Content
                   pl={2}
@@ -129,6 +132,7 @@ class RangeDateField extends React.Component<
                   opened={this.state.opened === "start"}
                   {...propsFrom}
                 />
+
                 <InputView.Content>-</InputView.Content>
                 <Calendar
                   name={end}
@@ -189,8 +193,7 @@ class RangeDateField extends React.Component<
     this.internalSetTimeout(() => {
       if (
         document.hasFocus() &&
-        document.activeElement === document.body &&
-        document.activeElement !== document.documentElement
+        !this.calendar.current.contains(document.activeElement)
       ) {
         this.setState({ opened: "none" });
       }
