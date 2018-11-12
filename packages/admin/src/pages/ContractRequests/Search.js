@@ -168,6 +168,7 @@ const Search = ({ uri }) => (
                               })
                             }
                             tableName="contractrequests/search"
+                            whiteSpaceNoWrap={["databaseId"]}
                           />
                           <Pagination {...pageInfo} />
                         </>

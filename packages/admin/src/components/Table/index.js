@@ -133,6 +133,7 @@ class Table extends React.Component<TableProps, TableState> {
       onSortingChange,
       tableName,
       hiddenFields = "",
+      whiteSpaceNoWrap,
       headless,
       tableBody: Body = TableBody
     } = this.props;
@@ -209,6 +210,7 @@ class Table extends React.Component<TableProps, TableState> {
             onSortingChange={onSortingChange}
             filterRow={filterRow}
             headless={headless}
+            whiteSpaceNoWrap={whiteSpaceNoWrap}
           />
         </TableWrapper>
       </>
@@ -309,7 +311,7 @@ export const TableCell = styled.td`
   overflow: hidden;
   text-overflow: ellipsis;
   border-right: 1px solid #e0e0e0;
-  ${ifNotProp(
+  ${ifProp(
     "whiteSpaceNoWrap",
     css`
       white-space: nowrap;

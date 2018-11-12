@@ -361,6 +361,7 @@ const Employees = ({ contractorEmployeeDivisions }) =>
         ...contractorEmployeeDivisions
       })}
       tableName="/contract-requests/employees"
+      whiteSpaceNoWrap={["databaseId"]}
     />
   );
 

@@ -531,6 +531,7 @@ const Employees = ({ id }) => (
                         })
                       }
                       tableName="/contract/employees"
+                      whiteSpaceNoWrap={["databaseId"]}
                     />
                     <Pagination {...pageInfo} />
                   </>
