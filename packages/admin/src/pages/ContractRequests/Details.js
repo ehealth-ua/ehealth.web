@@ -121,7 +121,7 @@ const Details = ({ id }) => (
                           <Button variant="red">Відхилити</Button>
                         </Link>
                       </Box>
-                      <Link to="approve">
+                      <Link to="update">
                         <Button variant="green">Затвердити</Button>
                       </Link>
                     </Flex>
