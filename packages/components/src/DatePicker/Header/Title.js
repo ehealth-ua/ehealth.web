@@ -1,6 +1,6 @@
 import styled from "react-emotion/macro";
 
-const Link = styled.span`
+const Link = styled.button`
   cursor: pointer;
   &:hover {
     color: #2292f2;
