@@ -58,7 +58,15 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                         }}
                       >
                         {({ signData }) => (
-                          <Mutation mutation={SignContractRequestMutation}>
+                          <Mutation
+                            mutation={SignContractRequestMutation}
+                            refetchQueries={() => [
+                              {
+                                query: ContractRequestQuery,
+                                variables: { id }
+                              }
+                            ]}
+                          >
                             {signContractRequest => (
                               <Button
                                 variant="green"
