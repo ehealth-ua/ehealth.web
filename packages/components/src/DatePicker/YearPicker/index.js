@@ -16,9 +16,22 @@ class YearPicker extends Component {
     return (
       <>
         <Header data-test="yearsHeader">
-          <Button onClick={this.decreaseYear} direction="backward" />
-          <Title onClick={() => chooseYear(selectedYear)}>{selectedYear}</Title>
-          <Button onClick={this.increaseYear} direction="forward" />
+          <Button
+            onMouseDown={e => e.preventDefault()}
+            onClick={this.decreaseYear}
+            direction="backward"
+          />
+          <Title
+            onMouseDown={e => e.preventDefault()}
+            onClick={() => chooseYear(selectedYear)}
+          >
+            {selectedYear}
+          </Title>
+          <Button
+            onMouseDown={e => e.preventDefault()}
+            onClick={this.increaseYear}
+            direction="forward"
+          />
         </Header>
         <YearsList chooseYear={chooseYear} selectedYear={selectedYear} />
       </>

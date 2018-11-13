@@ -11,7 +11,12 @@ const YearsList = ({ selectedYear, chooseYear }) => {
   return (
     <List>
       {yearsArray.map(year => (
-        <Item key={year} col={4} onClick={() => chooseYear(year)}>
+        <Item
+          key={year}
+          col={4}
+          onMouseDown={e => e.preventDefault()}
+          onClick={() => chooseYear(year)}
+        >
           {year}
         </Item>
       ))}
