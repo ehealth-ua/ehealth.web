@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.133.2"></a>
+## [0.133.2](https://github.com/edenlabllc/ehealth.web/compare/v0.133.1...v0.133.2) (2018-11-13)
+
+
+### Bug Fixes
+
+* **components:** add preventDefault to the onMouseDown event for the nav elements in the DatePicker component ([d920bbd](https://github.com/edenlabllc/ehealth.web/commit/d920bbd))
+* **components:** change header in dataPicker from span to button ([716995a](https://github.com/edenlabllc/ehealth.web/commit/716995a))
+
+
+
+
+
 <a name="0.133.0"></a>
 # [0.133.0](https://github.com/edenlabllc/ehealth.web/compare/v0.132.6...v0.133.0) (2018-11-13)
 

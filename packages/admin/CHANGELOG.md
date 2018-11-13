@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.133.2"></a>
+## [0.133.2](https://github.com/edenlabllc/ehealth.web/compare/v0.133.1...v0.133.2) (2018-11-13)
+
+
+### Bug Fixes
+
+* **components:** change logic onBlur in open calendar ([615abe5](https://github.com/edenlabllc/ehealth.web/commit/615abe5))
+
+
+
+
+
 <a name="0.133.1"></a>
 ## [0.133.1](https://github.com/edenlabllc/ehealth.web/compare/v0.133.0...v0.133.1) (2018-11-13)
 
