@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.133.3"></a>
+## [0.133.3](https://github.com/edenlabllc/ehealth.web/compare/v0.133.2...v0.133.3) (2018-11-13)
+
+
+### Bug Fixes
+
+* **components:** add preventDefault to the onMouseDown event for the year elements in the DatePicker component ([e0abe39](https://github.com/edenlabllc/ehealth.web/commit/e0abe39))
+
+
+
+
+
 <a name="0.133.2"></a>
 ## [0.133.2](https://github.com/edenlabllc/ehealth.web/compare/v0.133.1...v0.133.2) (2018-11-13)
 
