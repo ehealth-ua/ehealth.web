@@ -23,11 +23,13 @@ const DayPicker = ({
                 calendars,
                 "data-test": "backMonth"
               })}
+              onMouseDown={e => e.preventDefault()}
               onClick={decrease}
               direction="backward"
             />
             <div>
               <Title
+                onMouseDown={e => e.preventDefault()}
                 onClick={() => {
                   switchMode("month");
                   getCurrentMonth(calendar.month);
@@ -35,13 +37,19 @@ const DayPicker = ({
               >
                 {MONTH_NAMES[calendar.month]}{" "}
               </Title>
-              <Title onClick={() => switchMode("year")}>{calendar.year}</Title>
+              <Title
+                onMouseDown={e => e.preventDefault()}
+                onClick={() => switchMode("year")}
+              >
+                {calendar.year}
+              </Title>
             </div>
             <Button
               {...getForwardProps({
                 calendars,
                 "data-test": "forwardMonth"
               })}
+              onMouseDown={e => e.preventDefault()}
               onClick={increase}
               direction="forward"
             />

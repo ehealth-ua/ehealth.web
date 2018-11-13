@@ -14,6 +14,7 @@ const DayPanel = ({ calendar, getDateProps }) => {
             {...(idx === 0 ? { "data-test": "firstDayOfWeek" } : {})}
             col={7}
             weekday
+            onMouseDown={e => e.preventDefault()}
           >
             {weekday}
           </Item>

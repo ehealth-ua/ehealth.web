@@ -7,7 +7,12 @@ const MonthsList = ({ chooseMonth }) => {
   return (
     <List>
       {MONTH_NAMES.map((month, index) => (
-        <Item key={index} col={3} onClick={() => chooseMonth(index)}>
+        <Item
+          key={index}
+          col={3}
+          onMouseDown={e => e.preventDefault()}
+          onClick={() => chooseMonth(index)}
+        >
           {month}
         </Item>
       ))}
