@@ -5,11 +5,13 @@ import { Link } from "react-router";
 
 import NavItem from "../../../components/NavItem";
 import { DocIcon, ExitIcon } from "@ehealth/icons";
+import { Link as ExternalLink } from "@ehealth/components";
 
 import ShowWithScope from "../ShowWithScope";
 import ShowMore from "../ShowMore";
 
 import { logOut } from "./redux";
+import { REACT_APP_ADMIN_URL } from "../../../env";
 
 import styles from "./styles.module.css";
 
@@ -88,9 +90,12 @@ class Nav extends React.Component {
           </ShowWithScope>
           <ShowWithScope scope="legal_entity:read">
             <NavItem to="clinics" activeClassName={styles.active}>
-              <Link id="clinics-nav" to="/clinics">
+              <ExternalLink
+                id="clinics-nav"
+                href={`${REACT_APP_ADMIN_URL}/legal-entities/search`}
+              >
                 Медичні заклади
-              </Link>
+              </ExternalLink>
             </NavItem>
           </ShowWithScope>
           <ShowWithScope scope="legal_entity:read">
@@ -100,6 +105,31 @@ class Nav extends React.Component {
               </Link>
             </NavItem>
           </ShowWithScope>
+          <li>
+            <ShowMore
+              nav
+              name={
+                <>
+                  Задачі в процесі
+                  <br />
+                  виконання
+                </>
+              }
+            >
+              <ul>
+                <ShowWithScope scope="legal_entity:merge">
+                  <NavItem to="registers" activeClassName={styles.active}>
+                    <ExternalLink
+                      id="registers-nav"
+                      href={`${REACT_APP_ADMIN_URL}/legal-entity-merge-jobs/search/related`}
+                    >
+                      Підпорядкування МЗ
+                    </ExternalLink>
+                  </NavItem>
+                </ShowWithScope>
+              </ul>
+            </ShowMore>
+          </li>
           <NavItem to="reports" activeClassName={styles.active}>
             <Link id="reports-nav" to="/reports">
               Звіти
@@ -172,9 +202,12 @@ class Nav extends React.Component {
               <ul>
                 <ShowWithScope scope="contract:read">
                   <NavItem to="contracts" activeClassName={styles.active}>
-                    <Link id="contracts-nav" to="/contracts">
+                    <ExternalLink
+                      id="contracts-nav"
+                      href={`${REACT_APP_ADMIN_URL}/contracts/search`}
+                    >
                       Перелік договорів
-                    </Link>
+                    </ExternalLink>
                   </NavItem>
                 </ShowWithScope>
                 <ShowWithScope scope="contract_request:read">
@@ -182,9 +215,12 @@ class Nav extends React.Component {
                     to="contract-requests"
                     activeClassName={styles.active}
                   >
-                    <Link id="contract-requests-nav" to="/contract-requests">
+                    <ExternalLink
+                      id="contract-requests-nav"
+                      href={`${REACT_APP_ADMIN_URL}/contract-requests/search`}
+                    >
                       Заяви на <br /> укладення договору
-                    </Link>
+                    </ExternalLink>
                   </NavItem>
                 </ShowWithScope>
               </ul>
