@@ -98,7 +98,15 @@ const Details = ({ id }) => (
                     title="Закрити медзаклад"
                   >
                     {toggle => (
-                      <Mutation mutation={DeactivateLegalEntityMutation}>
+                      <Mutation
+                        mutation={DeactivateLegalEntityMutation}
+                        refetchQueries={() => [
+                          {
+                            query: LegalEntityQuery,
+                            variables: { id, first: 10 }
+                          }
+                        ]}
+                      >
                         {deactivateLegalEntity => (
                           <Flex justifyContent="center">
                             <Box mr={20}>
@@ -110,7 +118,7 @@ const Details = ({ id }) => (
                               onClick={async () => {
                                 await deactivateLegalEntity({
                                   variables: {
-                                    id
+                                    input: { id }
                                   }
                                 });
                                 toggle();
@@ -134,7 +142,15 @@ const Details = ({ id }) => (
                         title="Закрити медзаклад"
                       >
                         {toggle => (
-                          <Mutation mutation={DeactivateLegalEntityMutation}>
+                          <Mutation
+                            mutation={DeactivateLegalEntityMutation}
+                            refetchQueries={() => [
+                              {
+                                query: LegalEntityQuery,
+                                variables: { id, first: 10 }
+                              }
+                            ]}
+                          >
                             {deactivateLegalEntity => (
                               <Flex justifyContent="center">
                                 <Box mr={20}>
@@ -146,7 +162,7 @@ const Details = ({ id }) => (
                                   onClick={async () => {
                                     await deactivateLegalEntity({
                                       variables: {
-                                        id
+                                        input: { id }
                                       }
                                     });
                                     toggle();
@@ -167,7 +183,15 @@ const Details = ({ id }) => (
                       title="Верифікація медзакладу"
                     >
                       {toggle => (
-                        <Mutation mutation={NhsVerifyLegalEntityMutation}>
+                        <Mutation
+                          mutation={NhsVerifyLegalEntityMutation}
+                          refetchQueries={() => [
+                            {
+                              query: LegalEntityQuery,
+                              variables: { id, first: 10 }
+                            }
+                          ]}
+                        >
                           {nhsVerifyLegalEntity => (
                             <Flex justifyContent="center">
                               <Box mr={20}>
@@ -179,7 +203,7 @@ const Details = ({ id }) => (
                                 onClick={async () => {
                                   await nhsVerifyLegalEntity({
                                     variables: {
-                                      id
+                                      input: { id }
                                     }
                                   });
                                   toggle();

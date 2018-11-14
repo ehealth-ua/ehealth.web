@@ -1,5 +1,5 @@
-mutation DeactivateLegalEntityMutation($id: ID!) {
-  deactivateLegalEntity: deactivateLegalEntity(input: { id: $id }) {
+mutation DeactivateLegalEntityMutation($input: DeactivateLegalEntityInput!) {
+  deactivateLegalEntity: deactivateLegalEntity(input: $input) {
     legalEntity {
       id
     }
