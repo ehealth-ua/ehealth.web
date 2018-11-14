@@ -20,6 +20,11 @@ const LEGAL_ENTITY_STATUS = {
   NOT_VERIFIED: "Не верифіковано"
 };
 
+const LEGAL_ENTITY_RELATION = {
+  MERGED_FROM: "підпорядкованого",
+  MERGED_TO: "основного"
+};
+
 const LEGAL_ENTITY_TYPE = {
   PHARMACY: "Аптека",
   MSP: "Заклад з надання медичних послуг",
@@ -60,6 +65,7 @@ const STATUSES = {
   LEGALENTITY,
   LEGAL_ENTITY_STATUS,
   LEGAL_ENTITY_TYPE,
+  LEGAL_ENTITY_RELATION,
   CONTRACT_REQUEST,
   MERGE_LEGAL_ENTITIES_JOBS,
   NHS_PAYMENT_METHOD

@@ -1,5 +1,8 @@
 import React from "react";
-import { Flex, Box, Heading } from "rebass/emotion";
+import { Flex, Box, Text, Heading } from "rebass/emotion";
+import { BooleanValue } from "react-values";
+import system from "system-components/emotion";
+import { ChevronBottomIcon } from "@ehealth/icons";
 import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
 import format from "date-fns/format";
@@ -22,11 +25,13 @@ import ContractsNav from "../ContractsNav";
 
 import * as Field from "../../../components/Field";
 import Link from "../../../components/Link";
+import Line from "../../../components/Line";
 import Table from "../../../components/Table";
 import Pagination from "../../../components/Pagination";
 import Button, { IconButton } from "../../../components/Button";
 import Badge from "../../../components/Badge";
 import STATUSES from "../../../helpers/statuses";
+
 import {
   EDRPOU_PATTERN,
   SEARCH_CONTRACT_PATTERN
@@ -41,6 +46,10 @@ const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
   ([name, value]) => ({ name, value })
 );
 
+const legalEntityRelation = Object.entries(STATUSES.LEGAL_ENTITY_RELATION).map(
+  ([name, value]) => ({ name, value })
+);
+
 const CapitationContractsSearch = ({ uri }) => (
   <Box p={6}>
     <ContractsNav />
@@ -48,7 +57,12 @@ const CapitationContractsSearch = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { status = {}, searchRequest, isSuspended } = {},
+          filter: {
+            status = {},
+            legalEntityRelation = {},
+            searchRequest,
+            isSuspended
+          } = {},
           date: { startFrom, startTo, endFrom, endTo } = {},
           first,
           last,
@@ -85,6 +99,7 @@ const CapitationContractsSearch = ({ uri }) => (
                   startDate: formatDateTimeInterval(startFrom, startTo),
                   endDate: formatDateTimeInterval(endFrom, endTo),
                   status: status.name,
+                  legalEntityRelation: legalEntityRelation.name,
                   isSuspended: convertIsSuspendedItem(isSuspended)
                 }
               }}
@@ -204,16 +219,6 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
           message="Невірний номер"
         />
       </Box>
-      <Box px={1} width={2 / 5}>
-        <Field.Select
-          name="filter.isSuspended"
-          label="Стан договору"
-          items={["", "true", "false"]}
-          renderItem={item => renderIsSuspendedItem(item)}
-          itemToString={item => renderIsSuspendedItem(item)}
-          type="select"
-        />
-      </Box>
     </Flex>
     <Flex mx={-1}>
       <Box px={1} width={1 / 6}>
@@ -244,6 +249,62 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
         />
       </Flex>
     </Flex>
+
+    <BooleanValue>
+      {({ value: opened, toggle }) => (
+        <>
+          {opened && (
+            <Flex mx={-1}>
+              <Box width={1 / 6} px={1} mr={1}>
+                <Field.Select
+                  name="filter.isSuspended"
+                  label="Призупинений"
+                  items={["", "true", "false"]}
+                  renderItem={item => renderIsSuspendedItem(item)}
+                  itemToString={item => renderIsSuspendedItem(item)}
+                  type="select"
+                />
+              </Box>
+              <Box width={1 / 3}>
+                <Field.Select
+                  name="filter.legalEntityRelation"
+                  label="Договори реорагізованих закладів"
+                  placeholder="test"
+                  items={[{ value: "всі договори" }, ...legalEntityRelation]}
+                  renderItem={item => item.value}
+                  itemToString={item => {
+                    if (!item) return "всі договори";
+                    return typeof item === "string" ? item : item.value;
+                  }}
+                  type="select"
+                />
+              </Box>
+            </Flex>
+          )}
+          <Flex mb={4}>
+            <Button
+              variant="none"
+              border="none"
+              px="0"
+              py="0"
+              color="bluePastel"
+              onClick={toggle}
+            >
+              <Flex
+                justifyContent="center"
+                alignItems="center"
+                color="bluePastel"
+              >
+                <TextNoWrap>розширений пошук</TextNoWrap>
+                <Icon transform={opened ? "rotate(180)" : "rotate(0)"} />
+              </Flex>
+            </Button>
+            <Line my={3} />
+          </Flex>
+        </>
+      )}
+    </BooleanValue>
+
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
         <Button variant="blue">Шукати</Button>
@@ -275,6 +336,20 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
     </Flex>
   </Form>
 );
+
+const TextNoWrap = system(
+  {
+    is: Text
+  },
+  { whiteSpace: "nowrap" }
+);
+
+const Icon = system({
+  is: ChevronBottomIcon,
+  mx: 2,
+  width: 11,
+  transform: "rotate(180)"
+});
 
 const renderIsSuspendedItem = item =>
   item === "" ? "всі договори" : item === "true" ? "діючий" : "призупинений";
