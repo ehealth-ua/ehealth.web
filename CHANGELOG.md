@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.133.4"></a>
+## [0.133.4](https://github.com/edenlabllc/ehealth.web/compare/v0.133.3...v0.133.4) (2018-11-14)
+
+
+### Bug Fixes
+
+* **admin:** fix mutation verify and deactivate Legal entities ([2c659f2](https://github.com/edenlabllc/ehealth.web/commit/2c659f2))
+* **admin:** rename query to EmployeesQuery ([87e0619](https://github.com/edenlabllc/ehealth.web/commit/87e0619))
+
+
+
+
+
 <a name="0.133.3"></a>
 ## [0.133.3](https://github.com/edenlabllc/ehealth.web/compare/v0.133.2...v0.133.3) (2018-11-13)
 
