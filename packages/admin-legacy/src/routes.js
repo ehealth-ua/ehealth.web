@@ -21,6 +21,7 @@ import App from "./containers/layouts/App";
 import Main from "./containers/layouts/Main";
 import PreloadData from "./containers/layouts/PreloadData";
 
+import SignInPage from "./containers/pages/SignInPage";
 import DashboardPage from "./containers/pages/DashboardPage";
 
 import DictionariesPage from "./containers/pages/DictionariesPage";
@@ -325,6 +326,7 @@ export default class Routes extends Component {
             </Route>
             <Route path="401" component={AccessDeniedPage} />
           </Route>
+          <Route path="sign-in" component={SignInPage} />
           <Route path="internal-error" component={InternalErrorPage} />
           <Route path="*" component={NotFoundPage} />
         </Route>

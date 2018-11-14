@@ -223,7 +223,7 @@ const NavSection = ({ title, children }) => (
 );
 
 const NavContainer = styled.nav`
-  margin-top: 80px;
+  margin: 80px 0 35px;
 `;
 
 const NavList = styled.ul`

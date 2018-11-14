@@ -355,7 +355,7 @@ class Nav extends React.Component {
           </li>
           <li className={styles.logout} onClick={() => this.props.logOut()}>
             <LogoutIcon width={10} height={10} />
-            Вихід
+            Вийти
           </li>
         </ul>
       </nav>
