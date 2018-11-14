@@ -7,7 +7,7 @@ const Line = system({
   my: 5,
   mx: 0,
   height: "1px",
-  w: "100%"
+  width: "100%"
 });
 
 export default Line;
