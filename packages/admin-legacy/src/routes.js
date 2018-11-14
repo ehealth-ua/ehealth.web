@@ -11,15 +11,15 @@ import {
 import { syncHistoryWithStore } from "react-router-redux";
 import { useRedial } from "react-router-redial";
 
-import { logout, getToken, verifyToken } from "./redux/session";
-import { fetchUserData } from "./redux/user";
-import { REACT_APP_PUBLIC_INDEX_ROUTE } from "./env";
+import {
+  REACT_APP_OAUTH_URL,
+  REACT_APP_CLIENT_ID,
+  REACT_APP_OAUTH_REDIRECT_URI
+} from "./env";
 
 import App from "./containers/layouts/App";
 import Main from "./containers/layouts/Main";
 import PreloadData from "./containers/layouts/PreloadData";
-
-import SignInPage from "./containers/pages/SignInPage";
 
 import DashboardPage from "./containers/pages/DashboardPage";
 
@@ -101,7 +101,6 @@ import InternalErrorPage from "./containers/pages/InternalErrorPage/index";
 
 import { showLoading, hideLoading } from "./redux/loading";
 import { hasScope } from "./helpers/scope";
-import { isAuthorized, getScope } from "./reducers";
 import { getCookie } from "@ehealth/utils";
 
 export default class Routes extends Component {
@@ -138,7 +137,9 @@ export default class Routes extends Component {
             onError: ({ payload: { status } }) => {
               dispatch(hideLoading());
               if (status === 401) {
-                history.push("/sign-in");
+                window.location.replace(
+                  `${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`
+                );
               }
             }
           })
@@ -324,7 +325,6 @@ export default class Routes extends Component {
             </Route>
             <Route path="401" component={AccessDeniedPage} />
           </Route>
-          <Route path="sign-in" component={SignInPage} />
           <Route path="internal-error" component={InternalErrorPage} />
           <Route path="*" component={NotFoundPage} />
         </Route>
@@ -343,7 +343,9 @@ export default class Routes extends Component {
 
   requireAuth = () => (nextState, replace, next) => {
     if (!getCookie("meta")) {
-      replace({ pathname: "/sign-in" });
+      window.location.replace(
+        `${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`
+      );
     }
     return next();
   };
