@@ -1,4 +1,4 @@
-query EmploeesQuery(
+query EmployeesQuery(
   $first: Int!
   $filter: EmployeeFilter
   $orderBy: EmployeeOrderBy

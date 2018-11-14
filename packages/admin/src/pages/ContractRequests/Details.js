@@ -37,7 +37,7 @@ import { SearchIcon } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
-import EmployeesQuery from "../../graphql/EmploeesQuery.graphql";
+import EmployeesQuery from "../../graphql/EmployeesQuery.graphql";
 import AssignContractRequestMutation from "../../graphql/AssignContractRequestMutation.graphql";
 
 const Details = ({ id }) => (

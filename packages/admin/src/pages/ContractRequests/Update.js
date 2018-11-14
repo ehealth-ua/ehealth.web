@@ -19,7 +19,7 @@ import DefinitionListView from "../../components/DefinitionListView";
 import STATUSES from "../../helpers/statuses";
 
 import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
-import EmploeesQuery from "../../graphql/EmploeesQuery.graphql";
+import EmployeesQuery from "../../graphql/EmployeesQuery.graphql";
 import UpdateContractRequestMutation from "../../graphql/UpdateContractRequestMutation.graphql";
 
 const nhsPaymentMethod = Object.entries(STATUSES.NHS_PAYMENT_METHOD).map(
@@ -128,7 +128,7 @@ const UpdateContractRequest = ({
   return (
     <Box m={5}>
       <Query
-        query={EmploeesQuery}
+        query={EmployeesQuery}
         variables={{
           first: 50,
           filter: {
