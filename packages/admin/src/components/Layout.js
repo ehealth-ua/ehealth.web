@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "@reach/router";
-import { EhealthLogoIcon, LogoutIcon } from "@ehealth/icons";
+import {
+  EhealthLogoIcon,
+  LogoutIcon as Logout,
+  DocIcon as Doc
+} from "@ehealth/icons";
 import system from "system-components/emotion";
 import { gradient } from "@ehealth/system-tools";
 import { Box } from "rebass/emotion";
@@ -18,10 +22,20 @@ const Layout = ({ children }) => (
       <Box px={5}>
         <Nav />
       </Box>
-      <Logout href="/auth/logout">
-        <Icon width={10} height={10} />
-        Вийти
-      </Logout>
+      <BottomWrapper>
+        <BottomLink
+          href="http://docs.uaehealthapi.apiary.io/#"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <DocIcon />
+          Документація
+        </BottomLink>
+        <BottomLink href="/auth/logout">
+          <LogoutIcon width={10} height={10} />
+          Вийти
+        </BottomLink>
+      </BottomWrapper>
     </Sidebar>
     <Content>{children}</Content>
   </Wrapper>
@@ -71,22 +85,37 @@ const Content = system({
   width: "100%"
 });
 
-const Logout = system(
+const BottomWrapper = system(
   {
-    is: "a",
+    is: "div",
     mt: "auto",
     px: 6,
-    py: 4,
+    py: 4
+  },
+  {
+    borderTop: "1px solid #0083a1"
+  }
+);
+
+const BottomLink = system(
+  {
+    is: "a",
+    display: "block",
+    py: 3,
     color: "white",
     fontSize: 0
   },
   {
-    borderTop: "1px solid #0083a1",
     textDecoration: "none"
   }
 );
 
-const Icon = system({
-  is: LogoutIcon,
+const DocIcon = system({
+  is: Doc,
+  mr: 2
+});
+
+const LogoutIcon = system({
+  is: Logout,
   mr: 2
 });

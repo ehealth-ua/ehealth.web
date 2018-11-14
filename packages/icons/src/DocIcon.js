@@ -55,7 +55,7 @@ const DocIcon = ({ ...props }) => (
     <path
       id="SvgjsPath1018"
       d="M69.1107 397.998H64.0013V410.99199999999996H73.997V403.14699999999993ZM69.3211 399.29L72.7403 402.894H70V403H66V402H69.3211ZM66 409V408H72V409ZM66 407V406H72V407ZM66 405V404H72V405Z "
-      fill="#2c3456"
+      fill="#CED0DA"
       fillOpacity="1"
       transform="matrix(1,0,0,1,-64,-397)"
     />

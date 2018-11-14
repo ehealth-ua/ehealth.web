@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { Link } from "react-router";
 
 import NavItem from "../../../components/NavItem";
-import { DocIcon, ExitIcon } from "@ehealth/icons";
+import { DocIcon, LogoutIcon } from "@ehealth/icons";
 import { Link as ExternalLink } from "@ehealth/components";
 
 import ShowWithScope from "../ShowWithScope";
@@ -56,7 +56,8 @@ class Nav extends React.Component {
                       id="pending-declarations-nav"
                       to="/pending-declarations"
                     >
-                      Декларації на розгляді
+                      Декларації на
+                      <br /> розгляді
                     </Link>
                   </NavItem>
                 </ul>
@@ -101,7 +102,8 @@ class Nav extends React.Component {
           <ShowWithScope scope="legal_entity:read">
             <NavItem to="clinics-verification" activeClassName={styles.active}>
               <Link id="clinics-nav" to="/clinics-verification">
-                Підтвердження МЗ
+                Підтвердження
+                <br /> медзакладів
               </Link>
             </NavItem>
           </ShowWithScope>
@@ -123,7 +125,8 @@ class Nav extends React.Component {
                       id="registers-nav"
                       href={`${REACT_APP_ADMIN_URL}/legal-entity-merge-jobs/search/related`}
                     >
-                      Підпорядкування МЗ
+                      Підпорядкування
+                      <br /> медзакладів
                     </ExternalLink>
                   </NavItem>
                 </ShowWithScope>
@@ -351,7 +354,7 @@ class Nav extends React.Component {
             </a>
           </li>
           <li className={styles.logout} onClick={() => this.props.logOut()}>
-            <ExitIcon />
+            <LogoutIcon width={10} height={10} />
             Вихід
           </li>
         </ul>

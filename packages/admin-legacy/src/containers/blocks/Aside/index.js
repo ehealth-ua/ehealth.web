@@ -2,6 +2,7 @@ import React from "react";
 import { compose } from "redux";
 import { Link } from "react-router";
 import { connect } from "react-redux";
+import { EhealthLogoIcon } from "@ehealth/icons";
 
 import Nav from "../Nav";
 import Gamburger from "../Gamburger";
@@ -16,9 +17,8 @@ class Aside extends React.Component {
     return (
       <aside className={styles.aside}>
         <Link className={styles.logo} to="/">
-          <img src="/images/nhs-logo.svg" alt="Logo" />
+          <EhealthLogoIcon width={75} />
         </Link>
-        <hr className={styles.line} />
 
         <Nav isOpen={active} />
 
@@ -30,6 +30,9 @@ class Aside extends React.Component {
   }
 }
 
-export default compose(connect(state => state.blocks.Aside, { toggleMenu }))(
-  Aside
-);
+export default compose(
+  connect(
+    state => state.blocks.Aside,
+    { toggleMenu }
+  )
+)(Aside);

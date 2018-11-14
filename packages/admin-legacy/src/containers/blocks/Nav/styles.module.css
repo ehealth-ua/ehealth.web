@@ -1,10 +1,20 @@
 .nav {
-  padding: 47px 0 0 37px;
+  padding: 75px 35px 150px;
   font-weight: 300;
 }
 
 .nav .down {
-  margin-top: 20px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0 25px;
+  border-top: 1px solid #0083a1;
+}
+
+.nav .down li {
+  padding: 10px 35px;
+  line-height: 1em;
 }
 
 .nav .down li.active i {
@@ -25,7 +35,7 @@
 }
 
 .nav .logout svg {
-  margin-right: 8px;
+  margin-right: 10px;
 }
 
 .nav li {
@@ -35,10 +45,10 @@
 .nav li::before {
   content: "";
   display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-right: 14px;
-  background-color: #2d294c;
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  background-color: #fff;
   border-radius: 50%;
   vertical-align: middle;
 }

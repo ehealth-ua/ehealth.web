@@ -6,10 +6,11 @@ import { FlagsProvider, Flag } from "flag";
 import { ChevronBottomIcon } from "@ehealth/icons";
 
 import flags from "../flags";
-import { REACT_APP_ADMIN_LEGACY_URL } from "../env";
 
 import Ability from "./Ability";
 import Link from "./Link";
+
+import { REACT_APP_ADMIN_LEGACY_URL } from "../env";
 
 const Nav = () => (
   <FlagsProvider flags={flags}>
@@ -159,10 +160,6 @@ const Nav = () => (
             Скинути метод авторизації
           </NavLinkExternal>
         </Ability>
-
-        <NavLinkExternal href="http://docs.uaehealthapi.apiary.io/#">
-          Документація
-        </NavLinkExternal>
       </NavList>
     </NavContainer>
   </FlagsProvider>

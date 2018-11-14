@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import { ChevronBottomIcon } from "@ehealth/icons";
 
 import styles from "./styles.module.css";
 
@@ -22,7 +23,10 @@ class ShowMore extends React.Component {
           )}
           onClick={() => this.setState({ show: !show })}
         >
-          {name} <span>▾</span>
+          {name}{" "}
+          <span>
+            <ChevronBottomIcon width="7" height="7" />
+          </span>
         </button>
 
         <div
