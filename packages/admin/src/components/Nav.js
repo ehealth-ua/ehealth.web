@@ -16,30 +16,32 @@ const Nav = () => (
   <FlagsProvider flags={flags}>
     <NavContainer>
       <NavList>
-        <NavLinkExternal to="dashboard">Статистика</NavLinkExternal>
-        <NavLinkExternal to="persons">Персони</NavLinkExternal>
+        <Flag name="features.legacy">
+          <NavLinkExternal to="dashboard">Статистика</NavLinkExternal>
+          <NavLinkExternal to="persons">Персони</NavLinkExternal>
 
-        <Ability action="read" resource="declaration">
-          <NavSection title="Декларації">
-            <NavLinkExternal to="declarations">Декларації</NavLinkExternal>
-            <NavLinkExternal to="pending-declarations">
-              Декларації на розгляді
-            </NavLinkExternal>
-          </NavSection>
-        </Ability>
-
-        <Ability action="read" resource="employee">
-          <NavSection title="Співробітники">
-            <Ability action="read" resource="employee">
-              <NavLinkExternal to="employees">Співробітники</NavLinkExternal>
-              <NavLinkExternal to="pending-employees">
-                Співробітники
-                <br />
-                на розгляді
+          <Ability action="read" resource="declaration">
+            <NavSection title="Декларації">
+              <NavLinkExternal to="declarations">Декларації</NavLinkExternal>
+              <NavLinkExternal to="pending-declarations">
+                Декларації на розгляді
               </NavLinkExternal>
-            </Ability>
-          </NavSection>
-        </Ability>
+            </NavSection>
+          </Ability>
+
+          <Ability action="read" resource="employee">
+            <NavSection title="Співробітники">
+              <Ability action="read" resource="employee">
+                <NavLinkExternal to="employees">Співробітники</NavLinkExternal>
+                <NavLinkExternal to="pending-employees">
+                  Співробітники
+                  <br />
+                  на розгляді
+                </NavLinkExternal>
+              </Ability>
+            </NavSection>
+          </Ability>
+        </Flag>
 
         <Ability
           action="read"
@@ -66,11 +68,13 @@ const Nav = () => (
           <NavLink to="/legal-entities">Медзаклади</NavLink>
         </Ability>
 
-        <Ability action="read" resource="legal_entity">
-          <NavLinkExternal to="clinics-verification">
-            Підтвердження медзакладів
-          </NavLinkExternal>
-        </Ability>
+        <Flag name="features.legacy">
+          <Ability action="read" resource="legal_entity">
+            <NavLinkExternal to="clinics-verification">
+              Підтвердження медзакладів
+            </NavLinkExternal>
+          </Ability>
+        </Flag>
 
         <Ability action="merge" resources={["legal_entity"]} loose>
           <NavSection title="Задачі в процесі виконання">
@@ -82,84 +86,92 @@ const Nav = () => (
           </NavSection>
         </Ability>
 
-        <NavLinkExternal to="reports">Звіти</NavLinkExternal>
+        <Flag name="features.legacy">
+          <NavLinkExternal to="reports">Звіти</NavLinkExternal>
 
-        <NavSection title="Реєстри">
-          <Ability action="read" resource="register">
-            <NavLinkExternal to="registers">Реєстри</NavLinkExternal>
-          </Ability>
-          <Ability action="read" resource="register_entry">
-            <NavLinkExternal to="registers-entries">
-              Записи реєстру
+          <NavSection title="Реєстри">
+            <Ability action="read" resource="register">
+              <NavLinkExternal to="registers">Реєстри</NavLinkExternal>
+            </Ability>
+            <Ability action="read" resource="register_entry">
+              <NavLinkExternal to="registers-entries">
+                Записи реєстру
+              </NavLinkExternal>
+            </Ability>
+          </NavSection>
+
+          <NavLinkExternal to="dictionaries">Словники</NavLinkExternal>
+
+          <Ability action="read" resource="global_parameters">
+            <NavLinkExternal to="configuration">
+              Конфігурація системи
             </NavLinkExternal>
           </Ability>
-        </NavSection>
 
-        <NavLinkExternal to="dictionaries">Словники</NavLinkExternal>
+          <NavSection title="Медикаменти">
+            <Ability action="read" resource="innm">
+              <NavLinkExternal to="innms">МНН</NavLinkExternal>
+            </Ability>
+            <Ability action="read" resource="innm_dosage">
+              <NavLinkExternal to="innm-dosages">
+                Лікарська форма
+              </NavLinkExternal>
+            </Ability>
+            <Ability action="read" resource="medication">
+              <NavLinkExternal to="medications">
+                Торгівельне найменування
+              </NavLinkExternal>
+            </Ability>
+          </NavSection>
 
-        <Ability action="read" resource="global_parameters">
-          <NavLinkExternal to="configuration">
-            Конфігурація системи
-          </NavLinkExternal>
-        </Ability>
+          <NavSection title="Програми">
+            <Ability action="read" resource="medical_program">
+              <NavLinkExternal to="medical-programs">
+                Перелік мед. програм
+              </NavLinkExternal>
+            </Ability>
+            <Ability action="read" resource="program_medication">
+              <NavLinkExternal to="program-medications">
+                Учасники програм
+              </NavLinkExternal>
+            </Ability>
+          </NavSection>
 
-        <NavSection title="Медикаменти">
-          <Ability action="read" resource="innm">
-            <NavLinkExternal to="innms">МНН</NavLinkExternal>
-          </Ability>
-          <Ability action="read" resource="innm_dosage">
-            <NavLinkExternal to="innm-dosages">Лікарська форма</NavLinkExternal>
-          </Ability>
-          <Ability action="read" resource="medication">
-            <NavLinkExternal to="medications">
-              Торгівельне найменування
+          <NavSection title="Рецепти">
+            <Ability action="read" resource="medication_request">
+              <NavLinkExternal to="medication-requests">
+                Рецепти
+              </NavLinkExternal>
+            </Ability>
+            <Ability action="read" resource="medication_dispense">
+              <NavLinkExternal to="medication-dispenses">
+                Відпуски рецептів
+              </NavLinkExternal>
+            </Ability>
+            <Ability action="download" resource="reimbursement_report">
+              <NavLinkExternal to="reimbursement-report">Звіт</NavLinkExternal>
+            </Ability>
+          </NavSection>
+
+          <NavSection title="Користувачі">
+            <Ability action="read" resource="bl_user">
+              <NavLinkExternal to="black-list-users">
+                Заблоковані користувачі
+              </NavLinkExternal>
+            </Ability>
+            <Ability action="read" resource="party_user">
+              <NavLinkExternal to="party-users">
+                Облікові записи
+              </NavLinkExternal>
+            </Ability>
+          </NavSection>
+
+          <Ability action="reset_authentication_method" resource="person">
+            <NavLinkExternal to="reset-authentication-method">
+              Скинути метод авторизації
             </NavLinkExternal>
           </Ability>
-        </NavSection>
-
-        <NavSection title="Програми">
-          <Ability action="read" resource="medical_program">
-            <NavLinkExternal to="medical-programs">
-              Перелік мед. програм
-            </NavLinkExternal>
-          </Ability>
-          <Ability action="read" resource="program_medication">
-            <NavLinkExternal to="program-medications">
-              Учасники програм
-            </NavLinkExternal>
-          </Ability>
-        </NavSection>
-
-        <NavSection title="Рецепти">
-          <Ability action="read" resource="medication_request">
-            <NavLinkExternal to="medication-requests">Рецепти</NavLinkExternal>
-          </Ability>
-          <Ability action="read" resource="medication_dispense">
-            <NavLinkExternal to="medication-dispenses">
-              Відпуски рецептів
-            </NavLinkExternal>
-          </Ability>
-          <Ability action="download" resource="reimbursement_report">
-            <NavLinkExternal to="reimbursement-report">Звіт</NavLinkExternal>
-          </Ability>
-        </NavSection>
-
-        <NavSection title="Користувачі">
-          <Ability action="read" resource="bl_user">
-            <NavLinkExternal to="black-list-users">
-              Заблоковані користувачі
-            </NavLinkExternal>
-          </Ability>
-          <Ability action="read" resource="party_user">
-            <NavLinkExternal to="party-users">Облікові записи</NavLinkExternal>
-          </Ability>
-        </NavSection>
-
-        <Ability action="reset_authentication_method" resource="person">
-          <NavLinkExternal to="reset-authentication-method">
-            Скинути метод авторизації
-          </NavLinkExternal>
-        </Ability>
+        </Flag>
       </NavList>
     </NavContainer>
   </FlagsProvider>
