@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.135.2"></a>
+## [0.135.2](https://github.com/edenlabllc/ehealth.web/compare/v0.135.1...v0.135.2) (2018-11-15)
+
+
+### Bug Fixes
+
+* **admin:** fix fetch policy in query list ([9fc0736](https://github.com/edenlabllc/ehealth.web/commit/9fc0736))
+
+
+
+
+
 <a name="0.135.1"></a>
 ## [0.135.1](https://github.com/edenlabllc/ehealth.web/compare/v0.135.0...v0.135.1) (2018-11-15)
 
