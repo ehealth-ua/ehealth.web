@@ -41,52 +41,13 @@ const Nav = () => (
               </Ability>
             </NavSection>
           </Ability>
-        </Flag>
 
-        <Ability
-          action="read"
-          resources={["contract_request", "contract"]}
-          loose
-        >
-          <NavSection title="Договори">
-            <Ability action="read" resource="contract_request">
-              <NavLink to="/contracts">Перелік договорів</NavLink>
-              <NavLink to="/contract-requests">
-                Заяви на укладення договору
-              </NavLink>
-            </Ability>
-          </NavSection>
-        </Ability>
-        <Flag name="features.person">
-          <Ability action="read" resource="person">
-            <NavSection title="Паціенти">
-              <NavLink to="/persons">Пошук паціентів</NavLink>
-            </NavSection>
-          </Ability>
-        </Flag>
-        <Ability action="read" resource="legal_entity">
-          <NavLink to="/legal-entities">Медзаклади</NavLink>
-        </Ability>
-
-        <Flag name="features.legacy">
           <Ability action="read" resource="legal_entity">
             <NavLinkExternal to="clinics-verification">
               Підтвердження медзакладів
             </NavLinkExternal>
           </Ability>
-        </Flag>
 
-        <Ability action="merge" resources={["legal_entity"]} loose>
-          <NavSection title="Задачі в процесі виконання">
-            <Ability action="merge" resource="legal_entity">
-              <NavLink to="/legal-entity-merge-jobs">
-                Підпорядкування медзакладів
-              </NavLink>
-            </Ability>
-          </NavSection>
-        </Ability>
-
-        <Flag name="features.legacy">
           <NavLinkExternal to="reports">Звіти</NavLinkExternal>
 
           <NavSection title="Реєстри">
@@ -172,6 +133,41 @@ const Nav = () => (
             </NavLinkExternal>
           </Ability>
         </Flag>
+
+        <Ability
+          action="read"
+          resources={["contract_request", "contract"]}
+          loose
+        >
+          <NavSection title="Договори">
+            <Ability action="read" resource="contract_request">
+              <NavLink to="/contracts">Перелік договорів</NavLink>
+              <NavLink to="/contract-requests">
+                Заяви на укладення договору
+              </NavLink>
+            </Ability>
+          </NavSection>
+        </Ability>
+        <Flag name="features.person">
+          <Ability action="read" resource="person">
+            <NavSection title="Паціенти">
+              <NavLink to="/persons">Пошук паціентів</NavLink>
+            </NavSection>
+          </Ability>
+        </Flag>
+        <Ability action="read" resource="legal_entity">
+          <NavLink to="/legal-entities">Медзаклади</NavLink>
+        </Ability>
+
+        <Ability action="merge" resources={["legal_entity"]} loose>
+          <NavSection title="Задачі в процесі виконання">
+            <Ability action="merge" resource="legal_entity">
+              <NavLink to="/legal-entity-merge-jobs">
+                Підпорядкування медзакладів
+              </NavLink>
+            </Ability>
+          </NavSection>
+        </Ability>
       </NavList>
     </NavContainer>
   </FlagsProvider>
