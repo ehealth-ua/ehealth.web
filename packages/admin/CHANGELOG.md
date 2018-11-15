@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.135.0"></a>
+# [0.135.0](https://github.com/edenlabllc/ehealth.web/compare/v0.134.1...v0.135.0) (2018-11-15)
+
+
+### Features
+
+* **admin:** add features flag for the legacy links ([ce9d5df](https://github.com/edenlabllc/ehealth.web/commit/ce9d5df))
+
+
+
+
+
 <a name="0.134.0"></a>
 # [0.134.0](https://github.com/edenlabllc/ehealth.web/compare/v0.133.4...v0.134.0) (2018-11-15)
 
