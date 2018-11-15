@@ -1,5 +1,6 @@
 import React from "react";
 import { Router } from "@reach/router";
+import { I18nProvider } from "@lingui/react";
 import { ThemeProvider } from "@ehealth/components";
 
 import "./globalStyles";
@@ -17,28 +18,34 @@ import Declarations from "./pages/Declarations";
 import LegalEntities from "./pages/LegalEntities";
 import Dictionaries from "./pages/Dictionaries";
 
+import locale from "./locales/uk/messages";
+
+const catalogs = { cs: locale };
+
 const NotFound = () => <p>Sorry, nothing here</p>;
 
 const App = () => (
-  <ThemeProvider theme={theme}>
-    <ErrorBoundary>
-      <DataProvider>
-        <Layout>
-          <Router>
-            <Home path="/" />
-            <ContractRequests path="contract-requests/*" />
-            <Contracts path="contracts/*" />
-            <LegalEntityMergeJobs path="legal-entity-merge-jobs/*" />
-            <Persons path="persons/*" />
-            <Declarations path="declarations/*" />
-            <LegalEntities path="legal-entities/*" />
-            <Dictionaries path="dictionaries/*" />
-            <NotFound default />
-          </Router>
-        </Layout>
-      </DataProvider>
-    </ErrorBoundary>
-  </ThemeProvider>
+  <I18nProvider language="uk" catalogs={catalogs}>
+    <ThemeProvider theme={theme}>
+      <ErrorBoundary>
+        <DataProvider>
+          <Layout>
+            <Router>
+              <Home path="/" />
+              <ContractRequests path="contract-requests/*" />
+              <Contracts path="contracts/*" />
+              <LegalEntityMergeJobs path="legal-entity-merge-jobs/*" />
+              <Persons path="persons/*" />
+              <Declarations path="declarations/*" />
+              <LegalEntities path="legal-entities/*" />
+              <Dictionaries path="dictionaries/*" />
+              <NotFound default />
+            </Router>
+          </Layout>
+        </DataProvider>
+      </ErrorBoundary>
+    </ThemeProvider>
+  </I18nProvider>
 );
 
 export default App;
