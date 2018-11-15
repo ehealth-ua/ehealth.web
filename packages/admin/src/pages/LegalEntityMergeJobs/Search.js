@@ -76,6 +76,7 @@ const Search = ({ uri }) => (
             </Router>
             <Query
               query={LegalEntitiesMergeJobsQuery}
+              fetchPolicy="network-only"
               variables={{
                 first: 10,
                 filter,

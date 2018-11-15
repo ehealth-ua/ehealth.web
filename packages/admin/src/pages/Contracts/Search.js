@@ -61,6 +61,7 @@ const Search = ({ uri }) => (
           <>
             <Query
               query={SearchContractsQuery}
+              fetchPolicy="network-only"
               variables={{
                 first:
                   !first && !last
