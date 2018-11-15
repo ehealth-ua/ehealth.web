@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.135.1"></a>
+## [0.135.1](https://github.com/edenlabllc/ehealth.web/compare/v0.135.0...v0.135.1) (2018-11-15)
+
+
+### Bug Fixes
+
+* **admin:** fix view Contract and ContractRequest details view ([be1b357](https://github.com/edenlabllc/ehealth.web/commit/be1b357))
+
+
+
+
+
 <a name="0.135.0"></a>
 # [0.135.0](https://github.com/edenlabllc/ehealth.web/compare/v0.134.1...v0.135.0) (2018-11-15)
 
