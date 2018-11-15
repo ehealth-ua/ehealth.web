@@ -221,7 +221,7 @@ const UpdateContractRequest = ({
                       <Field.Number
                         name="nhsContractPrice"
                         label="Сума контракту"
-                        placeholder="1 - 1 000 000"
+                        placeholder="0 - 1 000 000"
                         postfix="грн"
                       />
                       <Validations field="nhsContractPrice">

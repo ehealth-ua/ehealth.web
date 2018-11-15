@@ -106,7 +106,7 @@ const Search = ({ uri }) => (
                             contractNumber: "Номер договору",
                             startDate: "Договір діє з",
                             endDate: "Договір діє по",
-                            isSuspended: "Призупинений",
+                            isSuspended: "Стан договору",
                             insertedAt: "Додано",
                             status: "Статус",
                             details: "Деталі"
@@ -202,7 +202,7 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
       <Box px={1} width={2 / 5}>
         <Field.Select
           name="filter.isSuspended"
-          label="Призупинений"
+          label="Стан договору"
           items={["", "true", "false"]}
           renderItem={item => renderIsSuspendedItem(item)}
           itemToString={item => renderIsSuspendedItem(item)}
@@ -267,7 +267,7 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
 );
 
 const renderIsSuspendedItem = item =>
-  item === "" ? "всі договори" : item === "true" ? "так" : "ні";
+  item === "" ? "всі договори" : item === "true" ? "діючий" : "призупинений";
 
 const convertIsSuspendedItem = item => {
   try {

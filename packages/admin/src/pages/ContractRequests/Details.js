@@ -28,6 +28,7 @@ import Table, {
   TableRow,
   TableCell
 } from "../../components/Table";
+import LinkComponent from "../../components/Link";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
 import * as Field from "../../components/Field";
@@ -53,6 +54,11 @@ const Details = ({ id }) => (
         printoutContent: content,
         startDate,
         endDate,
+        nhsSigner,
+        nhsSignerBase,
+        nhsContractPrice,
+        nhsPaymentMethod,
+        issueCity,
         contractorRmspAmount,
         contractorLegalEntity,
         contractorOwner,
@@ -61,7 +67,12 @@ const Details = ({ id }) => (
         contractorDivisions,
         contractorEmployeeDivisions,
         externalContractors,
-        attachedDocuments
+        attachedDocuments,
+        previousRequest: {
+          databaseId: previousRequestDatabaseId,
+          id: previousRequestId
+        },
+        statusReason
       } = data.contractRequest;
 
       const { party = "" } = assignee ? assignee : {};
@@ -82,11 +93,19 @@ const Details = ({ id }) => (
                 <DefinitionListView
                   labels={{
                     id: "ID заяви",
+                    previousRequestId: "ID попередньої заяви",
                     status: "Статус",
                     assignee: "Виконавець"
                   }}
                   data={{
                     id: databaseId,
+                    previousRequestId: (
+                      <LinkComponent
+                        to={`/contract-requests/${previousRequestId}`}
+                      >
+                        {previousRequestDatabaseId}
+                      </LinkComponent>
+                    ),
                     status: (
                       <Badge
                         name={status}
@@ -159,7 +178,13 @@ const Details = ({ id }) => (
                 path="/"
                 startDate={startDate}
                 endDate={endDate}
+                nhsSigner={nhsSigner}
+                nhsSignerBase={nhsSignerBase}
+                nhsContractPrice={nhsContractPrice}
+                nhsPaymentMethod={nhsPaymentMethod}
+                issueCity={issueCity}
                 contractorRmspAmount={contractorRmspAmount}
+                statusReason={statusReason}
               />
               <LegalEntity
                 path="/legal-entity"
@@ -192,8 +217,34 @@ const Details = ({ id }) => (
   </Query>
 );
 
-const GeneralInfo = ({ contractorRmspAmount, ...dates }) => (
+const GeneralInfo = ({
+  nhsSigner,
+  nhsSignerBase,
+  nhsContractPrice,
+  nhsPaymentMethod,
+  issueCity,
+  contractorRmspAmount,
+  statusReason,
+  ...dates
+}) => (
   <Box p={5}>
+    <DefinitionListView
+      labels={{
+        nhsSignerName: "Ім'я підписанта",
+        nhsSignerBase: "Підстава",
+        nhsContractPrice: "Ціна договору",
+        nhsPaymentMethod: "Спосіб оплати",
+        issueCity: "Місто укладення договору"
+      }}
+      data={{
+        nhsSignerName: nhsSigner ? getFullName(nhsSigner.party) : null,
+        nhsSignerBase,
+        nhsContractPrice,
+        nhsPaymentMethod,
+        issueCity
+      }}
+    />
+    {nhsSigner && <Line />}
     <DefinitionListView
       labels={{
         startDate: "Початкова дата дії контракту",
@@ -215,6 +266,15 @@ const GeneralInfo = ({ contractorRmspAmount, ...dates }) => (
             <Grey>(станом на 01.01.2018)</Grey>
           </>
         )
+      }}
+    />
+    {statusReason && <Line />}
+    <DefinitionListView
+      labels={{
+        statusReason: "Коментар до статусу"
+      }}
+      data={{
+        statusReason
       }}
     />
   </Box>

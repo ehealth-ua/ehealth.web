@@ -52,10 +52,10 @@ const Details = ({ id }) => (
         contractNumber,
         contractRequest: {
           id: contractRequestId,
-          databaseId: contractRequestDatabaseId
+          databaseId: contractRequestDatabaseId,
+          printoutContent: contractRequestContent
         },
         status,
-        printoutContent: content,
         startDate,
         endDate,
         nhsSignerId,
@@ -70,7 +70,8 @@ const Details = ({ id }) => (
         contractorBase,
         contractorPaymentDetails,
         externalContractors,
-        attachedDocuments
+        attachedDocuments,
+        statusReason
       } = data.contract;
 
       return (
@@ -120,7 +121,7 @@ const Details = ({ id }) => (
                 justifyContent="space-between"
                 alignItems="flex-end"
               >
-                {content && <PrintButton content={content} />}
+                <PrintButton content={contractRequestContent} />
                 {status === "VERIFIED" && (
                   <Popup
                     variant="red"
@@ -196,6 +197,7 @@ const Details = ({ id }) => (
                 nhsContractPrice={nhsContractPrice}
                 nhsPaymentMethod={nhsPaymentMethod}
                 issueCity={issueCity}
+                statusReason={statusReason}
               />
               <LegalEntity
                 path="/legal-entity"
@@ -230,6 +232,7 @@ const GeneralInfo = ({
   nhsContractPrice,
   nhsPaymentMethod,
   issueCity,
+  statusReason,
   ...dates
 }) => (
   <Box p={5}>
@@ -273,6 +276,15 @@ const GeneralInfo = ({
             <Grey>(станом на 01.01.2018)</Grey>
           </>
         )
+      }}
+    />
+    {statusReason && <Line />}
+    <DefinitionListView
+      labels={{
+        statusReason: "Коментар до статусу"
+      }}
+      data={{
+        statusReason
       }}
     />
   </Box>

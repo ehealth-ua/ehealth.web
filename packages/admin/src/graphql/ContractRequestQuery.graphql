@@ -135,5 +135,10 @@ query ContractRequestQuery($id: ID!) {
     toApproveContent
     toDeclineContent
     toSignContent
+    statusReason
+    previousRequest {
+      id
+      databaseId
+    }
   }
 }
