@@ -89,13 +89,43 @@ class Nav extends React.Component {
               </ShowMore>
             </li>
           </ShowWithScope>
+          <li>
+            <ShowMore nav name="Договори">
+              <ul>
+                <ShowWithScope scope="contract:read">
+                  <NavItem to="contracts" activeClassName={styles.active}>
+                    <ExternalLink
+                      id="contracts-nav"
+                      href={`${REACT_APP_ADMIN_URL}/contracts/search`}
+                    >
+                      Перелік договорів
+                    </ExternalLink>
+                  </NavItem>
+                </ShowWithScope>
+                <ShowWithScope scope="contract_request:read">
+                  <NavItem
+                    to="contract-requests"
+                    activeClassName={styles.active}
+                  >
+                    <ExternalLink
+                      id="contract-requests-nav"
+                      href={`${REACT_APP_ADMIN_URL}/contract-requests/search`}
+                    >
+                      Заяви на укладення
+                      <br /> договору
+                    </ExternalLink>
+                  </NavItem>
+                </ShowWithScope>
+              </ul>
+            </ShowMore>
+          </li>
           <ShowWithScope scope="legal_entity:read">
             <NavItem to="clinics" activeClassName={styles.active}>
               <ExternalLink
                 id="clinics-nav"
                 href={`${REACT_APP_ADMIN_URL}/legal-entities/search`}
               >
-                Медичні заклади
+                Медзаклади
               </ExternalLink>
             </NavItem>
           </ShowWithScope>
@@ -195,35 +225,6 @@ class Nav extends React.Component {
                     <Link id="medications-nav" to="/medications">
                       Торгівельне <br /> найменування
                     </Link>
-                  </NavItem>
-                </ShowWithScope>
-              </ul>
-            </ShowMore>
-          </li>
-          <li>
-            <ShowMore nav name="Договори">
-              <ul>
-                <ShowWithScope scope="contract:read">
-                  <NavItem to="contracts" activeClassName={styles.active}>
-                    <ExternalLink
-                      id="contracts-nav"
-                      href={`${REACT_APP_ADMIN_URL}/contracts/search`}
-                    >
-                      Перелік договорів
-                    </ExternalLink>
-                  </NavItem>
-                </ShowWithScope>
-                <ShowWithScope scope="contract_request:read">
-                  <NavItem
-                    to="contract-requests"
-                    activeClassName={styles.active}
-                  >
-                    <ExternalLink
-                      id="contract-requests-nav"
-                      href={`${REACT_APP_ADMIN_URL}/contract-requests/search`}
-                    >
-                      Заяви на <br /> укладення договору
-                    </ExternalLink>
                   </NavItem>
                 </ShowWithScope>
               </ul>
