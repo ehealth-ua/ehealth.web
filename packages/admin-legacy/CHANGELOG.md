@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.134.0"></a>
+# [0.134.0](https://github.com/edenlabllc/ehealth.web/compare/v0.133.4...v0.134.0) (2018-11-15)
+
+
+### Features
+
+* **admin:** add new env variables to the Admin and Admin Legacy ([921d9e1](https://github.com/edenlabllc/ehealth.web/commit/921d9e1))
+* **admin:** link Admin and Admin Legacy with each other ([1bd2652](https://github.com/edenlabllc/ehealth.web/commit/1bd2652))
+
+
+
+
+
 <a name="0.133.3"></a>
 ## [0.133.3](https://github.com/edenlabllc/ehealth.web/compare/v0.133.2...v0.133.3) (2018-11-13)
 
