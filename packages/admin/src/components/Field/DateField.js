@@ -20,7 +20,8 @@ type DateFieldProps = {|
   name: string,
   label?: string,
   hint?: string,
-  warning?: string
+  warning?: string,
+  placement?: string
 |};
 
 class DateField extends React.Component<DateFieldProps, DateFieldState> {
@@ -32,12 +33,14 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
     this.internalClearTimeouts();
   }
 
+  calendar = React.createRef();
+
   render() {
-    const { label, hint, warning, ...props } = this.props;
+    const { label, hint, warning, placement = "bottom", ...props } = this.props;
     const { isOpen } = this.state;
 
     return (
-      <FieldView.Wrapper>
+      <FieldView.Wrapper innerRef={this.calendar}>
         <label
           onClick={this.handleClick}
           onBlur={this.handleBlur}
@@ -102,6 +105,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
           <Field {...props}>
             {({ input: { value, onChange } }) => (
               <DatePicker
+                placement={placement}
                 selected={this.getSelectedDate(value)}
                 onDateSelected={this.handleDateSelect(onChange)}
               />
@@ -164,8 +168,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
     this.internalSetTimeout(() => {
       if (
         document.hasFocus() &&
-        document.activeElement === document.body &&
-        document.activeElement !== document.documentElement
+        !this.calendar.current.contains(document.activeElement)
       ) {
         this.setState({ isOpen: false });
       }
