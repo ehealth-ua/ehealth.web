@@ -28,6 +28,15 @@ query SearchContractsQuery(
         id
         edrpou
         name
+        mergedFromLegalEntities(first: 10) {
+          nodes {
+            mergedFromLegalEntity {
+              id
+              name
+              edrpou
+            }
+          }
+        }
       }
       contractorOwner {
         id

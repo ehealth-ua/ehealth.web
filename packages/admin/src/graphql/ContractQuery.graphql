@@ -31,12 +31,6 @@ query ContractQuery(
     }
     nhsContractPrice
     issueCity
-    contractorLegalEntity {
-      edrpou
-      name
-      id
-      databaseId
-    }
     printoutContent
     startDate
     endDate
@@ -45,6 +39,7 @@ query ContractQuery(
       id
       name
       edrpou
+      databaseId
       addresses {
         type
         area
@@ -56,6 +51,24 @@ query ContractQuery(
         street
         building
         apartment
+      }
+      mergedFromLegalEntities(first: 10) {
+        nodes {
+          mergedFromLegalEntity {
+            id
+            name
+            edrpou
+            databaseId
+          }
+        }
+      }
+      mergedToLegalEntity {
+        mergedFromLegalEntity {
+          id
+          name
+          edrpou
+          databaseId
+        }
       }
     }
     contractorOwner {

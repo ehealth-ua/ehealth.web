@@ -7,13 +7,15 @@ import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
 
-import { Form, LocationParams, Modal } from "@ehealth/components";
+import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
 import {
   PrinterIcon,
   PositiveIcon,
   DefaultImageIcon,
-  NegativeIcon,
-  AdminSearchIcon
+  CircleIcon,
+  AdminSearchIcon,
+  CancelIcon,
+  NegativeIcon
 } from "@ehealth/icons";
 import {
   getFullName,
@@ -32,6 +34,7 @@ import Table, {
 import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
+import Tooltip from "../../../components/Tooltip";
 import * as Field from "../../../components/Field";
 import AddressView from "../../../components/AddressView";
 import Breadcrumbs from "../../../components/Breadcrumbs";
@@ -42,6 +45,9 @@ import Pagination from "../../../components/Pagination";
 const ContractQuery = loader("../../../graphql/ContractQuery.graphql");
 const TerminateContractMutation = loader(
   "../../../graphql/TerminateContractMutation.graphql"
+);
+const ProlongateContractMutation = loader(
+  "../../../graphql/ProlongateContractMutation.graphql"
 );
 
 const CapitationContractsDetails = () => (
@@ -210,6 +216,7 @@ const Details = ({ id }) => (
                 nhsPaymentMethod={nhsPaymentMethod}
                 issueCity={issueCity}
                 statusReason={statusReason}
+                contractorLegalEntity={contractorLegalEntity}
               />
               <LegalEntity
                 path="/legal-entity"
@@ -244,8 +251,11 @@ const GeneralInfo = ({
   nhsContractPrice,
   nhsPaymentMethod,
   issueCity,
+  startDate,
+  endDate,
+  id,
   statusReason,
-  ...dates
+  contractorLegalEntity
 }) => (
   <Box p={5}>
     <DefinitionListView
@@ -273,7 +283,15 @@ const GeneralInfo = ({
         endDate: "Кінцева дата дії контракту"
       }}
       data={{
-        ...dates
+        startDate,
+        endDate: checkStatusProlongate(
+          contractorLegalEntity,
+          contractorLegalEntity.id
+        ) ? (
+          <ProlongateContract id={id} endDate={endDate} />
+        ) : (
+          endDate
+        )
       }}
     />
     <Line />
@@ -300,6 +318,88 @@ const GeneralInfo = ({
       }}
     />
   </Box>
+);
+
+const checkStatusProlongate = (data, id) => {
+  if (
+    data.mergedToLegalEntity &&
+    data.mergedToLegalEntity.mergedFromLegalEntity
+  ) {
+    const {
+      id: mergedFromLegalEntityId
+    } = data.mergedToLegalEntity.mergedFromLegalEntity;
+    return mergedFromLegalEntityId === id;
+  }
+  return false;
+};
+
+const ProlongateContract = ({ endDate, id }) => (
+  <BooleanValue>
+    {({ value: opened, toggle }) =>
+      opened ? (
+        <Mutation
+          mutation={ProlongateContractMutation}
+          refetchQueries={() => [
+            {
+              query: ContractQuery,
+              variables: { id, first: ITEMS_PER_PAGE[0] }
+            }
+          ]}
+        >
+          {prolongateContract => (
+            <Form
+              onSubmit={async ({ endDate }) => {
+                await prolongateContract({
+                  variables: { input: { id, endDate } }
+                });
+                toggle();
+              }}
+              initialValues={{ endDate }}
+            >
+              <Flex>
+                <Field.DatePicker name="endDate" placement="top" />
+                <Validation.Required
+                  field="endDate"
+                  message="Обов&#700;язкове поле"
+                />
+                <Box mx={2} color="redPigment">
+                  <Button variant="none" border="none" px="0">
+                    <CancelIcon />
+                  </Button>
+                </Box>
+                <Box>
+                  <Tooltip
+                    component={() => (
+                      <Button variant="none" border="none" px="0">
+                        <PositiveIcon />
+                      </Button>
+                    )}
+                    content={
+                      <>
+                        Увага! Ви збираєтесь змінити кінцеву дату контракту,
+                        натискаючи <br />
+                        кнопку “Зберегти зміни”, ви підтверджуєте справжність
+                        вашого наміру
+                      </>
+                    }
+                  />
+                </Box>
+              </Flex>
+            </Form>
+          )}
+        </Mutation>
+      ) : (
+        <Flex>
+          {endDate}
+          <Button variant="none" border="none" px="0" py="0" onClick={toggle}>
+            <Text color="rockmanBlue" fontWeight="bold" ml={2}>
+              змінити
+            </Text>
+          </Button>
+        </Flex>
+      )
+    }
+  </BooleanValue>
 );
 
 const LegalEntity = ({

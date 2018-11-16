@@ -1,0 +1,8 @@
+mutation ProlongateContractMutation($input: ProlongateContractInput!) {
+  contract: prolongateContract(input: $input) {
+    contract {
+      id
+      endDate
+    }
+  }
+}
