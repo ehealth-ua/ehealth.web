@@ -4,6 +4,7 @@ export { default as AdminSearchIcon } from "./AdminSearchIcon";
 export { default as ArrowRightIcon } from "./ArrowRightIcon";
 export { default as ArrowLeftIcon } from "./ArrowLeftIcon";
 export { default as BackIcon } from "./BackIcon";
+export { default as CancelIcon } from "./CancelIcon";
 export { default as CaretUpIcon } from "./CaretUpIcon";
 export { default as CaretDownIcon } from "./CaretDownIcon";
 export { default as CalendarIcon } from "./CalendarIcon";
