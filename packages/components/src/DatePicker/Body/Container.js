@@ -2,8 +2,11 @@ import styled from "react-emotion/macro";
 
 const Container = styled.div`
   position: absolute;
-  top: 100%;
-  right: 0;
+  top: ${props => (props.placement === "bottom" ? "100%" : "auto")};
+  right: ${props => (props.placement === "bottom" ? "0" : "auto")};
+  bottom: ${props =>
+    props.placement === "top" ? "calc(100% + 20px)" : "auto"};
+  left: ${props => (props.placement === "top" ? "0" : "auto")};
   z-index: 1000;
   min-width: 300px;
   max-width: 300px;

@@ -17,6 +17,7 @@ type DatepickerProps = {|
   maxDate?: Date,
   fillAdjacentMonths?: boolean,
   showOutsideDays?: boolean,
+  placement?: string,
   onDateSelected: () => mixed,
   onOffsetChanged: () => mixed
 |};
@@ -58,8 +59,9 @@ class Datepicker extends React.Component<DatepickerProps, DatepickerState> {
   }
 
   render() {
+    const { placement } = this.props;
     return (
-      <Container>
+      <Container placement={placement}>
         <Switch
           value={this.state.mode}
           year={
