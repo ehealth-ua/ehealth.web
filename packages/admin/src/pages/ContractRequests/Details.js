@@ -68,10 +68,7 @@ const Details = ({ id }) => (
         contractorEmployeeDivisions,
         externalContractors,
         attachedDocuments,
-        previousRequest: {
-          databaseId: previousRequestDatabaseId,
-          id: previousRequestId
-        },
+        previousRequest,
         statusReason
       } = data.contractRequest;
 
@@ -99,11 +96,11 @@ const Details = ({ id }) => (
                   }}
                   data={{
                     id: databaseId,
-                    previousRequestId: (
+                    previousRequestId: previousRequest && (
                       <LinkComponent
-                        to={`/contract-requests/${previousRequestId}`}
+                        to={`/contract-requests/${previousRequest.id}`}
                       >
-                        {previousRequestDatabaseId}
+                        {previousRequest.databaseId}
                       </LinkComponent>
                     ),
                     status: (
