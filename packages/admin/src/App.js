@@ -15,6 +15,7 @@ import LegalEntityMergeJobs from "./pages/LegalEntityMergeJobs";
 import Persons from "./pages/Persons";
 import Declarations from "./pages/Declarations";
 import LegalEntities from "./pages/LegalEntities";
+import Dictionaries from "./pages/Dictionaries";
 
 const NotFound = () => <p>Sorry, nothing here</p>;
 
@@ -31,6 +32,7 @@ const App = () => (
             <Persons path="persons/*" />
             <Declarations path="declarations/*" />
             <LegalEntities path="legal-entities/*" />
+            <Dictionaries path="dictionaries/*" />
             <NotFound default />
           </Router>
         </Layout>

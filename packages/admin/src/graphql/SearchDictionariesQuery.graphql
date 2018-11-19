@@ -1,0 +1,29 @@
+query SearchDictionariesQuery(
+  $filter: LegalEntityFilter
+  $first: Int
+  $last: Int
+  $before: String
+  $after: String
+) {
+  dictionaries(
+    filter: $filter
+    first: $first
+    last: $last
+    before: $before
+    after: $after
+  ) {
+    nodes {
+      id
+      name
+      isActive
+      labels
+      values
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
