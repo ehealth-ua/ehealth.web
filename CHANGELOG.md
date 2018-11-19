@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.136.0"></a>
+# [0.136.0](https://github.com/edenlabllc/ehealth.web/compare/v0.135.3...v0.136.0) (2018-11-19)
+
+
+### Features
+
+* **admin:** add Dictionaries Search page ([d79e0b4](https://github.com/edenlabllc/ehealth.web/commit/d79e0b4))
+
+
+
+
+
 <a name="0.135.3"></a>
 ## [0.135.3](https://github.com/edenlabllc/ehealth.web/compare/v0.135.2...v0.135.3) (2018-11-16)
 
