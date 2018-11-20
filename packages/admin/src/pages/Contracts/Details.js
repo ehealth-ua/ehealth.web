@@ -294,7 +294,13 @@ const LegalEntity = ({
   contractorBase,
   contractorOwner,
   contractorPaymentDetails: { bankName, mfo, payerAccount },
-  contractorLegalEntity: { databaseId: legalEntityId, name, edrpou, addresses }
+  contractorLegalEntity: {
+    databaseId: legalEntityDatabaseId,
+    id: legalEntityId,
+    name,
+    edrpou,
+    addresses
+  }
 }) => (
   <Box p={5}>
     <DefinitionListView
@@ -317,7 +323,11 @@ const LegalEntity = ({
         legalEntityId: "ID медзакладу"
       }}
       data={{
-        legalEntityId
+        legalEntityId: (
+          <Link to={`/legal-entities/${legalEntityId}`}>
+            {legalEntityDatabaseId}
+          </Link>
+        )
       }}
     />
     <Line />
