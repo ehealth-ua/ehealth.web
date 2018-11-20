@@ -1,0 +1,7 @@
+mutation UpdateDictionaryMutation($input: UpdateDictionaryInput!) {
+  dictionaries: updateDictionary(input: $input) {
+    dictionary {
+      id
+    }
+  }
+}
