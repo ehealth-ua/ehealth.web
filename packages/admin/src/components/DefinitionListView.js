@@ -11,6 +11,7 @@ const DefinitionListView = ({
   data,
   color,
   flexDirection,
+  alignItems,
   marginBetween,
   labelWidth = 150
 }) => (
@@ -18,7 +19,7 @@ const DefinitionListView = ({
     labels={labels}
     data={data}
     renderItem={({ label, value }) => (
-      <Item color={color} flexDirection={flexDirection}>
+      <Item color={color} flexDirection={flexDirection} alignItems={alignItems}>
         <Box width={labelWidth}>
           <Text fontWeight={700}>{label}</Text>
         </Box>
