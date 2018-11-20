@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.137.0"></a>
+# [0.137.0](https://github.com/edenlabllc/ehealth.web/compare/v0.136.0...v0.137.0) (2018-11-20)
+
+
+### Features
+
+* **mock-server:** add list schemas to .env ([56a619f](https://github.com/edenlabllc/ehealth.web/commit/56a619f))
+* **mock-server:** add list schemas to turn on schema for merge ([ed3cb12](https://github.com/edenlabllc/ehealth.web/commit/ed3cb12))
+* **mock-server:** update schema to v1.1.2 ([474ca57](https://github.com/edenlabllc/ehealth.web/commit/474ca57))
+
+
+
+
+
 <a name="0.136.0"></a>
 # [0.136.0](https://github.com/edenlabllc/ehealth.web/compare/v0.135.3...v0.136.0) (2018-11-19)
 
