@@ -15,7 +15,7 @@ const introspectionResult = require("./schema.json");
 const resolvers = require("./lib/resolvers");
 const schemaDirectives = require("./lib/directives");
 
-const { PORT, WHITE_LIST_ORIGINS = "" } = process.env;
+const { PORT, WHITE_LIST_ORIGINS = "", SCHEMAS = "" } = process.env;
 
 const http = new HttpLink({
   uri: "https://api.dev.asclepius.com.ua/graphql",
@@ -52,8 +52,10 @@ addMockFunctionsToSchema({
   schema: mockSchema
 });
 
+const schemas = arr => SCHEMAS.split(",").map(item => arr[item]);
+
 const schema = mergeSchemas({
-  schemas: [mockSchema, remoteSchema]
+  schemas: schemas({ mockSchema, remoteSchema })
 });
 
 const server = new ApolloServer({
