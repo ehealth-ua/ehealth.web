@@ -4,13 +4,19 @@ import { boolean } from "@ehealth/system-tools";
 import { ChevronBottomIcon, AdminSearchIcon } from "@ehealth/icons";
 import Dropdown from "./Dropdown";
 
-export const List = system({
-  is: Dropdown.List,
-  position: "absolute",
-  top: "100%",
-  width: "100%",
-  zIndex: 10
-});
+export const List = system(
+  {
+    is: Dropdown.List,
+    position: "absolute",
+    top: "100%",
+    width: "100%",
+    zIndex: 10,
+    maxHeight: "450px"
+  },
+  {
+    overflowY: "scroll"
+  }
+);
 
 export const SelectedItem = system({
   display: "flex",

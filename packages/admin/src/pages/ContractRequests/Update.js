@@ -15,6 +15,7 @@ import Badge from "../../components/Badge";
 import Steps from "../../components/Steps";
 import Button from "../../components/Button";
 import * as Field from "../../components/Field";
+import { SearchIcon } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
 import STATUSES from "../../helpers/statuses";
 
@@ -196,7 +197,10 @@ const UpdateContractRequest = ({
                             ? item
                             : getFullName(item.party);
                         }}
-                        type="select"
+                        filterOptions={{
+                          keys: ["party.lastName", "party.firstName"]
+                        }}
+                        iconComponent={SearchIcon}
                       />
 
                       <Validation.Required
