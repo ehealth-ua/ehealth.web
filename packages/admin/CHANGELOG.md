@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.139.0"></a>
+# [0.139.0](https://github.com/edenlabllc/ehealth.web/compare/v0.138.0...v0.139.0) (2018-11-21)
+
+
+### Features
+
+* **admin:** add flag for the dictionaries ([f9889fb](https://github.com/edenlabllc/ehealth.web/commit/f9889fb))
+
+
+
+
+
 <a name="0.138.0"></a>
 # [0.138.0](https://github.com/edenlabllc/ehealth.web/compare/v0.137.0...v0.138.0) (2018-11-20)
 
