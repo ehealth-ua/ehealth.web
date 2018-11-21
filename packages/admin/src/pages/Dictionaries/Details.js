@@ -39,6 +39,7 @@ const Details = ({ name }) => (
       const { nodes: dictionaries = [] } = data.dictionaries;
 
       const { id, isActive, labels, values } = dictionaries[0];
+      const isReadOnly = labels.includes("READ_ONLY");
 
       return (
         <>
@@ -57,7 +58,7 @@ const Details = ({ name }) => (
                     status: "Статус"
                   }}
                   data={{
-                    name: name,
+                    name,
                     status: isActive && <PositiveIcon />
                   }}
                   labelWidth="100px"
@@ -72,9 +73,16 @@ const Details = ({ name }) => (
           </Tabs.Nav>
           <Tabs.Content>
             <Router>
-              <DictionaryValues path="/" values={values} id={id} name={name} />
+              <DictionaryValues
+                path="/"
+                isReadOnly={isReadOnly}
+                values={values}
+                id={id}
+                name={name}
+              />
               <DictionaryLabels
                 path="/labels"
+                isReadOnly={isReadOnly}
                 labels={labels}
                 id={id}
                 name={name}
@@ -87,9 +95,9 @@ const Details = ({ name }) => (
   </Query>
 );
 
-const DictionaryLabels = ({ labels, id, name }) => {
+const DictionaryLabels = ({ isReadOnly, labels, id, name }) => {
   //Hard-coded data is a temporary but necessary solution
-  const listOfLabels = ["SYSTEM", "EXTERNAL"];
+  const listOfLabels = ["SYSTEM", "EXTERNAL", "ADMIN", "TRANSLATIONS"];
   const aviableLabels = listOfLabels.filter(item => !labels.includes(item));
 
   return (
@@ -114,24 +122,26 @@ const DictionaryLabels = ({ labels, id, name }) => {
                   {labels.map(label => (
                     <SelectedItem key={label} mx={1}>
                       {label}
-                      <RemoveItem
-                        onClick={() => {
-                          const updatedLabelsList = labels.filter(
-                            item => item !== label
-                          );
+                      {!isReadOnly && (
+                        <RemoveItem
+                          onClick={() => {
+                            const updatedLabelsList = labels.filter(
+                              item => item !== label
+                            );
 
-                          updateDictionary({
-                            variables: {
-                              input: {
-                                id,
-                                labels: updatedLabelsList
+                            updateDictionary({
+                              variables: {
+                                input: {
+                                  id,
+                                  labels: updatedLabelsList
+                                }
                               }
-                            }
-                          });
-                        }}
-                      >
-                        <RemoveItemIcon />
-                      </RemoveItem>
+                            });
+                          }}
+                        >
+                          <RemoveItemIcon />
+                        </RemoveItem>
+                      )}
                     </SelectedItem>
                   ))}
                 </Flex>
@@ -141,52 +151,54 @@ const DictionaryLabels = ({ labels, id, name }) => {
             alignItems="center"
           />
 
-          <BooleanValue>
-            {({ value: opened, toggle }) => (
-              <>
-                <AddButton onClick={toggle}>
-                  <Flex>
-                    <Box mr={2}>
-                      <PlusIcon width={16} height={16} />
-                    </Box>
-                    Додати тег
-                  </Flex>
-                </AddButton>
-                {opened && (
-                  <Box mt={2} width={1 / 3}>
-                    <Form
-                      onSubmit={({ addNewLabel }) => {
-                        addNewLabel &&
-                          updateDictionary({
-                            variables: {
-                              input: {
-                                id,
-                                labels: [...labels, addNewLabel]
+          {!isReadOnly && (
+            <BooleanValue>
+              {({ value: opened, toggle }) => (
+                <>
+                  <AddButton onClick={toggle}>
+                    <Flex>
+                      <Box mr={2}>
+                        <PlusIcon width={16} height={16} />
+                      </Box>
+                      Додати тег
+                    </Flex>
+                  </AddButton>
+                  {opened && (
+                    <Box mt={2} width={1 / 3}>
+                      <Form
+                        onSubmit={({ addNewLabel }) => {
+                          addNewLabel &&
+                            updateDictionary({
+                              variables: {
+                                input: {
+                                  id,
+                                  labels: [...labels, addNewLabel]
+                                }
                               }
-                            }
-                          });
+                            });
 
-                        toggle();
-                      }}
-                    >
-                      <Field.Select
-                        name="addNewLabel"
-                        label="Виберіть тег"
-                        placeholder="Оберіть тег зі списку"
-                        items={aviableLabels}
-                        renderItem={item => item}
-                        hideErrors
-                      />
+                          toggle();
+                        }}
+                      >
+                        <Field.Select
+                          name="addNewLabel"
+                          label="Виберіть тег"
+                          placeholder="Оберіть тег зі списку"
+                          items={aviableLabels}
+                          renderItem={item => item}
+                          hideErrors
+                        />
 
-                      <Button variant="green" mt={4}>
-                        Зберегти
-                      </Button>
-                    </Form>
-                  </Box>
-                )}
-              </>
-            )}
-          </BooleanValue>
+                        <Button variant="green" mt={4}>
+                          Зберегти
+                        </Button>
+                      </Form>
+                    </Box>
+                  )}
+                </>
+              )}
+            </BooleanValue>
+          )}
         </Box>
       )}
     </Mutation>
@@ -203,7 +215,7 @@ class DictionaryValues extends React.Component {
   editFormRef = React.createRef();
 
   render() {
-    const { values, id, name } = this.props;
+    const { isReadOnly, values, id, name } = this.props;
     const arrayOfValues = Object.entries(values).map(([key, description]) => ({
       key,
       description
@@ -225,20 +237,22 @@ class DictionaryValues extends React.Component {
           <>
             <Flex justifyContent="space-between" color="darkAndStormy">
               Пошук значення
-              <AddButton
-                onClick={() =>
-                  this.setState({
-                    fieldToEdit: "ADD_NEW_FIELD"
-                  })
-                }
-              >
-                <Flex>
-                  <Box mr={2}>
-                    <PlusIcon width={16} height={16} />
-                  </Box>
-                  Додати значення
-                </Flex>
-              </AddButton>
+              {!isReadOnly && (
+                <AddButton
+                  onClick={() =>
+                    this.setState({
+                      fieldToEdit: { key: "", description: "" }
+                    })
+                  }
+                >
+                  <Flex>
+                    <Box mr={2}>
+                      <PlusIcon width={16} height={16} />
+                    </Box>
+                    Додати значення
+                  </Flex>
+                </AddButton>
+              )}
             </Flex>
 
             <Form onSubmit={() => null}>
@@ -280,11 +294,11 @@ class DictionaryValues extends React.Component {
               header={{
                 key: "Ключ",
                 description: "Опис",
-                action: "Дія"
+                ...(!isReadOnly && { action: "Дія" })
               }}
               renderRow={({ ...rowContent }) => ({
                 ...rowContent,
-                action: (
+                action: !isReadOnly && (
                   <AddButton
                     onClick={() =>
                       this.setState({
@@ -315,46 +329,47 @@ class DictionaryValues extends React.Component {
                 behavior: "smooth"
               });
 
+              const submitMutationForm = (mutationValue = []) => {
+                const valuesForMutation = this.getValuesForMutation(
+                  mutationValue,
+                  this.state.fieldToEdit,
+                  arrayOfValues
+                ).reduce(
+                  (result, item) => ({
+                    ...result,
+                    ...{
+                      [item.key]: item.description
+                    }
+                  }),
+                  {}
+                );
+
+                const mutationValuesToJson = JSON.stringify(valuesForMutation);
+                updateDictionary({
+                  variables: {
+                    input: {
+                      id,
+                      values: mutationValuesToJson
+                    }
+                  }
+                });
+
+                this.setState({
+                  filterKey: null,
+                  filterDescription: null,
+                  fieldToEdit: null
+                });
+              };
+
               return (
                 <Form
                   onSubmit={({ mutationValue }) => {
-                    const valuesForMutation = this.getValuesForMutation(
-                      mutationValue,
-                      this.state.fieldToEdit,
-                      arrayOfValues
-                    ).reduce(
-                      (result, item) => ({
-                        ...result,
-                        ...{
-                          [Object.values(item)[0]]: Object.values(item)[1]
-                        }
-                      }),
-                      {}
-                    );
-
-                    const mutationValuesToJson = JSON.stringify(
-                      valuesForMutation
-                    );
-                    updateDictionary({
-                      variables: {
-                        input: {
-                          id,
-                          values: mutationValuesToJson
-                        }
-                      }
-                    });
-
-                    this.setState({
-                      filterKey: null,
-                      filterDescription: null,
-                      fieldToEdit: null
-                    });
+                    submitMutationForm(mutationValue);
                   }}
                   initialValues={{
-                    mutationValue:
-                      this.state.fieldToEdit !== "ADD_NEW_FIELD"
-                        ? [this.state.fieldToEdit]
-                        : [{ key: "", description: "" }]
+                    mutationValue: this.state.fieldToEdit.key
+                      ? [this.state.fieldToEdit]
+                      : [{ key: "", description: "" }]
                   }}
                 >
                   <FieldArray name="mutationValue">
@@ -366,7 +381,7 @@ class DictionaryValues extends React.Component {
                               <Field.Text
                                 name={`${name}.key`}
                                 label={
-                                  this.state.fieldToEdit === "ADD_NEW_FIELD"
+                                  this.state.fieldToEdit.key
                                     ? "Ключ"
                                     : "Змінити ключ"
                                 }
@@ -381,7 +396,7 @@ class DictionaryValues extends React.Component {
                               <Field.Text
                                 name={`${name}.description`}
                                 label={
-                                  this.state.fieldToEdit === "ADD_NEW_FIELD"
+                                  this.state.fieldToEdit.key
                                     ? "Опис"
                                     : "Змінити опис"
                                 }
@@ -392,12 +407,25 @@ class DictionaryValues extends React.Component {
                                 message="Обов&#700;язкове поле"
                               />
                             </Box>
-                            <RemoveButtom
-                              onClick={() => fields.remove(index)}
-                            />
+                            {!this.state.fieldToEdit.key ? (
+                              <RemoveButtom
+                                onClick={() => fields.remove(index)}
+                              />
+                            ) : (
+                              <RemovalContainer>
+                                <Button
+                                  variant="red"
+                                  onClick={() => {
+                                    submitMutationForm();
+                                  }}
+                                >
+                                  Видалити
+                                </Button>
+                              </RemovalContainer>
+                            )}
                           </Flex>
                         ))}
-                        {this.state.fieldToEdit === "ADD_NEW_FIELD" && (
+                        {!this.state.fieldToEdit.key && (
                           <AddButton
                             onClick={() =>
                               fields.push({ key: "", description: "" })
@@ -447,7 +475,7 @@ class DictionaryValues extends React.Component {
       return filteredValues.filter(item => item.key !== fieldToEdit.key);
     }
 
-    if (fieldToEdit !== "ADD_NEW_FIELD") {
+    if (fieldToEdit.key) {
       const getValueIndex = filteredValues.findIndex(
         item => item.key === fieldToEdit.key
       );
@@ -467,6 +495,13 @@ const RemoveButtom = system({
   color: "redPigment",
   alignSelf: "center",
   ml: 2
+});
+
+const RemovalContainer = system({
+  is: Box,
+  px: 4,
+  mt: "-4px",
+  alignSelf: "center"
 });
 
 const AddButton = system(
