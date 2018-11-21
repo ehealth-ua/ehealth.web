@@ -50,16 +50,22 @@ const Nav = () => (
 
           <NavLinkExternal to="reports">Звіти</NavLinkExternal>
 
-          <NavSection title="Реєстри">
-            <Ability action="read" resource="register">
-              <NavLinkExternal to="registers">Реєстри</NavLinkExternal>
-            </Ability>
-            <Ability action="read" resource="register_entry">
-              <NavLinkExternal to="registers-entries">
-                Записи реєстру
-              </NavLinkExternal>
-            </Ability>
-          </NavSection>
+          <Ability
+            action="read"
+            resources={["register", "register_entry"]}
+            loose
+          >
+            <NavSection title="Реєстри">
+              <Ability action="read" resource="register">
+                <NavLinkExternal to="registers">Реєстри</NavLinkExternal>
+              </Ability>
+              <Ability action="read" resource="register_entry">
+                <NavLinkExternal to="registers-entries">
+                  Записи реєстру
+                </NavLinkExternal>
+              </Ability>
+            </NavSection>
+          </Ability>
 
           <NavLinkExternal to="dictionaries">Словники</NavLinkExternal>
 
@@ -69,63 +75,89 @@ const Nav = () => (
             </NavLinkExternal>
           </Ability>
 
-          <NavSection title="Медикаменти">
-            <Ability action="read" resource="innm">
-              <NavLinkExternal to="innms">МНН</NavLinkExternal>
-            </Ability>
-            <Ability action="read" resource="innm_dosage">
-              <NavLinkExternal to="innm-dosages">
-                Лікарська форма
-              </NavLinkExternal>
-            </Ability>
-            <Ability action="read" resource="medication">
-              <NavLinkExternal to="medications">
-                Торгівельне найменування
-              </NavLinkExternal>
-            </Ability>
-          </NavSection>
+          <Ability
+            action="read"
+            resources={["innm", "innm_dosage", "medication"]}
+            loose
+          >
+            <NavSection title="Медикаменти">
+              <Ability action="read" resource="innm">
+                <NavLinkExternal to="innms">МНН</NavLinkExternal>
+              </Ability>
+              <Ability action="read" resource="innm_dosage">
+                <NavLinkExternal to="innm-dosages">
+                  Лікарська форма
+                </NavLinkExternal>
+              </Ability>
+              <Ability action="read" resource="medication">
+                <NavLinkExternal to="medications">
+                  Торгівельне найменування
+                </NavLinkExternal>
+              </Ability>
+            </NavSection>
+          </Ability>
 
-          <NavSection title="Програми">
-            <Ability action="read" resource="medical_program">
-              <NavLinkExternal to="medical-programs">
-                Перелік мед. програм
-              </NavLinkExternal>
-            </Ability>
-            <Ability action="read" resource="program_medication">
-              <NavLinkExternal to="program-medications">
-                Учасники програм
-              </NavLinkExternal>
-            </Ability>
-          </NavSection>
+          <Ability
+            action="read"
+            resources={["medical_program", "program_medication"]}
+            loose
+          >
+            <NavSection title="Програми">
+              <Ability action="read" resource="medical_program">
+                <NavLinkExternal to="medical-programs">
+                  Перелік мед. програм
+                </NavLinkExternal>
+              </Ability>
+              <Ability action="read" resource="program_medication">
+                <NavLinkExternal to="program-medications">
+                  Учасники програм
+                </NavLinkExternal>
+              </Ability>
+            </NavSection>
+          </Ability>
 
-          <NavSection title="Рецепти">
-            <Ability action="read" resource="medication_request">
-              <NavLinkExternal to="medication-requests">
-                Рецепти
-              </NavLinkExternal>
-            </Ability>
-            <Ability action="read" resource="medication_dispense">
-              <NavLinkExternal to="medication-dispenses">
-                Відпуски рецептів
-              </NavLinkExternal>
-            </Ability>
-            <Ability action="download" resource="reimbursement_report">
-              <NavLinkExternal to="reimbursement-report">Звіт</NavLinkExternal>
-            </Ability>
-          </NavSection>
+          <Ability
+            action="read"
+            resources={[
+              "medication_request",
+              "medication_dispense",
+              "reimbursement_report"
+            ]}
+            loose
+          >
+            <NavSection title="Рецепти">
+              <Ability action="read" resource="medication_request">
+                <NavLinkExternal to="medication-requests">
+                  Рецепти
+                </NavLinkExternal>
+              </Ability>
+              <Ability action="read" resource="medication_dispense">
+                <NavLinkExternal to="medication-dispenses">
+                  Відпуски рецептів
+                </NavLinkExternal>
+              </Ability>
+              <Ability action="download" resource="reimbursement_report">
+                <NavLinkExternal to="reimbursement-report">
+                  Звіт
+                </NavLinkExternal>
+              </Ability>
+            </NavSection>
+          </Ability>
 
-          <NavSection title="Користувачі">
-            <Ability action="read" resource="bl_user">
-              <NavLinkExternal to="black-list-users">
-                Заблоковані користувачі
-              </NavLinkExternal>
-            </Ability>
-            <Ability action="read" resource="party_user">
-              <NavLinkExternal to="party-users">
-                Облікові записи
-              </NavLinkExternal>
-            </Ability>
-          </NavSection>
+          <Ability action="read" resources={["bl_user", "party_user"]} loose>
+            <NavSection title="Користувачі">
+              <Ability action="read" resource="bl_user">
+                <NavLinkExternal to="black-list-users">
+                  Заблоковані користувачі
+                </NavLinkExternal>
+              </Ability>
+              <Ability action="read" resource="party_user">
+                <NavLinkExternal to="party-users">
+                  Облікові записи
+                </NavLinkExternal>
+              </Ability>
+            </NavSection>
+          </Ability>
 
           <Ability action="reset_authentication_method" resource="person">
             <NavLinkExternal to="reset-authentication-method">
