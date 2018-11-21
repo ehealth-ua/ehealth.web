@@ -169,7 +169,9 @@ const Nav = () => (
           </NavSection>
         </Ability>
 
-        <NavLink to="/dictionaries">Словники</NavLink>
+        <Flag name="features.dictionaries">
+          <NavLink to="/dictionaries">Словники</NavLink>
+        </Flag>
       </NavList>
     </NavContainer>
   </FlagsProvider>
