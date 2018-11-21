@@ -21,6 +21,7 @@ export { default as DocIcon } from "./DocIcon";
 export { default as DropDownButton } from "./DropDownButton";
 export { default as EhealthLogoIcon } from "./EhealthLogoIcon";
 export { default as ExitIcon } from "./ExitIcon";
+export { default as FilterIcon } from "./FilterIcon";
 export { default as InfoIcon } from "./InfoIcon";
 export { default as KeyIcon } from "./KeyIcon";
 export { default as ListIcon } from "./ListIcon";
