@@ -348,7 +348,9 @@ const License = ({ license: { accreditation, licenses = [] } }) => {
         }}
         data={{
           ...accreditation,
-          validateDate: `з ${issuedDate} по ${expiryDate}`
+          validateDate: `з ${issuedDate} ${
+            expiryDate ? `по ${expiryDate}` : ""
+          }`
         }}
       />
       <Line />
@@ -363,7 +365,9 @@ const License = ({ license: { accreditation, licenses = [] } }) => {
             }}
             data={{
               ...item,
-              validateDate: `з ${issuedDate} по ${expiryDate}`
+              validateDate: `з ${issuedDate} ${
+                expiryDate ? `по ${expiryDate}` : ""
+              }`
             }}
           />
           {array.length - 1 !== index && <Line />}
