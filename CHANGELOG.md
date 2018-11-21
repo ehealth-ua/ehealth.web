@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.140.3"></a>
+## [0.140.3](https://github.com/edenlabllc/ehealth.web/compare/v0.140.2...v0.140.3) (2018-11-21)
+
+
+### Bug Fixes
+
+* **admin:** hide expiryDate if it is null ([#522](https://github.com/edenlabllc/ehealth.web/issues/522)) ([e17cf91](https://github.com/edenlabllc/ehealth.web/commit/e17cf91))
+
+
+
+
+
 <a name="0.140.2"></a>
 ## [0.140.2](https://github.com/edenlabllc/ehealth.web/compare/v0.140.1...v0.140.2) (2018-11-21)
 
