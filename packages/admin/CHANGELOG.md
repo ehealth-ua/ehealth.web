@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.140.1"></a>
+## [0.140.1](https://github.com/edenlabllc/ehealth.web/compare/v0.140.0...v0.140.1) (2018-11-21)
+
+
+### Bug Fixes
+
+* **admin:** change Select type on CR Update page, add max-height to the Dropdown List ([#520](https://github.com/edenlabllc/ehealth.web/issues/520)) ([bbea4e5](https://github.com/edenlabllc/ehealth.web/commit/bbea4e5))
+
+
+
+
+
 <a name="0.140.0"></a>
 # [0.140.0](https://github.com/edenlabllc/ehealth.web/compare/v0.139.0...v0.140.0) (2018-11-21)
 
