@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.140.2"></a>
+## [0.140.2](https://github.com/edenlabllc/ehealth.web/compare/v0.140.1...v0.140.2) (2018-11-21)
+
+
+### Bug Fixes
+
+* **admin:** add Ability check for the NavSections ([#521](https://github.com/edenlabllc/ehealth.web/issues/521)) ([0c7ffbe](https://github.com/edenlabllc/ehealth.web/commit/0c7ffbe))
+
+
+
+
+
 <a name="0.140.1"></a>
 ## [0.140.1](https://github.com/edenlabllc/ehealth.web/compare/v0.140.0...v0.140.1) (2018-11-21)
 
