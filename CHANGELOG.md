@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.141.0"></a>
+# [0.141.0](https://github.com/edenlabllc/ehealth.web/compare/v0.140.4...v0.141.0) (2018-11-22)
+
+
+### Features
+
+* **admin:** add Dictionary Details page ([df8fb5c](https://github.com/edenlabllc/ehealth.web/commit/df8fb5c))
+* **admin:** add ReadOnly label handling, add Remove Value handler, change type of state value from string to object for adding new Value ([95f3efc](https://github.com/edenlabllc/ehealth.web/commit/95f3efc))
+
+
+
+
+
 <a name="0.140.4"></a>
 ## [0.140.4](https://github.com/edenlabllc/ehealth.web/compare/v0.140.3...v0.140.4) (2018-11-22)
 
