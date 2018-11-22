@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.142.1"></a>
+## [0.142.1](https://github.com/edenlabllc/ehealth.web/compare/v0.142.0...v0.142.1) (2018-11-22)
+
+
+### Bug Fixes
+
+* **admin:** update translations and mapping into the Licenses tab on LE details ([#526](https://github.com/edenlabllc/ehealth.web/issues/526)) ([7beafc1](https://github.com/edenlabllc/ehealth.web/commit/7beafc1))
+
+
+
+
+
 <a name="0.142.0"></a>
 # [0.142.0](https://github.com/edenlabllc/ehealth.web/compare/v0.141.1...v0.142.0) (2018-11-22)
 
