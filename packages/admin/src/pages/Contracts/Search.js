@@ -10,7 +10,7 @@ import {
   stringifySortingParams,
   formatDateTimeInterval
 } from "@ehealth/utils";
-import { AdminSearchIcon, PositiveIcon, CircleIcon } from "@ehealth/icons";
+import { AdminSearchIcon, PositiveIcon, NegativeIcon } from "@ehealth/icons";
 
 import * as Field from "../../components/Field";
 import Link from "../../components/Link";
@@ -127,10 +127,7 @@ const Search = ({ uri }) => (
                                 {isSuspended ? (
                                   <PositiveIcon />
                                 ) : (
-                                  <CircleIcon
-                                    stroke="#1bb934"
-                                    strokeWidth="4"
-                                  />
+                                  <NegativeIcon />
                                 )}
                               </Flex>
                             ),

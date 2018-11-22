@@ -3,7 +3,7 @@ import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
 import { Form, LocationParams, Validation } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
-import { PositiveIcon, AdminSearchIcon, CircleIcon } from "@ehealth/icons";
+import { PositiveIcon, AdminSearchIcon, NegativeIcon } from "@ehealth/icons";
 import createDecorator from "final-form-calculate";
 import format from "date-fns/format";
 
@@ -138,10 +138,7 @@ const Search = ({ uri }) => (
                                 {nhsVerified ? (
                                   <PositiveIcon />
                                 ) : (
-                                  <CircleIcon
-                                    stroke="#1bb934"
-                                    strokeWidth="4"
-                                  />
+                                  <NegativeIcon />
                                 )}
                               </Flex>
                             ),

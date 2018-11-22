@@ -6,7 +6,7 @@ import system from "system-components/emotion";
 
 import { getFullName } from "@ehealth/utils";
 import { LocationParams, Form, Validation } from "@ehealth/components";
-import { AdminSearchIcon, PositiveIcon, CircleIcon } from "@ehealth/icons";
+import { AdminSearchIcon, PositiveIcon, NegativeIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
 import Line from "../../components/Line";
@@ -101,11 +101,7 @@ const Search = ({ location: { state } }) => (
                       owner: owner && getFullName(owner.party),
                       nhsVerified: (
                         <Flex justifyContent="center">
-                          {nhsVerified ? (
-                            <PositiveIcon />
-                          ) : (
-                            <CircleIcon stroke="#1bb934" strokeWidth="4" />
-                          )}
+                          {nhsVerified ? <PositiveIcon /> : <NegativeIcon />}
                         </Flex>
                       ),
                       status: (

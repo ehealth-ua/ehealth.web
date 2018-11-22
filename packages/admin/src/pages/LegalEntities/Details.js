@@ -10,7 +10,7 @@ import {
   PositiveIcon,
   AdminSearchIcon,
   AdminAddIcon,
-  CircleIcon
+  NegativeIcon
 } from "@ehealth/icons";
 import {
   getFullName,
@@ -323,16 +323,8 @@ const GeneralInfo = ({
         nhsVerified: "Верифікація НСЗУ"
       }}
       data={{
-        misVerified: misVerified ? (
-          <PositiveIcon />
-        ) : (
-          <CircleIcon stroke="#1bb934" strokeWidth="4" />
-        ),
-        nhsVerified: nhsVerified ? (
-          <PositiveIcon />
-        ) : (
-          <CircleIcon stroke="#1bb934" strokeWidth="4" />
-        )
+        misVerified: misVerified ? <PositiveIcon /> : <NegativeIcon />,
+        nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />
       }}
       color="blueberrySoda"
     />
@@ -589,11 +581,7 @@ const Divisions = ({ id }) => (
                     ...props,
                     mountainGroup: (
                       <Flex justifyContent="center">
-                        {mountainGroup ? (
-                          <PositiveIcon />
-                        ) : (
-                          <CircleIcon stroke="#1bb934" strokeWidth="4" />
-                        )}
+                        {mountainGroup ? <PositiveIcon /> : <NegativeIcon />}
                       </Flex>
                     ),
                     addresses: addresses

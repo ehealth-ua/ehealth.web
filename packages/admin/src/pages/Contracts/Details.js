@@ -11,7 +11,7 @@ import {
   PrinterIcon,
   PositiveIcon,
   DefaultImageIcon,
-  CircleIcon,
+  NegativeIcon,
   AdminSearchIcon
 } from "@ehealth/icons";
 import {
@@ -109,7 +109,7 @@ const Details = ({ id }) => (
                     isSuspended: isSuspended ? (
                       <PositiveIcon />
                     ) : (
-                      <CircleIcon stroke="#1bb934" strokeWidth="4" />
+                      <NegativeIcon />
                     )
                   }}
                   color="#7F8FA4"
@@ -434,11 +434,7 @@ const Divisions = ({ id }) => (
                       name,
                       mountainGroup: (
                         <Flex justifyContent="center">
-                          {mountainGroup ? (
-                            <PositiveIcon />
-                          ) : (
-                            <CircleIcon stroke="#1bb934" strokeWidth="4" />
-                          )}
+                          {mountainGroup ? <PositiveIcon /> : <NegativeIcon />}
                         </Flex>
                       ),
                       phones: (

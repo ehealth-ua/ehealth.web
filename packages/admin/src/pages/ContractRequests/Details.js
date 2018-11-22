@@ -12,9 +12,9 @@ import { boolean } from "@ehealth/system-tools";
 import {
   PrinterIcon,
   PositiveIcon,
+  NegativeIcon,
   DefaultImageIcon,
-  DropDownButton,
-  CircleIcon
+  DropDownButton
 } from "@ehealth/icons";
 import {
   getFullName,
@@ -383,11 +383,7 @@ const Divisions = ({ contractorDivisions }) =>
         name,
         mountainGroup: (
           <Flex justifyContent="center">
-            {mountainGroup ? (
-              <PositiveIcon />
-            ) : (
-              <CircleIcon stroke="#1bb934" strokeWidth="4" />
-            )}
+            {mountainGroup ? <PositiveIcon /> : <NegativeIcon />}
           </Flex>
         ),
         phones: (
