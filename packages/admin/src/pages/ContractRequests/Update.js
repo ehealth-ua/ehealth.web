@@ -126,6 +126,7 @@ const UpdateContractRequest = ({
   const [initialNhsPaymentMethod] = nhsPaymentMethod.filter(
     ({ key }) => key === initialValues.nhsPaymentMethod
   );
+  const { nhsSignerBase, issueCity, nhsContractPrice } = initialValues;
   return (
     <Box m={5}>
       <Query
@@ -177,6 +178,11 @@ const UpdateContractRequest = ({
                   }}
                   initialValues={{
                     ...initialValues,
+                    nhsSignerBase:
+                      nhsSignerBase ||
+                      "Положення про Національну службу здоров'я України, затвердженого постановою Кабінету Міністрів України від 27 грудня 2017 року № 1101",
+                    issueCity: issueCity || "Київ",
+                    nhsContractPrice: nhsContractPrice || 0,
                     nhsPaymentMethod: initialNhsPaymentMethod
                   }}
                 >
