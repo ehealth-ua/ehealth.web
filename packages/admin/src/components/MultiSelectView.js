@@ -39,14 +39,16 @@ export const RemoveItem = system({
 
 export const DropdownButton = system(
   {
-    is: "button",
+    is: "div",
     position: "absolute",
+    display: "flex",
     right: 0,
     top: 0,
     px: 3,
     height: "100%",
     cursor: "pointer",
-    lineHeight: 0
+    alignItems: "center",
+    justifyContent: "flex-end"
   },
   boolean({
     prop: "type",
