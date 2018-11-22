@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.141.1"></a>
+## [0.141.1](https://github.com/edenlabllc/ehealth.web/compare/v0.141.0...v0.141.1) (2018-11-22)
+
+
+### Bug Fixes
+
+* **admin:** change search param from id to databaseId on Legal Entity List page ([#525](https://github.com/edenlabllc/ehealth.web/issues/525)) ([651117f](https://github.com/edenlabllc/ehealth.web/commit/651117f))
+
+
+
+
+
 <a name="0.141.0"></a>
 # [0.141.0](https://github.com/edenlabllc/ehealth.web/compare/v0.140.4...v0.141.0) (2018-11-22)
 
