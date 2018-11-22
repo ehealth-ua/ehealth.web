@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.140.4"></a>
+## [0.140.4](https://github.com/edenlabllc/ehealth.web/compare/v0.140.3...v0.140.4) (2018-11-22)
+
+
+### Bug Fixes
+
+* **admin:** remove dropdown list opening in Select after pressing the enter button ([8dd4ebb](https://github.com/edenlabllc/ehealth.web/commit/8dd4ebb))
+
+
+
+
+
 <a name="0.140.3"></a>
 ## [0.140.3](https://github.com/edenlabllc/ehealth.web/compare/v0.140.2...v0.140.3) (2018-11-21)
 
