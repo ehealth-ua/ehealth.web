@@ -61,7 +61,7 @@ const Search = ({ uri }) => (
         } = locationParams;
         const regId = new RegExp(ID_PATTERN);
         const testID = regId.test(code);
-        const sendCodeParams = testID ? { id: code } : { edrpou: code };
+        const sendCodeParams = testID ? { databaseId: code } : { edrpou: code };
 
         const filteredParams = {
           ...sendCodeParams,
