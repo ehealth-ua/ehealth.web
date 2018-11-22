@@ -245,6 +245,7 @@ const Calendar = ({
   handleKeyPress,
   handleDateSelect,
   getSelectedDate,
+  placement = "bottom",
   ...props
 }: CalendarProps) => (
   <FieldView.Wrapper maxWidth={100} px={2}>
@@ -269,6 +270,7 @@ const Calendar = ({
       <Field {...props}>
         {({ input: { value, onChange } }) => (
           <DatePicker
+            placement={placement}
             selected={getSelectedDate(value)}
             onDateSelected={handleDateSelect(onChange)}
             minDate={minDate}

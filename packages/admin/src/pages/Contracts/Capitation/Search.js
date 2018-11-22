@@ -8,18 +8,26 @@ import isEmpty from "lodash/isEmpty";
 import format from "date-fns/format";
 import { loader } from "graphql.macro";
 
-import { Form, Validation, LocationParams } from "@ehealth/components";
+import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
 import {
   parseSortingParams,
   stringifySortingParams,
   formatDateTimeInterval
 } from "@ehealth/utils";
+
 import {
   AdminSearchIcon,
   PositiveIcon,
+  FilterIcon,
   NegativeIcon,
   RemoveItemIcon
 } from "@ehealth/icons";
+
+import {
+  SearchIcon,
+  SelectedItem,
+  RemoveItem
+} from "../../../components/MultiSelectView";
 
 import ContractsNav from "../ContractsNav";
 
@@ -50,34 +58,39 @@ const legalEntityRelation = Object.entries(STATUSES.LEGAL_ENTITY_RELATION).map(
   ([name, value]) => ({ name, value })
 );
 
+const sendFilterForm = filter => {
+  if (!filter) return {};
+  const {
+    status = {},
+    legalEntityRelation = {},
+    searchRequest,
+    isSuspended,
+    date: { startFrom, startTo, endFrom, endTo } = {}
+  } = filter;
+  const edrpouReg = new RegExp(EDRPOU_PATTERN);
+  const edrpouTest = edrpouReg.test(searchRequest);
+  const contract =
+    !isEmpty(searchRequest) &&
+    (edrpouTest
+      ? { contractorLegalEntity: { edrpou: searchRequest } }
+      : { contractNumber: searchRequest });
+  return {
+    ...contract,
+    startDate: () => formatDateTimeInterval(startFrom, startTo),
+    endDate: () => formatDateTimeInterval(endFrom, endTo),
+    status: status.name,
+    legalEntityRelation: legalEntityRelation.name,
+    isSuspended: convertIsSuspendedItem(isSuspended)
+  };
+};
+
 const CapitationContractsSearch = ({ uri }) => (
   <Box p={6}>
     <ContractsNav />
 
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
-        const {
-          filter: {
-            status = {},
-            legalEntityRelation = {},
-            searchRequest,
-            isSuspended
-          } = {},
-          date: { startFrom, startTo, endFrom, endTo } = {},
-          first,
-          last,
-          after,
-          before,
-          orderBy
-        } = locationParams;
-
-        const edrpouReg = new RegExp(EDRPOU_PATTERN);
-        const edrpouTest = edrpouReg.test(searchRequest);
-        const contract =
-          !isEmpty(searchRequest) &&
-          (edrpouTest
-            ? { contractorLegalEntity: { edrpou: searchRequest } }
-            : { contractNumber: searchRequest });
+        const { filter, first, last, after, before, orderBy } = locationParams;
         return (
           <>
             <Query
@@ -94,14 +107,7 @@ const CapitationContractsSearch = ({ uri }) => (
                 after,
                 before,
                 orderBy,
-                filter: {
-                  ...contract,
-                  startDate: formatDateTimeInterval(startFrom, startTo),
-                  endDate: formatDateTimeInterval(endFrom, endTo),
-                  status: status.name,
-                  legalEntityRelation: legalEntityRelation.name,
-                  isSuspended: convertIsSuspendedItem(isSuspended)
-                }
+                filter: sendFilterForm(filter)
               }}
             >
               {({
@@ -220,6 +226,45 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
         />
       </Box>
     </Flex>
+    <BooleanValue>
+      {({ value: opened, toggle }) => (
+        <>
+          {opened && (
+            <SearchContractsModalForm
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              toggle={toggle}
+              refetch={refetch}
+            />
+          )}
+          <Flex mb={4} alignItems="center">
+            <Button
+              variant="none"
+              border="none"
+              px={0}
+              py={0}
+              mr={2}
+              color="bluePastel"
+              onClick={toggle}
+            >
+              <Flex
+                justifyContent="center"
+                alignItems="center"
+                color="bluePastel"
+              >
+                <FilterIcon />
+                <TextNoWrap ml={2}>Показати всі фільтри</TextNoWrap>
+              </Flex>
+            </Button>
+            <HidenFilters
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              refetch={refetch}
+            />
+          </Flex>
+        </>
+      )}
+    </BooleanValue>
     <Flex mx={-1}>
       <Box px={1} width={1 / 6}>
         <Field.Select
@@ -239,71 +284,16 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
       <Flex px={1}>
         <Box mr={1}>
           <Field.RangePicker
-            rangeNames={["date.startFrom", "date.startTo"]}
+            rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
             label="Початок дії договору"
           />
         </Box>
         <Field.RangePicker
-          rangeNames={["date.endFrom", "date.endTo"]}
+          rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
           label="Кінець дії договору"
         />
       </Flex>
     </Flex>
-
-    <BooleanValue>
-      {({ value: opened, toggle }) => (
-        <>
-          {opened && (
-            <Flex mx={-1}>
-              <Box width={1 / 6} px={1} mr={1}>
-                <Field.Select
-                  name="filter.isSuspended"
-                  label="Призупинений"
-                  items={["", "true", "false"]}
-                  renderItem={item => renderIsSuspendedItem(item)}
-                  itemToString={item => renderIsSuspendedItem(item)}
-                  type="select"
-                />
-              </Box>
-              <Box width={1 / 3}>
-                <Field.Select
-                  name="filter.legalEntityRelation"
-                  label="Договори реорагізованих закладів"
-                  placeholder="test"
-                  items={[{ value: "всі договори" }, ...legalEntityRelation]}
-                  renderItem={item => item.value}
-                  itemToString={item => {
-                    if (!item) return "всі договори";
-                    return typeof item === "string" ? item : item.value;
-                  }}
-                  type="select"
-                />
-              </Box>
-            </Flex>
-          )}
-          <Flex mb={4}>
-            <Button
-              variant="none"
-              border="none"
-              px="0"
-              py="0"
-              color="bluePastel"
-              onClick={toggle}
-            >
-              <Flex
-                justifyContent="center"
-                alignItems="center"
-                color="bluePastel"
-              >
-                <TextNoWrap>розширений пошук</TextNoWrap>
-                <Icon transform={opened ? "rotate(180)" : "rotate(0)"} />
-              </Flex>
-            </Button>
-            <Line my={3} />
-          </Flex>
-        </>
-      )}
-    </BooleanValue>
 
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
@@ -313,9 +303,7 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
         <IconButton
           icon={RemoveItemIcon}
           type="reset"
-          disabled={
-            isEmpty(initialValues.filter) && isEmpty(initialValues.date)
-          }
+          disabled={isEmpty(initialValues.filter)}
           onClick={() => {
             onSubmit({
               ...initialValues,
@@ -337,19 +325,196 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
   </Form>
 );
 
+const HidenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
+  const {
+    filter: {
+      legalEntityRelation: { name, value } = {},
+      legalEntityRelation,
+      isSuspended
+    } = {}
+  } = initialValues;
+
+  return (
+    <Flex>
+      {name && (
+        <SelectedItem mx={1}>
+          договори {value} закладу
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                filter: {
+                  ...initialValues.filter,
+                  legalEntityRelation: undefined
+                }
+              });
+              refetch({
+                ...initialValues,
+                filter: sendFilterForm({
+                  ...initialValues.filter,
+                  legalEntityRelation: undefined
+                })
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+      {isSuspended !== undefined && (
+        <SelectedItem mx={1}>
+          {renderIsSuspendedItem(isSuspended)}
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                filter: {
+                  ...initialValues.filter,
+                  isSuspended: undefined
+                }
+              });
+              refetch({
+                ...initialValues,
+                filter: sendFilterForm({
+                  ...initialValues.filter,
+                  isSuspended: undefined
+                })
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+    </Flex>
+  );
+};
+
+const SearchContractsModalForm = ({
+  initialValues,
+  onSubmit,
+  toggle,
+  refetch
+}) => (
+  <Modal width={800} backdrop textAlign="left">
+    <Button
+      variant="none"
+      border="none"
+      px={0}
+      py={0}
+      mb={4}
+      color="bluePastel"
+      onClick={toggle}
+    >
+      <Flex justifyContent="center" alignItems="center" color="bluePastel">
+        <FilterIcon />
+        <TextNoWrap ml={2}>Сховати фільтри</TextNoWrap>
+      </Flex>
+    </Button>
+    <Form
+      onSubmit={values => {
+        onSubmit(values);
+        toggle();
+      }}
+      initialValues={initialValues}
+    >
+      <Flex mx={-1}>
+        <Box px={1} width={1 / 4}>
+          <Field.Select
+            name="filter.status"
+            label="Статус договору"
+            placeholder="test"
+            items={[{ value: "всі статуси" }, ...contractStatuses]}
+            renderItem={item => item.value}
+            itemToString={item => {
+              if (!item) return "всі статуси";
+              return typeof item === "string" ? item : item.value;
+            }}
+            type="select"
+          />
+        </Box>
+
+        <Flex px={1}>
+          <Box mr={1}>
+            <Field.RangePicker
+              rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
+              label="Початок дії договору"
+            />
+          </Box>
+          <Field.RangePicker
+            rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
+            label="Кінець дії договору"
+          />
+        </Flex>
+      </Flex>
+      <Flex mx={-1}>
+        <Box width={1 / 4} px={1} mr={1}>
+          <Field.Select
+            name="filter.isSuspended"
+            label="Призупинений"
+            items={["", "true", "false"]}
+            renderItem={item => renderIsSuspendedItem(item)}
+            itemToString={item => renderIsSuspendedItem(item)}
+            type="select"
+          />
+        </Box>
+        <Box width={1 / 2}>
+          <Field.Select
+            name="filter.legalEntityRelation"
+            label="Договори реорагізованих закладів"
+            placeholder="test"
+            items={[{ value: "всі договори" }, ...legalEntityRelation]}
+            renderItem={item => item.value}
+            itemToString={item => {
+              if (!item) return "всі договори";
+              return typeof item === "string" ? item : item.value;
+            }}
+            type="select"
+          />
+        </Box>
+      </Flex>
+      <Flex mx={-1} mt={4} justifyContent="flex-start">
+        <Box px={1}>
+          <Button variant="red" onClick={toggle}>
+            Закрити
+          </Button>
+        </Box>
+        <Box px={1}>
+          <Button variant="blue">Шукати</Button>
+        </Box>
+        <Box px={1}>
+          <IconButton
+            icon={RemoveItemIcon}
+            type="reset"
+            disabled={isEmpty(initialValues.filter)}
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                filter: null,
+                searchRequest: null,
+                date: null
+              });
+              refetch({
+                filter: undefined,
+                searchRequest: undefined,
+                date: undefined
+              });
+            }}
+          >
+            Скинути пошук
+          </IconButton>
+        </Box>
+      </Flex>
+    </Form>
+  </Modal>
+);
+
 const TextNoWrap = system(
   {
     is: Text
   },
   { whiteSpace: "nowrap" }
 );
-
-const Icon = system({
-  is: ChevronBottomIcon,
-  mx: 2,
-  width: 11,
-  transform: "rotate(180)"
-});
 
 const renderIsSuspendedItem = item =>
   item === "" ? "всі договори" : item === "true" ? "діючий" : "призупинений";
