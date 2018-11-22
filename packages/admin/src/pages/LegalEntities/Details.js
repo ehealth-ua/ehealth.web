@@ -4,6 +4,7 @@ import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
 import { Flex, Box, Heading } from "rebass/emotion";
 import format from "date-fns/format";
+import isEmpty from "lodash/isEmpty";
 
 import {
   PositiveIcon,
@@ -337,14 +338,26 @@ const GeneralInfo = ({
     />
   </Box>
 );
-const License = ({ license: { accreditation, licenses = [] } }) => {
-  const { issuedDate, expiryDate } = accreditation;
+const License = ({ license }) => {
+  if (!license) return null;
+
+  const {
+    accreditation,
+    accreditation: { issuedDate, expiryDate },
+    licenses
+  } = license;
+
   return (
     <Box p={5}>
+      <Heading fontSize="1" fontWeight="normal" mb={5}>
+        Акредитація
+      </Heading>
       <DefinitionListView
         labels={{
-          category: "Акредитація",
-          validateDate: "Термін дії"
+          category: "Категорія",
+          validateDate: "Термін дії",
+          orderDate: "Дата наказу",
+          orderNo: "Номер наказу"
         }}
         data={{
           ...accreditation,
@@ -353,26 +366,38 @@ const License = ({ license: { accreditation, licenses = [] } }) => {
           }`
         }}
       />
-      <Line />
-      {licenses.map(({ issuedDate, expiryDate, ...item }, index, array) => (
-        <React.Fragment key={index}>
-          <DefinitionListView
-            labels={{
-              licenseNumber: "Ліцензія",
-              validateDate: "Термін дії",
-              whatLicensed: "Орган, що видав",
-              activeFromDate: "Актуальність"
-            }}
-            data={{
-              ...item,
-              validateDate: `з ${issuedDate} ${
-                expiryDate ? `по ${expiryDate}` : ""
-              }`
-            }}
-          />
-          {array.length - 1 !== index && <Line />}
-        </React.Fragment>
-      ))}
+      {!isEmpty(licenses) && (
+        <>
+          <Line />
+          <Heading fontSize="1" fontWeight="normal" mb={5}>
+            Ліцензії
+          </Heading>
+
+          {licenses.map(
+            ({ activeFromDate, expiryDate, ...item }, index, array) => (
+              <React.Fragment key={index}>
+                <DefinitionListView
+                  labels={{
+                    licenseNumber: "Номер ліцензії",
+                    whatLicensed: "Видана на",
+                    issuedDate: "Дата видачі",
+                    issuedBy: "Орган, що видав",
+                    validateDate: "Термін дії",
+                    orderNo: "Номер наказу"
+                  }}
+                  data={{
+                    ...item,
+                    validateDate: `з ${activeFromDate} ${
+                      expiryDate ? `по ${expiryDate}` : ""
+                    }`
+                  }}
+                />
+                {array.length - 1 !== index && <Line />}
+              </React.Fragment>
+            )
+          )}
+        </>
+      )}
     </Box>
   );
 };
