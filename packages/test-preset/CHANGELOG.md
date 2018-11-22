@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.142.0"></a>
+# [0.142.0](https://github.com/edenlabllc/ehealth.web/compare/v0.141.1...v0.142.0) (2018-11-22)
+
+**Note:** Version bump only for package @ehealth/test-preset
+
+
+
+
+
 <a name="0.141.0"></a>
 # [0.141.0](https://github.com/edenlabllc/ehealth.web/compare/v0.140.4...v0.141.0) (2018-11-22)
 
