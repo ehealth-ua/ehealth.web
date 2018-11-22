@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.143.0"></a>
+# [0.143.0](https://github.com/edenlabllc/ehealth.web/compare/v0.142.1...v0.143.0) (2018-11-22)
+
+
+### Features
+
+* **admin:** format and add workingHours to the Divisions table on CR Details ([e823c79](https://github.com/edenlabllc/ehealth.web/commit/e823c79))
+
+
+
+
+
 <a name="0.142.1"></a>
 ## [0.142.1](https://github.com/edenlabllc/ehealth.web/compare/v0.142.0...v0.142.1) (2018-11-22)
 
