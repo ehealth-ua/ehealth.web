@@ -18,7 +18,8 @@ import {
 } from "@ehealth/icons";
 import {
   getFullName,
-  filterTableColumn as filterTableDefaultColumn
+  filterTableColumn as filterTableDefaultColumn,
+  formatWorkingHours
 } from "@ehealth/utils";
 
 import Line from "../../components/Line";
@@ -36,6 +37,7 @@ import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { SearchIcon } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
+import WEEK_DAYS from "../../helpers/weekDays";
 
 import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
 import EmployeesQuery from "../../graphql/EmployeesQuery.graphql";
@@ -362,6 +364,7 @@ const Divisions = ({ contractorDivisions }) =>
         name: "Назва відділення",
         addresses: "Адреса",
         mountainGroup: "Гірський регіон",
+        workingHours: "Графік роботи",
         phones: (
           <>
             Телефон <br />
@@ -369,7 +372,14 @@ const Divisions = ({ contractorDivisions }) =>
           </>
         )
       }}
-      renderRow={({ name, addresses, mountainGroup, phones, email }) => ({
+      renderRow={({
+        name,
+        addresses,
+        mountainGroup,
+        workingHours,
+        phones,
+        email
+      }) => ({
         name,
         mountainGroup: (
           <Flex justifyContent="center">
@@ -390,11 +400,19 @@ const Divisions = ({ contractorDivisions }) =>
             <Box>{email}</Box>
           </>
         ),
+        workingHours:
+          workingHours &&
+          formatWorkingHours(WEEK_DAYS, workingHours).map(({ day, hours }) => (
+            <Box pb={2}>
+              {day}: {hours.map(i => i.join("-")).join(", ")}
+            </Box>
+          )),
         addresses: addresses
           .filter(a => a.type === "RESIDENCE")
           .map((item, key) => <AddressView data={item} key={key} />)
       })}
       tableName="/contract-requests/divisions"
+      hiddenFields="workingHours"
     />
   );
 
