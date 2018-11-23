@@ -333,31 +333,30 @@ const GeneralInfo = ({
 const License = ({ license }) => {
   if (!license) return null;
 
-  const {
-    accreditation,
-    accreditation: { issuedDate, expiryDate },
-    licenses
-  } = license;
+  const { accreditation, licenses } = license;
 
   return (
     <Box p={5}>
       <Heading fontSize="1" fontWeight="normal" mb={5}>
         Акредитація
       </Heading>
-      <DefinitionListView
-        labels={{
-          category: "Категорія",
-          validateDate: "Термін дії",
-          orderDate: "Дата наказу",
-          orderNo: "Номер наказу"
-        }}
-        data={{
-          ...accreditation,
-          validateDate: `з ${issuedDate} ${
-            expiryDate ? `по ${expiryDate}` : ""
-          }`
-        }}
-      />
+      {!isEmpty(accreditation) && (
+        <DefinitionListView
+          labels={{
+            category: "Категорія",
+            validateDate: "Термін дії",
+            orderDate: "Дата наказу",
+            orderNo: "Номер наказу"
+          }}
+          data={{
+            ...accreditation,
+            validateDate: `з ${accreditation.issuedDate} ${
+              accreditation.expiryDate ? `по ${accreditation.expiryDate}` : ""
+            }`
+          }}
+        />
+      )}
+
       {!isEmpty(licenses) && (
         <>
           <Line />
@@ -365,8 +364,9 @@ const License = ({ license }) => {
             Ліцензії
           </Heading>
 
-          {licenses.map(
-            ({ activeFromDate, expiryDate, ...item }, index, array) => (
+          {licenses
+            .filter(item => item)
+            .map(({ activeFromDate, expiryDate, ...item }, index, array) => (
               <React.Fragment key={index}>
                 <DefinitionListView
                   labels={{
@@ -386,8 +386,7 @@ const License = ({ license }) => {
                 />
                 {array.length - 1 !== index && <Line />}
               </React.Fragment>
-            )
-          )}
+            ))}
         </>
       )}
     </Box>
