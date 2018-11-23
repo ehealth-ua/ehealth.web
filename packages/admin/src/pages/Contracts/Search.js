@@ -55,7 +55,7 @@ const Search = ({ uri }) => (
         const contract =
           !isEmpty(searchRequest) &&
           (edrpouTest
-            ? { contractorLegalEntityEdrpou: searchRequest }
+            ? { contractorLegalEntity: { edrpou: searchRequest } }
             : { contractNumber: searchRequest });
         return (
           <>
