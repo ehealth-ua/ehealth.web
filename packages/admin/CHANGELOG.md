@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.143.2"></a>
+## [0.143.2](https://github.com/edenlabllc/ehealth.web/compare/v0.143.1...v0.143.2) (2018-11-23)
+
+
+### Bug Fixes
+
+* **admin:** update search by edrpou according to the new scheme on Contracts List page ([ff0ec2a](https://github.com/edenlabllc/ehealth.web/commit/ff0ec2a))
+
+
+
+
+
 <a name="0.143.1"></a>
 ## [0.143.1](https://github.com/edenlabllc/ehealth.web/compare/v0.143.0...v0.143.1) (2018-11-22)
 
