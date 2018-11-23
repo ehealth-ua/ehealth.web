@@ -582,7 +582,7 @@ const ModalSelect = ({ submitted, id }) => (
     variables={{
       first: 50,
       filter: {
-        employeeType: "NHS",
+        employeeType: ["NHS", "NHS_SIGNER"],
         status: "APPROVED"
       },
       orderBy: "INSERTED_AT_DESC"
