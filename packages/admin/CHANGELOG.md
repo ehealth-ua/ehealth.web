@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.143.3"></a>
+## [0.143.3](https://github.com/edenlabllc/ehealth.web/compare/v0.143.2...v0.143.3) (2018-11-23)
+
+
+### Bug Fixes
+
+* **admin:** update reset search button on Search pages ([e2933b0](https://github.com/edenlabllc/ehealth.web/commit/e2933b0))
+
+
+
+
+
 <a name="0.143.2"></a>
 ## [0.143.2](https://github.com/edenlabllc/ehealth.web/compare/v0.143.1...v0.143.2) (2018-11-23)
 
