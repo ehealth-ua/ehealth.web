@@ -312,6 +312,8 @@ const SearchLegalEntitiesForm = ({
       </Box>
       <Box px={1}>
         <ResetButton
+          type="reset"
+          disabled={isEmpty(initialValues.filter)}
           onClick={() => {
             setLocationParams({
               ...initialValues,

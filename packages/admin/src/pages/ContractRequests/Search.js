@@ -249,6 +249,10 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
       </Box>
       <Box px={1}>
         <ResetButton
+          type="reset"
+          disabled={
+            isEmpty(initialValues.filter) && isEmpty(initialValues.date)
+          }
           onClick={() => {
             onSubmit({
               ...initialValues,
