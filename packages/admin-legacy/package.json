@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/admin-legacy",
-  "version": "0.143.1",
+  "version": "0.144.0",
   "private": true,
   "dependencies": {
     "@ehealth/components": "file:../components",
