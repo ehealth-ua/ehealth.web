@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.144.1"></a>
+## [0.144.1](https://github.com/edenlabllc/ehealth.web/compare/v0.144.0...v0.144.1) (2018-11-23)
+
+
+### Bug Fixes
+
+* **admin:** fix view License on LegalEntities details ([1ea7d00](https://github.com/edenlabllc/ehealth.web/commit/1ea7d00))
+
+
+
+
+
 <a name="0.144.0"></a>
 # [0.144.0](https://github.com/edenlabllc/ehealth.web/compare/v0.143.3...v0.144.0) (2018-11-23)
 
