@@ -7,13 +7,21 @@ import { EhealthLogoIcon } from "@ehealth/icons";
 import Button from "./Button";
 import Link from "./Link";
 
-const ErrorDefault = ({ number, text }) => (
+const ErrorDefault = ({ number, text, error }) => (
   <Layout>
     <Wrapper>
       <EhealthLogoIcon height="100" />
       <ErrorTitle weight="bold">Помилка</ErrorTitle>
       {number && <Number>{number}</Number>}
       <ErrorText weight="bold">{text}</ErrorText>
+      {error &&
+        error.message && (
+          <ErrorDetails>
+            <ErrorDetailsTitle>Деталі помилки</ErrorDetailsTitle>
+            <ErrorMsg>{error.message}</ErrorMsg>
+          </ErrorDetails>
+        )}
+
       <Link is="a" href="/">
         <Button variant="blue">Повернутись на головну</Button>
       </Link>
@@ -22,17 +30,25 @@ const ErrorDefault = ({ number, text }) => (
 );
 
 const Error = {};
-Error.ServerError = () => (
-  <ErrorDefault text="Повторіть спробу пізніше" number="500" />
+Error.ServerError = ({ error }) => (
+  <ErrorDefault text="Повторіть спробу пізніше" error={error} number="500" />
 );
-Error.NotFound = () => (
-  <ErrorDefault text="Сторінка, яку ви шукаєте відсутня" number="404" />
+Error.NotFound = ({ error }) => (
+  <ErrorDefault
+    text="Сторінка, яку ви шукаєте відсутня"
+    error={error}
+    number="404"
+  />
 );
-Error.ClientError = () => (
-  <ErrorDefault text="Сталася помилка. Спробуйте пізніше" />
+Error.ClientError = ({ error }) => (
+  <ErrorDefault text="Сталася помилка. Спробуйте пізніше" error={error} />
 );
-Error.ConflictError = () => (
-  <ErrorDefault text="Сталася помилка. Спробуйте пізніше" number="409" />
+Error.ConflictError = ({ error }) => (
+  <ErrorDefault
+    text="Сталася помилка. Спробуйте пізніше"
+    error={error}
+    number="409"
+  />
 );
 
 export default Error;
@@ -65,4 +81,20 @@ const ErrorTitle = styled(Heading.H2)`
 
 const ErrorText = styled(Heading.H2)`
   margin-bottom: 50px;
+`;
+
+const ErrorMsg = styled.p`
+  padding: 20px;
+  white-space: pre-wrap;
+`;
+
+const ErrorDetails = styled.div`
+  padding: 20px;
+  margin: 20px;
+  border-radius: 3px;
+  border: 1px solid lightgrey;
+`;
+
+const ErrorDetailsTitle = styled.p`
+  color: #2ea2f8;
 `;

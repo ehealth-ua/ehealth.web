@@ -45,6 +45,9 @@ export default class ErrorBoundary extends Component {
                 ) : (
                   <Modal width={760} p={4} placement="top">
                     Щось пішло не так...
+                    <br />
+                    <br />
+                    <pre>{error && error.message}</pre>
                   </Modal>
                 )}
               </>
@@ -54,9 +57,9 @@ export default class ErrorBoundary extends Component {
                 to={`${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
               />
             }
-            NOT_FOUND={<Error.NotFound />}
-            INTERNAL_SERVER_ERROR={<Error.ServerError />}
-            CONFLICT={<Error.ConflictError />}
+            NOT_FOUND={<Error.NotFound error={error} />}
+            INTERNAL_SERVER_ERROR={<Error.ServerError error={error} />}
+            CONFLICT={<Error.ConflictError error={error} />}
             default={
               <Modal width={760} p={4} placement="top">
                 Щось пішло не так
@@ -76,7 +79,7 @@ export default class ErrorBoundary extends Component {
     this.setState({ error, blocking });
 
     if (!blocking) {
-      setTimeout(() => this.setState({ error: null }), 5000);
+      setTimeout(() => this.setState({ error: null }), 8000);
     }
   };
 }
