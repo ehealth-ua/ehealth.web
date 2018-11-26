@@ -18,7 +18,10 @@ const Nav = () => (
       <NavList>
         <Flag name="features.legacy">
           <NavLinkExternal to="dashboard">Статистика</NavLinkExternal>
-          <NavLinkExternal to="persons">Персони</NavLinkExternal>
+
+          <Ability action="read" resource="person">
+            <NavLinkExternal to="persons">Персони</NavLinkExternal>
+          </Ability>
 
           <Ability action="read" resource="declaration">
             <NavSection title="Декларації">

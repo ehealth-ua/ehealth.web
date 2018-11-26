@@ -34,11 +34,13 @@ class Nav extends React.Component {
               Статистика
             </Link>
           </NavItem>
-          <NavItem to="/persons" activeClassName={styles.active}>
-            <Link id="persons-nav" to="/persons">
-              Персони
-            </Link>
-          </NavItem>
+          <ShowWithScope scope="person:read">
+            <NavItem to="/persons" activeClassName={styles.active}>
+              <Link id="persons-nav" to="/persons">
+                Персони
+              </Link>
+            </NavItem>
+          </ShowWithScope>
           <ShowWithScope scope="declaration:read">
             <li>
               <ShowMore nav name="Декларації">
