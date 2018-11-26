@@ -16,8 +16,7 @@ export default class ErrorBoundary extends Component {
   state = { error: null, blocking: false };
 
   componentDidCatch({ message }, info) {
-    const error = { type: "client", message };
-
+    const error = { type: "CLIENT", message };
     this.setError({ error, blocking: true });
   }
 
@@ -29,8 +28,8 @@ export default class ErrorBoundary extends Component {
         {error && (
           <Switch
             value={error.type}
-            client={<Error.ClientError error={error} />}
-            forbidden={
+            CLIENT={<Error.ClientError error={error} />}
+            FORBIDDEN={
               <>
                 <Modal width={760} px={76} py={32} placement="top" backdrop>
                   <Text color="red" fontSize="16" fontWeight="bold">
@@ -50,14 +49,22 @@ export default class ErrorBoundary extends Component {
                 )}
               </>
             }
-            unauthorized={
+            UNAUTHORIZED={
               <ForceRedirect
                 to={`${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
               />
             }
-            not_found={<Error.NotFound />}
-            internal_server_error={<Error.ServerError />}
-            conflict={<Error.ConflictError />}
+            NOT_FOUND={<Error.NotFound />}
+            INTERNAL_SERVER_ERROR={<Error.ServerError />}
+            CONFLICT={<Error.ConflictError />}
+            default={
+              <Modal width={760} p={4} placement="top">
+                Щось пішло не так
+                <br />
+                <br />
+                <pre>{error && error.message}</pre>
+              </Modal>
+            }
           />
         )}
         {(error && blocking) || this.props.children}
@@ -69,7 +76,7 @@ export default class ErrorBoundary extends Component {
     this.setState({ error, blocking });
 
     if (!blocking) {
-      setTimeout(() => this.setState({ error: null }), 2000);
+      setTimeout(() => this.setState({ error: null }), 5000);
     }
   };
 }

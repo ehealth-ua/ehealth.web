@@ -9,13 +9,15 @@ import Link from "./Link";
 
 const ErrorDefault = ({ number, text }) => (
   <Layout>
-    <EhealthLogoIcon height="100" />
-    <ErrorTitle weight="bold">Помилка</ErrorTitle>
-    {number && <Number>{number}</Number>}
-    <ErrorText weight="bold">{text}</ErrorText>
-    <Link is="a" href="/">
-      <Button variant="blue">Повернутись на головну</Button>
-    </Link>
+    <Wrapper>
+      <EhealthLogoIcon height="100" />
+      <ErrorTitle weight="bold">Помилка</ErrorTitle>
+      {number && <Number>{number}</Number>}
+      <ErrorText weight="bold">{text}</ErrorText>
+      <Link is="a" href="/">
+        <Button variant="blue">Повернутись на головну</Button>
+      </Link>
+    </Wrapper>
   </Layout>
 );
 
@@ -36,6 +38,10 @@ Error.ConflictError = () => (
 export default Error;
 
 const Layout = styled.div`
+  background-color: #fff;
+`;
+
+const Wrapper = styled.div`
   display: flex;
   height: 100vh;
   flex-direction: column;

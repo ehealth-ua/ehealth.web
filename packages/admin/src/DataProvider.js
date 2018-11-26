@@ -13,7 +13,6 @@ class DataProvider extends Component {
 
   async componentDidMount() {
     await getDataFromTree(<ApolloProvider {...this.providerProps} />);
-
     this.setState({ loading: false });
   }
 

@@ -8,14 +8,14 @@ import { visit, BREAK } from "graphql";
 import { REACT_APP_API_URL } from "./env";
 
 const STATUS_NAMES = {
-  400: "bad_request",
-  401: "unauthorized",
-  403: "forbidden",
-  404: "not_found",
-  409: "conflict",
-  422: "unprocessable_entity",
-  500: "internal_server_error",
-  503: "service_unavailable"
+  400: "BAD_REQUEST",
+  401: "UNAUTHORIZED",
+  403: "FORBIDDEN",
+  404: "NOT_FOUND",
+  409: "CONFLICT",
+  422: "UNPROCESSABLE_ENTITY",
+  500: "INTERNAL_SERVER_ERROR",
+  503: "SERVICE_UNAVAILABLE"
 };
 
 export const createClient = ({ onError: handleError }) => {
@@ -26,11 +26,21 @@ export const createClient = ({ onError: handleError }) => {
 
   const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
     const getGraphqlError = () => {
+      const checkedCode = (data, code) => {
+        const [[key]] = Object.entries(data).filter(
+          ([key, value]) => value === code
+        );
+        return key;
+      };
       if (graphQLErrors) {
         for (let err of graphQLErrors) {
           return {
             message: err.message,
-            statusCode: err.extensions.exception.statusCode
+            statusCode: !err.extensions
+              ? 500
+              : err.extensions.code
+                ? checkedCode(STATUS_NAMES, err.extensions.code)
+                : err.extensions.exception.statusCode
           };
         }
       }
