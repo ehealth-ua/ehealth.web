@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.145.0"></a>
+# [0.145.0](https://github.com/edenlabllc/ehealth.web/compare/v0.144.2...v0.145.0) (2018-11-26)
+
+
+### Features
+
+* **admin:** add text message for error ([89e4ee2](https://github.com/edenlabllc/ehealth.web/commit/89e4ee2))
+
+
+
+
+
 <a name="0.144.2"></a>
 ## [0.144.2](https://github.com/edenlabllc/ehealth.web/compare/v0.144.1...v0.144.2) (2018-11-26)
 
