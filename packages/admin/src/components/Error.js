@@ -55,6 +55,9 @@ export default Error;
 
 const Layout = styled.div`
   background-color: #fff;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
 `;
 
 const Wrapper = styled.div`
