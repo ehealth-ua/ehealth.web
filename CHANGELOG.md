@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.144.2"></a>
+## [0.144.2](https://github.com/edenlabllc/ehealth.web/compare/v0.144.1...v0.144.2) (2018-11-26)
+
+
+### Bug Fixes
+
+* **admin:** add Error handling to admin ([681bac8](https://github.com/edenlabllc/ehealth.web/commit/681bac8))
+
+
+
+
+
 <a name="0.144.1"></a>
 ## [0.144.1](https://github.com/edenlabllc/ehealth.web/compare/v0.144.0...v0.144.1) (2018-11-23)
 
