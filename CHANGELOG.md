@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.145.2"></a>
+## [0.145.2](https://github.com/edenlabllc/ehealth.web/compare/v0.145.1...v0.145.2) (2018-11-26)
+
+
+### Bug Fixes
+
+* **admin:** fix position on Error component ([a7b3a15](https://github.com/edenlabllc/ehealth.web/commit/a7b3a15))
+
+
+
+
+
 <a name="0.145.1"></a>
 ## [0.145.1](https://github.com/edenlabllc/ehealth.web/compare/v0.145.0...v0.145.1) (2018-11-26)
 
