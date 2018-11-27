@@ -1,11 +1,12 @@
 import React from "react";
+import { Box } from "rebass/emotion";
 import system from "system-components/emotion";
 import { RemoveItemIcon } from "@ehealth/icons";
 
-export const ResetButton = ({ children, ...props }) => (
+export const IconButton = ({ children, icon: Icon = Reset, ...props }) => (
   <Container {...props}>
-    <Reset />
-    {children}
+    <Icon />
+    <Box ml="2">{children}</Box>
   </Container>
 );
 

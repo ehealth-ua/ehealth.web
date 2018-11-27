@@ -17,7 +17,7 @@ import * as Field from "../../components/Field";
 import Link from "../../components/Link";
 import Table from "../../components/Table";
 import Pagination from "../../components/Pagination";
-import Button, { ResetButton } from "../../components/Button";
+import Button, { IconButton as ResetButton } from "../../components/Button";
 import Badge from "../../components/Badge";
 import STATUSES from "../../helpers/statuses";
 import {

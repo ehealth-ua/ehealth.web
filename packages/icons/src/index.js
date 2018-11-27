@@ -14,6 +14,7 @@ export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
 export { default as ChevronRightIcon } from "./ChevronRightIcon";
 export { default as CircleIcon } from "./CircleIcon";
 export { default as CloseIcon } from "./CloseIcon";
+export { default as CommentIcon } from "./CommentIcon";
 export { default as DefaultImageIcon } from "./DefaultImageIcon";
 export { default as DocIcon } from "./DocIcon";
 export { default as DropDownButton } from "./DropDownButton";

@@ -17,7 +17,7 @@ import Table from "../../components/Table";
 import Link from "../../components/Link";
 import AddressView from "../../components/AddressView";
 import Badge from "../../components/Badge";
-import Button, { ResetButton } from "../../components/Button";
+import Button, { IconButton as ResetButton } from "../../components/Button";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
