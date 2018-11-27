@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "react-emotion/macro";
 import { Query, Mutation } from "react-apollo";
+import { loader } from "graphql.macro";
+
 import {
   Heading,
   Link,
@@ -14,16 +16,18 @@ import { getDefinitions } from "@ehealth/utils";
 import { PencilIcon } from "@ehealth/icons";
 import Section from "../components/Section";
 import DefinitionListView from "../components/DefinitionListView";
-import AuthenticationFactorQuery from "../graphql/AuthenticationFactorQuery.graphql";
-import ApprovalsRequestQuery from "../graphql/ApprovalsRequestQuery.graphql";
 import DictionaryValue from "../components/DictionaryValue";
-import DeleteApprovalMutation from "../graphql/DeleteApprovalMutation.graphql";
-import {
-  REACT_APP_UPDATE_FACTOR_URL,
-  REACT_APP_OAUTH_URL,
-  REACT_APP_CLIENT_ID,
-  REACT_APP_OAUTH_REDIRECT_URI
-} from "../env";
+import env from "../env";
+
+const AuthenticationFactorQuery = loader(
+  "../graphql/AuthenticationFactorQuery.graphql"
+);
+const ApprovalsRequestQuery = loader(
+  "../graphql/ApprovalsRequestQuery.graphql"
+);
+const DeleteApprovalMutation = loader(
+  "../graphql/DeleteApprovalMutation.graphql"
+);
 
 const SecurityPage = () => (
   <Query query={AuthenticationFactorQuery}>
@@ -57,7 +61,9 @@ const SecurityPage = () => (
                       Для того, щоб його задати повторно необхідно ще раз пройти
                       процес{" "}
                       <Link
-                        href={`${REACT_APP_OAUTH_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+                        href={`${env.REACT_APP_OAUTH_URL}/?client_id=${
+                          env.REACT_APP_CLIENT_ID
+                        }&redirect_uri=${env.REACT_APP_OAUTH_REDIRECT_URI}`}
                       >
                         авторизації
                       </Link>
@@ -122,7 +128,9 @@ const SecurityBlock = ({ phone }) => (
     data={{
       phone: (
         <Link
-          href={`${REACT_APP_UPDATE_FACTOR_URL}/?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+          href={`${env.REACT_APP_UPDATE_FACTOR_URL}/?client_id=${
+            env.REACT_APP_CLIENT_ID
+          }&redirect_uri=${env.REACT_APP_OAUTH_REDIRECT_URI}`}
           size="s"
           upperCase
           color={"black"}

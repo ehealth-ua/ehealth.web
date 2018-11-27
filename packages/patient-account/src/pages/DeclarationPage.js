@@ -1,9 +1,11 @@
 import React from "react";
 import { Query } from "react-apollo";
+import { loader } from "graphql.macro";
 
-import DeclarationQuery from "../graphql/DeclarationQuery.graphql";
 import Declaration from "../components/Declaration";
 import { Spinner } from "@ehealth/components";
+
+const DeclarationQuery = loader("../graphql/DeclarationQuery.graphql");
 
 const DeclarationPage = ({ id, navigate }) => (
   <Query query={DeclarationQuery} variables={{ id }}>

@@ -5,6 +5,8 @@ import { Flex, Box, Text, Heading } from "rebass/emotion";
 import system from "system-components/emotion";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
+import { Trans } from "@lingui/react";
+import { loader } from "graphql.macro";
 
 import { Form, LocationParams, Modal } from "@ehealth/components";
 import {
@@ -35,11 +37,13 @@ import * as Field from "../../components/Field";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import DefinitionListView from "../../components/DefinitionListView";
-
-import ContractQuery from "../../graphql/ContractQuery.graphql";
-import TerminateContractMutation from "../../graphql/TerminateContractMutation.graphql";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 import Pagination from "../../components/Pagination";
+
+const ContractQuery = loader("../../graphql/ContractQuery.graphql");
+const TerminateContractMutation = loader(
+  "../../graphql/TerminateContractMutation.graphql"
+);
 
 const Details = ({ id }) => (
   <Query query={ContractQuery} variables={{ id, first: ITEMS_PER_PAGE[0] }}>
@@ -80,7 +84,7 @@ const Details = ({ id }) => (
             <Box py={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/contracts">
-                  Перелік договорів
+                  <Trans id="contract_requests.title">Перелік договорів</Trans>
                 </Breadcrumbs.Item>
                 <Breadcrumbs.Item>Деталі договору</Breadcrumbs.Item>
               </Breadcrumbs.List>

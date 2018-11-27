@@ -4,6 +4,8 @@ import isEqual from "lodash/isEqual";
 import debounce from "lodash/debounce";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 import { Flex } from "rebass/emotion";
+import { loader } from "graphql.macro";
+
 import {
   Heading,
   Link,
@@ -26,15 +28,18 @@ import {
   filterPropertiesByValue
 } from "@ehealth/utils";
 
-import { REACT_APP_SIGNER_URL } from "../env";
-import PersonDetailsQuery from "../graphql/PersonDetailsQuery.graphql";
-import RegionsQuery from "../graphql/RegionsQuery.graphql";
-import SearchSettlementsQuery from "../graphql/SearchSettlementsQuery.graphql";
-import UpdatePersonMutation from "../graphql/UpdatePersonMutation.graphql";
+import env from "../env";
 import Section from "../components/Section";
 import DefinitionListView from "../components/DefinitionListView";
 import DictionaryValue from "../components/DictionaryValue";
 import ProfileAuthSection from "../components/ProfileAuthSection";
+
+const PersonDetailsQuery = loader("../graphql/PersonDetailsQuery.graphql");
+const RegionsQuery = loader("../graphql/RegionsQuery.graphql");
+const SearchSettlementsQuery = loader(
+  "../graphql/SearchSettlementsQuery.graphql"
+);
+const UpdatePersonMutation = loader("../graphql/UpdatePersonMutation.graphql");
 
 const NAME_PATTERN =
   '^(?!.*[ЫЪЭЁыъэё@%&$^#])[a-zA-ZА-ЯҐЇІЄа-яґїіє0-9№\\"!\\^\\*)\\]\\[(._-].*$';
@@ -64,7 +69,7 @@ const ProfileEditPage = ({ history }) => (
         if (loading || error) return <Spinner />;
         return (
           <Signer.Parent
-            url={REACT_APP_SIGNER_URL}
+            url={env.REACT_APP_SIGNER_URL}
             features={{ width: 640, height: 589 }}
           >
             {({ signData }) => (

@@ -10,5 +10,5 @@
       }
     ]
   ],
-  "plugins": ["module:fast-async"]
+  "plugins": ["module:fast-async", "@babel/plugin-proposal-class-properties"]
 }

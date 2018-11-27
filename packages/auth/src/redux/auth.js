@@ -1,10 +1,10 @@
 import { handleAction } from "redux-actions";
-import { REACT_APP_AUTH_URL } from "../env";
+import env from "../env";
 import { invoke } from "./api";
 
 export const createSessionToken = ({ drfo, ...body }) =>
   invoke({
-    endpoint: `${REACT_APP_AUTH_URL}/oauth/tokens`,
+    endpoint: `${env.REACT_APP_AUTH_URL}/oauth/tokens`,
     method: "POST",
     types: [
       "auth/CREATE_SESSION_TOKEN_REQUEST",
@@ -33,7 +33,7 @@ export const createSessionToken = ({ drfo, ...body }) =>
 
 export const passwordUpdateRequest = body =>
   invoke({
-    endpoint: `${REACT_APP_AUTH_URL}/oauth/tokens/actions/change_password`,
+    endpoint: `${env.REACT_APP_AUTH_URL}/oauth/tokens/actions/change_password`,
     method: "POST",
     types: [
       "auth/PASSWORD_UPDATE_REQUEST",
@@ -46,7 +46,7 @@ export const passwordUpdateRequest = body =>
 export const newPasswordRequest = password =>
   invoke(
     {
-      endpoint: `${REACT_APP_AUTH_URL}/oauth/users/actions/update_password`,
+      endpoint: `${env.REACT_APP_AUTH_URL}/oauth/users/actions/update_password`,
       method: "POST",
       types: [
         "auth/PASSWORD_UPDATE_REQUEST",
@@ -65,7 +65,7 @@ export const newPasswordRequest = password =>
 export const otpVerifyToken = code =>
   invoke(
     {
-      endpoint: `${REACT_APP_AUTH_URL}/oauth/tokens`,
+      endpoint: `${env.REACT_APP_AUTH_URL}/oauth/tokens`,
       method: "POST",
       types: [
         "auth/OTP_VERIFY_TOKEN_REQUEST",
@@ -97,7 +97,7 @@ export const otpVerifyToken = code =>
 export const otpResendOtp = () =>
   invoke(
     {
-      endpoint: `${REACT_APP_AUTH_URL}/oauth/tokens`,
+      endpoint: `${env.REACT_APP_AUTH_URL}/oauth/tokens`,
       method: "POST",
       types: [
         "auth/OTP_RESEND_TOKEN_REQUEST",
@@ -127,7 +127,7 @@ export const otpResendOtp = () =>
 
 export const fetchSessionToken = token =>
   invoke({
-    endpoint: `${REACT_APP_AUTH_URL}/admin/tokens/${token}/verify`,
+    endpoint: `${env.REACT_APP_AUTH_URL}/admin/tokens/${token}/verify`,
     method: "GET",
     types: [
       "auth/FETCH_SESSION_TOKEN_REQUEST",
@@ -141,7 +141,7 @@ export const fetchSessionToken = token =>
 
 export const updatePassword = (id, body) =>
   invoke({
-    endpoint: `${REACT_APP_AUTH_URL}/users/${id}/actions/change_password`,
+    endpoint: `${env.REACT_APP_AUTH_URL}/users/${id}/actions/change_password`,
     method: "PATCH",
     types: [
       "auth/UPDATE_PASSWORD_REQUEST",
@@ -158,7 +158,7 @@ export const updatePassword = (id, body) =>
 export const authorize = ({ clientId, scope, redirectUri }) =>
   invoke(
     {
-      endpoint: `${REACT_APP_AUTH_URL}/oauth/apps/authorize`,
+      endpoint: `${env.REACT_APP_AUTH_URL}/oauth/apps/authorize`,
       method: "POST",
       types: [
         "auth/AUTHORIZE_REQUEST",
@@ -185,7 +185,7 @@ export const authorize = ({ clientId, scope, redirectUri }) =>
 
 export const getNonce = client_id =>
   invoke({
-    endpoint: `${REACT_APP_AUTH_URL}/oauth/nonce`,
+    endpoint: `${env.REACT_APP_AUTH_URL}/oauth/nonce`,
     method: "POST",
     types: ["auth/NONCE_REQUEST", "auth/NONCE_SUCCESS", "auth/NONCE_FAILURE"],
     body: {

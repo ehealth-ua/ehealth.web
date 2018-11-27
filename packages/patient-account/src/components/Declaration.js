@@ -2,6 +2,8 @@ import React from "react";
 import styled from "react-emotion/macro";
 import format from "date-fns/format";
 import ReactDOM from "react-dom";
+import { loader } from "graphql.macro";
+
 import {
   getDefinitions,
   getFullName,
@@ -23,7 +25,9 @@ import DictionaryValue from "./DictionaryValue";
 import DECLARATION_STATUSES from "../helpers/statuses";
 import AddressView from "./AddressView";
 
-import ApproveDeclarationRequestMutation from "../graphql/ApproveDeclarationRequestMutation.graphql";
+const ApproveDeclarationRequestMutation = loader(
+  "../graphql/ApproveDeclarationRequestMutation.graphql"
+);
 
 const DeclarationBody = ({ navigate, data }) => {
   const {

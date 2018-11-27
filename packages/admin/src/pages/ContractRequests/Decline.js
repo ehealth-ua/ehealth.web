@@ -3,6 +3,7 @@ import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
 import { Flex, Box } from "rebass/emotion";
 import system from "system-components/emotion";
+import { loader } from "graphql.macro";
 
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { Signer } from "@ehealth/react-iit-digital-signature";
@@ -15,10 +16,14 @@ import Tooltip from "../../components/Tooltip";
 import * as Field from "../../components/Field";
 import DefinitionListView from "../../components/DefinitionListView";
 
-import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
-import DeclineContractRequestMutation from "../../graphql/DeclineContractRequestMutation.graphql";
+import env from "../../env";
 
-import { REACT_APP_SIGNER_URL } from "../../env";
+const ContractRequestQuery = loader(
+  "../../graphql/ContractRequestQuery.graphql"
+);
+const DeclineContractRequestMutation = loader(
+  "../../graphql/DeclineContractRequestMutation.graphql"
+);
 
 const Decline = ({
   id,
@@ -160,7 +165,7 @@ const Sign = ({
       }
     }) => (
       <Signer.Parent
-        url={REACT_APP_SIGNER_URL}
+        url={env.REACT_APP_SIGNER_URL}
         features={{ width: 640, height: 589 }}
       >
         {({ signData }) => (

@@ -3,10 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
-import {
-  REACT_APP_DIGITAL_SIGNATURE_SIGN_IN_ENABLED,
-  REACT_APP_SIGN_UP_ENABLED
-} from "../../../env";
+import env from "../../../env";
 
 import { H1 } from "../../../components/Title";
 import Button, { ButtonsGroup } from "../../../components/Button";
@@ -39,7 +36,7 @@ const SignInPage = ({
         redirect_uri && (
           <NarrowContainer>
             <SignInForm onSubmit={onSubmit} initialValues={{ email }} />
-            {REACT_APP_DIGITAL_SIGNATURE_SIGN_IN_ENABLED && (
+            {env.REACT_APP_DIGITAL_SIGNATURE_SIGN_IN_ENABLED && (
               <Button
                 color="blue"
                 onClick={() =>
@@ -51,7 +48,7 @@ const SignInPage = ({
               </Button>
             )}
             <ButtonsGroup>
-              {REACT_APP_SIGN_UP_ENABLED && (
+              {env.REACT_APP_SIGN_UP_ENABLED && (
                 <Button theme="link" to="/sign-up">
                   Зареєструватися
                 </Button>

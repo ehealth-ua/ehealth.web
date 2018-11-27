@@ -1,10 +1,7 @@
 import React from "react";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
-import {
-  REACT_APP_ALLOWED_SIGN_ORIGINS,
-  REACT_APP_DIGITAL_SIGNATURE_ENABLED
-} from "../../../env";
+import env from "../../../env";
 
 import {
   Main,
@@ -23,7 +20,7 @@ const SignPage = () => (
     <Article>
       <NarrowContainer>
         <Signer.Child
-          allowedOrigins={REACT_APP_ALLOWED_SIGN_ORIGINS.split(",")}
+          allowedOrigins={env.REACT_APP_ALLOWED_SIGN_ORIGINS.split(",")}
         >
           {({ data, onSignSuccess, onSignError }) =>
             data && (
@@ -32,13 +29,13 @@ const SignPage = () => (
                   try {
                     const content = JSON.stringify(data);
 
-                    const signedContent = REACT_APP_DIGITAL_SIGNATURE_ENABLED
+                    const signedContent = env.REACT_APP_DIGITAL_SIGNATURE_ENABLED
                       ? ds.SignDataInternal(true, content, true)
                       : btoa(unescape(encodeURIComponent(content)));
 
                     let meta;
 
-                    if (!REACT_APP_DIGITAL_SIGNATURE_ENABLED) {
+                    if (!env.REACT_APP_DIGITAL_SIGNATURE_ENABLED) {
                       meta = {
                         drfo: ds.privKeyOwnerInfo.subjDRFOCode,
                         given_name: encodeURIComponent(

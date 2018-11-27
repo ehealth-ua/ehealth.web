@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { Router } from "@reach/router";
+import { loader } from "graphql.macro";
+
 import {
   Heading,
   Field,
@@ -22,9 +24,11 @@ import DivisionsMap from "../components/DivisionsMap";
 import DictionaryValue from "../components/DictionaryValue";
 import AddressView from "../components/AddressView";
 
-import SettlementQuery from "../graphql/SettlementQuery.graphql";
-import SearchEmployeeQuery from "../graphql/SearchEmployeeQuery.graphql";
-import SearchDivisionsByMapQuery from "../graphql/SearchDivisionsByMapQuery.graphql";
+const SettlementQuery = loader("../graphql/SettlementQuery.graphql");
+const SearchEmployeeQuery = loader("../graphql/SearchEmployeeQuery.graphql");
+const SearchDivisionsByMapQuery = loader(
+  "../graphql/SearchDivisionsByMapQuery.graphql"
+);
 
 const DEFAULT_CENTER = { lat: 50.4021368, lng: 30.4525107 };
 const DEFAULT_ZOOM = 9;

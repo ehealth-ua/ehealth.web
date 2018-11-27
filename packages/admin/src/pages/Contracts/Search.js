@@ -3,6 +3,7 @@ import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
 import format from "date-fns/format";
+import { loader } from "graphql.macro";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
 import {
@@ -21,12 +22,13 @@ import Badge from "../../components/Badge";
 import STATUSES from "../../helpers/statuses";
 import {
   EDRPOU_PATTERN,
-  CONTRACT_PATTERN,
   SEARCH_CONTRACT_PATTERN
 } from "../../constants/contracts";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
-import SearchContractsQuery from "../../graphql/SearchContractsQuery.graphql";
+const SearchContractsQuery = loader(
+  "../../graphql/SearchContractsQuery.graphql"
+);
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
   ([name, value]) => ({ name, value })

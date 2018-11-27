@@ -1,6 +1,6 @@
 import React from "react";
 import { Signer } from "@ehealth/react-iit-digital-signature";
-import { REACT_APP_STAMP_URL } from "../../../env";
+import env from "../../../env";
 
 import Button from "../../../components/Button";
 import styles from "./styles.module.css";
@@ -66,7 +66,7 @@ export default class StampContract extends React.Component {
               title="contract"
             />
             <Signer.Parent
-              url={REACT_APP_STAMP_URL}
+              url={env.REACT_APP_STAMP_URL}
               features={{ width: 640, height: 670 }}
             >
               {({ signData }) => (

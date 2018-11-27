@@ -3,6 +3,7 @@ import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
 import { Flex, Box } from "rebass/emotion";
 import system from "system-components/emotion";
+import { loader } from "graphql.macro";
 
 import { LocationParams } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
@@ -16,10 +17,14 @@ import Tooltip from "../../components/Tooltip";
 import DefinitionListView from "../../components/DefinitionListView";
 import STATUSES from "../../helpers/statuses";
 
-import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
-import ApproveContractRequestMutation from "../../graphql/ApproveContractRequestMutation.graphql";
+import env from "../../env";
 
-import { REACT_APP_SIGNER_URL } from "../../env";
+const ContractRequestQuery = loader(
+  "../../graphql/ContractRequestQuery.graphql"
+);
+const ApproveContractRequestMutation = loader(
+  "../../graphql/ApproveContractRequestMutation.graphql"
+);
 
 const Approve = ({ id }) => (
   <>
@@ -29,60 +34,57 @@ const Approve = ({ id }) => (
         <Steps.Item to="./">Підтвердіть з ЕЦП</Steps.Item>
       </Steps.List>
     </Box>
-    <LocationParams>
-      {({ locationParams, setLocationParams }) => (
-        <Query
-          query={ContractRequestQuery}
-          variables={{
-            id
-          }}
-        >
-          {({ loading, error, data: { contractRequest } = {} }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`;
-            const {
-              status,
-              databaseId,
-              contractorLegalEntity: { databaseId: legalEntityId, name, edrpou }
-            } = contractRequest;
 
-            return (
-              <>
-                <OpacityBox m={5}>
-                  <DefinitionListView
-                    labels={{
-                      id: "ID заяви",
-                      status: "Статус",
-                      edrpou: "ЄДРПОУ",
-                      name: "Назва",
-                      legalEntityId: "ID медзакладу"
-                    }}
-                    data={{
-                      id: databaseId,
-                      status: (
-                        <Badge
-                          name={status}
-                          type="CONTRACT_REQUEST"
-                          minWidth={100}
-                        />
-                      ),
-                      edrpou,
-                      name,
-                      legalEntityId
-                    }}
-                    color="#7F8FA4"
-                    labelWidth="100px"
-                  />
-                </OpacityBox>
-                <Router>
-                  <ApproveContractRequest path="/" data={contractRequest} />
-                </Router>
-              </>
-            );
-          }}
-        </Query>
-      )}
-    </LocationParams>
+    <Query
+      query={ContractRequestQuery}
+      variables={{
+        id
+      }}
+    >
+      {({ loading, error, data: { contractRequest } = {} }) => {
+        if (loading) return "Loading...";
+        if (error) return `Error! ${error.message}`;
+        const {
+          status,
+          databaseId,
+          contractorLegalEntity: { databaseId: legalEntityId, name, edrpou }
+        } = contractRequest;
+
+        return (
+          <>
+            <OpacityBox m={5}>
+              <DefinitionListView
+                labels={{
+                  id: "ID заяви",
+                  status: "Статус",
+                  edrpou: "ЄДРПОУ",
+                  name: "Назва",
+                  legalEntityId: "ID медзакладу"
+                }}
+                data={{
+                  id: databaseId,
+                  status: (
+                    <Badge
+                      name={status}
+                      type="CONTRACT_REQUEST"
+                      minWidth={100}
+                    />
+                  ),
+                  edrpou,
+                  name,
+                  legalEntityId
+                }}
+                color="#7F8FA4"
+                labelWidth="100px"
+              />
+            </OpacityBox>
+            <Router>
+              <ApproveContractRequest path="/" data={contractRequest} />
+            </Router>
+          </>
+        );
+      }}
+    </Query>
   </>
 );
 
@@ -123,7 +125,7 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
 
 const Sign = ({ id, data: { toApproveContent }, navigate }) => (
   <Signer.Parent
-    url={REACT_APP_SIGNER_URL}
+    url={env.REACT_APP_SIGNER_URL}
     features={{
       width: 640,
       height: 589

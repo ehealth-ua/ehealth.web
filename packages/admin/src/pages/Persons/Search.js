@@ -4,6 +4,7 @@ import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
 import format from "date-fns/format";
 import { getIn } from "final-form";
+import { loader } from "graphql.macro";
 
 import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
 import {
@@ -15,14 +16,13 @@ import {
   getFullName,
   formatDate
 } from "@ehealth/utils";
-import { ResetIcon } from "@ehealth/icons";
 
 import Link from "../../components/Link";
 import Table from "../../components/Table";
 import Details from "../../components/Details";
 import * as Field from "../../components/Field";
 
-import SearchPersonsQuery from "../../graphql/SearchPersonsQuery.graphql";
+const SearchPersonsQuery = loader("../../graphql/SearchPersonsQuery.graphql");
 
 const PHONE_PATTERN = "^\\+380\\d{9}$";
 

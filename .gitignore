@@ -60,6 +60,7 @@ typings/
 dist/
 build/
 __dist/
+_build/
 
 # Misc
 .env.local

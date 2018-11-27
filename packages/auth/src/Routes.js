@@ -11,7 +11,7 @@ import {
 import { syncHistoryWithStore } from "react-router-redux";
 import { useRedial } from "react-router-redial";
 
-import { REACT_APP_SIGN_UP_ENABLED } from "./env";
+import env from "./env";
 
 import { getUser, getToken } from "./reducers";
 import { loadTokenFromStorage, isLoginned, logout } from "./redux/session";
@@ -112,7 +112,7 @@ export default class Routes extends Component {
                 <Route path="stamp" component={StampPage} />
               </Route>
 
-              {REACT_APP_SIGN_UP_ENABLED && (
+              {env.REACT_APP_SIGN_UP_ENABLED && (
                 <>
                   <Route path="sign-up" component={SignUpVerifyPage} />
                   <Route

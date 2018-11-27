@@ -2,10 +2,7 @@ import React from "react";
 import { Switch } from "@ehealth/components";
 import { Link } from "react-router";
 import Button from "../../../components/Button";
-import {
-  REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
-  REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
-} from "../../../env";
+import env from "../../../env";
 import { Main, Header, Article } from "../../../components/CenterLayout";
 import { H1, H2 } from "../../../components/Title";
 
@@ -30,8 +27,8 @@ const SignUpFailurePage = ({ params, location }) => (
               to={{
                 pathname: "/sign-in",
                 query: {
-                  client_id: REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
-                  redirect_uri: REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
+                  client_id: env.REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
+                  redirect_uri: env.REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
                 }
               }}
             >

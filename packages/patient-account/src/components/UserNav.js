@@ -2,10 +2,12 @@ import React from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
 import { Match } from "@reach/router";
+import { loader } from "graphql.macro";
+
 import { Tooltip, Link } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
 
-import PersonQuery from "../graphql/PersonQuery.graphql";
+const PersonQuery = loader("../graphql/PersonQuery.graphql");
 
 const UserNav = () => (
   <Query query={PersonQuery}>

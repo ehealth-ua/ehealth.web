@@ -4,7 +4,7 @@ import { getLocation } from "../../../reducers";
 import { createSessionToken } from "../../../redux/auth";
 import { createUserFromRequest } from "../../../redux/user";
 import { login } from "../../../redux/session";
-import { REACT_APP_CLIENT_ID } from "../../../env";
+import env from "../../../env";
 import error_messages from "../../../helpers/errors";
 
 export const onSubmitSignUp = (employeeRequestId, email, password) => (
@@ -20,7 +20,7 @@ export const onSubmitSignUp = (employeeRequestId, email, password) => (
           grant_type: "password",
           email,
           password,
-          client_id: REACT_APP_CLIENT_ID,
+          client_id: env.REACT_APP_CLIENT_ID,
           scope: "employee_request:approve employee_request:reject"
         })
       ).then(action => {
@@ -68,7 +68,7 @@ export const onSubmitSignIn = (employeeRequestId, email, password) => (
       grant_type: "password",
       email,
       password,
-      client_id: REACT_APP_CLIENT_ID,
+      client_id: env.REACT_APP_CLIENT_ID,
       scope: "employee_request:approve employee_request:reject"
     })
   ).then(action => {

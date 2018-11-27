@@ -1,6 +1,8 @@
 import React from "react";
 import { Query } from "react-apollo";
-import DictionaryQuery from "../graphql/DictionaryQuery.graphql";
+import { loader } from "graphql.macro";
+
+const DictionaryQuery = loader("../graphql/DictionaryQuery.graphql");
 
 type DictProps = {
   name: string,

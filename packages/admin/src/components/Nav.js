@@ -10,7 +10,7 @@ import flags from "../flags";
 import Ability from "./Ability";
 import Link from "./Link";
 
-import { REACT_APP_ADMIN_LEGACY_URL } from "../env";
+import env from "../env";
 
 const Nav = () => (
   <FlagsProvider flags={flags}>
@@ -240,7 +240,7 @@ const NavLinkExternal = ({ to, href, children }) => {
         target: "_blank"
       }
     : {
-        href: `${REACT_APP_ADMIN_LEGACY_URL}/${to}`
+        href: `${env.REACT_APP_ADMIN_LEGACY_URL}/${to}`
       };
 
   return (

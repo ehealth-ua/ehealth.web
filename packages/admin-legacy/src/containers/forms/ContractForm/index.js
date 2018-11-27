@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { reduxForm, Field, getFormValues } from "redux-form";
 
-import { REACT_APP_SIGNER_URL } from "../../../env";
+import env from "../../../env";
 
 import FieldInput from "../../../components/reduxForm/FieldInput";
 import FieldSelect from "../../../components/reduxForm/FieldSelect";
@@ -259,7 +259,7 @@ class ContractForm extends React.Component {
         </form>
         {this.state.approve && (
           <Signer.Parent
-            url={REACT_APP_SIGNER_URL}
+            url={env.REACT_APP_SIGNER_URL}
             features={{ width: 640, height: 589 }}
           >
             {({ signData }) => (
@@ -335,7 +335,7 @@ class ContractForm extends React.Component {
         )}
         {this.state.decline && (
           <Signer.Parent
-            url={REACT_APP_SIGNER_URL}
+            url={env.REACT_APP_SIGNER_URL}
             features={{ width: 640, height: 589 }}
           >
             {({ signData }) => (

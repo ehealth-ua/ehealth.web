@@ -2,11 +2,8 @@ import React, { createContext, Component } from "react";
 import { ForceRedirect, Switch, Modal } from "@ehealth/components";
 import Error from "./components/Error";
 import { Text } from "rebass/emotion";
-import {
-  REACT_APP_OAUTH_URL,
-  REACT_APP_CLIENT_ID,
-  REACT_APP_OAUTH_REDIRECT_URI
-} from "./env";
+
+import env from "./env";
 
 const { Provider, Consumer } = createContext(() => {});
 
@@ -53,7 +50,9 @@ export default class ErrorBoundary extends Component {
               }
               unauthorized={
                 <ForceRedirect
-                  to={`${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+                  to={`${env.REACT_APP_OAUTH_URL}?client_id=${
+                    env.REACT_APP_CLIENT_ID
+                  }&redirect_uri=${env.REACT_APP_OAUTH_REDIRECT_URI}`}
                 />
               }
               not_found={<Error.NotFound />}

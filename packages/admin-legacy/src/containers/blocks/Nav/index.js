@@ -11,7 +11,7 @@ import ShowWithScope from "../ShowWithScope";
 import ShowMore from "../ShowMore";
 
 import { logOut } from "./redux";
-import { REACT_APP_ADMIN_URL } from "../../../env";
+import env from "../../../env";
 
 import styles from "./styles.module.css";
 
@@ -306,7 +306,7 @@ class Nav extends React.Component {
                     <NavItem to="contracts" activeClassName={styles.active}>
                       <ExternalLink
                         id="contracts-nav"
-                        href={`${REACT_APP_ADMIN_URL}/contracts/search`}
+                        href={`${env.REACT_APP_ADMIN_URL}/contracts/search`}
                       >
                         Перелік договорів
                       </ExternalLink>
@@ -319,7 +319,7 @@ class Nav extends React.Component {
                     >
                       <ExternalLink
                         id="contract-requests-nav"
-                        href={`${REACT_APP_ADMIN_URL}/contract-requests/search`}
+                        href={`${env.REACT_APP_ADMIN_URL}/contract-requests/search`}
                       >
                         Заяви на укладення
                         <br /> договору
@@ -334,7 +334,7 @@ class Nav extends React.Component {
             <NavItem to="clinics" activeClassName={styles.active}>
               <ExternalLink
                 id="clinics-nav"
-                href={`${REACT_APP_ADMIN_URL}/legal-entities/search`}
+                href={`${env.REACT_APP_ADMIN_URL}/legal-entities/search`}
               >
                 Медзаклади
               </ExternalLink>
@@ -357,7 +357,7 @@ class Nav extends React.Component {
                     <NavItem to="registers" activeClassName={styles.active}>
                       <ExternalLink
                         id="registers-nav"
-                        href={`${REACT_APP_ADMIN_URL}/legal-entity-merge-jobs/search/related`}
+                        href={`${env.REACT_APP_ADMIN_URL}/legal-entity-merge-jobs/search/related`}
                       >
                         Підпорядкування
                         <br /> медзакладів

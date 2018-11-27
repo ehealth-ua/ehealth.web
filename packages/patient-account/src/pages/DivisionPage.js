@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { Query } from "react-apollo";
-import { Heading, Link } from "@ehealth/components";
+import { loader } from "graphql.macro";
 
-import DefinitionListView from "../components/DefinitionListView";
-import DictionaryValue from "../components/DictionaryValue";
 import {
+  Heading,
+  Link,
   CabinetTable,
   Spinner,
   LocationParams,
@@ -13,7 +13,10 @@ import {
 } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
 
-import DivisionDetailsQuery from "../graphql/DivisionDetailsQuery.graphql";
+import DefinitionListView from "../components/DefinitionListView";
+import DictionaryValue from "../components/DictionaryValue";
+
+const DivisionDetailsQuery = loader("../graphql/DivisionDetailsQuery.graphql");
 
 const DivisionPage = ({ id }) => (
   <>

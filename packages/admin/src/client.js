@@ -5,7 +5,7 @@ import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { visit, BREAK } from "graphql";
 
-import { REACT_APP_API_URL } from "./env";
+import env from "./env";
 
 const STATUS_NAMES = {
   400: "BAD_REQUEST",
@@ -68,7 +68,7 @@ export const createClient = ({ onError: handleError }) => {
   });
 
   const httpLink = new HttpLink({
-    uri: REACT_APP_API_URL,
+    uri: env.REACT_APP_API_URL,
     credentials: "include"
   });
 

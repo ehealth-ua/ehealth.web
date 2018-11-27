@@ -4,12 +4,7 @@ import { compose } from "redux";
 import { withRouter } from "react-router";
 import Helmet from "react-helmet";
 
-import {
-  REACT_APP_OAUTH_URL,
-  REACT_APP_SCOPES,
-  REACT_APP_CLIENT_ID,
-  REACT_APP_OAUTH_REDIRECT_URI
-} from "../../../env";
+import env from "../../../env";
 
 import styles from "./styles.module.css";
 
@@ -36,7 +31,9 @@ class SignInPage extends React.Component {
           <article className={styles.form}>
             <a
               className={styles.button}
-              href={`${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`}
+              href={`${env.REACT_APP_OAUTH_URL}?client_id=${
+                env.REACT_APP_CLIENT_ID
+              }&redirect_uri=${env.REACT_APP_OAUTH_REDIRECT_URI}`}
             >
               Увійти за допомогою EHEALTH
             </a>

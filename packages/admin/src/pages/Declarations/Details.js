@@ -4,6 +4,7 @@ import { Query, Mutation } from "react-apollo";
 import { Flex, Box, Heading, Text } from "rebass/emotion";
 import { BooleanValue } from "react-values";
 import system from "system-components/emotion";
+import { loader } from "graphql.macro";
 
 import {
   PositiveIcon,
@@ -27,10 +28,16 @@ import DefinitionListView from "../../components/DefinitionListView";
 import STATUSES from "../../helpers/statuses";
 import documents from "../../helpers/documents";
 
-import DeclarationQuery from "../../graphql/DeclarationQuery.graphql";
-import TerminateDeclarationMutation from "../../graphql/TerminateDeclarationMutation.graphql";
-import RejectDeclarationMutation from "../../graphql/RejectDeclarationMutation.graphql";
-import ApproveDeclarationMutation from "../../graphql/ApproveDeclarationMutation.graphql";
+const DeclarationQuery = loader("../../graphql/DeclarationQuery.graphql");
+const TerminateDeclarationMutation = loader(
+  "../../graphql/TerminateDeclarationMutation.graphql"
+);
+const RejectDeclarationMutation = loader(
+  "../../graphql/RejectDeclarationMutation.graphql"
+);
+const ApproveDeclarationMutation = loader(
+  "../../graphql/ApproveDeclarationMutation.graphql"
+);
 
 const Details = ({ id }) => (
   <Query query={DeclarationQuery} variables={{ id }}>

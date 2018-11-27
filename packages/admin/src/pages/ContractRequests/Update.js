@@ -3,6 +3,7 @@ import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
 import { Flex, Box } from "rebass/emotion";
 import system from "system-components/emotion";
+import { loader } from "graphql.macro";
 
 import {
   LocationParams,
@@ -19,10 +20,13 @@ import { SearchIcon } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
 import STATUSES from "../../helpers/statuses";
 
-import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
-import EmployeesQuery from "../../graphql/EmployeesQuery.graphql";
-import UpdateContractRequestMutation from "../../graphql/UpdateContractRequestMutation.graphql";
-
+const ContractRequestQuery = loader(
+  "../../graphql/ContractRequestQuery.graphql"
+);
+const EmployeesQuery = loader("../../graphql/EmployeesQuery.graphql");
+const UpdateContractRequestMutation = loader(
+  "../../graphql/UpdateContractRequestMutation.graphql"
+);
 const nhsPaymentMethod = Object.entries(STATUSES.NHS_PAYMENT_METHOD).map(
   ([key, value]) => ({ key, value })
 );

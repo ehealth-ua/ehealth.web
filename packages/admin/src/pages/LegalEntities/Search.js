@@ -1,16 +1,16 @@
 import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
+import { loader } from "graphql.macro";
+import createDecorator from "final-form-calculate";
+import format from "date-fns/format";
+import isEmpty from "lodash/isEmpty";
+
 import { Form, LocationParams, Validation } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import { PositiveIcon, AdminSearchIcon, NegativeIcon } from "@ehealth/icons";
-import createDecorator from "final-form-calculate";
-import format from "date-fns/format";
 
-import debounce from "lodash/debounce";
-import isEmpty from "lodash/isEmpty";
 import STATUSES from "../../helpers/statuses";
-
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import Table from "../../components/Table";
@@ -18,11 +18,12 @@ import Link from "../../components/Link";
 import AddressView from "../../components/AddressView";
 import Badge from "../../components/Badge";
 import Button, { ResetButton } from "../../components/Button";
-
-import SearchLegalEntitiesQuery from "../../graphql/SearchLegalEntitiesQuery.graphql";
-import SettlementsQuery from "../../graphql/SettlementsQuery.graphql";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
+const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
+const SearchLegalEntitiesQuery = loader(
+  "../../graphql/SearchLegalEntitiesQuery.graphql"
+);
 const legalEntityStatus = Object.entries(STATUSES.LEGAL_ENTITY_STATUS).map(
   ([key, value]) => ({
     key: key === "VERIFIED",

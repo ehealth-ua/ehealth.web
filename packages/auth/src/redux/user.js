@@ -1,5 +1,5 @@
 import { handleAction, combineActions } from "redux-actions";
-import { REACT_APP_AUTH_URL, REACT_APP_API_URL } from "../env";
+import env from "../env";
 import { invoke } from "./api";
 import { fetchSessionToken } from "./auth";
 
@@ -17,7 +17,7 @@ export const fetchUserData = token => dispatch =>
 
 export const fetchUser = userId =>
   invoke({
-    endpoint: `${REACT_APP_AUTH_URL}/oauth/users/${userId}`,
+    endpoint: `${env.REACT_APP_AUTH_URL}/oauth/users/${userId}`,
     method: "GET",
     types: [
       "user/FETCH_USER_REQUEST",
@@ -28,7 +28,9 @@ export const fetchUser = userId =>
 
 export const createUserFromRequest = (employeeRequestId, body) =>
   invoke({
-    endpoint: `${REACT_APP_API_URL}/api/employee_requests/${employeeRequestId}/user`,
+    endpoint: `${
+      env.REACT_APP_API_URL
+    }/api/employee_requests/${employeeRequestId}/user`,
     method: "POST",
     types: [
       "user/CREATE_USER_FROM_REQUEST_REQUEST",

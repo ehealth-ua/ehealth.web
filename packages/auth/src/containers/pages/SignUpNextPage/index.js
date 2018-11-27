@@ -9,11 +9,7 @@ import {
 } from "@ehealth/components";
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
 
-import {
-  REACT_APP_DIGITAL_SIGNATURE_ENABLED,
-  REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
-  REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
-} from "../../../env";
+import env from "../../../env";
 import { fetchDictionaries } from "../../../redux/dictionaries";
 import { sendOtp, register } from "../../../redux/cabinet";
 import { login } from "../../../redux/session";
@@ -69,7 +65,9 @@ class SignUpNextForm extends Component {
   }
 
   get initialValues() {
-    const { ds: { privKeySubject, privKeyOwnerInfo } } = this.props;
+    const {
+      ds: { privKeySubject, privKeyOwnerInfo }
+    } = this.props;
     const { email } = this.tokenData;
 
     return {
@@ -108,7 +106,10 @@ class SignUpNextForm extends Component {
     const { sendOtp, router, location } = this.props;
 
     try {
-      const { error, payload: { response } } = await sendOtp({
+      const {
+        error,
+        payload: { response }
+      } = await sendOtp({
         factor: person.authentication_methods[0].phone_number,
         type: "SMS"
       });
@@ -125,7 +126,7 @@ class SignUpNextForm extends Component {
 
     try {
       const content = getPersonContent(personData);
-      const signed_content = REACT_APP_DIGITAL_SIGNATURE_ENABLED
+      const signed_content = env.REACT_APP_DIGITAL_SIGNATURE_ENABLED
         ? ds.SignDataInternal(true, content, true)
         : btoa(unescape(encodeURIComponent(content)));
 
@@ -215,9 +216,10 @@ const calculatePhones = (
 ];
 
 const registerUser = payload => async dispatch => {
-  const { error, payload: { response, data } } = await dispatch(
-    register(payload)
-  );
+  const {
+    error,
+    payload: { response, data }
+  } = await dispatch(register(payload));
 
   if (error) throw response.error;
 
@@ -225,10 +227,13 @@ const registerUser = payload => async dispatch => {
 };
 
 const authorizeUser = () => async dispatch => {
-  const { error, payload: { response, headers } } = await dispatch(
+  const {
+    error,
+    payload: { response, headers }
+  } = await dispatch(
     authorize({
-      clientId: REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
-      redirectUri: REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
+      clientId: env.REACT_APP_PATIENT_ACCOUNT_CLIENT_ID,
+      redirectUri: env.REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI
     })
   );
 

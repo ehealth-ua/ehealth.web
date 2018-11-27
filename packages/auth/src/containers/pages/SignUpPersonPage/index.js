@@ -11,7 +11,7 @@ import {
 import { formatDate, parseDate } from "@ehealth/utils";
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
 
-import { REACT_APP_API_URL } from "../../../env";
+import env from "../../../env";
 import { createUrl } from "../../../helpers/url";
 import {
   Main,
@@ -239,7 +239,7 @@ class AddressFields extends Component {
 
   async componentDidMount() {
     const regionsResponse = await fetch(
-      createUrl(`${REACT_APP_API_URL}/api/uaddresses/regions`, {
+      createUrl(`${env.REACT_APP_API_URL}/api/uaddresses/regions`, {
         page_size: 30
       })
     );
@@ -254,11 +254,14 @@ class AddressFields extends Component {
       this.setState({ settlements: [] });
     } else {
       const settlementsResponse = await fetch(
-        createUrl(`${REACT_APP_API_URL}/api/uaddresses/search/settlements`, {
-          name: settlement,
-          page_size: 200,
-          region: area
-        })
+        createUrl(
+          `${env.REACT_APP_API_URL}/api/uaddresses/search/settlements`,
+          {
+            name: settlement,
+            page_size: 200,
+            region: area
+          }
+        )
       );
       const { data } = await settlementsResponse.json();
       this.setState({ settlements: data });

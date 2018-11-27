@@ -3,12 +3,8 @@ import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
 
 import { Signer } from "@ehealth/react-iit-digital-signature";
-import { StampIcon } from "@ehealth/icons";
 
-import {
-  REACT_APP_ALLOWED_SIGN_ORIGINS,
-  REACT_APP_DIGITAL_SIGNATURE_ENABLED
-} from "../../../env";
+import env from "../../../env";
 
 import {
   Main,
@@ -37,7 +33,7 @@ class StampPage extends Component {
         <Article>
           <NarrowContainer>
             <Signer.Child
-              allowedOrigins={REACT_APP_ALLOWED_SIGN_ORIGINS.split(",")}
+              allowedOrigins={env.REACT_APP_ALLOWED_SIGN_ORIGINS.split(",")}
             >
               {({ data, onSignSuccess, onSignError }) => {
                 if (!data) return null;
@@ -85,13 +81,13 @@ class StampPage extends Component {
   submitFormSuccess = (ds, data, status = true, success = () => {}) => {
     const content = !status ? JSON.stringify(data) : data;
 
-    const signedContent = REACT_APP_DIGITAL_SIGNATURE_ENABLED
+    const signedContent = env.REACT_APP_DIGITAL_SIGNATURE_ENABLED
       ? ds.SignDataInternal(true, content, status)
       : btoa(unescape(encodeURIComponent(content)));
 
     let meta;
 
-    if (!REACT_APP_DIGITAL_SIGNATURE_ENABLED) {
+    if (!env.REACT_APP_DIGITAL_SIGNATURE_ENABLED) {
       meta = {
         drfo: ds.privKeyOwnerInfo.subjDRFOCode,
         given_name: encodeURIComponent(ds.privKeySubject.GivenName),

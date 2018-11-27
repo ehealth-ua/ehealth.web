@@ -1,5 +1,5 @@
 import { handleAction } from "redux-actions";
-import { REACT_APP_AUTH_URL } from "../env";
+import env from "../env";
 import { normalize } from "normalizr";
 import { client } from "../schemas";
 import { invoke } from "./api";
@@ -7,7 +7,7 @@ import { invoke } from "./api";
 export const fetchClientById = id =>
   invoke(
     {
-      endpoint: `${REACT_APP_AUTH_URL}/oauth/clients/${id}/details`,
+      endpoint: `${env.REACT_APP_AUTH_URL}/oauth/clients/${id}/details`,
       method: "GET",
       types: [
         "client/FETCH_CLIENT_REQUEST",

@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withRouter, Link } from "react-router";
-import {
-  REACT_APP_DIGITAL_SIGNATURE_ENABLED,
-  REACT_APP_CLIENT_ID
-} from "../../../env";
+import env from "../../../env";
 
 import { SUBMIT_ERROR } from "@ehealth/components";
 import Button from "../../../components/Button";
@@ -65,10 +62,10 @@ class SignInDSPage extends Component {
 
     login(token);
     const content = JSON.stringify({ jwt: token });
-    const signed_content = REACT_APP_DIGITAL_SIGNATURE_ENABLED
+    const signed_content = env.REACT_APP_DIGITAL_SIGNATURE_ENABLED
       ? ds.SignDataInternal(true, content, true)
       : btoa(content);
-    const drfo = REACT_APP_DIGITAL_SIGNATURE_ENABLED
+    const drfo = env.REACT_APP_DIGITAL_SIGNATURE_ENABLED
       ? undefined
       : ds.privKeyOwnerInfo.subjDRFOCode;
 
@@ -79,7 +76,7 @@ class SignInDSPage extends Component {
     } = await createSessionToken({
       drfo,
       signed_content,
-      client_id: REACT_APP_CLIENT_ID,
+      client_id: env.REACT_APP_CLIENT_ID,
       grant_type: "digital_signature",
       signed_content_encoding: "base64",
       scope: "app:authorize"

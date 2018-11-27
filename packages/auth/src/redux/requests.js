@@ -1,5 +1,5 @@
 import { handleAction, combineActions } from "redux-actions";
-import { REACT_APP_API_URL } from "../env";
+import env from "../env";
 import { normalize } from "normalizr";
 import { request } from "../schemas";
 import { invoke } from "./api";
@@ -9,7 +9,7 @@ export const REJECT_REQUEST_ACTION = "reject";
 
 export const fetchRequestByHash = hash =>
   invoke({
-    endpoint: `${REACT_APP_API_URL}/api/invite/${hash}`,
+    endpoint: `${env.REACT_APP_API_URL}/api/invite/${hash}`,
     method: "GET",
     types: [
       "requests/FETCH_REQUEST_REQUEST",
@@ -32,7 +32,7 @@ export const fetchRequestByHash = hash =>
 
 export const performActionWithRequest = (id, action) =>
   invoke({
-    endpoint: `${REACT_APP_API_URL}/api/employee_requests/${id}/${action}`,
+    endpoint: `${env.REACT_APP_API_URL}/api/employee_requests/${id}/${action}`,
     method: "POST",
     types: [
       "requests/PERFORM_ACTION_WITH_REQUEST",

@@ -9,13 +9,15 @@ import {
   formatPhone
 } from "@ehealth/utils";
 import { Flex } from "rebass/emotion";
+import { loader } from "graphql.macro";
 
-import PersonDetailsQuery from "../graphql/PersonDetailsQuery.graphql";
 import Section from "../components/Section";
 import DefinitionListView from "../components/DefinitionListView";
 import DictionaryValue from "../components/DictionaryValue";
 import AddressView from "../components/AddressView";
 import ProfileAuthSection from "../components/ProfileAuthSection";
+
+const PersonDetailsQuery = loader("../graphql/PersonDetailsQuery.graphql");
 
 const ProfilePage = () => (
   <>

@@ -4,6 +4,7 @@ import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
 import { Flex, Box, Heading } from "rebass/emotion";
 import format from "date-fns/format";
+import { loader } from "graphql.macro";
 import isEmpty from "lodash/isEmpty";
 
 import {
@@ -35,9 +36,13 @@ import DefinitionListView from "../../components/DefinitionListView";
 
 import STATUSES from "../../helpers/statuses";
 
-import DeactivateLegalEntityMutation from "../../graphql/DeactivateLegalEntityMutation.graphql";
-import NhsVerifyLegalEntityMutation from "../../graphql/NhsVerifyLegalEntityMutation.graphql";
-import LegalEntityQuery from "../../graphql/LegalEntityQuery.graphql";
+const DeactivateLegalEntityMutation = loader(
+  "../../graphql/DeactivateLegalEntityMutation.graphql"
+);
+const NhsVerifyLegalEntityMutation = loader(
+  "../../graphql/NhsVerifyLegalEntityMutation.graphql"
+);
+const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
 
 const Details = ({ id }) => (
   <Query query={LegalEntityQuery} variables={{ id, first: 10 }}>

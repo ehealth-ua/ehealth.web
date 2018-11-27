@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 import { Switch } from "@ehealth/components";
 import Button from "../../../components/Button";
-import { REACT_APP_DIGITAL_SIGNATURE_ENABLED } from "../../../env";
+import env from "../../../env";
 import { getToken } from "../../../reducers";
 import { setData, logoutAction } from "../../../redux/session";
 import { validateEmail, getUser } from "../../../redux/cabinet";
@@ -96,7 +96,7 @@ class SignUpValidatePage extends Component {
     const { token, location, router, getUser } = this.props;
 
     const content = JSON.stringify({ token });
-    const signed_content = REACT_APP_DIGITAL_SIGNATURE_ENABLED
+    const signed_content = env.REACT_APP_DIGITAL_SIGNATURE_ENABLED
       ? ds.SignDataInternal(true, content, true)
       : btoa(unescape(encodeURIComponent(content)));
 

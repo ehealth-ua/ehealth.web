@@ -3,7 +3,11 @@
   "version": "0.146.0",
   "private": true,
   "description": "",
-  "main": "src",
+  "main": "dist",
+  "scripts": {
+    "prepare": "rm -fr dist && NODE_ENV=production babel src --out-dir dist",
+    "start": "NODE_ENV=development babel src --out-dir dist --watch"
+  },
   "dependencies": {
     "@ehealth/icons": "file:../icons",
     "@ehealth/system-tools": "file:../system-tools",

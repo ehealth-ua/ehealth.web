@@ -4,6 +4,7 @@ import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
 import format from "date-fns/format";
 import differenceInSeconds from "date-fns/difference_in_seconds";
+import { loader } from "graphql.macro";
 
 import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
 import { AdminSearchIcon } from "@ehealth/icons";
@@ -14,7 +15,9 @@ import Button from "../../components/Button";
 import * as Field from "../../components/Field";
 import STATUSES from "../../helpers/statuses";
 
-import LegalEntitiesMergeJobsQuery from "../../graphql/LegalEntitiesMergeJobsQuery.graphql";
+const LegalEntitiesMergeJobsQuery = loader(
+  "../../graphql/LegalEntitiesMergeJobsQuery.graphql"
+);
 
 const EDRPOU_PATTERN = "^[0-9]{8,10}$";
 

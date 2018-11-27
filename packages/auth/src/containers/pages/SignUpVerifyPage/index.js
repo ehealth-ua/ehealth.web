@@ -18,10 +18,7 @@ import {
 import { H1 } from "../../../components/Title";
 import { verifyEmail } from "../../../redux/cabinet";
 
-import {
-  REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI,
-  REACT_APP_PATIENT_ACCOUNT_CLIENT_ID
-} from "../../../env";
+import env from "../../../env";
 
 const SignUpVerifyPage = ({ router, verifyEmail }) => (
   <Main>
@@ -63,7 +60,9 @@ const SignUpVerifyPage = ({ router, verifyEmail }) => (
       <p>
         Вже зареєстровані?{" "}
         <Link
-          to={`/sign-in?client_id=${REACT_APP_PATIENT_ACCOUNT_CLIENT_ID}&scope=&redirect_uri=${REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI}`}
+          to={`/sign-in?client_id=${
+            env.REACT_APP_PATIENT_ACCOUNT_CLIENT_ID
+          }&scope=&redirect_uri=${env.REACT_APP_PATIENT_ACCOUNT_REDIRECT_URI}`}
         >
           Авторизуйтеся
         </Link>

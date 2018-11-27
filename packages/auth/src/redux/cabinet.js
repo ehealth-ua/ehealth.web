@@ -1,10 +1,10 @@
-import { REACT_APP_API_URL, REACT_APP_DIGITAL_SIGNATURE_ENABLED } from "../env";
+import env from "../env";
 
 import { invoke } from "./api";
 
 export const verifyEmail = body =>
   invoke({
-    endpoint: `${REACT_APP_API_URL}/api/cabinet/email_verification`,
+    endpoint: `${env.REACT_APP_API_URL}/api/cabinet/email_verification`,
     method: "POST",
     types: [
       "cabinet/VERIFY_EMAIL_REQUEST",
@@ -16,7 +16,7 @@ export const verifyEmail = body =>
 
 export const validateEmail = () =>
   invoke({
-    endpoint: `${REACT_APP_API_URL}/api/cabinet/email_validation`,
+    endpoint: `${env.REACT_APP_API_URL}/api/cabinet/email_validation`,
     method: "POST",
     types: [
       "cabinet/VALIDATE_EMAIL_REQUEST",
@@ -27,7 +27,7 @@ export const validateEmail = () =>
 
 export const getUser = ({ signed_content, ...headers }) =>
   invoke({
-    endpoint: `${REACT_APP_API_URL}/api/cabinet/users`,
+    endpoint: `${env.REACT_APP_API_URL}/api/cabinet/users`,
     method: "POST",
     types: [
       "cabinet/GET_USER_REQUEST",
@@ -38,12 +38,12 @@ export const getUser = ({ signed_content, ...headers }) =>
       signed_content,
       signed_content_encoding: "base64"
     },
-    ...(!!REACT_APP_DIGITAL_SIGNATURE_ENABLED || { headers })
+    ...(!!env.REACT_APP_DIGITAL_SIGNATURE_ENABLED || { headers })
   });
 
 export const sendOtp = body =>
   invoke({
-    endpoint: `${REACT_APP_API_URL}/api/sms_verifications`,
+    endpoint: `${env.REACT_APP_API_URL}/api/sms_verifications`,
     method: "POST",
     types: [
       "cabinet/SEND_OTP_REQUEST",
@@ -55,7 +55,7 @@ export const sendOtp = body =>
 
 export const register = ({ signed_content, password, otp, ...headers }) =>
   invoke({
-    endpoint: `${REACT_APP_API_URL}/api/cabinet/registration`,
+    endpoint: `${env.REACT_APP_API_URL}/api/cabinet/registration`,
     method: "POST",
     types: [
       "cabinet/REGISTRATION_REQUEST",
@@ -68,5 +68,5 @@ export const register = ({ signed_content, password, otp, ...headers }) =>
       password,
       otp
     },
-    ...(!!REACT_APP_DIGITAL_SIGNATURE_ENABLED || { headers })
+    ...(!!env.REACT_APP_DIGITAL_SIGNATURE_ENABLED || { headers })
   });

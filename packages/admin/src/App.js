@@ -18,9 +18,9 @@ import Declarations from "./pages/Declarations";
 import LegalEntities from "./pages/LegalEntities";
 import Dictionaries from "./pages/Dictionaries";
 
-import locale from "./locales/uk/messages";
+import localeUK from "./locales/uk/messages.js";
 
-const catalogs = { cs: locale };
+const catalogs = { uk: localeUK };
 
 const NotFound = () => <p>Sorry, nothing here</p>;
 

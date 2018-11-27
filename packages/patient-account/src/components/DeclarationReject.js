@@ -2,19 +2,23 @@ import React from "react";
 import { ifProp } from "styled-tools";
 import { Mutation } from "react-apollo";
 import styled from "react-emotion/macro";
+import { loader } from "graphql.macro";
 
 import { Form, Field, Link, Modal, Heading } from "@ehealth/components";
 
-import TerminateQuery from "../graphql/TerminateDeclarationQuery.graphql";
+const TerminateDeclarationQuery = loader(
+  "../graphql/TerminateDeclarationQuery.graphql"
+);
 
 const DeclarationReject = ({ onClose, id, onReject }) => (
-  <Mutation mutation={TerminateQuery}>
+  <Mutation mutation={TerminateDeclarationQuery}>
     {terminateDeclaration => {
       return (
         <Modal width={760} onClose={onClose} backdrop>
           <Heading.H1>Розірвання декларації</Heading.H1>
           <P red={true}>
-            Ви збираєтесь розірвати декларацію,<br />
+            Ви збираєтесь розірвати декларацію,
+            <br />
             цю дію не можна буде відмінити.
           </P>
           <P>Ви впевнені, що хочете розірвати декларацію?</P>

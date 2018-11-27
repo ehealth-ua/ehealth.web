@@ -1,21 +1,24 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { Link } from "@reach/router";
 import { Switch } from "@ehealth/components";
 import printIframe from "print-iframe";
+import { loader } from "graphql.macro";
 
-import { PrinterIcon } from "@ehealth/icons";
-import LinkComponent from "../../components/Link";
 import system from "system-components/emotion";
 import { Box, Flex, Text } from "rebass/emotion";
+import { PrinterIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
+
 import Button from "../../components/Button";
+import env from "../../env";
 
-import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
-import SignContractRequestMutation from "../../graphql/SignContractRequestMutation.graphql";
-
-import { REACT_APP_STAMP_URL } from "../../env";
+const SignContractRequestMutation = loader(
+  "../../graphql/SignContractRequestMutation.graphql"
+);
+const ContractRequestQuery = loader(
+  "../../graphql/ContractRequestQuery.graphql"
+);
 
 const PrintOutContent = ({ id, navigate, ...props }) => {
   return (
@@ -51,7 +54,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                     value={status}
                     PENDING_NHS_SIGN={
                       <Signer.Parent
-                        url={REACT_APP_STAMP_URL}
+                        url={env.REACT_APP_STAMP_URL}
                         features={{
                           width: 640,
                           height: 670

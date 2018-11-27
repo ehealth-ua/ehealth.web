@@ -4,7 +4,7 @@ import { getLocation } from "../../../reducers";
 import { approveFactor } from "../../../redux/factors";
 import { login } from "../../../redux/session";
 import { authorize } from "../../../redux/auth";
-import { REACT_APP_CLIENT_ID } from "../../../env";
+import env from "../../../env";
 
 export const onSubmit = ({ code }) => (dispatch, getState) =>
   dispatch(approveFactor(parseInt(code, 10))).then(action => {
@@ -36,7 +36,7 @@ export const onSubmit = ({ code }) => (dispatch, getState) =>
           pathname: "/invite/accept"
         })
       );
-    } else if (location.query.client_id === REACT_APP_CLIENT_ID) {
+    } else if (location.query.client_id === env.REACT_APP_CLIENT_ID) {
       return dispatch(
         authorize({
           clientId: location.query.client_id,

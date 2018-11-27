@@ -6,6 +6,7 @@ import system from "system-components/emotion";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { Manager, Reference, Popper } from "react-popper";
+import { loader } from "graphql.macro";
 
 import { Form, Switch } from "@ehealth/components";
 import { boolean } from "@ehealth/system-tools";
@@ -39,9 +40,13 @@ import { SearchIcon } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
 import WEEK_DAYS from "../../helpers/weekDays";
 
-import ContractRequestQuery from "../../graphql/ContractRequestQuery.graphql";
-import EmployeesQuery from "../../graphql/EmployeesQuery.graphql";
-import AssignContractRequestMutation from "../../graphql/AssignContractRequestMutation.graphql";
+const ContractRequestQuery = loader(
+  "../../graphql/ContractRequestQuery.graphql"
+);
+const AssignContractRequestMutation = loader(
+  "../../graphql/AssignContractRequestMutation.graphql"
+);
+const EmployeesQuery = loader("../../graphql/EmployeesQuery.graphql");
 
 const Details = ({ id }) => (
   <Query query={ContractRequestQuery} variables={{ id }}>
@@ -119,7 +124,10 @@ const Details = ({ id }) => (
                           <ModalSelect submitted={getFullName(party)} id={id} />
                         }
                         IN_PROCESS={
-                          <ModalSelect submitted={getFullName(party)} id={id} />
+                          <ModalSelect
+                            submitted={getFullName(party)}
+                            id={id + 1}
+                          />
                         }
                         default={assignee && getFullName(party)}
                       />

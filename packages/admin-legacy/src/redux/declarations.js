@@ -1,5 +1,5 @@
 import { handleActions, combineActions } from "redux-actions";
-import { MOCK_API_URL } from "../env";
+import env from "../env";
 import { normalize } from "normalizr";
 import { createUrl } from "../helpers/url";
 import { declaration } from "../schemas";
@@ -95,7 +95,7 @@ export const fetchDeclaration = id =>
 
 export const updateDeclaration = (id, body) =>
   invoke({
-    endpoint: `${MOCK_API_URL}/declarations/${id}`,
+    endpoint: `${env.MOCK_API_URL}/declarations/${id}`,
     method: "PATCH",
     headers: {
       "content-type": "application/json"

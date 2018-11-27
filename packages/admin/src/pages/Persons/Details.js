@@ -3,6 +3,7 @@ import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
 import { Flex, Box, Heading, Text } from "rebass/emotion";
 import { BooleanValue } from "react-values";
+import { loader } from "graphql.macro";
 
 import { Form, Modal, LocationParams } from "@ehealth/components";
 import { AdminSearchIcon } from "@ehealth/icons";
@@ -24,9 +25,13 @@ import DefinitionListView from "../../components/DefinitionListView";
 
 import STATUSES from "../../helpers/statuses";
 
-import PersonQuery from "../../graphql/PersonQuery.graphql";
-import ResetAuthMethodMutation from "../../graphql/ResetAuthMethodMutation.graphql";
-import PersonDeclarationsQuery from "../../graphql/PersonDeclarationsQuery.graphql";
+const PersonDeclarationsQuery = loader(
+  "../../graphql/PersonDeclarationsQuery.graphql"
+);
+const ResetAuthMethodMutation = loader(
+  "../../graphql/ResetAuthMethodMutation.graphql"
+);
+const PersonQuery = loader("../../graphql/PersonQuery.graphql");
 
 const filterData = (type, arr) => arr.filter(t => t.type === type);
 

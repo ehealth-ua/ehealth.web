@@ -3,7 +3,7 @@ import { SubmissionError } from "redux-form";
 import { createSessionToken } from "../../../redux/auth";
 import { login } from "../../../redux/session";
 import { getLocation } from "../../../reducers";
-import { REACT_APP_CLIENT_ID } from "../../../env";
+import env from "../../../env";
 import error_messages from "../../../helpers/errors";
 
 export const onSubmit = ({ email, password }) => (dispatch, getState) =>
@@ -12,7 +12,7 @@ export const onSubmit = ({ email, password }) => (dispatch, getState) =>
       grant_type: "password",
       email,
       password,
-      client_id: REACT_APP_CLIENT_ID,
+      client_id: env.REACT_APP_CLIENT_ID,
       scope: "app:authorize"
     })
   ).then(action => {

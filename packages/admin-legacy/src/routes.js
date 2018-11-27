@@ -11,11 +11,7 @@ import {
 import { syncHistoryWithStore } from "react-router-redux";
 import { useRedial } from "react-router-redial";
 
-import {
-  REACT_APP_OAUTH_URL,
-  REACT_APP_CLIENT_ID,
-  REACT_APP_OAUTH_REDIRECT_URI
-} from "./env";
+import env from "./env";
 
 import App from "./containers/layouts/App";
 import Main from "./containers/layouts/Main";
@@ -139,7 +135,9 @@ export default class Routes extends Component {
               dispatch(hideLoading());
               if (status === 401) {
                 window.location.replace(
-                  `${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`
+                  `${env.REACT_APP_OAUTH_URL}?client_id=${
+                    env.REACT_APP_CLIENT_ID
+                  }&redirect_uri=${env.REACT_APP_OAUTH_REDIRECT_URI}`
                 );
               }
             }
@@ -346,7 +344,9 @@ export default class Routes extends Component {
   requireAuth = () => (nextState, replace, next) => {
     if (!getCookie("meta")) {
       window.location.replace(
-        `${REACT_APP_OAUTH_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_OAUTH_REDIRECT_URI}`
+        `${env.REACT_APP_OAUTH_URL}?client_id=${
+          env.REACT_APP_CLIENT_ID
+        }&redirect_uri=${env.REACT_APP_OAUTH_REDIRECT_URI}`
       );
     }
     return next();

@@ -3,6 +3,7 @@ import { Query } from "react-apollo";
 import { ifProp } from "styled-tools";
 import { Router, Match } from "@reach/router";
 import styled from "react-emotion/macro";
+import { loader } from "graphql.macro";
 import { ArrowRightIcon } from "@ehealth/icons";
 import {
   Heading,
@@ -13,11 +14,12 @@ import {
   Spinner
 } from "@ehealth/components";
 
-import DeclarationsQuery from "../graphql/DeclarationsQuery.graphql";
 import NoDeclarationList from "../components/NoDeclarationList";
 import DeclarationHistory from "../components/DeclarationHistory";
 import DeclarationItem from "../components/DeclarationItem";
 import Line from "../components/Line";
+
+const DeclarationsQuery = loader("../graphql/DeclarationsQuery.graphql");
 
 const HomePage = () => (
   <div data-test="home">

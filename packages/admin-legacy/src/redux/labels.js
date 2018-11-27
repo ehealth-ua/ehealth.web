@@ -1,11 +1,11 @@
 import { handleAction, combineActions } from "redux-actions";
-import { REACT_APP_MOCK_API_URL } from "../env";
+import env from "../env";
 import { createUrl } from "../helpers/url";
 import { invoke } from "./api";
 
 export const fetchLabels = options =>
   invoke({
-    endpoint: createUrl(`${REACT_APP_MOCK_API_URL}/labels`, options),
+    endpoint: createUrl(`${env.REACT_APP_MOCK_API_URL}/labels`, options),
     method: "GET",
     headers: {
       "content-type": "application/json"

@@ -1,7 +1,7 @@
 import { handleAction, combineActions } from "redux-actions";
 import { normalize } from "normalizr";
 
-import { REACT_APP_API_URL } from "../env";
+import env from "../env";
 import { dictionary } from "../schemas";
 import { createUrl } from "../helpers/url";
 
@@ -9,7 +9,7 @@ import { invoke } from "./api";
 
 export const fetchDictionaries = options =>
   invoke({
-    endpoint: createUrl(`${REACT_APP_API_URL}/api/dictionaries`, options),
+    endpoint: createUrl(`${env.REACT_APP_API_URL}/api/dictionaries`, options),
     method: "GET",
     types: [
       "dictionaries/FETCH_DICTIONARIES_REQUEST",

@@ -2,7 +2,7 @@ import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
 import { Flex, Box, Text } from "rebass/emotion";
-import system from "system-components/emotion";
+import { loader } from "graphql.macro";
 
 import { getFullName } from "@ehealth/utils";
 import { LocationParams, Form, Validation } from "@ehealth/components";
@@ -18,12 +18,16 @@ import Tooltip from "../../components/Tooltip";
 import * as Field from "../../components/Field";
 import DefinitionListView from "../../components/DefinitionListView";
 
-import LegalEntityQuery from "../../graphql/LegalEntityQuery.graphql";
-import SearchLegalEntitiesQuery from "../../graphql/SearchLegalEntitiesQuery.graphql";
-import MergeLegalEntitiesMutation from "../../graphql/MergeLegalEntitiesMutation.graphql";
-
-import { REACT_APP_SIGNER_URL } from "../../env";
+import env from "../../env";
 import STATUSES from "../../helpers/statuses";
+
+const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
+const SearchLegalEntitiesQuery = loader(
+  "../../graphql/SearchLegalEntitiesQuery.graphql"
+);
+const MergeLegalEntitiesMutation = loader(
+  "../../graphql/MergeLegalEntitiesMutation.graphql"
+);
 
 const Add = ({ location: { state } }) => (
   <>
@@ -238,7 +242,7 @@ const Sign = ({
       return (
         <Box px={5}>
           <Signer.Parent
-            url={REACT_APP_SIGNER_URL}
+            url={env.REACT_APP_SIGNER_URL}
             features={{ width: 640, height: 589 }}
           >
             {({ signData }) => (

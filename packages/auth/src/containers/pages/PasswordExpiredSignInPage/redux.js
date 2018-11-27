@@ -2,7 +2,7 @@ import { push } from "react-router-redux";
 import { SubmissionError } from "redux-form";
 import { getLocation } from "../../../reducers";
 import { createSessionToken } from "../../../redux/auth";
-import { REACT_APP_CLIENT_ID } from "../../../env";
+import env from "../../../env";
 import { login } from "../../../redux/session";
 import error_messages from "../../../helpers/errors";
 
@@ -11,7 +11,7 @@ export const onSubmit = ({ email, password }) => (dispatch, getState) =>
     createSessionToken({
       grant_type: "change_password",
       scope: "user:change_password",
-      client_id: REACT_APP_CLIENT_ID,
+      client_id: env.REACT_APP_CLIENT_ID,
       email,
       password
     })

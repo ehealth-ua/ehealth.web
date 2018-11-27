@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "react-emotion/macro";
 import { Query, Mutation } from "react-apollo";
+import { loader } from "graphql.macro";
+
 import { getFullName } from "@ehealth/utils";
 import {
   Heading,
@@ -13,9 +15,11 @@ import {
 import DictionaryValue from "../components/DictionaryValue";
 import DefinitionListView from "../components/DefinitionListView";
 
-import CreateDeclarationRequestMutation from "../graphql/CreateDeclarationRequestMutation.graphql";
-import EmployeeQuery from "../graphql/EmployeeQuery.graphql";
-import PersonQuery from "../graphql/PersonQuery.graphql";
+const CreateDeclarationRequestMutation = loader(
+  "../graphql/CreateDeclarationRequestMutation.graphql"
+);
+const EmployeeQuery = loader("../graphql/EmployeeQuery.graphql");
+const PersonQuery = loader("../graphql/PersonQuery.graphql");
 
 class EmployeePage extends React.Component {
   state = {

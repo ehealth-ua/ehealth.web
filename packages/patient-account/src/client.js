@@ -6,7 +6,7 @@ import { onError } from "apollo-link-error";
 import { visit, BREAK } from "graphql";
 import { fieldNameNormalizer, fieldNameDenormalizer } from "@ehealth/utils";
 
-import { REACT_APP_API_URL } from "./env";
+import env from "./env";
 
 const STATUS_NAMES = {
   400: "bad_request",
@@ -47,7 +47,7 @@ export const createClient = ({ onError: handleError }) => {
   });
 
   const restLink = new RestLink({
-    uri: REACT_APP_API_URL,
+    uri: env.REACT_APP_API_URL,
     credentials: "include",
     headers: {
       "Content-Type": "application/json"

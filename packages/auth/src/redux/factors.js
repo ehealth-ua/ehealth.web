@@ -1,10 +1,10 @@
-import { REACT_APP_AUTH_URL } from "../env";
+import env from "../env";
 import { invoke } from "./api";
 
 export const initFactor = phone =>
   invoke(
     {
-      endpoint: `${REACT_APP_AUTH_URL}/oauth/users/actions/init_factor`,
+      endpoint: `${env.REACT_APP_AUTH_URL}/oauth/users/actions/init_factor`,
       method: "POST",
       types: [
         "factor/INIT_FACTOR_REQUEST",
@@ -34,7 +34,7 @@ export const initFactor = phone =>
 export const approveFactor = code =>
   invoke(
     {
-      endpoint: `${REACT_APP_AUTH_URL}/oauth/users/actions/approve_factor`,
+      endpoint: `${env.REACT_APP_AUTH_URL}/oauth/users/actions/approve_factor`,
       method: "POST",
       types: [
         "factor/APPROVE_FACTOR_REQUEST",

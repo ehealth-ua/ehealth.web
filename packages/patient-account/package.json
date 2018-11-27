@@ -14,17 +14,19 @@
     "apollo-link-error": "^1.1.0",
     "apollo-link-rest": "^0.3.0",
     "emotion": "^9.2.5",
-    "graphql": "0.13.2",
+    "graphql": "14.0.2",
     "graphql.macro": "^1.0.2",
+    "http-proxy-middleware": "^0.19.0",
     "print-iframe": "0.0.4",
     "react": "^16.4.2",
     "react-apollo": "^2.2.4",
+    "react-app-polyfill": "^0.1.3",
     "react-dom": "^16.4.2",
     "react-emotion": "^9.2.5",
     "react-google-maps": "^9.4.5",
     "react-projector": "^1.0.0-beta.1",
     "react-projector-responsive": "^1.0.0-beta.1",
-    "react-scripts": "2.0.0-next.66cc7a90",
+    "react-scripts": "2.1.1",
     "rebass": "^3.0.0-8",
     "styled-tools": "^0.5.0",
     "url-polyfill": "^1.0.13"
@@ -38,16 +40,5 @@
     "image:build-and-test": "npm run image:build && npm run image:test",
     "image:push": "ehealth-scripts image push",
     "chart:update": "ehealth-scripts chart update"
-  },
-  "proxy": {
-    "/(api|reports)": {
-      "target": "http://api.dev.asclepius.com.ua/"
-    },
-    "/auth": {
-      "target": "http://localhost:4000/"
-    },
-    "/polyfill(.min)?.js": {
-      "target": "http://localhost:4001/"
-    }
   }
 }
