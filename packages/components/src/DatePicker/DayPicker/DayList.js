@@ -29,6 +29,7 @@ const DayList = ({ calendar, getDateProps }) => (
             unavailable={!selectable}
             currentMonth={!(!prevMonth && !nextMonth)}
             today={today}
+            onMouseDown={e => e.preventDefault()}
           >
             {date.getDate()}
           </Item>
