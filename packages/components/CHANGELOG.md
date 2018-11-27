@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.145.3"></a>
+## [0.145.3](https://github.com/edenlabllc/ehealth.web/compare/v0.145.2...v0.145.3) (2018-11-27)
+
+
+### Bug Fixes
+
+* **components:** fix day selection in DatePicker component in Safari ([0d3d88b](https://github.com/edenlabllc/ehealth.web/commit/0d3d88b))
+
+
+
+
+
 <a name="0.145.0"></a>
 # [0.145.0](https://github.com/edenlabllc/ehealth.web/compare/v0.144.2...v0.145.0) (2018-11-26)
 
