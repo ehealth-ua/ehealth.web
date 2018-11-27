@@ -1,0 +1,7 @@
+mutation NhsCommentLegalEntityMutation($input: NhsCommentLegalEntityInput!) {
+  legalEntity: nhsCommentLegalEntity(input: $input) {
+    legalEntity {
+      id
+    }
+  }
+}
