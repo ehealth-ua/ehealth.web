@@ -3,6 +3,7 @@ import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
 import { Flex, Box, Heading } from "rebass/emotion";
+import system from "system-components/emotion";
 import format from "date-fns/format";
 import { loader } from "graphql.macro";
 import isEmpty from "lodash/isEmpty";
@@ -11,7 +12,8 @@ import {
   PositiveIcon,
   AdminSearchIcon,
   AdminAddIcon,
-  NegativeIcon
+  NegativeIcon,
+  CommentIcon
 } from "@ehealth/icons";
 import {
   getFullName,
@@ -26,7 +28,7 @@ import Link from "../../components/Link";
 import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
-import Button from "../../components/Button";
+import Button, { IconButton } from "../../components/Button";
 import Tooltip from "../../components/Tooltip";
 import Ability from "../../components/Ability";
 import * as Field from "../../components/Field";
@@ -41,6 +43,12 @@ const DeactivateLegalEntityMutation = loader(
 );
 const NhsVerifyLegalEntityMutation = loader(
   "../../graphql/NhsVerifyLegalEntityMutation.graphql"
+);
+const NhsCommentLegalEntityMutation = loader(
+  "../../graphql/NhsCommentLegalEntityMutation.graphql"
+);
+const NhsReviewLegalEntityMutation = loader(
+  "../../graphql/NhsReviewLegalEntityMutation.graphql"
 );
 const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
 
@@ -63,12 +71,13 @@ const Details = ({ id }) => (
         kveds,
         misVerified,
         nhsVerified,
+        nhsReviewed,
+        nhsComment,
         owner,
         medicalServiceProvider,
         mergedToLegalEntity
       } = legalEntity;
-      const statusAction =
-        status === "ACTIVE" && (nhsVerified ? status : "NHS_VERIFY_CLOSED");
+      const isVerificationActive = status === "ACTIVE" && nhsReviewed;
 
       return (
         <>
@@ -95,52 +104,37 @@ const Details = ({ id }) => (
                   labelWidth="100px"
                 />
               </Box>
-              <Switch
-                value={statusAction}
-                ACTIVE={
-                  <Popup
-                    variant="red"
-                    buttonText="Закрити медзаклад"
-                    title="Закрити медзаклад"
-                  >
-                    {toggle => (
-                      <Mutation
-                        mutation={DeactivateLegalEntityMutation}
-                        refetchQueries={() => [
-                          {
-                            query: LegalEntityQuery,
-                            variables: { id, first: 10 }
-                          }
-                        ]}
-                      >
-                        {deactivateLegalEntity => (
-                          <Flex justifyContent="center">
-                            <Box mr={20}>
-                              <Button variant="blue" onClick={toggle}>
-                                Повернутися
-                              </Button>
-                            </Box>
-                            <Button
-                              onClick={async () => {
-                                await deactivateLegalEntity({
-                                  variables: {
-                                    input: { id }
-                                  }
-                                });
-                                toggle();
-                              }}
-                              variant="red"
-                            >
-                              Закрити медзаклад
-                            </Button>
-                          </Flex>
-                        )}
-                      </Mutation>
-                    )}
-                  </Popup>
-                }
-                NHS_VERIFY_CLOSED={
-                  <Flex>
+              {status === "ACTIVE" && (
+                <>
+                  {!nhsReviewed ? (
+                    <Mutation
+                      mutation={NhsReviewLegalEntityMutation}
+                      refetchQueries={() => [
+                        {
+                          query: LegalEntityQuery,
+                          variables: { id, first: 10 }
+                        }
+                      ]}
+                    >
+                      {nhsReviewLegalEntity => (
+                        <Button
+                          onClick={async () => {
+                            await nhsReviewLegalEntity({
+                              variables: {
+                                input: {
+                                  id,
+                                  nhsReviewed: true
+                                }
+                              }
+                            });
+                          }}
+                          variant="blue"
+                        >
+                          Взяти в роботу
+                        </Button>
+                      )}
+                    </Mutation>
+                  ) : (
                     <Box mr={20}>
                       <Popup
                         variant="red"
@@ -183,55 +177,15 @@ const Details = ({ id }) => (
                         )}
                       </Popup>
                     </Box>
-                    <Popup
-                      variant="green"
-                      buttonText="Верифікація"
-                      title="Верифікація медзакладу"
-                    >
-                      {toggle => (
-                        <Mutation
-                          mutation={NhsVerifyLegalEntityMutation}
-                          refetchQueries={() => [
-                            {
-                              query: LegalEntityQuery,
-                              variables: { id, first: 10 }
-                            }
-                          ]}
-                        >
-                          {nhsVerifyLegalEntity => (
-                            <Flex justifyContent="center">
-                              <Box mr={20}>
-                                <Button variant="blue" onClick={toggle}>
-                                  Повернутися
-                                </Button>
-                              </Box>
-                              <Button
-                                onClick={async () => {
-                                  await nhsVerifyLegalEntity({
-                                    variables: {
-                                      input: { id }
-                                    }
-                                  });
-                                  toggle();
-                                }}
-                                variant="green"
-                              >
-                                Верифікувати медзаклад
-                              </Button>
-                            </Flex>
-                          )}
-                        </Mutation>
-                      )}
-                    </Popup>
-                  </Flex>
-                }
-              />
+                  )}
+                </>
+              )}
             </Flex>
           </Box>
 
           <Tabs.Nav>
             <Tabs.NavItem to="./">Загальна інформація</Tabs.NavItem>
-            <Tabs.NavItem to="./licenses">Ліцензії</Tabs.NavItem>
+            <Tabs.NavItem to="./licenses">Ліцензії / Верифікація</Tabs.NavItem>
             <Ability action="read" resource="related_legal_entities">
               <Tabs.NavItem to="./related-legal-entities">
                 Підпорядковані медзаклади
@@ -261,7 +215,13 @@ const Details = ({ id }) => (
                 misVerified={misVerified}
                 nhsVerified={nhsVerified}
               />
-              <License path="/licenses" license={medicalServiceProvider} />
+              <License
+                path="/licenses"
+                license={medicalServiceProvider}
+                nhsVerified={nhsVerified}
+                nhsComment={nhsComment}
+                isVerificationActive={isVerificationActive}
+              />
               <RelatedLegalEntities
                 path="/related-legal-entities"
                 status={status}
@@ -284,7 +244,6 @@ const GeneralInfo = ({
   ownerPropertyType,
   kveds,
   misVerified,
-  nhsVerified,
   ...props
 }) => (
   <Box p={5}>
@@ -324,21 +283,27 @@ const GeneralInfo = ({
     />
     <DefinitionListView
       labels={{
-        misVerified: "Верифікація МІС",
-        nhsVerified: "Верифікація НСЗУ"
+        misVerified: "Верифікація МІС"
       }}
       data={{
-        misVerified: misVerified ? <PositiveIcon /> : <NegativeIcon />,
-        nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />
+        misVerified: misVerified ? <PositiveIcon /> : <NegativeIcon />
       }}
       color="blueberrySoda"
     />
   </Box>
 );
-const License = ({ license }) => {
+
+const License = ({
+  id,
+  isVerificationActive,
+  license,
+  nhsVerified,
+  nhsComment
+}) => {
   if (!license) return null;
 
   const { accreditation, licenses } = license;
+  const licensesData = licenses ? licenses.filter(item => item) : [];
 
   return (
     <Box p={5}>
@@ -361,39 +326,176 @@ const License = ({ license }) => {
           }}
         />
       )}
-
-      {!isEmpty(licenses) && (
+      <Line />
+      {!isEmpty(licensesData) && (
         <>
-          <Line />
           <Heading fontSize="1" fontWeight="normal" mb={5}>
             Ліцензії
           </Heading>
 
-          {licenses
-            .filter(item => item)
-            .map(({ activeFromDate, expiryDate, ...item }, index, array) => (
-              <React.Fragment key={index}>
-                <DefinitionListView
-                  labels={{
-                    licenseNumber: "Номер ліцензії",
-                    whatLicensed: "Видана на",
-                    issuedDate: "Дата видачі",
-                    issuedBy: "Орган, що видав",
-                    validateDate: "Термін дії",
-                    orderNo: "Номер наказу"
-                  }}
-                  data={{
-                    ...item,
-                    validateDate: `з ${activeFromDate} ${
-                      expiryDate ? `по ${expiryDate}` : ""
-                    }`
-                  }}
-                />
-                {array.length - 1 !== index && <Line />}
-              </React.Fragment>
-            ))}
+          <Table
+            data={licensesData}
+            header={{
+              licenseNumber: "Номер ліцензії",
+              whatLicensed: "Видана на",
+              issuedDate: "Дата видачі",
+              issuedBy: "Орган, що видав",
+              validateDate: "Термін дії",
+              orderNo: "Номер наказу"
+            }}
+            renderRow={({ activeFromDate, expiryDate, ...licenses }) => ({
+              validateDate: `з ${activeFromDate} ${
+                expiryDate ? `по ${expiryDate}` : ""
+              }`,
+              ...licenses
+            })}
+            tableName="legal-entities/licenses"
+          />
         </>
       )}
+
+      <OpacityBox mt={5} opacity={isVerificationActive ? 1 : 0.5}>
+        <Popup
+          variant="green"
+          buttonText={nhsComment ? "Дивитись коментарі" : "Залишити коментар"}
+          title={nhsComment ? "Коментар" : "Залишити коментар"}
+          icon={CommentIcon}
+          disabled={!isVerificationActive}
+        >
+          {toggle => (
+            <Mutation
+              mutation={NhsCommentLegalEntityMutation}
+              refetchQueries={() => [
+                {
+                  query: LegalEntityQuery,
+                  variables: { id, first: 10 }
+                }
+              ]}
+            >
+              {nhsCommentLegalEntity => (
+                <BooleanValue defaultValue={!nhsComment}>
+                  {({ value: showForm, toggle: toggleForm }) =>
+                    showForm ? (
+                      <Form
+                        initialValues={{ nhsComment }}
+                        onSubmit={async ({ nhsComment }) => {
+                          await nhsCommentLegalEntity({
+                            variables: { input: { id, nhsComment } }
+                          });
+                          toggle();
+                        }}
+                      >
+                        <Field.Textarea
+                          name="nhsComment"
+                          placeholder="Введіть текст коментаря"
+                          rows={5}
+                        />
+                        <Flex justifyContent="left">
+                          <Box mr={20}>
+                            <Button variant="blue" onClick={toggle}>
+                              Закрити
+                            </Button>
+                          </Box>
+                          <Button type="submit" variant="green">
+                            Коментувати
+                          </Button>
+                        </Flex>
+                      </Form>
+                    ) : (
+                      <>
+                        <Box pt={2} pb={5}>
+                          {nhsComment}
+                        </Box>
+                        <Flex justifyContent="left">
+                          <Box mr={20}>
+                            <Button variant="blue" onClick={toggle}>
+                              Закрити
+                            </Button>
+                          </Box>
+                          <Box mr={20}>
+                            <Button
+                              variant="red"
+                              onClick={async () => {
+                                await nhsCommentLegalEntity({
+                                  variables: {
+                                    input: { id, nhsComment: "" }
+                                  }
+                                });
+                                toggle();
+                              }}
+                            >
+                              Видалити
+                            </Button>
+                          </Box>
+                          <Box>
+                            <Button variant="green" onClick={toggleForm}>
+                              Редагувати коментар
+                            </Button>
+                          </Box>
+                        </Flex>
+                      </>
+                    )
+                  }
+                </BooleanValue>
+              )}
+            </Mutation>
+          )}
+        </Popup>
+
+        <Line />
+        <DefinitionListView
+          labels={{
+            nhsVerified: "Верифікація НСЗУ"
+          }}
+          data={{
+            nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />
+          }}
+        />
+
+        <Box mt={3}>
+          <Popup
+            variant="green"
+            buttonText="Верифікувати медзаклад"
+            title="Верифікація медзакладу"
+            disabled={!isVerificationActive || nhsVerified}
+          >
+            {toggle => (
+              <Mutation
+                mutation={NhsVerifyLegalEntityMutation}
+                refetchQueries={() => [
+                  {
+                    query: LegalEntityQuery,
+                    variables: { id, first: 10 }
+                  }
+                ]}
+              >
+                {nhsVerifyLegalEntity => (
+                  <Flex justifyContent="center">
+                    <Box mr={20}>
+                      <Button variant="blue" onClick={toggle}>
+                        Повернутися
+                      </Button>
+                    </Box>
+                    <Button
+                      onClick={async () => {
+                        await nhsVerifyLegalEntity({
+                          variables: {
+                            input: { id }
+                          }
+                        });
+                        toggle();
+                      }}
+                      variant="green"
+                    >
+                      Верифікувати медзаклад
+                    </Button>
+                  </Flex>
+                )}
+              </Mutation>
+            )}
+          </Popup>
+        </Box>
+      </OpacityBox>
     </Box>
   );
 };
@@ -605,24 +707,50 @@ const Divisions = ({ id }) => (
   </Ability>
 );
 
-const Popup = ({ variant, buttonText, title, children, render = children }) => (
-  <BooleanValue>
-    {({ value: opened, toggle }) => (
-      <>
-        <Button variant={variant} disabled={opened} onClick={toggle}>
-          {buttonText}
-        </Button>
-        {opened && (
-          <Modal width={760} backdrop>
-            <Heading as="h1" fontWeight="normal" mb={6}>
-              {title}
-            </Heading>
-            {render(toggle)}
-          </Modal>
-        )}
-      </>
-    )}
-  </BooleanValue>
-);
+const Popup = ({
+  variant,
+  buttonText,
+  icon: Icon,
+  title,
+  children,
+  disabled,
+  render = children
+}) => {
+  const ButtonComponent = Icon ? IconButton : Button;
+  return (
+    <BooleanValue>
+      {({ value: opened, toggle }) => (
+        <>
+          <ButtonComponent
+            icon={CommentIcon}
+            variant={variant}
+            disabled={disabled}
+            onClick={toggle}
+          >
+            {buttonText}
+          </ButtonComponent>
+
+          {opened && (
+            <Modal width={760} backdrop textAlign="left">
+              {Icon ? (
+                <Flex pb={4}>
+                  <Icon />
+                  <Box ml={2}>{title}</Box>
+                </Flex>
+              ) : (
+                <Heading as="h1" fontWeight="normal" textAlign="center" mb={6}>
+                  {title}
+                </Heading>
+              )}
+              {render(toggle)}
+            </Modal>
+          )}
+        </>
+      )}
+    </BooleanValue>
+  );
+};
 
 export default Details;
+
+const OpacityBox = system({ is: Box, opacity: 1 });

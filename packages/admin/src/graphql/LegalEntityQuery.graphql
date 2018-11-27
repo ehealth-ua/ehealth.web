@@ -33,6 +33,8 @@ query LegalEntityQuery(
     kveds
     misVerified
     nhsVerified
+    nhsReviewed
+    nhsComment
     medicalServiceProvider {
       licenses {
         licenseNumber
