@@ -5,8 +5,8 @@
   "description": "",
   "main": "dist",
   "scripts": {
-    "prepare": "rm -fr dist && NODE_ENV=production babel src --out-dir dist",
-    "start": "NODE_ENV=development babel src --out-dir dist --watch"
+    "prepare": "rm -fr dist && NODE_ENV=production babel src --out-dir dist --ignore 'src/__tests__/' ",
+    "start": "NODE_ENV=development babel src --out-dir dist --watch --ignore 'src/__tests__/' "
   },
   "dependencies": {
     "@ehealth/icons": "file:../icons",

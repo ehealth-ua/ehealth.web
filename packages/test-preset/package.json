@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@babel/core": "7.1.0",
+    "@babel/core": "7.1.6",
     "@ehealth/env": "file:../env",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.0",

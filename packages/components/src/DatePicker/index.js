@@ -1,6 +1,6 @@
 // @flow
 import * as React from "react";
-import { Switch } from "@ehealth/components";
+import Switch from "../Switch";
 
 import YearPicker from "./YearPicker";
 import DayPicker from "./DayPicker";
