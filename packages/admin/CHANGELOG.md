@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.146.0"></a>
+# [0.146.0](https://github.com/edenlabllc/ehealth.web/compare/v0.145.3...v0.146.0) (2018-11-28)
+
+
+### Bug Fixes
+
+* **admin:** add maxlength prop to the statusReason fields on Decline Contract Request and Terminate Contract pages ([54805c5](https://github.com/edenlabllc/ehealth.web/commit/54805c5))
+
+
+### Features
+
+* **admin:** add symbols left hint, based on maxlength prop ([1cbbd13](https://github.com/edenlabllc/ehealth.web/commit/1cbbd13))
+
+
+
+
+
 <a name="0.145.3"></a>
 ## [0.145.3](https://github.com/edenlabllc/ehealth.web/compare/v0.145.2...v0.145.3) (2018-11-27)
 
