@@ -1,8 +1,12 @@
 import React from "react";
 import { Query } from "react-apollo";
 import { Box, Heading, Text } from "rebass/emotion";
+import { loader } from "graphql.macro";
 import { ITEMS_PER_PAGE } from "../constants/pagination";
-import SearchLegalEntitiesQuery from "../graphql/SearchLegalEntitiesQuery.graphql";
+
+const SearchLegalEntitiesQuery = loader(
+  "../graphql/SearchLegalEntitiesQuery.graphql"
+);
 
 const Home = () => (
   <Query
