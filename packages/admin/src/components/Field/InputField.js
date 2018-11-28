@@ -25,10 +25,15 @@ const InputField = ({
   <Field {...props}>
     {({ input, meta: { state, errored, error } }) => (
       <FieldView.Wrapper is="label">
-        {label && (
+        {(label || input.maxlength) && (
           <FieldView.Header>
             <FieldView.Label>{label}</FieldView.Label>
             {hint && <FieldView.Message>{hint}</FieldView.Message>}
+            {input.maxlength && (
+              <FieldView.Message>
+                Залишилось символів {input.maxlength - input.value.length}
+              </FieldView.Message>
+            )}
           </FieldView.Header>
         )}
 
