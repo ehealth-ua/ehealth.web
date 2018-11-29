@@ -104,29 +104,31 @@ class Nav extends React.Component {
               Звіти
             </Link>
           </NavItem>
-          <li>
-            <ShowMore nav name="Реєстри">
-              <ul>
-                <ShowWithScope scope="register:read">
-                  <NavItem to="registers" activeClassName={styles.active}>
-                    <Link id="registers-nav" to="/registers">
-                      Реєстри
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-                <ShowWithScope scope="register_entry:read">
-                  <NavItem
-                    to="registers-entries"
-                    activeClassName={styles.active}
-                  >
-                    <Link id="registers-entries-nav" to="/registers-entries">
-                      Записи реєстру
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-              </ul>
-            </ShowMore>
-          </li>
+          <ShowWithScope scope={["register:read", "register_entry:read"]}>
+            <li>
+              <ShowMore nav name="Реєстри">
+                <ul>
+                  <ShowWithScope scope="register:read">
+                    <NavItem to="registers" activeClassName={styles.active}>
+                      <Link id="registers-nav" to="/registers">
+                        Реєстри
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                  <ShowWithScope scope="register_entry:read">
+                    <NavItem
+                      to="registers-entries"
+                      activeClassName={styles.active}
+                    >
+                      <Link id="registers-entries-nav" to="/registers-entries">
+                        Записи реєстру
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                </ul>
+              </ShowMore>
+            </li>
+          </ShowWithScope>
           <NavItem to="dictionaries" activeClassName={styles.active}>
             <Link id="dictionaries-nav" to="/dictionaries">
               Словники
@@ -139,130 +141,148 @@ class Nav extends React.Component {
               </Link>
             </NavItem>
           </ShowWithScope>
-          <li>
-            <ShowMore nav name="Медикаменти">
-              <ul>
-                <ShowWithScope scope="innm:read">
-                  <NavItem to="innms" activeClassName={styles.active}>
-                    <Link id="innms-nav" to="/innms">
-                      МНН
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-                <ShowWithScope scope="innm_dosage:read">
-                  <NavItem to="innm-dosages" activeClassName={styles.active}>
-                    <Link id="innm-dosages-nav" to="/innm-dosages">
-                      Лікарська форма
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-                <ShowWithScope scope="medication:read">
-                  <NavItem to="medications" activeClassName={styles.active}>
-                    <Link id="medications-nav" to="/medications">
-                      Торгівельне <br /> найменування
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-              </ul>
-            </ShowMore>
-          </li>
-          <li>
-            <ShowMore nav name="Програми">
-              <ul>
-                <ShowWithScope scope="medical_program:read">
-                  <NavItem
-                    to="medical-programs"
-                    activeClassName={styles.active}
-                  >
-                    <Link id="medical-programs-nav" to="/medical-programs">
-                      Перелік мед. програм
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-                <ShowWithScope scope="program_medication:read">
-                  <NavItem
-                    to="program-medications"
-                    activeClassName={styles.active}
-                  >
-                    <Link
-                      id="program_medications-nav"
-                      to="/program-medications"
+          <ShowWithScope
+            scope={["innm:read", "innm_dosage:read", "medication:read"]}
+          >
+            <li>
+              <ShowMore nav name="Медикаменти">
+                <ul>
+                  <ShowWithScope scope="innm:read">
+                    <NavItem to="innms" activeClassName={styles.active}>
+                      <Link id="innms-nav" to="/innms">
+                        МНН
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                  <ShowWithScope scope="innm_dosage:read">
+                    <NavItem to="innm-dosages" activeClassName={styles.active}>
+                      <Link id="innm-dosages-nav" to="/innm-dosages">
+                        Лікарська форма
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                  <ShowWithScope scope="medication:read">
+                    <NavItem to="medications" activeClassName={styles.active}>
+                      <Link id="medications-nav" to="/medications">
+                        Торгівельне <br /> найменування
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                </ul>
+              </ShowMore>
+            </li>
+          </ShowWithScope>
+          <ShowWithScope
+            scope={["medical_program:read", "program_medication:read"]}
+          >
+            <li>
+              <ShowMore nav name="Програми">
+                <ul>
+                  <ShowWithScope scope="medical_program:read">
+                    <NavItem
+                      to="medical-programs"
+                      activeClassName={styles.active}
                     >
-                      Учасники програм
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-              </ul>
-            </ShowMore>
-          </li>
-          <li>
-            <ShowMore nav name="Рецепти">
-              <ul>
-                <ShowWithScope scope="medication_request:read">
-                  <NavItem
-                    to="medication-requests"
-                    activeClassName={styles.active}
-                  >
-                    <Link
-                      id="medication-requests-nav"
-                      to="/medication-requests"
+                      <Link id="medical-programs-nav" to="/medical-programs">
+                        Перелік мед. програм
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                  <ShowWithScope scope="program_medication:read">
+                    <NavItem
+                      to="program-medications"
+                      activeClassName={styles.active}
                     >
-                      Рецепти
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-                <ShowWithScope scope="medication_dispense:read">
-                  <NavItem
-                    to="medication-dispenses"
-                    activeClassName={styles.active}
-                  >
-                    <Link
-                      id="medication-dispenses-nav"
-                      to="/medication-dispenses"
+                      <Link
+                        id="program_medications-nav"
+                        to="/program-medications"
+                      >
+                        Учасники програм
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                </ul>
+              </ShowMore>
+            </li>
+          </ShowWithScope>
+          <ShowWithScope
+            scope={[
+              "medication_request:read",
+              "medication_dispense:read",
+              "reimbursement_report:download"
+            ]}
+          >
+            <li>
+              <ShowMore nav name="Рецепти">
+                <ul>
+                  <ShowWithScope scope="medication_request:read">
+                    <NavItem
+                      to="medication-requests"
+                      activeClassName={styles.active}
                     >
-                      Відпуски рецептів
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-                <ShowWithScope scope="reimbursement_report:download">
-                  <NavItem
-                    to="reimbursement-report"
-                    activeClassName={styles.active}
-                  >
-                    <Link
-                      id="reimbursement-report-nav"
-                      to="/reimbursement-report"
+                      <Link
+                        id="medication-requests-nav"
+                        to="/medication-requests"
+                      >
+                        Рецепти
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                  <ShowWithScope scope="medication_dispense:read">
+                    <NavItem
+                      to="medication-dispenses"
+                      activeClassName={styles.active}
                     >
-                      Звіт
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-              </ul>
-            </ShowMore>
-          </li>
-          <li>
-            <ShowMore nav name="Користувачі">
-              <ul>
-                <ShowWithScope scope="bl_user:read">
-                  <NavItem
-                    to="black-list-users"
-                    activeClassName={styles.active}
-                  >
-                    <Link id="black_list_users" to="/black-list-users">
-                      Заблоковані <br /> користувачі
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-                <ShowWithScope scope="party_user:read">
-                  <NavItem to="party-users" activeClassName={styles.active}>
-                    <Link id="party_users" to="/party-users">
-                      Облікові записи
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
-              </ul>
-            </ShowMore>
-          </li>
+                      <Link
+                        id="medication-dispenses-nav"
+                        to="/medication-dispenses"
+                      >
+                        Відпуски рецептів
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                  <ShowWithScope scope="reimbursement_report:download">
+                    <NavItem
+                      to="reimbursement-report"
+                      activeClassName={styles.active}
+                    >
+                      <Link
+                        id="reimbursement-report-nav"
+                        to="/reimbursement-report"
+                      >
+                        Звіт
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                </ul>
+              </ShowMore>
+            </li>
+          </ShowWithScope>
+          <ShowWithScope scope={["bl_user:read", "party_user:read"]}>
+            <li>
+              <ShowMore nav name="Користувачі">
+                <ul>
+                  <ShowWithScope scope="bl_user:read">
+                    <NavItem
+                      to="black-list-users"
+                      activeClassName={styles.active}
+                    >
+                      <Link id="black_list_users" to="/black-list-users">
+                        Заблоковані <br /> користувачі
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                  <ShowWithScope scope="party_user:read">
+                    <NavItem to="party-users" activeClassName={styles.active}>
+                      <Link id="party_users" to="/party-users">
+                        Облікові записи
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                </ul>
+              </ShowMore>
+            </li>
+          </ShowWithScope>
           <ShowWithScope scope="person:reset_authentication_method">
             <NavItem
               to="reset-authentication-method"
@@ -278,37 +298,38 @@ class Nav extends React.Component {
               </Link>
             </NavItem>
           </ShowWithScope>
-
-          <li>
-            <ShowMore nav name="Договори">
-              <ul>
-                <ShowWithScope scope="contract:read">
-                  <NavItem to="contracts" activeClassName={styles.active}>
-                    <ExternalLink
-                      id="contracts-nav"
-                      href={`${REACT_APP_ADMIN_URL}/contracts/search`}
+          <ShowWithScope scope={["contract:read", "contract_request:read"]}>
+            <li>
+              <ShowMore nav name="Договори">
+                <ul>
+                  <ShowWithScope scope="contract:read">
+                    <NavItem to="contracts" activeClassName={styles.active}>
+                      <ExternalLink
+                        id="contracts-nav"
+                        href={`${REACT_APP_ADMIN_URL}/contracts/search`}
+                      >
+                        Перелік договорів
+                      </ExternalLink>
+                    </NavItem>
+                  </ShowWithScope>
+                  <ShowWithScope scope="contract_request:read">
+                    <NavItem
+                      to="contract-requests"
+                      activeClassName={styles.active}
                     >
-                      Перелік договорів
-                    </ExternalLink>
-                  </NavItem>
-                </ShowWithScope>
-                <ShowWithScope scope="contract_request:read">
-                  <NavItem
-                    to="contract-requests"
-                    activeClassName={styles.active}
-                  >
-                    <ExternalLink
-                      id="contract-requests-nav"
-                      href={`${REACT_APP_ADMIN_URL}/contract-requests/search`}
-                    >
-                      Заяви на укладення
-                      <br /> договору
-                    </ExternalLink>
-                  </NavItem>
-                </ShowWithScope>
-              </ul>
-            </ShowMore>
-          </li>
+                      <ExternalLink
+                        id="contract-requests-nav"
+                        href={`${REACT_APP_ADMIN_URL}/contract-requests/search`}
+                      >
+                        Заяви на укладення
+                        <br /> договору
+                      </ExternalLink>
+                    </NavItem>
+                  </ShowWithScope>
+                </ul>
+              </ShowMore>
+            </li>
+          </ShowWithScope>
           <ShowWithScope scope="legal_entity:read">
             <NavItem to="clinics" activeClassName={styles.active}>
               <ExternalLink
@@ -319,32 +340,34 @@ class Nav extends React.Component {
               </ExternalLink>
             </NavItem>
           </ShowWithScope>
-          <li>
-            <ShowMore
-              nav
-              name={
-                <>
-                  Задачі в процесі
-                  <br />
-                  виконання
-                </>
-              }
-            >
-              <ul>
-                <ShowWithScope scope="legal_entity:merge">
-                  <NavItem to="registers" activeClassName={styles.active}>
-                    <ExternalLink
-                      id="registers-nav"
-                      href={`${REACT_APP_ADMIN_URL}/legal-entity-merge-jobs/search/related`}
-                    >
-                      Підпорядкування
-                      <br /> медзакладів
-                    </ExternalLink>
-                  </NavItem>
-                </ShowWithScope>
-              </ul>
-            </ShowMore>
-          </li>
+          <ShowWithScope scope="legal_entity:merge">
+            <li>
+              <ShowMore
+                nav
+                name={
+                  <>
+                    Задачі в процесі
+                    <br />
+                    виконання
+                  </>
+                }
+              >
+                <ul>
+                  <ShowWithScope scope="legal_entity:merge">
+                    <NavItem to="registers" activeClassName={styles.active}>
+                      <ExternalLink
+                        id="registers-nav"
+                        href={`${REACT_APP_ADMIN_URL}/legal-entity-merge-jobs/search/related`}
+                      >
+                        Підпорядкування
+                        <br /> медзакладів
+                      </ExternalLink>
+                    </NavItem>
+                  </ShowWithScope>
+                </ul>
+              </ShowMore>
+            </li>
+          </ShowWithScope>
         </ul>
         <ul className={styles.down}>
           <li>
