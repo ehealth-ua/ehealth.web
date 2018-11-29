@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "lerna run start --parallel",
-    "prepare": "lerna run babel",
+    "prepare": "lerna run transpile",
     "pretest": "npm run prepare",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest --config jest.config.unit.js",
