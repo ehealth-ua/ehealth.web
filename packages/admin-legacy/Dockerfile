@@ -2,6 +2,7 @@ FROM node:10-alpine as builder
 ENV NODE_ENV production
 RUN apk --no-cache add build-base python
 RUN npm install npm@6 --global --quiet
+RUN npm set unsafe-perm true
 RUN mkdir -p /opt/target
 WORKDIR /opt/src
 COPY . .

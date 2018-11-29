@@ -5,7 +5,7 @@
   "description": "",
   "main": "dist",
   "scripts": {
-    "prepare": "rm -fr dist && NODE_ENV=production babel src --out-dir dist",
+    "babel": "rm -fr dist && NODE_ENV=production babel src --out-dir dist",
     "start": "NODE_ENV=development babel src --out-dir dist --watch"
   }
 }

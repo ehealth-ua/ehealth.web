@@ -124,10 +124,7 @@ const Details = ({ id }) => (
                           <ModalSelect submitted={getFullName(party)} id={id} />
                         }
                         IN_PROCESS={
-                          <ModalSelect
-                            submitted={getFullName(party)}
-                            id={id + 1}
-                          />
+                          <ModalSelect submitted={getFullName(party)} id={id} />
                         }
                         default={assignee && getFullName(party)}
                       />

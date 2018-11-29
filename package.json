@@ -1,6 +1,8 @@
 {
   "private": true,
   "dependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
     "@ehealth/admin": "file:packages/admin",
     "@ehealth/admin-legacy": "file:packages/admin-legacy",
     "@ehealth/auth": "file:packages/auth",
@@ -15,12 +17,7 @@
     "npm-package-filter": "^0.1.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/preset-env": "^7.1.6",
-    "@babel/preset-flow": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
     "@ehealth/scripts": "file:packages/scripts",
     "@ehealth/test-preset": "file:packages/test-preset",
     "@lingui/cli": "^2.7.2",
@@ -37,6 +34,8 @@
   },
   "scripts": {
     "start": "lerna run start --parallel",
+    "prepare": "lerna run babel",
+    "pretest": "npm run prepare",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest --config jest.config.unit.js",
     "test:e2e": "jest --config jest.config.e2e.js",
