@@ -17,7 +17,8 @@ app.get("/polyfill:min(.min)?.js", (req, res) => {
       default: {},
       es6: {},
       es7: {},
-      es2017: {}
+      es2017: {},
+      fetch: {}
     },
     stream: true
   });
