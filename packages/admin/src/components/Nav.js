@@ -177,7 +177,7 @@ const Nav = () => (
           <NavSection title="Договори">
             <Ability action="read" resource="contract_request">
               <NavLink to="/contracts">Перелік договорів</NavLink>
-              <NavLink to="/contract-requests">
+              <NavLink to="/capitation-contract-requests">
                 Заяви на укладення договору
               </NavLink>
             </Ability>

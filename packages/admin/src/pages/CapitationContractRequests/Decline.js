@@ -18,8 +18,8 @@ import DefinitionListView from "../../components/DefinitionListView";
 
 import env from "../../env";
 
-const ContractRequestQuery = loader(
-  "../../graphql/ContractRequestQuery.graphql"
+const CapitationContractRequestQuery = loader(
+  "../../graphql/CapitationContractRequestQuery.graphql"
 );
 const DeclineContractRequestMutation = loader(
   "../../graphql/DeclineContractRequestMutation.graphql"
@@ -46,8 +46,8 @@ const Decline = ({
       </Box>
       <LocationParams>
         {({ locationParams, setLocationParams }) => (
-          <Query query={ContractRequestQuery} variables={{ id }}>
-            {({ loading, error, data: { contractRequest } }) => {
+          <Query query={CapitationContractRequestQuery} variables={{ id }}>
+            {({ loading, error, data: { capitationContractRequest } }) => {
               if (loading) return "Loading...";
               if (error) return `Error! ${error.message}`;
 
@@ -59,7 +59,7 @@ const Decline = ({
                   name,
                   edrpou
                 }
-              } = contractRequest;
+              } = capitationContractRequest;
 
               return (
                 <Box m={5}>
@@ -94,7 +94,7 @@ const Decline = ({
                     <Reason
                       path="/"
                       onSubmit={setLocationParams}
-                      data={contractRequest}
+                      data={capitationContractRequest}
                     />
                     <Sign path="/sign" />
                   </Router>
@@ -156,12 +156,12 @@ const Sign = ({
     state: { base }
   }
 }) => (
-  <Query query={ContractRequestQuery} variables={{ id }}>
+  <Query query={CapitationContractRequestQuery} variables={{ id }}>
     {({
       loading,
       error,
       data: {
-        contractRequest: { toDeclineContent }
+        capitationContractRequest: { toDeclineContent }
       }
     }) => (
       <Signer.Parent
@@ -173,7 +173,7 @@ const Sign = ({
             mutation={DeclineContractRequestMutation}
             refetchQueries={() => [
               {
-                query: ContractRequestQuery,
+                query: CapitationContractRequestQuery,
                 variables: { id }
               }
             ]}

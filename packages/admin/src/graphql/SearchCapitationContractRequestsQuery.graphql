@@ -1,12 +1,12 @@
-query SearchContractRequestsQuery(
-  $filter: ContractRequestFilter
-  $orderBy: ContractRequestOrderBy
+query SearchCapitationContractRequestsQuery(
+  $filter: CapitationContractRequestFilter
+  $orderBy: CapitationContractRequestOrderBy
   $before: String
   $after: String
   $first: Int
   $last: Int
 ) {
-  contractRequests(
+  capitationContractRequests(
     first: $first
     filter: $filter
     orderBy: $orderBy

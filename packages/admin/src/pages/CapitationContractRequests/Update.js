@@ -20,8 +20,8 @@ import { SearchIcon } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
 import STATUSES from "../../helpers/statuses";
 
-const ContractRequestQuery = loader(
-  "../../graphql/ContractRequestQuery.graphql"
+const CapitationContractRequestQuery = loader(
+  "../../graphql/CapitationContractRequestQuery.graphql"
 );
 const EmployeesQuery = loader("../../graphql/EmployeesQuery.graphql");
 const UpdateContractRequestMutation = loader(
@@ -42,7 +42,7 @@ const Update = ({ id }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
         <Query
-          query={ContractRequestQuery}
+          query={CapitationContractRequestQuery}
           variables={{
             id
           }}
@@ -50,7 +50,7 @@ const Update = ({ id }) => (
           {({ loading, error, data }) => {
             if (loading) return "Loading...";
             if (error) return `Error! ${error.message}`;
-            const { contractRequest } = data;
+            const { capitationContractRequest } = data;
             const {
               status,
               databaseId,
@@ -65,7 +65,7 @@ const Update = ({ id }) => (
               nhsSignerBase,
               nhsSigner,
               miscellaneous
-            } = contractRequest;
+            } = capitationContractRequest;
 
             return (
               <>
@@ -108,7 +108,7 @@ const Update = ({ id }) => (
                     }}
                     locationParams={locationParams}
                     onSubmit={setLocationParams}
-                    data={contractRequest}
+                    data={capitationContractRequest}
                   />
                 </Router>
               </>
@@ -154,7 +154,7 @@ const UpdateContractRequest = ({
               mutation={UpdateContractRequestMutation}
               refetchQueries={() => [
                 {
-                  query: ContractRequestQuery,
+                  query: CapitationContractRequestQuery,
                   variables: { id }
                 }
               ]}

@@ -102,7 +102,9 @@ const Details = ({ id }) => (
                   data={{
                     databaseId,
                     contractRequestId: (
-                      <Link to={`/contract-requests/${contractRequestId}`}>
+                      <Link
+                        to={`/capitation-contract-requests/${contractRequestId}`}
+                      >
                         {contractRequestDatabaseId}
                       </Link>
                     ),

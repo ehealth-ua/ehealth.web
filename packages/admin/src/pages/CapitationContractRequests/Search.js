@@ -23,20 +23,19 @@ import Badge from "../../components/Badge";
 import STATUSES from "../../helpers/statuses";
 import {
   EDRPOU_PATTERN,
-  CONTRACT_PATTERN,
   SEARCH_REQUEST_PATTERN
 } from "../../constants/contractRequests";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
-const SearchContractRequestsQuery = loader(
-  "../../graphql/SearchContractRequestsQuery.graphql"
+const SearchCapitationContractRequestsQuery = loader(
+  "../../graphql/SearchCapitationContractRequestsQuery.graphql"
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
   ([name, value]) => ({ name, value })
 );
 
-const Search = ({ uri }) => (
+const Search = () => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
       Перелік заяв на укладення договору
@@ -65,7 +64,7 @@ const Search = ({ uri }) => (
         return (
           <>
             <Query
-              query={SearchContractRequestsQuery}
+              query={SearchCapitationContractRequestsQuery}
               fetchPolicy="network-only"
               variables={{
                 first:
@@ -91,8 +90,8 @@ const Search = ({ uri }) => (
                 loading,
                 error,
                 data: {
-                  contractRequests: {
-                    nodes: contractRequests = [],
+                  capitationContractRequests: {
+                    nodes: capitationContractRequests = [],
                     pageInfo
                   } = {}
                 } = {},
@@ -100,16 +99,16 @@ const Search = ({ uri }) => (
               }) => {
                 return (
                   <>
-                    <SearchContractRequestsForm
+                    <SearchCapitationContractRequestsForm
                       initialValues={locationParams}
                       onSubmit={setLocationParams}
                       refetch={refetch}
                     />
                     {!error &&
-                      contractRequests.length > 0 && (
+                      capitationContractRequests.length > 0 && (
                         <>
                           <Table
-                            data={contractRequests}
+                            data={capitationContractRequests}
                             header={{
                               databaseId: "ID заяви на укладення договору",
                               contractNumber: "Номер договору",
@@ -131,7 +130,7 @@ const Search = ({ uri }) => (
                               },
                               assignee,
                               insertedAt,
-                              ...contractRequests
+                              ...capitationContractRequests
                             }) => ({
                               edrpou,
                               contractorLegalEntityName,
@@ -142,7 +141,7 @@ const Search = ({ uri }) => (
                               assigneeName: assignee
                                 ? getFullName(assignee.party)
                                 : undefined,
-                              ...contractRequests,
+                              ...capitationContractRequests,
                               status: (
                                 <Badge
                                   type="CONTRACT_REQUEST"
@@ -171,7 +170,7 @@ const Search = ({ uri }) => (
                                 orderBy: stringifySortingParams(sortingParams)
                               })
                             }
-                            tableName="contractrequests/search"
+                            tableName="capitationContractRequests/search"
                             whiteSpaceNoWrap={["databaseId"]}
                           />
                           <Pagination {...pageInfo} />
@@ -190,7 +189,11 @@ const Search = ({ uri }) => (
 
 export default Search;
 
-const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
+const SearchCapitationContractRequestsForm = ({
+  initialValues,
+  onSubmit,
+  refetch
+}) => (
   <Form onSubmit={onSubmit} initialValues={initialValues}>
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>

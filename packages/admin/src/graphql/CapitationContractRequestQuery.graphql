@@ -1,5 +1,5 @@
-query ContractRequestQuery($id: ID!) {
-  contractRequest(id: $id) {
+query CapitationCapitationContractRequestQuery($id: ID!) {
+  capitationContractRequest(id: $id) {
     id
     databaseId
     status

@@ -40,8 +40,8 @@ import { SearchIcon } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
 import WEEK_DAYS from "../../helpers/weekDays";
 
-const ContractRequestQuery = loader(
-  "../../graphql/ContractRequestQuery.graphql"
+const CapitationContractRequestQuery = loader(
+  "../../graphql/CapitationContractRequestQuery.graphql"
 );
 const AssignContractRequestMutation = loader(
   "../../graphql/AssignContractRequestMutation.graphql"
@@ -49,7 +49,7 @@ const AssignContractRequestMutation = loader(
 const EmployeesQuery = loader("../../graphql/EmployeesQuery.graphql");
 
 const Details = ({ id }) => (
-  <Query query={ContractRequestQuery} variables={{ id }}>
+  <Query query={CapitationContractRequestQuery} variables={{ id }}>
     {({ loading, error, data }) => {
       if (loading) return "Loading...";
       if (error) return `Error! ${error.message}`;
@@ -77,7 +77,7 @@ const Details = ({ id }) => (
         attachedDocuments,
         previousRequest,
         statusReason
-      } = data.contractRequest;
+      } = data.capitationContractRequest;
 
       const { party = "" } = assignee ? assignee : {};
 
@@ -86,7 +86,7 @@ const Details = ({ id }) => (
           <Box p={6}>
             <Box py={10}>
               <Breadcrumbs.List>
-                <Breadcrumbs.Item to="/contract-requests">
+                <Breadcrumbs.Item to="/capitation-contract-requests">
                   Перелік заяв
                 </Breadcrumbs.Item>
                 <Breadcrumbs.Item>Деталі заяви</Breadcrumbs.Item>
@@ -105,7 +105,9 @@ const Details = ({ id }) => (
                     id: databaseId,
                     previousRequestId: previousRequest && (
                       <LinkComponent
-                        to={`/contract-requests/${previousRequest.id}`}
+                        to={`/capitation-contract-requests/${
+                          previousRequest.id
+                        }`}
                       >
                         {previousRequest.databaseId}
                       </LinkComponent>
@@ -412,7 +414,7 @@ const Divisions = ({ contractorDivisions }) =>
           .filter(a => a.type === "RESIDENCE")
           .map((item, key) => <AddressView data={item} key={key} />)
       })}
-      tableName="/contract-requests/divisions"
+      tableName="/capitation-contract-requests/divisions"
       hiddenFields="workingHours"
     />
   );
@@ -446,7 +448,7 @@ const Employees = ({ contractorEmployeeDivisions }) =>
           .speciality,
         ...contractorEmployeeDivisions
       })}
-      tableName="/contract-requests/employees"
+      tableName="/capitation-contract-requests/employees"
       whiteSpaceNoWrap={["databaseId"]}
     />
   );
@@ -481,7 +483,7 @@ const ExternalContractorsTable = ({ data }) => (
       issuedAt: "Дата укладення",
       expiresAt: "Дата закінчення"
     }}
-    tableName="/contract-requests/external-contractors"
+    tableName="/capitation-contract-requests/external-contractors"
     tableBody={({
       columns,
       data,
@@ -555,7 +557,7 @@ const ExternalContractorsTable = ({ data }) => (
                               division: { name },
                               medicalService
                             }) => ({ name, medicalService })}
-                            tableName="/contract-requests/ExternalContractorsTable"
+                            tableName="/capitation-contract-requests/ExternalContractorsTable"
                             headless
                           />
                         </TableCell>
@@ -605,7 +607,7 @@ const ModalSelect = ({ submitted, id }) => (
               mutation={AssignContractRequestMutation}
               refetchQueries={() => [
                 {
-                  query: ContractRequestQuery,
+                  query: CapitationContractRequestQuery,
                   variables: { id }
                 }
               ]}

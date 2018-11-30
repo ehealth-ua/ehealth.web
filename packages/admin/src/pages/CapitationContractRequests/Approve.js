@@ -5,7 +5,6 @@ import { Flex, Box } from "rebass/emotion";
 import system from "system-components/emotion";
 import { loader } from "graphql.macro";
 
-import { LocationParams } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
@@ -19,8 +18,8 @@ import STATUSES from "../../helpers/statuses";
 
 import env from "../../env";
 
-const ContractRequestQuery = loader(
-  "../../graphql/ContractRequestQuery.graphql"
+const CapitationContractRequestQuery = loader(
+  "../../graphql/CapitationContractRequestQuery.graphql"
 );
 const ApproveContractRequestMutation = loader(
   "../../graphql/ApproveContractRequestMutation.graphql"
@@ -36,19 +35,19 @@ const Approve = ({ id }) => (
     </Box>
 
     <Query
-      query={ContractRequestQuery}
+      query={CapitationContractRequestQuery}
       variables={{
         id
       }}
     >
-      {({ loading, error, data: { contractRequest } = {} }) => {
+      {({ loading, error, data: { capitationContractRequest } = {} }) => {
         if (loading) return "Loading...";
         if (error) return `Error! ${error.message}`;
         const {
           status,
           databaseId,
           contractorLegalEntity: { databaseId: legalEntityId, name, edrpou }
-        } = contractRequest;
+        } = capitationContractRequest;
 
         return (
           <>
@@ -79,7 +78,10 @@ const Approve = ({ id }) => (
               />
             </OpacityBox>
             <Router>
-              <ApproveContractRequest path="/" data={contractRequest} />
+              <ApproveContractRequest
+                path="/"
+                data={capitationContractRequest}
+              />
             </Router>
           </>
         );
@@ -93,7 +95,7 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
     nhsSigner,
     nhsContractPrice,
     nhsPaymentMethod,
-    ...contractRequest
+    ...capitationContractRequest
   } = data;
   return (
     <Box m={5}>
@@ -111,7 +113,7 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
           nhsSigner: nhsSigner && getFullName(nhsSigner.party),
           nhsContractPrice: `${nhsContractPrice} грн`,
           nhsPaymentMethod: STATUSES.NHS_PAYMENT_METHOD[nhsPaymentMethod],
-          ...contractRequest
+          ...capitationContractRequest
         }}
         labelWidth="300px"
         marginBetween={2}
@@ -136,7 +138,7 @@ const Sign = ({ id, data: { toApproveContent }, navigate }) => (
         mutation={ApproveContractRequestMutation}
         refetchQueries={() => [
           {
-            query: ContractRequestQuery,
+            query: CapitationContractRequestQuery,
             variables: { id }
           }
         ]}

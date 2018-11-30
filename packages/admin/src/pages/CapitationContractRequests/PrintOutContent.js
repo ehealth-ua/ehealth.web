@@ -16,14 +16,14 @@ import env from "../../env";
 const SignContractRequestMutation = loader(
   "../../graphql/SignContractRequestMutation.graphql"
 );
-const ContractRequestQuery = loader(
-  "../../graphql/ContractRequestQuery.graphql"
+const CapitationContractRequestQuery = loader(
+  "../../graphql/CapitationContractRequestQuery.graphql"
 );
 
 const PrintOutContent = ({ id, navigate, ...props }) => {
   return (
     <Query
-      query={ContractRequestQuery}
+      query={CapitationContractRequestQuery}
       variables={{
         id
       }}
@@ -32,7 +32,11 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
         if (loading) return "Loading...";
         if (error) return `Error! ${error.message}`;
         const {
-          contractRequest: { printoutContent: content, status, toSignContent }
+          capitationContractRequest: {
+            printoutContent: content,
+            status,
+            toSignContent
+          }
         } = data;
         return (
           <>
@@ -65,7 +69,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                             mutation={SignContractRequestMutation}
                             refetchQueries={() => [
                               {
-                                query: ContractRequestQuery,
+                                query: CapitationContractRequestQuery,
                                 variables: { id }
                               }
                             ]}
