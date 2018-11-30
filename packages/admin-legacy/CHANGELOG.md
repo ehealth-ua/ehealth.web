@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.147.0"></a>
+# [0.147.0](https://github.com/edenlabllc/ehealth.web/compare/v0.146.1...v0.147.0) (2018-11-30)
+
+
+### Bug Fixes
+
+* add additional flag to npm config, move babel/cli to dependencies, add pretest and prepare commands ([dabfc86](https://github.com/edenlabllc/ehealth.web/commit/dabfc86))
+* remove react-app-polyfill ([710a7bd](https://github.com/edenlabllc/ehealth.web/commit/710a7bd))
+
+
+### Features
+
+* update CRA, refactor all related code ([4c43df8](https://github.com/edenlabllc/ehealth.web/commit/4c43df8))
+
+
+
+
+
 <a name="0.146.1"></a>
 ## [0.146.1](https://github.com/edenlabllc/ehealth.web/compare/v0.146.0...v0.146.1) (2018-11-29)
 

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.147.0"></a>
+# [0.147.0](https://github.com/edenlabllc/ehealth.web/compare/v0.146.1...v0.147.0) (2018-11-30)
+
+
+### Bug Fixes
+
+* **admin:** add graphql loader to home page ([bbf0583](https://github.com/edenlabllc/ehealth.web/commit/bbf0583))
+* add additional flag to npm config, move babel/cli to dependencies, add pretest and prepare commands ([dabfc86](https://github.com/edenlabllc/ehealth.web/commit/dabfc86))
+* fix unit tests ([1ffe29e](https://github.com/edenlabllc/ehealth.web/commit/1ffe29e))
+* remove react-app-polyfill ([710a7bd](https://github.com/edenlabllc/ehealth.web/commit/710a7bd))
+* rename scripts ([e6fdf27](https://github.com/edenlabllc/ehealth.web/commit/e6fdf27))
+
+
+### Features
+
+* **admin:** setup localization ([78ec846](https://github.com/edenlabllc/ehealth.web/commit/78ec846))
+* update CRA, refactor all related code ([4c43df8](https://github.com/edenlabllc/ehealth.web/commit/4c43df8))
+
+
+
+
+
 <a name="0.146.1"></a>
 ## [0.146.1](https://github.com/edenlabllc/ehealth.web/compare/v0.146.0...v0.146.1) (2018-11-29)
 
