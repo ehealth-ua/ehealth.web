@@ -1,10 +1,12 @@
 import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
+import { loader } from "graphql.macro";
 import { Flex, Box } from "rebass/emotion";
 import system from "system-components/emotion";
 import { BooleanValue } from "react-values";
 import isEmpty from "lodash/isEmpty";
+import { FieldArray } from "react-final-form-arrays";
 
 import { Form, Validation } from "@ehealth/components";
 import {
@@ -25,10 +27,12 @@ import {
 } from "../../components/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
 
-import DictionariesQuery from "../../graphql/SearchDictionariesQuery.graphql";
-import UpdateDictionaryMutation from "../../graphql/UpdateDictionaryMutation.graphql";
-
-import { FieldArray } from "react-final-form-arrays";
+const DictionariesQuery = loader(
+  "../../graphql/SearchDictionariesQuery.graphql"
+);
+const UpdateDictionaryMutation = loader(
+  "../../graphql/UpdateDictionaryMutation.graphql"
+);
 
 const Details = ({ name }) => (
   <Query query={DictionariesQuery} variables={{ first: 1, filter: { name } }}>

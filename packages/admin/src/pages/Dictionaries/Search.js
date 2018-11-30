@@ -1,20 +1,23 @@
 import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
-import { Query } from "react-apollo";
-import { Form, LocationParams } from "@ehealth/components";
-import { AdminSearchIcon } from "@ehealth/icons";
-
 import isEmpty from "lodash/isEmpty";
+import { Query } from "react-apollo";
+import { loader } from "graphql.macro";
+
+import { Form, LocationParams } from "@ehealth/components";
 
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import Table from "../../components/Table";
 import Link from "../../components/Link";
 
-import DictionariesQuery from "../../graphql/SearchDictionariesQuery.graphql";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
-const Search = ({ uri }) => (
+const DictionariesQuery = loader(
+  "../../graphql/SearchDictionariesQuery.graphql"
+);
+
+const Search = () => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
       Словники
