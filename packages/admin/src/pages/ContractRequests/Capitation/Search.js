@@ -12,7 +12,7 @@ import {
   parseSortingParams,
   stringifySortingParams
 } from "@ehealth/utils";
-import { AdminSearchIcon } from "@ehealth/icons";
+import { AdminSearchIcon, RemoveItemIcon } from "@ehealth/icons";
 
 import ContractRequestsNav from "../ContractRequestsNav";
 
@@ -21,7 +21,7 @@ import Badge from "../../../components/Badge";
 import Link from "../../../components/Link";
 import Pagination from "../../../components/Pagination";
 import * as Field from "../../../components/Field";
-import Button, { ResetButton } from "../../../components/Button";
+import Button, { IconButton } from "../../../components/Button";
 
 import {
   EDRPOU_PATTERN,
@@ -248,7 +248,8 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
         <Button variant="blue">Шукати</Button>
       </Box>
       <Box px={1}>
-        <ResetButton
+        <IconButton
+          icon={RemoveItemIcon}
           type="reset"
           disabled={
             isEmpty(initialValues.filter) && isEmpty(initialValues.date)
@@ -268,7 +269,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
           }}
         >
           Скинути пошук
-        </ResetButton>
+        </IconButton>
       </Box>
     </Flex>
   </Form>

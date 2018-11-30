@@ -1,9 +1,8 @@
 import React from "react";
 import { Box } from "rebass/emotion";
 import system from "system-components/emotion";
-import { RemoveItemIcon } from "@ehealth/icons";
 
-export const IconButton = ({ children, icon: Icon = Reset, ...props }) => (
+export const IconButton = ({ children, icon: Icon, ...props }) => (
   <Container {...props}>
     <Icon />
     <Box ml="2">{children}</Box>
@@ -43,13 +42,6 @@ const Container = system(
     whiteSpace: "nowrap"
   }
 );
-
-const Reset = system({
-  is: RemoveItemIcon,
-  color: "rockmanBlue",
-  minWidth: "8px",
-  mr: 2
-});
 
 Button.displayName = "Button";
 

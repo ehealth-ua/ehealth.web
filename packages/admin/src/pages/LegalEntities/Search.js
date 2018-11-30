@@ -8,7 +8,12 @@ import isEmpty from "lodash/isEmpty";
 
 import { Form, LocationParams, Validation } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
-import { PositiveIcon, AdminSearchIcon, NegativeIcon } from "@ehealth/icons";
+import {
+  PositiveIcon,
+  AdminSearchIcon,
+  NegativeIcon,
+  RemoveItemIcon
+} from "@ehealth/icons";
 
 import STATUSES from "../../helpers/statuses";
 import * as Field from "../../components/Field";
@@ -17,7 +22,7 @@ import Table from "../../components/Table";
 import Link from "../../components/Link";
 import AddressView from "../../components/AddressView";
 import Badge from "../../components/Badge";
-import Button, { IconButton as ResetButton } from "../../components/Button";
+import Button, { IconButton } from "../../components/Button";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
@@ -312,7 +317,8 @@ const SearchLegalEntitiesForm = ({
         <Button variant="blue">Шукати</Button>
       </Box>
       <Box px={1}>
-        <ResetButton
+        <IconButton
+          icon={RemoveItemIcon}
           type="reset"
           disabled={isEmpty(initialValues.filter)}
           onClick={() => {
@@ -325,7 +331,7 @@ const SearchLegalEntitiesForm = ({
           }}
         >
           Скинути пошук
-        </ResetButton>
+        </IconButton>
       </Box>
     </Flex>
   </Form>

@@ -213,7 +213,6 @@ const Details = ({ id }) => (
                 ownerPropertyType={ownerPropertyType}
                 kveds={kveds}
                 misVerified={misVerified}
-                nhsVerified={nhsVerified}
               />
               <License
                 path="/licenses"
@@ -300,33 +299,33 @@ const License = ({
   nhsVerified,
   nhsComment
 }) => {
-  if (!license) return null;
-
-  const { accreditation, licenses } = license;
+  const { accreditation, licenses } = license || {};
   const licensesData = licenses ? licenses.filter(item => item) : [];
 
   return (
     <Box p={5}>
-      <Heading fontSize="1" fontWeight="normal" mb={5}>
-        Акредитація
-      </Heading>
       {!isEmpty(accreditation) && (
-        <DefinitionListView
-          labels={{
-            category: "Категорія",
-            validateDate: "Термін дії",
-            orderDate: "Дата наказу",
-            orderNo: "Номер наказу"
-          }}
-          data={{
-            ...accreditation,
-            validateDate: `з ${accreditation.issuedDate} ${
-              accreditation.expiryDate ? `по ${accreditation.expiryDate}` : ""
-            }`
-          }}
-        />
+        <>
+          <Heading fontSize="1" fontWeight="normal" mb={5}>
+            Акредитація
+          </Heading>
+          <DefinitionListView
+            labels={{
+              category: "Категорія",
+              validateDate: "Термін дії",
+              orderDate: "Дата наказу",
+              orderNo: "Номер наказу"
+            }}
+            data={{
+              ...accreditation,
+              validateDate: `з ${accreditation.issuedDate} ${
+                accreditation.expiryDate ? `по ${accreditation.expiryDate}` : ""
+              }`
+            }}
+          />
+          <Line />
+        </>
       )}
-      <Line />
       {!isEmpty(licensesData) && (
         <>
           <Heading fontSize="1" fontWeight="normal" mb={5}>
@@ -387,7 +386,7 @@ const License = ({
                       >
                         <Field.Textarea
                           name="nhsComment"
-                          placeholder="Введіть текст коментаря"
+                          placeholder="Введіть коментар"
                           rows={5}
                         />
                         <Flex justifyContent="left">
@@ -453,47 +452,23 @@ const License = ({
         />
 
         <Box mt={3}>
-          <Popup
-            variant="green"
-            buttonText="Верифікувати медзаклад"
-            title="Верифікація медзакладу"
-            disabled={!isVerificationActive || nhsVerified}
-          >
-            {toggle => (
-              <Mutation
-                mutation={NhsVerifyLegalEntityMutation}
-                refetchQueries={() => [
-                  {
-                    query: LegalEntityQuery,
-                    variables: { id, first: 10 }
-                  }
-                ]}
-              >
-                {nhsVerifyLegalEntity => (
-                  <Flex justifyContent="center">
-                    <Box mr={20}>
-                      <Button variant="blue" onClick={toggle}>
-                        Повернутися
-                      </Button>
-                    </Box>
-                    <Button
-                      onClick={async () => {
-                        await nhsVerifyLegalEntity({
-                          variables: {
-                            input: { id }
-                          }
-                        });
-                        toggle();
-                      }}
-                      variant="green"
-                    >
-                      Верифікувати медзаклад
-                    </Button>
-                  </Flex>
-                )}
-              </Mutation>
-            )}
-          </Popup>
+          {nhsVerified ? (
+            <NhsVerifyButton
+              id={id}
+              variant="red"
+              title="Скасувати верифікацію"
+              isVerificationActive={isVerificationActive}
+              nhsVerified={!nhsVerified}
+            />
+          ) : (
+            <NhsVerifyButton
+              id={id}
+              variant="green"
+              title="Верифікувати медзаклад"
+              isVerificationActive={isVerificationActive}
+              nhsVerified={!nhsVerified}
+            />
+          )}
         </Box>
       </OpacityBox>
     </Box>
@@ -752,5 +727,58 @@ const Popup = ({
 };
 
 export default Details;
+
+const NhsVerifyButton = ({
+  id,
+  variant,
+  title,
+  nhsVerified,
+  isVerificationActive
+}) => (
+  <Popup
+    variant={variant}
+    buttonText={title}
+    title={title}
+    disabled={!isVerificationActive}
+  >
+    {toggle => (
+      <Mutation
+        mutation={NhsVerifyLegalEntityMutation}
+        refetchQueries={() => [
+          {
+            query: LegalEntityQuery,
+            variables: { id, first: 10 }
+          }
+        ]}
+      >
+        {nhsVerifyLegalEntity => (
+          <Flex justifyContent="center">
+            <Box mr={20}>
+              <Button variant="blue" onClick={toggle}>
+                Повернутися
+              </Button>
+            </Box>
+            <Button
+              onClick={async () => {
+                await nhsVerifyLegalEntity({
+                  variables: {
+                    input: {
+                      id,
+                      nhsVerified
+                    }
+                  }
+                });
+                toggle();
+              }}
+              variant={variant}
+            >
+              {title}
+            </Button>
+          </Flex>
+        )}
+      </Mutation>
+    )}
+  </Popup>
+);
 
 const OpacityBox = system({ is: Box, opacity: 1 });

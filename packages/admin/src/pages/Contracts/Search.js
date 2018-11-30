@@ -11,13 +11,18 @@ import {
   stringifySortingParams,
   formatDateTimeInterval
 } from "@ehealth/utils";
-import { AdminSearchIcon, PositiveIcon, NegativeIcon } from "@ehealth/icons";
+import {
+  AdminSearchIcon,
+  PositiveIcon,
+  NegativeIcon,
+  RemoveItemIcon
+} from "@ehealth/icons";
 
 import * as Field from "../../components/Field";
 import Link from "../../components/Link";
 import Table from "../../components/Table";
 import Pagination from "../../components/Pagination";
-import Button, { IconButton as ResetButton } from "../../components/Button";
+import Button, { IconButton } from "../../components/Button";
 import Badge from "../../components/Badge";
 import STATUSES from "../../helpers/statuses";
 import {
@@ -244,7 +249,8 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
         <Button variant="blue">Шукати</Button>
       </Box>
       <Box px={1}>
-        <ResetButton
+        <IconButton
+          icon={RemoveItemIcon}
           type="reset"
           disabled={
             isEmpty(initialValues.filter) && isEmpty(initialValues.date)
@@ -264,7 +270,7 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
           }}
         >
           Скинути пошук
-        </ResetButton>
+        </IconButton>
       </Box>
     </Flex>
   </Form>
