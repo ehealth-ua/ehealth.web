@@ -33,8 +33,7 @@ class FakeDirective extends SchemaDirectiveVisitor {
       }
 
       if (randexp) {
-        const rand = new RandExp(randexp).gen();
-        return rand;
+        return new RandExp(randexp).gen();
       }
     };
   }

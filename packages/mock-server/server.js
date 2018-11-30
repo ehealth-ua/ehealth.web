@@ -1,5 +1,6 @@
 require("@ehealth/env/load");
 const { buildClientSchema } = require("graphql");
+const faker = require("faker");
 const {
   mergeSchemas,
   makeExecutableSchema,
@@ -49,7 +50,27 @@ const remoteSchema = makeRemoteExecutableSchema({
 });
 
 addMockFunctionsToSchema({
-  schema: mockSchema
+  schema: mockSchema,
+  mocks: {
+    ID: () =>
+      Buffer.from(`mockGlobalID:${faker.random.uuid()}`).toString("base64"),
+    UUID: () => faker.random.uuid(),
+    Date: () => faker.date.past(2),
+    // TODO: return Time with timeZone
+    DateTime: () => faker.date.past(2),
+    Time: () => faker.date.past(),
+    PageInfo: () => ({
+      hasNextPage: faker.random.boolean(),
+      hasPreviousPage: faker.random.boolean(),
+      startCursor: () =>
+        Buffer.from(`mockStartCursor:${faker.random.uuid()}`).toString(
+          "base64"
+        ),
+      endCursor: () =>
+        Buffer.from(`mockEndCursor:${faker.random.uuid()}`).toString("base64")
+    })
+  },
+  preserveResolvers: true
 });
 
 const schemas = arr => SCHEMAS.split(",").map(item => arr[item]);

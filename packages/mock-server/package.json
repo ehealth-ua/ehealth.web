@@ -15,7 +15,7 @@
     "chart:update": "ehealth-scripts chart update"
   },
   "dependencies": {
-    "@ehealth-ua/schema": "^1.1.2",
+    "@ehealth-ua/schema": "^2.0.0",
     "@ehealth/env": "file:../env",
     "apollo-link-context": "^1.0.9",
     "apollo-link-http": "^1.5.5",
@@ -23,7 +23,9 @@
     "faker": "^4.1.0",
     "graphql": "14.0.2",
     "graphql-iso-date": "^3.5.0",
+    "graphql-tools-type-uuid": "^2.0.1",
     "graphql-type-json": "^0.2.1",
-    "node-fetch": "^2.2.0"
+    "node-fetch": "^2.2.0",
+    "randexp": "^0.5.3"
   }
 }
