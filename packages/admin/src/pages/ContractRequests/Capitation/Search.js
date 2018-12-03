@@ -1,46 +1,46 @@
 import React from "react";
-import { Flex, Box, Heading } from "rebass/emotion";
-import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
-import format from "date-fns/format";
+import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
+import format from "date-fns/format";
+import { Box, Flex } from "rebass/emotion";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
 import {
-  parseSortingParams,
-  stringifySortingParams,
   formatDateTimeInterval,
-  getFullName
+  getFullName,
+  parseSortingParams,
+  stringifySortingParams
 } from "@ehealth/utils";
 import { AdminSearchIcon } from "@ehealth/icons";
 
-import * as Field from "../../components/Field";
-import Link from "../../components/Link";
-import Table from "../../components/Table";
-import Pagination from "../../components/Pagination";
-import Button, { ResetButton } from "../../components/Button";
-import Badge from "../../components/Badge";
-import STATUSES from "../../helpers/statuses";
+import ContractRequestsNav from "../ContractRequestsNav";
+
+import Table from "../../../components/Table";
+import Badge from "../../../components/Badge";
+import Link from "../../../components/Link";
+import Pagination from "../../../components/Pagination";
+import * as Field from "../../../components/Field";
+import Button, { ResetButton } from "../../../components/Button";
+
 import {
   EDRPOU_PATTERN,
   SEARCH_REQUEST_PATTERN
-} from "../../constants/contractRequests";
-import { ITEMS_PER_PAGE } from "../../constants/pagination";
+} from "../../../constants/contractRequests";
+import { ITEMS_PER_PAGE } from "../../../constants/pagination";
+import STATUSES from "../../../helpers/statuses";
 
 const SearchCapitationContractRequestsQuery = loader(
-  "../../graphql/SearchCapitationContractRequestsQuery.graphql"
+  "../../../graphql/SearchCapitationContractRequestsQuery.graphql"
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
   ([name, value]) => ({ name, value })
 );
 
-const Search = () => (
+const CapitationContractRequestsSearch = () => (
   <Box p={6}>
-    <Heading as="h1" fontWeight="normal" mb={6}>
-      Перелік заяв на укладення договору
-    </Heading>
-
+    <ContractRequestsNav />
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
@@ -99,7 +99,7 @@ const Search = () => (
               }) => {
                 return (
                   <>
-                    <SearchCapitationContractRequestsForm
+                    <SearchContractRequestsForm
                       initialValues={locationParams}
                       onSubmit={setLocationParams}
                       refetch={refetch}
@@ -150,7 +150,7 @@ const Search = () => (
                                 />
                               ),
                               details: (
-                                <Link to={`../${id}`} fontWeight="bold">
+                                <Link to={`./${id}`} fontWeight="bold">
                                   Показати деталі
                                 </Link>
                               )
@@ -187,13 +187,7 @@ const Search = () => (
   </Box>
 );
 
-export default Search;
-
-const SearchCapitationContractRequestsForm = ({
-  initialValues,
-  onSubmit,
-  refetch
-}) => (
+const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
   <Form onSubmit={onSubmit} initialValues={initialValues}>
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
@@ -279,3 +273,5 @@ const SearchCapitationContractRequestsForm = ({
     </Flex>
   </Form>
 );
+
+export default CapitationContractRequestsSearch;

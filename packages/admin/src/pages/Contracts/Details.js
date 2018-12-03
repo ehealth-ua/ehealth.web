@@ -103,7 +103,7 @@ const Details = ({ id }) => (
                     databaseId,
                     contractRequestId: (
                       <Link
-                        to={`/capitation-contract-requests/${contractRequestId}`}
+                        to={`/contract-requests/capitation/${contractRequestId}`}
                       >
                         {contractRequestDatabaseId}
                       </Link>

@@ -23,30 +23,45 @@ import {
   formatWorkingHours
 } from "@ehealth/utils";
 
-import Line from "../../components/Line";
-import Tabs from "../../components/Tabs";
+import Update from "./Update";
+import Approve from "./Approve";
+import Decline from "./Decline";
+import PrintOutContent from "./PrintOutContent";
+
+import Line from "../../../components/Line";
+import Tabs from "../../../components/Tabs";
 import Table, {
   TableBodyComponent,
   TableRow,
   TableCell
-} from "../../components/Table";
-import LinkComponent from "../../components/Link";
-import Badge from "../../components/Badge";
-import Button from "../../components/Button";
-import * as Field from "../../components/Field";
-import AddressView from "../../components/AddressView";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import { SearchIcon } from "../../components/MultiSelectView";
-import DefinitionListView from "../../components/DefinitionListView";
-import WEEK_DAYS from "../../helpers/weekDays";
+} from "../../../components/Table";
+import LinkComponent from "../../../components/Link";
+import Badge from "../../../components/Badge";
+import Button from "../../../components/Button";
+import * as Field from "../../../components/Field";
+import AddressView from "../../../components/AddressView";
+import Breadcrumbs from "../../../components/Breadcrumbs";
+import { SearchIcon } from "../../../components/MultiSelectView";
+import DefinitionListView from "../../../components/DefinitionListView";
+import WEEK_DAYS from "../../../helpers/weekDays";
 
 const CapitationContractRequestQuery = loader(
-  "../../graphql/CapitationContractRequestQuery.graphql"
+  "../../../graphql/CapitationContractRequestQuery.graphql"
 );
 const AssignContractRequestMutation = loader(
-  "../../graphql/AssignContractRequestMutation.graphql"
+  "../../../graphql/AssignContractRequestMutation.graphql"
 );
-const EmployeesQuery = loader("../../graphql/EmployeesQuery.graphql");
+const EmployeesQuery = loader("../../../graphql/EmployeesQuery.graphql");
+
+const CapitationContractRequestsDetails = () => (
+  <Router>
+    <Details path=":id/*" />
+    <Update path=":id/update/*" />
+    <Approve path=":id/approve/*" />
+    <Decline path=":id/decline/*" />
+    <PrintOutContent path=":id/print-out-content/*" />
+  </Router>
+);
 
 const Details = ({ id }) => (
   <Query query={CapitationContractRequestQuery} variables={{ id }}>
@@ -86,7 +101,7 @@ const Details = ({ id }) => (
           <Box p={6}>
             <Box py={10}>
               <Breadcrumbs.List>
-                <Breadcrumbs.Item to="/capitation-contract-requests">
+                <Breadcrumbs.Item to="/contract-requests">
                   Перелік заяв
                 </Breadcrumbs.Item>
                 <Breadcrumbs.Item>Деталі заяви</Breadcrumbs.Item>
@@ -105,7 +120,7 @@ const Details = ({ id }) => (
                     id: databaseId,
                     previousRequestId: previousRequest && (
                       <LinkComponent
-                        to={`/capitation-contract-requests/${
+                        to={`/contract-requests/capitation/${
                           previousRequest.id
                         }`}
                       >
@@ -728,4 +743,4 @@ const SaveLink = system(
   { textDecoration: "none" }
 );
 
-export default Details;
+export default CapitationContractRequestsDetails;

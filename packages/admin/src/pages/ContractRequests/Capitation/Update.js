@@ -12,20 +12,20 @@ import {
   Validations
 } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
-import Badge from "../../components/Badge";
-import Steps from "../../components/Steps";
-import Button from "../../components/Button";
-import * as Field from "../../components/Field";
-import { SearchIcon } from "../../components/MultiSelectView";
-import DefinitionListView from "../../components/DefinitionListView";
-import STATUSES from "../../helpers/statuses";
+import Badge from "../../../components/Badge";
+import Steps from "../../../components/Steps";
+import Button from "../../../components/Button";
+import * as Field from "../../../components/Field/index";
+import { SearchIcon } from "../../../components/MultiSelectView";
+import DefinitionListView from "../../../components/DefinitionListView";
+import STATUSES from "../../../helpers/statuses";
 
 const CapitationContractRequestQuery = loader(
-  "../../graphql/CapitationContractRequestQuery.graphql"
+  "../../../graphql/CapitationContractRequestQuery.graphql"
 );
-const EmployeesQuery = loader("../../graphql/EmployeesQuery.graphql");
+const EmployeesQuery = loader("../../../graphql/EmployeesQuery.graphql");
 const UpdateContractRequestMutation = loader(
-  "../../graphql/UpdateContractRequestMutation.graphql"
+  "../../../graphql/UpdateContractRequestMutation.graphql"
 );
 const nhsPaymentMethod = Object.entries(STATUSES.NHS_PAYMENT_METHOD).map(
   ([key, value]) => ({ key, value })

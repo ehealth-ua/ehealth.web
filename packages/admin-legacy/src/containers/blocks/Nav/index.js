@@ -319,7 +319,9 @@ class Nav extends React.Component {
                     >
                       <ExternalLink
                         id="contract-requests-nav"
-                        href={`${env.REACT_APP_ADMIN_URL}/contract-requests/search`}
+                        href={`${
+                          env.REACT_APP_ADMIN_URL
+                        }/contract-requests/capitation`}
                       >
                         Заяви на укладення
                         <br /> договору

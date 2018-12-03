@@ -8,21 +8,21 @@ import { loader } from "graphql.macro";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
-import Line from "../../components/Line";
-import Badge from "../../components/Badge";
-import Steps from "../../components/Steps";
-import Button from "../../components/Button";
-import Tooltip from "../../components/Tooltip";
-import * as Field from "../../components/Field";
-import DefinitionListView from "../../components/DefinitionListView";
+import Line from "../../../components/Line";
+import Badge from "../../../components/Badge";
+import Steps from "../../../components/Steps";
+import Button from "../../../components/Button";
+import Tooltip from "../../../components/Tooltip";
+import * as Field from "../../../components/Field";
+import DefinitionListView from "../../../components/DefinitionListView";
 
-import env from "../../env";
+import env from "../../../env";
 
 const CapitationContractRequestQuery = loader(
-  "../../graphql/CapitationContractRequestQuery.graphql"
+  "../../../graphql/CapitationContractRequestQuery.graphql"
 );
 const DeclineContractRequestMutation = loader(
-  "../../graphql/DeclineContractRequestMutation.graphql"
+  "../../../graphql/DeclineContractRequestMutation.graphql"
 );
 
 const Decline = ({

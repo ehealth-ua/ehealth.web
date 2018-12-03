@@ -8,21 +8,21 @@ import { loader } from "graphql.macro";
 import { getFullName } from "@ehealth/utils";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
-import Line from "../../components/Line";
-import Badge from "../../components/Badge";
-import Steps from "../../components/Steps";
-import Button from "../../components/Button";
-import Tooltip from "../../components/Tooltip";
-import DefinitionListView from "../../components/DefinitionListView";
-import STATUSES from "../../helpers/statuses";
+import Line from "../../../components/Line";
+import Badge from "../../../components/Badge";
+import Steps from "../../../components/Steps";
+import Button from "../../../components/Button";
+import Tooltip from "../../../components/Tooltip";
+import DefinitionListView from "../../../components/DefinitionListView";
+import STATUSES from "../../../helpers/statuses";
 
-import env from "../../env";
+import env from "../../../env";
 
 const CapitationContractRequestQuery = loader(
-  "../../graphql/CapitationContractRequestQuery.graphql"
+  "../../../graphql/CapitationContractRequestQuery.graphql"
 );
 const ApproveContractRequestMutation = loader(
-  "../../graphql/ApproveContractRequestMutation.graphql"
+  "../../../graphql/ApproveContractRequestMutation.graphql"
 );
 
 const Approve = ({ id }) => (
