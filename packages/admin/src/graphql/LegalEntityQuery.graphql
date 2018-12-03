@@ -35,6 +35,14 @@ query LegalEntityQuery(
     nhsVerified
     nhsReviewed
     nhsComment
+    website
+    receiverFundsCode
+    legalForm
+    beneficiary
+    archive {
+      date
+      place
+    }
     medicalServiceProvider {
       licenses {
         licenseNumber

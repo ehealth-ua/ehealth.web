@@ -75,7 +75,12 @@ const Details = ({ id }) => (
         nhsComment,
         owner,
         medicalServiceProvider,
-        mergedToLegalEntity
+        mergedToLegalEntity,
+        website,
+        receiverFundsCode,
+        legalForm,
+        beneficiary,
+        archive
       } = legalEntity;
       const isVerificationActive = status === "ACTIVE" && nhsReviewed;
 
@@ -213,6 +218,11 @@ const Details = ({ id }) => (
                 ownerPropertyType={ownerPropertyType}
                 kveds={kveds}
                 misVerified={misVerified}
+                website={website}
+                receiverFundsCode={receiverFundsCode}
+                legalForm={legalForm}
+                beneficiary={beneficiary}
+                archive={archive}
               />
               <License
                 path="/licenses"
@@ -243,6 +253,10 @@ const GeneralInfo = ({
   ownerPropertyType,
   kveds,
   misVerified,
+  receiverFundsCode,
+  legalForm,
+  beneficiary,
+  archive,
   ...props
 }) => (
   <Box p={5}>
@@ -253,6 +267,7 @@ const GeneralInfo = ({
         addresses: "Адреса",
         phones: "Номер телефону",
         email: "Email",
+        website: "Веб-сторінка",
         type: "Тип"
       }}
       data={{
@@ -268,10 +283,16 @@ const GeneralInfo = ({
     <DefinitionListView
       labels={{
         ownerPropertyType: "Тип власності",
-        kveds: "КВЕДи"
+        legalForm: "Форма господарювання",
+        kveds: "КВЕДи",
+        receiverFundsCode: "Код одержувача бюджетних коштів",
+        beneficiary: "Вигодонабувач"
       }}
       data={{
         ownerPropertyType,
+        legalForm,
+        beneficiary,
+        receiverFundsCode,
         kveds: kveds.map((el, key, arr) => (
           <React.Fragment key={key}>
             {el}
@@ -289,6 +310,29 @@ const GeneralInfo = ({
       }}
       color="blueberrySoda"
     />
+
+    {!isEmpty(archive) && (
+      <>
+        <Line />
+        <Heading fontSize="1" fontWeight="normal" mb={5}>
+          Архів
+        </Heading>
+
+        {archive.map((item, index) => (
+          <ArchiveBox key={index}>
+            <DefinitionListView
+              labels={{
+                date: "Дата архівування",
+                place: "Місце зберігання"
+              }}
+              data={{
+                ...item
+              }}
+            />
+          </ArchiveBox>
+        ))}
+      </>
+    )}
   </Box>
 );
 
@@ -782,3 +826,15 @@ const NhsVerifyButton = ({
 );
 
 const OpacityBox = system({ is: Box, opacity: 1 });
+
+const ArchiveBox = system(
+  {
+    is: Box,
+    mb: 6
+  },
+  `
+    &:last-child {
+      margin-bottom: 0;
+    }
+  `
+);
