@@ -1,15 +1,18 @@
 import React from "react";
 import { Router, Redirect } from "@reach/router";
+import CapitationContractDetails from "./Capitation/Details";
+import CapitationContractSearch from "./Capitation/Search";
+import ReimbursementContractDetails from "./Reimbursement/Details";
+import ReimbursementContractSearch from "./Reimbursement/Search";
 
-import Search from "./Search";
-import Details from "./Details";
-
-const Contract = ({ uri }) => (
+const Contracts = ({ uri }) => (
   <Router>
-    <Redirect from="/" to={`${uri}/search`} />
-    <Search path="search/*" />
-    <Details path=":id/*" />
+    <Redirect from="/" to={`${uri}/capitation`} />
+    <CapitationContractSearch path="capitation/" />
+    <CapitationContractDetails path="capitation/*" />
+    <ReimbursementContractSearch path="reimbursement/" />
+    <ReimbursementContractDetails path="reimbursement/*" />
   </Router>
 );
 
-export default Contract;
+export default Contracts;

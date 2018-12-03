@@ -2,10 +2,10 @@ import React from "react";
 import { Heading } from "rebass/emotion";
 import { Tabs } from "@ehealth/components";
 
-const ContractRequestsNav = () => (
+const ContractsNav = () => (
   <>
     <Heading as="h1" fontWeight="normal" mb={6}>
-      Перелік заяв на укладення договору
+      Перелік договорів
     </Heading>
     <Tabs.Nav>
       <Tabs.Link to="../capitation">Медзаклади</Tabs.Link>
@@ -14,4 +14,4 @@ const ContractRequestsNav = () => (
   </>
 );
 
-export default ContractRequestsNav;
+export default ContractsNav;

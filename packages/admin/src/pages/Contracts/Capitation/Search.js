@@ -18,32 +18,32 @@ import {
   RemoveItemIcon
 } from "@ehealth/icons";
 
-import * as Field from "../../components/Field";
-import Link from "../../components/Link";
-import Table from "../../components/Table";
-import Pagination from "../../components/Pagination";
-import Button, { IconButton } from "../../components/Button";
-import Badge from "../../components/Badge";
-import STATUSES from "../../helpers/statuses";
+import ContractsNav from "../ContractsNav";
+
+import * as Field from "../../../components/Field";
+import Link from "../../../components/Link";
+import Table from "../../../components/Table";
+import Pagination from "../../../components/Pagination";
+import Button, { IconButton } from "../../../components/Button";
+import Badge from "../../../components/Badge";
+import STATUSES from "../../../helpers/statuses";
 import {
   EDRPOU_PATTERN,
   SEARCH_CONTRACT_PATTERN
-} from "../../constants/contracts";
-import { ITEMS_PER_PAGE } from "../../constants/pagination";
+} from "../../../constants/contracts";
+import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 
 const SearchContractsQuery = loader(
-  "../../graphql/SearchContractsQuery.graphql"
+  "../../../graphql/SearchContractsQuery.graphql"
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
   ([name, value]) => ({ name, value })
 );
 
-const Search = ({ uri }) => (
+const CapitationContractsSearch = ({ uri }) => (
   <Box p={6}>
-    <Heading as="h1" fontWeight="normal" mb={6}>
-      Перелік договорів
-    </Heading>
+    <ContractsNav />
 
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
@@ -147,7 +147,7 @@ const Search = ({ uri }) => (
                               />
                             ),
                             details: (
-                              <Link to={`../${id}`} fontWeight="bold">
+                              <Link to={`./${id}`} fontWeight="bold">
                                 Показати деталі
                               </Link>
                             )
@@ -186,7 +186,7 @@ const Search = ({ uri }) => (
   </Box>
 );
 
-export default Search;
+export default CapitationContractsSearch;
 
 const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
   <Form onSubmit={onSubmit} initialValues={initialValues}>

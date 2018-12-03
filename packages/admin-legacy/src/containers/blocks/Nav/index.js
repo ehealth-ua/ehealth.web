@@ -306,7 +306,7 @@ class Nav extends React.Component {
                     <NavItem to="contracts" activeClassName={styles.active}>
                       <ExternalLink
                         id="contracts-nav"
-                        href={`${env.REACT_APP_ADMIN_URL}/contracts/search`}
+                        href={`${env.REACT_APP_ADMIN_URL}/contracts/capitation`}
                       >
                         Перелік договорів
                       </ExternalLink>

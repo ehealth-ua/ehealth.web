@@ -5,7 +5,6 @@ import { Flex, Box, Text, Heading } from "rebass/emotion";
 import system from "system-components/emotion";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
-import { Trans } from "@lingui/react";
 import { loader } from "graphql.macro";
 
 import { Form, LocationParams, Modal } from "@ehealth/components";
@@ -23,26 +22,32 @@ import {
   stringifySortingParams
 } from "@ehealth/utils";
 
-import Line from "../../components/Line";
-import Tabs from "../../components/Tabs";
+import Line from "../../../components/Line";
+import Tabs from "../../../components/Tabs";
 import Table, {
   TableBodyComponent,
   TableRow,
   TableCell
-} from "../../components/Table";
-import Link from "../../components/Link";
-import Badge from "../../components/Badge";
-import Button from "../../components/Button";
-import * as Field from "../../components/Field";
-import AddressView from "../../components/AddressView";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import DefinitionListView from "../../components/DefinitionListView";
-import { ITEMS_PER_PAGE } from "../../constants/pagination";
-import Pagination from "../../components/Pagination";
+} from "../../../components/Table";
+import Link from "../../../components/Link";
+import Badge from "../../../components/Badge";
+import Button from "../../../components/Button";
+import * as Field from "../../../components/Field";
+import AddressView from "../../../components/AddressView";
+import Breadcrumbs from "../../../components/Breadcrumbs";
+import DefinitionListView from "../../../components/DefinitionListView";
+import { ITEMS_PER_PAGE } from "../../../constants/pagination";
+import Pagination from "../../../components/Pagination";
 
-const ContractQuery = loader("../../graphql/ContractQuery.graphql");
+const ContractQuery = loader("../../../graphql/ContractQuery.graphql");
 const TerminateContractMutation = loader(
-  "../../graphql/TerminateContractMutation.graphql"
+  "../../../graphql/TerminateContractMutation.graphql"
+);
+
+const CapitationContractsDetails = () => (
+  <Router>
+    <Details path=":id/*" />
+  </Router>
 );
 
 const Details = ({ id }) => (
@@ -84,7 +89,7 @@ const Details = ({ id }) => (
             <Box py={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/contracts">
-                  <Trans id="contract_requests.title">Перелік договорів</Trans>
+                  Перелік договорів
                 </Breadcrumbs.Item>
                 <Breadcrumbs.Item>Деталі договору</Breadcrumbs.Item>
               </Breadcrumbs.List>
@@ -749,4 +754,4 @@ const SaveLink = system(
   { textDecoration: "none" }
 );
 
-export default Details;
+export default CapitationContractsDetails;

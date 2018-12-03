@@ -1,10 +1,10 @@
 import React from "react";
-import ContractRequestsNav from "../ContractRequestsNav";
+import ContractsNav from "../ContractsNav";
 import { Box } from "rebass/emotion";
 
 const Search = () => (
   <Box p={6}>
-    <ContractRequestsNav />
+    <ContractsNav />
   </Box>
 );
 
