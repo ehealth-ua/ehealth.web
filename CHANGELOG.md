@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/edenlabllc/ehealth.web/compare/v1.1.0...v1.2.0) (2018-12-04)
+
+
+### Bug Fixes
+
+* **admin:** add loader for graphql queries, reorder imports, remove unused imports and props ([#551](https://github.com/edenlabllc/ehealth.web/issues/551)) ([0dfffbc](https://github.com/edenlabllc/ehealth.web/commit/0dfffbc))
+
+
+### Features
+
+* **admin:** add new fields to the Legal Entity Details page ([#554](https://github.com/edenlabllc/ehealth.web/issues/554)) ([305ff58](https://github.com/edenlabllc/ehealth.web/commit/305ff58))
+
+
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/edenlabllc/ehealth.web/compare/v1.0.0...v1.1.0) (2018-12-04)
 
