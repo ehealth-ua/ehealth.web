@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/edenlabllc/ehealth.web/compare/v1.3.0...v1.4.0) (2018-12-04)
+
+
+### Bug Fixes
+
+* **admin:** fix line component width ([8a30ab1](https://github.com/edenlabllc/ehealth.web/commit/8a30ab1))
+* **admin:** fix onBlur in DateField and add default props placement ([362817a](https://github.com/edenlabllc/ehealth.web/commit/362817a))
+
+
+### Features
+
+* **admin:** add new filter item to contract list ([ee94473](https://github.com/edenlabllc/ehealth.web/commit/ee94473))
+* **admin:** add prolongate form to contract details ([729c09e](https://github.com/edenlabllc/ehealth.web/commit/729c09e))
+* **admin:** change filter view in contracts list ([6320604](https://github.com/edenlabllc/ehealth.web/commit/6320604))
+
+
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/edenlabllc/ehealth.web/compare/v1.1.0...v1.2.0) (2018-12-04)
 

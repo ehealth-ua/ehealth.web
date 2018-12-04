@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/edenlabllc/ehealth.web/compare/v1.3.0...v1.4.0) (2018-12-04)
+
+
+### Features
+
+* **icons:** add CancelIcon to package icons ([d6998ea](https://github.com/edenlabllc/ehealth.web/commit/d6998ea))
+* **icons:** add filterIcon for advanced filter ([a03d412](https://github.com/edenlabllc/ehealth.web/commit/a03d412))
+
+
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/edenlabllc/ehealth.web/compare/v1.0.0...v1.1.0) (2018-12-04)
 

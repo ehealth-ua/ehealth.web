@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/edenlabllc/ehealth.web/compare/v1.3.0...v1.4.0) (2018-12-04)
+
+
+### Features
+
+* **components:** add placement prop for DatePicker body ([dca535a](https://github.com/edenlabllc/ehealth.web/commit/dca535a))
+
+
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/edenlabllc/ehealth.web/compare/v1.0.0...v1.1.0) (2018-12-04)
 
