@@ -5,6 +5,7 @@ import { loader } from "graphql.macro";
 import createDecorator from "final-form-calculate";
 import format from "date-fns/format";
 import isEmpty from "lodash/isEmpty";
+import { Trans } from "@lingui/macro";
 
 import { Form, LocationParams, Validation } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
@@ -52,7 +53,7 @@ const SEARCH_REQUEST_PATTERN = `(${EDRPOU_PATTERN})|(${LEGALENTITY_ID_PATTERN})`
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
-      Пошук медзакладів
+      <Trans>Search legal entities</Trans>
     </Heading>
 
     <LocationParams>

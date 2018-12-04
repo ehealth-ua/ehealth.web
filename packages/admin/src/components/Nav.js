@@ -3,6 +3,7 @@ import styled from "react-emotion/macro";
 import { ifProp } from "styled-tools";
 import * as Reach from "@reach/router";
 import { FlagsProvider, Flag } from "flag";
+import { Trans } from "@lingui/macro";
 import { ChevronBottomIcon } from "@ehealth/icons";
 
 import flags from "../flags";
@@ -17,29 +18,39 @@ const Nav = () => (
     <NavContainer>
       <NavList>
         <Flag name="features.legacy">
-          <NavLinkExternal to="dashboard">Статистика</NavLinkExternal>
+          <NavLinkExternal to="dashboard">
+            <Trans>Statistic</Trans>
+          </NavLinkExternal>
 
           <Ability action="read" resource="person">
-            <NavLinkExternal to="persons">Персони</NavLinkExternal>
+            <NavLinkExternal to="persons">
+              <Trans>Persons</Trans>
+            </NavLinkExternal>
           </Ability>
 
           <Ability action="read" resource="declaration">
-            <NavSection title="Декларації">
-              <NavLinkExternal to="declarations">Декларації</NavLinkExternal>
+            <NavSection title={<Trans>Declarations</Trans>}>
+              <NavLinkExternal to="declarations">
+                <Trans>Declarations</Trans>
+              </NavLinkExternal>
               <NavLinkExternal to="pending-declarations">
-                Декларації на розгляді
+                <Trans>Pending declarations</Trans>
               </NavLinkExternal>
             </NavSection>
           </Ability>
 
           <Ability action="read" resource="employee">
-            <NavSection title="Співробітники">
+            <NavSection title={<Trans>Employees</Trans>}>
               <Ability action="read" resource="employee">
-                <NavLinkExternal to="employees">Співробітники</NavLinkExternal>
+                <NavLinkExternal to="employees">
+                  <Trans>Employees</Trans>
+                </NavLinkExternal>
                 <NavLinkExternal to="pending-employees">
-                  Співробітники
-                  <br />
-                  на розгляді
+                  <Trans>
+                    Pending
+                    <br />
+                    employees
+                  </Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
@@ -47,34 +58,40 @@ const Nav = () => (
 
           <Ability action="read" resource="legal_entity">
             <NavLinkExternal to="clinics-verification">
-              Підтвердження медзакладів
+              <Trans>Clinics verification</Trans>
             </NavLinkExternal>
           </Ability>
 
-          <NavLinkExternal to="reports">Звіти</NavLinkExternal>
+          <NavLinkExternal to="reports">
+            <Trans>Reports</Trans>
+          </NavLinkExternal>
 
           <Ability
             action="read"
             resources={["register", "register_entry"]}
             loose
           >
-            <NavSection title="Реєстри">
+            <NavSection title={<Trans>Registers</Trans>}>
               <Ability action="read" resource="register">
-                <NavLinkExternal to="registers">Реєстри</NavLinkExternal>
+                <NavLinkExternal to="registers">
+                  <Trans>Registers</Trans>
+                </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="register_entry">
                 <NavLinkExternal to="registers-entries">
-                  Записи реєстру
+                  <Trans>Registers entries</Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
           </Ability>
 
-          <NavLinkExternal to="dictionaries">Словники</NavLinkExternal>
+          <NavLinkExternal to="dictionaries">
+            <Trans>Dictionaries</Trans>
+          </NavLinkExternal>
 
           <Ability action="read" resource="global_parameters">
             <NavLinkExternal to="configuration">
-              Конфігурація системи
+              <Trans>Configuration</Trans>
             </NavLinkExternal>
           </Ability>
 
@@ -83,18 +100,20 @@ const Nav = () => (
             resources={["innm", "innm_dosage", "medication"]}
             loose
           >
-            <NavSection title="Медикаменти">
+            <NavSection title={<Trans>Medicines</Trans>}>
               <Ability action="read" resource="innm">
-                <NavLinkExternal to="innms">МНН</NavLinkExternal>
+                <NavLinkExternal to="innms">
+                  <Trans>Innm</Trans>
+                </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="innm_dosage">
                 <NavLinkExternal to="innm-dosages">
-                  Лікарська форма
+                  <Trans>Innm dosage</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="medication">
                 <NavLinkExternal to="medications">
-                  Торгівельне найменування
+                  <Trans>Trade name</Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
@@ -105,15 +124,15 @@ const Nav = () => (
             resources={["medical_program", "program_medication"]}
             loose
           >
-            <NavSection title="Програми">
+            <NavSection title={<Trans>Medical program</Trans>}>
               <Ability action="read" resource="medical_program">
                 <NavLinkExternal to="medical-programs">
-                  Перелік мед. програм
+                  <Trans>List of medical programs</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="program_medication">
                 <NavLinkExternal to="program-medications">
-                  Учасники програм
+                  <Trans>Program Participants</Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
@@ -128,35 +147,35 @@ const Nav = () => (
             ]}
             loose
           >
-            <NavSection title="Рецепти">
+            <NavSection title={<Trans>Recipes</Trans>}>
               <Ability action="read" resource="medication_request">
                 <NavLinkExternal to="medication-requests">
-                  Рецепти
+                  <Trans>Recipes</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="medication_dispense">
                 <NavLinkExternal to="medication-dispenses">
-                  Відпуски рецептів
+                  <Trans>Medication dispenses</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="download" resource="reimbursement_report">
                 <NavLinkExternal to="reimbursement-report">
-                  Звіт
+                  <Trans>Reimbursement report</Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
           </Ability>
 
           <Ability action="read" resources={["bl_user", "party_user"]} loose>
-            <NavSection title="Користувачі">
+            <NavSection title={<Trans>Users</Trans>}>
               <Ability action="read" resource="bl_user">
                 <NavLinkExternal to="black-list-users">
-                  Заблоковані користувачі
+                  <Trans>Black list users</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="party_user">
                 <NavLinkExternal to="party-users">
-                  Облікові записи
+                  <Trans>Accounts</Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
@@ -164,7 +183,7 @@ const Nav = () => (
 
           <Ability action="reset_authentication_method" resource="person">
             <NavLinkExternal to="reset-authentication-method">
-              Скинути метод авторизації
+              <Trans>Reset authorization method</Trans>
             </NavLinkExternal>
           </Ability>
         </Flag>
@@ -174,38 +193,44 @@ const Nav = () => (
           resources={["contract_request", "contract"]}
           loose
         >
-          <NavSection title="Договори">
+          <NavSection title={<Trans>Contracts</Trans>}>
             <Ability action="read" resource="contract_request">
-              <NavLink to="/contracts">Перелік договорів</NavLink>
+              <NavLink to="/contracts">
+                <Trans>Contracts</Trans>
+              </NavLink>
               <NavLink to="/contract-requests">
-                Заяви на укладення договору
+                <Trans>Contract requests</Trans>
               </NavLink>
             </Ability>
           </NavSection>
         </Ability>
         <Flag name="features.person">
           <Ability action="read" resource="person">
-            <NavSection title="Паціенти">
-              <NavLink to="/persons">Пошук паціентів</NavLink>
-            </NavSection>
+            <NavLink to="/persons">
+              <Trans>Persons</Trans>
+            </NavLink>
           </Ability>
         </Flag>
         <Ability action="read" resource="legal_entity">
-          <NavLink to="/legal-entities">Медзаклади</NavLink>
+          <NavLink to="/legal-entities">
+            <Trans>Legal entities</Trans>
+          </NavLink>
         </Ability>
 
         <Ability action="merge" resources={["legal_entity"]} loose>
-          <NavSection title="Задачі в процесі виконання">
+          <NavSection title={<Trans>Jobs</Trans>}>
             <Ability action="merge" resource="legal_entity">
               <NavLink to="/legal-entity-merge-jobs">
-                Підпорядкування медзакладів
+                <Trans>Legal entity merge jobs</Trans>
               </NavLink>
             </Ability>
           </NavSection>
         </Ability>
 
         <Flag name="features.dictionaries">
-          <NavLink to="/dictionaries">Словники</NavLink>
+          <NavLink to="/dictionaries">
+            <Trans>Dictionaries</Trans>
+          </NavLink>
         </Flag>
       </NavList>
     </NavContainer>
