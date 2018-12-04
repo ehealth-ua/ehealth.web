@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/edenlabllc/ehealth.web/compare/v0.147.0...v1.0.0) (2018-12-04)
+
+
+### Bug Fixes
+
+* **polyfill:** add fetch ([4d57790](https://github.com/edenlabllc/ehealth.web/commit/4d57790))
+
+
+### Code Refactoring
+
+* **admin:** rename contract requests to capitation contract requests ([9c3644a](https://github.com/edenlabllc/ehealth.web/commit/9c3644a))
+
+
+### BREAKING CHANGES
+
+* **admin:** contract requests was renamed to capitation contract requests
+
+
+
+
+
 <a name="0.147.0"></a>
 # [0.147.0](https://github.com/edenlabllc/ehealth.web/compare/v0.146.1...v0.147.0) (2018-11-30)
 
