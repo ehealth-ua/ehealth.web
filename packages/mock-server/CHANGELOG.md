@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/edenlabllc/ehealth.web/compare/v1.2.0...v1.3.0) (2018-12-04)
+
+
+### Features
+
+* **mock-server:** add new resolvers for scalars ([702f8e1](https://github.com/edenlabllc/ehealth.web/commit/702f8e1))
+* **mock-server:** add randexp to FakeDirective for using RegExp in schemas ([ca5ff97](https://github.com/edenlabllc/ehealth.web/commit/ca5ff97))
+* **mock-server:** add resolvers for new scalar and type PageInfo ([8651e72](https://github.com/edenlabllc/ehealth.web/commit/8651e72))
+
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/edenlabllc/ehealth.web/compare/v0.147.0...v1.0.0) (2018-12-04)
 
