@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/edenlabllc/ehealth.web/compare/v1.0.0...v1.1.0) (2018-12-04)
+
+
+### Features
+
+* **admin:** add new logic for LE Verify, Decline and Commenting ([5f19ee3](https://github.com/edenlabllc/ehealth.web/commit/5f19ee3))
+* **admin:** add NHS Review and NHS Comment mutations ([1220a80](https://github.com/edenlabllc/ehealth.web/commit/1220a80))
+* **admin:** add Unverify ability for NHS, add boolean nhsVerified value to nhsVerify mutation ([8f9e23e](https://github.com/edenlabllc/ehealth.web/commit/8f9e23e))
+
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/edenlabllc/ehealth.web/compare/v0.147.0...v1.0.0) (2018-12-04)
 

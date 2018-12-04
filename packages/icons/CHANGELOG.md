@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/edenlabllc/ehealth.web/compare/v1.0.0...v1.1.0) (2018-12-04)
+
+
+### Features
+
+* **icons:** add CommentIcon for Admin ([8f94b4c](https://github.com/edenlabllc/ehealth.web/commit/8f94b4c))
+
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/edenlabllc/ehealth.web/compare/v0.147.0...v1.0.0) (2018-12-04)
 
