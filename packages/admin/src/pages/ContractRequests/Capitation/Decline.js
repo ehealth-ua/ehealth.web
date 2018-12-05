@@ -129,7 +129,7 @@ const Reason = ({
             rows={6}
             label="Причина відхилення"
             placeholder="Вкажіть причину відхилення"
-            maxlength="255"
+            maxlength="3000"
           />
           <Validation.Required field="base" message="Обов&#700;язкове поле" />
           <Flex>

@@ -172,7 +172,7 @@ const Details = ({ id }) => (
                               name="statusReason"
                               placeholder="Вкажіть причину розірвання договору"
                               rows={5}
-                              maxlength="255"
+                              maxlength="3000"
                             />
                             <Flex justifyContent="center">
                               <Box mr={20}>
