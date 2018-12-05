@@ -318,7 +318,7 @@ const GeneralInfo = ({
           Архів
         </Heading>
 
-        {archive.map((item, index) => (
+        {archive.map(({ date, place }, index) => (
           <ArchiveBox key={index}>
             <DefinitionListView
               labels={{
@@ -326,7 +326,8 @@ const GeneralInfo = ({
                 place: "Місце зберігання"
               }}
               data={{
-                ...item
+                date: format(date, "DD.MM.YYYY"),
+                place
               }}
             />
           </ArchiveBox>
@@ -343,8 +344,11 @@ const License = ({
   nhsVerified,
   nhsComment
 }) => {
-  const { accreditation, licenses } = license || {};
-  const licensesData = licenses ? licenses.filter(item => item) : [];
+  const {
+    accreditation,
+    accreditation: { orderDate, issuedDate, expiryDate } = {},
+    licenses
+  } = license || {};
 
   return (
     <Box p={5}>
@@ -362,22 +366,23 @@ const License = ({
             }}
             data={{
               ...accreditation,
-              validateDate: `з ${accreditation.issuedDate} ${
-                accreditation.expiryDate ? `по ${accreditation.expiryDate}` : ""
+              orderDate: format(orderDate, "DD.MM.YYYY"),
+              validateDate: `з ${format(issuedDate, "DD.MM.YYYY")} ${
+                expiryDate ? `по ${format(expiryDate, "DD.MM.YYYY")}` : ""
               }`
             }}
           />
           <Line />
         </>
       )}
-      {!isEmpty(licensesData) && (
+      {!isEmpty(licenses) && (
         <>
           <Heading fontSize="1" fontWeight="normal" mb={5}>
             Ліцензії
           </Heading>
 
           <Table
-            data={licensesData}
+            data={licenses}
             header={{
               licenseNumber: "Номер ліцензії",
               whatLicensed: "Видана на",
@@ -386,10 +391,16 @@ const License = ({
               validateDate: "Термін дії",
               orderNo: "Номер наказу"
             }}
-            renderRow={({ activeFromDate, expiryDate, ...licenses }) => ({
-              validateDate: `з ${activeFromDate} ${
-                expiryDate ? `по ${expiryDate}` : ""
+            renderRow={({
+              activeFromDate,
+              expiryDate,
+              issuedDate,
+              ...licenses
+            }) => ({
+              validateDate: `з ${format(activeFromDate, "DD.MM.YYYY")} ${
+                expiryDate ? `по ${format(expiryDate, "DD.MM.YYYY")}` : ""
               }`,
+              issuedDate: format(issuedDate, "DD.MM.YYYY"),
               ...licenses
             })}
             tableName="legal-entities/licenses"
@@ -432,6 +443,7 @@ const License = ({
                           name="nhsComment"
                           placeholder="Введіть коментар"
                           rows={5}
+                          maxlength="3000"
                         />
                         <Flex justifyContent="left">
                           <Box mr={20}>

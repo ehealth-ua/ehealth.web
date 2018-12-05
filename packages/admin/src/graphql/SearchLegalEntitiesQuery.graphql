@@ -32,6 +32,7 @@ query SearchLegalEntitiesQuery(
         apartment
       }
       nhsVerified
+      nhsReviewed
       insertedAt
       status
       type

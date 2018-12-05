@@ -124,6 +124,7 @@ const Search = ({ uri }) => (
                             edrpou: "ЄДРПОУ",
                             addresses: "Адреса",
                             nhsVerified: "Верифікований НСЗУ",
+                            nhsReviewed: "Розглянутий НСЗУ",
                             insertedAt: "Додано",
                             status: "Статус",
                             action: "Дія"
@@ -131,6 +132,7 @@ const Search = ({ uri }) => (
                           renderRow={({
                             addresses,
                             nhsVerified,
+                            nhsReviewed,
                             status,
                             insertedAt,
                             databaseId,
@@ -143,6 +145,15 @@ const Search = ({ uri }) => (
                             nhsVerified: (
                               <Flex justifyContent="center">
                                 {nhsVerified ? (
+                                  <PositiveIcon />
+                                ) : (
+                                  <NegativeIcon />
+                                )}
+                              </Flex>
+                            ),
+                            nhsReviewed: (
+                              <Flex justifyContent="center">
+                                {nhsReviewed ? (
                                   <PositiveIcon />
                                 ) : (
                                   <NegativeIcon />
@@ -179,7 +190,8 @@ const Search = ({ uri }) => (
                             "edrpou",
                             "status",
                             "insertedAt",
-                            "nhsVerified"
+                            "nhsVerified",
+                            "nhsReviewed"
                           ]}
                           sortingParams={parseSortingParams(
                             locationParams.orderBy
