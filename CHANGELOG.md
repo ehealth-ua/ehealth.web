@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.5"></a>
+## [1.5.5](https://github.com/edenlabllc/ehealth.web/compare/v1.5.4...v1.5.5) (2018-12-06)
+
+
+### Bug Fixes
+
+* **admin:** remove unused variable nhsReviewed in nhsReviewLegalEntity input ([8ef961a](https://github.com/edenlabllc/ehealth.web/commit/8ef961a))
+
+
+
+
+
 <a name="1.5.4"></a>
 ## [1.5.4](https://github.com/edenlabllc/ehealth.web/compare/v1.5.3...v1.5.4) (2018-12-06)
 
