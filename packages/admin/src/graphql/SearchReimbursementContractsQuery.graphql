@@ -1,0 +1,42 @@
+query SearchReimbursementContractsQuery(
+  $filter: ReimbursementContractFilter
+  $orderBy: ReimbursementContractOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
+) {
+  reimbursementContracts(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
+    nodes {
+      id
+      databaseId
+      contractNumber
+      startDate
+      endDate
+      status
+      statusReason
+      contractorLegalEntity {
+        edrpou
+      }
+      medicalProgram {
+        nodes {
+          id
+          name
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}

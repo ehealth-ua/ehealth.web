@@ -1,0 +1,13 @@
+query MedicalProgramsQuery(
+  $filter: MedicalProgramFilter
+  $orderBy: MedicalProgramOrderBy
+) {
+  medicalPrograms(filter: $filter, orderBy: $orderBy) {
+    nodes {
+      id
+      databaseId
+      name
+      isActive
+    }
+  }
+}
