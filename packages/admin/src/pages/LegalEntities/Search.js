@@ -227,7 +227,15 @@ const SearchLegalEntitiesForm = ({
   refetch
 }) => (
   <Form
-    onSubmit={setLocationParams}
+    onSubmit={params =>
+      setLocationParams({
+        ...params,
+        after: undefined,
+        before: undefined,
+        last: undefined,
+        first: initialValues.first || ITEMS_PER_PAGE[0]
+      })
+    }
     initialValues={initialValues}
     decorators={[resetValue]}
   >

@@ -94,7 +94,18 @@ export default Search;
 
 const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
   <Form onSubmit={() => null} initialValues={initialValues}>
-    <Form.AutoSubmit onSubmit={setLocationParams} />
+    <Form.AutoSubmit
+      onSubmit={params =>
+        params.hasOwnProperty("filter") &&
+        setLocationParams({
+          ...params,
+          after: undefined,
+          before: undefined,
+          last: undefined,
+          first: initialValues.first || ITEMS_PER_PAGE[0]
+        })
+      }
+    />
     <Flex mx={-1}>
       <Box px={1} width={2 / 5}>
         <Field.Text

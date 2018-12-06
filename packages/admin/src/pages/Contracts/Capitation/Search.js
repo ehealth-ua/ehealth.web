@@ -76,8 +76,8 @@ const sendFilterForm = filter => {
       : { contractNumber: searchRequest });
   return {
     ...contract,
-    startDate: () => formatDateTimeInterval(startFrom, startTo),
-    endDate: () => formatDateTimeInterval(endFrom, endTo),
+    startDate: formatDateTimeInterval(startFrom, startTo),
+    endDate: formatDateTimeInterval(endFrom, endTo),
     status: status.name,
     legalEntityRelation: legalEntityRelation.name,
     isSuspended: convertIsSuspendedItem(isSuspended)
@@ -210,7 +210,18 @@ const CapitationContractsSearch = ({ uri }) => (
 export default CapitationContractsSearch;
 
 const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
-  <Form onSubmit={onSubmit} initialValues={initialValues}>
+  <Form
+    initialValues={initialValues}
+    onSubmit={params =>
+      onSubmit({
+        ...params,
+        after: undefined,
+        before: undefined,
+        last: undefined,
+        first: initialValues.first || ITEMS_PER_PAGE[0]
+      })
+    }
+  >
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
         <Field.Text

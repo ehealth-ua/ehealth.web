@@ -188,7 +188,18 @@ const CapitationContractRequestsSearch = () => (
 );
 
 const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
-  <Form onSubmit={onSubmit} initialValues={initialValues}>
+  <Form
+    initialValues={initialValues}
+    onSubmit={params =>
+      onSubmit({
+        ...params,
+        after: undefined,
+        before: undefined,
+        last: undefined,
+        first: initialValues.first || ITEMS_PER_PAGE[0]
+      })
+    }
+  >
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
         <Field.Text
