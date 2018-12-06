@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/edenlabllc/ehealth.web/compare/v1.5.6...v1.6.0) (2018-12-06)
+
+
+### Features
+
+* **admin:** change errors view from separate page to popup, add error details ([#563](https://github.com/edenlabllc/ehealth.web/issues/563)) ([9ab2182](https://github.com/edenlabllc/ehealth.web/commit/9ab2182))
+
+
+
+
+
 <a name="1.5.6"></a>
 ## [1.5.6](https://github.com/edenlabllc/ehealth.web/compare/v1.5.5...v1.5.6) (2018-12-06)
 
