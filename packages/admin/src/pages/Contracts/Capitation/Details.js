@@ -38,6 +38,7 @@ import Tooltip from "../../../components/Tooltip";
 import * as Field from "../../../components/Field";
 import AddressView from "../../../components/AddressView";
 import Breadcrumbs from "../../../components/Breadcrumbs";
+import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import Pagination from "../../../components/Pagination";
@@ -272,7 +273,9 @@ const GeneralInfo = ({
         nhsSignerName: getFullName(nhsSignerName),
         nhsSignerBase,
         nhsContractPrice,
-        nhsPaymentMethod,
+        nhsPaymentMethod: (
+          <DictionaryValue name="PAYMENT_METHOD" item={nhsPaymentMethod} />
+        ),
         issueCity
       }}
     />
@@ -658,9 +661,16 @@ const Employees = ({ id }) => (
                         databaseId,
                         divisionName,
                         employeeName: getFullName(party),
-                        speciality: specialities.find(
-                          item => item.specialityOfficio && item
-                        ).speciality,
+                        speciality: (
+                          <DictionaryValue
+                            name="SPECIALITY_TYPE"
+                            item={
+                              specialities.find(
+                                item => item.specialityOfficio && item
+                              ).speciality
+                            }
+                          />
+                        ),
                         ...contractorEmployeeDivisions
                       })}
                       sortableFields={["staffUnits", "declarationLimit"]}
@@ -789,7 +799,15 @@ const ExternalContractorsTable = ({ data }) => (
                             renderRow={({
                               division: { name },
                               medicalService
-                            }) => ({ name, medicalService })}
+                            }) => ({
+                              name,
+                              medicalService: (
+                                <DictionaryValue
+                                  name="MEDICAL_SERVICE"
+                                  item={medicalService}
+                                />
+                              )
+                            })}
                             tableName="/contract/ExternalContractorsTable"
                             headless
                           />
