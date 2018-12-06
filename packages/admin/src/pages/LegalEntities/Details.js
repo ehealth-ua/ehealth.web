@@ -458,9 +458,7 @@ const License = ({
                       </Form>
                     ) : (
                       <>
-                        <Box pt={2} pb={5}>
-                          {nhsComment}
-                        </Box>
+                        <CommentBox>{nhsComment}</CommentBox>
                         <Flex justifyContent="left">
                           <Box mr={20}>
                             <Button variant="blue" onClick={toggle}>
@@ -848,5 +846,16 @@ const ArchiveBox = system(
     &:last-child {
       margin-bottom: 0;
     }
+  `
+);
+
+const CommentBox = system(
+  {
+    is: Box,
+    pt: 2,
+    pb: 5
+  },
+  `
+    white-space: pre-line;
   `
 );
