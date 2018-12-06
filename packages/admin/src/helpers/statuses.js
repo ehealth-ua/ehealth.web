@@ -15,20 +15,9 @@ const LEGALENTITY = {
   CLOSED: "неактивний"
 };
 
-const LEGAL_ENTITY_STATUS = {
-  VERIFIED: "Верифіковано",
-  NOT_VERIFIED: "Не верифіковано"
-};
-
 const LEGAL_ENTITY_RELATION = {
   MERGED_FROM: "підпорядкованого",
   MERGED_TO: "основного"
-};
-
-const LEGAL_ENTITY_TYPE = {
-  PHARMACY: "Аптека",
-  MSP: "Заклад з надання медичних послуг",
-  NHS: "Національна служба здоров'я України"
 };
 
 const CONTRACT_REQUEST = {
@@ -53,22 +42,15 @@ const MERGE_LEGAL_ENTITIES_JOBS = {
   PENDING: "В процесі виконання",
   PROCESSED: "Виконана"
 };
-const NHS_PAYMENT_METHOD = {
-  BACKWARD: "Передоплата",
-  FORWARD: "Післяоплата"
-};
 
 const STATUSES = {
   CONTRACT,
   PERSON,
   DECLARATION,
   LEGALENTITY,
-  LEGAL_ENTITY_STATUS,
-  LEGAL_ENTITY_TYPE,
   LEGAL_ENTITY_RELATION,
   CONTRACT_REQUEST,
-  MERGE_LEGAL_ENTITIES_JOBS,
-  NHS_PAYMENT_METHOD
+  MERGE_LEGAL_ENTITIES_JOBS
 };
 
 export default STATUSES;
