@@ -257,6 +257,7 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
               mr={2}
               color="bluePastel"
               onClick={toggle}
+              type="reset"
             >
               <Flex
                 justifyContent="center"
@@ -267,7 +268,7 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
                 <TextNoWrap ml={2}>Показати всі фільтри</TextNoWrap>
               </Flex>
             </Button>
-            <HidenFilters
+            <HiddenFilters
               initialValues={initialValues}
               onSubmit={onSubmit}
               refetch={refetch}
@@ -336,7 +337,7 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
   </Form>
 );
 
-const HidenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
+const HiddenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
   const {
     filter: {
       legalEntityRelation: { name, value } = {},
@@ -361,6 +362,7 @@ const HidenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
               });
               refetch({
                 ...initialValues,
+                first: parseInt(initialValues.first) || ITEMS_PER_PAGE[0],
                 filter: sendFilterForm({
                   ...initialValues.filter,
                   legalEntityRelation: undefined
@@ -386,6 +388,7 @@ const HidenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
               });
               refetch({
                 ...initialValues,
+                first: parseInt(initialValues.first) || ITEMS_PER_PAGE[0],
                 filter: sendFilterForm({
                   ...initialValues.filter,
                   isSuspended: undefined
@@ -416,6 +419,7 @@ const SearchContractsModalForm = ({
       mb={4}
       color="bluePastel"
       onClick={toggle}
+      type="reset"
     >
       <Flex justifyContent="center" alignItems="center" color="bluePastel">
         <FilterIcon />
@@ -528,7 +532,7 @@ const TextNoWrap = system(
 );
 
 const renderIsSuspendedItem = item =>
-  item === "" ? "всі договори" : item === "true" ? "діючий" : "призупинений";
+  item === "" ? "всі договори" : item === "true" ? "призупинений" : "діючий";
 
 const convertIsSuspendedItem = item => {
   try {
