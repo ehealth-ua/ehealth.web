@@ -357,7 +357,11 @@ const ProlongateContract = ({ endDate, id }) => (
               initialValues={{ endDate }}
             >
               <Flex>
-                <Field.DatePicker name="endDate" placement="top" />
+                <Field.DatePicker
+                  name="endDate"
+                  placement="top"
+                  minDate={endDate}
+                />
                 <Validation.Required
                   field="endDate"
                   message="Обов&#700;язкове поле"

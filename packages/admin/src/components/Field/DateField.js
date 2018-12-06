@@ -36,7 +36,14 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
   calendar = React.createRef();
 
   render() {
-    const { label, hint, warning, placement = "bottom", ...props } = this.props;
+    const {
+      label,
+      hint,
+      warning,
+      placement = "bottom",
+      minDate,
+      ...props
+    } = this.props;
     const { isOpen } = this.state;
 
     return (
@@ -106,6 +113,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
             {({ input: { value, onChange } }) => (
               <DatePicker
                 placement={placement}
+                minDate={minDate}
                 selected={this.getSelectedDate(value)}
                 onDateSelected={this.handleDateSelect(onChange)}
               />
