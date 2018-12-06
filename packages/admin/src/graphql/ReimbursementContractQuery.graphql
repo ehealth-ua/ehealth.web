@@ -1,0 +1,119 @@
+query ReimbursementContractQuery(
+  $id: ID!
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
+  $divisionFilter: DivisionFilter
+) {
+  reimbursementContract(id: $id) {
+    id
+    databaseId
+    contractNumber
+    contractRequest {
+      id
+      databaseId
+      printoutContent
+    }
+    isSuspended
+    status
+    printoutContent
+    startDate
+    endDate
+    statusReason
+    contractorLegalEntity {
+      id
+      name
+      edrpou
+      databaseId
+      addresses {
+        type
+        area
+        region
+        settlement
+        settlementType
+        settlementId
+        streetType
+        street
+        building
+        apartment
+      }
+      mergedToLegalEntity {
+        mergedFromLegalEntity {
+          id
+          name
+          edrpou
+          databaseId
+        }
+      }
+    }
+    contractorOwner {
+      databaseId
+      party {
+        firstName
+        lastName
+        secondName
+      }
+    }
+    contractorBase
+    contractorPaymentDetails {
+      bankName
+      mfo
+      payerAccount
+    }
+    contractorDivisions(
+      filter: $divisionFilter
+      first: $first
+      before: $before
+      after: $after
+      last: $last
+    ) {
+      nodes {
+        id
+        databaseId
+        name
+        addresses {
+          type
+          area
+          region
+          settlement
+          settlementType
+          settlementId
+          streetType
+          street
+          building
+          apartment
+        }
+        phones {
+          type
+          number
+        }
+        email
+        mountainGroup
+        workingHours {
+          days
+          hours {
+            from
+            to
+          }
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+    attachedDocuments {
+      type
+      url
+    }
+    medicalProgram {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+}
