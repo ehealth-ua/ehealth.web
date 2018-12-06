@@ -13,8 +13,8 @@ import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
 import Button from "../../../components/Button";
 import Tooltip from "../../../components/Tooltip";
+import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
-import STATUSES from "../../../helpers/statuses";
 
 import env from "../../../env";
 
@@ -112,7 +112,9 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
         data={{
           nhsSigner: nhsSigner && getFullName(nhsSigner.party),
           nhsContractPrice: `${nhsContractPrice} грн`,
-          nhsPaymentMethod: STATUSES.NHS_PAYMENT_METHOD[nhsPaymentMethod],
+          nhsPaymentMethod: (
+            <DictionaryValue name="PAYMENT_METHOD" item={nhsPaymentMethod} />
+          ),
           ...capitationContractRequest
         }}
         labelWidth="300px"

@@ -40,6 +40,7 @@ import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
 import * as Field from "../../../components/Field";
 import AddressView from "../../../components/AddressView";
+import DictionaryValue from "../../../components/DictionaryValue";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import { SearchIcon } from "../../../components/MultiSelectView";
 import DefinitionListView from "../../../components/DefinitionListView";
@@ -261,7 +262,9 @@ const GeneralInfo = ({
         nhsSignerName: nhsSigner ? getFullName(nhsSigner.party) : null,
         nhsSignerBase,
         nhsContractPrice,
-        nhsPaymentMethod,
+        nhsPaymentMethod: (
+          <DictionaryValue name="PAYMENT_METHOD" item={nhsPaymentMethod} />
+        ),
         issueCity
       }}
     />
@@ -459,8 +462,15 @@ const Employees = ({ contractorEmployeeDivisions }) =>
         databaseId,
         divisionName,
         employeeName: getFullName(party),
-        speciality: specialities.find(item => item.specialityOfficio && item)
-          .speciality,
+        speciality: (
+          <DictionaryValue
+            name="SPECIALITY_TYPE"
+            item={
+              specialities.find(item => item.specialityOfficio && item)
+                .speciality
+            }
+          />
+        ),
         ...contractorEmployeeDivisions
       })}
       tableName="/capitation-contract-requests/employees"
@@ -571,7 +581,15 @@ const ExternalContractorsTable = ({ data }) => (
                             renderRow={({
                               division: { name },
                               medicalService
-                            }) => ({ name, medicalService })}
+                            }) => ({
+                              name,
+                              medicalService: (
+                                <DictionaryValue
+                                  name="MEDICAL_SERVICE"
+                                  item={medicalService}
+                                />
+                              )
+                            })}
                             tableName="/capitation-contract-requests/ExternalContractorsTable"
                             headless
                           />

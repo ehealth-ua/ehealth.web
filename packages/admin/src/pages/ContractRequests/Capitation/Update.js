@@ -17,8 +17,8 @@ import Steps from "../../../components/Steps";
 import Button from "../../../components/Button";
 import * as Field from "../../../components/Field/index";
 import { SearchIcon } from "../../../components/MultiSelectView";
+import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
-import STATUSES from "../../../helpers/statuses";
 
 const CapitationContractRequestQuery = loader(
   "../../../graphql/CapitationContractRequestQuery.graphql"
@@ -26,9 +26,6 @@ const CapitationContractRequestQuery = loader(
 const EmployeesQuery = loader("../../../graphql/EmployeesQuery.graphql");
 const UpdateContractRequestMutation = loader(
   "../../../graphql/UpdateContractRequestMutation.graphql"
-);
-const nhsPaymentMethod = Object.entries(STATUSES.NHS_PAYMENT_METHOD).map(
-  ([key, value]) => ({ key, value })
 );
 
 const Update = ({ id }) => (
@@ -127,9 +124,6 @@ const UpdateContractRequest = ({
   locationParams,
   id
 }) => {
-  const [initialNhsPaymentMethod] = nhsPaymentMethod.filter(
-    ({ key }) => key === initialValues.nhsPaymentMethod
-  );
   const { nhsSignerBase, issueCity, nhsContractPrice } = initialValues;
   return (
     <Box m={5}>
@@ -186,8 +180,7 @@ const UpdateContractRequest = ({
                       nhsSignerBase ||
                       "Положення про Національну службу здоров'я України, затвердженого постановою Кабінету Міністрів України від 27 грудня 2017 року № 1101",
                     issueCity: issueCity || "Київ",
-                    nhsContractPrice: nhsContractPrice || 0,
-                    nhsPaymentMethod: initialNhsPaymentMethod
+                    nhsContractPrice: nhsContractPrice || 0
                   }}
                 >
                   <Form.AutoSubmit
@@ -247,16 +240,28 @@ const UpdateContractRequest = ({
                       </Validations>
                     </Box>
                     <Box width={2 / 5}>
-                      <Field.Select
-                        type="select"
-                        name="nhsPaymentMethod"
-                        label="Спосіб оплати"
-                        placeholder="Оберіть cпосіб"
-                        items={nhsPaymentMethod}
-                        itemToString={({ value }) => value}
-                        renderItem={({ value }) => value}
-                        size="small"
-                        sendForm="key"
+                      <DictionaryValue
+                        name="PAYMENT_METHOD"
+                        render={dict => (
+                          <Field.Select
+                            type="select"
+                            name="nhsPaymentMethod"
+                            label="Спосіб оплати"
+                            placeholder="Оберіть cпосіб"
+                            itemToString={item => {
+                              return item.key ? dict[item.key] : dict[item];
+                            }}
+                            items={[
+                              ...Object.entries(dict).map(([key, value]) => ({
+                                value,
+                                key
+                              }))
+                            ]}
+                            renderItem={({ value }) => value}
+                            size="small"
+                            sendForm="key"
+                          />
+                        )}
                       />
                       <Validation.Required
                         field="nhsPaymentMethod"
