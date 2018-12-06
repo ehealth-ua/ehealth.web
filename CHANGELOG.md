@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.3"></a>
+## [1.5.3](https://github.com/edenlabllc/ehealth.web/compare/v1.5.2...v1.5.3) (2018-12-06)
+
+
+### Bug Fixes
+
+* **admin:** remove pagination params after form submitting, fix filter by dates on Contracts list, check for the filter key before form autosubmit on Dictionaries list ([226fb7f](https://github.com/edenlabllc/ehealth.web/commit/226fb7f))
+
+
+
+
+
 <a name="1.5.2"></a>
 ## [1.5.2](https://github.com/edenlabllc/ehealth.web/compare/v1.5.1...v1.5.2) (2018-12-05)
 
