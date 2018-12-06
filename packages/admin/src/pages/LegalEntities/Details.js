@@ -139,48 +139,46 @@ const Details = ({ id }) => (
                       )}
                     </Mutation>
                   ) : (
-                    <Box mr={20}>
-                      <Popup
-                        variant="red"
-                        buttonText="Закрити медзаклад"
-                        title="Закрити медзаклад"
-                      >
-                        {toggle => (
-                          <Mutation
-                            mutation={DeactivateLegalEntityMutation}
-                            refetchQueries={() => [
-                              {
-                                query: LegalEntityQuery,
-                                variables: { id, first: 10 }
-                              }
-                            ]}
-                          >
-                            {deactivateLegalEntity => (
-                              <Flex justifyContent="center">
-                                <Box mr={20}>
-                                  <Button variant="blue" onClick={toggle}>
-                                    Повернутися
-                                  </Button>
-                                </Box>
-                                <Button
-                                  onClick={async () => {
-                                    await deactivateLegalEntity({
-                                      variables: {
-                                        input: { id }
-                                      }
-                                    });
-                                    toggle();
-                                  }}
-                                  variant="red"
-                                >
-                                  Закрити медзаклад
+                    <Popup
+                      variant="red"
+                      buttonText="Закрити медзаклад"
+                      title="Закрити медзаклад"
+                    >
+                      {toggle => (
+                        <Mutation
+                          mutation={DeactivateLegalEntityMutation}
+                          refetchQueries={() => [
+                            {
+                              query: LegalEntityQuery,
+                              variables: { id, first: 10 }
+                            }
+                          ]}
+                        >
+                          {deactivateLegalEntity => (
+                            <Flex justifyContent="center">
+                              <Box mr={20}>
+                                <Button variant="blue" onClick={toggle}>
+                                  Повернутися
                                 </Button>
-                              </Flex>
-                            )}
-                          </Mutation>
-                        )}
-                      </Popup>
-                    </Box>
+                              </Box>
+                              <Button
+                                onClick={async () => {
+                                  await deactivateLegalEntity({
+                                    variables: {
+                                      input: { id }
+                                    }
+                                  });
+                                  toggle();
+                                }}
+                                variant="red"
+                              >
+                                Закрити медзаклад
+                              </Button>
+                            </Flex>
+                          )}
+                        </Mutation>
+                      )}
+                    </Popup>
                   )}
                 </>
               )}
@@ -505,23 +503,11 @@ const License = ({
         />
 
         <Box mt={3}>
-          {nhsVerified ? (
-            <NhsVerifyButton
-              id={id}
-              variant="red"
-              title="Скасувати верифікацію"
-              isVerificationActive={isVerificationActive}
-              nhsVerified={!nhsVerified}
-            />
-          ) : (
-            <NhsVerifyButton
-              id={id}
-              variant="green"
-              title="Верифікувати медзаклад"
-              isVerificationActive={isVerificationActive}
-              nhsVerified={!nhsVerified}
-            />
-          )}
+          <NhsVerifyButton
+            id={id}
+            isVerificationActive={isVerificationActive}
+            nhsVerified={nhsVerified}
+          />
         </Box>
       </OpacityBox>
     </Box>
@@ -781,58 +767,59 @@ const Popup = ({
 
 export default Details;
 
-const NhsVerifyButton = ({
-  id,
-  variant,
-  title,
-  nhsVerified,
-  isVerificationActive
-}) => (
-  <Popup
-    variant={variant}
-    buttonText={title}
-    title={title}
-    disabled={!isVerificationActive}
-  >
-    {toggle => (
-      <Mutation
-        mutation={NhsVerifyLegalEntityMutation}
-        refetchQueries={() => [
-          {
-            query: LegalEntityQuery,
-            variables: { id, first: 10 }
-          }
-        ]}
-      >
-        {nhsVerifyLegalEntity => (
-          <Flex justifyContent="center">
-            <Box mr={20}>
-              <Button variant="blue" onClick={toggle}>
-                Повернутися
-              </Button>
-            </Box>
-            <Button
-              onClick={async () => {
-                await nhsVerifyLegalEntity({
-                  variables: {
-                    input: {
-                      id,
-                      nhsVerified
+const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
+  const variant = nhsVerified ? "red" : "green";
+  const title = nhsVerified
+    ? "Скасувати верифікацію"
+    : "Верифікувати медзаклад";
+
+  return (
+    <Popup
+      variant={variant}
+      buttonText={title}
+      title={title}
+      disabled={!isVerificationActive}
+    >
+      {toggle => (
+        <Mutation
+          mutation={NhsVerifyLegalEntityMutation}
+          refetchQueries={() => [
+            {
+              query: LegalEntityQuery,
+              variables: { id, first: 10 }
+            }
+          ]}
+        >
+          {nhsVerifyLegalEntity => (
+            <Flex justifyContent="center">
+              <Box mr={20}>
+                <Button variant="blue" onClick={toggle}>
+                  Повернутися
+                </Button>
+              </Box>
+              <Button
+                onClick={async () => {
+                  await nhsVerifyLegalEntity({
+                    variables: {
+                      input: {
+                        id,
+                        nhsVerified: !nhsVerified
+                      }
                     }
-                  }
-                });
-                toggle();
-              }}
-              variant={variant}
-            >
-              {title}
-            </Button>
-          </Flex>
-        )}
-      </Mutation>
-    )}
-  </Popup>
-);
+                  });
+                  toggle();
+                }}
+                variant={variant}
+              >
+                {title}
+              </Button>
+            </Flex>
+          )}
+        </Mutation>
+      )}
+    </Popup>
+  );
+};
 
 const OpacityBox = system({ is: Box, opacity: 1 });
 
