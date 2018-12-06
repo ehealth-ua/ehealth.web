@@ -1,32 +1,42 @@
 import React from "react";
-import styled from "react-emotion/macro";
-
-import { Heading } from "@ehealth/components";
+import system from "system-components/emotion";
+import { Box, Flex } from "rebass/emotion";
+import { Modal } from "@ehealth/components";
 import { EhealthLogoIcon } from "@ehealth/icons";
-
 import Button from "./Button";
 import Link from "./Link";
 
 const ErrorDefault = ({ number, text, error }) => (
-  <Layout>
+  <Modal width={760} px={76} py={32} placement="center" backdrop>
     <Wrapper>
-      <EhealthLogoIcon height="100" />
+      <EhealthLogoIcon height="80" />
       <ErrorTitle weight="bold">Помилка</ErrorTitle>
       {number && <Number>{number}</Number>}
-      <ErrorText weight="bold">{text}</ErrorText>
-      {error &&
-        error.message && (
-          <ErrorDetails>
-            <ErrorDetailsTitle>Деталі помилки</ErrorDetailsTitle>
-            <ErrorMsg>{error.message}</ErrorMsg>
-          </ErrorDetails>
-        )}
-
-      <Link is="a" href="/">
-        <Button variant="blue">Повернутись на головну</Button>
-      </Link>
+      {text && <ErrorText weight="bold">{text}</ErrorText>}
+      {error && (
+        <ErrorDetails>
+          <Box mr={3}>
+            {error.message}
+            {error.errorDetails && ":"}
+          </Box>
+          <Box>
+            {error.errorDetails &&
+              error.errorDetails.map(e => (
+                <Description>{e.description}</Description>
+              ))}
+          </Box>
+        </ErrorDetails>
+      )}
+      {number === "404" || number === "500" ? (
+        <>
+          <br />
+          <Link is="a" href="/">
+            <Button variant="blue">Повернутись на головну</Button>
+          </Link>
+        </>
+      ) : null}
     </Wrapper>
-  </Layout>
+  </Modal>
 );
 
 const Error = {};
@@ -50,54 +60,69 @@ Error.ConflictError = ({ error }) => (
     number="409"
   />
 );
+Error.Forbidden = ({ error }) => (
+  <ErrorDefault
+    text="У вас немає доступу до даної операції"
+    error={error}
+    number="403"
+  />
+);
+Error.UnprocessableEntity = ({ error }) => (
+  <ErrorDefault error={error} number="422" />
+);
+Error.Default = ({ error }) => (
+  <ErrorDefault text="Щось пішло не так" error={error} />
+);
 
 export default Error;
 
-const Layout = styled.div`
-  background-color: #fff;
-  position: fixed;
-  z-index: 999;
-  width: 100%;
-`;
+const Wrapper = system({
+  is: Flex,
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center"
+});
 
-const Wrapper = styled.div`
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 420px;
-  margin: 0 auto;
-  text-align: center;
-`;
+const Number = system({
+  is: "h1",
+  mt: 0,
+  mb: 50,
+  fontSize: "85px",
+  lineHeight: "85px",
+  fontWeight: 200
+});
 
-const Number = styled(Heading.H1)`
-  font-size: 85px;
-  font-weight: 200;
-  margin: 0 0 50px;
-  line-height: 85px;
-`;
+const ErrorTitle = system({
+  is: "h2",
+  mt: 50,
+  mb: 40,
+  fontWeight: 200
+});
 
-const ErrorTitle = styled(Heading.H2)`
-  margin: 50px 0 40px;
-`;
+const ErrorText = system({
+  is: "h2",
+  mb: 50,
+  fontWeight: 200
+});
 
-const ErrorText = styled(Heading.H2)`
-  margin-bottom: 50px;
-`;
+const ErrorDetails = system({
+  is: Flex,
+  justifyContent: "center",
+  border: "1px solid #ddd",
+  p: 2,
+  m: 2,
+  background: "#f9f9f9",
+  fontFamily: "monospace"
+});
 
-const ErrorMsg = styled.p`
-  padding: 20px;
-  white-space: pre-wrap;
-`;
-
-const ErrorDetails = styled.div`
-  padding: 20px;
-  margin: 20px;
-  border-radius: 3px;
-  border: 1px solid lightgrey;
-`;
-
-const ErrorDetailsTitle = styled.p`
-  color: #2ea2f8;
-`;
+const Description = system(
+  {
+    is: Box,
+    mb: 2
+  },
+  `
+    &:last-child {
+      margin-bottom: 0;
+    }
+  `
+);

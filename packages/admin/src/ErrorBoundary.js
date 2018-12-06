@@ -1,7 +1,6 @@
 import React, { createContext, Component } from "react";
 import { ForceRedirect, Switch, Modal } from "@ehealth/components";
 import Error from "./components/Error";
-import { Text } from "rebass/emotion";
 import env from "./env";
 
 const { Provider, Consumer } = createContext(() => {});
@@ -11,7 +10,7 @@ export default class ErrorBoundary extends Component {
 
   state = { error: null, blocking: false };
 
-  componentDidCatch({ message }, info) {
+  componentDidCatch({ message }) {
     const error = { type: "CLIENT", message };
     this.setError({ error, blocking: true });
   }
@@ -25,21 +24,13 @@ export default class ErrorBoundary extends Component {
           <Switch
             value={error.type}
             CLIENT={<Error.ClientError error={error} />}
-            FORBIDDEN={
-              <>
-                <Modal width={760} px={76} py={32} placement="top" backdrop>
-                  <Text color="red" fontSize="16" fontWeight="bold">
-                    У вас немає доступу до даної операції
-                  </Text>
-                </Modal>
-              </>
-            }
+            FORBIDDEN={<Error.Forbidden error={error} />}
             network={
               <>
                 {blocking ? (
                   <Error.ClientError error={error} />
                 ) : (
-                  <Modal width={760} p={4} placement="top">
+                  <Modal width={760} p={4} placement="center">
                     Щось пішло не так...
                     <br />
                     <br />
@@ -58,14 +49,8 @@ export default class ErrorBoundary extends Component {
             NOT_FOUND={<Error.NotFound error={error} />}
             INTERNAL_SERVER_ERROR={<Error.ServerError error={error} />}
             CONFLICT={<Error.ConflictError error={error} />}
-            default={
-              <Modal width={760} p={4} placement="top">
-                Щось пішло не так
-                <br />
-                <br />
-                <pre>{error && error.message}</pre>
-              </Modal>
-            }
+            UNPROCESSABLE_ENTITY={<Error.UnprocessableEntity error={error} />}
+            default={<Error.Default error={error} />}
           />
         )}
         {(error && blocking) || this.props.children}

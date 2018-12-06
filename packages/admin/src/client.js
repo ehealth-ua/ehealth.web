@@ -36,6 +36,7 @@ export const createClient = ({ onError: handleError }) => {
         for (let err of graphQLErrors) {
           return {
             message: err.message,
+            errorDetails: err.errors,
             statusCode: !err.extensions
               ? 500
               : err.extensions.code
@@ -49,11 +50,11 @@ export const createClient = ({ onError: handleError }) => {
 
     const graphqlError = getGraphqlError();
 
-    const { message, statusCode } = graphqlError || networkError;
+    const { message, errorDetails, statusCode } = graphqlError || networkError;
 
     if (statusCode === 422) return;
 
-    const error = { message, type: STATUS_NAMES[statusCode] };
+    const error = { message, errorDetails, type: STATUS_NAMES[statusCode] };
 
     let operationType;
 
