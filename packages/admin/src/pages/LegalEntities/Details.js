@@ -127,8 +127,7 @@ const Details = ({ id }) => (
                             await nhsReviewLegalEntity({
                               variables: {
                                 input: {
-                                  id,
-                                  nhsReviewed: true
+                                  id
                                 }
                               }
                             });
