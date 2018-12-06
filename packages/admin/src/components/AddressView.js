@@ -1,6 +1,7 @@
 //@flow
 import * as React from "react";
 import capitalize from "lodash/capitalize";
+import DictionaryValue from "./DictionaryValue";
 
 type AddressProps = {
   data: {
@@ -33,16 +34,17 @@ const AddressView = ({
     {zip && <>{zip}, </>}
     {formatArea(area)}, {region && <>{normalizeName(region)} район, </>}
     <>
-      {/* TODO: Add Dictionary*/}
-      {settlementType} &nbsp;
+      <DictionaryValue name="SETTLEMENT_TYPE" item={settlementType} />
+      &nbsp;
       {normalizeName(settlement)}
     </>
     ,{" "}
     <>
       {street && (
         <>
-          {/* TODO: Add Dictionary*/}
-          {streetType} {normalizeName(street)}
+          <DictionaryValue name="STREET_TYPE" item={streetType} />
+          &nbsp;
+          {normalizeName(street)}
           &nbsp;
         </>
       )}
