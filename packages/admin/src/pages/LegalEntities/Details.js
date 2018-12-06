@@ -34,9 +34,8 @@ import Ability from "../../components/Ability";
 import * as Field from "../../components/Field";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
-
-import STATUSES from "../../helpers/statuses";
 
 const DeactivateLegalEntityMutation = loader(
   "../../graphql/DeactivateLegalEntityMutation.graphql"
@@ -273,7 +272,7 @@ const GeneralInfo = ({
           .filter(a => a.type === "REGISTRATION")
           .map((item, key) => <AddressView data={item} key={key} />),
         phones: getPhones(phones),
-        type: STATUSES.LEGAL_ENTITY_TYPE[type]
+        type: <DictionaryValue name="LEGAL_ENTITY_TYPE" item={type} />
       }}
     />
     <Line />
@@ -286,16 +285,30 @@ const GeneralInfo = ({
         beneficiary: "Вигодонабувач"
       }}
       data={{
-        ownerPropertyType,
-        legalForm,
+        ownerPropertyType: (
+          <DictionaryValue
+            name="OWNER_PROPERTY_TYPE"
+            item={ownerPropertyType}
+          />
+        ),
+        legalForm: <DictionaryValue name="LEGAL_FORM" item={legalForm} />,
         beneficiary,
         receiverFundsCode,
-        kveds: kveds.map((el, key, arr) => (
-          <React.Fragment key={key}>
-            {el}
-            {key !== arr.length - 1 && ", "}
-          </React.Fragment>
-        ))
+        kveds: (
+          <DictionaryValue
+            name="KVEDS"
+            render={dict => (
+              <>
+                {kveds.map((el, key, arr) => (
+                  <React.Fragment key={key}>
+                    {dict[el]}
+                    {key !== arr.length - 1 && ", "}
+                  </React.Fragment>
+                ))}
+              </>
+            )}
+          />
+        )
       }}
     />
     <DefinitionListView
@@ -343,7 +356,13 @@ const License = ({
 }) => {
   const {
     accreditation,
-    accreditation: { orderDate, issuedDate, expiryDate } = {},
+    accreditation: {
+      orderDate,
+      issuedDate,
+      expiryDate,
+      category,
+      orderNo
+    } = {},
     licenses
   } = license || {};
 
@@ -362,11 +381,20 @@ const License = ({
               orderNo: "Номер наказу"
             }}
             data={{
-              ...accreditation,
+              category: category && (
+                <DictionaryValue
+                  name="ACCREDITATION_CATEGORY"
+                  item={accreditation.category}
+                />
+              ),
+              validateDate: `з ${format(issuedDate, "DD.MM.YYYY")}
+                              ${
+                                expiryDate
+                                  ? `по ${format(expiryDate, "DD.MM.YYYY")}`
+                                  : ""
+                              }`,
               orderDate: format(orderDate, "DD.MM.YYYY"),
-              validateDate: `з ${format(issuedDate, "DD.MM.YYYY")} ${
-                expiryDate ? `по ${format(expiryDate, "DD.MM.YYYY")}` : ""
-              }`
+              orderNo
             }}
           />
           <Line />

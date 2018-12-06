@@ -16,9 +16,9 @@ import {
   RemoveItemIcon
 } from "@ehealth/icons";
 
-import STATUSES from "../../helpers/statuses";
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
+import DictionaryValue from "../../components/DictionaryValue";
 import Table from "../../components/Table";
 import Link from "../../components/Link";
 import AddressView from "../../components/AddressView";
@@ -30,18 +30,7 @@ const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
 const SearchLegalEntitiesQuery = loader(
   "../../graphql/SearchLegalEntitiesQuery.graphql"
 );
-const legalEntityStatus = Object.entries(STATUSES.LEGAL_ENTITY_STATUS).map(
-  ([key, value]) => ({
-    key: key === "VERIFIED",
-    value
-  })
-);
-const legalEntityType = Object.entries(STATUSES.LEGAL_ENTITY_TYPE).map(
-  ([key, value]) => ({
-    key,
-    value
-  })
-);
+
 const ID_PATTERN =
   "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
 
@@ -74,7 +63,7 @@ const Search = ({ uri }) => (
           ...sendCodeParams,
           nhsVerified: isEmpty(nhsVerified)
             ? undefined
-            : nhsVerified.key === "true",
+            : nhsVerified.key === "VERIFIED",
           settlement: isEmpty(settlement) ? undefined : settlement.settlement,
           area: isEmpty(settlement) ? undefined : settlement.area,
           type: isEmpty(type) ? undefined : type.key
@@ -141,7 +130,12 @@ const Search = ({ uri }) => (
                           }) => ({
                             ...legalEntity,
                             id: databaseId,
-                            type: STATUSES.LEGAL_ENTITY_TYPE[type],
+                            type: (
+                              <DictionaryValue
+                                name="LEGAL_ENTITY_TYPE"
+                                item={type}
+                              />
+                            ),
                             nhsVerified: (
                               <Flex justifyContent="center">
                                 {nhsVerified ? (
@@ -295,41 +289,57 @@ const SearchLegalEntitiesForm = ({
       {/*</Box>*/}
 
       <Box px={1} width={1 / 4}>
-        {/*Todo: Use Select with dictionary LEGAL_ENTITY_TYPE*/}
-        <Field.Select
-          type="select"
-          name="filter.type"
-          label="Тип медзакладу"
-          placeholder="Показати всі"
-          itemToString={item => {
-            if (!item) return "Показати всі";
-            return typeof item === "string" ? item : item.value;
-          }}
-          items={[
-            { value: "Показати всі", name: undefined },
-            ...legalEntityType
-          ]}
-          renderItem={({ value }) => value}
-          size="small"
+        <DictionaryValue
+          name="LEGAL_ENTITY_TYPE"
+          render={dict => (
+            <Field.Select
+              type="select"
+              name="filter.type"
+              label="Тип медзакладу"
+              placeholder="Показати всі"
+              itemToString={item => {
+                if (!item) return "Показати всі";
+                return typeof item === "string" ? item : item.value;
+              }}
+              items={[
+                { value: "Показати всі", key: undefined },
+                ...Object.entries(dict)
+                  .filter(([key]) => key !== "MIS")
+                  .map(([key, value]) => ({
+                    value,
+                    key
+                  }))
+              ]}
+              renderItem={({ value }) => value}
+              size="small"
+            />
+          )}
         />
       </Box>
       <Box px={1} width={1 / 4}>
-        {/*Todo: Use Select with dictionary LEGAL_ENTITY_STATUS*/}
-        <Field.Select
-          type="select"
-          name="filter.nhsVerified"
-          label="Статус верифікації"
-          placeholder="Всі статуси"
-          itemToString={item => {
-            if (!item) return "Всі статуси";
-            return typeof item === "string" ? item : item.value;
-          }}
-          items={[
-            { value: "Всі статуси", name: undefined },
-            ...legalEntityStatus
-          ]}
-          renderItem={({ value }) => value}
-          size="small"
+        <DictionaryValue
+          name="LEGAL_ENTITY_STATUS"
+          render={dict => (
+            <Field.Select
+              type="select"
+              name="filter.nhsVerified"
+              label="Статус верифікації"
+              placeholder="Всі статуси"
+              itemToString={item => {
+                if (!item) return "Всі статуси";
+                return typeof item === "string" ? item : item.value;
+              }}
+              items={[
+                { value: "Всі статуси", name: undefined },
+                ...Object.entries(dict).map(([key, value]) => ({
+                  value,
+                  key
+                }))
+              ]}
+              renderItem={({ value }) => value}
+              size="small"
+            />
+          )}
         />
       </Box>
     </Flex>

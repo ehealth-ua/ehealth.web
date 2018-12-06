@@ -16,10 +16,10 @@ import Steps from "../../components/Steps";
 import Button from "../../components/Button";
 import Tooltip from "../../components/Tooltip";
 import * as Field from "../../components/Field";
+import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import env from "../../env";
-import STATUSES from "../../helpers/statuses";
 
 const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
 const SearchLegalEntitiesQuery = loader(
@@ -101,7 +101,9 @@ const Search = ({ location: { state } }) => (
                       ...legalEntity
                     }) => ({
                       ...legalEntity,
-                      type: STATUSES.LEGAL_ENTITY_TYPE[type],
+                      type: (
+                        <DictionaryValue name="LEGAL_ENTITY_TYPE" item={type} />
+                      ),
                       owner: owner && getFullName(owner.party),
                       nhsVerified: (
                         <Flex justifyContent="center">
