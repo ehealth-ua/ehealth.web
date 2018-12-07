@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/edenlabllc/ehealth.web/compare/v1.6.0...v1.6.1) (2018-12-07)
+
+
+### Bug Fixes
+
+* **admin:** remove timeout from error popup, fix error description ([cfcd8b1](https://github.com/edenlabllc/ehealth.web/commit/cfcd8b1))
+
+
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/edenlabllc/ehealth.web/compare/v1.5.6...v1.6.0) (2018-12-06)
 
