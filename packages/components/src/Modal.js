@@ -43,11 +43,11 @@ const Window = system(
     maxWidth: "100vw",
     maxHeight: "100vh",
     textAlign: "center",
-    placement: "center"
+    placement: "center",
+    overflow: "auto"
   },
   `
     box-shadow: 0 0 7px 5px rgba(0, 0, 0, 0.1);
-    overflow: auto;
   `,
   "width",
   variant({
