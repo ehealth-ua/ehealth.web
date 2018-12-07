@@ -661,15 +661,23 @@ const Owner = ({
       }}
       data={{
         party: getFullName(party),
-        speciality:
-          doctor.specialities &&
-          doctor.specialities.map(({ speciality }, index, array) => (
-            <React.Fragment key={index}>
-              {speciality}
-              {array.length - 1 !== index && ", "}
-            </React.Fragment>
-          )),
-        position
+        speciality: doctor.specialities && (
+          <DictionaryValue
+            name="SPECIALITY_TYPE"
+            render={dict => (
+              <>
+                {doctor.specialities.map(({ speciality }, index, array) => (
+                  <React.Fragment key={index}>
+                    {dict[speciality]}
+                    {array.length - 1 !== index && ", "}
+                  </React.Fragment>
+                ))}
+              </>
+            )}
+          />
+        ),
+
+        position: <DictionaryValue name="POSITION" item={position} />
       }}
     />
     <DefinitionListView
