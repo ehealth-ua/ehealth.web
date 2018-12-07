@@ -2,12 +2,17 @@ import React from "react";
 import system from "system-components/emotion";
 import { Box, Flex } from "rebass/emotion";
 import { Modal } from "@ehealth/components";
-import { EhealthLogoIcon } from "@ehealth/icons";
+import { EhealthLogoIcon, CloseIcon } from "@ehealth/icons";
 import Button from "./Button";
 import Link from "./Link";
 
-const ErrorDefault = ({ number, text, error }) => (
+const ErrorDefault = ({ number, text, error, onClose }) => (
   <Modal width={760} px={76} py={32} placement="center" backdrop>
+    {onClose && (
+      <CloseButton onClick={onClose}>
+        <CloseIcon width={15} height={15} />
+      </CloseButton>
+    )}
     <Wrapper>
       <EhealthLogoIcon height="80" />
       <ErrorTitle weight="bold">Помилка</ErrorTitle>
@@ -21,9 +26,10 @@ const ErrorDefault = ({ number, text, error }) => (
           </Box>
           <Box>
             {error.errorDetails &&
-              error.errorDetails.map(e => (
-                <Description>{e.description}</Description>
-              ))}
+              error.errorDetails.map(e => {
+                const [description] = Object.values(e).map(i => i.description);
+                return <Description>{description}</Description>;
+              })}
           </Box>
         </ErrorDetails>
       )}
@@ -53,25 +59,27 @@ Error.NotFound = ({ error }) => (
 Error.ClientError = ({ error }) => (
   <ErrorDefault text="Сталася помилка. Спробуйте пізніше" error={error} />
 );
-Error.ConflictError = ({ error }) => (
+Error.ConflictError = ({ error, onClose }) => (
   <ErrorDefault
     text="Сталася помилка. Спробуйте пізніше"
     error={error}
+    onClose={onClose}
     number="409"
   />
 );
-Error.Forbidden = ({ error }) => (
+Error.Forbidden = ({ error, onClose }) => (
   <ErrorDefault
     text="У вас немає доступу до даної операції"
     error={error}
+    onClose={onClose}
     number="403"
   />
 );
-Error.UnprocessableEntity = ({ error }) => (
-  <ErrorDefault error={error} number="422" />
+Error.UnprocessableEntity = ({ error, onClose }) => (
+  <ErrorDefault error={error} onClose={onClose} number="422" />
 );
-Error.Default = ({ error }) => (
-  <ErrorDefault text="Щось пішло не так" error={error} />
+Error.Default = ({ error, onClose }) => (
+  <ErrorDefault text="Щось пішло не так" error={error} onClose={onClose} />
 );
 
 export default Error;
@@ -126,3 +134,11 @@ const Description = system(
     }
   `
 );
+
+const CloseButton = system({
+  position: "absolute",
+  top: 30,
+  right: 30,
+  width: 15,
+  height: 15
+});

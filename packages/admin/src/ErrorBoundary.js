@@ -24,7 +24,7 @@ export default class ErrorBoundary extends Component {
           <Switch
             value={error.type}
             CLIENT={<Error.ClientError error={error} />}
-            FORBIDDEN={<Error.Forbidden error={error} />}
+            FORBIDDEN={<Error.Forbidden error={error} onClose={this.onClose} />}
             network={
               <>
                 {blocking ? (
@@ -48,9 +48,13 @@ export default class ErrorBoundary extends Component {
             }
             NOT_FOUND={<Error.NotFound error={error} />}
             INTERNAL_SERVER_ERROR={<Error.ServerError error={error} />}
-            CONFLICT={<Error.ConflictError error={error} />}
-            UNPROCESSABLE_ENTITY={<Error.UnprocessableEntity error={error} />}
-            default={<Error.Default error={error} />}
+            CONFLICT={
+              <Error.ConflictError error={error} onClose={this.onClose} />
+            }
+            UNPROCESSABLE_ENTITY={
+              <Error.UnprocessableEntity error={error} onClose={this.onClose} />
+            }
+            default={<Error.Default error={error} onClose={this.onClose} />}
           />
         )}
         {(error && blocking) || this.props.children}
@@ -60,9 +64,8 @@ export default class ErrorBoundary extends Component {
 
   setError = ({ error, blocking }) => {
     this.setState({ error, blocking });
-
-    if (!blocking) {
-      setTimeout(() => this.setState({ error: null }), 8000);
-    }
+  };
+  onClose = () => {
+    this.setState({ error: null });
   };
 }
