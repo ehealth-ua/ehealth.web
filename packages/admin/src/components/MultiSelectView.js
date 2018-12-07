@@ -11,7 +11,7 @@ export const List = system(
     top: "100%",
     width: "100%",
     zIndex: 10,
-    maxHeight: "450px"
+    maxHeight: "300px"
   },
   {
     overflowY: "scroll"
