@@ -1,12 +1,14 @@
 import React from "react";
 import { Query } from "react-apollo";
-import DictionaryQuery from "./graphql/DictionaryQuery.graphql";
+import { loader } from "graphql.macro";
+const DictionaryQuery = loader("./graphql/SearchDictionariesQuery.graphql");
 
 const Preload = ({ children }) => (
   <Query
     fetchPolicy="cache-first"
     context={{ credentials: "same-origin" }}
     query={DictionaryQuery}
+    variables={{ first: 400 }}
   >
     {({ loading, error, data }) => {
       if (loading || error) return null;

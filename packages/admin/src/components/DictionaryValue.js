@@ -20,7 +20,7 @@ const DictionaryValue = ({
     fetchPolicy="cache-first"
     context={{ credentials: "same-origin" }}
     query={DictionaryQuery}
-    variables={{ first: 10, filter: { name } }}
+    variables={{ first: 400 }}
   >
     {({
       loading,
@@ -28,8 +28,7 @@ const DictionaryValue = ({
       data: { dictionaries: { nodes: dictionaries = [] } = {} }
     }) => {
       if (loading || error) return null;
-
-      const [{ values }] = dictionaries;
+      const { values } = dictionaries.find(dict => dict.name === name);
 
       const value =
         item !== undefined ? (values[item] ? values[item] : item) : values;

@@ -7,6 +7,7 @@ import "./globalStyles";
 import * as theme from "./theme";
 import ErrorBoundary from "./ErrorBoundary";
 import DataProvider from "./DataProvider";
+import Preload from "./Preload";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -29,19 +30,21 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <ErrorBoundary>
         <DataProvider>
-          <Layout>
-            <Router>
-              <Home path="/" />
-              <ContractRequests path="contract-requests/*" />
-              <Contracts path="contracts/*" />
-              <LegalEntityMergeJobs path="legal-entity-merge-jobs/*" />
-              <Persons path="persons/*" />
-              <Declarations path="declarations/*" />
-              <LegalEntities path="legal-entities/*" />
-              <Dictionaries path="dictionaries/*" />
-              <NotFound default />
-            </Router>
-          </Layout>
+          <Preload>
+            <Layout>
+              <Router>
+                <Home path="/" />
+                <ContractRequests path="contract-requests/*" />
+                <Contracts path="contracts/*" />
+                <LegalEntityMergeJobs path="legal-entity-merge-jobs/*" />
+                <Persons path="persons/*" />
+                <Declarations path="declarations/*" />
+                <LegalEntities path="legal-entities/*" />
+                <Dictionaries path="dictionaries/*" />
+                <NotFound default />
+              </Router>
+            </Layout>
+          </Preload>
         </DataProvider>
       </ErrorBoundary>
     </ThemeProvider>
