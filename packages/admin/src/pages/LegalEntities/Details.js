@@ -430,10 +430,29 @@ const License = ({
             })}
             tableName="legal-entities/licenses"
           />
+          <Line />
         </>
       )}
 
       <OpacityBox mt={5} opacity={isVerificationActive ? 1 : 0.5}>
+        <Heading fontSize="1" fontWeight="normal" mb={5}>
+          Верифікація
+        </Heading>
+        <DefinitionListView
+          labels={{
+            nhsVerified: "Верифікація НСЗУ"
+          }}
+          data={{
+            nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />
+          }}
+        />
+        <Box mt={3} mb={4}>
+          <NhsVerifyButton
+            id={id}
+            isVerificationActive={isVerificationActive}
+            nhsVerified={nhsVerified}
+          />
+        </Box>
         <Popup
           variant="green"
           buttonText={nhsComment ? "Дивитись коментарі" : "Залишити коментар"}
@@ -519,24 +538,6 @@ const License = ({
             </Mutation>
           )}
         </Popup>
-
-        <Line />
-        <DefinitionListView
-          labels={{
-            nhsVerified: "Верифікація НСЗУ"
-          }}
-          data={{
-            nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />
-          }}
-        />
-
-        <Box mt={3}>
-          <NhsVerifyButton
-            id={id}
-            isVerificationActive={isVerificationActive}
-            nhsVerified={nhsVerified}
-          />
-        </Box>
       </OpacityBox>
     </Box>
   );
