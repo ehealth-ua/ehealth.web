@@ -18,7 +18,6 @@ const DictionaryValue = ({
 }: DictProps) => (
   <Query
     fetchPolicy="cache-first"
-    context={{ credentials: "same-origin" }}
     query={DictionaryQuery}
     variables={{ first: 400 }}
   >

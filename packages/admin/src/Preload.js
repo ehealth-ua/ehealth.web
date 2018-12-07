@@ -6,7 +6,6 @@ const DictionaryQuery = loader("./graphql/SearchDictionariesQuery.graphql");
 const Preload = ({ children }) => (
   <Query
     fetchPolicy="cache-first"
-    context={{ credentials: "same-origin" }}
     query={DictionaryQuery}
     variables={{ first: 400 }}
   >
