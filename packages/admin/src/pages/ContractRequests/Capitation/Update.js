@@ -241,7 +241,7 @@ const UpdateContractRequest = ({
                     </Box>
                     <Box width={2 / 5}>
                       <DictionaryValue
-                        name="PAYMENT_METHOD"
+                        name="CONTRACT_PAYMENT_METHOD"
                         render={dict => (
                           <Field.Select
                             type="select"

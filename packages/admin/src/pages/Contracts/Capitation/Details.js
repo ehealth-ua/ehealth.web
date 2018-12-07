@@ -274,7 +274,10 @@ const GeneralInfo = ({
         nhsSignerBase,
         nhsContractPrice,
         nhsPaymentMethod: (
-          <DictionaryValue name="PAYMENT_METHOD" item={nhsPaymentMethod} />
+          <DictionaryValue
+            name="CONTRACT_PAYMENT_METHOD"
+            item={nhsPaymentMethod}
+          />
         ),
         issueCity
       }}
