@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.1"></a>
+## [1.9.1](https://github.com/edenlabllc/ehealth.web/compare/v1.9.0...v1.9.1) (2018-12-07)
+
+
+### Bug Fixes
+
+* **admin:** delete credentials from query on dictionaries ([1846d9a](https://github.com/edenlabllc/ehealth.web/commit/1846d9a))
+
+
+
+
+
 <a name="1.9.0"></a>
 # [1.9.0](https://github.com/edenlabllc/ehealth.web/compare/v1.8.1...v1.9.0) (2018-12-07)
 
