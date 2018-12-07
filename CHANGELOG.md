@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/edenlabllc/ehealth.web/compare/v1.7.0...v1.8.0) (2018-12-07)
+
+
+### Bug Fixes
+
+* **admin:** add DictionaryValue in contractRequests, for paymentMethod, medicalService, specialityType ([de565cd](https://github.com/edenlabllc/ehealth.web/commit/de565cd))
+* **admin:** add DictionaryValue in contracts, for paymentMethod, medicalService, specialityType ([5db8b8b](https://github.com/edenlabllc/ehealth.web/commit/5db8b8b))
+* **admin:** add DictionaryValue in LE, for leType, leStatus, accreditationCategory, legalForm, kveds ([b8d3af3](https://github.com/edenlabllc/ehealth.web/commit/b8d3af3))
+* **admin:** add DictionaryValue to AddressView for settlementType and streetType ([b587d22](https://github.com/edenlabllc/ehealth.web/commit/b587d22))
+* **admin:** delete useless statuses in helpers ([1385edc](https://github.com/edenlabllc/ehealth.web/commit/1385edc))
+
+
+### Features
+
+* **admin:** add component DictionaryValue ([8ac0545](https://github.com/edenlabllc/ehealth.web/commit/8ac0545))
+
+
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/edenlabllc/ehealth.web/compare/v1.6.1...v1.7.0) (2018-12-07)
 
