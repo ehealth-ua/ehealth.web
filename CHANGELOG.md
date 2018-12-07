@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/edenlabllc/ehealth.web/compare/v1.6.1...v1.7.0) (2018-12-07)
+
+
+### Bug Fixes
+
+* **admin:** fix search form on contracts ([d1235fc](https://github.com/edenlabllc/ehealth.web/commit/d1235fc))
+
+
+### Features
+
+* **admin:** add props minDate for DatePicker component ([34aa5ba](https://github.com/edenlabllc/ehealth.web/commit/34aa5ba))
+
+
+
+
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/edenlabllc/ehealth.web/compare/v1.6.0...v1.6.1) (2018-12-07)
 
