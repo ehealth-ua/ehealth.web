@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/edenlabllc/ehealth.web/compare/v1.8.1...v1.9.0) (2018-12-07)
+
+
+### Bug Fixes
+
+* **admin:** add preload component with dictionaries query, change query in DictionaryValue component ([f43e219](https://github.com/edenlabllc/ehealth.web/commit/f43e219))
+* **admin:** change PAYMENT_METHOD to CONTRACT_PAYMENT_METHOD in dictionaryValue in contract and contractRequest ([f3e001f](https://github.com/edenlabllc/ehealth.web/commit/f3e001f))
+
+
+### Features
+
+* **admin:** add dictionaries for position and doctorSpecialities in LE details ([5d0545d](https://github.com/edenlabllc/ehealth.web/commit/5d0545d))
+
+
+
+
+
 <a name="1.8.1"></a>
 ## [1.8.1](https://github.com/edenlabllc/ehealth.web/compare/v1.8.0...v1.8.1) (2018-12-07)
 
