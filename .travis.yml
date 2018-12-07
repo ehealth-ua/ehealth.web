@@ -11,12 +11,9 @@ env:
     - TRUNK_BRANCH="master"
     - DOCKER_REPOSITORY="edenlabllc"
     - HELM_CHART="fe"
-    - secure:
-        g0ucSJW6qgwUa9BPockDpCVb2nhkvzaEmZvh0EIkr+10bImhI086g+ytiqxxBCbIzL7qSOtp+Sr8iwZwrwk6qI16sGmTzvy/BOtSSL2fevapdhgQRXn7JDaaj19pQ8xgo3hkyjkGsHr22/27uD88AlwG8Wv0nhV5oH0Kb/reOjv1QrF+oRtjVrpRRw0PL5rFLYZ/JZ7kkdVI+pp2aDTIEJs/QxSsJ602fokuLbwdrNKeo3BQEnzY95Z0TYaj9Rvl8nI3a/LECNeKABHLVhn0t4qXQBqIZmR/3Il3QOA1eUAoNarsZsuGKweEnKYbj0X6F19tjRupYdHY25W42MUxvun4VJ/AzXLRaa4KdiCAGn5k99jlpIUHOu+NnnUSppac+39qoepridJ4vPiqhNpHHTtfui6eKvF3WSx+znzwM41c1jv/bjZ9SfYuvoXLbCyQzgZrCJEDP3iRJpaTkasfXTdwSmAIbHDVZEU1jic1zLYIyjxzuGG2oV0c37M5AgdzsL/HiqOSVh5zetMH2N76MbQ4bjUtm7+pjUpD5Vinuya6VmHe8vIQwe3aDPEiNozE5XD6uABtHIYcsGTky2a319GOiCWNHpT4/7r3kqpqMQIdNnhfQq7TWoaGz77L7RaBIdsmqDQ3C2xF/3FoGlr1Vv8Olm0v2fWQTXIyJKv7th8=
-    - secure:
-        Vlp9QazReDIv234C1/zjPyJIwm/RjBRLMu0Qmpsy1C7h7NIQvd9xlutgzGDw2xP0NCj2p9kThW+rGoi8PSGObJJHuv5uuqoa22BHoXdenDgN6/AOf6iJexup7T98pIlBskbkdiaJSMf4J+cSQ9tJizOIL9timOP14iAyMtUltM1EsaFEoSMWHnDu1oE50R4aMHvdSUnO+jzkLhGBPrHZMZDMkeVDIv+qaGnwr9s3l+emI9x+cSxKybM+OwEJpa/ZycxuuPgsjsrWzMcvNLF+qGsMFXl8BnigQmKauc7UzcRQx3qO9zkyAhvQSQHSFnBeMmdjkjkd7vdFRO90bnI1mHYj5UmV6+v8nqVSsz/gHUaeBPNEexpy83GPe7iQO1Xh0iMZRB8GRyqcsmsHFKaszh+C4i+6vZduvy5HbZ0djOa8nJnLHV9euffY9jvetbZQmsoRCbUPW0Ih/iYXfUauLl1DelgU/kyFQ9Lg/ynwBE477A17NQk3shzvQHS8pGvd6DdXxgkWB0XFfEW2japQoAXvDQ/EN0XCvZXMoQPKngLvEGFW5BmsntjuHhyKiUSY/pBF6klaAalASGi/Jgft5yE0gCtsZSVv4xN8sSbU2//jT525jxgkcAh8KrdmwwnG3G11S2f9qjwY7oKWPYQg8Z+rPfjimYsRUZXg8dBQZ7A=
-    - secure:
-        FBlFqxWej/gWqnvBa3ah451ItzBpE7RQX2j2Eyv0ABE6OdSiAlUMimTAhVmawA5R4F7DDFmSKeY9L6zD/qKz+OtcuI6ATxGlDRy8puff27UQJtYeIQDDMyUKWwRk+dsZgbu0sbYvv5D5/+cOodusVtaN4bvlV1OPNNVkXgGOOJmGxsZwHw7mJJM49L/ufdPv+WNa+zrDERBe9HAgQ48G98S1Q0P8SF2GzIoBJgP1Id+VXM7yUK1OC3oHtO/5mxV++T88O5VtY0ISeYmfSAp7IIbYYQXPnh4NWb5iFGBx3epjeQVfSoUDlD9UOhsphChhJeaQwvsb7X0pmM5lW1eDnoXZNcP2g6cvZz6dPaiZvbMd8ZwS1JMOb8KFSEWtUAid2i8J6OfMgp1QQ34T5duO8UPc2z6AVuRIot+NQw5eGt1JQ5uXJEre+VmEJfcrkfQDaGmdJoyOWnGFKq+XURgdPW4cmBAB8Bx6QYqOCRlSy0+8kJiBMSFTe2Z/Ay4hoASyUlcWlCHLlywRWELip5T3V5ZByC79Zp9mBCx3g7LzbfK2ntCJBJWn9M+ucPeH9JARwJ2cjObau/dpiXZeFOzMIsTPmjuUN/5wXn3CkoqNZ3i1VDTG5b++3o8VVKMVqhT5COdVXczLiWiigxTmJtYPhQiGEuMgClwvFIAhmymOZW4=
+    - secure: g0ucSJW6qgwUa9BPockDpCVb2nhkvzaEmZvh0EIkr+10bImhI086g+ytiqxxBCbIzL7qSOtp+Sr8iwZwrwk6qI16sGmTzvy/BOtSSL2fevapdhgQRXn7JDaaj19pQ8xgo3hkyjkGsHr22/27uD88AlwG8Wv0nhV5oH0Kb/reOjv1QrF+oRtjVrpRRw0PL5rFLYZ/JZ7kkdVI+pp2aDTIEJs/QxSsJ602fokuLbwdrNKeo3BQEnzY95Z0TYaj9Rvl8nI3a/LECNeKABHLVhn0t4qXQBqIZmR/3Il3QOA1eUAoNarsZsuGKweEnKYbj0X6F19tjRupYdHY25W42MUxvun4VJ/AzXLRaa4KdiCAGn5k99jlpIUHOu+NnnUSppac+39qoepridJ4vPiqhNpHHTtfui6eKvF3WSx+znzwM41c1jv/bjZ9SfYuvoXLbCyQzgZrCJEDP3iRJpaTkasfXTdwSmAIbHDVZEU1jic1zLYIyjxzuGG2oV0c37M5AgdzsL/HiqOSVh5zetMH2N76MbQ4bjUtm7+pjUpD5Vinuya6VmHe8vIQwe3aDPEiNozE5XD6uABtHIYcsGTky2a319GOiCWNHpT4/7r3kqpqMQIdNnhfQq7TWoaGz77L7RaBIdsmqDQ3C2xF/3FoGlr1Vv8Olm0v2fWQTXIyJKv7th8=
+    - secure: Vlp9QazReDIv234C1/zjPyJIwm/RjBRLMu0Qmpsy1C7h7NIQvd9xlutgzGDw2xP0NCj2p9kThW+rGoi8PSGObJJHuv5uuqoa22BHoXdenDgN6/AOf6iJexup7T98pIlBskbkdiaJSMf4J+cSQ9tJizOIL9timOP14iAyMtUltM1EsaFEoSMWHnDu1oE50R4aMHvdSUnO+jzkLhGBPrHZMZDMkeVDIv+qaGnwr9s3l+emI9x+cSxKybM+OwEJpa/ZycxuuPgsjsrWzMcvNLF+qGsMFXl8BnigQmKauc7UzcRQx3qO9zkyAhvQSQHSFnBeMmdjkjkd7vdFRO90bnI1mHYj5UmV6+v8nqVSsz/gHUaeBPNEexpy83GPe7iQO1Xh0iMZRB8GRyqcsmsHFKaszh+C4i+6vZduvy5HbZ0djOa8nJnLHV9euffY9jvetbZQmsoRCbUPW0Ih/iYXfUauLl1DelgU/kyFQ9Lg/ynwBE477A17NQk3shzvQHS8pGvd6DdXxgkWB0XFfEW2japQoAXvDQ/EN0XCvZXMoQPKngLvEGFW5BmsntjuHhyKiUSY/pBF6klaAalASGi/Jgft5yE0gCtsZSVv4xN8sSbU2//jT525jxgkcAh8KrdmwwnG3G11S2f9qjwY7oKWPYQg8Z+rPfjimYsRUZXg8dBQZ7A=
+    - secure: FBlFqxWej/gWqnvBa3ah451ItzBpE7RQX2j2Eyv0ABE6OdSiAlUMimTAhVmawA5R4F7DDFmSKeY9L6zD/qKz+OtcuI6ATxGlDRy8puff27UQJtYeIQDDMyUKWwRk+dsZgbu0sbYvv5D5/+cOodusVtaN4bvlV1OPNNVkXgGOOJmGxsZwHw7mJJM49L/ufdPv+WNa+zrDERBe9HAgQ48G98S1Q0P8SF2GzIoBJgP1Id+VXM7yUK1OC3oHtO/5mxV++T88O5VtY0ISeYmfSAp7IIbYYQXPnh4NWb5iFGBx3epjeQVfSoUDlD9UOhsphChhJeaQwvsb7X0pmM5lW1eDnoXZNcP2g6cvZz6dPaiZvbMd8ZwS1JMOb8KFSEWtUAid2i8J6OfMgp1QQ34T5duO8UPc2z6AVuRIot+NQw5eGt1JQ5uXJEre+VmEJfcrkfQDaGmdJoyOWnGFKq+XURgdPW4cmBAB8Bx6QYqOCRlSy0+8kJiBMSFTe2Z/Ay4hoASyUlcWlCHLlywRWELip5T3V5ZByC79Zp9mBCx3g7LzbfK2ntCJBJWn9M+ucPeH9JARwJ2cjObau/dpiXZeFOzMIsTPmjuUN/5wXn3CkoqNZ3i1VDTG5b++3o8VVKMVqhT5COdVXczLiWiigxTmJtYPhQiGEuMgClwvFIAhmymOZW4=
 before_install:
   - npm i -g npm@6.0.1
 install:
@@ -27,17 +24,15 @@ jobs:
     - stage: unit tests
       script: npm run test:unit
     - stage: build and release
-      if:
-        (branch = env(TRUNK_BRANCH) OR branch =~ /^(\d+\.)?\d+-stable$/) AND type = push
+      if: (branch = env(TRUNK_BRANCH) OR branch =~ /^(\d+\.)?\d+-stable$/) AND type = push
       script:
         - ./ci/prepare-release.sh || travis_terminate 1
         - "npm run release -- --yes || travis_terminate 1"
-        - npm run image:build-and-test -- --concurrency 1 --since origin/HEAD || travis_terminate 1
-        - npm run image:push -- --since origin/HEAD -- -- --latest=`[ "$TRAVIS_BRANCH" = "$TRUNK_BRANCH" ] && echo true || echo false` || travis_terminate 1
+        - npm run image:build-and-test -- --concurrency 1 --since origin/$TRAVIS_BRANCH || travis_terminate 1
+        - npm run image:push -- --since origin/$TRAVIS_BRANCH -- -- --latest=`[ "$TRAVIS_BRANCH" = "$TRUNK_BRANCH" ] && echo true || echo false` || travis_terminate 1
         - git push --follow-tags --no-verify origin $TRAVIS_BRANCH || travis_terminate 1
     - stage: deploy
-      if:
-        (branch = env(TRUNK_BRANCH) OR branch =~ /^(\d+\.)?\d+-stable$/) AND type = push
+      if: (branch = env(TRUNK_BRANCH) OR branch =~ /^(\d+\.)?\d+-stable$/) AND type = push
       script:
         - ./ci/prepare-deploy.sh || travis_terminate 1
         - npm run chart:update || travis_terminate 1
