@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.4"></a>
+## [1.9.4](https://github.com/edenlabllc/ehealth.web/compare/v1.9.3...v1.9.4) (2018-12-10)
+
+
+### Bug Fixes
+
+* **admin:** update orderBy value for edrpou field on Capitation Contracts List page ([#571](https://github.com/edenlabllc/ehealth.web/issues/571)) ([5212c46](https://github.com/edenlabllc/ehealth.web/commit/5212c46))
+
+
+
+
+
 <a name="1.9.3"></a>
 ## [1.9.3](https://github.com/edenlabllc/ehealth.web/compare/v1.9.2...v1.9.3) (2018-12-10)
 
