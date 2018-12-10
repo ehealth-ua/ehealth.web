@@ -18,6 +18,7 @@ import {
 import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import Button from "../../components/Button";
+import Loader from "../../components/Loader";
 import * as Field from "../../components/Field";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import {
@@ -37,7 +38,7 @@ const UpdateDictionaryMutation = loader(
 const Details = ({ name }) => (
   <Query query={DictionariesQuery} variables={{ first: 1, filter: { name } }}>
     {({ loading, error, data }) => {
-      if (loading) return "Loading...";
+      if (loading) return <Loader />;
       if (error) return `Error! ${error.message}`;
 
       const { nodes: dictionaries = [] } = data.dictionaries;

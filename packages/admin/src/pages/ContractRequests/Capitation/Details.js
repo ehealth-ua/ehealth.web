@@ -38,6 +38,7 @@ import Table, {
 import LinkComponent from "../../../components/Link";
 import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
+import Loader from "../../../components/Loader";
 import * as Field from "../../../components/Field";
 import AddressView from "../../../components/AddressView";
 import DictionaryValue from "../../../components/DictionaryValue";
@@ -67,7 +68,7 @@ const CapitationContractRequestsDetails = () => (
 const Details = ({ id }) => (
   <Query query={CapitationContractRequestQuery} variables={{ id }}>
     {({ loading, error, data }) => {
-      if (loading) return "Loading...";
+      if (loading) return <Loader />;
       if (error) return `Error! ${error.message}`;
 
       const {

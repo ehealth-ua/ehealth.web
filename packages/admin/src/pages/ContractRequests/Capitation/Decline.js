@@ -12,6 +12,7 @@ import Line from "../../../components/Line";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
 import Button from "../../../components/Button";
+import Loader from "../../../components/Loader";
 import Tooltip from "../../../components/Tooltip";
 import * as Field from "../../../components/Field";
 import DefinitionListView from "../../../components/DefinitionListView";
@@ -48,7 +49,7 @@ const Decline = ({
         {({ locationParams, setLocationParams }) => (
           <Query query={CapitationContractRequestQuery} variables={{ id }}>
             {({ loading, error, data: { capitationContractRequest } }) => {
-              if (loading) return "Loading...";
+              if (loading) return <Loader />;
               if (error) return `Error! ${error.message}`;
 
               const {

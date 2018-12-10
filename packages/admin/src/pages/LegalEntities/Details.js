@@ -28,6 +28,7 @@ import Link from "../../components/Link";
 import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
+import Loader from "../../components/Loader";
 import Button, { IconButton } from "../../components/Button";
 import Tooltip from "../../components/Tooltip";
 import Ability from "../../components/Ability";
@@ -74,7 +75,7 @@ const Details = ({ id }) => (
     }}
   >
     {({ loading, error, data: { legalEntity } }) => {
-      if (loading) return "Loading...";
+      if (loading) return <Loader />;
       if (error) return `Error! ${error.message}`;
       const {
         id,

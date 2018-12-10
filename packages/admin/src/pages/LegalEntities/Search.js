@@ -21,6 +21,7 @@ import Pagination from "../../components/Pagination";
 import DictionaryValue from "../../components/DictionaryValue";
 import Table from "../../components/Table";
 import Link from "../../components/Link";
+import Loader from "../../components/Loader";
 import AddressView from "../../components/AddressView";
 import Badge from "../../components/Badge";
 import Button, { IconButton } from "../../components/Button";
@@ -89,7 +90,7 @@ const Search = ({ uri }) => (
             }}
           >
             {({ loading, error, data, refetch }) => {
-              if (loading) return null;
+              if (loading) return <Loader />;
               const {
                 nodes: legalEntities = [],
                 pageInfo

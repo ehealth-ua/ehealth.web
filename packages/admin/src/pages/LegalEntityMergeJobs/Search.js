@@ -11,6 +11,7 @@ import { AdminSearchIcon } from "@ehealth/icons";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
+import Loader from "../../components/Loader";
 import Button from "../../components/Button";
 import * as Field from "../../components/Field";
 import STATUSES from "../../helpers/statuses";
@@ -91,7 +92,7 @@ const Search = ({ uri }) => (
               }}
             >
               {({ loading, error, data }) => {
-                if (loading) return null;
+                if (loading) return <Loader />;
                 const {
                   nodes: legalEntityMergeJobs = []
                 } = data.legalEntityMergeJobs;

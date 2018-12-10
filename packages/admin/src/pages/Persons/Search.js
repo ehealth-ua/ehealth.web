@@ -18,6 +18,7 @@ import {
 } from "@ehealth/utils";
 
 import Link from "../../components/Link";
+import Loader from "../../components/Loader";
 import Table from "../../components/Table";
 import Details from "../../components/Details";
 import * as Field from "../../components/Field";
@@ -53,7 +54,7 @@ const Search = ({ uri }) => (
           </Router>
           <Query query={SearchPersonsQuery} variables={locationParams}>
             {({ loading, error, data, refetch }) => {
-              if (loading) return null;
+              if (loading) return <Loader />;
               const { nodes: persons = [] } = data.persons;
               return !error && persons.length > 0 ? (
                 <Table

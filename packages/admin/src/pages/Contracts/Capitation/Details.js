@@ -33,6 +33,7 @@ import Table, {
 } from "../../../components/Table";
 import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
+import Loader from "../../../components/Loader";
 import Button from "../../../components/Button";
 import Tooltip from "../../../components/Tooltip";
 import * as Field from "../../../components/Field";
@@ -65,7 +66,7 @@ const Details = ({ id }) => (
     variables={{ id, first: ITEMS_PER_PAGE[0] }}
   >
     {({ loading, error, data }) => {
-      if (loading) return "Loading...";
+      if (loading) return <Loader />;
       if (error) return `Error! ${error.message}`;
       const {
         isSuspended,

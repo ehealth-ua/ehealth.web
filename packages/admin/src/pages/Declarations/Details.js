@@ -20,6 +20,7 @@ import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
+import Loader from "../../components/Loader";
 import * as Field from "../../components/Field";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
@@ -42,7 +43,7 @@ const ApproveDeclarationMutation = loader(
 const Details = ({ id }) => (
   <Query query={DeclarationQuery} variables={{ id }}>
     {({ loading, error, data }) => {
-      if (loading) return "Loading...";
+      if (loading) return <Loader />;
       if (error) return `Error! ${error.message}`;
       const {
         id,

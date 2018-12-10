@@ -15,6 +15,7 @@ import {
 
 import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
+import Loader from "../../components/Loader";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
@@ -42,7 +43,7 @@ const declarationStatuses = Object.entries(STATUSES.DECLARATION).map(
 const Details = ({ id }) => (
   <Query query={PersonQuery} variables={{ id }}>
     {({ loading, error, data }) => {
-      if (loading) return "Loading...";
+      if (loading) return <Loader />;
       if (error) return `Error! ${error.message}`;
       const {
         id,

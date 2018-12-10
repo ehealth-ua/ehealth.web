@@ -18,6 +18,7 @@ import ContractRequestsNav from "../ContractRequestsNav";
 
 import Table from "../../../components/Table";
 import Badge from "../../../components/Badge";
+import Loader from "../../../components/Loader";
 import Link from "../../../components/Link";
 import Pagination from "../../../components/Pagination";
 import * as Field from "../../../components/Field";
@@ -97,6 +98,8 @@ const CapitationContractRequestsSearch = () => (
                 } = {},
                 refetch
               }) => {
+                if (loading) return <Loader />;
+                if (error) return `Error! ${error.message}`;
                 return (
                   <>
                     <SearchContractRequestsForm

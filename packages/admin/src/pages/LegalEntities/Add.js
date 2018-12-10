@@ -14,6 +14,7 @@ import Badge from "../../components/Badge";
 import Table from "../../components/Table";
 import Steps from "../../components/Steps";
 import Button from "../../components/Button";
+import Loader from "../../components/Loader";
 import Tooltip from "../../components/Tooltip";
 import * as Field from "../../components/Field";
 import DictionaryValue from "../../components/DictionaryValue";
@@ -76,7 +77,7 @@ const Search = ({ location: { state } }) => (
             variables={{ filter, first: 1 }}
           >
             {({ loading, error, data }) => {
-              if (loading) return null;
+              if (loading) return <Loader />;
               if (error) return `Error! ${error.message}`;
               const { nodes: legalEntities } = data.legalEntities;
               const [legalEntity] = legalEntities;

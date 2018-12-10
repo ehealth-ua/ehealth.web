@@ -35,6 +35,7 @@ import * as Field from "../../../components/Field";
 import Link from "../../../components/Link";
 import Line from "../../../components/Line";
 import Table from "../../../components/Table";
+import Loader from "../../../components/Loader";
 import Pagination from "../../../components/Pagination";
 import Button, { IconButton } from "../../../components/Button";
 import Badge from "../../../components/Badge";
@@ -117,15 +118,17 @@ const CapitationContractsSearch = ({ uri }) => (
                   capitationContracts: { nodes: contracts = [], pageInfo } = {}
                 } = {},
                 refetch
-              }) => (
-                <>
-                  <SearchContractsForm
-                    initialValues={locationParams}
-                    onSubmit={setLocationParams}
-                    refetch={refetch}
-                  />
-                  {!error &&
-                    contracts.length > 0 && (
+              }) => {
+                if (loading) return <Loader />;
+                if (error) return `Error! ${error.message}`;
+                return (
+                  <>
+                    <SearchContractsForm
+                      initialValues={locationParams}
+                      onSubmit={setLocationParams}
+                      refetch={refetch}
+                    />
+                    {contracts.length > 0 && (
                       <>
                         <Table
                           data={contracts}
@@ -199,8 +202,9 @@ const CapitationContractsSearch = ({ uri }) => (
                         <Pagination {...pageInfo} />
                       </>
                     )}
-                </>
-              )}
+                  </>
+                );
+              }}
             </Query>
           </>
         );

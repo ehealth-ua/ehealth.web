@@ -9,6 +9,7 @@ import { RemoveItemIcon } from "@ehealth/icons";
 
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
+import Loader from "../../components/Loader";
 import Table from "../../components/Table";
 import Link from "../../components/Link";
 import Button, { IconButton } from "../../components/Button";
@@ -46,7 +47,7 @@ const Search = () => (
             }}
           >
             {({ loading, error, data }) => {
-              if (loading) return null;
+              if (loading) return <Loader />;
               const { nodes: dictionaries = [], pageInfo } = data.dictionaries;
 
               return (
