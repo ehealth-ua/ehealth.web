@@ -1,0 +1,104 @@
+query ReimbursementContractRequestQuery($id: ID!) {
+  reimbursementContractRequest(id: $id) {
+    id
+    databaseId
+    status
+    nhsPaymentMethod
+    nhsSignerBase
+    nhsSigner {
+      id
+      party {
+        firstName
+        lastName
+        secondName
+      }
+    }
+    nhsLegalEntity {
+      databaseId
+    }
+    issueCity
+    contractorLegalEntity {
+      edrpou
+      name
+      id
+      databaseId
+    }
+    assignee {
+      id
+      party {
+        firstName
+        lastName
+        secondName
+      }
+    }
+    startDate
+    endDate
+    contractorLegalEntity {
+      id
+      name
+      edrpou
+      addresses {
+        type
+        area
+        region
+        settlement
+        settlementType
+        settlementId
+        streetType
+        street
+        building
+        apartment
+      }
+    }
+    contractorOwner {
+      databaseId
+      party {
+        firstName
+        lastName
+        secondName
+      }
+    }
+    contractorBase
+    contractorPaymentDetails {
+      bankName
+      mfo
+      payerAccount
+    }
+    contractorDivisions {
+      id
+      name
+      addresses {
+        type
+        area
+        region
+        settlement
+        settlementType
+        settlementId
+        streetType
+        street
+        building
+        apartment
+      }
+      phones {
+        type
+        number
+      }
+      email
+      mountainGroup
+      workingHours
+    }
+    miscellaneous
+    toApproveContent
+    toDeclineContent
+    toSignContent
+    statusReason
+    previousRequest {
+      id
+      databaseId
+    }
+    medicalProgram {
+      id
+      name
+    }
+  }
+}
