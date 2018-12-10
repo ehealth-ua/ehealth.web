@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.5"></a>
+## [1.9.5](https://github.com/edenlabllc/ehealth.web/compare/v1.9.4...v1.9.5) (2018-12-10)
+
+
+### Bug Fixes
+
+* **admin:** add flex container for fixing Add Param button in Safari ([7166b63](https://github.com/edenlabllc/ehealth.web/commit/7166b63))
+
+
+
+
+
 <a name="1.9.4"></a>
 ## [1.9.4](https://github.com/edenlabllc/ehealth.web/compare/v1.9.3...v1.9.4) (2018-12-10)
 
