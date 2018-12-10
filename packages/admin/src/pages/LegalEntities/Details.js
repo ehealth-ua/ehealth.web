@@ -354,17 +354,7 @@ const License = ({
   nhsVerified,
   nhsComment
 }) => {
-  const {
-    accreditation,
-    accreditation: {
-      orderDate,
-      issuedDate,
-      expiryDate,
-      category,
-      orderNo
-    } = {},
-    licenses
-  } = license || {};
+  const { accreditation, licenses } = license || {};
 
   return (
     <Box p={5}>
@@ -381,20 +371,23 @@ const License = ({
               orderNo: "Номер наказу"
             }}
             data={{
-              category: category && (
+              category: accreditation.category && (
                 <DictionaryValue
                   name="ACCREDITATION_CATEGORY"
                   item={accreditation.category}
                 />
               ),
-              validateDate: `з ${format(issuedDate, "DD.MM.YYYY")}
+              validateDate: `з ${format(accreditation.issuedDate, "DD.MM.YYYY")}
                               ${
-                                expiryDate
-                                  ? `по ${format(expiryDate, "DD.MM.YYYY")}`
+                                accreditation.expiryDate
+                                  ? `по ${format(
+                                      accreditation.expiryDate,
+                                      "DD.MM.YYYY"
+                                    )}`
                                   : ""
                               }`,
-              orderDate: format(orderDate, "DD.MM.YYYY"),
-              orderNo
+              orderDate: format(accreditation.orderDate, "DD.MM.YYYY"),
+              ...accreditation
             }}
           />
           <Line />
