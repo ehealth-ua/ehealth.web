@@ -26,10 +26,8 @@ query SearchReimbursementContractsQuery(
         edrpou
       }
       medicalProgram {
-        nodes {
-          id
-          name
-        }
+        id
+        name
       }
     }
     pageInfo {

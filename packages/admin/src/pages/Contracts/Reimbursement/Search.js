@@ -141,16 +141,13 @@ const ReimbursementContractsSearch = () => (
                             isSuspended,
                             contractorLegalEntity: { edrpou },
                             insertedAt,
-                            medicalProgram: { nodes: medicalPrograms = [] },
+                            medicalProgram,
                             ...contracts
                           }) => ({
                             edrpou,
                             ...contracts,
                             medicalProgram:
-                              !isEmpty(medicalPrograms) &&
-                              medicalPrograms
-                                .map(({ name }) => name)
-                                .join(", "),
+                              medicalProgram && medicalProgram.name,
                             isSuspended: (
                               <Flex justifyContent="center">
                                 {isSuspended ? (
