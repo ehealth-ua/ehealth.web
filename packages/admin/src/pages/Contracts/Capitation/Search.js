@@ -131,7 +131,7 @@ const CapitationContractsSearch = ({ uri }) => (
                           data={contracts}
                           header={{
                             databaseId: "ID",
-                            edrpou: "ЄДРПОУ",
+                            contractorLegalEntityEdrpou: "ЄДРПОУ",
                             contractNumber: "Номер договору",
                             startDate: "Договір діє з",
                             endDate: "Договір діє по",
@@ -144,11 +144,13 @@ const CapitationContractsSearch = ({ uri }) => (
                             id,
                             status,
                             isSuspended,
-                            contractorLegalEntity: { edrpou },
+                            contractorLegalEntity: {
+                              edrpou: contractorLegalEntityEdrpou
+                            },
                             insertedAt,
                             ...contracts
                           }) => ({
-                            edrpou,
+                            contractorLegalEntityEdrpou,
                             ...contracts,
                             isSuspended: (
                               <Flex justifyContent="center">
@@ -178,7 +180,7 @@ const CapitationContractsSearch = ({ uri }) => (
                             "startDate",
                             "endDate",
                             "isSuspended",
-                            "edrpou",
+                            "contractorLegalEntityEdrpou",
                             "insertedAt"
                           ]}
                           sortingParams={parseSortingParams(
