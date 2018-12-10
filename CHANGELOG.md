@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.3"></a>
+## [1.9.3](https://github.com/edenlabllc/ehealth.web/compare/v1.9.2...v1.9.3) (2018-12-10)
+
+
+### Bug Fixes
+
+* **admin:** rename Queries for the Capitation Contracts, according to the updated scheme ([dc1af41](https://github.com/edenlabllc/ehealth.web/commit/dc1af41))
+
+
+
+
+
 <a name="1.9.2"></a>
 ## [1.9.2](https://github.com/edenlabllc/ehealth.web/compare/v1.9.1...v1.9.2) (2018-12-10)
 
