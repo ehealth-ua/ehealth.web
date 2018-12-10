@@ -1,7 +1,7 @@
 //@flow
 import * as React from "react";
 import styled from "react-emotion/macro";
-import { Box } from "rebass/emotion";
+import { Box, Flex } from "rebass/emotion";
 import Dropdown from "../Dropdown";
 import { DropDownButton } from "@ehealth/icons";
 import { checkLastInList } from "@ehealth/utils";
@@ -39,8 +39,10 @@ const TableDropDownControll = ({
   <ButtonDropDownWrapper>
     <details>
       <ButtonContent>
-        <DropDownButton color="#2EA2F8" />
-        <Description>{description}</Description>
+        <Flex>
+          <DropDownButton color="#2EA2F8" />
+          <Description>{description}</Description>
+        </Flex>
       </ButtonContent>
 
       <TableDropdown
@@ -72,7 +74,6 @@ const TableDropdown = ({
 );
 
 const Icon = styled.summary`
-  display: flex;
   list-style-type: none;
   cursor: pointer;
   &:focus {
