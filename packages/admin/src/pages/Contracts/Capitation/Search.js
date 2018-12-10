@@ -46,8 +46,8 @@ import {
 } from "../../../constants/contracts";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 
-const SearchContractsQuery = loader(
-  "../../../graphql/SearchContractsQuery.graphql"
+const SearchCapitationContractsQuery = loader(
+  "../../../graphql/SearchCapitationContractsQuery.graphql"
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
@@ -94,7 +94,7 @@ const CapitationContractsSearch = ({ uri }) => (
         return (
           <>
             <Query
-              query={SearchContractsQuery}
+              query={SearchCapitationContractsQuery}
               fetchPolicy="network-only"
               variables={{
                 first:
@@ -114,7 +114,7 @@ const CapitationContractsSearch = ({ uri }) => (
                 loading,
                 error,
                 data: {
-                  contracts: { nodes: contracts = [], pageInfo } = {}
+                  capitationContracts: { nodes: contracts = [], pageInfo } = {}
                 } = {},
                 refetch
               }) => (

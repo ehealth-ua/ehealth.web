@@ -1,4 +1,4 @@
-query ContractQuery(
+query CapitationContractQuery(
   $id: ID!
   $before: String
   $after: String
@@ -8,7 +8,7 @@ query ContractQuery(
   $divisionFilter: DivisionFilter
   $employeeFilter: ContractorEmployeeDivisionFilter
 ) {
-  contract(id: $id) {
+  capitationContract(id: $id) {
     id
     databaseId
     contractNumber

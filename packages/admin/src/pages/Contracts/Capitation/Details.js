@@ -43,7 +43,9 @@ import DefinitionListView from "../../../components/DefinitionListView";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import Pagination from "../../../components/Pagination";
 
-const ContractQuery = loader("../../../graphql/ContractQuery.graphql");
+const CapitationContractQuery = loader(
+  "../../../graphql/CapitationContractQuery.graphql"
+);
 const TerminateContractMutation = loader(
   "../../../graphql/TerminateContractMutation.graphql"
 );
@@ -58,7 +60,10 @@ const CapitationContractsDetails = () => (
 );
 
 const Details = ({ id }) => (
-  <Query query={ContractQuery} variables={{ id, first: ITEMS_PER_PAGE[0] }}>
+  <Query
+    query={CapitationContractQuery}
+    variables={{ id, first: ITEMS_PER_PAGE[0] }}
+  >
     {({ loading, error, data }) => {
       if (loading) return "Loading...";
       if (error) return `Error! ${error.message}`;
@@ -88,7 +93,7 @@ const Details = ({ id }) => (
         externalContractors,
         attachedDocuments,
         statusReason
-      } = data.contract;
+      } = data.capitationContract;
 
       return (
         <>
@@ -151,7 +156,7 @@ const Details = ({ id }) => (
                         mutation={TerminateContractMutation}
                         refetchQueries={() => [
                           {
-                            query: ContractQuery,
+                            query: CapitationContractQuery,
                             variables: { id, first: ITEMS_PER_PAGE[0] }
                           }
                         ]}
@@ -347,7 +352,7 @@ const ProlongateContract = ({ endDate, id }) => (
           mutation={ProlongateContractMutation}
           refetchQueries={() => [
             {
-              query: ContractQuery,
+              query: CapitationContractQuery,
               variables: { id, first: ITEMS_PER_PAGE[0] }
             }
           ]}
@@ -505,7 +510,7 @@ const Divisions = ({ id }) => (
             </Box>
           </Form>
           <Query
-            query={ContractQuery}
+            query={CapitationContractQuery}
             variables={{
               id,
               first:
@@ -528,7 +533,7 @@ const Divisions = ({ id }) => (
                   nodes: contractorDivisions,
                   pageInfo
                 } = {}
-              } = data.contract;
+              } = data.capitationContract;
               return contractorDivisions && contractorDivisions.length ? (
                 <>
                   <Table
@@ -613,7 +618,7 @@ const Employees = ({ id }) => (
             </Box>
           </Form>
           <Query
-            query={ContractQuery}
+            query={CapitationContractQuery}
             variables={{
               id,
               first:
@@ -637,7 +642,7 @@ const Employees = ({ id }) => (
                   nodes: contractorEmployeeDivisions,
                   pageInfo
                 } = {}
-              } = data.contract;
+              } = data.capitationContract;
               return (
                 contractorEmployeeDivisions &&
                 contractorEmployeeDivisions.length > 0 && (
