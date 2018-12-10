@@ -19,38 +19,38 @@ const Nav = () => (
       <NavList>
         <Flag name="features.legacy">
           <NavLinkExternal to="dashboard">
-            <Trans>Statistic</Trans>
+            <Trans id="nav.statistic">Statistic</Trans>
           </NavLinkExternal>
 
           <Ability action="read" resource="person">
             <NavLinkExternal to="persons">
-              <Trans>Persons</Trans>
+              <Trans id="nav.persons">Persons</Trans>
             </NavLinkExternal>
           </Ability>
 
           <Ability action="read" resource="declaration">
-            <NavSection title={<Trans>Declarations</Trans>}>
+            <NavSection
+              title={<Trans id="nav.declarations">Declarations</Trans>}
+            >
               <NavLinkExternal to="declarations">
-                <Trans>Declarations</Trans>
+                <Trans id="nav.declarations">Declarations</Trans>
               </NavLinkExternal>
               <NavLinkExternal to="pending-declarations">
-                <Trans>Pending declarations</Trans>
+                <Trans id="nav.pending_declarations">
+                  Pending declarations
+                </Trans>
               </NavLinkExternal>
             </NavSection>
           </Ability>
 
           <Ability action="read" resource="employee">
-            <NavSection title={<Trans>Employees</Trans>}>
+            <NavSection title={<Trans id="nav.employees">Employees</Trans>}>
               <Ability action="read" resource="employee">
                 <NavLinkExternal to="employees">
-                  <Trans>Employees</Trans>
+                  <Trans id="nav.employees">Employees</Trans>
                 </NavLinkExternal>
                 <NavLinkExternal to="pending-employees">
-                  <Trans>
-                    Pending
-                    <br />
-                    employees
-                  </Trans>
+                  <Trans id="nav.pending_employees">Pending employees</Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
@@ -58,12 +58,12 @@ const Nav = () => (
 
           <Ability action="read" resource="legal_entity">
             <NavLinkExternal to="clinics-verification">
-              <Trans>Clinics verification</Trans>
+              <Trans id="nav.clinics_verification">Clinics verification</Trans>
             </NavLinkExternal>
           </Ability>
 
           <NavLinkExternal to="reports">
-            <Trans>Reports</Trans>
+            <Trans id="nav.reports">Reports</Trans>
           </NavLinkExternal>
 
           <Ability
@@ -71,27 +71,27 @@ const Nav = () => (
             resources={["register", "register_entry"]}
             loose
           >
-            <NavSection title={<Trans>Registers</Trans>}>
+            <NavSection title={<Trans id="nav.registers">Registers</Trans>}>
               <Ability action="read" resource="register">
                 <NavLinkExternal to="registers">
-                  <Trans>Registers</Trans>
+                  <Trans id="nav.registers">Registers</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="register_entry">
                 <NavLinkExternal to="registers-entries">
-                  <Trans>Registers entries</Trans>
+                  <Trans id="nav.registers_entries">Registers entries</Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
           </Ability>
 
           <NavLinkExternal to="dictionaries">
-            <Trans>Dictionaries</Trans>
+            <Trans id="nav.dictionaries">Dictionaries</Trans>
           </NavLinkExternal>
 
           <Ability action="read" resource="global_parameters">
             <NavLinkExternal to="configuration">
-              <Trans>Configuration</Trans>
+              <Trans id="nav.configuration">Configuration</Trans>
             </NavLinkExternal>
           </Ability>
 
@@ -100,20 +100,20 @@ const Nav = () => (
             resources={["innm", "innm_dosage", "medication"]}
             loose
           >
-            <NavSection title={<Trans>Medicines</Trans>}>
+            <NavSection title={<Trans id="nav.medicines">Medicines</Trans>}>
               <Ability action="read" resource="innm">
                 <NavLinkExternal to="innms">
-                  <Trans>Innm</Trans>
+                  <Trans id="nav.innm">Innm</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="innm_dosage">
                 <NavLinkExternal to="innm-dosages">
-                  <Trans>Innm dosage</Trans>
+                  <Trans id="nav.innm_dosage">Innm dosage</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="medication">
                 <NavLinkExternal to="medications">
-                  <Trans>Trade name</Trans>
+                  <Trans id="nav.trade_name">Trade name</Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
@@ -124,15 +124,21 @@ const Nav = () => (
             resources={["medical_program", "program_medication"]}
             loose
           >
-            <NavSection title={<Trans>Medical program</Trans>}>
+            <NavSection
+              title={<Trans id="nav.medical_program">Medical program</Trans>}
+            >
               <Ability action="read" resource="medical_program">
                 <NavLinkExternal to="medical-programs">
-                  <Trans>List of medical programs</Trans>
+                  <Trans id="nav.list_of_medical_programs">
+                    List of medical programs
+                  </Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="program_medication">
                 <NavLinkExternal to="program-medications">
-                  <Trans>Program Participants</Trans>
+                  <Trans id="nav.program_participants">
+                    Program Participants
+                  </Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
@@ -147,35 +153,39 @@ const Nav = () => (
             ]}
             loose
           >
-            <NavSection title={<Trans>Recipes</Trans>}>
+            <NavSection title={<Trans id="nav.recipes">Recipes</Trans>}>
               <Ability action="read" resource="medication_request">
                 <NavLinkExternal to="medication-requests">
-                  <Trans>Recipes</Trans>
+                  <Trans id="nav.recipes">Recipes</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="medication_dispense">
                 <NavLinkExternal to="medication-dispenses">
-                  <Trans>Medication dispenses</Trans>
+                  <Trans id="nav.medication_dispenses">
+                    Medication dispenses
+                  </Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="download" resource="reimbursement_report">
                 <NavLinkExternal to="reimbursement-report">
-                  <Trans>Reimbursement report</Trans>
+                  <Trans id="nav.reimbursement_report">
+                    Reimbursement report
+                  </Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
           </Ability>
 
           <Ability action="read" resources={["bl_user", "party_user"]} loose>
-            <NavSection title={<Trans>Users</Trans>}>
+            <NavSection title={<Trans id="nav.users">Users</Trans>}>
               <Ability action="read" resource="bl_user">
                 <NavLinkExternal to="black-list-users">
-                  <Trans>Black list users</Trans>
+                  <Trans id="nav.black_list_users">Black list users</Trans>
                 </NavLinkExternal>
               </Ability>
               <Ability action="read" resource="party_user">
                 <NavLinkExternal to="party-users">
-                  <Trans>Accounts</Trans>
+                  <Trans id="nav.accounts">Accounts</Trans>
                 </NavLinkExternal>
               </Ability>
             </NavSection>
@@ -183,7 +193,9 @@ const Nav = () => (
 
           <Ability action="reset_authentication_method" resource="person">
             <NavLinkExternal to="reset-authentication-method">
-              <Trans>Reset authorization method</Trans>
+              <Trans id="nav.reset_authentication_method">
+                Reset authentication method
+              </Trans>
             </NavLinkExternal>
           </Ability>
         </Flag>
@@ -193,13 +205,13 @@ const Nav = () => (
           resources={["contract_request", "contract"]}
           loose
         >
-          <NavSection title={<Trans>Contracts</Trans>}>
+          <NavSection title={<Trans id="nav.contracts">Contracts</Trans>}>
             <Ability action="read" resource="contract_request">
               <NavLink to="/contracts">
-                <Trans>Contracts</Trans>
+                <Trans id="nav.contracts">Contracts</Trans>
               </NavLink>
               <NavLink to="/contract-requests">
-                <Trans>Contract requests</Trans>
+                <Trans id="nav.contract_requests">Contract requests</Trans>
               </NavLink>
             </Ability>
           </NavSection>
@@ -207,21 +219,23 @@ const Nav = () => (
         <Flag name="features.person">
           <Ability action="read" resource="person">
             <NavLink to="/persons">
-              <Trans>Persons</Trans>
+              <Trans id="nav.persons">Persons</Trans>
             </NavLink>
           </Ability>
         </Flag>
         <Ability action="read" resource="legal_entity">
           <NavLink to="/legal-entities">
-            <Trans>Legal entities</Trans>
+            <Trans id="nav.legal_entities">Legal entities</Trans>
           </NavLink>
         </Ability>
 
         <Ability action="merge" resources={["legal_entity"]} loose>
-          <NavSection title={<Trans>Jobs</Trans>}>
+          <NavSection title={<Trans id="nav.jobs">Jobs</Trans>}>
             <Ability action="merge" resource="legal_entity">
               <NavLink to="/legal-entity-merge-jobs">
-                <Trans>Legal entity merge jobs</Trans>
+                <Trans id="nav.legal_entity_merge_jobs">
+                  Legal entity merge jobs
+                </Trans>
               </NavLink>
             </Ability>
           </NavSection>
@@ -229,7 +243,7 @@ const Nav = () => (
 
         <Flag name="features.dictionaries">
           <NavLink to="/dictionaries">
-            <Trans>Dictionaries</Trans>
+            <Trans id="nav.dictionaries">Dictionaries</Trans>
           </NavLink>
         </Flag>
       </NavList>

@@ -42,7 +42,7 @@ const SEARCH_REQUEST_PATTERN = `(${EDRPOU_PATTERN})|(${LEGALENTITY_ID_PATTERN})`
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
-      <Trans>Search legal entities</Trans>
+      <Trans id="le.search_legal_entities">Search legal entities</Trans>
     </Heading>
 
     <LocationParams>
