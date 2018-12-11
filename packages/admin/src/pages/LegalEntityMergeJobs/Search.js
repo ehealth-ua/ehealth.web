@@ -2,9 +2,9 @@ import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
-import format from "date-fns/format";
 import differenceInSeconds from "date-fns/difference_in_seconds";
 import { loader } from "graphql.macro";
+import { Trans, DateFormat, Plural } from "@lingui/macro";
 
 import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
 import { AdminSearchIcon } from "@ehealth/icons";
@@ -22,16 +22,20 @@ const LegalEntitiesMergeJobsQuery = loader(
 const EDRPOU_PATTERN = "^[0-9]{8,10}$";
 
 const jobsStatuses = Object.entries(STATUSES.MERGE_LEGAL_ENTITIES_JOBS).map(
-  ([name, value]) => ({ name, value })
+  ([key, value]) => ({ key, value })
 );
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={1}>
-      Об’єднання медзакладів
+      <Trans id="le_merge.merge_legal_entities">Merge legal entities</Trans>
     </Heading>
     <Tabs.Nav>
-      <Tabs.Link to="./related">Підпорядковані</Tabs.Link>
-      <Tabs.Link to="./main">Основний медзаклад</Tabs.Link>
+      <Tabs.Link to="./related">
+        <Trans id="le_merge.subordinated_legal_entity">Subordinated</Trans>
+      </Tabs.Link>
+      <Tabs.Link to="./main">
+        <Trans id="le_merge.main_legal_entity">Main</Trans>
+      </Tabs.Link>
     </Tabs.Nav>
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
@@ -58,7 +62,7 @@ const Search = ({ uri }) => (
             : { id: mergedFromLegalEntityCode };
 
         const filter = {
-          status: status && status.name,
+          status: status && status.key,
           mergedToLegalEntity,
           mergedFromLegalEntity
         };
@@ -96,15 +100,35 @@ const Search = ({ uri }) => (
                     data={legalEntityMergeJobs}
                     header={{
                       databaseId: "ID",
-                      mergedToLegalEntityName: "Основний медзаклад",
-                      mergedToLegalEntityEdrpou: "ЄДРПОУ основного медзакладу",
-                      mergedFromLegalEntityName:
-                        "Назва підпорядкованого медзакладу",
-                      mergedFromLegalEntityEdrpou:
-                        "ЄДРПОУ підпорядкованого медзакладу",
-                      startedAt: "Час старту задачі",
-                      executionTime: "Час виконання задачі",
-                      status: "Статус задачі"
+                      mergedToLegalEntityName: (
+                        <Trans id="le_merge.main_legal_entity_name">
+                          Main legal entity
+                        </Trans>
+                      ),
+                      mergedToLegalEntityEdrpou: (
+                        <Trans id="le_merge.main_legal_entity_edrpou">
+                          Main legal entity edrpou
+                        </Trans>
+                      ),
+                      mergedFromLegalEntityName: (
+                        <Trans id="le_merge.subordinated_legal_entity_name">
+                          Subordinated legal entity
+                        </Trans>
+                      ),
+                      mergedFromLegalEntityEdrpou: (
+                        <Trans id="le_merge.subordinated_legal_entity_edrpou">
+                          Subordinated legal entity edrpou
+                        </Trans>
+                      ),
+                      startedAt: (
+                        <Trans id="le_merge.started_at">Started at</Trans>
+                      ),
+                      executionTime: (
+                        <Trans id="le_merge.execution_time">
+                          Execution time
+                        </Trans>
+                      ),
+                      status: <Trans id="le_merge.job_status">Job status</Trans>
                     }}
                     renderRow={({
                       databaseId,
@@ -126,11 +150,31 @@ const Search = ({ uri }) => (
                       mergedToLegalEntityEdrpou,
                       mergedFromLegalEntityName,
                       mergedFromLegalEntityEdrpou,
-                      startedAt: format(startedAt, "DD.MM.YYYY, HH:mm"),
+                      startedAt: (
+                        <DateFormat
+                          value={startedAt}
+                          format={{
+                            year: "numeric",
+                            month: "numeric",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric"
+                          }}
+                        />
+                      ),
                       executionTime:
-                        status === "PENDING"
-                          ? "-"
-                          : `${differenceInSeconds(endedAt, startedAt)} с`,
+                        status === "PENDING" ? (
+                          "-"
+                        ) : (
+                          <Plural
+                            value={differenceInSeconds(endedAt, startedAt)}
+                            zero="# секунд"
+                            one="# секунда"
+                            few="# секунди"
+                            many="# секунд"
+                            other="# секунд"
+                          />
+                        ),
                       status: (
                         <Badge
                           type="MERGE_LEGAL_ENTITIES_JOBS"
@@ -164,34 +208,52 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
   <Form initialValues={initialValues} onSubmit={onSubmit}>
     <Flex mx={-1}>
       <Box px={1} width={1 / 1.5}>
-        <Field.Text
-          name="filter.mergedFromLegalEntity.code"
-          label="Знайти підпорядкований медзаклад"
-          placeholder="ЄДРПОУ медзакладу"
-          postfix={<AdminSearchIcon color="#CED0DA" />}
+        <Trans
+          id="le_merge.legal_entity_edrpou"
+          render={({ translation }) => (
+            <Field.Text
+              name="filter.mergedFromLegalEntity.code"
+              label={
+                <Trans id="le_merge.subordinated_legal_entity_search">
+                  Search main legal entity
+                </Trans>
+              }
+              placeholder={translation}
+              postfix={<AdminSearchIcon color="#CED0DA" />}
+            />
+          )}
         />
         <Validation.Matches
           field="filter.mergedFromLegalEntity.code"
           options={EDRPOU_PATTERN}
-          message="Невірний номер"
+          message={
+            <Trans id="form.validation.wrong_number">Wrong number</Trans>
+          }
         />
       </Box>
       <Box px={1} width={1 / 3}>
-        <Field.Select
-          name="filter.status"
-          label="Статус задачі"
-          items={[{ value: "всі статуси", name: undefined }, ...jobsStatuses]}
-          renderItem={item => item.value}
-          itemToString={item => {
-            if (!item) return "всі статуси";
-            return typeof item === "string" ? item : item.value;
-          }}
-          filterOptions={{ keys: ["value"] }}
-          type="select"
+        <Trans
+          id="common.all_statuses"
+          render={({ translation }) => (
+            <Field.Select
+              name="filter.status"
+              label={<Trans id="le_merge.job_status">Job status</Trans>}
+              items={[{ value: translation, key: undefined }, ...jobsStatuses]}
+              renderItem={item => item.value}
+              itemToString={item => {
+                if (!item) return translation;
+                return typeof item === "string" ? item : item.value;
+              }}
+              filterOptions={{ keys: ["value"] }}
+              type="select"
+            />
+          )}
         />
       </Box>
     </Flex>
-    <Button variant="blue">Шукати</Button>
+    <Button variant="blue">
+      <Trans id="common.search_button">Search</Trans>
+    </Button>
   </Form>
 );
 
@@ -199,33 +261,52 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
   <Form initialValues={initialValues} onSubmit={onSubmit}>
     <Flex mx={-1}>
       <Box px={1} width={1 / 1.5}>
-        <Field.Text
-          name="filter.mergedToLegalEntity.code"
-          label="Знайти основний медзаклад"
-          placeholder="ЄДРПОУ медзакладу"
-          postfix={<AdminSearchIcon color="#CED0DA" />}
+        <Trans
+          id="le_merge.legal_entity_edrpou"
+          render={({ translation }) => (
+            <Field.Text
+              name="filter.mergedToLegalEntity.code"
+              label={
+                <Trans id="le_merge.main_legal_entity_search">
+                  Search main legal entity
+                </Trans>
+              }
+              placeholder={translation}
+              postfix={<AdminSearchIcon color="#CED0DA" />}
+            />
+          )}
         />
         <Validation.Matches
           field="filter.mergedToLegalEntity.code"
           options={EDRPOU_PATTERN}
-          message="Невірний номер"
+          message={
+            <Trans id="form.validation.wrong_number">Wrong number</Trans>
+          }
         />
       </Box>
+
       <Box px={1} width={1 / 3}>
-        <Field.Select
-          name="filter.status"
-          label="Статус задачі"
-          items={[{ value: "всі статуси", name: undefined }, ...jobsStatuses]}
-          renderItem={item => item.value}
-          itemToString={item => {
-            if (!item) return "всі статуси";
-            return typeof item === "string" ? item : item.value;
-          }}
-          filterOptions={{ keys: ["value"] }}
-          type="select"
+        <Trans
+          id="common.all_statuses"
+          render={({ translation }) => (
+            <Field.Select
+              name="filter.status"
+              label={<Trans id="le_merge.job_status">Job status</Trans>}
+              items={[{ value: translation, key: undefined }, ...jobsStatuses]}
+              renderItem={item => item.value}
+              itemToString={item => {
+                if (!item) return translation;
+                return typeof item === "string" ? item : item.value;
+              }}
+              filterOptions={{ keys: ["value"] }}
+              type="select"
+            />
+          )}
         />
       </Box>
     </Flex>
-    <Button variant="blue">Шукати</Button>
+    <Button variant="blue">
+      <Trans id="common.search_button">Search</Trans>
+    </Button>
   </Form>
 );

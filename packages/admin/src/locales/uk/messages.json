@@ -1,5 +1,21 @@
 {
+  "common.all_statuses": "Всі статуси",
+  "common.search_button": "Шукати",
+  "form.validation.wrong_number": "Невірний номер",
   "le.search_legal_entities": "Пошук медзакладів",
+  "le_merge.execution_time": "Час виконання задачі",
+  "le_merge.job_status": "Статус задачі",
+  "le_merge.legal_entity_edrpou": "ЄДРПОУ медзакладу",
+  "le_merge.main_legal_entity": "Основний медзаклад",
+  "le_merge.main_legal_entity_edrpou": "ЄДРПОУ основного медзакладу",
+  "le_merge.main_legal_entity_name": "Основний медзаклад",
+  "le_merge.main_legal_entity_search": "Знайти основний медзаклад",
+  "le_merge.merge_legal_entities": "Об’єднання медзакладів",
+  "le_merge.started_at": "Час старту задачі",
+  "le_merge.subordinated_legal_entity": "Підпорядковані",
+  "le_merge.subordinated_legal_entity_edrpou": "ЄДРПОУ підпорядкованого медзакладу",
+  "le_merge.subordinated_legal_entity_name": "Назва підпорядкованого медзакладу",
+  "le_merge.subordinated_legal_entity_search": "Знайти підпорядкований медзаклад",
   "nav.accounts": "Облікові записи",
   "nav.black_list_users": "Заблоковані користувачі",
   "nav.clinics_verification": "Підтвердження медзакладів",
@@ -30,5 +46,6 @@
   "nav.reset_authentication_method": "Скинути метод авторизації",
   "nav.statistic": "Статистика",
   "nav.trade_name": "Торгівельне найменування",
-  "nav.users": "Користувачі"
+  "nav.users": "Користувачі",
+  "{0, plural, zero {# секунд} one {# секунда} few {# секунди} many {# секунд} other {# секунд}}": ""
 }
