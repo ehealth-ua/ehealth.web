@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.10.0"></a>
+# [1.10.0](https://github.com/edenlabllc/ehealth.web/compare/v1.9.6...v1.10.0) (2018-12-11)
+
+
+### Features
+
+* **admin:** merge legal entities page localization ([7b1f02f](https://github.com/edenlabllc/ehealth.web/commit/7b1f02f))
+
+
+
+
+
 <a name="1.9.6"></a>
 ## [1.9.6](https://github.com/edenlabllc/ehealth.web/compare/v1.9.5...v1.9.6) (2018-12-10)
 
