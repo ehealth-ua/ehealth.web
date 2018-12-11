@@ -28,14 +28,14 @@ const jobsStatuses = Object.entries(STATUSES.MERGE_LEGAL_ENTITIES_JOBS).map(
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={1}>
-      <Trans id="le_merge.merge_legal_entities">Merge legal entities</Trans>
+      <Trans>Merge legal entities</Trans>
     </Heading>
     <Tabs.Nav>
       <Tabs.Link to="./related">
-        <Trans id="le_merge.subordinated_legal_entity">Subordinated</Trans>
+        <Trans>Related</Trans>
       </Tabs.Link>
       <Tabs.Link to="./main">
-        <Trans id="le_merge.main_legal_entity">Main</Trans>
+        <Trans>Main</Trans>
       </Tabs.Link>
     </Tabs.Nav>
     <LocationParams>
@@ -107,54 +107,38 @@ const Search = ({ uri }) => (
                       <Table
                         data={legalEntityMergeJobs}
                         header={{
-                          databaseId: "ID",
+                          databaseId: <Trans>ID</Trans>,
                           mergedToLegalEntityName: (
-                            <Trans id="le_merge.main_legal_entity_name">
-                              Main legal entity
-                            </Trans>
+                            <Trans>Main legal entity name</Trans>
                           ),
                           mergedToLegalEntityEdrpou: (
-                            <Trans id="le_merge.main_legal_entity_edrpou">
-                              Main legal entity edrpou
-                            </Trans>
+                            <Trans>Main legal entity edrpou</Trans>
                           ),
                           mergedFromLegalEntityName: (
-                            <Trans id="le_merge.subordinated_legal_entity_name">
-                              Subordinated legal entity
-                            </Trans>
+                            <Trans>Related legal entity name</Trans>
                           ),
                           mergedFromLegalEntityEdrpou: (
-                            <Trans id="le_merge.subordinated_legal_entity_edrpou">
-                              Subordinated legal entity edrpou
-                            </Trans>
+                            <Trans>Related legal entity edrpou</Trans>
                           ),
-                          startedAt: (
-                            <Trans id="le_merge.started_at">Started at</Trans>
-                          ),
-                          executionTime: (
-                            <Trans id="le_merge.execution_time">
-                              Execution time
-                            </Trans>
-                          ),
-                          status: (
-                            <Trans id="le_merge.job_status">Job status</Trans>
-                          )
+                          startedAt: <Trans>Started at</Trans>,
+                          executionTime: <Trans>Execution time</Trans>,
+                          status: <Trans>Job status</Trans>
                         }}
                         renderRow={({
-                          databaseId,
-                          mergedToLegalEntity: {
-                            name: mergedToLegalEntityName,
-                            edrpou: mergedToLegalEntityEdrpou
-                          },
-                          mergedFromLegalEntity: {
-                            name: mergedFromLegalEntityName,
-                            edrpou: mergedFromLegalEntityEdrpou
-                          },
-                          startedAt,
-                          endedAt,
-                          executionTime,
-                          status
-                        }) => ({
+                                      databaseId,
+                                      mergedToLegalEntity: {
+                                        name: mergedToLegalEntityName,
+                                        edrpou: mergedToLegalEntityEdrpou
+                                      },
+                                      mergedFromLegalEntity: {
+                                        name: mergedFromLegalEntityName,
+                                        edrpou: mergedFromLegalEntityEdrpou
+                                      },
+                                      startedAt,
+                                      endedAt,
+                                      executionTime,
+                                      status
+                                    }) => ({
                           databaseId,
                           mergedToLegalEntityName,
                           mergedToLegalEntityEdrpou,
@@ -178,11 +162,11 @@ const Search = ({ uri }) => (
                             ) : (
                               <Plural
                                 value={differenceInSeconds(endedAt, startedAt)}
-                                zero="# секунд"
-                                one="# секунда"
-                                few="# секунди"
-                                many="# секунд"
-                                other="# секунд"
+                                zero="# seconds"
+                                one="# second"
+                                few="# seconds"
+                                many="# seconds"
+                                other="# seconds"
                               />
                             ),
                           status: (
@@ -221,15 +205,11 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 1.5}>
         <Trans
-          id="le_merge.legal_entity_edrpou"
+          id="Legal entity edrpou"
           render={({ translation }) => (
             <Field.Text
               name="filter.mergedFromLegalEntity.code"
-              label={
-                <Trans id="le_merge.subordinated_legal_entity_search">
-                  Search main legal entity
-                </Trans>
-              }
+              label={<Trans>Search related legal entity</Trans>}
               placeholder={translation}
               postfix={<AdminSearchIcon color="#CED0DA" />}
             />
@@ -238,18 +218,16 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.mergedFromLegalEntity.code"
           options={EDRPOU_PATTERN}
-          message={
-            <Trans id="form.validation.wrong_number">Wrong number</Trans>
-          }
+          message={<Trans>Wrong number</Trans>}
         />
       </Box>
       <Box px={1} width={1 / 3}>
         <Trans
-          id="common.all_statuses"
+          id="All statuses"
           render={({ translation }) => (
             <Field.Select
               name="filter.status"
-              label={<Trans id="le_merge.job_status">Job status</Trans>}
+              label={<Trans>Job status</Trans>}
               items={[{ value: translation, key: undefined }, ...jobsStatuses]}
               renderItem={item => item.value}
               itemToString={item => {
@@ -264,7 +242,7 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
       </Box>
     </Flex>
     <Button variant="blue">
-      <Trans id="common.search_button">Search</Trans>
+      <Trans>Search</Trans>
     </Button>
   </Form>
 );
@@ -274,15 +252,11 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 1.5}>
         <Trans
-          id="le_merge.legal_entity_edrpou"
+          id="Legal entity edrpou"
           render={({ translation }) => (
             <Field.Text
               name="filter.mergedToLegalEntity.code"
-              label={
-                <Trans id="le_merge.main_legal_entity_search">
-                  Search main legal entity
-                </Trans>
-              }
+              label={<Trans>Search main legal entity</Trans>}
               placeholder={translation}
               postfix={<AdminSearchIcon color="#CED0DA" />}
             />
@@ -291,19 +265,17 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.mergedToLegalEntity.code"
           options={EDRPOU_PATTERN}
-          message={
-            <Trans id="form.validation.wrong_number">Wrong number</Trans>
-          }
+          message={<Trans>Wrong number</Trans>}
         />
       </Box>
 
       <Box px={1} width={1 / 3}>
         <Trans
-          id="common.all_statuses"
+          id="All statuses"
           render={({ translation }) => (
             <Field.Select
               name="filter.status"
-              label={<Trans id="le_merge.job_status">Job status</Trans>}
+              label={<Trans>Job status</Trans>}
               items={[{ value: translation, key: undefined }, ...jobsStatuses]}
               renderItem={item => item.value}
               itemToString={item => {
@@ -318,7 +290,7 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
       </Box>
     </Flex>
     <Button variant="blue">
-      <Trans id="common.search_button">Search</Trans>
+      <Trans>Search</Trans>
     </Button>
   </Form>
 );

@@ -1,51 +1,250 @@
 {
-  "common.all_statuses": "Всі статуси",
-  "common.search_button": "Шукати",
-  "form.validation.wrong_number": "Невірний номер",
-  "le.search_legal_entities": "Пошук медзакладів",
-  "le_merge.execution_time": "Час виконання задачі",
-  "le_merge.job_status": "Статус задачі",
-  "le_merge.legal_entity_edrpou": "ЄДРПОУ медзакладу",
-  "le_merge.main_legal_entity": "Основний медзаклад",
-  "le_merge.main_legal_entity_edrpou": "ЄДРПОУ основного медзакладу",
-  "le_merge.main_legal_entity_name": "Основний медзаклад",
-  "le_merge.main_legal_entity_search": "Знайти основний медзаклад",
-  "le_merge.merge_legal_entities": "Об’єднання медзакладів",
-  "le_merge.started_at": "Час старту задачі",
-  "le_merge.subordinated_legal_entity": "Підпорядковані",
-  "le_merge.subordinated_legal_entity_edrpou": "ЄДРПОУ підпорядкованого медзакладу",
-  "le_merge.subordinated_legal_entity_name": "Назва підпорядкованого медзакладу",
-  "le_merge.subordinated_legal_entity_search": "Знайти підпорядкований медзаклад",
-  "nav.accounts": "Облікові записи",
-  "nav.black_list_users": "Заблоковані користувачі",
-  "nav.clinics_verification": "Підтвердження медзакладів",
-  "nav.configuration": "Конфігурація системи",
-  "nav.contract_requests": "Заяви на укладення договору",
-  "nav.contracts": "Договори",
-  "nav.declarations": "Декларації",
-  "nav.dictionaries": "Словники",
-  "nav.employees": "Співробітники",
-  "nav.innm": "МНН",
-  "nav.innm_dosage": "Лікарська форма",
-  "nav.jobs": "Задачі в процесі виконання",
-  "nav.legal_entities": "Медзаклади",
-  "nav.legal_entity_merge_jobs": "Підпорядкування медзакладів",
-  "nav.list_of_medical_programs": "Перелік мед. програм",
-  "nav.medical_program": "Програми",
-  "nav.medication_dispenses": "Відпуски рецептів",
-  "nav.medicines": "Медикаменти",
-  "nav.pending_declarations": "Декларації на розгляді",
-  "nav.pending_employees": "Співробітники на розгляді",
-  "nav.persons": "Паціенти",
-  "nav.program_participants": "Учасники програм",
-  "nav.recipes": "Рецепти",
-  "nav.registers": "Реєстри",
-  "nav.registers_entries": "Записи реєстру",
-  "nav.reimbursement_report": "Звіт",
-  "nav.reports": "Звіти",
-  "nav.reset_authentication_method": "Скинути метод авторизації",
-  "nav.statistic": "Статистика",
-  "nav.trade_name": "Торгівельне найменування",
-  "nav.users": "Користувачі",
-  "{0, plural, zero {# секунд} one {# секунда} few {# секунди} many {# секунд} other {# секунд}}": ""
+  "Accounts": {
+    "translation": "Облікові записи",
+    "origin": [["src/components/Nav.js", 174]]
+  },
+  "All statuses": {
+    "translation": "Всі статуси",
+    "origin": [
+      ["src/pages/LegalEntityMergeJobs/Search.js", 215],
+      ["src/pages/LegalEntityMergeJobs/Search.js", 263]
+    ]
+  },
+  "Black list users": {
+    "translation": "Заблоковані користувачі",
+    "origin": [["src/components/Nav.js", 169]]
+  },
+  "Clinics verification": {
+    "translation": "Підтвердження медзакладів",
+    "origin": [["src/components/Nav.js", 57]]
+  },
+  "Configuration": {
+    "translation": "Конфігурація системи",
+    "origin": [["src/components/Nav.js", 90]]
+  },
+  "Contract requests": {
+    "translation": "Заяви на укладення договору",
+    "origin": [["src/components/Nav.js", 198]]
+  },
+  "Contracts": {
+    "translation": "Договори",
+    "origin": [["src/components/Nav.js", 192], ["src/components/Nav.js", 195]]
+  },
+  "Declarations": {
+    "translation": "Декларації",
+    "origin": [["src/components/Nav.js", 32], ["src/components/Nav.js", 34]]
+  },
+  "Dictionaries": {
+    "translation": "Словники",
+    "origin": [["src/components/Nav.js", 85], ["src/components/Nav.js", 228]]
+  },
+  "Employees": {
+    "translation": "Співробітники",
+    "origin": [["src/components/Nav.js", 43], ["src/components/Nav.js", 46]]
+  },
+  "Execution time": {
+    "translation": "Час виконання задачі",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 116]]
+  },
+  "Innm": {
+    "translation": "МНН",
+    "origin": [["src/components/Nav.js", 102]]
+  },
+  "Innm dosage": {
+    "translation": "Лікарська форма",
+    "origin": [["src/components/Nav.js", 107]]
+  },
+  "Job status": {
+    "translation": "Статус задачі",
+    "origin": [
+      ["src/pages/LegalEntityMergeJobs/Search.js", 117],
+      ["src/pages/LegalEntityMergeJobs/Search.js", 220],
+      ["src/pages/LegalEntityMergeJobs/Search.js", 268]
+    ]
+  },
+  "Jobs": {
+    "translation": "Задачі в процесі виконання",
+    "origin": [["src/components/Nav.js", 217]]
+  },
+  "Legal entities": {
+    "translation": "Медзаклади",
+    "origin": [["src/components/Nav.js", 212]]
+  },
+  "Legal entity edrpou": {
+    "translation": "ЄДРПОУ медзаклад",
+    "origin": [
+      ["src/pages/LegalEntityMergeJobs/Search.js", 197],
+      ["src/pages/LegalEntityMergeJobs/Search.js", 244]
+    ]
+  },
+  "Legal entity merge jobs": {
+    "translation": "Підпорядкування медзакладів",
+    "origin": [["src/components/Nav.js", 220]]
+  },
+  "List of medical programs": {
+    "translation": "Перелік мед. програм",
+    "origin": [["src/components/Nav.js", 126]]
+  },
+  "Main": {
+    "translation": "Основний",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 37]]
+  },
+  "Main legal entity edrpou": {
+    "translation": "ЄДРПОУ основного медзакладу",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 107]]
+  },
+  "Main legal entity name": {
+    "translation": "Основний медзаклад",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 104]]
+  },
+  "Medical program": {
+    "translation": "Програми",
+    "origin": [["src/components/Nav.js", 123]]
+  },
+  "Medication dispenses": {
+    "translation": "Відпуски рецептів",
+    "origin": [["src/components/Nav.js", 154]]
+  },
+  "Medicines": {
+    "translation": "Медикаменти",
+    "origin": [["src/components/Nav.js", 99]]
+  },
+  "Merge legal entities": {
+    "translation": "Об’єднання медзакладів",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 30]]
+  },
+  "Pending declarations": {
+    "translation": "Декларації на розгляді",
+    "origin": [["src/components/Nav.js", 37]]
+  },
+  "Pending employees": {
+    "translation": "Співробітники на розгляді",
+    "origin": [["src/components/Nav.js", 49]]
+  },
+  "Persons": {
+    "translation": "Паціенти",
+    "origin": [["src/components/Nav.js", 27], ["src/components/Nav.js", 206]]
+  },
+  "Program Participants": {
+    "translation": "Учасники програм",
+    "origin": [["src/components/Nav.js", 131]]
+  },
+  "Recipes": {
+    "translation": "Рецепти",
+    "origin": [["src/components/Nav.js", 146], ["src/components/Nav.js", 149]]
+  },
+  "Registers": {
+    "translation": "Реєстри",
+    "origin": [["src/components/Nav.js", 70], ["src/components/Nav.js", 73]]
+  },
+  "Registers entries": {
+    "translation": "Записи реєстру",
+    "origin": [["src/components/Nav.js", 78]]
+  },
+  "Reimbursement report": {
+    "translation": "Звіт",
+    "origin": [["src/components/Nav.js", 159]]
+  },
+  "Related": {
+    "translation": "Підпорядковані",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 34]]
+  },
+  "Related legal entity edrpou": {
+    "translation": "ЄДРПОУ підпорядкованого медзакладу",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 113]]
+  },
+  "Related legal entity name": {
+    "translation": "Назва підпорядкованого медзакладу",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 110]]
+  },
+  "Reports": {
+    "translation": "Звіти",
+    "origin": [["src/components/Nav.js", 62]]
+  },
+  "Reset authentication method": {
+    "translation": "Скинути метод авторизації",
+    "origin": [["src/components/Nav.js", 182]]
+  },
+  "Search": {
+    "translation": "Шукати",
+    "origin": [
+      ["src/pages/LegalEntityMergeJobs/Search.js", 235],
+      ["src/pages/LegalEntityMergeJobs/Search.js", 283]
+    ]
+  },
+  "Search legal entities": {
+    "translation": "Пошук медзакладів",
+    "origin": [["src/pages/LegalEntities/Search.js", 44]]
+  },
+  "Search main legal entity": {
+    "translation": "Знайти основний медзаклад",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 249]]
+  },
+  "Search related legal entity": {
+    "translation": "Знайти підпорядкований медзаклад",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 202]]
+  },
+  "Started at": {
+    "translation": "Час старту задачі",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 115]]
+  },
+  "Statistic": {
+    "translation": "Статистика",
+    "origin": [["src/components/Nav.js", 22]]
+  },
+  "Status": {
+    "translation": "Статус",
+    "origin": [["src/pages/LegalEntities/Search.js", 127]]
+  },
+  "Trade name": {
+    "translation": "Торгівельне найменування",
+    "origin": [["src/components/Nav.js", 112]]
+  },
+  "Users": {
+    "translation": "Користувачі",
+    "origin": [["src/components/Nav.js", 166]]
+  },
+  "Wrong number": {
+    "translation": "Невірний номер",
+    "origin": [
+      ["src/pages/LegalEntityMergeJobs/Search.js", 211],
+      ["src/pages/LegalEntityMergeJobs/Search.js", 258]
+    ]
+  },
+  "{0, plural, zero {# seconds} one {# second} few {# seconds} many {# seconds} other {# seconds}}": {
+    "translation": "{0, plural, zero {# секунд} one {# секунда} few {# секунди} many {# секунд} other {# секунд}}",
+    "origin": [["src/pages/LegalEntityMergeJobs/Search.js", 155]]
+  },
+  "ЄДРПОУ": {
+    "translation": "ЄДРПОУ",
+    "origin": [["src/pages/LegalEntities/Search.js", 112]]
+  },
+  "Адреса": {
+    "translation": "Адреса",
+    "origin": [["src/pages/LegalEntities/Search.js", 113]]
+  },
+  "Верифікований НСЗУ": {
+    "translation": "Верифікований НСЗУ",
+    "origin": [["src/pages/LegalEntities/Search.js", 115]]
+  },
+  "Додано": {
+    "translation": "Додано",
+    "origin": [["src/pages/LegalEntities/Search.js", 125]]
+  },
+  "Дія": {
+    "translation": "Дія",
+    "origin": [["src/pages/LegalEntities/Search.js", 128]]
+  },
+  "Назва медзакладу": {
+    "translation": "Назва медзакладу",
+    "origin": [["src/pages/LegalEntities/Search.js", 110]]
+  },
+  "Розглянутий НСЗУ": {
+    "translation": "Розглянутий НСЗУ",
+    "origin": [["src/pages/LegalEntities/Search.js", 120]]
+  },
+  "Тип медзакладу": {
+    "translation": "Тип медзакладу",
+    "origin": [["src/pages/LegalEntities/Search.js", 111]]
+  }
 }

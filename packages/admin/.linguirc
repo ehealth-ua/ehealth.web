@@ -1,5 +1,4 @@
 {
    "localeDir": "src/locales/",
-   "srcPathDirs": ["src/"],
-   "format": "minimal"
+   "srcPathDirs": ["src/"]
 }
