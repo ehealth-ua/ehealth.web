@@ -371,6 +371,7 @@ const License = ({
               orderNo: "Номер наказу"
             }}
             data={{
+              ...accreditation,
               category: accreditation.category && (
                 <DictionaryValue
                   name="ACCREDITATION_CATEGORY"
@@ -386,8 +387,7 @@ const License = ({
                                     )}`
                                   : ""
                               }`,
-              orderDate: format(accreditation.orderDate, "DD.MM.YYYY"),
-              ...accreditation
+              orderDate: format(accreditation.orderDate, "DD.MM.YYYY")
             }}
           />
           <Line />
