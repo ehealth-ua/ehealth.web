@@ -329,7 +329,7 @@ class DictionaryValues extends React.Component {
           >
             {updateDictionary => {
               this.editFormRef.current.scrollIntoView({
-                block: "end",
+                block: "start",
                 behavior: "smooth"
               });
 

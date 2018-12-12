@@ -5,11 +5,13 @@ import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
 
 import { Form, LocationParams } from "@ehealth/components";
+import { RemoveItemIcon } from "@ehealth/icons";
 
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import Table from "../../components/Table";
 import Link from "../../components/Link";
+import Button, { IconButton } from "../../components/Button";
 
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
@@ -68,7 +70,7 @@ const Search = () => (
                             labels: labels.join(", "),
                             action: (
                               <Link
-                                to={`../${dictionary.name}`}
+                                to={`../${encodeURIComponent(dictionary.name)}`}
                                 fontWeight="bold"
                               >
                                 Переглянути
@@ -93,21 +95,20 @@ const Search = () => (
 export default Search;
 
 const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
-  <Form onSubmit={() => null} initialValues={initialValues}>
-    <Form.AutoSubmit
-      onSubmit={params =>
-        params.hasOwnProperty("filter") &&
-        setLocationParams({
-          ...params,
-          after: undefined,
-          before: undefined,
-          last: undefined,
-          first: initialValues.first || ITEMS_PER_PAGE[0]
-        })
-      }
-    />
+  <Form
+    onSubmit={params =>
+      setLocationParams({
+        ...params,
+        after: undefined,
+        before: undefined,
+        last: undefined,
+        first: initialValues.first || ITEMS_PER_PAGE[0]
+      })
+    }
+    initialValues={initialValues}
+  >
     <Flex mx={-1}>
-      <Box px={1} width={2 / 5}>
+      <Box px={1} width={2 / 4}>
         <Field.Text
           name="filter.name"
           label="Знайти словник"
@@ -116,13 +117,33 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
         />
       </Box>
 
-      <Box px={1} width={2 / 5}>
+      <Box px={1} width={2 / 4}>
         <Field.Text
           name="filter.label"
           label="Фільтрувати за тегом"
           placeholder="Тег"
           autocomplete="off"
         />
+      </Box>
+    </Flex>
+    <Flex mx={-1} justifyContent="flex-start">
+      <Box px={1}>
+        <Button variant="blue">Шукати</Button>
+      </Box>
+      <Box px={1}>
+        <IconButton
+          icon={RemoveItemIcon}
+          type="reset"
+          disabled={isEmpty(initialValues.filter)}
+          onClick={() => {
+            setLocationParams({
+              ...initialValues,
+              filter: null
+            });
+          }}
+        >
+          Скинути пошук
+        </IconButton>
       </Box>
     </Flex>
   </Form>
