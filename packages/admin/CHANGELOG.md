@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.10.1"></a>
+## [1.10.1](https://github.com/edenlabllc/ehealth.web/compare/v1.10.0...v1.10.1) (2018-12-12)
+
+
+### Bug Fixes
+
+* **admin:** fix filters and pagination on RelatedLegalEntities and Divisions tabs ([59da037](https://github.com/edenlabllc/ehealth.web/commit/59da037))
+* **admin:** reorder spreaded accreditation variable in License tab ([ed473f1](https://github.com/edenlabllc/ehealth.web/commit/ed473f1))
+
+
+
+
+
 <a name="1.10.0"></a>
 # [1.10.0](https://github.com/edenlabllc/ehealth.web/compare/v1.9.6...v1.10.0) (2018-12-11)
 
