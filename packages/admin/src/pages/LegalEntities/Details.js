@@ -154,7 +154,7 @@ const Details = ({ id }) => (
                           }}
                           variant="blue"
                         >
-                          Взяти в роботу
+                          Опрацювати
                         </Button>
                       )}
                     </Mutation>
@@ -471,7 +471,7 @@ const License = ({
         </Box>
         <Popup
           variant="green"
-          buttonText={nhsComment ? "Дивитись коментарі" : "Залишити коментар"}
+          buttonText={nhsComment ? "Редагувати коментар" : "Залишити коментар"}
           title={nhsComment ? "Коментар" : "Залишити коментар"}
           icon={CommentIcon}
           disabled={!isVerificationActive}
@@ -556,6 +556,7 @@ const License = ({
             </Mutation>
           )}
         </Popup>
+        {nhsComment && <BorderBox>{nhsComment}</BorderBox>}
       </OpacityBox>
     </Box>
   );
@@ -896,5 +897,21 @@ const CommentBox = system(
   },
   `
     white-space: pre-line;
+  `
+);
+
+const BorderBox = system(
+  {
+    is: Box,
+    p: 4,
+    mb: 5,
+    fontSize: 0,
+    lineHeight: 1.5,
+    maxHeight: 200,
+    border: "1px solid #dfe2e5"
+  },
+  `
+    white-space: pre-line;
+    overflow-y: scroll;
   `
 );
