@@ -37,6 +37,8 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
+import { ITEMS_PER_PAGE } from "../../constants/pagination";
+
 const DeactivateLegalEntityMutation = loader(
   "../../graphql/DeactivateLegalEntityMutation.graphql"
 );
@@ -51,8 +53,25 @@ const NhsReviewLegalEntityMutation = loader(
 );
 const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
 
+const parseLocationParams = (id, params = {}) => {
+  const { filter, first, last, ...pagination } = params;
+  return {
+    id,
+    ...pagination,
+    ...filter,
+    first:
+      !first && !last ? ITEMS_PER_PAGE[0] : first ? parseInt(first) : undefined,
+    last: last ? parseInt(last) : undefined
+  };
+};
+
 const Details = ({ id }) => (
-  <Query query={LegalEntityQuery} variables={{ id, first: 10 }}>
+  <Query
+    query={LegalEntityQuery}
+    variables={{
+      ...parseLocationParams(id)
+    }}
+  >
     {({ loading, error, data: { legalEntity } }) => {
       if (loading) return "Loading...";
       if (error) return `Error! ${error.message}`;
@@ -116,7 +135,9 @@ const Details = ({ id }) => (
                       refetchQueries={() => [
                         {
                           query: LegalEntityQuery,
-                          variables: { id, first: 10 }
+                          variables: {
+                            ...parseLocationParams(id)
+                          }
                         }
                       ]}
                     >
@@ -149,7 +170,9 @@ const Details = ({ id }) => (
                           refetchQueries={() => [
                             {
                               query: LegalEntityQuery,
-                              variables: { id, first: 10 }
+                              variables: {
+                                ...parseLocationParams(id)
+                              }
                             }
                           ]}
                         >
@@ -459,7 +482,9 @@ const License = ({
               refetchQueries={() => [
                 {
                   query: LegalEntityQuery,
-                  variables: { id, first: 10 }
+                  variables: {
+                    ...parseLocationParams(id)
+                  }
                 }
               ]}
             >
@@ -545,7 +570,7 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
               <Form onSubmit={setLocationParams} initialValues={locationParams}>
                 <Box px={5} pt={5} width={460}>
                   <Field.Text
-                    name="mergedFromLegalEntity.edrpou"
+                    name="filter.mergeLegalEntityFilter.mergedFromLegalEntity.edrpou"
                     label="Знайти підпорядкований медзаклад"
                     placeholder="Введіть ЄДРПОУ медзакладу"
                     postfix={<AdminSearchIcon color="#CED0DA" />}
@@ -582,9 +607,7 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
           <Query
             query={LegalEntityQuery}
             variables={{
-              id,
-              first: 10,
-              mergeLegalEntityFilter: locationParams
+              ...parseLocationParams(id, locationParams)
             }}
           >
             {({ loading, error, data }) => {
@@ -689,7 +712,7 @@ const Divisions = ({ id }) => (
           <Form onSubmit={setLocationParams} initialValues={locationParams}>
             <Box px={5} pt={5} width={460}>
               <Field.Text
-                name="name"
+                name="filter.divisionFilter.name"
                 label="Знайти відділення"
                 placeholder="Введіть назву відділення"
                 postfix={<AdminSearchIcon color="#CED0DA" />}
@@ -699,9 +722,7 @@ const Divisions = ({ id }) => (
           <Query
             query={LegalEntityQuery}
             variables={{
-              id,
-              first: 10,
-              divisionFilter: locationParams
+              ...parseLocationParams(id, locationParams)
             }}
           >
             {({ loading, error, data }) => {
@@ -816,7 +837,9 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
           refetchQueries={() => [
             {
               query: LegalEntityQuery,
-              variables: { id, first: 10 }
+              variables: {
+                ...parseLocationParams(id)
+              }
             }
           ]}
         >
