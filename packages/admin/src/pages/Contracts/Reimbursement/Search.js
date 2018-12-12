@@ -4,6 +4,7 @@ import { BooleanValue } from "react-values";
 import system from "system-components/emotion";
 import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
+import debounce from "lodash/debounce";
 import format from "date-fns/format";
 import { loader } from "graphql.macro";
 
@@ -47,14 +48,15 @@ const MedicalProgramsQuery = loader(
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
-  ([name, value]) => ({ name, value })
+  ([key, value]) => ({ key, value })
 );
 
+//TODO: bring it out to the helper
 const sendFilterForm = filter => {
   if (!filter) return {};
   const {
     status = {},
-    medicalProgramName,
+    medicalProgram = {},
     searchRequest,
     isSuspended,
     date: { startFrom, startTo, endFrom, endTo } = {}
@@ -68,13 +70,22 @@ const sendFilterForm = filter => {
       : { contractNumber: searchRequest });
   return {
     ...contract,
-    startDate: () => formatDateTimeInterval(startFrom, startTo),
-    endDate: () => formatDateTimeInterval(endFrom, endTo),
-    status: status.name,
+    startDate: formatDateTimeInterval(startFrom, startTo),
+    endDate: formatDateTimeInterval(endFrom, endTo),
+    status: status.key,
     isSuspended: convertIsSuspendedItem(isSuspended),
-    medicalProgramName
+    medicalProgram: !isEmpty(medicalProgram)
+      ? { name: medicalProgram.name }
+      : undefined
   };
 };
+
+const resetPaginationParams = first => ({
+  after: undefined,
+  before: undefined,
+  last: undefined,
+  first: first || ITEMS_PER_PAGE[0]
+});
 
 const ReimbursementContractsSearch = () => (
   <Box p={6}>
@@ -109,14 +120,12 @@ const ReimbursementContractsSearch = () => (
                     nodes: contracts = [],
                     pageInfo
                   } = {}
-                } = {},
-                refetch
+                } = {}
               }) => (
                 <>
                   <SearchContractsForm
                     initialValues={locationParams}
                     onSubmit={setLocationParams}
-                    refetch={refetch}
                   />
                   {!error &&
                     contracts.length > 0 && (
@@ -144,8 +153,8 @@ const ReimbursementContractsSearch = () => (
                             medicalProgram,
                             ...contracts
                           }) => ({
-                            edrpou,
                             ...contracts,
+                            edrpou,
                             medicalProgram:
                               medicalProgram && medicalProgram.name,
                             isSuspended: (
@@ -189,7 +198,7 @@ const ReimbursementContractsSearch = () => (
                           }
                           tableName="reimbursement-contract/search"
                           whiteSpaceNoWrap={["databaseId"]}
-                          hiddenFields="databaseId,insertedAt"
+                          hiddenFields="insertedAt"
                         />
                         <Pagination {...pageInfo} />
                       </>
@@ -206,8 +215,16 @@ const ReimbursementContractsSearch = () => (
 
 export default ReimbursementContractsSearch;
 
-const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
-  <Form onSubmit={onSubmit} initialValues={initialValues}>
+const SearchContractsForm = ({ initialValues, onSubmit }) => (
+  <Form
+    onSubmit={params =>
+      onSubmit({
+        ...params,
+        ...resetPaginationParams(initialValues.first)
+      })
+    }
+    initialValues={initialValues}
+  >
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
         <Field.Text
@@ -231,7 +248,6 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
               initialValues={initialValues}
               onSubmit={onSubmit}
               toggle={toggle}
-              refetch={refetch}
             />
           )}
           <Flex mb={4} alignItems="center">
@@ -253,10 +269,9 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
                 <TextNoWrap>Показати всі фільтри</TextNoWrap>
               </Flex>
             </Button>
-            <HidenFilters
+            <SelectedFilters
               initialValues={initialValues}
               onSubmit={onSubmit}
-              refetch={refetch}
             />
           </Flex>
         </>
@@ -307,11 +322,6 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
               searchRequest: null,
               date: null
             });
-            refetch({
-              filter: undefined,
-              searchRequest: undefined,
-              date: undefined
-            });
           }}
         >
           Скинути пошук
@@ -321,29 +331,23 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
   </Form>
 );
 
-const HidenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
-  const { filter: { medicalProgramName, isSuspended } = {} } = initialValues;
+const SelectedFilters = ({ initialValues, onSubmit, toggle }) => {
+  const { filter: { medicalProgram, isSuspended } = {} } = initialValues;
 
   return (
     <Flex flexWrap="wrap">
-      {medicalProgramName && (
+      {!isEmpty(medicalProgram) && (
         <SelectedItem mx={1}>
-          Медична програма: "{medicalProgramName}"
+          {medicalProgram.name}
           <RemoveItem
             onClick={() => {
               onSubmit({
                 ...initialValues,
+                ...resetPaginationParams(initialValues.first),
                 filter: {
                   ...initialValues.filter,
-                  medicalProgramName: undefined
+                  medicalProgram: undefined
                 }
-              });
-              refetch({
-                ...initialValues,
-                filter: sendFilterForm({
-                  ...initialValues.filter,
-                  medicalProgramName: undefined
-                })
               });
             }}
           >
@@ -351,24 +355,18 @@ const HidenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
           </RemoveItem>
         </SelectedItem>
       )}
-      {isSuspended !== undefined && (
+      {!isEmpty(isSuspended) && (
         <SelectedItem mx={1}>
           {renderIsSuspendedItem(isSuspended)}
           <RemoveItem
             onClick={() => {
               onSubmit({
                 ...initialValues,
+                ...resetPaginationParams(initialValues.first),
                 filter: {
                   ...initialValues.filter,
                   isSuspended: undefined
                 }
-              });
-              refetch({
-                ...initialValues,
-                filter: sendFilterForm({
-                  ...initialValues.filter,
-                  isSuspended: undefined
-                })
               });
             }}
           >
@@ -380,12 +378,7 @@ const HidenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
   );
 };
 
-const SearchContractsModalForm = ({
-  initialValues,
-  onSubmit,
-  toggle,
-  refetch
-}) => (
+const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
   <Modal width={800} backdrop textAlign="left">
     <Button
       variant="none"
@@ -402,122 +395,126 @@ const SearchContractsModalForm = ({
       </Flex>
     </Button>
 
-    <Query
-      query={MedicalProgramsQuery}
-      variables={{
-        filter: {
-          isActive: true,
-          insertedAt: "" //dirty hack for the incorrect scheme required value
-        }
+    <Form
+      onSubmit={values => {
+        onSubmit(values);
+        toggle();
       }}
+      initialValues={initialValues}
     >
-      {({
-        loading,
-        error,
-        data: { medicalPrograms: { nodes: medicalPrograms = [] } = {} } = {}
-      }) => {
-        const medicalProgramsNames = medicalPrograms.map(({ name }) => name);
-
-        return (
-          <Form
-            onSubmit={values => {
-              onSubmit(values);
-              toggle();
+      <Flex mx={-1}>
+        <Box px={1} width={1 / 4}>
+          <Field.Select
+            name="filter.status"
+            label="Статус договору"
+            items={[{ value: "всі статуси" }, ...contractStatuses]}
+            renderItem={item => item.value}
+            itemToString={item => {
+              if (!item) return "всі статуси";
+              return typeof item === "string" ? item : item.value;
             }}
-            initialValues={initialValues}
-          >
-            <Flex mx={-1}>
-              <Box px={1} width={1 / 4}>
-                <Field.Select
-                  name="filter.status"
-                  label="Статус договору"
-                  items={[{ value: "всі статуси" }, ...contractStatuses]}
-                  renderItem={item => item.value}
-                  itemToString={item => {
-                    if (!item) return "всі статуси";
-                    return typeof item === "string" ? item : item.value;
-                  }}
-                  type="select"
-                />
-              </Box>
+            type="select"
+          />
+        </Box>
 
-              <Flex px={1}>
-                <Box mr={1}>
-                  <Field.RangePicker
-                    rangeNames={[
-                      "filter.date.startFrom",
-                      "filter.date.startTo"
-                    ]}
-                    label="Початок дії договору"
-                  />
-                </Box>
-                <Field.RangePicker
-                  rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
-                  label="Кінець дії договору"
-                />
-              </Flex>
-            </Flex>
-            <Flex mx={-1}>
-              <Box width={2 / 5} px={1} mr={1}>
+        <Flex px={1}>
+          <Box mr={1}>
+            <Field.RangePicker
+              rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
+              label="Початок дії договору"
+            />
+          </Box>
+          <Field.RangePicker
+            rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
+            label="Кінець дії договору"
+          />
+        </Flex>
+      </Flex>
+      <Flex mx={-1}>
+        <Box width={2 / 5} px={1} mr={1}>
+          <Field.Select
+            name="filter.isSuspended"
+            label="Стан договору"
+            items={["", "true", "false"]}
+            renderItem={item => renderIsSuspendedItem(item)}
+            itemToString={item => renderIsSuspendedItem(item)}
+            type="select"
+          />
+        </Box>
+        <Box width={2 / 5}>
+          <Query
+            query={MedicalProgramsQuery}
+            fetchPolicy="cache-first"
+            variables={{
+              skip: true
+            }}
+          >
+            {({
+              loading,
+              error,
+              data: {
+                medicalPrograms: { nodes: medicalPrograms = [] } = {}
+              } = {},
+              refetch: refetchMedicalProgram
+            }) => {
+              return (
                 <Field.Select
-                  name="filter.isSuspended"
-                  label="Стан договору"
-                  items={["", "true", "false"]}
-                  renderItem={item => renderIsSuspendedItem(item)}
-                  itemToString={item => renderIsSuspendedItem(item)}
-                  type="select"
-                />
-              </Box>
-              <Box width={2 / 5}>
-                <Field.Select
-                  name="filter.medicalProgramName"
+                  name="filter.medicalProgram.name"
                   label="Медична програма"
-                  items={["всі програми", ...medicalProgramsNames]}
+                  items={
+                    loading || error
+                      ? []
+                      : medicalPrograms.map(({ name }) => name)
+                  }
+                  onInputValueChange={debounce(
+                    program =>
+                      !isEmpty(program) &&
+                      refetchMedicalProgram({
+                        skip: false,
+                        first: 20,
+                        filter: { name: program }
+                      }),
+                    1000
+                  )}
                   renderItem={item => item}
                   itemToString={item => {
-                    if (!item) return "всі програми";
+                    if (!item) return "";
                     return typeof item === "string" ? item : item.name;
                   }}
-                  type="select"
                 />
-              </Box>
-            </Flex>
-            <Flex mx={-1} mt={4} justifyContent="flex-start">
-              <Box px={1}>
-                <Button variant="red" onClick={toggle}>
-                  Закрити
-                </Button>
-              </Box>
-              <Box px={1}>
-                <Button variant="blue">Шукати</Button>
-              </Box>
-              <Box px={1}>
-                <IconButton
-                  icon={RemoveItemIcon}
-                  type="reset"
-                  disabled={isEmpty(initialValues.filter)}
-                  onClick={() => {
-                    onSubmit({
-                      ...initialValues,
-                      filter: null,
-                      searchRequest: null,
-                      date: null
-                    });
-                    refetch({
-                      filter: undefined,
-                      searchRequest: undefined,
-                      date: undefined
-                    });
-                  }}
-                >
-                  Скинути пошук
-                </IconButton>
-              </Box>
-            </Flex>
-          </Form>
-        );
-      }}
-    </Query>
+              );
+            }}
+          </Query>
+        </Box>
+      </Flex>
+      <Flex mx={-1} mt={4} justifyContent="flex-start">
+        <Box px={1}>
+          <Button variant="red" onClick={toggle}>
+            Закрити
+          </Button>
+        </Box>
+        <Box px={1}>
+          <Button variant="blue">Шукати</Button>
+        </Box>
+        <Box px={1}>
+          <IconButton
+            icon={RemoveItemIcon}
+            type="reset"
+            disabled={isEmpty(initialValues.filter)}
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                filter: null,
+                searchRequest: null,
+                date: null
+              });
+            }}
+          >
+            Скинути пошук
+          </IconButton>
+        </Box>
+      </Flex>
+    </Form>
   </Modal>
 );
 

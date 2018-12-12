@@ -1,8 +1,11 @@
 query MedicalProgramsQuery(
+  $first: Int
   $filter: MedicalProgramFilter
   $orderBy: MedicalProgramOrderBy
+  $skip: Boolean!
 ) {
-  medicalPrograms(filter: $filter, orderBy: $orderBy) {
+  medicalPrograms(first: $first, filter: $filter, orderBy: $orderBy)
+    @skip(if: $skip) {
     nodes {
       id
       databaseId
