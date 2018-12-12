@@ -113,7 +113,7 @@ const Search = ({ uri }) => (
                             edrpou: "ЄДРПОУ",
                             addresses: "Адреса",
                             nhsVerified: "Верифікований НСЗУ",
-                            nhsReviewed: "Розглянутий НСЗУ",
+                            nhsReviewed: "Опрацьовано",
                             insertedAt: "Додано",
                             status: "Статус",
                             action: "Дія"
@@ -148,9 +148,9 @@ const Search = ({ uri }) => (
                             nhsReviewed: (
                               <Flex justifyContent="center">
                                 {nhsReviewed ? (
-                                  <PositiveIcon />
+                                  <PositiveIcon fill="#f7981c" />
                                 ) : (
-                                  <NegativeIcon />
+                                  <NegativeIcon stroke="#f7981c" />
                                 )}
                               </Flex>
                             ),

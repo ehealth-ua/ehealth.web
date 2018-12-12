@@ -53,7 +53,8 @@ const NhsReviewLegalEntityMutation = loader(
 );
 const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
 
-const parseLocationParams = (id, params = {}) => {
+//TODO: bring it out to the helper
+const filteredLocationParams = (id, params = {}) => {
   const { filter, first, last, ...pagination } = params;
   return {
     id,
@@ -69,7 +70,7 @@ const Details = ({ id }) => (
   <Query
     query={LegalEntityQuery}
     variables={{
-      ...parseLocationParams(id)
+      ...filteredLocationParams(id)
     }}
   >
     {({ loading, error, data: { legalEntity } }) => {
@@ -136,7 +137,7 @@ const Details = ({ id }) => (
                         {
                           query: LegalEntityQuery,
                           variables: {
-                            ...parseLocationParams(id)
+                            ...filteredLocationParams(id)
                           }
                         }
                       ]}
@@ -171,7 +172,7 @@ const Details = ({ id }) => (
                             {
                               query: LegalEntityQuery,
                               variables: {
-                                ...parseLocationParams(id)
+                                ...filteredLocationParams(id)
                               }
                             }
                           ]}
@@ -483,7 +484,7 @@ const License = ({
                 {
                   query: LegalEntityQuery,
                   variables: {
-                    ...parseLocationParams(id)
+                    ...filteredLocationParams(id)
                   }
                 }
               ]}
@@ -608,7 +609,7 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
           <Query
             query={LegalEntityQuery}
             variables={{
-              ...parseLocationParams(id, locationParams)
+              ...filteredLocationParams(id, locationParams)
             }}
           >
             {({ loading, error, data }) => {
@@ -723,7 +724,7 @@ const Divisions = ({ id }) => (
           <Query
             query={LegalEntityQuery}
             variables={{
-              ...parseLocationParams(id, locationParams)
+              ...filteredLocationParams(id, locationParams)
             }}
           >
             {({ loading, error, data }) => {
@@ -839,7 +840,7 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
             {
               query: LegalEntityQuery,
               variables: {
-                ...parseLocationParams(id)
+                ...filteredLocationParams(id)
               }
             }
           ]}
