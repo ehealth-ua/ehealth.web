@@ -34,6 +34,10 @@ import { SearchIcon } from "../../../components/MultiSelectView";
 import DefinitionListView from "../../../components/DefinitionListView";
 import WEEK_DAYS from "../../../helpers/weekDays";
 
+import Approve from "./Approve";
+import Update from "./Update";
+import Decline from "./Decline";
+
 const ReimbursementContractRequestQuery = loader(
   "../../../graphql/ReimbursementContractRequestQuery.graphql"
 );
@@ -45,6 +49,9 @@ const EmployeesQuery = loader("../../../graphql/EmployeesQuery.graphql");
 const ReimbursementContractRequestDetails = () => (
   <Router>
     <Details path=":id/*" />
+    <Update path=":id/update/*" />
+    <Approve path=":id/approve/*" />
+    <Decline path=":id/decline/*" />
   </Router>
 );
 
@@ -256,10 +263,16 @@ const GeneralInfo = ({
         <DefinitionListView
           color="blueberrySoda"
           labels={{
-            name: "ID медичної програми"
+            name: (
+              <>
+                ID медичної
+                <br />
+                програми
+              </>
+            )
           }}
           data={{
-            name: medicalProgram.id
+            name: medicalProgram.databaseId
           }}
         />
       </>

@@ -23,6 +23,7 @@ query ReimbursementContractRequestQuery($id: ID!) {
       id
       databaseId
     }
+    printoutContent
     assignee {
       id
       party {
@@ -87,6 +88,10 @@ query ReimbursementContractRequestQuery($id: ID!) {
       mountainGroup
       workingHours
     }
+    attachedDocuments {
+      type
+      url
+    }
     miscellaneous
     toApproveContent
     toDeclineContent
@@ -98,6 +103,7 @@ query ReimbursementContractRequestQuery($id: ID!) {
     }
     medicalProgram {
       id
+      databaseId
       name
     }
   }
