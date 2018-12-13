@@ -11,8 +11,8 @@ type DictProps = {
 };
 
 const DictionaryValue = ({
-  name,
-  item,
+  name = "",
+  item = "",
   children,
   render = children
 }: DictProps) => (
@@ -30,7 +30,11 @@ const DictionaryValue = ({
       const { values } = dictionaries.find(dict => dict.name === name);
 
       const value =
-        item !== undefined ? (values[item] ? values[item] : item) : values;
+        typeof render !== "function"
+          ? values[item]
+            ? values[item]
+            : item
+          : values;
 
       return typeof render === "function" ? render(value) : value;
     }}
