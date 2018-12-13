@@ -35,7 +35,7 @@ import * as Field from "../../../components/Field";
 import Link from "../../../components/Link";
 import Line from "../../../components/Line";
 import Table from "../../../components/Table";
-import Loader from "../../../components/Loader";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import Pagination from "../../../components/Pagination";
 import Button, { IconButton } from "../../../components/Button";
 import Badge from "../../../components/Badge";
@@ -94,6 +94,10 @@ const CapitationContractsSearch = ({ uri }) => (
         const { filter, first, last, after, before, orderBy } = locationParams;
         return (
           <>
+            <SearchContractsForm
+              initialValues={locationParams}
+              onSubmit={setLocationParams}
+            />
             <Query
               query={SearchCapitationContractsQuery}
               fetchPolicy="network-only"
@@ -119,15 +123,9 @@ const CapitationContractsSearch = ({ uri }) => (
                 } = {},
                 refetch
               }) => {
-                if (loading) return <Loader />;
                 if (error) return `Error! ${error.message}`;
                 return (
-                  <>
-                    <SearchContractsForm
-                      initialValues={locationParams}
-                      onSubmit={setLocationParams}
-                      refetch={refetch}
-                    />
+                  <LoadingOverlay loading={loading}>
                     {contracts.length > 0 && (
                       <>
                         <Table
@@ -202,7 +200,7 @@ const CapitationContractsSearch = ({ uri }) => (
                         <Pagination {...pageInfo} />
                       </>
                     )}
-                  </>
+                  </LoadingOverlay>
                 );
               }}
             </Query>
@@ -215,7 +213,7 @@ const CapitationContractsSearch = ({ uri }) => (
 
 export default CapitationContractsSearch;
 
-const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
+const SearchContractsForm = ({ initialValues, onSubmit }) => (
   <Form
     initialValues={initialValues}
     onSubmit={params =>
@@ -251,7 +249,6 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
               initialValues={initialValues}
               onSubmit={onSubmit}
               toggle={toggle}
-              refetch={refetch}
             />
           )}
           <Flex mb={4} alignItems="center">
@@ -274,10 +271,9 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
                 <TextNoWrap ml={2}>Показати всі фільтри</TextNoWrap>
               </Flex>
             </Button>
-            <HiddenFilters
+            <SelectedFilters
               initialValues={initialValues}
               onSubmit={onSubmit}
-              refetch={refetch}
             />
           </Flex>
         </>
@@ -329,11 +325,6 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
               searchRequest: null,
               date: null
             });
-            refetch({
-              filter: undefined,
-              searchRequest: undefined,
-              date: undefined
-            });
           }}
         >
           Скинути пошук
@@ -343,7 +334,7 @@ const SearchContractsForm = ({ initialValues, onSubmit, refetch }) => (
   </Form>
 );
 
-const HiddenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
+const SelectedFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
   const {
     filter: {
       legalEntityRelation: { name, value } = {},
@@ -366,14 +357,6 @@ const HiddenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
                   legalEntityRelation: undefined
                 }
               });
-              refetch({
-                ...initialValues,
-                first: parseInt(initialValues.first) || ITEMS_PER_PAGE[0],
-                filter: sendFilterForm({
-                  ...initialValues.filter,
-                  legalEntityRelation: undefined
-                })
-              });
             }}
           >
             <RemoveItemIcon />
@@ -392,14 +375,6 @@ const HiddenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
                   isSuspended: undefined
                 }
               });
-              refetch({
-                ...initialValues,
-                first: parseInt(initialValues.first) || ITEMS_PER_PAGE[0],
-                filter: sendFilterForm({
-                  ...initialValues.filter,
-                  isSuspended: undefined
-                })
-              });
             }}
           >
             <RemoveItemIcon />
@@ -410,12 +385,7 @@ const HiddenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
   );
 };
 
-const SearchContractsModalForm = ({
-  initialValues,
-  onSubmit,
-  toggle,
-  refetch
-}) => (
+const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
   <Modal width={800} backdrop textAlign="left">
     <Button
       variant="none"
@@ -515,11 +485,7 @@ const SearchContractsModalForm = ({
                 searchRequest: null,
                 date: null
               });
-              refetch({
-                filter: undefined,
-                searchRequest: undefined,
-                date: undefined
-              });
+              toggle();
             }}
           >
             Скинути пошук

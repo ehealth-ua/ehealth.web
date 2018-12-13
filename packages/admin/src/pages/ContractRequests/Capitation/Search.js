@@ -18,7 +18,7 @@ import ContractRequestsNav from "../ContractRequestsNav";
 
 import Table from "../../../components/Table";
 import Badge from "../../../components/Badge";
-import Loader from "../../../components/Loader";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import Link from "../../../components/Link";
 import Pagination from "../../../components/Pagination";
 import * as Field from "../../../components/Field";
@@ -64,6 +64,10 @@ const CapitationContractRequestsSearch = () => (
 
         return (
           <>
+            <SearchContractRequestsForm
+              initialValues={locationParams}
+              onSubmit={setLocationParams}
+            />
             <Query
               query={SearchCapitationContractRequestsQuery}
               fetchPolicy="network-only"
@@ -98,88 +102,78 @@ const CapitationContractRequestsSearch = () => (
                 } = {},
                 refetch
               }) => {
-                if (loading) return <Loader />;
                 if (error) return `Error! ${error.message}`;
                 return (
-                  <>
-                    <SearchContractRequestsForm
-                      initialValues={locationParams}
-                      onSubmit={setLocationParams}
-                      refetch={refetch}
-                    />
-                    {!error &&
-                      capitationContractRequests.length > 0 && (
-                        <>
-                          <Table
-                            data={capitationContractRequests}
-                            header={{
-                              databaseId: "ID заяви на укладення договору",
-                              contractNumber: "Номер договору",
-                              edrpou: "ЄДРПОУ",
-                              contractorLegalEntityName: "Назва медзакладу",
-                              assigneeName: "Виконавець",
-                              status: "Статус",
-                              startDate: "Договір діє з",
-                              endDate: "Договір діє по",
-                              insertedAt: "Додано",
-                              details: "Деталі"
-                            }}
-                            renderRow={({
-                              id,
-                              status,
-                              contractorLegalEntity: {
-                                edrpou,
-                                name: contractorLegalEntityName
-                              },
-                              assignee,
-                              insertedAt,
-                              ...capitationContractRequests
-                            }) => ({
+                  <LoadingOverlay loading={loading}>
+                    {capitationContractRequests.length > 0 && (
+                      <>
+                        <Table
+                          data={capitationContractRequests}
+                          header={{
+                            databaseId: "ID заяви на укладення договору",
+                            contractNumber: "Номер договору",
+                            edrpou: "ЄДРПОУ",
+                            contractorLegalEntityName: "Назва медзакладу",
+                            assigneeName: "Виконавець",
+                            status: "Статус",
+                            startDate: "Договір діє з",
+                            endDate: "Договір діє по",
+                            insertedAt: "Додано",
+                            details: "Деталі"
+                          }}
+                          renderRow={({
+                            id,
+                            status,
+                            contractorLegalEntity: {
                               edrpou,
-                              contractorLegalEntityName,
-                              insertedAt: format(
-                                insertedAt,
-                                "DD.MM.YYYY, HH:mm"
-                              ),
-                              assigneeName: assignee
-                                ? getFullName(assignee.party)
-                                : undefined,
-                              ...capitationContractRequests,
-                              status: (
-                                <Badge
-                                  type="CONTRACT_REQUEST"
-                                  name={status}
-                                  display="block"
-                                />
-                              ),
-                              details: (
-                                <Link to={`./${id}`} fontWeight="bold">
-                                  Показати деталі
-                                </Link>
-                              )
-                            })}
-                            sortableFields={[
-                              "status",
-                              "startDate",
-                              "endDate",
-                              "insertedAt"
-                            ]}
-                            sortingParams={parseSortingParams(
-                              locationParams.orderBy
-                            )}
-                            onSortingChange={sortingParams =>
-                              setLocationParams({
-                                ...locationParams,
-                                orderBy: stringifySortingParams(sortingParams)
-                              })
-                            }
-                            tableName="capitationContractRequests/search"
-                            whiteSpaceNoWrap={["databaseId"]}
-                          />
-                          <Pagination {...pageInfo} />
-                        </>
-                      )}
-                  </>
+                              name: contractorLegalEntityName
+                            },
+                            assignee,
+                            insertedAt,
+                            ...capitationContractRequests
+                          }) => ({
+                            edrpou,
+                            contractorLegalEntityName,
+                            insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                            assigneeName: assignee
+                              ? getFullName(assignee.party)
+                              : undefined,
+                            ...capitationContractRequests,
+                            status: (
+                              <Badge
+                                type="CONTRACT_REQUEST"
+                                name={status}
+                                display="block"
+                              />
+                            ),
+                            details: (
+                              <Link to={`./${id}`} fontWeight="bold">
+                                Показати деталі
+                              </Link>
+                            )
+                          })}
+                          sortableFields={[
+                            "status",
+                            "startDate",
+                            "endDate",
+                            "insertedAt"
+                          ]}
+                          sortingParams={parseSortingParams(
+                            locationParams.orderBy
+                          )}
+                          onSortingChange={sortingParams =>
+                            setLocationParams({
+                              ...locationParams,
+                              orderBy: stringifySortingParams(sortingParams)
+                            })
+                          }
+                          tableName="capitationContractRequests/search"
+                          whiteSpaceNoWrap={["databaseId"]}
+                        />
+                        <Pagination {...pageInfo} />
+                      </>
+                    )}
+                  </LoadingOverlay>
                 );
               }}
             </Query>
@@ -274,11 +268,6 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
               filter: null,
               searchRequest: null,
               date: null
-            });
-            refetch({
-              filter: undefined,
-              searchRequest: undefined,
-              date: undefined
             });
           }}
         >

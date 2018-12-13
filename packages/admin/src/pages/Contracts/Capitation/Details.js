@@ -6,6 +6,7 @@ import system from "system-components/emotion";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
+import isEmpty from "lodash/isEmpty";
 
 import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
 import {
@@ -33,7 +34,7 @@ import Table, {
 } from "../../../components/Table";
 import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
-import Loader from "../../../components/Loader";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import Button from "../../../components/Button";
 import Tooltip from "../../../components/Tooltip";
 import * as Field from "../../../components/Field";
@@ -65,8 +66,7 @@ const Details = ({ id }) => (
     query={CapitationContractQuery}
     variables={{ id, first: ITEMS_PER_PAGE[0] }}
   >
-    {({ loading, error, data }) => {
-      if (loading) return <Loader />;
+    {({ loading, error, data: { capitationContract = {} } = {} }) => {
       if (error) return `Error! ${error.message}`;
       const {
         isSuspended,
@@ -76,28 +76,28 @@ const Details = ({ id }) => (
           id: contractRequestId,
           databaseId: contractRequestDatabaseId,
           printoutContent: contractRequestContent
-        },
+        } = {},
         status,
         startDate,
         endDate,
         nhsSignerId,
-        nhsSigner: { party: nhsSignerName },
+        nhsSigner: { party: nhsSignerName = "" } = {},
         nhsSignerBase,
         nhsContractPrice,
         nhsPaymentMethod,
         issueCity,
         contractorRmspAmount,
-        contractorLegalEntity,
+        contractorLegalEntity = {},
         contractorOwner,
         contractorBase,
         contractorPaymentDetails,
-        externalContractors,
+        externalContractors = [],
         attachedDocuments,
         statusReason
-      } = data.capitationContract;
+      } = capitationContract;
 
       return (
-        <>
+        <LoadingOverlay loading={loading}>
           <Box p={6}>
             <Box py={10}>
               <Breadcrumbs.List>
@@ -245,7 +245,7 @@ const Details = ({ id }) => (
               />
             </Router>
           </Tabs.Content>
-        </>
+        </LoadingOverlay>
       );
     }}
   </Query>
@@ -538,74 +538,89 @@ const Divisions = ({ id }) => (
               divisionFilter: { name }
             }}
           >
-            {({ loading, error, data }) => {
-              if (loading) return "Loading...";
-              if (error) return `Error! ${error.message}`;
-              const {
-                contractorDivisions: {
-                  nodes: contractorDivisions,
-                  pageInfo
+            {({
+              loading,
+              error,
+              data: {
+                capitationContract: {
+                  contractorDivisions: {
+                    nodes: contractorDivisions = [],
+                    pageInfo
+                  } = {}
                 } = {}
-              } = data.capitationContract;
-              return contractorDivisions && contractorDivisions.length ? (
-                <>
-                  <Table
-                    data={contractorDivisions}
-                    header={{
-                      name: "Назва відділення",
-                      addresses: "Адреса",
-                      mountainGroup: "Гірський регіон",
-                      phones: (
-                        <>
-                          Телефон <br />
-                          Email
-                        </>
-                      ),
-                      action: "Дія"
-                    }}
-                    renderRow={({
-                      databaseId,
-                      name,
-                      addresses,
-                      mountainGroup,
-                      phones,
-                      email
-                    }) => ({
-                      name,
-                      mountainGroup: (
-                        <Flex justifyContent="center">
-                          {mountainGroup ? <PositiveIcon /> : <NegativeIcon />}
-                        </Flex>
-                      ),
-                      phones: (
-                        <>
-                          <Box>
-                            {phones
-                              .filter(a => a.type === "MOBILE")
-                              .map(item => item.number)[0] || phones[0].number}
-                          </Box>
-                          <Box>{email}</Box>
-                        </>
-                      ),
-                      addresses: addresses
-                        .filter(a => a.type === "RESIDENCE")
-                        .map((item, key) => (
-                          <AddressView data={item} key={key} />
-                        )),
-                      action: (
-                        <Link
-                          to={`../employees?division.databaseId=${databaseId}&division.name=${name}`}
-                          fontWeight="bold"
-                        >
-                          Перейти до працівників
-                        </Link>
-                      )
-                    })}
-                    tableName="/contract/divisions"
-                  />
-                  <Pagination {...pageInfo} />
-                </>
-              ) : null;
+              } = {}
+            }) => {
+              if (error) return `Error! ${error.message}`;
+              return (
+                <LoadingOverlay loading={loading}>
+                  {contractorDivisions.length > 0 ? (
+                    <>
+                      <Table
+                        data={contractorDivisions}
+                        header={{
+                          name: "Назва відділення",
+                          addresses: "Адреса",
+                          mountainGroup: "Гірський регіон",
+                          phones: (
+                            <>
+                              Телефон <br />
+                              Email
+                            </>
+                          ),
+                          action: "Дія"
+                        }}
+                        renderRow={({
+                          databaseId,
+                          name,
+                          addresses,
+                          mountainGroup,
+                          phones,
+                          email
+                        }) => ({
+                          name,
+                          mountainGroup: (
+                            <Flex justifyContent="center">
+                              {mountainGroup ? (
+                                <PositiveIcon />
+                              ) : (
+                                <NegativeIcon />
+                              )}
+                            </Flex>
+                          ),
+                          phones: (
+                            <>
+                              <Box>
+                                {phones
+                                  .filter(a => a.type === "MOBILE")
+                                  .map(item => item.number)[0] ||
+                                  phones[0].number}
+                              </Box>
+                              <Box>{email}</Box>
+                            </>
+                          ),
+                          addresses: addresses
+                            .filter(a => a.type === "RESIDENCE")
+                            .map((item, key) => (
+                              <AddressView data={item} key={key} />
+                            )),
+                          action: (
+                            <Link
+                              to={`../employees?division.databaseId=${databaseId}&division.name=${name}`}
+                              fontWeight="bold"
+                            >
+                              Перейти до працівників
+                            </Link>
+                          )
+                        })}
+                        tableName="/contract/divisions"
+                      />
+                      <Pagination {...pageInfo} />
+                    </>
+                  ) : (
+                    <EmptyData />
+                  )}
+                </LoadingOverlay>
+              );
             }}
           </Query>
         </>
@@ -647,67 +662,76 @@ const Employees = ({ id }) => (
               employeeFilter: { division }
             }}
           >
-            {({ loading, error, data }) => {
-              if (loading) return "Loading...";
-              if (error) return `Error! ${error.message}`;
-              const {
-                contractorEmployeeDivisions: {
-                  nodes: contractorEmployeeDivisions,
-                  pageInfo
+            {({
+              loading,
+              error,
+              data: {
+                capitationContract: {
+                  contractorEmployeeDivisions: {
+                    nodes: contractorEmployeeDivisions = [],
+                    pageInfo
+                  } = {}
                 } = {}
-              } = data.capitationContract;
+              } = {}
+            }) => {
+              if (error) return `Error! ${error.message}`;
               return (
-                contractorEmployeeDivisions &&
-                contractorEmployeeDivisions.length > 0 && (
-                  <>
-                    <Table
-                      data={contractorEmployeeDivisions}
-                      header={{
-                        databaseId: "ID",
-                        divisionName: "Назва відділення",
-                        employeeName: "ПІБ працівника",
-                        speciality: "Спеціальність",
-                        staffUnits: "Штатна одиниця",
-                        declarationLimit: "Ліміт кількості декларацій"
-                      }}
-                      renderRow={({
-                        employee: {
+                <LoadingOverlay loading={loading}>
+                  {contractorEmployeeDivisions.length > 0 ? (
+                    <>
+                      <Table
+                        data={contractorEmployeeDivisions}
+                        header={{
+                          databaseId: "ID",
+                          divisionName: "Назва відділення",
+                          employeeName: "ПІБ працівника",
+                          speciality: "Спеціальність",
+                          staffUnits: "Штатна одиниця",
+                          declarationLimit: "Ліміт кількості декларацій"
+                        }}
+                        renderRow={({
+                          employee: {
+                            databaseId,
+                            party,
+                            additionalInfo: { specialities }
+                          },
+                          division: { name: divisionName },
+                          ...contractorEmployeeDivisions
+                        }) => ({
                           databaseId,
-                          party,
-                          additionalInfo: { specialities }
-                        },
-                        division: { name: divisionName },
-                        ...contractorEmployeeDivisions
-                      }) => ({
-                        databaseId,
-                        divisionName,
-                        employeeName: getFullName(party),
-                        speciality: (
-                          <DictionaryValue
-                            name="SPECIALITY_TYPE"
-                            item={
-                              specialities.find(
-                                item => item.specialityOfficio && item
-                              ).speciality
-                            }
-                          />
-                        ),
-                        ...contractorEmployeeDivisions
-                      })}
-                      sortableFields={["staffUnits", "declarationLimit"]}
-                      sortingParams={parseSortingParams(locationParams.orderBy)}
-                      onSortingChange={sortingParams =>
-                        setLocationParams({
-                          ...locationParams,
-                          orderBy: stringifySortingParams(sortingParams)
-                        })
-                      }
-                      tableName="/contract/employees"
-                      whiteSpaceNoWrap={["databaseId"]}
-                    />
-                    <Pagination {...pageInfo} />
-                  </>
-                )
+                          divisionName,
+                          employeeName: getFullName(party),
+                          speciality: (
+                            <DictionaryValue
+                              name="SPECIALITY_TYPE"
+                              item={
+                                specialities.find(
+                                  item => item.specialityOfficio && item
+                                ).speciality
+                              }
+                            />
+                          ),
+                          ...contractorEmployeeDivisions
+                        })}
+                        sortableFields={["staffUnits", "declarationLimit"]}
+                        sortingParams={parseSortingParams(
+                          locationParams.orderBy
+                        )}
+                        onSortingChange={sortingParams =>
+                          setLocationParams({
+                            ...locationParams,
+                            orderBy: stringifySortingParams(sortingParams)
+                          })
+                        }
+                        tableName="/contract/employees"
+                        whiteSpaceNoWrap={["databaseId"]}
+                      />
+                      <Pagination {...pageInfo} />
+                    </>
+                  ) : (
+                    <EmptyData />
+                  )}
+                </LoadingOverlay>
               );
             }}
           </Query>
@@ -718,9 +742,10 @@ const Employees = ({ id }) => (
 );
 
 const ExternalContractors = ({ externalContractors }) =>
-  externalContractors &&
-  externalContractors.length > 0 && (
+  externalContractors && externalContractors.length > 0 ? (
     <ExternalContractorsTable data={externalContractors} />
+  ) : (
+    <EmptyData />
   );
 
 const Documents = ({ attachedDocuments }) =>
@@ -873,6 +898,12 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
       </>
     )}
   </BooleanValue>
+);
+
+const EmptyData = props => (
+  <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
+    Інформація відсутня
+  </Text>
 );
 
 const Wrapper = system(

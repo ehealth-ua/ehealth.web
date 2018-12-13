@@ -38,7 +38,7 @@ import Table, {
 import LinkComponent from "../../../components/Link";
 import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
-import Loader from "../../../components/Loader";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import * as Field from "../../../components/Field";
 import AddressView from "../../../components/AddressView";
 import DictionaryValue from "../../../components/DictionaryValue";
@@ -66,11 +66,13 @@ const CapitationContractRequestsDetails = () => (
 );
 
 const Details = ({ id }) => (
-  <Query query={CapitationContractRequestQuery} variables={{ id }}>
-    {({ loading, error, data }) => {
-      if (loading) return <Loader />;
+  <Query
+    query={CapitationContractRequestQuery}
+    fetchPolicy="network-only"
+    variables={{ id }}
+  >
+    {({ loading, error, data: { capitationContractRequest = {} } = {} }) => {
       if (error) return `Error! ${error.message}`;
-
       const {
         databaseId,
         status,
@@ -94,12 +96,12 @@ const Details = ({ id }) => (
         attachedDocuments,
         previousRequest,
         statusReason
-      } = data.capitationContractRequest;
+      } = capitationContractRequest;
 
       const { party = "" } = assignee ? assignee : {};
 
       return (
-        <>
+        <LoadingOverlay loading={loading}>
           <Box p={6}>
             <Box py={10}>
               <Breadcrumbs.List>
@@ -234,7 +236,7 @@ const Details = ({ id }) => (
               />
             </Router>
           </Tabs.Content>
-        </>
+        </LoadingOverlay>
       );
     }}
   </Query>

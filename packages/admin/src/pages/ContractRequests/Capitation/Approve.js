@@ -12,7 +12,7 @@ import Line from "../../../components/Line";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
 import Button from "../../../components/Button";
-import Loader from "../../../components/Loader";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import Tooltip from "../../../components/Tooltip";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
@@ -42,16 +42,19 @@ const Approve = ({ id }) => (
       }}
     >
       {({ loading, error, data: { capitationContractRequest } = {} }) => {
-        if (loading) return <Loader />;
         if (error) return `Error! ${error.message}`;
         const {
           status,
           databaseId,
-          contractorLegalEntity: { databaseId: legalEntityId, name, edrpou }
+          contractorLegalEntity: {
+            databaseId: legalEntityId,
+            name,
+            edrpou
+          } = {}
         } = capitationContractRequest;
 
         return (
-          <>
+          <LoadingOverlay loading={loading}>
             <OpacityBox m={5}>
               <DefinitionListView
                 labels={{
@@ -84,7 +87,7 @@ const Approve = ({ id }) => (
                 data={capitationContractRequest}
               />
             </Router>
-          </>
+          </LoadingOverlay>
         );
       }}
     </Query>

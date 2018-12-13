@@ -15,7 +15,7 @@ import { getFullName } from "@ehealth/utils";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
 import Button from "../../../components/Button";
-import Loader from "../../../components/Loader";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import * as Field from "../../../components/Field/index";
 import { SearchIcon } from "../../../components/MultiSelectView";
 import DictionaryValue from "../../../components/DictionaryValue";
@@ -45,10 +45,13 @@ const Update = ({ id }) => (
             id
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
+          {({
+            loading,
+            error,
+            data: { capitationContractRequest = {} } = {}
+          }) => {
             if (error) return `Error! ${error.message}`;
-            const { capitationContractRequest } = data;
+
             const {
               status,
               databaseId,
@@ -66,7 +69,7 @@ const Update = ({ id }) => (
             } = capitationContractRequest;
 
             return (
-              <>
+              <LoadingOverlay loading={loading}>
                 <OpacityBox m={5}>
                   <DefinitionListView
                     labels={{
@@ -109,7 +112,7 @@ const Update = ({ id }) => (
                     data={capitationContractRequest}
                   />
                 </Router>
-              </>
+              </LoadingOverlay>
             );
           }}
         </Query>
@@ -144,7 +147,6 @@ const UpdateContractRequest = ({
           error,
           data: { employees: { nodes: employees = [] } = {} } = {}
         }) => {
-          if (loading) return <Loader />;
           if (error) return `Error! ${error.message}`;
           return (
             <Mutation

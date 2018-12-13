@@ -2,7 +2,7 @@ import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
-import { Flex, Box, Heading } from "rebass/emotion";
+import { Flex, Box, Heading, Text } from "rebass/emotion";
 import system from "system-components/emotion";
 import format from "date-fns/format";
 import { loader } from "graphql.macro";
@@ -28,7 +28,7 @@ import Link from "../../components/Link";
 import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
-import Loader from "../../components/Loader";
+import LoadingOverlay, { Spinner } from "../../components/LoadingOverlay";
 import Button, { IconButton } from "../../components/Button";
 import Tooltip from "../../components/Tooltip";
 import Ability from "../../components/Ability";
@@ -74,8 +74,7 @@ const Details = ({ id }) => (
       ...filteredLocationParams(id)
     }}
   >
-    {({ loading, error, data: { legalEntity } }) => {
-      if (loading) return <Loader />;
+    {({ loading, error, data: { legalEntity = {} } }) => {
       if (error) return `Error! ${error.message}`;
       const {
         id,
@@ -83,12 +82,12 @@ const Details = ({ id }) => (
         status,
         edrpou,
         name,
-        addresses,
-        phones,
+        addresses = [],
+        phones = [],
         email,
         type,
         ownerPropertyType,
-        kveds,
+        kveds = [],
         misVerified,
         nhsVerified,
         nhsReviewed,
@@ -105,7 +104,7 @@ const Details = ({ id }) => (
       const isVerificationActive = status === "ACTIVE" && nhsReviewed;
 
       return (
-        <>
+        <LoadingOverlay loading={loading}>
           <Box p={6}>
             <Box py={10}>
               <Breadcrumbs.List>
@@ -261,7 +260,7 @@ const Details = ({ id }) => (
               <Divisions path="/divisions" />
             </Router>
           </Tabs.Content>
-        </>
+        </LoadingOverlay>
       );
     }}
   </Query>
@@ -613,53 +612,58 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
               ...filteredLocationParams(id, locationParams)
             }}
           >
-            {({ loading, error, data }) => {
-              if (loading) return "Loading...";
+            {({ loading, error, data = {} }) => {
               if (error) return `Error! ${error.message}`;
               const {
                 legalEntity: {
-                  mergedFromLegalEntities: { nodes }
-                }
+                  mergedFromLegalEntities: { nodes = [] } = {}
+                } = {}
               } = data;
               const { orderBy } = locationParams;
-              return nodes.length ? (
-                <Table
-                  data={nodes}
-                  header={{
-                    name: "Назва Медзакладу",
-                    edrpou: "ЄДРПОУ",
-                    reason: "Основа",
-                    insertedAt: "Додано",
-                    isActive: "Статус"
-                  }}
-                  renderRow={({
-                    reason,
-                    insertedAt,
-                    mergedFromLegalEntity: { edrpou, name },
-                    isActive
-                  }) => ({
-                    reason,
-                    insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
-                    name,
-                    edrpou,
-                    isActive: (
-                      <Badge
-                        name={isActive ? "ACTIVE" : "CLOSED"}
-                        type="LEGALENTITY"
-                        display="block"
-                      />
-                    )
-                  })}
-                  sortableFields={["insertedAt", "isActive"]}
-                  sortingParams={parseSortingParams(orderBy)}
-                  onSortingChange={sortingParams =>
-                    setLocationParams({
-                      orderBy: stringifySortingParams(sortingParams)
-                    })
-                  }
-                  tableName="mergedFromLegalEntities"
-                />
-              ) : null;
+              return (
+                <LoadingOverlay loading={loading}>
+                  {nodes.length > 0 ? (
+                    <Table
+                      data={nodes}
+                      header={{
+                        name: "Назва Медзакладу",
+                        edrpou: "ЄДРПОУ",
+                        reason: "Основа",
+                        insertedAt: "Додано",
+                        isActive: "Статус"
+                      }}
+                      renderRow={({
+                        reason,
+                        insertedAt,
+                        mergedFromLegalEntity: { edrpou, name },
+                        isActive
+                      }) => ({
+                        reason,
+                        insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                        name,
+                        edrpou,
+                        isActive: (
+                          <Badge
+                            name={isActive ? "ACTIVE" : "CLOSED"}
+                            type="LEGALENTITY"
+                            display="block"
+                          />
+                        )
+                      })}
+                      sortableFields={["insertedAt", "isActive"]}
+                      sortingParams={parseSortingParams(orderBy)}
+                      onSortingChange={sortingParams =>
+                        setLocationParams({
+                          orderBy: stringifySortingParams(sortingParams)
+                        })
+                      }
+                      tableName="mergedFromLegalEntities"
+                    />
+                  ) : (
+                    <EmptyData />
+                  )}
+                </LoadingOverlay>
+              );
             }}
           </Query>
         </>
@@ -876,6 +880,12 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
     </Popup>
   );
 };
+
+const EmptyData = props => (
+  <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
+    Інформація відсутня
+  </Text>
+);
 
 const OpacityBox = system({ is: Box, opacity: 1 });
 

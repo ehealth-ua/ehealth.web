@@ -12,7 +12,7 @@ import Line from "../../../components/Line";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
 import Button from "../../../components/Button";
-import Loader from "../../../components/Loader";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import Tooltip from "../../../components/Tooltip";
 import * as Field from "../../../components/Field";
 import DefinitionListView from "../../../components/DefinitionListView";
@@ -48,8 +48,11 @@ const Decline = ({
       <LocationParams>
         {({ locationParams, setLocationParams }) => (
           <Query query={CapitationContractRequestQuery} variables={{ id }}>
-            {({ loading, error, data: { capitationContractRequest } }) => {
-              if (loading) return <Loader />;
+            {({
+              loading,
+              error,
+              data: { capitationContractRequest = {} } = {}
+            }) => {
               if (error) return `Error! ${error.message}`;
 
               const {
@@ -63,43 +66,45 @@ const Decline = ({
               } = capitationContractRequest;
 
               return (
-                <Box m={5}>
-                  <OpacityBox>
-                    <DefinitionListView
-                      labels={{
-                        databaseId: "ID заяви",
-                        status: "Статус",
-                        edrpou: "ЄДРПОУ",
-                        name: "Назва",
-                        legalEntityId: "ID медзакладу"
-                      }}
-                      data={{
-                        databaseId,
-                        status: (
-                          <Badge
-                            name={status}
-                            type="CONTRACT_REQUEST"
-                            minWidth={100}
-                          />
-                        ),
-                        edrpou,
-                        name,
-                        legalEntityId
-                      }}
-                      color="#7F8FA4"
-                      labelWidth="100px"
-                    />
-                  </OpacityBox>
-                  <Line />
-                  <Router>
-                    <Reason
-                      path="/"
-                      onSubmit={setLocationParams}
-                      data={capitationContractRequest}
-                    />
-                    <Sign path="/sign" />
-                  </Router>
-                </Box>
+                <LoadingOverlay loading={loading}>
+                  <Box m={5}>
+                    <OpacityBox>
+                      <DefinitionListView
+                        labels={{
+                          databaseId: "ID заяви",
+                          status: "Статус",
+                          edrpou: "ЄДРПОУ",
+                          name: "Назва",
+                          legalEntityId: "ID медзакладу"
+                        }}
+                        data={{
+                          databaseId,
+                          status: (
+                            <Badge
+                              name={status}
+                              type="CONTRACT_REQUEST"
+                              minWidth={100}
+                            />
+                          ),
+                          edrpou,
+                          name,
+                          legalEntityId
+                        }}
+                        color="#7F8FA4"
+                        labelWidth="100px"
+                      />
+                    </OpacityBox>
+                    <Line />
+                    <Router>
+                      <Reason
+                        path="/"
+                        onSubmit={setLocationParams}
+                        data={capitationContractRequest}
+                      />
+                      <Sign path="/sign" />
+                    </Router>
+                  </Box>
+                </LoadingOverlay>
               );
             }}
           </Query>

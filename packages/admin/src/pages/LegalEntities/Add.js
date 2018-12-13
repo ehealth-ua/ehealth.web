@@ -14,7 +14,7 @@ import Badge from "../../components/Badge";
 import Table from "../../components/Table";
 import Steps from "../../components/Steps";
 import Button from "../../components/Button";
-import Loader from "../../components/Loader";
+import LoadingOverlay from "../../components/LoadingOverlay";
 import Tooltip from "../../components/Tooltip";
 import * as Field from "../../components/Field";
 import DictionaryValue from "../../components/DictionaryValue";
@@ -76,63 +76,76 @@ const Search = ({ location: { state } }) => (
             query={SearchLegalEntitiesQuery}
             variables={{ filter, first: 1 }}
           >
-            {({ loading, error, data }) => {
-              if (loading) return <Loader />;
+            {({
+              loading,
+              error,
+              data: { legalEntities: { nodes: legalEntities = [] } = {} } = {}
+            }) => {
               if (error) return `Error! ${error.message}`;
-              const { nodes: legalEntities } = data.legalEntities;
               const [legalEntity] = legalEntities;
-              return legalEntities.length ? (
-                <>
-                  <Table
-                    data={legalEntities}
-                    header={{
-                      databaseId: "ID Медзакладу",
-                      name: "Назва Медзакладу",
-                      edrpou: "ЄДРПОУ",
-                      owner: "Керівник",
-                      type: "Тип",
-                      nhsVerified: "Верифікований НСЗУ",
-                      status: "Статус"
-                    }}
-                    renderRow={({
-                      status,
-                      nhsVerified,
-                      owner,
-                      type,
-                      ...legalEntity
-                    }) => ({
-                      ...legalEntity,
-                      type: (
-                        <DictionaryValue name="LEGAL_ENTITY_TYPE" item={type} />
-                      ),
-                      owner: owner && getFullName(owner.party),
-                      nhsVerified: (
-                        <Flex justifyContent="center">
-                          {nhsVerified ? <PositiveIcon /> : <NegativeIcon />}
-                        </Flex>
-                      ),
-                      status: (
-                        <Badge
-                          name={status}
-                          type="LEGALENTITY"
-                          display="block"
-                        />
-                      )
-                    })}
-                    tableName="legalEntity/Add"
-                  />
-                  <Flex px={5} mt={5}>
-                    <Box mr={3}>
-                      <Link to="../related-legal-entities">
-                        <Button variant="blue">Повернутися</Button>
-                      </Link>
-                    </Box>
-                    <Link to="./reason" state={{ legalEntity, ...state }}>
-                      <Button variant="green">Далі</Button>
-                    </Link>
-                  </Flex>
-                </>
-              ) : null;
+              return (
+                <LoadingOverlay loading={loading}>
+                  {legalEntities.length ? (
+                    <>
+                      <Table
+                        data={legalEntities}
+                        header={{
+                          databaseId: "ID Медзакладу",
+                          name: "Назва Медзакладу",
+                          edrpou: "ЄДРПОУ",
+                          owner: "Керівник",
+                          type: "Тип",
+                          nhsVerified: "Верифікований НСЗУ",
+                          status: "Статус"
+                        }}
+                        renderRow={({
+                          status,
+                          nhsVerified,
+                          owner,
+                          type,
+                          ...legalEntity
+                        }) => ({
+                          ...legalEntity,
+                          type: (
+                            <DictionaryValue
+                              name="LEGAL_ENTITY_TYPE"
+                              item={type}
+                            />
+                          ),
+                          owner: owner && getFullName(owner.party),
+                          nhsVerified: (
+                            <Flex justifyContent="center">
+                              {nhsVerified ? (
+                                <PositiveIcon />
+                              ) : (
+                                <NegativeIcon />
+                              )}
+                            </Flex>
+                          ),
+                          status: (
+                            <Badge
+                              name={status}
+                              type="LEGALENTITY"
+                              display="block"
+                            />
+                          )
+                        })}
+                        tableName="legalEntity/Add"
+                      />
+                      <Flex px={5} mt={5}>
+                        <Box mr={3}>
+                          <Link to="../related-legal-entities">
+                            <Button variant="blue">Повернутися</Button>
+                          </Link>
+                        </Box>
+                        <Link to="./reason" state={{ legalEntity, ...state }}>
+                          <Button variant="green">Далі</Button>
+                        </Link>
+                      </Flex>
+                    </>
+                  ) : null}
+                </LoadingOverlay>
+              );
             }}
           </Query>
         )}
@@ -230,12 +243,12 @@ const Sign = ({
     query={LegalEntityQuery}
     variables={{ id: legalEntityToId, first: 10 }}
   >
-    {({ loading, error, data }) => {
-      if (loading) return "Loading...";
+    {({
+      loading,
+      error,
+      data: { legalEntity: { databaseId, name, edrpou } = {} } = {}
+    }) => {
       if (error) return `Error! ${error.message}`;
-      const {
-        legalEntity: { databaseId, name, edrpou }
-      } = data;
       const legalEntityTo = { id: databaseId, name, edrpou };
       const legalEntityFrom = {
         id: legalEntityFromId,
@@ -243,107 +256,110 @@ const Sign = ({
         edrpou: legalEntityFromEdrpou
       };
       return (
-        <Box px={5}>
-          <Signer.Parent
-            url={env.REACT_APP_SIGNER_URL}
-            features={{ width: 640, height: 589 }}
-          >
-            {({ signData }) => (
-              <Mutation mutation={MergeLegalEntitiesMutation}>
-                {mergeLegalEntities => (
-                  <>
-                    <Text fontSize={1} fontWeight="bold" mb={3}>
-                      Основний медзаклад
-                    </Text>
-                    <DefinitionListView
-                      labels={{
-                        edrpou: "ЄДРПОУ",
-                        name: "Назва",
-                        id: "ID медзакладу"
-                      }}
-                      data={legalEntityTo}
-                    />
-                    <Line />
-                    <Text fontSize={1} fontWeight="bold" mb={3}>
-                      Підпорядкований медзаклад
-                    </Text>
-                    <DefinitionListView
-                      labels={{
-                        edrpou: "ЄДРПОУ",
-                        name: "Назва",
-                        id: "ID медзакладу"
-                      }}
-                      data={legalEntityFrom}
-                    />
-                    <Line />
-                    <DefinitionListView
-                      labels={{
-                        reason: "Підстава підпорядкування"
-                      }}
-                      data={{ reason }}
-                    />
-                    <Flex>
-                      <Box mr={3}>
-                        <Link
-                          to="../reason"
-                          state={{
-                            reason,
-                            legalEntity: {
-                              id: legalEntityFromId,
-                              name: legalEntityFromName,
-                              edrpou: legalEntityFromEdrpou,
-                              owner
-                            }
-                          }}
-                        >
-                          <Button variant="blue">Повернутися</Button>
-                        </Link>
-                      </Box>
-                      <Tooltip
-                        component={() => (
-                          <Button
-                            variant="green"
-                            onClick={async () => {
-                              const mergedLegalEntities = {
-                                merged_from_legal_entity: legalEntityFrom,
-                                merged_to_legal_entity: legalEntityTo,
-                                reason
-                              };
-                              const { signedContent } = await signData(
-                                mergedLegalEntities
-                              );
-                              await mergeLegalEntities({
-                                variables: {
-                                  input: {
-                                    signedContent: {
-                                      content: signedContent,
-                                      encoding: "BASE64"
-                                    }
-                                  }
-                                }
-                              });
-                              navigate("/legal-entity-merge-jobs");
+        <LoadingOverlay loading={loading}>
+          <Box px={5}>
+            <Signer.Parent
+              url={env.REACT_APP_SIGNER_URL}
+              features={{ width: 640, height: 589 }}
+            >
+              {({ signData }) => (
+                <Mutation mutation={MergeLegalEntitiesMutation}>
+                  {mergeLegalEntities => (
+                    <>
+                      <Text fontSize={1} fontWeight="bold" mb={3}>
+                        Основний медзаклад
+                      </Text>
+                      <DefinitionListView
+                        labels={{
+                          edrpou: "ЄДРПОУ",
+                          name: "Назва",
+                          id: "ID медзакладу"
+                        }}
+                        data={legalEntityTo}
+                      />
+                      <Line />
+                      <Text fontSize={1} fontWeight="bold" mb={3}>
+                        Підпорядкований медзаклад
+                      </Text>
+                      <DefinitionListView
+                        labels={{
+                          edrpou: "ЄДРПОУ",
+                          name: "Назва",
+                          id: "ID медзакладу"
+                        }}
+                        data={legalEntityFrom}
+                      />
+                      <Line />
+                      <DefinitionListView
+                        labels={{
+                          reason: "Підстава підпорядкування"
+                        }}
+                        data={{ reason }}
+                      />
+                      <Flex>
+                        <Box mr={3}>
+                          <Link
+                            to="../reason"
+                            state={{
+                              reason,
+                              legalEntity: {
+                                id: legalEntityFromId,
+                                name: legalEntityFromName,
+                                edrpou: legalEntityFromEdrpou,
+                                owner
+                              }
                             }}
                           >
-                            Підписати
-                          </Button>
-                        )}
-                        content={
-                          <>
-                            Увага! <br />
-                            Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність власних
-                            намірів , а також що зміст правочину ВІДПОВІДАЄ
-                            ВАШІЇЙ ВОЛІ, ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ ОСОБИСТО ВАМИ.
-                          </>
-                        }
-                      />
-                    </Flex>
-                  </>
-                )}
-              </Mutation>
-            )}
-          </Signer.Parent>
-        </Box>
+                            <Button variant="blue">Повернутися</Button>
+                          </Link>
+                        </Box>
+                        <Tooltip
+                          component={() => (
+                            <Button
+                              variant="green"
+                              onClick={async () => {
+                                const mergedLegalEntities = {
+                                  merged_from_legal_entity: legalEntityFrom,
+                                  merged_to_legal_entity: legalEntityTo,
+                                  reason
+                                };
+                                const { signedContent } = await signData(
+                                  mergedLegalEntities
+                                );
+                                await mergeLegalEntities({
+                                  variables: {
+                                    input: {
+                                      signedContent: {
+                                        content: signedContent,
+                                        encoding: "BASE64"
+                                      }
+                                    }
+                                  }
+                                });
+                                navigate("/legal-entity-merge-jobs");
+                              }}
+                            >
+                              Підписати
+                            </Button>
+                          )}
+                          content={
+                            <>
+                              Увага! <br />
+                              Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність
+                              власних намірів , а також що зміст правочину
+                              ВІДПОВІДАЄ ВАШІЇЙ ВОЛІ, ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ
+                              ОСОБИСТО ВАМИ.
+                            </>
+                          }
+                        />
+                      </Flex>
+                    </>
+                  )}
+                </Mutation>
+              )}
+            </Signer.Parent>
+          </Box>
+        </LoadingOverlay>
       );
     }}
   </Query>

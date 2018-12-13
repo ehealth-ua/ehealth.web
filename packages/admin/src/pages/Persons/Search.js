@@ -18,7 +18,7 @@ import {
 } from "@ehealth/utils";
 
 import Link from "../../components/Link";
-import Loader from "../../components/Loader";
+import LoadingOverlay from "../../components/LoadingOverlay";
 import Table from "../../components/Table";
 import Details from "../../components/Details";
 import * as Field from "../../components/Field";
@@ -53,56 +53,69 @@ const Search = ({ uri }) => (
             />
           </Router>
           <Query query={SearchPersonsQuery} variables={locationParams}>
-            {({ loading, error, data, refetch }) => {
-              if (loading) return <Loader />;
-              const { nodes: persons = [] } = data.persons;
-              return !error && persons.length > 0 ? (
-                <Table
-                  data={persons}
-                  header={{
-                    fullName: "ПІБ пацієнта",
-                    birthDate: "Дата народження",
-                    taxId: "ІПН",
-                    unzr: "ID Запису в ЄДДР",
-                    authenticationMethods: "Метод аутентифікації",
-                    insertedAt: "Додано",
-                    action: "Дія"
-                  }}
-                  renderRow={({
-                    id,
-                    birthDate,
-                    taxId,
-                    authenticationMethods,
-                    insertedAt,
-                    ...person
-                  }) => ({
-                    ...person,
-                    fullName: getFullName(person),
-                    birthDate: formatDate(birthDate),
-                    taxId: taxId || "—",
-                    insertedAt: format(
-                      new Date(insertedAt),
-                      "DD.MM.YYYY, HH:mm"
-                    ),
-                    authenticationMethods: (
-                      <AuthnMethodsList data={authenticationMethods} />
-                    ),
-                    action: (
-                      <Link to={`../${id}`} fontWeight="bold">
-                        Показати деталі
-                      </Link>
-                    )
-                  })}
-                  sortableFields={["birthDate", "taxId", "unzr", "insertedAt"]}
-                  sortingParams={parseSortingParams(locationParams.orderBy)}
-                  onSortingChange={sortingParams =>
-                    setLocationParams({
-                      orderBy: stringifySortingParams(sortingParams)
-                    })
-                  }
-                  tableName="persons/search"
-                />
-              ) : null;
+            {({
+              loading,
+              error,
+              data: { persons = ({ nodes: persons = [] } = {}) } = {},
+              refetch
+            }) => {
+              if (error) return `Error! ${error.message}`;
+              return (
+                <LoadingOverlay loading={loading}>
+                  {persons.length > 0 ? (
+                    <Table
+                      data={persons}
+                      header={{
+                        fullName: "ПІБ пацієнта",
+                        birthDate: "Дата народження",
+                        taxId: "ІПН",
+                        unzr: "ID Запису в ЄДДР",
+                        authenticationMethods: "Метод аутентифікації",
+                        insertedAt: "Додано",
+                        action: "Дія"
+                      }}
+                      renderRow={({
+                        id,
+                        birthDate,
+                        taxId,
+                        authenticationMethods,
+                        insertedAt,
+                        ...person
+                      }) => ({
+                        ...person,
+                        fullName: getFullName(person),
+                        birthDate: formatDate(birthDate),
+                        taxId: taxId || "—",
+                        insertedAt: format(
+                          new Date(insertedAt),
+                          "DD.MM.YYYY, HH:mm"
+                        ),
+                        authenticationMethods: (
+                          <AuthnMethodsList data={authenticationMethods} />
+                        ),
+                        action: (
+                          <Link to={`../${id}`} fontWeight="bold">
+                            Показати деталі
+                          </Link>
+                        )
+                      })}
+                      sortableFields={[
+                        "birthDate",
+                        "taxId",
+                        "unzr",
+                        "insertedAt"
+                      ]}
+                      sortingParams={parseSortingParams(locationParams.orderBy)}
+                      onSortingChange={sortingParams =>
+                        setLocationParams({
+                          orderBy: stringifySortingParams(sortingParams)
+                        })
+                      }
+                      tableName="persons/search"
+                    />
+                  ) : null}
+                </LoadingOverlay>
+              );
             }}
           </Query>
         </>

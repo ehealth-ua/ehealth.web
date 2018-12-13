@@ -11,7 +11,7 @@ import { AdminSearchIcon } from "@ehealth/icons";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
-import Loader from "../../components/Loader";
+import LoadingOverlay from "../../components/LoadingOverlay";
 import Button from "../../components/Button";
 import * as Field from "../../components/Field";
 import STATUSES from "../../helpers/statuses";
@@ -91,109 +91,120 @@ const Search = ({ uri }) => (
                 orderBy
               }}
             >
-              {({ loading, error, data }) => {
-                if (loading) return <Loader />;
-                const {
-                  nodes: legalEntityMergeJobs = []
-                } = data.legalEntityMergeJobs;
-                return !error && legalEntityMergeJobs.length > 0 ? (
-                  <Table
-                    data={legalEntityMergeJobs}
-                    header={{
-                      databaseId: "ID",
-                      mergedToLegalEntityName: (
-                        <Trans id="le_merge.main_legal_entity_name">
-                          Main legal entity
-                        </Trans>
-                      ),
-                      mergedToLegalEntityEdrpou: (
-                        <Trans id="le_merge.main_legal_entity_edrpou">
-                          Main legal entity edrpou
-                        </Trans>
-                      ),
-                      mergedFromLegalEntityName: (
-                        <Trans id="le_merge.subordinated_legal_entity_name">
-                          Subordinated legal entity
-                        </Trans>
-                      ),
-                      mergedFromLegalEntityEdrpou: (
-                        <Trans id="le_merge.subordinated_legal_entity_edrpou">
-                          Subordinated legal entity edrpou
-                        </Trans>
-                      ),
-                      startedAt: (
-                        <Trans id="le_merge.started_at">Started at</Trans>
-                      ),
-                      executionTime: (
-                        <Trans id="le_merge.execution_time">
-                          Execution time
-                        </Trans>
-                      ),
-                      status: <Trans id="le_merge.job_status">Job status</Trans>
-                    }}
-                    renderRow={({
-                      databaseId,
-                      mergedToLegalEntity: {
-                        name: mergedToLegalEntityName,
-                        edrpou: mergedToLegalEntityEdrpou
-                      },
-                      mergedFromLegalEntity: {
-                        name: mergedFromLegalEntityName,
-                        edrpou: mergedFromLegalEntityEdrpou
-                      },
-                      startedAt,
-                      endedAt,
-                      executionTime,
-                      status
-                    }) => ({
-                      databaseId,
-                      mergedToLegalEntityName,
-                      mergedToLegalEntityEdrpou,
-                      mergedFromLegalEntityName,
-                      mergedFromLegalEntityEdrpou,
-                      startedAt: (
-                        <DateFormat
-                          value={startedAt}
-                          format={{
-                            year: "numeric",
-                            month: "numeric",
-                            day: "numeric",
-                            hour: "numeric",
-                            minute: "numeric"
-                          }}
-                        />
-                      ),
-                      executionTime:
-                        status === "PENDING" ? (
-                          "-"
-                        ) : (
-                          <Plural
-                            value={differenceInSeconds(endedAt, startedAt)}
-                            zero="# секунд"
-                            one="# секунда"
-                            few="# секунди"
-                            many="# секунд"
-                            other="# секунд"
-                          />
-                        ),
-                      status: (
-                        <Badge
-                          type="MERGE_LEGAL_ENTITIES_JOBS"
-                          name={status}
-                          display="block"
-                        />
-                      )
-                    })}
-                    sortableFields={["startedAt"]}
-                    sortingParams={parseSortingParams(orderBy)}
-                    onSortingChange={sortingParams =>
-                      setLocationParams({
-                        orderBy: stringifySortingParams(sortingParams)
-                      })
-                    }
-                    tableName="legalEntityMergeJobs/search"
-                  />
-                ) : null;
+              {({
+                loading,
+                error,
+                data: {
+                  legalEntityMergeJobs: {
+                    nodes: legalEntityMergeJobs = []
+                  } = {}
+                } = {}
+              }) => {
+                if (error) return `Error! ${error.message}`;
+                return (
+                  <LoadingOverlay loading={loading}>
+                    {legalEntityMergeJobs.length > 0 ? (
+                      <Table
+                        data={legalEntityMergeJobs}
+                        header={{
+                          databaseId: "ID",
+                          mergedToLegalEntityName: (
+                            <Trans id="le_merge.main_legal_entity_name">
+                              Main legal entity
+                            </Trans>
+                          ),
+                          mergedToLegalEntityEdrpou: (
+                            <Trans id="le_merge.main_legal_entity_edrpou">
+                              Main legal entity edrpou
+                            </Trans>
+                          ),
+                          mergedFromLegalEntityName: (
+                            <Trans id="le_merge.subordinated_legal_entity_name">
+                              Subordinated legal entity
+                            </Trans>
+                          ),
+                          mergedFromLegalEntityEdrpou: (
+                            <Trans id="le_merge.subordinated_legal_entity_edrpou">
+                              Subordinated legal entity edrpou
+                            </Trans>
+                          ),
+                          startedAt: (
+                            <Trans id="le_merge.started_at">Started at</Trans>
+                          ),
+                          executionTime: (
+                            <Trans id="le_merge.execution_time">
+                              Execution time
+                            </Trans>
+                          ),
+                          status: (
+                            <Trans id="le_merge.job_status">Job status</Trans>
+                          )
+                        }}
+                        renderRow={({
+                          databaseId,
+                          mergedToLegalEntity: {
+                            name: mergedToLegalEntityName,
+                            edrpou: mergedToLegalEntityEdrpou
+                          },
+                          mergedFromLegalEntity: {
+                            name: mergedFromLegalEntityName,
+                            edrpou: mergedFromLegalEntityEdrpou
+                          },
+                          startedAt,
+                          endedAt,
+                          executionTime,
+                          status
+                        }) => ({
+                          databaseId,
+                          mergedToLegalEntityName,
+                          mergedToLegalEntityEdrpou,
+                          mergedFromLegalEntityName,
+                          mergedFromLegalEntityEdrpou,
+                          startedAt: (
+                            <DateFormat
+                              value={startedAt}
+                              format={{
+                                year: "numeric",
+                                month: "numeric",
+                                day: "numeric",
+                                hour: "numeric",
+                                minute: "numeric"
+                              }}
+                            />
+                          ),
+                          executionTime:
+                            status === "PENDING" ? (
+                              "-"
+                            ) : (
+                              <Plural
+                                value={differenceInSeconds(endedAt, startedAt)}
+                                zero="# секунд"
+                                one="# секунда"
+                                few="# секунди"
+                                many="# секунд"
+                                other="# секунд"
+                              />
+                            ),
+                          status: (
+                            <Badge
+                              type="MERGE_LEGAL_ENTITIES_JOBS"
+                              name={status}
+                              display="block"
+                            />
+                          )
+                        })}
+                        sortableFields={["startedAt"]}
+                        sortingParams={parseSortingParams(orderBy)}
+                        onSortingChange={sortingParams =>
+                          setLocationParams({
+                            orderBy: stringifySortingParams(sortingParams)
+                          })
+                        }
+                        tableName="legalEntityMergeJobs/search"
+                      />
+                    ) : null}
+                  </LoadingOverlay>
+                );
               }}
             </Query>
           </>

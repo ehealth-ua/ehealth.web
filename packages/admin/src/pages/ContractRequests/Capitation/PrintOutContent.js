@@ -10,6 +10,7 @@ import { Box, Flex, Text } from "rebass/emotion";
 import { PrinterIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import Button from "../../../components/Button";
 import env from "../../../env";
 
@@ -28,18 +29,20 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
         id
       }}
     >
-      {({ loading, error, data }) => {
-        if (loading) return "Loading...";
-        if (error) return `Error! ${error.message}`;
-        const {
+      {({
+        loading,
+        error,
+        data: {
           capitationContractRequest: {
             printoutContent: content,
             status,
             toSignContent
-          }
-        } = data;
+          } = {}
+        } = {}
+      }) => {
+        if (error) return `Error! ${error.message}`;
         return (
-          <>
+          <LoadingOverlay loading={loading}>
             <Portal content={content} />
             <FixedWrapper>
               <Flex
@@ -128,7 +131,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                 </Button>
               </Flex>
             </FixedWrapper>
-          </>
+          </LoadingOverlay>
         );
       }}
     </Query>

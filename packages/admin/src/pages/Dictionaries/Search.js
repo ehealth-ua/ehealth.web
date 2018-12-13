@@ -9,7 +9,7 @@ import { RemoveItemIcon } from "@ehealth/icons";
 
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
-import Loader from "../../components/Loader";
+import LoadingOverlay from "../../components/LoadingOverlay";
 import Table from "../../components/Table";
 import Link from "../../components/Link";
 import Button, { IconButton } from "../../components/Button";
@@ -31,33 +31,37 @@ const Search = () => (
         const { filter = {}, first, last, after, before } = locationParams;
 
         return (
-          <Query
-            query={DictionariesQuery}
-            variables={{
-              first:
-                !first && !last
-                  ? ITEMS_PER_PAGE[0]
-                  : first
-                    ? parseInt(first)
-                    : undefined,
-              last: last ? parseInt(last) : undefined,
-              after,
-              before,
-              filter: !isEmpty(filter) ? filter : undefined
-            }}
-          >
-            {({ loading, error, data }) => {
-              if (loading) return <Loader />;
-              const { nodes: dictionaries = [], pageInfo } = data.dictionaries;
-
-              return (
-                <>
-                  <SearchDictionariesForm
-                    initialValues={locationParams}
-                    setLocationParams={setLocationParams}
-                  />
-                  {!error &&
-                    dictionaries.length > 0 && (
+          <>
+            <SearchDictionariesForm
+              initialValues={locationParams}
+              setLocationParams={setLocationParams}
+            />
+            <Query
+              query={DictionariesQuery}
+              variables={{
+                first:
+                  !first && !last
+                    ? ITEMS_PER_PAGE[0]
+                    : first
+                      ? parseInt(first)
+                      : undefined,
+                last: last ? parseInt(last) : undefined,
+                after,
+                before,
+                filter: !isEmpty(filter) ? filter : undefined
+              }}
+            >
+              {({
+                loading,
+                error,
+                data: {
+                  dictionaries: { nodes: dictionaries = [], pageInfo } = {}
+                } = {}
+              }) => {
+                if (error) return `Error! ${error.message}`;
+                return (
+                  <LoadingOverlay loading={loading}>
+                    {dictionaries.length > 0 && (
                       <>
                         <Table
                           data={dictionaries}
@@ -83,10 +87,11 @@ const Search = () => (
                         <Pagination {...pageInfo} />
                       </>
                     )}
-                </>
-              );
-            }}
-          </Query>
+                  </LoadingOverlay>
+                );
+              }}
+            </Query>
+          </>
         );
       }}
     </LocationParams>

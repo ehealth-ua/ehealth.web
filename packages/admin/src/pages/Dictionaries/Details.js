@@ -18,7 +18,7 @@ import {
 import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import Button from "../../components/Button";
-import Loader from "../../components/Loader";
+import LoadingOverlay from "../../components/LoadingOverlay";
 import * as Field from "../../components/Field";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import {
@@ -37,17 +37,17 @@ const UpdateDictionaryMutation = loader(
 
 const Details = ({ name }) => (
   <Query query={DictionariesQuery} variables={{ first: 1, filter: { name } }}>
-    {({ loading, error, data }) => {
-      if (loading) return <Loader />;
+    {({
+      loading,
+      error,
+      data: { dictionaries: { nodes: dictionaries = [] } = {} } = {}
+    }) => {
       if (error) return `Error! ${error.message}`;
-
-      const { nodes: dictionaries = [] } = data.dictionaries;
-
-      const { id, isActive, labels, values } = dictionaries[0];
+      const [{ id, isActive, labels = [], values = [] } = {}] = dictionaries;
       const isReadOnly = labels.includes("READ_ONLY");
 
       return (
-        <>
+        <LoadingOverlay loading={loading}>
           <Box p={6}>
             <Box py={10}>
               <Breadcrumbs.List>
@@ -94,7 +94,7 @@ const Details = ({ name }) => (
               />
             </Router>
           </Tabs.Content>
-        </>
+        </LoadingOverlay>
       );
     }}
   </Query>
