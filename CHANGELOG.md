@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.11.0"></a>
+# [1.11.0](https://github.com/edenlabllc/ehealth.web/compare/v1.10.2...v1.11.0) (2018-12-13)
+
+
+### Bug Fixes
+
+* **admin:** change medicalProgram structure, according to the updated scheme ([7e87cd9](https://github.com/edenlabllc/ehealth.web/commit/7e87cd9))
+
+
+### Features
+
+* **admin:** add Reimbursement Contract List page ([477289e](https://github.com/edenlabllc/ehealth.web/commit/477289e))
+
+
+
+
+
 <a name="1.10.2"></a>
 ## [1.10.2](https://github.com/edenlabllc/ehealth.web/compare/v1.10.1...v1.10.2) (2018-12-12)
 
