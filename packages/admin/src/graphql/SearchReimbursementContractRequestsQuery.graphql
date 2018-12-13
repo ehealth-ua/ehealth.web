@@ -40,10 +40,8 @@ query SearchReimbursementContractRequestsQuery(
         id
       }
       medicalProgram {
-        nodes {
-          id
-          name
-        }
+        id
+        name
       }
     }
     pageInfo {

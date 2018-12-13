@@ -1,5 +1,6 @@
 import React from "react";
 import isEmpty from "lodash/isEmpty";
+import debounce from "lodash/debounce";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
 import format from "date-fns/format";
@@ -42,15 +43,16 @@ const MedicalProgramsQuery = loader(
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
-  ([name, value]) => ({ name, value })
+  ([key, value]) => ({ key, value })
 );
 
+//TODO: bring it out to the helper
 const sendFilterForm = filter => {
   if (!filter) return {};
   const {
     status = {},
+    medicalProgram = {},
     searchRequest,
-    medicalProgramName,
     assigneeName,
     date: { startFrom, startTo, endFrom, endTo } = {}
   } = filter;
@@ -59,17 +61,26 @@ const sendFilterForm = filter => {
   const contractRequest =
     !isEmpty(searchRequest) &&
     (edrpouTest
-      ? { contractorLegalEntityEdrpou: searchRequest }
+      ? { contractorLegalEntity: { edrpou: searchRequest } }
       : { contractNumber: searchRequest });
   return {
     ...contractRequest,
     startDate: formatDateTimeInterval(startFrom, startTo),
     endDate: formatDateTimeInterval(endFrom, endTo),
-    status: status.name,
+    status: status.key,
     assigneeName,
-    medicalProgramName
+    medicalProgram: !isEmpty(medicalProgram)
+      ? { name: medicalProgram.name }
+      : undefined
   };
 };
+
+const resetPaginationParams = first => ({
+  after: undefined,
+  before: undefined,
+  last: undefined,
+  first: first || ITEMS_PER_PAGE[0]
+});
 
 const ReimbursementContractRequestsSearch = () => (
   <Box p={6}>
@@ -77,145 +88,131 @@ const ReimbursementContractRequestsSearch = () => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const { filter, first, last, after, before, orderBy } = locationParams;
-
         return (
-          <>
-            <Query
-              query={SearchReimbursementContractRequestsQuery}
-              fetchPolicy="network-only"
-              variables={{
-                first:
-                  !first && !last
-                    ? ITEMS_PER_PAGE[0]
-                    : first
-                      ? parseInt(first)
-                      : undefined,
-                last: last ? parseInt(last) : undefined,
-                after,
-                before,
-                orderBy,
-                filter: sendFilterForm(filter)
-              }}
-            >
-              {({
-                loading,
-                error,
-                data: {
-                  reimbursementContractRequests: {
-                    nodes: reimbursementContractRequests = [],
-                    pageInfo
-                  } = {}
-                } = {},
-                refetch
-              }) => {
-                return (
-                  <>
-                    <SearchContractRequestsForm
-                      initialValues={locationParams}
-                      onSubmit={setLocationParams}
-                      refetch={refetch}
-                    />
-                    {!error &&
-                      reimbursementContractRequests.length > 0 && (
-                        <>
-                          <Table
-                            data={reimbursementContractRequests}
-                            header={{
-                              databaseId: "ID заяви на укладення договору",
-                              edrpou: "ЄДРПОУ",
-                              contractorLegalEntityName: "Назва медзакладу",
-                              contractNumber: "Номер договору",
-                              startDate: "Договір діє з",
-                              endDate: "Договір діє по",
-                              assigneeName: "Виконавець",
-                              medicalProgram: "Медична програма",
-                              insertedAt: "Додано",
-                              status: "Статус",
-                              details: "Деталі"
-                            }}
-                            renderRow={({
-                              id,
-                              status,
-                              contractorLegalEntity: {
-                                edrpou,
-                                name: contractorLegalEntityName
-                              },
-                              assignee,
-                              insertedAt,
-                              medicalProgram: { nodes: medicalPrograms = [] },
-                              ...reimbursementContractRequests
-                            }) => ({
+          <Query
+            query={SearchReimbursementContractRequestsQuery}
+            fetchPolicy="network-only"
+            variables={{
+              first:
+                !first && !last
+                  ? ITEMS_PER_PAGE[0]
+                  : first
+                    ? parseInt(first)
+                    : undefined,
+              last: last ? parseInt(last) : undefined,
+              after,
+              before,
+              orderBy,
+              filter: sendFilterForm(filter)
+            }}
+          >
+            {({ loading, error, data }) => {
+              if (loading) return null;
+              const {
+                nodes: reimbursementContractRequests = [],
+                pageInfo
+              } = data.reimbursementContractRequests;
+              return (
+                <>
+                  <SearchContractRequestsForm
+                    initialValues={locationParams}
+                    onSubmit={setLocationParams}
+                  />
+                  {!error &&
+                    reimbursementContractRequests.length > 0 && (
+                      <>
+                        <Table
+                          data={reimbursementContractRequests}
+                          header={{
+                            databaseId: "ID заяви на укладення договору",
+                            edrpou: "ЄДРПОУ",
+                            contractorLegalEntityName: "Назва медзакладу",
+                            contractNumber: "Номер договору",
+                            startDate: "Договір діє з",
+                            endDate: "Договір діє по",
+                            assigneeName: "Виконавець",
+                            medicalProgram: "Медична програма",
+                            insertedAt: "Додано",
+                            status: "Статус",
+                            details: "Деталі"
+                          }}
+                          renderRow={({
+                            id,
+                            status,
+                            startDate,
+                            endDate,
+                            contractorLegalEntity: {
                               edrpou,
-                              contractorLegalEntityName,
-                              ...reimbursementContractRequests,
-                              medicalProgram:
-                                !isEmpty(medicalPrograms) &&
-                                medicalPrograms
-                                  .map(({ name }) => name)
-                                  .join(", "),
-                              insertedAt: format(
-                                insertedAt,
-                                "DD.MM.YYYY, HH:mm"
-                              ),
-                              assigneeName: assignee
-                                ? getFullName(assignee.party)
-                                : undefined,
-                              status: (
-                                <Badge
-                                  type="CONTRACT_REQUEST"
-                                  name={status}
-                                  display="block"
-                                />
-                              ),
-                              details: (
-                                <Link to={`./${id}`} fontWeight="bold">
-                                  Показати деталі
-                                </Link>
-                              )
-                            })}
-                            sortableFields={[
-                              "status",
-                              "startDate",
-                              "endDate",
-                              "insertedAt"
-                            ]}
-                            sortingParams={parseSortingParams(
-                              locationParams.orderBy
-                            )}
-                            onSortingChange={sortingParams =>
-                              setLocationParams({
-                                ...locationParams,
-                                orderBy: stringifySortingParams(sortingParams)
-                              })
-                            }
-                            tableName="reimbursementContractRequests/search"
-                            whiteSpaceNoWrap={["databaseId"]}
-                            hiddenFields="databaseId,contractorLegalEntityName,insertedAt"
-                          />
-                          <Pagination {...pageInfo} />
-                        </>
-                      )}
-                  </>
-                );
-              }}
-            </Query>
-          </>
+                              name: contractorLegalEntityName
+                            },
+                            assignee,
+                            insertedAt,
+                            medicalProgram,
+                            ...reimbursementContractRequests
+                          }) => ({
+                            ...reimbursementContractRequests,
+                            edrpou,
+                            contractorLegalEntityName,
+                            medicalProgram:
+                              medicalProgram && medicalProgram.name,
+                            startDate: format(startDate, "DD.MM.YYYY"),
+                            endDate: format(endDate, "DD.MM.YYYY"),
+                            insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                            assigneeName: assignee
+                              ? getFullName(assignee.party)
+                              : undefined,
+                            status: (
+                              <Badge
+                                type="CONTRACT_REQUEST"
+                                name={status}
+                                display="block"
+                              />
+                            ),
+                            details: (
+                              <Link to={`./${id}`} fontWeight="bold">
+                                Показати деталі
+                              </Link>
+                            )
+                          })}
+                          sortableFields={[
+                            "status",
+                            "startDate",
+                            "endDate",
+                            "insertedAt"
+                          ]}
+                          sortingParams={parseSortingParams(
+                            locationParams.orderBy
+                          )}
+                          onSortingChange={sortingParams =>
+                            setLocationParams({
+                              ...locationParams,
+                              orderBy: stringifySortingParams(sortingParams)
+                            })
+                          }
+                          tableName="reimbursementContractRequests/search"
+                          whiteSpaceNoWrap={["databaseId"]}
+                          hiddenFields="contractorLegalEntityName,insertedAt"
+                        />
+                        <Pagination {...pageInfo} />
+                      </>
+                    )}
+                </>
+              );
+            }}
+          </Query>
         );
       }}
     </LocationParams>
   </Box>
 );
 
-const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
+const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
   <Form
     initialValues={initialValues}
     onSubmit={params =>
       onSubmit({
         ...params,
-        after: undefined,
-        before: undefined,
-        last: undefined,
-        first: initialValues.first || ITEMS_PER_PAGE[0]
+        ...resetPaginationParams(initialValues.first)
       })
     }
   >
@@ -251,7 +248,6 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
               initialValues={initialValues}
               onSubmit={onSubmit}
               toggle={toggle}
-              refetch={refetch}
             />
           )}
           <Flex mb={4} alignItems="center">
@@ -274,10 +270,9 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
                 <TextNoWrap>Показати всі фільтри</TextNoWrap>
               </Flex>
             </Button>
-            <HidenFilters
+            <SelectedFilters
               initialValues={initialValues}
               onSubmit={onSubmit}
-              refetch={refetch}
             />
           </Flex>
         </>
@@ -288,7 +283,6 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
         <Field.Select
           name="filter.status"
           label="Статус заяви"
-          placeholder="test"
           items={[{ value: "всі статуси" }, ...contractStatuses]}
           renderItem={item => item.value}
           itemToString={item => {
@@ -306,7 +300,6 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
             label="Початок дії договору"
           />
         </Box>
-
         <Field.RangePicker
           rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
           label="Кінець дії договору"
@@ -331,11 +324,6 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
               searchRequest: null,
               date: null
             });
-            refetch({
-              filter: undefined,
-              searchRequest: undefined,
-              date: undefined
-            });
           }}
         >
           Скинути пошук
@@ -345,34 +333,23 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
   </Form>
 );
 
-const HidenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
-  const { filter: { medicalProgramName } = {} } = initialValues;
+const SelectedFilters = ({ initialValues, onSubmit, toggle }) => {
+  const { filter: { medicalProgram } = {} } = initialValues;
 
   return (
     <Flex flexWrap="wrap">
-      {medicalProgramName && (
+      {!isEmpty(medicalProgram) && (
         <SelectedItem mx={1}>
-          Медична програма: "{medicalProgramName}"
+          {medicalProgram.name}
           <RemoveItem
             onClick={() => {
               onSubmit({
                 ...initialValues,
-                after: undefined,
-                before: undefined,
-                last: undefined,
-                first: initialValues.first || ITEMS_PER_PAGE[0],
+                ...resetPaginationParams(initialValues.first),
                 filter: {
                   ...initialValues.filter,
-                  medicalProgramName: undefined
+                  medicalProgram: undefined
                 }
-              });
-              refetch({
-                ...initialValues,
-                first: parseInt(initialValues.first) || ITEMS_PER_PAGE[0],
-                filter: sendFilterForm({
-                  ...initialValues.filter,
-                  medicalProgramName: undefined
-                })
               });
             }}
           >
@@ -384,12 +361,7 @@ const HidenFilters = ({ initialValues, onSubmit, toggle, refetch }) => {
   );
 };
 
-const SearchContractsModalForm = ({
-  initialValues,
-  onSubmit,
-  toggle,
-  refetch
-}) => (
+const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
   <Modal width={800} backdrop textAlign="left" overflow="visible">
     <Button
       variant="none"
@@ -406,119 +378,119 @@ const SearchContractsModalForm = ({
       </Flex>
     </Button>
 
-    <Query
-      query={MedicalProgramsQuery}
-      variables={{
-        filter: {
-          isActive: true,
-          insertedAt: "" //dirty hack for the incorrect scheme required value
-        }
+    <Form
+      onSubmit={params => {
+        onSubmit({
+          ...params,
+          ...resetPaginationParams(initialValues.first)
+        });
+        toggle();
       }}
+      initialValues={initialValues}
     >
-      {({
-        loading,
-        error,
-        data: { medicalPrograms: { nodes: medicalPrograms = [] } = {} } = {}
-      }) => {
-        const medicalProgramsNames = medicalPrograms.map(({ name }) => name);
-
-        return (
-          <Form
-            onSubmit={params => {
-              onSubmit({
-                ...params,
-                after: undefined,
-                before: undefined,
-                last: undefined,
-                first: initialValues.first || ITEMS_PER_PAGE[0]
-              });
-              toggle();
+      <Flex mx={-1}>
+        <Box px={1} width={1 / 4}>
+          <Field.Select
+            name="filter.status"
+            label="Статус заяви"
+            items={[{ value: "всі статуси" }, ...contractStatuses]}
+            renderItem={item => item.value}
+            itemToString={item => {
+              if (!item) return "всі статуси";
+              return typeof item === "string" ? item : item.value;
             }}
-            initialValues={initialValues}
-          >
-            <Flex mx={-1}>
-              <Box px={1} width={1 / 4}>
-                <Field.Select
-                  name="filter.status"
-                  label="Статус заяви"
-                  items={[{ value: "всі статуси" }, ...contractStatuses]}
-                  renderItem={item => item.value}
-                  itemToString={item => {
-                    if (!item) return "всі статуси";
-                    return typeof item === "string" ? item : item.value;
-                  }}
-                  type="select"
-                  maxHeight={100}
-                />
-              </Box>
+            type="select"
+          />
+        </Box>
 
-              <Flex px={1}>
-                <Box mr={1}>
-                  <Field.RangePicker
-                    rangeNames={[
-                      "filter.date.startFrom",
-                      "filter.date.startTo"
-                    ]}
-                    label="Початок дії договору"
-                  />
-                </Box>
-                <Field.RangePicker
-                  rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
-                  label="Кінець дії договору"
-                />
-              </Flex>
-            </Flex>
-            <Flex mx={-1}>
-              <Box px={1} width={2 / 5}>
+        <Flex px={1}>
+          <Box mr={1}>
+            <Field.RangePicker
+              rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
+              label="Початок дії договору"
+            />
+          </Box>
+          <Field.RangePicker
+            rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
+            label="Кінець дії договору"
+          />
+        </Flex>
+      </Flex>
+      <Flex mx={-1}>
+        <Box px={1} width={2 / 5}>
+          <Query
+            query={MedicalProgramsQuery}
+            fetchPolicy="cache-first"
+            variables={{
+              skip: true
+            }}
+          >
+            {({
+              loading,
+              error,
+              data: {
+                medicalPrograms: { nodes: medicalPrograms = [] } = {}
+              } = {},
+              refetch: refetchMedicalProgram
+            }) => {
+              return (
                 <Field.Select
-                  name="filter.medicalProgramName"
+                  name="filter.medicalProgram.name"
                   label="Медична програма"
-                  items={["всі програми", ...medicalProgramsNames]}
+                  items={
+                    loading || error
+                      ? []
+                      : medicalPrograms.map(({ name }) => name)
+                  }
+                  onInputValueChange={debounce(
+                    program =>
+                      !isEmpty(program) &&
+                      refetchMedicalProgram({
+                        skip: false,
+                        first: 20,
+                        filter: { name: program }
+                      }),
+                    1000
+                  )}
                   renderItem={item => item}
                   itemToString={item => {
-                    if (!item) return "всі програми";
+                    if (!item) return "";
                     return typeof item === "string" ? item : item.name;
                   }}
-                  type="select"
                 />
-              </Box>
-            </Flex>
-            <Flex mx={-1} mt={4} justifyContent="flex-start">
-              <Box px={1}>
-                <Button variant="red" onClick={toggle}>
-                  Закрити
-                </Button>
-              </Box>
-              <Box px={1}>
-                <Button variant="blue">Шукати</Button>
-              </Box>
-              <Box px={1}>
-                <IconButton
-                  icon={RemoveItemIcon}
-                  type="reset"
-                  disabled={isEmpty(initialValues.filter)}
-                  onClick={() => {
-                    onSubmit({
-                      ...initialValues,
-                      filter: null,
-                      searchRequest: null,
-                      date: null
-                    });
-                    refetch({
-                      filter: undefined,
-                      searchRequest: undefined,
-                      date: undefined
-                    });
-                  }}
-                >
-                  Скинути пошук
-                </IconButton>
-              </Box>
-            </Flex>
-          </Form>
-        );
-      }}
-    </Query>
+              );
+            }}
+          </Query>
+        </Box>
+      </Flex>
+      <Flex mx={-1} mt={4} justifyContent="flex-start">
+        <Box px={1}>
+          <Button variant="red" onClick={toggle}>
+            Закрити
+          </Button>
+        </Box>
+        <Box px={1}>
+          <Button variant="blue">Шукати</Button>
+        </Box>
+        <Box px={1}>
+          <IconButton
+            icon={RemoveItemIcon}
+            type="reset"
+            disabled={isEmpty(initialValues.filter)}
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                filter: null,
+                searchRequest: null,
+                date: null
+              });
+            }}
+          >
+            Скинути пошук
+          </IconButton>
+        </Box>
+      </Flex>
+    </Form>
   </Modal>
 );
 
