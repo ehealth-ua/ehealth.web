@@ -18,7 +18,7 @@ import {
   CancelIcon,
   NegativeIcon
 } from "@ehealth/icons";
-import { getFullName, formatWorkingHours } from "@ehealth/utils";
+import { getFullName } from "@ehealth/utils";
 
 import Line from "../../../components/Line";
 import Tabs from "../../../components/Tabs";
@@ -33,7 +33,6 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import DefinitionListView from "../../../components/DefinitionListView";
 import Pagination from "../../../components/Pagination";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
-import WEEK_DAYS from "../../../helpers/weekDays";
 
 const ReimbursementContractQuery = loader(
   "../../../graphql/ReimbursementContractQuery.graphql"
@@ -163,7 +162,7 @@ const Details = ({ id }) => (
                               name="statusReason"
                               placeholder="Вкажіть причину розірвання договору"
                               rows={5}
-                              maxlength="255"
+                              maxlength="3000"
                             />
                             <Flex justifyContent="center">
                               <Box mr={20}>
@@ -250,31 +249,29 @@ const GeneralInfo = ({
     {!isEmpty(medicalProgram) && (
       <>
         <Line />
-        <Heading fontSize="1" fontWeight="normal" mb={5}>
-          Медичні програми
-        </Heading>
-        {medicalProgram.nodes.map(({ name }, index) => (
-          <DefinitionListView
-            key={index}
-            labels={{
-              medicalProgram: "Медчна програма"
-            }}
-            data={{
-              medicalProgram: name
-            }}
-          />
-        ))}
+        <DefinitionListView
+          labels={{
+            medicalProgram: "Медчна програма"
+          }}
+          data={{
+            medicalProgram: medicalProgram.name
+          }}
+        />
       </>
     )}
-    {statusReason && <Line />}
-    <DefinitionListView
-      labels={{
-        statusReason: "Коментар до статусу"
-      }}
-      data={{
-        statusReason
-      }}
-    />
+    {!isEmpty(statusReason) && (
+      <>
+        <Line />
+        <DefinitionListView
+          labels={{
+            statusReason: "Коментар до статусу"
+          }}
+          data={{
+            statusReason
+          }}
+        />
+      </>
+    )}
   </Box>
 );
 
@@ -492,15 +489,12 @@ const Divisions = ({ id }) => (
                           Телефон <br />
                           Email
                         </>
-                      ),
-                      workingHours: "Графік роботи"
+                      )
                     }}
                     renderRow={({
-                      databaseId,
                       name,
                       addresses,
                       mountainGroup,
-                      workingHours,
                       phones,
                       email
                     }) => ({
@@ -524,16 +518,7 @@ const Divisions = ({ id }) => (
                         .filter(a => a.type === "RESIDENCE")
                         .map((item, key) => (
                           <AddressView data={item} key={key} />
-                        )),
-                      workingHours:
-                        workingHours &&
-                        formatWorkingHours(WEEK_DAYS, workingHours).map(
-                          ({ day, hours }) => (
-                            <Box pb={2}>
-                              {day}: {hours.map(i => i.join("-")).join(", ")}
-                            </Box>
-                          )
-                        )
+                        ))
                     })}
                     tableName="reimbursement-contract/divisions"
                   />
@@ -549,7 +534,7 @@ const Divisions = ({ id }) => (
 );
 
 const Documents = ({ attachedDocuments }) =>
-  attachedDocuments &&
+  !isEmpty(attachedDocuments) &&
   attachedDocuments.map(({ url, type }) => (
     <Box m="2">
       <SaveLink href={url} target="_blank">

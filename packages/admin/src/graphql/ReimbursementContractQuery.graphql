@@ -90,13 +90,7 @@ query ReimbursementContractQuery(
         }
         email
         mountainGroup
-        workingHours {
-          days
-          hours {
-            from
-            to
-          }
-        }
+        workingHours
       }
       pageInfo {
         endCursor
@@ -110,10 +104,8 @@ query ReimbursementContractQuery(
       url
     }
     medicalProgram {
-      nodes {
-        id
-        name
-      }
+      id
+      name
     }
   }
 }
