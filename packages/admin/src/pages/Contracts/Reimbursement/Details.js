@@ -199,6 +199,7 @@ const Details = ({ id }) => (
                 statusReason={statusReason}
                 contractorLegalEntity={contractorLegalEntity}
                 medicalProgram={medicalProgram}
+                status={status}
               />
               <LegalEntity
                 path="/legal-entity"
@@ -226,7 +227,8 @@ const GeneralInfo = ({
   id,
   statusReason,
   contractorLegalEntity,
-  medicalProgram
+  medicalProgram,
+  status
 }) => (
   <Box p={5}>
     <DefinitionListView
@@ -238,7 +240,8 @@ const GeneralInfo = ({
         startDate: format(startDate, "DD.MM.YYYY"),
         endDate: checkStatusProlongate(
           contractorLegalEntity,
-          contractorLegalEntity.id
+          contractorLegalEntity.id,
+          status
         ) ? (
           <ProlongateContract id={id} endDate={endDate} />
         ) : (
@@ -275,7 +278,10 @@ const GeneralInfo = ({
   </Box>
 );
 
-const checkStatusProlongate = (data, id) => {
+const checkStatusProlongate = (data, id, statusContract) => {
+  if (statusContract === "TERMINATED") {
+    return false;
+  }
   if (
     data.mergedToLegalEntity &&
     data.mergedToLegalEntity.mergedFromLegalEntity
@@ -312,13 +318,23 @@ const ProlongateContract = ({ endDate, id }) => (
               initialValues={{ endDate }}
             >
               <Flex>
-                <Field.DatePicker name="endDate" placement="top" />
+                <Field.DatePicker
+                  name="endDate"
+                  minDate={endDate}
+                  placement="top"
+                />
                 <Validation.Required
                   field="endDate"
                   message="Обов&#700;язкове поле"
                 />
                 <Box mx={2} color="redPigment">
-                  <Button variant="none" border="none" px="0">
+                  <Button
+                    variant="none"
+                    border="none"
+                    px="0"
+                    type="reset"
+                    onClick={toggle}
+                  >
                     <CancelIcon />
                   </Button>
                 </Box>
@@ -345,7 +361,7 @@ const ProlongateContract = ({ endDate, id }) => (
         </Mutation>
       ) : (
         <Flex>
-          {endDate}
+          {format(endDate, "DD.MM.YYYY")}
           <Button variant="none" border="none" px="0" py="0" onClick={toggle}>
             <Text color="rockmanBlue" fontWeight="bold" ml={2}>
               змінити
