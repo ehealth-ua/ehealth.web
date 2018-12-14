@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.13.0"></a>
+# [1.13.0](https://github.com/edenlabllc/ehealth.web/compare/v1.12.1...v1.13.0) (2018-12-14)
+
+
+### Features
+
+* **admin:** add Loader component with LoaderIcon ([8f12a72](https://github.com/edenlabllc/ehealth.web/commit/8f12a72))
+* **admin:** add Loader to pages in Query ([242b5b9](https://github.com/edenlabllc/ehealth.web/commit/242b5b9))
+* **admin:** add LoadingOverlay component for loading, delete Loader component ([df59b05](https://github.com/edenlabllc/ehealth.web/commit/df59b05))
+* **icons:** add LoaderIcon with animation dots ([c542b17](https://github.com/edenlabllc/ehealth.web/commit/c542b17))
+
+
+
+
+
 <a name="1.12.1"></a>
 ## [1.12.1](https://github.com/edenlabllc/ehealth.web/compare/v1.12.0...v1.12.1) (2018-12-14)
 

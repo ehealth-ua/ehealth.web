@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.13.0"></a>
+# [1.13.0](https://github.com/edenlabllc/ehealth.web/compare/v1.12.1...v1.13.0) (2018-12-14)
+
+
+### Features
+
+* **icons:** add LoaderIcon with animation dots ([c542b17](https://github.com/edenlabllc/ehealth.web/commit/c542b17))
+
+
+
+
+
 <a name="1.10.1"></a>
 ## [1.10.1](https://github.com/edenlabllc/ehealth.web/compare/v1.10.0...v1.10.1) (2018-12-12)
 
