@@ -1,13 +1,11 @@
 import React from "react";
+import Composer from "react-composer";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
 import createDecorator from "final-form-calculate";
-import format from "date-fns/format";
 import isEmpty from "lodash/isEmpty";
-import system from "system-components/emotion";
-
-import { Trans } from "@lingui/macro";
+import { DateFormat, Trans } from "@lingui/macro";
 
 import { Form, LocationParams, Validation } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
@@ -45,7 +43,7 @@ const SEARCH_REQUEST_PATTERN = `(${EDRPOU_PATTERN})|(${LEGALENTITY_ID_PATTERN})`
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
-      <Trans id="le.search_legal_entities">Search legal entities</Trans>
+      <Trans>Search legal entities</Trans>
     </Heading>
 
     <LocationParams>
@@ -110,16 +108,16 @@ const Search = ({ uri }) => (
                     <Table
                       data={legalEntities}
                       header={{
-                        id: "ID",
-                        name: "Назва медзакладу",
-                        type: "Тип медзакладу",
-                        edrpou: "ЄДРПОУ",
-                        addresses: "Адреса",
-                        nhsVerified: "Верифікований НСЗУ",
-                        nhsReviewed: "Розглянутий НСЗУ",
-                        insertedAt: "Додано",
-                        status: "Статус",
-                        action: "Дія"
+                        id: <Trans>ID</Trans>,
+                        name: <Trans>Legal entity name</Trans>,
+                        type: <Trans>Legal entity type</Trans>,
+                        edrpou: <Trans>EDRPOU</Trans>,
+                        addresses: <Trans>Address</Trans>,
+                        nhsVerified: <Trans>NHS verified</Trans>,
+                        nhsReviewed: <Trans>NHS reviewed</Trans>,
+                        insertedAt: <Trans>Inserted at</Trans>,
+                        status: <Trans>Status</Trans>,
+                        action: <Trans>Action</Trans>
                       }}
                       renderRow={({
                         addresses,
@@ -149,7 +147,7 @@ const Search = ({ uri }) => (
                             {nhsReviewed ? <PositiveIcon /> : <NegativeIcon />}
                           </Flex>
                         ),
-                        insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                        insertedAt: <DateFormat value={insertedAt} />,
                         status: (
                           <Badge
                             type="LEGALENTITY"
@@ -218,17 +216,22 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
   >
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
-        <Field.Text
-          name="filter.code"
-          label="Пошук медзакладу за ЄДРПОУ"
-          placeholder="ЄДРПОУ або ID медзакладу"
-          postfix={<AdminSearchIcon color="#CED0DA" />}
-          autocomplete="off"
+        <Trans
+          id="Legal entity EDRPOU or ID"
+          render={({ translation }) => (
+            <Field.Text
+              name="filter.code"
+              label={<Trans>Search legal entity by EDRPOU</Trans>}
+              placeholder={translation}
+              postfix={<AdminSearchIcon color="#CED0DA" />}
+              autoComplete="off"
+            />
+          )}
         />
         <Validation.Matches
           field="filter.code"
           options={SEARCH_REQUEST_PATTERN}
-          message="Невірний номер"
+          message={<Trans>Invalid number</Trans>}
         />
       </Box>
     </Flex>
@@ -272,20 +275,24 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
       {/*</Box>*/}
 
       <Box px={1} width={1 / 4}>
-        <DictionaryValue
-          name="LEGAL_ENTITY_TYPE"
-          render={dict => (
+        <Composer
+          components={[
+            <DictionaryValue name="LEGAL_ENTITY_TYPE" />,
+            ({ render }) => <Trans id="Show all" render={render} />
+          ]}
+        >
+          {([dict, { translation }]) => (
             <Field.Select
               type="select"
               name="filter.type"
-              label="Тип медзакладу"
-              placeholder="Показати всі"
+              label={<Trans>Legal entity type</Trans>}
+              placeholder={translation}
               itemToString={item => {
-                if (!item) return "Показати всі";
+                if (!item) return translation;
                 return typeof item === "string" ? item : item.value;
               }}
               items={[
-                { value: "Показати всі", key: undefined },
+                { value: translation, key: undefined },
                 ...Object.entries(dict)
                   .filter(([key]) => key !== "MIS")
                   .map(([key, value]) => ({
@@ -297,23 +304,27 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
               size="small"
             />
           )}
-        />
+        </Composer>
       </Box>
       <Box px={1} width={1 / 4}>
-        <DictionaryValue
-          name="LEGAL_ENTITY_STATUS"
-          render={dict => (
+        <Composer
+          components={[
+            <DictionaryValue name="LEGAL_ENTITY_STATUS" />,
+            ({ render }) => <Trans id="All statuses" render={render} />
+          ]}
+        >
+          {([dict, { translation }]) => (
             <Field.Select
               type="select"
               name="filter.nhsVerified"
-              label="Статус верифікації"
-              placeholder="Всі статуси"
+              label={<Trans>Verification status</Trans>}
+              placeholder={translation}
               itemToString={item => {
-                if (!item) return "Всі статуси";
+                if (!item) return translation;
                 return typeof item === "string" ? item : item.value;
               }}
               items={[
-                { value: "Всі статуси", name: undefined },
+                { value: translation, name: undefined },
                 ...Object.entries(dict).map(([key, value]) => ({
                   value,
                   key
@@ -323,12 +334,14 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
               size="small"
             />
           )}
-        />
+        </Composer>
       </Box>
     </Flex>
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
-        <Button variant="blue">Шукати</Button>
+        <Button variant="blue">
+          <Trans>Search</Trans>
+        </Button>
       </Box>
       <Box px={1}>
         <IconButton
@@ -343,7 +356,7 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
             });
           }}
         >
-          Скинути пошук
+          <Trans>Reset</Trans>
         </IconButton>
       </Box>
     </Flex>

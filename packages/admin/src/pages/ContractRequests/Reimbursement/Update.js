@@ -4,7 +4,7 @@ import { Router, Link } from "@reach/router";
 import { Flex, Box } from "rebass/emotion";
 import system from "system-components/emotion";
 import { loader } from "graphql.macro";
-
+import { Trans } from "@lingui/macro";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
 import Badge from "../../../components/Badge";
@@ -27,8 +27,12 @@ const Update = ({ id }) => (
   <>
     <Box pt={5} px={5}>
       <Steps.List>
-        <Steps.Item to="./">Дозаповніть поля</Steps.Item>
-        <Steps.Item to="../approve">Підтвердіть з ЕЦП</Steps.Item>
+        <Steps.Item to="./">
+          <Trans>Дозаповніть поля</Trans>
+        </Steps.Item>
+        <Steps.Item to="../approve">
+          <Trans>Підтвердіть з ЕЦП</Trans>
+        </Steps.Item>
       </Steps.List>
     </Box>
     <LocationParams>
@@ -63,11 +67,11 @@ const Update = ({ id }) => (
                 <OpacityBox m={5}>
                   <DefinitionListView
                     labels={{
-                      databaseId: "ID заяви",
-                      status: "Статус",
-                      edrpou: "ЄДРПОУ",
-                      name: "Назва",
-                      legalEntityId: "ID аптеки"
+                      databaseId: <Trans>ID заяви</Trans>,
+                      status: <Trans>Статус</Trans>,
+                      edrpou: <Trans>ЄДРПОУ</Trans>,
+                      name: <Trans>Назва</Trans>,
+                      legalEntityId: <Trans>ID аптеки</Trans>
                     }}
                     data={{
                       databaseId,
@@ -167,10 +171,14 @@ const UpdateContractRequest = ({
                   }}
                   initialValues={{
                     ...initialValues,
-                    nhsSignerBase:
-                      nhsSignerBase ||
-                      "Положення про Національну службу здоров'я України, затвердженого постановою Кабінету Міністрів України від 27 грудня 2017 року № 1101",
-                    issueCity: issueCity || "Київ"
+                    nhsSignerBase: nhsSignerBase || (
+                      <Trans>
+                        Положення про Національну службу здоров'я України,
+                        затвердженого постановою Кабінету Міністрів України від
+                        27 грудня 2017 року № 1101
+                      </Trans>
+                    ),
+                    issueCity: issueCity || <Trans>Київ</Trans>
                   }}
                 >
                   <Form.AutoSubmit
@@ -178,100 +186,137 @@ const UpdateContractRequest = ({
                   />
                   <Flex>
                     <Box mr={5} width={2 / 5}>
-                      <Field.Select
-                        name="nhsSignerId"
-                        label="Підписант зі сторони Замовника"
-                        placeholder="Введіть підписанта"
-                        items={employees}
-                        renderItem={item => item && getFullName(item.party)}
-                        itemToString={item => {
-                          if (!item) return "";
-                          return typeof item === "string"
-                            ? item
-                            : getFullName(item.party);
-                        }}
-                        filterOptions={{
-                          keys: ["party.lastName", "party.firstName"]
-                        }}
-                        iconComponent={SearchIcon}
+                      <Trans
+                        id="Введіть підписанта"
+                        render={({ translate }) => (
+                          <Field.Select
+                            name="nhsSignerId"
+                            label={
+                              <Trans>Підписант зі сторони Замовника</Trans>
+                            }
+                            placeholder={translate}
+                            items={employees}
+                            renderItem={item => item && getFullName(item.party)}
+                            itemToString={item => {
+                              if (!item) return "";
+                              return typeof item === "string"
+                                ? item
+                                : getFullName(item.party);
+                            }}
+                            filterOptions={{
+                              keys: ["party.lastName", "party.firstName"]
+                            }}
+                            iconComponent={SearchIcon}
+                          />
+                        )}
                       />
 
                       <Validation.Required
                         field="nhsSignerId"
-                        message="Обов&#700;язкове поле"
+                        message={<Trans>Обовʼязкове поле</Trans>}
                       />
                     </Box>
                     <Box width={2 / 5}>
-                      <Field.Text
-                        name="nhsSignerBase"
-                        label="Що діє на підставі"
-                        placeholder="Оберіть підставу"
+                      <Trans
+                        id="Оберіть підставу"
+                        render={({ translate }) => (
+                          <Field.Text
+                            name="nhsSignerBase"
+                            label={<Trans>Що діє на підставі</Trans>}
+                            placeholder={translate}
+                          />
+                        )}
                       />
                       <Validation.Required
                         field="nhsSignerBase"
-                        message="Обов&#700;язкове поле"
+                        message={<Trans>Обовʼязкове поле</Trans>}
                       />
                     </Box>
                   </Flex>
                   <Flex>
                     <Box mr={5} width={2 / 5}>
-                      <Field.Text
-                        name="issueCity"
-                        label="Місто укладення договору"
-                        placeholder="Введіть місто"
+                      <Trans
+                        id="Введіть місто"
+                        render={({ translate }) => (
+                          <Field.Text
+                            name="issueCity"
+                            label={<Trans>Місто укладення договору</Trans>}
+                            placeholder={translate}
+                          />
+                        )}
                       />
                       <Validation.Required
                         field="issueCity"
-                        message="Обов&#700;язкове поле"
+                        message={<Trans>Обовʼязкове поле</Trans>}
                       />
                     </Box>
                     <Box width={2 / 5}>
                       <DictionaryValue
                         name="CONTRACT_PAYMENT_METHOD"
                         render={dict => (
-                          <Field.Select
-                            type="select"
-                            name="nhsPaymentMethod"
-                            label="Спосіб оплати"
-                            placeholder="Оберіть cпосіб"
-                            itemToString={item => {
-                              return item && item.key
-                                ? dict[item.key]
-                                : dict[item];
-                            }}
-                            items={[
-                              ...Object.entries(dict).map(([key, value]) => ({
-                                value,
-                                key
-                              }))
-                            ]}
-                            renderItem={({ value }) => value}
-                            size="small"
-                            sendForm="key"
+                          <Trans
+                            id="Оберіть cпосіб"
+                            render={({ translate }) => (
+                              <Field.Select
+                                type="select"
+                                name="nhsPaymentMethod"
+                                label={<Trans>Спосіб оплати</Trans>}
+                                placeholder={translate}
+                                itemToString={item => {
+                                  return item && item.key
+                                    ? dict[item.key]
+                                    : dict[item];
+                                }}
+                                items={[
+                                  ...Object.entries(dict).map(
+                                    ([key, value]) => ({
+                                      value,
+                                      key
+                                    })
+                                  )
+                                ]}
+                                renderItem={({ value }) => value}
+                                size="small"
+                                sendForm="key"
+                              />
+                            )}
                           />
                         )}
                       />
                       <Validation.Required
                         field="nhsPaymentMethod"
-                        message="Обов&#700;язкове поле"
+                        message={<Trans>Обовʼязкове поле</Trans>}
                       />
                     </Box>
                   </Flex>
                   <Box width={2 / 5}>
-                    <Field.Textarea
-                      name="miscellaneous"
-                      label="Інші умови (залежно від виду медичних послуг)"
-                      placeholder="Перерахуйте умови (за наявності)"
-                      rows={5}
+                    <Trans
+                      id="Перерахуйте умови (за наявності)"
+                      render={({ translate }) => (
+                        <Field.Textarea
+                          name="miscellaneous"
+                          label={
+                            <Trans>
+                              Інші умови (залежно від виду медичних послуг)
+                            </Trans>
+                          }
+                          placeholder={translate}
+                          rows={5}
+                        />
+                      )}
                     />
                   </Box>
                   <Flex mt={5}>
                     <Box mr={3}>
                       <Link to="../">
-                        <ButtonWidth variant="blue">Повернутися</ButtonWidth>
+                        <ButtonWidth variant="blue">
+                          <Trans>Повернутися</Trans>
+                        </ButtonWidth>
                       </Link>
                     </Box>
-                    <ButtonWidth variant="green">Оновити</ButtonWidth>
+                    <ButtonWidth variant="green">
+                      <Trans>Оновити</Trans>
+                    </ButtonWidth>
                   </Flex>
                 </Form>
               )}

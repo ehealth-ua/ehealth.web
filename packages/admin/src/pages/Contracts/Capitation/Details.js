@@ -6,14 +6,13 @@ import system from "system-components/emotion";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
-import isEmpty from "lodash/isEmpty";
+import { Trans } from "@lingui/macro";
 
 import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
 import {
   PrinterIcon,
   PositiveIcon,
   DefaultImageIcon,
-  CircleIcon,
   AdminSearchIcon,
   CancelIcon,
   NegativeIcon
@@ -102,20 +101,22 @@ const Details = ({ id }) => (
             <Box py={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/contracts">
-                  Перелік договорів
+                  <Trans>Перелік договорів</Trans>
                 </Breadcrumbs.Item>
-                <Breadcrumbs.Item>Деталі договору</Breadcrumbs.Item>
+                <Breadcrumbs.Item>
+                  <Trans>Деталі договору</Trans>
+                </Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
             <Flex justifyContent="space-between">
               <Box>
                 <DefinitionListView
                   labels={{
-                    databaseId: "ID договору",
-                    contractRequestId: "ID заяви",
-                    contractNumber: "Номер договору",
-                    status: "Статус",
-                    isSuspended: "Призупинений"
+                    databaseId: <Trans>ID договору</Trans>,
+                    contractRequestId: <Trans>ID заяви</Trans>,
+                    contractNumber: <Trans>Номер договору</Trans>,
+                    status: <Trans>Статус</Trans>,
+                    isSuspended: <Trans>Призупинений</Trans>
                   }}
                   data={{
                     databaseId,
@@ -149,8 +150,8 @@ const Details = ({ id }) => (
                 {status === "VERIFIED" && (
                   <Popup
                     variant="red"
-                    buttonText="Розірвати договір"
-                    title="Розірвати договір"
+                    buttonText={<Trans>Розірвати договір</Trans>}
+                    title={<Trans>Розірвати договір</Trans>}
                   >
                     {toggle => (
                       <Mutation
@@ -172,23 +173,30 @@ const Details = ({ id }) => (
                             }}
                           >
                             <Text mb={2}>
-                              Увага! Після розірвання договору, цю дію не можна
-                              буде скасувати
+                              <Trans>
+                                Увага! Після розірвання договору, цю дію не
+                                можна буде скасувати
+                              </Trans>
                             </Text>
-                            <Field.Textarea
-                              name="statusReason"
-                              placeholder="Вкажіть причину розірвання договору"
-                              rows={5}
-                              maxlength="3000"
+                            <Trans
+                              id="Вкажіть причину розірвання договору"
+                              render={({ translate }) => (
+                                <Field.Textarea
+                                  name="statusReason"
+                                  placeholder={translate}
+                                  rows={5}
+                                  maxlength="3000"
+                                />
+                              )}
                             />
                             <Flex justifyContent="center">
                               <Box mr={20}>
                                 <Button variant="blue" onClick={toggle}>
-                                  Повернутися
+                                  <Trans>Повернутися</Trans>
                                 </Button>
                               </Box>
                               <Button type="submit" variant="red">
-                                Розірвати договір
+                                <Trans>Розірвати договір</Trans>
                               </Button>
                             </Flex>
                           </Form>
@@ -202,12 +210,24 @@ const Details = ({ id }) => (
           </Box>
 
           <Tabs.Nav>
-            <Tabs.NavItem to="./">Загальна інформація</Tabs.NavItem>
-            <Tabs.NavItem to="./legal-entity">Медзаклад</Tabs.NavItem>
-            <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
-            <Tabs.NavItem to="./employees">Лікарі</Tabs.NavItem>
-            <Tabs.NavItem to="./external-contractors">Підрядники</Tabs.NavItem>
-            <Tabs.NavItem to="./documents">Документи</Tabs.NavItem>
+            <Tabs.NavItem to="./">
+              <Trans>Загальна інформація</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./legal-entity">
+              <Trans>Медзаклад</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./divisions">
+              <Trans>Відділення</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./employees">
+              <Trans>Лікарі</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./external-contractors">
+              <Trans>Підрядники</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./documents">
+              <Trans>Документи</Trans>
+            </Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
             <Router>
@@ -269,12 +289,12 @@ const GeneralInfo = ({
   <Box p={5}>
     <DefinitionListView
       labels={{
-        nhsSignerId: "ID підписанта",
-        nhsSignerName: "Ім'я підписанта",
-        nhsSignerBase: "Підстава",
-        nhsContractPrice: "Ціна договору",
-        nhsPaymentMethod: "Спосіб оплати",
-        issueCity: "Місто укладення договору"
+        nhsSignerId: <Trans>ID підписанта</Trans>,
+        nhsSignerName: <Trans>Ім'я підписанта</Trans>,
+        nhsSignerBase: <Trans>Підстава</Trans>,
+        nhsContractPrice: <Trans>Ціна договору</Trans>,
+        nhsPaymentMethod: <Trans>Спосіб оплати</Trans>,
+        issueCity: <Trans>Місто укладення договору</Trans>
       }}
       data={{
         nhsSignerId,
@@ -293,8 +313,8 @@ const GeneralInfo = ({
     <Line />
     <DefinitionListView
       labels={{
-        startDate: "Початкова дата дії контракту",
-        endDate: "Кінцева дата дії контракту"
+        startDate: <Trans>Початкова дата дії контракту</Trans>,
+        endDate: <Trans>Кінцева дата дії контракту</Trans>
       }}
       data={{
         startDate,
@@ -312,7 +332,9 @@ const GeneralInfo = ({
     <Line />
     <DefinitionListView
       labels={{
-        contractorRmspAmount: "Кількість осіб, що обслуговуються медзакладом"
+        contractorRmspAmount: (
+          <Trans>Кількість осіб, що обслуговуються медзакладом</Trans>
+        )
       }}
       data={{
         contractorRmspAmount: (
@@ -326,7 +348,7 @@ const GeneralInfo = ({
     {statusReason && <Line />}
     <DefinitionListView
       labels={{
-        statusReason: "Коментар до статусу"
+        statusReason: <Trans>Коментар до статусу</Trans>
       }}
       data={{
         statusReason
@@ -382,7 +404,7 @@ const ProlongateContract = ({ endDate, id }) => (
                 />
                 <Validation.Required
                   field="endDate"
-                  message="Обов&#700;язкове поле"
+                  message={<Trans>Обовʼязкове поле</Trans>}
                 />
                 <Box mx={2} color="redPigment">
                   <Button
@@ -403,12 +425,13 @@ const ProlongateContract = ({ endDate, id }) => (
                       </Button>
                     )}
                     content={
-                      <>
+                      <Trans>
                         Увага! Ви збираєтесь змінити кінцеву дату контракту.
                         <br />
-                        Натискаючи кнопку “Зберегти зміни”, ви <br />
+                        Натискаючи кнопку “Зберегти зміни”, ви
+                        <br />
                         підтверджуєте справжність вашого наміру
-                      </>
+                      </Trans>
                     }
                   />
                 </Box>
@@ -421,7 +444,7 @@ const ProlongateContract = ({ endDate, id }) => (
           {endDate}
           <Button variant="none" border="none" px="0" py="0" onClick={toggle}>
             <Text color="rockmanBlue" fontWeight="bold" ml={2}>
-              змінити
+              <Trans>змінити</Trans>
             </Text>
           </Button>
         </Flex>
@@ -445,9 +468,9 @@ const LegalEntity = ({
   <Box p={5}>
     <DefinitionListView
       labels={{
-        edrpou: "ЄДРПОУ",
-        name: "Назва",
-        addresses: "Адреса"
+        edrpou: <Trans>ЄДРПОУ</Trans>,
+        name: <Trans>Назва</Trans>,
+        addresses: <Trans>Адреса</Trans>
       }}
       data={{
         name: name,
@@ -460,7 +483,7 @@ const LegalEntity = ({
     <DefinitionListView
       color="blueberrySoda"
       labels={{
-        legalEntityId: "ID медзакладу"
+        legalEntityId: <Trans>ID медзакладу</Trans>
       }}
       data={{
         legalEntityId: (
@@ -473,8 +496,8 @@ const LegalEntity = ({
     <Line />
     <DefinitionListView
       labels={{
-        fullName: "ПІБ підписанта",
-        contractorBase: "Діє на основі"
+        fullName: <Trans>ПІБ підписанта</Trans>,
+        contractorBase: <Trans>Діє на основі</Trans>
       }}
       data={{
         fullName: contractorOwner && getFullName(contractorOwner.party),
@@ -484,7 +507,7 @@ const LegalEntity = ({
     <DefinitionListView
       color="blueberrySoda"
       labels={{
-        ownerId: "ID підписанта"
+        ownerId: <Trans>ID підписанта</Trans>
       }}
       data={{
         ownerId: contractorOwner && contractorOwner.databaseId
@@ -493,9 +516,9 @@ const LegalEntity = ({
     <Line />
     <DefinitionListView
       labels={{
-        bankName: "Банк",
-        mfo: "Код банку (МФО)",
-        payerAccount: "Номер рахунку"
+        bankName: <Trans>Банк</Trans>,
+        mfo: <Trans>Код банку (МФО)</Trans>,
+        payerAccount: <Trans>Номер рахунку</Trans>
       }}
       data={{
         bankName,
@@ -514,11 +537,16 @@ const Divisions = ({ id }) => (
         <>
           <Form onSubmit={setLocationParams} initialValues={locationParams}>
             <Box px={5} pt={5} width={460}>
-              <Field.Text
-                name="name"
-                label="Знайти відділення"
-                placeholder="Введіть назву відділення"
-                postfix={<AdminSearchIcon color="#CED0DA" />}
+              <Trans
+                id="Введіть назву відділення"
+                render={({ translate }) => (
+                  <Field.Text
+                    name="name"
+                    label={<Trans>Знайти відділення</Trans>}
+                    placeholder={translate}
+                    postfix={<AdminSearchIcon color="#CED0DA" />}
+                  />
+                )}
               />
             </Box>
           </Form>
@@ -558,16 +586,17 @@ const Divisions = ({ id }) => (
                       <Table
                         data={contractorDivisions}
                         header={{
-                          name: "Назва відділення",
-                          addresses: "Адреса",
-                          mountainGroup: "Гірський регіон",
+                          name: <Trans>Назва відділення</Trans>,
+                          addresses: <Trans>Адреса</Trans>,
+                          mountainGroup: <Trans>Гірський регіон</Trans>,
                           phones: (
                             <>
-                              Телефон <br />
-                              Email
+                              <Trans>Телефон</Trans>
+                              <br />
+                              <Trans>Email</Trans>
                             </>
                           ),
-                          action: "Дія"
+                          action: <Trans>Дія</Trans>
                         }}
                         renderRow={({
                           databaseId,
@@ -608,7 +637,7 @@ const Divisions = ({ id }) => (
                               to={`../employees?division.databaseId=${databaseId}&division.name=${name}`}
                               fontWeight="bold"
                             >
-                              Перейти до працівників
+                              <Trans>Перейти до працівників</Trans>
                             </Link>
                           )
                         })}
@@ -637,11 +666,16 @@ const Employees = ({ id }) => (
         <>
           <Form onSubmit={setLocationParams} initialValues={locationParams}>
             <Box px={5} pt={5} width={460}>
-              <Field.Text
-                name="division.name"
-                label="Знайти за відділенням"
-                placeholder="Введіть назву відділення"
-                postfix={<AdminSearchIcon color="#CED0DA" />}
+              <Trans
+                id="Введіть назву відділення"
+                render={({ translate }) => (
+                  <Field.Text
+                    name="division.name"
+                    label={<Trans>Знайти за відділенням</Trans>}
+                    placeholder={translate}
+                    postfix={<AdminSearchIcon color="#CED0DA" />}
+                  />
+                )}
               />
             </Box>
           </Form>
@@ -682,12 +716,14 @@ const Employees = ({ id }) => (
                       <Table
                         data={contractorEmployeeDivisions}
                         header={{
-                          databaseId: "ID",
-                          divisionName: "Назва відділення",
-                          employeeName: "ПІБ працівника",
-                          speciality: "Спеціальність",
-                          staffUnits: "Штатна одиниця",
-                          declarationLimit: "Ліміт кількості декларацій"
+                          databaseId: <Trans>ID</Trans>,
+                          divisionName: <Trans>Назва відділення</Trans>,
+                          employeeName: <Trans>ПІБ працівника</Trans>,
+                          speciality: <Trans>Спеціальність</Trans>,
+                          staffUnits: <Trans>Штатна одиниця</Trans>,
+                          declarationLimit: (
+                            <Trans>Ліміт кількості декларацій</Trans>
+                          )
                         }}
                         renderRow={({
                           employee: {
@@ -767,11 +803,11 @@ const ExternalContractorsTable = ({ data }) => (
   <Table
     data={data}
     header={{
-      name: "Медзаклад",
-      divisions: "Відділення та послуги",
-      number: "Номер договору",
-      issuedAt: "Дата укладення",
-      expiresAt: "Дата закінчення"
+      name: <Trans>Медзаклад</Trans>,
+      divisions: <Trans>Відділення та послуги</Trans>,
+      number: <Trans>Номер договору</Trans>,
+      issuedAt: <Trans>Дата укладення</Trans>,
+      expiresAt: <Trans>Дата закінчення</Trans>
     }}
     tableName="/contract/external-contractors"
     tableBody={({
@@ -797,7 +833,7 @@ const ExternalContractorsTable = ({ data }) => (
         divisions: (
           <Wrapper onClick={onClick}>
             <Text color="rockmanBlue" fontWeight="bold" mr={1} fontSize={0}>
-              Показати відділення ({divisions.length})
+              <Trans>Показати відділення</Trans>({divisions.length})
             </Text>
           </Wrapper>
         )
@@ -874,7 +910,7 @@ const ExternalContractorsTable = ({ data }) => (
 const PrintButton = ({ content }) => (
   <Wrapper color="shiningKnight" onClick={() => printIframe(content)}>
     <Text color="rockmanBlue" fontWeight="bold" mr={1} fontSize="1">
-      Дивитись друковану форму
+      <Trans>Дивитись друковану форму</Trans>
     </Text>
     <PrinterIcon />
   </Wrapper>
@@ -902,7 +938,7 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
 
 const EmptyData = props => (
   <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
-    Інформація відсутня
+    <Trans>Інформація відсутня</Trans>
   </Text>
 );
 

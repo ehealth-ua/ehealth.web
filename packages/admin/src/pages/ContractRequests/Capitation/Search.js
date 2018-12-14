@@ -2,8 +2,8 @@ import React from "react";
 import isEmpty from "lodash/isEmpty";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
-import format from "date-fns/format";
 import { Box, Flex } from "rebass/emotion";
+import { Trans, DateFormat } from "@lingui/macro";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
 import {
@@ -110,16 +110,20 @@ const CapitationContractRequestsSearch = () => (
                         <Table
                           data={capitationContractRequests}
                           header={{
-                            databaseId: "ID заяви на укладення договору",
-                            contractNumber: "Номер договору",
-                            edrpou: "ЄДРПОУ",
-                            contractorLegalEntityName: "Назва медзакладу",
-                            assigneeName: "Виконавець",
-                            status: "Статус",
-                            startDate: "Договір діє з",
-                            endDate: "Договір діє по",
-                            insertedAt: "Додано",
-                            details: "Деталі"
+                            databaseId: (
+                              <Trans>ID заяви на укладення договору</Trans>
+                            ),
+                            contractNumber: <Trans>Номер договору</Trans>,
+                            edrpou: <Trans>ЄДРПОУ</Trans>,
+                            contractorLegalEntityName: (
+                              <Trans>Назва медзакладу</Trans>
+                            ),
+                            assigneeName: <Trans>Виконавець</Trans>,
+                            status: <Trans>Статус</Trans>,
+                            startDate: <Trans>Договір діє з</Trans>,
+                            endDate: <Trans>Договір діє по</Trans>,
+                            insertedAt: <Trans>Додано</Trans>,
+                            details: <Trans>Деталі</Trans>
                           }}
                           renderRow={({
                             id,
@@ -134,7 +138,18 @@ const CapitationContractRequestsSearch = () => (
                           }) => ({
                             edrpou,
                             contractorLegalEntityName,
-                            insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                            insertedAt: (
+                              <DateFormat
+                                value={insertedAt}
+                                format={{
+                                  year: "numeric",
+                                  month: "numeric",
+                                  day: "numeric",
+                                  hour: "numeric",
+                                  minute: "numeric"
+                                }}
+                              />
+                            ),
                             assigneeName: assignee
                               ? getFullName(assignee.party)
                               : undefined,
@@ -148,7 +163,7 @@ const CapitationContractRequestsSearch = () => (
                             ),
                             details: (
                               <Link to={`./${id}`} fontWeight="bold">
-                                Показати деталі
+                                <Trans>Показати деталі</Trans>
                               </Link>
                             )
                           })}
@@ -184,7 +199,7 @@ const CapitationContractRequestsSearch = () => (
   </Box>
 );
 
-const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
+const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
   <Form
     initialValues={initialValues}
     onSubmit={params =>
@@ -199,41 +214,56 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
   >
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
-        <Field.Text
-          name="filter.searchRequest"
-          label="Пошук заяви"
-          placeholder="ЄДРПОУ або Номер договору"
-          postfix={<AdminSearchIcon color="#CED0DA" />}
+        <Trans
+          id="ЄДРПОУ або Номер договору"
+          render={({ translate }) => (
+            <Field.Text
+              name="filter.searchRequest"
+              label={<Trans>Пошук заяви</Trans>}
+              placeholder={translate}
+              postfix={<AdminSearchIcon color="#CED0DA" />}
+            />
+          )}
         />
         <Validation.Matches
           field="filter.searchRequest"
           options={SEARCH_REQUEST_PATTERN}
-          message="Невірний номер"
+          message={<Trans>Невірний номер</Trans>}
         />
       </Box>
 
       <Box px={1} width={2 / 5}>
-        <Field.Text
-          name="filter.assigneeName"
-          label="Виконавець"
-          placeholder="Оберіть виконавця"
-          postfix={<AdminSearchIcon color="#CED0DA" />}
+        <Trans
+          id="Оберіть виконавця"
+          render={({ translate }) => (
+            <Field.Text
+              name="filter.assigneeName"
+              label={<Trans>Виконавець</Trans>}
+              placeholder={translate}
+              postfix={<AdminSearchIcon color="#CED0DA" />}
+            />
+          )}
         />
       </Box>
     </Flex>
     <Flex mx={-1}>
       <Box px={1} width={1 / 6}>
-        <Field.Select
-          name="filter.status"
-          label="Статус заяви"
-          placeholder="test"
-          items={[{ value: "всі статуси" }, ...contractStatuses]}
-          renderItem={item => item.value}
-          itemToString={item => {
-            if (!item) return "всі статуси";
-            return typeof item === "string" ? item : item.value;
-          }}
-          type="select"
+        <Trans
+          id="All statuses"
+          render={({ translate }) => (
+            <Field.Select
+              name="filter.status"
+              label={<Trans>Статус заяви</Trans>}
+              placeholder={translate}
+              items={[{ value: translate }, ...contractStatuses]}
+              renderItem={item => item.value}
+              itemToString={item => {
+                if (!item) return translate;
+                return typeof item === "string" ? item : item.value;
+              }}
+              type="select"
+            />
+          )}
         />
       </Box>
 
@@ -241,19 +271,21 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
         <Box mr={1}>
           <Field.RangePicker
             rangeNames={["date.startFrom", "date.startTo"]}
-            label="Початок дії договору"
+            label={<Trans>Початок дії договору</Trans>}
           />
         </Box>
 
         <Field.RangePicker
           rangeNames={["date.endFrom", "date.endTo"]}
-          label="Кінець дії договору"
+          label={<Trans>Кінець дії договору</Trans>}
         />
       </Flex>
     </Flex>
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
-        <Button variant="blue">Шукати</Button>
+        <Button variant="blue">
+          <Trans>Шукати</Trans>
+        </Button>
       </Box>
       <Box px={1}>
         <IconButton
@@ -271,7 +303,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit, refetch }) => (
             });
           }}
         >
-          Скинути пошук
+          <Trans>Скинути пошук</Trans>
         </IconButton>
       </Box>
     </Flex>

@@ -125,20 +125,20 @@ const Search = ({ uri }) => (
                           status: <Trans>Job status</Trans>
                         }}
                         renderRow={({
-                                      databaseId,
-                                      mergedToLegalEntity: {
-                                        name: mergedToLegalEntityName,
-                                        edrpou: mergedToLegalEntityEdrpou
-                                      },
-                                      mergedFromLegalEntity: {
-                                        name: mergedFromLegalEntityName,
-                                        edrpou: mergedFromLegalEntityEdrpou
-                                      },
-                                      startedAt,
-                                      endedAt,
-                                      executionTime,
-                                      status
-                                    }) => ({
+                          databaseId,
+                          mergedToLegalEntity: {
+                            name: mergedToLegalEntityName,
+                            edrpou: mergedToLegalEntityEdrpou
+                          },
+                          mergedFromLegalEntity: {
+                            name: mergedFromLegalEntityName,
+                            edrpou: mergedFromLegalEntityEdrpou
+                          },
+                          startedAt,
+                          endedAt,
+                          executionTime,
+                          status
+                        }) => ({
                           databaseId,
                           mergedToLegalEntityName,
                           mergedToLegalEntityEdrpou,
@@ -218,7 +218,7 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.mergedFromLegalEntity.code"
           options={EDRPOU_PATTERN}
-          message={<Trans>Wrong number</Trans>}
+          message={<Trans>Invalid number</Trans>}
         />
       </Box>
       <Box px={1} width={1 / 3}>
@@ -265,7 +265,7 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.mergedToLegalEntity.code"
           options={EDRPOU_PATTERN}
-          message={<Trans>Wrong number</Trans>}
+          message={<Trans>Invalid number</Trans>}
         />
       </Box>
 

@@ -3,7 +3,7 @@ import { Flex, Box, Heading } from "rebass/emotion";
 import isEmpty from "lodash/isEmpty";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
-
+import { Trans } from "@lingui/macro";
 import { Form, LocationParams } from "@ehealth/components";
 import { RemoveItemIcon } from "@ehealth/icons";
 
@@ -23,7 +23,7 @@ const DictionariesQuery = loader(
 const Search = () => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
-      Словники
+      <Trans>Словники</Trans>
     </Heading>
 
     <LocationParams>
@@ -66,9 +66,9 @@ const Search = () => (
                         <Table
                           data={dictionaries}
                           header={{
-                            name: "Назва словника",
-                            labels: "Теги",
-                            action: "Дія"
+                            name: <Trans>Назва словника</Trans>,
+                            labels: <Trans>Теги</Trans>,
+                            action: <Trans>Дія</Trans>
                           }}
                           renderRow={({ labels = [], ...dictionary }) => ({
                             ...dictionary,
@@ -78,7 +78,7 @@ const Search = () => (
                                 to={`../${encodeURIComponent(dictionary.name)}`}
                                 fontWeight="bold"
                               >
-                                Переглянути
+                                <Trans>Переглянути</Trans>
                               </Link>
                             )
                           })}
@@ -115,20 +115,30 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
   >
     <Flex mx={-1}>
       <Box px={1} width={2 / 4}>
-        <Field.Text
-          name="filter.name"
-          label="Знайти словник"
-          placeholder="Назва словника"
-          autocomplete="off"
+        <Trans
+          id="Назва словника"
+          render={({ translate }) => (
+            <Field.Text
+              name="filter.name"
+              label={<Trans>Знайти словник</Trans>}
+              placeholder={translate}
+              autoComplete="off"
+            />
+          )}
         />
       </Box>
 
       <Box px={1} width={2 / 4}>
-        <Field.Text
-          name="filter.label"
-          label="Фільтрувати за тегом"
-          placeholder="Тег"
-          autocomplete="off"
+        <Trans
+          id="Тег"
+          render={({ translate }) => (
+            <Field.Text
+              name="filter.label"
+              label={<Trans>Фільтрувати за тегом</Trans>}
+              placeholder={translate}
+              autocomplete="off"
+            />
+          )}
         />
       </Box>
     </Flex>
@@ -148,7 +158,7 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
             });
           }}
         >
-          Скинути пошук
+          <Trans>Скинути пошук</Trans>
         </IconButton>
       </Box>
     </Flex>

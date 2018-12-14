@@ -4,7 +4,7 @@ import { Router, Link } from "@reach/router";
 import { Flex, Box } from "rebass/emotion";
 import system from "system-components/emotion";
 import { loader } from "graphql.macro";
-
+import { Trans } from "@lingui/macro";
 import { getFullName } from "@ehealth/utils";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
@@ -30,8 +30,12 @@ const Approve = ({ id }) => (
   <>
     <Box pt={5} px={5}>
       <Steps.List>
-        <Steps.Item to="../update">Дозаповніть поля</Steps.Item>
-        <Steps.Item to="./">Підтвердіть з ЕЦП</Steps.Item>
+        <Steps.Item to="../update">
+          <Trans>Дозаповніть поля</Trans>
+        </Steps.Item>
+        <Steps.Item to="./">
+          <Trans>Підтвердіть з ЕЦП</Trans>
+        </Steps.Item>
       </Steps.List>
     </Box>
 
@@ -58,11 +62,11 @@ const Approve = ({ id }) => (
             <OpacityBox m={5}>
               <DefinitionListView
                 labels={{
-                  id: "ID заяви",
-                  status: "Статус",
-                  edrpou: "ЄДРПОУ",
-                  name: "Назва",
-                  legalEntityId: "ID медзакладу"
+                  id: <Trans>ID заяви</Trans>,
+                  status: <Trans>Статус</Trans>,
+                  edrpou: <Trans>ЄДРПОУ</Trans>,
+                  name: <Trans>Назва</Trans>,
+                  legalEntityId: <Trans>ID медзакладу</Trans>
                 }}
                 data={{
                   id: databaseId,
@@ -106,12 +110,12 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
       <Line />
       <DefinitionListView
         labels={{
-          nhsSigner: "Підписант зі сторони Замовника",
-          nhsSignerBase: "Що діє на підставі",
-          nhsContractPrice: "Сума контракту",
-          nhsPaymentMethod: "Спосіб оплати",
-          issueCity: "Місто укладення договору",
-          miscellaneous: "Інші умови"
+          nhsSigner: <Trans>Підписант зі сторони Замовника</Trans>,
+          nhsSignerBase: <Trans>Що діє на підставі</Trans>,
+          nhsContractPrice: <Trans>Сума контракту</Trans>,
+          nhsPaymentMethod: <Trans>Спосіб оплати</Trans>,
+          issueCity: <Trans>Місто укладення договору</Trans>,
+          miscellaneous: <Trans>Інші умови</Trans>
         }}
         data={{
           nhsSigner: nhsSigner && getFullName(nhsSigner.party),
@@ -156,7 +160,9 @@ const Sign = ({ id, data: { toApproveContent }, navigate }) => (
           <Flex mt={5}>
             <Box mr={3}>
               <Link to="../update">
-                <Button variant="blue">Повернутися</Button>
+                <Button variant="blue">
+                  <Trans>Повернутися</Trans>
+                </Button>
               </Link>
             </Box>
             <Tooltip
@@ -180,7 +186,7 @@ const Sign = ({ id, data: { toApproveContent }, navigate }) => (
                     navigate("../");
                   }}
                 >
-                  Затвердити, наклавши ЕЦП
+                  <Trans>Затвердити, наклавши ЕЦП</Trans>
                 </Button>
               )}
               content={toApproveContent.text}

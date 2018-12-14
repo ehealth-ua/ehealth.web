@@ -4,6 +4,7 @@ import { Router, Link } from "@reach/router";
 import { Flex, Box } from "rebass/emotion";
 import system from "system-components/emotion";
 import { loader } from "graphql.macro";
+import { Trans } from "@lingui/macro";
 
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { Signer } from "@ehealth/react-iit-digital-signature";
@@ -32,10 +33,10 @@ const Decline = ({ id, location: { state }, ...props }) => {
       <Box pt={5} px={5}>
         <Steps.List>
           <Steps.Item to="./" state={{ base }}>
-            Дозаповніть поля
+            <Trans>Дозаповніть поля</Trans>
           </Steps.Item>
           <Steps.Item to="./sign" state={{ base }} disabled={!base}>
-            Підтвердіть з ЕЦП
+            <Trans>Підтвердіть з ЕЦП</Trans>
           </Steps.Item>
         </Steps.List>
       </Box>
@@ -61,11 +62,11 @@ const Decline = ({ id, location: { state }, ...props }) => {
                   <OpacityBox>
                     <DefinitionListView
                       labels={{
-                        databaseId: "ID заяви",
-                        status: "Статус",
-                        edrpou: "ЄДРПОУ",
-                        name: "Назва",
-                        legalEntityId: "ID аптеки"
+                        databaseId: <Trans>ID заяви</Trans>,
+                        status: <Trans>Статус</Trans>,
+                        edrpou: <Trans>ЄДРПОУ</Trans>,
+                        name: <Trans>Назва</Trans>,
+                        legalEntityId: <Trans>ID аптеки</Trans>
                       }}
                       data={{
                         databaseId,
@@ -114,22 +115,32 @@ const Reason = ({ initialValues, navigate, location: { state } }) => {
           }}
           initialValues={{ base }}
         >
-          <Field.Textarea
-            name="base"
-            rows={6}
-            label="Причина відхилення"
-            placeholder="Вкажіть причину відхилення"
-            maxlength="3000"
+          <Trans
+            id="Вкажіть причину відхилення"
+            render={({ translate: translate }) => (
+              <Field.Textarea
+                name="base"
+                rows={6}
+                label={<Trans>Причина відхилення</Trans>}
+                placeholder={translate}
+                maxlength="3000"
+              />
+            )}
           />
-          <Validation.Required field="base" message="Обов&#700;язкове поле" />
+          <Validation.Required
+            field="base"
+            message={<Trans>Обовʼязкове поле</Trans>}
+          />
           <Flex>
             <Box mr={3}>
               <Link to="../" state={base}>
-                <Button variant="blue">Повернутися</Button>
+                <Button variant="blue">
+                  <Trans>Повернутися</Trans>
+                </Button>
               </Link>
             </Box>
             <Button variant="green" state={base}>
-              Далі
+              <Trans>Далі</Trans>
             </Button>
           </Flex>
         </Form>
@@ -172,7 +183,7 @@ const Sign = ({
               <>
                 <DefinitionListView
                   labels={{
-                    base: "Причина відхилення"
+                    base: <Trans>Причина відхилення</Trans>
                   }}
                   data={{
                     base
@@ -184,7 +195,9 @@ const Sign = ({
                 <Flex mt={5}>
                   <Box mr={3}>
                     <Link to="../" state={{ base }}>
-                      <Button variant="blue">Повернутися</Button>
+                      <Button variant="blue">
+                        <Trans>Повернутися</Trans>
+                      </Button>
                     </Link>
                   </Box>
                   <Tooltip
@@ -210,7 +223,7 @@ const Sign = ({
                           navigate("../../");
                         }}
                       >
-                        Затвердити, наклавши ЕЦП
+                        <Trans>Затвердити, наклавши ЕЦП</Trans>
                       </Button>
                     )}
                     content={toDeclineContent && toDeclineContent.text}

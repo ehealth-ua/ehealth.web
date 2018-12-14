@@ -4,7 +4,7 @@ import { Link } from "@reach/router";
 import { Switch } from "@ehealth/components";
 import printIframe from "print-iframe";
 import { loader } from "graphql.macro";
-
+import { Trans } from "@lingui/macro";
 import system from "system-components/emotion";
 import { Box, Flex, Text } from "rebass/emotion";
 import { PrinterIcon } from "@ehealth/icons";
@@ -54,7 +54,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                 <Box>
                   <Link to="../">
                     <Button mr="2" variant="blue">
-                      Повернутись
+                      <Trans>Повернутись</Trans>
                     </Button>
                   </Link>
                   <Switch
@@ -99,7 +99,9 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                                   navigate("../");
                                 }}
                               >
-                                Підписати, наклавши ЕЦП та Печатку
+                                <Trans>
+                                  Підписати, наклавши ЕЦП та Печатку
+                                </Trans>
                               </Button>
                             )}
                           </Mutation>
@@ -124,7 +126,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                       fontSize="1"
                       color="rockmanBlue"
                     >
-                      Роздрукувати
+                      <Trans>Роздрукувати</Trans>
                     </Text>
                     <PrinterIcon color="shiningKnight" />
                   </Flex>

@@ -3,7 +3,7 @@ import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
 import { Flex, Box, Text } from "rebass/emotion";
 import { loader } from "graphql.macro";
-
+import { Trans } from "@lingui/macro";
 import { getFullName } from "@ehealth/utils";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { AdminSearchIcon, PositiveIcon, NegativeIcon } from "@ehealth/icons";
@@ -35,17 +35,17 @@ const Add = ({ location: { state } }) => (
     <Box pt={5} px={5}>
       <Steps.List>
         <Steps.Item to="./" state={state}>
-          Знайдіть медзаклад
+          <Trans>Знайдіть медзаклад</Trans>
         </Steps.Item>
         <Steps.Item
           to="./reason"
           state={state}
           disabled={state && !state.reason}
         >
-          Вкажіть підставу
+          <Trans>Вкажіть підставу</Trans>
         </Steps.Item>
         <Steps.Item to="./sign" state={state} disabled={state && !state.reason}>
-          Підтвердіть з ЕЦП
+          <Trans>Підтвердіть з ЕЦП</Trans>
         </Steps.Item>
       </Steps.List>
     </Box>
@@ -63,11 +63,16 @@ const Search = ({ location: { state } }) => (
       <>
         <Form onSubmit={setLocationParams} initialValues={{ filter, orderBy }}>
           <Box px={5} width={460}>
-            <Field.Text
-              name="filter.edrpou"
-              label="Знайти підпорядкований медзаклад"
-              placeholder="Введіть ЄДРПОУ медзакладу"
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+            <Trans
+              id="Введіть ЄДРПОУ медзакладу"
+              render={({ translate }) => (
+                <Field.Text
+                  name="filter.edrpou"
+                  label={<Trans>Знайти підпорядкований медзаклад</Trans>}
+                  placeholder={translate}
+                  postfix={<AdminSearchIcon color="#CED0DA" />}
+                />
+              )}
             />
           </Box>
         </Form>
@@ -90,13 +95,13 @@ const Search = ({ location: { state } }) => (
                       <Table
                         data={legalEntities}
                         header={{
-                          databaseId: "ID Медзакладу",
-                          name: "Назва Медзакладу",
-                          edrpou: "ЄДРПОУ",
-                          owner: "Керівник",
-                          type: "Тип",
-                          nhsVerified: "Верифікований НСЗУ",
-                          status: "Статус"
+                          databaseId: <Trans>ID Медзакладу</Trans>,
+                          name: <Trans>Назва Медзакладу</Trans>,
+                          edrpou: <Trans>ЄДРПОУ</Trans>,
+                          owner: <Trans>Керівник</Trans>,
+                          type: <Trans>Тип</Trans>,
+                          nhsVerified: <Trans>Верифікований НСЗУ</Trans>,
+                          status: <Trans>Статус</Trans>
                         }}
                         renderRow={({
                           status,
@@ -135,11 +140,15 @@ const Search = ({ location: { state } }) => (
                       <Flex px={5} mt={5}>
                         <Box mr={3}>
                           <Link to="../related-legal-entities">
-                            <Button variant="blue">Повернутися</Button>
+                            <Button variant="blue">
+                              <Trans>Повернутися</Trans>
+                            </Button>
                           </Link>
                         </Box>
                         <Link to="./reason" state={{ legalEntity, ...state }}>
-                          <Button variant="green">Далі</Button>
+                          <Button variant="green">
+                            <Trans>Далі</Trans>
+                          </Button>
                         </Link>
                       </Flex>
                     </>
@@ -164,15 +173,14 @@ const Reason = ({
   }
 }) => (
   <Box pt={1} px={5}>
-    {console.log(databaseId)}
     <Text fontSize={1} fontWeight="bold" mb={3}>
-      Підпорядкований медзаклад
+      <Trans>Підпорядкований медзаклад</Trans>
     </Text>
     <DefinitionListView
       labels={{
-        edrpou: "ЄДРПОУ",
-        name: "Назва",
-        owner: "Власник"
+        edrpou: <Trans>ЄДРПОУ</Trans>,
+        name: <Trans>Назва</Trans>,
+        owner: <Trans>Власник</Trans>
       }}
       data={{
         edrpou,
@@ -198,13 +206,21 @@ const Reason = ({
         }}
         initialValues={{ reason }}
       >
-        <Field.Textarea
-          name="reason"
-          rows={6}
-          label="Вкажіть підставу підпорядкування"
-          placeholder="Приклад: Наказ КМУ № 73465"
+        <Trans
+          id="Приклад: Наказ КМУ № 73465"
+          render={({ translate }) => (
+            <Field.Textarea
+              name="reason"
+              rows={6}
+              label={<Trans>Вкажіть підставу підпорядкування</Trans>}
+              placeholder={translate}
+            />
+          )}
         />
-        <Validation.Required field="reason" message="Обов&#700;язкове поле" />
+        <Validation.Required
+          field="reason"
+          message={<Trans>Обовʼязкове поле</Trans>}
+        />
         <Flex>
           <Box mr={3}>
             <Link
@@ -214,10 +230,14 @@ const Reason = ({
                 legalEntity: { owner, databaseId, name, edrpou }
               }}
             >
-              <Button variant="blue">Повернутися</Button>
+              <Button variant="blue">
+                <Trans>Повернутися</Trans>
+              </Button>
             </Link>
           </Box>
-          <Button variant="green">Далі</Button>
+          <Button variant="green">
+            <Trans>Далі</Trans>
+          </Button>
         </Flex>
       </Form>
     </Box>
@@ -267,32 +287,32 @@ const Sign = ({
                   {mergeLegalEntities => (
                     <>
                       <Text fontSize={1} fontWeight="bold" mb={3}>
-                        Основний медзаклад
+                        <Trans>Основний медзаклад</Trans>
                       </Text>
                       <DefinitionListView
                         labels={{
-                          edrpou: "ЄДРПОУ",
-                          name: "Назва",
-                          id: "ID медзакладу"
+                          edrpou: <Trans>ЄДРПОУ</Trans>,
+                          name: <Trans>Назва</Trans>,
+                          id: <Trans>ID медзакладу</Trans>
                         }}
                         data={legalEntityTo}
                       />
                       <Line />
                       <Text fontSize={1} fontWeight="bold" mb={3}>
-                        Підпорядкований медзаклад
+                        <Trans>Підпорядкований медзаклад</Trans>
                       </Text>
                       <DefinitionListView
                         labels={{
-                          edrpou: "ЄДРПОУ",
-                          name: "Назва",
-                          id: "ID медзакладу"
+                          edrpou: <Trans>ЄДРПОУ</Trans>,
+                          name: <Trans>Назва</Trans>,
+                          id: <Trans>ID медзакладу</Trans>
                         }}
                         data={legalEntityFrom}
                       />
                       <Line />
                       <DefinitionListView
                         labels={{
-                          reason: "Підстава підпорядкування"
+                          reason: <Trans>Підстава підпорядкування</Trans>
                         }}
                         data={{ reason }}
                       />
@@ -310,7 +330,9 @@ const Sign = ({
                               }
                             }}
                           >
-                            <Button variant="blue">Повернутися</Button>
+                            <Button variant="blue">
+                              <Trans>Повернутися</Trans>
+                            </Button>
                           </Link>
                         </Box>
                         <Tooltip
@@ -339,17 +361,17 @@ const Sign = ({
                                 navigate("/legal-entity-merge-jobs");
                               }}
                             >
-                              Підписати
+                              <Trans>Підписати</Trans>
                             </Button>
                           )}
                           content={
-                            <>
+                            <Trans>
                               Увага! <br />
                               Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність
                               власних намірів , а також що зміст правочину
                               ВІДПОВІДАЄ ВАШІЇЙ ВОЛІ, ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ
                               ОСОБИСТО ВАМИ.
-                            </>
+                            </Trans>
                           }
                         />
                       </Flex>

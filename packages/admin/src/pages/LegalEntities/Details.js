@@ -4,8 +4,8 @@ import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
 import { Flex, Box, Heading, Text } from "rebass/emotion";
 import system from "system-components/emotion";
-import format from "date-fns/format";
 import { loader } from "graphql.macro";
+import { DateFormat, Trans } from "@lingui/macro";
 import isEmpty from "lodash/isEmpty";
 
 import {
@@ -21,14 +21,14 @@ import {
   parseSortingParams,
   stringifySortingParams
 } from "@ehealth/utils";
-import { LocationParams, Form, Modal, Switch } from "@ehealth/components";
+import { LocationParams, Form, Modal } from "@ehealth/components";
 
 import Line from "../../components/Line";
 import Link from "../../components/Link";
 import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
-import LoadingOverlay, { Spinner } from "../../components/LoadingOverlay";
+import LoadingOverlay from "../../components/LoadingOverlay";
 import Button, { IconButton } from "../../components/Button";
 import Tooltip from "../../components/Tooltip";
 import Ability from "../../components/Ability";
@@ -109,15 +109,20 @@ const Details = ({ id }) => (
             <Box py={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/legal-entities">
-                  Пошук медзакладу
+                  <Trans>Search legal entities</Trans>
                 </Breadcrumbs.Item>
-                <Breadcrumbs.Item>Деталі медзакладу</Breadcrumbs.Item>
+                <Breadcrumbs.Item>
+                  <Trans>Legal entity details</Trans>
+                </Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
             <Flex justifyContent="space-between" alignItems="flex-end">
               <Box>
                 <DefinitionListView
-                  labels={{ databaseId: "ID медзакладу", status: "Статус" }}
+                  labels={{
+                    databaseId: <Trans>Legal entity ID</Trans>,
+                    status: <Trans>Status</Trans>
+                  }}
                   data={{
                     databaseId,
                     status: (
@@ -155,15 +160,15 @@ const Details = ({ id }) => (
                           }}
                           variant="blue"
                         >
-                          Опрацювати
+                          <Trans>To process</Trans>
                         </Button>
                       )}
                     </Mutation>
                   ) : (
                     <Popup
                       variant="red"
-                      buttonText="Закрити медзаклад"
-                      title="Закрити медзаклад"
+                      buttonText={<Trans>Close legal entity</Trans>}
+                      title={<Trans>Close legal entity</Trans>}
                     >
                       {toggle => (
                         <Mutation
@@ -181,7 +186,7 @@ const Details = ({ id }) => (
                             <Flex justifyContent="center">
                               <Box mr={20}>
                                 <Button variant="blue" onClick={toggle}>
-                                  Повернутися
+                                  <Trans>Back</Trans>
                                 </Button>
                               </Box>
                               <Button
@@ -195,7 +200,7 @@ const Details = ({ id }) => (
                                 }}
                                 variant="red"
                               >
-                                Закрити медзаклад
+                                <Trans>Close legal entity</Trans>
                               </Button>
                             </Flex>
                           )}
@@ -209,21 +214,27 @@ const Details = ({ id }) => (
           </Box>
 
           <Tabs.Nav>
-            <Tabs.NavItem to="./">Загальна інформація</Tabs.NavItem>
-            <Tabs.NavItem to="./licenses">Ліцензії / Верифікація</Tabs.NavItem>
+            <Tabs.NavItem to="./">
+              <Trans>General info</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./licenses">
+              <Trans>Licenses</Trans> / <Trans>Verification</Trans>
+            </Tabs.NavItem>
             <Ability action="read" resource="related_legal_entities">
               <Tabs.NavItem to="./related-legal-entities">
-                Підпорядковані медзаклади
+                <Trans>Related legal entity</Trans>
               </Tabs.NavItem>
             </Ability>
-            {owner && <Tabs.NavItem to="./owner">Власник</Tabs.NavItem>}
+            {owner && (
+              <Tabs.NavItem to="./owner">
+                <Trans>Owner</Trans>
+              </Tabs.NavItem>
+            )}
             <Ability action="read" resource="division">
-              <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
+              <Tabs.NavItem to="./divisions">
+                <Trans>Divisions</Trans>
+              </Tabs.NavItem>
             </Ability>
-            {/*<Tabs.NavItem to="./requests-for-contract">*/}
-            {/*Заяви на укладення договору*/}
-            {/*</Tabs.NavItem>*/}
-            {/*<Tabs.NavItem to="./contracts">Договори</Tabs.NavItem>*/}
           </Tabs.Nav>
           <Tabs.Content>
             <Router>
@@ -282,13 +293,13 @@ const GeneralInfo = ({
   <Box p={5}>
     <DefinitionListView
       labels={{
-        edrpou: "ЄДРПОУ",
-        name: "Назва",
-        addresses: "Адреса",
-        phones: "Номер телефону",
-        email: "Email",
-        website: "Веб-сторінка",
-        type: "Тип"
+        edrpou: <Trans>EDRPOU</Trans>,
+        name: <Trans>Name</Trans>,
+        addresses: <Trans>Address</Trans>,
+        phones: <Trans>Phone</Trans>,
+        email: <Trans>Email</Trans>,
+        website: <Trans>Website</Trans>,
+        type: <Trans>Type</Trans>
       }}
       data={{
         ...props,
@@ -302,11 +313,11 @@ const GeneralInfo = ({
     <Line />
     <DefinitionListView
       labels={{
-        ownerPropertyType: "Тип власності",
-        legalForm: "Форма господарювання",
-        kveds: "КВЕДи",
-        receiverFundsCode: "Код одержувача бюджетних коштів",
-        beneficiary: "Вигодонабувач"
+        ownerPropertyType: <Trans>Тип власності</Trans>,
+        legalForm: <Trans>Форма господарювання</Trans>,
+        kveds: <Trans>КВЕДи</Trans>,
+        receiverFundsCode: <Trans>Код одержувача бюджетних коштів</Trans>,
+        beneficiary: <Trans>Вигодонабувач</Trans>
       }}
       data={{
         ownerPropertyType: (
@@ -337,7 +348,7 @@ const GeneralInfo = ({
     />
     <DefinitionListView
       labels={{
-        misVerified: "Верифікація МІС"
+        misVerified: <Trans>Верифікація МІС</Trans>
       }}
       data={{
         misVerified: misVerified ? <PositiveIcon /> : <NegativeIcon />
@@ -349,18 +360,18 @@ const GeneralInfo = ({
       <>
         <Line />
         <Heading fontSize="1" fontWeight="normal" mb={5}>
-          Архів
+          <Trans>Архів</Trans>
         </Heading>
 
         {archive.map(({ date, place }, index) => (
           <ArchiveBox key={index}>
             <DefinitionListView
               labels={{
-                date: "Дата архівування",
-                place: "Місце зберігання"
+                date: <Trans>Дата архівування</Trans>,
+                place: <Trans>Місце зберігання</Trans>
               }}
               data={{
-                date: format(date, "DD.MM.YYYY"),
+                date: <DateFormat value={date} />,
                 place
               }}
             />
@@ -385,14 +396,14 @@ const License = ({
       {!isEmpty(accreditation) && (
         <>
           <Heading fontSize="1" fontWeight="normal" mb={5}>
-            Акредитація
+            <Trans>Акредитація</Trans>
           </Heading>
           <DefinitionListView
             labels={{
-              category: "Категорія",
-              validateDate: "Термін дії",
-              orderDate: "Дата наказу",
-              orderNo: "Номер наказу"
+              category: <Trans>Категорія</Trans>,
+              validateDate: <Trans>Термін дії</Trans>,
+              orderDate: <Trans>Дата наказу</Trans>,
+              orderNo: <Trans>Номер наказу</Trans>
             }}
             data={{
               ...accreditation,
@@ -402,16 +413,19 @@ const License = ({
                   item={accreditation.category}
                 />
               ),
-              validateDate: `з ${format(accreditation.issuedDate, "DD.MM.YYYY")}
-                              ${
-                                accreditation.expiryDate
-                                  ? `по ${format(
-                                      accreditation.expiryDate,
-                                      "DD.MM.YYYY"
-                                    )}`
-                                  : ""
-                              }`,
-              orderDate: format(accreditation.orderDate, "DD.MM.YYYY")
+              validateDate: (
+                <>
+                  з <DateFormat value={accreditation.issuedDate} />{" "}
+                  {accreditation.expiryDate ? (
+                    <>
+                      по <DateFormat value={accreditation.expiryDate} />
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </>
+              ),
+              orderDate: <DateFormat value={accreditation.orderDate} />
             }}
           />
           <Line />
@@ -420,18 +434,18 @@ const License = ({
       {!isEmpty(licenses) && (
         <>
           <Heading fontSize="1" fontWeight="normal" mb={5}>
-            Ліцензії
+            <Trans>Ліцензії</Trans>
           </Heading>
 
           <Table
             data={licenses}
             header={{
-              licenseNumber: "Номер ліцензії",
-              whatLicensed: "Видана на",
-              issuedDate: "Дата видачі",
-              issuedBy: "Орган, що видав",
-              validateDate: "Термін дії",
-              orderNo: "Номер наказу"
+              licenseNumber: <Trans>Номер ліцензії</Trans>,
+              whatLicensed: <Trans>Видана на</Trans>,
+              issuedDate: <Trans>Дата видачі</Trans>,
+              issuedBy: <Trans>Орган, що видав</Trans>,
+              validateDate: <Trans>Термін дії</Trans>,
+              orderNo: <Trans>Номер наказу</Trans>
             }}
             renderRow={({
               activeFromDate,
@@ -439,10 +453,21 @@ const License = ({
               issuedDate,
               ...licenses
             }) => ({
-              validateDate: `з ${format(activeFromDate, "DD.MM.YYYY")} ${
-                expiryDate ? `по ${format(expiryDate, "DD.MM.YYYY")}` : ""
-              }`,
-              issuedDate: format(issuedDate, "DD.MM.YYYY"),
+              validateDate: (
+                <>
+                  <>
+                    з <DateFormat value={activeFromDate} />{" "}
+                    {expiryDate ? (
+                      <>
+                        по <DateFormat value={expiryDate} />
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                </>
+              ),
+              issuedDate: <DateFormat value={issuedDate} />,
               ...licenses
             })}
             tableName="legal-entities/licenses"
@@ -453,11 +478,11 @@ const License = ({
 
       <OpacityBox mt={5} opacity={isVerificationActive ? 1 : 0.5}>
         <Heading fontSize="1" fontWeight="normal" mb={5}>
-          Верифікація
+          <Trans>Верифікація</Trans>
         </Heading>
         <DefinitionListView
           labels={{
-            nhsVerified: "Верифікація НСЗУ"
+            nhsVerified: <Trans>Верифікація НСЗУ</Trans>
           }}
           data={{
             nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />
@@ -472,8 +497,20 @@ const License = ({
         </Box>
         <Popup
           variant="green"
-          buttonText={nhsComment ? "Редагувати коментар" : "Залишити коментар"}
-          title={nhsComment ? "Коментар" : "Залишити коментар"}
+          buttonText={
+            nhsComment ? (
+              <Trans>Редагувати коментар</Trans>
+            ) : (
+              <Trans>Залишити коментар</Trans>
+            )
+          }
+          title={
+            nhsComment ? (
+              <Trans>Коментар</Trans>
+            ) : (
+              <Trans>Залишити коментар</Trans>
+            )
+          }
           icon={CommentIcon}
           disabled={!isVerificationActive}
         >
@@ -502,20 +539,25 @@ const License = ({
                           toggle();
                         }}
                       >
-                        <Field.Textarea
-                          name="nhsComment"
-                          placeholder="Введіть коментар"
-                          rows={5}
-                          maxlength="3000"
+                        <Trans
+                          id="Введіть коментар"
+                          render={({ translate }) => (
+                            <Field.Textarea
+                              name="nhsComment"
+                              placeholder={translate}
+                              rows={5}
+                              maxlength="3000"
+                            />
+                          )}
                         />
                         <Flex justifyContent="left">
                           <Box mr={20}>
                             <Button variant="blue" onClick={toggle}>
-                              Закрити
+                              <Trans>Закрити</Trans>
                             </Button>
                           </Box>
                           <Button type="submit" variant="green">
-                            Коментувати
+                            <Trans>Залишити коментар</Trans>
                           </Button>
                         </Flex>
                       </Form>
@@ -525,7 +567,7 @@ const License = ({
                         <Flex justifyContent="left">
                           <Box mr={20}>
                             <Button variant="blue" onClick={toggle}>
-                              Закрити
+                              <Trans>Закрити</Trans>
                             </Button>
                           </Box>
                           <Box mr={20}>
@@ -540,12 +582,12 @@ const License = ({
                                 toggle();
                               }}
                             >
-                              Видалити
+                              <Trans>Видалити</Trans>
                             </Button>
                           </Box>
                           <Box>
                             <Button variant="green" onClick={toggleForm}>
-                              Редагувати коментар
+                              <Trans>Редагувати коментар</Trans>
                             </Button>
                           </Box>
                         </Flex>
@@ -571,11 +613,16 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
             <Box px={1}>
               <Form onSubmit={setLocationParams} initialValues={locationParams}>
                 <Box px={5} pt={5} width={460}>
-                  <Field.Text
-                    name="filter.mergeLegalEntityFilter.mergedFromLegalEntity.edrpou"
-                    label="Знайти підпорядкований медзаклад"
-                    placeholder="Введіть ЄДРПОУ медзакладу"
-                    postfix={<AdminSearchIcon color="#CED0DA" />}
+                  <Trans
+                    id="Введіть ЄДРПОУ медзакладу"
+                    render={({ translate }) => (
+                      <Field.Text
+                        name="filter.mergeLegalEntityFilter.mergedFromLegalEntity.edrpou"
+                        label={<Trans>Знайти підпорядкований медзаклад</Trans>}
+                        placeholder={translate}
+                        postfix={<AdminSearchIcon color="#CED0DA" />}
+                      />
+                    )}
                   />
                 </Box>
               </Form>
@@ -584,13 +631,13 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
               {mergedToLegalEntity ? (
                 <Tooltip
                   placement="top"
-                  content="Увага, медзаклад було реорганізовано"
+                  content={<Trans>Увага, медзаклад було реорганізовано</Trans>}
                   component={() => (
                     <Link
                       to={`../../${mergedToLegalEntity.mergedToLegalEntity.id}`}
                       fontWeight="bold"
                     >
-                      Перейти до основного закладу
+                      <Trans>Перейти до основного закладу</Trans>
                     </Link>
                   )}
                 />
@@ -600,7 +647,7 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
                     <Box mr={2}>
                       <AdminAddIcon width={16} height={16} />
                     </Box>{" "}
-                    Додати підпорядкований медзаклад
+                    <Trans>Додати підпорядкований медзаклад</Trans>
                   </Flex>
                 </Link>
               ) : null}
@@ -626,11 +673,11 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
                     <Table
                       data={nodes}
                       header={{
-                        name: "Назва Медзакладу",
-                        edrpou: "ЄДРПОУ",
-                        reason: "Основа",
-                        insertedAt: "Додано",
-                        isActive: "Статус"
+                        name: <Trans>Назва Медзакладу</Trans>,
+                        edrpou: <Trans>ЄДРПОУ</Trans>,
+                        reason: <Trans>Основа</Trans>,
+                        insertedAt: <Trans>Додано</Trans>,
+                        isActive: <Trans>Статус</Trans>
                       }}
                       renderRow={({
                         reason,
@@ -639,7 +686,7 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
                         isActive
                       }) => ({
                         reason,
-                        insertedAt: format(insertedAt, "DD.MM.YYYY, HH:mm"),
+                        insertedAt: <DateFormat value={insertedAt} />,
                         name,
                         edrpou,
                         isActive: (
@@ -678,9 +725,9 @@ const Owner = ({
   <Box p={5}>
     <DefinitionListView
       labels={{
-        party: "ПІБ",
-        speciality: "Спеціальність",
-        position: "Посада"
+        party: <Trans>ПІБ</Trans>,
+        speciality: <Trans>Спеціальність</Trans>,
+        position: <Trans>Посада</Trans>
       }}
       data={{
         party: getFullName(party),
@@ -718,11 +765,16 @@ const Divisions = ({ id }) => (
         <>
           <Form onSubmit={setLocationParams} initialValues={locationParams}>
             <Box px={5} pt={5} width={460}>
-              <Field.Text
-                name="filter.divisionFilter.name"
-                label="Знайти відділення"
-                placeholder="Введіть назву відділення"
-                postfix={<AdminSearchIcon color="#CED0DA" />}
+              <Trans
+                id="Введіть назву відділення"
+                render={({ translate }) => (
+                  <Field.Text
+                    name="filter.divisionFilter.name"
+                    label={<Trans>Знайти відділення</Trans>}
+                    placeholder={translate}
+                    postfix={<AdminSearchIcon color="#CED0DA" />}
+                  />
+                )}
               />
             </Box>
           </Form>
@@ -744,10 +796,10 @@ const Divisions = ({ id }) => (
                 <Table
                   data={divisions}
                   header={{
-                    name: "Назва Медзакладу",
-                    addresses: "Адреса",
-                    mountainGroup: "Гірський регіон",
-                    phones: "Телефон",
+                    name: <Trans>Назва Медзакладу</Trans>,
+                    addresses: <Trans>Адреса</Trans>,
+                    mountainGroup: <Trans>Гірський регіон</Trans>,
+                    phones: <Trans>Телефон</Trans>,
                     email: "Email"
                   }}
                   renderRow={({
@@ -827,9 +879,11 @@ export default Details;
 
 const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
   const variant = nhsVerified ? "red" : "green";
-  const title = nhsVerified
-    ? "Скасувати верифікацію"
-    : "Верифікувати медзаклад";
+  const title = nhsVerified ? (
+    <Trans>Скасувати верифікацію</Trans>
+  ) : (
+    <Trans>Верифікувати медзаклад</Trans>
+  );
 
   return (
     <Popup
@@ -854,7 +908,7 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
             <Flex justifyContent="center">
               <Box mr={20}>
                 <Button variant="blue" onClick={toggle}>
-                  Повернутися
+                  <Trans>Повернутися</Trans>
                 </Button>
               </Box>
               <Button

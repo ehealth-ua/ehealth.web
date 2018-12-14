@@ -4,7 +4,7 @@ import { Query, Mutation } from "react-apollo";
 import { Flex, Box, Heading, Text } from "rebass/emotion";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
-
+import { Trans } from "@lingui/macro";
 import { Form, Modal, LocationParams } from "@ehealth/components";
 import { AdminSearchIcon } from "@ehealth/icons";
 import {
@@ -79,16 +79,18 @@ const Details = ({ id }) => (
             <Box mb={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/persons">
-                  Пошук пацієнтів
+                  <Trans>Пошук пацієнтів</Trans>
                 </Breadcrumbs.Item>
-                <Breadcrumbs.Item>Деталі пацієнта</Breadcrumbs.Item>
+                <Breadcrumbs.Item>
+                  <Trans>Деталі пацієнта</Trans>
+                </Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
             <DefinitionListView
               labels={{
-                id: "ID пацієнта",
-                fullName: "ПІБ пацієнта",
-                status: "Статус"
+                id: <Trans>ID пацієнта</Trans>,
+                fullName: <Trans>ПІБ пацієнта</Trans>,
+                status: <Trans>Статус</Trans>
               }}
               data={{
                 id,
@@ -100,9 +102,15 @@ const Details = ({ id }) => (
             />
           </Box>
           <Tabs.Nav>
-            <Tabs.NavItem to="./">Особиста інформація</Tabs.NavItem>
-            <Tabs.NavItem to="./auth">Метод аутентифікації</Tabs.NavItem>
-            <Tabs.NavItem to="./declarations">Декларації</Tabs.NavItem>
+            <Tabs.NavItem to="./">
+              <Trans>Особиста інформація</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./auth">
+              <Trans>Метод аутентифікації</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./declarations">
+              <Trans>Декларації</Trans>
+            </Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
             <Router>
@@ -121,23 +129,13 @@ const UserInfo = ({ userInfo }) => (
   <Box p={5}>
     <DefinitionListView
       labels={{
-        birthDate: "Дата народження",
-        birthCountry: "Країна народження",
-        birthSettlement: "Місце народження",
-        taxId: "ІНН",
-        unzr: "ID Запису в ЄДДР",
-        mobilePhone: (
-          <>
-            Мобільний номер
-            <br /> телефон
-          </>
-        ),
-        landLinePhone: (
-          <>
-            Стаціонарний номер
-            <br /> телефону
-          </>
-        )
+        birthDate: <Trans>Дата народження</Trans>,
+        birthCountry: <Trans>Країна народження</Trans>,
+        birthSettlement: <Trans>Місце народження</Trans>,
+        taxId: <Trans>ІНН</Trans>,
+        unzr: <Trans>ID Запису в ЄДДР</Trans>,
+        mobilePhone: <Trans>Мобільний номер</Trans>,
+        landLinePhone: <Trans>Стаціонарний номер</Trans>
       }}
       data={userInfo}
     />
@@ -149,8 +147,8 @@ const AuthInfo = ({ id, authInfo }) =>
     <Box p={5}>
       <DefinitionListView
         labels={{
-          type: "Тип аутентифікації",
-          phoneNumber: "Номер телефону"
+          type: <Trans>Тип аутентифікації</Trans>,
+          phoneNumber: <Trans>Номер телефону</Trans>
         }}
         data={authInfo}
       />
@@ -162,22 +160,25 @@ const AuthInfo = ({ id, authInfo }) =>
                 {({ value: opened, toggle }) => (
                   <>
                     <Button variant="green" disabled={opened} onClick={toggle}>
-                      Скинути метод аутентифікації
+                      <Trans>Скинути метод аутентифікації</Trans>
                     </Button>
                     {opened && (
                       <Modal width={760} backdrop>
                         <Heading as="h1" fontWeight="normal" mb={6}>
-                          Зміна методу аутентифікації
+                          <Trans>Зміна методу аутентифікації</Trans>
                         </Heading>
                         <Text lineHeight={2} textAlign="center" mb={6}>
-                          Увага! <br />
-                          Після підтвердження, метод аутентифікації буде змінено
-                          на невизначений
+                          <Trans>
+                            Увага!
+                            <br />
+                            Після підтвердження, метод аутентифікації буде
+                            змінено на невизначений
+                          </Trans>
                         </Text>
                         <Flex justifyContent="center">
                           <Box mx={2}>
                             <Button variant="blue" onClick={toggle}>
-                              Повернутися
+                              <Trans>Повернутися</Trans>
                             </Button>
                           </Box>
                           <Box mx={2}>
@@ -190,7 +191,7 @@ const AuthInfo = ({ id, authInfo }) =>
                                 toggle();
                               }}
                             >
-                              Скинути метод аутентифікації
+                              <Trans>Скинути метод аутентифікації</Trans>
                             </Button>
                           </Box>
                         </Flex>
@@ -236,17 +237,22 @@ const DeclarationsInfo = ({ id }) => (
                   <Form.AutoSubmit onSubmit={setLocationParams} />
                   <Flex>
                     <Box px={5} pt={5} width={460}>
-                      <Field.Text
-                        name="declarationId"
-                        label="Пошук декларації"
-                        placeholder="Введіть ID або номер декларації"
-                        postfix={<AdminSearchIcon color="#CED0DA" />}
+                      <Trans
+                        id="Введіть ID або номер декларації"
+                        render={({ translate }) => (
+                          <Field.Text
+                            name="declarationId"
+                            label={<Trans>Пошук декларації</Trans>}
+                            placeholder={translate}
+                            postfix={<AdminSearchIcon color="#CED0DA" />}
+                          />
+                        )}
                       />
                     </Box>
                     <Box pt={5}>
                       <Field.Select
                         name="status"
-                        label="Статус декларації"
+                        label={<Trans>Статус декларації</Trans>}
                         items={[
                           { value: "всі статуси", name: undefined },
                           ...declarationStatuses
@@ -266,14 +272,14 @@ const DeclarationsInfo = ({ id }) => (
                   data={declarations}
                   header={{
                     id: "ID декларації",
-                    declarationNumber: "Номер декларації",
-                    startDate: "Декларація діє з",
-                    name: "Медзаклад",
-                    edrpou: "ЄДРПОУ",
-                    divisionName: "Назва відділення",
-                    address: "Адреса",
-                    status: "Статус",
-                    action: "Дія"
+                    declarationNumber: <Trans>Номер декларації</Trans>,
+                    startDate: <Trans>Декларація діє з</Trans>,
+                    name: <Trans>Медзаклад</Trans>,
+                    edrpou: <Trans>ЄДРПОУ</Trans>,
+                    divisionName: <Trans>Назва відділення</Trans>,
+                    address: <Trans>Адреса</Trans>,
+                    status: <Trans>Статус</Trans>,
+                    action: <Trans>Дія</Trans>
                   }}
                   renderRow={({
                     id,
@@ -304,7 +310,9 @@ const DeclarationsInfo = ({ id }) => (
                         />
                       ),
                       action: (
-                        <Link to={`/declarations/${id}`}>Показати деталі</Link>
+                        <Link to={`/declarations/${id}`}>
+                          <Trans>Показати деталі</Trans>
+                        </Link>
                       )
                     };
                   }}

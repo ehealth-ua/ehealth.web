@@ -2,10 +2,9 @@ import React from "react";
 import { Flex, Box, Heading } from "rebass/emotion";
 import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
-import format from "date-fns/format";
 import { getIn } from "final-form";
 import { loader } from "graphql.macro";
-
+import { Trans, DateFormat } from "@lingui/macro";
 import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
 import {
   parseSortingParams,
@@ -30,11 +29,15 @@ const PHONE_PATTERN = "^\\+380\\d{9}$";
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={1}>
-      Пошук пацієнтів
+      <Trans>Пошук пацієнтів</Trans>
     </Heading>
     <Tabs.Nav>
-      <Tabs.Link to="./by-person-data">За даними</Tabs.Link>
-      <Tabs.Link to="./by-declaration">За номером декларації</Tabs.Link>
+      <Tabs.Link to="./by-person-data">
+        <Trans>За даними</Trans>
+      </Tabs.Link>
+      <Tabs.Link to="./by-declaration">
+        <Trans>За номером декларації</Trans>
+      </Tabs.Link>
     </Tabs.Nav>
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
@@ -66,13 +69,15 @@ const Search = ({ uri }) => (
                     <Table
                       data={persons}
                       header={{
-                        fullName: "ПІБ пацієнта",
-                        birthDate: "Дата народження",
-                        taxId: "ІПН",
-                        unzr: "ID Запису в ЄДДР",
-                        authenticationMethods: "Метод аутентифікації",
-                        insertedAt: "Додано",
-                        action: "Дія"
+                        fullName: <Trans>ПІБ пацієнта</Trans>,
+                        birthDate: <Trans>Дата народження</Trans>,
+                        taxId: <Trans>ІПН</Trans>,
+                        unzr: <Trans>ID Запису в ЄДДР</Trans>,
+                        authenticationMethods: (
+                          <Trans>Метод аутентифікації</Trans>
+                        ),
+                        insertedAt: <Trans>Додано</Trans>,
+                        action: <Trans>Дія</Trans>
                       }}
                       renderRow={({
                         id,
@@ -86,16 +91,24 @@ const Search = ({ uri }) => (
                         fullName: getFullName(person),
                         birthDate: formatDate(birthDate),
                         taxId: taxId || "—",
-                        insertedAt: format(
-                          new Date(insertedAt),
-                          "DD.MM.YYYY, HH:mm"
+                        insertedAt: (
+                          <DateFormat
+                            value={insertedAt}
+                            format={{
+                              year: "numeric",
+                              month: "numeric",
+                              day: "numeric",
+                              hour: "numeric",
+                              minute: "numeric"
+                            }}
+                          />
                         ),
                         authenticationMethods: (
                           <AuthnMethodsList data={authenticationMethods} />
                         ),
                         action: (
                           <Link to={`../${id}`} fontWeight="bold">
-                            Показати деталі
+                            <Trans>Показати деталі</Trans>
                           </Link>
                         )
                       })}
@@ -130,75 +143,90 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
   <Form initialValues={initialValues} onSubmit={onSubmit}>
     <Flex mx={-1}>
       <Box px={1} width={1 / 3}>
-        <Field.Text
-          name="filter.personal.firstName"
-          label="Прізвище"
-          placeholder="Введіть прізвище"
+        <Trans
+          id="Введіть прізвище"
+          render={({ translate }) => (
+            <Field.Text
+              name="filter.personal.firstName"
+              label={<Trans>Прізвище</Trans>}
+              placeholder={translate}
+            />
+          )}
         />
         <Validation
           field="filter.personal.firstName"
           validate={validateRequiredObjectField("filter.personal")}
-          message="Обов&#700;язкове поле"
+          message={<Trans>Обовʼязкове поле</Trans>}
         />
       </Box>
       <Box px={1} width={1 / 3}>
-        <Field.Text
-          name="filter.personal.lastName"
-          label="Ім’я"
-          placeholder="Введіть ім’я"
+        <Trans
+          id="Введіть ім’я"
+          render={({ translate }) => (
+            <Field.Text
+              name="filter.personal.lastName"
+              label={<Trans>Ім’я</Trans>}
+              placeholder={translate}
+            />
+          )}
         />
         <Validation
           field="filter.personal.lastName"
           validate={validateRequiredObjectField("filter.personal")}
-          message="Обов&#700;язкове поле"
+          message={<Trans>Обовʼязкове поле</Trans>}
         />
       </Box>
       <Box px={1} width={1 / 6}>
         <Field.DatePicker
           name="filter.personal.birthDate"
-          label="Дата народження"
+          label={<Trans>Дата народження</Trans>}
         />
         <Validation
           field="filter.personal.birthDate"
           validate={validateRequiredObjectField("filter.personal")}
-          message="Обов&#700;язкове поле"
+          message={<Trans>Обовʼязкове поле</Trans>}
         />
       </Box>
     </Flex>
     <Details summary="розширений пошук">
       <Box fontSize={0} pb={2}>
-        Для пошуку, заповніть будь-яке з наведених полів
+        <Trans>Для пошуку, заповніть будь-яке з наведених полів</Trans>
       </Box>
       <Flex mx={-1}>
         <Box px={1} width={1 / 3} borderLeft="1">
-          <Field.Text
-            name="filter.unzr"
-            label="ID Запису в ЄДДР"
-            placeholder="19650930-65465"
-            format={formatUnzr}
-            divider
+          <Trans
+            id="19650930-65465"
+            render={({ translate }) => (
+              <Field.Text
+                name="filter.unzr"
+                label={<Trans>ID Запису в ЄДДР</Trans>}
+                placeholder={translate}
+                format={formatUnzr}
+                divider
+              />
+            )}
           />
         </Box>
         <Box px={1} width={1 / 3} borderLeft="1">
           <Field.Text
             name="filter.taxId"
-            label="ІНН"
-            placeholder="123456789"
+            label={<Trans>ІНН</Trans>}
+            placeholder={123456789}
             divider
           />
         </Box>
         <Box px={1} width={1 / 3}>
           <Field.Text
             name="filter.phoneNumber"
-            label="Номер телефону"
-            placeholder="+38"
+            label={<Trans>Номер телефону</Trans>}
+            placeholder={+38}
             format={formatPhone}
             parse={parsePhone}
           />
           <Validation.Matches
             field="filter.phoneNumber"
             options={PHONE_PATTERN}
-            message="Невірний номер телефону"
+            message={<Trans>Невірний номер телефону</Trans>}
           />
         </Box>
       </Flex>
@@ -216,10 +244,15 @@ const SearchByDeclarationForm = ({ initialValues, onSubmit }) => (
   <Form initialValues={initialValues} onSubmit={onSubmit}>
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
-        <Field.Text
-          name="filter.declarationNumber"
-          label="Пошук за номером декларації"
-          placeholder="Введіть номер декларації"
+        <Trans
+          id="Введіть номер декларації"
+          render={({ translate }) => (
+            <Field.Text
+              name="filter.declarationNumber"
+              label={<Trans>Пошук за номером декларації</Trans>}
+              placeholder={translate}
+            />
+          )}
         />
       </Box>
     </Flex>

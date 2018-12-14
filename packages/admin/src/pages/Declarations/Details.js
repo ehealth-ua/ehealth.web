@@ -5,7 +5,7 @@ import { Flex, Box, Heading, Text } from "rebass/emotion";
 import { BooleanValue } from "react-values";
 import system from "system-components/emotion";
 import { loader } from "graphql.macro";
-
+import { Trans } from "@lingui/macro";
 import {
   PositiveIcon,
   MenuTileIcon,
@@ -75,9 +75,11 @@ const Details = ({ id }) => (
             <Box mb={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/declarations">
-                  Пошук декларацій
+                  <Trans>Пошук декларацій</Trans>
                 </Breadcrumbs.Item>
-                <Breadcrumbs.Item>Деталі декларації</Breadcrumbs.Item>
+                <Breadcrumbs.Item>
+                  <Trans>Деталі декларації</Trans>
+                </Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
             <Flex justifyContent="space-between" alignItems="flex-end">
@@ -119,19 +121,24 @@ const Details = ({ id }) => (
                                 toggle();
                               }}
                             >
-                              <Field.Textarea
-                                name="reasonDescription"
-                                placeholder="Вкажіть причину розірвання декларації"
-                                rows={5}
+                              <Trans
+                                id="Вкажіть причину розірвання декларації"
+                                render={({ translate }) => (
+                                  <Field.Textarea
+                                    name="reasonDescription"
+                                    placeholder={translate}
+                                    rows={5}
+                                  />
+                                )}
                               />
                               <Flex justifyContent="center">
                                 <Box mr={20}>
                                   <Button variant="blue" onClick={toggle}>
-                                    Повернутися
+                                    <Trans>Повернутися</Trans>
                                   </Button>
                                 </Box>
                                 <Button type="submit" variant="red">
-                                  Розірвати декларацію
+                                  <Trans>Розірвати декларацію</Trans>
                                 </Button>
                               </Flex>
                             </Form>
@@ -145,8 +152,8 @@ const Details = ({ id }) => (
                       <Box mr={20}>
                         <Popup
                           variant="red"
-                          buttonText="Відхилити"
-                          title="Відхилення декларації"
+                          buttonText={<Trans>Відхилити</Trans>}
+                          title={<Trans>Відхилення декларації</Trans>}
                         >
                           {toggle => (
                             <Mutation mutation={RejectDeclarationMutation}>
@@ -154,7 +161,7 @@ const Details = ({ id }) => (
                                 <Flex justifyContent="center">
                                   <Box mr={20}>
                                     <Button variant="blue" onClick={toggle}>
-                                      Повернутися
+                                      <Trans>Повернутися</Trans>
                                     </Button>
                                   </Box>
                                   <Button
@@ -168,7 +175,7 @@ const Details = ({ id }) => (
                                     }}
                                     variant="red"
                                   >
-                                    Відхилити декларацію
+                                    <Trans>Відхилити декларацію</Trans>
                                   </Button>
                                 </Flex>
                               )}
@@ -178,8 +185,8 @@ const Details = ({ id }) => (
                       </Box>
                       <Popup
                         variant="green"
-                        buttonText="Затвердити"
-                        title="Затвердження декларації"
+                        buttonText={<Trans>Затвердити</Trans>}
+                        title={<Trans>Затвердження декларації</Trans>}
                       >
                         {toggle => (
                           <Mutation mutation={ApproveDeclarationMutation}>
@@ -187,7 +194,7 @@ const Details = ({ id }) => (
                               <Flex justifyContent="center">
                                 <Box mr={20}>
                                   <Button variant="blue" onClick={toggle}>
-                                    Повернутися
+                                    <Trans>Повернутися</Trans>
                                   </Button>
                                 </Box>
                                 <Button
@@ -201,7 +208,7 @@ const Details = ({ id }) => (
                                   }}
                                   variant="green"
                                 >
-                                  Затвердити декларацію
+                                  <Trans>Затвердити декларацію</Trans>
                                 </Button>
                               </Flex>
                             )}
@@ -215,12 +222,24 @@ const Details = ({ id }) => (
             </Flex>
           </Box>
           <Tabs.Nav>
-            <Tabs.NavItem to="./">Загальна інформація</Tabs.NavItem>
-            <Tabs.NavItem to="./legal-entity">Медзаклад</Tabs.NavItem>
-            <Tabs.NavItem to="./divisions">Відділення</Tabs.NavItem>
-            <Tabs.NavItem to="./employee">Лікар</Tabs.NavItem>
-            <Tabs.NavItem to="./patient">Пацієнт</Tabs.NavItem>
-            <Tabs.NavItem to="./documents">Документи</Tabs.NavItem>
+            <Tabs.NavItem to="./">
+              <Trans>Загальна інформація</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./legal-entity">
+              <Trans>Медзаклад</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./divisions">
+              <Trans>Відділення</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./employee">
+              <Trans>Лікар</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./patient">
+              <Trans>Пацієнт</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./documents">
+              <Trans>Документи</Trans>
+            </Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
             <Box p={5}>
@@ -263,12 +282,12 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
 const GeneralInfo = ({ general }) => (
   <DefinitionListView
     labels={{
-      declarationRequestId: "ID запиту",
-      startDate: "Початкова дата дії декларації",
-      endDate: "Кінцева дата дії декларації",
-      status: "Статус",
-      scope: "Тип",
-      reason: "Причина розірвання"
+      declarationRequestId: <Trans>ID запиту</Trans>,
+      startDate: <Trans>Початкова дата дії декларації</Trans>,
+      endDate: <Trans>Кінцева дата дії декларації</Trans>,
+      status: <Trans>Статус</Trans>,
+      scope: <Trans>Тип</Trans>,
+      reason: <Trans>Причина розірвання</Trans>
     }}
     data={general}
   />
@@ -284,9 +303,9 @@ const LegalEntity = ({
     <>
       <DefinitionListView
         labels={{
-          edrpou: "ЄДРПОУ",
-          publicName: "Назва",
-          addresses: "Адреса"
+          edrpou: <Trans>ЄДРПОУ</Trans>,
+          publicName: <Trans>Назва</Trans>,
+          addresses: <Trans>Адреса</Trans>
         }}
         data={{
           edrpou,
@@ -305,7 +324,7 @@ const LegalEntity = ({
           id,
           link: (
             <Link to={`/legal-entities/${id}`} fontWeight={700}>
-              Показати детальну інформацію
+              <Trans>Показати детальну інформацію</Trans>
             </Link>
           )
         }}
@@ -323,11 +342,11 @@ const Division = ({
     <>
       <DefinitionListView
         labels={{
-          name: "Назва",
-          type: "Тип",
-          addresses: "Адреса",
-          mountainGroup: "Гірський регіон",
-          phones: "Номер телефону",
+          name: <Trans>Назва</Trans>,
+          type: <Trans>Тип</Trans>,
+          addresses: <Trans>Адреса</Trans>,
+          mountainGroup: <Trans>Гірський регіон</Trans>,
+          phones: <Trans>Номер телефону</Trans>,
           email: "Email"
         }}
         data={{
@@ -348,7 +367,7 @@ const Division = ({
           id,
           link: (
             <Link to={`/division/${id}`} fontWeight={700}>
-              Показати детальну інформацію
+              <Trans>Показати детальну інформацію</Trans>
             </Link>
           )
         }}
@@ -371,9 +390,9 @@ const Employee = ({
     <>
       <DefinitionListView
         labels={{
-          fullName: "Повне ім’я",
-          speciality: "Спеціальність",
-          position: "Посада"
+          fullName: <Trans>Повне ім’я</Trans>,
+          speciality: <Trans>Спеціальність</Trans>,
+          position: <Trans>Посада</Trans>
         }}
         data={{
           fullName: getFullName(party),
@@ -390,7 +409,7 @@ const Employee = ({
           id,
           link: (
             <Link to={`/employees/${id}`} fontWeight={700}>
-              Показати детальну інформацію
+              <Trans>Показати детальну інформацію</Trans>
             </Link>
           )
         }}
@@ -415,13 +434,13 @@ const Patient = ({
   <>
     <DefinitionListView
       labels={{
-        fullName: "Повне ім’я",
-        birthDate: "Дата народження",
-        birthCountry: "Країна народження",
-        birthSettlement: "Місце народження",
-        unzr: "ID Запису в ЄДДР",
-        taxId: "ІНН",
-        phones: "Номер телефону"
+        fullName: <Trans>Повне ім’я</Trans>,
+        birthDate: <Trans>Дата народження</Trans>,
+        birthCountry: <Trans>Країна народження</Trans>,
+        birthSettlement: <Trans>Місце народження</Trans>,
+        unzr: <Trans>ID Запису в ЄДДР</Trans>,
+        taxId: <Trans>ІНН</Trans>,
+        phones: <Trans>Номер телефону</Trans>
       }}
       data={{
         fullName: getFullName(fullName),
@@ -442,7 +461,7 @@ const Patient = ({
         id,
         link: (
           <Link to={`/persons/${id}`} fontWeight={700}>
-            Показати детальну інформацію
+            <Trans>Показати детальну інформацію</Trans>
           </Link>
         )
       }}
