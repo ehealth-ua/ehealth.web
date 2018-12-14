@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.12.1"></a>
+## [1.12.1](https://github.com/edenlabllc/ehealth.web/compare/v1.12.0...v1.12.1) (2018-12-14)
+
+
+### Bug Fixes
+
+* **admin:** fix cancel button and check status contract in prolongate ([949cb78](https://github.com/edenlabllc/ehealth.web/commit/949cb78))
+
+
+
+
+
 <a name="1.12.0"></a>
 # [1.12.0](https://github.com/edenlabllc/ehealth.web/compare/v1.11.0...v1.12.0) (2018-12-13)
 
