@@ -223,6 +223,7 @@ const Details = ({ id }) => (
                 issueCity={issueCity}
                 statusReason={statusReason}
                 contractorLegalEntity={contractorLegalEntity}
+                status={status}
               />
               <LegalEntity
                 path="/legal-entity"
@@ -261,7 +262,8 @@ const GeneralInfo = ({
   endDate,
   id,
   statusReason,
-  contractorLegalEntity
+  contractorLegalEntity,
+  status
 }) => (
   <Box p={5}>
     <DefinitionListView
@@ -297,7 +299,8 @@ const GeneralInfo = ({
         startDate,
         endDate: checkStatusProlongate(
           contractorLegalEntity,
-          contractorLegalEntity.id
+          contractorLegalEntity.id,
+          status
         ) ? (
           <ProlongateContract id={id} endDate={endDate} />
         ) : (
@@ -331,7 +334,10 @@ const GeneralInfo = ({
   </Box>
 );
 
-const checkStatusProlongate = (data, id) => {
+const checkStatusProlongate = (data, id, statusContract) => {
+  if (statusContract === "TERMINATED") {
+    return false;
+  }
   if (
     data.mergedToLegalEntity &&
     data.mergedToLegalEntity.mergedFromLegalEntity
@@ -378,7 +384,13 @@ const ProlongateContract = ({ endDate, id }) => (
                   message="Обов&#700;язкове поле"
                 />
                 <Box mx={2} color="redPigment">
-                  <Button variant="none" border="none" px="0">
+                  <Button
+                    variant="none"
+                    border="none"
+                    px="0"
+                    type="reset"
+                    onClick={toggle}
+                  >
                     <CancelIcon />
                   </Button>
                 </Box>
