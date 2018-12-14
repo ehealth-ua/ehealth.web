@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.14.0"></a>
+# [1.14.0](https://github.com/edenlabllc/ehealth.web/compare/v1.13.0...v1.14.0) (2018-12-14)
+
+
+### Features
+
+* **admin:** add Reimbursement Contract Details page ([11dcd57](https://github.com/edenlabllc/ehealth.web/commit/11dcd57))
+
+
+
+
+
 <a name="1.13.0"></a>
 # [1.13.0](https://github.com/edenlabllc/ehealth.web/compare/v1.12.1...v1.13.0) (2018-12-14)
 
