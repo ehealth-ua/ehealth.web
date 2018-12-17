@@ -1,0 +1,19 @@
+query EmployeesQuery(
+  $first: Int!
+  $filter: EmployeeFilter
+  $orderBy: EmployeeOrderBy
+  $skip: Boolean! = false
+) {
+  employees(first: $first, filter: $filter, orderBy: $orderBy)
+    @skip(if: $skip) {
+    nodes {
+      id
+      databaseId
+      party {
+        firstName
+        secondName
+        lastName
+      }
+    }
+  }
+}
