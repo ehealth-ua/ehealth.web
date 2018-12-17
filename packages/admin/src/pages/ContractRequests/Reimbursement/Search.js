@@ -42,6 +42,10 @@ const MedicalProgramsQuery = loader(
   "../../../graphql/MedicalProgramsQuery.graphql"
 );
 
+const EmployeesQuery = loader(
+  "../../../graphql/GetAssignEmployeeQuery.graphql"
+);
+
 const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
   ([key, value]) => ({ key, value })
 );
@@ -254,17 +258,62 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
       </Box>
 
       <Box px={1} width={2 / 5}>
-        <Trans
-          id="Choose assignee"
-          render={({ translation }) => (
-            <Field.Text
-              name="filter.assigneeName"
-              label={<Trans>Performer</Trans>}
-              placeholder={translation}
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+        <Query
+          query={EmployeesQuery}
+          variables={{
+            skip: true,
+            first: 50,
+            filter: {
+              employeeType: ["NHS_SIGNER"],
+              status: "APPROVED"
+            },
+            orderBy: "INSERTED_AT_DESC"
+          }}
+        >
+          {({
+            loading,
+            error,
+            data: { employees: { nodes: employees = [] } = {} } = {},
+            refetch: refetchEmployees
+          }) => (
+            <Trans
+              id="Choose assignee"
+              render={({ translation }) => (
+                <Field.Select
+                  name="filter.assigneeName"
+                  label={<Trans>Performer</Trans>}
+                  placeholder={translation}
+                  items={
+                    loading || error
+                      ? []
+                      : employees.map(
+                          ({ party }) => party && getFullName(party)
+                        )
+                  }
+                  onInputValueChange={debounce(
+                    name =>
+                      !isEmpty(name) &&
+                      refetchEmployees({
+                        skip: false,
+                        first: 50,
+                        filter: {
+                          employeeType: ["NHS_SIGNER"],
+                          status: "APPROVED",
+                          party: { fullName: name }
+                        }
+                      }),
+                    1000
+                  )}
+                  renderItem={item => item}
+                  itemToString={item => {
+                    if (!item) return "";
+                    return typeof item === "string" ? item : item.name;
+                  }}
+                />
+              )}
             />
           )}
-        />
+        </Query>
       </Box>
     </Flex>
     <BooleanValue>

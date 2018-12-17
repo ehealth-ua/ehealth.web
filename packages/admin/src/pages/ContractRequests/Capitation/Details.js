@@ -7,6 +7,9 @@ import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { Manager, Reference, Popper } from "react-popper";
 import { loader } from "graphql.macro";
+import isEmpty from "lodash/isEmpty";
+import debounce from "lodash/debounce";
+
 import { Trans } from "@lingui/macro";
 import { Form, Switch } from "@ehealth/components";
 import { boolean } from "@ehealth/system-tools";
@@ -53,7 +56,9 @@ const CapitationContractRequestQuery = loader(
 const AssignContractRequestMutation = loader(
   "../../../graphql/AssignContractRequestMutation.graphql"
 );
-const EmployeesQuery = loader("../../../graphql/EmployeesQuery.graphql");
+const EmployeesQuery = loader(
+  "../../../graphql/GetAssignEmployeeQuery.graphql"
+);
 
 const CapitationContractRequestsDetails = () => (
   <Router>
@@ -646,95 +651,111 @@ const PrintButton = ({ content }) => (
 );
 
 const ModalSelect = ({ submitted, id }) => (
-  <Query
-    query={EmployeesQuery}
-    variables={{
-      first: 50,
-      filter: {
-        employeeType: ["NHS", "NHS_SIGNER"],
-        status: "APPROVED"
-      },
-      orderBy: "INSERTED_AT_DESC"
-    }}
-  >
-    {({
-      loading,
-      error,
-      data: { employees: { nodes: employees = [] } = {} } = {}
-    }) => (
-      <BooleanValue>
-        {({ value: opened, toggle }) => (
-          <Form onSubmit={() => null}>
-            <Mutation
-              mutation={AssignContractRequestMutation}
-              refetchQueries={() => [
-                {
-                  query: CapitationContractRequestQuery,
-                  variables: { id }
-                }
-              ]}
-            >
-              {assignContractRequest => (
-                <Form.AutoSubmit
-                  onSubmit={async ({ assignee }) => {
-                    assignee &&
-                      (await assignContractRequest({
-                        variables: {
-                          input: {
-                            id,
-                            employeeId: assignee.id
-                          }
-                        }
-                      }).then(toggle));
+  <BooleanValue>
+    {({ value: opened, toggle }) => (
+      <Form onSubmit={() => null}>
+        <Mutation
+          mutation={AssignContractRequestMutation}
+          refetchQueries={() => [
+            {
+              query: CapitationContractRequestQuery,
+              variables: { id }
+            }
+          ]}
+        >
+          {assignContractRequest => (
+            <Form.AutoSubmit
+              onSubmit={async ({ assignee }) => {
+                return (
+                  assignee &&
+                  (await assignContractRequest({
+                    variables: {
+                      input: {
+                        id,
+                        employeeId: assignee.id
+                      }
+                    }
+                  }).then(toggle))
+                );
+              }}
+            />
+          )}
+        </Mutation>
+        <Manager>
+          <Reference>
+            {({ ref }) => (
+              <Flex innerRef={ref} alignItems="center">
+                {submitted}
+                <ButtonWrapper onClick={toggle}>
+                  {!submitted && <DropDownButton color="#2EA2F8" />}
+                  <ButtonText>
+                    {!submitted ? "Додати виконавця" : "Змінити"}
+                  </ButtonText>
+                </ButtonWrapper>
+              </Flex>
+            )}
+          </Reference>
+          <Popper placement="bottom-start" positionFixed>
+            {({ ref, style }) => (
+              <ModalWrapper style={style} innerRef={ref} visible={opened}>
+                <Query
+                  query={EmployeesQuery}
+                  fetchPolicy="no-cache"
+                  variables={{
+                    first: 50,
+                    filter: {
+                      employeeType: ["NHS", "NHS_SIGNER"],
+                      status: "APPROVED"
+                    },
+                    orderBy: "INSERTED_AT_DESC"
                   }}
-                />
-              )}
-            </Mutation>
-            <Manager>
-              <Reference>
-                {({ ref }) => (
-                  <Flex innerRef={ref} alignItems="center">
-                    {submitted}
-                    <ButtonWrapper onClick={toggle}>
-                      {!submitted && <DropDownButton color="#2EA2F8" />}
-                      <ButtonText>
-                        {!submitted ? (
-                          <Trans>Add performer</Trans>
-                        ) : (
-                          <Trans>Change</Trans>
+                >
+                  {({
+                    loading,
+                    error,
+                    data: { employees: { nodes: employees = [] } = {} } = {},
+                    refetch: refetchEmployees
+                  }) => (
+                    <>
+                      <Field.Select
+                        name="assignee"
+                        items={loading || error ? [] : employees}
+                        onInputValueChange={debounce(
+                          name =>
+                            !isEmpty(name) &&
+                            refetchEmployees({
+                              first: 50,
+                              filter: {
+                                employeeType: ["NHS", "NHS_SIGNER"],
+                                status: "APPROVED",
+                                party: { fullName: name }
+                              }
+                            }),
+
+                          1000
                         )}
-                      </ButtonText>
-                    </ButtonWrapper>
-                  </Flex>
-                )}
-              </Reference>
-              <Popper placement="bottom-start" positionFixed>
-                {({ ref, style }) => (
-                  <ModalWrapper style={style} innerRef={ref} visible={opened}>
-                    <Field.Select
-                      name="assignee"
-                      items={employees}
-                      renderItem={item => getFullName(item.party)}
-                      itemToString={item => {
-                        if (!item) return "";
-                        return typeof item === "string"
-                          ? item
-                          : getFullName(item.party);
-                      }}
-                      filterOptions={{ keys: ["party.lastName"] }}
-                      hideErrors
-                      iconComponent={SearchIcon}
-                      style={{ margin: "5px", border: "1px solid #DFE3E9" }}
-                    />
-                  </ModalWrapper>
-                )}
-              </Popper>
-            </Manager>
-          </Form>
-        )}
-      </BooleanValue>
+                        renderItem={item =>
+                          item.party && getFullName(item.party)
+                        }
+                        filterOptions={{
+                          keys: ["party.lastName", "party.firstName"]
+                        }}
+                        itemToString={item =>
+                          !item ? "" : item.party && getFullName(item.party)
+                        }
+                        style={{ margin: "5px", border: "1px solid #DFE3E9" }}
+                        hideErrors
+                      />
+                    </>
+                  )}
+                </Query>
+              </ModalWrapper>
+            )}
+          </Popper>
+        </Manager>
+      </Form>
     )}
-  </Query>
+  </BooleanValue>
 );
 
 const ModalWrapper = system(
