@@ -59,7 +59,7 @@ const CapitationContractRequestsSearch = () => (
         const contractRequest =
           !isEmpty(searchRequest) &&
           (edrpouTest
-            ? { contractorLegalEntityEdrpou: searchRequest }
+            ? { contractorLegalEntity: { edrpou: searchRequest } }
             : { contractNumber: searchRequest });
 
         return (
