@@ -54,7 +54,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                 <Box>
                   <Link to="../">
                     <Button mr="2" variant="blue">
-                      <Trans>Повернутись</Trans>
+                      <Trans>Back</Trans>
                     </Button>
                   </Link>
                   <Switch
@@ -99,9 +99,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                                   navigate("../");
                                 }}
                               >
-                                <Trans>
-                                  Підписати, наклавши ЕЦП та Печатку
-                                </Trans>
+                                <Trans>Signing by EDS and seal</Trans>
                               </Button>
                             )}
                           </Mutation>
@@ -126,7 +124,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                       fontSize="1"
                       color="rockmanBlue"
                     >
-                      <Trans>Роздрукувати</Trans>
+                      <Trans>Print</Trans>
                     </Text>
                     <PrinterIcon color="shiningKnight" />
                   </Flex>

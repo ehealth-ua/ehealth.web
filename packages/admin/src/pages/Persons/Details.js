@@ -79,18 +79,18 @@ const Details = ({ id }) => (
             <Box mb={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/persons">
-                  <Trans>Пошук пацієнтів</Trans>
+                  <Trans>Patient Search</Trans>
                 </Breadcrumbs.Item>
                 <Breadcrumbs.Item>
-                  <Trans>Деталі пацієнта</Trans>
+                  <Trans>Details of the patient</Trans>
                 </Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
             <DefinitionListView
               labels={{
-                id: <Trans>ID пацієнта</Trans>,
-                fullName: <Trans>ПІБ пацієнта</Trans>,
-                status: <Trans>Статус</Trans>
+                id: <Trans>Patient ID</Trans>,
+                fullName: <Trans>Patient Name</Trans>,
+                status: <Trans>Status</Trans>
               }}
               data={{
                 id,
@@ -103,13 +103,13 @@ const Details = ({ id }) => (
           </Box>
           <Tabs.Nav>
             <Tabs.NavItem to="./">
-              <Trans>Особиста інформація</Trans>
+              <Trans>Personal information</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./auth">
-              <Trans>Метод аутентифікації</Trans>
+              <Trans>Authentication method</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./declarations">
-              <Trans>Декларації</Trans>
+              <Trans>Declarations</Trans>
             </Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
@@ -129,13 +129,13 @@ const UserInfo = ({ userInfo }) => (
   <Box p={5}>
     <DefinitionListView
       labels={{
-        birthDate: <Trans>Дата народження</Trans>,
-        birthCountry: <Trans>Країна народження</Trans>,
-        birthSettlement: <Trans>Місце народження</Trans>,
-        taxId: <Trans>ІНН</Trans>,
-        unzr: <Trans>ID Запису в ЄДДР</Trans>,
-        mobilePhone: <Trans>Мобільний номер</Trans>,
-        landLinePhone: <Trans>Стаціонарний номер</Trans>
+        birthDate: <Trans>Date of birth</Trans>,
+        birthCountry: <Trans>Country of birth</Trans>,
+        birthSettlement: <Trans>Place of birth</Trans>,
+        taxId: <Trans>INN</Trans>,
+        unzr: <Trans>Record ID in EDDR</Trans>,
+        mobilePhone: <Trans>Mobile number</Trans>,
+        landLinePhone: <Trans>Stationary number</Trans>
       }}
       data={userInfo}
     />
@@ -147,8 +147,8 @@ const AuthInfo = ({ id, authInfo }) =>
     <Box p={5}>
       <DefinitionListView
         labels={{
-          type: <Trans>Тип аутентифікації</Trans>,
-          phoneNumber: <Trans>Номер телефону</Trans>
+          type: <Trans>Authentication type</Trans>,
+          phoneNumber: <Trans>Phone number</Trans>
         }}
         data={authInfo}
       />
@@ -160,25 +160,25 @@ const AuthInfo = ({ id, authInfo }) =>
                 {({ value: opened, toggle }) => (
                   <>
                     <Button variant="green" disabled={opened} onClick={toggle}>
-                      <Trans>Скинути метод аутентифікації</Trans>
+                      <Trans>Reset Authentication Method</Trans>
                     </Button>
                     {opened && (
                       <Modal width={760} backdrop>
                         <Heading as="h1" fontWeight="normal" mb={6}>
-                          <Trans>Зміна методу аутентифікації</Trans>
+                          <Trans>Change authentication method</Trans>
                         </Heading>
                         <Text lineHeight={2} textAlign="center" mb={6}>
                           <Trans>
-                            Увага!
+                            Warning!
                             <br />
-                            Після підтвердження, метод аутентифікації буде
-                            змінено на невизначений
+                            After confirmation, the authentication method will
+                            be changed to the uncertain
                           </Trans>
                         </Text>
                         <Flex justifyContent="center">
                           <Box mx={2}>
                             <Button variant="blue" onClick={toggle}>
-                              <Trans>Повернутися</Trans>
+                              <Trans>Return</Trans>
                             </Button>
                           </Box>
                           <Box mx={2}>
@@ -191,7 +191,7 @@ const AuthInfo = ({ id, authInfo }) =>
                                 toggle();
                               }}
                             >
-                              <Trans>Скинути метод аутентифікації</Trans>
+                              <Trans>Reset Authentication Method</Trans>
                             </Button>
                           </Box>
                         </Flex>
@@ -238,32 +238,39 @@ const DeclarationsInfo = ({ id }) => (
                   <Flex>
                     <Box px={5} pt={5} width={460}>
                       <Trans
-                        id="Введіть ID або номер декларації"
-                        render={({ translate }) => (
+                        id="Enter ID or Declaration number"
+                        render={({ translation }) => (
                           <Field.Text
                             name="declarationId"
-                            label={<Trans>Пошук декларації</Trans>}
-                            placeholder={translate}
+                            label={<Trans>Declaration search</Trans>}
+                            placeholder={translation}
                             postfix={<AdminSearchIcon color="#CED0DA" />}
                           />
                         )}
                       />
                     </Box>
                     <Box pt={5}>
-                      <Field.Select
-                        name="status"
-                        label={<Trans>Статус декларації</Trans>}
-                        items={[
-                          { value: "всі статуси", name: undefined },
-                          ...declarationStatuses
-                        ]}
-                        renderItem={item => item.value}
-                        itemToString={item => {
-                          if (!item) return "всі статуси";
-                          return typeof item === "string" ? item : item.value;
-                        }}
-                        filterOptions={{ keys: ["value"] }}
-                        type="select"
+                      <Trans
+                        id="All statuses"
+                        render={({ translation }) => (
+                          <Field.Select
+                            name="status"
+                            label={<Trans>Declaration status</Trans>}
+                            items={[
+                              { value: translation, name: undefined },
+                              ...declarationStatuses
+                            ]}
+                            renderItem={item => item.value}
+                            itemToString={item => {
+                              if (!item) return translation;
+                              return typeof item === "string"
+                                ? item
+                                : item.value;
+                            }}
+                            filterOptions={{ keys: ["value"] }}
+                            type="select"
+                          />
+                        )}
                       />
                     </Box>
                   </Flex>
@@ -271,15 +278,15 @@ const DeclarationsInfo = ({ id }) => (
                 <Table
                   data={declarations}
                   header={{
-                    id: "ID декларації",
-                    declarationNumber: <Trans>Номер декларації</Trans>,
-                    startDate: <Trans>Декларація діє з</Trans>,
-                    name: <Trans>Медзаклад</Trans>,
-                    edrpou: <Trans>ЄДРПОУ</Trans>,
-                    divisionName: <Trans>Назва відділення</Trans>,
-                    address: <Trans>Адреса</Trans>,
-                    status: <Trans>Статус</Trans>,
-                    action: <Trans>Дія</Trans>
+                    id: <Trans>Declaration ID</Trans>,
+                    declarationNumber: <Trans>Declaration number</Trans>,
+                    startDate: <Trans>Declaration valid from</Trans>,
+                    name: <Trans>Legal entity</Trans>,
+                    edrpou: <Trans>EDRPOU</Trans>,
+                    divisionName: <Trans>Division name</Trans>,
+                    address: <Trans>Address</Trans>,
+                    status: <Trans>Status</Trans>,
+                    action: <Trans>Action</Trans>
                   }}
                   renderRow={({
                     id,
@@ -311,7 +318,7 @@ const DeclarationsInfo = ({ id }) => (
                       ),
                       action: (
                         <Link to={`/declarations/${id}`}>
-                          <Trans>Показати деталі</Trans>
+                          <Trans>Show details</Trans>
                         </Link>
                       )
                     };

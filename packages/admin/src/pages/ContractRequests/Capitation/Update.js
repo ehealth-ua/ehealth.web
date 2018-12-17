@@ -34,10 +34,10 @@ const Update = ({ id }) => (
     <Box pt={5} px={5}>
       <Steps.List>
         <Steps.Item to="./">
-          <Trans>Дозаповніть поля</Trans>
+          <Trans>Fill in fields</Trans>
         </Steps.Item>
         <Steps.Item to="../approve">
-          <Trans>Підтвердіть з ЕЦП</Trans>
+          <Trans>Confirm with EDS</Trans>
         </Steps.Item>
       </Steps.List>
     </Box>
@@ -77,11 +77,11 @@ const Update = ({ id }) => (
                 <OpacityBox m={5}>
                   <DefinitionListView
                     labels={{
-                      databaseId: <Trans>ID заяви</Trans>,
-                      status: <Trans>Статус</Trans>,
-                      edrpou: <Trans>ЄДРПОУ</Trans>,
-                      name: <Trans>Назва</Trans>,
-                      legalEntityId: <Trans>ID медзакладу</Trans>
+                      databaseId: <Trans>Contract request ID</Trans>,
+                      status: <Trans>Status</Trans>,
+                      edrpou: <Trans>EDRPOU</Trans>,
+                      name: <Trans>Name</Trans>,
+                      legalEntityId: <Trans>Legal entity ID</Trans>
                     }}
                     data={{
                       databaseId,
@@ -185,10 +185,14 @@ const UpdateContractRequest = ({
                   }}
                   initialValues={{
                     ...initialValues,
-                    nhsSignerBase:
-                      nhsSignerBase ||
-                      "Положення про Національну службу здоров'я України, затвердженого постановою Кабінету Міністрів України від 27 грудня 2017 року № 1101",
-                    issueCity: issueCity || "Київ",
+                    nhsSignerBase: nhsSignerBase || (
+                      <Trans>
+                        Regulations on the National Health Service of Ukraine,
+                        approved by the Resolution of the Cabinet of Ministers
+                        of Ukraine dated December 27, 2017 No. 1101
+                      </Trans>
+                    ),
+                    issueCity: issueCity || <Trans>Kyiv</Trans>,
                     nhsContractPrice: nhsContractPrice || 0
                   }}
                 >
@@ -198,14 +202,14 @@ const UpdateContractRequest = ({
                   <Flex>
                     <Box mr={5} width={2 / 5}>
                       <Trans
-                        id="Введіть підписанта"
-                        render={({ translate }) => (
+                        id="Enter signer"
+                        render={({ translation }) => (
                           <Field.Select
                             name="nhsSignerId"
                             label={
-                              <Trans>Підписант зі сторони Замовника</Trans>
+                              <Trans>Signatory from the Customers side</Trans>
                             }
-                            placeholder={translate}
+                            placeholder={translation}
                             items={employees}
                             renderItem={item => item && getFullName(item.party)}
                             itemToString={item => {
@@ -224,23 +228,23 @@ const UpdateContractRequest = ({
 
                       <Validation.Required
                         field="nhsSignerId"
-                        message={<Trans>Обов&#700;язкове поле</Trans>}
+                        message={<Trans>Required field</Trans>}
                       />
                     </Box>
                     <Box width={2 / 5}>
                       <Trans
-                        id="Оберіть підставу"
-                        render={({ translate }) => (
+                        id="Choose base"
+                        render={({ translation }) => (
                           <Field.Text
                             name="nhsSignerBase"
-                            label={<Trans>Що діє на підставі</Trans>}
-                            placeholder={translate}
+                            label={<Trans>Basis</Trans>}
+                            placeholder={translation}
                           />
                         )}
                       />
                       <Validation.Required
                         field="nhsSignerBase"
-                        message={<Trans>Обов&#700;язкове поле</Trans>}
+                        message={<Trans>Required field</Trans>}
                       />
                     </Box>
                   </Flex>
@@ -248,13 +252,13 @@ const UpdateContractRequest = ({
                     <Box mr={5} width={2 / 5}>
                       <Field.Number
                         name="nhsContractPrice"
-                        label={<Trans>Сума контракту</Trans>}
+                        label={<Trans>Contract Amount</Trans>}
                         placeholder="0 - 1 000 000"
-                        postfix={<Trans>грн</Trans>}
+                        postfix={<Trans>uah</Trans>}
                       />
                       <Validations field="nhsContractPrice">
                         <Validation.Required
-                          message={<Trans>Об&#700;язкове поле</Trans>}
+                          message={<Trans>Required field</Trans>}
                         />
                         {/*<Validation.Matches*/}
                         {/*options={"^(\\d{1,7})(\\.\\d{1,2})?$"}*/}
@@ -267,13 +271,13 @@ const UpdateContractRequest = ({
                         name="CONTRACT_PAYMENT_METHOD"
                         render={dict => (
                           <Trans
-                            id="Оберіть cпосіб"
-                            render={({ translate }) => (
+                            id="Choose payment method"
+                            render={({ translation }) => (
                               <Field.Select
                                 type="select"
                                 name="nhsPaymentMethod"
-                                label={<Trans>Спосіб оплати</Trans>}
-                                placeholder={translate}
+                                label={<Trans>Payment method</Trans>}
+                                placeholder={translation}
                                 itemToString={item => {
                                   return item.key ? dict[item.key] : dict[item];
                                 }}
@@ -295,38 +299,43 @@ const UpdateContractRequest = ({
                       />
                       <Validation.Required
                         field="nhsPaymentMethod"
-                        message={<Trans>Обов&#700;язкове поле</Trans>}
+                        message={<Trans>Required field</Trans>}
                       />
                     </Box>
                   </Flex>
                   <Box width={2 / 5}>
                     <Trans
-                      id="Введіть місто"
-                      render={({ translate }) => (
+                      id="Enter city"
+                      render={({ translation }) => (
                         <Field.Text
                           name="issueCity"
-                          label={<Trans>Місто укладення договору</Trans>}
-                          placeholder={translate}
+                          label={
+                            <Trans>
+                              The city of the conclusion of the contract
+                            </Trans>
+                          }
+                          placeholder={translation}
                         />
                       )}
                     />
                     <Validation.Required
                       field="issueCity"
-                      message={<Trans>Обов&#700;язкове поле</Trans>}
+                      message={<Trans>Required field</Trans>}
                     />
                   </Box>
                   <Box width={2 / 5}>
                     <Trans
-                      id="Перерахуйте умови (за наявності)"
-                      render={({ translate }) => (
+                      id="List the conditions"
+                      render={({ translation }) => (
                         <Field.Textarea
                           name="miscellaneous"
                           label={
                             <Trans>
-                              Інші умови (залежно від виду медичних послуг)
+                              Miscellaneous (depending on the type of medical
+                              service)
                             </Trans>
                           }
-                          placeholder={translate}
+                          placeholder={translation}
                           rows={5}
                         />
                       )}
@@ -336,12 +345,12 @@ const UpdateContractRequest = ({
                     <Box mr={3}>
                       <Link to="../">
                         <ButtonWidth variant="blue">
-                          <Trans>Повернутися</Trans>
+                          <Trans>Return</Trans>
                         </ButtonWidth>
                       </Link>
                     </Box>
                     <ButtonWidth variant="green">
-                      <Trans>Оновити</Trans>
+                      <Trans>Refresh</Trans>
                     </ButtonWidth>
                   </Flex>
                 </Form>

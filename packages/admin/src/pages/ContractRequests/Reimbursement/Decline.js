@@ -33,10 +33,10 @@ const Decline = ({ id, location: { state }, ...props }) => {
       <Box pt={5} px={5}>
         <Steps.List>
           <Steps.Item to="./" state={{ base }}>
-            <Trans>Дозаповніть поля</Trans>
+            <Trans>Fill in fields</Trans>
           </Steps.Item>
           <Steps.Item to="./sign" state={{ base }} disabled={!base}>
-            <Trans>Підтвердіть з ЕЦП</Trans>
+            <Trans>Confirm with EDS</Trans>
           </Steps.Item>
         </Steps.List>
       </Box>
@@ -62,11 +62,11 @@ const Decline = ({ id, location: { state }, ...props }) => {
                   <OpacityBox>
                     <DefinitionListView
                       labels={{
-                        databaseId: <Trans>ID заяви</Trans>,
-                        status: <Trans>Статус</Trans>,
-                        edrpou: <Trans>ЄДРПОУ</Trans>,
-                        name: <Trans>Назва</Trans>,
-                        legalEntityId: <Trans>ID аптеки</Trans>
+                        databaseId: <Trans>Contract request ID</Trans>,
+                        status: <Trans>Status</Trans>,
+                        edrpou: <Trans>EDRPOU</Trans>,
+                        name: <Trans>Name</Trans>,
+                        legalEntityId: <Trans>Pharmacy ID</Trans>
                       }}
                       data={{
                         databaseId,
@@ -116,31 +116,31 @@ const Reason = ({ initialValues, navigate, location: { state } }) => {
           initialValues={{ base }}
         >
           <Trans
-            id="Вкажіть причину відхилення"
-            render={({ translate: translate }) => (
+            id="Enter decline reason"
+            render={({ translation: translation }) => (
               <Field.Textarea
                 name="base"
                 rows={6}
-                label={<Trans>Причина відхилення</Trans>}
-                placeholder={translate}
+                label={<Trans>Decline reason</Trans>}
+                placeholder={translation}
                 maxlength="3000"
               />
             )}
           />
           <Validation.Required
             field="base"
-            message={<Trans>Обовʼязкове поле</Trans>}
+            message={<Trans>Required field</Trans>}
           />
           <Flex>
             <Box mr={3}>
               <Link to="../" state={base}>
                 <Button variant="blue">
-                  <Trans>Повернутися</Trans>
+                  <Trans>Return</Trans>
                 </Button>
               </Link>
             </Box>
             <Button variant="green" state={base}>
-              <Trans>Далі</Trans>
+              <Trans>Next</Trans>
             </Button>
           </Flex>
         </Form>
@@ -183,7 +183,7 @@ const Sign = ({
               <>
                 <DefinitionListView
                   labels={{
-                    base: <Trans>Причина відхилення</Trans>
+                    base: <Trans>Decline reason</Trans>
                   }}
                   data={{
                     base
@@ -196,7 +196,7 @@ const Sign = ({
                   <Box mr={3}>
                     <Link to="../" state={{ base }}>
                       <Button variant="blue">
-                        <Trans>Повернутися</Trans>
+                        <Trans>Return</Trans>
                       </Button>
                     </Link>
                   </Box>
@@ -223,7 +223,7 @@ const Sign = ({
                           navigate("../../");
                         }}
                       >
-                        <Trans>Затвердити, наклавши ЕЦП</Trans>
+                        <Trans>Approve by EDS</Trans>
                       </Button>
                     )}
                     content={toDeclineContent && toDeclineContent.text}

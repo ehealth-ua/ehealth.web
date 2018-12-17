@@ -35,17 +35,17 @@ const Add = ({ location: { state } }) => (
     <Box pt={5} px={5}>
       <Steps.List>
         <Steps.Item to="./" state={state}>
-          <Trans>Знайдіть медзаклад</Trans>
+          <Trans>Find Legal entity</Trans>
         </Steps.Item>
         <Steps.Item
           to="./reason"
           state={state}
           disabled={state && !state.reason}
         >
-          <Trans>Вкажіть підставу</Trans>
+          <Trans>Specify the basis</Trans>
         </Steps.Item>
         <Steps.Item to="./sign" state={state} disabled={state && !state.reason}>
-          <Trans>Підтвердіть з ЕЦП</Trans>
+          <Trans>Confirm with EDS</Trans>
         </Steps.Item>
       </Steps.List>
     </Box>
@@ -64,12 +64,12 @@ const Search = ({ location: { state } }) => (
         <Form onSubmit={setLocationParams} initialValues={{ filter, orderBy }}>
           <Box px={5} width={460}>
             <Trans
-              id="Введіть ЄДРПОУ медзакладу"
-              render={({ translate }) => (
+              id="Enter legal entity EDRPOU"
+              render={({ translation }) => (
                 <Field.Text
                   name="filter.edrpou"
-                  label={<Trans>Знайти підпорядкований медзаклад</Trans>}
-                  placeholder={translate}
+                  label={<Trans>Find related legal entity</Trans>}
+                  placeholder={translation}
                   postfix={<AdminSearchIcon color="#CED0DA" />}
                 />
               )}
@@ -95,13 +95,13 @@ const Search = ({ location: { state } }) => (
                       <Table
                         data={legalEntities}
                         header={{
-                          databaseId: <Trans>ID Медзакладу</Trans>,
-                          name: <Trans>Назва Медзакладу</Trans>,
-                          edrpou: <Trans>ЄДРПОУ</Trans>,
-                          owner: <Trans>Керівник</Trans>,
-                          type: <Trans>Тип</Trans>,
-                          nhsVerified: <Trans>Верифікований НСЗУ</Trans>,
-                          status: <Trans>Статус</Trans>
+                          databaseId: <Trans>Legal entity ID</Trans>,
+                          name: <Trans>Legal entity name</Trans>,
+                          edrpou: <Trans>EDRPOU</Trans>,
+                          owner: <Trans>CEO</Trans>,
+                          type: <Trans>Type</Trans>,
+                          nhsVerified: <Trans>Verified by NZZU</Trans>,
+                          status: <Trans>Status</Trans>
                         }}
                         renderRow={({
                           status,
@@ -141,13 +141,13 @@ const Search = ({ location: { state } }) => (
                         <Box mr={3}>
                           <Link to="../related-legal-entities">
                             <Button variant="blue">
-                              <Trans>Повернутися</Trans>
+                              <Trans>Return</Trans>
                             </Button>
                           </Link>
                         </Box>
                         <Link to="./reason" state={{ legalEntity, ...state }}>
                           <Button variant="green">
-                            <Trans>Далі</Trans>
+                            <Trans>Next</Trans>
                           </Button>
                         </Link>
                       </Flex>
@@ -174,13 +174,13 @@ const Reason = ({
 }) => (
   <Box pt={1} px={5}>
     <Text fontSize={1} fontWeight="bold" mb={3}>
-      <Trans>Підпорядкований медзаклад</Trans>
+      <Trans>Related legal entity</Trans>
     </Text>
     <DefinitionListView
       labels={{
-        edrpou: <Trans>ЄДРПОУ</Trans>,
-        name: <Trans>Назва</Trans>,
-        owner: <Trans>Власник</Trans>
+        edrpou: <Trans>EDRPOU</Trans>,
+        name: <Trans>Name</Trans>,
+        owner: <Trans>Owner</Trans>
       }}
       data={{
         edrpou,
@@ -190,7 +190,7 @@ const Reason = ({
     />
     <DefinitionListView
       labels={{
-        databaseId: "ID медзакладу"
+        databaseId: "Legal entity ID"
       }}
       data={{
         databaseId
@@ -207,19 +207,19 @@ const Reason = ({
         initialValues={{ reason }}
       >
         <Trans
-          id="Приклад: Наказ КМУ № 73465"
-          render={({ translate }) => (
+          id="Example: Order of the Cabinet of Ministers of Ukraine # 73465 "
+          render={({ translation }) => (
             <Field.Textarea
               name="reason"
               rows={6}
-              label={<Trans>Вкажіть підставу підпорядкування</Trans>}
-              placeholder={translate}
+              label={<Trans>Specify the merge reason</Trans>}
+              placeholder={translation}
             />
           )}
         />
         <Validation.Required
           field="reason"
-          message={<Trans>Обовʼязкове поле</Trans>}
+          message={<Trans>Required field</Trans>}
         />
         <Flex>
           <Box mr={3}>
@@ -231,12 +231,12 @@ const Reason = ({
               }}
             >
               <Button variant="blue">
-                <Trans>Повернутися</Trans>
+                <Trans>Return</Trans>
               </Button>
             </Link>
           </Box>
           <Button variant="green">
-            <Trans>Далі</Trans>
+            <Trans>Next</Trans>
           </Button>
         </Flex>
       </Form>
@@ -287,32 +287,32 @@ const Sign = ({
                   {mergeLegalEntities => (
                     <>
                       <Text fontSize={1} fontWeight="bold" mb={3}>
-                        <Trans>Основний медзаклад</Trans>
+                        <Trans>Main legal entity</Trans>
                       </Text>
                       <DefinitionListView
                         labels={{
-                          edrpou: <Trans>ЄДРПОУ</Trans>,
-                          name: <Trans>Назва</Trans>,
-                          id: <Trans>ID медзакладу</Trans>
+                          edrpou: <Trans>EDRPOU</Trans>,
+                          name: <Trans>Name</Trans>,
+                          id: <Trans>Legal entity ID</Trans>
                         }}
                         data={legalEntityTo}
                       />
                       <Line />
                       <Text fontSize={1} fontWeight="bold" mb={3}>
-                        <Trans>Підпорядкований медзаклад</Trans>
+                        <Trans>Related legal entity</Trans>
                       </Text>
                       <DefinitionListView
                         labels={{
-                          edrpou: <Trans>ЄДРПОУ</Trans>,
-                          name: <Trans>Назва</Trans>,
-                          id: <Trans>ID медзакладу</Trans>
+                          edrpou: <Trans>EDRPOU</Trans>,
+                          name: <Trans>Name</Trans>,
+                          id: <Trans>Legal entity ID</Trans>
                         }}
                         data={legalEntityFrom}
                       />
                       <Line />
                       <DefinitionListView
                         labels={{
-                          reason: <Trans>Підстава підпорядкування</Trans>
+                          reason: <Trans>Merge Legal entity reason</Trans>
                         }}
                         data={{ reason }}
                       />
@@ -331,7 +331,7 @@ const Sign = ({
                             }}
                           >
                             <Button variant="blue">
-                              <Trans>Повернутися</Trans>
+                              <Trans>Return</Trans>
                             </Button>
                           </Link>
                         </Box>
@@ -361,16 +361,17 @@ const Sign = ({
                                 navigate("/legal-entity-merge-jobs");
                               }}
                             >
-                              <Trans>Підписати</Trans>
+                              <Trans>Sign</Trans>
                             </Button>
                           )}
                           content={
                             <Trans>
-                              Увага! <br />
-                              Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність
-                              власних намірів , а також що зміст правочину
-                              ВІДПОВІДАЄ ВАШІЇЙ ВОЛІ, ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ
-                              ОСОБИСТО ВАМИ.
+                              Warning!
+                              <br />
+                              By approving the request, CONFIRMS the validity of
+                              their own intentions, and also that the content of
+                              the transaction is in accordance with your
+                              authority, accepted and signed personally by you.
                             </Trans>
                           }
                         />

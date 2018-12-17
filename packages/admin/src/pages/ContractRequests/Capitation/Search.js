@@ -111,19 +111,21 @@ const CapitationContractRequestsSearch = () => (
                           data={capitationContractRequests}
                           header={{
                             databaseId: (
-                              <Trans>ID заяви на укладення договору</Trans>
+                              <Trans>Contract request databaseID</Trans>
                             ),
-                            contractNumber: <Trans>Номер договору</Trans>,
-                            edrpou: <Trans>ЄДРПОУ</Trans>,
+                            contractNumber: <Trans>Contract Number</Trans>,
+                            edrpou: <Trans>EDRPOU</Trans>,
                             contractorLegalEntityName: (
-                              <Trans>Назва медзакладу</Trans>
+                              <Trans>Name of medical institution</Trans>
                             ),
-                            assigneeName: <Trans>Виконавець</Trans>,
-                            status: <Trans>Статус</Trans>,
-                            startDate: <Trans>Договір діє з</Trans>,
-                            endDate: <Trans>Договір діє по</Trans>,
-                            insertedAt: <Trans>Додано</Trans>,
-                            details: <Trans>Деталі</Trans>
+                            assigneeName: <Trans>Performer</Trans>,
+                            status: <Trans>Status</Trans>,
+                            startDate: (
+                              <Trans>The contract is valid with</Trans>
+                            ),
+                            endDate: <Trans>The contract is valid for</Trans>,
+                            insertedAt: <Trans>Added</Trans>,
+                            details: <Trans>Details</Trans>
                           }}
                           renderRow={({
                             id,
@@ -163,7 +165,7 @@ const CapitationContractRequestsSearch = () => (
                             ),
                             details: (
                               <Link to={`./${id}`} fontWeight="bold">
-                                <Trans>Показати деталі</Trans>
+                                <Trans>Show details</Trans>
                               </Link>
                             )
                           })}
@@ -215,12 +217,12 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
         <Trans
-          id="ЄДРПОУ або Номер договору"
-          render={({ translate }) => (
+          id="EDRPOU or Contract number"
+          render={({ translation }) => (
             <Field.Text
               name="filter.searchRequest"
-              label={<Trans>Пошук заяви</Trans>}
-              placeholder={translate}
+              label={<Trans>Search contract request</Trans>}
+              placeholder={translation}
               postfix={<AdminSearchIcon color="#CED0DA" />}
             />
           )}
@@ -228,18 +230,18 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.searchRequest"
           options={SEARCH_REQUEST_PATTERN}
-          message={<Trans>Невірний номер</Trans>}
+          message={<Trans>Invalid number</Trans>}
         />
       </Box>
 
       <Box px={1} width={2 / 5}>
         <Trans
-          id="Оберіть виконавця"
-          render={({ translate }) => (
+          id="Choose assignee"
+          render={({ translation }) => (
             <Field.Text
               name="filter.assigneeName"
-              label={<Trans>Виконавець</Trans>}
-              placeholder={translate}
+              label={<Trans>Performer</Trans>}
+              placeholder={translation}
               postfix={<AdminSearchIcon color="#CED0DA" />}
             />
           )}
@@ -250,15 +252,15 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
       <Box px={1} width={1 / 6}>
         <Trans
           id="All statuses"
-          render={({ translate }) => (
+          render={({ translation }) => (
             <Field.Select
               name="filter.status"
-              label={<Trans>Статус заяви</Trans>}
-              placeholder={translate}
-              items={[{ value: translate }, ...contractStatuses]}
+              label={<Trans>Contract Request status</Trans>}
+              placeholder={translation}
+              items={[{ value: translation }, ...contractStatuses]}
               renderItem={item => item.value}
               itemToString={item => {
-                if (!item) return translate;
+                if (!item) return translation;
                 return typeof item === "string" ? item : item.value;
               }}
               type="select"
@@ -271,20 +273,20 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
         <Box mr={1}>
           <Field.RangePicker
             rangeNames={["date.startFrom", "date.startTo"]}
-            label={<Trans>Початок дії договору</Trans>}
+            label={<Trans>Contract start date</Trans>}
           />
         </Box>
 
         <Field.RangePicker
           rangeNames={["date.endFrom", "date.endTo"]}
-          label={<Trans>Кінець дії договору</Trans>}
+          label={<Trans>Contract end date</Trans>}
         />
       </Flex>
     </Flex>
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
         <Button variant="blue">
-          <Trans>Шукати</Trans>
+          <Trans>Search</Trans>
         </Button>
       </Box>
       <Box px={1}>
@@ -303,7 +305,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
             });
           }}
         >
-          <Trans>Скинути пошук</Trans>
+          <Trans>Reset</Trans>
         </IconButton>
       </Box>
     </Flex>

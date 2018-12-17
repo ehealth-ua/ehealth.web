@@ -147,7 +147,18 @@ const Search = ({ uri }) => (
                             {nhsReviewed ? <PositiveIcon /> : <NegativeIcon />}
                           </Flex>
                         ),
-                        insertedAt: <DateFormat value={insertedAt} />,
+                        insertedAt: (
+                          <DateFormat
+                            value={insertedAt}
+                            format={{
+                              year: "numeric",
+                              month: "numeric",
+                              day: "numeric",
+                              hour: "numeric",
+                              minute: "numeric"
+                            }}
+                          />
+                        ),
                         status: (
                           <Badge
                             type="LEGALENTITY"

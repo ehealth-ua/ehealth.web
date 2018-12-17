@@ -106,10 +106,10 @@ const Details = ({ id }) => (
             <Box py={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/contract-requests">
-                  <Trans>Перелік заяв</Trans>
+                  <Trans>Contract requests list</Trans>
                 </Breadcrumbs.Item>
                 <Breadcrumbs.Item>
-                  <Trans>Деталі заяви</Trans>
+                  <Trans>Contract request details</Trans>
                 </Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
@@ -117,10 +117,10 @@ const Details = ({ id }) => (
               <Box>
                 <DefinitionListView
                   labels={{
-                    id: <Trans>ID заяви</Trans>,
-                    previousRequestId: <Trans>ID попередньої заяви</Trans>,
-                    status: <Trans>Статус</Trans>,
-                    assignee: <Trans>Виконавець</Trans>
+                    id: <Trans>Contract request ID</Trans>,
+                    previousRequestId: <Trans>Previous request ID</Trans>,
+                    status: <Trans>Status</Trans>,
+                    assignee: <Trans>Performer</Trans>
                   }}
                   data={{
                     id: databaseId,
@@ -165,13 +165,13 @@ const Details = ({ id }) => (
                       <Box mr={2}>
                         <Link to="decline">
                           <Button variant="red">
-                            <Trans>Відхилити</Trans>
+                            <Trans>Reject</Trans>
                           </Button>
                         </Link>
                       </Box>
                       <Link to="update">
                         <Button variant="green">
-                          <Trans>Затвердити</Trans>
+                          <Trans>Approve</Trans>
                         </Button>
                       </Link>
                     </Flex>
@@ -186,7 +186,7 @@ const Details = ({ id }) => (
                     <PrintButton content={content} />
                     <Link to="./print-out-content">
                       <Button variant="green">
-                        <Trans>Підписати</Trans>
+                        <Trans>Sign</Trans>
                       </Button>
                     </Link>
                   </Flex>
@@ -199,22 +199,22 @@ const Details = ({ id }) => (
 
           <Tabs.Nav>
             <Tabs.NavItem to="./">
-              <Trans>Загальна інформація</Trans>
+              <Trans>General information</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./legal-entity">
-              <Trans>Медзаклад</Trans>
+              <Trans>Legal entity</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./divisions">
-              <Trans>Відділення</Trans>
+              <Trans>Division</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./employees">
-              <Trans>Лікарі</Trans>
+              <Trans>Doctors</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./external-contractors">
-              <Trans>Підрядники</Trans>
+              <Trans>Contractors</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./documents">
-              <Trans>Документи</Trans>
+              <Trans>Documents</Trans>
             </Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
@@ -275,11 +275,11 @@ const GeneralInfo = ({
   <Box p={5}>
     <DefinitionListView
       labels={{
-        nhsSignerName: <Trans>Ім'я підписанта</Trans>,
-        nhsSignerBase: <Trans>Підстава</Trans>,
-        nhsContractPrice: <Trans>Ціна договору</Trans>,
-        nhsPaymentMethod: <Trans>Спосіб оплати</Trans>,
-        issueCity: <Trans>Місто укладення договору</Trans>
+        nhsSignerName: <Trans>Signer name</Trans>,
+        nhsSignerBase: <Trans>Signer base</Trans>,
+        nhsContractPrice: <Trans>Contract Price</Trans>,
+        nhsPaymentMethod: <Trans>Payment method</Trans>,
+        issueCity: <Trans>The city of the conclusion of the contract</Trans>
       }}
       data={{
         nhsSignerName: nhsSigner ? getFullName(nhsSigner.party) : null,
@@ -297,8 +297,8 @@ const GeneralInfo = ({
     {nhsSigner && <Line />}
     <DefinitionListView
       labels={{
-        startDate: <Trans>Початкова дата дії контракту</Trans>,
-        endDate: <Trans>Кінцева дата дії контракту</Trans>
+        startDate: <Trans>Initial date of the contract</Trans>,
+        endDate: <Trans>Expiry date of the contract</Trans>
       }}
       data={{
         ...dates
@@ -308,7 +308,7 @@ const GeneralInfo = ({
     <DefinitionListView
       labels={{
         contractorRmspAmount: (
-          <Trans>Кількість осіб, що обслуговуються медзакладом</Trans>
+          <Trans>Number of persons served by legal entity</Trans>
         )
       }}
       data={{
@@ -323,7 +323,7 @@ const GeneralInfo = ({
     {statusReason && <Line />}
     <DefinitionListView
       labels={{
-        statusReason: <Trans>Коментар до статусу</Trans>
+        statusReason: <Trans>Status Comment</Trans>
       }}
       data={{
         statusReason
@@ -347,9 +347,9 @@ const LegalEntity = ({
   <Box p={5}>
     <DefinitionListView
       labels={{
-        edrpou: <Trans>ЄДРПОУ</Trans>,
-        name: <Trans>Назва</Trans>,
-        addresses: <Trans>Адреса</Trans>
+        edrpou: <Trans>EDRPOU</Trans>,
+        name: <Trans>Name</Trans>,
+        addresses: <Trans>Address</Trans>
       }}
       data={{
         name: name,
@@ -362,7 +362,7 @@ const LegalEntity = ({
     <DefinitionListView
       color="blueberrySoda"
       labels={{
-        legalEntityId: <Trans>ID медзакладу</Trans>
+        legalEntityId: <Trans>Legal entity ID</Trans>
       }}
       data={{
         legalEntityId: (
@@ -375,8 +375,8 @@ const LegalEntity = ({
     <Line />
     <DefinitionListView
       labels={{
-        fullName: <Trans>ПІБ підписанта</Trans>,
-        contractorBase: <Trans>Діє на основі</Trans>
+        fullName: <Trans>Subscriber Name</Trans>,
+        contractorBase: <Trans>Based on</Trans>
       }}
       data={{
         fullName: contractorOwner && getFullName(contractorOwner.party),
@@ -386,7 +386,7 @@ const LegalEntity = ({
     <DefinitionListView
       color="blueberrySoda"
       labels={{
-        ownerId: <Trans>ID підписанта</Trans>
+        ownerId: <Trans>Signer ID</Trans>
       }}
       data={{
         ownerId: contractorOwner && contractorOwner.databaseId
@@ -395,9 +395,9 @@ const LegalEntity = ({
     <Line />
     <DefinitionListView
       labels={{
-        bankName: <Trans>Банк</Trans>,
-        mfo: <Trans>Код банку (МФО)</Trans>,
-        payerAccount: <Trans>Номер рахунку</Trans>
+        bankName: <Trans>Bank</Trans>,
+        mfo: <Trans>Bank Code (MFO)</Trans>,
+        payerAccount: <Trans>Account number</Trans>
       }}
       data={{
         bankName,
@@ -414,13 +414,13 @@ const Divisions = ({ contractorDivisions }) =>
     <Table
       data={contractorDivisions}
       header={{
-        name: <Trans>Назва відділення</Trans>,
-        addresses: <Trans>Адреса</Trans>,
-        mountainGroup: <Trans>Гірський регіон</Trans>,
-        workingHours: <Trans>Графік роботи</Trans>,
+        name: <Trans>Division name</Trans>,
+        addresses: <Trans>Address</Trans>,
+        mountainGroup: <Trans>Mountain region</Trans>,
+        workingHours: <Trans>Work schedule</Trans>,
         phones: (
           <>
-            <Trans>Телефон</Trans>
+            <Trans>Phone</Trans>
             <br />
             <Trans>Email</Trans>
           </>
@@ -473,11 +473,11 @@ const Employees = ({ contractorEmployeeDivisions }) =>
       data={contractorEmployeeDivisions}
       header={{
         databaseId: <Trans>ID</Trans>,
-        divisionName: <Trans>Назва відділення</Trans>,
-        employeeName: <Trans>ПІБ працівника</Trans>,
-        speciality: <Trans>Спеціальність</Trans>,
-        staffUnits: <Trans>Штатна одиниця</Trans>,
-        declarationLimit: <Trans>Ліміт кількості декларацій</Trans>
+        divisionName: <Trans>Division name</Trans>,
+        employeeName: <Trans>Name of employee</Trans>,
+        speciality: <Trans>Specialty</Trans>,
+        staffUnits: <Trans>Permanent unit</Trans>,
+        declarationLimit: <Trans>Declarations limit</Trans>
       }}
       renderRow={({
         employee: {
@@ -531,11 +531,11 @@ const ExternalContractorsTable = ({ data }) => (
   <Table
     data={data}
     header={{
-      name: <Trans>Медзаклад</Trans>,
-      divisions: <Trans>Відділення та послуги</Trans>,
-      number: <Trans>Номер договору</Trans>,
-      issuedAt: <Trans>Дата укладення</Trans>,
-      expiresAt: <Trans>Дата закінчення</Trans>
+      name: <Trans>Legal entity</Trans>,
+      divisions: <Trans>Division and Services</Trans>,
+      number: <Trans>Contract Number</Trans>,
+      issuedAt: <Trans>Contract start date</Trans>,
+      expiresAt: <Trans>Contract end date</Trans>
     }}
     tableName="/capitation-contract-requests/external-contractors"
     tableBody={({
@@ -562,8 +562,7 @@ const ExternalContractorsTable = ({ data }) => (
         divisions: (
           <Wrapper onClick={onClick}>
             <Text color="rockmanBlue" fontWeight="bold" mr={1} fontSize={0}>
-              <Trans>Показати відділення (</Trans>
-              {divisions.length})
+              <Trans>Show division</Trans>({divisions.length})
             </Text>
           </Wrapper>
         )
@@ -640,7 +639,7 @@ const ExternalContractorsTable = ({ data }) => (
 const PrintButton = ({ content }) => (
   <Wrapper color="shiningKnight" onClick={() => printIframe(content)}>
     <Text color="rockmanBlue" fontWeight="bold" mr={1} fontSize="1">
-      <Trans>Дивитись друковану форму</Trans>
+      <Trans>Show printout form</Trans>
     </Text>
     <PrinterIcon />
   </Wrapper>
@@ -700,9 +699,9 @@ const ModalSelect = ({ submitted, id }) => (
                       {!submitted && <DropDownButton color="#2EA2F8" />}
                       <ButtonText>
                         {!submitted ? (
-                          <Trans>Додати виконавця</Trans>
+                          <Trans>Add performer</Trans>
                         ) : (
-                          <Trans>Змінити</Trans>
+                          <Trans>Change</Trans>
                         )}
                       </ButtonText>
                     </ButtonWrapper>

@@ -31,10 +31,10 @@ const Approve = ({ id }) => (
     <Box pt={5} px={5}>
       <Steps.List>
         <Steps.Item to="../update">
-          <Trans>Дозаповніть поля</Trans>
+          <Trans>Fill in fields</Trans>
         </Steps.Item>
         <Steps.Item to="./">
-          <Trans>Підтвердіть з ЕЦП</Trans>
+          <Trans>Confirm with EDS</Trans>
         </Steps.Item>
       </Steps.List>
     </Box>
@@ -62,11 +62,11 @@ const Approve = ({ id }) => (
             <OpacityBox m={5}>
               <DefinitionListView
                 labels={{
-                  id: <Trans>ID заяви</Trans>,
-                  status: <Trans>Статус</Trans>,
-                  edrpou: <Trans>ЄДРПОУ</Trans>,
-                  name: <Trans>Назва</Trans>,
-                  legalEntityId: <Trans>ID медзакладу</Trans>
+                  id: <Trans>Contract request ID</Trans>,
+                  status: <Trans>Status</Trans>,
+                  edrpou: <Trans>EDRPOU</Trans>,
+                  name: <Trans>Name</Trans>,
+                  legalEntityId: <Trans>Legal entity ID</Trans>
                 }}
                 data={{
                   id: databaseId,
@@ -110,16 +110,20 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
       <Line />
       <DefinitionListView
         labels={{
-          nhsSigner: <Trans>Підписант зі сторони Замовника</Trans>,
-          nhsSignerBase: <Trans>Що діє на підставі</Trans>,
-          nhsContractPrice: <Trans>Сума контракту</Trans>,
-          nhsPaymentMethod: <Trans>Спосіб оплати</Trans>,
-          issueCity: <Trans>Місто укладення договору</Trans>,
-          miscellaneous: <Trans>Інші умови</Trans>
+          nhsSigner: <Trans>Signatory from the Customers side</Trans>,
+          nhsSignerBase: <Trans>Basis</Trans>,
+          nhsContractPrice: <Trans>Contract Amount</Trans>,
+          nhsPaymentMethod: <Trans>Payment method</Trans>,
+          issueCity: <Trans>The city of the conclusion of the contract</Trans>,
+          miscellaneous: <Trans>Miscellaneous</Trans>
         }}
         data={{
           nhsSigner: nhsSigner && getFullName(nhsSigner.party),
-          nhsContractPrice: `${nhsContractPrice} грн`,
+          nhsContractPrice: (
+            <>
+              {nhsContractPrice} <Trans>uah</Trans>
+            </>
+          ),
           nhsPaymentMethod: (
             <DictionaryValue
               name="CONTRACT_PAYMENT_METHOD"
@@ -161,7 +165,7 @@ const Sign = ({ id, data: { toApproveContent }, navigate }) => (
             <Box mr={3}>
               <Link to="../update">
                 <Button variant="blue">
-                  <Trans>Повернутися</Trans>
+                  <Trans>Return</Trans>
                 </Button>
               </Link>
             </Box>
@@ -186,7 +190,7 @@ const Sign = ({ id, data: { toApproveContent }, navigate }) => (
                     navigate("../");
                   }}
                 >
-                  <Trans>Затвердити, наклавши ЕЦП</Trans>
+                  <Trans>Approve by EDS</Trans>
                 </Button>
               )}
               content={toApproveContent.text}

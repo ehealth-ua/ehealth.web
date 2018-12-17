@@ -134,15 +134,17 @@ const ReimbursementContractsSearch = () => (
                           data={contracts}
                           header={{
                             databaseId: <Trans>ID</Trans>,
-                            edrpou: <Trans>ЄДРПОУ</Trans>,
-                            contractNumber: <Trans>Номер договору</Trans>,
-                            startDate: <Trans>Договір діє з</Trans>,
-                            endDate: <Trans>Договір діє по</Trans>,
-                            medicalProgram: <Trans>Медична програма</Trans>,
-                            isSuspended: <Trans>Стан договору</Trans>,
-                            insertedAt: <Trans>Додано</Trans>,
-                            status: <Trans>Статус</Trans>,
-                            details: <Trans>Деталі</Trans>
+                            edrpou: <Trans>EDRPOU</Trans>,
+                            contractNumber: <Trans>Contract Number</Trans>,
+                            startDate: (
+                              <Trans>The contract is valid with</Trans>
+                            ),
+                            endDate: <Trans>The contract is valid for</Trans>,
+                            medicalProgram: <Trans>Medical program</Trans>,
+                            isSuspended: <Trans>Contract state</Trans>,
+                            insertedAt: <Trans>Added</Trans>,
+                            status: <Trans>Status</Trans>,
+                            details: <Trans>Details</Trans>
                           }}
                           renderRow={({
                             id,
@@ -166,7 +168,18 @@ const ReimbursementContractsSearch = () => (
                                 )}
                               </Flex>
                             ),
-                            insertedAt: <DateFormat value={insertedAt} />,
+                            insertedAt: (
+                              <DateFormat
+                                value={insertedAt}
+                                format={{
+                                  year: "numeric",
+                                  month: "numeric",
+                                  day: "numeric",
+                                  hour: "numeric",
+                                  minute: "numeric"
+                                }}
+                              />
+                            ),
                             status: (
                               <Badge
                                 type="CONTRACT"
@@ -176,7 +189,7 @@ const ReimbursementContractsSearch = () => (
                             ),
                             details: (
                               <Link to={`./${id}`} fontWeight="bold">
-                                <Trans>Показати деталі</Trans>
+                                <Trans>Show details</Trans>
                               </Link>
                             )
                           })}
@@ -228,12 +241,12 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
         <Trans
-          id="ЄДРПОУ або Номер договору"
-          render={({ translate }) => (
+          id="EDRPOU or Contract number"
+          render={({ translation }) => (
             <Field.Text
               name="filter.searchRequest"
-              label={<Trans>Пошук договору</Trans>}
-              placeholder={translate}
+              label={<Trans>Search contract</Trans>}
+              placeholder={translation}
               postfix={<AdminSearchIcon color="#CED0DA" />}
             />
           )}
@@ -241,7 +254,7 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.searchRequest"
           options={SEARCH_CONTRACT_PATTERN}
-          message={<Trans>Невірний номер</Trans>}
+          message={<Trans>Invalid number</Trans>}
         />
       </Box>
     </Flex>
@@ -272,7 +285,7 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
               >
                 <FilterIcon />
                 <TextNoWrap>
-                  <Trans>Показати всі фільтри</Trans>
+                  <Trans>Show all filters</Trans>
                 </TextNoWrap>
               </Flex>
             </Button>
@@ -288,15 +301,15 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
       <Box px={1} width={1 / 6}>
         <Trans
           id="All statuses"
-          render={({ translate }) => (
+          render={({ translation }) => (
             <Field.Select
               name="filter.status"
-              label={<Trans>Статус договору</Trans>}
-              placeholder={translate}
-              items={[{ value: translate }, ...contractStatuses]}
+              label={<Trans>Contract status</Trans>}
+              placeholder={translation}
+              items={[{ value: translation }, ...contractStatuses]}
               renderItem={item => item.value}
               itemToString={item => {
-                if (!item) return translate;
+                if (!item) return translation;
                 return typeof item === "string" ? item : item.value;
               }}
               type="select"
@@ -309,12 +322,12 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
         <Box mr={1}>
           <Field.RangePicker
             rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
-            label={<Trans>Початок дії договору</Trans>}
+            label={<Trans>Contract start date</Trans>}
           />
         </Box>
         <Field.RangePicker
           rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
-          label={<Trans>Кінець дії договору</Trans>}
+          label={<Trans>Contract end date</Trans>}
         />
       </Flex>
     </Flex>
@@ -322,7 +335,7 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
         <Button variant="blue">
-          <Trans>Шукати</Trans>
+          <Trans>Search</Trans>
         </Button>
       </Box>
       <Box px={1}>
@@ -339,7 +352,7 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
             });
           }}
         >
-          <Trans>Скинути пошук</Trans>
+          <Trans>Reset</Trans>
         </IconButton>
       </Box>
     </Flex>
@@ -407,7 +420,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
       <Flex justifyContent="center" alignItems="center" color="bluePastel">
         <FilterIcon />
         <TextNoWrap>
-          <Trans>Сховати фільтри</Trans>
+          <Trans>Hide filters</Trans>
         </TextNoWrap>
       </Flex>
     </Button>
@@ -423,15 +436,15 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
         <Box px={1} width={1 / 4}>
           <Trans
             id="All statuses"
-            render={({ translate }) => (
+            render={({ translation }) => (
               <Field.Select
                 name="filter.status"
-                label={<Trans>Статус договору</Trans>}
-                placeholder={translate}
-                items={[{ value: translate }, ...contractStatuses]}
+                label={<Trans>Contract status</Trans>}
+                placeholder={translation}
+                items={[{ value: translation }, ...contractStatuses]}
                 renderItem={item => item.value}
                 itemToString={item => {
-                  if (!item) return translate;
+                  if (!item) return translation;
                   return typeof item === "string" ? item : item.value;
                 }}
                 type="select"
@@ -444,12 +457,12 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
           <Box mr={1}>
             <Field.RangePicker
               rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
-              label={<Trans>Початок дії договору</Trans>}
+              label={<Trans>Contract start date</Trans>}
             />
           </Box>
           <Field.RangePicker
             rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
-            label={<Trans>Кінець дії договору</Trans>}
+            label={<Trans>Contract end date</Trans>}
           />
         </Flex>
       </Flex>
@@ -457,7 +470,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
         <Box width={2 / 5} px={1} mr={1}>
           <Field.Select
             name="filter.isSuspended"
-            label={<Trans>Стан договору</Trans>}
+            label={<Trans>Contract state</Trans>}
             items={["", "true", "false"]}
             renderItem={item => renderIsSuspendedItem(item)}
             itemToString={item => renderIsSuspendedItem(item)}
@@ -483,7 +496,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
               return (
                 <Field.Select
                   name="filter.medicalProgram.name"
-                  label={<Trans>Медична програма</Trans>}
+                  label={<Trans>Medical program</Trans>}
                   items={
                     loading || error
                       ? []
@@ -513,12 +526,12 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
       <Flex mx={-1} mt={4} justifyContent="flex-start">
         <Box px={1}>
           <Button variant="red" onClick={toggle}>
-            <Trans>Закрити</Trans>
+            <Trans>Close</Trans>
           </Button>
         </Box>
         <Box px={1}>
           <Button variant="blue">
-            <Trans>Шукати</Trans>
+            <Trans>Search</Trans>
           </Button>
         </Box>
         <Box px={1}>
@@ -535,7 +548,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
               });
             }}
           >
-            <Trans>Скинути пошук</Trans>
+            <Trans>Reset</Trans>
           </IconButton>
         </Box>
       </Flex>
@@ -553,13 +566,7 @@ const TextNoWrap = system(
 
 // TODO: remove this after select refactoring
 const renderIsSuspendedItem = item =>
-  item === "" ? (
-    <Trans>всі договори</Trans>
-  ) : item === "true" ? (
-    <Trans>призупинений</Trans>
-  ) : (
-    <Trans>діючий</Trans>
-  );
+  item === "" ? "всі договори" : item === "true" ? "призупинений" : "діючий";
 
 const convertIsSuspendedItem = item => {
   try {

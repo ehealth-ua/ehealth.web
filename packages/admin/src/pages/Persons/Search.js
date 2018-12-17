@@ -29,14 +29,14 @@ const PHONE_PATTERN = "^\\+380\\d{9}$";
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={1}>
-      <Trans>Пошук пацієнтів</Trans>
+      <Trans>Patient Search</Trans>
     </Heading>
     <Tabs.Nav>
       <Tabs.Link to="./by-person-data">
-        <Trans>За даними</Trans>
+        <Trans>According to</Trans>
       </Tabs.Link>
       <Tabs.Link to="./by-declaration">
-        <Trans>За номером декларації</Trans>
+        <Trans>By declaration number</Trans>
       </Tabs.Link>
     </Tabs.Nav>
     <LocationParams>
@@ -69,15 +69,15 @@ const Search = ({ uri }) => (
                     <Table
                       data={persons}
                       header={{
-                        fullName: <Trans>ПІБ пацієнта</Trans>,
-                        birthDate: <Trans>Дата народження</Trans>,
-                        taxId: <Trans>ІПН</Trans>,
-                        unzr: <Trans>ID Запису в ЄДДР</Trans>,
+                        fullName: <Trans>Patient Name</Trans>,
+                        birthDate: <Trans>Date of birth</Trans>,
+                        taxId: <Trans>INN</Trans>,
+                        unzr: <Trans>Record ID in EDDR</Trans>,
                         authenticationMethods: (
-                          <Trans>Метод аутентифікації</Trans>
+                          <Trans>Authentication method</Trans>
                         ),
-                        insertedAt: <Trans>Додано</Trans>,
-                        action: <Trans>Дія</Trans>
+                        insertedAt: <Trans>Added</Trans>,
+                        action: <Trans>Action</Trans>
                       }}
                       renderRow={({
                         id,
@@ -108,7 +108,7 @@ const Search = ({ uri }) => (
                         ),
                         action: (
                           <Link to={`../${id}`} fontWeight="bold">
-                            <Trans>Показати деталі</Trans>
+                            <Trans>Show details</Trans>
                           </Link>
                         )
                       })}
@@ -144,73 +144,68 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 3}>
         <Trans
-          id="Введіть прізвище"
-          render={({ translate }) => (
+          id="Enter first name"
+          render={({ translation }) => (
             <Field.Text
               name="filter.personal.firstName"
-              label={<Trans>Прізвище</Trans>}
-              placeholder={translate}
+              label={<Trans>First Name</Trans>}
+              placeholder={translation}
             />
           )}
         />
         <Validation
           field="filter.personal.firstName"
           validate={validateRequiredObjectField("filter.personal")}
-          message={<Trans>Обовʼязкове поле</Trans>}
+          message={<Trans>Required field</Trans>}
         />
       </Box>
       <Box px={1} width={1 / 3}>
         <Trans
-          id="Введіть ім’я"
-          render={({ translate }) => (
+          id="Enter name"
+          render={({ translation }) => (
             <Field.Text
               name="filter.personal.lastName"
-              label={<Trans>Ім’я</Trans>}
-              placeholder={translate}
+              label={<Trans>Last Name</Trans>}
+              placeholder={translation}
             />
           )}
         />
         <Validation
           field="filter.personal.lastName"
           validate={validateRequiredObjectField("filter.personal")}
-          message={<Trans>Обовʼязкове поле</Trans>}
+          message={<Trans>Required field</Trans>}
         />
       </Box>
       <Box px={1} width={1 / 6}>
         <Field.DatePicker
           name="filter.personal.birthDate"
-          label={<Trans>Дата народження</Trans>}
+          label={<Trans>Date of birth</Trans>}
         />
         <Validation
           field="filter.personal.birthDate"
           validate={validateRequiredObjectField("filter.personal")}
-          message={<Trans>Обовʼязкове поле</Trans>}
+          message={<Trans>Required field</Trans>}
         />
       </Box>
     </Flex>
     <Details summary="розширений пошук">
       <Box fontSize={0} pb={2}>
-        <Trans>Для пошуку, заповніть будь-яке з наведених полів</Trans>
+        <Trans>To search, fill out any of the following fields</Trans>
       </Box>
       <Flex mx={-1}>
         <Box px={1} width={1 / 3} borderLeft="1">
-          <Trans
-            id="19650930-65465"
-            render={({ translate }) => (
-              <Field.Text
-                name="filter.unzr"
-                label={<Trans>ID Запису в ЄДДР</Trans>}
-                placeholder={translate}
-                format={formatUnzr}
-                divider
-              />
-            )}
+          <Field.Text
+            name="filter.unzr"
+            label={<Trans>Record ID in EDDR</Trans>}
+            placeholder="19650930-65465"
+            format={formatUnzr}
+            divider
           />
         </Box>
         <Box px={1} width={1 / 3} borderLeft="1">
           <Field.Text
             name="filter.taxId"
-            label={<Trans>ІНН</Trans>}
+            label={<Trans>INN</Trans>}
             placeholder={123456789}
             divider
           />
@@ -218,15 +213,15 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
         <Box px={1} width={1 / 3}>
           <Field.Text
             name="filter.phoneNumber"
-            label={<Trans>Номер телефону</Trans>}
-            placeholder={+38}
+            label={<Trans>Phone number</Trans>}
+            placeholder="+38"
             format={formatPhone}
             parse={parsePhone}
           />
           <Validation.Matches
             field="filter.phoneNumber"
             options={PHONE_PATTERN}
-            message={<Trans>Невірний номер телефону</Trans>}
+            message={<Trans>Invalid phone number</Trans>}
           />
         </Box>
       </Flex>
@@ -245,12 +240,12 @@ const SearchByDeclarationForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
         <Trans
-          id="Введіть номер декларації"
-          render={({ translate }) => (
+          id="Enter declaration number"
+          render={({ translation }) => (
             <Field.Text
               name="filter.declarationNumber"
-              label={<Trans>Пошук за номером декларації</Trans>}
-              placeholder={translate}
+              label={<Trans>Search by declaration number</Trans>}
+              placeholder={translation}
             />
           )}
         />

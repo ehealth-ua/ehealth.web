@@ -6,14 +6,14 @@ import { Trans } from "@lingui/macro";
 const ContractRequestsNav = () => (
   <>
     <Heading as="h1" fontWeight="normal" mb={6}>
-      <Trans>Перелік заяв на укладення договору</Trans>
+      <Trans>Contract request list</Trans>
     </Heading>
     <Tabs.Nav>
       <Tabs.Link to="../capitation">
-        <Trans>Медзаклади</Trans>
+        <Trans>Medical institutions</Trans>
       </Tabs.Link>
       <Tabs.Link to="../reimbursement">
-        <Trans>Аптеки</Trans>
+        <Trans>Pharmacies</Trans>
       </Tabs.Link>
     </Tabs.Nav>
   </>

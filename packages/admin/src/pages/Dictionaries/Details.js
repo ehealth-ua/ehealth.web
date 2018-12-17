@@ -52,10 +52,10 @@ const Details = ({ name }) => (
             <Box py={10}>
               <Breadcrumbs.List>
                 <Breadcrumbs.Item to="/dictionaries">
-                  <Trans>Словники</Trans>
+                  <Trans>Dictionaries</Trans>
                 </Breadcrumbs.Item>
                 <Breadcrumbs.Item>
-                  <Trans>Редагування словника</Trans>
+                  <Trans>Editing the dictionary</Trans>
                 </Breadcrumbs.Item>
               </Breadcrumbs.List>
             </Box>
@@ -78,10 +78,10 @@ const Details = ({ name }) => (
 
           <Tabs.Nav>
             <Tabs.NavItem to="./">
-              <Trans>Значення</Trans>
+              <Trans>Value</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./labels">
-              <Trans>Теги</Trans>
+              <Trans>Tags</Trans>
             </Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
@@ -127,7 +127,7 @@ const DictionaryLabels = ({ isReadOnly, labels, id, name }) => {
         <Box px={5} py={4}>
           <DefinitionListView
             labels={{
-              labels: <Trans>Теги</Trans>
+              labels: <Trans>Tags</Trans>
             }}
             data={{
               labels: (
@@ -173,7 +173,7 @@ const DictionaryLabels = ({ isReadOnly, labels, id, name }) => {
                       <Box mr={2}>
                         <PlusIcon width={16} height={16} />
                       </Box>
-                      <Trans>Додати тег</Trans>
+                      <Trans>Add tag</Trans>
                     </Flex>
                   </AddButton>
                   {opened && (
@@ -194,12 +194,12 @@ const DictionaryLabels = ({ isReadOnly, labels, id, name }) => {
                         }}
                       >
                         <Trans
-                          id="Оберіть тег зі списку"
-                          render={({ translate }) => (
+                          id="Select tag from list"
+                          render={({ translation }) => (
                             <Field.Select
                               name="addNewLabel"
-                              label={<Trans>Виберіть тег</Trans>}
-                              placeholder={translate}
+                              label={<Trans>Select a tag</Trans>}
+                              placeholder={translation}
                               items={aviableLabels}
                               renderItem={item => item}
                               hideErrors
@@ -208,7 +208,7 @@ const DictionaryLabels = ({ isReadOnly, labels, id, name }) => {
                         />
 
                         <Button variant="green" mt={4}>
-                          <Trans>Зберегти</Trans>
+                          <Trans>Save</Trans>
                         </Button>
                       </Form>
                     </Box>
@@ -254,7 +254,7 @@ class DictionaryValues extends React.Component {
         {!this.state.fieldToEdit ? (
           <>
             <Flex justifyContent="space-between" color="darkAndStormy">
-              <Trans>Пошук значення</Trans>
+              <Trans>Search for a value</Trans>
               {!isReadOnly && (
                 <AddButton
                   onClick={() =>
@@ -267,7 +267,7 @@ class DictionaryValues extends React.Component {
                     <Box mr={2}>
                       <PlusIcon width={16} height={16} />
                     </Box>
-                    <Trans>Додати значення</Trans>
+                    <Trans>Add value</Trans>
                   </Flex>
                 </AddButton>
               )}
@@ -285,12 +285,12 @@ class DictionaryValues extends React.Component {
               <Flex mx={-1} pt={5}>
                 <Box px={1} width={1 / 3}>
                   <Trans
-                    id="Виберіть ключ"
-                    render={({ translate }) => (
+                    id="Select key"
+                    render={({ translation }) => (
                       <Field.Select
                         name="filterKey"
-                        label={<Trans>Ключ</Trans>}
-                        placeholder={translate}
+                        label={<Trans>Key</Trans>}
+                        placeholder={translation}
                         items={Object.keys(values)}
                         renderItem={item => item}
                         hideErrors
@@ -300,12 +300,12 @@ class DictionaryValues extends React.Component {
                 </Box>
                 <Box px={1} width={2 / 3}>
                   <Trans
-                    id="Введіть опис"
-                    render={({ translate }) => (
+                    id="Enter description"
+                    render={({ translation }) => (
                       <Field.Select
                         name="filterDescription"
-                        label={<Trans>Опис</Trans>}
-                        placeholder={translate}
+                        label={<Trans>Description</Trans>}
+                        placeholder={translation}
                         items={Object.values(values)}
                         renderItem={item => item}
                         iconComponent={SearchIcon}
@@ -320,9 +320,9 @@ class DictionaryValues extends React.Component {
             <Table
               data={filteredValues}
               header={{
-                key: <Trans>Ключ</Trans>,
-                description: <Trans>Опис</Trans>,
-                ...(!isReadOnly && { action: "Дія" })
+                key: <Trans>Key</Trans>,
+                description: <Trans>Description</Trans>,
+                ...(!isReadOnly && { action: <Trans>Action</Trans> })
               }}
               renderRow={({ ...rowContent }) => ({
                 ...rowContent,
@@ -334,7 +334,7 @@ class DictionaryValues extends React.Component {
                       })
                     }
                   >
-                    <Trans>Редагувати</Trans>
+                    <Trans>Edit</Trans>
                   </AddButton>
                 )
               })}
@@ -407,46 +407,46 @@ class DictionaryValues extends React.Component {
                           <Flex mx={-1} key={name}>
                             <Box px={1} width={1 / 3}>
                               <Trans
-                                id="Введіть ключ"
-                                render={({ translate }) => (
+                                id="Select key"
+                                render={({ translation }) => (
                                   <Field.Text
                                     name={`${name}.key`}
                                     label={
                                       this.state.fieldToEdit.key ? (
-                                        <Trans>Ключ</Trans>
+                                        <Trans>Key</Trans>
                                       ) : (
-                                        <Trans>Змінити ключ</Trans>
+                                        <Trans>Change key</Trans>
                                       )
                                     }
-                                    placeholder={translate}
+                                    placeholder={translation}
                                   />
                                 )}
                               />
                               <Validation.Required
                                 field={`${name}.key`}
-                                message={<Trans>Обов&#700;язкове поле</Trans>}
+                                message={<Trans>Required field</Trans>}
                               />
                             </Box>
                             <Box px={1} width={1 / 3}>
                               <Trans
-                                id="Введіть опис"
-                                render={({ translate }) => (
+                                id="Enter description"
+                                render={({ translation }) => (
                                   <Field.Text
                                     name={`${name}.description`}
                                     label={
                                       this.state.fieldToEdit.key ? (
-                                        <Trans>Опис</Trans>
+                                        <Trans>Description</Trans>
                                       ) : (
-                                        <Trans>Змінити опис</Trans>
+                                        <Trans>Change description</Trans>
                                       )
                                     }
-                                    placeholder={translate}
+                                    placeholder={translation}
                                   />
                                 )}
                               />
                               <Validation.Required
                                 field={`${name}.description`}
-                                message={<Trans>Обов&#700;язкове поле</Trans>}
+                                message={<Trans>Required field</Trans>}
                               />
                             </Box>
                             {!this.state.fieldToEdit.key ? (
@@ -461,7 +461,7 @@ class DictionaryValues extends React.Component {
                                     submitMutationForm();
                                   }}
                                 >
-                                  <Trans>Видалити</Trans>
+                                  <Trans>Delete</Trans>
                                 </Button>
                               </RemovalContainer>
                             )}
@@ -477,7 +477,7 @@ class DictionaryValues extends React.Component {
                               <Box mr={2}>
                                 <PlusIcon width={16} height={16} />
                               </Box>
-                              <Trans>Додати ще</Trans>
+                              <Trans>Add another</Trans>
                             </Flex>
                           </AddButton>
                         )}
@@ -496,12 +496,12 @@ class DictionaryValues extends React.Component {
                           })
                         }
                       >
-                        <Trans>Повернутися</Trans>
+                        <Trans>Return</Trans>
                       </Button>
                     </Box>
                     <Box px={2}>
                       <Button variant="green">
-                        <Trans>Зберегти та повернутися</Trans>
+                        <Trans>Save and Return</Trans>
                       </Button>
                     </Box>
                   </Flex>

@@ -23,7 +23,7 @@ const DictionariesQuery = loader(
 const Search = () => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
-      <Trans>Словники</Trans>
+      <Trans>Dictionaries</Trans>
     </Heading>
 
     <LocationParams>
@@ -66,9 +66,9 @@ const Search = () => (
                         <Table
                           data={dictionaries}
                           header={{
-                            name: <Trans>Назва словника</Trans>,
-                            labels: <Trans>Теги</Trans>,
-                            action: <Trans>Дія</Trans>
+                            name: <Trans>Dictionary name</Trans>,
+                            labels: <Trans>Tags</Trans>,
+                            action: <Trans>Action</Trans>
                           }}
                           renderRow={({ labels = [], ...dictionary }) => ({
                             ...dictionary,
@@ -78,7 +78,7 @@ const Search = () => (
                                 to={`../${encodeURIComponent(dictionary.name)}`}
                                 fontWeight="bold"
                               >
-                                <Trans>Переглянути</Trans>
+                                <Trans>View</Trans>
                               </Link>
                             )
                           })}
@@ -116,12 +116,12 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
     <Flex mx={-1}>
       <Box px={1} width={2 / 4}>
         <Trans
-          id="Назва словника"
-          render={({ translate }) => (
+          id="Dictionary name"
+          render={({ translation }) => (
             <Field.Text
               name="filter.name"
-              label={<Trans>Знайти словник</Trans>}
-              placeholder={translate}
+              label={<Trans>Find dictionary</Trans>}
+              placeholder={translation}
               autoComplete="off"
             />
           )}
@@ -130,12 +130,12 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
 
       <Box px={1} width={2 / 4}>
         <Trans
-          id="Тег"
-          render={({ translate }) => (
+          id="Tag"
+          render={({ translation }) => (
             <Field.Text
               name="filter.label"
-              label={<Trans>Фільтрувати за тегом</Trans>}
-              placeholder={translate}
+              label={<Trans>Filter by Tag</Trans>}
+              placeholder={translation}
               autocomplete="off"
             />
           )}
@@ -158,7 +158,7 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
             });
           }}
         >
-          <Trans>Скинути пошук</Trans>
+          <Trans>Reset</Trans>
         </IconButton>
       </Box>
     </Flex>
