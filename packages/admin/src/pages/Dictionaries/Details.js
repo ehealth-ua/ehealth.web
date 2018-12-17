@@ -471,9 +471,7 @@ class DictionaryValues extends React.Component {
                                     <Button
                                       variant="red"
                                       disabled={arrayOfValues.length === 1}
-                                      onClick={() => {
-                                        submitMutationForm();
-                                      }}
+                                      onClick={submitMutationForm}
                                     >
                                       <Trans>Delete</Trans>
                                     </Button>

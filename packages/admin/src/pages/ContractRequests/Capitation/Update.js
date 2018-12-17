@@ -185,14 +185,10 @@ const UpdateContractRequest = ({
                   }}
                   initialValues={{
                     ...initialValues,
-                    nhsSignerBase: nhsSignerBase || (
-                      <Trans>
-                        Regulations on the National Health Service of Ukraine,
-                        approved by the Resolution of the Cabinet of Ministers
-                        of Ukraine dated December 27, 2017 No. 1101
-                      </Trans>
-                    ),
-                    issueCity: issueCity || <Trans>Kyiv</Trans>,
+                    nhsSignerBase:
+                      nhsSignerBase ||
+                      "Положення про Національну службу здоров'я України, затвердженого постановою Кабінету Міністрів України від 27 грудня 2017 року № 1101",
+                    issueCity: issueCity || "Київ",
                     nhsContractPrice: nhsContractPrice || 0
                   }}
                 >
