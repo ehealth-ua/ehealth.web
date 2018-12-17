@@ -11,6 +11,7 @@ import { Trans } from "@lingui/macro";
 import { Form, Validation } from "@ehealth/components";
 import {
   PositiveIcon,
+  NegativeIcon,
   DropDownButton as PlusIcon,
   RemoveItemIcon
 } from "@ehealth/icons";
@@ -68,7 +69,7 @@ const Details = ({ name }) => (
                   }}
                   data={{
                     name,
-                    status: isActive && <PositiveIcon />
+                    status: isActive ? <PositiveIcon /> : <NegativeIcon />
                   }}
                   labelWidth="100px"
                 />
@@ -108,34 +109,30 @@ const Details = ({ name }) => (
   </Query>
 );
 
-const DictionaryLabels = ({ isReadOnly, labels, id, name }) => {
-  //Hard-coded data is a temporary but necessary solution
-  const listOfLabels = ["SYSTEM", "EXTERNAL", "ADMIN", "TRANSLATIONS"];
-  const aviableLabels = listOfLabels.filter(item => !labels.includes(item));
-
-  return (
-    <Mutation
-      mutation={UpdateDictionaryMutation}
-      refetchQueries={() => [
-        {
-          query: DictionariesQuery,
-          variables: { first: 1, filter: { name } }
-        }
-      ]}
-    >
-      {updateDictionary => (
-        <Box px={5} py={4}>
-          <DefinitionListView
-            labels={{
-              labels: <Trans>Tags</Trans>
-            }}
-            data={{
-              labels: (
-                <Flex>
-                  {labels.map(label => (
-                    <SelectedItem key={label} mx={1}>
-                      {label}
-                      {!isReadOnly && (
+const DictionaryLabels = ({ isReadOnly, labels, id, name }) => (
+  <Mutation
+    mutation={UpdateDictionaryMutation}
+    refetchQueries={() => [
+      {
+        query: DictionariesQuery,
+        variables: { first: 1, filter: { name } }
+      }
+    ]}
+  >
+    {updateDictionary => (
+      <Box px={5} py={4}>
+        <DefinitionListView
+          labels={{
+            labels: <Trans>Tags</Trans>
+          }}
+          data={{
+            labels: (
+              <Flex>
+                {labels.map(label => (
+                  <SelectedItem key={label} mx={1}>
+                    {label}
+                    {!isReadOnly &&
+                      labels.length > 1 && (
                         <RemoveItem
                           onClick={() => {
                             const updatedLabelsList = labels.filter(
@@ -155,73 +152,96 @@ const DictionaryLabels = ({ isReadOnly, labels, id, name }) => {
                           <RemoveItemIcon />
                         </RemoveItem>
                       )}
-                    </SelectedItem>
-                  ))}
-                </Flex>
-              )
-            }}
-            labelWidth="100px"
-            alignItems="center"
-          />
+                  </SelectedItem>
+                ))}
+              </Flex>
+            )
+          }}
+          labelWidth="100px"
+          alignItems="center"
+        />
 
-          {!isReadOnly && (
-            <BooleanValue>
-              {({ value: opened, toggle }) => (
-                <>
-                  <AddButton onClick={toggle}>
-                    <Flex>
-                      <Box mr={2}>
-                        <PlusIcon width={16} height={16} />
-                      </Box>
-                      <Trans>Add tag</Trans>
-                    </Flex>
-                  </AddButton>
-                  {opened && (
-                    <Box mt={2} width={1 / 3}>
-                      <Form
-                        onSubmit={({ addNewLabel }) => {
-                          addNewLabel &&
-                            updateDictionary({
-                              variables: {
-                                input: {
-                                  id,
-                                  labels: [...labels, addNewLabel]
-                                }
-                              }
-                            });
-
-                          toggle();
-                        }}
-                      >
-                        <Trans
-                          id="Select tag from list"
-                          render={({ translation }) => (
-                            <Field.Select
-                              name="addNewLabel"
-                              label={<Trans>Select a tag</Trans>}
-                              placeholder={translation}
-                              items={aviableLabels}
-                              renderItem={item => item}
-                              hideErrors
-                            />
-                          )}
-                        />
-
-                        <Button variant="green" mt={4}>
-                          <Trans>Save</Trans>
-                        </Button>
-                      </Form>
+        {!isReadOnly && (
+          <BooleanValue>
+            {({ value: opened, toggle }) => (
+              <>
+                <AddButton onClick={toggle}>
+                  <Flex>
+                    <Box mr={2}>
+                      <PlusIcon width={16} height={16} />
                     </Box>
-                  )}
-                </>
-              )}
-            </BooleanValue>
-          )}
-        </Box>
-      )}
-    </Mutation>
-  );
-};
+                    <Trans>Add tag</Trans>
+                  </Flex>
+                </AddButton>
+                {opened && (
+                  <Box mt={2} width={1 / 3}>
+                    <Form
+                      onSubmit={({ addNewLabel }) => {
+                        addNewLabel &&
+                          updateDictionary({
+                            variables: {
+                              input: {
+                                id,
+                                labels: [...labels, addNewLabel]
+                              }
+                            }
+                          });
+
+                        toggle();
+                      }}
+                    >
+                      {
+                        <Query
+                          query={DictionariesQuery}
+                          variables={{
+                            first: 1,
+                            filter: { name: "DICTIONARY_LABELS" }
+                          }}
+                        >
+                          {({ loading, error, data }) => {
+                            if (loading || error) return null;
+
+                            const listOfLabels = !isEmpty(
+                              data.dictionaries.nodes
+                            )
+                              ? Object.keys(data.dictionaries.nodes[0].values)
+                              : [];
+                            const aviableLabels = listOfLabels.filter(
+                              item => !labels.includes(item)
+                            );
+
+                            return (
+                              <Trans
+                                id="Select tag from list"
+                                render={({ translation }) => (
+                                  <Field.Select
+                                    name="addNewLabel"
+                                    label={<Trans>Select a tag</Trans>}
+                                    placeholder={translation}
+                                    items={aviableLabels}
+                                    renderItem={item => item}
+                                    hideErrors
+                                  />
+                                )}
+                              />
+                            );
+                          }}
+                        </Query>
+                      }
+                      <Button variant="green" mt={4}>
+                        <Trans>Save</Trans>
+                      </Button>
+                    </Form>
+                  </Box>
+                )}
+              </>
+            )}
+          </BooleanValue>
+        )}
+      </Box>
+    )}
+  </Mutation>
+);
 
 class DictionaryValues extends React.Component {
   state = {
@@ -400,90 +420,86 @@ class DictionaryValues extends React.Component {
                       : [{ key: "", description: "" }]
                   }}
                 >
-                  <FieldArray name="mutationValue">
-                    {({ fields }) => (
-                      <>
-                        {fields.map((name, index) => (
-                          <Flex mx={-1} key={name}>
-                            <Box px={1} width={1 / 3}>
-                              <Trans
-                                id="Select key"
-                                render={({ translation }) => (
+                  <Trans
+                    id="Enter value"
+                    render={({ translation }) => (
+                      <FieldArray name="mutationValue">
+                        {({ fields }) => (
+                          <>
+                            {fields.map((name, index) => (
+                              <Flex mx={-1} key={name}>
+                                <Box px={1} width={1 / 3}>
                                   <Field.Text
                                     name={`${name}.key`}
                                     label={
                                       this.state.fieldToEdit.key ? (
-                                        <Trans>Key</Trans>
-                                      ) : (
                                         <Trans>Change key</Trans>
+                                      ) : (
+                                        <Trans>Key</Trans>
                                       )
                                     }
                                     placeholder={translation}
                                   />
-                                )}
-                              />
-                              <Validation.Required
-                                field={`${name}.key`}
-                                message={<Trans>Required field</Trans>}
-                              />
-                            </Box>
-                            <Box px={1} width={1 / 3}>
-                              <Trans
-                                id="Enter description"
-                                render={({ translation }) => (
+                                  <Validation.Required
+                                    field={`${name}.key`}
+                                    message={<Trans>Required field</Trans>}
+                                  />
+                                </Box>
+                                <Box px={1} width={1 / 3}>
                                   <Field.Text
                                     name={`${name}.description`}
                                     label={
                                       this.state.fieldToEdit.key ? (
-                                        <Trans>Description</Trans>
-                                      ) : (
                                         <Trans>Change description</Trans>
+                                      ) : (
+                                        <Trans>Description</Trans>
                                       )
                                     }
                                     placeholder={translation}
                                   />
+                                  <Validation.Required
+                                    field={`${name}.description`}
+                                    message={<Trans>Required field</Trans>}
+                                  />
+                                </Box>
+                                {!this.state.fieldToEdit.key ? (
+                                  <RemoveButtom
+                                    onClick={() => fields.remove(index)}
+                                  />
+                                ) : (
+                                  <RemovalContainer>
+                                    <Button
+                                      variant="red"
+                                      disabled={arrayOfValues.length === 1}
+                                      onClick={() => {
+                                        submitMutationForm();
+                                      }}
+                                    >
+                                      <Trans>Delete</Trans>
+                                    </Button>
+                                  </RemovalContainer>
                                 )}
-                              />
-                              <Validation.Required
-                                field={`${name}.description`}
-                                message={<Trans>Required field</Trans>}
-                              />
-                            </Box>
-                            {!this.state.fieldToEdit.key ? (
-                              <RemoveButtom
-                                onClick={() => fields.remove(index)}
-                              />
-                            ) : (
-                              <RemovalContainer>
-                                <Button
-                                  variant="red"
-                                  onClick={() => {
-                                    submitMutationForm();
-                                  }}
-                                >
-                                  <Trans>Delete</Trans>
-                                </Button>
-                              </RemovalContainer>
+                              </Flex>
+                            ))}
+                            {!this.state.fieldToEdit.key && (
+                              <AddButton
+                                onClick={() =>
+                                  fields.push({ key: "", description: "" })
+                                }
+                              >
+                                <Flex>
+                                  <Box mr={2}>
+                                    <PlusIcon width={16} height={16} />
+                                  </Box>
+                                  <Trans>Add another</Trans>
+                                </Flex>
+                              </AddButton>
                             )}
-                          </Flex>
-                        ))}
-                        {!this.state.fieldToEdit.key && (
-                          <AddButton
-                            onClick={() =>
-                              fields.push({ key: "", description: "" })
-                            }
-                          >
-                            <Flex>
-                              <Box mr={2}>
-                                <PlusIcon width={16} height={16} />
-                              </Box>
-                              <Trans>Add another</Trans>
-                            </Flex>
-                          </AddButton>
+                          </>
                         )}
-                      </>
+                      </FieldArray>
                     )}
-                  </FieldArray>
+                  />
                   <Flex mx={-2} pt={5}>
                     <Box px={2}>
                       <Button

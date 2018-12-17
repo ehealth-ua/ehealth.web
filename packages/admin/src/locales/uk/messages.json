@@ -24,7 +24,7 @@
     "translation": "Дія",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 597],
-      ["src/pages/Dictionaries/Details.js", 325],
+      ["src/pages/Dictionaries/Details.js", 345],
       ["src/pages/Dictionaries/Search.js", 71],
       ["src/pages/LegalEntities/Search.js", 120],
       ["src/pages/Persons/Details.js", 289],
@@ -33,7 +33,7 @@
   },
   "Add another": {
     "translation": "Додати ще",
-    "origin": [["src/pages/Dictionaries/Details.js", 480]]
+    "origin": [["src/pages/Dictionaries/Details.js", 494]]
   },
   "Add performer": {
     "translation": "Додати виконавця",
@@ -48,11 +48,11 @@
   },
   "Add tag": {
     "translation": "Додати тег",
-    "origin": [["src/pages/Dictionaries/Details.js", 176]]
+    "origin": [["src/pages/Dictionaries/Details.js", 173]]
   },
   "Add value": {
     "translation": "Додати значення",
-    "origin": [["src/pages/Dictionaries/Details.js", 270]]
+    "origin": [["src/pages/Dictionaries/Details.js", 290]]
   },
   "Added": {
     "translation": "Додано",
@@ -252,11 +252,11 @@
   },
   "Change description": {
     "translation": "Змінити опис",
-    "origin": [["src/pages/Dictionaries/Details.js", 440]]
+    "origin": [["src/pages/Dictionaries/Details.js", 453]]
   },
   "Change key": {
     "translation": "Змінити ключ",
-    "origin": [["src/pages/Dictionaries/Details.js", 418]]
+    "origin": [["src/pages/Dictionaries/Details.js", 436]]
   },
   "Choose assignee": {
     "translation": "Оберіть виконавця",
@@ -553,16 +553,16 @@
   "Delete": {
     "translation": "Видалити",
     "origin": [
-      ["src/pages/Dictionaries/Details.js", 464],
+      ["src/pages/Dictionaries/Details.js", 478],
       ["src/pages/LegalEntities/Details.js", 581]
     ]
   },
   "Description": {
     "translation": "Опис",
     "origin": [
-      ["src/pages/Dictionaries/Details.js", 307],
-      ["src/pages/Dictionaries/Details.js", 324],
-      ["src/pages/Dictionaries/Details.js", 438]
+      ["src/pages/Dictionaries/Details.js", 327],
+      ["src/pages/Dictionaries/Details.js", 344],
+      ["src/pages/Dictionaries/Details.js", 455]
     ]
   },
   "Details": {
@@ -590,7 +590,7 @@
     "origin": [
       ["src/components/Nav.js", 85],
       ["src/components/Nav.js", 228],
-      ["src/pages/Dictionaries/Details.js", 55],
+      ["src/pages/Dictionaries/Details.js", 56],
       ["src/pages/Dictionaries/Search.js", 26]
     ]
   },
@@ -694,7 +694,7 @@
   },
   "Edit": {
     "translation": "Редагувати",
-    "origin": [["src/pages/Dictionaries/Details.js", 337]]
+    "origin": [["src/pages/Dictionaries/Details.js", 357]]
   },
   "Edit comment": {
     "translation": "Редагувати коментар",
@@ -705,7 +705,7 @@
   },
   "Editing the dictionary": {
     "translation": "Редагування словника",
-    "origin": [["src/pages/Dictionaries/Details.js", 58]]
+    "origin": [["src/pages/Dictionaries/Details.js", 59]]
   },
   "Email": {
     "translation": "Email",
@@ -759,10 +759,7 @@
   },
   "Enter description": {
     "translation": "Введіть опис",
-    "origin": [
-      ["src/pages/Dictionaries/Details.js", 302],
-      ["src/pages/Dictionaries/Details.js", 431]
-    ]
+    "origin": [["src/pages/Dictionaries/Details.js", 322]]
   },
   "Enter division name": {
     "translation": "Введіть назву відділення",
@@ -806,6 +803,10 @@
     "translation": "Вкажіть причину розірвання декларації",
     "origin": [["src/pages/Declarations/Details.js", 124]]
   },
+  "Enter value": {
+    "translation": "Введіть значення",
+    "origin": [["src/pages/Dictionaries/Details.js", 423]]
+  },
   "Example: Order of the Cabinet of Ministers of Ukraine # 73465 ": {
     "translation": "Приклад: Наказ КМУ № 73465",
     "origin": [["src/pages/LegalEntities/Add.js", 209]]
@@ -835,7 +836,7 @@
   },
   "Filter by Tag": {
     "translation": "Фільтрувати за тегом",
-    "origin": [["src/pages/Dictionaries/Search.js", 137]]
+    "origin": [["src/pages/Dictionaries/Search.js", 152]]
   },
   "Find Legal entity": {
     "translation": "Знайдіть медзаклад",
@@ -1000,9 +1001,9 @@
   "Key": {
     "translation": "Ключ",
     "origin": [
-      ["src/pages/Dictionaries/Details.js", 292],
-      ["src/pages/Dictionaries/Details.js", 323],
-      ["src/pages/Dictionaries/Details.js", 416]
+      ["src/pages/Dictionaries/Details.js", 312],
+      ["src/pages/Dictionaries/Details.js", 343],
+      ["src/pages/Dictionaries/Details.js", 438]
     ]
   },
   "Kyiv": {
@@ -1508,7 +1509,7 @@
     "origin": [["src/components/Nav.js", 62]]
   },
   "Required field": {
-    "translation": "Обов&#700;язкове поле",
+    "translation": "Обов'язкове поле",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Decline.js", 147],
       ["src/pages/ContractRequests/Capitation/Update.js", 231],
@@ -1523,8 +1524,8 @@
       ["src/pages/ContractRequests/Reimbursement/Update.js", 292],
       ["src/pages/Contracts/Capitation/Details.js", 407],
       ["src/pages/Contracts/Reimbursement/Details.js", 345],
-      ["src/pages/Dictionaries/Details.js", 427],
-      ["src/pages/Dictionaries/Details.js", 449],
+      ["src/pages/Dictionaries/Details.js", 445],
+      ["src/pages/Dictionaries/Details.js", 462],
       ["src/pages/LegalEntities/Add.js", 222],
       ["src/pages/Persons/Search.js", 159],
       ["src/pages/Persons/Search.js", 176],
@@ -1541,7 +1542,7 @@
       ["src/pages/Contracts/Capitation/Search.js", 527],
       ["src/pages/Contracts/Reimbursement/Search.js", 355],
       ["src/pages/Contracts/Reimbursement/Search.js", 551],
-      ["src/pages/Dictionaries/Search.js", 161],
+      ["src/pages/Dictionaries/Search.js", 181],
       ["src/pages/LegalEntities/Search.js", 370]
     ]
   },
@@ -1572,7 +1573,7 @@
       ["src/pages/Declarations/Details.js", 137],
       ["src/pages/Declarations/Details.js", 164],
       ["src/pages/Declarations/Details.js", 197],
-      ["src/pages/Dictionaries/Details.js", 499],
+      ["src/pages/Dictionaries/Details.js", 515],
       ["src/pages/LegalEntities/Add.js", 144],
       ["src/pages/LegalEntities/Add.js", 234],
       ["src/pages/LegalEntities/Add.js", 334],
@@ -1582,11 +1583,11 @@
   },
   "Save": {
     "translation": "Зберегти",
-    "origin": [["src/pages/Dictionaries/Details.js", 211]]
+    "origin": [["src/pages/Dictionaries/Details.js", 232]]
   },
   "Save and Return": {
     "translation": "Зберегти та повернутися",
-    "origin": [["src/pages/Dictionaries/Details.js", 504]]
+    "origin": [["src/pages/Dictionaries/Details.js", 520]]
   },
   "Search": {
     "translation": "Шукати",
@@ -1627,7 +1628,7 @@
   },
   "Search for a value": {
     "translation": "Пошук значення",
-    "origin": [["src/pages/Dictionaries/Details.js", 257]]
+    "origin": [["src/pages/Dictionaries/Details.js", 277]]
   },
   "Search legal entities": {
     "translation": "Пошук медзакладів",
@@ -1650,18 +1651,15 @@
   },
   "Select a tag": {
     "translation": "Виберіть тег",
-    "origin": [["src/pages/Dictionaries/Details.js", 201]]
+    "origin": [["src/pages/Dictionaries/Details.js", 219]]
   },
   "Select key": {
     "translation": "Виберіть ключ",
-    "origin": [
-      ["src/pages/Dictionaries/Details.js", 287],
-      ["src/pages/Dictionaries/Details.js", 409]
-    ]
+    "origin": [["src/pages/Dictionaries/Details.js", 307]]
   },
   "Select tag from list": {
     "translation": "Оберіть тег зі списку",
-    "origin": [["src/pages/Dictionaries/Details.js", 196]]
+    "origin": [["src/pages/Dictionaries/Details.js", 214]]
   },
   "Select the menu item on the left to get started!": {
     "translation": "Оберіть пункт меню ліворуч, щоб почати роботу!",
@@ -1851,13 +1849,13 @@
   },
   "Tag": {
     "translation": "Тег",
-    "origin": [["src/pages/Dictionaries/Search.js", 132]]
+    "origin": [["src/pages/Dictionaries/Search.js", 147]]
   },
   "Tags": {
     "translation": "Теги",
     "origin": [
-      ["src/pages/Dictionaries/Details.js", 84],
-      ["src/pages/Dictionaries/Details.js", 130],
+      ["src/pages/Dictionaries/Details.js", 85],
+      ["src/pages/Dictionaries/Details.js", 126],
       ["src/pages/Dictionaries/Search.js", 70]
     ]
   },
@@ -1951,7 +1949,7 @@
   },
   "Value": {
     "translation": "Значення",
-    "origin": [["src/pages/Dictionaries/Details.js", 81]]
+    "origin": [["src/pages/Dictionaries/Details.js", 82]]
   },
   "Verification": {
     "translation": "Верифікація",

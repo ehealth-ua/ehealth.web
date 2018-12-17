@@ -114,7 +114,7 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
     initialValues={initialValues}
   >
     <Flex mx={-1}>
-      <Box px={1} width={2 / 4}>
+      <Box px={1} width={3 / 5}>
         <Trans
           id="Dictionary name"
           render={({ translation }) => (
@@ -122,24 +122,44 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
               name="filter.name"
               label={<Trans>Find dictionary</Trans>}
               placeholder={translation}
-              autoComplete="off"
+              autocomplete="off"
             />
           )}
         />
       </Box>
 
-      <Box px={1} width={2 / 4}>
-        <Trans
-          id="Tag"
-          render={({ translation }) => (
-            <Field.Text
-              name="filter.label"
-              label={<Trans>Filter by Tag</Trans>}
-              placeholder={translation}
-              autocomplete="off"
-            />
-          )}
-        />
+      <Box px={1} width={2 / 5}>
+        <Query
+          query={DictionariesQuery}
+          variables={{
+            first: 1,
+            filter: { name: "DICTIONARY_LABELS" }
+          }}
+        >
+          {({ loading, error, data }) => {
+            if (loading || error) return null;
+
+            const listOfLabels = !isEmpty(data.dictionaries.nodes)
+              ? Object.keys(data.dictionaries.nodes[0].values)
+              : [];
+
+            return (
+              <Trans
+                id="Tag"
+                render={({ translation }) => (
+                  <Field.Select
+                    name="filter.label"
+                    label={<Trans>Filter by Tag</Trans>}
+                    placeholder={translation}
+                    items={listOfLabels}
+                    renderItem={item => item}
+                    hideErrors
+                  />
+                )}
+              />
+            );
+          }}
+        </Query>
       </Box>
     </Flex>
     <Flex mx={-1} justifyContent="flex-start">
