@@ -50,7 +50,7 @@ const CapitationContractRequestsSearch = () => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { status = {}, searchRequest, assigneeName } = {},
+          filter: { status = {}, searchRequest, assignee = {} } = {},
           date: { startFrom, startTo, endFrom, endTo } = {},
           first,
           last,
@@ -92,7 +92,9 @@ const CapitationContractRequestsSearch = () => (
                   startDate: formatDateTimeInterval(startFrom, startTo),
                   endDate: formatDateTimeInterval(endFrom, endTo),
                   status: status.name,
-                  assigneeName
+                  assignee: !isEmpty(assignee)
+                    ? { databaseId: assignee.databaseId }
+                    : undefined
                 }
               }}
             >
@@ -258,41 +260,33 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
             data: { employees: { nodes: employees = [] } = {} } = {},
             refetch: refetchEmployees
           }) => (
-            <Trans
-              id="Choose assignee"
-              render={({ translation }) => (
-                <Field.Select
-                  name="filter.assigneeName"
-                  label={<Trans>Performer</Trans>}
-                  placeholder={translation}
-                  items={
-                    loading || error
-                      ? []
-                      : employees.map(
-                          ({ party }) => party && getFullName(party)
-                        )
-                  }
-                  onInputValueChange={debounce(
-                    name =>
-                      !isEmpty(name) &&
-                      refetchEmployees({
-                        skip: false,
-                        first: 50,
-                        filter: {
-                          employeeType: ["NHS_SIGNER"],
-                          status: "APPROVED",
-                          party: { fullName: name }
-                        }
-                      }),
-                    1000
-                  )}
-                  renderItem={item => item}
-                  itemToString={item => {
-                    if (!item) return "";
-                    return typeof item === "string" ? item : item.name;
-                  }}
-                />
+            <Field.Select
+              name="filter.assignee"
+              label={<Trans>Performer</Trans>}
+              //Todo: check assignee in trans (if trans -> redirect input)
+              placeholder="Оберіть виконавця"
+              items={loading || error ? [] : employees}
+              onInputValueChange={debounce(
+                name =>
+                  !isEmpty(name) &&
+                  refetchEmployees({
+                    skip: false,
+                    first: 50,
+                    filter: {
+                      employeeType: ["NHS_SIGNER"],
+                      status: "APPROVED",
+                      party: { fullName: name }
+                    }
+                  }),
+                1000
               )}
+              filterOptions={{
+                keys: ["party.lastName", "party.firstName"]
+              }}
+              renderItem={item => item.party && getFullName(item.party)}
+              itemToString={item =>
+                !item ? "" : item.party && getFullName(item.party)
+              }
             />
           )}
         </Query>
