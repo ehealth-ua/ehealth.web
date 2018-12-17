@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.16.1"></a>
+## [1.16.1](https://github.com/edenlabllc/ehealth.web/compare/v1.16.0...v1.16.1) (2018-12-17)
+
+
+### Bug Fixes
+
+* **admin:** remove translations for nhsSignerBase and issueCity on Contract Request Update pages ([a632150](https://github.com/edenlabllc/ehealth.web/commit/a632150))
+
+
+
+
+
 <a name="1.16.0"></a>
 # [1.16.0](https://github.com/edenlabllc/ehealth.web/compare/v1.15.0...v1.16.0) (2018-12-17)
 
