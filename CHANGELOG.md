@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.16.2"></a>
+## [1.16.2](https://github.com/edenlabllc/ehealth.web/compare/v1.16.1...v1.16.2) (2018-12-17)
+
+
+### Bug Fixes
+
+* **admin:** change filtering contractNumber by edrpou, according to the new scheme ([#604](https://github.com/edenlabllc/ehealth.web/issues/604)) ([3d30364](https://github.com/edenlabllc/ehealth.web/commit/3d30364))
+
+
+
+
+
 <a name="1.16.1"></a>
 ## [1.16.1](https://github.com/edenlabllc/ehealth.web/compare/v1.16.0...v1.16.1) (2018-12-17)
 
