@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.16.0"></a>
+# [1.16.0](https://github.com/edenlabllc/ehealth.web/compare/v1.15.0...v1.16.0) (2018-12-17)
+
+
+### Features
+
+* **admin:** translate everything into ukrainian ([d26e767](https://github.com/edenlabllc/ehealth.web/commit/d26e767))
+* **admin:** wrap all ukrainian text in Trans macro ([4218a3e](https://github.com/edenlabllc/ehealth.web/commit/4218a3e))
+
+
+
+
+
 <a name="1.15.0"></a>
 # [1.15.0](https://github.com/edenlabllc/ehealth.web/compare/v1.14.0...v1.15.0) (2018-12-14)
 
