@@ -698,57 +698,68 @@ const ModalSelect = ({ submitted, id }) => (
           <Popper placement="bottom-start" positionFixed>
             {({ ref, style }) => (
               <ModalWrapper style={style} innerRef={ref} visible={opened}>
-                <Query
-                  query={EmployeesQuery}
-                  fetchPolicy="no-cache"
-                  variables={{
-                    first: 50,
-                    filter: {
-                      employeeType: ["NHS", "NHS_SIGNER"],
-                      status: "APPROVED"
-                    },
-                    orderBy: "INSERTED_AT_DESC"
-                  }}
-                >
-                  {({
-                    loading,
-                    error,
-                    data: { employees: { nodes: employees = [] } = {} } = {},
-                    refetch: refetchEmployees
-                  }) => (
-                    <>
-                      <Field.Select
-                        name="assignee"
-                        items={loading || error ? [] : employees}
-                        onInputValueChange={debounce(
-                          name =>
-                            !isEmpty(name) &&
-                            refetchEmployees({
-                              first: 50,
-                              filter: {
-                                employeeType: ["NHS", "NHS_SIGNER"],
-                                status: "APPROVED",
-                                party: { fullName: name }
-                              }
-                            }),
+                <Trans
+                  id="Choose assignee"
+                  render={({ translation }) => (
+                    <Query
+                      query={EmployeesQuery}
+                      fetchPolicy="no-cache"
+                      variables={{
+                        first: 50,
+                        filter: {
+                          employeeType: ["NHS", "NHS_SIGNER"],
+                          status: "APPROVED"
+                        },
+                        orderBy: "INSERTED_AT_DESC"
+                      }}
+                    >
+                      {({
+                        loading,
+                        error,
+                        data: {
+                          employees: { nodes: employees = [] } = {}
+                        } = {},
+                        refetch: refetchEmployees
+                      }) => (
+                        <>
+                          <Field.Select
+                            name="assignee"
+                            placeholder={translation}
+                            items={loading || error ? [] : employees}
+                            onInputValueChange={debounce(
+                              name =>
+                                !isEmpty(name) &&
+                                refetchEmployees({
+                                  first: 50,
+                                  filter: {
+                                    employeeType: ["NHS", "NHS_SIGNER"],
+                                    status: "APPROVED",
+                                    party: { fullName: name }
+                                  }
+                                }),
 
-                          1000
-                        )}
-                        renderItem={item =>
-                          item.party && getFullName(item.party)
-                        }
-                        filterOptions={{
-                          keys: ["party.lastName", "party.firstName"]
-                        }}
-                        itemToString={item =>
-                          !item ? "" : item.party && getFullName(item.party)
-                        }
-                        style={{ margin: "5px", border: "1px solid #DFE3E9" }}
-                        hideErrors
-                      />
-                    </>
+                              1000
+                            )}
+                            renderItem={item =>
+                              item.party && getFullName(item.party)
+                            }
+                            filterOptions={{
+                              keys: ["party.lastName", "party.firstName"]
+                            }}
+                            itemToString={item =>
+                              !item ? "" : item.party && getFullName(item.party)
+                            }
+                            style={{
+                              margin: "5px",
+                              border: "1px solid #DFE3E9"
+                            }}
+                            hideErrors
+                          />
+                        </>
+                      )}
+                    </Query>
                   )}
-                </Query>
+                />
               </ModalWrapper>
             )}
           </Popper>

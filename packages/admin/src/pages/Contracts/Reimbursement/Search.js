@@ -478,49 +478,55 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
           />
         </Box>
         <Box width={2 / 5}>
-          <Query
-            query={MedicalProgramsQuery}
-            fetchPolicy="cache-first"
-            variables={{
-              skip: true
-            }}
-          >
-            {({
-              loading,
-              error,
-              data: {
-                medicalPrograms: { nodes: medicalPrograms = [] } = {}
-              } = {},
-              refetch: refetchMedicalProgram
-            }) => {
-              return (
-                <Field.Select
-                  name="filter.medicalProgram.name"
-                  label={<Trans>Medical program</Trans>}
-                  items={
-                    loading || error
-                      ? []
-                      : medicalPrograms.map(({ name }) => name)
-                  }
-                  onInputValueChange={debounce(
-                    program =>
-                      !isEmpty(program) &&
-                      refetchMedicalProgram({
-                        skip: false,
-                        first: 20,
-                        filter: { name: program }
-                      }),
-                    1000
-                  )}
-                  renderItem={item => item}
-                  itemToString={item => {
-                    if (!item) return "";
-                    return typeof item === "string" ? item : item.name;
-                  }}
-                />
-              );
-            }}
-          </Query>
+          <Trans
+            id="Choose medical program"
+            render={({ translation }) => (
+              <Query
+                query={MedicalProgramsQuery}
+                fetchPolicy="cache-first"
+                variables={{
+                  skip: true
+                }}
+              >
+                {({
+                  loading,
+                  error,
+                  data: {
+                    medicalPrograms: { nodes: medicalPrograms = [] } = {}
+                  } = {},
+                  refetch: refetchMedicalProgram
+                }) => {
+                  return (
+                    <Field.Select
+                      name="filter.medicalProgram.name"
+                      label={<Trans>Medical program</Trans>}
+                      placeholder={translation}
+                      items={
+                        loading || error
+                          ? []
+                          : medicalPrograms.map(({ name }) => name)
+                      }
+                      onInputValueChange={debounce(
+                        program =>
+                          !isEmpty(program) &&
+                          refetchMedicalProgram({
+                            skip: false,
+                            first: 20,
+                            filter: { name: program }
+                          }),
+                        1000
+                      )}
+                      renderItem={item => item}
+                      itemToString={item => {
+                        if (!item) return "";
+                        return typeof item === "string" ? item : item.name;
+                      }}
+                    />
+                  );
+                }}
+              </Query>
+            )}
+          />
         </Box>
       </Flex>
       <Flex mx={-1} mt={4} justifyContent="flex-start">
