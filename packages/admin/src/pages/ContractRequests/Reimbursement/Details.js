@@ -275,13 +275,7 @@ const GeneralInfo = ({
         <DefinitionListView
           color="blueberrySoda"
           labels={{
-            name: (
-              <>
-                ID медичної
-                <br />
-                програми
-              </>
-            )
+            name: <Trans>Medical program ID</Trans>
           }}
           data={{
             name: medicalProgram.databaseId

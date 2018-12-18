@@ -20,7 +20,9 @@ import * as Field from "./Field";
 const AssignContractRequestMutation = loader(
   "../graphql/AssignContractRequestMutation.graphql"
 );
-const EmployeesQuery = loader("../graphql/GetAssignEmployeeQuery.graphql");
+const GetAssignEmployeeQuery = loader(
+  "../graphql/GetAssignEmployeeQuery.graphql"
+);
 
 const AssigneeSearch = ({ submitted, id, query }) => (
   <BooleanValue>
@@ -72,7 +74,7 @@ const AssigneeSearch = ({ submitted, id, query }) => (
               {({ ref, style }) => (
                 <ModalWrapper style={style} innerRef={ref}>
                   <Query
-                    query={EmployeesQuery}
+                    query={GetAssignEmployeeQuery}
                     fetchPolicy="no-cache"
                     variables={{
                       skip: true,
