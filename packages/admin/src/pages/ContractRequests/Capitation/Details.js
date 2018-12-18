@@ -1,24 +1,19 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
-import { Query, Mutation } from "react-apollo";
+import { Query } from "react-apollo";
 import { Flex, Box, Text } from "rebass/emotion";
 import system from "system-components/emotion";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
-import { Manager, Reference, Popper } from "react-popper";
 import { loader } from "graphql.macro";
-import isEmpty from "lodash/isEmpty";
-import debounce from "lodash/debounce";
 
 import { Trans } from "@lingui/macro";
-import { Form, Switch } from "@ehealth/components";
-import { boolean } from "@ehealth/system-tools";
+import { Switch } from "@ehealth/components";
 import {
   PrinterIcon,
   PositiveIcon,
   NegativeIcon,
-  DefaultImageIcon,
-  DropDownButton
+  DefaultImageIcon
 } from "@ehealth/icons";
 import {
   getFullName,
@@ -42,22 +37,15 @@ import LinkComponent from "../../../components/Link";
 import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
 import LoadingOverlay from "../../../components/LoadingOverlay";
-import * as Field from "../../../components/Field";
 import AddressView from "../../../components/AddressView";
 import DictionaryValue from "../../../components/DictionaryValue";
 import Breadcrumbs from "../../../components/Breadcrumbs";
-import { SearchIcon } from "../../../components/MultiSelectView";
 import DefinitionListView from "../../../components/DefinitionListView";
+import AssigneeSearch from "../../../components/AssigneeSearch";
 import WEEK_DAYS from "../../../helpers/weekDays";
 
 const CapitationContractRequestQuery = loader(
   "../../../graphql/CapitationContractRequestQuery.graphql"
-);
-const AssignContractRequestMutation = loader(
-  "../../../graphql/AssignContractRequestMutation.graphql"
-);
-const EmployeesQuery = loader(
-  "../../../graphql/GetAssignEmployeeQuery.graphql"
 );
 
 const CapitationContractRequestsDetails = () => (
@@ -149,10 +137,18 @@ const Details = ({ id }) => (
                       <Switch
                         value={status}
                         NEW={
-                          <ModalSelect submitted={getFullName(party)} id={id} />
+                          <AssigneeSearch
+                            submitted={getFullName(party)}
+                            id={id}
+                            query={CapitationContractRequestQuery}
+                          />
                         }
                         IN_PROCESS={
-                          <ModalSelect submitted={getFullName(party)} id={id} />
+                          <AssigneeSearch
+                            submitted={getFullName(party)}
+                            id={id}
+                            query={CapitationContractRequestQuery}
+                          />
                         }
                         default={assignee && getFullName(party)}
                       />
@@ -649,160 +645,6 @@ const PrintButton = ({ content }) => (
     <PrinterIcon />
   </Wrapper>
 );
-
-const ModalSelect = ({ submitted, id }) => (
-  <BooleanValue>
-    {({ value: opened, toggle }) => (
-      <Form onSubmit={() => null}>
-        <Mutation
-          mutation={AssignContractRequestMutation}
-          refetchQueries={() => [
-            {
-              query: CapitationContractRequestQuery,
-              variables: { id }
-            }
-          ]}
-        >
-          {assignContractRequest => (
-            <Form.AutoSubmit
-              onSubmit={async ({ assignee }) => {
-                return (
-                  assignee &&
-                  (await assignContractRequest({
-                    variables: {
-                      input: {
-                        id,
-                        employeeId: assignee.id
-                      }
-                    }
-                  }).then(toggle))
-                );
-              }}
-            />
-          )}
-        </Mutation>
-        <Manager>
-          <Reference>
-            {({ ref }) => (
-              <Flex innerRef={ref} alignItems="center">
-                {submitted}
-                <ButtonWrapper onClick={toggle}>
-                  {!submitted && <DropDownButton color="#2EA2F8" />}
-                  <ButtonText>
-                    {!submitted ? "Додати виконавця" : "Змінити"}
-                  </ButtonText>
-                </ButtonWrapper>
-              </Flex>
-            )}
-          </Reference>
-          <Popper placement="bottom-start" positionFixed>
-            {({ ref, style }) => (
-              <ModalWrapper style={style} innerRef={ref} visible={opened}>
-                <Trans
-                  id="Choose assignee"
-                  render={({ translation }) => (
-                    <Query
-                      query={EmployeesQuery}
-                      fetchPolicy="no-cache"
-                      variables={{
-                        first: 50,
-                        filter: {
-                          employeeType: ["NHS", "NHS_SIGNER"],
-                          status: "APPROVED"
-                        },
-                        orderBy: "INSERTED_AT_DESC"
-                      }}
-                    >
-                      {({
-                        loading,
-                        error,
-                        data: {
-                          employees: { nodes: employees = [] } = {}
-                        } = {},
-                        refetch: refetchEmployees
-                      }) => (
-                        <>
-                          <Field.Select
-                            name="assignee"
-                            placeholder={translation}
-                            items={loading || error ? [] : employees}
-                            onInputValueChange={debounce(
-                              name =>
-                                !isEmpty(name) &&
-                                refetchEmployees({
-                                  first: 50,
-                                  filter: {
-                                    employeeType: ["NHS", "NHS_SIGNER"],
-                                    status: "APPROVED",
-                                    party: { fullName: name }
-                                  }
-                                }),
-
-                              1000
-                            )}
-                            renderItem={item =>
-                              item.party && getFullName(item.party)
-                            }
-                            filterOptions={{
-                              keys: ["party.lastName", "party.firstName"]
-                            }}
-                            itemToString={item =>
-                              !item ? "" : item.party && getFullName(item.party)
-                            }
-                            style={{
-                              margin: "5px",
-                              border: "1px solid #DFE3E9"
-                            }}
-                            hideErrors
-                          />
-                        </>
-                      )}
-                    </Query>
-                  )}
-                />
-              </ModalWrapper>
-            )}
-          </Popper>
-        </Manager>
-      </Form>
-    )}
-  </BooleanValue>
-);
-
-const ModalWrapper = system(
-  {
-    width: 245,
-    mt: 2,
-    fontSize: 1,
-    color: "darkAndStormy"
-  },
-  {
-    zIndex: 100,
-    visibility: "hidden",
-    boxShadow: "0 1px 4px rgba(72, 60, 60, 0.2)"
-  },
-  boolean({
-    prop: "visible",
-    key: "inputs.select.visible"
-  })
-);
-
-const ButtonWrapper = system(
-  {
-    display: "flex"
-  },
-  {
-    cursor: "pointer"
-  }
-);
-
-const ButtonText = system({
-  is: "span",
-  ml: 2,
-  color: "rockmanBlue",
-  fontSize: 0,
-  fontWeight: 700
-});
 
 const Wrapper = system(
   {
