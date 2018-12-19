@@ -23,6 +23,7 @@ import Badge from "../../../components/Badge";
 import Link from "../../../components/Link";
 import Pagination from "../../../components/Pagination";
 import * as Field from "../../../components/Field";
+import AssigneeSearch from "../../../components/AssigneeSearch";
 import Button, { IconButton } from "../../../components/Button";
 
 import {
@@ -40,10 +41,6 @@ const SearchReimbursementContractRequestsQuery = loader(
 
 const MedicalProgramsQuery = loader(
   "../../../graphql/MedicalProgramsQuery.graphql"
-);
-
-const EmployeesQuery = loader(
-  "../../../graphql/GetAssignEmployeeQuery.graphql"
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
@@ -260,58 +257,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
       </Box>
 
       <Box px={1} width={2 / 5}>
-        <Trans
-          id="Choose assignee"
-          render={({ translation }) => (
-            <Query
-              query={EmployeesQuery}
-              variables={{
-                skip: true,
-                first: 50,
-                filter: {
-                  employeeType: ["NHS_SIGNER"],
-                  status: "APPROVED"
-                },
-                orderBy: "INSERTED_AT_DESC"
-              }}
-            >
-              {({
-                loading,
-                error,
-                data: { employees: { nodes: employees = [] } = {} } = {},
-                refetch: refetchEmployees
-              }) => (
-                <Field.Select
-                  name="filter.assignee"
-                  label={<Trans>Performer</Trans>}
-                  placeholder={translation}
-                  items={loading || error ? [] : employees}
-                  onInputValueChange={debounce(
-                    name =>
-                      !isEmpty(name) &&
-                      refetchEmployees({
-                        skip: false,
-                        first: 50,
-                        filter: {
-                          employeeType: ["NHS_SIGNER"],
-                          status: "APPROVED",
-                          party: { fullName: name }
-                        }
-                      }),
-                    1000
-                  )}
-                  filterOptions={{
-                    keys: ["party.lastName", "party.firstName"]
-                  }}
-                  renderItem={item => item.party && getFullName(item.party)}
-                  itemToString={item =>
-                    !item ? "" : item.party && getFullName(item.party)
-                  }
-                />
-              )}
-            </Query>
-          )}
-        />
+        <AssigneeSearch />
       </Box>
     </Flex>
     <BooleanValue>
