@@ -41,7 +41,7 @@ import AddressView from "../../../components/AddressView";
 import DictionaryValue from "../../../components/DictionaryValue";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import DefinitionListView from "../../../components/DefinitionListView";
-import AssigneeSearch from "../../../components/AssigneeSearch";
+import ModalAssigneeSearch from "../../../components/ModalAssigneeSearch";
 import WEEK_DAYS from "../../../helpers/weekDays";
 
 const CapitationContractRequestQuery = loader(
@@ -137,14 +137,14 @@ const Details = ({ id }) => (
                       <Switch
                         value={status}
                         NEW={
-                          <AssigneeSearch
+                          <ModalAssigneeSearch
                             submitted={getFullName(party)}
                             id={id}
                             query={CapitationContractRequestQuery}
                           />
                         }
                         IN_PROCESS={
-                          <AssigneeSearch
+                          <ModalAssigneeSearch
                             submitted={getFullName(party)}
                             id={id}
                             query={CapitationContractRequestQuery}

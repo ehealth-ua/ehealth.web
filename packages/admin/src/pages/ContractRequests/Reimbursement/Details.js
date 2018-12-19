@@ -26,7 +26,7 @@ import Button from "../../../components/Button";
 import AddressView from "../../../components/AddressView";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import DefinitionListView from "../../../components/DefinitionListView";
-import AssigneeSearch from "../../../components/AssigneeSearch";
+import ModalAssigneeSearch from "../../../components/ModalAssigneeSearch";
 import WEEK_DAYS from "../../../helpers/weekDays";
 
 import Approve from "./Approve";
@@ -116,14 +116,14 @@ const Details = ({ id }) => (
                       <Switch
                         value={status}
                         NEW={
-                          <AssigneeSearch
+                          <ModalAssigneeSearch
                             submitted={getFullName(party)}
                             id={id}
                             query={ReimbursementContractRequestQuery}
                           />
                         }
                         IN_PROCESS={
-                          <AssigneeSearch
+                          <ModalAssigneeSearch
                             submitted={getFullName(party)}
                             id={id}
                             query={ReimbursementContractRequestQuery}
