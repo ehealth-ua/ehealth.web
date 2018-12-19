@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.17.0"></a>
+# [1.17.0](https://github.com/edenlabllc/ehealth.web/compare/v1.16.2...v1.17.0) (2018-12-19)
+
+
+### Features
+
+* **admin:** add query for assing employee on ContractRequests ([b59d843](https://github.com/edenlabllc/ehealth.web/commit/b59d843))
+
+
+
+
+
 <a name="1.16.2"></a>
 ## [1.16.2](https://github.com/edenlabllc/ehealth.web/compare/v1.16.1...v1.16.2) (2018-12-17)
 
