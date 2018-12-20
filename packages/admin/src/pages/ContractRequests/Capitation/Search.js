@@ -32,6 +32,7 @@ import {
 } from "../../../constants/contractRequests";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import STATUSES from "../../../helpers/statuses";
+import contractFormFilteredParams from "../../../helpers/contractFormFilteredParams";
 
 const SearchCapitationContractRequestsQuery = loader(
   "../../../graphql/SearchCapitationContractRequestsQuery.graphql"
@@ -42,7 +43,7 @@ const EmployeesQuery = loader(
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
-  ([name, value]) => ({ name, value })
+  ([key, value]) => ({ key, value })
 );
 
 const CapitationContractRequestsSearch = () => (
@@ -50,23 +51,7 @@ const CapitationContractRequestsSearch = () => (
     <ContractRequestsNav />
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
-        const {
-          filter: { status = {}, searchRequest, assignee = {} } = {},
-          date: { startFrom, startTo, endFrom, endTo } = {},
-          first,
-          last,
-          after,
-          before,
-          orderBy
-        } = locationParams;
-
-        const edrpouReg = new RegExp(EDRPOU_PATTERN);
-        const edrpouTest = edrpouReg.test(searchRequest);
-        const contractRequest =
-          !isEmpty(searchRequest) &&
-          (edrpouTest
-            ? { contractorLegalEntity: { edrpou: searchRequest } }
-            : { contractNumber: searchRequest });
+        const { filter, first, last, after, before, orderBy } = locationParams;
 
         return (
           <>
@@ -88,15 +73,7 @@ const CapitationContractRequestsSearch = () => (
                 after,
                 before,
                 orderBy,
-                filter: {
-                  ...contractRequest,
-                  startDate: formatDateTimeInterval(startFrom, startTo),
-                  endDate: formatDateTimeInterval(endFrom, endTo),
-                  status: status.name,
-                  assignee: !isEmpty(assignee)
-                    ? { databaseId: assignee.databaseId }
-                    : undefined
-                }
+                filter: contractFormFilteredParams(filter)
               }}
             >
               {({
@@ -270,13 +247,13 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
       <Flex px={1}>
         <Box mr={1}>
           <Field.RangePicker
-            rangeNames={["date.startFrom", "date.startTo"]}
+            rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
             label={<Trans>Contract start date</Trans>}
           />
         </Box>
 
         <Field.RangePicker
-          rangeNames={["date.endFrom", "date.endTo"]}
+          rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
           label={<Trans>Contract end date</Trans>}
         />
       </Flex>
@@ -291,15 +268,12 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
         <IconButton
           icon={RemoveItemIcon}
           type="reset"
-          disabled={
-            isEmpty(initialValues.filter) && isEmpty(initialValues.date)
-          }
+          disabled={isEmpty(initialValues.filter)}
           onClick={() => {
             onSubmit({
               ...initialValues,
               filter: null,
-              searchRequest: null,
-              date: null
+              searchRequest: null
             });
           }}
         >

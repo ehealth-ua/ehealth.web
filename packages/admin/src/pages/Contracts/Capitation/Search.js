@@ -40,44 +40,19 @@ import {
   SEARCH_CONTRACT_PATTERN
 } from "../../../constants/contracts";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
+import contractFormFilteredParams from "../../../helpers/contractFormFilteredParams";
 
 const SearchCapitationContractsQuery = loader(
   "../../../graphql/SearchCapitationContractsQuery.graphql"
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
-  ([name, value]) => ({ name, value })
+  ([key, value]) => ({ key, value })
 );
 
 const legalEntityRelation = Object.entries(STATUSES.LEGAL_ENTITY_RELATION).map(
   ([name, value]) => ({ name, value })
 );
-
-const sendFilterForm = filter => {
-  if (!filter) return {};
-  const {
-    status = {},
-    legalEntityRelation = {},
-    searchRequest,
-    isSuspended,
-    date: { startFrom, startTo, endFrom, endTo } = {}
-  } = filter;
-  const edrpouReg = new RegExp(EDRPOU_PATTERN);
-  const edrpouTest = edrpouReg.test(searchRequest);
-  const contract =
-    !isEmpty(searchRequest) &&
-    (edrpouTest
-      ? { contractorLegalEntity: { edrpou: searchRequest } }
-      : { contractNumber: searchRequest });
-  return {
-    ...contract,
-    startDate: formatDateTimeInterval(startFrom, startTo),
-    endDate: formatDateTimeInterval(endFrom, endTo),
-    status: status.name,
-    legalEntityRelation: legalEntityRelation.name,
-    isSuspended: convertIsSuspendedItem(isSuspended)
-  };
-};
 
 const CapitationContractsSearch = ({ uri }) => (
   <Box p={6}>
@@ -106,7 +81,7 @@ const CapitationContractsSearch = ({ uri }) => (
                 after,
                 before,
                 orderBy,
-                filter: sendFilterForm(filter)
+                filter: contractFormFilteredParams(filter)
               }}
             >
               {({
@@ -342,8 +317,7 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
             onSubmit({
               ...initialValues,
               filter: null,
-              searchRequest: null,
-              date: null
+              searchRequest: null
             });
           }}
         >
@@ -518,8 +492,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
               onSubmit({
                 ...initialValues,
                 filter: null,
-                searchRequest: null,
-                date: null
+                searchRequest: null
               });
               toggle();
             }}
@@ -542,11 +515,3 @@ const TextNoWrap = system(
 // TODO: remove this after select refactoring
 const renderIsSuspendedItem = item =>
   item === "" ? "всі договори" : item === "true" ? "призупинений" : "діючий";
-
-const convertIsSuspendedItem = item => {
-  try {
-    return JSON.parse(item);
-  } catch (error) {
-    return undefined;
-  }
-};

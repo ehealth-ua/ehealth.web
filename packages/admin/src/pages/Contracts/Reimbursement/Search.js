@@ -9,11 +9,7 @@ import { loader } from "graphql.macro";
 import { DateFormat, Trans } from "@lingui/macro";
 
 import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
-import {
-  parseSortingParams,
-  stringifySortingParams,
-  formatDateTimeInterval
-} from "@ehealth/utils";
+import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 
 import {
   AdminSearchIcon,
@@ -32,11 +28,9 @@ import Button, { IconButton } from "../../../components/Button";
 import Badge from "../../../components/Badge";
 import STATUSES from "../../../helpers/statuses";
 
-import {
-  EDRPOU_PATTERN,
-  SEARCH_CONTRACT_PATTERN
-} from "../../../constants/contracts";
+import { SEARCH_CONTRACT_PATTERN } from "../../../constants/contracts";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
+import contractFormFilteredParams from "../../../helpers/contractFormFilteredParams";
 
 import ContractsNav from "../ContractsNav";
 
@@ -50,35 +44,6 @@ const MedicalProgramsQuery = loader(
 const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
   ([key, value]) => ({ key, value })
 );
-
-//TODO: bring it out to the helper
-const sendFilterForm = filter => {
-  if (!filter) return {};
-  const {
-    status = {},
-    medicalProgram = {},
-    searchRequest,
-    isSuspended,
-    date: { startFrom, startTo, endFrom, endTo } = {}
-  } = filter;
-  const edrpouReg = new RegExp(EDRPOU_PATTERN);
-  const edrpouTest = edrpouReg.test(searchRequest);
-  const contract =
-    !isEmpty(searchRequest) &&
-    (edrpouTest
-      ? { contractorLegalEntity: { edrpou: searchRequest } }
-      : { contractNumber: searchRequest });
-  return {
-    ...contract,
-    startDate: formatDateTimeInterval(startFrom, startTo),
-    endDate: formatDateTimeInterval(endFrom, endTo),
-    status: status.key,
-    isSuspended: convertIsSuspendedItem(isSuspended),
-    medicalProgram: !isEmpty(medicalProgram)
-      ? { name: medicalProgram.name }
-      : undefined
-  };
-};
 
 const resetPaginationParams = first => ({
   after: undefined,
@@ -109,7 +74,7 @@ const ReimbursementContractsSearch = () => (
                 after,
                 before,
                 orderBy,
-                filter: sendFilterForm(filter)
+                filter: contractFormFilteredParams(filter)
               }}
             >
               {({
@@ -347,8 +312,7 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
             onSubmit({
               ...initialValues,
               filter: null,
-              searchRequest: null,
-              date: null
+              searchRequest: null
             });
           }}
         >
@@ -549,8 +513,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
               onSubmit({
                 ...initialValues,
                 filter: null,
-                searchRequest: null,
-                date: null
+                searchRequest: null
               });
             }}
           >
@@ -573,11 +536,3 @@ const TextNoWrap = system(
 // TODO: remove this after select refactoring
 const renderIsSuspendedItem = item =>
   item === "" ? "всі договори" : item === "true" ? "призупинений" : "діючий";
-
-const convertIsSuspendedItem = item => {
-  try {
-    return JSON.parse(item);
-  } catch (error) {
-    return undefined;
-  }
-};

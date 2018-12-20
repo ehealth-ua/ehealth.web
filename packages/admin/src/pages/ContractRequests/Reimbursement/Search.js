@@ -10,7 +10,6 @@ import system from "system-components/emotion";
 
 import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
 import {
-  formatDateTimeInterval,
   getFullName,
   parseSortingParams,
   stringifySortingParams
@@ -26,12 +25,10 @@ import * as Field from "../../../components/Field";
 import AssigneeSearch from "../../../components/AssigneeSearch";
 import Button, { IconButton } from "../../../components/Button";
 
-import {
-  EDRPOU_PATTERN,
-  SEARCH_REQUEST_PATTERN
-} from "../../../constants/contractRequests";
+import { SEARCH_REQUEST_PATTERN } from "../../../constants/contractRequests";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import STATUSES from "../../../helpers/statuses";
+import contractFormFilteredParams from "../../../helpers/contractFormFilteredParams";
 
 import ContractRequestsNav from "../ContractRequestsNav";
 
@@ -46,37 +43,6 @@ const MedicalProgramsQuery = loader(
 const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
   ([key, value]) => ({ key, value })
 );
-
-//TODO: bring it out to the helper
-const sendFilterForm = filter => {
-  if (!filter) return {};
-  const {
-    status = {},
-    medicalProgram = {},
-    searchRequest,
-    assignee = {},
-    date: { startFrom, startTo, endFrom, endTo } = {}
-  } = filter;
-  const edrpouReg = new RegExp(EDRPOU_PATTERN);
-  const edrpouTest = edrpouReg.test(searchRequest);
-  const contractRequest =
-    !isEmpty(searchRequest) &&
-    (edrpouTest
-      ? { contractorLegalEntity: { edrpou: searchRequest } }
-      : { contractNumber: searchRequest });
-  return {
-    ...contractRequest,
-    startDate: formatDateTimeInterval(startFrom, startTo),
-    endDate: formatDateTimeInterval(endFrom, endTo),
-    status: status.key,
-    assignee: !isEmpty(assignee)
-      ? { databaseId: assignee.databaseId }
-      : undefined,
-    medicalProgram: !isEmpty(medicalProgram)
-      ? { name: medicalProgram.name }
-      : undefined
-  };
-};
 
 const resetPaginationParams = first => ({
   after: undefined,
@@ -106,7 +72,7 @@ const ReimbursementContractRequestsSearch = () => (
               after,
               before,
               orderBy,
-              filter: sendFilterForm(filter)
+              filter: contractFormFilteredParams(filter)
             }}
           >
             {({ loading, error, data }) => {
@@ -344,15 +310,12 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
         <IconButton
           icon={RemoveItemIcon}
           type="reset"
-          disabled={
-            isEmpty(initialValues.filter) && isEmpty(initialValues.date)
-          }
+          disabled={isEmpty(initialValues.filter)}
           onClick={() => {
             onSubmit({
               ...initialValues,
               filter: null,
-              searchRequest: null,
-              date: null
+              searchRequest: null
             });
           }}
         >
@@ -527,8 +490,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
               onSubmit({
                 ...initialValues,
                 filter: null,
-                searchRequest: null,
-                date: null
+                searchRequest: null
               });
             }}
           >
