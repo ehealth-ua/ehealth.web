@@ -12,6 +12,7 @@
     "@lingui/macro": "^2.7.2",
     "@lingui/react": "^2.7.2",
     "@reach/router": "^1.1.1",
+    "@sentry/browser": "^4.4.2",
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
     "apollo-link": "^1.2.2",

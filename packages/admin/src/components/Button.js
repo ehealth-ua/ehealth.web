@@ -20,9 +20,11 @@ const Button = system(
     variant: "light"
   },
   `
+    cursor: default;
     display: inline-block;
     vertical-align: middle;
     outline: none;
+    text-decoration: none;
   `
 );
 

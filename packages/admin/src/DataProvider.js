@@ -12,7 +12,12 @@ class DataProvider extends Component {
   client = createClient({ onError: this.props.onError });
 
   async componentDidMount() {
-    await getDataFromTree(<ApolloProvider {...this.providerProps} />);
+    try {
+      await getDataFromTree(<ApolloProvider {...this.providerProps} />);
+    } catch {
+      // We are ignoring the exceptions happened during cache hydration
+    }
+
     this.setState({ loading: false });
   }
 

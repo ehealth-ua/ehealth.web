@@ -1,72 +1,52 @@
 import { ApolloClient } from "apollo-client";
-import { InMemoryCache, defaultDataIdFromObject } from "apollo-cache-inmemory";
+import { InMemoryCache } from "apollo-cache-inmemory";
 import { concat } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
-import { visit, BREAK } from "graphql";
 
 import env from "./env";
 
-const STATUS_NAMES = {
-  400: "BAD_REQUEST",
-  401: "UNAUTHORIZED",
-  403: "FORBIDDEN",
-  404: "NOT_FOUND",
-  409: "CONFLICT",
-  422: "UNPROCESSABLE_ENTITY",
-  500: "INTERNAL_SERVER_ERROR",
-  503: "SERVICE_UNAVAILABLE"
-};
+class GraphQLError extends Error {
+  name = "GraphQLError";
+
+  constructor({ message, ...error }, operationName, variables) {
+    super(message);
+
+    Object.assign(this, error);
+
+    this.operationName = operationName;
+    this.variables = variables;
+  }
+}
+
+class NetworkError extends Error {
+  name = "NetworkError";
+
+  constructor({ name, message, ...error }) {
+    super(message);
+
+    // NOTE: This assignment is potentially harmful, rewrite with props whitelisting if any issues will be encountered
+    Object.assign(this, error);
+  }
+}
 
 export const createClient = ({ onError: handleError }) => {
-  const cache = new InMemoryCache({
-    addTypename: false,
-    dataIdFromObject
-  });
+  const cache = new InMemoryCache();
 
-  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
-    const getGraphqlError = () => {
-      const checkedCode = (data, code) => {
-        const [[key]] = Object.entries(data).filter(
-          ([key, value]) => value === code
-        );
-        return key;
-      };
-      if (graphQLErrors) {
-        for (let err of graphQLErrors) {
-          return {
-            message: err.message,
-            errorDetails: err.errors,
-            statusCode: !err.extensions
-              ? 500
-              : err.extensions.code
-                ? checkedCode(STATUS_NAMES, err.extensions.code)
-                : err.extensions.exception.statusCode
-          };
-        }
-      }
-      return null;
-    };
+  const errorLink = onError(
+    ({
+      graphQLErrors,
+      networkError,
+      operation,
+      operation: { operationName, variables }
+    }) => {
+      const error = graphQLErrors
+        ? new GraphQLError(graphQLErrors[0], operationName, variables)
+        : new NetworkError(networkError);
 
-    const graphqlError = getGraphqlError();
-
-    const { message, errorDetails, statusCode } = graphqlError || networkError;
-
-    if (statusCode === 422) return;
-
-    const error = { message, errorDetails, type: STATUS_NAMES[statusCode] };
-
-    let operationType;
-
-    visit(operation.query, {
-      OperationDefinition(node) {
-        operationType = node.operation;
-        return BREAK;
-      }
-    });
-
-    handleError({ error, blocking: operationType === "query" });
-  });
+      handleError({ error });
+    }
+  );
 
   const httpLink = new HttpLink({
     uri: env.REACT_APP_API_URL,
@@ -78,15 +58,6 @@ export const createClient = ({ onError: handleError }) => {
     link: concat(errorLink, httpLink),
     defaultOptions
   });
-};
-
-const dataIdFromObject = object => {
-  switch (object.__typename) {
-    case "Dictionary":
-      return `Dictionary:${object.name}`;
-    default:
-      return defaultDataIdFromObject(object);
-  }
 };
 
 const defaultOptions = {

@@ -1,7 +1,9 @@
 import React, { createContext, Component } from "react";
-import { ForceRedirect, Switch, Modal } from "@ehealth/components";
-import Error from "./components/Error";
+import Cookie from "js-cookie";
+import * as Sentry from "@sentry/browser";
+
 import env from "./env";
+import Error from "./components/Error";
 
 const { Provider, Consumer } = createContext(() => {});
 
@@ -10,9 +12,18 @@ export default class ErrorBoundary extends Component {
 
   state = { error: null, blocking: false };
 
-  componentDidCatch({ message }) {
-    const error = { type: "CLIENT", message };
-    this.setError({ error, blocking: true });
+  componentDidMount() {
+    const meta = Cookie.getJSON("meta");
+
+    if (meta) {
+      Sentry.configureScope(scope => {
+        scope.setUser({ id: meta.userId });
+      });
+    }
+  }
+
+  componentDidCatch(error, info) {
+    this.setError({ error, info, blocking: true });
   }
 
   render() {
@@ -21,51 +32,35 @@ export default class ErrorBoundary extends Component {
     return (
       <Provider value={this.setError}>
         {error && (
-          <Switch
-            value={error.type}
-            CLIENT={<Error.ClientError error={error} />}
-            FORBIDDEN={<Error.Forbidden error={error} onClose={this.onClose} />}
-            network={
-              <>
-                {blocking ? (
-                  <Error.ClientError error={error} />
-                ) : (
-                  <Modal width={760} p={4} placement="center">
-                    Щось пішло не так...
-                    <br />
-                    <br />
-                    <pre>{error && error.message}</pre>
-                  </Modal>
-                )}
-              </>
-            }
-            UNAUTHORIZED={
-              <ForceRedirect
-                to={`${env.REACT_APP_OAUTH_URL}?client_id=${
-                  env.REACT_APP_CLIENT_ID
-                }&redirect_uri=${env.REACT_APP_OAUTH_REDIRECT_URI}`}
-              />
-            }
-            NOT_FOUND={<Error.NotFound error={error} />}
-            INTERNAL_SERVER_ERROR={<Error.ServerError error={error} />}
-            CONFLICT={
-              <Error.ConflictError error={error} onClose={this.onClose} />
-            }
-            UNPROCESSABLE_ENTITY={
-              <Error.UnprocessableEntity error={error} onClose={this.onClose} />
-            }
-            default={<Error.Default error={error} onClose={this.onClose} />}
-          />
+          <Error error={error} blocking={blocking} onClose={this.onClose} />
         )}
-        {(error && blocking) || this.props.children}
+        {blocking || this.props.children}
       </Provider>
     );
   }
 
-  setError = ({ error, blocking }) => {
+  setError = ({ error, info, blocking }) => {
+    // TODO: This logic should be reconsidered when we will receive unauthenticated errors in GraphQL error format
+    if (error.name === "NetworkError" && error.statusCode === 401) {
+      const authUrl = `${env.REACT_APP_OAUTH_URL}?client_id=${
+        env.REACT_APP_CLIENT_ID
+      }&redirect_uri=${env.REACT_APP_OAUTH_REDIRECT_URI}`;
+      window.location.replace(authUrl);
+      return;
+    }
+
     this.setState({ error, blocking });
+
+    Sentry.withScope(scope => {
+      if (info) {
+        Object.keys(info).forEach(key => scope.setExtra(key, info[key]));
+      }
+
+      Sentry.captureException(error);
+    });
   };
+
   onClose = () => {
-    this.setState({ error: null });
+    this.setState({ error: null, blocking: false });
   };
 }
