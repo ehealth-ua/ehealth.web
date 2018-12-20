@@ -26,8 +26,8 @@ const Item = styled.button`
     color: ${ifProp("selected", "#fff", "#2292f2")};
   }
   &[disabled] {
-    background: #eaeaea;
-    color: #333;
+    background: ${ifProp("selected", "#1A91EB", "#eaeaea")};
+    color: ${ifProp("selected", "#fff", "#333")};
     cursor: not-allowed;
   }
 `;
