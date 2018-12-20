@@ -9,11 +9,19 @@ const DayPicker = ({
   offset,
   increase,
   decrease,
+  selected,
   switchMode,
   getCurrentMonth,
   ...props
 }) => (
-  <Dayzed {...props} offset={offset} firstDayOfWeek={1} showOutsideDays>
+  <Dayzed
+    {...props}
+    offset={offset}
+    selected={selected}
+    date={selected ? selected : undefined}
+    firstDayOfWeek={1}
+    showOutsideDays
+  >
     {({ calendars, getDateProps, getBackProps, getForwardProps }) =>
       calendars.map(calendar => (
         <React.Fragment key={`${calendar.month}-${calendar.year}`}>
