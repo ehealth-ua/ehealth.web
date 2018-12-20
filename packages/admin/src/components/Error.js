@@ -3,6 +3,7 @@ import system from "system-components/emotion";
 import { Box, Flex } from "rebass/emotion";
 import { Switch, Modal } from "@ehealth/components";
 import { EhealthLogoIcon, CloseIcon } from "@ehealth/icons";
+import * as Sentry from "@sentry/browser";
 
 import Button from "./Button";
 
@@ -38,16 +39,25 @@ const Error = ({ error, blocking, onClose }) => {
               })}
           </Box>
         </ErrorDetails>
-        {[
-          "FORBIDDEN",
-          "NETWORK_ERROR",
-          "INTERNAL_SERVER_ERROR",
-          "UNKNOWN_ERROR"
-        ].includes(code) && (
-          <Button is="a" href="/" variant="blue" mt={3}>
-            Повернутись на головну
+        <Flex justifyContent="center" mt={3}>
+          <Button
+            variant="blue"
+            mx={2}
+            onClick={() => Sentry.showReportDialog()}
+          >
+            Описати проблему
           </Button>
-        )}
+          {[
+            "FORBIDDEN",
+            "NETWORK_ERROR",
+            "INTERNAL_SERVER_ERROR",
+            "UNKNOWN_ERROR"
+          ].includes(code) && (
+            <Button is="a" href="/" mx={2}>
+              Повернутись на головну
+            </Button>
+          )}
+        </Flex>
       </Wrapper>
     </Modal>
   );
