@@ -8,7 +8,7 @@ import { BooleanValue } from "react-values";
 import isEmpty from "lodash/isEmpty";
 import { FieldArray } from "react-final-form-arrays";
 import { Trans } from "@lingui/macro";
-import { Form, Validation } from "@ehealth/components";
+import { Form, Validation, Validations } from "@ehealth/components";
 import {
   PositiveIcon,
   NegativeIcon,
@@ -440,10 +440,24 @@ class DictionaryValues extends React.Component {
                                     }
                                     placeholder={translation}
                                   />
-                                  <Validation.Required
-                                    field={`${name}.key`}
-                                    message={<Trans>Required field</Trans>}
-                                  />
+                                  <Validations field={`${name}.key`}>
+                                    <Validation.Required
+                                      message={<Trans>Required field</Trans>}
+                                    />
+                                    <Validation.IsExists
+                                      options={arrayOfValues
+                                        .map(({ key }) => key)
+                                        .filter(
+                                          item =>
+                                            item !== this.state.fieldToEdit.key
+                                        )}
+                                      message={
+                                        <Trans>
+                                          This key is already exists
+                                        </Trans>
+                                      }
+                                    />
+                                  </Validations>
                                 </Box>
                                 <Box px={1} width={1 / 3}>
                                   <Field.Text
