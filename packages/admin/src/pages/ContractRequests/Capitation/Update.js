@@ -235,6 +235,7 @@ const UpdateContractRequest = ({
                             name="nhsSignerBase"
                             label={<Trans>Basis</Trans>}
                             placeholder={translation}
+                            maxlength={255}
                           />
                         )}
                       />
@@ -311,6 +312,7 @@ const UpdateContractRequest = ({
                             </Trans>
                           }
                           placeholder={translation}
+                          maxlength={100}
                         />
                       )}
                     />
