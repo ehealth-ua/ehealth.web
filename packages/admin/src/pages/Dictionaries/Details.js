@@ -90,6 +90,7 @@ const Details = ({ name }) => (
               <DictionaryValues
                 path="/"
                 isReadOnly={isReadOnly}
+                isActive={isActive}
                 values={values}
                 id={id}
                 name={name}
@@ -97,6 +98,7 @@ const Details = ({ name }) => (
               <DictionaryLabels
                 path="/labels"
                 isReadOnly={isReadOnly}
+                isActive={isActive}
                 labels={labels}
                 id={id}
                 name={name}
@@ -109,7 +111,7 @@ const Details = ({ name }) => (
   </Query>
 );
 
-const DictionaryLabels = ({ isReadOnly, labels, id, name }) => (
+const DictionaryLabels = ({ isReadOnly, isActive, labels, id, name }) => (
   <Mutation
     mutation={UpdateDictionaryMutation}
     refetchQueries={() => [
@@ -132,6 +134,7 @@ const DictionaryLabels = ({ isReadOnly, labels, id, name }) => (
                   <SelectedItem key={label} mx={1}>
                     {label}
                     {!isReadOnly &&
+                      isActive &&
                       labels.length > 1 && (
                         <RemoveItem
                           onClick={() => {
@@ -161,83 +164,84 @@ const DictionaryLabels = ({ isReadOnly, labels, id, name }) => (
           alignItems="center"
         />
 
-        {!isReadOnly && (
-          <BooleanValue>
-            {({ value: opened, toggle }) => (
-              <>
-                <AddButton onClick={toggle}>
-                  <Flex>
-                    <Box mr={2}>
-                      <PlusIcon width={16} height={16} />
-                    </Box>
-                    <Trans>Add tag</Trans>
-                  </Flex>
-                </AddButton>
-                {opened && (
-                  <Box mt={2} width={1 / 3}>
-                    <Form
-                      onSubmit={({ addNewLabel }) => {
-                        addNewLabel &&
-                          updateDictionary({
-                            variables: {
-                              input: {
-                                id,
-                                labels: [...labels, addNewLabel]
+        {!isReadOnly &&
+          isActive && (
+            <BooleanValue>
+              {({ value: opened, toggle }) => (
+                <>
+                  <AddButton onClick={toggle}>
+                    <Flex>
+                      <Box mr={2}>
+                        <PlusIcon width={16} height={16} />
+                      </Box>
+                      <Trans>Add tag</Trans>
+                    </Flex>
+                  </AddButton>
+                  {opened && (
+                    <Box mt={2} width={1 / 3}>
+                      <Form
+                        onSubmit={({ addNewLabel }) => {
+                          addNewLabel &&
+                            updateDictionary({
+                              variables: {
+                                input: {
+                                  id,
+                                  labels: [...labels, addNewLabel]
+                                }
                               }
-                            }
-                          });
+                            });
 
-                        toggle();
-                      }}
-                    >
-                      {
-                        <Query
-                          query={DictionariesQuery}
-                          variables={{
-                            first: 1,
-                            filter: { name: "DICTIONARY_LABELS" }
-                          }}
-                        >
-                          {({ loading, error, data }) => {
-                            if (loading || error) return null;
+                          toggle();
+                        }}
+                      >
+                        {
+                          <Query
+                            query={DictionariesQuery}
+                            variables={{
+                              first: 1,
+                              filter: { name: "DICTIONARY_LABELS" }
+                            }}
+                          >
+                            {({ loading, error, data }) => {
+                              if (loading || error) return null;
 
-                            const listOfLabels = !isEmpty(
-                              data.dictionaries.nodes
-                            )
-                              ? Object.keys(data.dictionaries.nodes[0].values)
-                              : [];
-                            const aviableLabels = listOfLabels.filter(
-                              item => !labels.includes(item)
-                            );
+                              const listOfLabels = !isEmpty(
+                                data.dictionaries.nodes
+                              )
+                                ? Object.keys(data.dictionaries.nodes[0].values)
+                                : [];
+                              const aviableLabels = listOfLabels.filter(
+                                item => !labels.includes(item)
+                              );
 
-                            return (
-                              <Trans
-                                id="Select tag from list"
-                                render={({ translation }) => (
-                                  <Field.Select
-                                    name="addNewLabel"
-                                    label={<Trans>Select a tag</Trans>}
-                                    placeholder={translation}
-                                    items={aviableLabels}
-                                    renderItem={item => item}
-                                    hideErrors
-                                  />
-                                )}
-                              />
-                            );
-                          }}
-                        </Query>
-                      }
-                      <Button variant="green" mt={4}>
-                        <Trans>Save</Trans>
-                      </Button>
-                    </Form>
-                  </Box>
-                )}
-              </>
-            )}
-          </BooleanValue>
-        )}
+                              return (
+                                <Trans
+                                  id="Select tag from list"
+                                  render={({ translation }) => (
+                                    <Field.Select
+                                      name="addNewLabel"
+                                      label={<Trans>Select a tag</Trans>}
+                                      placeholder={translation}
+                                      items={aviableLabels}
+                                      renderItem={item => item}
+                                      hideErrors
+                                    />
+                                  )}
+                                />
+                              );
+                            }}
+                          </Query>
+                        }
+                        <Button variant="green" mt={4}>
+                          <Trans>Save</Trans>
+                        </Button>
+                      </Form>
+                    </Box>
+                  )}
+                </>
+              )}
+            </BooleanValue>
+          )}
       </Box>
     )}
   </Mutation>
@@ -253,7 +257,7 @@ class DictionaryValues extends React.Component {
   editFormRef = React.createRef();
 
   render() {
-    const { isReadOnly, values, id, name } = this.props;
+    const { isReadOnly, isActive, values, id, name } = this.props;
     const arrayOfValues = Object.entries(values).map(([key, description]) => ({
       key,
       description
@@ -275,22 +279,23 @@ class DictionaryValues extends React.Component {
           <>
             <Flex justifyContent="space-between" color="darkAndStormy">
               <Trans>Search for a value</Trans>
-              {!isReadOnly && (
-                <AddButton
-                  onClick={() =>
-                    this.setState({
-                      fieldToEdit: { key: "", description: "" }
-                    })
-                  }
-                >
-                  <Flex>
-                    <Box mr={2}>
-                      <PlusIcon width={16} height={16} />
-                    </Box>
-                    <Trans>Add value</Trans>
-                  </Flex>
-                </AddButton>
-              )}
+              {!isReadOnly &&
+                isActive && (
+                  <AddButton
+                    onClick={() =>
+                      this.setState({
+                        fieldToEdit: { key: "", description: "" }
+                      })
+                    }
+                  >
+                    <Flex>
+                      <Box mr={2}>
+                        <PlusIcon width={16} height={16} />
+                      </Box>
+                      <Trans>Add value</Trans>
+                    </Flex>
+                  </AddButton>
+                )}
             </Flex>
 
             <Form onSubmit={() => null}>
@@ -342,21 +347,23 @@ class DictionaryValues extends React.Component {
               header={{
                 key: <Trans>Key</Trans>,
                 description: <Trans>Description</Trans>,
-                ...(!isReadOnly && { action: <Trans>Action</Trans> })
+                ...(!isReadOnly &&
+                  isActive && { action: <Trans>Action</Trans> })
               }}
               renderRow={({ ...rowContent }) => ({
                 ...rowContent,
-                action: !isReadOnly && (
-                  <AddButton
-                    onClick={() =>
-                      this.setState({
-                        fieldToEdit: rowContent
-                      })
-                    }
-                  >
-                    <Trans>Edit</Trans>
-                  </AddButton>
-                )
+                action: !isReadOnly &&
+                  isActive && (
+                    <AddButton
+                      onClick={() =>
+                        this.setState({
+                          fieldToEdit: rowContent
+                        })
+                      }
+                    >
+                      <Trans>Edit</Trans>
+                    </AddButton>
+                  )
               })}
               tableName="dictionaries/values"
             />
