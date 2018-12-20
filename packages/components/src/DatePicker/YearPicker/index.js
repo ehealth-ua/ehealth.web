@@ -18,7 +18,10 @@ class YearPicker extends Component {
         <Header data-test="yearsHeader">
           <Button
             onMouseDown={e => e.preventDefault()}
-            onClick={this.decreaseYear}
+            onClick={e => {
+              e.preventDefault();
+              this.decreaseYear();
+            }}
             direction="backward"
           />
           <Title
@@ -29,7 +32,11 @@ class YearPicker extends Component {
           </Title>
           <Button
             onMouseDown={e => e.preventDefault()}
-            onClick={this.increaseYear}
+            onMouseUp={e => e.preventDefault()}
+            onClick={e => {
+              e.preventDefault();
+              this.increaseYear();
+            }}
             direction="forward"
           />
         </Header>
