@@ -21,6 +21,7 @@ type DateFieldProps = {|
   label?: string,
   hint?: string,
   warning?: string,
+  minDate?: string,
   placement?: string
 |};
 
@@ -42,6 +43,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
       warning,
       placement = "bottom",
       minDate,
+      maxDate,
       ...props
     } = this.props;
     const { isOpen } = this.state;
@@ -113,7 +115,8 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
             {({ input: { value, onChange } }) => (
               <DatePicker
                 placement={placement}
-                minDate={minDate}
+                minDate={this.getSelectedDate(minDate)}
+                maxDate={maxDate ? new Date(maxDate) : undefined}
                 selected={this.getSelectedDate(value)}
                 onDateSelected={this.handleDateSelect(onChange)}
               />
