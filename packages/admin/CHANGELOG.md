@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.19.0"></a>
+# [1.19.0](https://github.com/edenlabllc/ehealth.web/compare/v1.18.2...v1.19.0) (2018-12-20)
+
+
+### Features
+
+* **admin:** add automatic error tracking via Sentry ([dc783e1](https://github.com/edenlabllc/ehealth.web/commit/dc783e1))
+* **admin:** add feedback form to error modal ([c6f8a09](https://github.com/edenlabllc/ehealth.web/commit/c6f8a09))
+
+
+
+
+
 <a name="1.18.2"></a>
 ## [1.18.2](https://github.com/edenlabllc/ehealth.web/compare/v1.18.1...v1.18.2) (2018-12-20)
 
