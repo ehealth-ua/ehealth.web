@@ -30,6 +30,7 @@ import Tooltip from "../../../components/Tooltip";
 import * as Field from "../../../components/Field";
 import AddressView from "../../../components/AddressView";
 import Breadcrumbs from "../../../components/Breadcrumbs";
+import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
 import Pagination from "../../../components/Pagination";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
@@ -580,7 +581,7 @@ const Documents = ({ attachedDocuments }) =>
           <DefaultImageIcon />
         </Box>
         <Text color="rockmanBlue" lineHeight="1">
-          {type}
+          <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
         </Text>
       </SaveLink>
     </Box>

@@ -789,7 +789,7 @@ const Documents = ({ attachedDocuments }) =>
           <DefaultImageIcon />
         </Box>
         <Text color="rockmanBlue" lineHeight="1">
-          {type}
+          <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
         </Text>
       </SaveLink>
     </Box>

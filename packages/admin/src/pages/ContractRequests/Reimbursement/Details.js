@@ -25,6 +25,7 @@ import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
 import AddressView from "../../../components/AddressView";
 import Breadcrumbs from "../../../components/Breadcrumbs";
+import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
 import ModalAssigneeSearch from "../../../components/ModalAssigneeSearch";
 import WEEK_DAYS from "../../../helpers/weekDays";
@@ -433,7 +434,7 @@ const Documents = ({ attachedDocuments }) =>
           <DefaultImageIcon />
         </Box>
         <Text color="rockmanBlue" lineHeight="1">
-          {type}
+          <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
         </Text>
       </SaveLink>
     </Box>
