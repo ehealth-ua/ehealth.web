@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.19.4"></a>
+## [1.19.4](https://github.com/edenlabllc/ehealth.web/compare/v1.19.3...v1.19.4) (2018-12-21)
+
+
+### Bug Fixes
+
+* **admin:** change format minDate from string to date in DateField ([8566fb5](https://github.com/edenlabllc/ehealth.web/commit/8566fb5))
+* **admin:** checking min max date in getSelectedDate on RangeDateField ([05dd9ca](https://github.com/edenlabllc/ehealth.web/commit/05dd9ca))
+* **components:** add preventDefault on YearPicker on click for unsend form ([f134273](https://github.com/edenlabllc/ehealth.web/commit/f134273))
+* **components:** delete getForwardProps from DayPicker component for undisabled button encrease and decrease ([1d00592](https://github.com/edenlabllc/ehealth.web/commit/1d00592))
+* **components:** fix style on disabled and selected date in DatePicker ([8069e9f](https://github.com/edenlabllc/ehealth.web/commit/8069e9f))
+* **components:** fix view DatePicker with props minDate greater than current year ([4d6e782](https://github.com/edenlabllc/ehealth.web/commit/4d6e782))
+
+
+
+
+
 <a name="1.19.3"></a>
 ## [1.19.3](https://github.com/edenlabllc/ehealth.web/compare/v1.19.2...v1.19.3) (2018-12-21)
 

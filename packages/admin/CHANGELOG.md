@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.19.4"></a>
+## [1.19.4](https://github.com/edenlabllc/ehealth.web/compare/v1.19.3...v1.19.4) (2018-12-21)
+
+
+### Bug Fixes
+
+* **admin:** change format minDate from string to date in DateField ([8566fb5](https://github.com/edenlabllc/ehealth.web/commit/8566fb5))
+* **admin:** checking min max date in getSelectedDate on RangeDateField ([05dd9ca](https://github.com/edenlabllc/ehealth.web/commit/05dd9ca))
+
+
+
+
+
 <a name="1.19.2"></a>
 ## [1.19.2](https://github.com/edenlabllc/ehealth.web/compare/v1.19.1...v1.19.2) (2018-12-21)
 
