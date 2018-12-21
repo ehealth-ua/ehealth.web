@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.19.3"></a>
+## [1.19.3](https://github.com/edenlabllc/ehealth.web/compare/v1.19.2...v1.19.3) (2018-12-21)
+
+
+### Bug Fixes
+
+* update jest-puppeteer to 3.7.0 ([06a55e4](https://github.com/edenlabllc/ehealth.web/commit/06a55e4))
+
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/edenlabllc/ehealth.web/compare/v0.147.0...v1.0.0) (2018-12-04)
 
