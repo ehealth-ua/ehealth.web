@@ -126,7 +126,9 @@ class RangeDateField extends React.Component<
                   }
                   onBlur={this.handleBlur}
                   handleDateSelect={this.handleDateSelect}
-                  getSelectedDate={this.getSelectedDate}
+                  getSelectedDate={value =>
+                    this.getSelectedDate(value, propsTo.input.value)
+                  }
                   handleKeyPress={this.handleKeyPress}
                   maxDate={this.getMinMaxDate(propsTo.input.value)}
                   opened={this.state.opened === "start"}
@@ -144,7 +146,9 @@ class RangeDateField extends React.Component<
                   }
                   onBlur={this.handleBlur}
                   handleDateSelect={this.handleDateSelect}
-                  getSelectedDate={this.getSelectedDate}
+                  getSelectedDate={value =>
+                    this.getSelectedDate(value, propsFrom.input.value)
+                  }
                   handleKeyPress={this.handleKeyPress}
                   minDate={this.getMinMaxDate(propsFrom.input.value)}
                   opened={this.state.opened === "end"}
@@ -166,9 +170,16 @@ class RangeDateField extends React.Component<
     );
   }
 
-  getSelectedDate(value: string) {
+  getSelectedDate(value: string, rangedDate: string) {
     const parsedDate = Date.parse(value);
-    return new Date(isNaN(parsedDate) ? Date.now() : parsedDate);
+    const parsedRangedDate = Date.parse(rangedDate);
+    return new Date(
+      isNaN(parsedDate)
+        ? isNaN(parsedRangedDate)
+          ? Date.now()
+          : parsedRangedDate
+        : parsedDate
+    );
   }
 
   getMinMaxDate(value: string) {
