@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.19.1"></a>
+## [1.19.1](https://github.com/edenlabllc/ehealth.web/compare/v1.19.0...v1.19.1) (2018-12-21)
+
+
+### Bug Fixes
+
+* **admin:** trim spaces in the Key field on the Dictionary edit page ([3885ade](https://github.com/edenlabllc/ehealth.web/commit/3885ade))
+
+
+
+
+
 <a name="1.19.0"></a>
 # [1.19.0](https://github.com/edenlabllc/ehealth.web/compare/v1.18.2...v1.19.0) (2018-12-20)
 
