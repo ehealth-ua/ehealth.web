@@ -22,15 +22,12 @@ const DayPicker = ({
     firstDayOfWeek={1}
     showOutsideDays
   >
-    {({ calendars, getDateProps, getBackProps, getForwardProps }) =>
+    {({ calendars, getDateProps }) =>
       calendars.map(calendar => (
         <React.Fragment key={`${calendar.month}-${calendar.year}`}>
           <Header data-test="monthYear">
             <Button
-              {...getBackProps({
-                calendars,
-                "data-test": "backMonth"
-              })}
+              data-test="backMonth"
               onMouseDown={e => e.preventDefault()}
               onClick={decrease}
               direction="backward"
@@ -53,10 +50,7 @@ const DayPicker = ({
               </Title>
             </div>
             <Button
-              {...getForwardProps({
-                calendars,
-                "data-test": "forwardMonth"
-              })}
+              data-test="forwardMonth"
               onMouseDown={e => e.preventDefault()}
               onClick={increase}
               direction="forward"
