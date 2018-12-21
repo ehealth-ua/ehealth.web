@@ -446,6 +446,7 @@ class DictionaryValues extends React.Component {
                                       )
                                     }
                                     placeholder={translation}
+                                    parse={value => value.trim()}
                                   />
                                   <Validations field={`${name}.key`}>
                                     <Validation.Required
