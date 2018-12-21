@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.21.0"></a>
+# [1.21.0](https://github.com/edenlabllc/ehealth.web/compare/v1.20.0...v1.21.0) (2018-12-21)
+
+
+### Features
+
+* **admin:** add PrintOutContent in reimbursment CR ([e1266a7](https://github.com/edenlabllc/ehealth.web/commit/e1266a7))
+
+
+
+
+
 <a name="1.20.0"></a>
 # [1.20.0](https://github.com/edenlabllc/ehealth.web/compare/v1.19.4...v1.20.0) (2018-12-21)
 
