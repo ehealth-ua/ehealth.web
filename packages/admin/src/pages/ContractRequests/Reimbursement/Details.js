@@ -33,6 +33,7 @@ import WEEK_DAYS from "../../../helpers/weekDays";
 import Approve from "./Approve";
 import Update from "./Update";
 import Decline from "./Decline";
+import PrintOutContent from "./PrintOutContent";
 
 const ReimbursementContractRequestQuery = loader(
   "../../../graphql/ReimbursementContractRequestQuery.graphql"
@@ -44,6 +45,7 @@ const ReimbursementContractRequestDetails = () => (
     <Update path=":id/update/*" />
     <Approve path=":id/approve/*" />
     <Decline path=":id/decline/*" />
+    <PrintOutContent path=":id/print-out-content/*" />
   </Router>
 );
 
