@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.21.1"></a>
+## [1.21.1](https://github.com/edenlabllc/ehealth.web/compare/v1.21.0...v1.21.1) (2018-12-24)
+
+
+### Bug Fixes
+
+* **admin:** add owner and employee id to the Contracts Queries ([f8db475](https://github.com/edenlabllc/ehealth.web/commit/f8db475))
+
+
+
+
+
 <a name="1.21.0"></a>
 # [1.21.0](https://github.com/edenlabllc/ehealth.web/compare/v1.20.0...v1.21.0) (2018-12-21)
 
