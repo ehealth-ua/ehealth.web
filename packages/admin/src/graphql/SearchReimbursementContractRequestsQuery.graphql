@@ -25,6 +25,7 @@ query SearchReimbursementContractRequestsQuery(
       assignee {
         id
         party {
+          id
           firstName
           secondName
           lastName

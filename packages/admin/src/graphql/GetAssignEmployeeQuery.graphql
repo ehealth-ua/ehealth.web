@@ -10,6 +10,7 @@ query EmployeesQuery(
       id
       databaseId
       party {
+        id
         firstName
         secondName
         lastName

@@ -8,6 +8,7 @@ query CapitationCapitationContractRequestQuery($id: ID!) {
     nhsSigner {
       id
       party {
+        id
         firstName
         lastName
         secondName
@@ -23,6 +24,7 @@ query CapitationCapitationContractRequestQuery($id: ID!) {
     assignee {
       id
       party {
+        id
         firstName
         lastName
         secondName
@@ -53,6 +55,7 @@ query CapitationCapitationContractRequestQuery($id: ID!) {
       id
       databaseId
       party {
+        id
         firstName
         lastName
         secondName
@@ -92,6 +95,7 @@ query CapitationCapitationContractRequestQuery($id: ID!) {
         id
         databaseId
         party {
+          id
           firstName
           lastName
           secondName

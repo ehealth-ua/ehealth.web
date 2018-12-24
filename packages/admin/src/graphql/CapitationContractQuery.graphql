@@ -24,6 +24,7 @@ query CapitationContractQuery(
     nhsSigner {
       id
       party {
+        id
         firstName
         lastName
         secondName
@@ -75,6 +76,7 @@ query CapitationContractQuery(
       id
       databaseId
       party {
+        id
         firstName
         lastName
         secondName
@@ -137,6 +139,7 @@ query CapitationContractQuery(
           id
           databaseId
           party {
+            id
             firstName
             lastName
             secondName

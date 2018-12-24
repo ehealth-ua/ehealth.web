@@ -51,6 +51,7 @@ query ReimbursementContractQuery(
       id
       databaseId
       party {
+        id
         firstName
         lastName
         secondName

@@ -39,6 +39,7 @@ query SearchLegalEntitiesQuery(
       owner {
         id
         party {
+          id
           firstName
           lastName
           secondName

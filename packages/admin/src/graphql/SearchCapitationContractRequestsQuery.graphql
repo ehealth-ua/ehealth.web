@@ -24,6 +24,7 @@ query SearchCapitationContractRequestsQuery(
       assignee {
         id
         party {
+          id
           firstName
           secondName
           lastName

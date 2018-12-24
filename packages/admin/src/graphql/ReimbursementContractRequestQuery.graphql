@@ -8,6 +8,7 @@ query ReimbursementContractRequestQuery($id: ID!) {
     nhsSigner {
       id
       party {
+        id
         firstName
         lastName
         secondName
@@ -22,6 +23,7 @@ query ReimbursementContractRequestQuery($id: ID!) {
     assignee {
       id
       party {
+        id
         firstName
         lastName
         secondName
@@ -51,6 +53,7 @@ query ReimbursementContractRequestQuery($id: ID!) {
       id
       databaseId
       party {
+        id
         firstName
         lastName
         secondName
