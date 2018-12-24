@@ -37,6 +37,7 @@ query SearchLegalEntitiesQuery(
       status
       type
       owner {
+        id
         party {
           firstName
           lastName

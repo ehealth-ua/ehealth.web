@@ -23,6 +23,7 @@ query SearchReimbursementContractsQuery(
       status
       statusReason
       contractorLegalEntity {
+        id
         edrpou
       }
       medicalProgram {

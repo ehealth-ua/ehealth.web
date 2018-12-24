@@ -72,6 +72,7 @@ query CapitationContractQuery(
       }
     }
     contractorOwner {
+      id
       databaseId
       party {
         firstName
@@ -133,6 +134,7 @@ query CapitationContractQuery(
     ) {
       nodes {
         employee {
+          id
           databaseId
           party {
             firstName
@@ -162,6 +164,7 @@ query CapitationContractQuery(
     }
     externalContractors {
       legalEntity {
+        id
         name
       }
       contract {
@@ -171,6 +174,7 @@ query CapitationContractQuery(
       }
       divisions {
         division {
+          id
           name
         }
         medicalService

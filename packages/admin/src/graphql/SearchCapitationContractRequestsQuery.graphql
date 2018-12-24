@@ -21,8 +21,8 @@ query SearchCapitationContractRequestsQuery(
       startDate
       endDate
       status
-      databaseId
       assignee {
+        id
         party {
           firstName
           secondName

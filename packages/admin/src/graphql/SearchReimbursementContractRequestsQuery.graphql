@@ -23,6 +23,7 @@ query SearchReimbursementContractRequestsQuery(
       status
       databaseId
       assignee {
+        id
         party {
           firstName
           secondName

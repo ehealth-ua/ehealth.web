@@ -14,15 +14,10 @@ query ReimbursementContractRequestQuery($id: ID!) {
       }
     }
     nhsLegalEntity {
-      databaseId
-    }
-    issueCity
-    contractorLegalEntity {
-      edrpou
-      name
       id
       databaseId
     }
+    issueCity
     printoutContent
     assignee {
       id
@@ -36,6 +31,7 @@ query ReimbursementContractRequestQuery($id: ID!) {
     endDate
     contractorLegalEntity {
       id
+      databaseId
       name
       edrpou
       addresses {
@@ -52,6 +48,7 @@ query ReimbursementContractRequestQuery($id: ID!) {
       }
     }
     contractorOwner {
+      id
       databaseId
       party {
         firstName
