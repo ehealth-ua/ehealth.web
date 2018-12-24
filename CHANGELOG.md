@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.21.2"></a>
+## [1.21.2](https://github.com/edenlabllc/ehealth.web/compare/v1.21.1...v1.21.2) (2018-12-24)
+
+
+### Bug Fixes
+
+* **admin:** add id to the party in the Queries ([a8bbf64](https://github.com/edenlabllc/ehealth.web/commit/a8bbf64))
+
+
+
+
+
 <a name="1.21.1"></a>
 ## [1.21.1](https://github.com/edenlabllc/ehealth.web/compare/v1.21.0...v1.21.1) (2018-12-24)
 
