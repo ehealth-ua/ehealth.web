@@ -24,6 +24,7 @@ import * as Field from "../../../components/Field";
 import Link from "../../../components/Link";
 import Table from "../../../components/Table";
 import Pagination from "../../../components/Pagination";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import Button, { IconButton } from "../../../components/Button";
 import Badge from "../../../components/Badge";
 import STATUSES from "../../../helpers/statuses";
@@ -60,6 +61,10 @@ const ReimbursementContractsSearch = () => (
         const { filter, first, last, after, before, orderBy } = locationParams;
         return (
           <>
+            <SearchContractsForm
+              initialValues={locationParams}
+              onSubmit={setLocationParams}
+            />
             <Query
               query={SearchReimbursementContractsQuery}
               fetchPolicy="network-only"
@@ -77,23 +82,16 @@ const ReimbursementContractsSearch = () => (
                 filter: contractFormFilteredParams(filter)
               }}
             >
-              {({
-                loading,
-                error,
-                data: {
-                  reimbursementContracts: {
-                    nodes: contracts = [],
-                    pageInfo
-                  } = {}
-                } = {}
-              }) => (
-                <>
-                  <SearchContractsForm
-                    initialValues={locationParams}
-                    onSubmit={setLocationParams}
-                  />
-                  {!error &&
-                    contracts.length > 0 && (
+              {({ loading, error, data }) => {
+                if (error || isEmpty(data)) return null;
+                const {
+                  nodes: contracts = [],
+                  pageInfo
+                } = data.reimbursementContracts;
+
+                return (
+                  <LoadingOverlay loading={loading}>
+                    {contracts.length > 0 && (
                       <>
                         <Table
                           data={contracts}
@@ -181,8 +179,9 @@ const ReimbursementContractsSearch = () => (
                         <Pagination {...pageInfo} />
                       </>
                     )}
-                </>
-              )}
+                  </LoadingOverlay>
+                );
+              }}
             </Query>
           </>
         );

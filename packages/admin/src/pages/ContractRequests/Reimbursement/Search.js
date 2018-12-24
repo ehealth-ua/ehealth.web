@@ -23,6 +23,7 @@ import Link from "../../../components/Link";
 import Pagination from "../../../components/Pagination";
 import * as Field from "../../../components/Field";
 import AssigneeSearch from "../../../components/AssigneeSearch";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import Button, { IconButton } from "../../../components/Button";
 
 import { SEARCH_REQUEST_PATTERN } from "../../../constants/contractRequests";
@@ -58,37 +59,38 @@ const ReimbursementContractRequestsSearch = () => (
       {({ locationParams, setLocationParams }) => {
         const { filter, first, last, after, before, orderBy } = locationParams;
         return (
-          <Query
-            query={SearchReimbursementContractRequestsQuery}
-            fetchPolicy="network-only"
-            variables={{
-              first:
-                !first && !last
-                  ? ITEMS_PER_PAGE[0]
-                  : first
-                    ? parseInt(first)
-                    : undefined,
-              last: last ? parseInt(last) : undefined,
-              after,
-              before,
-              orderBy,
-              filter: contractFormFilteredParams(filter)
-            }}
-          >
-            {({ loading, error, data }) => {
-              if (loading) return null;
-              const {
-                nodes: reimbursementContractRequests = [],
-                pageInfo
-              } = data.reimbursementContractRequests;
-              return (
-                <>
-                  <SearchContractRequestsForm
-                    initialValues={locationParams}
-                    onSubmit={setLocationParams}
-                  />
-                  {!error &&
-                    reimbursementContractRequests.length > 0 && (
+          <>
+            <SearchContractRequestsForm
+              initialValues={locationParams}
+              onSubmit={setLocationParams}
+            />
+            <Query
+              query={SearchReimbursementContractRequestsQuery}
+              fetchPolicy="network-only"
+              variables={{
+                first:
+                  !first && !last
+                    ? ITEMS_PER_PAGE[0]
+                    : first
+                      ? parseInt(first)
+                      : undefined,
+                last: last ? parseInt(last) : undefined,
+                after,
+                before,
+                orderBy,
+                filter: contractFormFilteredParams(filter)
+              }}
+            >
+              {({ loading, error, data }) => {
+                if (error || isEmpty(data)) return null;
+                const {
+                  nodes: reimbursementContractRequests = [],
+                  pageInfo
+                } = data.reimbursementContractRequests;
+
+                return (
+                  <LoadingOverlay loading={loading}>
+                    {reimbursementContractRequests.length > 0 && (
                       <>
                         <Table
                           data={reimbursementContractRequests}
@@ -182,10 +184,11 @@ const ReimbursementContractRequestsSearch = () => (
                         <Pagination {...pageInfo} />
                       </>
                     )}
-                </>
-              );
-            }}
-          </Query>
+                  </LoadingOverlay>
+                );
+              }}
+            </Query>
+          </>
         );
       }}
     </LocationParams>
