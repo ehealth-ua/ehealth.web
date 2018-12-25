@@ -4,7 +4,8 @@ import { Router, Link } from "@reach/router";
 import { Flex, Box } from "rebass/emotion";
 import system from "system-components/emotion";
 import { loader } from "graphql.macro";
-import { Trans } from "@lingui/macro";
+import { Trans, t } from "@lingui/macro";
+import { I18n } from "@lingui/react";
 import {
   LocationParams,
   Form,
@@ -168,6 +169,7 @@ const UpdateContractRequest = ({
                     const {
                       nhsSignerId,
                       nhsContractPrice,
+                      miscellaneous,
                       nhsPaymentMethod: { key } = {}
                     } = locationParams;
                     await updateContractRequest({
@@ -177,7 +179,8 @@ const UpdateContractRequest = ({
                           id,
                           nhsPaymentMethod: key,
                           nhsContractPrice: parseInt(nhsContractPrice, 10),
-                          nhsSignerId: nhsSignerId ? nhsSignerId.id : undefined
+                          nhsSignerId: nhsSignerId ? nhsSignerId.id : undefined,
+                          miscellaneous: miscellaneous || ""
                         }
                       }
                     });
@@ -228,17 +231,16 @@ const UpdateContractRequest = ({
                       />
                     </Box>
                     <Box width={2 / 5}>
-                      <Trans
-                        id="Choose base"
-                        render={({ translation }) => (
+                      <I18n>
+                        {({ i18n }) => (
                           <Field.Text
                             name="nhsSignerBase"
                             label={<Trans>Basis</Trans>}
-                            placeholder={translation}
+                            placeholder={i18n._(t`Choose base`)}
                             maxlength={255}
                           />
                         )}
-                      />
+                      </I18n>
                       <Validation.Required
                         field="nhsSignerBase"
                         message={<Trans>Required field</Trans>}
@@ -301,9 +303,8 @@ const UpdateContractRequest = ({
                     </Box>
                   </Flex>
                   <Box width={2 / 5}>
-                    <Trans
-                      id="Enter city"
-                      render={({ translation }) => (
+                    <I18n>
+                      {({ i18n }) => (
                         <Field.Text
                           name="issueCity"
                           label={
@@ -311,20 +312,19 @@ const UpdateContractRequest = ({
                               The city of the conclusion of the contract
                             </Trans>
                           }
-                          placeholder={translation}
+                          placeholder={i18n._(t`Enter city`)}
                           maxlength={100}
                         />
                       )}
-                    />
+                    </I18n>
                     <Validation.Required
                       field="issueCity"
                       message={<Trans>Required field</Trans>}
                     />
                   </Box>
                   <Box width={2 / 5}>
-                    <Trans
-                      id="List the conditions"
-                      render={({ translation }) => (
+                    <I18n>
+                      {({ i18n }) => (
                         <Field.Textarea
                           name="miscellaneous"
                           label={
@@ -333,11 +333,11 @@ const UpdateContractRequest = ({
                               service)
                             </Trans>
                           }
-                          placeholder={translation}
+                          placeholder={i18n._(t`List the conditions`)}
                           rows={5}
                         />
                       )}
-                    />
+                    </I18n>
                   </Box>
                   <Flex mt={5}>
                     <Box mr={3}>
