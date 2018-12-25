@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.21.4"></a>
+## [1.21.4](https://github.com/edenlabllc/ehealth.web/compare/v1.21.3...v1.21.4) (2018-12-25)
+
+
+### Bug Fixes
+
+* **admin:** change translation method for the Fields for preventing rerendering, add ability to clear the miscellaneous param ([31b13ef](https://github.com/edenlabllc/ehealth.web/commit/31b13ef))
+
+
+
+
+
 <a name="1.21.3"></a>
 ## [1.21.3](https://github.com/edenlabllc/ehealth.web/compare/v1.21.2...v1.21.3) (2018-12-24)
 
