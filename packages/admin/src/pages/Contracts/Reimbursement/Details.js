@@ -119,7 +119,7 @@ const Details = ({ id }) => (
                     isSuspended: isSuspended ? (
                       <PositiveIcon />
                     ) : (
-                      <NegativeIcon />
+                      <NegativeIcon fill="#ED1C24" stroke="#ED1C24" />
                     )
                   }}
                   color="#7F8FA4"

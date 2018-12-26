@@ -128,7 +128,10 @@ const CapitationContractsSearch = ({ uri }) => (
                                 {isSuspended ? (
                                   <PositiveIcon />
                                 ) : (
-                                  <NegativeIcon />
+                                  <NegativeIcon
+                                    fill="#ED1C24"
+                                    stroke="#ED1C24"
+                                  />
                                 )}
                               </Flex>
                             ),
