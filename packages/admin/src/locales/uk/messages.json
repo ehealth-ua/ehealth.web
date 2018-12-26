@@ -7,9 +7,9 @@
     "translation": "Номер рахунку",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 401],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 358],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 361],
       ["src/pages/Contracts/Capitation/Details.js", 519],
-      ["src/pages/Contracts/Reimbursement/Details.js", 457]
+      ["src/pages/Contracts/Reimbursement/Details.js", 458]
     ]
   },
   "Accounts": {
@@ -24,7 +24,7 @@
     "translation": "Дія",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 597],
-      ["src/pages/Dictionaries/Details.js", 345],
+      ["src/pages/Dictionaries/Details.js", 351],
       ["src/pages/Dictionaries/Search.js", 71],
       ["src/pages/LegalEntities/Search.js", 120],
       ["src/pages/Persons/Details.js", 289],
@@ -33,7 +33,7 @@
   },
   "Add another": {
     "translation": "Додати ще",
-    "origin": [["src/pages/Dictionaries/Details.js", 506]]
+    "origin": [["src/pages/Dictionaries/Details.js", 514]]
   },
   "Add related legal entity": {
     "translation": "Додати підпорядкований медзаклад",
@@ -41,19 +41,19 @@
   },
   "Add tag": {
     "translation": "Додати тег",
-    "origin": [["src/pages/Dictionaries/Details.js", 173]]
+    "origin": [["src/pages/Dictionaries/Details.js", 177]]
   },
   "Add value": {
     "translation": "Додати значення",
-    "origin": [["src/pages/Dictionaries/Details.js", 290]]
+    "origin": [["src/pages/Dictionaries/Details.js", 295]]
   },
   "Added": {
     "translation": "Додано",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 135],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 144],
-      ["src/pages/Contracts/Capitation/Search.js", 135],
-      ["src/pages/Contracts/Reimbursement/Search.js", 145],
+      ["src/pages/ContractRequests/Capitation/Search.js", 112],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 110],
+      ["src/pages/Contracts/Capitation/Search.js", 110],
+      ["src/pages/Contracts/Reimbursement/Search.js", 110],
       ["src/pages/LegalEntities/Details.js", 677],
       ["src/pages/Persons/Search.js", 79]
     ]
@@ -63,12 +63,12 @@
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 353],
       ["src/pages/ContractRequests/Capitation/Details.js", 419],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 310],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 376],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 313],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 379],
       ["src/pages/Contracts/Capitation/Details.js", 471],
       ["src/pages/Contracts/Capitation/Details.js", 588],
-      ["src/pages/Contracts/Reimbursement/Details.js", 409],
-      ["src/pages/Contracts/Reimbursement/Details.js", 522],
+      ["src/pages/Contracts/Reimbursement/Details.js", 410],
+      ["src/pages/Contracts/Reimbursement/Details.js", 523],
       ["src/pages/Declarations/Details.js", 308],
       ["src/pages/Declarations/Details.js", 347],
       ["src/pages/LegalEntities/Details.js", 298],
@@ -80,20 +80,20 @@
   "All contracts": {
     "translation": "Всі договори",
     "origin": [
-      ["src/pages/Contracts/Capitation/Search.js", 466],
-      ["src/pages/Contracts/Capitation/Search.js", 482]
+      ["src/pages/Contracts/Capitation/Search.js", 440],
+      ["src/pages/Contracts/Capitation/Search.js", 456]
     ]
   },
   "All statuses": {
     "translation": "Всі статуси",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 251],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 305],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 425],
-      ["src/pages/Contracts/Capitation/Search.js", 297],
-      ["src/pages/Contracts/Capitation/Search.js", 432],
-      ["src/pages/Contracts/Reimbursement/Search.js", 302],
-      ["src/pages/Contracts/Reimbursement/Search.js", 437],
+      ["src/pages/ContractRequests/Capitation/Search.js", 228],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 271],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 388],
+      ["src/pages/Contracts/Capitation/Search.js", 272],
+      ["src/pages/Contracts/Capitation/Search.js", 406],
+      ["src/pages/Contracts/Reimbursement/Search.js", 267],
+      ["src/pages/Contracts/Reimbursement/Search.js", 401],
       ["src/pages/LegalEntities/Search.js", 324],
       ["src/pages/LegalEntityMergeJobs/Search.js", 225],
       ["src/pages/LegalEntityMergeJobs/Search.js", 273],
@@ -108,7 +108,7 @@
     "translation": "Затвердити",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 175],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 154],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 157],
       ["src/pages/Declarations/Details.js", 188]
     ]
   },
@@ -137,7 +137,7 @@
     "translation": "Увага! Після розірвання договору, цю дію не можна буде скасувати",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 176],
-      ["src/pages/Contracts/Reimbursement/Details.js", 160]
+      ["src/pages/Contracts/Reimbursement/Details.js", 161]
     ]
   },
   "Attention, legal entity was reorganized": {
@@ -163,6 +163,7 @@
     "translation": "Повернутись",
     "origin": [
       ["src/pages/ContractRequests/Capitation/PrintOutContent.js", 57],
+      ["src/pages/ContractRequests/Reimbursement/PrintOutContent.js", 57],
       ["src/pages/LegalEntities/Details.js", 189]
     ]
   },
@@ -170,27 +171,27 @@
     "translation": "Банк",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 399],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 356],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 359],
       ["src/pages/Contracts/Capitation/Details.js", 517],
-      ["src/pages/Contracts/Reimbursement/Details.js", 455]
+      ["src/pages/Contracts/Reimbursement/Details.js", 456]
     ]
   },
   "Bank Code (MFO)": {
     "translation": "Код банку (МФО)",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 400],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 357],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 360],
       ["src/pages/Contracts/Capitation/Details.js", 518],
-      ["src/pages/Contracts/Reimbursement/Details.js", 456]
+      ["src/pages/Contracts/Reimbursement/Details.js", 457]
     ]
   },
   "Based on": {
     "translation": "Діє на основі",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 380],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 337],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 340],
       ["src/pages/Contracts/Capitation/Details.js", 498],
-      ["src/pages/Contracts/Reimbursement/Details.js", 436]
+      ["src/pages/Contracts/Reimbursement/Details.js", 437]
     ]
   },
   "Basis": {
@@ -241,11 +242,11 @@
   },
   "Change description": {
     "translation": "Змінити опис",
-    "origin": [["src/pages/Dictionaries/Details.js", 467]]
+    "origin": [["src/pages/Dictionaries/Details.js", 475]]
   },
   "Change key": {
     "translation": "Змінити ключ",
-    "origin": [["src/pages/Dictionaries/Details.js", 436]]
+    "origin": [["src/pages/Dictionaries/Details.js", 443]]
   },
   "Choose assignee": {
     "translation": "Оберіть виконавця",
@@ -264,15 +265,15 @@
   "Choose medical program": {
     "translation": "Оберіть медичну програму",
     "origin": [
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 459],
-      ["src/pages/Contracts/Reimbursement/Search.js", 481]
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 422],
+      ["src/pages/Contracts/Reimbursement/Search.js", 445]
     ]
   },
   "Choose payment method": {
     "translation": "Оберіть cпосіб",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Update.js", 269],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 257]
+      ["src/pages/ContractRequests/Capitation/Update.js", 270],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 259]
     ]
   },
   "Clinics verification": {
@@ -282,9 +283,9 @@
   "Close": {
     "translation": "Закрити",
     "origin": [
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 513],
-      ["src/pages/Contracts/Capitation/Search.js", 504],
-      ["src/pages/Contracts/Reimbursement/Search.js", 535],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 476],
+      ["src/pages/Contracts/Capitation/Search.js", 478],
+      ["src/pages/Contracts/Reimbursement/Search.js", 499],
       ["src/pages/LegalEntities/Details.js", 552],
       ["src/pages/LegalEntities/Details.js", 566]
     ]
@@ -325,27 +326,27 @@
     "translation": "Сума контракту",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Approve.js", 115],
-      ["src/pages/ContractRequests/Capitation/Update.js", 251]
+      ["src/pages/ContractRequests/Capitation/Update.js", 252]
     ]
   },
   "Contract ID": {
     "translation": "ID договору",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 115],
-      ["src/pages/Contracts/Reimbursement/Details.js", 99]
+      ["src/pages/Contracts/Reimbursement/Details.js", 100]
     ]
   },
   "Contract Number": {
     "translation": "Номер договору",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 537],
-      ["src/pages/ContractRequests/Capitation/Search.js", 124],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 137],
+      ["src/pages/ContractRequests/Capitation/Search.js", 101],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 103],
       ["src/pages/Contracts/Capitation/Details.js", 117],
-      ["src/pages/Contracts/Capitation/Details.js", 804],
-      ["src/pages/Contracts/Capitation/Search.js", 129],
-      ["src/pages/Contracts/Reimbursement/Details.js", 101],
-      ["src/pages/Contracts/Reimbursement/Search.js", 138]
+      ["src/pages/Contracts/Capitation/Details.js", 809],
+      ["src/pages/Contracts/Capitation/Search.js", 104],
+      ["src/pages/Contracts/Reimbursement/Details.js", 102],
+      ["src/pages/Contracts/Reimbursement/Search.js", 103]
     ]
   },
   "Contract Price": {
@@ -358,23 +359,23 @@
   "Contract Request status": {
     "translation": "Статус заяви",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 256],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 310],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 430]
+      ["src/pages/ContractRequests/Capitation/Search.js", 233],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 276],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 393]
     ]
   },
   "Contract end date": {
     "translation": "Дата закінчення",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 539],
-      ["src/pages/ContractRequests/Capitation/Search.js", 280],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 333],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 453],
-      ["src/pages/Contracts/Capitation/Details.js", 806],
-      ["src/pages/Contracts/Capitation/Search.js", 325],
-      ["src/pages/Contracts/Capitation/Search.js", 460],
-      ["src/pages/Contracts/Reimbursement/Search.js", 330],
-      ["src/pages/Contracts/Reimbursement/Search.js", 465]
+      ["src/pages/ContractRequests/Capitation/Search.js", 257],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 299],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 416],
+      ["src/pages/Contracts/Capitation/Details.js", 811],
+      ["src/pages/Contracts/Capitation/Search.js", 300],
+      ["src/pages/Contracts/Capitation/Search.js", 434],
+      ["src/pages/Contracts/Reimbursement/Search.js", 295],
+      ["src/pages/Contracts/Reimbursement/Search.js", 429]
     ]
   },
   "Contract request ID": {
@@ -386,25 +387,25 @@
       ["src/pages/ContractRequests/Capitation/Update.js", 80],
       ["src/pages/ContractRequests/Reimbursement/Approve.js", 61],
       ["src/pages/ContractRequests/Reimbursement/Decline.js", 65],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 92],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 95],
       ["src/pages/ContractRequests/Reimbursement/Update.js", 70],
       ["src/pages/Contracts/Capitation/Details.js", 116],
-      ["src/pages/Contracts/Reimbursement/Details.js", 100],
+      ["src/pages/Contracts/Reimbursement/Details.js", 101],
       ["src/pages/Declarations/Details.js", 285]
     ]
   },
   "Contract request databaseID": {
     "translation": "ID заяви на укладення договору",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 122],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 131]
+      ["src/pages/ContractRequests/Capitation/Search.js", 99],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 97]
     ]
   },
   "Contract request details": {
     "translation": "Деталі заяви",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 105],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 84]
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 87]
     ]
   },
   "Contract request list": {
@@ -419,38 +420,38 @@
     "translation": "Перелік заяв",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 102],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 81]
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 84]
     ]
   },
   "Contract start date": {
     "translation": "Дата укладення",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 538],
-      ["src/pages/ContractRequests/Capitation/Search.js", 274],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 328],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 448],
-      ["src/pages/Contracts/Capitation/Details.js", 805],
-      ["src/pages/Contracts/Capitation/Search.js", 320],
-      ["src/pages/Contracts/Capitation/Search.js", 455],
-      ["src/pages/Contracts/Reimbursement/Search.js", 325],
-      ["src/pages/Contracts/Reimbursement/Search.js", 460]
+      ["src/pages/ContractRequests/Capitation/Search.js", 251],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 294],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 411],
+      ["src/pages/Contracts/Capitation/Details.js", 810],
+      ["src/pages/Contracts/Capitation/Search.js", 295],
+      ["src/pages/Contracts/Capitation/Search.js", 429],
+      ["src/pages/Contracts/Reimbursement/Search.js", 290],
+      ["src/pages/Contracts/Reimbursement/Search.js", 424]
     ]
   },
   "Contract state": {
     "translation": "Стан договору",
     "origin": [
-      ["src/pages/Contracts/Capitation/Search.js", 134],
-      ["src/pages/Contracts/Reimbursement/Search.js", 144],
-      ["src/pages/Contracts/Reimbursement/Search.js", 473]
+      ["src/pages/Contracts/Capitation/Search.js", 109],
+      ["src/pages/Contracts/Reimbursement/Search.js", 109],
+      ["src/pages/Contracts/Reimbursement/Search.js", 437]
     ]
   },
   "Contract status": {
     "translation": "Статус договору",
     "origin": [
-      ["src/pages/Contracts/Capitation/Search.js", 302],
-      ["src/pages/Contracts/Capitation/Search.js", 437],
-      ["src/pages/Contracts/Reimbursement/Search.js", 307],
-      ["src/pages/Contracts/Reimbursement/Search.js", 442]
+      ["src/pages/Contracts/Capitation/Search.js", 277],
+      ["src/pages/Contracts/Capitation/Search.js", 411],
+      ["src/pages/Contracts/Reimbursement/Search.js", 272],
+      ["src/pages/Contracts/Reimbursement/Search.js", 406]
     ]
   },
   "Contractors": {
@@ -549,32 +550,32 @@
   "Delete": {
     "translation": "Видалити",
     "origin": [
-      ["src/pages/Dictionaries/Details.js", 490],
+      ["src/pages/Dictionaries/Details.js", 498],
       ["src/pages/LegalEntities/Details.js", 581]
     ]
   },
   "Description": {
     "translation": "Опис",
     "origin": [
-      ["src/pages/Dictionaries/Details.js", 327],
-      ["src/pages/Dictionaries/Details.js", 344],
-      ["src/pages/Dictionaries/Details.js", 469]
+      ["src/pages/Dictionaries/Details.js", 332],
+      ["src/pages/Dictionaries/Details.js", 349],
+      ["src/pages/Dictionaries/Details.js", 477]
     ]
   },
   "Details": {
     "translation": "Показати деталі",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 136],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 146],
-      ["src/pages/Contracts/Capitation/Search.js", 137],
-      ["src/pages/Contracts/Reimbursement/Search.js", 147]
+      ["src/pages/ContractRequests/Capitation/Search.js", 113],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 112],
+      ["src/pages/Contracts/Capitation/Search.js", 112],
+      ["src/pages/Contracts/Reimbursement/Search.js", 112]
     ]
   },
   "Details of the contract": {
     "translation": "Деталі договору",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 107],
-      ["src/pages/Contracts/Reimbursement/Details.js", 91]
+      ["src/pages/Contracts/Reimbursement/Details.js", 92]
     ]
   },
   "Details of the patient": {
@@ -601,9 +602,9 @@
     "translation": "Відділення",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 209],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 188],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 191],
       ["src/pages/Contracts/Capitation/Details.js", 220],
-      ["src/pages/Contracts/Reimbursement/Details.js", 204],
+      ["src/pages/Contracts/Reimbursement/Details.js", 205],
       ["src/pages/Declarations/Details.js", 232]
     ]
   },
@@ -611,7 +612,7 @@
     "translation": "Відділення та послуги",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 536],
-      ["src/pages/Contracts/Capitation/Details.js", 803]
+      ["src/pages/Contracts/Capitation/Details.js", 808]
     ]
   },
   "Division name": {
@@ -619,10 +620,10 @@
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 418],
       ["src/pages/ContractRequests/Capitation/Details.js", 477],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 375],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 378],
       ["src/pages/Contracts/Capitation/Details.js", 587],
       ["src/pages/Contracts/Capitation/Details.js", 718],
-      ["src/pages/Contracts/Reimbursement/Details.js", 521],
+      ["src/pages/Contracts/Reimbursement/Details.js", 522],
       ["src/pages/Persons/Details.js", 286]
     ]
   },
@@ -645,9 +646,9 @@
     "translation": "Документи",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 218],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 191],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 194],
       ["src/pages/Contracts/Capitation/Details.js", 229],
-      ["src/pages/Contracts/Reimbursement/Details.js", 207],
+      ["src/pages/Contracts/Reimbursement/Details.js", 208],
       ["src/pages/Declarations/Details.js", 241]
     ]
   },
@@ -657,17 +658,17 @@
       ["src/pages/ContractRequests/Capitation/Approve.js", 67],
       ["src/pages/ContractRequests/Capitation/Decline.js", 76],
       ["src/pages/ContractRequests/Capitation/Details.js", 351],
-      ["src/pages/ContractRequests/Capitation/Search.js", 125],
+      ["src/pages/ContractRequests/Capitation/Search.js", 102],
       ["src/pages/ContractRequests/Capitation/Update.js", 82],
       ["src/pages/ContractRequests/Reimbursement/Approve.js", 63],
       ["src/pages/ContractRequests/Reimbursement/Decline.js", 67],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 308],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 133],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 311],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 99],
       ["src/pages/ContractRequests/Reimbursement/Update.js", 72],
       ["src/pages/Contracts/Capitation/Details.js", 469],
-      ["src/pages/Contracts/Capitation/Search.js", 128],
-      ["src/pages/Contracts/Reimbursement/Details.js", 407],
-      ["src/pages/Contracts/Reimbursement/Search.js", 137],
+      ["src/pages/Contracts/Capitation/Search.js", 103],
+      ["src/pages/Contracts/Reimbursement/Details.js", 408],
+      ["src/pages/Contracts/Reimbursement/Search.js", 102],
       ["src/pages/Declarations/Details.js", 306],
       ["src/pages/LegalEntities/Add.js", 100],
       ["src/pages/LegalEntities/Add.js", 181],
@@ -682,15 +683,15 @@
   "EDRPOU or Contract number": {
     "translation": "ЄДРПОУ або Номер договору",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 227],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 241],
-      ["src/pages/Contracts/Capitation/Search.js", 237],
-      ["src/pages/Contracts/Reimbursement/Search.js", 243]
+      ["src/pages/ContractRequests/Capitation/Search.js", 204],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 207],
+      ["src/pages/Contracts/Capitation/Search.js", 212],
+      ["src/pages/Contracts/Reimbursement/Search.js", 208]
     ]
   },
   "Edit": {
     "translation": "Редагувати",
-    "origin": [["src/pages/Dictionaries/Details.js", 357]]
+    "origin": [["src/pages/Dictionaries/Details.js", 364]]
   },
   "Edit comment": {
     "translation": "Редагувати коментар",
@@ -707,9 +708,9 @@
     "translation": "Email",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 426],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 382],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 385],
       ["src/pages/Contracts/Capitation/Details.js", 594],
-      ["src/pages/Contracts/Reimbursement/Details.js", 528],
+      ["src/pages/Contracts/Reimbursement/Details.js", 529],
       ["src/pages/Declarations/Details.js", 350],
       ["src/pages/LegalEntities/Details.js", 300],
       ["src/pages/LegalEntities/Details.js", 812]
@@ -721,7 +722,7 @@
   },
   "End date of the contract": {
     "translation": "Кінцева дата дії договору",
-    "origin": [["src/pages/Contracts/Reimbursement/Details.js", 254]]
+    "origin": [["src/pages/Contracts/Reimbursement/Details.js", 255]]
   },
   "End date of the declaration": {
     "translation": "Кінцева дата дії декларації",
@@ -734,8 +735,8 @@
   "Enter city": {
     "translation": "Введіть місто",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Update.js", 303],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 234]
+      ["src/pages/ContractRequests/Capitation/Update.js", 304],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 235]
     ]
   },
   "Enter comment": {
@@ -755,14 +756,14 @@
   },
   "Enter description": {
     "translation": "Введіть опис",
-    "origin": [["src/pages/Dictionaries/Details.js", 322]]
+    "origin": [["src/pages/Dictionaries/Details.js", 327]]
   },
   "Enter division name": {
     "translation": "Введіть назву відділення",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 538],
       ["src/pages/Contracts/Capitation/Details.js", 667],
-      ["src/pages/Contracts/Reimbursement/Details.js", 476],
+      ["src/pages/Contracts/Reimbursement/Details.js", 477],
       ["src/pages/LegalEntities/Details.js", 777]
     ]
   },
@@ -792,7 +793,7 @@
     "translation": "Вкажіть причину розірвання договору",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 181],
-      ["src/pages/Contracts/Reimbursement/Details.js", 165]
+      ["src/pages/Contracts/Reimbursement/Details.js", 166]
     ]
   },
   "Enter terminate declaration reason": {
@@ -801,7 +802,7 @@
   },
   "Enter value": {
     "translation": "Введіть значення",
-    "origin": [["src/pages/Dictionaries/Details.js", 423]]
+    "origin": [["src/pages/Dictionaries/Details.js", 430]]
   },
   "Example: Order of the Cabinet of Ministers of Ukraine # 73465 ": {
     "translation": "Приклад: Наказ КМУ № 73465",
@@ -815,7 +816,7 @@
     "translation": "Кінцева дата дії контракту",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 302],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 257],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 260],
       ["src/pages/Contracts/Capitation/Details.js", 317]
     ]
   },
@@ -850,7 +851,7 @@
     "translation": "Знайти відділення",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 543],
-      ["src/pages/Contracts/Reimbursement/Details.js", 481],
+      ["src/pages/Contracts/Reimbursement/Details.js", 482],
       ["src/pages/LegalEntities/Details.js", 782]
     ]
   },
@@ -891,9 +892,9 @@
     "translation": "Загальна інформація",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 203],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 182],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 185],
       ["src/pages/Contracts/Capitation/Details.js", 214],
-      ["src/pages/Contracts/Reimbursement/Details.js", 198],
+      ["src/pages/Contracts/Reimbursement/Details.js", 199],
       ["src/pages/Declarations/Details.js", 226]
     ]
   },
@@ -908,9 +909,9 @@
   "Hide filters": {
     "translation": "Сховати фільтри",
     "origin": [
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 408],
-      ["src/pages/Contracts/Capitation/Search.js", 419],
-      ["src/pages/Contracts/Reimbursement/Search.js", 423]
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 371],
+      ["src/pages/Contracts/Capitation/Search.js", 393],
+      ["src/pages/Contracts/Reimbursement/Search.js", 387]
     ]
   },
   "ID": {
@@ -918,8 +919,8 @@
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 476],
       ["src/pages/Contracts/Capitation/Details.js", 717],
-      ["src/pages/Contracts/Capitation/Search.js", 127],
-      ["src/pages/Contracts/Reimbursement/Search.js", 136],
+      ["src/pages/Contracts/Capitation/Search.js", 102],
+      ["src/pages/Contracts/Reimbursement/Search.js", 101],
       ["src/pages/LegalEntities/Search.js", 111],
       ["src/pages/LegalEntityMergeJobs/Search.js", 110]
     ]
@@ -937,9 +938,9 @@
     "translation": "Початкова дата дії договору",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 301],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 256],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 259],
       ["src/pages/Contracts/Capitation/Details.js", 316],
-      ["src/pages/Contracts/Reimbursement/Details.js", 253]
+      ["src/pages/Contracts/Reimbursement/Details.js", 254]
     ]
   },
   "Initial date of the declaration": {
@@ -961,10 +962,10 @@
   "Invalid number": {
     "translation": "Невірний номер",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 241],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 255],
-      ["src/pages/Contracts/Capitation/Search.js", 251],
-      ["src/pages/Contracts/Reimbursement/Search.js", 257],
+      ["src/pages/ContractRequests/Capitation/Search.js", 218],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 221],
+      ["src/pages/Contracts/Capitation/Search.js", 226],
+      ["src/pages/Contracts/Reimbursement/Search.js", 222],
       ["src/pages/LegalEntities/Search.js", 245],
       ["src/pages/LegalEntityMergeJobs/Search.js", 221],
       ["src/pages/LegalEntityMergeJobs/Search.js", 268]
@@ -997,9 +998,9 @@
   "Key": {
     "translation": "Ключ",
     "origin": [
-      ["src/pages/Dictionaries/Details.js", 312],
-      ["src/pages/Dictionaries/Details.js", 343],
-      ["src/pages/Dictionaries/Details.js", 438]
+      ["src/pages/Dictionaries/Details.js", 317],
+      ["src/pages/Dictionaries/Details.js", 348],
+      ["src/pages/Dictionaries/Details.js", 445]
     ]
   },
   "Last Name": {
@@ -1024,7 +1025,7 @@
       ["src/pages/ContractRequests/Capitation/Details.js", 206],
       ["src/pages/ContractRequests/Capitation/Details.js", 535],
       ["src/pages/Contracts/Capitation/Details.js", 217],
-      ["src/pages/Contracts/Capitation/Details.js", 802],
+      ["src/pages/Contracts/Capitation/Details.js", 807],
       ["src/pages/Declarations/Details.js", 229],
       ["src/pages/Persons/Details.js", 284]
     ]
@@ -1073,7 +1074,7 @@
   },
   "Legal entity relation": {
     "translation": "Договори реорагізованих закладів",
-    "origin": [["src/pages/Contracts/Capitation/Search.js", 487]]
+    "origin": [["src/pages/Contracts/Capitation/Search.js", 461]]
   },
   "Legal entity type": {
     "translation": "Тип медзакладу",
@@ -1098,7 +1099,7 @@
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 104],
       ["src/pages/Contracts/ContractsNav.js", 9],
-      ["src/pages/Contracts/Reimbursement/Details.js", 88]
+      ["src/pages/Contracts/Reimbursement/Details.js", 89]
     ]
   },
   "List of medical programs": {
@@ -1108,8 +1109,8 @@
   "List the conditions": {
     "translation": "Перерахуйте умови (за наявності)",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Update.js", 323],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 293]
+      ["src/pages/ContractRequests/Capitation/Update.js", 325],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 295]
     ]
   },
   "MIS Verification": {
@@ -1143,17 +1144,17 @@
     "translation": "Медична програма",
     "origin": [
       ["src/components/Nav.js", 123],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 269],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 143],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 480],
-      ["src/pages/Contracts/Reimbursement/Details.js", 274],
-      ["src/pages/Contracts/Reimbursement/Search.js", 143],
-      ["src/pages/Contracts/Reimbursement/Search.js", 502]
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 272],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 109],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 443],
+      ["src/pages/Contracts/Reimbursement/Details.js", 275],
+      ["src/pages/Contracts/Reimbursement/Search.js", 108],
+      ["src/pages/Contracts/Reimbursement/Search.js", 466]
     ]
   },
   "Medical program ID": {
     "translation": "ID медичної програми",
-    "origin": [["src/pages/ContractRequests/Reimbursement/Details.js", 278]]
+    "origin": [["src/pages/ContractRequests/Reimbursement/Details.js", 281]]
   },
   "Medication dispenses": {
     "translation": "Відпуски рецептів",
@@ -1181,8 +1182,8 @@
   "Miscellaneous (depending on the type of medical service)": {
     "translation": "Інше (залежно від виду медичних послуг)",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Update.js", 329],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 299]
+      ["src/pages/ContractRequests/Capitation/Update.js", 331],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 301]
     ]
   },
   "Mobile number": {
@@ -1193,9 +1194,9 @@
     "translation": "Гірський регіон",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 420],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 377],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 380],
       ["src/pages/Contracts/Capitation/Details.js", 589],
-      ["src/pages/Contracts/Reimbursement/Details.js", 523],
+      ["src/pages/Contracts/Reimbursement/Details.js", 524],
       ["src/pages/Declarations/Details.js", 348],
       ["src/pages/LegalEntities/Details.js", 810]
     ]
@@ -1217,10 +1218,10 @@
       ["src/pages/ContractRequests/Capitation/Update.js", 83],
       ["src/pages/ContractRequests/Reimbursement/Approve.js", 64],
       ["src/pages/ContractRequests/Reimbursement/Decline.js", 68],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 309],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 312],
       ["src/pages/ContractRequests/Reimbursement/Update.js", 73],
       ["src/pages/Contracts/Capitation/Details.js", 470],
-      ["src/pages/Contracts/Reimbursement/Details.js", 408],
+      ["src/pages/Contracts/Reimbursement/Details.js", 409],
       ["src/pages/Declarations/Details.js", 307],
       ["src/pages/Declarations/Details.js", 345],
       ["src/pages/LegalEntities/Add.js", 182],
@@ -1239,8 +1240,8 @@
   "Name of medical institution": {
     "translation": "Назва медзакладу",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 127],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 135]
+      ["src/pages/ContractRequests/Capitation/Search.js", 104],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 101]
     ]
   },
   "Next": {
@@ -1254,7 +1255,7 @@
   },
   "No info": {
     "translation": "Інформація відсутня",
-    "origin": [["src/pages/Contracts/Capitation/Details.js", 937]]
+    "origin": [["src/pages/Contracts/Capitation/Details.js", 942]]
   },
   "Number of persons served by legal entity": {
     "translation": "Кількість осіб, що обслуговуються медзакладом",
@@ -1312,10 +1313,10 @@
     "origin": [
       ["src/pages/ContractRequests/Capitation/Approve.js", 116],
       ["src/pages/ContractRequests/Capitation/Details.js", 282],
-      ["src/pages/ContractRequests/Capitation/Update.js", 275],
+      ["src/pages/ContractRequests/Capitation/Update.js", 276],
       ["src/pages/ContractRequests/Reimbursement/Approve.js", 106],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 243],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 263],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 246],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 265],
       ["src/pages/Contracts/Capitation/Details.js", 296]
     ]
   },
@@ -1332,9 +1333,9 @@
     "origin": [
       ["src/components/AssigneeSearch.js", 32],
       ["src/pages/ContractRequests/Capitation/Details.js", 116],
-      ["src/pages/ContractRequests/Capitation/Search.js", 129],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 95],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 142]
+      ["src/pages/ContractRequests/Capitation/Search.js", 106],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 98],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 108]
     ]
   },
   "Permanent unit": {
@@ -1362,8 +1363,8 @@
   "Pharmacy": {
     "translation": "Аптека",
     "origin": [
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 185],
-      ["src/pages/Contracts/Reimbursement/Details.js", 201]
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 188],
+      ["src/pages/Contracts/Reimbursement/Details.js", 202]
     ]
   },
   "Pharmacy ID": {
@@ -1378,9 +1379,9 @@
     "translation": "Телефон",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 424],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 380],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 383],
       ["src/pages/Contracts/Capitation/Details.js", 592],
-      ["src/pages/Contracts/Reimbursement/Details.js", 526],
+      ["src/pages/Contracts/Reimbursement/Details.js", 527],
       ["src/pages/LegalEntities/Details.js", 299],
       ["src/pages/LegalEntities/Details.js", 811]
     ]
@@ -1412,13 +1413,14 @@
     "translation": "ID попередньої заяви",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 114],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 93]
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 96]
     ]
   },
   "Print": {
     "translation": "Роздрукувати",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/PrintOutContent.js", 127]
+      ["src/pages/ContractRequests/Capitation/PrintOutContent.js", 127],
+      ["src/pages/ContractRequests/Reimbursement/PrintOutContent.js", 127]
     ]
   },
   "Program Participants": {
@@ -1445,8 +1447,8 @@
   "Refresh": {
     "translation": "Оновити",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Update.js", 349],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 319]
+      ["src/pages/ContractRequests/Capitation/Update.js", 351],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 321]
     ]
   },
   "Registers": {
@@ -1465,7 +1467,7 @@
     "translation": "Відхилити",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 169],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 148],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 151],
       ["src/pages/Declarations/Details.js", 155]
     ]
   },
@@ -1498,19 +1500,19 @@
     "origin": [
       ["src/pages/ContractRequests/Capitation/Decline.js", 147],
       ["src/pages/ContractRequests/Capitation/Update.js", 227],
-      ["src/pages/ContractRequests/Capitation/Update.js", 243],
-      ["src/pages/ContractRequests/Capitation/Update.js", 257],
-      ["src/pages/ContractRequests/Capitation/Update.js", 298],
-      ["src/pages/ContractRequests/Capitation/Update.js", 319],
+      ["src/pages/ContractRequests/Capitation/Update.js", 244],
+      ["src/pages/ContractRequests/Capitation/Update.js", 258],
+      ["src/pages/ContractRequests/Capitation/Update.js", 299],
+      ["src/pages/ContractRequests/Capitation/Update.js", 321],
       ["src/pages/ContractRequests/Reimbursement/Decline.js", 132],
       ["src/pages/ContractRequests/Reimbursement/Update.js", 212],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 228],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 250],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 288],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 229],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 252],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 290],
       ["src/pages/Contracts/Capitation/Details.js", 407],
-      ["src/pages/Contracts/Reimbursement/Details.js", 345],
-      ["src/pages/Dictionaries/Details.js", 445],
-      ["src/pages/Dictionaries/Details.js", 476],
+      ["src/pages/Contracts/Reimbursement/Details.js", 346],
+      ["src/pages/Dictionaries/Details.js", 453],
+      ["src/pages/Dictionaries/Details.js", 484],
       ["src/pages/LegalEntities/Add.js", 222],
       ["src/pages/Persons/Search.js", 159],
       ["src/pages/Persons/Search.js", 176],
@@ -1520,13 +1522,13 @@
   "Reset": {
     "translation": "Скинути пошук",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 306],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 359],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 535],
-      ["src/pages/Contracts/Capitation/Search.js", 350],
-      ["src/pages/Contracts/Capitation/Search.js", 527],
-      ["src/pages/Contracts/Reimbursement/Search.js", 355],
-      ["src/pages/Contracts/Reimbursement/Search.js", 557],
+      ["src/pages/ContractRequests/Capitation/Search.js", 280],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 322],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 497],
+      ["src/pages/Contracts/Capitation/Search.js", 324],
+      ["src/pages/Contracts/Capitation/Search.js", 500],
+      ["src/pages/Contracts/Reimbursement/Search.js", 319],
+      ["src/pages/Contracts/Reimbursement/Search.js", 520],
       ["src/pages/Dictionaries/Search.js", 181],
       ["src/pages/LegalEntities/Search.js", 370]
     ]
@@ -1548,17 +1550,17 @@
       ["src/pages/ContractRequests/Capitation/Approve.js", 168],
       ["src/pages/ContractRequests/Capitation/Decline.js", 153],
       ["src/pages/ContractRequests/Capitation/Decline.js", 214],
-      ["src/pages/ContractRequests/Capitation/Update.js", 344],
+      ["src/pages/ContractRequests/Capitation/Update.js", 346],
       ["src/pages/ContractRequests/Reimbursement/Approve.js", 153],
       ["src/pages/ContractRequests/Reimbursement/Decline.js", 138],
       ["src/pages/ContractRequests/Reimbursement/Decline.js", 199],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 314],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 316],
       ["src/pages/Contracts/Capitation/Details.js", 195],
-      ["src/pages/Contracts/Reimbursement/Details.js", 179],
+      ["src/pages/Contracts/Reimbursement/Details.js", 180],
       ["src/pages/Declarations/Details.js", 137],
       ["src/pages/Declarations/Details.js", 164],
       ["src/pages/Declarations/Details.js", 197],
-      ["src/pages/Dictionaries/Details.js", 527],
+      ["src/pages/Dictionaries/Details.js", 535],
       ["src/pages/LegalEntities/Add.js", 144],
       ["src/pages/LegalEntities/Add.js", 234],
       ["src/pages/LegalEntities/Add.js", 334],
@@ -1568,22 +1570,22 @@
   },
   "Save": {
     "translation": "Зберегти",
-    "origin": [["src/pages/Dictionaries/Details.js", 232]]
+    "origin": [["src/pages/Dictionaries/Details.js", 236]]
   },
   "Save and Return": {
     "translation": "Зберегти та повернутися",
-    "origin": [["src/pages/Dictionaries/Details.js", 532]]
+    "origin": [["src/pages/Dictionaries/Details.js", 540]]
   },
   "Search": {
     "translation": "Шукати",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 287],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 340],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 518],
-      ["src/pages/Contracts/Capitation/Search.js", 333],
-      ["src/pages/Contracts/Capitation/Search.js", 509],
-      ["src/pages/Contracts/Reimbursement/Search.js", 338],
-      ["src/pages/Contracts/Reimbursement/Search.js", 540],
+      ["src/pages/ContractRequests/Capitation/Search.js", 264],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 306],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 481],
+      ["src/pages/Contracts/Capitation/Search.js", 308],
+      ["src/pages/Contracts/Capitation/Search.js", 483],
+      ["src/pages/Contracts/Reimbursement/Search.js", 303],
+      ["src/pages/Contracts/Reimbursement/Search.js", 504],
       ["src/pages/LegalEntities/Search.js", 354],
       ["src/pages/LegalEntityMergeJobs/Search.js", 245],
       ["src/pages/LegalEntityMergeJobs/Search.js", 293]
@@ -1596,15 +1598,15 @@
   "Search contract": {
     "translation": "Пошук договору",
     "origin": [
-      ["src/pages/Contracts/Capitation/Search.js", 242],
-      ["src/pages/Contracts/Reimbursement/Search.js", 248]
+      ["src/pages/Contracts/Capitation/Search.js", 217],
+      ["src/pages/Contracts/Reimbursement/Search.js", 213]
     ]
   },
   "Search contract request": {
     "translation": "Пошук заяви",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 232],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 246]
+      ["src/pages/ContractRequests/Capitation/Search.js", 209],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 212]
     ]
   },
   "Search for Declarations": {
@@ -1613,7 +1615,7 @@
   },
   "Search for a value": {
     "translation": "Пошук значення",
-    "origin": [["src/pages/Dictionaries/Details.js", 277]]
+    "origin": [["src/pages/Dictionaries/Details.js", 281]]
   },
   "Search legal entities": {
     "translation": "Пошук медзакладів",
@@ -1636,15 +1638,15 @@
   },
   "Select a tag": {
     "translation": "Виберіть тег",
-    "origin": [["src/pages/Dictionaries/Details.js", 219]]
+    "origin": [["src/pages/Dictionaries/Details.js", 223]]
   },
   "Select key": {
     "translation": "Виберіть ключ",
-    "origin": [["src/pages/Dictionaries/Details.js", 307]]
+    "origin": [["src/pages/Dictionaries/Details.js", 312]]
   },
   "Select tag from list": {
     "translation": "Оберіть тег зі списку",
-    "origin": [["src/pages/Dictionaries/Details.js", 214]]
+    "origin": [["src/pages/Dictionaries/Details.js", 218]]
   },
   "Select the menu item on the left to get started!": {
     "translation": "Оберіть пункт меню ліворуч, щоб почати роботу!",
@@ -1657,9 +1659,9 @@
   "Show all filters": {
     "translation": "Показати всі фільтри",
     "origin": [
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 291],
-      ["src/pages/Contracts/Capitation/Search.js", 283],
-      ["src/pages/Contracts/Reimbursement/Search.js", 288]
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 257],
+      ["src/pages/Contracts/Capitation/Search.js", 258],
+      ["src/pages/Contracts/Reimbursement/Search.js", 253]
     ]
   },
   "Show detailed information": {
@@ -1674,10 +1676,10 @@
   "Show details": {
     "translation": "Показати деталі",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 176],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 193],
-      ["src/pages/Contracts/Capitation/Search.js", 181],
-      ["src/pages/Contracts/Reimbursement/Search.js", 192],
+      ["src/pages/ContractRequests/Capitation/Search.js", 153],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 159],
+      ["src/pages/Contracts/Capitation/Search.js", 156],
+      ["src/pages/Contracts/Reimbursement/Search.js", 157],
       ["src/pages/Persons/Details.js", 321],
       ["src/pages/Persons/Search.js", 111]
     ]
@@ -1686,23 +1688,23 @@
     "translation": "Показати відділення",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 566],
-      ["src/pages/Contracts/Capitation/Details.js", 832]
+      ["src/pages/Contracts/Capitation/Details.js", 837]
     ]
   },
   "Show printout form": {
     "translation": "Дивитись друковану форму",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 643],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 445],
-      ["src/pages/Contracts/Capitation/Details.js", 909],
-      ["src/pages/Contracts/Reimbursement/Details.js", 592]
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 448],
+      ["src/pages/Contracts/Capitation/Details.js", 914],
+      ["src/pages/Contracts/Reimbursement/Details.js", 593]
     ]
   },
   "Sign": {
     "translation": "Підписати",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 190],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 169],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 172],
       ["src/pages/LegalEntities/Add.js", 364]
     ]
   },
@@ -1719,17 +1721,17 @@
     "translation": "ID підписанта",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 390],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 347],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 350],
       ["src/pages/Contracts/Capitation/Details.js", 292],
       ["src/pages/Contracts/Capitation/Details.js", 508],
-      ["src/pages/Contracts/Reimbursement/Details.js", 446]
+      ["src/pages/Contracts/Reimbursement/Details.js", 447]
     ]
   },
   "Signer base": {
     "translation": "Підстава",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 280],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 242],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 245],
       ["src/pages/Contracts/Capitation/Details.js", 294]
     ]
   },
@@ -1737,14 +1739,15 @@
     "translation": "Ім'я підписанта",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 279],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 241],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 244],
       ["src/pages/Contracts/Capitation/Details.js", 293]
     ]
   },
   "Signing by EDS and seal": {
     "translation": "Підписати, наклавши ЕЦП та Печатку",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/PrintOutContent.js", 102]
+      ["src/pages/ContractRequests/Capitation/PrintOutContent.js", 102],
+      ["src/pages/ContractRequests/Reimbursement/PrintOutContent.js", 102]
     ]
   },
   "Specialty": {
@@ -1782,17 +1785,17 @@
       ["src/pages/ContractRequests/Capitation/Approve.js", 66],
       ["src/pages/ContractRequests/Capitation/Decline.js", 75],
       ["src/pages/ContractRequests/Capitation/Details.js", 115],
-      ["src/pages/ContractRequests/Capitation/Search.js", 130],
+      ["src/pages/ContractRequests/Capitation/Search.js", 107],
       ["src/pages/ContractRequests/Capitation/Update.js", 81],
       ["src/pages/ContractRequests/Reimbursement/Approve.js", 62],
       ["src/pages/ContractRequests/Reimbursement/Decline.js", 66],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 94],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 145],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 97],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 111],
       ["src/pages/ContractRequests/Reimbursement/Update.js", 71],
       ["src/pages/Contracts/Capitation/Details.js", 118],
-      ["src/pages/Contracts/Capitation/Search.js", 136],
-      ["src/pages/Contracts/Reimbursement/Details.js", 102],
-      ["src/pages/Contracts/Reimbursement/Search.js", 146],
+      ["src/pages/Contracts/Capitation/Search.js", 111],
+      ["src/pages/Contracts/Reimbursement/Details.js", 103],
+      ["src/pages/Contracts/Reimbursement/Search.js", 111],
       ["src/pages/Declarations/Details.js", 91],
       ["src/pages/Declarations/Details.js", 288],
       ["src/pages/LegalEntities/Add.js", 104],
@@ -1808,7 +1811,7 @@
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 327],
       ["src/pages/Contracts/Capitation/Details.js", 351],
-      ["src/pages/Contracts/Reimbursement/Details.js", 287]
+      ["src/pages/Contracts/Reimbursement/Details.js", 288]
     ]
   },
   "Storage location": {
@@ -1819,17 +1822,17 @@
     "translation": "ПІБ підписанта",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 379],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 336],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 339],
       ["src/pages/Contracts/Capitation/Details.js", 497],
-      ["src/pages/Contracts/Reimbursement/Details.js", 435]
+      ["src/pages/Contracts/Reimbursement/Details.js", 436]
     ]
   },
   "Suspended": {
     "translation": "Призупинений",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 119],
-      ["src/pages/Contracts/Capitation/Search.js", 471],
-      ["src/pages/Contracts/Reimbursement/Details.js", 103]
+      ["src/pages/Contracts/Capitation/Search.js", 445],
+      ["src/pages/Contracts/Reimbursement/Details.js", 104]
     ]
   },
   "Tag": {
@@ -1840,7 +1843,7 @@
     "translation": "Теги",
     "origin": [
       ["src/pages/Dictionaries/Details.js", 85],
-      ["src/pages/Dictionaries/Details.js", 126],
+      ["src/pages/Dictionaries/Details.js", 128],
       ["src/pages/Dictionaries/Search.js", 70]
     ]
   },
@@ -1850,9 +1853,9 @@
       ["src/pages/Contracts/Capitation/Details.js", 153],
       ["src/pages/Contracts/Capitation/Details.js", 154],
       ["src/pages/Contracts/Capitation/Details.js", 199],
-      ["src/pages/Contracts/Reimbursement/Details.js", 137],
       ["src/pages/Contracts/Reimbursement/Details.js", 138],
-      ["src/pages/Contracts/Reimbursement/Details.js", 183]
+      ["src/pages/Contracts/Reimbursement/Details.js", 139],
+      ["src/pages/Contracts/Reimbursement/Details.js", 184]
     ]
   },
   "Terminate declaration": {
@@ -1868,34 +1871,34 @@
     "origin": [
       ["src/pages/ContractRequests/Capitation/Approve.js", 117],
       ["src/pages/ContractRequests/Capitation/Details.js", 283],
-      ["src/pages/ContractRequests/Capitation/Update.js", 309],
+      ["src/pages/ContractRequests/Capitation/Update.js", 310],
       ["src/pages/ContractRequests/Reimbursement/Approve.js", 107],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 244],
-      ["src/pages/ContractRequests/Reimbursement/Update.js", 240],
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 247],
+      ["src/pages/ContractRequests/Reimbursement/Update.js", 241],
       ["src/pages/Contracts/Capitation/Details.js", 297]
     ]
   },
   "The contract is valid for": {
     "translation": "Договір діє по",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 134],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 141],
-      ["src/pages/Contracts/Capitation/Search.js", 133],
-      ["src/pages/Contracts/Reimbursement/Search.js", 142]
+      ["src/pages/ContractRequests/Capitation/Search.js", 111],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 107],
+      ["src/pages/Contracts/Capitation/Search.js", 108],
+      ["src/pages/Contracts/Reimbursement/Search.js", 107]
     ]
   },
   "The contract is valid with": {
     "translation": "Договір діє з",
     "origin": [
-      ["src/pages/ContractRequests/Capitation/Search.js", 132],
-      ["src/pages/ContractRequests/Reimbursement/Search.js", 139],
-      ["src/pages/Contracts/Capitation/Search.js", 131],
-      ["src/pages/Contracts/Reimbursement/Search.js", 140]
+      ["src/pages/ContractRequests/Capitation/Search.js", 109],
+      ["src/pages/ContractRequests/Reimbursement/Search.js", 105],
+      ["src/pages/Contracts/Capitation/Search.js", 106],
+      ["src/pages/Contracts/Reimbursement/Search.js", 105]
     ]
   },
   "This key is already exists": {
     "translation": "Цей ключ вже використовується у словнику",
-    "origin": [["src/pages/Dictionaries/Details.js", 455]]
+    "origin": [["src/pages/Dictionaries/Details.js", 463]]
   },
   "To": {
     "translation": "по",
@@ -1911,6 +1914,10 @@
   "To search, fill out any of the following fields": {
     "translation": "Для пошуку, заповніть будь-яке з наведених полів",
     "origin": [["src/pages/Persons/Search.js", 193]]
+  },
+  "To see the services, click on \"Show division\"": {
+    "translation": "Для ознайомлення з послугами натисніть \"Показати відділення\"",
+    "origin": [["src/pages/Contracts/Capitation/Details.js", 780]]
   },
   "Trade name": {
     "translation": "Торгівельне найменування",
@@ -1971,7 +1978,7 @@
     "translation": "Увага! Ви збираєтесь змінити кінцеву дату контракту. <0/> Натискаючи кнопку “Зберегти зміни”, ви <1/> підтверджуєте справжність вашого наміру",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 428],
-      ["src/pages/Contracts/Reimbursement/Details.js", 366]
+      ["src/pages/Contracts/Reimbursement/Details.js", 367]
     ]
   },
   "Warning!<0/>After confirmation, the authentication method will be changed to the uncertain": {
@@ -1990,18 +1997,18 @@
     "translation": "Графік роботи",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Details.js", 421],
-      ["src/pages/ContractRequests/Reimbursement/Details.js", 385]
+      ["src/pages/ContractRequests/Reimbursement/Details.js", 388]
     ]
   },
   "contract of {value} legal entity": {
     "translation": "договори {value} закладу",
-    "origin": [["src/pages/Contracts/Capitation/Search.js", 366]]
+    "origin": [["src/pages/Contracts/Capitation/Search.js", 340]]
   },
   "uah": {
     "translation": "грн",
     "origin": [
       ["src/pages/ContractRequests/Capitation/Approve.js", 124],
-      ["src/pages/ContractRequests/Capitation/Update.js", 253]
+      ["src/pages/ContractRequests/Capitation/Update.js", 254]
     ]
   },
   "{0, plural, zero {# seconds} one {# second} few {# seconds} many {# seconds} other {# seconds}}": {

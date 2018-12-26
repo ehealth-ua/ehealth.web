@@ -511,7 +511,12 @@ const Employees = ({ contractorEmployeeDivisions }) =>
 const ExternalContractors = ({ externalContractors }) =>
   externalContractors &&
   externalContractors.length > 0 && (
-    <ExternalContractorsTable data={externalContractors} />
+    <>
+      <Text px={6} pt={2} fontSize={1}>
+        <Trans>To see the services, click on "Show division"</Trans>
+      </Text>
+      <ExternalContractorsTable data={externalContractors} />
+    </>
   );
 
 const Documents = ({ attachedDocuments }) =>
