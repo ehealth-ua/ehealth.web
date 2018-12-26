@@ -8,8 +8,8 @@ class LoadingOverlay extends Component {
   state = {
     delayLoading: false,
     loadingFromState: false,
-    delayBeforeLoading: 200,
-    delayAfterLoading: 750
+    delayBeforeLoading: 1000,
+    delayAfterLoading: 500
   };
 
   componentDidMount() {
