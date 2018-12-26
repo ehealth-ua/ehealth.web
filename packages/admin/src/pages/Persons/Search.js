@@ -31,7 +31,7 @@ const Search = ({ uri }) => (
     <Heading as="h1" fontWeight="normal" mb={1}>
       <Trans>Patient Search</Trans>
     </Heading>
-    <Tabs.Nav>
+    <Tabs.Nav justifyContent="center">
       <Tabs.Link to="./by-person-data">
         <Trans>According to</Trans>
       </Tabs.Link>
