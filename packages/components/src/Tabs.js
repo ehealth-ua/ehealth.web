@@ -14,13 +14,13 @@ const Nav = system(
         ["januaryDawn", 59],
         ["januaryDawn", 60]
       ]
-    ]
+    ],
+    justifyContent: ["center", "space-around"]
   },
   gradient,
   {
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: ["center", "space-around"]
+    flexWrap: "wrap"
   }
 );
 
@@ -30,7 +30,7 @@ const Item = system(
     borderColor: "transparent",
     color: "blueberrySoda",
     fontSize: 2,
-    mx: [1, 2],
+    mx: [4, 6],
     height: 60
   },
   {
