@@ -7,6 +7,7 @@ import Composer from "react-composer";
 import { Field, DatePicker } from "@ehealth/components";
 import { CalendarIcon } from "@ehealth/icons";
 import { formatDate, parseDate } from "@ehealth/utils";
+import { Flex, Box } from "rebass/emotion";
 
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
@@ -103,58 +104,66 @@ class RangeDateField extends React.Component<
         >
           {([propsFrom, propsTo]) => (
             <>
-              <InputView.Border
-                state={propsFrom.meta.state || propsTo.meta.state}
-                innerRef={this.calendar}
-              >
-                <InputView.Content
-                  pl={2}
-                  py={0}
-                  flex="none"
-                  display="flex"
-                  alignItems="center"
+              <Flex>
+                <InputView.Border
+                  state={propsFrom.meta.state || propsTo.meta.state}
+                  innerRef={this.calendar}
                 >
-                  <CalendarIcon />
-                </InputView.Content>
-                <Calendar
-                  name={start}
-                  label="from"
-                  onFocus={() =>
-                    this.setState({
-                      opened: "start"
-                    })
-                  }
-                  onBlur={this.handleBlur}
-                  handleDateSelect={this.handleDateSelect}
-                  getSelectedDate={value =>
-                    this.getSelectedDate(value, propsTo.input.value)
-                  }
-                  handleKeyPress={this.handleKeyPress}
-                  maxDate={this.getMinMaxDate(propsTo.input.value)}
-                  opened={this.state.opened === "start"}
-                  {...propsFrom}
-                />
-
-                <InputView.Content>-</InputView.Content>
-                <Calendar
-                  name={end}
-                  label="to"
-                  onFocus={() =>
-                    this.setState({
-                      opened: "end"
-                    })
-                  }
-                  onBlur={this.handleBlur}
-                  handleDateSelect={this.handleDateSelect}
-                  getSelectedDate={value =>
-                    this.getSelectedDate(value, propsFrom.input.value)
-                  }
-                  handleKeyPress={this.handleKeyPress}
-                  minDate={this.getMinMaxDate(propsFrom.input.value)}
-                  opened={this.state.opened === "end"}
-                  {...propsTo}
-                />
-              </InputView.Border>
+                  <InputView.Content
+                    pl={2}
+                    py={0}
+                    flex="none"
+                    display="flex"
+                    alignItems="center"
+                  >
+                    <CalendarIcon />
+                  </InputView.Content>
+                  <Calendar
+                    name={start}
+                    label="from"
+                    onFocus={() =>
+                      this.setState({
+                        opened: "start"
+                      })
+                    }
+                    onBlur={this.handleBlur}
+                    handleDateSelect={this.handleDateSelect}
+                    getSelectedDate={value =>
+                      this.getSelectedDate(value, propsTo.input.value)
+                    }
+                    handleKeyPress={this.handleKeyPress}
+                    maxDate={this.getMinMaxDate(propsTo.input.value)}
+                    opened={this.state.opened === "start"}
+                    {...propsFrom}
+                  />
+                </InputView.Border>
+                <Box mx={1}>
+                  <InputView.Content>-</InputView.Content>
+                </Box>
+                <InputView.Border
+                  state={propsFrom.meta.state || propsTo.meta.state}
+                  innerRef={this.calendar}
+                >
+                  <Calendar
+                    name={end}
+                    label="to"
+                    onFocus={() =>
+                      this.setState({
+                        opened: "end"
+                      })
+                    }
+                    onBlur={this.handleBlur}
+                    handleDateSelect={this.handleDateSelect}
+                    getSelectedDate={value =>
+                      this.getSelectedDate(value, propsFrom.input.value)
+                    }
+                    handleKeyPress={this.handleKeyPress}
+                    minDate={this.getMinMaxDate(propsFrom.input.value)}
+                    opened={this.state.opened === "end"}
+                    {...propsTo}
+                  />
+                </InputView.Border>
+              </Flex>
               <FieldView.Footer>
                 <FieldView.Message
                   state={propsFrom.meta.state || propsTo.meta.state}
