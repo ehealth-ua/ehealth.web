@@ -116,7 +116,7 @@ const Details = ({ id }) => (
                     contractRequestId: <Trans>Contract request ID</Trans>,
                     contractNumber: <Trans>Contract Number</Trans>,
                     status: <Trans>Status</Trans>,
-                    isSuspended: <Trans>Suspended</Trans>
+                    isSuspended: <Trans>Contract state</Trans>
                   }}
                   data={{
                     databaseId,
@@ -131,10 +131,12 @@ const Details = ({ id }) => (
                     status: (
                       <Badge name={status} type="CONTRACT" minWidth={100} />
                     ),
-                    isSuspended: isSuspended ? (
-                      <PositiveIcon />
-                    ) : (
-                      <NegativeIcon fill="#ED1C24" stroke="#ED1C24" />
+                    isSuspended: (
+                      <Badge
+                        name={isSuspended ? "SUSPENDED" : "NOTSUSPENDED"}
+                        type="SUSPENDED"
+                        minWidth={100}
+                      />
                     )
                   }}
                   color="#7F8FA4"

@@ -36,6 +36,11 @@ const CONTRACT = {
   TERMINATED: "завершений"
 };
 
+const SUSPENDED = {
+  NOTSUSPENDED: "діючий",
+  SUSPENDED: "призупинений"
+};
+
 const MERGE_LEGAL_ENTITIES_JOBS = {
   FAILED: "Помилка",
   FAILED_WITH_ERROR: "Помилка системи",
@@ -50,7 +55,8 @@ const STATUSES = {
   LEGALENTITY,
   LEGAL_ENTITY_RELATION,
   CONTRACT_REQUEST,
-  MERGE_LEGAL_ENTITIES_JOBS
+  MERGE_LEGAL_ENTITIES_JOBS,
+  SUSPENDED
 };
 
 export default STATUSES;

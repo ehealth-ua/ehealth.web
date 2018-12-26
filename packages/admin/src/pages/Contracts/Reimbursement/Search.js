@@ -124,8 +124,11 @@ const ReimbursementContractsSearch = () => (
                               medicalProgram && medicalProgram.name,
                             isSuspended: (
                               <Flex justifyContent="center">
-                                {isSuspended ? (
-                                  <PositiveIcon />
+                                {!isSuspended ? (
+                                  <NegativeIcon
+                                    fill="#1BB934"
+                                    stroke="#1BB934"
+                                  />
                                 ) : (
                                   <NegativeIcon
                                     fill="#ED1C24"

@@ -19,7 +19,8 @@ import {
   PositiveIcon,
   FilterIcon,
   NegativeIcon,
-  RemoveItemIcon
+  RemoveItemIcon,
+  CircleIcon
 } from "@ehealth/icons";
 
 import { SelectedItem, RemoveItem } from "../../../components/MultiSelectView";
@@ -125,8 +126,11 @@ const CapitationContractsSearch = ({ uri }) => (
                             ...contracts,
                             isSuspended: (
                               <Flex justifyContent="center">
-                                {isSuspended ? (
-                                  <PositiveIcon />
+                                {!isSuspended ? (
+                                  <NegativeIcon
+                                    fill="#1BB934"
+                                    stroke="#1BB934"
+                                  />
                                 ) : (
                                   <NegativeIcon
                                     fill="#ED1C24"
