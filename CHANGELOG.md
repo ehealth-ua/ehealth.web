@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.22.0"></a>
+# [1.22.0](https://github.com/edenlabllc/ehealth.web/compare/v1.21.4...v1.22.0) (2018-12-26)
+
+
+### Bug Fixes
+
+* **admin:** add text information to ExternalContractors tab ([17786ca](https://github.com/edenlabllc/ehealth.web/commit/17786ca))
+* **admin:** change delay in LoadingOverlay ([3fecd18](https://github.com/edenlabllc/ehealth.web/commit/3fecd18))
+* **admin:** change IntupViewBorder in RangeDateField ([eb9c98c](https://github.com/edenlabllc/ehealth.web/commit/eb9c98c))
+* **admin:** change suspended status in details from icon to badge ([73539cd](https://github.com/edenlabllc/ehealth.web/commit/73539cd))
+* **admin:** change view NegativeIcon on status not suspended ([bd4e0e6](https://github.com/edenlabllc/ehealth.web/commit/bd4e0e6))
+
+
+### Features
+
+* **admin:** change view empty tab data on pages ([04492f6](https://github.com/edenlabllc/ehealth.web/commit/04492f6))
+
+
+
+
+
 <a name="1.21.4"></a>
 ## [1.21.4](https://github.com/edenlabllc/ehealth.web/compare/v1.21.3...v1.21.4) (2018-12-25)
 
