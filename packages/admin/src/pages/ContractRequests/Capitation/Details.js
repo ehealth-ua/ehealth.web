@@ -410,8 +410,7 @@ const LegalEntity = ({
 );
 
 const Divisions = ({ contractorDivisions }) =>
-  contractorDivisions &&
-  contractorDivisions.length > 0 && (
+  contractorDivisions && contractorDivisions.length > 0 ? (
     <Table
       data={contractorDivisions}
       header={{
@@ -465,11 +464,12 @@ const Divisions = ({ contractorDivisions }) =>
       tableName="/capitation-contract-requests/divisions"
       hiddenFields="workingHours"
     />
+  ) : (
+    <EmptyData />
   );
 
 const Employees = ({ contractorEmployeeDivisions }) =>
-  contractorEmployeeDivisions &&
-  contractorEmployeeDivisions.length > 0 && (
+  contractorEmployeeDivisions && contractorEmployeeDivisions.length > 0 ? (
     <Table
       data={contractorEmployeeDivisions}
       header={{
@@ -506,32 +506,39 @@ const Employees = ({ contractorEmployeeDivisions }) =>
       tableName="/capitation-contract-requests/employees"
       whiteSpaceNoWrap={["databaseId"]}
     />
+  ) : (
+    <EmptyData />
   );
 
 const ExternalContractors = ({ externalContractors }) =>
-  externalContractors &&
-  externalContractors.length > 0 && (
+  externalContractors && externalContractors.length > 0 ? (
     <>
       <Text px={6} pt={2} fontSize={1}>
         <Trans>To see the services, click on "Show division"</Trans>
       </Text>
       <ExternalContractorsTable data={externalContractors} />
     </>
+  ) : (
+    <EmptyData />
   );
 
 const Documents = ({ attachedDocuments }) =>
-  attachedDocuments.map(({ url, type }) => (
-    <Box m="2">
-      <SaveLink href={url} target="_blank">
-        <Box m={1} color="shiningKnight">
-          <DefaultImageIcon />
-        </Box>
-        <Text color="rockmanBlue" lineHeight="1">
-          <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
-        </Text>
-      </SaveLink>
-    </Box>
-  ));
+  attachedDocuments ? (
+    attachedDocuments.map(({ url, type }) => (
+      <Box m="2">
+        <SaveLink href={url} target="_blank">
+          <Box m={1} color="shiningKnight">
+            <DefaultImageIcon />
+          </Box>
+          <Text color="rockmanBlue" lineHeight="1">
+            <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
+          </Text>
+        </SaveLink>
+      </Box>
+    ))
+  ) : (
+    <EmptyData />
+  );
 
 const ExternalContractorsTable = ({ data }) => (
   <Table
@@ -650,6 +657,18 @@ const PrintButton = ({ content }) => (
     <PrinterIcon />
   </Wrapper>
 );
+
+const EmptyData = props => (
+  <WrapperBoxHeight>
+    <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
+      <Trans>No info</Trans>
+    </Text>
+  </WrapperBoxHeight>
+);
+const WrapperBoxHeight = system({
+  is: Box,
+  height: 500
+});
 
 const Wrapper = system(
   {

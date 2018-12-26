@@ -512,7 +512,7 @@ const Divisions = ({ id }) => (
                   pageInfo
                 } = {}
               } = data.reimbursementContract;
-              if (isEmpty(contractorDivisions)) return null;
+              if (isEmpty(contractorDivisions)) return <EmptyData />;
 
               return (
                 <>
@@ -573,19 +573,22 @@ const Divisions = ({ id }) => (
 );
 
 const Documents = ({ attachedDocuments }) =>
-  !isEmpty(attachedDocuments) &&
-  attachedDocuments.map(({ url, type }) => (
-    <Box m="2">
-      <SaveLink href={url} target="_blank">
-        <Box m={1} color="shiningKnight">
-          <DefaultImageIcon />
-        </Box>
-        <Text color="rockmanBlue" lineHeight="1">
-          <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
-        </Text>
-      </SaveLink>
-    </Box>
-  ));
+  !isEmpty(attachedDocuments) ? (
+    attachedDocuments.map(({ url, type }) => (
+      <Box m="2">
+        <SaveLink href={url} target="_blank">
+          <Box m={1} color="shiningKnight">
+            <DefaultImageIcon />
+          </Box>
+          <Text color="rockmanBlue" lineHeight="1">
+            <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
+          </Text>
+        </SaveLink>
+      </Box>
+    ))
+  ) : (
+    <EmptyData />
+  );
 
 const PrintButton = ({ content }) => (
   <Wrapper color="shiningKnight" onClick={() => printIframe(content)}>
@@ -615,6 +618,18 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
     )}
   </BooleanValue>
 );
+
+const EmptyData = props => (
+  <WrapperBoxHeight>
+    <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
+      <Trans>No info</Trans>
+    </Text>
+  </WrapperBoxHeight>
+);
+const WrapperBoxHeight = system({
+  is: Box,
+  height: 500
+});
 
 const Wrapper = system(
   {

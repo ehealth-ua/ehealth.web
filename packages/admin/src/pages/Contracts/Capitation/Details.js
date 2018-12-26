@@ -786,19 +786,22 @@ const ExternalContractors = ({ externalContractors }) =>
   );
 
 const Documents = ({ attachedDocuments }) =>
-  attachedDocuments &&
-  attachedDocuments.map(({ url, type }) => (
-    <Box m="2">
-      <SaveLink href={url} target="_blank">
-        <Box m={1} color="shiningKnight">
-          <DefaultImageIcon />
-        </Box>
-        <Text color="rockmanBlue" lineHeight="1">
-          <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
-        </Text>
-      </SaveLink>
-    </Box>
-  ));
+  attachedDocuments ? (
+    attachedDocuments.map(({ url, type }) => (
+      <Box m="2">
+        <SaveLink href={url} target="_blank">
+          <Box m={1} color="shiningKnight">
+            <DefaultImageIcon />
+          </Box>
+          <Text color="rockmanBlue" lineHeight="1">
+            <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
+          </Text>
+        </SaveLink>
+      </Box>
+    ))
+  ) : (
+    <EmptyData />
+  );
 
 const ExternalContractorsTable = ({ data }) => (
   <Table
@@ -938,10 +941,16 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
 );
 
 const EmptyData = props => (
-  <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
-    <Trans>No info</Trans>
-  </Text>
+  <WrapperBoxHeight>
+    <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
+      <Trans>No info</Trans>
+    </Text>
+  </WrapperBoxHeight>
 );
+const WrapperBoxHeight = system({
+  is: Box,
+  height: 500
+});
 
 const Wrapper = system(
   {

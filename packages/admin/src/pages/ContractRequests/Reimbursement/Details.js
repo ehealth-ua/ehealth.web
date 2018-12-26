@@ -371,7 +371,7 @@ const LegalEntity = ({
 };
 
 const Divisions = ({ contractorDivisions }) =>
-  !isEmpty(contractorDivisions) && (
+  !isEmpty(contractorDivisions) ? (
     <Table
       data={contractorDivisions}
       header={{
@@ -425,22 +425,27 @@ const Divisions = ({ contractorDivisions }) =>
       tableName="/reimbursement-contract-requests/divisions"
       hiddenFields="workingHours"
     />
+  ) : (
+    <EmptyData />
   );
 
 const Documents = ({ attachedDocuments }) =>
-  !isEmpty(attachedDocuments) &&
-  attachedDocuments.map(({ url, type }) => (
-    <Box m="2">
-      <SaveLink href={url} target="_blank">
-        <Box m={1} color="shiningKnight">
-          <DefaultImageIcon />
-        </Box>
-        <Text color="rockmanBlue" lineHeight="1">
-          <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
-        </Text>
-      </SaveLink>
-    </Box>
-  ));
+  !isEmpty(attachedDocuments) ? (
+    attachedDocuments.map(({ url, type }) => (
+      <Box m="2">
+        <SaveLink href={url} target="_blank">
+          <Box m={1} color="shiningKnight">
+            <DefaultImageIcon />
+          </Box>
+          <Text color="rockmanBlue" lineHeight="1">
+            <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
+          </Text>
+        </SaveLink>
+      </Box>
+    ))
+  ) : (
+    <EmptyData />
+  );
 
 const PrintButton = ({ content }) => (
   <Wrapper color="shiningKnight" onClick={() => printIframe(content)}>
@@ -468,5 +473,17 @@ const SaveLink = system(
   },
   { textDecoration: "none" }
 );
+
+const EmptyData = props => (
+  <WrapperBoxHeight>
+    <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
+      <Trans>No info</Trans>
+    </Text>
+  </WrapperBoxHeight>
+);
+const WrapperBoxHeight = system({
+  is: Box,
+  height: 500
+});
 
 export default ReimbursementContractRequestDetails;
