@@ -115,6 +115,8 @@ const CapitationContractRequestsSearch = () => (
                           renderRow={({
                             id,
                             status,
+                            startDate,
+                            endDate,
                             contractorLegalEntity: {
                               edrpou,
                               name: contractorLegalEntityName
@@ -123,8 +125,11 @@ const CapitationContractRequestsSearch = () => (
                             insertedAt,
                             ...capitationContractRequests
                           }) => ({
+                            ...capitationContractRequests,
                             edrpou,
                             contractorLegalEntityName,
+                            startDate: <DateFormat value={startDate} />,
+                            endDate: <DateFormat value={endDate} />,
                             insertedAt: (
                               <DateFormat
                                 value={insertedAt}
@@ -140,7 +145,6 @@ const CapitationContractRequestsSearch = () => (
                             assigneeName: assignee
                               ? getFullName(assignee.party)
                               : undefined,
-                            ...capitationContractRequests,
                             status: (
                               <Badge
                                 type="CONTRACT_REQUEST"

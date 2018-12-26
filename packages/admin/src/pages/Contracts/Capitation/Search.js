@@ -116,14 +116,16 @@ const CapitationContractsSearch = ({ uri }) => (
                             id,
                             status,
                             isSuspended,
+                            startDate,
+                            endDate,
                             contractorLegalEntity: {
                               edrpou: contractorLegalEntityEdrpou
                             },
                             insertedAt,
                             ...contracts
                           }) => ({
-                            contractorLegalEntityEdrpou,
                             ...contracts,
+                            contractorLegalEntityEdrpou,
                             isSuspended: (
                               <Flex justifyContent="center">
                                 {!isSuspended ? (
@@ -139,6 +141,8 @@ const CapitationContractsSearch = ({ uri }) => (
                                 )}
                               </Flex>
                             ),
+                            startDate: <DateFormat value={startDate} />,
+                            endDate: <DateFormat value={endDate} />,
                             insertedAt: (
                               <DateFormat
                                 value={insertedAt}

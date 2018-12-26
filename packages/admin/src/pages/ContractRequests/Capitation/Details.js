@@ -7,7 +7,7 @@ import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
 
-import { Trans } from "@lingui/macro";
+import { DateFormat, Trans } from "@lingui/macro";
 import { Switch } from "@ehealth/components";
 import {
   PrinterIcon,
@@ -271,7 +271,8 @@ const GeneralInfo = ({
   issueCity,
   contractorRmspAmount,
   statusReason,
-  ...dates
+  startDate,
+  endDate
 }) => (
   <Box p={5}>
     <DefinitionListView
@@ -302,7 +303,8 @@ const GeneralInfo = ({
         endDate: <Trans>Expiry date of the contract</Trans>
       }}
       data={{
-        ...dates
+        startDate: <DateFormat value={startDate} />,
+        endDate: <DateFormat value={endDate} />
       }}
     />
     <Line />

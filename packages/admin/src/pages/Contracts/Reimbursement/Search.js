@@ -113,6 +113,8 @@ const ReimbursementContractsSearch = () => (
                             id,
                             status,
                             isSuspended,
+                            startDate,
+                            endDate,
                             contractorLegalEntity: { edrpou },
                             insertedAt,
                             medicalProgram,
@@ -137,6 +139,8 @@ const ReimbursementContractsSearch = () => (
                                 )}
                               </Flex>
                             ),
+                            startDate: <DateFormat value={startDate} />,
+                            endDate: <DateFormat value={endDate} />,
                             insertedAt: (
                               <DateFormat
                                 value={insertedAt}

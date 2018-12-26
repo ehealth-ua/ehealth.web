@@ -6,7 +6,7 @@ import system from "system-components/emotion";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
-import { Trans } from "@lingui/macro";
+import { DateFormat, Trans } from "@lingui/macro";
 
 import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
 import {
@@ -319,7 +319,7 @@ const GeneralInfo = ({
         endDate: <Trans>Expiry date of the contract</Trans>
       }}
       data={{
-        startDate,
+        startDate: <DateFormat value={startDate} />,
         endDate: checkStatusProlongate(
           contractorLegalEntity,
           contractorLegalEntity.id,
@@ -327,7 +327,7 @@ const GeneralInfo = ({
         ) ? (
           <ProlongateContract id={id} endDate={endDate} />
         ) : (
-          endDate
+          <DateFormat value={endDate} />
         )
       }}
     />
@@ -834,8 +834,8 @@ const ExternalContractorsTable = ({ data }) => (
       ) => ({
         name,
         number,
-        issuedAt,
-        expiresAt,
+        issuedAt: <DateFormat value={issuedAt} />,
+        expiresAt: <DateFormat value={expiresAt} />,
         divisions: (
           <Wrapper onClick={onClick}>
             <Text color="rockmanBlue" fontWeight="bold" mr={1} fontSize={0}>
