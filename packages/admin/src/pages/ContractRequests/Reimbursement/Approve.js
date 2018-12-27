@@ -1,28 +1,22 @@
 import React from "react";
-import { Query, Mutation } from "react-apollo";
-import { Router, Link } from "@reach/router";
-import { Flex, Box } from "rebass/emotion";
+import { Query } from "react-apollo";
+import { Router } from "@reach/router";
+import { Box } from "rebass/emotion";
 import system from "system-components/emotion";
 import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
 import { getFullName } from "@ehealth/utils";
-import { Signer } from "@ehealth/react-iit-digital-signature";
 
 import Line from "../../../components/Line";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
-import Button from "../../../components/Button";
 import Tooltip from "../../../components/Tooltip";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
-
-import env from "../../../env";
+import SignContractRequest from "../../../components/SignContractRequest";
 
 const ReimbursementContractRequestQuery = loader(
   "../../../graphql/ReimbursementContractRequestQuery.graphql"
-);
-const ApproveContractRequestMutation = loader(
-  "../../../graphql/ApproveContractRequestMutation.graphql"
 );
 
 const Approve = ({ id }) => (
@@ -122,70 +116,15 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
         flexDirection="column"
       />
 
-      <Sign id={id} data={data} navigate={navigate} />
+      <SignContractRequest
+        id={id}
+        data={data}
+        navigate={navigate}
+        query={ReimbursementContractRequestQuery}
+      />
     </Box>
   );
 };
-
-const Sign = ({ id, data: { toApproveContent }, navigate }) => (
-  <Signer.Parent
-    url={env.REACT_APP_SIGNER_URL}
-    features={{
-      width: 640,
-      height: 589
-    }}
-  >
-    {({ signData }) => (
-      <Mutation
-        mutation={ApproveContractRequestMutation}
-        refetchQueries={() => [
-          {
-            query: ReimbursementContractRequestQuery,
-            variables: { id }
-          }
-        ]}
-      >
-        {approveContractRequest => (
-          <Flex mt={5}>
-            <Box mr={3}>
-              <Link to="../update">
-                <Button variant="blue">
-                  <Trans>Return</Trans>
-                </Button>
-              </Link>
-            </Box>
-            <Tooltip
-              component={() => (
-                <Button
-                  variant="green"
-                  onClick={async () => {
-                    const { signedContent } = await signData(toApproveContent);
-
-                    await approveContractRequest({
-                      variables: {
-                        input: {
-                          id,
-                          signedContent: {
-                            content: signedContent,
-                            encoding: "BASE64"
-                          }
-                        }
-                      }
-                    });
-                    navigate("../");
-                  }}
-                >
-                  <Trans>Approve by EDS</Trans>
-                </Button>
-              )}
-              content={toApproveContent && toApproveContent.text}
-            />
-          </Flex>
-        )}
-      </Mutation>
-    )}
-  </Signer.Parent>
-);
 
 const OpacityBox = system({ is: Box, opacity: 0.5 });
 
