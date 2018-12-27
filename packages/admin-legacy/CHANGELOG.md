@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.23.0"></a>
+# [1.23.0](https://github.com/edenlabllc/ehealth.web/compare/v1.22.1...v1.23.0) (2018-12-27)
+
+
+### Features
+
+* **admin-legacy:** add no_tax_id filter to declarations in status pending verification ([ac25fb7](https://github.com/edenlabllc/ehealth.web/commit/ac25fb7))
+
+
+
+
+
 <a name="1.22.0"></a>
 # [1.22.0](https://github.com/edenlabllc/ehealth.web/compare/v1.21.4...v1.22.0) (2018-12-26)
 
