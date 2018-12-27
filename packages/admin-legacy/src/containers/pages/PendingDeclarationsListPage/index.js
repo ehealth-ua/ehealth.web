@@ -121,6 +121,7 @@ export default compose(
         fetchDeclarations({
           page_size: 5,
           status: "pending_verification",
+          reason: "no_tax_id",
           ...query
         })
       )
