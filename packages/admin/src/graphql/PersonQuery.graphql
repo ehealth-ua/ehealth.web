@@ -1,6 +1,11 @@
-query PersonQuery($id: ID!) {
+query PersonQuery(
+  $id: ID!
+  $filter: DeclarationFilter
+  $orderBy: DeclarationOrderBy
+) {
   person(id: $id) {
     id
+    databaseId
     status
     firstName
     secondName
@@ -17,6 +22,43 @@ query PersonQuery($id: ID!) {
     authenticationMethods {
       type
       phoneNumber
+    }
+    declarations(filter: $filter, orderBy: $orderBy) {
+      id
+      databaseId
+      declarationNumber
+      startDate
+      endDate
+      status
+      scope
+      declarationRequestId
+      legalEntity {
+        id
+        name
+        shortName
+        publicName
+        type
+        edrpou
+        status
+        addresses {
+          type
+          country
+          area
+          region
+          settlement
+          settlementType
+          settlementId
+          streetType
+          street
+          building
+          apartment
+          zip
+        }
+      }
+      division {
+        id
+        name
+      }
     }
   }
 }

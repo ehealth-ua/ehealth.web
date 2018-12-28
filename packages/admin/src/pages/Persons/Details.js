@@ -4,8 +4,10 @@ import { Query, Mutation } from "react-apollo";
 import { Flex, Box, Heading, Text } from "rebass/emotion";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
-import { Trans } from "@lingui/macro";
-import { Form, Modal, LocationParams } from "@ehealth/components";
+import { Trans, t, DateFormat } from "@lingui/macro";
+import { I18n } from "@lingui/react";
+import isEmpty from "lodash/isEmpty";
+import { Form, Validation, Modal, LocationParams } from "@ehealth/components";
 import { AdminSearchIcon } from "@ehealth/icons";
 import {
   parseSortingParams,
@@ -24,11 +26,11 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import AddressView from "../../components/AddressView";
 import DefinitionListView from "../../components/DefinitionListView";
 
-import STATUSES from "../../helpers/statuses";
+import {
+  DECLARATION_SEARCH_PATTERN,
+  DECLARATION_ID_PATTERN
+} from "../../constants/declarationSearchPatterns";
 
-const PersonDeclarationsQuery = loader(
-  "../../graphql/PersonDeclarationsQuery.graphql"
-);
 const ResetAuthMethodMutation = loader(
   "../../graphql/ResetAuthMethodMutation.graphql"
 );
@@ -36,16 +38,13 @@ const PersonQuery = loader("../../graphql/PersonQuery.graphql");
 
 const filterData = (type, arr) => arr.filter(t => t.type === type);
 
-const declarationStatuses = Object.entries(STATUSES.DECLARATION).map(
-  ([name, value]) => ({ name, value })
-);
-
 const Details = ({ id }) => (
-  <Query query={PersonQuery} variables={{ id }}>
+  <Query query={PersonQuery} fetchPolicy="network-only" variables={{ id }}>
     {({ loading, error, data: { person = {} } = {} }) => {
       if (error) return `Error! ${error.message}`;
       const {
         id,
+        databaseId,
         status,
         firstName,
         secondName,
@@ -64,6 +63,9 @@ const Details = ({ id }) => (
       const authInfo = authenticationMethods[0];
 
       const userInfo = {
+        firstName,
+        secondName,
+        lastName,
         birthDate,
         birthCountry,
         birthSettlement,
@@ -88,13 +90,11 @@ const Details = ({ id }) => (
             </Box>
             <DefinitionListView
               labels={{
-                id: <Trans>Patient ID</Trans>,
-                fullName: <Trans>Patient Name</Trans>,
+                databaseId: <Trans>Patient ID</Trans>,
                 status: <Trans>Status</Trans>
               }}
               data={{
-                id,
-                fullName: getFullName({ firstName, secondName, lastName }),
+                databaseId,
                 status: <Badge name={status} type="PERSON" minWidth={100} />
               }}
               color="#7F8FA4"
@@ -125,10 +125,15 @@ const Details = ({ id }) => (
   </Query>
 );
 
-const UserInfo = ({ userInfo }) => (
+const UserInfo = ({
+  userInfo,
+  birthDate,
+  userInfo: { firstName, secondName, lastName }
+}) => (
   <Box p={5}>
     <DefinitionListView
       labels={{
+        fullName: <Trans>Patient Name</Trans>,
         birthDate: <Trans>Date of birth</Trans>,
         birthCountry: <Trans>Country of birth</Trans>,
         birthSettlement: <Trans>Place of birth</Trans>,
@@ -137,7 +142,11 @@ const UserInfo = ({ userInfo }) => (
         mobilePhone: <Trans>Mobile number</Trans>,
         landLinePhone: <Trans>Stationary number</Trans>
       }}
-      data={userInfo}
+      data={{
+        ...userInfo,
+        birthDate: <DateFormat value={birthDate} />,
+        fullName: getFullName({ firstName, secondName, lastName })
+      }}
     />
   </Box>
 );
@@ -209,136 +218,131 @@ const AuthInfo = ({ id, authInfo }) =>
 
 const DeclarationsInfo = ({ id }) => (
   <LocationParams>
-    {({
-      locationParams: { orderBy, declarationId, status },
-      setLocationParams
-    }) => {
+    {({ locationParams, setLocationParams }) => {
+      const { orderBy, filter: { declarationSearch } = {} } = locationParams;
+
+      const isRequestById = new RegExp(DECLARATION_ID_PATTERN).test(
+        declarationSearch
+      );
+      const declarationRequest =
+        !isEmpty(declarationSearch) &&
+        (isRequestById
+          ? { declarationId: declarationSearch }
+          : { declarationNumber: declarationSearch });
+
       return (
-        <Query
-          query={PersonDeclarationsQuery}
-          variables={{
-            id,
-            filter: { declarationId, status: status && status.name },
-            orderBy
-          }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`;
-            const {
-              person: { declarations }
-            } = data;
-            return (
-              <>
-                <Form
-                  onSubmit={() => null /* NOT USED, but required */}
-                  initialValues={{ declarationId, status }}
-                >
-                  <Form.AutoSubmit onSubmit={setLocationParams} />
-                  <Flex>
-                    <Box px={5} pt={5} width={460}>
-                      <Trans
-                        id="Enter ID or Declaration number"
-                        render={({ translation }) => (
-                          <Field.Text
-                            name="declarationId"
-                            label={<Trans>Declaration search</Trans>}
-                            placeholder={translation}
-                            postfix={<AdminSearchIcon color="#CED0DA" />}
-                          />
-                        )}
-                      />
-                    </Box>
-                    <Box pt={5}>
-                      <Trans
-                        id="All statuses"
-                        render={({ translation }) => (
-                          <Field.Select
-                            name="status"
-                            label={<Trans>Declaration status</Trans>}
-                            items={[
-                              { value: translation, name: undefined },
-                              ...declarationStatuses
-                            ]}
-                            renderItem={item => item.value}
-                            itemToString={item => {
-                              if (!item) return translation;
-                              return typeof item === "string"
-                                ? item
-                                : item.value;
-                            }}
-                            filterOptions={{ keys: ["value"] }}
-                            type="select"
-                          />
-                        )}
-                      />
-                    </Box>
-                  </Flex>
-                </Form>
-                <Table
-                  data={declarations}
-                  header={{
-                    id: <Trans>Declaration ID</Trans>,
-                    declarationNumber: <Trans>Declaration number</Trans>,
-                    startDate: <Trans>Declaration valid from</Trans>,
-                    name: <Trans>Legal entity</Trans>,
-                    edrpou: <Trans>EDRPOU</Trans>,
-                    divisionName: <Trans>Division name</Trans>,
-                    address: <Trans>Address</Trans>,
-                    status: <Trans>Status</Trans>,
-                    action: <Trans>Action</Trans>
-                  }}
-                  renderRow={({
-                    id,
-                    declarationNumber,
-                    startDate,
-                    legalEntity: { edrpou, name, addresses },
-                    division: { name: divisionName },
-                    status
-                  }) => {
-                    const [residenceAddress] = addresses.filter(
-                      a => a.type === "RESIDENCE"
-                    );
-                    return {
-                      id,
+        <>
+          <SearchDeclarationsForm
+            initialValues={locationParams}
+            onSubmit={setLocationParams}
+          />
+          <Query
+            query={PersonQuery}
+            variables={{
+              id,
+              orderBy,
+              filter: { ...declarationRequest }
+            }}
+          >
+            {({ loading, error, data }) => {
+              if (error || isEmpty(data)) return null;
+              const {
+                person: { declarations = [] }
+              } = data;
+              return (
+                <LoadingOverlay loading={loading}>
+                  <Table
+                    data={declarations}
+                    header={{
+                      databaseId: <Trans>Declaration ID</Trans>,
+                      declarationNumber: <Trans>Declaration number</Trans>,
+                      startDate: <Trans>Declaration valid from</Trans>,
+                      name: <Trans>Legal entity</Trans>,
+                      edrpou: <Trans>EDRPOU</Trans>,
+                      divisionName: <Trans>Division name</Trans>,
+                      address: <Trans>Address</Trans>,
+                      status: <Trans>Status</Trans>,
+                      action: <Trans>Action</Trans>
+                    }}
+                    renderRow={({
+                      databaseId,
                       declarationNumber,
                       startDate,
-                      name,
-                      edrpou,
-                      divisionName,
-                      address: residenceAddress && (
-                        <AddressView data={residenceAddress} />
-                      ),
-                      status: (
-                        <Badge
-                          name={status}
-                          type="DECLARATION"
-                          display="block"
-                        />
-                      ),
-                      action: (
-                        <Link to={`/declarations/${id}`}>
-                          <Trans>Show details</Trans>
-                        </Link>
-                      )
-                    };
-                  }}
-                  sortableFields={["startDate", "status"]}
-                  sortingParams={parseSortingParams(orderBy)}
-                  onSortingChange={sortingParams =>
-                    setLocationParams({
-                      orderBy: stringifySortingParams(sortingParams)
-                    })
-                  }
-                  hiddenFields="id"
-                />
-              </>
-            );
-          }}
-        </Query>
+                      legalEntity: { edrpou, name, addresses },
+                      division: { name: divisionName },
+                      status
+                    }) => {
+                      const [residenceAddress] = addresses.filter(
+                        a => a.type === "RESIDENCE"
+                      );
+                      return {
+                        databaseId,
+                        declarationNumber,
+                        startDate,
+                        name,
+                        edrpou,
+                        divisionName,
+                        address: residenceAddress && (
+                          <AddressView data={residenceAddress} />
+                        ),
+                        status: (
+                          <Badge
+                            name={status}
+                            type="DECLARATION"
+                            display="block"
+                          />
+                        ),
+                        action: (
+                          <Link to={`/declarations/${id}`} fontWeight="bold">
+                            <Trans>Show details</Trans>
+                          </Link>
+                        )
+                      };
+                    }}
+                    sortableFields={["startDate", "status"]}
+                    sortingParams={parseSortingParams(orderBy)}
+                    onSortingChange={sortingParams =>
+                      setLocationParams({
+                        orderBy: stringifySortingParams(sortingParams)
+                      })
+                    }
+                    whiteSpaceNoWrap={["databaseId"]}
+                    hiddenFields="databaseId"
+                    tableName="person-details/declarations"
+                  />
+                </LoadingOverlay>
+              );
+            }}
+          </Query>
+        </>
       );
     }}
   </LocationParams>
+);
+
+const SearchDeclarationsForm = ({ initialValues, onSubmit }) => (
+  <Form onSubmit={onSubmit} initialValues={initialValues}>
+    <Flex>
+      <Box px={5} pt={5} width={460}>
+        <I18n>
+          {({ i18n }) => (
+            <Field.Text
+              name="filter.declarationSearch"
+              label={<Trans>Declaration search</Trans>}
+              placeholder={i18n._(t`Enter ID or Declaration number`)}
+              postfix={<AdminSearchIcon color="#CED0DA" />}
+            />
+          )}
+        </I18n>
+        <Validation.Matches
+          field="filter.declarationSearch"
+          options={DECLARATION_SEARCH_PATTERN}
+          message={<Trans>Invalid number</Trans>}
+        />
+      </Box>
+    </Flex>
+    <input type="submit" hidden />
+  </Form>
 );
 
 export default Details;
