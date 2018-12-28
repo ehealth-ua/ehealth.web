@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.25.0"></a>
+# [1.25.0](https://github.com/edenlabllc/ehealth.web/compare/v1.24.0...v1.25.0) (2018-12-28)
+
+
+### Features
+
+* **admin:** add Declarations List page ([0dbc46e](https://github.com/edenlabllc/ehealth.web/commit/0dbc46e))
+
+
+
+
+
 <a name="1.23.3"></a>
 ## [1.23.3](https://github.com/edenlabllc/ehealth.web/compare/v1.23.2...v1.23.3) (2018-12-28)
 
