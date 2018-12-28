@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.24.0"></a>
+# [1.24.0](https://github.com/edenlabllc/ehealth.web/compare/v1.23.3...v1.24.0) (2018-12-28)
+
+
+### Features
+
+* **admin:** update schema version to 2.5.0 ([#648](https://github.com/edenlabllc/ehealth.web/issues/648)) ([07a85f9](https://github.com/edenlabllc/ehealth.web/commit/07a85f9))
+
+
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/edenlabllc/ehealth.web/compare/v1.2.0...v1.3.0) (2018-12-04)
 
