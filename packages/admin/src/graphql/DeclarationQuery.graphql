@@ -1,6 +1,7 @@
 query DeclarationQuery($id: ID!) {
   declaration(id: $id) {
     id
+    databaseId
     declarationNumber
     startDate
     endDate
@@ -10,6 +11,7 @@ query DeclarationQuery($id: ID!) {
     declarationRequestId
     legalEntity {
       id
+      databaseId
       publicName
       edrpou
       addresses {
@@ -29,6 +31,7 @@ query DeclarationQuery($id: ID!) {
     }
     person {
       id
+      databaseId
       firstName
       lastName
       secondName
@@ -43,6 +46,7 @@ query DeclarationQuery($id: ID!) {
     }
     division {
       id
+      databaseId
       name
       type
       email
@@ -68,13 +72,14 @@ query DeclarationQuery($id: ID!) {
     }
     employee {
       id
+      databaseId
       position
       party {
         firstName
         lastName
         secondName
       }
-      doctor {
+      additionalInfo {
         specialities {
           speciality
           specialityOfficio

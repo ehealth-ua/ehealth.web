@@ -4,18 +4,14 @@ import { Query, Mutation } from "react-apollo";
 import { Flex, Box, Heading, Text } from "rebass/emotion";
 import { BooleanValue } from "react-values";
 import system from "system-components/emotion";
+import isEmpty from "lodash/isEmpty";
 import { loader } from "graphql.macro";
-import { Trans } from "@lingui/macro";
-import {
-  PositiveIcon,
-  MenuTileIcon,
-  MenuListIcon,
-  DefaultImageIcon
-} from "@ehealth/icons";
+import { Trans, DateFormat } from "@lingui/macro";
+import { PositiveIcon, NegativeIcon, DefaultImageIcon } from "@ehealth/icons";
 import { getFullName, getPhones } from "@ehealth/utils";
 import { Form, Modal, Switch } from "@ehealth/components";
-import { mixed } from "@ehealth/system-tools";
 
+import Line from "../../components/Line";
 import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
 import Badge from "../../components/Badge";
@@ -26,8 +22,9 @@ import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import DefinitionListView from "../../components/DefinitionListView";
 
-import STATUSES from "../../helpers/statuses";
 import documents from "../../helpers/documents";
+
+import env from "../../env";
 
 const DeclarationQuery = loader("../../graphql/DeclarationQuery.graphql");
 const TerminateDeclarationMutation = loader(
@@ -46,6 +43,7 @@ const Details = ({ id }) => (
       if (error) return `Error! ${error.message}`;
       const {
         id,
+        databaseId,
         declarationNumber,
         startDate,
         endDate,
@@ -61,10 +59,9 @@ const Details = ({ id }) => (
 
       const general = {
         declarationNumber,
-        declarationRequestId,
         startDate,
         endDate,
-        status: STATUSES.DECLARATION[status],
+        status,
         scope,
         reason
       };
@@ -86,13 +83,13 @@ const Details = ({ id }) => (
               <Box>
                 <DefinitionListView
                   labels={{
-                    id: <Trans>Declaration ID</Trans>,
-                    declarationNumber: <Trans>Declaration number</Trans>,
+                    databaseId: <Trans>Declaration ID</Trans>,
+                    declarationRequestId: <Trans>Declaration request ID</Trans>,
                     status: <Trans>Status</Trans>
                   }}
                   data={{
-                    id,
-                    declarationNumber,
+                    databaseId,
+                    declarationRequestId,
                     status: (
                       <Badge name={status} type="DECLARATION" minWidth={100} />
                     )
@@ -104,49 +101,6 @@ const Details = ({ id }) => (
               <Box>
                 <Switch
                   value={status}
-                  ACTIVE={
-                    <Popup
-                      variant="red"
-                      buttonText="Розірвати декларацію"
-                      title="Розірвання декларації"
-                    >
-                      {toggle => (
-                        <Mutation mutation={TerminateDeclarationMutation}>
-                          {terminateDeclaration => (
-                            <Form
-                              onSubmit={async reasonDescription => {
-                                await terminateDeclaration({
-                                  variables: { id, reasonDescription }
-                                });
-                                toggle();
-                              }}
-                            >
-                              <Trans
-                                id="Enter terminate declaration reason"
-                                render={({ translation }) => (
-                                  <Field.Textarea
-                                    name="reasonDescription"
-                                    placeholder={translation}
-                                    rows={5}
-                                  />
-                                )}
-                              />
-                              <Flex justifyContent="center">
-                                <Box mr={20}>
-                                  <Button variant="blue" onClick={toggle}>
-                                    <Trans>Return</Trans>
-                                  </Button>
-                                </Box>
-                                <Button type="submit" variant="red">
-                                  <Trans>Terminate declaration</Trans>
-                                </Button>
-                              </Flex>
-                            </Form>
-                          )}
-                        </Mutation>
-                      )}
-                    </Popup>
-                  }
                   PENDING_VERIFICATION={
                     <Flex>
                       <Box mr={20}>
@@ -279,22 +233,102 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
   </BooleanValue>
 );
 
-const GeneralInfo = ({ general }) => (
-  <DefinitionListView
-    labels={{
-      declarationRequestId: <Trans>Contract request ID</Trans>,
-      startDate: <Trans>Initial date of the declaration</Trans>,
-      endDate: <Trans>End date of the declaration</Trans>,
-      status: <Trans>Status</Trans>,
-      scope: <Trans>Type</Trans>,
-      reason: <Trans>Termination reason</Trans>
-    }}
-    data={general}
-  />
+const GeneralInfo = ({
+  id,
+  general: { declarationNumber, startDate, endDate, status, reason, scope } = {}
+}) => (
+  <>
+    <DefinitionListView
+      labels={{
+        declarationNumber: <Trans>Declaration number</Trans>,
+        startDate: <Trans>Initial date of the declaration</Trans>,
+        endDate: <Trans>End date of the declaration</Trans>
+      }}
+      data={{
+        declarationNumber,
+        startDate: <DateFormat value={startDate} />,
+        endDate: <DateFormat value={endDate} />
+      }}
+    />
+    {reason && (
+      <>
+        <Line />
+        <DefinitionListView
+          labels={{
+            reason: <Trans>Status Comment</Trans>
+          }}
+          data={{
+            reason
+          }}
+        />
+        <Line />
+      </>
+    )}
+    <DefinitionListView
+      labels={{
+        scope: <Trans>Type</Trans>
+      }}
+      data={{
+        scope
+      }}
+    />
+    {status === "ACTIVE" && (
+      <Box mt={6}>
+        <Popup
+          variant="red"
+          buttonText={<Trans>Terminate declaration</Trans>}
+          title={<Trans>Declaration termination</Trans>}
+        >
+          {toggle => (
+            <Mutation mutation={TerminateDeclarationMutation}>
+              {terminateDeclaration => (
+                <Form
+                  onSubmit={async reasonDescription => {
+                    await terminateDeclaration({
+                      variables: { id, reasonDescription }
+                    });
+                    toggle();
+                  }}
+                >
+                  <Text mb={2}>
+                    <Trans>
+                      Attention! After declaration termination this action can
+                      not be canceled
+                    </Trans>
+                  </Text>
+                  <Trans
+                    id="Enter terminate declaration reason"
+                    render={({ translation }) => (
+                      <Field.Textarea
+                        name="reasonDescription"
+                        placeholder={translation}
+                        rows={5}
+                        maxlength="3000"
+                      />
+                    )}
+                  />
+                  <Flex justifyContent="center">
+                    <Box mr={20}>
+                      <Button variant="blue" onClick={toggle}>
+                        <Trans>Return</Trans>
+                      </Button>
+                    </Box>
+                    <Button type="submit" variant="red">
+                      <Trans>Terminate declaration</Trans>
+                    </Button>
+                  </Flex>
+                </Form>
+              )}
+            </Mutation>
+          )}
+        </Popup>
+      </Box>
+    )}
+  </>
 );
 
 const LegalEntity = ({
-  legalEntity: { edrpou, publicName, addresses, id }
+  legalEntity: { id, databaseId, edrpou, publicName, addresses }
 }) => {
   const [registrationAddress] = addresses.filter(
     a => a.type === "REGISTRATION"
@@ -317,11 +351,11 @@ const LegalEntity = ({
       />
       <DefinitionListView
         labels={{
-          id: "Legal entity ID",
+          databaseId: <Trans>Legal entity ID</Trans>,
           link: ""
         }}
         data={{
-          id,
+          databaseId,
           link: (
             <Link to={`/legal-entities/${id}`} fontWeight={700}>
               <Trans>Show detailed information</Trans>
@@ -335,7 +369,7 @@ const LegalEntity = ({
 };
 
 const Division = ({
-  division: { id, addresses, phones, mountainGroup, ...division }
+  division: { id, databaseId, addresses, phones, mountainGroup, ...division }
 }) => {
   const [residenceAddress] = addresses.filter(a => a.type === "RESIDENCE");
   return (
@@ -360,16 +394,10 @@ const Division = ({
       />
       <DefinitionListView
         labels={{
-          id: "ID відділення",
-          link: ""
+          databaseId: "ID відділення"
         }}
         data={{
-          id,
-          link: (
-            <Link to={`/division/${id}`} fontWeight={700}>
-              <Trans>Show detailed information</Trans>
-            </Link>
-          )
+          databaseId
         }}
         color="#7F8FA4"
       />
@@ -380,9 +408,10 @@ const Division = ({
 const Employee = ({
   employee: {
     id,
+    databaseId,
     position,
     party,
-    doctor: { specialities }
+    additionalInfo: { specialities }
   }
 }) => {
   const [specialityOfficio] = specialities.filter(s => s.specialityOfficio);
@@ -402,13 +431,17 @@ const Employee = ({
       />
       <DefinitionListView
         labels={{
-          id: "ID лікаря",
+          databaseId: <Trans>Employee ID</Trans>,
           link: ""
         }}
         data={{
-          id,
+          databaseId,
           link: (
-            <Link to={`/employees/${id}`} fontWeight={700}>
+            <Link
+              is="a"
+              href={`${env.REACT_APP_ADMIN_LEGACY_URL}/employees/${id}`}
+              fontWeight={700}
+            >
               <Trans>Show detailed information</Trans>
             </Link>
           )
@@ -422,12 +455,14 @@ const Employee = ({
 const Patient = ({
   patient: {
     id,
+    databaseId,
     birthDate,
     taxId,
     phones,
     birthCountry,
     birthSettlement,
     unzr,
+    noTaxId,
     ...fullName
   }
 }) => (
@@ -440,25 +475,29 @@ const Patient = ({
         birthSettlement: <Trans>Place of birth</Trans>,
         unzr: <Trans>Record ID in EDDR</Trans>,
         taxId: <Trans>INN</Trans>,
+        noTaxId: <Trans>No tax ID</Trans>,
         phones: <Trans>Phone number</Trans>
       }}
       data={{
         fullName: getFullName(fullName),
-        birthDate,
+        birthDate: <DateFormat value={birthDate} />,
         birthCountry,
         birthSettlement,
         unzr,
         taxId,
+        noTaxId: noTaxId ? (
+          <NegativeIcon fill="#ED1C24" stroke="#ED1C24" />
+        ) : null,
         phones: getPhones(phones)
       }}
     />
     <DefinitionListView
       labels={{
-        id: "Patient ID",
+        databaseId: <Trans>Patient ID</Trans>,
         link: ""
       }}
       data={{
-        id,
+        databaseId,
         link: (
           <Link to={`/persons/${id}`} fontWeight={700}>
             <Trans>Show detailed information</Trans>
@@ -470,63 +509,21 @@ const Patient = ({
   </>
 );
 
-const Documents = ({ documents }) => (
-  <BooleanValue>
-    {({ value: opened, toggle }) => (
-      <>
-        <Flex alignItems="center" justifyContent="flex-end">
-          <ButtonIcon pointerEvents={opened} onClick={toggle}>
-            <MenuTileIcon />
-          </ButtonIcon>
-          <ButtonIcon pointerEvents={!opened} onClick={toggle}>
-            <MenuListIcon />
-          </ButtonIcon>
-        </Flex>
-
-        <Flex flexWrap="wrap" flexDirection={!opened ? "column" : "row"}>
-          {documents.map(({ src, alt }) => (
-            <Box m="2">
-              <SaveLink
-                href={src}
-                target="_blank"
-                flexDirection={opened ? "column" : "row"}
-                alignItems={!opened ? "center" : "flex-start"}
-              >
-                {opened ? (
-                  <BorderBox>
-                    <img src={src} alt={alt} width="100%" height="100%" />
-                  </BorderBox>
-                ) : (
-                  <Box m={1} color="shiningKnight">
-                    <DefaultImageIcon />
-                  </Box>
-                )}
-                <Text color="rockmanBlue" lineHeight="1">
-                  {alt}
-                </Text>
-              </SaveLink>
-            </Box>
-          ))}
-        </Flex>
-      </>
-    )}
-  </BooleanValue>
-);
-
-const ButtonIcon = system(
-  {
-    p: 2,
-    borderRadius: 2,
-    lineHeight: 0
-  },
-  { cursor: "pointer" },
-  props =>
-    mixed({
-      bg: props.pointerEvents && "silverCity",
-      pointerEvents: !props.pointerEvents ? "auto" : "none",
-      color: !props.pointerEvents ? "bluePastel" : "shiningKnight"
-    })(props)
-);
+//TODO: pass Documents to the separate component
+const Documents = ({ documents }) =>
+  !isEmpty(documents) &&
+  documents.map(({ url, alt }) => (
+    <Box m="2">
+      <SaveLink href={url} target="_blank">
+        <Box m={1} color="shiningKnight">
+          <DefaultImageIcon />
+        </Box>
+        <Text color="rockmanBlue" lineHeight="1">
+          {alt}
+        </Text>
+      </SaveLink>
+    </Box>
+  ));
 
 const SaveLink = system(
   {
@@ -538,14 +535,5 @@ const SaveLink = system(
   },
   { textDecoration: "none" }
 );
-
-const BorderBox = system({
-  border: 1,
-  width: 125,
-  height: 125,
-  m: 2,
-  ml: 0,
-  borderColor: "silverCity"
-});
 
 export default Details;
