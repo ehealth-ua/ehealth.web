@@ -212,7 +212,15 @@ const Nav = () => (
             <Trans>Legal entities</Trans>
           </NavLink>
         </Ability>
-
+        <Flag name="features.declaration">
+          <Ability action="read" resource="declaration">
+            <NavSection title={<Trans>Declarations</Trans>}>
+              <NavLink to="declarations">
+                <Trans>Declarations</Trans>
+              </NavLink>
+            </NavSection>
+          </Ability>
+        </Flag>
         <Ability action="merge" resources={["legal_entity"]} loose>
           <NavSection title={<Trans>Jobs</Trans>}>
             <Ability action="merge" resource="legal_entity">
