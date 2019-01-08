@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.25.2"></a>
+## [1.25.2](https://github.com/edenlabllc/ehealth.web/compare/v1.25.1...v1.25.2) (2019-01-08)
+
+
+### Bug Fixes
+
+* **admin:** change fontSize in printout button ([bafddc4](https://github.com/edenlabllc/ehealth.web/commit/bafddc4))
+
+
+
+
+
 <a name="1.25.1"></a>
 ## [1.25.1](https://github.com/edenlabllc/ehealth.web/compare/v1.25.0...v1.25.1) (2018-12-28)
 
