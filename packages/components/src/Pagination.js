@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { withProps } from "recompose";
 import { stringifySearchParams } from "@ehealth/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@ehealth/icons";
@@ -102,7 +102,7 @@ const Item = styled.li`
   text-align: center;
   user-select: none;
 
-  &:first-child {
+  &:first-of-type {
     margin-left: 0;
   }
 

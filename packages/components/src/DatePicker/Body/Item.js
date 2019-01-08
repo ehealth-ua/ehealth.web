@@ -1,4 +1,4 @@
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { prop, ifProp, ifNotProp } from "styled-tools";
 
 const Item = styled.button`

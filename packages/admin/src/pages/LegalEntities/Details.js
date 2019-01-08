@@ -2,8 +2,8 @@ import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
-import { Flex, Box, Heading, Text } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex, Box, Heading, Text } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 import { DateFormat, Trans } from "@lingui/macro";
 import isEmpty from "lodash/isEmpty";
@@ -950,11 +950,11 @@ const EmptyData = props => (
   </Text>
 );
 
-const OpacityBox = system({ is: Box, opacity: 1 });
+const OpacityBox = system({ extend: Box, opacity: 1 });
 
 const ArchiveBox = system(
   {
-    is: Box,
+    extend: Box,
     mb: 6
   },
   `
@@ -966,7 +966,7 @@ const ArchiveBox = system(
 
 const CommentBox = system(
   {
-    is: Box,
+    extend: Box,
     pt: 2,
     pb: 5
   },
@@ -977,7 +977,7 @@ const CommentBox = system(
 
 const BorderBox = system(
   {
-    is: Box,
+    extend: Box,
     p: 4,
     mb: 5,
     fontSize: 0,

@@ -4,9 +4,9 @@ import debounce from "lodash/debounce";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
 import { DateFormat, Trans } from "@lingui/macro";
-import { Box, Flex, Text } from "rebass/emotion";
+import { Box, Flex, Text } from "@rebass/emotion";
 import { BooleanValue } from "react-values";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 
 import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
 import {
@@ -284,7 +284,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
                 if (!item) return translation;
                 return typeof item === "string" ? item : item.value;
               }}
-              type="select"
+              variant="select"
             />
           )}
         />
@@ -401,7 +401,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                   if (!item) return translation;
                   return typeof item === "string" ? item : item.value;
                 }}
-                type="select"
+                variant="select"
               />
             )}
           />
@@ -509,7 +509,7 @@ export default ReimbursementContractRequestsSearch;
 
 const TextNoWrap = system(
   {
-    is: Text,
+    extend: Text,
     ml: 2
   },
   { whiteSpace: "nowrap" }

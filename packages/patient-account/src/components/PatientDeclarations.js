@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import { gql } from "graphql.macro";
 import { ifProp, prop } from "styled-tools";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { Route } from "react-router-dom";
 import { ArrowRightIcon } from "@ehealth/icons";
 import { CabinetTable, Link } from "@ehealth/components";

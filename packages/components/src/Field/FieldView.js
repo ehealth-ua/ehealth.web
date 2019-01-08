@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "react-emotion/macro";
-import { css } from "react-emotion";
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 import { prop, ifProp, withProp } from "styled-tools";
 
 const FieldView = ({
@@ -11,9 +11,8 @@ const FieldView = ({
   wrapperIsLabel = true
 }) => {
   const Wrapper = wrapperIsLabel ? FieldWrapperLabel : FieldWrapper;
-
   return (
-    <Wrapper innerRef={innerRef} horizontal={horizontal}>
+    <Wrapper ref={innerRef} horizontal={horizontal}>
       {label && <FieldLabel horizontal={horizontal}>{label}</FieldLabel>}
       <FieldContent horizontal={horizontal}>{children}</FieldContent>
     </Wrapper>

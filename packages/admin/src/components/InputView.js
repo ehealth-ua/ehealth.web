@@ -1,39 +1,38 @@
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { variant, boolean } from "@ehealth/system-tools";
 
 export const Border = system(
   {
     bg: "white",
-    border: 1,
     borderColor: "silverCity",
     color: "darkAndStormy",
-    fontSize: 1,
+    position: "static",
+    fontSize: 1
+  },
+  {
+    display: "flex",
     lineHeight: 1,
     flexWrap: "nowrap",
-    position: "static"
+    borderWidth: 1,
+    borderStyle: "solid"
   },
   variant({
     prop: "state",
     key: "inputs.border.states"
   }),
-  `
-    display: flex;
-  `
+  "color",
+  "space",
+  "position",
+  "borderColor",
+  "fontSize"
 );
 
 export const Content = system(
   {
     py: 2,
-    flex: "1 1 auto"
+    flex: "1 1 auto",
+    blacklist: ["itemToString", "propTypes", "onInputValueChange"]
   },
-  variant({
-    prop: "type",
-    key: "inputs.field"
-  }),
-  boolean({
-    prop: "disabled",
-    key: "inputs.field.disabled"
-  }),
   `
     border: none;
     color: inherit;
@@ -54,14 +53,26 @@ export const Content = system(
       opacity: 0.5;
     }
   `,
+  variant({
+    prop: "variant",
+    key: "inputs.field"
+  }),
+  boolean({
+    prop: "disabled",
+    key: "inputs.field.disabled"
+  }),
   "display",
   "justifyContent",
   "alignItems",
+  "flex",
   "space",
   "width"
 );
 
 export const Divider = system(
+  {
+    blacklist: ["propTypes"]
+  },
   boolean({
     prop: "active",
     key: "inputs.divider.active"

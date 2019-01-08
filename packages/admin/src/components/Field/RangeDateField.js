@@ -7,7 +7,7 @@ import Composer from "react-composer";
 import { Field, DatePicker } from "@ehealth/components";
 import { CalendarIcon } from "@ehealth/icons";
 import { formatDate, parseDate } from "@ehealth/utils";
-import { Flex, Box } from "rebass/emotion";
+import { Flex, Box } from "@rebass/emotion";
 
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
@@ -107,7 +107,7 @@ class RangeDateField extends React.Component<
               <Flex>
                 <InputView.Border
                   state={propsFrom.meta.state || propsTo.meta.state}
-                  innerRef={this.calendar}
+                  ref={this.calendar}
                 >
                   <InputView.Content
                     pl={2}
@@ -142,7 +142,7 @@ class RangeDateField extends React.Component<
                 </Box>
                 <InputView.Border
                   state={propsFrom.meta.state || propsTo.meta.state}
-                  innerRef={this.calendar}
+                  ref={this.calendar}
                 >
                   <Calendar
                     name={end}
@@ -268,7 +268,7 @@ const Calendar = ({
   placement = "bottom",
   ...props
 }: CalendarProps) => (
-  <FieldView.Wrapper maxWidth={100} px={2}>
+  <FieldView.Wrapper maxWidth={120} px={2}>
     <label onFocus={onFocus} onBlur={onBlur}>
       <Field format={formatDate} parse={parseDate} {...props}>
         {({ input }) => (
@@ -281,7 +281,7 @@ const Calendar = ({
             guide={false}
             pipe={autoCorrectedDatePipe}
             width="100%"
-            autocomplete="off"
+            autoComplete="off"
           />
         )}
       </Field>

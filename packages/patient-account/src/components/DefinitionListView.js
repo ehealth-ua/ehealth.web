@@ -1,6 +1,6 @@
 import React from "react";
-import { Flex, Box, Text } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex, Box, Text } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 import { px } from "styled-system";
 
 import { DefinitionList } from "@ehealth/components";
@@ -30,15 +30,18 @@ export default DefinitionListView;
 
 const Item = system(
   {
-    is: Flex,
-    flexWrap: "nowrap",
+    extend: Flex,
     fontSize: 1,
     color: "#333",
     mb: 4
   },
   `
+    flex-wrap: nowrap;
     &:last-of-type {
       margin-bottom: 0;
     }
-  `
+  `,
+  "space",
+  "color",
+  "fontSize"
 );

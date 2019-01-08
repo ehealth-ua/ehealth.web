@@ -1,6 +1,6 @@
 import React from "react";
 import * as Reach from "@reach/router";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { prop, ifProp, switchProp } from "styled-tools";
 
 type Props = {

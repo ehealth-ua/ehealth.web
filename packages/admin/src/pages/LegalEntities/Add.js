@@ -1,7 +1,7 @@
 import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
-import { Flex, Box, Text } from "rebass/emotion";
+import { Flex, Box, Text } from "@rebass/emotion";
 import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
 import { getFullName } from "@ehealth/utils";

@@ -1,6 +1,6 @@
 //@flow
 import * as React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled/macro";
 
 type CellWithResizeProps = {
   onClick: () => mixed,
@@ -56,7 +56,7 @@ class TableHeaderCellWithResize extends React.Component<
           width: `${cellWidth}px`
         }}
         onClick={onClick}
-        innerRef={this.cell}
+        ref={this.cell}
       >
         {children}
         <ResizeHandler
@@ -148,12 +148,13 @@ class TableHeaderCellWithResize extends React.Component<
       const storage = localStorage.getItem(storageName);
 
       isValidJson(storage) &&
-        JSON.parse(storage).find(item => {
-          item[cellName] &&
+        JSON.parse(storage).find(
+          item =>
+            item[cellName] &&
             this.setState({
               cellWidth: item[cellName]
-            });
-        });
+            })
+        );
     }
   }
 
@@ -210,7 +211,7 @@ const TableHeaderCell = styled.th`
   &:last-child {
     border-right: none;
 
-    ${ResizeHandler}:last-child {
+    ${ResizeHandler} {
       display: none;
     }
   }

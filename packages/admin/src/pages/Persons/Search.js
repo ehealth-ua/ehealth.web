@@ -1,8 +1,8 @@
 import React from "react";
 import isEmpty from "lodash/isEmpty";
-import { Flex, Box, Heading } from "rebass/emotion";
+import { Flex, Box, Heading } from "@rebass/emotion";
 import { Query } from "react-apollo";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
 import {
@@ -296,8 +296,13 @@ const AuthnMethodsList = ({ data }) => (
   </Flex>
 );
 
-const Divider = system({
-  mx: 5,
-  width: "1px",
-  bg: "januaryDawn"
-});
+const Divider = system(
+  {
+    mx: 5,
+    width: "1px",
+    bg: "januaryDawn"
+  },
+  "color",
+  "width",
+  "space"
+);

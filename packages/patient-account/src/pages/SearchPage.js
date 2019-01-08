@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { Query } from "react-apollo";
 import { Router } from "@reach/router";
 import { loader } from "graphql.macro";

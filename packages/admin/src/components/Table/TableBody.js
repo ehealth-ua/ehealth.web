@@ -45,7 +45,7 @@ const TableBody = ({
             .map((name, index, array) => (
               <CellComponent
                 key={columnKeyExtractor(name, index)}
-                title={typeof row[name] === "string" && row[name]}
+                title={typeof row[name] === "string" ? row[name] : undefined}
                 whiteSpaceNoWrap={whiteSpaceNoWrap.includes(name)}
               >
                 {row[name]}

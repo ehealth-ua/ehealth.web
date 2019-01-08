@@ -1,8 +1,8 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
 import { Query } from "react-apollo";
-import { Flex, Box, Text } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex, Box, Text } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 import printIframe from "print-iframe";
 import { loader } from "graphql.macro";
 import format from "date-fns/format";
@@ -458,7 +458,7 @@ const PrintButton = ({ content }) => (
 
 const Wrapper = system(
   {
-    is: Flex
+    extend: Flex
   },
   { cursor: "pointer" }
 );

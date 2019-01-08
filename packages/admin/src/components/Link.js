@@ -1,21 +1,26 @@
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import * as Reach from "@reach/router";
 
 const Link = system(
   {
     is: Reach.Link,
-    display: "inline-block",
-    verticalAlign: "middle",
     fontSize: 0,
-    fontWeight: "normal",
     color: "rockmanBlue"
   },
-  `
-    user-select: none;
-    outline: none;
-    text-decoration: none;
-    cursor: pointer;
-  `
+  {
+    display: "inline-block",
+    verticalAlign: "middle",
+    userSelect: "none",
+    outline: "none",
+    textDecoration: "none",
+    cursor: "pointer"
+  },
+
+  "display",
+  "verticalAlign",
+  "color",
+  "fontSize",
+  "fontWeight"
 );
 
 export default Link;

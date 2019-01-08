@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Heading } from "rebass/emotion";
+import { Flex, Box, Heading } from "@rebass/emotion";
 import isEmpty from "lodash/isEmpty";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
@@ -122,7 +122,7 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
               name="filter.name"
               label={<Trans>Find dictionary</Trans>}
               placeholder={translation}
-              autocomplete="off"
+              autoComplete="off"
             />
           )}
         />

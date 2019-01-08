@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Heading } from "rebass/emotion";
+import { Flex, Box, Heading } from "@rebass/emotion";
 import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
 import differenceInSeconds from "date-fns/difference_in_seconds";
@@ -235,7 +235,7 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
                 return typeof item === "string" ? item : item.value;
               }}
               filterOptions={{ keys: ["value"] }}
-              type="select"
+              variant="select"
             />
           )}
         />
@@ -283,7 +283,7 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
                 return typeof item === "string" ? item : item.value;
               }}
               filterOptions={{ keys: ["value"] }}
-              type="select"
+              variant="select"
             />
           )}
         />

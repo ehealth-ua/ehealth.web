@@ -11,8 +11,7 @@ export default class RenderCodeAtx extends React.Component {
   render() {
     const {
       fields,
-      meta: { error, submitFailed },
-      data
+      meta: { error, submitFailed }
     } = this.props;
 
     return (

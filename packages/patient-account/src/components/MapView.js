@@ -7,7 +7,7 @@ import {
 } from "react-google-maps";
 import InfoBox from "react-google-maps/lib/components/addons/InfoBox";
 import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 
 import { ArrowRightIcon } from "@ehealth/icons";
 import { Link } from "@ehealth/components";
@@ -136,7 +136,9 @@ const SearchMapTooltip = ({
   name,
   legalEntity,
   address,
-  contacts: { phones: [phone] },
+  contacts: {
+    phones: [phone]
+  },
   onMouseLeave
 }) => (
   <Popup onMouseLeave={onMouseLeave}>

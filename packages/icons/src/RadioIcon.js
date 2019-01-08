@@ -1,5 +1,5 @@
 import React from "react";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { variant } from "@ehealth/system-tools";
 
 const Svg = ({ selected, disabled, ...props }) => {
@@ -44,7 +44,7 @@ const Svg = ({ selected, disabled, ...props }) => {
 };
 
 const RadioIcon = system({
-  is: Svg,
+  extend: Svg,
   width: "16px",
   height: "16px",
   mr: "15px"

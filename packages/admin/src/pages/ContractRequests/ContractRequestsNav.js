@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading } from "rebass/emotion";
+import { Heading } from "@rebass/emotion";
 import { Tabs } from "@ehealth/components";
 import { Trans } from "@lingui/macro";
 

@@ -1,7 +1,7 @@
 import React, { createContext, Component } from "react";
 import { ForceRedirect, Switch, Modal } from "@ehealth/components";
 import Error from "./components/Error";
-import { Text } from "rebass/emotion";
+import { Text } from "@rebass/emotion";
 
 import env from "./env";
 

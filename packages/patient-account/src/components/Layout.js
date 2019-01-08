@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { EhealthLogoIcon } from "@ehealth/icons";
 import UserNav from "./UserNav";
 

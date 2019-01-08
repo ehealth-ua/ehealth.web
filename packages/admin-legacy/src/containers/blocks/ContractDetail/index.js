@@ -476,7 +476,12 @@ class ContractDetail extends React.Component {
               {contract.urgent.map((item, i) => (
                 <div className={styles.docLinkWrapper} key={i}>
                   <PdfIcon width="14" />
-                  <a className={styles.docLink} href={item.url} target="_blank">
+                  <a
+                    className={styles.docLink}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <DictionaryValue
                       dictionary="CONTRACT_DOCUMENT"
                       value={item.type}

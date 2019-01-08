@@ -1,5 +1,5 @@
 import React from "react";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { mixed } from "@ehealth/system-tools";
 import { ChevronBottomIcon } from "@ehealth/icons";
 
@@ -41,7 +41,7 @@ const Summary = system(
 
 const Icon = system(
   {
-    is: ChevronBottomIcon,
+    extend: ChevronBottomIcon,
     ml: 2,
     width: 11
   },

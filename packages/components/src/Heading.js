@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { prop, ifProp, switchProp, withProp } from "styled-tools";
 
 const DEFAULT_FONT_SIZES = [22, 18, 16, 14, 14, 12];

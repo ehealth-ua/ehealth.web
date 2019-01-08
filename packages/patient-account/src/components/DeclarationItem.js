@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { CircleIcon } from "@ehealth/icons";
 import { Heading, Link } from "@ehealth/components";
 

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Flex, Box, Text } from "rebass/emotion";
+import { Flex, Box, Text } from "@rebass/emotion";
 import { LoaderIcon } from "@ehealth/icons";
 import { ifProp } from "styled-tools";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 
 class LoadingOverlay extends Component {
   state = {
-    delayLoading: false,
+    delayLoading: undefined,
     loadingFromState: false,
     delayBeforeLoading: 1000,
     delayAfterLoading: 500
@@ -108,24 +108,30 @@ export const Spinner = props => (
 
 const WrapperLoader = system(
   {
-    is: Flex,
-    width: "100%",
-    height: "100%"
+    extend: Flex
   },
   {
     position: "absolute",
-
+    width: "100%",
+    height: "100%",
     zIndex: 1
   }
 );
 
-const Blur = system({ is: Box, minHeight: 50 }, props => ({
-  filter: ifProp("filter", "blur(2px)", "none")(props)
-}));
+const Blur = system(
+  {
+    extend: Box,
+    blacklist: ["filter"]
+  },
+  props => ({
+    minHeight: 50,
+    filter: ifProp("filter", "blur(2px)", "none")(props)
+  })
+);
 
 const Wrapper = system(
   {
-    is: Box
+    extend: Box
   },
   {
     position: "relative"

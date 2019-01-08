@@ -1,6 +1,6 @@
 import React from "react";
 import * as Reach from "@reach/router";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { ChevronBottomIcon } from "@ehealth/icons";
 
 /**
@@ -27,41 +27,54 @@ const Item = ({ to, ...props }) => (
   </Breadcrumb>
 );
 
-const List = system({
-  is: "ul",
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  p: 0
-});
+const List = system(
+  {
+    is: "ul",
+    p: 0
+  },
+  {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap"
+  },
+  "space"
+);
 
-const Breadcrumb = system({
-  is: "li",
-  fontSize: "14px",
-  color: "#354052",
-  mb: 2
-});
+const Breadcrumb = system(
+  {
+    is: "li",
+    mb: 2,
+    fontSize: 1,
+    color: "darkAndStormy"
+  },
+  "space",
+  "fontSize",
+  "color"
+);
 
 const Link = system(
   {
     is: Reach.Link,
-    color: "#848c98"
+    color: "romanSilver"
   },
-  `
-  text-decoration: none
-`
+  {
+    textDecoration: "none"
+  },
+  "color"
 );
 
 const Arrow = system(
   {
-    is: ChevronBottomIcon,
-    color: "#a1a7af",
-    mx: 2,
+    extend: ChevronBottomIcon,
+    color: "romanSilver",
+    mx: 2
+  },
+  {
+    transform: "rotate(270deg)",
     verticalAlign: "middle"
   },
-  `
-    transform: rotate(270deg)
-  `
+  "color",
+  "space"
 );
 
 const Breadcrumbs = { List, Item };

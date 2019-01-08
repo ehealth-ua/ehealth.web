@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "react-emotion/macro";
-import { css, keyframes } from "react-emotion";
+import styled from "@emotion/styled";
+import { css, keyframes } from "@emotion/core";
 import { Manager, Reference, Popper } from "react-popper";
 import { ifProp } from "styled-tools";
 
@@ -14,7 +14,7 @@ const Tooltip = ({
   <Manager>
     <Reference>
       {({ ref }) => (
-        <Target innerRef={ref} disableHover={disableHover}>
+        <Target ref={ref} disableHover={disableHover}>
           <Component />
         </Target>
       )}
@@ -36,7 +36,7 @@ const Tooltip = ({
       {({ ref, style, placement, arrowProps, ...props }) => (
         <TooltipWrapper
           style={style}
-          innerRef={ref}
+          ref={ref}
           placement={placement}
           showTooltip={showTooltip}
         >
@@ -49,7 +49,7 @@ const Tooltip = ({
                 : "auto"
             }}
             placement={placement}
-            innerRef={arrowProps.ref}
+            ref={arrowProps.ref}
           />
         </TooltipWrapper>
       )}

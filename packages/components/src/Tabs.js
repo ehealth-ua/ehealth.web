@@ -1,6 +1,6 @@
 import React from "react";
 import * as ReachRouter from "@reach/router";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { gradient, boolean } from "@ehealth/system-tools";
 
 const Nav = system(
@@ -15,41 +15,54 @@ const Nav = system(
         ["januaryDawn", 60]
       ]
     ],
+    blacklist: ["repeatingLinearGradient"]
+  },
+  {
+    display: "flex",
+    flexWrap: "wrap",
     justifyContent: ["center", "space-around"]
   },
   gradient,
-  {
-    display: "flex",
-    flexWrap: "wrap"
-  }
+  "space",
+  "justifyContent",
+  "repeatingLinearGradient"
 );
 
 const Item = system(
   {
-    borderBottom: 3,
-    borderColor: "transparent",
-    color: "blueberrySoda",
     fontSize: 2,
     mx: [4, 6],
-    height: 60
+    color: "blueberrySoda",
+    blacklist: ["active"]
   },
   {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     textDecoration: "none",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
+    height: 60,
+    borderBottomWidth: 3,
+    borderBottomStyle: "solid",
+    borderColor: "transparent"
   },
   boolean({
     prop: "active",
     borderColor: "rockmanBlue",
     color: "darkAndStormy"
-  })
+  }),
+  "space",
+  "color",
+  "fontSize",
+  "borderBottom",
+  "borderColor"
 );
 
 const Link = props => (
   <ReachRouter.Match path={props.to}>
-    {({ match }) => <Item is={ReachRouter.Link} {...props} active={!!match} />}
+    {({ match }) => (
+      <Item extend={ReachRouter.Link} {...props} active={!!match} />
+    )}
   </ReachRouter.Match>
 );
 

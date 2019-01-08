@@ -1,4 +1,4 @@
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 
 const Section = styled.div`
   margin: 30px 0;

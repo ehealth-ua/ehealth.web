@@ -1,4 +1,4 @@
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { variant } from "@ehealth/system-tools";
 
 export const Wrapper = system(
@@ -6,16 +6,20 @@ export const Wrapper = system(
     position: "relative",
     flexDirection: "column",
     alignItems: "stretch",
-    maxWidth: "100%"
+    maxWidth: "100%",
+    blacklist: ["itemToString"]
   },
   `
     display: flex;
-
     &:last-child {
       margin-bottom: 0;
     }
   `,
-  "space"
+  "space",
+  "flexDirection",
+  "position",
+  "alignItems",
+  "maxWidth"
 );
 
 export const Header = system(
@@ -26,22 +30,28 @@ export const Header = system(
     display: flex;
     justify-content: space-between;
     align-items: center;
-  `
+  `,
+  "space"
 );
 
-export const Footer = system({
-  is: Header,
-  mt: 1,
-  mb: 1,
-  height: 20
-});
+export const Footer = system(
+  {
+    extend: Header,
+    mt: 1,
+    mb: 1,
+    height: 20
+  },
+  "space",
+  "height"
+);
 
 export const Label = system(
   {
     color: "darkAndStormy",
     fontSize: 1
   },
-  "space"
+  "fontSize",
+  "color"
 );
 
 export const Message = system(
@@ -53,5 +63,6 @@ export const Message = system(
     prop: "state",
     key: "fields.message.states"
   }),
-  "space"
+  "fontSize",
+  "color"
 );

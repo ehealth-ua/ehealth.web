@@ -1,6 +1,7 @@
 import React from "react";
-import { Box } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Box } from "@rebass/emotion";
+import system from "@ehealth/system-components";
+import { variant } from "styled-system";
 
 export const IconButton = ({ children, icon: Icon, ...props }) => (
   <Container {...props}>
@@ -25,7 +26,14 @@ const Button = system(
     vertical-align: middle;
     outline: none;
     text-decoration: none;
-  `
+  `,
+  "space",
+  "fontSize",
+  "border",
+  "lineHeight",
+  variant({
+    key: "buttons"
+  })
 );
 
 const Container = system(
@@ -42,7 +50,15 @@ const Container = system(
   {
     cursor: "pointer",
     whiteSpace: "nowrap"
-  }
+  },
+  "display",
+  "alignItems",
+  "space",
+  "color",
+  "fontSize",
+  "fontWeight",
+  "border",
+  "lineHeight"
 );
 
 Button.displayName = "Button";

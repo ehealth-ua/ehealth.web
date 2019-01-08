@@ -1,8 +1,8 @@
 import React from "react";
 import { Router } from "@reach/router";
 import { Mutation, Query } from "react-apollo";
-import { Flex, Box, Text, Heading } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex, Box, Text, Heading } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
@@ -956,7 +956,7 @@ const WrapperBoxHeight = system({
 
 const Wrapper = system(
   {
-    is: Flex
+    extend: Flex
   },
   { cursor: "pointer" }
 );

@@ -5,8 +5,8 @@ import { Switch } from "@ehealth/components";
 import printIframe from "print-iframe";
 import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
-import system from "system-components/emotion";
-import { Box, Flex, Text } from "rebass/emotion";
+import system from "@ehealth/system-components";
+import { Box, Flex, Text } from "@rebass/emotion";
 import { PrinterIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
@@ -145,7 +145,7 @@ const Wrapper = system({
 });
 
 const FixedWrapper = system({
-  is: Box,
+  extend: Box,
   position: "fixed",
   bottom: 0,
   left: 0,

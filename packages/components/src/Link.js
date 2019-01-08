@@ -1,7 +1,7 @@
 import React from "react";
 import * as Reach from "@reach/router";
-import styled from "react-emotion/macro";
-import { css } from "react-emotion";
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 import { prop, ifProp, switchProp } from "styled-tools";
 import { pickValidProps } from "@ehealth/utils";
 

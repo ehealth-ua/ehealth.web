@@ -1,7 +1,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import styled from "react-emotion/macro";
-import system from "system-components/emotion";
+import styled from "@emotion/styled";
+import system from "@ehealth/system-components";
 import { variant } from "styled-system";
 import { CloseIcon } from "@ehealth/icons";
 
@@ -29,38 +29,51 @@ const Modal = ({ backdrop, onClose, children, ...props }: ModalProps) =>
 
 export default Modal;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 28px;
-  right: 30px;
-`;
+const CloseButton = system(
+  {},
+  {
+    position: "absolute",
+    top: "28px",
+    right: "30px"
+  }
+);
 
 const Window = system(
   {
     position: "fixed",
     p: 7,
     bg: "white",
+    placement: "center"
+  },
+  {
     maxWidth: "100vw",
     maxHeight: "100vh",
     textAlign: "center",
-    placement: "center",
-    overflow: "auto"
+    overflow: "auto",
+    boxShadow: "0 0 7px 5px rgba(0, 0, 0, 0.1)"
   },
-  `
-    box-shadow: 0 0 7px 5px rgba(0, 0, 0, 0.1);
-  `,
+  "position",
   "width",
+  "color",
+  "space",
+  "overflow",
+  "textAlign",
   variant({
     prop: "placement",
     key: "placements"
   })
 );
 
-const Backdrop = system({
-  position: "fixed",
-  bg: "rgba(255, 255, 255, 0.5)",
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0
-});
+const Backdrop = system(
+  {
+    bg: "rgba(255, 255, 255, 0.5)"
+  },
+  {
+    position: "fixed",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0
+  },
+  "color"
+);

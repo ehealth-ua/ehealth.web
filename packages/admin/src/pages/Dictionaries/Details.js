@@ -2,8 +2,8 @@ import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
 import { loader } from "graphql.macro";
-import { Flex, Box } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex, Box } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 import { BooleanValue } from "react-values";
 import isEmpty from "lodash/isEmpty";
 import { FieldArray } from "react-final-form-arrays";
@@ -274,7 +274,7 @@ class DictionaryValues extends React.Component {
         : arrayOfValues;
 
     return (
-      <Box p={5} innerRef={this.editFormRef}>
+      <Box p={5} ref={this.editFormRef}>
         {!this.state.fieldToEdit ? (
           <>
             <Flex justifyContent="space-between" color="darkAndStormy">
@@ -570,32 +570,45 @@ class DictionaryValues extends React.Component {
 
 export default Details;
 
-const RemoveButtom = system({
-  is: RemoveItemIcon,
-  color: "redPigment",
-  alignSelf: "center",
-  ml: 2
-});
+const RemoveButtom = system(
+  {
+    extend: RemoveItemIcon,
+    color: "redPigment",
+    ml: 2
+  },
+  {
+    alignSelf: "center"
+  },
+  "color",
+  "space"
+);
 
-const RemovalContainer = system({
-  is: Box,
-  px: 4,
-  mt: "-4px",
-  alignSelf: "center"
-});
+const RemovalContainer = system(
+  {
+    extend: Box,
+    px: 4,
+    mt: "-4px"
+  },
+  {
+    alignSelf: "center"
+  },
+  "space"
+);
 
 const AddButton = system(
   {
-    display: "inline-block",
-    verticalAlign: "middle",
     fontSize: 0,
-    fontWeight: "bold",
     color: "rockmanBlue"
   },
-  `
-    user-select: none;
-    outline: none;
-    text-decoration: none;
-    cursor: pointer;
-  `
+  {
+    display: "inline-block",
+    verticalAlign: "middle",
+    userSelect: "none",
+    outline: "none",
+    textDecoration: "none",
+    cursor: "pointer",
+    fontWeight: "bold"
+  },
+  "fontSize",
+  "color"
 );

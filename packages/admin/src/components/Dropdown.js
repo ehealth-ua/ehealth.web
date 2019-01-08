@@ -1,4 +1,4 @@
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { ifProp } from "styled-tools";
 
 import { CheckRightIcon } from "@ehealth/icons";
@@ -17,7 +17,7 @@ const Item = styled.div`
   background: ${ifProp("on", "#F1F4F8", "#fff")};
   user-select: none;
   cursor: pointer;
-  &:first-child {
+  &:first-of-type {
     border-top: none;
   }
 `;

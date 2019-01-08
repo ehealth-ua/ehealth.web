@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { Slider, Slide } from "react-projector";
 import { ifProp } from "styled-tools";
 import { ResponsiveSlide } from "react-projector-responsive";

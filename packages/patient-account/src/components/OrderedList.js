@@ -1,8 +1,12 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 
 const OrderedList = ({ children }) => (
-  <Wrapper>{children.map((i, key) => <Item key={key}>{i}</Item>)}</Wrapper>
+  <Wrapper>
+    {children.map((i, key) => (
+      <Item key={key}>{i}</Item>
+    ))}
+  </Wrapper>
 );
 export default OrderedList;
 

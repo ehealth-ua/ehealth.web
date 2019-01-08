@@ -1,14 +1,12 @@
 import React from "react";
 import isEmpty from "lodash/isEmpty";
-import debounce from "lodash/debounce";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
-import { Box, Flex } from "rebass/emotion";
+import { Box, Flex } from "@rebass/emotion";
 import { Trans, DateFormat } from "@lingui/macro";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
 import {
-  formatDateTimeInterval,
   getFullName,
   parseSortingParams,
   stringifySortingParams
@@ -26,20 +24,13 @@ import * as Field from "../../../components/Field";
 import AssigneeSearch from "../../../components/AssigneeSearch";
 import Button, { IconButton } from "../../../components/Button";
 
-import {
-  EDRPOU_PATTERN,
-  SEARCH_REQUEST_PATTERN
-} from "../../../constants/contractRequests";
+import { SEARCH_REQUEST_PATTERN } from "../../../constants/contractRequests";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import STATUSES from "../../../helpers/statuses";
 import contractFormFilteredParams from "../../../helpers/contractFormFilteredParams";
 
 const SearchCapitationContractRequestsQuery = loader(
   "../../../graphql/SearchCapitationContractRequestsQuery.graphql"
-);
-
-const EmployeesQuery = loader(
-  "../../../graphql/GetAssignEmployeeQuery.graphql"
 );
 
 const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
@@ -242,7 +233,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
                 if (!item) return translation;
                 return typeof item === "string" ? item : item.value;
               }}
-              type="select"
+              variant="select"
             />
           )}
         />

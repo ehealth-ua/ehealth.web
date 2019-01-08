@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 
 import DigitalSignature from "@ehealth/react-iit-digital-signature";
 import { Field, Form, Validation } from "@ehealth/components";

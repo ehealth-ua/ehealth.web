@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, Match } from "@reach/router";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { ifProp } from "styled-tools";
-import { css } from "react-emotion";
+import { css } from "@emotion/core";
 
 import { SmallChevronLeftIcon, SmallChevronRightIcon } from "@ehealth/icons";
 
@@ -64,10 +64,10 @@ class Nav extends React.Component {
             <SmallChevronLeftIcon />
           </Arrow>
         )}
-        <Wrapper innerRef={this.wrapper}>
+        <Wrapper ref={this.wrapper}>
           <Container
             style={{ left: this.state.containerLeftX }}
-            innerRef={this.container}
+            ref={this.container}
           >
             {this.props.children}
           </Container>

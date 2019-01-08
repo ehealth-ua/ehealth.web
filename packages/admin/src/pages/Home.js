@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Text } from "rebass/emotion";
+import { Box, Heading, Text } from "@rebass/emotion";
 import { Trans } from "@lingui/macro";
 
 const Home = () => (

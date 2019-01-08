@@ -1,9 +1,9 @@
 //@flow
 import * as React from "react";
-import styled from "react-emotion/macro";
-import { css } from "react-emotion";
+import styled from "@emotion/styled/macro";
+import { css } from "@emotion/core";
 import { ifProp, ifNotProp } from "styled-tools";
-import { Flex } from "rebass/emotion";
+import { Flex } from "@rebass/emotion";
 import isEqual from "lodash/isEqual";
 
 import { TableView } from "@ehealth/components";

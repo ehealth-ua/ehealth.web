@@ -6,7 +6,7 @@ import { List, DropdownButton, DropdownIcon } from "../MultiSelectView";
 import * as FieldView from "../FieldView";
 import * as InputView from "../InputView";
 import { SingleDownshift } from "./DownshiftField";
-import { ChevronBottomIcon } from "@ehealth/icons";
+
 /**
  *
  * @example
@@ -29,7 +29,7 @@ import { ChevronBottomIcon } from "@ehealth/icons";
  *   renderItem={item => item.name }
  *   itemToString={item => {
  *     if (!item) return "";
- *     return typeof item === "string"
+ *     return variantof item === "string"
  *       ? item
  *       : item.name
  *   }}
@@ -38,9 +38,9 @@ import { ChevronBottomIcon } from "@ehealth/icons";
  *   }
  * />
  *
- * Optional prop "type" with possible value "select"
- * Without "type" select works with search field and filter in List
- * With type="select" select works like classic select field, without search and filtering, and with gradient background
+ * Optional prop "variant" with possible value "select"
+ * Without "variant" select works with search field and filter in List
+ * With variant="select" select works like classic select field, without search and filtering, and with gradient background
  */
 
 const SelectField = ({
@@ -48,7 +48,7 @@ const SelectField = ({
   hint,
   warning,
   items = [],
-  type,
+  variant,
   filterOptions,
   filter = matchSorter,
   hideErrors = false,
@@ -71,7 +71,7 @@ const SelectField = ({
       input: { onFocus, onBlur, size, disabled, ...input },
       meta: { active, errored, error }
     }) => (
-      <FieldView.Wrapper {...getRootProps({ refKey: "innerRef" })}>
+      <FieldView.Wrapper {...getRootProps({ refKey: "ref" })}>
         {label && (
           <FieldView.Header>
             <FieldView.Label>{label}</FieldView.Label>
@@ -92,13 +92,9 @@ const SelectField = ({
               width: 0,
               disabled,
               ...input,
-              type,
-              onKeyDown: event => {
-                if (!isOpen && event.key === "Backspace") {
-                  clearSelection();
-                }
-              },
+              variant,
               onChange: e => {
+                console.log(e);
                 if (e.target.value === "") {
                   clearSelection();
                 }
@@ -109,14 +105,15 @@ const SelectField = ({
             {...getToggleButtonProps({
               open: isOpen,
               disabled,
-              type
+              variant,
+              type: "div"
             })}
           >
             <Icon />
           </DropdownButton>
           {isOpen && (
             <List>
-              {filter(items, !type && inputValue, filterOptions).map(
+              {filter(items, !variant && inputValue, filterOptions).map(
                 (item, index) => (
                   <Dropdown.Item
                     {...getItemProps({

@@ -2,7 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import { ifProp } from "styled-tools";
 import { Router, Match } from "@reach/router";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { loader } from "graphql.macro";
 import { ArrowRightIcon } from "@ehealth/icons";
 import {

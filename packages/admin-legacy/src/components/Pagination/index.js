@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { withProps } from "recompose";
 import { stringifySearchParams, parseSearchParams } from "@ehealth/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@ehealth/icons";
@@ -73,7 +73,9 @@ const DirectionPage = ({ page, backward, ...props }) => (
 );
 
 const LinkComponent = ({ page, children, ...props }) => {
-  const { location: { search, pathname } } = props;
+  const {
+    location: { search, pathname }
+  } = props;
   return (
     <Link
       to={{

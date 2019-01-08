@@ -1,5 +1,4 @@
-import React from "react";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 
 const Line = system({
   is: "figure",

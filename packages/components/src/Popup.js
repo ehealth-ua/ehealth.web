@@ -1,6 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 
 import { CloseIcon } from "@ehealth/icons";
 

@@ -10,7 +10,7 @@ const inputs = {
   field: {
     select: {
       pointerEvents: "none",
-      backgroundImage: `linear-gradient(0deg, #F2F4F7 0%, #FFFFFF 100%)`
+      backgroundImage: "linear-gradient(0deg, #F2F4F7 0%, #FFFFFF 100%)"
     },
     disabled: {
       pointerEvents: "none",
@@ -26,7 +26,7 @@ const inputs = {
     }
   },
   button: {
-    fullWidth: {
+    select: {
       width: "100%",
       textAlign: "right"
     }

@@ -7,7 +7,7 @@ import { passwordRecoveryRequest } from "../../../redux/password";
 
 import { H1, H3 } from "../../../components/Title";
 import ResetPasswordForm from "../../forms/ResetPasswordForm";
-import Button, { ButtonsGroup } from "../../../components/Button";
+import { ButtonsGroup } from "../../../components/Button";
 
 import styles from "./styles.module.css";
 

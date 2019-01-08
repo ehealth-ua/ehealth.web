@@ -1,26 +1,20 @@
 import React from "react";
-import { Flex, Box, Text } from "rebass/emotion";
+import { Flex, Box, Text } from "@rebass/emotion";
 import { BooleanValue } from "react-values";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
 import { loader } from "graphql.macro";
 import { DateFormat, Trans } from "@lingui/macro";
 
 import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
-import {
-  parseSortingParams,
-  stringifySortingParams,
-  formatDateTimeInterval
-} from "@ehealth/utils";
+import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 
 import {
   AdminSearchIcon,
-  PositiveIcon,
   FilterIcon,
   NegativeIcon,
-  RemoveItemIcon,
-  CircleIcon
+  RemoveItemIcon
 } from "@ehealth/icons";
 
 import { SelectedItem, RemoveItem } from "../../../components/MultiSelectView";
@@ -36,10 +30,7 @@ import Button, { IconButton } from "../../../components/Button";
 import Badge from "../../../components/Badge";
 import STATUSES from "../../../helpers/statuses";
 
-import {
-  EDRPOU_PATTERN,
-  SEARCH_CONTRACT_PATTERN
-} from "../../../constants/contracts";
+import { SEARCH_CONTRACT_PATTERN } from "../../../constants/contracts";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import contractFormFilteredParams from "../../../helpers/contractFormFilteredParams";
 
@@ -293,7 +284,7 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
                 if (!item) return translation;
                 return typeof item === "string" ? item : item.value;
               }}
-              type="select"
+              variant="select"
             />
           )}
         />
@@ -427,7 +418,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                   if (!item) return translation;
                   return typeof item === "string" ? item : item.value;
                 }}
-                type="select"
+                variant="select"
               />
             )}
           />
@@ -458,7 +449,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                 items={["", "true", "false"]}
                 renderItem={item => renderIsSuspendedItem(item)}
                 itemToString={item => renderIsSuspendedItem(item)}
-                type="select"
+                variant="select"
               />
             )}
           />
@@ -477,7 +468,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                   if (!item) return translation;
                   return typeof item === "string" ? item : item.value;
                 }}
-                type="select"
+                variant="select"
               />
             )}
           />
@@ -518,7 +509,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
 
 const TextNoWrap = system(
   {
-    is: Text
+    extend: Text
   },
   { whiteSpace: "nowrap" }
 );

@@ -1,6 +1,6 @@
 import React from "react";
 import * as Reach from "@reach/router";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { mixed, boolean } from "@ehealth/system-tools";
 
 export const Item = ({ to, disabled, ...props }) => (
@@ -18,14 +18,14 @@ export const Item = ({ to, disabled, ...props }) => (
 
 const Link = system(
   {
-    display: "flex",
-    overflow: "hidden",
     mr: 2,
-    color: "romanSilver",
     fontSize: 1,
-    alignItems: "center"
+    color: "romanSilver"
   },
   {
+    display: "flex",
+    overflow: "hidden",
+    alignItems: "center",
     textDecoration: "none",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis"
@@ -56,18 +56,22 @@ const Link = system(
   boolean({
     prop: "active",
     color: "darkAndStormy"
-  })
+  }),
+  "space",
+  "color",
+  "fontSize"
 );
 
 const List = system(
   {
     is: "nav",
-    display: "flex",
     mb: 4
   },
   {
+    display: "flex",
     counterReset: "step"
-  }
+  },
+  "space"
 );
 
 const Steps = { List, Item };

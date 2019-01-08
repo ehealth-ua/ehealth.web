@@ -5,8 +5,8 @@ import { Switch } from "@ehealth/components";
 import printIframe from "print-iframe";
 import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
-import system from "system-components/emotion";
-import { Box, Flex, Text } from "rebass/emotion";
+import system from "@ehealth/system-components";
+import { Box, Flex, Text } from "@rebass/emotion";
 import { PrinterIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
@@ -138,34 +138,46 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
   );
 };
 
-const Wrapper = system({
-  position: "relative",
-  overflow: "hidden",
-  height: "calc(100vh - 90px)"
-});
+const Wrapper = system(
+  {},
+  {
+    position: "relative",
+    overflow: "hidden",
+    height: "calc(100vh - 90px)"
+  }
+);
 
-const FixedWrapper = system({
-  is: Box,
-  position: "fixed",
-  bottom: 0,
-  left: 0,
-  right: 0,
-  p: 2,
-  background: "white",
-  borderTop: "1px solid",
-  borderColor: "silverCity",
-  boxShadow: "0 0 18px rgba(174, 174, 174, 0.75)"
-});
+const FixedWrapper = system(
+  {
+    extend: Box,
+    p: 2,
+    background: "white",
+    borderColor: "silverCity"
+  },
+  {
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTop: "1px solid",
+    boxShadow: "0 0 18px rgba(174, 174, 174, 0.75)"
+  },
+  "space",
+  "color",
+  "borderColor"
+);
 
-const Frame = system({
-  is: "iframe",
-  position: "absolute",
-  width: "100%",
-  height: "100%",
-  top: 0,
-  left: 0,
-  border: 0
-});
+const Frame = system(
+  { is: "iframe" },
+  {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    top: 0,
+    left: 0,
+    border: 0
+  }
+);
 
 const Portal = ({ content }) => (
   <Wrapper position="relative">

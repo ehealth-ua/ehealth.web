@@ -1,6 +1,6 @@
 import React from "react";
 import Composer from "react-composer";
-import { Flex, Box, Heading } from "rebass/emotion";
+import { Flex, Box, Heading } from "@rebass/emotion";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
 import createDecorator from "final-form-calculate";
@@ -27,7 +27,7 @@ import Badge from "../../components/Badge";
 import Button, { IconButton } from "../../components/Button";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
-const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
+// const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
 const SearchLegalEntitiesQuery = loader(
   "../../graphql/SearchLegalEntitiesQuery.graphql"
 );
@@ -294,7 +294,7 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
         >
           {([dict, { translation }]) => (
             <Field.Select
-              type="select"
+              variant="select"
               name="filter.type"
               label={<Trans>Legal entity type</Trans>}
               placeholder={translation}
@@ -326,7 +326,7 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
         >
           {([dict, { translation }]) => (
             <Field.Select
-              type="select"
+              variant="select"
               name="filter.nhsVerified"
               label={<Trans>Verification status</Trans>}
               placeholder={translation}
@@ -378,10 +378,10 @@ const resetValue = createDecorator(
   {
     field: "filter.code",
     updates: {
-      ["filter.settlement"]: (value, { filter = {} }) => {
+      "filter.settlement": (value, { filter = {} }) => {
         return value ? undefined : filter.settlement;
       },
-      ["filter.nhsVerified"]: (value, { filter = {} }) => {
+      "filter.nhsVerified": (value, { filter = {} }) => {
         return value ? undefined : filter.nhsVerified;
       }
     }
@@ -389,7 +389,7 @@ const resetValue = createDecorator(
   {
     field: "filter.settlement",
     updates: {
-      ["filter.code"]: (value, { filter = {} }) => {
+      "filter.code": (value, { filter = {} }) => {
         return value ? undefined : filter.code;
       }
     }
@@ -397,7 +397,7 @@ const resetValue = createDecorator(
   {
     field: "filter.nhsVerified",
     updates: {
-      ["filter.code"]: (value, { filter = {} }) => {
+      "filter.code": (value, { filter = {} }) => {
         return value ? undefined : filter.code;
       }
     }

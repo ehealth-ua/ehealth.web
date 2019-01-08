@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { Query } from "react-apollo";
 import { Match } from "@reach/router";
 import { loader } from "graphql.macro";
@@ -17,7 +17,7 @@ const UserNav = () => (
       return (
         <Tooltip
           renderParent={({ getProps }) => (
-            <UserNavWrapper {...getProps({ refKey: "innerRef" })}>
+            <UserNavWrapper {...getProps({ refKey: "ref" })}>
               <User>{getFullName(person.data)}</User>
             </UserNavWrapper>
           )}

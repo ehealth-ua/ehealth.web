@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { prop } from "styled-tools";
-import { Flex, Box } from "rebass/emotion";
+import { Flex, Box } from "@rebass/emotion";
 
 export const Row = styled(Flex)`
   margin-bottom: ${prop("theme.form.fieldVerticalDistance", 20)}px;

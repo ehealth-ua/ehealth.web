@@ -1,9 +1,9 @@
 import React from "react";
-import { Flex, Box, Heading, Text } from "rebass/emotion";
+import { Flex, Box, Text } from "@rebass/emotion";
 import { LocationParams } from "@ehealth/components";
 import { TriangleLeftIcon, TriangleRightIcon } from "@ehealth/icons";
 import Button from "./Button";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { ITEMS_PER_PAGE } from "../constants/pagination";
 
 const Pagination = ({
@@ -71,7 +71,7 @@ const Pagination = ({
 );
 
 const Wrapper = system({
-  is: Flex,
+  extend: Flex,
   alignItems: "center",
   justifyContent: "center",
   width: "70",

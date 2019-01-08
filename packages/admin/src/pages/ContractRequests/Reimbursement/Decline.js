@@ -1,8 +1,8 @@
 import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
-import { Flex, Box } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex, Box } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
 
@@ -117,7 +117,7 @@ const Reason = ({ initialValues, navigate, location: { state } }) => {
         >
           <Trans
             id="Enter decline reason"
-            render={({ translation: translation }) => (
+            render={({ translation }) => (
               <Field.Textarea
                 name="base"
                 rows={6}
@@ -239,7 +239,7 @@ const Sign = ({
 );
 
 const OpacityBox = system({
-  is: Box,
+  extend: Box,
   opacity: 0.5
 });
 

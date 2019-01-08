@@ -1,8 +1,8 @@
 import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { Router, Link } from "@reach/router";
-import { Flex, Box } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex, Box } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 import { Trans, t } from "@lingui/macro";
 import { I18n } from "@lingui/react";
@@ -273,7 +273,7 @@ const UpdateContractRequest = ({
                             id="Choose payment method"
                             render={({ translation }) => (
                               <Field.Select
-                                type="select"
+                                variant="select"
                                 name="nhsPaymentMethod"
                                 label={<Trans>Payment method</Trans>}
                                 placeholder={translation}
@@ -361,8 +361,8 @@ const UpdateContractRequest = ({
   );
 };
 
-const OpacityBox = system({ is: Box, opacity: 0.5 });
+const OpacityBox = system({ extend: Box, opacity: 0.5 });
 
-const ButtonWidth = system({ is: Button, width: 140 });
+const ButtonWidth = system({ extend: Button, width: 140 });
 
 export default Update;

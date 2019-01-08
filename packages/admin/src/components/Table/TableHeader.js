@@ -1,8 +1,6 @@
 //@flow
 import * as React from "react";
-import styled from "react-emotion/macro";
-import { css } from "react-emotion";
-import { ifProp } from "styled-tools";
+import styled from "@emotion/styled";
 import { Switch } from "@ehealth/components";
 import { CaretDownIcon, CaretUpIcon } from "@ehealth/icons";
 import {
@@ -52,9 +50,7 @@ const TableHeader = ({
   <HeaderComponent>
     <RowComponent>
       {Object.entries(header)
-        .filter(([headerName, content]) =>
-          filterTableColumn(filterRow, headerName)
-        )
+        .filter(([headerName]) => filterTableColumn(filterRow, headerName))
         .map(([name, content], index) => {
           const isSortable = sortableFields.includes(name);
           return (

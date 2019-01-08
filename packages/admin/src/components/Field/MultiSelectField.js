@@ -36,7 +36,7 @@ const MultiSelect = ({
     }) => (
       <FieldView.Wrapper
         {...getRootProps({
-          refKey: "innerRef"
+          refKey: "ref"
         })}
       >
         {label && (

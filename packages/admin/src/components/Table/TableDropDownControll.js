@@ -1,7 +1,7 @@
 //@flow
 import * as React from "react";
-import styled from "react-emotion/macro";
-import { Box, Flex } from "rebass/emotion";
+import styled from "@emotion/styled";
+import { Box, Flex } from "@rebass/emotion";
 import Dropdown from "../Dropdown";
 import { DropDownButton } from "@ehealth/icons";
 import { checkLastInList } from "@ehealth/utils";

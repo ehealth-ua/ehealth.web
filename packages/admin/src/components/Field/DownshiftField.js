@@ -96,7 +96,7 @@ export class MultiDownshift extends Component {
               stateReducer={this.stateReducer}
               onChange={this.handleSelection}
               selectedItem={this.state.selectedItems}
-              render={downshift =>
+              children={downshift =>
                 render(this.getStateAndHelpers(downshift, meta))
               }
             />
@@ -114,7 +114,7 @@ export const SingleDownshift = ({ children, render = children, ...props }) => (
         {...props}
         selectedItem={value}
         onChange={onChange}
-        render={downshiftRenderProps =>
+        children={downshiftRenderProps =>
           render({ ...downshiftRenderProps, ...fieldRenderProps, input })
         }
       />

@@ -1,8 +1,8 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
 import { Query } from "react-apollo";
-import { Flex, Box, Text } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex, Box, Text } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
@@ -667,31 +667,38 @@ const EmptyData = props => (
     </Text>
   </WrapperBoxHeight>
 );
-const WrapperBoxHeight = system({
-  is: Box,
-  height: 500
-});
+const WrapperBoxHeight = system(
+  {
+    is: Box
+  },
+  { height: 500 }
+);
 
 const Wrapper = system(
   {
-    is: Flex
+    extend: Flex
   },
   { cursor: "pointer" }
 );
 
-const Grey = system({
-  color: "blueberrySoda"
-});
+const Grey = system(
+  {
+    color: "blueberrySoda"
+  },
+  "color"
+);
 
 const SaveLink = system(
   {
-    is: "a",
+    is: "a"
+  },
+  {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    lineHeight: 0
-  },
-  { textDecoration: "none" }
+    lineHeight: 0,
+    textDecoration: "none"
+  }
 );
 
 export default CapitationContractRequestsDetails;

@@ -3,7 +3,7 @@ import { Router } from "@reach/router";
 import { I18nProvider } from "@lingui/react";
 import { ThemeProvider } from "@ehealth/components";
 
-import "./globalStyles";
+import GlobalStyles from "./components/GlobalStyles";
 import * as theme from "./theme";
 import ErrorBoundary from "./ErrorBoundary";
 import DataProvider from "./DataProvider";
@@ -27,6 +27,8 @@ const NotFound = () => <p>Sorry, nothing here</p>;
 
 const App = () => (
   <I18nProvider language="uk" catalogs={catalogs}>
+    <GlobalStyles />
+
     <ThemeProvider theme={theme}>
       <ErrorBoundary>
         <DataProvider>

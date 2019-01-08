@@ -3,10 +3,10 @@ import { Form as FinalForm, FormSpy } from "react-final-form";
 import createFocusDecorator from "final-form-focus";
 import setFieldData from "final-form-set-field-data";
 import arrayMutators from "final-form-arrays";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { prop } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
-import { Text } from "rebass/emotion";
+import { Text } from "@rebass/emotion";
 import debounce from "lodash/debounce";
 
 import Button from "./Button";

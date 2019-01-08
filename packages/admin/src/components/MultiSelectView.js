@@ -1,70 +1,82 @@
-import system from "system-components/emotion";
-import { boolean } from "@ehealth/system-tools";
+import system from "@ehealth/system-components";
+import { variant } from "@ehealth/system-tools";
 
 import { ChevronBottomIcon, AdminSearchIcon } from "@ehealth/icons";
 import Dropdown from "./Dropdown";
 
 export const List = system(
   {
-    is: Dropdown.List,
+    extend: Dropdown.List
+  },
+  {
     position: "absolute",
     top: "100%",
     width: "100%",
     zIndex: 10,
-    maxHeight: "300px"
-  },
-  {
+    maxHeight: "300px",
     overflowY: "scroll"
   }
 );
 
-export const SelectedItem = system({
-  display: "flex",
-  alignItems: "center",
-  bg: "boysenberryShadow",
-  border: 1,
-  borderColor: "hintOfCandela",
-  borderRadius: 1,
-  color: "biroBlue",
-  height: "30px",
-  px: 2,
-  m: "2px 0 0 2px"
-});
+export const SelectedItem = system(
+  {
+    bg: "boysenberryShadow",
+    px: 2,
+    m: "2px 0 0 2px"
+  },
+  {
+    display: "flex",
+    alignItems: "center",
+    border: 1,
+    borderColor: "hintOfCandela",
+    borderRadius: 1,
+    color: "biroBlue",
+    height: "30px"
+  },
+  "space",
+  "color"
+);
 
-export const RemoveItem = system({
-  is: "button",
-  p: 0,
-  ml: 2
-});
+export const RemoveItem = system(
+  {
+    is: "button",
+    p: 0,
+    ml: 2
+  },
+  "space"
+);
 
 export const DropdownButton = system(
   {
-    is: "div",
+    as: "div",
+    px: 3
+  },
+  {
     position: "absolute",
     display: "flex",
     right: 0,
     top: 0,
-    px: 3,
     height: "100%",
     cursor: "pointer",
     alignItems: "center",
     justifyContent: "flex-end"
   },
-  boolean({
-    prop: "type",
-    key: "inputs.button.fullWidth"
-  })
+  variant({
+    prop: "variant",
+    key: "inputs.button"
+  }),
+  "space"
 );
 
 export const DropdownIcon = system({
-  is: ChevronBottomIcon,
+  extend: ChevronBottomIcon,
   color: "jacarandaLight",
   width: "7px",
   height: "4px"
 });
 
 export const SearchIcon = system({
-  is: AdminSearchIcon,
+  extend: AdminSearchIcon,
   color: "#CED0DA",
   width: "14px",
   height: "14px"

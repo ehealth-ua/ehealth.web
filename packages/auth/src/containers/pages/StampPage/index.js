@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { ifProp } from "styled-tools";
 
 import { Signer } from "@ehealth/react-iit-digital-signature";

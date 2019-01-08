@@ -1,7 +1,7 @@
 import React from "react";
-import { Flex, Box, Text } from "rebass/emotion";
+import { Flex, Box, Text } from "@rebass/emotion";
 import { BooleanValue } from "react-values";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
 import debounce from "lodash/debounce";
@@ -13,7 +13,6 @@ import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 
 import {
   AdminSearchIcon,
-  PositiveIcon,
   FilterIcon,
   NegativeIcon,
   RemoveItemIcon
@@ -286,7 +285,7 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
                 if (!item) return translation;
                 return typeof item === "string" ? item : item.value;
               }}
-              type="select"
+              variant="select"
             />
           )}
         />
@@ -420,7 +419,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                   if (!item) return translation;
                   return typeof item === "string" ? item : item.value;
                 }}
-                type="select"
+                variant="select"
               />
             )}
           />
@@ -447,7 +446,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
             items={["", "true", "false"]}
             renderItem={item => renderIsSuspendedItem(item)}
             itemToString={item => renderIsSuspendedItem(item)}
-            type="select"
+            variant="select"
           />
         </Box>
         <Box width={2 / 5}>
@@ -536,7 +535,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
 
 const TextNoWrap = system(
   {
-    is: Text,
+    extend: Text,
     ml: 2
   },
   { whiteSpace: "nowrap" }

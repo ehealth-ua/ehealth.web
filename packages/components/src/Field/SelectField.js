@@ -1,6 +1,6 @@
 import React from "react";
 import Downshift from "downshift";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { ifProp } from "styled-tools";
 import { pickProps } from "@ehealth/utils";
 
@@ -49,7 +49,7 @@ const SelectField = ({
       input: { onFocus, onBlur, size, ...input },
       meta: { active, errored, error }
     }) => (
-      <FieldView {...getRootProps({ refKey: "innerRef", label, horizontal })}>
+      <FieldView {...getRootProps({ refKey: "ref", label, horizontal })}>
         <InputBorder
           disabled={disabled}
           errored={errored}
@@ -131,7 +131,7 @@ const DownshiftField = ({ children, render = children, ...props }) => {
           {...downshiftProps}
           selectedItem={value}
           onChange={onChange}
-          render={downshiftRenderProps =>
+          children={downshiftRenderProps =>
             render({ ...downshiftRenderProps, ...fieldRenderProps, input })
           }
         />

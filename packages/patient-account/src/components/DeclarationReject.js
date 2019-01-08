@@ -1,7 +1,7 @@
 import React from "react";
 import { ifProp } from "styled-tools";
 import { Mutation } from "react-apollo";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { loader } from "graphql.macro";
 
 import { Form, Field, Link, Modal, Heading } from "@ehealth/components";

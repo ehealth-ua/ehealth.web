@@ -1,9 +1,9 @@
 import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
-import { Flex, Box, Heading, Text } from "rebass/emotion";
+import { Flex, Box, Heading, Text } from "@rebass/emotion";
 import { BooleanValue } from "react-values";
-import system from "system-components/emotion";
+import system from "@ehealth/system-components";
 import isEmpty from "lodash/isEmpty";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
@@ -527,13 +527,15 @@ const Documents = ({ documents }) =>
 
 const SaveLink = system(
   {
-    is: "a",
+    is: "a"
+  },
+  {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    lineHeight: 0
-  },
-  { textDecoration: "none" }
+    lineHeight: 0,
+    textDecoration: "none"
+  }
 );
 
 export default Details;

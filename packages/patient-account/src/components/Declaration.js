@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import format from "date-fns/format";
 import ReactDOM from "react-dom";
 import { loader } from "graphql.macro";
@@ -12,7 +12,7 @@ import {
 } from "@ehealth/utils";
 import * as Reach from "@reach/router";
 import { ifProp } from "styled-tools";
-import { injectGlobal } from "react-emotion/macro";
+import { injectGlobal } from "emotion/macro";
 import { Mutation } from "react-apollo";
 import printIframe from "print-iframe";
 

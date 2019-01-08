@@ -1,7 +1,7 @@
 import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
-import { Flex, Box, Heading, Text } from "rebass/emotion";
+import { Flex, Box, Heading, Text } from "@rebass/emotion";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
 import { Trans, t, DateFormat } from "@lingui/macro";
@@ -43,7 +43,6 @@ const Details = ({ id }) => (
     {({ loading, error, data: { person = {} } = {} }) => {
       if (error) return `Error! ${error.message}`;
       const {
-        id,
         databaseId,
         status,
         firstName,

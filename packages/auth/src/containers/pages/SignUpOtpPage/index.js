@@ -10,7 +10,7 @@ import {
   StateMachine,
   Switch
 } from "@ehealth/components";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { Link } from "react-router";
 import {
   Main,

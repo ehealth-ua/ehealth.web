@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 
 import Tooltip from "./Tooltip";
 
@@ -24,7 +24,7 @@ class Clipboard extends React.Component {
     const Component = () => (
       <Pointer onClick={this.copy}>
         <Textarea
-          innerRef={textarea => (this.textarea = textarea)}
+          ref={textarea => (this.textarea = textarea)}
           defaultValue={text}
         />
         {render(text)}

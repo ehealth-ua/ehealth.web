@@ -7,8 +7,8 @@ import isEmpty from "lodash/isEmpty";
 import debounce from "lodash/debounce";
 import { t } from "@lingui/macro";
 import { I18n } from "@lingui/react";
-import { Flex } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 
 import { getFullName } from "@ehealth/utils";
 import { boolean } from "@ehealth/system-tools";
@@ -58,7 +58,7 @@ const ModalAssigneeSearch = ({ submitted, id, query }) => (
         <Manager>
           <Reference>
             {({ ref }) => (
-              <Flex innerRef={ref} alignItems="center">
+              <Flex ref={ref} alignItems="center">
                 {submitted}
                 <ButtonWrapper onClick={toggle}>
                   {!submitted && <DropDownButton color="#2EA2F8" />}
@@ -72,7 +72,7 @@ const ModalAssigneeSearch = ({ submitted, id, query }) => (
           {opened && (
             <Popper placement="bottom-start" positionFixed>
               {({ ref, style }) => (
-                <ModalWrapper style={style} innerRef={ref}>
+                <ModalWrapper style={style} ref={ref}>
                   <Query
                     query={GetAssignEmployeeQuery}
                     fetchPolicy="no-cache"

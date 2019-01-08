@@ -49,7 +49,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
     const { isOpen } = this.state;
 
     return (
-      <FieldView.Wrapper innerRef={this.calendar}>
+      <FieldView.Wrapper ref={this.calendar}>
         <label
           onClick={!props.disabled && this.handleClick}
           onBlur={this.handleBlur}

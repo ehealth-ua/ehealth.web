@@ -1,6 +1,6 @@
 import React from "react";
 import { FieldArray } from "react-final-form-arrays";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { AddIcon, RemoveIcon } from "@ehealth/icons";
 
 import Link from "../Link";

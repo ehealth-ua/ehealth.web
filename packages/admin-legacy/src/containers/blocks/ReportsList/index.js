@@ -49,7 +49,7 @@ export default class ReportsList extends React.Component {
     capitationDetail: {}
   };
   render() {
-    const { reports, paging, location } = this.props;
+    const { reports, paging } = this.props;
     if (!reports) return null;
     const {
       capitationDetail: { report = [], contracts = [] },

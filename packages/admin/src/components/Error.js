@@ -1,6 +1,6 @@
 import React from "react";
-import system from "system-components/emotion";
-import { Box, Flex } from "rebass/emotion";
+import system from "@ehealth/system-components";
+import { Box, Flex } from "@rebass/emotion";
 import { Switch, Modal } from "@ehealth/components";
 import { EhealthLogoIcon, CloseIcon } from "@ehealth/icons";
 import * as Sentry from "@sentry/browser";
@@ -76,46 +76,63 @@ const getErrorCode = error => {
   }
 };
 
-const Wrapper = system({
-  is: Flex,
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center"
-});
+const Wrapper = system(
+  {
+    extend: Flex
+  },
+  {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  }
+);
 
-const ErrorTitle = system({
-  is: "h2",
-  mt: 50,
-  mb: 40,
-  fontWeight: 200
-});
+const ErrorTitle = system(
+  {
+    is: "h2",
+    mt: 50,
+    mb: 40,
+    fontWeight: 200
+  },
+  "space",
+  "fontWeight"
+);
 
-const ErrorDetails = system({
-  is: Flex,
-  justifyContent: "center",
-  border: "1px solid #ddd",
-  p: 2,
-  m: 2,
-  background: "#f9f9f9",
-  fontFamily: "monospace"
-});
+const ErrorDetails = system(
+  {
+    extend: Flex,
+    p: 2,
+    m: 2
+  },
+  {
+    background: "#f9f9f9",
+    fontFamily: "monospace",
+    justifyContent: "center",
+    border: "1px solid #ddd"
+  },
+  "space"
+);
 
 const Description = system(
   {
-    is: Box,
+    extend: Box,
     mb: 2
   },
   `
     &:last-child {
       margin-bottom: 0;
     }
-  `
+  `,
+  "space"
 );
 
-const CloseButton = system({
-  position: "absolute",
-  top: 30,
-  right: 30,
-  width: 15,
-  height: 15
-});
+const CloseButton = system(
+  {},
+  {
+    position: "absolute",
+    top: 30,
+    right: 30,
+    width: 15,
+    height: 15
+  }
+);

@@ -1,7 +1,6 @@
 import React from "react";
-import { Flex, Box, Text } from "rebass/emotion";
+import { Flex, Box, Text } from "@rebass/emotion";
 import { LocationParams } from "@ehealth/components";
-import system from "system-components/emotion";
 import Button from "../Button";
 
 const ShowItems = ({ list = [] }) => (
@@ -10,7 +9,7 @@ const ShowItems = ({ list = [] }) => (
       const { first, last } = locationParams;
       return (
         <Flex alignItems="center" justifyContent="center" mr="1">
-          <Text fontSize="12" fontWeight="700" color="blueberrySoda">
+          <Text fontSize="0" fontWeight="700" color="blueberrySoda">
             показати
           </Text>
           <Box ml="1">
@@ -29,7 +28,7 @@ const ShowItems = ({ list = [] }) => (
                 }}
               >
                 <Text
-                  fontSize="12"
+                  fontSize="0"
                   fontWeight="700"
                   color={
                     item === parseInt(first) ||

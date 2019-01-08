@@ -3,8 +3,8 @@ import { Link } from "@reach/router";
 import { Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
 import { Trans } from "@lingui/macro";
-import { Flex, Box } from "rebass/emotion";
-import system from "system-components/emotion";
+import { Flex, Box } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 
 import Button from "./Button";
@@ -84,7 +84,7 @@ class SignContractRequest extends React.Component {
                       >
                         <Trans>Approve by EDS</Trans>
                       </Button>
-                      <Box innerRef={this.infoBox}>
+                      <Box ref={this.infoBox}>
                         {opened && (
                           <>
                             {scrollTo(this.infoBox)}
@@ -113,16 +113,16 @@ const scrollTo = target => {
 
 const BorderBox = system(
   {
-    is: Box,
+    extend: Box,
     p: 4,
     my: 5,
     fontSize: 0,
-    lineHeight: 1.5,
     border: 1,
-    borderColor: "januaryDawn",
-    position: "relative"
+    borderColor: "januaryDawn"
   },
   {
+    position: "relative",
+    lineHeight: 1.5,
     "&::before": {
       content: '""',
       position: "absolute",
@@ -136,7 +136,11 @@ const BorderBox = system(
       clipPath: "polygon(100% 0,0 100%,0 0)",
       backgroundColor: "#fff"
     }
-  }
+  },
+  "space",
+  "fontSize",
+  "border",
+  "borderColor"
 );
 
 export default SignContractRequest;

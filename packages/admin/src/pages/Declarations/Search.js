@@ -1,7 +1,6 @@
 import React from "react";
 import isEmpty from "lodash/isEmpty";
-import { Flex, Box, Heading } from "rebass/emotion";
-import { Router, Redirect } from "@reach/router";
+import { Flex, Box, Heading } from "@rebass/emotion";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";

@@ -1,5 +1,4 @@
 import { CALL_API } from "redux-api-middleware";
-import { getToken } from "./session";
 
 export const invoke = (config, { auth = true } = {}) => (
   dispatch,
@@ -9,8 +8,6 @@ export const invoke = (config, { auth = true } = {}) => (
     credentials: "include",
     ...config
   };
-
-  const authHeaders = {};
 
   result.headers = {
     "content-type": "application/json",

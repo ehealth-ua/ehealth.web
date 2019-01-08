@@ -1,4 +1,4 @@
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { ifProp } from "styled-tools";
 
 const Header = styled.div`

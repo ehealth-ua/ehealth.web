@@ -1,5 +1,5 @@
-import styled from "react-emotion/macro";
-import { css } from "react-emotion";
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 
 const iconDirection = props =>
   props.direction === "forward"

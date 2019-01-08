@@ -8,7 +8,7 @@ import {
   formatDate,
   formatPhone
 } from "@ehealth/utils";
-import { Flex } from "rebass/emotion";
+import { Flex } from "@rebass/emotion";
 import { loader } from "graphql.macro";
 
 import Section from "../components/Section";

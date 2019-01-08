@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
-import { ThemeProvider } from "emotion-theming";
+import { ThemeProvider } from "@ehealth/components";
 import { Provider } from "react-redux";
 
 import "./global.css";

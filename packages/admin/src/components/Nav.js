@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { ifProp } from "styled-tools";
 import * as Reach from "@reach/router";
 import { FlagsProvider, Flag } from "flag";
@@ -247,13 +247,7 @@ const NavLink = ({ to, children }) => (
   <Reach.Match path={`${to}/*`}>
     {({ match }) => (
       <NavItem isCurrent={match}>
-        <Link
-          to={to}
-          color="white"
-          fontWeight={match && "bold"}
-          display="inline"
-          verticalAlign="baseline"
-        >
+        <Link to={to} color="white" fontWeight={match && "bold"}>
           {children}
         </Link>
       </NavItem>

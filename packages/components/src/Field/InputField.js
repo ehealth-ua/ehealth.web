@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "react-emotion/macro";
+import styled from "@emotion/styled";
 import { prop, ifProp, withProp } from "styled-tools";
 import MaskedInput from "react-text-mask";
 import { switchFlags } from "@ehealth/utils";
