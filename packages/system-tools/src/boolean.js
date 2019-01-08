@@ -8,7 +8,7 @@ const boolean = ({ prop, key, ...styles }) => {
     mixed(props[prop] ? util.get(props.theme, key) || styles : null);
 
   fn.propTypes = {
-    [prop]: PropTypes.boolean
+    [prop]: PropTypes.bool
   };
 
   return fn;
