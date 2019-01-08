@@ -594,7 +594,7 @@ const Documents = ({ attachedDocuments }) =>
 
 const PrintButton = ({ content }) => (
   <Wrapper color="shiningKnight" onClick={() => printIframe(content)}>
-    <Text color="rockmanBlue" fontWeight="bold" mr={1} fontSize="1">
+    <Text color="rockmanBlue" fontWeight="bold" mr={1} fontSize="0">
       <Trans>Show printout form</Trans>
     </Text>
     <PrinterIcon />
