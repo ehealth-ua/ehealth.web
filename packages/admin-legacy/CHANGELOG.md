@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.26.0"></a>
+# [1.26.0](https://github.com/edenlabllc/ehealth.web/compare/v1.25.2...v1.26.0) (2019-01-11)
+
+
+### Features
+
+* **admin-legacy:** add patient in select field to register ([efc2d64](https://github.com/edenlabllc/ehealth.web/commit/efc2d64))
+
+
+
+
+
 <a name="1.23.0"></a>
 # [1.23.0](https://github.com/edenlabllc/ehealth.web/compare/v1.22.1...v1.23.0) (2018-12-27)
 
