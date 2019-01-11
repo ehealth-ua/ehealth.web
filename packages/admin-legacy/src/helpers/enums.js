@@ -1,5 +1,5 @@
 export const ENTITY_TYPE = {
-  //patient: "Пацієнт",
+  patient: "Пацієнт",
   //employee: "Лікар",
   declaration: "Декларація"
 };
