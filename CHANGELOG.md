@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.26.1"></a>
+## [1.26.1](https://github.com/edenlabllc/ehealth.web/compare/v1.26.0...v1.26.1) (2019-01-11)
+
+**Note:** Version bump only for package ehealth.web
+
+
+
+
+
 <a name="1.26.0"></a>
 # [1.26.0](https://github.com/edenlabllc/ehealth.web/compare/v1.25.2...v1.26.0) (2019-01-11)
 
