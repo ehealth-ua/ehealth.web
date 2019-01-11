@@ -64,6 +64,7 @@ const Search = ({ uri }) => (
               onSubmit={setLocationParams}
             />
             <Query
+              skip={isEmpty(documents) || isEmpty(personal)}
               query={SearchPersonsQuery}
               variables={{
                 first:
@@ -199,7 +200,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
         </Box>
         <Box px={1}>
           <Field.Text
-            name="filter.documents.passport"
+            name="filter.documents.number"
             label={<Trans>Passport number</Trans>}
             placeholder="MM123456"
           />
@@ -211,7 +212,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
           <Box width={2 / 5}>
             <Box px={1}>
               <Field.Text
-                name="filter.personal.phoneNumber"
+                name="filter.personal.authenticationMethod.phoneNumber"
                 label={<Trans>Phone number</Trans>}
                 placeholder="+38"
                 format={formatPhone}
@@ -219,7 +220,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                 disabled={!value}
               />
               <Validation.Matches
-                field="filter.personal.phoneNumber"
+                field="filter.personal.authenticationMethod.phoneNumber"
                 options={PHONE_PATTERN}
                 message={<Trans>Invalid phone number</Trans>}
               />
@@ -236,16 +237,23 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
         )}
       </DependedField>
       <DependedField.Listener
-        field="filter.first"
-        set="filter.second"
-        to={""}
+        field="filter.documents"
+        set="filter.personal"
+        to={initialValues.filter ? initialValues.filter.personal : ""}
       />
     </Flex>
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
-        <Button variant="blue">
-          <Trans>Search</Trans>
-        </Button>
+        <DependedField name="filter" subscription={{ value: true }}>
+          {({ input: { value } }) => (
+            <Button
+              variant="blue"
+              disabled={isEmpty(value.documents) || isEmpty(value.personal)}
+            >
+              <Trans>Search</Trans>
+            </Button>
+          )}
+        </DependedField>
       </Box>
       <Box px={1}>
         <IconButton
