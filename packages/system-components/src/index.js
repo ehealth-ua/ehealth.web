@@ -25,14 +25,15 @@ const propNames = styleKeys.reduce((a, key) => {
 // private blacklist
 const _blacklist = ["css", "is", "tag", "extend", ...propNames];
 
+const base = props => props.extend || props.tag || props.is || "div";
+
 const tag = React.forwardRef(({ blacklist = [], ...props }, ref) => {
-  const Base = props.extend || props.tag || props.is || "div";
+  const Base = base(props);
   const next = omit(
     props,
-    typeof Base === "string"
-      ? [..._blacklist, ...blacklist]
-      : ["extend", ...blacklist]
+    typeof Base === "string" ? [..._blacklist, ...blacklist] : _blacklist
   );
+
   return React.createElement(Base, { ...next, ref });
 });
 
@@ -49,9 +50,8 @@ const getPropTypes = funcs =>
 
 const system = (props = {}, ...keysOrStyles) => {
   const funcs = keysOrStyles.map(key => styles[key] || key);
-  const propTypes = getPropTypes(funcs);
 
-  const Component = styled(tag)([], ...funcs, css);
+  const Component = styled(tag)(funcs, css);
 
   const baseProps = util.get(props, "extend.defaultProps") || {};
 
