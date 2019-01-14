@@ -73,10 +73,13 @@ const Sidebar = system(
   "color"
 );
 
-const LogoIcon = system({
-  extend: EhealthLogoIcon,
-  width: 75
-});
+const LogoIcon = system(
+  {
+    extend: EhealthLogoIcon,
+    width: 75
+  },
+  "width"
+);
 
 const Content = system(
   {
@@ -135,5 +138,7 @@ const LogoutIcon = system(
     extend: Logout,
     mr: 2
   },
-  "space"
+  "space",
+  "width",
+  "height"
 );
