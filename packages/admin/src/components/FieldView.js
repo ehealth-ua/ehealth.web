@@ -56,11 +56,10 @@ export const Label = system(
 
 export const Message = system(
   {
-    color: "shiningKnight",
+    variant: "default",
     fontSize: 0
   },
   variant({
-    prop: "state",
     key: "fields.message.states"
   }),
   "fontSize",

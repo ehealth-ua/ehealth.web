@@ -90,7 +90,9 @@ const MultiSelect = ({
         </InputView.Border>
 
         <FieldView.Footer>
-          <FieldView.Message>{errored ? error : warning}</FieldView.Message>
+          <FieldView.Message variant={errored && "errored"}>
+            {errored ? error : warning}
+          </FieldView.Message>
         </FieldView.Footer>
       </FieldView.Wrapper>
     )}

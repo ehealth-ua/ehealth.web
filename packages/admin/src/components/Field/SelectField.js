@@ -82,7 +82,7 @@ const SelectField = ({
         <InputView.Border
           position="relative"
           flexWrap="wrap"
-          borderColor={errored && "red"}
+          variant={errored && "errored"}
         >
           <InputView.Content
             {...getInputProps({
@@ -94,7 +94,6 @@ const SelectField = ({
               ...input,
               variant,
               onChange: e => {
-                console.log(e);
                 if (e.target.value === "") {
                   clearSelection();
                 }
@@ -133,7 +132,7 @@ const SelectField = ({
 
         {!hideErrors && (
           <FieldView.Footer>
-            <FieldView.Message color="red">
+            <FieldView.Message variant={errored && "errored"}>
               {errored ? error : warning}
             </FieldView.Message>
           </FieldView.Footer>

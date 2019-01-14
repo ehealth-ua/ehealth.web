@@ -38,7 +38,7 @@ const InputField = ({
         )}
 
         <InputView.Divider active={divider}>
-          <InputView.Border state={state}>
+          <InputView.Border variant={state}>
             {prefix && (
               <InputView.Content pl={2} flex="none">
                 {prefix}
@@ -58,7 +58,7 @@ const InputField = ({
           </InputView.Border>
         </InputView.Divider>
         <FieldView.Footer>
-          <FieldView.Message state={state}>
+          <FieldView.Message variant={state}>
             {errored ? error : warning}
           </FieldView.Message>
         </FieldView.Footer>

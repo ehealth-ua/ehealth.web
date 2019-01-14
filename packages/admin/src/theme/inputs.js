@@ -1,6 +1,7 @@
 const inputs = {
   border: {
     states: {
+      default: { borderColor: "silverCity" },
       active: { borderColor: "rockmanBlue" },
       errored: { borderColor: "redPigment", color: "redPigment" },
       success: { borderColor: "darkPastelGreen" },

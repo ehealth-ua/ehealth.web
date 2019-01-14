@@ -106,7 +106,7 @@ class RangeDateField extends React.Component<
             <>
               <Flex>
                 <InputView.Border
-                  state={propsFrom.meta.state || propsTo.meta.state}
+                  variant={propsFrom.meta.state || propsTo.meta.state}
                   ref={this.calendar}
                 >
                   <InputView.Content
@@ -141,7 +141,7 @@ class RangeDateField extends React.Component<
                   <InputView.Content>-</InputView.Content>
                 </Box>
                 <InputView.Border
-                  state={propsFrom.meta.state || propsTo.meta.state}
+                  variant={propsFrom.meta.state || propsTo.meta.state}
                   ref={this.calendar}
                 >
                   <Calendar

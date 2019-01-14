@@ -65,7 +65,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
           <Field format={formatDate} parse={parseDate} {...props}>
             {({ input, meta: { state, errored, error } }) => (
               <>
-                <InputView.Border state={state}>
+                <InputView.Border variant={state}>
                   <InputView.Content
                     pl={2}
                     py={0}
@@ -101,7 +101,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
                 </InputView.Border>
 
                 <FieldView.Footer>
-                  <FieldView.Message state={state}>
+                  <FieldView.Message variant={state}>
                     {errored ? error : warning}
                   </FieldView.Message>
                 </FieldView.Footer>

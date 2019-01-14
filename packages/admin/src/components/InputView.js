@@ -4,10 +4,10 @@ import { variant, boolean } from "@ehealth/system-tools";
 export const Border = system(
   {
     bg: "white",
-    borderColor: "silverCity",
     color: "darkAndStormy",
     position: "static",
-    fontSize: 1
+    fontSize: 1,
+    variant: "default"
   },
   {
     display: "flex",
@@ -17,7 +17,6 @@ export const Border = system(
     borderStyle: "solid"
   },
   variant({
-    prop: "state",
     key: "inputs.border.states"
   }),
   "color",
@@ -54,7 +53,6 @@ export const Content = system(
     }
   `,
   variant({
-    prop: "variant",
     key: "inputs.field"
   }),
   boolean({
