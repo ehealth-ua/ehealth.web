@@ -70,13 +70,18 @@ const Pagination = ({
   </LocationParams>
 );
 
-const Wrapper = system({
-  extend: Flex,
-  alignItems: "center",
-  justifyContent: "center",
-  width: "70",
-  lineHeight: "1",
-  color: "silverCity"
-});
+const Wrapper = system(
+  {
+    extend: Flex,
+    color: "silverCity"
+  },
+  {
+    alignItems: "center",
+    justifyContent: "center",
+    width: "70px",
+    lineHeight: 1
+  },
+  "color"
+);
 
 export default Pagination;

@@ -74,7 +74,8 @@ const Arrow = system(
     verticalAlign: "middle"
   },
   "color",
-  "space"
+  "space",
+  "width"
 );
 
 const Breadcrumbs = { List, Item };

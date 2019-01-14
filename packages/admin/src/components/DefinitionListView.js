@@ -36,15 +36,20 @@ export default DefinitionListView;
 const Item = system(
   {
     extend: Flex,
-    flexWrap: "nowrap",
     fontSize: 0,
     color: "#333",
-    mb: 4,
+    mb: 4
+  },
+  {
+    flexWrap: "nowrap",
     flexDirection: "row"
   },
   `
     &:last-of-type {
       margin-bottom: 0;
     }
-  `
+  `,
+  "color",
+  "fontSize",
+  "space"
 );

@@ -68,12 +68,16 @@ export const DropdownButton = system(
   "space"
 );
 
-export const DropdownIcon = system({
-  extend: ChevronBottomIcon,
-  color: "jacarandaLight",
-  width: "7px",
-  height: "4px"
-});
+export const DropdownIcon = system(
+  {
+    extend: ChevronBottomIcon,
+    color: "jacarandaLight",
+    width: "7px",
+    height: "4px"
+  },
+  "width",
+  "height"
+);
 
 export const SearchIcon = system({
   extend: AdminSearchIcon,
