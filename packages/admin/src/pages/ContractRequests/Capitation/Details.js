@@ -678,7 +678,8 @@ const Wrapper = system(
   {
     extend: Flex
   },
-  { cursor: "pointer" }
+  { cursor: "pointer" },
+  "color"
 );
 
 const Grey = system(
