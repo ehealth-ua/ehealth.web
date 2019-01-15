@@ -15,14 +15,13 @@ Scenario: Get Person Details
 
 Scenario: Get Person Details (PERSONAL_INFO)
   Given I am on the PERSONAL_INFO tab
-  Then I should see firstName, secondName, lastName, birthDate, birthCountry, birthSettlement, taxId, unzr, phones 
+  Then I should see firstName, secondName, lastName, birthDate, birthCountry, birthSettlement, taxId, noTaxId, unzr, phones 
 
 Scenario: Get Person Details (AUTHENTICATION_METHOD)
   Given I am on the AUTHENTICATION_METHOD tab
   Then I should see authenticationMethod.type 
   And authenticationMethod.phoneNumber
   And button resetPersonAuthenticationMethod
-
 
 Scenario: Reset AUTHENTICATION METHOD
   Given I am on the AUTHENTICATION_METHOD tab
@@ -32,7 +31,7 @@ Scenario: Reset AUTHENTICATION METHOD
   Then I shouls see AUTHENTICATION_METHOD tab 
   And authenticationMethod.type ='N/A'
 
-Scenario: Get Person Details (AUTHENTICATION_METHOD)
+Scenario: Get Person Details (DECLARATIONS)
   Given I am on the DECLARATIONS tab
   Then I should see Declarations filtered by PersonId
   And input field with DeclarationFilter 
@@ -41,8 +40,8 @@ Scenario: Get Person Details (AUTHENTICATION_METHOD)
 
 Scenario: Search declarations by status (DECALRATIONS)
   Given I am on the DECALRATIONS tab
-  When I choose STATUS from drop-down list 
-  Then I should see DECLARATION_LIST filtered by STATUS
+  When I order by STATUS
+  Then I should see DECLARATION_LIST ordered by STATUS
 
 Scenario: Search declarations by ID (DECALRATIONS)
   Given I am on the DECALRATIONS tab
