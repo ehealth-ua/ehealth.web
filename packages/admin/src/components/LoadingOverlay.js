@@ -115,7 +115,10 @@ const WrapperLoader = system(
     width: "100%",
     height: "100%",
     zIndex: 1
-  }
+  },
+  "justifyContent",
+  "alignItems",
+  "flexDirection"
 );
 
 const Blur = system(
