@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.28.0"></a>
+# [1.28.0](https://github.com/edenlabllc/ehealth.web/compare/v1.27.0...v1.28.0) (2019-01-15)
+
+
+### Bug Fixes
+
+* **system-tools:** fix boolean propType ([e16101a](https://github.com/edenlabllc/ehealth.web/commit/e16101a))
+
+
+### Features
+
+* upgrade emotion, downshift, styled-system ([158ba6b](https://github.com/edenlabllc/ehealth.web/commit/158ba6b))
+
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/edenlabllc/ehealth.web/compare/v0.147.0...v1.0.0) (2018-12-04)
 

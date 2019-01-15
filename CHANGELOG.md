@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.28.0"></a>
+# [1.28.0](https://github.com/edenlabllc/ehealth.web/compare/v1.27.0...v1.28.0) (2019-01-15)
+
+
+### Bug Fixes
+
+* **admin:** add color helper ([3494d75](https://github.com/edenlabllc/ehealth.web/commit/3494d75))
+* **admin:** add width and height to icons ([13007fb](https://github.com/edenlabllc/ehealth.web/commit/13007fb))
+* **admin:** fix styles in some components ([3cf4dbb](https://github.com/edenlabllc/ehealth.web/commit/3cf4dbb))
+* **system-components:** add blacklist when using extend ([d7643a4](https://github.com/edenlabllc/ehealth.web/commit/d7643a4))
+* **system-tools:** fix boolean propType ([e16101a](https://github.com/edenlabllc/ehealth.web/commit/e16101a))
+
+
+### Features
+
+* add system-components as local dependency ([48d2a4f](https://github.com/edenlabllc/ehealth.web/commit/48d2a4f))
+* update imports, props and arg according to new API of updated dependencies ([c8ddb38](https://github.com/edenlabllc/ehealth.web/commit/c8ddb38))
+* upgrade emotion, downshift, styled-system ([158ba6b](https://github.com/edenlabllc/ehealth.web/commit/158ba6b))
+
+
+
+
+
 <a name="1.27.0"></a>
 # [1.27.0](https://github.com/edenlabllc/ehealth.web/compare/v1.26.1...v1.27.0) (2019-01-14)
 

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.28.0"></a>
+# [1.28.0](https://github.com/edenlabllc/ehealth.web/compare/v1.27.0...v1.28.0) (2019-01-15)
+
+
+### Bug Fixes
+
+* **admin:** add color helper ([3494d75](https://github.com/edenlabllc/ehealth.web/commit/3494d75))
+* **admin:** add width and height to icons ([13007fb](https://github.com/edenlabllc/ehealth.web/commit/13007fb))
+* **admin:** fix styles in some components ([3cf4dbb](https://github.com/edenlabllc/ehealth.web/commit/3cf4dbb))
+
+
+### Features
+
+* update imports, props and arg according to new API of updated dependencies ([c8ddb38](https://github.com/edenlabllc/ehealth.web/commit/c8ddb38))
+* upgrade emotion, downshift, styled-system ([158ba6b](https://github.com/edenlabllc/ehealth.web/commit/158ba6b))
+
+
+
+
+
 <a name="1.26.1"></a>
 ## [1.26.1](https://github.com/edenlabllc/ehealth.web/compare/v1.26.0...v1.26.1) (2019-01-11)
 
