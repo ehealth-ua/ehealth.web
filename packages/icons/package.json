@@ -9,7 +9,7 @@
     "start": "NODE_ENV=development babel src --out-dir dist --watch"
   },
   "peerDependencies": {
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react": "^16.8.0-alpha.0",
+    "react-dom": "^16.8.0-alpha.0"
   }
 }
