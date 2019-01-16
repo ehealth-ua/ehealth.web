@@ -218,6 +218,9 @@ const Nav = () => (
               <NavLink to="declarations">
                 <Trans>Declarations</Trans>
               </NavLink>
+              <NavLink to="pending-declarations">
+                <Trans>Pending declarations</Trans>
+              </NavLink>
             </NavSection>
           </Ability>
         </Flag>

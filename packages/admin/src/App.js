@@ -16,6 +16,7 @@ import Contracts from "./pages/Contracts";
 import LegalEntityMergeJobs from "./pages/LegalEntityMergeJobs";
 import Persons from "./pages/Persons";
 import Declarations from "./pages/Declarations";
+import PendingDeclarations from "./pages/PendingDeclarations";
 import LegalEntities from "./pages/LegalEntities";
 import Dictionaries from "./pages/Dictionaries";
 
@@ -41,6 +42,7 @@ const App = () => (
                 <LegalEntityMergeJobs path="legal-entity-merge-jobs/*" />
                 <Persons path="persons/*" />
                 <Declarations path="declarations/*" />
+                <PendingDeclarations path="pending-declarations/*" />
                 <LegalEntities path="legal-entities/*" />
                 <Dictionaries path="dictionaries/*" />
                 <NotFound default />
