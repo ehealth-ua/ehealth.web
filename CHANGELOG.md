@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.28.8"></a>
+## [1.28.8](https://github.com/edenlabllc/ehealth.web/compare/v1.28.7...v1.28.8) (2019-01-16)
+
+
+### Bug Fixes
+
+* **admin:** set itemToString function as default renderItem value ([#667](https://github.com/edenlabllc/ehealth.web/issues/667)) ([7278ec4](https://github.com/edenlabllc/ehealth.web/commit/7278ec4))
+
+
+
+
+
 <a name="1.28.7"></a>
 ## [1.28.7](https://github.com/edenlabllc/ehealth.web/compare/v1.28.6...v1.28.7) (2019-01-16)
 
