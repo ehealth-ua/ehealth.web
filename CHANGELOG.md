@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.28.5"></a>
+## [1.28.5](https://github.com/edenlabllc/ehealth.web/compare/v1.28.4...v1.28.5) (2019-01-16)
+
+
+### Bug Fixes
+
+* **admin:** fix broken styles in Approve/Update and PrintOutContent pages ([4d3cfd1](https://github.com/edenlabllc/ehealth.web/commit/4d3cfd1))
+
+
+
+
+
 <a name="1.28.4"></a>
 ## [1.28.4](https://github.com/edenlabllc/ehealth.web/compare/v1.28.3...v1.28.4) (2019-01-16)
 
