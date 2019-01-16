@@ -53,10 +53,11 @@ const SelectField = ({
   filter = matchSorter,
   hideErrors = false,
   iconComponent: Icon = DropdownIcon,
-  renderItem = item => item,
+  itemToString = i => (i == null ? "" : String(i)),
+  renderItem = itemToString,
   ...props
 }) => (
-  <SingleDownshift {...props}>
+  <SingleDownshift itemToString={itemToString} {...props}>
     {({
       getRootProps,
       getInputProps,
