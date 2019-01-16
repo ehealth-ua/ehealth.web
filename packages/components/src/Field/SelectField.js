@@ -49,7 +49,7 @@ const SelectField = ({
       input: { onFocus, onBlur, size, ...input },
       meta: { active, errored, error }
     }) => (
-      <FieldView {...getRootProps({ refKey: "ref", label, horizontal })}>
+      <FieldView {...getRootProps({ refKey: "innerRef", label, horizontal })}>
         <InputBorder
           disabled={disabled}
           errored={errored}
