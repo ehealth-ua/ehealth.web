@@ -312,14 +312,14 @@ const UpdateContractRequest = ({
                   <Flex mt={5}>
                     <Box mr={3}>
                       <Link to="../">
-                        <ButtonWidth variant="blue">
+                        <Button variant="blue" width={140}>
                           <Trans>Return</Trans>
-                        </ButtonWidth>
+                        </Button>
                       </Link>
                     </Box>
-                    <ButtonWidth variant="green">
+                    <Button variant="green" width={140}>
                       <Trans>Refresh</Trans>
-                    </ButtonWidth>
+                    </Button>
                   </Flex>
                 </Form>
               )}
@@ -331,8 +331,6 @@ const UpdateContractRequest = ({
   );
 };
 
-const OpacityBox = system({ extend: Box, opacity: 0.5 });
-
-const ButtonWidth = system({ extend: Button, width: 140 });
+const OpacityBox = system({ extend: Box, opacity: 0.5 }, "opacity", "space");
 
 export default Update;

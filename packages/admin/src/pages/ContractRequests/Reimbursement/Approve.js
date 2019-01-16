@@ -125,6 +125,6 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
   );
 };
 
-const OpacityBox = system({ extend: Box, opacity: 0.5 });
+const OpacityBox = system({ extend: Box, opacity: 0.5 }, "opacity", "space");
 
 export default Approve;

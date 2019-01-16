@@ -151,7 +151,7 @@ const FixedWrapper = system(
   {
     extend: Box,
     p: 2,
-    background: "white",
+    bg: "white",
     borderColor: "silverCity"
   },
   {
@@ -180,7 +180,7 @@ const Frame = system(
 );
 
 const Portal = ({ content }) => (
-  <Wrapper position="relative">
+  <Wrapper>
     <Frame srcDoc={content} />
   </Wrapper>
 );

@@ -31,6 +31,7 @@ const Button = system(
   "fontSize",
   "border",
   "lineHeight",
+  "width",
   variant({
     key: "buttons"
   })
