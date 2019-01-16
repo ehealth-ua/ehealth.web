@@ -698,7 +698,8 @@ const SaveLink = system(
     flexDirection: "row",
     alignItems: "center",
     lineHeight: 0,
-    textDecoration: "none"
+    textDecoration: "none",
+    fontSize: 14
   }
 );
 

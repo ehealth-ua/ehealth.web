@@ -512,5 +512,6 @@ const TextNoWrap = system(
     extend: Text,
     ml: 2
   },
-  { whiteSpace: "nowrap" }
+  { whiteSpace: "nowrap" },
+  "space"
 );

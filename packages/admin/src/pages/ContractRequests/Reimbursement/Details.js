@@ -460,18 +460,22 @@ const Wrapper = system(
   {
     extend: Flex
   },
-  { cursor: "pointer" }
+  { cursor: "pointer" },
+  "color"
 );
 
 const SaveLink = system(
   {
-    is: "a",
+    is: "a"
+  },
+  {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    lineHeight: 0
-  },
-  { textDecoration: "none" }
+    lineHeight: 0,
+    textDecoration: "none",
+    fontSize: 14
+  }
 );
 
 const EmptyData = props => (
@@ -481,9 +485,12 @@ const EmptyData = props => (
     </Text>
   </WrapperBoxHeight>
 );
-const WrapperBoxHeight = system({
-  is: Box,
-  height: 500
-});
+const WrapperBoxHeight = system(
+  {
+    is: Box,
+    height: 500
+  },
+  "height"
+);
 
 export default ReimbursementContractRequestDetails;

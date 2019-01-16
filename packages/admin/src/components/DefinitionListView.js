@@ -51,5 +51,7 @@ const Item = system(
   `,
   "color",
   "fontSize",
-  "space"
+  "space",
+  "alignItems",
+  "flexDirection"
 );
