@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 
 import { reduxForm, Field, getFormValues } from "redux-form";
 import { reduxFormValidate, ErrorMessage } from "react-nebo15-validate";
-import ReactFileReader from "react-file-reader";
 
 import FieldTextarea from "../../../components/reduxForm/FieldTextarea";
+import FieldFile from "../../../components/reduxForm/FieldFile/";
 
 import Button from "../../../components/Button";
 import { FormRow, FormColumn } from "../../../components/Form";
@@ -20,26 +20,27 @@ import styles from "./styles.module.css";
 
 class RegisterUploadForm extends React.Component {
   state = {
-    file_name: null,
-    file: null,
     pending: false
   };
 
-  handleFiles = file => {
-    this.setState(() => ({
-      file: file.base64,
-      file_name: file.fileList[0].name
-    }));
+  getBase64 = file => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
   };
 
-  onSubmit({ entity_type, type, reason_description }) {
-    const { file, file_name } = this.state;
+  async onSubmit({ file, entity_type, reason_description, type, ...props }) {
+    const fileBase64 = await this.getBase64(file);
+    const [dataType, baseString] = fileBase64.split("base64,");
     return this.props
       .onSubmit({
         entity_type: entity_type.name,
         type: type.name,
-        file: file.replace("data:text/csv;base64,", ""),
-        file_name,
+        file: baseString,
+        file_name: file.name,
         reason_description
       })
       .then(resp =>
@@ -55,8 +56,6 @@ class RegisterUploadForm extends React.Component {
       data: { registerTypes },
       submitting
     } = this.props;
-    const { file, file_name } = this.state;
-
     return (
       <form
         onSubmit={handleSubmit(v => {
@@ -110,42 +109,22 @@ class RegisterUploadForm extends React.Component {
           </FormRow>
           <FormRow>
             <FormColumn>
-              <ReactFileReader
-                fileTypes={[".csv"]}
-                base64={true}
-                multipleFiles={false}
-                handleFiles={this.handleFiles}
-              >
-                <Button size="small" color="blue">
-                  Завантажити файл
-                </Button>
-                {file_name && (
-                  <span>
-                    <b>{` ${file_name}*`}</b>
-                  </span>
-                )}
-              </ReactFileReader>
+              <Field name="file" component={FieldFile} />
             </FormColumn>
           </FormRow>
           <FormRow>
             <FormColumn>
               <ShowWithScope scope="register:write">
                 <div>
-                  <Button
-                    type="submit"
-                    disabled={!file && !file_name && submitting}
-                  >
-                    {this.state.pending && (
+                  <Button type="submit" disabled={submitting}>
+                    {this.state.pending ? (
                       <div>
                         Зачекайте. Йде завантаження файлу{" "}
                         <LoadingDot align="center" />
                       </div>
+                    ) : (
+                      "Зберегти файл"
                     )}
-                    {!file && !file_name && "Завантажте файл"}
-                    {!this.state.pending &&
-                      file &&
-                      file_name &&
-                      "Зберегти файл"}
                   </Button>
                 </div>
               </ShowWithScope>
@@ -166,6 +145,10 @@ export default compose(
       },
       entity_type: {
         required: true
+      },
+      file: {
+        required: true,
+        fileType: true
       }
     })
   }),

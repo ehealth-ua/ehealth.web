@@ -1,0 +1,34 @@
+.file-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-label {
+  display: block;
+  position: relative;
+}
+.file-error {
+  color: #ff1f44;
+  padding-top: 5px;
+  padding-bottom: 15px;
+}
+.file-label::after {
+  content: "";
+  display: block;
+  height: calc(100% + 24px);
+  top: -12px;
+  left: -20px;
+  z-index: 999;
+  width: calc(100% + 40px);
+  position: absolute;
+  cursor: pointer;
+}

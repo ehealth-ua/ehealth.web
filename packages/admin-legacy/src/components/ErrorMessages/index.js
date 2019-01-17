@@ -7,9 +7,11 @@ import {
 
 import isUuidValid from "../../helpers/validators/uuid";
 import isUrlValid from "../../helpers/validators/url";
+import isFileTypeCsv from "../../helpers/validators/isFileTypeCsv";
 
 addValidation("uuid", isUuidValid);
 addValidation("url", isUrlValid);
+addValidation("fileType", isFileTypeCsv);
 
 export default class ErrorMessagesTranslated extends React.Component {
   render() {
@@ -46,6 +48,7 @@ export default class ErrorMessagesTranslated extends React.Component {
         </ErrorMessage>
         <ErrorMessage when="uuid">Некоректний формат ID</ErrorMessage>
         <ErrorMessage when="url">Некоректний формат URL</ErrorMessage>
+        <ErrorMessage when="fileType">Некоректний формат файлу</ErrorMessage>
       </ErrorMessages>
     );
   }
