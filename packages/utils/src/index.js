@@ -1,4 +1,5 @@
 export { default as convertObjectKeys } from "./convertObjectKeys";
+export { default as convertStringToBoolean } from "./convertStringToBoolean";
 export { default as checkLastInList } from "./checkLastInList";
 export { default as getDefinitions } from "./getDefinitions";
 export { default as getDictValue } from "./getDictValue";
