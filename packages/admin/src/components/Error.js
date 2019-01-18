@@ -33,10 +33,9 @@ const Error = ({ error, blocking, onClose }) => {
           <Box mr={3}>{error.message}</Box>
           <Box>
             {error.errors &&
-              error.errors.map(e => {
-                const [description] = Object.values(e).map(i => i.description);
-                return <Description>{description}</Description>;
-              })}
+              error.errors.map((e, k) => (
+                <Description key={k}>{e.description}</Description>
+              ))}
           </Box>
         </ErrorDetails>
         <Flex justifyContent="center" mt={3}>
