@@ -22,19 +22,21 @@ export const SelectedItem = system(
   {
     bg: "boysenberryShadow",
     px: 2,
-    m: "2px 0 0 2px"
+    m: "2px 0 0 2px",
+    fontSize: 1,
+    color: "biroBlue",
+    borderColor: "hintOfCandela"
   },
   {
     display: "flex",
     alignItems: "center",
     border: 1,
-    borderColor: "hintOfCandela",
-    borderRadius: 1,
-    color: "biroBlue",
+    borderRadius: 2,
     height: "30px"
   },
   "space",
-  "color"
+  "color",
+  "fontSize"
 );
 
 export const RemoveItem = system(
