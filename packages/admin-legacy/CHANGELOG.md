@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.29.7"></a>
+## [1.29.7](https://github.com/edenlabllc/ehealth.web/compare/v1.29.6...v1.29.7) (2019-01-18)
+
+
+### Bug Fixes
+
+* **admin-legacy:** add to white list empty string for checking type in file on RegisterUploadForm ([ef72e27](https://github.com/edenlabllc/ehealth.web/commit/ef72e27))
+
+
+
+
+
 <a name="1.29.4"></a>
 ## [1.29.4](https://github.com/edenlabllc/ehealth.web/compare/v1.29.3...v1.29.4) (2019-01-18)
 
