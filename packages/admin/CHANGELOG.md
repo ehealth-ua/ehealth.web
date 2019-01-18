@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.29.6"></a>
+## [1.29.6](https://github.com/edenlabllc/ehealth.web/compare/v1.29.5...v1.29.6) (2019-01-18)
+
+
+### Bug Fixes
+
+* **admin:** use camelCase for colSpan prop ([517600e](https://github.com/edenlabllc/ehealth.web/commit/517600e))
+
+
+
+
+
 <a name="1.29.5"></a>
 ## [1.29.5](https://github.com/edenlabllc/ehealth.web/compare/v1.29.4...v1.29.5) (2019-01-18)
 
