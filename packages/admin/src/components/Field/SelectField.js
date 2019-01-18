@@ -55,6 +55,7 @@ const SelectField = ({
   iconComponent: Icon = DropdownIcon,
   itemToString = i => (i == null ? "" : String(i)),
   renderItem = itemToString,
+  emptyOption,
   ...props
 }) => (
   <SingleDownshift itemToString={itemToString} {...props}>
@@ -113,20 +114,22 @@ const SelectField = ({
           </DropdownButton>
           {isOpen && (
             <List>
-              {filter(items, !variant && inputValue, filterOptions).map(
-                (item, index) => (
-                  <Dropdown.Item
-                    {...getItemProps({
-                      key: index,
-                      index,
-                      item,
-                      on: highlightedIndex === index
-                    })}
-                  >
-                    {renderItem(item)}
-                  </Dropdown.Item>
-                )
-              )}
+              {filter(
+                emptyOption ? ["", ...items] : items,
+                !variant && inputValue,
+                filterOptions
+              ).map((item, index) => (
+                <Dropdown.Item
+                  {...getItemProps({
+                    key: index,
+                    index,
+                    item,
+                    on: highlightedIndex === index
+                  })}
+                >
+                  {renderItem(item)}
+                </Dropdown.Item>
+              ))}
             </List>
           )}
         </InputView.Border>
