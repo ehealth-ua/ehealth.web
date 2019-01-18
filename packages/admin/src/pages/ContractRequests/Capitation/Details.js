@@ -609,7 +609,7 @@ const ExternalContractorsTable = ({ data }) => (
                       >
                         <TableCell
                           key={`cell_${rowKeyExtractor(item, index)}`}
-                          colspan={
+                          colSpan={
                             columns.filter(bodyName =>
                               filterTableColumn(filterRow, bodyName)
                             ).length
