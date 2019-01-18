@@ -1,0 +1,53 @@
+query PersonDeclarationsQuery(
+  $id: ID!
+  $orderBy: DeclarationOrderBy
+  $first: Int
+) {
+  person(id: $id) {
+    id
+    declarations(first: $first, orderBy: $orderBy) {
+      nodes {
+        id
+        databaseId
+        declarationNumber
+        startDate
+        endDate
+        status
+        scope
+        legalEntity {
+          id
+          name
+          shortName
+          publicName
+          type
+          edrpou
+          status
+          addresses {
+            type
+            country
+            area
+            region
+            settlement
+            settlementType
+            settlementId
+            streetType
+            street
+            building
+            apartment
+            zip
+          }
+        }
+        division {
+          id
+          name
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+  }
+}

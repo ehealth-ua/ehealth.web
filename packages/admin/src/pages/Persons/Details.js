@@ -30,11 +30,16 @@ import {
   DECLARATION_SEARCH_PATTERN,
   DECLARATION_ID_PATTERN
 } from "../../constants/declarationSearchPatterns";
+import Pagination from "../../components/Pagination";
+import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 const ResetAuthMethodMutation = loader(
   "../../graphql/ResetAuthMethodMutation.graphql"
 );
 const PersonQuery = loader("../../graphql/PersonQuery.graphql");
+const PersonDeclarationsQuery = loader(
+  "../../graphql/PersonDeclarationsQuery.graphql"
+);
 
 const filterData = (type, arr) => arr.filter(t => t.type === type);
 
@@ -59,7 +64,8 @@ const Details = ({ id }) => (
 
       const [mobilePhone] = filterData("MOBILE", phones);
       const [landLinePhone] = filterData("LAND_LINE", phones);
-      const authInfo = authenticationMethods[0];
+      const authInfo =
+        !isEmpty(authenticationMethods) && authenticationMethods[0];
 
       const userInfo = {
         firstName,
@@ -218,7 +224,14 @@ const AuthInfo = ({ id, authInfo }) =>
 const DeclarationsInfo = ({ id }) => (
   <LocationParams>
     {({ locationParams, setLocationParams }) => {
-      const { orderBy, filter: { declarationSearch } = {} } = locationParams;
+      const {
+        first,
+        last,
+        after,
+        before,
+        orderBy,
+        filter: { declarationSearch } = {}
+      } = locationParams;
 
       const isRequestById = new RegExp(DECLARATION_ID_PATTERN).test(
         declarationSearch
@@ -236,9 +249,18 @@ const DeclarationsInfo = ({ id }) => (
             onSubmit={setLocationParams}
           />
           <Query
-            query={PersonQuery}
+            query={PersonDeclarationsQuery}
             variables={{
               id,
+              first:
+                !first && !last
+                  ? ITEMS_PER_PAGE[0]
+                  : first
+                    ? parseInt(first)
+                    : undefined,
+              last: last ? parseInt(last) : undefined,
+              after,
+              before,
               orderBy,
               filter: { ...declarationRequest }
             }}
@@ -246,69 +268,77 @@ const DeclarationsInfo = ({ id }) => (
             {({ loading, error, data }) => {
               if (error || isEmpty(data)) return null;
               const {
-                person: { declarations = [] }
-              } = data;
+                declarations: { nodes: declarations = [], pageInfo } = {}
+              } = data.person;
               return (
                 <LoadingOverlay loading={loading}>
-                  <Table
-                    data={declarations}
-                    header={{
-                      databaseId: <Trans>Declaration ID</Trans>,
-                      declarationNumber: <Trans>Declaration number</Trans>,
-                      startDate: <Trans>Declaration valid from</Trans>,
-                      name: <Trans>Legal entity</Trans>,
-                      edrpou: <Trans>EDRPOU</Trans>,
-                      divisionName: <Trans>Division name</Trans>,
-                      address: <Trans>Address</Trans>,
-                      status: <Trans>Status</Trans>,
-                      action: <Trans>Action</Trans>
-                    }}
-                    renderRow={({
-                      databaseId,
-                      declarationNumber,
-                      startDate,
-                      legalEntity: { edrpou, name, addresses },
-                      division: { name: divisionName },
-                      status
-                    }) => {
-                      const [residenceAddress] = addresses.filter(
-                        a => a.type === "RESIDENCE"
-                      );
-                      return {
-                        databaseId,
-                        declarationNumber,
-                        startDate,
-                        name,
-                        edrpou,
-                        divisionName,
-                        address: residenceAddress && (
-                          <AddressView data={residenceAddress} />
-                        ),
-                        status: (
-                          <Badge
-                            name={status}
-                            type="DECLARATION"
-                            display="block"
-                          />
-                        ),
-                        action: (
-                          <Link to={`/declarations/${id}`} fontWeight="bold">
-                            <Trans>Show details</Trans>
-                          </Link>
-                        )
-                      };
-                    }}
-                    sortableFields={["startDate", "status"]}
-                    sortingParams={parseSortingParams(orderBy)}
-                    onSortingChange={sortingParams =>
-                      setLocationParams({
-                        orderBy: stringifySortingParams(sortingParams)
-                      })
-                    }
-                    whiteSpaceNoWrap={["databaseId"]}
-                    hiddenFields="databaseId"
-                    tableName="person-details/declarations"
-                  />
+                  {declarations.length > 0 && (
+                    <>
+                      <Table
+                        data={declarations}
+                        header={{
+                          databaseId: <Trans>Declaration ID</Trans>,
+                          declarationNumber: <Trans>Declaration number</Trans>,
+                          startDate: <Trans>Declaration valid from</Trans>,
+                          name: <Trans>Legal entity</Trans>,
+                          edrpou: <Trans>EDRPOU</Trans>,
+                          divisionName: <Trans>Division name</Trans>,
+                          address: <Trans>Address</Trans>,
+                          status: <Trans>Status</Trans>,
+                          action: <Trans>Action</Trans>
+                        }}
+                        renderRow={({
+                          databaseId,
+                          declarationNumber,
+                          startDate,
+                          legalEntity: { edrpou, name, addresses },
+                          division: { name: divisionName },
+                          status
+                        }) => {
+                          const [residenceAddress] = addresses.filter(
+                            a => a.type === "RESIDENCE"
+                          );
+                          return {
+                            databaseId,
+                            declarationNumber,
+                            startDate,
+                            name,
+                            edrpou,
+                            divisionName,
+                            address: residenceAddress && (
+                              <AddressView data={residenceAddress} />
+                            ),
+                            status: (
+                              <Badge
+                                name={status}
+                                type="DECLARATION"
+                                display="block"
+                              />
+                            ),
+                            action: (
+                              <Link
+                                to={`/declarations/${id}`}
+                                fontWeight="bold"
+                              >
+                                <Trans>Show details</Trans>
+                              </Link>
+                            )
+                          };
+                        }}
+                        sortableFields={["startDate", "status"]}
+                        sortingParams={parseSortingParams(orderBy)}
+                        onSortingChange={sortingParams =>
+                          setLocationParams({
+                            orderBy: stringifySortingParams(sortingParams)
+                          })
+                        }
+                        whiteSpaceNoWrap={["databaseId"]}
+                        hiddenFields="databaseId"
+                        tableName="person-details/declarations"
+                      />
+                      <Pagination {...pageInfo} />
+                    </>
+                  )}
                 </LoadingOverlay>
               );
             }}
