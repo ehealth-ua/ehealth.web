@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.28.10"></a>
+## [1.28.10](https://github.com/edenlabllc/ehealth.web/compare/v1.28.9...v1.28.10) (2019-01-18)
+
+
+### Bug Fixes
+
+* **admin-legacy:** use FileReader for field file in RegisterUploadForm ([f1ee3d6](https://github.com/edenlabllc/ehealth.web/commit/f1ee3d6))
+
+
+
+
+
 <a name="1.28.7"></a>
 ## [1.28.7](https://github.com/edenlabllc/ehealth.web/compare/v1.28.6...v1.28.7) (2019-01-16)
 
