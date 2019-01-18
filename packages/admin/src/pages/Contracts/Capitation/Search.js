@@ -38,14 +38,6 @@ const SearchCapitationContractsQuery = loader(
   "../../../graphql/SearchCapitationContractsQuery.graphql"
 );
 
-const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
-  ([key, value]) => ({ key, value })
-);
-
-const legalEntityRelation = Object.entries(STATUSES.LEGAL_ENTITY_RELATION).map(
-  ([name, value]) => ({ name, value })
-);
-
 const CapitationContractsSearch = ({ uri }) => (
   <Box p={6}>
     <ContractsNav />
@@ -63,13 +55,8 @@ const CapitationContractsSearch = ({ uri }) => (
               query={SearchCapitationContractsQuery}
               fetchPolicy="network-only"
               variables={{
-                first:
-                  !first && !last
-                    ? ITEMS_PER_PAGE[0]
-                    : first
-                      ? parseInt(first)
-                      : undefined,
-                last: last ? parseInt(last) : undefined,
+                first: !first && !last ? ITEMS_PER_PAGE[0] : parseInt(first),
+                last: parseInt(last),
                 after,
                 before,
                 orderBy,
@@ -119,17 +106,10 @@ const CapitationContractsSearch = ({ uri }) => (
                             contractorLegalEntityEdrpou,
                             isSuspended: (
                               <Flex justifyContent="center">
-                                {!isSuspended ? (
-                                  <NegativeIcon
-                                    fill="#1BB934"
-                                    stroke="#1BB934"
-                                  />
-                                ) : (
-                                  <NegativeIcon
-                                    fill="#ED1C24"
-                                    stroke="#ED1C24"
-                                  />
-                                )}
+                                <NegativeIcon
+                                  fill={!isSuspended ? "#1BB934" : "#ED1C24"}
+                                  stroke={!isSuspended ? "#1BB934" : "#ED1C24"}
+                                />
                               </Flex>
                             ),
                             startDate: <DateFormat value={startDate} />,
@@ -278,13 +258,10 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
               name="filter.status"
               label={<Trans>Contract status</Trans>}
               placeholder={translation}
-              items={[{ value: translation }, ...contractStatuses]}
-              renderItem={item => item.value}
-              itemToString={item => {
-                if (!item) return translation;
-                return typeof item === "string" ? item : item.value;
-              }}
+              items={Object.keys(STATUSES.CONTRACT)}
+              itemToString={item => STATUSES.CONTRACT[item] || translation}
               variant="select"
+              emptyOption
             />
           )}
         />
@@ -357,7 +334,7 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
       )}
       {isSuspended !== undefined && (
         <SelectedItem mx={1}>
-          {renderIsSuspendedItem(isSuspended)}
+          {STATUSES.SUSPENDED[isSuspended]}
           <RemoveItem
             onClick={() => {
               onSubmit({
@@ -412,13 +389,10 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                 name="filter.status"
                 label={<Trans>Contract status</Trans>}
                 placeholder={translation}
-                items={[{ value: translation }, ...contractStatuses]}
-                renderItem={item => item.value}
-                itemToString={item => {
-                  if (!item) return translation;
-                  return typeof item === "string" ? item : item.value;
-                }}
+                items={Object.keys(STATUSES.CONTRACT)}
+                itemToString={item => STATUSES.CONTRACT[item] || translation}
                 variant="select"
+                emptyOption
               />
             )}
           />
@@ -446,10 +420,10 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                 name="filter.isSuspended"
                 label={<Trans>Suspended</Trans>}
                 placeholder={translation}
-                items={["", "true", "false"]}
-                renderItem={item => renderIsSuspendedItem(item)}
-                itemToString={item => renderIsSuspendedItem(item)}
+                items={Object.keys(STATUSES.SUSPENDED)}
+                itemToString={item => STATUSES.SUSPENDED[item] || translation}
                 variant="select"
+                emptyOption
               />
             )}
           />
@@ -462,13 +436,12 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                 name="filter.legalEntityRelation"
                 label={<Trans>Legal entity relation</Trans>}
                 placeholder={translation}
-                items={[{ value: translation }, ...legalEntityRelation]}
-                renderItem={item => item.value}
-                itemToString={item => {
-                  if (!item) return translation;
-                  return typeof item === "string" ? item : item.value;
-                }}
+                items={Object.keys(STATUSES.LEGAL_ENTITY_RELATION)}
+                itemToString={item =>
+                  STATUSES.LEGAL_ENTITY_RELATION[item] || translation
+                }
                 variant="select"
+                emptyOption
               />
             )}
           />
@@ -511,9 +484,6 @@ const TextNoWrap = system(
   {
     extend: Text
   },
-  { whiteSpace: "nowrap" }
+  { whiteSpace: "nowrap" },
+  "space"
 );
-
-// TODO: remove this after select refactoring
-const renderIsSuspendedItem = item =>
-  item === "" ? "всі договори" : item === "true" ? "призупинений" : "діючий";

@@ -96,12 +96,11 @@ const ModalAssigneeSearch = ({ submitted, id, query }) => (
                               name="assignee"
                               placeholder={i18n._(t`Choose assignee`)}
                               items={
-                                !employees
-                                  ? []
-                                  : employees.nodes.map(({ id, party }) => ({
-                                      id,
-                                      name: getFullName(party)
-                                    }))
+                                employees &&
+                                employees.nodes.map(({ id, party }) => ({
+                                  id,
+                                  name: getFullName(party)
+                                }))
                               }
                               onInputValueChange={debounce(
                                 name =>
@@ -118,14 +117,14 @@ const ModalAssigneeSearch = ({ submitted, id, query }) => (
                                   }),
                                 1000
                               )}
-                              renderItem={item => item.name}
-                              itemToString={item => (!item ? "" : item.name)}
+                              itemToString={item => item && item.name}
                               filterOptions={{ keys: ["name"] }}
                               style={{
                                 margin: "5px",
                                 border: "1px solid #DFE3E9"
                               }}
                               hideErrors
+                              autoFocus
                             />
                           )}
                         </I18n>
@@ -158,22 +157,31 @@ const ModalWrapper = system(
   boolean({
     prop: "visible",
     key: "inputs.select.visible"
-  })
+  }),
+  "space",
+  "color",
+  "fontSize",
+  "width"
 );
 
 const ButtonWrapper = system(
+  {},
   {
-    display: "flex"
-  },
-  {
+    display: "flex",
     cursor: "pointer"
   }
 );
 
-const ButtonText = system({
-  is: "span",
-  ml: 2,
-  color: "rockmanBlue",
-  fontSize: 0,
-  fontWeight: 700
-});
+const ButtonText = system(
+  {
+    is: "span",
+    ml: 2,
+    color: "rockmanBlue",
+    fontSize: 0,
+    fontWeight: 700
+  },
+  "space",
+  "color",
+  "fontSize",
+  "fontWeight"
+);

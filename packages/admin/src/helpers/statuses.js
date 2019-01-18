@@ -32,13 +32,13 @@ const CONTRACT_REQUEST = {
 };
 
 const CONTRACT = {
-  VERIFIED: "верифікований",
-  TERMINATED: "завершений"
+  VERIFIED: "Верифікований",
+  TERMINATED: "Завершений"
 };
 
 const SUSPENDED = {
-  NOTSUSPENDED: "діючий",
-  SUSPENDED: "призупинений"
+  [false]: "Діючий",
+  [true]: "Призупинений"
 };
 
 const MERGE_LEGAL_ENTITIES_JOBS = {

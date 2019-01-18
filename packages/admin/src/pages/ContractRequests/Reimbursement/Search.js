@@ -41,10 +41,6 @@ const MedicalProgramsQuery = loader(
   "../../../graphql/MedicalProgramsQuery.graphql"
 );
 
-const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
-  ([key, value]) => ({ key, value })
-);
-
 const resetPaginationParams = first => ({
   after: undefined,
   before: undefined,
@@ -278,13 +274,12 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
               name="filter.status"
               label={<Trans>Contract Request status</Trans>}
               placeholder={translation}
-              items={[{ value: translation }, ...contractStatuses]}
-              renderItem={item => item.value}
-              itemToString={item => {
-                if (!item) return translation;
-                return typeof item === "string" ? item : item.value;
-              }}
+              items={Object.keys(STATUSES.CONTRACT_REQUEST)}
+              itemToString={item =>
+                STATUSES.CONTRACT_REQUEST[item] || translation
+              }
               variant="select"
+              emptyOption
             />
           )}
         />
@@ -395,13 +390,12 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                 name="filter.status"
                 label={<Trans>Contract Request status</Trans>}
                 placeholder={translation}
-                items={[{ value: translation }, ...contractStatuses]}
-                renderItem={item => item.value}
-                itemToString={item => {
-                  if (!item) return translation;
-                  return typeof item === "string" ? item : item.value;
-                }}
+                items={Object.keys(STATUSES.CONTRACT_REQUEST)}
+                itemToString={item =>
+                  STATUSES.CONTRACT_REQUEST[item] || translation
+                }
                 variant="select"
+                emptyOption
               />
             )}
           />
@@ -445,11 +439,7 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                       name="filter.medicalProgram.name"
                       label={<Trans>Medical program</Trans>}
                       placeholder={translation}
-                      items={
-                        loading || error
-                          ? []
-                          : medicalPrograms.map(({ name }) => name)
-                      }
+                      items={medicalPrograms.map(({ name }) => name)}
                       onInputValueChange={debounce(
                         program =>
                           !isEmpty(program) &&
@@ -460,11 +450,6 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                           }),
                         1000
                       )}
-                      renderItem={item => item}
-                      itemToString={item => {
-                        if (!item) return "";
-                        return typeof item === "string" ? item : item.name;
-                      }}
                     />
                   );
                 }}

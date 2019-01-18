@@ -33,10 +33,6 @@ const SearchCapitationContractRequestsQuery = loader(
   "../../../graphql/SearchCapitationContractRequestsQuery.graphql"
 );
 
-const contractStatuses = Object.entries(STATUSES.CONTRACT_REQUEST).map(
-  ([key, value]) => ({ key, value })
-);
-
 const CapitationContractRequestsSearch = () => (
   <Box p={6}>
     <ContractRequestsNav />
@@ -227,13 +223,12 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
               name="filter.status"
               label={<Trans>Contract Request status</Trans>}
               placeholder={translation}
-              items={[{ value: translation }, ...contractStatuses]}
-              renderItem={item => item.value}
-              itemToString={item => {
-                if (!item) return translation;
-                return typeof item === "string" ? item : item.value;
-              }}
+              items={Object.keys(STATUSES.CONTRACT_REQUEST)}
+              itemToString={item =>
+                STATUSES.CONTRACT_REQUEST[item] || translation
+              }
               variant="select"
+              emptyOption
             />
           )}
         />

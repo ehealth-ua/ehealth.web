@@ -25,7 +25,9 @@ import DefinitionListView from "../../../components/DefinitionListView";
 const CapitationContractRequestQuery = loader(
   "../../../graphql/CapitationContractRequestQuery.graphql"
 );
-const EmployeesQuery = loader("../../../graphql/EmployeesQuery.graphql");
+const EmployeesQuery = loader(
+  "../../../graphql/GetAssignEmployeeQuery.graphql"
+);
 const UpdateContractRequestMutation = loader(
   "../../../graphql/UpdateContractRequestMutation.graphql"
 );
@@ -109,7 +111,7 @@ const Update = ({ id }) => (
                       issueCity,
                       nhsContractPrice,
                       nhsPaymentMethod,
-                      nhsSignerId: nhsSigner,
+                      nhsSigner,
                       miscellaneous
                     }}
                     locationParams={locationParams}
@@ -167,19 +169,22 @@ const UpdateContractRequest = ({
                 <Form
                   onSubmit={async () => {
                     const {
-                      nhsSignerId,
+                      nhsSigner,
                       nhsContractPrice,
                       miscellaneous,
-                      nhsPaymentMethod: { key } = {}
+                      nhsPaymentMethod,
+                      issueCity,
+                      nhsSignerBase
                     } = locationParams;
                     await updateContractRequest({
                       variables: {
                         input: {
-                          ...locationParams,
                           id,
-                          nhsPaymentMethod: key,
+                          nhsPaymentMethod,
+                          issueCity,
+                          nhsSignerBase,
                           nhsContractPrice: parseInt(nhsContractPrice, 10),
-                          nhsSignerId: nhsSignerId ? nhsSignerId.id : undefined,
+                          nhsSignerId: nhsSigner ? nhsSigner.id : undefined,
                           miscellaneous: miscellaneous || ""
                         }
                       }
@@ -210,13 +215,9 @@ const UpdateContractRequest = ({
                             }
                             placeholder={translation}
                             items={employees}
-                            renderItem={item => item && getFullName(item.party)}
-                            itemToString={item => {
-                              if (!item) return "";
-                              return typeof item === "string"
-                                ? item
-                                : getFullName(item.party);
-                            }}
+                            itemToString={item =>
+                              item && getFullName(item.party)
+                            }
                             filterOptions={{
                               keys: ["party.lastName", "party.firstName"]
                             }}
@@ -277,18 +278,8 @@ const UpdateContractRequest = ({
                                 name="nhsPaymentMethod"
                                 label={<Trans>Payment method</Trans>}
                                 placeholder={translation}
-                                itemToString={item => {
-                                  return item.key ? dict[item.key] : dict[item];
-                                }}
-                                items={[
-                                  ...Object.entries(dict).map(
-                                    ([key, value]) => ({
-                                      value,
-                                      key
-                                    })
-                                  )
-                                ]}
-                                renderItem={({ value }) => value}
+                                itemToString={item => dict[item]}
+                                items={Object.keys(dict)}
                                 size="small"
                                 sendForm="key"
                               />
@@ -342,14 +333,14 @@ const UpdateContractRequest = ({
                   <Flex mt={5}>
                     <Box mr={3}>
                       <Link to="../">
-                        <ButtonWidth variant="blue">
+                        <Button variant="blue" width={140}>
                           <Trans>Return</Trans>
-                        </ButtonWidth>
+                        </Button>
                       </Link>
                     </Box>
-                    <ButtonWidth variant="green">
+                    <Button variant="green" width={140}>
                       <Trans>Refresh</Trans>
-                    </ButtonWidth>
+                    </Button>
                   </Flex>
                 </Form>
               )}
@@ -361,8 +352,6 @@ const UpdateContractRequest = ({
   );
 };
 
-const OpacityBox = system({ extend: Box, opacity: 0.5 });
-
-const ButtonWidth = system({ extend: Button, width: 140 });
+const OpacityBox = system({ extend: Box, opacity: 0.5 }, "opacity", "space");
 
 export default Update;

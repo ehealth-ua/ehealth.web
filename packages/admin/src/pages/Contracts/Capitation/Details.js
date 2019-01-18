@@ -133,7 +133,7 @@ const Details = ({ id }) => (
                     ),
                     isSuspended: (
                       <Badge
-                        name={isSuspended ? "SUSPENDED" : "NOTSUSPENDED"}
+                        name={isSuspended}
                         type="SUSPENDED"
                         minWidth={100}
                       />

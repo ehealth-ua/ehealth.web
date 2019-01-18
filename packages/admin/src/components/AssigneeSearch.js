@@ -32,12 +32,11 @@ const AssigneeSearch = ({ submitted, id, query }) => (
               label={<Trans>Performer</Trans>}
               placeholder={translation}
               items={
-                !employees
-                  ? []
-                  : employees.nodes.map(({ databaseId, party }) => ({
-                      databaseId,
-                      name: getFullName(party)
-                    }))
+                employees &&
+                employees.nodes.map(({ databaseId, party }) => ({
+                  databaseId,
+                  name: getFullName(party)
+                }))
               }
               onInputValueChange={debounce(
                 name =>
@@ -53,8 +52,7 @@ const AssigneeSearch = ({ submitted, id, query }) => (
                   }),
                 1000
               )}
-              renderItem={item => item.name}
-              itemToString={item => (!item ? "" : item.name)}
+              itemToString={item => item && item.name}
               filterOptions={{ keys: ["name"] }}
             />
           );

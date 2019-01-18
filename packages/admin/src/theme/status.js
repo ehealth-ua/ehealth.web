@@ -19,8 +19,8 @@ const status = {
       SIGNED: { bg: "darkPastelGreen" },
       VERIFIED: { bg: "darkPastelGreen" },
       NHS_SIGNED: { bg: "darkAndStormy" },
-      SUSPENDED: { bg: "redPigment" },
-      NOTSUSPENDED: { bg: "darkPastelGreen" }
+      [true]: { bg: "redPigment" },
+      [false]: { bg: "darkPastelGreen" }
     }
   }
 };

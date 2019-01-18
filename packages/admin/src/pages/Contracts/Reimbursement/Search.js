@@ -41,10 +41,6 @@ const MedicalProgramsQuery = loader(
   "../../../graphql/MedicalProgramsQuery.graphql"
 );
 
-const contractStatuses = Object.entries(STATUSES.CONTRACT).map(
-  ([key, value]) => ({ key, value })
-);
-
 const resetPaginationParams = first => ({
   after: undefined,
   before: undefined,
@@ -68,13 +64,8 @@ const ReimbursementContractsSearch = () => (
               query={SearchReimbursementContractsQuery}
               fetchPolicy="network-only"
               variables={{
-                first:
-                  !first && !last
-                    ? ITEMS_PER_PAGE[0]
-                    : first
-                      ? parseInt(first)
-                      : undefined,
-                last: last ? parseInt(last) : undefined,
+                first: !first && !last ? ITEMS_PER_PAGE[0] : parseInt(first),
+                last: parseInt(last),
                 after,
                 before,
                 orderBy,
@@ -125,17 +116,10 @@ const ReimbursementContractsSearch = () => (
                               medicalProgram && medicalProgram.name,
                             isSuspended: (
                               <Flex justifyContent="center">
-                                {!isSuspended ? (
-                                  <NegativeIcon
-                                    fill="#1BB934"
-                                    stroke="#1BB934"
-                                  />
-                                ) : (
-                                  <NegativeIcon
-                                    fill="#ED1C24"
-                                    stroke="#ED1C24"
-                                  />
-                                )}
+                                <NegativeIcon
+                                  fill={!isSuspended ? "#1BB934" : "#ED1C24"}
+                                  stroke={!isSuspended ? "#1BB934" : "#ED1C24"}
+                                />
                               </Flex>
                             ),
                             startDate: <DateFormat value={startDate} />,
@@ -279,13 +263,10 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
               name="filter.status"
               label={<Trans>Contract status</Trans>}
               placeholder={translation}
-              items={[{ value: translation }, ...contractStatuses]}
-              renderItem={item => item.value}
-              itemToString={item => {
-                if (!item) return translation;
-                return typeof item === "string" ? item : item.value;
-              }}
+              items={Object.keys(STATUSES.CONTRACT)}
+              itemToString={item => STATUSES.CONTRACT[item] || translation}
               variant="select"
+              emptyOption
             />
           )}
         />
@@ -357,7 +338,7 @@ const SelectedFilters = ({ initialValues, onSubmit, toggle }) => {
       )}
       {!isEmpty(isSuspended) && (
         <SelectedItem mx={1}>
-          {renderIsSuspendedItem(isSuspended)}
+          {STATUSES.SUSPENDED[isSuspended]}
           <RemoveItem
             onClick={() => {
               onSubmit({
@@ -413,13 +394,10 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                 name="filter.status"
                 label={<Trans>Contract status</Trans>}
                 placeholder={translation}
-                items={[{ value: translation }, ...contractStatuses]}
-                renderItem={item => item.value}
-                itemToString={item => {
-                  if (!item) return translation;
-                  return typeof item === "string" ? item : item.value;
-                }}
+                items={Object.keys(STATUSES.CONTRACT)}
+                itemToString={item => STATUSES.CONTRACT[item] || translation}
                 variant="select"
+                emptyOption
               />
             )}
           />
@@ -440,13 +418,19 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
       </Flex>
       <Flex mx={-1}>
         <Box width={2 / 5} px={1} mr={1}>
-          <Field.Select
-            name="filter.isSuspended"
-            label={<Trans>Contract state</Trans>}
-            items={["", "true", "false"]}
-            renderItem={item => renderIsSuspendedItem(item)}
-            itemToString={item => renderIsSuspendedItem(item)}
-            variant="select"
+          <Trans
+            id="All contracts"
+            render={({ translation }) => (
+              <Field.Select
+                name="filter.isSuspended"
+                label={<Trans>Suspended</Trans>}
+                placeholder={translation}
+                items={Object.keys(STATUSES.SUSPENDED)}
+                itemToString={item => STATUSES.SUSPENDED[item] || translation}
+                variant="select"
+                emptyOption
+              />
+            )}
           />
         </Box>
         <Box width={2 / 5}>
@@ -461,41 +445,28 @@ const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
                 }}
               >
                 {({
-                  loading,
-                  error,
                   data: {
                     medicalPrograms: { nodes: medicalPrograms = [] } = {}
                   } = {},
                   refetch: refetchMedicalProgram
-                }) => {
-                  return (
-                    <Field.Select
-                      name="filter.medicalProgram.name"
-                      label={<Trans>Medical program</Trans>}
-                      placeholder={translation}
-                      items={
-                        loading || error
-                          ? []
-                          : medicalPrograms.map(({ name }) => name)
-                      }
-                      onInputValueChange={debounce(
-                        program =>
-                          !isEmpty(program) &&
-                          refetchMedicalProgram({
-                            skip: false,
-                            first: 20,
-                            filter: { name: program }
-                          }),
-                        1000
-                      )}
-                      renderItem={item => item}
-                      itemToString={item => {
-                        if (!item) return "";
-                        return typeof item === "string" ? item : item.name;
-                      }}
-                    />
-                  );
-                }}
+                }) => (
+                  <Field.Select
+                    name="filter.medicalProgram.name"
+                    label={<Trans>Medical program</Trans>}
+                    placeholder={translation}
+                    items={medicalPrograms.map(({ name }) => name)}
+                    onInputValueChange={debounce(
+                      program =>
+                        !isEmpty(program) &&
+                        refetchMedicalProgram({
+                          skip: false,
+                          first: 20,
+                          filter: { name: program }
+                        }),
+                      1000
+                    )}
+                  />
+                )}
               </Query>
             )}
           />
@@ -538,9 +509,6 @@ const TextNoWrap = system(
     extend: Text,
     ml: 2
   },
-  { whiteSpace: "nowrap" }
+  { whiteSpace: "nowrap" },
+  "space"
 );
-
-// TODO: remove this after select refactoring
-const renderIsSuspendedItem = item =>
-  item === "" ? "всі договори" : item === "true" ? "призупинений" : "діючий";

@@ -19,7 +19,9 @@ import DefinitionListView from "../../../components/DefinitionListView";
 const ReimbursementContractRequestQuery = loader(
   "../../../graphql/ReimbursementContractRequestQuery.graphql"
 );
-const EmployeesQuery = loader("../../../graphql/EmployeesQuery.graphql");
+const EmployeesQuery = loader(
+  "../../../graphql/GetAssignEmployeeQuery.graphql"
+);
 const UpdateContractRequestMutation = loader(
   "../../../graphql/UpdateContractRequestMutation.graphql"
 );
@@ -98,7 +100,7 @@ const Update = ({ id }) => (
                       nhsSignerBase,
                       issueCity,
                       nhsPaymentMethod,
-                      nhsSignerId: nhsSigner,
+                      nhsSigner,
                       miscellaneous
                     }}
                     locationParams={locationParams}
@@ -155,17 +157,20 @@ const UpdateContractRequest = ({
                 <Form
                   onSubmit={async () => {
                     const {
-                      nhsSignerId,
+                      nhsSigner,
                       miscellaneous,
-                      nhsPaymentMethod: { key } = {}
+                      nhsPaymentMethod,
+                      issueCity,
+                      nhsSignerBase
                     } = locationParams;
                     await updateContractRequest({
                       variables: {
                         input: {
-                          ...locationParams,
                           id,
-                          nhsPaymentMethod: key,
-                          nhsSignerId: nhsSignerId ? nhsSignerId.id : undefined,
+                          nhsPaymentMethod,
+                          nhsSignerId: nhsSigner ? nhsSigner.id : undefined,
+                          issueCity,
+                          nhsSignerBase,
                           miscellaneous: miscellaneous || ""
                         }
                       }
@@ -189,19 +194,15 @@ const UpdateContractRequest = ({
                         id="Enter signer"
                         render={({ translation }) => (
                           <Field.Select
-                            name="nhsSignerId"
+                            name="nhsSigner"
                             label={
                               <Trans>Signatory from the Customers side</Trans>
                             }
                             placeholder={translation}
                             items={employees}
-                            renderItem={item => item && getFullName(item.party)}
-                            itemToString={item => {
-                              if (!item) return "";
-                              return typeof item === "string"
-                                ? item
-                                : getFullName(item.party);
-                            }}
+                            itemToString={item =>
+                              item && getFullName(item.party)
+                            }
                             filterOptions={{
                               keys: ["party.lastName", "party.firstName"]
                             }}
@@ -211,7 +212,7 @@ const UpdateContractRequest = ({
                       />
 
                       <Validation.Required
-                        field="nhsSignerId"
+                        field="nhsSigner"
                         message={<Trans>Required field</Trans>}
                       />
                     </Box>
@@ -265,20 +266,8 @@ const UpdateContractRequest = ({
                                 name="nhsPaymentMethod"
                                 label={<Trans>Payment method</Trans>}
                                 placeholder={translation}
-                                itemToString={item => {
-                                  return item && item.key
-                                    ? dict[item.key]
-                                    : dict[item];
-                                }}
-                                items={[
-                                  ...Object.entries(dict).map(
-                                    ([key, value]) => ({
-                                      value,
-                                      key
-                                    })
-                                  )
-                                ]}
-                                renderItem={({ value }) => value}
+                                itemToString={item => dict[item]}
+                                items={Object.keys(dict)}
                                 size="small"
                                 sendForm="key"
                               />
