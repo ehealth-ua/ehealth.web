@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.29.5"></a>
+## [1.29.5](https://github.com/edenlabllc/ehealth.web/compare/v1.29.4...v1.29.5) (2019-01-18)
+
+
+### Bug Fixes
+
+* **admin:** add helpers to OpacityBox ([890a604](https://github.com/edenlabllc/ehealth.web/commit/890a604))
+
+
+
+
+
 <a name="1.29.3"></a>
 ## [1.29.3](https://github.com/edenlabllc/ehealth.web/compare/v1.29.2...v1.29.3) (2019-01-18)
 
