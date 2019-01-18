@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.29.0"></a>
+# [1.29.0](https://github.com/edenlabllc/ehealth.web/compare/v1.28.10...v1.29.0) (2019-01-18)
+
+
+### Bug Fixes
+
+* **admin:** add emptyOption prop to Select ([f20c07f](https://github.com/edenlabllc/ehealth.web/commit/f20c07f))
+* **admin:** fix error description ([5251c32](https://github.com/edenlabllc/ehealth.web/commit/5251c32))
+* **admin:** make selectedItem smaller ([bfc68ca](https://github.com/edenlabllc/ehealth.web/commit/bfc68ca))
+
+
+### Features
+
+* **utils:** add convertStringToBoolean helper ([c5b31bd](https://github.com/edenlabllc/ehealth.web/commit/c5b31bd))
+
+
+
+
+
 <a name="1.28.10"></a>
 ## [1.28.10](https://github.com/edenlabllc/ehealth.web/compare/v1.28.9...v1.28.10) (2019-01-18)
 
