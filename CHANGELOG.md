@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.29.4"></a>
+## [1.29.4](https://github.com/edenlabllc/ehealth.web/compare/v1.29.3...v1.29.4) (2019-01-18)
+
+
+### Bug Fixes
+
+* **admin-legacy:** checking csv type with list in validation on RegisterUploadForm ([cbeb77c](https://github.com/edenlabllc/ehealth.web/commit/cbeb77c))
+
+
+
+
+
 <a name="1.29.3"></a>
 ## [1.29.3](https://github.com/edenlabllc/ehealth.web/compare/v1.29.2...v1.29.3) (2019-01-18)
 
