@@ -152,7 +152,6 @@ const SearchDictionariesForm = ({ initialValues, setLocationParams }) => (
                     label={<Trans>Filter by Tag</Trans>}
                     placeholder={translation}
                     items={listOfLabels}
-                    renderItem={item => item}
                     hideErrors
                   />
                 )}

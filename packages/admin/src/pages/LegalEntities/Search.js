@@ -64,10 +64,10 @@ const Search = ({ uri }) => (
           ...sendCodeParams,
           nhsVerified: isEmpty(nhsVerified)
             ? undefined
-            : nhsVerified.key === "VERIFIED",
+            : nhsVerified === "VERIFIED",
           settlement: isEmpty(settlement) ? undefined : settlement.settlement,
           area: isEmpty(settlement) ? undefined : settlement.area,
-          type: isEmpty(type) ? undefined : type.key
+          type
         };
         return (
           <>
@@ -294,25 +294,13 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
         >
           {([dict, { translation }]) => (
             <Field.Select
-              variant="select"
               name="filter.type"
               label={<Trans>Legal entity type</Trans>}
               placeholder={translation}
-              itemToString={item => {
-                if (!item) return translation;
-                return typeof item === "string" ? item : item.value;
-              }}
-              items={[
-                { value: translation, key: undefined },
-                ...Object.entries(dict)
-                  .filter(([key]) => key !== "MIS")
-                  .map(([key, value]) => ({
-                    value,
-                    key
-                  }))
-              ]}
-              renderItem={({ value }) => value}
-              size="small"
+              items={Object.keys(dict).filter(key => key !== "MIS")}
+              itemToString={item => dict[item] || translation}
+              variant="select"
+              emptyOption
             />
           )}
         </Composer>
@@ -326,23 +314,13 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
         >
           {([dict, { translation }]) => (
             <Field.Select
-              variant="select"
               name="filter.nhsVerified"
               label={<Trans>Verification status</Trans>}
               placeholder={translation}
-              itemToString={item => {
-                if (!item) return translation;
-                return typeof item === "string" ? item : item.value;
-              }}
-              items={[
-                { value: translation, name: undefined },
-                ...Object.entries(dict).map(([key, value]) => ({
-                  value,
-                  key
-                }))
-              ]}
-              renderItem={({ value }) => value}
-              size="small"
+              items={Object.keys(dict)}
+              itemToString={item => dict[item] || translation}
+              variant="select"
+              emptyOption
             />
           )}
         </Composer>

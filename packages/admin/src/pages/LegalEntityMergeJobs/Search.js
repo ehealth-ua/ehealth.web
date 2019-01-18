@@ -22,9 +22,6 @@ const LegalEntitiesMergeJobsQuery = loader(
 
 const EDRPOU_PATTERN = "^[0-9]{8,10}$";
 
-const jobsStatuses = Object.entries(STATUSES.MERGE_LEGAL_ENTITIES_JOBS).map(
-  ([key, value]) => ({ key, value })
-);
 const Search = ({ uri }) => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={1}>
@@ -63,7 +60,7 @@ const Search = ({ uri }) => (
             : { id: mergedFromLegalEntityCode };
 
         const filter = {
-          status: status && status.key,
+          status,
           mergedToLegalEntity,
           mergedFromLegalEntity
         };
@@ -228,14 +225,14 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
             <Field.Select
               name="filter.status"
               label={<Trans>Job status</Trans>}
-              items={[{ value: translation, key: undefined }, ...jobsStatuses]}
-              renderItem={item => item.value}
-              itemToString={item => {
-                if (!item) return translation;
-                return typeof item === "string" ? item : item.value;
-              }}
-              filterOptions={{ keys: ["value"] }}
+              placeholder={translation}
+              items={Object.keys(STATUSES.MERGE_LEGAL_ENTITIES_JOBS)}
+              itemToString={item =>
+                STATUSES.MERGE_LEGAL_ENTITIES_JOBS[item] || translation
+              }
               variant="select"
+              filterOptions={{ keys: ["value"] }}
+              emptyOption
             />
           )}
         />
@@ -276,14 +273,14 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
             <Field.Select
               name="filter.status"
               label={<Trans>Job status</Trans>}
-              items={[{ value: translation, key: undefined }, ...jobsStatuses]}
-              renderItem={item => item.value}
-              itemToString={item => {
-                if (!item) return translation;
-                return typeof item === "string" ? item : item.value;
-              }}
-              filterOptions={{ keys: ["value"] }}
+              placeholder={translation}
+              items={Object.keys(STATUSES.MERGE_LEGAL_ENTITIES_JOBS)}
+              itemToString={item =>
+                STATUSES.MERGE_LEGAL_ENTITIES_JOBS[item] || translation
+              }
               variant="select"
+              filterOptions={{ keys: ["value"] }}
+              emptyOption
             />
           )}
         />

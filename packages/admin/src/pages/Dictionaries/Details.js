@@ -223,7 +223,6 @@ const DictionaryLabels = ({ isReadOnly, isActive, labels, id, name }) => (
                                       label={<Trans>Select a tag</Trans>}
                                       placeholder={translation}
                                       items={aviableLabels}
-                                      renderItem={item => item}
                                       hideErrors
                                     />
                                   )}
@@ -317,7 +316,6 @@ class DictionaryValues extends React.Component {
                         label={<Trans>Key</Trans>}
                         placeholder={translation}
                         items={Object.keys(values)}
-                        renderItem={item => item}
                         hideErrors
                       />
                     )}
@@ -332,7 +330,6 @@ class DictionaryValues extends React.Component {
                         label={<Trans>Description</Trans>}
                         placeholder={translation}
                         items={Object.values(values)}
-                        renderItem={item => item}
                         iconComponent={SearchIcon}
                         hideErrors
                       />
