@@ -64,8 +64,13 @@ const ReimbursementContractsSearch = () => (
               query={SearchReimbursementContractsQuery}
               fetchPolicy="network-only"
               variables={{
-                first: !first && !last ? ITEMS_PER_PAGE[0] : parseInt(first),
-                last: parseInt(last),
+                first:
+                  !first && !last
+                    ? ITEMS_PER_PAGE[0]
+                    : first
+                      ? parseInt(first)
+                      : undefined,
+                last: last ? parseInt(last) : undefined,
                 after,
                 before,
                 orderBy,
