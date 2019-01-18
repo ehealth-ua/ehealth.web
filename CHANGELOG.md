@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.29.3"></a>
+## [1.29.3](https://github.com/edenlabllc/ehealth.web/compare/v1.29.2...v1.29.3) (2019-01-18)
+
+
+### Bug Fixes
+
+* **admin:** revert paging filter ([d8c9a5c](https://github.com/edenlabllc/ehealth.web/commit/d8c9a5c))
+
+
+
+
+
 <a name="1.29.2"></a>
 ## [1.29.2](https://github.com/edenlabllc/ehealth.web/compare/v1.29.1...v1.29.2) (2019-01-18)
 
