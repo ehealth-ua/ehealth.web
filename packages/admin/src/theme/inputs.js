@@ -5,7 +5,7 @@ const inputs = {
       active: { borderColor: "rockmanBlue" },
       errored: { borderColor: "redPigment", color: "redPigment" },
       success: { borderColor: "darkPastelGreen" },
-      disabled: { bg: "wallsOfSantorini" }
+      disabled: { borderColor: "silverCity", bg: "wallsOfSantorini" }
     }
   },
   field: {
