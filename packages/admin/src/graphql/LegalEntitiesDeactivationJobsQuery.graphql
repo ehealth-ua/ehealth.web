@@ -1,0 +1,33 @@
+query LegalEntitiesDeactivationJobsQuery(
+  $filter: LegalEntityDeactivationJobFilter
+  $orderBy: LegalEntityDeactivationJobOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
+) {
+  legalEntityDeactivationJobs(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
+    nodes {
+      id
+      databaseId
+      legalEntityId
+      startedAt
+      endedAt
+      status
+      result
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+  }
+}

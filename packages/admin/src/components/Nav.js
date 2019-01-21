@@ -231,6 +231,11 @@ const Nav = () => (
                 <Trans>Legal entity merge jobs</Trans>
               </NavLink>
             </Ability>
+            <Ability action="deactivate" resource="legal_entity">
+              <NavLink to="/legal-entity-deactivate-jobs">
+                <Trans>Legal entity deactivate jobs</Trans>
+              </NavLink>
+            </Ability>
           </NavSection>
         </Ability>
 
