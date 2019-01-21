@@ -949,10 +949,13 @@ const EmptyData = props => (
     </Text>
   </WrapperBoxHeight>
 );
-const WrapperBoxHeight = system({
-  is: Box,
-  height: 500
-});
+const WrapperBoxHeight = system(
+  {
+    is: Box,
+    height: 500
+  },
+  "height"
+);
 
 const Wrapper = system(
   {

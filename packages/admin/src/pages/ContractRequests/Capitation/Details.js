@@ -669,9 +669,10 @@ const EmptyData = props => (
 );
 const WrapperBoxHeight = system(
   {
-    is: Box
+    is: Box,
+    height: 500
   },
-  { height: 500 }
+  "height"
 );
 
 const Wrapper = system(

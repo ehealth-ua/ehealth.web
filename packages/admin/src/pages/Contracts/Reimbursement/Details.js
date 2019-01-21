@@ -118,7 +118,7 @@ const Details = ({ id }) => (
                     ),
                     isSuspended: (
                       <Badge
-                        name={isSuspended ? "SUSPENDED" : "NOTSUSPENDED"}
+                        name={isSuspended}
                         type="SUSPENDED"
                         minWidth={100}
                       />
@@ -628,10 +628,13 @@ const EmptyData = props => (
     </Text>
   </WrapperBoxHeight>
 );
-const WrapperBoxHeight = system({
-  is: Box,
-  height: 500
-});
+const WrapperBoxHeight = system(
+  {
+    is: Box,
+    height: 500
+  },
+  "height"
+);
 
 const Wrapper = system(
   {
@@ -642,13 +645,15 @@ const Wrapper = system(
 
 const SaveLink = system(
   {
-    is: "a",
+    is: "a"
+  },
+  {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    lineHeight: 0
-  },
-  { textDecoration: "none" }
+    lineHeight: 0,
+    textDecoration: "none"
+  }
 );
 
 export default ReimbursementContractsDetails;
