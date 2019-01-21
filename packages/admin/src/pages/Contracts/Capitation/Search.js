@@ -313,15 +313,16 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
 );
 
 const SelectedFilters = ({ initialValues, onSubmit }) => {
-  const {
-    filter: { legalEntityRelation: { name, value } = {}, isSuspended } = {}
-  } = initialValues;
+  const { filter: { legalEntityRelation, isSuspended } = {} } = initialValues;
 
   return (
     <Flex>
-      {name && (
+      {legalEntityRelation && (
         <SelectedItem mx={1}>
-          <Trans>contract of {value} legal entity</Trans>
+          <Trans>
+            contract of {STATUSES.LEGAL_ENTITY_RELATION[legalEntityRelation]}{" "}
+            legal entity
+          </Trans>
           <RemoveItem
             onClick={() => {
               onSubmit({
