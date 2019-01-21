@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.30.0"></a>
+# [1.30.0](https://github.com/edenlabllc/ehealth.web/compare/v1.29.8...v1.30.0) (2019-01-21)
+
+
+### Features
+
+* **admin:** add DeclarationByNumber Query, update Declaration List page according to the new features ([#663](https://github.com/edenlabllc/ehealth.web/issues/663)) ([dc54e46](https://github.com/edenlabllc/ehealth.web/commit/dc54e46))
+
+
+
+
+
 <a name="1.29.8"></a>
 ## [1.29.8](https://github.com/edenlabllc/ehealth.web/compare/v1.29.7...v1.29.8) (2019-01-21)
 
