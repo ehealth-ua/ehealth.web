@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.29.8"></a>
+## [1.29.8](https://github.com/edenlabllc/ehealth.web/compare/v1.29.7...v1.29.8) (2019-01-21)
+
+
+### Bug Fixes
+
+* **admin:** fix height of empty container and suspended badge ([07d52d6](https://github.com/edenlabllc/ehealth.web/commit/07d52d6))
+
+
+
+
+
 <a name="1.29.7"></a>
 ## [1.29.7](https://github.com/edenlabllc/ehealth.web/compare/v1.29.6...v1.29.7) (2019-01-18)
 
