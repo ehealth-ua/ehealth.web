@@ -10,7 +10,12 @@ import {
   stringifySortingParams,
   getFullName
 } from "@ehealth/utils";
-import { AdminSearchIcon, RemoveItemIcon, NegativeIcon } from "@ehealth/icons";
+import {
+  AdminSearchIcon,
+  RemoveItemIcon,
+  PositiveIcon,
+  NegativeIcon
+} from "@ehealth/icons";
 
 import Link from "../../components/Link";
 import Badge from "../../components/Badge";
@@ -18,23 +23,14 @@ import LoadingOverlay from "../../components/LoadingOverlay";
 import Table from "../../components/Table";
 import * as Field from "../../components/Field";
 import Button, { IconButton } from "../../components/Button";
-import Pagination from "../../components/Pagination";
 import AddressView from "../../components/AddressView";
-import { ITEMS_PER_PAGE } from "../../constants/pagination";
 import { DECLARATION_NUMBER_PATTERN } from "../../constants/declarationSearchPatterns";
 
-const SearchDeclarationsQuery = loader(
-  "../../graphql/SearchDeclarationsQuery.graphql"
+const DeclarationByNumberQuery = loader(
+  "../../graphql/DeclarationByNumberQuery.graphql"
 );
 
-const resetPaginationParams = first => ({
-  after: undefined,
-  before: undefined,
-  last: undefined,
-  first: first || ITEMS_PER_PAGE[0]
-});
-
-const Search = ({ uri }) => (
+const Search = () => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={6}>
       <Trans>Search for Declarations</Trans>
@@ -42,14 +38,7 @@ const Search = ({ uri }) => (
 
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
-        const {
-          filter: { declarationNumber } = {},
-          first,
-          last,
-          after,
-          before,
-          orderBy
-        } = locationParams;
+        const { filter: { declarationNumber } = {} } = locationParams;
 
         return (
           <>
@@ -58,111 +47,82 @@ const Search = ({ uri }) => (
               onSubmit={setLocationParams}
             />
             <Query
-              query={SearchDeclarationsQuery}
-              variables={{
-                first:
-                  !first && !last
-                    ? ITEMS_PER_PAGE[0]
-                    : first
-                      ? parseInt(first)
-                      : undefined,
-                last: last ? parseInt(last) : undefined,
-                after,
-                before,
-                orderBy,
-                filter: { declarationNumber }
-              }}
+              skip={isEmpty(declarationNumber)}
+              query={DeclarationByNumberQuery}
+              variables={{ declarationNumber }}
             >
               {({ loading, error, data }) => {
                 if (error || isEmpty(data)) return null;
-                const {
-                  nodes: declarations = [],
-                  pageInfo
-                } = data.declarations;
-
                 return (
                   <LoadingOverlay loading={loading}>
-                    {declarations.length > 0 && (
-                      <>
-                        <Table
-                          data={declarations}
-                          header={{
-                            databaseId: <Trans>Declaration ID</Trans>,
-                            declarationNumber: (
-                              <Trans>Declaration number</Trans>
-                            ),
-                            startDate: <Trans>Declaration start date</Trans>,
-                            legalEntityName: <Trans>Legal entity</Trans>,
-                            legalEntityEdrpou: <Trans>EDRPOU</Trans>,
-                            divisionName: <Trans>Division name</Trans>,
-                            divisionAddress: <Trans>Address</Trans>,
-                            status: <Trans>Status</Trans>,
-                            noTaxId: <Trans>No tax ID</Trans>,
-                            patientName: <Trans>Patient Name</Trans>,
-                            action: <Trans>Action</Trans>
-                          }}
-                          renderRow={({
-                            id,
-                            legalEntity,
-                            startDate,
-                            division,
-                            person,
-                            status,
-                            noTaxId,
-                            ...declaration
-                          }) => ({
-                            ...declaration,
-                            legalEntityName: legalEntity.name,
-                            legalEntityEdrpou: legalEntity.edrpou,
-                            patientName: getFullName(person),
-                            divisionName: division.name,
-                            divisionAddress: division.addresses
-                              .filter(address => address.type === "RESIDENCE")
-                              .map((item, key) => (
-                                <AddressView data={item} key={key} />
-                              )),
-                            startDate: <DateFormat value={startDate} />,
-                            status: (
-                              <Badge
-                                name={status}
-                                type="DECLARATION"
-                                minWidth={100}
-                              />
-                            ),
-                            noTaxId: (
-                              <Flex justifyContent="center">
-                                {noTaxId ? (
-                                  <NegativeIcon
-                                    fill="#ED1C24"
-                                    stroke="#ED1C24"
-                                  />
-                                ) : (
-                                  <NegativeIcon />
-                                )}
-                              </Flex>
-                            ),
-                            action: (
-                              <Link to={`../${id}`} fontWeight="bold">
-                                <Trans>Show details</Trans>
-                              </Link>
-                            )
-                          })}
-                          sortableFields={["startDate", "status", "noTaxId"]}
-                          sortingParams={parseSortingParams(
-                            locationParams.orderBy
-                          )}
-                          onSortingChange={sortingParams =>
-                            setLocationParams({
-                              orderBy: stringifySortingParams(sortingParams)
-                            })
-                          }
-                          tableName="declarations/search"
-                          whiteSpaceNoWrap={["databaseId"]}
-                          hiddenFields="noTaxId,patientName,databaseId"
-                        />
-                        <Pagination {...pageInfo} />
-                      </>
-                    )}
+                    <Table
+                      data={[data.declarationByNumber]}
+                      header={{
+                        databaseId: <Trans>Declaration ID</Trans>,
+                        declarationNumber: <Trans>Declaration number</Trans>,
+                        startDate: <Trans>Declaration start date</Trans>,
+                        legalEntityName: <Trans>Legal entity</Trans>,
+                        legalEntityEdrpou: <Trans>EDRPOU</Trans>,
+                        divisionName: <Trans>Division name</Trans>,
+                        divisionAddress: <Trans>Address</Trans>,
+                        status: <Trans>Status</Trans>,
+                        noTaxId: <Trans>No tax ID</Trans>,
+                        patientName: <Trans>Patient Name</Trans>,
+                        action: <Trans>Action</Trans>
+                      }}
+                      renderRow={({
+                        id,
+                        legalEntity,
+                        startDate,
+                        division,
+                        person,
+                        status,
+                        noTaxId,
+                        ...declaration
+                      }) => ({
+                        ...declaration,
+                        legalEntityName: legalEntity.name,
+                        legalEntityEdrpou: legalEntity.edrpou,
+                        patientName: getFullName(person),
+                        divisionName: division.name,
+                        divisionAddress: division.addresses
+                          .filter(address => address.type === "RESIDENCE")
+                          .map((item, key) => (
+                            <AddressView data={item} key={key} />
+                          )),
+                        startDate: <DateFormat value={startDate} />,
+                        status: (
+                          <Badge
+                            name={status}
+                            type="DECLARATION"
+                            minWidth={100}
+                          />
+                        ),
+                        noTaxId: (
+                          <Flex justifyContent="center">
+                            {person.noTaxId ? (
+                              <PositiveIcon />
+                            ) : (
+                              <NegativeIcon />
+                            )}
+                          </Flex>
+                        ),
+                        action: (
+                          <Link to={`../${id}`} fontWeight="bold">
+                            <Trans>Show details</Trans>
+                          </Link>
+                        )
+                      })}
+                      sortingParams={parseSortingParams(locationParams.orderBy)}
+                      onSortingChange={sortingParams =>
+                        setLocationParams({
+                          orderBy: stringifySortingParams(sortingParams)
+                        })
+                      }
+                      tableName="declaration-by-number/search"
+                      whiteSpaceNoWrap={["databaseId"]}
+                      hiddenFields="noTaxId,patientName,databaseId"
+                    />
                   </LoadingOverlay>
                 );
               }}
@@ -181,8 +141,7 @@ const SearchDeclarationForm = ({ initialValues, onSubmit }) => (
     initialValues={initialValues}
     onSubmit={params =>
       onSubmit({
-        ...params,
-        ...resetPaginationParams(initialValues.first)
+        ...params
       })
     }
   >

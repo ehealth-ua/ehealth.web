@@ -1,0 +1,38 @@
+query DeclarationByNumberQuery($declarationNumber: String!) {
+  declarationByNumber(declarationNumber: $declarationNumber) {
+    id
+    databaseId
+    declarationNumber
+    startDate
+    endDate
+    status
+    legalEntity {
+      id
+      databaseId
+      name
+      edrpou
+    }
+    person {
+      id
+      databaseId
+      firstName
+      lastName
+      secondName
+      noTaxId
+    }
+    division {
+      id
+      databaseId
+      name
+      addresses {
+        type
+        settlement
+        settlementType
+        settlementId
+        streetType
+        street
+        building
+      }
+    }
+  }
+}
