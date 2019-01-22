@@ -11,6 +11,7 @@ import { AdminSearchIcon, RemoveItemIcon } from "@ehealth/icons";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
+import Pagination from "../../components/Pagination";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import Button, { IconButton } from "../../components/Button";
 import * as Field from "../../components/Field";
@@ -72,69 +73,75 @@ const Search = ({ uri }) => (
                 return (
                   <LoadingOverlay loading={loading}>
                     {legalEntityDeactivationJobs.length > 0 && (
-                      <Table
-                        data={legalEntityDeactivationJobs}
-                        header={{
-                          databaseId: <Trans>ID</Trans>,
-                          name: <Trans>Legal entity name</Trans>,
-                          edrpou: <Trans>EDRPOU</Trans>,
-                          startedAt: <Trans>Started at</Trans>,
-                          executionTime: <Trans>Execution time</Trans>,
-                          status: <Trans>Job status</Trans>
-                        }}
-                        renderRow={({
-                          databaseId,
-                          startedAt,
-                          endedAt,
-                          executionTime,
-                          status,
-                          ...legalEntityData
-                        }) => ({
-                          ...legalEntityData,
-                          databaseId,
-                          startedAt: (
-                            <DateFormat
-                              value={startedAt}
-                              format={{
-                                year: "numeric",
-                                month: "numeric",
-                                day: "numeric",
-                                hour: "numeric",
-                                minute: "numeric"
-                              }}
-                            />
-                          ),
-                          executionTime:
-                            status === "PENDING" ? (
-                              "-"
-                            ) : (
-                              <Plural
-                                value={differenceInSeconds(endedAt, startedAt)}
-                                zero="# seconds"
-                                one="# second"
-                                few="# seconds"
-                                many="# seconds"
-                                other="# seconds"
+                      <>
+                        <Table
+                          data={legalEntityDeactivationJobs}
+                          header={{
+                            databaseId: <Trans>ID</Trans>,
+                            name: <Trans>Legal entity name</Trans>,
+                            edrpou: <Trans>EDRPOU</Trans>,
+                            startedAt: <Trans>Started at</Trans>,
+                            executionTime: <Trans>Execution time</Trans>,
+                            status: <Trans>Job status</Trans>
+                          }}
+                          renderRow={({
+                            databaseId,
+                            startedAt,
+                            endedAt,
+                            executionTime,
+                            status,
+                            ...legalEntityData
+                          }) => ({
+                            ...legalEntityData,
+                            databaseId,
+                            startedAt: (
+                              <DateFormat
+                                value={startedAt}
+                                format={{
+                                  year: "numeric",
+                                  month: "numeric",
+                                  day: "numeric",
+                                  hour: "numeric",
+                                  minute: "numeric"
+                                }}
                               />
                             ),
-                          status: (
-                            <Badge
-                              type="MERGE_LEGAL_ENTITIES_JOBS"
-                              name={status}
-                              display="block"
-                            />
-                          )
-                        })}
-                        sortableFields={["startedAt"]}
-                        sortingParams={parseSortingParams(orderBy)}
-                        onSortingChange={sortingParams =>
-                          setLocationParams({
-                            ...locationParams,
-                            orderBy: stringifySortingParams(sortingParams)
-                          })
-                        }
-                        tableName="legalEntityDeactivationJobs/search"
-                      />
+                            executionTime:
+                              status === "PENDING" ? (
+                                "-"
+                              ) : (
+                                <Plural
+                                  value={differenceInSeconds(
+                                    endedAt,
+                                    startedAt
+                                  )}
+                                  zero="# seconds"
+                                  one="# second"
+                                  few="# seconds"
+                                  many="# seconds"
+                                  other="# seconds"
+                                />
+                              ),
+                            status: (
+                              <Badge
+                                type="MERGE_LEGAL_ENTITIES_JOBS"
+                                name={status}
+                                display="block"
+                              />
+                            )
+                          })}
+                          sortableFields={["startedAt"]}
+                          sortingParams={parseSortingParams(orderBy)}
+                          onSortingChange={sortingParams =>
+                            setLocationParams({
+                              ...locationParams,
+                              orderBy: stringifySortingParams(sortingParams)
+                            })
+                          }
+                          tableName="legalEntityDeactivationJobs/search"
+                        />
+                        <Pagination {...pageInfo} />
+                      </>
                     )}
                   </LoadingOverlay>
                 );
@@ -150,7 +157,18 @@ const Search = ({ uri }) => (
 export default Search;
 
 const SearchLegalEntitiesForm = ({ initialValues, onSubmit }) => (
-  <Form initialValues={initialValues} onSubmit={onSubmit}>
+  <Form
+    initialValues={initialValues}
+    onSubmit={params =>
+      onSubmit({
+        ...params,
+        after: undefined,
+        before: undefined,
+        last: undefined,
+        first: initialValues.first || ITEMS_PER_PAGE[0]
+      })
+    }
+  >
     <Flex mx={-1}>
       <Box px={1} width={1 / 1.5}>
         <Trans
