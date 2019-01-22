@@ -298,7 +298,15 @@ const NavSection = ({ title, children }) => (
         verticalAlign="baseline"
       >
         {title}
-        <ChevronIcon width="7" height="7" />
+        <ChevronBottomIcon
+          width="7px"
+          height="7px"
+          ml={2}
+          css={`
+          details[open] & {
+            transform: rotate(180deg);
+        `}
+        />
       </Link>
       <NavList>{children}</NavList>
     </details>
@@ -324,11 +332,4 @@ const NavItem = styled.li`
     transparent 100%
   );
   margin-top: 15px;
-`;
-
-const ChevronIcon = styled(ChevronBottomIcon)`
-  margin-left: 10px;
-  details[open] & {
-    transform: rotate(180deg);
-  }
 `;

@@ -1,13 +1,21 @@
 import React from "react";
 import system from "@ehealth/system-components";
 import { mixed } from "@ehealth/system-tools";
-import { ChevronBottomIcon } from "@ehealth/icons";
+import { ChevronBottomIcon as Icon } from "@ehealth/icons";
 
 const Details = ({ summary, children }) => (
   <details>
     <Summary>
       {summary}
-      <Icon />
+      <Icon
+        width="11px"
+        height="11px"
+        ml={2}
+        css={`
+          details[open] & {
+            transform: rotate(180deg);
+        `}
+      />
     </Summary>
     {children}
   </details>
@@ -37,17 +45,4 @@ const Summary = system(
       mr: 0
     })(props)
   })
-);
-
-const Icon = system(
-  {
-    extend: ChevronBottomIcon,
-    ml: 2,
-    width: 11
-  },
-  {
-    "details[open] &": {
-      transform: "rotate(180deg)"
-    }
-  }
 );

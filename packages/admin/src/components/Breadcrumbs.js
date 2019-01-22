@@ -1,7 +1,7 @@
 import React from "react";
 import * as Reach from "@reach/router";
 import system from "@ehealth/system-components";
-import { ChevronBottomIcon } from "@ehealth/icons";
+import { ChevronBottomIcon as Arrow } from "@ehealth/icons";
 
 /**
  * @example
@@ -19,7 +19,13 @@ const Item = ({ to, ...props }) => (
     {to ? (
       <>
         <Link to={to} {...props} />
-        <Arrow width={7} />
+        <Arrow
+          mx={2}
+          verticalAlign="middle"
+          css={{
+            transform: "rotate(270deg)"
+          }}
+        />
       </>
     ) : (
       props.children
@@ -61,21 +67,6 @@ const Link = system(
     textDecoration: "none"
   },
   "color"
-);
-
-const Arrow = system(
-  {
-    extend: ChevronBottomIcon,
-    color: "romanSilver",
-    mx: 2
-  },
-  {
-    transform: "rotate(270deg)",
-    verticalAlign: "middle"
-  },
-  "color",
-  "space",
-  "width"
 );
 
 const Breadcrumbs = { List, Item };
