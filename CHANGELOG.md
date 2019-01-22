@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.33.1"></a>
+## [1.33.1](https://github.com/edenlabllc/ehealth.web/compare/v1.33.0...v1.33.1) (2019-01-22)
+
+
+### Bug Fixes
+
+* **admin-legacy:** add units to SearchIcon width and height ([05dfcca](https://github.com/edenlabllc/ehealth.web/commit/05dfcca))
+
+
+
+
+
 <a name="1.33.0"></a>
 # [1.33.0](https://github.com/edenlabllc/ehealth.web/compare/v1.32.5...v1.33.0) (2019-01-22)
 
