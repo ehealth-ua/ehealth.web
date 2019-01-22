@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.33.0"></a>
+# [1.33.0](https://github.com/edenlabllc/ehealth.web/compare/v1.32.5...v1.33.0) (2019-01-22)
+
+
+### Features
+
+* **admin:** add pagination to the Legal Entity Deactivation Jobs List page ([#688](https://github.com/edenlabllc/ehealth.web/issues/688)) ([d21b66c](https://github.com/edenlabllc/ehealth.web/commit/d21b66c))
+
+
+
+
+
 <a name="1.32.5"></a>
 ## [1.32.5](https://github.com/edenlabllc/ehealth.web/compare/v1.32.4...v1.32.5) (2019-01-22)
 
