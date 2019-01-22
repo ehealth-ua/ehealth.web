@@ -1,4 +1,5 @@
 import React from "react";
+import system from "@ehealth/system-components";
 
 const ChevronBottomIcon = props => (
   <svg {...props} viewBox="0 0 7 4">
@@ -9,4 +10,16 @@ const ChevronBottomIcon = props => (
   </svg>
 );
 
-export default ChevronBottomIcon;
+export default system(
+  {
+    extend: ChevronBottomIcon,
+    color: "jacarandaLight",
+    width: "7px",
+    height: "4px"
+  },
+  "width",
+  "height",
+  "color",
+  "space",
+  "verticalAlign"
+);
