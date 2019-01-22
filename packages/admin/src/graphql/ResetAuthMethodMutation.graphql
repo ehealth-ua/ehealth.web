@@ -1,9 +1,13 @@
-mutation ResetAuthMethodMutation($id: ID!) {
-  person: resetPersonAuthenticationMethod(id: $id) {
-    id
-    authenticationMethods {
-      type
-      phoneNumber
+mutation ResetAuthMethodMutation(
+  $input: ResetPersonAuthenticationMethodInput!
+) {
+  person: resetPersonAuthenticationMethod(input: $input) {
+    person {
+      id
+      authenticationMethods {
+        type
+        phoneNumber
+      }
     }
   }
 }

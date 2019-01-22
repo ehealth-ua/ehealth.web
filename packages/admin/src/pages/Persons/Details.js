@@ -120,7 +120,11 @@ const Details = ({ id }) => (
           <Tabs.Content>
             <Router>
               <UserInfo path="/" userInfo={userInfo} />
-              <AuthInfo path="auth" authInfo={authInfo} />
+              <AuthInfo
+                path="auth"
+                databaseId={databaseId}
+                authInfo={authInfo}
+              />
               <DeclarationsInfo path="declarations" />
             </Router>
           </Tabs.Content>
@@ -156,7 +160,7 @@ const UserInfo = ({
   </Box>
 );
 
-const AuthInfo = ({ id, authInfo }) =>
+const AuthInfo = ({ id, databaseId, authInfo }) =>
   authInfo ? (
     <Box p={5}>
       <DefinitionListView
@@ -200,7 +204,9 @@ const AuthInfo = ({ id, authInfo }) =>
                               variant="green"
                               onClick={async () => {
                                 await resetPersonAuthenticationMethod({
-                                  variables: { id }
+                                  variables: {
+                                    input: { personId: databaseId }
+                                  }
                                 });
                                 toggle();
                               }}
