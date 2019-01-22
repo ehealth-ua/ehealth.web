@@ -13,7 +13,8 @@ import {
   PositiveIcon,
   NegativeIcon,
   DropDownButton as PlusIcon,
-  RemoveItemIcon
+  RemoveItemIcon,
+  SearchIcon
 } from "@ehealth/icons";
 
 import Tabs from "../../components/Tabs";
@@ -23,7 +24,6 @@ import LoadingOverlay from "../../components/LoadingOverlay";
 import * as Field from "../../components/Field";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import {
-  SearchIcon,
   SelectedItem,
   RemoveItem
 } from "../../components/Field/MultiSelectView";

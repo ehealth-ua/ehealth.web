@@ -1,8 +1,9 @@
 import React from "react";
 import matchSorter from "match-sorter";
+import { ChevronBottomIcon } from "@ehealth/icons";
 
 import Dropdown from "../Dropdown";
-import { List, DropdownButton, DropdownIcon } from "./MultiSelectView";
+import { List, DropdownButton } from "./MultiSelectView";
 import * as FieldView from "./FieldView";
 import * as InputView from "./InputView";
 import { SingleDownshift } from "./DownshiftField";
@@ -52,7 +53,7 @@ const SelectField = ({
   filterOptions,
   filter = matchSorter,
   hideErrors = false,
-  iconComponent: Icon = DropdownIcon,
+  iconComponent: Icon = ChevronBottomIcon,
   itemToString = i => (i == null ? "" : String(i)),
   renderItem = itemToString,
   emptyOption,

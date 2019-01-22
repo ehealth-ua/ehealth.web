@@ -8,11 +8,11 @@ import { Trans, t } from "@lingui/macro";
 import { I18n } from "@lingui/react";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
+import { SearchIcon } from "@ehealth/icons";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
 import Button from "../../../components/Button";
 import * as Field from "../../../components/Field/index";
-import { SearchIcon } from "../../../components/Field/MultiSelectView";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
 
