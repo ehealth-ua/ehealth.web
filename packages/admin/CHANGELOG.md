@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.33.2"></a>
+## [1.33.2](https://github.com/edenlabllc/ehealth.web/compare/v1.33.1...v1.33.2) (2019-01-22)
+
+
+### Bug Fixes
+
+* **admin:** update ResetAuthMethodMutation for Person Details ([4ab0ed1](https://github.com/edenlabllc/ehealth.web/commit/4ab0ed1))
+
+
+
+
+
 <a name="1.33.1"></a>
 ## [1.33.1](https://github.com/edenlabllc/ehealth.web/compare/v1.33.0...v1.33.1) (2019-01-22)
 
