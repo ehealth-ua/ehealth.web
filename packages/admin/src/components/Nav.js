@@ -22,11 +22,16 @@ const Nav = () => (
             <Trans>Statistic</Trans>
           </NavLinkExternal>
 
-          <Ability action="read" resource="person">
-            <NavLinkExternal to="persons">
-              <Trans>Persons</Trans>
-            </NavLinkExternal>
-          </Ability>
+          <Flag
+            name="features.person"
+            fallbackRender={() => (
+              <Ability action="read" resource="person">
+                <NavLinkExternal to="persons">
+                  <Trans>Persons</Trans>
+                </NavLinkExternal>
+              </Ability>
+            )}
+          />
 
           <Ability action="read" resource="declaration">
             <NavSection title={<Trans>Declarations</Trans>}>
