@@ -15,7 +15,11 @@ class SearchForm extends Component {
   };
 
   render() {
-    const { fields, location: { query }, router } = this.props;
+    const {
+      fields,
+      location: { query },
+      router
+    } = this.props;
     const { initialValues, showDetailedItems } = this.state;
     const showDetailedItemsButton = fields.filter(i => i.detailed).length > 1;
 
@@ -39,7 +43,7 @@ class SearchForm extends Component {
         {showDetailedItemsButton && (
           <div className={styles.search}>
             <Button
-              icon={<SearchIcon width="10" />}
+              icon={<SearchIcon width="10px" height="10px" />}
               theme="link"
               onClick={() =>
                 this.setState(() => ({
@@ -125,7 +129,10 @@ class SearchForm extends Component {
   };
 
   updateFilters = values => {
-    const { location: { query, ...location }, router } = this.props;
+    const {
+      location: { query, ...location },
+      router
+    } = this.props;
 
     this.setState({ initialValues: values });
 
