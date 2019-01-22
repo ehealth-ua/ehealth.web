@@ -33,6 +33,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
 import Pagination from "../../../components/Pagination";
+import EmptyData from "../../../components/EmptyData";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 
 const ReimbursementContractQuery = loader(
@@ -619,21 +620,6 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
       </>
     )}
   </BooleanValue>
-);
-
-const EmptyData = props => (
-  <WrapperBoxHeight>
-    <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
-      <Trans>No info</Trans>
-    </Text>
-  </WrapperBoxHeight>
-);
-const WrapperBoxHeight = system(
-  {
-    is: Box,
-    height: 500
-  },
-  "height"
 );
 
 const Wrapper = system(

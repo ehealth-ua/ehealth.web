@@ -43,6 +43,7 @@ import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import Pagination from "../../../components/Pagination";
+import EmptyData from "../../../components/EmptyData";
 
 const CapitationContractQuery = loader(
   "../../../graphql/CapitationContractQuery.graphql"
@@ -940,21 +941,6 @@ const Popup = ({ variant, buttonText, title, children, render = children }) => (
       </>
     )}
   </BooleanValue>
-);
-
-const EmptyData = props => (
-  <WrapperBoxHeight>
-    <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
-      <Trans>No info</Trans>
-    </Text>
-  </WrapperBoxHeight>
-);
-const WrapperBoxHeight = system(
-  {
-    is: Box,
-    height: 500
-  },
-  "height"
 );
 
 const Wrapper = system(

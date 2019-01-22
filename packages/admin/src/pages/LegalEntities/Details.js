@@ -2,7 +2,7 @@ import React from "react";
 import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
-import { Flex, Box, Heading, Text } from "@rebass/emotion";
+import { Flex, Box, Heading } from "@rebass/emotion";
 import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 import { DateFormat, Trans } from "@lingui/macro";
@@ -37,6 +37,7 @@ import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
+import EmptyData from "../../components/EmptyData";
 
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
@@ -943,12 +944,6 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
     </Popup>
   );
 };
-
-const EmptyData = props => (
-  <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
-    Інформація відсутня
-  </Text>
-);
 
 const OpacityBox = system({ extend: Box, opacity: 1 });
 

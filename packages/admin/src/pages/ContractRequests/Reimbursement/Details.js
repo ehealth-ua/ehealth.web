@@ -28,6 +28,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
 import ModalAssigneeSearch from "../../../components/ModalAssigneeSearch";
+import EmptyData from "../../../components/EmptyData";
 import WEEK_DAYS from "../../../helpers/weekDays";
 
 import Approve from "./Approve";
@@ -476,21 +477,6 @@ const SaveLink = system(
     textDecoration: "none",
     fontSize: 14
   }
-);
-
-const EmptyData = props => (
-  <WrapperBoxHeight>
-    <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
-      <Trans>No info</Trans>
-    </Text>
-  </WrapperBoxHeight>
-);
-const WrapperBoxHeight = system(
-  {
-    is: Box,
-    height: 500
-  },
-  "height"
 );
 
 export default ReimbursementContractRequestDetails;
