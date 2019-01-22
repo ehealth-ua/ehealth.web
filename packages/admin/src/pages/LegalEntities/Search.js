@@ -11,7 +11,7 @@ import { Form, LocationParams, Validation } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import {
   PositiveIcon,
-  AdminSearchIcon,
+  SearchIcon,
   NegativeIcon,
   RemoveItemIcon
 } from "@ehealth/icons";
@@ -234,7 +234,7 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
               name="filter.code"
               label={<Trans>Search legal entity by EDRPOU</Trans>}
               placeholder={translation}
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+              postfix={<SearchIcon color="silverCity" />}
               autoComplete="off"
             />
           )}

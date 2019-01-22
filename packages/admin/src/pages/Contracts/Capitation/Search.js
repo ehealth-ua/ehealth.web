@@ -11,7 +11,7 @@ import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 
 import {
-  AdminSearchIcon,
+  SearchIcon,
   FilterIcon,
   NegativeIcon,
   RemoveItemIcon
@@ -206,7 +206,7 @@ const SearchContractsForm = ({ initialValues, onSubmit }) => (
               name="filter.searchRequest"
               label={<Trans>Search contract</Trans>}
               placeholder={translation}
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+              postfix={<SearchIcon color="silverCity" />}
             />
           )}
         />

@@ -11,7 +11,7 @@ import {
   parseSortingParams,
   stringifySortingParams
 } from "@ehealth/utils";
-import { AdminSearchIcon, RemoveItemIcon } from "@ehealth/icons";
+import { SearchIcon, RemoveItemIcon } from "@ehealth/icons";
 
 import ContractRequestsNav from "../ContractRequestsNav";
 
@@ -199,7 +199,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
               name="filter.searchRequest"
               label={<Trans>Search contract request</Trans>}
               placeholder={translation}
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+              postfix={<SearchIcon color="silverCity" />}
             />
           )}
         />

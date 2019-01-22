@@ -10,7 +10,7 @@ import isEmpty from "lodash/isEmpty";
 
 import {
   PositiveIcon,
-  AdminSearchIcon,
+  SearchIcon,
   AdminAddIcon,
   NegativeIcon,
   CommentIcon
@@ -617,7 +617,7 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
                         name="filter.mergeLegalEntityFilter.mergedFromLegalEntity.edrpou"
                         label={<Trans>Find related legal entity</Trans>}
                         placeholder={translation}
-                        postfix={<AdminSearchIcon color="#CED0DA" />}
+                        postfix={<SearchIcon color="silverCity" />}
                       />
                     )}
                   />
@@ -782,7 +782,7 @@ const Divisions = ({ id }) => (
                     name="filter.divisionFilter.name"
                     label={<Trans>Find division</Trans>}
                     placeholder={translation}
-                    postfix={<AdminSearchIcon color="#CED0DA" />}
+                    postfix={<SearchIcon color="silverCity" />}
                   />
                 )}
               />

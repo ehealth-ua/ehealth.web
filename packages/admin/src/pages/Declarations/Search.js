@@ -11,7 +11,7 @@ import {
   getFullName
 } from "@ehealth/utils";
 import {
-  AdminSearchIcon,
+  SearchIcon,
   RemoveItemIcon,
   PositiveIcon,
   NegativeIcon
@@ -154,7 +154,7 @@ const SearchDeclarationForm = ({ initialValues, onSubmit }) => (
               name="filter.declarationNumber"
               label={<Trans>Search by declaration number</Trans>}
               placeholder={translation}
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+              postfix={<SearchIcon color="silverCity" />}
               autoComplete="off"
             />
           )}

@@ -7,7 +7,7 @@ import { Trans, DateFormat, Plural } from "@lingui/macro";
 import isEmpty from "lodash/isEmpty";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
-import { AdminSearchIcon, RemoveItemIcon } from "@ehealth/icons";
+import { SearchIcon, RemoveItemIcon } from "@ehealth/icons";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
@@ -178,7 +178,7 @@ const SearchLegalEntitiesForm = ({ initialValues, onSubmit }) => (
               name="filter.legalEntityId"
               label={<Trans>Find legal entity</Trans>}
               placeholder={translation}
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+              postfix={<SearchIcon color="silverCity" />}
             />
           )}
         />

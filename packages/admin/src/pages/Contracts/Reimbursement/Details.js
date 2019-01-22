@@ -14,7 +14,7 @@ import {
   PrinterIcon,
   PositiveIcon,
   DefaultImageIcon,
-  AdminSearchIcon,
+  SearchIcon,
   CancelIcon,
   NegativeIcon
 } from "@ehealth/icons";
@@ -484,7 +484,7 @@ const Divisions = ({ id }) => (
                     name="name"
                     label={<Trans>Find division</Trans>}
                     placeholder={translation}
-                    postfix={<AdminSearchIcon color="#CED0DA" />}
+                    postfix={<SearchIcon color="silverCity" />}
                   />
                 )}
               />

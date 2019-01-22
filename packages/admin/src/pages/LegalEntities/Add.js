@@ -6,7 +6,7 @@ import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
 import { getFullName } from "@ehealth/utils";
 import { LocationParams, Form, Validation } from "@ehealth/components";
-import { AdminSearchIcon, PositiveIcon, NegativeIcon } from "@ehealth/icons";
+import { SearchIcon, PositiveIcon, NegativeIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
 import Line from "../../components/Line";
@@ -70,7 +70,7 @@ const Search = ({ location: { state } }) => (
                   name="filter.edrpou"
                   label={<Trans>Find related legal entity</Trans>}
                   placeholder={translation}
-                  postfix={<AdminSearchIcon color="#CED0DA" />}
+                  postfix={<SearchIcon color="silverCity" />}
                 />
               )}
             />

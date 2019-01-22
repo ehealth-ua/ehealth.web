@@ -7,7 +7,7 @@ import { loader } from "graphql.macro";
 import { Trans, DateFormat, Plural } from "@lingui/macro";
 
 import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
-import { AdminSearchIcon } from "@ehealth/icons";
+import { SearchIcon } from "@ehealth/icons";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
@@ -208,7 +208,7 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
               name="filter.mergedFromLegalEntity.code"
               label={<Trans>Search related legal entity</Trans>}
               placeholder={translation}
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+              postfix={<SearchIcon color="silverCity" />}
             />
           )}
         />
@@ -255,7 +255,7 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
               name="filter.mergedToLegalEntity.code"
               label={<Trans>Search main legal entity</Trans>}
               placeholder={translation}
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+              postfix={<SearchIcon color="silverCity" />}
             />
           )}
         />

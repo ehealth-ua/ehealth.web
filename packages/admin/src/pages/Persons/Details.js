@@ -8,7 +8,7 @@ import { Trans, t, DateFormat } from "@lingui/macro";
 import { I18n } from "@lingui/react";
 import isEmpty from "lodash/isEmpty";
 import { Form, Validation, Modal, LocationParams } from "@ehealth/components";
-import { AdminSearchIcon } from "@ehealth/icons";
+import { SearchIcon } from "@ehealth/icons";
 import {
   parseSortingParams,
   stringifySortingParams,
@@ -359,7 +359,7 @@ const SearchDeclarationsForm = ({ initialValues, onSubmit }) => (
               name="filter.declarationSearch"
               label={<Trans>Declaration search</Trans>}
               placeholder={i18n._(t`Enter ID or Declaration number`)}
-              postfix={<AdminSearchIcon color="#CED0DA" />}
+              postfix={<SearchIcon color="silverCity" />}
             />
           )}
         </I18n>
