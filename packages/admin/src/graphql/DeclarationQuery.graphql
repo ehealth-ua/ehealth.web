@@ -8,7 +8,6 @@ query DeclarationQuery($id: ID!) {
     status
     reason
     scope
-    declarationRequestId
     legalEntity {
       id
       databaseId
@@ -85,6 +84,10 @@ query DeclarationQuery($id: ID!) {
           specialityOfficio
         }
       }
+    }
+    declarationAttachedDocuments {
+      type
+      url
     }
   }
 }

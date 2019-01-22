@@ -18,11 +18,11 @@ import Badge from "../../components/Badge";
 import Button from "../../components/Button";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import * as Field from "../../components/Field";
+import EmptyData from "../../components/EmptyData";
 import AddressView from "../../components/AddressView";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
-
-import documents from "../../helpers/documents";
 
 import env from "../../env";
 
@@ -54,7 +54,8 @@ const Details = ({ id }) => (
         legalEntity,
         division,
         employee,
-        person
+        person,
+        declarationAttachedDocuments
       } = declaration;
 
       const general = {
@@ -203,7 +204,10 @@ const Details = ({ id }) => (
                 <Division path="/divisions" division={division} />
                 <Employee path="/employee" employee={employee} />
                 <Patient path="/patient" patient={person} />
-                <Documents path="/documents" documents={documents} />
+                <Documents
+                  path="/documents"
+                  documents={declarationAttachedDocuments}
+                />
               </Router>
             </Box>
           </Tabs.Content>
@@ -369,7 +373,15 @@ const LegalEntity = ({
 };
 
 const Division = ({
-  division: { id, databaseId, addresses, phones, mountainGroup, ...division }
+  division: {
+    id,
+    databaseId,
+    type,
+    addresses,
+    phones,
+    mountainGroup,
+    ...division
+  }
 }) => {
   const [residenceAddress] = addresses.filter(a => a.type === "RESIDENCE");
   return (
@@ -384,6 +396,7 @@ const Division = ({
           email: <Trans>Email</Trans>
         }}
         data={{
+          type: <DictionaryValue name="DIVISION_TYPE" item={type} />,
           addresses: residenceAddress && (
             <AddressView data={residenceAddress} />
           ),
@@ -413,44 +426,49 @@ const Employee = ({
     party,
     additionalInfo: { specialities }
   }
-}) => {
-  const [specialityOfficio] = specialities.filter(s => s.specialityOfficio);
-  return (
-    <>
-      <DefinitionListView
-        labels={{
-          fullName: <Trans>Full name</Trans>,
-          speciality: <Trans>Specialty</Trans>,
-          position: <Trans>Position</Trans>
-        }}
-        data={{
-          fullName: getFullName(party),
-          speciality: specialityOfficio && specialityOfficio.speciality,
-          position
-        }}
-      />
-      <DefinitionListView
-        labels={{
-          databaseId: <Trans>Employee ID</Trans>,
-          link: ""
-        }}
-        data={{
-          databaseId,
-          link: (
-            <Link
-              is="a"
-              href={`${env.REACT_APP_ADMIN_LEGACY_URL}/employees/${id}`}
-              fontWeight={700}
-            >
-              <Trans>Show detailed information</Trans>
-            </Link>
-          )
-        }}
-        color="#7F8FA4"
-      />
-    </>
-  );
-};
+}) => (
+  <>
+    <DefinitionListView
+      labels={{
+        fullName: <Trans>Full name</Trans>,
+        speciality: <Trans>Specialty</Trans>,
+        position: <Trans>Position</Trans>
+      }}
+      data={{
+        fullName: getFullName(party),
+        speciality: specialities && (
+          <DictionaryValue
+            name="SPECIALITY_TYPE"
+            item={
+              specialities.find(item => item.specialityOfficio && item)
+                .speciality
+            }
+          />
+        ),
+        position: <DictionaryValue name="POSITION" item={position} />
+      }}
+    />
+    <DefinitionListView
+      labels={{
+        databaseId: <Trans>Employee ID</Trans>,
+        link: ""
+      }}
+      data={{
+        databaseId,
+        link: (
+          <Link
+            is="a"
+            href={`${env.REACT_APP_ADMIN_LEGACY_URL}/employees/${id}`}
+            fontWeight={700}
+          >
+            <Trans>Show detailed information</Trans>
+          </Link>
+        )
+      }}
+      color="#7F8FA4"
+    />
+  </>
+);
 
 const Patient = ({
   patient: {
@@ -511,19 +529,22 @@ const Patient = ({
 
 //TODO: pass Documents to the separate component
 const Documents = ({ documents }) =>
-  !isEmpty(documents) &&
-  documents.map(({ url, alt }) => (
-    <Box m="2">
-      <SaveLink href={url} target="_blank">
-        <Box m={1} color="shiningKnight">
-          <DefaultImageIcon />
-        </Box>
-        <Text color="rockmanBlue" lineHeight="1">
-          {alt}
-        </Text>
-      </SaveLink>
-    </Box>
-  ));
+  !isEmpty(documents) ? (
+    documents.map(({ url, type }) => (
+      <Box m="2">
+        <SaveLink href={url} target="_blank">
+          <Box m={1} color="shiningKnight">
+            <DefaultImageIcon />
+          </Box>
+          <Text color="rockmanBlue" lineHeight="1">
+            <DictionaryValue name="CONTRACT_DOCUMENT" item={type} />
+          </Text>
+        </SaveLink>
+      </Box>
+    ))
+  ) : (
+    <EmptyData />
+  );
 
 const SaveLink = system(
   {
