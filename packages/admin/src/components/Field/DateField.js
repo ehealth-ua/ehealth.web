@@ -7,8 +7,8 @@ import { Field, DatePicker } from "@ehealth/components";
 import { CalendarIcon } from "@ehealth/icons";
 import { formatDate, parseDate } from "@ehealth/utils";
 
-import * as FieldView from "../FieldView";
-import * as InputView from "../InputView";
+import * as FieldView from "./FieldView";
+import * as InputView from "./InputView";
 
 const autoCorrectedDatePipe = createAutoCorrectedDatePipe("dd.mm.yyyy");
 

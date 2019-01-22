@@ -4,9 +4,9 @@ import { RemoveItemIcon } from "@ehealth/icons";
 
 import { MultiDownshift } from "./DownshiftField";
 import Dropdown from "../Dropdown";
-import * as MultiSelectView from "../MultiSelectView";
-import * as FieldView from "../FieldView";
-import * as InputView from "../InputView";
+import * as MultiSelectView from "./MultiSelectView";
+import * as FieldView from "./FieldView";
+import * as InputView from "./InputView";
 
 const MultiSelect = ({
   label,

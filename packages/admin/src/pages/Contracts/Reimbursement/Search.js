@@ -18,7 +18,10 @@ import {
   RemoveItemIcon
 } from "@ehealth/icons";
 
-import { SelectedItem, RemoveItem } from "../../../components/MultiSelectView";
+import {
+  SelectedItem,
+  RemoveItem
+} from "../../../components/Field/MultiSelectView";
 import * as Field from "../../../components/Field";
 import Link from "../../../components/Link";
 import Table from "../../../components/Table";

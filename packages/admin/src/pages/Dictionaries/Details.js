@@ -26,7 +26,7 @@ import {
   SearchIcon,
   SelectedItem,
   RemoveItem
-} from "../../components/MultiSelectView";
+} from "../../components/Field/MultiSelectView";
 import DefinitionListView from "../../components/DefinitionListView";
 
 const DictionariesQuery = loader(

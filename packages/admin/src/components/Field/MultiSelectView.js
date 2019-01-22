@@ -2,7 +2,7 @@ import system from "@ehealth/system-components";
 import { variant } from "@ehealth/system-tools";
 
 import { ChevronBottomIcon, AdminSearchIcon } from "@ehealth/icons";
-import Dropdown from "./Dropdown";
+import Dropdown from "../Dropdown";
 
 export const List = system(
   {
@@ -77,13 +77,20 @@ export const DropdownIcon = system(
     width: "7px",
     height: "4px"
   },
+  "color",
+
   "width",
   "height"
 );
 
-export const SearchIcon = system({
-  extend: AdminSearchIcon,
-  color: "#CED0DA",
-  width: "14px",
-  height: "14px"
-});
+export const SearchIcon = system(
+  {
+    extend: AdminSearchIcon,
+    color: "#CED0DA",
+    width: "14px",
+    height: "14px"
+  },
+  "color",
+  "height",
+  "width"
+);

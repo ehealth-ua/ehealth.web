@@ -1,8 +1,8 @@
 import React from "react";
 import { Field } from "@ehealth/components";
 
-import * as FieldView from "../FieldView";
-import * as InputView from "../InputView";
+import * as FieldView from "./FieldView";
+import * as InputView from "./InputView";
 
 export const TextField = props => <InputField {...props} type="text" />;
 

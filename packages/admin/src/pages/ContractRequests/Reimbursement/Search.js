@@ -16,7 +16,10 @@ import {
 } from "@ehealth/utils";
 import { AdminSearchIcon, FilterIcon, RemoveItemIcon } from "@ehealth/icons";
 
-import { SelectedItem, RemoveItem } from "../../../components/MultiSelectView";
+import {
+  SelectedItem,
+  RemoveItem
+} from "../../../components/Field/MultiSelectView";
 import Table from "../../../components/Table";
 import Badge from "../../../components/Badge";
 import Link from "../../../components/Link";

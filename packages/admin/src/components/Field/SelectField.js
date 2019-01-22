@@ -2,9 +2,9 @@ import React from "react";
 import matchSorter from "match-sorter";
 
 import Dropdown from "../Dropdown";
-import { List, DropdownButton, DropdownIcon } from "../MultiSelectView";
-import * as FieldView from "../FieldView";
-import * as InputView from "../InputView";
+import { List, DropdownButton, DropdownIcon } from "./MultiSelectView";
+import * as FieldView from "./FieldView";
+import * as InputView from "./InputView";
 import { SingleDownshift } from "./DownshiftField";
 
 /**

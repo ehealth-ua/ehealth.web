@@ -9,8 +9,8 @@ import { CalendarIcon } from "@ehealth/icons";
 import { formatDate, parseDate } from "@ehealth/utils";
 import { Flex, Box } from "@rebass/emotion";
 
-import * as FieldView from "../FieldView";
-import * as InputView from "../InputView";
+import * as FieldView from "./FieldView";
+import * as InputView from "./InputView";
 
 /* @example
 *  <>
