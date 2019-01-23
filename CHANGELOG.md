@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.34.0"></a>
+# [1.34.0](https://github.com/edenlabllc/ehealth.web/compare/v1.33.4...v1.34.0) (2019-01-23)
+
+
+### Features
+
+* **auth:** change endpoint ([f3abc59](https://github.com/edenlabllc/ehealth.web/commit/f3abc59))
+* **gatekeeper:** change endpoint ([cd46406](https://github.com/edenlabllc/ehealth.web/commit/cd46406))
+
+
+
+
+
 <a name="1.33.4"></a>
 ## [1.33.4](https://github.com/edenlabllc/ehealth.web/compare/v1.33.3...v1.33.4) (2019-01-23)
 
