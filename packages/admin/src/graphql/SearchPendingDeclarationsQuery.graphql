@@ -21,6 +21,7 @@ query SearchPendingDeclarationsQuery(
       startDate
       signedAt
       status
+      reason
       legalEntity {
         id
         databaseId

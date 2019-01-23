@@ -100,6 +100,7 @@ const Search = () => (
                             division,
                             person,
                             status,
+                            reason,
                             ...declaration
                           }) => ({
                             ...declaration,
@@ -122,7 +123,7 @@ const Search = () => (
                             ),
                             reason: (
                               <Flex justifyContent="center">
-                                {person.noTaxId ? (
+                                {reason === "no_tax_id" ? (
                                   <PositiveIcon />
                                 ) : (
                                   <NegativeIcon />
