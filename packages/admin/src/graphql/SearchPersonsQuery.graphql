@@ -23,6 +23,7 @@ query SearchPersonsQuery(
       unzr
       taxId
       insertedAt
+      status
       authenticationMethods: authenticationMethods {
         type
         phoneNumber

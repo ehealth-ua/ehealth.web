@@ -15,7 +15,6 @@ import {
   parseSortingParams,
   stringifySortingParams,
   formatPhone,
-  parsePhone,
   getFullName,
   formatDate
 } from "@ehealth/utils";
@@ -27,12 +26,15 @@ import Table from "../../components/Table";
 import * as Field from "../../components/Field";
 import Button, { IconButton } from "../../components/Button";
 import Pagination from "../../components/Pagination";
+import Badge from "../../components/Badge";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 const SearchPersonsQuery = loader("../../graphql/SearchPersonsQuery.graphql");
 
 const PHONE_PATTERN = "^\\+380\\d{9}$";
 const EDRPOU_PATTERN = "^[0-9]{10}$";
+const UNZR_PATTERN = "^[0-9]{8}-[0-9]{5}$";
+const PASSPORT_PATTERN = "^[А-ЯҐЇІЄ]{2}[0-9]{6}$";
 
 const resetPaginationParams = first => ({
   after: undefined,
@@ -102,6 +104,7 @@ const Search = ({ uri }) => (
                               <Trans>Authentication method</Trans>
                             ),
                             insertedAt: <Trans>Added</Trans>,
+                            status: <Trans>Status</Trans>,
                             action: <Trans>Action</Trans>
                           }}
                           renderRow={({
@@ -110,6 +113,7 @@ const Search = ({ uri }) => (
                             taxId,
                             authenticationMethods,
                             insertedAt,
+                            status,
                             ...person
                           }) => ({
                             ...person,
@@ -131,6 +135,13 @@ const Search = ({ uri }) => (
                             authenticationMethods: (
                               <AuthnMethodsList data={authenticationMethods} />
                             ),
+                            status: (
+                              <Badge
+                                type="PERSON"
+                                name={status}
+                                display="block"
+                              />
+                            ),
                             action: (
                               <Link to={`../${id}`} fontWeight="bold">
                                 <Trans>Show details</Trans>
@@ -148,6 +159,7 @@ const Search = ({ uri }) => (
                           )}
                           onSortingChange={sortingParams =>
                             setLocationParams({
+                              ...locationParams,
                               orderBy: stringifySortingParams(sortingParams)
                             })
                           }
@@ -204,6 +216,11 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
             label={<Trans>Passport number</Trans>}
             placeholder="MM123456"
           />
+          <Validation.Matches
+            field="filter.documents.number"
+            options={`(${UNZR_PATTERN})|(${PASSPORT_PATTERN})`}
+            message={<Trans>Invalid number</Trans>}
+          />
         </Box>
       </Box>
       <Divider />
@@ -214,7 +231,6 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
               <Field.Text
                 name="filter.personal.authenticationMethod.phoneNumber"
                 label={<Trans>Phone number</Trans>}
-                placeholder="+38"
                 format={formatPhone}
                 parse={parsePhone}
                 disabled={!value}
@@ -295,6 +311,11 @@ const AuthnMethodsList = ({ data }) => (
     ))}
   </Flex>
 );
+
+const parsePhone = phone => {
+  const parsedPhone = `+${phone.replace(/[^\d]/g, "").substr(0, 12)}`;
+  return parsedPhone.length < 4 ? undefined : parsedPhone;
+};
 
 const Divider = system(
   {
