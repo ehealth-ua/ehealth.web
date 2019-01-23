@@ -209,7 +209,7 @@ const UpdateContractRequest = ({
                         id="Enter signer"
                         render={({ translation }) => (
                           <Field.Select
-                            name="nhsSignerId"
+                            name="nhsSigner"
                             label={
                               <Trans>Signatory from the Customers side</Trans>
                             }
@@ -227,7 +227,7 @@ const UpdateContractRequest = ({
                       />
 
                       <Validation.Required
-                        field="nhsSignerId"
+                        field="nhsSigner"
                         message={<Trans>Required field</Trans>}
                       />
                     </Box>
