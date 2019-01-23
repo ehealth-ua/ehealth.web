@@ -304,12 +304,24 @@ const GeneralInfo = ({
           title={<Trans>Declaration termination</Trans>}
         >
           {toggle => (
-            <Mutation mutation={TerminateDeclarationMutation}>
+            <Mutation
+              mutation={TerminateDeclarationMutation}
+              refetchQueries={() => [
+                {
+                  query: DeclarationQuery,
+                  variables: {
+                    id
+                  }
+                }
+              ]}
+            >
               {terminateDeclaration => (
                 <Form
-                  onSubmit={async reasonDescription => {
+                  onSubmit={async ({ reasonDescription }) => {
                     await terminateDeclaration({
-                      variables: { id, reasonDescription }
+                      variables: {
+                        input: { id, reasonDescription }
+                      }
                     });
                     toggle();
                   }}

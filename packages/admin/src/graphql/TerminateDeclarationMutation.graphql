@@ -1,5 +1,7 @@
-mutation TerminateDeclarationMutation($id: ID!, $reasonDescription: String) {
-  person: terminateDeclaration(id: $id, reasonDescription: $reasonDescription) {
-    id
+mutation TerminateDeclarationMutation($input: TerminateDeclarationInput!) {
+  terminateDeclaration(input: $input) {
+    declaration {
+      id
+    }
   }
 }
