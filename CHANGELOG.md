@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.34.3"></a>
+## [1.34.3](https://github.com/edenlabllc/ehealth.web/compare/v1.34.2...v1.34.3) (2019-01-23)
+
+
+### Bug Fixes
+
+* **components:** import macro for styled component ([9c69490](https://github.com/edenlabllc/ehealth.web/commit/9c69490))
+
+
+
+
+
 <a name="1.34.2"></a>
 ## [1.34.2](https://github.com/edenlabllc/ehealth.web/compare/v1.34.1...v1.34.2) (2019-01-23)
 
