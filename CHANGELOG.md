@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.33.4"></a>
+## [1.33.4](https://github.com/edenlabllc/ehealth.web/compare/v1.33.3...v1.33.4) (2019-01-23)
+
+
+### Bug Fixes
+
+* **admin:** change payload of deactivating le mutation, add redirect after mutation succeed ([e2a63ee](https://github.com/edenlabllc/ehealth.web/commit/e2a63ee))
+
+
+
+
+
 <a name="1.33.3"></a>
 ## [1.33.3](https://github.com/edenlabllc/ehealth.web/compare/v1.33.2...v1.33.3) (2019-01-23)
 
