@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.34.1"></a>
+## [1.34.1](https://github.com/edenlabllc/ehealth.web/compare/v1.34.0...v1.34.1) (2019-01-23)
+
+
+### Bug Fixes
+
+* **admin:** fix approve and reject declaration mutations, add refetching ([70d255b](https://github.com/edenlabllc/ehealth.web/commit/70d255b))
+
+
+
+
+
 <a name="1.33.4"></a>
 ## [1.33.4](https://github.com/edenlabllc/ehealth.web/compare/v1.33.3...v1.33.4) (2019-01-23)
 
