@@ -1,6 +1,6 @@
 mutation DeactivateLegalEntityMutation($input: DeactivateLegalEntityInput!) {
-  deactivateLegalEntity: deactivateLegalEntity(input: $input) {
-    legalEntity {
+  deactivateLegalEntity(input: $input) {
+    legalEntityDeactivationJob {
       id
     }
   }

@@ -68,7 +68,7 @@ const filteredLocationParams = (id, params = {}) => {
   };
 };
 
-const Details = ({ id }) => (
+const Details = ({ id, navigate }) => (
   <Query
     query={LegalEntityQuery}
     variables={{
@@ -197,7 +197,9 @@ const Details = ({ id }) => (
                                       input: { id }
                                     }
                                   });
-                                  toggle();
+                                  navigate(
+                                    "/legal-entity-deactivate-jobs/search"
+                                  );
                                 }}
                                 variant="red"
                               >
