@@ -4,7 +4,7 @@ import { invoke } from "./api";
 
 export const createSessionToken = ({ drfo, ...body }) =>
   invoke({
-    endpoint: `${env.REACT_APP_AUTH_URL}/oauth/tokens`,
+    endpoint: `${env.REACT_APP_AUTH_URL}/auth/login`,
     method: "POST",
     types: [
       "auth/CREATE_SESSION_TOKEN_REQUEST",
@@ -65,7 +65,7 @@ export const newPasswordRequest = password =>
 export const otpVerifyToken = code =>
   invoke(
     {
-      endpoint: `${env.REACT_APP_AUTH_URL}/oauth/tokens`,
+      endpoint: `${env.REACT_APP_AUTH_URL}/auth/login`,
       method: "POST",
       types: [
         "auth/OTP_VERIFY_TOKEN_REQUEST",
@@ -97,7 +97,7 @@ export const otpVerifyToken = code =>
 export const otpResendOtp = () =>
   invoke(
     {
-      endpoint: `${env.REACT_APP_AUTH_URL}/oauth/tokens`,
+      endpoint: `${env.REACT_APP_AUTH_URL}/auth/login`,
       method: "POST",
       types: [
         "auth/OTP_RESEND_TOKEN_REQUEST",
