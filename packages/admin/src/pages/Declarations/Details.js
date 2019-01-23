@@ -111,7 +111,17 @@ const Details = ({ id }) => (
                           title={<Trans>Declining declaration</Trans>}
                         >
                           {toggle => (
-                            <Mutation mutation={RejectDeclarationMutation}>
+                            <Mutation
+                              mutation={RejectDeclarationMutation}
+                              refetchQueries={() => [
+                                {
+                                  query: DeclarationQuery,
+                                  variables: {
+                                    id
+                                  }
+                                }
+                              ]}
+                            >
                               {rejectDeclaration => (
                                 <Flex justifyContent="center">
                                   <Box mr={20}>
@@ -123,7 +133,7 @@ const Details = ({ id }) => (
                                     onClick={async () => {
                                       await rejectDeclaration({
                                         variables: {
-                                          id
+                                          input: { id }
                                         }
                                       });
                                       toggle();
@@ -144,7 +154,17 @@ const Details = ({ id }) => (
                         title={<Trans>Approval of the declaration</Trans>}
                       >
                         {toggle => (
-                          <Mutation mutation={ApproveDeclarationMutation}>
+                          <Mutation
+                            mutation={ApproveDeclarationMutation}
+                            refetchQueries={() => [
+                              {
+                                query: DeclarationQuery,
+                                variables: {
+                                  id
+                                }
+                              }
+                            ]}
+                          >
                             {approveDeclaration => (
                               <Flex justifyContent="center">
                                 <Box mr={20}>
@@ -156,7 +176,7 @@ const Details = ({ id }) => (
                                   onClick={async () => {
                                     await approveDeclaration({
                                       variables: {
-                                        id
+                                        input: { id }
                                       }
                                     });
                                     toggle();

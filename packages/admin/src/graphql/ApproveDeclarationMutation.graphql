@@ -1,5 +1,7 @@
-mutation ApproveDeclarationMutation($id: ID!) {
-  person: approveDeclaration(id: $id) {
-    id
+mutation ApproveDeclarationMutation($input: ApproveDeclarationInput!) {
+  approveDeclaration(input: $input) {
+    declaration {
+      id
+    }
   }
 }

@@ -1,5 +1,7 @@
-mutation RejectDeclarationMutation($id: ID!) {
-  person: rejectDeclaration(id: $id) {
-    id
+mutation RejectDeclarationMutation($input: RejectDeclarationInput!) {
+  rejectDeclaration(input: $input) {
+    declaration {
+      id
+    }
   }
 }
