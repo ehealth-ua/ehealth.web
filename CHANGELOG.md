@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.34.4"></a>
+## [1.34.4](https://github.com/edenlabllc/ehealth.web/compare/v1.34.3...v1.34.4) (2019-01-23)
+
+
+### Bug Fixes
+
+* **admin:** fix phone field, add status to the grid, add validation to the documents.number field ([6b50537](https://github.com/edenlabllc/ehealth.web/commit/6b50537))
+
+
+
+
+
 <a name="1.34.3"></a>
 ## [1.34.3](https://github.com/edenlabllc/ehealth.web/compare/v1.34.2...v1.34.3) (2019-01-23)
 
