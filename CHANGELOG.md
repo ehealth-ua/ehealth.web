@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.34.5"></a>
+## [1.34.5](https://github.com/edenlabllc/ehealth.web/compare/v1.34.4...v1.34.5) (2019-01-23)
+
+
+### Bug Fixes
+
+* **admin:** change person.noTaxId to reason on Pending Declarations Search page ([37d9861](https://github.com/edenlabllc/ehealth.web/commit/37d9861))
+
+
+
+
+
 <a name="1.34.4"></a>
 ## [1.34.4](https://github.com/edenlabllc/ehealth.web/compare/v1.34.3...v1.34.4) (2019-01-23)
 
