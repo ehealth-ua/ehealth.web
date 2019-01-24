@@ -218,7 +218,6 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                 name="filter.documents.number"
                 label={<Trans>Passport number</Trans>}
                 placeholder={translation}
-                format={value => value && value.toUpperCase()}
               />
             )}
           />
@@ -258,19 +257,27 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
           </Box>
         )}
       </DependedField>
-      <DependedField.Listener
-        field="filter.documents"
-        set="filter.personal"
-        to={initialValues.filter ? initialValues.filter.personal : ""}
-      />
     </Flex>
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
         <DependedField name="filter" subscription={{ value: true }}>
-          {({ input: { value } }) => (
+          {({
+            input: {
+              value: {
+                documents = {},
+                personal = {},
+                personal: {
+                  authenticationMethod: { phoneNumber = {} } = {}
+                } = {}
+              }
+            }
+          }) => (
             <Button
               variant="blue"
-              disabled={isEmpty(value.documents) || isEmpty(value.personal)}
+              disabled={
+                (isEmpty(documents.number) && isEmpty(documents.taxId)) ||
+                (isEmpty(phoneNumber) && isEmpty(personal.birthDate))
+              }
             >
               <Trans>Search</Trans>
             </Button>
