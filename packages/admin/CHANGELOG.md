@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.35.0"></a>
+# [1.35.0](https://github.com/edenlabllc/ehealth.web/compare/v1.34.5...v1.35.0) (2019-01-24)
+
+
+### Bug Fixes
+
+* **admin:** disable Reset Auth Method button if user status is INACTIVE ([2b59644](https://github.com/edenlabllc/ehealth.web/commit/2b59644))
+
+
+
+
+
 <a name="1.34.5"></a>
 ## [1.34.5](https://github.com/edenlabllc/ehealth.web/compare/v1.34.4...v1.34.5) (2019-01-23)
 
