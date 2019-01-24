@@ -34,7 +34,7 @@ const SearchPersonsQuery = loader("../../graphql/SearchPersonsQuery.graphql");
 const PHONE_PATTERN = "^\\+380\\d{9}$";
 const EDRPOU_PATTERN = "^[0-9]{10}$";
 const UNZR_PATTERN = "^[0-9]{8}-[0-9]{5}$";
-const PASSPORT_PATTERN = "^[А-ЯҐЇІЄ]{2}[0-9]{6}$";
+const PASSPORT_PATTERN = "^[А-ЯҐЇІЄ]{2}[ ]{0,1}[#№]{0,1}[0-9]{6}$";
 
 const resetPaginationParams = first => ({
   after: undefined,
