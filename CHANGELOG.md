@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.35.4"></a>
+## [1.35.4](https://github.com/edenlabllc/ehealth.web/compare/v1.35.3...v1.35.4) (2019-01-24)
+
+
+### Bug Fixes
+
+* **admin:** fix query according to the new scheme and  change filter params on LegalEntityDeactivateJobs page, fix typo in messages ([99c4714](https://github.com/edenlabllc/ehealth.web/commit/99c4714))
+
+
+
+
+
 <a name="1.35.3"></a>
 ## [1.35.3](https://github.com/edenlabllc/ehealth.web/compare/v1.35.2...v1.35.3) (2019-01-24)
 
