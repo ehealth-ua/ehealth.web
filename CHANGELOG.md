@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.35.2"></a>
+## [1.35.2](https://github.com/edenlabllc/ehealth.web/compare/v1.35.1...v1.35.2) (2019-01-24)
+
+
+### Bug Fixes
+
+* **admin:** update addresses in Declaration queries ([#701](https://github.com/edenlabllc/ehealth.web/issues/701)) ([ac282f6](https://github.com/edenlabllc/ehealth.web/commit/ac282f6))
+
+
+
+
+
 <a name="1.35.1"></a>
 ## [1.35.1](https://github.com/edenlabllc/ehealth.web/compare/v1.35.0...v1.35.1) (2019-01-24)
 
