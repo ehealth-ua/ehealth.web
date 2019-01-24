@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.35.1"></a>
+## [1.35.1](https://github.com/edenlabllc/ehealth.web/compare/v1.35.0...v1.35.1) (2019-01-24)
+
+
+### Bug Fixes
+
+* **admin:** rename declaration status ([9ef350c](https://github.com/edenlabllc/ehealth.web/commit/9ef350c))
+
+
+
+
+
 <a name="1.35.0"></a>
 # [1.35.0](https://github.com/edenlabllc/ehealth.web/compare/v1.34.5...v1.35.0) (2019-01-24)
 
