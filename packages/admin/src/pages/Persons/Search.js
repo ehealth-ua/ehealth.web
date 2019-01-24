@@ -211,10 +211,16 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
           />
         </Box>
         <Box px={1}>
-          <Field.Text
-            name="filter.documents.number"
-            label={<Trans>Passport number</Trans>}
-            placeholder="MM123456"
+          <Trans
+            id="MY123456 or 11111111-11111"
+            render={({ translation }) => (
+              <Field.Text
+                name="filter.documents.number"
+                label={<Trans>Passport number</Trans>}
+                placeholder={translation}
+                format={value => value && value.toUpperCase()}
+              />
+            )}
           />
           <Validation.Matches
             field="filter.documents.number"
