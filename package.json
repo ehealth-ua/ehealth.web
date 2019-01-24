@@ -1,4 +1,5 @@
 {
+  "name": "@ehealth/monorepo",
   "private": true,
   "dependencies": {
     "@babel/cli": "^7.1.5",
