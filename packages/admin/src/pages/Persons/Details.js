@@ -124,6 +124,7 @@ const Details = ({ id }) => (
                 path="auth"
                 databaseId={databaseId}
                 authInfo={authInfo}
+                status={status}
               />
               <DeclarationsInfo path="declarations" />
             </Router>
@@ -160,7 +161,7 @@ const UserInfo = ({
   </Box>
 );
 
-const AuthInfo = ({ id, databaseId, authInfo }) =>
+const AuthInfo = ({ id, databaseId, authInfo, status }) =>
   authInfo ? (
     <Box p={5}>
       <DefinitionListView
@@ -177,7 +178,11 @@ const AuthInfo = ({ id, databaseId, authInfo }) =>
               <BooleanValue>
                 {({ value: opened, toggle }) => (
                   <>
-                    <Button variant="green" disabled={opened} onClick={toggle}>
+                    <Button
+                      variant="green"
+                      disabled={opened || status === "INACTIVE"}
+                      onClick={toggle}
+                    >
                       <Trans>Reset Authentication Method</Trans>
                     </Button>
                     {opened && (
