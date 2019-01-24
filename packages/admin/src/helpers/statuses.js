@@ -1,7 +1,7 @@
 const DECLARATION = {
   TERMINATED: "розірвана",
   ACTIVE: "активна",
-  REJECTED: "припинена",
+  REJECTED: "відхилена",
   PENDING_VERIFICATION: "очікує підтвердження"
 };
 
