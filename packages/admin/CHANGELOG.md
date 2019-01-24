@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.35.6"></a>
+## [1.35.6](https://github.com/edenlabllc/ehealth.web/compare/v1.35.5...v1.35.6) (2019-01-24)
+
+
+### Bug Fixes
+
+* **admin:** update Persons Search Form disallowing flow ([f9e4336](https://github.com/edenlabllc/ehealth.web/commit/f9e4336))
+
+
+
+
+
 <a name="1.35.5"></a>
 ## [1.35.5](https://github.com/edenlabllc/ehealth.web/compare/v1.35.4...v1.35.5) (2019-01-24)
 
