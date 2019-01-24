@@ -42,11 +42,15 @@ query SearchPendingDeclarationsQuery(
         name
         addresses {
           type
-          settlementType
+          area
+          region
           settlement
+          settlementType
+          settlementId
           streetType
           street
           building
+          apartment
         }
       }
     }

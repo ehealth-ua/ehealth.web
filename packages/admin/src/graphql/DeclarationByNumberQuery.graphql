@@ -26,12 +26,15 @@ query DeclarationByNumberQuery($declarationNumber: String!) {
       name
       addresses {
         type
+        area
+        region
         settlement
         settlementType
         settlementId
         streetType
         street
         building
+        apartment
       }
     }
   }
