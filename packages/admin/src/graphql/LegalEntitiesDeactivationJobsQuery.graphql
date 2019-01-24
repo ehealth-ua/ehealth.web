@@ -17,7 +17,11 @@ query LegalEntitiesDeactivationJobsQuery(
     nodes {
       id
       databaseId
-      legalEntityId
+      deactivatedLegalEntity {
+        id
+        edrpou
+        name
+      }
       startedAt
       endedAt
       status

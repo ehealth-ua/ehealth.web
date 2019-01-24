@@ -1096,7 +1096,7 @@
     "origin": [["src/pages/LegalEntities/Details.js", 116]]
   },
   "Legal entity edrpou": {
-    "translation": "ЄДРПОУ медзаклад",
+    "translation": "ЄДРПОУ медзакладу",
     "origin": [
       ["src/pages/LegalEntityMergeJobs/Search.js", 204],
       ["src/pages/LegalEntityMergeJobs/Search.js", 251]

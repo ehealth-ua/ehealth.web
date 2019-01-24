@@ -16,7 +16,7 @@ import LoadingOverlay from "../../components/LoadingOverlay";
 import Button, { IconButton } from "../../components/Button";
 import * as Field from "../../components/Field";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
-import { LEGAL_ENTITY_ID_PATTERN } from "../../constants/legalEntitySearchPatterns";
+import { EDRPOU_PATTERN } from "../../constants/legalEntitySearchPatterns";
 import STATUSES from "../../helpers/statuses";
 
 const LegalEntitiesDeactivationJobsQuery = loader(
@@ -90,10 +90,11 @@ const Search = ({ uri }) => (
                             endedAt,
                             executionTime,
                             status,
-                            ...legalEntityData
+                            deactivatedLegalEntity: { name, edrpou }
                           }) => ({
-                            ...legalEntityData,
                             databaseId,
+                            name,
+                            edrpou,
                             startedAt: (
                               <DateFormat
                                 value={startedAt}
@@ -172,10 +173,10 @@ const SearchLegalEntitiesForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box px={1} width={1 / 1.5}>
         <Trans
-          id="Legal entity ID"
+          id="Legal entity edrpou"
           render={({ translation }) => (
             <Field.Text
-              name="filter.legalEntityId"
+              name="filter.deactivatedLegalEntity.edrpou"
               label={<Trans>Find legal entity</Trans>}
               placeholder={translation}
               postfix={<SearchIcon color="silverCity" />}
@@ -183,8 +184,8 @@ const SearchLegalEntitiesForm = ({ initialValues, onSubmit }) => (
           )}
         />
         <Validation.Matches
-          field="filter.legalEntityId"
-          options={LEGAL_ENTITY_ID_PATTERN}
+          field="filter.deactivatedLegalEntity.edrpou"
+          options={EDRPOU_PATTERN}
           message={<Trans>Invalid number</Trans>}
         />
       </Box>
