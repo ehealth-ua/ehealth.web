@@ -22,7 +22,9 @@ type DateFieldProps = {|
   hint?: string,
   warning?: string,
   minDate?: string,
-  placement?: string
+  maxDate?: string,
+  placement?: string,
+  disabled?: boolean
 |};
 
 class DateField extends React.Component<DateFieldProps, DateFieldState> {
@@ -97,6 +99,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
                     {...input}
                     onKeyPress={this.handleKeyPress}
                     pipe={autoCorrectedDatePipe}
+                    autoComplete="off"
                   />
                 </InputView.Border>
 
@@ -149,7 +152,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
   }
 
   getSelectedDate(value: string) {
-    const parsedDate = Date.parse(value);
+    const parsedDate = value.length === 10 ? Date.parse(value) : undefined;
     return new Date(isNaN(parsedDate) ? Date.now() : parsedDate);
   }
 
