@@ -41,18 +41,6 @@ class Datepicker extends React.Component<DatepickerProps, DatepickerState> {
     currentMonth: parseInt(new Date().getMonth(), 10)
   };
 
-  componentWillUpdate(nextProps: DatepickerProps, nextState: DatepickerState) {
-    if (
-      nextProps.selected.getFullYear() !== this.props.selected.getFullYear()
-    ) {
-      this.chooseYear(nextProps.selected.getFullYear());
-    }
-
-    if (nextProps.selected.getMonth() !== this.props.selected.getMonth()) {
-      this.chooseMonth(nextProps.selected.getMonth());
-    }
-  }
-
   async componentWillMount() {
     const { currentYear } = this.state;
     const { selected, minDate } = this.props;
