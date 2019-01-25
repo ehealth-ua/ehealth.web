@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.36.0"></a>
+# [1.36.0](https://github.com/edenlabllc/ehealth.web/compare/v1.35.6...v1.36.0) (2019-01-25)
+
+
+### Features
+
+* **utils:** add cleanDeep function ([769021c](https://github.com/edenlabllc/ehealth.web/commit/769021c))
+
+
+
+
+
 <a name="1.29.0"></a>
 # [1.29.0](https://github.com/edenlabllc/ehealth.web/compare/v1.28.10...v1.29.0) (2019-01-18)
 
