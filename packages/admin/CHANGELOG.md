@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.36.2"></a>
+## [1.36.2](https://github.com/edenlabllc/ehealth.web/compare/v1.36.1...v1.36.2) (2019-01-28)
+
+
+### Bug Fixes
+
+* **admin:** changed Reason field as required ([#707](https://github.com/edenlabllc/ehealth.web/issues/707)) ([0857604](https://github.com/edenlabllc/ehealth.web/commit/0857604))
+
+
+
+
+
 <a name="1.36.1"></a>
 ## [1.36.1](https://github.com/edenlabllc/ehealth.web/compare/v1.36.0...v1.36.1) (2019-01-28)
 
