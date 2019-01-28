@@ -192,6 +192,10 @@ const Details = ({ id }) => (
                                 />
                               )}
                             />
+                            <Validation.Required
+                              field="statusReason"
+                              message={<Trans>Required field</Trans>}
+                            />
                             <Flex justifyContent="center">
                               <Box mr={20}>
                                 <Button variant="blue" onClick={toggle}>
