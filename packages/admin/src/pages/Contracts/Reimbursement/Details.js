@@ -15,8 +15,7 @@ import {
   PositiveIcon,
   DefaultImageIcon,
   SearchIcon,
-  CancelIcon,
-  NegativeIcon
+  CancelIcon
 } from "@ehealth/icons";
 import { getFullName } from "@ehealth/utils";
 
@@ -205,7 +204,7 @@ const Details = ({ id }) => (
               <Trans>Pharmacy</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./divisions">
-              <Trans>Division</Trans>
+              <Trans>Subdivision</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./documents">
               <Trans>Documents</Trans>
@@ -524,7 +523,6 @@ const Divisions = ({ id }) => (
                     header={{
                       name: <Trans>Division name</Trans>,
                       addresses: <Trans>Address</Trans>,
-                      mountainGroup: <Trans>Mountain region</Trans>,
                       phones: (
                         <>
                           <Trans>Phone</Trans>
@@ -533,19 +531,8 @@ const Divisions = ({ id }) => (
                         </>
                       )
                     }}
-                    renderRow={({
+                    renderRow={({ name, addresses, phones, email }) => ({
                       name,
-                      addresses,
-                      mountainGroup,
-                      phones,
-                      email
-                    }) => ({
-                      name,
-                      mountainGroup: (
-                        <Flex justifyContent="center">
-                          {mountainGroup ? <PositiveIcon /> : <NegativeIcon />}
-                        </Flex>
-                      ),
                       phones: (
                         <>
                           <Box>

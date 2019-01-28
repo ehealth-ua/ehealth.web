@@ -9,12 +9,7 @@ import format from "date-fns/format";
 import isEmpty from "lodash/isEmpty";
 import { Trans } from "@lingui/macro";
 import { Switch } from "@ehealth/components";
-import {
-  PrinterIcon,
-  PositiveIcon,
-  NegativeIcon,
-  DefaultImageIcon
-} from "@ehealth/icons";
+import { PrinterIcon, DefaultImageIcon } from "@ehealth/icons";
 import { getFullName, formatWorkingHours } from "@ehealth/utils";
 
 import Line from "../../../components/Line";
@@ -189,7 +184,7 @@ const Details = ({ id }) => (
               <Trans>Pharmacy</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./divisions">
-              <Trans>Division</Trans>
+              <Trans>Subdivision</Trans>
             </Tabs.NavItem>
             <Tabs.NavItem to="./documents">
               <Trans>Documents</Trans>
@@ -250,7 +245,12 @@ const GeneralInfo = ({
       data={{
         nhsSignerName: nhsSigner ? getFullName(nhsSigner.party) : null,
         nhsSignerBase,
-        nhsPaymentMethod,
+        nhsPaymentMethod: nhsPaymentMethod && (
+          <DictionaryValue
+            name="CONTRACT_PAYMENT_METHOD"
+            item={nhsPaymentMethod}
+          />
+        ),
         issueCity
       }}
     />
@@ -378,7 +378,6 @@ const Divisions = ({ contractorDivisions }) =>
       header={{
         name: <Trans>Division name</Trans>,
         addresses: <Trans>Address</Trans>,
-        mountainGroup: <Trans>Mountain region</Trans>,
         phones: (
           <>
             <Trans>Phone</Trans>
@@ -391,17 +390,11 @@ const Divisions = ({ contractorDivisions }) =>
       renderRow={({
         name,
         addresses = [],
-        mountainGroup,
         workingHours,
         phones = [],
         email
       }) => ({
         name,
-        mountainGroup: (
-          <Flex justifyContent="center">
-            {mountainGroup ? <PositiveIcon /> : <NegativeIcon />}
-          </Flex>
-        ),
         phones: (
           <>
             <Box>
