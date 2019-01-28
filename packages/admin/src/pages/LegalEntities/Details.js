@@ -656,6 +656,7 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
           </Flex>
           <Query
             query={LegalEntityQuery}
+            fetchPolicy="network-only"
             variables={{
               ...filteredLocationParams(id, locationParams)
             }}
