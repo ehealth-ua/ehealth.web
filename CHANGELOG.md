@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.37.0"></a>
+# [1.37.0](https://github.com/edenlabllc/ehealth.web/compare/v1.36.3...v1.37.0) (2019-01-29)
+
+
+### Features
+
+* **admin:** add features for Merge Requests List page and Merge Requ… ([#715](https://github.com/edenlabllc/ehealth.web/issues/715)) ([e869676](https://github.com/edenlabllc/ehealth.web/commit/e869676))
+
+
+
+
+
 <a name="1.36.3"></a>
 ## [1.36.3](https://github.com/edenlabllc/ehealth.web/compare/v1.36.2...v1.36.3) (2019-01-28)
 
