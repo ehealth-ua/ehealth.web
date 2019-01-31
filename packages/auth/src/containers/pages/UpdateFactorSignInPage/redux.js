@@ -6,14 +6,15 @@ import { getLocation } from "../../../reducers";
 import env from "../../../env";
 import error_messages from "../../../helpers/errors";
 
-export const onSubmit = ({ email, password }) => (dispatch, getState) =>
+export const onSubmit = ({ email, password }, token) => (dispatch, getState) =>
   dispatch(
     createSessionToken({
       grant_type: "password",
       email,
       password,
       client_id: env.REACT_APP_CLIENT_ID,
-      scope: "app:authorize"
+      scope: "app:authorize",
+      token
     })
   ).then(action => {
     if (action.error) {

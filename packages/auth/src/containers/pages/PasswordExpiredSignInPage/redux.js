@@ -6,14 +6,15 @@ import env from "../../../env";
 import { login } from "../../../redux/session";
 import error_messages from "../../../helpers/errors";
 
-export const onSubmit = ({ email, password }) => (dispatch, getState) =>
+export const onSubmit = ({ email, password }, token) => (dispatch, getState) =>
   dispatch(
     createSessionToken({
       grant_type: "change_password",
       scope: "user:change_password",
       client_id: env.REACT_APP_CLIENT_ID,
       email,
-      password
+      password,
+      token
     })
   ).then(action => {
     if (action.error) {
@@ -40,7 +41,7 @@ export const onSubmit = ({ email, password }) => (dispatch, getState) =>
         return dispatch(
           push({
             ...location,
-            pathname: "update-password/new"
+            pathname: "/update-password/new"
           })
         );
       }
@@ -65,7 +66,7 @@ export const onSubmit = ({ email, password }) => (dispatch, getState) =>
         return dispatch(
           push({
             ...location,
-            pathname: "update-password/otp"
+            pathname: "/update-password/otp"
           })
         );
       }

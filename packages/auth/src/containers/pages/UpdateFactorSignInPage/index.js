@@ -2,6 +2,7 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { withGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import { H1 } from "../../../components/Title";
 import Button, { ButtonsGroup } from "../../../components/Button";
@@ -15,7 +16,12 @@ import SignInForm from "../../forms/SignInForm";
 
 import { onSubmit } from "./redux";
 
-const UpdateFactorSignInPage = ({ onSubmit = () => {}, location, router }) => (
+const UpdateFactorSignInPage = ({
+  onSubmit = () => {},
+  location,
+  router,
+  googleReCaptchaProps
+}) => (
   <Main id="update-factor-page">
     <Header>
       <H1>Зміна фактора авторизації</H1>
@@ -24,7 +30,12 @@ const UpdateFactorSignInPage = ({ onSubmit = () => {}, location, router }) => (
     <Article>
       <NarrowContainer>
         <SignInForm
-          onSubmit={onSubmit}
+          onSubmit={async data => {
+            const token = await googleReCaptchaProps.executeRecaptcha(
+              "UpdateFactorSignInPage"
+            );
+            onSubmit(data, token);
+          }}
           initialValues={{
             email: location.query.email
           }}
@@ -39,6 +50,11 @@ const UpdateFactorSignInPage = ({ onSubmit = () => {}, location, router }) => (
   </Main>
 );
 
-export default compose(withRouter, connect(null, { onSubmit }))(
-  UpdateFactorSignInPage
-);
+export default compose(
+  withRouter,
+  withGoogleReCaptcha,
+  connect(
+    null,
+    { onSubmit }
+  )
+)(UpdateFactorSignInPage);

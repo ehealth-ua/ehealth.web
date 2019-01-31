@@ -2,6 +2,7 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { withGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import { H1, H2 } from "../../../components/Title";
 import Button, { ButtonsGroup } from "../../../components/Button";
@@ -17,7 +18,11 @@ import SignInForm from "../../forms/SignInForm";
 
 import { onSubmit } from "./redux";
 
-const PasswordExpiredSignInPage = ({ onSubmit = () => {}, router }) => (
+const PasswordExpiredSignInPage = ({
+  onSubmit = () => {},
+  router,
+  googleReCaptchaProps
+}) => (
   <Main id="sign-in-page">
     <Header>
       <BackgroundLayout />
@@ -30,7 +35,15 @@ const PasswordExpiredSignInPage = ({ onSubmit = () => {}, router }) => (
     </Header>
     <Article>
       <NarrowContainer>
-        <SignInForm onSubmit={onSubmit} btnColor="green" />
+        <SignInForm
+          onSubmit={async data => {
+            const token = await googleReCaptchaProps.executeRecaptcha(
+              "PasswordExpiredSignInPage"
+            );
+            onSubmit(data, token);
+          }}
+          btnColor="green"
+        />
         <ButtonsGroup>
           <Button theme="link" onClick={() => router.goBack()}>
             Назад
@@ -41,6 +54,11 @@ const PasswordExpiredSignInPage = ({ onSubmit = () => {}, router }) => (
   </Main>
 );
 
-export default compose(withRouter, connect(null, { onSubmit }))(
-  PasswordExpiredSignInPage
-);
+export default compose(
+  withRouter,
+  withGoogleReCaptcha,
+  connect(
+    null,
+    { onSubmit }
+  )
+)(PasswordExpiredSignInPage);

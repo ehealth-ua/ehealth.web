@@ -23,6 +23,7 @@
     "react-composer": "^5.0.0",
     "react-dom": "^16.8.0-alpha.0",
     "react-final-form": "^4.0.2",
+    "react-google-recaptcha-v3": "^1.0.0-alpha.1",
     "react-helmet": "^5.2.0",
     "react-nebo15-validate": "^0.1.14",
     "react-redux": "^5.0.7",

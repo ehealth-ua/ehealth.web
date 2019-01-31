@@ -3,6 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { provideHooks } from "redial";
+import { withGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import Button from "../../../components/Button";
 import DictionaryValue from "../../../components/DictionaryValue";
@@ -18,8 +19,19 @@ import styles from "./styles.module.css";
 class AcceptPage extends Component {
   state = {
     isLoading: false,
-    error: null
+    error: null,
+    token: null
   };
+
+  async componentDidMount() {
+    const token = await this.props.googleReCaptchaProps.executeRecaptcha(
+      "AcceptPage"
+    );
+    this.setState({
+      token
+    });
+  }
+
   render() {
     const {
       client,
@@ -79,7 +91,7 @@ class AcceptPage extends Component {
               <Button
                 rel="noopener noreferrer"
                 target="__blank"
-                to="https://ti-ukraine.org/news/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
+                to="https://ti-ukraine.org/publication/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
                 theme="link"
               >
                 Угода користувача
@@ -89,7 +101,7 @@ class AcceptPage extends Component {
               <Button
                 rel="noopener noreferrer"
                 target="__blank"
-                to="https://ti-ukraine.org/news/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
+                to="https://ti-ukraine.org/publication/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
                 theme="link"
               >
                 Умови використання
@@ -113,7 +125,8 @@ class AcceptPage extends Component {
       .authorize({
         clientId: query.client_id,
         scope,
-        redirectUri: query.redirect_uri
+        redirectUri: query.redirect_uri,
+        token: this.state.token
       })
       .then(({ payload, error }) => {
         if (error) {
@@ -209,6 +222,7 @@ export default compose(
       ])
   }),
   withRouter,
+  withGoogleReCaptcha,
   connect(
     (state, { location: { query } }) => ({
       scope: query.scope || state.pages.AcceptPage.scope,

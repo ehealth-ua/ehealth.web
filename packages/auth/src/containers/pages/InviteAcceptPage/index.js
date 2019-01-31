@@ -25,7 +25,7 @@ const SignUpStep2Page = ({ onSubmit, onReject, request: { id } }) => (
         <a
           rel="noopener noreferrer"
           target="__blank"
-          href="https://ti-ukraine.org/news/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
+          href="https://ti-ukraine.org/publication/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
         >
           Регламенту функціонування системи
         </a>
