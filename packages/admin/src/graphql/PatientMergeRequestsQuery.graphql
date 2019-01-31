@@ -1,0 +1,30 @@
+query PatientMergeRequestsQuery(
+  $filter: MergeRequestFilter
+  $orderBy: MergeRequestOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
+) {
+  mergeRequests(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
+    nodes {
+      id
+      databaseId
+      status
+      insertedAt
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}

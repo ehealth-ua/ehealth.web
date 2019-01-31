@@ -16,6 +16,7 @@ import Contracts from "./pages/Contracts";
 import LegalEntityMergeJobs from "./pages/LegalEntityMergeJobs";
 import LegalEntityDeactivateJobs from "./pages/LegalEntityDeactivateJobs";
 import Persons from "./pages/Persons";
+import PatientMergeRequests from "./pages/PatientMergeRequests";
 import Declarations from "./pages/Declarations";
 import PendingDeclarations from "./pages/PendingDeclarations";
 import LegalEntities from "./pages/LegalEntities";
@@ -43,6 +44,7 @@ const App = () => (
                 <LegalEntityMergeJobs path="legal-entity-merge-jobs/*" />
                 <LegalEntityDeactivateJobs path="legal-entity-deactivate-jobs/*" />
                 <Persons path="persons/*" />
+                <PatientMergeRequests path="patient-merge-requests/*" />
                 <Declarations path="declarations/*" />
                 <PendingDeclarations path="pending-declarations/*" />
                 <LegalEntities path="legal-entities/*" />

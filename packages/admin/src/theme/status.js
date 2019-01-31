@@ -13,6 +13,7 @@ const status = {
       PENDING: { bg: "orangePastel" },
       NEW: { bg: "bluePastel" },
       IN_PROCESS: { bg: "orangePastel" },
+      POSTPONE: { bg: "orangePastel" },
       DECLINED: { bg: "redPigment" },
       APPROVED: { bg: "darkPastelGreen" },
       PENDING_NHS_SIGN: { bg: "shiningKnight", fontSize: 8 },

@@ -1,0 +1,7 @@
+mutation AssignMergeCandidate {
+  assignMergeCandidate {
+    mergeRequest {
+      id
+    }
+  }
+}

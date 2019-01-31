@@ -52,9 +52,15 @@ const REASON = {
   NO_TAX_ID: "Без ІПН"
 };
 
+const PATIENT_MERGE_REQUEST = {
+  NEW: "Нова",
+  POSTPONE: "Відкладена"
+};
+
 const STATUSES = {
   CONTRACT,
   PERSON,
+  PATIENT_MERGE_REQUEST,
   DECLARATION,
   REASON,
   LEGALENTITY,
