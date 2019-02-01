@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.38.1"></a>
+## [1.38.1](https://github.com/edenlabllc/ehealth.web/compare/v1.38.0...v1.38.1) (2019-02-01)
+
+
+### Bug Fixes
+
+* **auth:** move recaptcha from accept page to sign in form ([e80be2b](https://github.com/edenlabllc/ehealth.web/commit/e80be2b))
+
+
+
+
+
 <a name="1.38.0"></a>
 # [1.38.0](https://github.com/edenlabllc/ehealth.web/compare/v1.37.0...v1.38.0) (2019-01-31)
 
