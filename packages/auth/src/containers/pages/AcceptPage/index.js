@@ -3,7 +3,6 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { provideHooks } from "redial";
-import { withGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import Button from "../../../components/Button";
 import DictionaryValue from "../../../components/DictionaryValue";
@@ -19,18 +18,8 @@ import styles from "./styles.module.css";
 class AcceptPage extends Component {
   state = {
     isLoading: false,
-    error: null,
-    token: null
+    error: null
   };
-
-  async componentDidMount() {
-    const token = await this.props.googleReCaptchaProps.executeRecaptcha(
-      "AcceptPage"
-    );
-    this.setState({
-      token
-    });
-  }
 
   render() {
     const {
@@ -125,8 +114,7 @@ class AcceptPage extends Component {
       .authorize({
         clientId: query.client_id,
         scope,
-        redirectUri: query.redirect_uri,
-        token: this.state.token
+        redirectUri: query.redirect_uri
       })
       .then(({ payload, error }) => {
         if (error) {
@@ -222,7 +210,6 @@ export default compose(
       ])
   }),
   withRouter,
-  withGoogleReCaptcha,
   connect(
     (state, { location: { query } }) => ({
       scope: query.scope || state.pages.AcceptPage.scope,

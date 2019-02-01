@@ -155,7 +155,7 @@ export const updatePassword = (id, body) =>
     }
   });
 
-export const authorize = ({ clientId, scope, redirectUri, token }) =>
+export const authorize = ({ clientId, scope, redirectUri }) =>
   invoke(
     {
       endpoint: `${env.REACT_APP_AUTH_URL}/oauth/apps/authorize`,
@@ -176,8 +176,7 @@ export const authorize = ({ clientId, scope, redirectUri, token }) =>
         app: {
           client_id: clientId,
           redirect_uri: redirectUri,
-          scope,
-          token
+          scope
         }
       }
     },

@@ -2,6 +2,7 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { withGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import env from "../../../env";
 
@@ -23,7 +24,8 @@ const SignInPage = ({
     search,
     query: { client_id, redirect_uri, email }
   },
-  router
+  router,
+  googleReCaptchaProps
 }) => (
   <Main id="sign-in-page">
     <Header>
@@ -35,7 +37,15 @@ const SignInPage = ({
       {client_id &&
         redirect_uri && (
           <NarrowContainer>
-            <SignInForm onSubmit={onSubmit} initialValues={{ email }} />
+            <SignInForm
+              onSubmit={async data => {
+                const token = await googleReCaptchaProps.executeRecaptcha(
+                  "SignInPage"
+                );
+                onSubmit(data, token);
+              }}
+              initialValues={{ email }}
+            />
             {env.REACT_APP_DIGITAL_SIGNATURE_SIGN_IN_ENABLED && (
               <Button
                 color="blue"
@@ -68,6 +78,7 @@ const SignInPage = ({
 
 export default compose(
   withRouter,
+  withGoogleReCaptcha,
   connect(
     null,
     { onSubmit }

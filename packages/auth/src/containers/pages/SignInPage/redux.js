@@ -7,7 +7,7 @@ import { fetchUserData } from "../../../redux/user";
 import error_messages from "../../../helpers/errors";
 import env from "../../../env";
 
-export const onSubmit = ({ email, password, client_id }) => (
+export const onSubmit = ({ email, password, client_id }, token) => (
   dispatch,
   getState
 ) =>
@@ -17,7 +17,8 @@ export const onSubmit = ({ email, password, client_id }) => (
       email,
       password,
       client_id: env.REACT_APP_CLIENT_ID,
-      scope: "app:authorize"
+      scope: "app:authorize",
+      token
     })
   ).then(action => {
     if (action.error) {
