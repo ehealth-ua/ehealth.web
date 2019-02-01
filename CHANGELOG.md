@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.38.2"></a>
+## [1.38.2](https://github.com/edenlabllc/ehealth.web/compare/v1.38.1...v1.38.2) (2019-02-01)
+
+
+### Bug Fixes
+
+* **admin:** add declaration flag into the env.dev ([c3d813b](https://github.com/edenlabllc/ehealth.web/commit/c3d813b))
+
+
+
+
+
 <a name="1.38.1"></a>
 ## [1.38.1](https://github.com/edenlabllc/ehealth.web/compare/v1.38.0...v1.38.1) (2019-02-01)
 
