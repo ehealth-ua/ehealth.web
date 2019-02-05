@@ -17,8 +17,9 @@ type AddressProps = {
   }
 };
 
-const AddressView = ({
-  data: {
+const AddressView = ({ data }: AddressProps): React.Node => {
+  if (!data) return null;
+  const {
     zip,
     area,
     region,
@@ -28,36 +29,37 @@ const AddressView = ({
     street,
     building,
     apartment
-  }
-}: AddressProps): React.Node => (
-  <>
-    {zip && <>{zip}, </>}
-    {formatArea(area)}, {region && <>{normalizeName(region)} район, </>}
+  } = data;
+  return (
     <>
-      <DictionaryValue name="SETTLEMENT_TYPE" item={settlementType} />
-      &nbsp;
-      {normalizeName(settlement)}
-    </>
-    ,{" "}
-    <>
-      {street && (
+      {zip && <>{zip}, </>}
+      {formatArea(area)}, {region && <>{normalizeName(region)} район, </>}
+      <>
+        <DictionaryValue name="SETTLEMENT_TYPE" item={settlementType} />
+        &nbsp;
+        {normalizeName(settlement)}
+      </>
+      ,{" "}
+      <>
+        {street && (
+          <>
+            <DictionaryValue name="STREET_TYPE" item={streetType} />
+            &nbsp;
+            {normalizeName(street)}
+            &nbsp;
+          </>
+        )}
+        {building}
+      </>
+      {apartment && (
         <>
-          <DictionaryValue name="STREET_TYPE" item={streetType} />
-          &nbsp;
-          {normalizeName(street)}
-          &nbsp;
+          , кв.&nbsp;
+          {apartment}
         </>
       )}
-      {building}
     </>
-    {apartment && (
-      <>
-        , кв.&nbsp;
-        {apartment}
-      </>
-    )}
-  </>
-);
+  );
+};
 
 export default AddressView;
 
