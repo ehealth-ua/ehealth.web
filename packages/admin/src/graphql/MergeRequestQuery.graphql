@@ -1,0 +1,194 @@
+query MergeRequestQuery($id: ID!) {
+  mergeRequest(id: $id) {
+    id
+    databaseId
+    status
+    comment
+    manualMergeCandidate {
+      id
+      databaseId
+      mergeCandidate {
+        id
+        databaseId
+        person {
+          id
+          databaseId
+          firstName
+          lastName
+          secondName
+          birthDate
+          birthCountry
+          birthSettlement
+          gender
+          email
+          status
+          unzr
+          taxId
+          noTaxId
+          preferredWayCommunication
+          insertedAt
+          updatedAt
+          authenticationMethods {
+            type
+            phoneNumber
+          }
+          documents {
+            type
+            number
+            issuedAt
+            issuedBy
+          }
+          addresses {
+            type
+            country
+            area
+            region
+            settlement
+            settlementType
+            settlementId
+            streetType
+            street
+            building
+            apartment
+            zip
+          }
+          phones {
+            type
+            number
+          }
+          emergencyContact {
+            firstName
+            lastName
+            secondName
+            phones {
+              type
+              number
+            }
+          }
+          confidantPerson {
+            relationType
+            firstName
+            lastName
+            secondName
+            birthDate
+            birthCountry
+            birthSettlement
+            gender
+            unzr
+            taxId
+            email
+            documents {
+              type
+              number
+              issuedAt
+              issuedBy
+            }
+            documentsRelationship {
+              type
+              number
+              issuedAt
+              issuedBy
+            }
+            phones {
+              type
+              number
+            }
+            preferredWayCommunication
+          }
+          declarations {
+            nodes {
+              id
+              status
+            }
+          }
+        }
+        masterPerson {
+          id
+          databaseId
+          firstName
+          lastName
+          secondName
+          birthDate
+          birthCountry
+          birthSettlement
+          gender
+          email
+          status
+          unzr
+          taxId
+          noTaxId
+          preferredWayCommunication
+          insertedAt
+          updatedAt
+          authenticationMethods {
+            type
+            phoneNumber
+          }
+          documents {
+            type
+            number
+            issuedAt
+            issuedBy
+          }
+          addresses {
+            type
+            country
+            area
+            region
+            settlement
+            settlementType
+            settlementId
+            streetType
+            street
+            building
+            apartment
+            zip
+          }
+          phones {
+            type
+            number
+          }
+          emergencyContact {
+            firstName
+            lastName
+            secondName
+            phones {
+              type
+              number
+            }
+          }
+          confidantPerson {
+            relationType
+            firstName
+            lastName
+            secondName
+            birthDate
+            birthCountry
+            birthSettlement
+            gender
+            unzr
+            taxId
+            email
+            documents {
+              type
+              number
+              issuedAt
+              issuedBy
+            }
+            documentsRelationship {
+              type
+              number
+              issuedAt
+              issuedBy
+            }
+            phones {
+              type
+              number
+            }
+            preferredWayCommunication
+          }
+        }
+      }
+    }
+  }
+}
