@@ -20,7 +20,9 @@ const colors = {
   callaLily: "#E6EAEE",
   romanSilver: "#848C98",
   jacarandaLight: "#A8AAB7",
-  orangePastel: "#F7981C"
+  orangePastel: "#F7981C",
+  jupiter: "#E0E0E0",
+  paleGrey: "#FAFBFC"
 };
 
 export default colors;

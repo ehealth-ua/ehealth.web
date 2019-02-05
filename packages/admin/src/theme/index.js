@@ -2,6 +2,7 @@ export { default as buttons } from "./buttons";
 export { default as colors } from "./colors";
 export { default as fields } from "./fields";
 export { default as inputs } from "./inputs";
+export { default as tables } from "./tables";
 export { default as radios } from "./radios";
 export { default as status } from "./status";
 

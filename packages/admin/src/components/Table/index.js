@@ -1,8 +1,9 @@
 //@flow
 import * as React from "react";
 import styled from "@emotion/styled/macro";
-import { css } from "@emotion/core";
 import { ifProp, ifNotProp } from "styled-tools";
+import { mixed, boolean } from "@ehealth/system-tools";
+import system from "@ehealth/system-components";
 import { Flex } from "@rebass/emotion";
 import isEqual from "lodash/isEqual";
 
@@ -248,28 +249,36 @@ class Table extends React.Component<TableProps, TableState> {
 
 export default Table;
 
-const TableWrapper = styled.div`
-  width: 100%;
-  overflow: auto;
-`;
+const TableWrapper = system(
+  {},
+  {
+    width: "100%",
+    overflow: "auto"
+  }
+);
 
-export const TableRoot = styled.table`
-  border: ${ifProp("headless", "none", "1px solid #e0e0e0")};
-  border-collapse: collapse;
-  color: #3d3d3d;
-  font-size: 12px;
-  line-height: ${ifProp("headless", "0", "20px")};
-  table-layout: fixed;
-  width: 100%;
-  ${ifProp(
-    "headless",
-    `
-    td:last-of-type {
-      border-right: none;
+export const TableRoot = system(
+  {
+    color: "black",
+    fontSize: 0,
+    is: "table"
+  },
+  props => ({
+    tableLayout: "fixed",
+    width: "100%",
+    borderCollapse: "collapse",
+    "& + &": {
+      borderTop: 0
+    },
+    border: ifProp("headless", "none", "1px solid #e0e0e0")(props),
+    lineHeight: ifProp("headless", "0", "20px")(props),
+    "td:last-of-type": {
+      borderRight: "none"
     }
-  `
-  )};
-`;
+  }),
+  "fontSize",
+  "color"
+);
 
 const TableHeaderComponent = styled.thead`
   background-image: linear-gradient(0deg, #f2f4f7 0%, #ffffff 100%);
@@ -303,24 +312,30 @@ export const TableRow = styled.tr`
   }
 `;
 
-export const TableCell = styled.td`
-  border-top: 1px solid #e0e0e0;
-  text-align: left;
-  vertical-align: middle;
-  white-space: pre-wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-right: 1px solid #e0e0e0;
-  ${ifProp(
-    "whiteSpaceNoWrap",
-    css`
-      white-space: nowrap;
-    `
-  )};
-  ${ifNotProp(
-    "fullSize",
-    css`
-      padding: 16px 20px;
-    `
-  )};
-`;
+export const TableCell = system(
+  {
+    is: "td"
+  },
+  props =>
+    mixed({
+      border: 1,
+      borderStyle: "solid",
+      borderColor: "jupiter",
+      textAlign: "left",
+      verticalAlign: "middle",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: ifProp("whiteSpaceNoWrap", "nowrap", "pre-wrap")(props),
+      padding: ifNotProp("fullSize", "16px 20px", "0")(props),
+      backgroundColor: ifProp("horizontalTable", "white")(props),
+      "&:first-of-type": ifProp("horizontalTable", {
+        fontWeight: "bold",
+        backgroundColor: "#fafbfc",
+        width: "30%"
+      })(props)
+    }),
+  boolean({
+    prop: "mismatch",
+    key: "tables.mismatch"
+  })
+);
