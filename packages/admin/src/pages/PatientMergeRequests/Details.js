@@ -143,7 +143,7 @@ const Details = ({ id, navigate }) => (
               <Box px={3}>
                 <DefinitionListView
                   labels={{
-                    status: <Trans>Request Status</Trans>,
+                    status: <Trans>Request status</Trans>,
                     pairId: <Trans>Pair ID</Trans>
                   }}
                   data={{
@@ -427,9 +427,9 @@ const Document = ({ data, mismatch }) =>
     <Box pb={2}>
       <DefinitionListView
         labels={{
-          number: <Trans>Номер</Trans>,
-          issuedAt: <Trans>Дата видачі</Trans>,
-          issuedBy: <Trans>Виданий</Trans>
+          number: <Trans>Number</Trans>,
+          issuedAt: <Trans>Issued at</Trans>,
+          issuedBy: <Trans>Issued by</Trans>
         }}
         data={{
           ...data,
@@ -559,7 +559,7 @@ const Popup = ({
                         </IconButton>
                       </Box>
                       <Button type="submit" width={120} variant={variant}>
-                        <Trans>{buttonText}</Trans>
+                        {buttonText}
                       </Button>
                     </Flex>
                   </Form>
