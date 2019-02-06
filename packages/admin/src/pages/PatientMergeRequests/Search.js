@@ -25,14 +25,11 @@ const AssignMergeCandidate = loader(
   "../../graphql/AssignMergeCandidateMutation.graphql"
 );
 
-//TODO: we need to get the limit value from BE
-const POSTPONED_REQUESTS_LIMIT = 4;
-
 const Search = () => (
   <Box p={6}>
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
-        const { filter, first, last, after, before, orderBy } = locationParams;
+        const { first, last, after, before, orderBy } = locationParams;
 
         return (
           <Query
@@ -48,14 +45,17 @@ const Search = () => (
               last: last ? parseInt(last) : undefined,
               after,
               before,
-              orderBy,
-              filter
+              orderBy
             }}
           >
             {({ loading, error, data }) => {
               if (error) return null;
               const {
-                mergeRequests: { nodes: mergeRequests = [], pageInfo = {} } = {}
+                mergeRequests: {
+                  canAssignNew,
+                  nodes: mergeRequests = [],
+                  pageInfo = {}
+                } = {}
               } = data || {};
 
               return (
@@ -80,7 +80,20 @@ const Search = () => (
                       mutation={AssignMergeCandidate}
                       refetchQueries={() => [
                         {
-                          query: PatientMergeRequestsQuery
+                          query: PatientMergeRequestsQuery,
+                          fetchPolicy: "network-only",
+                          variables: {
+                            first:
+                              !first && !last
+                                ? ITEMS_PER_PAGE[0]
+                                : first
+                                  ? parseInt(first)
+                                  : undefined,
+                            last: last ? parseInt(last) : undefined,
+                            after,
+                            before,
+                            orderBy
+                          }
                         }
                       ]}
                     >
@@ -90,20 +103,13 @@ const Search = () => (
                             await assignMergeCandidate();
                           }}
                           variant="blue"
-                          disabled={isRequestButtonDisabled(
-                            mergeRequests,
-                            POSTPONED_REQUESTS_LIMIT
-                          )}
+                          disabled={!canAssignNew}
                         >
                           <Trans>Get the new Request</Trans>
                         </Button>
                       )}
                     </Mutation>
                   </Flex>
-                  <SearchPatientMergeRequestsForm
-                    initialValues={locationParams}
-                    onSubmit={setLocationParams}
-                  />
                   {mergeRequests.length > 0 && (
                     <>
                       <Table
@@ -178,53 +184,8 @@ const Search = () => (
 
 export default Search;
 
-const SearchPatientMergeRequestsForm = ({ initialValues, onSubmit }) => {
-  return (
-    <Form onSubmit={() => null} initialValues={initialValues}>
-      <Form.AutoSubmit
-        onSubmit={params =>
-          !isEqual(params.filter, initialValues.filter) &&
-          onSubmit({
-            ...params,
-            ...resetPaginationParams(initialValues.first)
-          })
-        }
-      />
-      <Flex mx={-1}>
-        <Box px={1} width={1 / 3}>
-          <Trans
-            id="Show all"
-            render={({ translation }) => (
-              <Field.Select
-                name="filter.status"
-                label={<Trans>Status</Trans>}
-                items={Object.keys(STATUSES.PATIENT_MERGE_REQUEST)}
-                itemToString={item =>
-                  STATUSES.PATIENT_MERGE_REQUEST[item] || translation
-                }
-                emptyOption
-                hideErrors
-                variant="select"
-              />
-            )}
-          />
-        </Box>
-      </Flex>
-    </Form>
-  );
-};
-
 const sortMergeRequests = mergeRequests =>
   mergeRequests.sort(request => (request.status === "NEW" ? -1 : 1));
-
-const isRequestButtonDisabled = (mergeRequests, limit) => {
-  const statusNew = mergeRequests.find(request => request.status === "NEW");
-  const statusPostpone = mergeRequests.filter(
-    request => request.status === "POSTPONE"
-  );
-
-  return statusNew || statusPostpone.length >= POSTPONED_REQUESTS_LIMIT;
-};
 
 const resetPaginationParams = first => ({
   after: undefined,

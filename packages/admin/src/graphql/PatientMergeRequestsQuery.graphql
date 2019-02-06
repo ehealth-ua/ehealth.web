@@ -1,5 +1,4 @@
 query PatientMergeRequestsQuery(
-  $filter: MergeRequestFilter
   $orderBy: MergeRequestOrderBy
   $before: String
   $after: String
@@ -8,12 +7,12 @@ query PatientMergeRequestsQuery(
 ) {
   mergeRequests(
     first: $first
-    filter: $filter
     orderBy: $orderBy
     before: $before
     after: $after
     last: $last
   ) {
+    canAssignNew
     nodes {
       id
       databaseId
