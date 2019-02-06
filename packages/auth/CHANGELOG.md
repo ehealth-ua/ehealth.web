@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.39.0"></a>
+# [1.39.0](https://github.com/edenlabllc/ehealth.web/compare/v1.38.2...v1.39.0) (2019-02-06)
+
+
+### Features
+
+* update react to 16.8.0 ([cb7e495](https://github.com/edenlabllc/ehealth.web/commit/cb7e495))
+
+
+
+
+
 <a name="1.38.1"></a>
 ## [1.38.1](https://github.com/edenlabllc/ehealth.web/compare/v1.38.0...v1.38.1) (2019-02-01)
 
