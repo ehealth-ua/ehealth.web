@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.40.0"></a>
+# [1.40.0](https://github.com/edenlabllc/ehealth.web/compare/v1.39.0...v1.40.0) (2019-02-06)
+
+
+### Features
+
+* **admin:** add mutations for changing status of Merge Request ([b48fd63](https://github.com/edenlabllc/ehealth.web/commit/b48fd63))
+* **admin:** add Patient Merge Request Details page ([0f3c699](https://github.com/edenlabllc/ehealth.web/commit/0f3c699))
+* **admin:** add Patient Merge Requests List page ([d2df9af](https://github.com/edenlabllc/ehealth.web/commit/d2df9af))
+
+
+
+
+
 <a name="1.39.0"></a>
 # [1.39.0](https://github.com/edenlabllc/ehealth.web/compare/v1.38.2...v1.39.0) (2019-02-06)
 
