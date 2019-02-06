@@ -2,7 +2,7 @@
 import * as React from "react";
 import styled from "@emotion/styled/macro";
 import { ifProp, ifNotProp } from "styled-tools";
-import { mixed, boolean } from "@ehealth/system-tools";
+import { mixed, boolean, variant } from "@ehealth/system-tools";
 import system from "@ehealth/system-components";
 import { Flex } from "@rebass/emotion";
 import isEqual from "lodash/isEqual";
@@ -326,14 +326,11 @@ export const TableCell = system(
       overflow: "hidden",
       textOverflow: "ellipsis",
       whiteSpace: ifProp("whiteSpaceNoWrap", "nowrap", "pre-wrap")(props),
-      padding: ifNotProp("fullSize", "16px 20px", "0")(props),
-      backgroundColor: ifProp("horizontalTable", "white")(props),
-      "&:first-of-type": ifProp("horizontalTable", {
-        fontWeight: "bold",
-        backgroundColor: "#fafbfc",
-        width: "30%"
-      })(props)
+      padding: ifNotProp("fullSize", "16px 20px", "0")(props)
     }),
+  variant({
+    key: "tables"
+  }),
   boolean({
     prop: "mismatch",
     key: "tables.mismatch"
