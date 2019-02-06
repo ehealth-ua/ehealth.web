@@ -1,0 +1,7 @@
+mutation UpdateMergeRequestMutation($input: UpdateMergeRequestInput!) {
+  updateMergeRequest(input: $input) {
+    mergeRequest {
+      id
+    }
+  }
+}

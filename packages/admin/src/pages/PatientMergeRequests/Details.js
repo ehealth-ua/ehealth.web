@@ -1,14 +1,19 @@
 import React from "react";
 import { isEqual } from "lodash";
-import { Flex, Box, Text } from "@rebass/emotion";
-import { Query } from "react-apollo";
+import { Flex, Box, Text, Heading as Title } from "@rebass/emotion";
+import { Query, Mutation } from "react-apollo";
+import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
 import { getPhones } from "@ehealth/utils";
 import system from "@ehealth/system-components";
+import { Form, Modal } from "@ehealth/components";
+import { RemoveItemIcon } from "@ehealth/icons";
 
 import Link from "../../components/Link";
 import Badge from "../../components/Badge";
+import Button, { IconButton } from "../../components/Button";
+import * as Field from "../../components/Field";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import DefinitionListView from "../../components/DefinitionListView";
@@ -23,8 +28,11 @@ import {
 } from "../../components/Table";
 
 const MergeRequestQuery = loader("../../graphql/MergeRequestQuery.graphql");
+const UpdateMergeRequestMutation = loader(
+  "../../graphql/UpdateMergeRequestMutation.graphql"
+);
 
-const Details = ({ id }) => (
+const Details = ({ id, navigate }) => (
   <Query query={MergeRequestQuery} variables={{ id }}>
     {({ loading, error, data }) => {
       if (error) return null;
@@ -258,6 +266,52 @@ const Details = ({ id }) => (
                     })}
                     skipComparison
                   />
+
+                  <Flex my={5} justifyContent="space-between">
+                    <Flex>
+                      <Box mr={4}>
+                        <Popup
+                          variant="light"
+                          buttonText={<Trans>Trash</Trans>}
+                          title={<Trans>Trash Merge Request</Trans>}
+                          status="TRASH"
+                          id={id}
+                          navigate={navigate}
+                        />
+                      </Box>
+
+                      <Popup
+                        variant="blue"
+                        buttonText={<Trans>Postpone</Trans>}
+                        title={<Trans>Postpone Merge Request</Trans>}
+                        status="POSTPONE"
+                        id={id}
+                        navigate={navigate}
+                        disabled={status === "POSTPONE"}
+                      />
+                    </Flex>
+
+                    <Flex>
+                      <Box mr={4}>
+                        <Popup
+                          variant="red"
+                          buttonText={<Trans>Split</Trans>}
+                          title={<Trans>Split Merge Request</Trans>}
+                          status="SPLIT"
+                          id={id}
+                          navigate={navigate}
+                        />
+                      </Box>
+                      <Popup
+                        variant="green"
+                        buttonText={<Trans>Merge</Trans>}
+                        title={<Trans>Merge Merge Request</Trans>}
+                        status="MERGE"
+                        id={id}
+                        navigate={navigate}
+                      />
+                    </Flex>
+                  </Flex>
                 </>
               )}
           </Box>
@@ -402,7 +456,7 @@ const Table = ({ renderRow, data, skipComparison }) => (
                 <TableCell
                   key={`${key}-${index}`}
                   mismatch={mismatch}
-                  horizontalTable
+                  variant="horizontal"
                 >
                   {index ? row[key] : value}
                 </TableCell>
@@ -436,6 +490,88 @@ const AuthnMethodsList = ({ data }) => (
     ))}
   </Flex>
 );
+
+const Popup = ({
+  id,
+  variant,
+  buttonText,
+  title,
+  status,
+  disabled,
+  navigate
+}) => {
+  return (
+    <BooleanValue>
+      {({ value: opened, toggle }) => (
+        <>
+          <Button
+            width={120}
+            variant={variant}
+            disabled={disabled}
+            onClick={toggle}
+          >
+            {buttonText}
+          </Button>
+          {opened && (
+            <Modal width={760} backdrop>
+              <Title as="h1" fontWeight="normal" mb={6}>
+                {title}
+              </Title>
+              <Mutation
+                mutation={UpdateMergeRequestMutation}
+                refetchQueries={() => [
+                  {
+                    query: MergeRequestQuery,
+                    variables: {
+                      id
+                    }
+                  }
+                ]}
+              >
+                {updateMergeRequest => (
+                  <Form
+                    onSubmit={async ({ comment }) => {
+                      await updateMergeRequest({
+                        variables: { input: { id, status, comment } }
+                      });
+                      navigate("/patient-merge-requests/search");
+                    }}
+                  >
+                    <Trans
+                      id="Enter comment"
+                      render={({ translation }) => (
+                        <Field.Textarea
+                          name="comment"
+                          placeholder={translation}
+                          rows={5}
+                          maxlength="3000"
+                        />
+                      )}
+                    />
+                    <Flex justifyContent="left">
+                      <Box mr={20}>
+                        <IconButton
+                          icon={RemoveItemIcon}
+                          type="reset"
+                          onClick={toggle}
+                        >
+                          <Trans>Return</Trans>
+                        </IconButton>
+                      </Box>
+                      <Button type="submit" width={120} variant={variant}>
+                        <Trans>{buttonText}</Trans>
+                      </Button>
+                    </Flex>
+                  </Form>
+                )}
+              </Mutation>
+            </Modal>
+          )}
+        </>
+      )}
+    </BooleanValue>
+  );
+};
 
 const convertTypeToKey = (data = [], types) =>
   types.reduce(

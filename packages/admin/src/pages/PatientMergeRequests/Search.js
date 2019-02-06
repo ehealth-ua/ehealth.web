@@ -37,6 +37,7 @@ const Search = () => (
         return (
           <Query
             query={PatientMergeRequestsQuery}
+            fetchPolicy="network-only"
             variables={{
               first:
                 !first && !last
