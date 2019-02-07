@@ -531,7 +531,7 @@ const License = ({
                     showForm ? (
                       <Form
                         initialValues={{ nhsComment }}
-                        onSubmit={async ({ nhsComment }) => {
+                        onSubmit={async ({ nhsComment = "" }) => {
                           await nhsCommentLegalEntity({
                             variables: { input: { id, nhsComment } }
                           });
@@ -948,7 +948,13 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
   );
 };
 
-const OpacityBox = system({ extend: Box, opacity: 1 });
+const OpacityBox = system(
+  {
+    extend: Box,
+    opacity: 1
+  },
+  "opacity"
+);
 
 const ArchiveBox = system(
   {
@@ -970,7 +976,8 @@ const CommentBox = system(
   },
   `
     white-space: pre-line;
-  `
+  `,
+  "space"
 );
 
 const BorderBox = system(
@@ -979,12 +986,19 @@ const BorderBox = system(
     p: 4,
     mb: 5,
     fontSize: 0,
+    border: 1,
+    borderColor: "januaryDawn"
+  },
+  {
     lineHeight: 1.5,
-    maxHeight: 200,
-    border: "1px solid #dfe2e5"
+    maxHeight: 200
   },
   `
     white-space: pre-line;
     overflow-y: scroll;
-  `
+  `,
+  "space",
+  "fontSize",
+  "border",
+  "borderColor"
 );
