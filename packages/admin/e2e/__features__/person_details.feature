@@ -11,7 +11,7 @@ Background: User is authorized and on PERSON_DETAILS_PAGE
 Scenario: Get Person Details
   Given I am on the PERSON_DETAILS_PAGE
   Then I should see header with id and status
-  And tabs personal_info, authentication_method, declarations
+  And tabs personal_info, authentication_method, declarations, emergency_contact, confidant_person 
 
 Scenario: Get Person Details (PERSONAL_INFO)
   Given I am on the PERSONAL_INFO tab
@@ -52,3 +52,15 @@ Scenario: Search declarations by DECLARATION_NUMBER (DECALRATIONS)
   Given I am on the DECALRATIONS tab
   When I fill DECLARATION_SEARCH field with correct existing DECLARATION_NUMBER
   Then I should see DECLARATION_LIST filtered by DECLARATION_NUMBER
+
+Scenario: Get Person Details (EMERGENCY_CONTACT)
+  Given I am on EMERGENCY_CONTACT tab
+  Then I should see firstName, secondName, lastName, phones
+
+Scenario: Get Person Details (CONFIDANT_PERSON)
+  Given I am on CONFIDANT_PERSON tab
+  Then I see table which is divided on logical blocks
+  block | primary_confidant_person | secondary_confidant_person |
+  blocks are next:
+  primary_confidant_person: firstName, secondName, lastName, birth_date, birth_country, birth_settlement, tax_id, unzr, email, phones
+  secondary_confidant_person: firstName, secondName, lastName, birth_date, birth_country, birth_settlement, tax_id, unzr, email, phones

@@ -22,8 +22,8 @@ Scenario: Get merge request details
   phones: authenticationMethods, phones
   documents
   addresses
-  emergencyContact
-  confidantPersons
+  emergencyContact: firstName, lastName, secondName, phones
+  confidantPersons: relation_type, first_name, last_name, second_name, birth_date, birth_country, birth_settlement, gender, tax_id, preferred_way_communication, email, documents_person, documents_relationship, phones
   go to declarations
 
 Scenario: Update NEW merge request to POSTPONE
