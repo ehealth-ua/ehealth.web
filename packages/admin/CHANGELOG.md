@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.40.2"></a>
+## [1.40.2](https://github.com/edenlabllc/ehealth.web/compare/v1.40.1...v1.40.2) (2019-02-07)
+
+
+### Bug Fixes
+
+* **admin:** change minDate format, add maxlength param to the EDRPOU field, add input props to the prefix in DatePicker ([#721](https://github.com/edenlabllc/ehealth.web/issues/721)) ([524fa94](https://github.com/edenlabllc/ehealth.web/commit/524fa94))
+
+
+
+
+
 <a name="1.40.1"></a>
 ## [1.40.1](https://github.com/edenlabllc/ehealth.web/compare/v1.40.0...v1.40.1) (2019-02-07)
 
