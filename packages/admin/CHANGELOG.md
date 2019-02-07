@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.40.3"></a>
+## [1.40.3](https://github.com/edenlabllc/ehealth.web/compare/v1.40.2...v1.40.3) (2019-02-07)
+
+
+### Bug Fixes
+
+* **admin:** add default value for nhsComment variable, fix styles for CommentBox in LE Details page ([c0f00fb](https://github.com/edenlabllc/ehealth.web/commit/c0f00fb))
+
+
+
+
+
 <a name="1.40.2"></a>
 ## [1.40.2](https://github.com/edenlabllc/ehealth.web/compare/v1.40.1...v1.40.2) (2019-02-07)
 
