@@ -69,6 +69,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
               <>
                 <InputView.Border variant={state}>
                   <InputView.Content
+                    {...input}
                     pl={2}
                     py={0}
                     flex="none"

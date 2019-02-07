@@ -139,6 +139,7 @@ const Reason = ({
                 label={<Trans>Decline reason</Trans>}
                 placeholder={translation}
                 maxlength="3000"
+                showLengthHint
               />
             )}
           />

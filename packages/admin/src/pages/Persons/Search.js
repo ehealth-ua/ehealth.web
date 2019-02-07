@@ -201,6 +201,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                 name="filter.documents.taxId"
                 label={<Trans>INN</Trans>}
                 placeholder={translation}
+                maxlength={10}
               />
             )}
           />
@@ -250,7 +251,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
               <Field.DatePicker
                 name="filter.personal.birthDate"
                 label={<Trans>Date of birth</Trans>}
-                minDate="01-01-1900"
+                minDate="1900-01-01"
                 disabled={!value}
               />
             </Box>

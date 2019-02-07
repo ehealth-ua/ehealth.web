@@ -340,6 +340,7 @@ const GeneralInfo = ({
                         placeholder={translation}
                         rows={5}
                         maxlength="3000"
+                        showLengthHint
                       />
                     )}
                   />

@@ -1,21 +1,17 @@
 import React from "react";
-import { isEqual } from "lodash";
 import { Flex, Box, Text, Heading } from "@rebass/emotion";
 import { Query, Mutation } from "react-apollo";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
-import { Form, LocationParams } from "@ehealth/components";
+import { LocationParams } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 
 import Link from "../../components/Link";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
-import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import LoadingOverlay from "../../components/LoadingOverlay";
-
-import STATUSES from "../../helpers/statuses";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 const PatientMergeRequestsQuery = loader(
@@ -186,10 +182,3 @@ export default Search;
 
 const sortMergeRequests = mergeRequests =>
   mergeRequests.sort(request => (request.status === "NEW" ? -1 : 1));
-
-const resetPaginationParams = first => ({
-  after: undefined,
-  before: undefined,
-  last: undefined,
-  first: first || ITEMS_PER_PAGE[0]
-});

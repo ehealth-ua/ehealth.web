@@ -239,6 +239,7 @@ const UpdateContractRequest = ({
                             label={<Trans>Basis</Trans>}
                             placeholder={i18n._(t`Choose base`)}
                             maxlength={255}
+                            showLengthHint
                           />
                         )}
                       </I18n>
@@ -305,6 +306,7 @@ const UpdateContractRequest = ({
                           }
                           placeholder={i18n._(t`Enter city`)}
                           maxlength={100}
+                          showLengthHint
                         />
                       )}
                     </I18n>

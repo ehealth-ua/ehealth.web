@@ -124,6 +124,7 @@ const Reason = ({ initialValues, navigate, location: { state } }) => {
                 label={<Trans>Decline reason</Trans>}
                 placeholder={translation}
                 maxlength="3000"
+                showLengthHint
               />
             )}
           />

@@ -20,6 +20,7 @@ const InputField = ({
   postfix,
   divider,
   is = "input",
+  showLengthHint,
   ...props
 }) => (
   <Field {...props}>
@@ -29,7 +30,7 @@ const InputField = ({
           <FieldView.Header>
             <FieldView.Label>{label}</FieldView.Label>
             {hint && <FieldView.Message>{hint}</FieldView.Message>}
-            {input.maxlength && (
+            {showLengthHint && (
               <FieldView.Message>
                 Залишилось символів {input.maxlength - input.value.length}
               </FieldView.Message>
