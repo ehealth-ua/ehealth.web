@@ -28,7 +28,7 @@ query PersonQuery($id: ID!) {
         number
       }
     }
-    confidantPerson {
+    confidantPersons {
       relationType
       firstName
       lastName

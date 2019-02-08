@@ -59,7 +59,7 @@ const Details = ({ id }) => (
         phones = [],
         authenticationMethods,
         emergencyContact,
-        confidantPerson
+        confidantPersons
       } = person;
       const [mobilePhone] = getDataByType("MOBILE", phones);
       const [landLinePhone] = getDataByType("LAND_LINE", phones);
@@ -137,7 +137,7 @@ const Details = ({ id }) => (
                 path="emergency-contact"
               />
               <ConfidantPersons
-                data={confidantPerson}
+                data={confidantPersons}
                 path="confidant-persons"
               />
             </Router>
