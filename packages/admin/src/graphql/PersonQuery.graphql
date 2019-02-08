@@ -19,5 +19,30 @@ query PersonQuery($id: ID!) {
       type
       phoneNumber
     }
+    emergencyContact {
+      firstName
+      lastName
+      secondName
+      phones {
+        type
+        number
+      }
+    }
+    confidantPerson {
+      relationType
+      firstName
+      lastName
+      secondName
+      birthDate
+      birthCountry
+      birthSettlement
+      unzr
+      taxId
+      email
+      phones {
+        type
+        number
+      }
+    }
   }
 }

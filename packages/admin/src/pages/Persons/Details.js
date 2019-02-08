@@ -41,8 +41,6 @@ const PersonDeclarationsQuery = loader(
   "../../graphql/PersonDeclarationsQuery.graphql"
 );
 
-const filterData = (type, arr) => arr.filter(t => t.type === type);
-
 const Details = ({ id }) => (
   <Query query={PersonQuery} fetchPolicy="network-only" variables={{ id }}>
     {({ loading, error, data: { person = {} } = {} }) => {
@@ -59,11 +57,12 @@ const Details = ({ id }) => (
         taxId,
         unzr,
         phones = [],
-        authenticationMethods
+        authenticationMethods,
+        emergencyContact,
+        confidantPerson
       } = person;
-
-      const [mobilePhone] = filterData("MOBILE", phones);
-      const [landLinePhone] = filterData("LAND_LINE", phones);
+      const [mobilePhone] = getDataByType("MOBILE", phones);
+      const [landLinePhone] = getDataByType("LAND_LINE", phones);
       const authInfo =
         !isEmpty(authenticationMethods) && authenticationMethods[0];
 
@@ -116,6 +115,12 @@ const Details = ({ id }) => (
             <Tabs.NavItem to="./declarations">
               <Trans>Declarations</Trans>
             </Tabs.NavItem>
+            <Tabs.NavItem to="./emergency-contact">
+              <Trans>Emergency Contact</Trans>
+            </Tabs.NavItem>
+            <Tabs.NavItem to="./confidant-persons">
+              <Trans>Confidant Persons</Trans>
+            </Tabs.NavItem>
           </Tabs.Nav>
           <Tabs.Content>
             <Router>
@@ -127,6 +132,14 @@ const Details = ({ id }) => (
                 status={status}
               />
               <DeclarationsInfo path="declarations" />
+              <EmergencyContact
+                data={emergencyContact}
+                path="emergency-contact"
+              />
+              <ConfidantPersons
+                data={confidantPerson}
+                path="confidant-persons"
+              />
             </Router>
           </Tabs.Content>
         </LoadingOverlay>
@@ -384,5 +397,102 @@ const SearchDeclarationsForm = ({ initialValues, onSubmit }) => (
     <input type="submit" hidden />
   </Form>
 );
+
+const EmergencyContact = ({ data }) => {
+  if (!data) return null;
+
+  const { firstName, secondName, lastName, phones } = data;
+  const [mobilePhone] = getDataByType("MOBILE", phones);
+  const [landLinePhone] = getDataByType("LAND_LINE", phones);
+
+  return (
+    <Box p={5}>
+      <DefinitionListView
+        labels={{
+          fullName: <Trans>PIB</Trans>,
+          mobilePhone: <Trans>Mobile number</Trans>,
+          landLinePhone: <Trans>Stationary number</Trans>
+        }}
+        data={{
+          fullName: getFullName({ firstName, secondName, lastName }),
+          mobilePhone: mobilePhone && mobilePhone.number,
+          landLinePhone: landLinePhone && landLinePhone.number
+        }}
+      />
+    </Box>
+  );
+};
+
+const ConfidantPerson = ({
+  data: {
+    relationType,
+    firstName,
+    secondName,
+    lastName,
+    birthDate,
+    phones,
+    ...person
+  }
+}) => {
+  const [mobilePhone] = getDataByType("MOBILE", phones);
+  const [landLinePhone] = getDataByType("LAND_LINE", phones);
+
+  return (
+    <Box p={5}>
+      <DefinitionListView
+        labels={{
+          fullName: <Trans>PIB</Trans>,
+          birthDate: <Trans>Date of birth</Trans>,
+          birthCountry: <Trans>Country of birth</Trans>,
+          birthSettlement: <Trans>Place of birth</Trans>,
+          taxId: <Trans>INN</Trans>,
+          unzr: <Trans>Record ID in EDDR</Trans>,
+          email: <Trans>Email</Trans>,
+          mobilePhone: <Trans>Mobile number</Trans>,
+          landLinePhone: <Trans>Stationary number</Trans>
+        }}
+        data={{
+          ...person,
+          fullName: getFullName({ firstName, secondName, lastName }),
+          birthDate: <DateFormat value={birthDate} />,
+          mobilePhone: mobilePhone && mobilePhone.number,
+          landLinePhone: landLinePhone && landLinePhone.number
+        }}
+      />
+    </Box>
+  );
+};
+
+const ConfidantPersons = ({ data }) => {
+  if (!data) return null;
+
+  const [primaryPerson] = getDataByType("PRIMARY", data, "relationType");
+  const [secondaryPerson] = getDataByType("SECONDARY", data, "relationType");
+
+  return (
+    <>
+      {primaryPerson && (
+        <>
+          <Heading fontSize="1" fontWeight="normal" p={5} pb={0}>
+            <Trans>Primary Confidant Persons</Trans>
+          </Heading>
+          <ConfidantPerson data={primaryPerson} />
+        </>
+      )}
+
+      {secondaryPerson && (
+        <>
+          <Heading fontSize="1" fontWeight="normal" p={5} pb={0}>
+            <Trans>Secondary Confidant Persons</Trans>
+          </Heading>
+          <ConfidantPerson data={secondaryPerson} />
+        </>
+      )}
+    </>
+  );
+};
+
+const getDataByType = (type, arr, key = "type") =>
+  arr.filter(t => t[key] === type);
 
 export default Details;

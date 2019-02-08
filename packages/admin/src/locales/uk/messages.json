@@ -25,7 +25,7 @@
       ["src/pages/Dictionaries/Search.js", 71],
       ["src/pages/LegalEntities/Search.js", 120],
       ["src/pages/PendingDeclarations/Search.js", 94],
-      ["src/pages/Persons/Details.js", 299],
+      ["src/pages/Persons/Details.js", 408],
       ["src/pages/Persons/Search.js", 108]
     ]
   },
@@ -76,7 +76,7 @@
       ["src/pages/LegalEntities/Search.js", 115],
       ["src/pages/PatientMergeRequests/Details.js", 213],
       ["src/pages/PendingDeclarations/Search.js", 90],
-      ["src/pages/Persons/Details.js", 297]
+      ["src/pages/Persons/Details.js", 406]
     ]
   },
   "All contracts": {
@@ -154,13 +154,13 @@
     "translation": "Метод аутентифікації",
     "origin": [
       ["src/pages/PatientMergeRequests/Details.js", 71],
-      ["src/pages/Persons/Details.js", 114],
+      ["src/pages/Persons/Details.js", 116],
       ["src/pages/Persons/Search.js", 104]
     ]
   },
   "Authentication type": {
     "translation": "Тип аутентифікації",
-    "origin": [["src/pages/Persons/Details.js", 169]]
+    "origin": [["src/pages/Persons/Details.js", 278]]
   },
   "Authority that issued": {
     "translation": "Орган, що видав",
@@ -241,7 +241,7 @@
   },
   "Change authentication method": {
     "translation": "Зміна методу аутентифікації",
-    "origin": [["src/pages/Persons/Details.js", 191]]
+    "origin": [["src/pages/Persons/Details.js", 300]]
   },
   "Change description": {
     "translation": "Змінити опис",
@@ -308,6 +308,10 @@
   "Comment": {
     "translation": "Коментар",
     "origin": [["src/pages/LegalEntities/Details.js", 511]]
+  },
+  "Confidant Persons": {
+    "translation": "Довірені особи",
+    "origin": [["src/pages/Persons/Details.js", 125]]
   },
   "Configuration": {
     "translation": "Конфігурація системи",
@@ -478,7 +482,8 @@
       ["src/pages/Declarations/Details.js", 524],
       ["src/pages/PatientMergeRequests/Details.js", 57],
       ["src/pages/PatientMergeRequests/Details.js", 88],
-      ["src/pages/Persons/Details.js", 148]
+      ["src/pages/Persons/Details.js", 199],
+      ["src/pages/Persons/Details.js", 257]
     ]
   },
   "Date of birth": {
@@ -487,7 +492,8 @@
       ["src/pages/Declarations/Details.js", 523],
       ["src/pages/PatientMergeRequests/Details.js", 56],
       ["src/pages/PatientMergeRequests/Details.js", 87],
-      ["src/pages/Persons/Details.js", 147],
+      ["src/pages/Persons/Details.js", 198],
+      ["src/pages/Persons/Details.js", 256],
       ["src/pages/Persons/Search.js", 100],
       ["src/pages/Persons/Search.js", 252]
     ]
@@ -506,7 +512,7 @@
       ["src/pages/Declarations/Details.js", 87],
       ["src/pages/Declarations/Search.js", 61],
       ["src/pages/PendingDeclarations/Search.js", 82],
-      ["src/pages/Persons/Details.js", 291]
+      ["src/pages/Persons/Details.js", 400]
     ]
   },
   "Declaration number": {
@@ -515,7 +521,7 @@
       ["src/pages/Declarations/Details.js", 267],
       ["src/pages/Declarations/Search.js", 62],
       ["src/pages/PendingDeclarations/Search.js", 84],
-      ["src/pages/Persons/Details.js", 292]
+      ["src/pages/Persons/Details.js", 401]
     ]
   },
   "Declaration request ID": {
@@ -524,7 +530,7 @@
   },
   "Declaration search": {
     "translation": "Пошук декларації",
-    "origin": [["src/pages/Persons/Details.js", 371]]
+    "origin": [["src/pages/Persons/Details.js", 480]]
   },
   "Declaration start date": {
     "translation": "Декларація діє з",
@@ -539,7 +545,7 @@
   },
   "Declaration valid from": {
     "translation": "Декларація діє з",
-    "origin": [["src/pages/Persons/Details.js", 293]]
+    "origin": [["src/pages/Persons/Details.js", 402]]
   },
   "Declarations": {
     "translation": "Декларації",
@@ -549,7 +555,7 @@
       ["src/components/Nav.js", 222],
       ["src/components/Nav.js", 224],
       ["src/pages/PatientMergeRequests/Details.js", 99],
-      ["src/pages/Persons/Details.js", 117]
+      ["src/pages/Persons/Details.js", 119]
     ]
   },
   "Declarations limit": {
@@ -610,7 +616,7 @@
   },
   "Details of the patient": {
     "translation": "Деталі пацієнта",
-    "origin": [["src/pages/Persons/Details.js", 92]]
+    "origin": [["src/pages/Persons/Details.js", 94]]
   },
   "Dictionaries": {
     "translation": "Словники",
@@ -654,7 +660,7 @@
       ["src/pages/Contracts/Reimbursement/Details.js", 528],
       ["src/pages/Declarations/Search.js", 66],
       ["src/pages/PendingDeclarations/Search.js", 89],
-      ["src/pages/Persons/Details.js", 296]
+      ["src/pages/Persons/Details.js", 405]
     ]
   },
   "Divisions": {
@@ -711,7 +717,7 @@
       ["src/pages/LegalEntities/Search.js", 114],
       ["src/pages/LegalEntityDeactivateJobs/Search.js", 82],
       ["src/pages/PendingDeclarations/Search.js", 88],
-      ["src/pages/Persons/Details.js", 295]
+      ["src/pages/Persons/Details.js", 404]
     ]
   },
   "EDRPOU or Contract number": {
@@ -754,7 +760,10 @@
   },
   "Emergency Contact": {
     "translation": "Контакт для екстреного зв’язку",
-    "origin": [["src/pages/PatientMergeRequests/Details.js", 231]]
+    "origin": [
+      ["src/pages/PatientMergeRequests/Details.js", 231],
+      ["src/pages/Persons/Details.js", 122]
+    ]
   },
   "Employee ID": {
     "translation": "ID лікаря",
@@ -774,7 +783,7 @@
   },
   "Enter ID or Declaration number": {
     "translation": "Введіть ID або номер декларації",
-    "origin": [["src/pages/Persons/Details.js", 372]]
+    "origin": [["src/pages/Persons/Details.js", 481]]
   },
   "Enter INN": {
     "translation": "Введіть ІПН",
@@ -998,7 +1007,8 @@
       ["src/pages/Declarations/Details.js", 527],
       ["src/pages/PatientMergeRequests/Details.js", 66],
       ["src/pages/PatientMergeRequests/Details.js", 93],
-      ["src/pages/Persons/Details.js", 150],
+      ["src/pages/Persons/Details.js", 201],
+      ["src/pages/Persons/Details.js", 259],
       ["src/pages/Persons/Search.js", 101],
       ["src/pages/Persons/Search.js", 202]
     ]
@@ -1044,7 +1054,7 @@
       ["src/pages/LegalEntityDeactivateJobs/Search.js", 189],
       ["src/pages/LegalEntityMergeJobs/Search.js", 218],
       ["src/pages/LegalEntityMergeJobs/Search.js", 265],
-      ["src/pages/Persons/Details.js", 380],
+      ["src/pages/Persons/Details.js", 489],
       ["src/pages/Persons/Search.js", 227]
     ]
   },
@@ -1124,7 +1134,7 @@
       ["src/pages/Declarations/Details.js", 204],
       ["src/pages/Declarations/Search.js", 64],
       ["src/pages/PendingDeclarations/Search.js", 87],
-      ["src/pages/Persons/Details.js", 294]
+      ["src/pages/Persons/Details.js", 403]
     ]
   },
   "Legal entity EDRPOU or ID": {
@@ -1311,7 +1321,11 @@
   },
   "Mobile number": {
     "translation": "Мобільний номер",
-    "origin": [["src/pages/Persons/Details.js", 152]]
+    "origin": [
+      ["src/pages/Persons/Details.js", 166],
+      ["src/pages/Persons/Details.js", 203],
+      ["src/pages/Persons/Details.js", 261]
+    ]
   },
   "Mountain region": {
     "translation": "Гірський регіон",
@@ -1426,7 +1440,11 @@
   },
   "PIB": {
     "translation": "ПІБ",
-    "origin": [["src/pages/LegalEntities/Details.js", 741]]
+    "origin": [
+      ["src/pages/LegalEntities/Details.js", 741],
+      ["src/pages/Persons/Details.js", 165],
+      ["src/pages/Persons/Details.js", 197]
+    ]
   },
   "Pair ID": {
     "translation": "ID пари",
@@ -1444,7 +1462,7 @@
     "translation": "ID пацієнта",
     "origin": [
       ["src/pages/Declarations/Details.js", 546],
-      ["src/pages/Persons/Details.js", 98]
+      ["src/pages/Persons/Details.js", 100]
     ]
   },
   "Patient IPN": {
@@ -1456,14 +1474,14 @@
     "origin": [
       ["src/pages/Declarations/Search.js", 70],
       ["src/pages/PendingDeclarations/Search.js", 93],
-      ["src/pages/Persons/Details.js", 146],
+      ["src/pages/Persons/Details.js", 255],
       ["src/pages/Persons/Search.js", 99]
     ]
   },
   "Patient Search": {
     "translation": "Пошук пацієнтів",
     "origin": [
-      ["src/pages/Persons/Details.js", 89],
+      ["src/pages/Persons/Details.js", 91],
       ["src/pages/Persons/Search.js", 49]
     ]
   },
@@ -1517,7 +1535,7 @@
   },
   "Personal information": {
     "translation": "Особиста інформація",
-    "origin": [["src/pages/Persons/Details.js", 111]]
+    "origin": [["src/pages/Persons/Details.js", 113]]
   },
   "Persons": {
     "translation": "Паціенти",
@@ -1561,7 +1579,7 @@
     "origin": [
       ["src/pages/Declarations/Details.js", 427],
       ["src/pages/Declarations/Details.js", 529],
-      ["src/pages/Persons/Details.js", 170],
+      ["src/pages/Persons/Details.js", 279],
       ["src/pages/Persons/Search.js", 238]
     ]
   },
@@ -1578,7 +1596,8 @@
     "translation": "Місце народження",
     "origin": [
       ["src/pages/Declarations/Details.js", 525],
-      ["src/pages/Persons/Details.js", 149]
+      ["src/pages/Persons/Details.js", 200],
+      ["src/pages/Persons/Details.js", 258]
     ]
   },
   "Position": {
@@ -1612,7 +1631,10 @@
   },
   "Primary Confidant Persons": {
     "translation": "Основна довірена особа",
-    "origin": [["src/pages/PatientMergeRequests/Details.js", 344]]
+    "origin": [
+      ["src/pages/PatientMergeRequests/Details.js", 344],
+      ["src/pages/Persons/Details.js", 229]
+    ]
   },
   "Print": {
     "translation": "Роздрукувати",
@@ -1639,7 +1661,8 @@
       ["src/pages/Declarations/Details.js", 526],
       ["src/pages/PatientMergeRequests/Details.js", 65],
       ["src/pages/PatientMergeRequests/Details.js", 92],
-      ["src/pages/Persons/Details.js", 151],
+      ["src/pages/Persons/Details.js", 202],
+      ["src/pages/Persons/Details.js", 260],
       ["src/pages/Persons/Search.js", 102]
     ]
   },
@@ -1749,8 +1772,8 @@
   "Reset Authentication Method": {
     "translation": "Скинути метод аутентифікації",
     "origin": [
-      ["src/pages/Persons/Details.js", 186],
-      ["src/pages/Persons/Details.js", 219]
+      ["src/pages/Persons/Details.js", 295],
+      ["src/pages/Persons/Details.js", 328]
     ]
   },
   "Reset authentication method": {
@@ -1778,7 +1801,7 @@
       ["src/pages/LegalEntities/Add.js", 334],
       ["src/pages/LegalEntities/Details.js", 924],
       ["src/pages/PatientMergeRequests/Details.js", 558],
-      ["src/pages/Persons/Details.js", 204]
+      ["src/pages/Persons/Details.js", 313]
     ]
   },
   "Save": {
@@ -1865,7 +1888,10 @@
   },
   "Secondary Confidant Persons": {
     "translation": "Додаткова довірена особа",
-    "origin": [["src/pages/PatientMergeRequests/Details.js", 360]]
+    "origin": [
+      ["src/pages/PatientMergeRequests/Details.js", 360],
+      ["src/pages/Persons/Details.js", 238]
+    ]
   },
   "Select a tag": {
     "translation": "Виберіть тег",
@@ -1927,7 +1953,7 @@
       ["src/pages/Declarations/Search.js", 112],
       ["src/pages/PatientMergeRequests/Search.js", 155],
       ["src/pages/PendingDeclarations/Search.js", 138],
-      ["src/pages/Persons/Details.js", 334],
+      ["src/pages/Persons/Details.js", 443],
       ["src/pages/Persons/Search.js", 147]
     ]
   },
@@ -2031,7 +2057,11 @@
   },
   "Stationary number": {
     "translation": "Стаціонарний номер",
-    "origin": [["src/pages/Persons/Details.js", 153]]
+    "origin": [
+      ["src/pages/Persons/Details.js", 167],
+      ["src/pages/Persons/Details.js", 204],
+      ["src/pages/Persons/Details.js", 262]
+    ]
   },
   "Statistic": {
     "translation": "Статистика",
@@ -2062,8 +2092,8 @@
       ["src/pages/LegalEntities/Search.js", 119],
       ["src/pages/PatientMergeRequests/Search.js", 123],
       ["src/pages/PendingDeclarations/Search.js", 91],
-      ["src/pages/Persons/Details.js", 99],
-      ["src/pages/Persons/Details.js", 298],
+      ["src/pages/Persons/Details.js", 101],
+      ["src/pages/Persons/Details.js", 407],
       ["src/pages/Persons/Search.js", 107]
     ]
   },
@@ -2257,7 +2287,7 @@
   },
   "Warning!<0/>After confirmation, the authentication method will be changed to the uncertain": {
     "translation": "Увага!<0/>Після підтвердження, метод аутентифікації буде змінено на невизначений",
-    "origin": [["src/pages/Persons/Details.js", 194]]
+    "origin": [["src/pages/Persons/Details.js", 303]]
   },
   "Warning!<0/>By approving the request, CONFIRMS the validity of their own intentions, and also that the content of the transaction is in accordance with your authority, accepted and signed personally by you.": {
     "translation": "Увага!<0/>Затверджуючи запит, ПІДТВЕРДЖУЄТЕ дійсність власних намірів , а також що зміст правочину ВІДПОВІДАЄ ВАШІЇЙ ВОЛІ, ПРИЙНЯТИЙ ТА ПІДПИСАНИЙ ОСОБИСТО ВАМИ.",
