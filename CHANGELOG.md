@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.42.1"></a>
+## [1.42.1](https://github.com/edenlabllc/ehealth.web/compare/v1.42.0...v1.42.1) (2019-02-08)
+
+
+### Bug Fixes
+
+* **admin:** update Persons Query according to the new schema ([#724](https://github.com/edenlabllc/ehealth.web/issues/724)) ([de0c080](https://github.com/edenlabllc/ehealth.web/commit/de0c080))
+
+
+
+
+
 <a name="1.42.0"></a>
 # [1.42.0](https://github.com/edenlabllc/ehealth.web/compare/v1.41.0...v1.42.0) (2019-02-08)
 
