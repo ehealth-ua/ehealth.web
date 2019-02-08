@@ -4,21 +4,23 @@ const Project = require("@lerna/project");
 
 const exec = require("../exec");
 
-const { CHART } = process.env;
-
-const deployChart = ({ chart }) => {
+const deployChart = ({ chart, env }) => {
   const { config, rootPath } = new Project();
 
   const chartsPath = path.join(rootPath, "charts");
   const chartPath = path.join(chartsPath, chart);
 
   if (!existsSync(chartPath))
-    throw new Error("Unable to deploy chart: chart directory not found");
+    throw new Error(
+      `Unable to deploy chart "${chart}": chart directory not found`
+    );
 
-  const valuesPath = path.join(chartPath, "values-dev.yaml");
+  const valuesPath = path.join(chartPath, `values-${env}.yaml`);
 
   if (!existsSync(valuesPath))
-    throw new Error("Unable to deploy chart: values file not found");
+    throw new Error(
+      `Unable to deploy chart "${chart}": values file for environment "${env}" not found`
+    );
 
   exec("helm init --upgrade --wait");
 

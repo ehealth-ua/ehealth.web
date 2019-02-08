@@ -5,16 +5,18 @@ const YAWN = require("yawn-yaml/cjs");
 
 const getPackageInfo = require("../getPackageInfo");
 
-const updateChart = ({ chart }) => {
+const updateChart = ({ chart, env }) => {
   const { rootPath } = new Project();
   const { chartName, version } = getPackageInfo();
 
   if (!chartName) return;
 
-  const valuesPath = path.join(rootPath, "charts", chart, "values-dev.yaml");
+  const valuesPath = path.join(rootPath, "charts", chart, `values-${env}.yaml`);
 
   if (!existsSync(valuesPath))
-    throw new Error("Unable to update chart: values file not found");
+    throw new Error(
+      `Unable to update chart "${chart}": values file for environment "${env}" not found`
+    );
 
   const yawn = new YAWN(readFileSync(valuesPath, { encoding: "utf8" }));
   const values = yawn.json;
