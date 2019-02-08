@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.40.4"></a>
+## [1.40.4](https://github.com/edenlabllc/ehealth.web/compare/v1.40.3...v1.40.4) (2019-02-08)
+
+
+### Bug Fixes
+
+* **admin-legacy:** fix arrow in nav ([5ffa1a5](https://github.com/edenlabllc/ehealth.web/commit/5ffa1a5))
+
+
+
+
+
 <a name="1.39.0"></a>
 # [1.39.0](https://github.com/edenlabllc/ehealth.web/compare/v1.38.2...v1.39.0) (2019-02-06)
 
