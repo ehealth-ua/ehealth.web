@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.42.0"></a>
+# [1.42.0](https://github.com/edenlabllc/ehealth.web/compare/v1.41.0...v1.42.0) (2019-02-08)
+
+
+### Features
+
+* **admin:** add Emergency Contact and Confidant Person tabs to the Person Details page ([#719](https://github.com/edenlabllc/ehealth.web/issues/719)) ([6768792](https://github.com/edenlabllc/ehealth.web/commit/6768792))
+
+
+
+
+
 <a name="1.40.3"></a>
 ## [1.40.3](https://github.com/edenlabllc/ehealth.web/compare/v1.40.2...v1.40.3) (2019-02-07)
 
