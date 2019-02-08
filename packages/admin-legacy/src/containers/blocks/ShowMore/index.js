@@ -23,10 +23,7 @@ class ShowMore extends React.Component {
           )}
           onClick={() => this.setState({ show: !show })}
         >
-          {name}{" "}
-          <span>
-            <ChevronBottomIcon width="7" height="7" />
-          </span>
+          {name} <ChevronBottomIcon />
         </button>
 
         <div
