@@ -1,5 +1,6 @@
 import React from "react";
-import { isEqual } from "lodash";
+import { isEqual, isEmpty } from "lodash";
+import Composer from "react-composer";
 import { Flex, Box, Text, Heading as Title } from "@rebass/emotion";
 import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
@@ -8,14 +9,14 @@ import { Trans, DateFormat } from "@lingui/macro";
 import { getPhones } from "@ehealth/utils";
 import system from "@ehealth/system-components";
 import { Form, Modal } from "@ehealth/components";
-import { RemoveItemIcon } from "@ehealth/icons";
 
 import Link from "../../components/Link";
 import Badge from "../../components/Badge";
-import Button, { IconButton } from "../../components/Button";
+import Button from "../../components/Button";
 import * as Field from "../../components/Field";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import LoadingOverlay from "../../components/LoadingOverlay";
+import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import AddressView from "../../components/AddressView";
@@ -48,83 +49,6 @@ const Details = ({ id, navigate }) => (
           } = {}
         } = {}
       } = data || {};
-
-      const generalHeader = {
-        firstName: <Trans>First name</Trans>,
-        lastName: <Trans>Last name</Trans>,
-        secondName: <Trans>Second name</Trans>,
-        birthDate: <Trans>Date of birth</Trans>,
-        birthCountry: <Trans>Country of birth</Trans>,
-        birthSettlement: <Trans>Settlement of birth</Trans>,
-        gender: <Trans>Gender</Trans>,
-        email: <Trans>Email</Trans>,
-        preferredWayCommunication: <Trans>Preferred way of communication</Trans>
-      };
-
-      const identityHeader = {
-        unzr: <Trans>Record ID in EDDR</Trans>,
-        taxId: <Trans>INN</Trans>,
-        noTaxId: <Trans>No tax ID</Trans>
-      };
-
-      const phonesHeader = {
-        authenticationMethods: <Trans>Authentication method</Trans>,
-        phones: <Trans>Phones</Trans>
-      };
-
-      const emergencyContactHeader = {
-        firstName: <Trans>First name</Trans>,
-        lastName: <Trans>Last name</Trans>,
-        secondName: <Trans>Second name</Trans>,
-        phones: <Trans>Phones</Trans>
-      };
-
-      const confidantPersonHeader = {
-        relationType: <Trans>Relation type</Trans>,
-        firstName: <Trans>First name</Trans>,
-        lastName: <Trans>Last name</Trans>,
-        secondName: <Trans>Second name</Trans>,
-        birthDate: <Trans>Date of birth</Trans>,
-        birthCountry: <Trans>Country of birth</Trans>,
-        birthSettlement: <Trans>Settlement of birth</Trans>,
-        gender: <Trans>Gender</Trans>,
-        email: <Trans>Email</Trans>,
-        unzr: <Trans>Record ID in EDDR</Trans>,
-        taxId: <Trans>INN</Trans>,
-        phones: <Trans>Phones</Trans>,
-        preferredWayCommunication: <Trans>Preferred way of communication</Trans>
-      };
-
-      const otherHeader = {
-        id: <Trans>Declarations</Trans>
-      };
-
-      //TODO: get this object from Dictionary
-      const addressesHeader = {
-        RESIDENCE: "Проживання",
-        REGISTRATION: "Реєстрації"
-      };
-
-      //TODO: get this object from Dictionary
-      const documentsHeader = {
-        BIRTH_CERTIFICATE: "Свідоцтво про народження",
-        COMPLEMENTARY_PROTECTION_CERTIFICATE:
-          "Посвідчення особи, яка потребує додаткового захисту",
-        NATIONAL_ID: "Біометричний паспорт громадянина України",
-        PASSPORT: "Паспорт громадянина України",
-        PERMANENT_RESIDENCE_PERMIT: "Посвідка на постійне проживання в Україні",
-        REFUGEE_CERTIFICATE: "Посвідка біженця",
-        TEMPORARY_CERTIFICATE: "Посвідка на проживання",
-        TEMPORARY_PASSPORT: "Тимчасове посвідчення громадянина України"
-      };
-
-      //TODO: get this object from Dictionary
-      const documentsRelationshipHeader = {
-        DOCUMENT: "Документ",
-        COURT_DECISION: "Рішення суду",
-        BIRTH_CERTIFICATE: "Свідоцтво про народження",
-        CONFIDANT_CERTIFICATE: "Посвідчення опікуна"
-      };
 
       return (
         <LoadingOverlay loading={loading}>
@@ -169,9 +93,23 @@ const Details = ({ id, navigate }) => (
                     <Trans>General information</Trans>
                   </Heading>
                   <Table
-                    data={tableData(generalHeader, [person, masterPerson])}
-                    renderRow={({ birthDate, ...content }) => ({
+                    header={{
+                      firstName: <Trans>First name</Trans>,
+                      lastName: <Trans>Last name</Trans>,
+                      secondName: <Trans>Second name</Trans>,
+                      birthDate: <Trans>Date of birth</Trans>,
+                      birthCountry: <Trans>Country of birth</Trans>,
+                      birthSettlement: <Trans>Settlement of birth</Trans>,
+                      gender: <Trans>Gender</Trans>,
+                      email: <Trans>Email</Trans>,
+                      preferredWayCommunication: (
+                        <Trans>Preferred way of communication</Trans>
+                      )
+                    }}
+                    data={[person, masterPerson]}
+                    renderRow={({ birthDate, gender, ...content }) => ({
                       ...content,
+                      gender: <DictionaryValue name="GENDER" item={gender} />,
                       birthDate: <DateFormat value={birthDate} />
                     })}
                   />
@@ -180,7 +118,12 @@ const Details = ({ id, navigate }) => (
                     <Trans>Identity Information</Trans>
                   </Heading>
                   <Table
-                    data={tableData(identityHeader, [person, masterPerson])}
+                    header={{
+                      unzr: <Trans>Record ID in EDDR</Trans>,
+                      taxId: <Trans>INN</Trans>,
+                      noTaxId: <Trans>No tax ID</Trans>
+                    }}
+                    data={[person, masterPerson]}
                     renderRow={({ noTaxId, ...content }) => ({
                       ...content,
                       noTaxId: noTaxId ? <Trans>Yes</Trans> : <Trans>No</Trans>
@@ -191,7 +134,13 @@ const Details = ({ id, navigate }) => (
                     <Trans>Phones</Trans>
                   </Heading>
                   <Table
-                    data={tableData(phonesHeader, [person, masterPerson])}
+                    header={{
+                      authenticationMethods: (
+                        <Trans>Authentication method</Trans>
+                      ),
+                      phones: <Trans>Phones</Trans>
+                    }}
+                    data={[person, masterPerson]}
                     renderRow={({ authenticationMethods, phones = [] }) => ({
                       authenticationMethods: (
                         <AuthnMethodsList data={authenticationMethods} />
@@ -203,38 +152,50 @@ const Details = ({ id, navigate }) => (
                   <Heading>
                     <Trans>Documents</Trans>
                   </Heading>
-                  <DocumentsTable
-                    header={documentsHeader}
-                    person={person.documents}
-                    masterPerson={masterPerson.documents}
-                  />
+                  <DictionaryValue name="DOCUMENT_TYPE">
+                    {documentsHeader => (
+                      <DocumentsTable
+                        header={documentsHeader}
+                        person={person.documents}
+                        masterPerson={masterPerson.documents}
+                      />
+                    )}
+                  </DictionaryValue>
 
                   <Heading>
                     <Trans>Address</Trans>
                   </Heading>
-                  <Table
-                    data={tableData(
-                      addressesHeader,
-                      combineNestedData(
-                        person.addresses,
-                        masterPerson.addresses,
-                        addressesHeader
-                      )
+                  <DictionaryValue name="ADDRESS_TYPE">
+                    {addressesHeader => (
+                      <Table
+                        header={addressesHeader}
+                        data={combineNestedData(
+                          person.addresses,
+                          masterPerson.addresses,
+                          addressesHeader
+                        )}
+                        renderRow={({ RESIDENCE, REGISTRATION }) => ({
+                          RESIDENCE: <AddressView data={RESIDENCE} />,
+                          REGISTRATION: <AddressView data={REGISTRATION} />
+                        })}
+                      />
                     )}
-                    renderRow={({ RESIDENCE, REGISTRATION }) => ({
-                      RESIDENCE: <AddressView data={RESIDENCE} />,
-                      REGISTRATION: <AddressView data={REGISTRATION} />
-                    })}
-                  />
+                  </DictionaryValue>
 
                   <Heading>
                     <Trans>Emergency Contact</Trans>
                   </Heading>
                   <Table
-                    data={tableData(emergencyContactHeader, [
-                      person,
-                      masterPerson
-                    ])}
+                    header={{
+                      firstName: <Trans>First name</Trans>,
+                      lastName: <Trans>Last name</Trans>,
+                      secondName: <Trans>Second name</Trans>,
+                      phones: <Trans>Phones</Trans>
+                    }}
+                    data={[
+                      person.emergencyContact,
+                      masterPerson.emergencyContact
+                    ]}
                     renderRow={({ phones = [], ...name }) => ({
                       ...name,
                       phones: phones.length > 0 && getPhones(phones)
@@ -242,18 +203,18 @@ const Details = ({ id, navigate }) => (
                   />
 
                   <ConfidantPersons
-                    person={person.confidantPerson}
-                    masterPerson={masterPerson.confidantPerson}
-                    personsHeader={confidantPersonHeader}
-                    documentsHeader={documentsHeader}
-                    documentsRelationshipHeader={documentsRelationshipHeader}
+                    person={person.confidantPersons}
+                    masterPerson={masterPerson.confidantPersons}
                   />
 
                   <Heading>
                     <Trans>Other</Trans>
                   </Heading>
                   <Table
-                    data={tableData(otherHeader, [person, masterPerson])}
+                    header={{
+                      id: <Trans>Declarations</Trans>
+                    }}
+                    data={[person, masterPerson]}
                     renderRow={({ id }) => ({
                       id: (
                         <Link
@@ -321,16 +282,12 @@ const Details = ({ id, navigate }) => (
   </Query>
 );
 
-const ConfidantPersons = ({
-  person = [],
-  masterPerson = [],
-  personsHeader,
-  documentsHeader,
-  documentsRelationshipHeader
-}) => {
-  const getRelationTypes = (person = []) => ({
-    primary: person.find(item => item.relationType === "PRIMARY"),
-    secondary: person.find(item => item.relationType === "SECONDARY")
+const ConfidantPersons = ({ person, masterPerson }) => {
+  const getRelationTypes = person => ({
+    primary:
+      !isEmpty(person) && person.find(item => item.relationType === "PRIMARY"),
+    secondary:
+      !isEmpty(person) && person.find(item => item.relationType === "SECONDARY")
   });
 
   const master = getRelationTypes(masterPerson);
@@ -347,9 +304,6 @@ const ConfidantPersons = ({
             person={slave.primary}
             masterPerson={master.primary}
             relationType="PRIMARY"
-            personsHeader={personsHeader}
-            documentsHeader={documentsHeader}
-            documentsRelationshipHeader={documentsRelationshipHeader}
           />
         </>
       )}
@@ -363,9 +317,6 @@ const ConfidantPersons = ({
             person={slave.secondary}
             masterPerson={master.secondary}
             relationType="SECONDARY"
-            personsHeader={personsHeader}
-            documentsHeader={documentsHeader}
-            documentsRelationshipHeader={documentsRelationshipHeader}
           />
         </>
       )}
@@ -376,42 +327,62 @@ const ConfidantPersons = ({
 const ConfidantPersonsPair = ({
   person = {},
   masterPerson = {},
-  relationType,
-  personsHeader,
-  documentsHeader,
-  documentsRelationshipHeader
-}) => {
-  return (
-    <>
-      <Table
-        data={tableData(personsHeader, [person, masterPerson])}
-        renderRow={({ phones = [], ...person }) => {
-          return {
-            ...person,
-            phones: phones.length > 0 && getPhones(phones)
-          };
-        }}
-      />
-      <DocumentsTable
-        header={documentsHeader}
-        person={person.documents}
-        masterPerson={masterPerson.documents}
-      />
-      <DocumentsTable
-        header={documentsRelationshipHeader}
-        person={person.documentsRelationship}
-        masterPerson={masterPerson.documentsRelationship}
-      />
-    </>
-  );
-};
+  relationType
+}) => (
+  <>
+    <Table
+      header={{
+        relationType: <Trans>Relation type</Trans>,
+        firstName: <Trans>First name</Trans>,
+        lastName: <Trans>Last name</Trans>,
+        secondName: <Trans>Second name</Trans>,
+        birthDate: <Trans>Date of birth</Trans>,
+        birthCountry: <Trans>Country of birth</Trans>,
+        birthSettlement: <Trans>Settlement of birth</Trans>,
+        gender: <Trans>Gender</Trans>,
+        email: <Trans>Email</Trans>,
+        unzr: <Trans>Record ID in EDDR</Trans>,
+        taxId: <Trans>INN</Trans>,
+        phones: <Trans>Phones</Trans>,
+        preferredWayCommunication: <Trans>Preferred way of communication</Trans>
+      }}
+      data={[person, masterPerson]}
+      renderRow={({ phones = [], gender, ...person }) => {
+        return {
+          ...person,
+          gender: <DictionaryValue name="GENDER" item={gender} />,
+          phones: phones.length > 0 && getPhones(phones)
+        };
+      }}
+    />
+    <Composer
+      components={[
+        <DictionaryValue name="DOCUMENT_TYPE" />,
+        <DictionaryValue name="DOCUMENT_RELATIONSHIP_TYPE" />
+      ]}
+    >
+      {([documentsHeader, documentsRelationshipHeader]) => (
+        <>
+          <DocumentsTable
+            header={documentsHeader}
+            person={person.documents}
+            masterPerson={masterPerson.documents}
+          />
+          <DocumentsTable
+            header={documentsRelationshipHeader}
+            person={person.relationshipDocuments}
+            masterPerson={masterPerson.relationshipDocuments}
+          />
+        </>
+      )}
+    </Composer>
+  </>
+);
 
 const DocumentsTable = ({ header, person, masterPerson, ...props }) => (
   <Table
-    data={documentsData(
-      header,
-      combineNestedData(person, masterPerson, header)
-    )}
+    header={header}
+    data={combineNestedData(person, masterPerson, header)}
     renderRow={({ ...documents }, mismatch) => {
       const [row] = Object.entries(documents).map(([key, value], index) => ({
         [key]: <Document data={value} mismatch={mismatch} />
@@ -419,6 +390,7 @@ const DocumentsTable = ({ header, person, masterPerson, ...props }) => (
       return row;
     }}
     {...props}
+    hideEmptyFields
   />
 );
 
@@ -442,32 +414,62 @@ const Document = ({ data, mismatch }) =>
     </Box>
   ) : null;
 
-const Table = ({ renderRow, data, skipComparison }) => (
-  <TableRoot fontSize={1}>
-    <TableBodyComponent>
-      {data.map((item, index) => (
-        <TableRow key={`row-${index}`}>
-          {Object.entries(item).map(([key, values]) =>
-            values.map((value, index) => {
-              const mismatch =
-                !skipComparison && !isEqual(values[1], values[2]);
-              const row = renderRow({ [key]: value }, mismatch);
-              return (
-                <TableCell
-                  key={`${key}-${index}`}
-                  mismatch={mismatch}
-                  variant="horizontal"
-                >
-                  {index ? row[key] : value}
-                </TableCell>
-              );
-            })
-          )}
-        </TableRow>
-      ))}
-    </TableBodyComponent>
-  </TableRoot>
-);
+const Table = ({
+  renderRow,
+  header,
+  data,
+  skipComparison,
+  hideEmptyFields
+}) => {
+  const transformedData = (
+    header,
+    [firstValue, secondValue],
+    hideEmptyFields
+  ) => {
+    const person = !isEmpty(firstValue) ? firstValue : {};
+    const masterPerson = !isEmpty(secondValue) ? secondValue : {};
+
+    const result = Object.entries(header).reduce(
+      (summary, [key, translation]) => {
+        const data = { [key]: [translation, person[key], masterPerson[key]] };
+        if (hideEmptyFields) {
+          if (person[key] || masterPerson[key]) {
+            return [...summary, data];
+          } else return summary;
+        } else return [...summary, data];
+      },
+      []
+    );
+    return result;
+  };
+
+  return (
+    <TableRoot fontSize={1}>
+      <TableBodyComponent>
+        {transformedData(header, data, hideEmptyFields).map((item, index) => (
+          <TableRow key={`row-${index}`}>
+            {Object.entries(item).map(([key, values]) =>
+              values.map((value, index) => {
+                const mismatch =
+                  !skipComparison && !isEqual(values[1], values[2]);
+                const row = renderRow({ [key]: value }, mismatch);
+                return (
+                  <TableCell
+                    key={`${key}-${index}`}
+                    mismatch={mismatch}
+                    variant="horizontal"
+                  >
+                    {index ? row[key] : value}
+                  </TableCell>
+                );
+              })
+            )}
+          </TableRow>
+        ))}
+      </TableBodyComponent>
+    </TableRoot>
+  );
+};
 
 const AuthnMethodsList = ({ data }) => (
   <Flex as="ul" flexDirection="column">
@@ -550,15 +552,11 @@ const Popup = ({
                     />
                     <Flex justifyContent="left">
                       <Box mr={20}>
-                        <IconButton
-                          icon={RemoveItemIcon}
-                          type="reset"
-                          onClick={toggle}
-                        >
+                        <Button type="reset" variant="light" onClick={toggle}>
                           <Trans>Return</Trans>
-                        </IconButton>
+                        </Button>
                       </Box>
-                      <Button type="submit" width={120} variant={variant}>
+                      <Button type="submit" width={120} variant="blue">
                         {buttonText}
                       </Button>
                     </Flex>
@@ -588,22 +586,6 @@ const combineNestedData = (person, masterPerson, header) => {
     convertTypeToKey(person, types),
     convertTypeToKey(masterPerson, types)
   ];
-};
-
-const tableData = (header, [person, masterPerson]) => {
-  const result = Object.entries(header).map(([key, value]) => ({
-    [key]: [value, person[key], masterPerson[key]]
-  }));
-  return result;
-};
-
-const documentsData = (header, [person, masterPerson]) => {
-  const result = Object.entries(header).reduce((summary, [key, value]) => {
-    if (person[key] || masterPerson[key]) {
-      return [...summary, { [key]: [value, person[key], masterPerson[key]] }];
-    } else return summary;
-  }, []);
-  return result;
 };
 
 const Heading = system(

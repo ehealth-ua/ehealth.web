@@ -5,7 +5,10 @@ const tables = {
     "&:first-of-type": {
       fontWeight: "bold",
       backgroundColor: "#fafbfc",
-      width: "30%"
+      width: "30%",
+      "&:first-letter": {
+        textTransform: "uppercase"
+      }
     }
   },
   mismatch: {

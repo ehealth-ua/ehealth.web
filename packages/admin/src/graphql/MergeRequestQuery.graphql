@@ -65,7 +65,7 @@ query MergeRequestQuery($id: ID!) {
               number
             }
           }
-          confidantPerson {
+          confidantPersons {
             relationType
             firstName
             lastName
@@ -83,7 +83,7 @@ query MergeRequestQuery($id: ID!) {
               issuedAt
               issuedBy
             }
-            documentsRelationship {
+            relationshipDocuments {
               type
               number
               issuedAt
@@ -157,7 +157,7 @@ query MergeRequestQuery($id: ID!) {
               number
             }
           }
-          confidantPerson {
+          confidantPersons {
             relationType
             firstName
             lastName
@@ -175,7 +175,7 @@ query MergeRequestQuery($id: ID!) {
               issuedAt
               issuedBy
             }
-            documentsRelationship {
+            relationshipDocuments {
               type
               number
               issuedAt
