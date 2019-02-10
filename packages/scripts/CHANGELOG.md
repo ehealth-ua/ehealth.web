@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.42.2"></a>
+## [1.42.2](https://github.com/edenlabllc/ehealth.web/compare/v1.42.1...v1.42.2) (2019-02-10)
+
+
+### Bug Fixes
+
+* **scripts:** divide deploy stages to dev and demo, add env option ([4f03e4b](https://github.com/edenlabllc/ehealth.web/commit/4f03e4b))
+
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/edenlabllc/ehealth.web/compare/v0.147.0...v1.0.0) (2018-12-04)
 

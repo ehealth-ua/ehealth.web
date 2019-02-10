@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.42.2"></a>
+## [1.42.2](https://github.com/edenlabllc/ehealth.web/compare/v1.42.1...v1.42.2) (2019-02-10)
+
+
+### Bug Fixes
+
+* **scripts:** divide deploy stages to dev and demo, add env option ([4f03e4b](https://github.com/edenlabllc/ehealth.web/commit/4f03e4b))
+* **scripts:** update travis config ([abbabe4](https://github.com/edenlabllc/ehealth.web/commit/abbabe4))
+
+
+
+
+
 <a name="1.42.1"></a>
 ## [1.42.1](https://github.com/edenlabllc/ehealth.web/compare/v1.42.0...v1.42.1) (2019-02-08)
 
