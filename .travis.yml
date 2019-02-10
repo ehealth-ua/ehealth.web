@@ -32,13 +32,13 @@ jobs:
         - npm run image:push -- --since origin/$TRAVIS_BRANCH -- -- --latest=`[ "$TRAVIS_BRANCH" = "$TRUNK_BRANCH" ] && echo true || echo false` || travis_terminate 1
         - git push --follow-tags --no-verify origin $TRAVIS_BRANCH || travis_terminate 1
     - stage: deploy to dev
-      if: (branch = env(TRUNK_BRANCH) AND type = push
+      if: branch = env(TRUNK_BRANCH) AND type = push
       script:
         - ./ci/prepare-deploy.sh || travis_terminate 1
         - npm run chart:update -- -- -- --env=dev || travis_terminate 1
         - npm run chart:deploy -- --env=dev || travis_terminate 1
     - stage: deploy to demo
-      if: branch =~ /^(\d+\.)?\d+-stable$/) AND type = push
+      if: branch =~ /^(\d+\.)?\d+-stable$/ AND type = push
       script:
         - ./ci/prepare-deploy.sh || travis_terminate 1
         - npm run chart:update -- -- -- --env=demo || travis_terminate 1
