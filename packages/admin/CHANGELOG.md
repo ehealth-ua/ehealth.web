@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.43.0"></a>
+# [1.43.0](https://github.com/edenlabllc/ehealth.web/compare/v1.42.2...v1.43.0) (2019-02-10)
+
+
+### Features
+
+* **admin:** add link to the Patient Merge Requests in the Nav, add feature to the env file ([#729](https://github.com/edenlabllc/ehealth.web/issues/729)) ([1218e70](https://github.com/edenlabllc/ehealth.web/commit/1218e70))
+
+
+
+
+
 <a name="1.42.2"></a>
 ## [1.42.2](https://github.com/edenlabllc/ehealth.web/compare/v1.42.1...v1.42.2) (2019-02-10)
 
