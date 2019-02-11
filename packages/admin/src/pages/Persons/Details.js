@@ -313,6 +313,7 @@ const DeclarationsInfo = ({ id }) => (
                           action: <Trans>Action</Trans>
                         }}
                         renderRow={({
+                          id: declarationId,
                           databaseId,
                           declarationNumber,
                           startDate,
@@ -342,7 +343,7 @@ const DeclarationsInfo = ({ id }) => (
                             ),
                             action: (
                               <Link
-                                to={`/declarations/${id}`}
+                                to={`/declarations/${declarationId}`}
                                 fontWeight="bold"
                               >
                                 <Trans>Show details</Trans>
