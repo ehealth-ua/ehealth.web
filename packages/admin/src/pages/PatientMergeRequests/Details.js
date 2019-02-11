@@ -16,6 +16,7 @@ import Button from "../../components/Button";
 import * as Field from "../../components/Field";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import LoadingOverlay from "../../components/LoadingOverlay";
+import AuthMethodsList from "../../components/AuthMethodsList";
 import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
@@ -143,7 +144,7 @@ const Details = ({ id, navigate }) => (
                     data={[person, masterPerson]}
                     renderRow={({ authenticationMethods, phones = [] }) => ({
                       authenticationMethods: (
-                        <AuthnMethodsList data={authenticationMethods} />
+                        <AuthMethodsList data={authenticationMethods} />
                       ),
                       phones: phones.length > 0 && getPhones(phones)
                     })}
@@ -470,28 +471,6 @@ const Table = ({
     </TableRoot>
   );
 };
-
-const AuthnMethodsList = ({ data }) => (
-  <Flex as="ul" flexDirection="column">
-    {data.map(({ type, phoneNumber }, idx) => (
-      <Box
-        key={idx}
-        as="li"
-        mb={1}
-        css={{ "&:last-child": { marginBottom: 0 } }}
-      >
-        {type !== "NA" ? (
-          <>
-            <div>{type}</div>
-            {phoneNumber && <div>{phoneNumber}</div>}
-          </>
-        ) : (
-          "—"
-        )}
-      </Box>
-    ))}
-  </Flex>
-);
 
 const Popup = ({
   id,

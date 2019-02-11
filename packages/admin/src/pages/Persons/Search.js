@@ -27,6 +27,7 @@ import * as Field from "../../components/Field";
 import Button, { IconButton } from "../../components/Button";
 import Pagination from "../../components/Pagination";
 import Badge from "../../components/Badge";
+import AuthMethodsList from "../../components/AuthMethodsList";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 const SearchPersonsQuery = loader("../../graphql/SearchPersonsQuery.graphql");
@@ -133,7 +134,7 @@ const Search = ({ uri }) => (
                               />
                             ),
                             authenticationMethods: (
-                              <AuthnMethodsList data={authenticationMethods} />
+                              <AuthMethodsList data={authenticationMethods} />
                             ),
                             status: (
                               <Badge
@@ -302,28 +303,6 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
       </Box>
     </Flex>
   </Form>
-);
-
-const AuthnMethodsList = ({ data }) => (
-  <Flex as="ul" flexDirection="column">
-    {data.map(({ type, phoneNumber }, idx) => (
-      <Box
-        key={idx}
-        as="li"
-        mb={1}
-        css={{ "&:last-child": { marginBottom: 0 } }}
-      >
-        {type !== "NA" ? (
-          <>
-            <div>{type}</div>
-            {phoneNumber && <div>{phoneNumber}</div>}
-          </>
-        ) : (
-          "—"
-        )}
-      </Box>
-    ))}
-  </Flex>
 );
 
 const parsePhone = phone => {
