@@ -348,9 +348,19 @@ const ConfidantPersonsPair = ({
         preferredWayCommunication: <Trans>Preferred way of communication</Trans>
       }}
       data={[person, masterPerson]}
-      renderRow={({ phones = [], gender, ...person }) => {
+      renderRow={({
+        relationType,
+        phones = [],
+        birthDate,
+        gender,
+        ...person
+      }) => {
         return {
           ...person,
+          relationType: (
+            <DictionaryValue name="CONFIDANT_PERSON_TYPE" item={relationType} />
+          ),
+          birthDate: <DateFormat value={birthDate} />,
           gender: <DictionaryValue name="GENDER" item={gender} />,
           phones: phones.length > 0 && getPhones(phones)
         };
