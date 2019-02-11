@@ -22,6 +22,7 @@ import Table from "../../components/Table";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
 import * as Field from "../../components/Field";
+import EmptyData from "../../components/EmptyData";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import AddressView from "../../components/AddressView";
 import DefinitionListView from "../../components/DefinitionListView";
@@ -464,7 +465,7 @@ const ConfidantPerson = ({
 };
 
 const ConfidantPersons = ({ data }) => {
-  if (!data) return null;
+  if (!data) return <EmptyData />;
 
   const [primaryPerson] = getDataByType("PRIMARY", data, "relationType");
   const [secondaryPerson] = getDataByType("SECONDARY", data, "relationType");
