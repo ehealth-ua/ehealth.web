@@ -85,7 +85,7 @@ const authenticate = async ({ code, redirect_uri }) => {
     client_secret: CLIENT_SECRET
   };
 
-  const response = await fetch(`${API_URL}/auth/login`, {
+  const response = await fetch(`${API_URL}/oauth/tokens`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token })
