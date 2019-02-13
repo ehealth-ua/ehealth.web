@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.43.6"></a>
+## [1.43.6](https://github.com/edenlabllc/ehealth.web/compare/v1.43.5...v1.43.6) (2019-02-13)
+
+
+### Bug Fixes
+
+* **admin:** show maxlength hint for the comment field on Merge Request Details page ([#733](https://github.com/edenlabllc/ehealth.web/issues/733)) ([41e5d8c](https://github.com/edenlabllc/ehealth.web/commit/41e5d8c))
+
+
+
+
+
 <a name="1.43.4"></a>
 ## [1.43.4](https://github.com/edenlabllc/ehealth.web/compare/v1.43.3...v1.43.4) (2019-02-11)
 
