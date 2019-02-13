@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.43.5"></a>
+## [1.43.5](https://github.com/edenlabllc/ehealth.web/compare/v1.43.4...v1.43.5) (2019-02-13)
+
+
+### Bug Fixes
+
+* **gatekeeper:** revert endpoint ([1aae8c2](https://github.com/edenlabllc/ehealth.web/commit/1aae8c2))
+
+
+
+
+
 <a name="1.34.0"></a>
 # [1.34.0](https://github.com/edenlabllc/ehealth.web/compare/v1.33.4...v1.34.0) (2019-01-23)
 
