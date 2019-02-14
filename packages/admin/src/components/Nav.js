@@ -33,16 +33,21 @@ const Nav = () => (
             )}
           />
 
-          <Ability action="read" resource="declaration">
-            <NavSection title={<Trans>Declarations</Trans>}>
-              <NavLinkExternal to="declarations">
-                <Trans>Declarations</Trans>
-              </NavLinkExternal>
-              <NavLinkExternal to="pending-declarations">
-                <Trans>Pending declarations</Trans>
-              </NavLinkExternal>
-            </NavSection>
-          </Ability>
+          <Flag
+            name="features.declaration"
+            fallbackRender={() => (
+              <Ability action="read" resource="declaration">
+                <NavSection title={<Trans>Declarations</Trans>}>
+                  <NavLinkExternal to="declarations">
+                    <Trans>Declarations</Trans>
+                  </NavLinkExternal>
+                  <NavLinkExternal to="pending-declarations">
+                    <Trans>Pending declarations</Trans>
+                  </NavLinkExternal>
+                </NavSection>
+              </Ability>
+            )}
+          />
 
           <Ability action="read" resource="employee">
             <NavSection title={<Trans>Employees</Trans>}>
@@ -85,10 +90,6 @@ const Nav = () => (
               </Ability>
             </NavSection>
           </Ability>
-
-          <NavLinkExternal to="dictionaries">
-            <Trans>Dictionaries</Trans>
-          </NavLinkExternal>
 
           <Ability action="read" resource="global_parameters">
             <NavLinkExternal to="configuration">
