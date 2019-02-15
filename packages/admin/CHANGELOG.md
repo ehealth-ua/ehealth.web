@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.44.0"></a>
+# [1.44.0](https://github.com/edenlabllc/ehealth.web/compare/v1.43.6...v1.44.0) (2019-02-15)
+
+
+### Bug Fixes
+
+* **admin:** remove link to the Legacy Dictionaries, add Flag for the Legacy Declarations menu item ([1504f4b](https://github.com/edenlabllc/ehealth.web/commit/1504f4b))
+
+
+
+
+
 <a name="1.43.6"></a>
 ## [1.43.6](https://github.com/edenlabllc/ehealth.web/compare/v1.43.5...v1.43.6) (2019-02-13)
 

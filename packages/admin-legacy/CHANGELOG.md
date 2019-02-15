@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.44.0"></a>
+# [1.44.0](https://github.com/edenlabllc/ehealth.web/compare/v1.43.6...v1.44.0) (2019-02-15)
+
+
+### Features
+
+* **admin-legacy:** add Flags to the Legacy Nav, add links to the new Admin pages ([5ae0683](https://github.com/edenlabllc/ehealth.web/commit/5ae0683))
+
+
+
+
+
 <a name="1.40.4"></a>
 ## [1.40.4](https://github.com/edenlabllc/ehealth.web/compare/v1.40.3...v1.40.4) (2019-02-08)
 
