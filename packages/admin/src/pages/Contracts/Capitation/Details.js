@@ -74,8 +74,7 @@ const Details = ({ id }) => (
         contractNumber,
         contractRequest: {
           id: contractRequestId,
-          databaseId: contractRequestDatabaseId,
-          printoutContent: contractRequestContent
+          databaseId: contractRequestDatabaseId
         } = {},
         status,
         startDate,
@@ -86,6 +85,7 @@ const Details = ({ id }) => (
         nhsContractPrice,
         nhsPaymentMethod,
         issueCity,
+        printoutContent,
         contractorRmspAmount,
         contractorLegalEntity = {},
         contractorOwner,
@@ -149,7 +149,7 @@ const Details = ({ id }) => (
                 justifyContent="space-between"
                 alignItems="flex-end"
               >
-                <PrintButton content={contractRequestContent} />
+                <PrintButton content={printoutContent} />
                 {status === "VERIFIED" && (
                   <Popup
                     variant="red"
@@ -796,9 +796,9 @@ const ExternalContractors = ({ externalContractors }) =>
 const Documents = ({ attachedDocuments }) =>
   attachedDocuments ? (
     attachedDocuments.map(({ url, type }) => (
-      <Box m="2">
+      <Box m="5">
         <SaveLink href={url} target="_blank">
-          <Box m={1} color="shiningKnight">
+          <Box mr={2} color="shiningKnight">
             <DefaultImageIcon />
           </Box>
           <Text color="rockmanBlue" lineHeight="1">
@@ -961,13 +961,15 @@ const Grey = system({
 
 const SaveLink = system(
   {
-    is: "a",
+    is: "a"
+  },
+  {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    lineHeight: 0
-  },
-  { textDecoration: "none" }
+    lineHeight: 0,
+    textDecoration: "none"
+  }
 );
 
 export default CapitationContractsDetails;

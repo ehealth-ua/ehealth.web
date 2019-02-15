@@ -65,10 +65,10 @@ const Details = ({ id }) => (
         contractNumber,
         contractRequest: {
           id: contractRequestId,
-          databaseId: contractRequestDatabaseId,
-          printoutContent: contractRequestContent
+          databaseId: contractRequestDatabaseId
         },
         status,
+        printoutContent,
         startDate,
         endDate,
         statusReason,
@@ -133,7 +133,7 @@ const Details = ({ id }) => (
                 justifyContent="space-between"
                 alignItems="flex-end"
               >
-                <PrintButton content={contractRequestContent} />
+                <PrintButton content={printoutContent} />
                 {status === "VERIFIED" && (
                   <Popup
                     variant="red"
@@ -570,9 +570,9 @@ const Divisions = ({ id }) => (
 const Documents = ({ attachedDocuments }) =>
   !isEmpty(attachedDocuments) ? (
     attachedDocuments.map(({ url, type }) => (
-      <Box m="2">
+      <Box m="5">
         <SaveLink href={url} target="_blank">
-          <Box m={1} color="shiningKnight">
+          <Box mr={2} color="shiningKnight">
             <DefaultImageIcon />
           </Box>
           <Text color="rockmanBlue" lineHeight="1">
