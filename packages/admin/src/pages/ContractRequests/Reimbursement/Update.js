@@ -124,7 +124,7 @@ const UpdateContractRequest = ({
   locationParams,
   id
 }) => {
-  const { nhsSignerBase, issueCity } = initialValues;
+  const { nhsSignerBase, issueCity, nhsPaymentMethod } = initialValues;
   return (
     <Box m={5}>
       <Query
@@ -179,6 +179,7 @@ const UpdateContractRequest = ({
                   }}
                   initialValues={{
                     ...initialValues,
+                    nhsPaymentMethod: nhsPaymentMethod || "BACKWARD",
                     nhsSignerBase:
                       nhsSignerBase ||
                       "Положення про Національну службу здоров'я України, затвердженого постановою Кабінету Міністрів України від 27 грудня 2017 року № 1101",
