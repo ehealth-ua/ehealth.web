@@ -28,6 +28,7 @@ import Button, { IconButton } from "../../components/Button";
 import Pagination from "../../components/Pagination";
 import Badge from "../../components/Badge";
 import AuthMethodsList from "../../components/AuthMethodsList";
+import DictionaryValue from "../../components/DictionaryValue";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
 const SearchPersonsQuery = loader("../../graphql/SearchPersonsQuery.graphql");
@@ -35,7 +36,6 @@ const SearchPersonsQuery = loader("../../graphql/SearchPersonsQuery.graphql");
 const PHONE_PATTERN = "^\\+380\\d{9}$";
 const EDRPOU_PATTERN = "^[0-9]{10}$";
 const UNZR_PATTERN = "^[0-9]{8}-[0-9]{5}$";
-const PASSPORT_PATTERN = "^[А-ЯҐЇІЄ]{2}[ ]{0,1}[#№]{0,1}[0-9]{6}$";
 
 const resetPaginationParams = first => ({
   after: undefined,
@@ -52,7 +52,7 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { documents, personal } = {},
+          filter: { identity, personal } = {},
           first,
           last,
           after,
@@ -67,8 +67,7 @@ const Search = ({ uri }) => (
               onSubmit={setLocationParams}
             />
             <Query
-              skip={isEmpty(documents) || isEmpty(personal)}
-              fetchPolicy="network-only"
+              skip={isEmpty(identity) || isEmpty(personal)}
               query={SearchPersonsQuery}
               variables={{
                 first:
@@ -82,7 +81,7 @@ const Search = ({ uri }) => (
                 before,
                 orderBy,
                 filter: {
-                  documents,
+                  identity,
                   personal
                 }
               }}
@@ -188,79 +187,154 @@ export default Search;
 const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
   <Form
     initialValues={initialValues}
-    onSubmit={params =>
-      onSubmit({
+    onSubmit={({ filter: { identity, personal }, ...params }) => {
+      const { number, type, ...documents } = identity;
+      return onSubmit({
         ...params,
-        ...resetPaginationParams(initialValues.first)
-      })
-    }
+        ...resetPaginationParams(initialValues.first),
+        filter: {
+          identity: {
+            type: number ? type : undefined,
+            number: number,
+            ...documents
+          },
+          personal: { ...personal }
+        }
+      });
+    }}
   >
     <Flex mx={-1}>
       <Box width={2 / 5}>
-        <Box px={1}>
-          <Trans
-            id="Enter INN"
-            render={({ translation }) => (
-              <Field.Text
-                name="filter.documents.taxId"
-                label={<Trans>INN</Trans>}
-                placeholder={translation}
-                maxlength={10}
-              />
-            )}
-          />
-          <Validation.Matches
-            field="filter.documents.taxId"
-            options={EDRPOU_PATTERN}
-            message={<Trans>Invalid tax id</Trans>}
-          />
-        </Box>
-        <Box px={1}>
-          <Trans
-            id="MY123456 or 11111111-11111"
-            render={({ translation }) => (
-              <Field.Text
-                name="filter.documents.number"
-                label={<Trans>Passport number</Trans>}
-                placeholder={translation}
-              />
-            )}
-          />
-          <Validation.Matches
-            field="filter.documents.number"
-            options={`(${UNZR_PATTERN})|(${PASSPORT_PATTERN})`}
-            message={<Trans>Invalid number</Trans>}
-          />
-        </Box>
+        <Flex>
+          <Box px={1}>
+            <Trans
+              id="Enter INN"
+              render={({ translation }) => (
+                <Field.Text
+                  name="filter.identity.taxId"
+                  label={<Trans>INN</Trans>}
+                  placeholder={translation}
+                  maxlength={10}
+                />
+              )}
+            />
+            <Validation.Matches
+              field="filter.identity.taxId"
+              options={EDRPOU_PATTERN}
+              message={<Trans>Invalid tax id</Trans>}
+            />
+          </Box>
+          <Box px={1}>
+            <Trans
+              id="Enter UNZR"
+              render={({ translation }) => (
+                <Field.Text
+                  name="filter.identity.unzr"
+                  label={<Trans>UNZR</Trans>}
+                  placeholder={translation}
+                  maxlength={14}
+                />
+              )}
+            />
+            <Validation.Matches
+              field="filter.identity.unzr"
+              options={UNZR_PATTERN}
+              message={<Trans>Invalid UNZR</Trans>}
+            />
+          </Box>
+        </Flex>
+        <Flex>
+          <Box pl={1} pr={2}>
+            <Trans
+              id="Enter document number"
+              render={({ translation }) => (
+                <DependedField
+                  name="filter.identity.type"
+                  subscription={{ value: true }}
+                >
+                  {({ input: { value } }) => {
+                    const { pattern, maxLength } = getValidationPattern(value);
+
+                    return (
+                      <>
+                        <Field.Text
+                          name="filter.identity.number"
+                          label={<Trans>Document number</Trans>}
+                          placeholder={translation}
+                          disabled={!value}
+                          maxLength={maxLength}
+                        />
+                        <Validation.Matches
+                          field="filter.identity.number"
+                          options={pattern}
+                          message={<Trans>Invalid number</Trans>}
+                        />
+                      </>
+                    );
+                  }}
+                </DependedField>
+              )}
+            />
+            <DependedField.Listener
+              field="filter.identity.type"
+              set="filter.identity.number"
+              to=""
+            />
+          </Box>
+          <Box>
+            <DictionaryValue name="DOCUMENT_TYPE">
+              {documentTypes => (
+                <Trans
+                  id="Select document type"
+                  render={({ translation }) => (
+                    <Field.Select
+                      name="filter.identity.type"
+                      label="&nbsp;"
+                      items={Object.keys(documentTypes)}
+                      itemToString={item => documentTypes[item] || translation}
+                      variant="select"
+                      emptyOption
+                    />
+                  )}
+                />
+              )}
+            </DictionaryValue>
+          </Box>
+        </Flex>
       </Box>
       <Divider />
-      <DependedField name="filter.documents" subscription={{ value: true }}>
-        {({ input: { value } }) => (
-          <Box width={2 / 5}>
-            <Box px={1}>
-              <Field.Text
-                name="filter.personal.authenticationMethod.phoneNumber"
-                label={<Trans>Phone number</Trans>}
-                format={formatPhone}
-                parse={parsePhone}
-                disabled={!value}
-              />
-              <Validation.Matches
-                field="filter.personal.authenticationMethod.phoneNumber"
-                options={PHONE_PATTERN}
-                message={<Trans>Invalid phone number</Trans>}
-              />
+      <DependedField name="filter.identity" subscription={{ value: true }}>
+        {({ input: { value } }) => {
+          const identity = Object.keys(value).filter(
+            item => value[item] && item !== "type"
+          );
+          return (
+            <Box width={2 / 5}>
+              <Box px={1}>
+                <Field.Text
+                  name="filter.personal.authenticationMethod.phoneNumber"
+                  label={<Trans>Phone number</Trans>}
+                  format={formatPhone}
+                  parse={parsePhone}
+                  disabled={isEmpty(identity)}
+                />
+                <Validation.Matches
+                  field="filter.personal.authenticationMethod.phoneNumber"
+                  options={PHONE_PATTERN}
+                  message={<Trans>Invalid phone number</Trans>}
+                />
+              </Box>
+              <Box px={1} width={3 / 5}>
+                <Field.DatePicker
+                  name="filter.personal.birthDate"
+                  label={<Trans>Date of birth</Trans>}
+                  minDate="1900-01-01"
+                  disabled={isEmpty(identity)}
+                />
+              </Box>
             </Box>
-            <Box px={1} width={3 / 5}>
-              <Field.DatePicker
-                name="filter.personal.birthDate"
-                label={<Trans>Date of birth</Trans>}
-                minDate="1900-01-01"
-                disabled={!value}
-              />
-            </Box>
-          </Box>
-        )}
+          );
+        }}
       </DependedField>
     </Flex>
     <Flex mx={-1} justifyContent="flex-start">
@@ -269,7 +343,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
           {({
             input: {
               value: {
-                documents = {},
+                identity = {},
                 personal = {},
                 personal: {
                   authenticationMethod: { phoneNumber = {} } = {}
@@ -280,7 +354,9 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
             <Button
               variant="blue"
               disabled={
-                (isEmpty(documents.number) && isEmpty(documents.taxId)) ||
+                (isEmpty(identity.number) &&
+                  isEmpty(identity.taxId) &&
+                  isEmpty(identity.unzr)) ||
                 (isEmpty(phoneNumber) && isEmpty(personal.birthDate))
               }
             >
@@ -311,6 +387,30 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
 const parsePhone = phone => {
   const parsedPhone = `+${phone.replace(/[^\d]/g, "").substr(0, 12)}`;
   return parsedPhone.length < 4 ? undefined : parsedPhone;
+};
+
+const getValidationPattern = data => {
+  switch (data) {
+    case "BIRTH_CERTIFICATE":
+    case "TEMPORARY_PASSPORT": {
+      return {
+        pattern: "^(?![ЫЪЭЁыъэё@%&$^#`~:,.*|}{?!])[A-ZА-ЯҐЇІЄ0-9№/()-]+$",
+        maxLength: 25
+      };
+    }
+    case "NATIONAL_ID": {
+      return {
+        pattern: "^[0-9]{9}$",
+        maxLength: 9
+      };
+    }
+    default: {
+      return {
+        pattern: "^((?![ЫЪЭЁ])([А-ЯҐЇІЄ])){2}[0-9]{6}$",
+        maxLength: 8
+      };
+    }
+  }
 };
 
 const Divider = system(
