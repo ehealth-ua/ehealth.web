@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.45.0"></a>
+# [1.45.0](https://github.com/edenlabllc/ehealth.web/compare/v1.44.0...v1.45.0) (2019-02-18)
+
+
+### Features
+
+* **admin:** set default payment method ([4469303](https://github.com/edenlabllc/ehealth.web/commit/4469303))
+
+
+
+
+
 <a name="1.44.0"></a>
 # [1.44.0](https://github.com/edenlabllc/ehealth.web/compare/v1.43.6...v1.44.0) (2019-02-15)
 
