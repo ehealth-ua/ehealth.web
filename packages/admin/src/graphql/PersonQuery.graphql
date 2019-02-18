@@ -6,14 +6,38 @@ query PersonQuery($id: ID!) {
     firstName
     secondName
     lastName
+    gender
     birthDate
     birthCountry
     birthSettlement
+    addresses {
+      type
+      country
+      area
+      region
+      settlement
+      settlementType
+      settlementId
+      streetType
+      street
+      building
+      apartment
+      zip
+    }
     taxId
     unzr
+    email
     phones {
       type
       number
+    }
+    preferredWayCommunication
+    documents {
+      type
+      number
+      issuedAt
+      issuedBy
+      expirationDate
     }
     authenticationMethods {
       type
@@ -33,6 +57,7 @@ query PersonQuery($id: ID!) {
       firstName
       lastName
       secondName
+      gender
       birthDate
       birthCountry
       birthSettlement
@@ -42,6 +67,20 @@ query PersonQuery($id: ID!) {
       phones {
         type
         number
+      }
+      documents {
+        type
+        number
+        issuedAt
+        issuedBy
+        expirationDate
+      }
+      relationshipDocuments {
+        type
+        number
+        issuedAt
+        issuedBy
+        expirationDate
       }
     }
   }

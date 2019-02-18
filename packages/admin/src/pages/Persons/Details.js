@@ -17,6 +17,7 @@ import {
 
 import Tabs from "../../components/Tabs";
 import Link from "../../components/Link";
+import Line from "../../components/Line";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
@@ -25,6 +26,8 @@ import * as Field from "../../components/Field";
 import EmptyData from "../../components/EmptyData";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import AddressView from "../../components/AddressView";
+import DocumentView from "../../components/DocumentView";
+import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import {
@@ -52,18 +55,21 @@ const Details = ({ id }) => (
         firstName,
         secondName,
         lastName,
+        gender,
         birthDate,
         birthCountry,
         birthSettlement,
+        addresses,
         taxId,
         unzr,
+        email,
         phones = [],
+        preferredWayCommunication,
+        documents,
         authenticationMethods,
         emergencyContact,
         confidantPersons
       } = person;
-      const [mobilePhone] = getDataByType("MOBILE", phones);
-      const [landLinePhone] = getDataByType("LAND_LINE", phones);
       const authInfo =
         !isEmpty(authenticationMethods) && authenticationMethods[0];
 
@@ -74,10 +80,14 @@ const Details = ({ id }) => (
         birthDate,
         birthCountry,
         birthSettlement,
+        gender,
+        addresses,
         taxId,
         unzr,
-        mobilePhone: mobilePhone && mobilePhone.number,
-        landLinePhone: landLinePhone && landLinePhone.number
+        documents,
+        email,
+        preferredWayCommunication,
+        phones
       };
 
       return (
@@ -125,7 +135,7 @@ const Details = ({ id }) => (
           </Tabs.Nav>
           <Tabs.Content>
             <Router>
-              <UserInfo path="/" userInfo={userInfo} />
+              <UserInfo path="/" data={userInfo} />
               <AuthInfo
                 path="auth"
                 databaseId={databaseId}
@@ -150,30 +160,73 @@ const Details = ({ id }) => (
 );
 
 const UserInfo = ({
-  userInfo,
-  birthDate,
-  userInfo: { firstName, secondName, lastName }
-}) => (
-  <Box p={5}>
-    <DefinitionListView
-      labels={{
-        fullName: <Trans>Patient Name</Trans>,
-        birthDate: <Trans>Date of birth</Trans>,
-        birthCountry: <Trans>Country of birth</Trans>,
-        birthSettlement: <Trans>Place of birth</Trans>,
-        taxId: <Trans>INN</Trans>,
-        unzr: <Trans>Record ID in EDDR</Trans>,
-        mobilePhone: <Trans>Mobile number</Trans>,
-        landLinePhone: <Trans>Stationary number</Trans>
-      }}
-      data={{
-        ...userInfo,
-        birthDate: <DateFormat value={birthDate} />,
-        fullName: getFullName({ firstName, secondName, lastName })
-      }}
-    />
-  </Box>
-);
+  data: {
+    firstName,
+    secondName,
+    lastName,
+    gender,
+    birthDate,
+    phones,
+    documents = [],
+    relationshipDocuments = [],
+    addresses = [],
+    relationType,
+    ...person
+  }
+}) => {
+  const [mobilePhone] = getDataByType("MOBILE", phones);
+  const [landLinePhone] = getDataByType("LAND_LINE", phones);
+
+  return (
+    <Box p={5}>
+      <DefinitionListView
+        labels={{
+          fullName: relationType ? (
+            <Trans>PIB</Trans>
+          ) : (
+            <Trans>Patient Name</Trans>
+          ),
+          gender: <Trans>Gender</Trans>,
+          birthDate: <Trans>Date of birth</Trans>,
+          birthCountry: <Trans>Country of birth</Trans>,
+          birthSettlement: <Trans>Place of birth</Trans>,
+          registrationAddress: <Trans>Registration address</Trans>,
+          residenceAddress: <Trans>Residence address</Trans>,
+          taxId: <Trans>INN</Trans>,
+          unzr: <Trans>Record ID in EDDR</Trans>,
+          preferredWayCommunication: (
+            <Trans>Preferred way of communication</Trans>
+          ),
+          email: <Trans>Email</Trans>,
+          mobilePhone: <Trans>Mobile number</Trans>,
+          landLinePhone: <Trans>Stationary number</Trans>
+        }}
+        data={{
+          ...person,
+          gender: <DictionaryValue name="GENDER" item={gender} />,
+          birthDate: <DateFormat value={birthDate} />,
+          fullName: getFullName({ firstName, secondName, lastName }),
+          registrationAddress: getAddressByType(addresses, "REGISTRATION"),
+          residenceAddress: getAddressByType(addresses, "RESIDENCE"),
+          mobilePhone: mobilePhone && mobilePhone.number,
+          landLinePhone: landLinePhone && landLinePhone.number
+        }}
+      />
+      {(!isEmpty(documents) || !isEmpty(relationshipDocuments)) && (
+        <>
+          <Heading fontSize="1" fontWeight="normal" py={2}>
+            <Trans>Documents</Trans>
+          </Heading>
+          <Documents documents={documents} dictionary="DOCUMENT_TYPE" />
+          <Documents
+            documents={relationshipDocuments}
+            dictionary="DOCUMENT_RELATIONSHIP_TYPE"
+          />
+        </>
+      )}
+    </Box>
+  );
+};
 
 const AuthInfo = ({ id, databaseId, authInfo, status }) =>
   authInfo ? (
@@ -425,46 +478,6 @@ const EmergencyContact = ({ data }) => {
   );
 };
 
-const ConfidantPerson = ({
-  data: {
-    relationType,
-    firstName,
-    secondName,
-    lastName,
-    birthDate,
-    phones,
-    ...person
-  }
-}) => {
-  const [mobilePhone] = getDataByType("MOBILE", phones);
-  const [landLinePhone] = getDataByType("LAND_LINE", phones);
-
-  return (
-    <Box p={5}>
-      <DefinitionListView
-        labels={{
-          fullName: <Trans>PIB</Trans>,
-          birthDate: <Trans>Date of birth</Trans>,
-          birthCountry: <Trans>Country of birth</Trans>,
-          birthSettlement: <Trans>Place of birth</Trans>,
-          taxId: <Trans>INN</Trans>,
-          unzr: <Trans>Record ID in EDDR</Trans>,
-          email: <Trans>Email</Trans>,
-          mobilePhone: <Trans>Mobile number</Trans>,
-          landLinePhone: <Trans>Stationary number</Trans>
-        }}
-        data={{
-          ...person,
-          fullName: getFullName({ firstName, secondName, lastName }),
-          birthDate: <DateFormat value={birthDate} />,
-          mobilePhone: mobilePhone && mobilePhone.number,
-          landLinePhone: landLinePhone && landLinePhone.number
-        }}
-      />
-    </Box>
-  );
-};
-
 const ConfidantPersons = ({ data }) => {
   if (!data) return <EmptyData />;
 
@@ -478,23 +491,43 @@ const ConfidantPersons = ({ data }) => {
           <Heading fontSize="1" fontWeight="normal" p={5} pb={0}>
             <Trans>Primary Confidant Persons</Trans>
           </Heading>
-          <ConfidantPerson data={primaryPerson} />
+          <UserInfo data={primaryPerson} />
         </>
       )}
 
       {secondaryPerson && (
         <>
-          <Heading fontSize="1" fontWeight="normal" p={5} pb={0}>
+          <Line />
+          <Heading fontSize="1" fontWeight="normal" p={5} py={2}>
             <Trans>Secondary Confidant Persons</Trans>
           </Heading>
-          <ConfidantPerson data={secondaryPerson} />
+          <UserInfo data={secondaryPerson} />
         </>
       )}
     </>
   );
 };
 
+const Documents = ({ documents, dictionary }) => {
+  if (isEmpty(documents)) return null;
+  return documents.map(({ type, ...documentDetails }, index) => (
+    <Box key={index}>
+      <Heading fontSize="0" fontWeight="bold" py={4}>
+        <DictionaryValue name={dictionary} item={type} />
+      </Heading>
+      <DocumentView data={documentDetails} />
+    </Box>
+  ));
+};
+
 const getDataByType = (type, arr, key = "type") =>
   arr.filter(t => t[key] === type);
+
+const getAddressByType = (addresses, type) => {
+  if (isEmpty(addresses)) return null;
+
+  const address = addresses.find(a => a.type === type);
+  return <AddressView data={address} />;
+};
 
 export default Details;

@@ -68,6 +68,7 @@ const Search = ({ uri }) => (
             />
             <Query
               skip={isEmpty(documents) || isEmpty(personal)}
+              fetchPolicy="network-only"
               query={SearchPersonsQuery}
               variables={{
                 first:
@@ -112,6 +113,7 @@ const Search = ({ uri }) => (
                             id,
                             birthDate,
                             taxId,
+                            unzr,
                             authenticationMethods,
                             insertedAt,
                             status,
@@ -121,6 +123,7 @@ const Search = ({ uri }) => (
                             fullName: getFullName(person),
                             birthDate: formatDate(birthDate),
                             taxId: taxId || "—",
+                            unzr: unzr || "—",
                             insertedAt: (
                               <DateFormat
                                 value={insertedAt}
