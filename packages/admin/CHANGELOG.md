@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.46.1"></a>
+## [1.46.1](https://github.com/edenlabllc/ehealth.web/compare/v1.46.0...v1.46.1) (2019-02-19)
+
+
+### Bug Fixes
+
+* **admin:** remove printoutContent from ContractRequest in Contracts queries, replace printoutContent in Details pages, fix styles on Documents tab ([6814dfe](https://github.com/edenlabllc/ehealth.web/commit/6814dfe))
+
+
+
+
+
 <a name="1.46.0"></a>
 # [1.46.0](https://github.com/edenlabllc/ehealth.web/compare/v1.45.0...v1.46.0) (2019-02-19)
 
