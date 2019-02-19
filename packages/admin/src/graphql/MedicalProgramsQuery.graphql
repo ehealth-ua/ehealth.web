@@ -1,16 +1,31 @@
 query MedicalProgramsQuery(
-  $first: Int
   $filter: MedicalProgramFilter
   $orderBy: MedicalProgramOrderBy
+  $first: Int
+  $last: Int
+  $before: String
+  $after: String
   $skip: Boolean!
 ) {
-  medicalPrograms(first: $first, filter: $filter, orderBy: $orderBy)
-    @skip(if: $skip) {
+  medicalPrograms(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) @skip(if: $skip) {
     nodes {
       id
       databaseId
       name
       isActive
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
     }
   }
 }

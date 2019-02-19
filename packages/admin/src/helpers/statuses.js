@@ -41,6 +41,11 @@ const SUSPENDED = {
   [true]: "Призупинений"
 };
 
+const MEDICAL_PROGRAM_STATUS = {
+  [true]: "Активна",
+  [false]: "Неактивна"
+};
+
 const MERGE_LEGAL_ENTITIES_JOBS = {
   FAILED: "Помилка",
   FAILED_WITH_ERROR: "Помилка системи",
@@ -67,6 +72,7 @@ const STATUSES = {
   LEGAL_ENTITY_RELATION,
   CONTRACT_REQUEST,
   MERGE_LEGAL_ENTITIES_JOBS,
+  MEDICAL_PROGRAM_STATUS,
   SUSPENDED
 };
 

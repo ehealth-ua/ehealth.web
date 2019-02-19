@@ -20,6 +20,7 @@ import PatientMergeRequests from "./pages/PatientMergeRequests";
 import Declarations from "./pages/Declarations";
 import PendingDeclarations from "./pages/PendingDeclarations";
 import LegalEntities from "./pages/LegalEntities";
+import MedicalPrograms from "./pages/MedicalPrograms";
 import Dictionaries from "./pages/Dictionaries";
 
 import localeUK from "./locales/uk/messages.js";
@@ -48,6 +49,7 @@ const App = () => (
                 <Declarations path="declarations/*" />
                 <PendingDeclarations path="pending-declarations/*" />
                 <LegalEntities path="legal-entities/*" />
+                <MedicalPrograms path="medical-programs/*" />
                 <Dictionaries path="dictionaries/*" />
                 <NotFound default />
               </Router>

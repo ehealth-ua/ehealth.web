@@ -1,0 +1,9 @@
+mutation DeactivateMedicalProgramMutation(
+  $input: DeactivateMedicalProgramInput!
+) {
+  deactivateMedicalProgram(input: $input) {
+    medicalProgram {
+      id
+    }
+  }
+}
