@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.46.0"></a>
+# [1.46.0](https://github.com/edenlabllc/ehealth.web/compare/v1.45.0...v1.46.0) (2019-02-19)
+
+
+### Features
+
+* **admin:** add additional info for Person and Confidant, reuse UserInfo for Confidant Tab ([493de8a](https://github.com/edenlabllc/ehealth.web/commit/493de8a))
+
+
+
+
+
 <a name="1.45.0"></a>
 # [1.45.0](https://github.com/edenlabllc/ehealth.web/compare/v1.44.0...v1.45.0) (2019-02-18)
 
