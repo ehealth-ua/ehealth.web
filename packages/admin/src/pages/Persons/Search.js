@@ -88,7 +88,7 @@ const Search = ({ uri }) => (
                     document: number
                       ? {
                           type: type,
-                          number: number
+                          number
                         }
                       : undefined
                   },
@@ -208,7 +208,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
             number: number,
             ...documents
           },
-          personal: { ...personal }
+          personal
         }
       });
     }}
@@ -249,7 +249,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
             <Validation.Matches
               field="filter.identity.unzr"
               options={UNZR_PATTERN}
-              message={<Trans>Invalid UNZR</Trans>}
+              message={<Trans>Invalid number</Trans>}
             />
           </Box>
         </Flex>
