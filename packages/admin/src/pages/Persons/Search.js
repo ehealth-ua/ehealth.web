@@ -59,6 +59,7 @@ const Search = ({ uri }) => (
           before,
           orderBy
         } = locationParams;
+        const { number, type, ...documents } = identity || {};
 
         return (
           <>
@@ -68,6 +69,7 @@ const Search = ({ uri }) => (
             />
             <Query
               skip={isEmpty(identity) || isEmpty(personal)}
+              fetchPolicy="network-only"
               query={SearchPersonsQuery}
               variables={{
                 first:
@@ -81,7 +83,15 @@ const Search = ({ uri }) => (
                 before,
                 orderBy,
                 filter: {
-                  identity,
+                  identity: {
+                    ...documents,
+                    document: number
+                      ? {
+                          type: type,
+                          number: number
+                        }
+                      : undefined
+                  },
                   personal
                 }
               }}
@@ -214,7 +224,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                   name="filter.identity.taxId"
                   label={<Trans>INN</Trans>}
                   placeholder={translation}
-                  maxlength={10}
+                  maxLength={10}
                 />
               )}
             />
@@ -232,7 +242,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                   name="filter.identity.unzr"
                   label={<Trans>UNZR</Trans>}
                   placeholder={translation}
-                  maxlength={14}
+                  maxLength={14}
                 />
               )}
             />
