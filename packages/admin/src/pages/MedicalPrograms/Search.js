@@ -1,19 +1,23 @@
 import React from "react";
 import isEmpty from "lodash/isEmpty";
+import { ifProp } from "styled-tools";
 import debounce from "lodash/debounce";
 import { loader } from "graphql.macro";
 import { BooleanValue } from "react-values";
+import { mixed } from "@ehealth/system-tools";
 import { Query, Mutation } from "react-apollo";
+import system from "@ehealth/system-components";
 import { Trans, DateFormat } from "@lingui/macro";
-import { Flex, Box, Heading } from "@rebass/emotion";
+import { Flex, Box, Heading, Text } from "@rebass/emotion";
 
-import { SearchIcon, RemoveItemIcon, NegativeIcon } from "@ehealth/icons";
+import { SearchIcon, RemoveItemIcon } from "@ehealth/icons";
 import { Form, LocationParams, Modal } from "@ehealth/components";
 import {
   parseSortingParams,
   stringifySortingParams,
   convertStringToBoolean
 } from "@ehealth/utils";
+import Badge from "../../components/Badge";
 import Table from "../../components/Table";
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
@@ -31,9 +35,21 @@ const DeactivateMedicalProgramMutation = loader(
 
 const Search = ({ uri }) => (
   <Box p={6}>
-    <Heading as="h1" fontWeight="normal" mb={6}>
-      <Trans>Medical programs</Trans>
-    </Heading>
+    <Flex justifyContent="space-between" alignItems="flex-start" mb={6}>
+      <Box>
+        <Heading as="h1" fontWeight="normal" mb={4}>
+          <Trans>Medical programs</Trans>
+        </Heading>
+        <Text fontSize={1}>
+          <Trans>Manage a program from the list below or add the new one</Trans>
+        </Text>
+      </Box>
+      <Box>
+        <Button onClick={() => null} variant="green">
+          <Trans>Add program</Trans>
+        </Button>
+      </Box>
+    </Flex>
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const { orderBy } = locationParams;
@@ -90,12 +106,12 @@ const Search = ({ uri }) => (
                               />
                             ),
                             isActive: (
-                              <Flex justifyContent="center">
-                                <NegativeIcon
-                                  fill={isActive ? "#1BB934" : "#ED1C24"}
-                                  stroke={isActive ? "#1BB934" : "#ED1C24"}
-                                />
-                              </Flex>
+                              <Badge
+                                type="MEDICAL_PROGRAM_STATUS"
+                                name={isActive}
+                                variant={`MEDICAL_PROGRAM_STATUS.${isActive}`}
+                                display="block"
+                              />
                             ),
                             action: (
                               <Popup
@@ -193,7 +209,7 @@ const SearchMedicalProgramsForm = ({ initialValues, onSubmit }) => (
     }
   >
     <Flex mx={-1}>
-      <Box px={1} width={1 / 2}>
+      <Box px={1} width={1 / 3}>
         <Trans
           id="Medical program ID"
           render={({ translation }) => (
@@ -206,7 +222,7 @@ const SearchMedicalProgramsForm = ({ initialValues, onSubmit }) => (
           )}
         />
       </Box>
-      <Box px={1} width={1 / 2}>
+      <Box px={1} width={1 / 3}>
         <Trans
           id="Choose medical program"
           render={({ translation }) => (
@@ -231,7 +247,6 @@ const SearchMedicalProgramsForm = ({ initialValues, onSubmit }) => (
                     label={<Trans>Medical program</Trans>}
                     placeholder={translation}
                     items={medicalPrograms.map(({ name }) => name)}
-                    autocomplete="off"
                     onInputValueChange={debounce(
                       (program, { selectedItem, inputValue }) =>
                         !isEmpty(program) &&
@@ -250,24 +265,24 @@ const SearchMedicalProgramsForm = ({ initialValues, onSubmit }) => (
           )}
         />
       </Box>
+      <Box px={1} width={1 / 3}>
+        <Trans
+          id="All statuses"
+          render={({ translation }) => (
+            <Field.Select
+              name="filter.isActive"
+              label={<Trans>Program status</Trans>}
+              items={Object.keys(STATUSES.MEDICAL_PROGRAM_STATUS)}
+              itemToString={item =>
+                STATUSES.MEDICAL_PROGRAM_STATUS[item] || translation
+              }
+              variant="select"
+              emptyOption
+            />
+          )}
+        />
+      </Box>
     </Flex>
-    <Box mx={-1} px={1} width={1 / 4}>
-      <Trans
-        id="All statuses"
-        render={({ translation }) => (
-          <Field.Select
-            name="filter.isActive"
-            label={<Trans>Program status</Trans>}
-            items={Object.keys(STATUSES.MEDICAL_PROGRAM_STATUS)}
-            itemToString={item =>
-              STATUSES.MEDICAL_PROGRAM_STATUS[item] || translation
-            }
-            variant="select"
-            emptyOption
-          />
-        )}
-      />
-    </Box>
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
         <Button variant="blue">
@@ -305,18 +320,12 @@ const Popup = ({
     <BooleanValue>
       {({ value: opened, toggle }) => (
         <>
-          <Flex justifyContent="center">
-            <Button
-              variant={variant}
-              onClick={toggle}
-              disabled={disabled}
-              px={1}
-              py={1}
-              fontSize={0}
-            >
-              Деактивувати
-            </Button>
-          </Flex>
+          <DeactivateButton
+            onClick={disabled ? null : toggle}
+            disabled={disabled}
+          >
+            <Trans>Deactivate</Trans>
+          </DeactivateButton>
 
           {opened && (
             <Modal width={760} backdrop textAlign="left">
@@ -351,3 +360,15 @@ const filteredLocationParams = (params = {}) => {
     filter: filter ? medicalProgramsFilteredParams(filter) : filter
   };
 };
+
+const DeactivateButton = system(
+  {
+    is: Text
+  },
+  props =>
+    mixed({
+      cursor: "pointer",
+      fontWeight: "bold",
+      color: ifProp("disabled", "januaryDawn", "rockmanBlue")(props)
+    })
+);

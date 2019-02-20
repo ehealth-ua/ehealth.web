@@ -21,7 +21,11 @@ const status = {
       VERIFIED: { bg: "darkPastelGreen" },
       NHS_SIGNED: { bg: "darkAndStormy" },
       [true]: { bg: "redPigment" },
-      [false]: { bg: "darkPastelGreen" }
+      [false]: { bg: "darkPastelGreen" },
+      MEDICAL_PROGRAM_STATUS: {
+        [true]: { bg: "darkPastelGreen" },
+        [false]: { bg: "redPigment" }
+      }
     }
   }
 };
