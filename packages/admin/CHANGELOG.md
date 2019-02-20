@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.47.0"></a>
+# [1.47.0](https://github.com/edenlabllc/ehealth.web/compare/v1.46.1...v1.47.0) (2019-02-20)
+
+
+### Bug Fixes
+
+* **admin:** update documents filter, according to the new scheme ([2f25bce](https://github.com/edenlabllc/ehealth.web/commit/2f25bce))
+
+
+### Features
+
+* **admin:** add new localizations for the Persons Search page ([821b73e](https://github.com/edenlabllc/ehealth.web/commit/821b73e))
+* **admin:** move UNZR search to the separate field, add field for document type select, depend document number field on type field ([7abf6ff](https://github.com/edenlabllc/ehealth.web/commit/7abf6ff))
+
+
+
+
+
 <a name="1.46.1"></a>
 ## [1.46.1](https://github.com/edenlabllc/ehealth.web/compare/v1.46.0...v1.46.1) (2019-02-19)
 
