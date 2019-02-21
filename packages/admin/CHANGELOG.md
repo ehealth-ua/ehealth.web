@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.47.2"></a>
+## [1.47.2](https://github.com/edenlabllc/ehealth.web/compare/v1.47.1...v1.47.2) (2019-02-21)
+
+
+### Bug Fixes
+
+* **admin:** fix search form view in Safari ([#758](https://github.com/edenlabllc/ehealth.web/issues/758)) ([b3ba1cb](https://github.com/edenlabllc/ehealth.web/commit/b3ba1cb))
+
+
+
+
+
 <a name="1.47.1"></a>
 ## [1.47.1](https://github.com/edenlabllc/ehealth.web/compare/v1.47.0...v1.47.1) (2019-02-21)
 
