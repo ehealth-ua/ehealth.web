@@ -216,7 +216,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
     <Flex mx={-1}>
       <Box width={2 / 5}>
         <Flex>
-          <Box px={1}>
+          <Box px={1} width={1 / 2}>
             <Trans
               id="Enter INN"
               render={({ translation }) => (
@@ -234,7 +234,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
               message={<Trans>Invalid tax id</Trans>}
             />
           </Box>
-          <Box px={1}>
+          <Box px={1} width={1 / 2}>
             <Trans
               id="Enter UNZR"
               render={({ translation }) => (
@@ -254,7 +254,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
           </Box>
         </Flex>
         <Flex>
-          <Box pl={1} pr={2}>
+          <Box px={1} width={1 / 2}>
             <Trans
               id="Enter document number"
               render={({ translation }) => (
@@ -273,6 +273,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                           placeholder={translation}
                           disabled={!value}
                           maxLength={maxLength}
+                          width="100%"
                         />
                         <Validation.Matches
                           field="filter.identity.number"
@@ -291,7 +292,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
               to=""
             />
           </Box>
-          <Box>
+          <Box px={1} width={1 / 2}>
             <DictionaryValue name="DOCUMENT_TYPE">
               {documentTypes => (
                 <Trans
@@ -334,7 +335,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                   message={<Trans>Invalid phone number</Trans>}
                 />
               </Box>
-              <Box px={1} width={3 / 5}>
+              <Box px={1} width={1 / 2}>
                 <Field.DatePicker
                   name="filter.personal.birthDate"
                   label={<Trans>Date of birth</Trans>}
