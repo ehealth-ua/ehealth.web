@@ -11,7 +11,7 @@ import { Trans, DateFormat } from "@lingui/macro";
 import { Flex, Box, Heading, Text } from "@rebass/emotion";
 
 import { SearchIcon, RemoveItemIcon } from "@ehealth/icons";
-import { Form, LocationParams, Modal } from "@ehealth/components";
+import { Form, LocationParams, Modal, Validation } from "@ehealth/components";
 import {
   parseSortingParams,
   stringifySortingParams,
@@ -29,32 +29,110 @@ import STATUSES from "../../helpers/statuses";
 const MedicalProgramsQuery = loader(
   "../../graphql/MedicalProgramsQuery.graphql"
 );
+const CreateMedicalProgramMutation = loader(
+  "../../graphql/CreateMedicalProgramMutation.graphql"
+);
 const DeactivateMedicalProgramMutation = loader(
   "../../graphql/DeactivateMedicalProgramMutation.graphql"
 );
 
 const Search = ({ uri }) => (
   <Box p={6}>
-    <Flex justifyContent="space-between" alignItems="flex-start" mb={6}>
-      <Box>
-        <Heading as="h1" fontWeight="normal" mb={4}>
-          <Trans>Medical programs</Trans>
-        </Heading>
-        <Text fontSize={1}>
-          <Trans>Manage a program from the list below or add the new one</Trans>
-        </Text>
-      </Box>
-      <Box>
-        <Button onClick={() => null} variant="green">
-          <Trans>Add program</Trans>
-        </Button>
-      </Box>
-    </Flex>
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const { orderBy } = locationParams;
         return (
           <>
+            <Flex justifyContent="space-between" alignItems="flex-start" mb={6}>
+              <Box>
+                <Heading as="h1" fontWeight="normal" mb={4}>
+                  <Trans>Medical programs</Trans>
+                </Heading>
+                <Text fontSize={1}>
+                  <Trans>
+                    Manage a program from the list below or add the new one
+                  </Trans>
+                </Text>
+              </Box>
+              <Box>
+                <BooleanValue>
+                  {({ value: opened, toggle }) => (
+                    <>
+                      <Button onClick={toggle} variant="green">
+                        <Trans>Add program</Trans>
+                      </Button>
+
+                      {opened && (
+                        <Modal width={760} backdrop textAlign="left">
+                          <Heading
+                            as="h1"
+                            fontWeight="normal"
+                            textAlign="center"
+                            mb={6}
+                          >
+                            <Trans>Add new medical program</Trans>
+                          </Heading>
+                          <Mutation
+                            mutation={CreateMedicalProgramMutation}
+                            refetchQueries={() => [
+                              {
+                                query: MedicalProgramsQuery,
+                                variables: {
+                                  ...filteredLocationParams(locationParams)
+                                }
+                              }
+                            ]}
+                          >
+                            {createMedicalProgram => (
+                              <Form
+                                onSubmit={async name => {
+                                  await createMedicalProgram({
+                                    variables: {
+                                      input: { ...name }
+                                    }
+                                  });
+                                  toggle();
+                                }}
+                              >
+                                <Trans
+                                  id="Enter program name"
+                                  render={({ translation }) => (
+                                    <>
+                                      <Field.Text
+                                        name="name"
+                                        label={
+                                          <Trans>Medical program name</Trans>
+                                        }
+                                        placeholder={translation}
+                                      />
+                                      <Validation.Required
+                                        field="name"
+                                        message={<Trans>Required field</Trans>}
+                                      />
+                                    </>
+                                  )}
+                                />
+                                <Flex justifyContent="left">
+                                  <Box mr={4}>
+                                    <Button variant="blue" onClick={toggle}>
+                                      <Trans>Back</Trans>
+                                    </Button>
+                                  </Box>
+                                  <Button type="submit" variant="green">
+                                    <Trans>Add program</Trans>
+                                  </Button>
+                                </Flex>
+                              </Form>
+                            )}
+                          </Mutation>
+                        </Modal>
+                      )}
+                    </>
+                  )}
+                </BooleanValue>
+              </Box>
+            </Flex>
+
             <SearchMedicalProgramsForm
               initialValues={locationParams}
               onSubmit={setLocationParams}
@@ -114,58 +192,85 @@ const Search = ({ uri }) => (
                               />
                             ),
                             action: (
-                              <Popup
-                                variant="red"
-                                buttonText={<Trans>Deactivate</Trans>}
-                                title={
+                              <BooleanValue>
+                                {({ value: opened, toggle }) => (
                                   <>
-                                    <Trans>Deactivate medical program</Trans>
-                                    <Box pt={3}>"{medicalProgram.name}"</Box>
-                                  </>
-                                }
-                                disabled={!isActive}
-                              >
-                                {toggle => (
-                                  <Mutation
-                                    mutation={DeactivateMedicalProgramMutation}
-                                    refetchQueries={() => [
-                                      {
-                                        query: MedicalProgramsQuery,
-                                        variables: {
-                                          ...filteredLocationParams(id)
-                                        }
-                                      }
-                                    ]}
-                                  >
-                                    {deactivateMedicalProgram => (
-                                      <Flex justifyContent="center">
-                                        <Box mr={20}>
-                                          <Button
-                                            variant="blue"
-                                            onClick={toggle}
-                                            width={140}
-                                          >
-                                            <Trans>Back</Trans>
-                                          </Button>
-                                        </Box>
-                                        <Button
-                                          onClick={async () => {
-                                            await deactivateMedicalProgram({
-                                              variables: {
-                                                input: { id }
-                                              }
-                                            });
-                                          }}
-                                          variant="red"
-                                          width={140}
+                                    <DeactivateButton
+                                      onClick={isActive ? toggle : null}
+                                      disabled={!isActive}
+                                    >
+                                      <Trans>Deactivate</Trans>
+                                    </DeactivateButton>
+
+                                    {opened && (
+                                      <Modal
+                                        width={760}
+                                        backdrop
+                                        textAlign="left"
+                                      >
+                                        <Heading
+                                          as="h1"
+                                          fontWeight="normal"
+                                          textAlign="center"
+                                          mb={6}
                                         >
-                                          <Trans>Deactivate</Trans>
-                                        </Button>
-                                      </Flex>
+                                          <Trans>
+                                            Deactivate medical program
+                                          </Trans>
+                                          <Box pt={3}>
+                                            "{medicalProgram.name}"
+                                          </Box>
+                                        </Heading>
+                                        <Mutation
+                                          mutation={
+                                            DeactivateMedicalProgramMutation
+                                          }
+                                          refetchQueries={() => [
+                                            {
+                                              query: MedicalProgramsQuery,
+                                              variables: {
+                                                ...filteredLocationParams(
+                                                  locationParams
+                                                )
+                                              }
+                                            }
+                                          ]}
+                                        >
+                                          {deactivateMedicalProgram => (
+                                            <Flex justifyContent="center">
+                                              <Box mr={20}>
+                                                <Button
+                                                  variant="blue"
+                                                  onClick={toggle}
+                                                  width={140}
+                                                >
+                                                  <Trans>Back</Trans>
+                                                </Button>
+                                              </Box>
+                                              <Button
+                                                onClick={async () => {
+                                                  await deactivateMedicalProgram(
+                                                    {
+                                                      variables: {
+                                                        input: { id }
+                                                      }
+                                                    }
+                                                  );
+                                                  toggle();
+                                                }}
+                                                variant="red"
+                                                width={140}
+                                              >
+                                                <Trans>Deactivate</Trans>
+                                              </Button>
+                                            </Flex>
+                                          )}
+                                        </Mutation>
+                                      </Modal>
                                     )}
-                                  </Mutation>
+                                  </>
                                 )}
-                              </Popup>
+                              </BooleanValue>
                             )
                           })}
                           sortableFields={["name", "insertedAt"]}
@@ -307,39 +412,6 @@ const SearchMedicalProgramsForm = ({ initialValues, onSubmit }) => (
     </Flex>
   </Form>
 );
-
-const Popup = ({
-  variant,
-  disabled,
-  buttonText,
-  title,
-  children,
-  render = children
-}) => {
-  return (
-    <BooleanValue>
-      {({ value: opened, toggle }) => (
-        <>
-          <DeactivateButton
-            onClick={disabled ? null : toggle}
-            disabled={disabled}
-          >
-            <Trans>Deactivate</Trans>
-          </DeactivateButton>
-
-          {opened && (
-            <Modal width={760} backdrop textAlign="left">
-              <Heading as="h1" fontWeight="normal" textAlign="center" mb={6}>
-                {title}
-              </Heading>
-              {render(toggle)}
-            </Modal>
-          )}
-        </>
-      )}
-    </BooleanValue>
-  );
-};
 
 const medicalProgramsFilteredParams = filter => {
   const { isActive, ...params } = filter;
