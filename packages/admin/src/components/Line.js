@@ -1,5 +1,4 @@
 import system from "@ehealth/system-components";
-import { mixed } from "@ehealth/system-tools";
 
 const Line = system(
   {

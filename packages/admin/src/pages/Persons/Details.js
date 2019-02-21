@@ -212,17 +212,24 @@ const UserInfo = ({
           landLinePhone: landLinePhone && landLinePhone.number
         }}
       />
-      {(!isEmpty(documents) || !isEmpty(relationshipDocuments)) && (
-        <>
-          <Heading fontSize="1" fontWeight="normal" py={2}>
+      {!isEmpty(documents) && (
+        <Box py={4}>
+          <Heading fontSize="1" fontWeight="normal">
             <Trans>Documents</Trans>
           </Heading>
           <Documents documents={documents} dictionary="DOCUMENT_TYPE" />
+        </Box>
+      )}
+      {!isEmpty(relationshipDocuments) && (
+        <Box pt={4}>
+          <Heading fontSize="1" fontWeight="normal">
+            <Trans>Documents confirming the credentials of the confidant</Trans>
+          </Heading>
           <Documents
             documents={relationshipDocuments}
             dictionary="DOCUMENT_RELATIONSHIP_TYPE"
           />
-        </>
+        </Box>
       )}
     </Box>
   );
@@ -380,10 +387,10 @@ const DeclarationsInfo = ({ id }) => (
                           return {
                             databaseId,
                             declarationNumber,
-                            startDate,
                             name,
                             edrpou,
                             divisionName,
+                            startDate: <DateFormat value={startDate} />,
                             address: residenceAddress && (
                               <AddressView data={residenceAddress} />
                             ),
