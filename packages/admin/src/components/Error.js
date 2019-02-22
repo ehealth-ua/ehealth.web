@@ -9,6 +9,12 @@ import Button from "./Button";
 
 const Error = ({ error, blocking, onClose }) => {
   const code = getErrorCode(error);
+  if (code === "UNPROCESSABLE_ENTITY") return null;
+
+  const {
+    extensions: { exception },
+    message
+  } = error;
 
   return (
     <Modal width={760} px={76} py={32} placement="center" backdrop>
@@ -29,23 +35,36 @@ const Error = ({ error, blocking, onClose }) => {
           />
         </ErrorTitle>
         <ErrorDetails>
-          {/* TODO: Remove this block as soon as we will stabilize errors format */}
-          <Box mr={3}>{error.message}</Box>
-          <Box>
-            {error.errors &&
-              error.errors.map((e, k) => (
-                <Description key={k}>{e.description}</Description>
-              ))}
-          </Box>
+          {code === "CONFLICT" && <Description>{message}</Description>}
+          {code === "FORBIDDEN" && (
+            <Description>
+              {exception ? (
+                <>
+                  Відсутній дозвіл на наступні дії:
+                  <ul>
+                    {exception.missingAllowances.map(scope => (
+                      <li key={scope}>{scope}</li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                message
+              )}
+            </Description>
+          )}
         </ErrorDetails>
         <Flex justifyContent="center" mt={3}>
-          <Button
-            variant="blue"
-            mx={2}
-            onClick={() => Sentry.showReportDialog()}
-          >
-            Описати проблему
-          </Button>
+          {["NETWORK_ERROR", "INTERNAL_SERVER_ERROR", "UNKNOWN_ERROR"].includes(
+            code
+          ) && (
+            <Button
+              variant="blue"
+              mx={2}
+              onClick={() => Sentry.showReportDialog()}
+            >
+              Описати проблему
+            </Button>
+          )}
           {[
             "FORBIDDEN",
             "NETWORK_ERROR",
