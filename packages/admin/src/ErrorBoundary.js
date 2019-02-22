@@ -23,7 +23,13 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, info) {
-    this.setError({ error, info, blocking: true });
+    switch (error.name) {
+      case "GraphQLError":
+      case "NetworkError":
+        return this.setError({ error, info, blocking: true });
+      default:
+        return this.setState({ blocking: true });
+    }
   }
 
   render() {
