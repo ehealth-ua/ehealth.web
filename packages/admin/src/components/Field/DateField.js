@@ -9,6 +9,7 @@ import { formatDate, parseDate } from "@ehealth/utils";
 
 import * as FieldView from "./FieldView";
 import * as InputView from "./InputView";
+import ErrorTranslation from "./ErrorTranslation";
 
 const autoCorrectedDatePipe = createAutoCorrectedDatePipe("dd.mm.yyyy");
 
@@ -106,7 +107,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
 
                 <FieldView.Footer>
                   <FieldView.Message variant={state}>
-                    {errored ? error : warning}
+                    {errored ? <ErrorTranslation error={error} /> : warning}
                   </FieldView.Message>
                 </FieldView.Footer>
               </>

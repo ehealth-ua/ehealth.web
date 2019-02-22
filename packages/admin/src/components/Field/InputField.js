@@ -3,6 +3,7 @@ import { Field } from "@ehealth/components";
 
 import * as FieldView from "./FieldView";
 import * as InputView from "./InputView";
+import ErrorTranslation from "./ErrorTranslation";
 
 export const TextField = props => <InputField {...props} type="text" />;
 
@@ -60,7 +61,7 @@ const InputField = ({
         </InputView.Divider>
         <FieldView.Footer>
           <FieldView.Message variant={state}>
-            {errored ? error : warning}
+            {errored ? <ErrorTranslation error={error} /> : warning}
           </FieldView.Message>
         </FieldView.Footer>
       </FieldView.Wrapper>

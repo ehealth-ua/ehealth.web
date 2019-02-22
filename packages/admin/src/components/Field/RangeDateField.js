@@ -11,6 +11,7 @@ import { Flex, Box } from "@rebass/emotion";
 
 import * as FieldView from "./FieldView";
 import * as InputView from "./InputView";
+import ErrorTranslation from "./ErrorTranslation";
 
 /* @example
 *  <>
@@ -168,8 +169,12 @@ class RangeDateField extends React.Component<
                 <FieldView.Message
                   state={propsFrom.meta.state || propsTo.meta.state}
                 >
-                  {(propsFrom.meta.errored && propsFrom.meta.error) ||
-                    (propsTo.meta.errored && propsTo.meta.error)}
+                  {(propsFrom.meta.errored && (
+                    <ErrorTranslation error={propsFrom.meta.error} />
+                  )) ||
+                    (propsTo.meta.errored && (
+                      <ErrorTranslation error={propsTo.meta.error} />
+                    ))}
                 </FieldView.Message>
               </FieldView.Footer>
             </>

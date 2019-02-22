@@ -7,6 +7,7 @@ import { List, DropdownButton } from "./MultiSelectView";
 import * as FieldView from "./FieldView";
 import * as InputView from "./InputView";
 import { SingleDownshift } from "./DownshiftField";
+import ErrorTranslation from "./ErrorTranslation";
 
 /**
  *
@@ -138,7 +139,7 @@ const SelectField = ({
         {!hideErrors && (
           <FieldView.Footer>
             <FieldView.Message variant={errored && "errored"}>
-              {errored ? error : warning}
+              {errored ? <ErrorTranslation error={error} /> : warning}
             </FieldView.Message>
           </FieldView.Footer>
         )}

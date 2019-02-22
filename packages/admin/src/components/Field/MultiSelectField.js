@@ -7,6 +7,7 @@ import Dropdown from "../Dropdown";
 import * as MultiSelectView from "./MultiSelectView";
 import * as FieldView from "./FieldView";
 import * as InputView from "./InputView";
+import ErrorTranslation from "./ErrorTranslation";
 
 const MultiSelect = ({
   label,
@@ -91,7 +92,7 @@ const MultiSelect = ({
 
         <FieldView.Footer>
           <FieldView.Message variant={errored && "errored"}>
-            {errored ? error : warning}
+            {errored ? <ErrorTranslation error={error} /> : warning}
           </FieldView.Message>
         </FieldView.Footer>
       </FieldView.Wrapper>
