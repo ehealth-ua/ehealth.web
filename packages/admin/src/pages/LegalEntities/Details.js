@@ -69,12 +69,7 @@ const filteredLocationParams = (id, params = {}) => {
 };
 
 const Details = ({ id, navigate }) => (
-  <Query
-    query={LegalEntityQuery}
-    variables={{
-      ...filteredLocationParams(id)
-    }}
-  >
+  <Query query={LegalEntityQuery} variables={filteredLocationParams(id)}>
     {({ loading, error, data: { legalEntity = {} } }) => {
       if (error) return `Error! ${error.message}`;
       const {
@@ -142,9 +137,7 @@ const Details = ({ id, navigate }) => (
                       refetchQueries={() => [
                         {
                           query: LegalEntityQuery,
-                          variables: {
-                            ...filteredLocationParams(id)
-                          }
+                          variables: filteredLocationParams(id)
                         }
                       ]}
                     >
@@ -177,9 +170,7 @@ const Details = ({ id, navigate }) => (
                           refetchQueries={() => [
                             {
                               query: LegalEntityQuery,
-                              variables: {
-                                ...filteredLocationParams(id)
-                              }
+                              variables: filteredLocationParams(id)
                             }
                           ]}
                         >
@@ -519,9 +510,7 @@ const License = ({
               refetchQueries={() => [
                 {
                   query: LegalEntityQuery,
-                  variables: {
-                    ...filteredLocationParams(id)
-                  }
+                  variables: filteredLocationParams(id)
                 }
               ]}
             >
@@ -657,9 +646,7 @@ const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
           <Query
             query={LegalEntityQuery}
             fetchPolicy="network-only"
-            variables={{
-              ...filteredLocationParams(id, locationParams)
-            }}
+            variables={filteredLocationParams(id, locationParams)}
           >
             {({ loading, error, data = {} }) => {
               if (error) return `Error! ${error.message}`;
@@ -793,9 +780,7 @@ const Divisions = ({ id }) => (
           </Form>
           <Query
             query={LegalEntityQuery}
-            variables={{
-              ...filteredLocationParams(id, locationParams)
-            }}
+            variables={filteredLocationParams(id, locationParams)}
           >
             {({ loading, error, data }) => {
               if (loading) return "Loading...";
@@ -911,9 +896,7 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
           refetchQueries={() => [
             {
               query: LegalEntityQuery,
-              variables: {
-                ...filteredLocationParams(id)
-              }
+              variables: filteredLocationParams(id)
             }
           ]}
         >

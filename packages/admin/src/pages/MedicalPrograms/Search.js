@@ -77,9 +77,9 @@ const Search = ({ uri }) => (
                             refetchQueries={() => [
                               {
                                 query: MedicalProgramsQuery,
-                                variables: {
-                                  ...filteredLocationParams(locationParams)
-                                }
+                                variables: filteredLocationParams(
+                                  locationParams
+                                )
                               }
                             ]}
                           >
@@ -107,7 +107,7 @@ const Search = ({ uri }) => (
                                       />
                                       <Validation.Required
                                         field="name"
-                                        message={<Trans>Required field</Trans>}
+                                        message="Required field"
                                       />
                                     </>
                                   )}
@@ -140,9 +140,7 @@ const Search = ({ uri }) => (
             <Query
               query={MedicalProgramsQuery}
               fetchPolicy="network-only"
-              variables={{
-                ...filteredLocationParams(locationParams)
-              }}
+              variables={filteredLocationParams(locationParams)}
             >
               {({ loading, error, data }) => {
                 if (error || isEmpty(data)) return null;
@@ -187,7 +185,7 @@ const Search = ({ uri }) => (
                               <Badge
                                 type="MEDICAL_PROGRAM_STATUS"
                                 name={isActive}
-                                variant={`MEDICAL_PROGRAM_STATUS.${isActive}`}
+                                variant={!isActive}
                                 display="block"
                               />
                             ),
@@ -228,11 +226,9 @@ const Search = ({ uri }) => (
                                           refetchQueries={() => [
                                             {
                                               query: MedicalProgramsQuery,
-                                              variables: {
-                                                ...filteredLocationParams(
-                                                  locationParams
-                                                )
-                                              }
+                                              variables: filteredLocationParams(
+                                                locationParams
+                                              )
                                             }
                                           ]}
                                         >
