@@ -36,6 +36,7 @@ import {
 } from "../../constants/declarationSearchPatterns";
 import Pagination from "../../components/Pagination";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
+import handleMutation from "../../helpers/handleMutation";
 
 const ResetAuthMethodMutation = loader(
   "../../graphql/ResetAuthMethodMutation.graphql"
@@ -281,14 +282,17 @@ const AuthInfo = ({ id, databaseId, authInfo, status }) =>
                           <Box mx={2}>
                             <Button
                               variant="green"
-                              onClick={async () => {
-                                await resetPersonAuthenticationMethod({
-                                  variables: {
-                                    input: { personId: databaseId }
-                                  }
-                                });
-                                toggle();
-                              }}
+                              onClick={() =>
+                                handleMutation(
+                                  () =>
+                                    resetPersonAuthenticationMethod({
+                                      variables: {
+                                        input: { personId: databaseId }
+                                      }
+                                    }),
+                                  toggle
+                                )
+                              }
                             >
                               <Trans>Reset Authentication Method</Trans>
                             </Button>
@@ -452,7 +456,7 @@ const SearchDeclarationsForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.declarationSearch"
           options={DECLARATION_SEARCH_PATTERN}
-          message={<Trans>Invalid number</Trans>}
+          message="Invalid number"
         />
       </Box>
     </Flex>

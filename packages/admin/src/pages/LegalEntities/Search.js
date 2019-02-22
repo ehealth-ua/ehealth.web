@@ -242,7 +242,7 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
         <Validation.Matches
           field="filter.code"
           options={SEARCH_REQUEST_PATTERN}
-          message={<Trans>Invalid number</Trans>}
+          message="Invalid number"
         />
       </Box>
     </Flex>

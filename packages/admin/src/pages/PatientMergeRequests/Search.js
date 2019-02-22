@@ -13,6 +13,7 @@ import Button from "../../components/Button";
 import Pagination from "../../components/Pagination";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
+import handleMutation from "../../helpers/handleMutation";
 
 const PatientMergeRequestsQuery = loader(
   "../../graphql/PatientMergeRequestsQuery.graphql"
@@ -95,9 +96,7 @@ const Search = () => (
                     >
                       {assignMergeCandidate => (
                         <Button
-                          onClick={async () => {
-                            await assignMergeCandidate();
-                          }}
+                          onClick={() => handleMutation(assignMergeCandidate)}
                           variant="blue"
                           disabled={!canAssignNew}
                         >

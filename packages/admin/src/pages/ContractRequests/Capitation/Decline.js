@@ -18,6 +18,7 @@ import * as Field from "../../../components/Field";
 import DefinitionListView from "../../../components/DefinitionListView";
 
 import env from "../../../env";
+import handleMutation from "../../../helpers/handleMutation";
 
 const CapitationContractRequestQuery = loader(
   "../../../graphql/CapitationContractRequestQuery.graphql"
@@ -143,10 +144,7 @@ const Reason = ({
               />
             )}
           />
-          <Validation.Required
-            field="base"
-            message={<Trans>Required field</Trans>}
-          />
+          <Validation.Required field="base" message="Required field" />
           <Flex>
             <Box mr={3}>
               <Link to="../" state={base}>
@@ -225,18 +223,21 @@ const Sign = ({
                             ...toDeclineContent,
                             status_reason: base
                           });
-                          await declineContractRequest({
-                            variables: {
-                              input: {
-                                id,
-                                signedContent: {
-                                  content: signedContent,
-                                  encoding: "BASE64"
+                          return handleMutation(
+                            () =>
+                              declineContractRequest({
+                                variables: {
+                                  input: {
+                                    id,
+                                    signedContent: {
+                                      content: signedContent,
+                                      encoding: "BASE64"
+                                    }
+                                  }
                                 }
-                              }
-                            }
-                          });
-                          navigate("../../");
+                              }),
+                            () => navigate("../../")
+                          );
                         }}
                       >
                         <Trans>Approve by EDS</Trans>

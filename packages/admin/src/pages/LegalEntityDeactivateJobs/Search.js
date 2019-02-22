@@ -186,7 +186,7 @@ const SearchLegalEntitiesForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.deactivatedLegalEntity.edrpou"
           options={EDRPOU_PATTERN}
-          message={<Trans>Invalid number</Trans>}
+          message="Invalid number"
         />
       </Box>
       <Box px={1} width={1 / 3}>

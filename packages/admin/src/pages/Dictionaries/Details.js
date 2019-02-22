@@ -446,9 +446,7 @@ class DictionaryValues extends React.Component {
                                     parse={value => value.trim()}
                                   />
                                   <Validations field={`${name}.key`}>
-                                    <Validation.Required
-                                      message={<Trans>Required field</Trans>}
-                                    />
+                                    <Validation.Required message="Required field" />
                                     <Validation.IsExists
                                       options={arrayOfValues
                                         .map(({ key }) => key)
@@ -478,7 +476,7 @@ class DictionaryValues extends React.Component {
                                   />
                                   <Validation.Required
                                     field={`${name}.description`}
-                                    message={<Trans>Required field</Trans>}
+                                    message="Required field"
                                   />
                                 </Box>
                                 {!this.state.fieldToEdit.key ? (

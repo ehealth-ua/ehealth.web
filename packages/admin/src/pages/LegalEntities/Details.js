@@ -40,6 +40,7 @@ import DefinitionListView from "../../components/DefinitionListView";
 import EmptyData from "../../components/EmptyData";
 
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
+import handleMutation from "../../helpers/handleMutation";
 
 const DeactivateLegalEntityMutation = loader(
   "../../graphql/DeactivateLegalEntityMutation.graphql"
@@ -143,15 +144,17 @@ const Details = ({ id, navigate }) => (
                     >
                       {nhsReviewLegalEntity => (
                         <Button
-                          onClick={async () => {
-                            await nhsReviewLegalEntity({
-                              variables: {
-                                input: {
-                                  id
+                          onClick={() =>
+                            handleMutation(() =>
+                              nhsReviewLegalEntity({
+                                variables: {
+                                  input: {
+                                    id
+                                  }
                                 }
-                              }
-                            });
-                          }}
+                              })
+                            )
+                          }
                           variant="blue"
                         >
                           <Trans>To process</Trans>
@@ -182,16 +185,20 @@ const Details = ({ id, navigate }) => (
                                 </Button>
                               </Box>
                               <Button
-                                onClick={async () => {
-                                  await deactivateLegalEntity({
-                                    variables: {
-                                      input: { id }
-                                    }
-                                  });
-                                  navigate(
-                                    "/legal-entity-deactivate-jobs/search"
-                                  );
-                                }}
+                                onClick={() =>
+                                  handleMutation(
+                                    () =>
+                                      deactivateLegalEntity({
+                                        variables: {
+                                          input: { id }
+                                        }
+                                      }),
+                                    () =>
+                                      navigate(
+                                        "/legal-entity-deactivate-jobs/search"
+                                      )
+                                  )
+                                }
                                 variant="red"
                               >
                                 <Trans>Close legal entity</Trans>
@@ -520,12 +527,15 @@ const License = ({
                     showForm ? (
                       <Form
                         initialValues={{ nhsComment }}
-                        onSubmit={async ({ nhsComment = "" }) => {
-                          await nhsCommentLegalEntity({
-                            variables: { input: { id, nhsComment } }
-                          });
-                          toggle();
-                        }}
+                        onSubmit={({ nhsComment = "" }) =>
+                          handleMutation(
+                            () =>
+                              nhsCommentLegalEntity({
+                                variables: { input: { id, nhsComment } }
+                              }),
+                            toggle
+                          )
+                        }
                       >
                         <Trans
                           id="Enter comment"
@@ -561,14 +571,17 @@ const License = ({
                           <Box mr={20}>
                             <Button
                               variant="red"
-                              onClick={async () => {
-                                await nhsCommentLegalEntity({
-                                  variables: {
-                                    input: { id, nhsComment: "" }
-                                  }
-                                });
-                                toggle();
-                              }}
+                              onClick={() =>
+                                handleMutation(
+                                  () =>
+                                    nhsCommentLegalEntity({
+                                      variables: {
+                                        input: { id, nhsComment: "" }
+                                      }
+                                    }),
+                                  toggle
+                                )
+                              }
                             >
                               <Trans>Delete</Trans>
                             </Button>
@@ -908,17 +921,20 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
                 </Button>
               </Box>
               <Button
-                onClick={async () => {
-                  await nhsVerifyLegalEntity({
-                    variables: {
-                      input: {
-                        id,
-                        nhsVerified: !nhsVerified
-                      }
-                    }
-                  });
-                  toggle();
-                }}
+                onClick={() =>
+                  handleMutation(
+                    () =>
+                      nhsVerifyLegalEntity({
+                        variables: {
+                          input: {
+                            id,
+                            nhsVerified: !nhsVerified
+                          }
+                        }
+                      }),
+                    toggle
+                  )
+                }
                 variant={variant}
               >
                 {title}

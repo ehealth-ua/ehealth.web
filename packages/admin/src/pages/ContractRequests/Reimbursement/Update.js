@@ -15,6 +15,7 @@ import Button from "../../../components/Button";
 import * as Field from "../../../components/Field/index";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
+import handleMutation from "../../../helpers/handleMutation";
 
 const ReimbursementContractRequestQuery = loader(
   "../../../graphql/ReimbursementContractRequestQuery.graphql"
@@ -157,25 +158,32 @@ const UpdateContractRequest = ({
                 <Form
                   onSubmit={async () => {
                     const {
-                      nhsSigner,
+                      nhsSignerId,
+                      nhsContractPrice,
                       miscellaneous,
                       nhsPaymentMethod,
                       issueCity,
                       nhsSignerBase
                     } = locationParams;
-                    await updateContractRequest({
-                      variables: {
-                        input: {
-                          id,
-                          nhsPaymentMethod,
-                          nhsSignerId: nhsSigner ? nhsSigner.id : undefined,
-                          issueCity,
-                          nhsSignerBase,
-                          miscellaneous: miscellaneous || ""
-                        }
-                      }
-                    });
-                    navigate("../approve");
+                    return handleMutation(
+                      () =>
+                        updateContractRequest({
+                          variables: {
+                            input: {
+                              id,
+                              nhsPaymentMethod,
+                              issueCity,
+                              nhsSignerBase,
+                              nhsContractPrice: parseInt(nhsContractPrice, 10),
+                              nhsSignerId: nhsSignerId
+                                ? nhsSignerId.id
+                                : undefined,
+                              miscellaneous: miscellaneous || ""
+                            }
+                          }
+                        }),
+                      () => navigate("../approve")
+                    );
                   }}
                   initialValues={{
                     ...initialValues,
@@ -195,12 +203,20 @@ const UpdateContractRequest = ({
                         id="Enter signer"
                         render={({ translation }) => (
                           <Field.Select
-                            name="nhsSigner"
+                            name="nhsSignerId"
                             label={
                               <Trans>Signatory from the Customers side</Trans>
                             }
                             placeholder={translation}
-                            items={employees}
+                            items={employees.map(
+                              ({
+                                party: { firstName, secondName, lastName },
+                                id
+                              }) => ({
+                                party: { firstName, secondName, lastName },
+                                id
+                              })
+                            )}
                             itemToString={item =>
                               item && getFullName(item.party)
                             }
@@ -213,8 +229,8 @@ const UpdateContractRequest = ({
                       />
 
                       <Validation.Required
-                        field="nhsSigner"
-                        message={<Trans>Required field</Trans>}
+                        field="nhsSignerId"
+                        message="Required field"
                       />
                     </Box>
                     <Box width={2 / 5}>
@@ -231,7 +247,7 @@ const UpdateContractRequest = ({
                       </I18n>
                       <Validation.Required
                         field="nhsSignerBase"
-                        message={<Trans>Required field</Trans>}
+                        message="Required field"
                       />
                     </Box>
                   </Flex>
@@ -254,7 +270,7 @@ const UpdateContractRequest = ({
                       </I18n>
                       <Validation.Required
                         field="issueCity"
-                        message={<Trans>Required field</Trans>}
+                        message="Required field"
                       />
                     </Box>
                     <Box width={2 / 5}>
@@ -280,7 +296,7 @@ const UpdateContractRequest = ({
                       />
                       <Validation.Required
                         field="nhsPaymentMethod"
-                        message={<Trans>Required field</Trans>}
+                        message="Required field"
                       />
                     </Box>
                   </Flex>

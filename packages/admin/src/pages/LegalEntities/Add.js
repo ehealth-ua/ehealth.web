@@ -21,6 +21,7 @@ import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import env from "../../env";
+import handleMutation from "../../helpers/handleMutation";
 
 const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
 const SearchLegalEntitiesQuery = loader(
@@ -190,7 +191,7 @@ const Reason = ({
     />
     <DefinitionListView
       labels={{
-        databaseId: "Legal entity ID"
+        databaseId: <Trans>Legal entity ID</Trans>
       }}
       data={{
         databaseId
@@ -217,10 +218,7 @@ const Reason = ({
             />
           )}
         />
-        <Validation.Required
-          field="reason"
-          message={<Trans>Required field</Trans>}
-        />
+        <Validation.Required field="reason" message="Required field" />
         <Flex>
           <Box mr={3}>
             <Link
@@ -348,17 +346,20 @@ const Sign = ({
                                 const { signedContent } = await signData(
                                   mergedLegalEntities
                                 );
-                                await mergeLegalEntities({
-                                  variables: {
-                                    input: {
-                                      signedContent: {
-                                        content: signedContent,
-                                        encoding: "BASE64"
+                                return handleMutation(
+                                  () =>
+                                    mergeLegalEntities({
+                                      variables: {
+                                        input: {
+                                          signedContent: {
+                                            content: signedContent,
+                                            encoding: "BASE64"
+                                          }
+                                        }
                                       }
-                                    }
-                                  }
-                                });
-                                navigate("/legal-entity-merge-jobs");
+                                    }),
+                                  () => navigate("/legal-entity-merge-jobs")
+                                );
                               }}
                             >
                               <Trans>Sign</Trans>

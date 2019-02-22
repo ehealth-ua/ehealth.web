@@ -13,6 +13,7 @@ import { Signer } from "@ehealth/react-iit-digital-signature";
 import LoadingOverlay from "../../../components/LoadingOverlay";
 import Button from "../../../components/Button";
 import env from "../../../env";
+import handleMutation from "../../../helpers/handleMutation";
 
 const SignContractRequestMutation = loader(
   "../../../graphql/SignContractRequestMutation.graphql"
@@ -85,18 +86,21 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                                     toSignContent
                                   );
 
-                                  await signContractRequest({
-                                    variables: {
-                                      input: {
-                                        id,
-                                        signedContent: {
-                                          content: signedContent,
-                                          encoding: "BASE64"
+                                  return handleMutation(
+                                    () =>
+                                      signContractRequest({
+                                        variables: {
+                                          input: {
+                                            id,
+                                            signedContent: {
+                                              content: signedContent,
+                                              encoding: "BASE64"
+                                            }
+                                          }
                                         }
-                                      }
-                                    }
-                                  });
-                                  navigate("../");
+                                      }),
+                                    () => navigate("../")
+                                  );
                                 }}
                               >
                                 <Trans>Signing by EDS and seal</Trans>

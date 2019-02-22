@@ -231,7 +231,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
             <Validation.Matches
               field="filter.identity.taxId"
               options={EDRPOU_PATTERN}
-              message={<Trans>Invalid tax id</Trans>}
+              message="Invalid tax id"
             />
           </Box>
           <Box px={1} width={1 / 2}>
@@ -249,7 +249,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
             <Validation.Matches
               field="filter.identity.unzr"
               options={UNZR_PATTERN}
-              message={<Trans>Invalid number</Trans>}
+              message="Invalid number"
             />
           </Box>
         </Flex>
@@ -278,7 +278,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                         <Validation.Matches
                           field="filter.identity.number"
                           options={pattern}
-                          message={<Trans>Invalid number</Trans>}
+                          message="Invalid number"
                         />
                       </>
                     );
@@ -332,7 +332,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                 <Validation.Matches
                   field="filter.personal.authenticationMethod.phoneNumber"
                   options={PHONE_PATTERN}
-                  message={<Trans>Invalid phone number</Trans>}
+                  message="Invalid phone number"
                 />
               </Box>
               <Box px={1} width={1 / 2}>

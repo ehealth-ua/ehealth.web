@@ -25,6 +25,7 @@ import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import env from "../../env";
+import handleMutation from "../../helpers/handleMutation";
 
 const DeclarationQuery = loader("../../graphql/DeclarationQuery.graphql");
 const TerminateDeclarationMutation = loader(
@@ -130,14 +131,17 @@ const Details = ({ id }) => (
                                     </Button>
                                   </Box>
                                   <Button
-                                    onClick={async () => {
-                                      await rejectDeclaration({
-                                        variables: {
-                                          input: { id }
-                                        }
-                                      });
-                                      toggle();
-                                    }}
+                                    onClick={async () =>
+                                      handleMutation(
+                                        () =>
+                                          rejectDeclaration({
+                                            variables: {
+                                              input: { id }
+                                            }
+                                          }),
+                                        toggle
+                                      )
+                                    }
                                     variant="red"
                                   >
                                     <Trans>Decline declaration</Trans>
@@ -173,14 +177,17 @@ const Details = ({ id }) => (
                                   </Button>
                                 </Box>
                                 <Button
-                                  onClick={async () => {
-                                    await approveDeclaration({
-                                      variables: {
-                                        input: { id }
-                                      }
-                                    });
-                                    toggle();
-                                  }}
+                                  onClick={() =>
+                                    handleMutation(
+                                      () =>
+                                        approveDeclaration({
+                                          variables: {
+                                            input: { id }
+                                          }
+                                        }),
+                                      toggle
+                                    )
+                                  }
                                   variant="green"
                                 >
                                   <Trans>Approve the declaration</Trans>
@@ -317,14 +324,17 @@ const GeneralInfo = ({
             >
               {terminateDeclaration => (
                 <Form
-                  onSubmit={async ({ reasonDescription }) => {
-                    await terminateDeclaration({
-                      variables: {
-                        input: { id, reasonDescription }
-                      }
-                    });
-                    toggle();
-                  }}
+                  onSubmit={({ reasonDescription }) =>
+                    handleMutation(
+                      () =>
+                        terminateDeclaration({
+                          variables: {
+                            input: { id, reasonDescription }
+                          }
+                        }),
+                      toggle
+                    )
+                  }
                 >
                   <Text mb={2}>
                     <Trans>

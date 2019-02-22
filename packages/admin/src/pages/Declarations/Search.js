@@ -162,7 +162,7 @@ const SearchDeclarationForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.declarationNumber"
           options={DECLARATION_NUMBER_PATTERN}
-          message={<Trans>Invalid number</Trans>}
+          message="Invalid number"
         />
       </Box>
     </Flex>

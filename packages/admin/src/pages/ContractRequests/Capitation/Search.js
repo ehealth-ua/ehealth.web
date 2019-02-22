@@ -206,7 +206,7 @@ const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
         <Validation.Matches
           field="filter.searchRequest"
           options={SEARCH_REQUEST_PATTERN}
-          message={<Trans>Invalid number</Trans>}
+          message="Invalid number"
         />
       </Box>
 

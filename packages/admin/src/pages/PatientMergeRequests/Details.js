@@ -28,6 +28,7 @@ import {
   TableCell,
   TableRow
 } from "../../components/Table";
+import handleMutation from "../../helpers/handleMutation";
 
 const MergeRequestQuery = loader("../../graphql/MergeRequestQuery.graphql");
 const UpdateMergeRequestMutation = loader(
@@ -521,12 +522,15 @@ const Popup = ({
               >
                 {updateMergeRequest => (
                   <Form
-                    onSubmit={async ({ comment }) => {
-                      await updateMergeRequest({
-                        variables: { input: { id, status, comment } }
-                      });
-                      navigate("/patient-merge-requests/search");
-                    }}
+                    onSubmit={({ comment }) =>
+                      handleMutation(
+                        () =>
+                          updateMergeRequest({
+                            variables: { input: { id, status, comment } }
+                          }),
+                        () => navigate("/patient-merge-requests/search")
+                      )
+                    }
                   >
                     <Trans
                       id="Enter comment"

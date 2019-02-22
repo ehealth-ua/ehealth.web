@@ -44,6 +44,7 @@ import DefinitionListView from "../../../components/DefinitionListView";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import Pagination from "../../../components/Pagination";
 import EmptyData from "../../../components/EmptyData";
+import handleMutation from "../../../helpers/handleMutation";
 
 const CapitationContractQuery = loader(
   "../../../graphql/CapitationContractQuery.graphql"
@@ -168,12 +169,15 @@ const Details = ({ id }) => (
                       >
                         {terminateContract => (
                           <Form
-                            onSubmit={async ({ statusReason }) => {
-                              await terminateContract({
-                                variables: { input: { id, statusReason } }
-                              });
-                              toggle();
-                            }}
+                            onSubmit={({ statusReason }) =>
+                              handleMutation(
+                                () =>
+                                  terminateContract({
+                                    variables: { input: { id, statusReason } }
+                                  }),
+                                toggle
+                              )
+                            }
                           >
                             <Text mb={2}>
                               <Trans>
@@ -195,7 +199,7 @@ const Details = ({ id }) => (
                             />
                             <Validation.Required
                               field="statusReason"
-                              message={<Trans>Required field</Trans>}
+                              message="Required field"
                             />
                             <Flex justifyContent="center">
                               <Box mr={20}>
@@ -396,12 +400,15 @@ const ProlongateContract = ({ endDate, id }) => (
         >
           {prolongateContract => (
             <Form
-              onSubmit={async ({ endDate }) => {
-                await prolongateContract({
-                  variables: { input: { id, endDate } }
-                });
-                toggle();
-              }}
+              onSubmit={({ endDate }) =>
+                handleMutation(
+                  () =>
+                    prolongateContract({
+                      variables: { input: { id, endDate } }
+                    }),
+                  toggle
+                )
+              }
               initialValues={{ endDate }}
             >
               <Flex>
@@ -410,10 +417,7 @@ const ProlongateContract = ({ endDate, id }) => (
                   placement="top"
                   minDate={endDate}
                 />
-                <Validation.Required
-                  field="endDate"
-                  message={<Trans>Required field</Trans>}
-                />
+                <Validation.Required field="endDate" message="Required field" />
                 <Box mx={2} color="redPigment">
                   <Button
                     variant="none"
