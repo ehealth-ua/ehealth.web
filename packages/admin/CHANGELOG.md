@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.48.0"></a>
+# [1.48.0](https://github.com/edenlabllc/ehealth.web/compare/v1.47.2...v1.48.0) (2019-02-22)
+
+
+### Features
+
+* **admin:** add Create Medical Program Mutation and Popup ([5f26721](https://github.com/edenlabllc/ehealth.web/commit/5f26721))
+* **admin:** add localizations for Medical Programs Search page ([59f8159](https://github.com/edenlabllc/ehealth.web/commit/59f8159))
+* **admin:** add Medical Programs list and Deactivate Medical Program Mutation ([b0b0127](https://github.com/edenlabllc/ehealth.web/commit/b0b0127))
+* **admin:** add theme and Badge for the Program Status, place Form fields in a row, change DeactivateButton view ([9328538](https://github.com/edenlabllc/ehealth.web/commit/9328538))
+
+
+
+
+
 <a name="1.47.2"></a>
 ## [1.47.2](https://github.com/edenlabllc/ehealth.web/compare/v1.47.1...v1.47.2) (2019-02-21)
 
