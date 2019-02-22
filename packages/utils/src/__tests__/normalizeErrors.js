@@ -32,12 +32,12 @@ const complicatedErrors = [
           {
             message: "Foo {bar} baz!",
             options: { bar: "hello" },
-            path: ["UNPROCESSABLE_ENTITY", "address", "settlement"]
+            path: ["address", "settlement"]
           },
           {
             message: "Foo {bar} baz!",
             options: { bar: "hello" },
-            path: ["UNPROCESSABLE_ENTITY", "address", "area"]
+            path: ["address", "area"]
           }
         ]
       }
@@ -54,7 +54,7 @@ const complicatedErrors = [
           {
             message: "Foo {bar} baz!",
             options: { bar: "hello" },
-            path: ["CONFLICT"]
+            path: ["settlement"]
           }
         ]
       }
@@ -131,19 +131,17 @@ describe("normalizeErrors", () => {
     expect(normalizeErrors(complicatedErrors, "filter.user")).toEqual({
       filter: {
         user: {
-          UNPROCESSABLE_ENTITY: {
-            address: {
-              settlement: {
-                message: "Foo {bar} baz!",
-                options: { bar: "hello" }
-              },
-              area: {
-                message: "Foo {bar} baz!",
-                options: { bar: "hello" }
-              }
+          address: {
+            settlement: {
+              message: "Foo {bar} baz!",
+              options: { bar: "hello" }
+            },
+            area: {
+              message: "Foo {bar} baz!",
+              options: { bar: "hello" }
             }
           },
-          CONFLICT: {
+          settlement: {
             message: "Foo {bar} baz!",
             options: {
               bar: "hello"
