@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.50.0"></a>
+# [1.50.0](https://github.com/edenlabllc/ehealth.web/compare/v1.49.0...v1.50.0) (2019-02-25)
+
+
+### Bug Fixes
+
+* **admin:** change errorPolicy for mutations ([48bc807](https://github.com/edenlabllc/ehealth.web/commit/48bc807))
+* **admin:** remove `TypeError` details from error popup ([429e62e](https://github.com/edenlabllc/ehealth.web/commit/429e62e))
+* **admin:** remove details from `NETWORK_ERROR`, `INTERNAL_SERVER_ERROR`, and `UNKNOWN_ERROR` ([ed69db4](https://github.com/edenlabllc/ehealth.web/commit/ed69db4))
+* **admin:** use `try...catch` to handle mutation errors ([3520971](https://github.com/edenlabllc/ehealth.web/commit/3520971))
+* **admin:** use less boilerplate code ([7678970](https://github.com/edenlabllc/ehealth.web/commit/7678970))
+
+
+### Features
+
+* **admin:** add `ErrorTranslation` into all Field components ([67ab1c6](https://github.com/edenlabllc/ehealth.web/commit/67ab1c6))
+* **admin:** add error handling to all mutations ([c3da254](https://github.com/edenlabllc/ehealth.web/commit/c3da254))
+* **admin:** add helper to avoid unnecessary code growth ([a926e99](https://github.com/edenlabllc/ehealth.web/commit/a926e99))
+* **admin:** adopt the structure of errors in popup ([d20487c](https://github.com/edenlabllc/ehealth.web/commit/d20487c))
+* **utils:** move handleMutation to utils package ([1edf8c3](https://github.com/edenlabllc/ehealth.web/commit/1edf8c3))
+
+
+
+
+
 <a name="1.48.0"></a>
 # [1.48.0](https://github.com/edenlabllc/ehealth.web/compare/v1.47.2...v1.48.0) (2019-02-22)
 

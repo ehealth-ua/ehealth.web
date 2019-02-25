@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.50.0"></a>
+# [1.50.0](https://github.com/edenlabllc/ehealth.web/compare/v1.49.0...v1.50.0) (2019-02-25)
+
+
+### Bug Fixes
+
+* **admin:** change errorPolicy for mutations ([48bc807](https://github.com/edenlabllc/ehealth.web/commit/48bc807))
+* **admin:** remove `TypeError` details from error popup ([429e62e](https://github.com/edenlabllc/ehealth.web/commit/429e62e))
+* **admin:** remove details from `NETWORK_ERROR`, `INTERNAL_SERVER_ERROR`, and `UNKNOWN_ERROR` ([ed69db4](https://github.com/edenlabllc/ehealth.web/commit/ed69db4))
+* **admin:** use `try...catch` to handle mutation errors ([3520971](https://github.com/edenlabllc/ehealth.web/commit/3520971))
+* **admin:** use less boilerplate code ([7678970](https://github.com/edenlabllc/ehealth.web/commit/7678970))
+* **utils:** change object structure in normalizeErrors test ([466b72b](https://github.com/edenlabllc/ehealth.web/commit/466b72b))
+* **utils:** fix test ([9fa454c](https://github.com/edenlabllc/ehealth.web/commit/9fa454c))
+
+
+### Features
+
+* **admin:** add `ErrorTranslation` into all Field components ([67ab1c6](https://github.com/edenlabllc/ehealth.web/commit/67ab1c6))
+* **admin:** add error handling to all mutations ([c3da254](https://github.com/edenlabllc/ehealth.web/commit/c3da254))
+* **admin:** add helper to avoid unnecessary code growth ([a926e99](https://github.com/edenlabllc/ehealth.web/commit/a926e99))
+* **admin:** adopt the structure of errors in popup ([d20487c](https://github.com/edenlabllc/ehealth.web/commit/d20487c))
+* **components:** handle graphQLErrors in forms ([0864de4](https://github.com/edenlabllc/ehealth.web/commit/0864de4))
+* **utils:** add errors normalizer ([0aebfe5](https://github.com/edenlabllc/ehealth.web/commit/0aebfe5))
+* **utils:** move handleMutation to utils package ([1edf8c3](https://github.com/edenlabllc/ehealth.web/commit/1edf8c3))
+
+
+
+
+
 <a name="1.49.0"></a>
 # [1.49.0](https://github.com/edenlabllc/ehealth.web/compare/v1.48.0...v1.49.0) (2019-02-25)
 

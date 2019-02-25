@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.50.0"></a>
+# [1.50.0](https://github.com/edenlabllc/ehealth.web/compare/v1.49.0...v1.50.0) (2019-02-25)
+
+
+### Bug Fixes
+
+* **utils:** change object structure in normalizeErrors test ([466b72b](https://github.com/edenlabllc/ehealth.web/commit/466b72b))
+* **utils:** fix test ([9fa454c](https://github.com/edenlabllc/ehealth.web/commit/9fa454c))
+
+
+### Features
+
+* **utils:** add errors normalizer ([0aebfe5](https://github.com/edenlabllc/ehealth.web/commit/0aebfe5))
+* **utils:** move handleMutation to utils package ([1edf8c3](https://github.com/edenlabllc/ehealth.web/commit/1edf8c3))
+
+
+
+
+
 <a name="1.36.0"></a>
 # [1.36.0](https://github.com/edenlabllc/ehealth.web/compare/v1.35.6...v1.36.0) (2019-01-25)
 
