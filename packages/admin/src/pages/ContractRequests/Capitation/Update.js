@@ -12,7 +12,7 @@ import {
   Validation,
   Validations
 } from "@ehealth/components";
-import { getFullName, handleMutation } from "@ehealth/utils";
+import { getFullName } from "@ehealth/utils";
 import { SearchIcon } from "@ehealth/icons";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
@@ -171,28 +171,20 @@ const UpdateContractRequest = ({
                       issueCity,
                       nhsSignerBase
                     } = locationParams;
-                    try {
-                      await handleMutation(
-                        updateContractRequest({
-                          variables: {
-                            input: {
-                              id,
-                              nhsPaymentMethod,
-                              issueCity,
-                              nhsSignerBase,
-                              nhsContractPrice: parseInt(nhsContractPrice, 10),
-                              nhsSignerId: nhsSignerId
-                                ? nhsSignerId.id
-                                : undefined,
-                              miscellaneous: miscellaneous || ""
-                            }
-                          }
-                        })
-                      );
-                      navigate("../approve");
-                    } catch (errors) {
-                      return errors;
-                    }
+                    await updateContractRequest({
+                      variables: {
+                        input: {
+                          id,
+                          nhsPaymentMethod,
+                          issueCity,
+                          nhsSignerBase,
+                          nhsContractPrice: parseInt(nhsContractPrice, 10),
+                          nhsSignerId: nhsSignerId ? nhsSignerId.id : undefined,
+                          miscellaneous: miscellaneous || ""
+                        }
+                      }
+                    });
+                    await navigate("../approve");
                   }}
                   initialValues={{
                     ...initialValues,

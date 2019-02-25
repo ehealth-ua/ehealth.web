@@ -17,7 +17,7 @@ import {
   SearchIcon,
   CancelIcon
 } from "@ehealth/icons";
-import { getFullName, handleMutation } from "@ehealth/utils";
+import { getFullName } from "@ehealth/utils";
 
 import Line from "../../../components/Line";
 import Tabs from "../../../components/Tabs";
@@ -153,16 +153,10 @@ const Details = ({ id }) => (
                         {terminateContract => (
                           <Form
                             onSubmit={async ({ statusReason }) => {
-                              try {
-                                await handleMutation(
-                                  terminateContract({
-                                    variables: { input: { id, statusReason } }
-                                  })
-                                );
-                                toggle();
-                              } catch (errors) {
-                                return errors;
-                              }
+                              await terminateContract({
+                                variables: { input: { id, statusReason } }
+                              });
+                              toggle();
                             }}
                           >
                             <Text mb={2}>
@@ -341,16 +335,10 @@ const ProlongateContract = ({ endDate, id }) => (
           {prolongateContract => (
             <Form
               onSubmit={async ({ endDate }) => {
-                try {
-                  await handleMutation(
-                    prolongateContract({
-                      variables: { input: { id, endDate } }
-                    })
-                  );
-                  toggle();
-                } catch (errors) {
-                  return errors;
-                }
+                await prolongateContract({
+                  variables: { input: { id, endDate } }
+                });
+                toggle();
               }}
               initialValues={{ endDate }}
             >

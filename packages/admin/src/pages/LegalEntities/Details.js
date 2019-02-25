@@ -19,8 +19,7 @@ import {
   getFullName,
   getPhones,
   parseSortingParams,
-  stringifySortingParams,
-  handleMutation
+  stringifySortingParams
 } from "@ehealth/utils";
 import { LocationParams, Form, Modal } from "@ehealth/components";
 
@@ -145,19 +144,13 @@ const Details = ({ id, navigate }) => (
                       {nhsReviewLegalEntity => (
                         <Button
                           onClick={async () => {
-                            try {
-                              await handleMutation(
-                                nhsReviewLegalEntity({
-                                  variables: {
-                                    input: {
-                                      id
-                                    }
-                                  }
-                                })
-                              );
-                            } catch (errors) {
-                              return errors;
-                            }
+                            await nhsReviewLegalEntity({
+                              variables: {
+                                input: {
+                                  id
+                                }
+                              }
+                            });
                           }}
                           variant="blue"
                         >
@@ -190,22 +183,16 @@ const Details = ({ id, navigate }) => (
                               </Box>
                               <Button
                                 onClick={async () => {
-                                  try {
-                                    await handleMutation(
-                                      deactivateLegalEntity({
-                                        variables: {
-                                          input: {
-                                            id
-                                          }
-                                        }
-                                      })
-                                    );
-                                    navigate(
-                                      "/legal-entity-deactivate-jobs/search"
-                                    );
-                                  } catch (errors) {
-                                    return errors;
-                                  }
+                                  await deactivateLegalEntity({
+                                    variables: {
+                                      input: {
+                                        id
+                                      }
+                                    }
+                                  });
+                                  await navigate(
+                                    "/legal-entity-deactivate-jobs/search"
+                                  );
                                 }}
                                 variant="red"
                               >
@@ -536,16 +523,10 @@ const License = ({
                       <Form
                         initialValues={{ nhsComment }}
                         onSubmit={async ({ nhsComment = "" }) => {
-                          try {
-                            await handleMutation(
-                              nhsCommentLegalEntity({
-                                variables: { input: { id, nhsComment } }
-                              })
-                            );
-                            toggle();
-                          } catch (errors) {
-                            return errors;
-                          }
+                          await nhsCommentLegalEntity({
+                            variables: { input: { id, nhsComment } }
+                          });
+                          toggle();
                         }}
                       >
                         <Trans
@@ -583,18 +564,12 @@ const License = ({
                             <Button
                               variant="red"
                               onClick={async () => {
-                                try {
-                                  await handleMutation(
-                                    nhsCommentLegalEntity({
-                                      variables: {
-                                        input: { id, nhsComment: "" }
-                                      }
-                                    })
-                                  );
-                                  toggle();
-                                } catch (errors) {
-                                  return errors;
-                                }
+                                await nhsCommentLegalEntity({
+                                  variables: {
+                                    input: { id, nhsComment: "" }
+                                  }
+                                });
+                                toggle();
                               }}
                             >
                               <Trans>Delete</Trans>
@@ -936,21 +911,15 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
               </Box>
               <Button
                 onClick={async () => {
-                  try {
-                    await handleMutation(
-                      nhsVerifyLegalEntity({
-                        variables: {
-                          input: {
-                            id,
-                            nhsVerified: !nhsVerified
-                          }
-                        }
-                      })
-                    );
-                    toggle();
-                  } catch (errors) {
-                    return errors;
-                  }
+                  await nhsVerifyLegalEntity({
+                    variables: {
+                      input: {
+                        id,
+                        nhsVerified: !nhsVerified
+                      }
+                    }
+                  });
+                  toggle();
                 }}
                 variant={variant}
               >

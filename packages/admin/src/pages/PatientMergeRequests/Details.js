@@ -6,7 +6,7 @@ import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
-import { getPhones, handleMutation } from "@ehealth/utils";
+import { getPhones } from "@ehealth/utils";
 import system from "@ehealth/system-components";
 import { Form, Modal } from "@ehealth/components";
 
@@ -522,16 +522,10 @@ const Popup = ({
                 {updateMergeRequest => (
                   <Form
                     onSubmit={async ({ comment }) => {
-                      try {
-                        await handleMutation(
-                          updateMergeRequest({
-                            variables: { input: { id, status, comment } }
-                          })
-                        );
-                        navigate("/patient-merge-requests/search");
-                      } catch (errors) {
-                        return errors;
-                      }
+                      await updateMergeRequest({
+                        variables: { input: { id, status, comment } }
+                      });
+                      navigate("/patient-merge-requests/search");
                     }}
                   >
                     <Trans

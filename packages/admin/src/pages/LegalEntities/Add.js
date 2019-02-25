@@ -4,7 +4,7 @@ import { Router, Link } from "@reach/router";
 import { Flex, Box, Text } from "@rebass/emotion";
 import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
-import { getFullName, handleMutation } from "@ehealth/utils";
+import { getFullName } from "@ehealth/utils";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { SearchIcon, PositiveIcon, NegativeIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
@@ -337,31 +337,25 @@ const Sign = ({
                             <Button
                               variant="green"
                               onClick={async () => {
-                                try {
-                                  const mergedLegalEntities = {
-                                    merged_from_legal_entity: legalEntityFrom,
-                                    merged_to_legal_entity: legalEntityTo,
-                                    reason
-                                  };
-                                  const { signedContent } = await signData(
-                                    mergedLegalEntities
-                                  );
-                                  await handleMutation(
-                                    mergeLegalEntities({
-                                      variables: {
-                                        input: {
-                                          signedContent: {
-                                            content: signedContent,
-                                            encoding: "BASE64"
-                                          }
-                                        }
+                                const mergedLegalEntities = {
+                                  merged_from_legal_entity: legalEntityFrom,
+                                  merged_to_legal_entity: legalEntityTo,
+                                  reason
+                                };
+                                const { signedContent } = await signData(
+                                  mergedLegalEntities
+                                );
+                                await mergeLegalEntities({
+                                  variables: {
+                                    input: {
+                                      signedContent: {
+                                        content: signedContent,
+                                        encoding: "BASE64"
                                       }
-                                    })
-                                  );
-                                  navigate("/legal-entity-merge-jobs");
-                                } catch (errors) {
-                                  return errors;
-                                }
+                                    }
+                                  }
+                                });
+                                await navigate("/legal-entity-merge-jobs");
                               }}
                             >
                               <Trans>Sign</Trans>

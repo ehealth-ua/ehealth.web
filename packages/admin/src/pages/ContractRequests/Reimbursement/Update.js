@@ -7,7 +7,7 @@ import { loader } from "graphql.macro";
 import { Trans, t } from "@lingui/macro";
 import { I18n } from "@lingui/react";
 import { LocationParams, Form, Validation } from "@ehealth/components";
-import { getFullName, handleMutation } from "@ehealth/utils";
+import { getFullName } from "@ehealth/utils";
 import { SearchIcon } from "@ehealth/icons";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
@@ -156,36 +156,28 @@ const UpdateContractRequest = ({
               {updateContractRequest => (
                 <Form
                   onSubmit={async () => {
-                    try {
-                      const {
-                        nhsSignerId,
-                        nhsContractPrice,
-                        miscellaneous,
-                        nhsPaymentMethod,
-                        issueCity,
-                        nhsSignerBase
-                      } = locationParams;
-                      await handleMutation(
-                        updateContractRequest({
-                          variables: {
-                            input: {
-                              id,
-                              nhsPaymentMethod,
-                              issueCity,
-                              nhsSignerBase,
-                              nhsContractPrice: parseInt(nhsContractPrice, 10),
-                              nhsSignerId: nhsSignerId
-                                ? nhsSignerId.id
-                                : undefined,
-                              miscellaneous: miscellaneous || ""
-                            }
-                          }
-                        })
-                      );
-                      navigate("../approve");
-                    } catch (errors) {
-                      return errors;
-                    }
+                    const {
+                      nhsSignerId,
+                      nhsContractPrice,
+                      miscellaneous,
+                      nhsPaymentMethod,
+                      issueCity,
+                      nhsSignerBase
+                    } = locationParams;
+                    await updateContractRequest({
+                      variables: {
+                        input: {
+                          id,
+                          nhsPaymentMethod,
+                          issueCity,
+                          nhsSignerBase,
+                          nhsContractPrice: parseInt(nhsContractPrice, 10),
+                          nhsSignerId: nhsSignerId ? nhsSignerId.id : undefined,
+                          miscellaneous: miscellaneous || ""
+                        }
+                      }
+                    });
+                    await navigate("../approve");
                   }}
                   initialValues={{
                     ...initialValues,

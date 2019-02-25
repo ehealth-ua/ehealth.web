@@ -7,7 +7,6 @@ import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
 
 import { LocationParams, Form, Validation } from "@ehealth/components";
-import { handleMutation } from "@ehealth/utils";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
 import Line from "../../../components/Line";
@@ -204,28 +203,22 @@ const Sign = ({
                       <Button
                         variant="green"
                         onClick={async () => {
-                          try {
-                            const { signedContent } = await signData({
-                              ...toDeclineContent,
-                              status_reason: base
-                            });
-                            await handleMutation(
-                              declineContractRequest({
-                                variables: {
-                                  input: {
-                                    id,
-                                    signedContent: {
-                                      content: signedContent,
-                                      encoding: "BASE64"
-                                    }
-                                  }
+                          const { signedContent } = await signData({
+                            ...toDeclineContent,
+                            status_reason: base
+                          });
+                          await declineContractRequest({
+                            variables: {
+                              input: {
+                                id,
+                                signedContent: {
+                                  content: signedContent,
+                                  encoding: "BASE64"
                                 }
-                              })
-                            );
-                            navigate("../../");
-                          } catch (errors) {
-                            return errors;
-                          }
+                              }
+                            }
+                          });
+                          await navigate("../../");
                         }}
                       >
                         <Trans>Approve by EDS</Trans>

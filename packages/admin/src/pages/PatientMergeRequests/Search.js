@@ -4,11 +4,7 @@ import { Query, Mutation } from "react-apollo";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
 import { LocationParams } from "@ehealth/components";
-import {
-  parseSortingParams,
-  stringifySortingParams,
-  handleMutation
-} from "@ehealth/utils";
+import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 
 import Link from "../../components/Link";
 import Table from "../../components/Table";
@@ -99,13 +95,7 @@ const Search = () => (
                     >
                       {assignMergeCandidate => (
                         <Button
-                          onClick={async () => {
-                            try {
-                              await handleMutation(assignMergeCandidate());
-                            } catch (errors) {
-                              return errors;
-                            }
-                          }}
+                          onClick={async () => await assignMergeCandidate()}
                           variant="blue"
                           disabled={!canAssignNew}
                         >

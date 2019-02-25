@@ -8,7 +8,6 @@ import { Trans } from "@lingui/macro";
 import system from "@ehealth/system-components";
 import { Box, Flex, Text } from "@rebass/emotion";
 import { PrinterIcon } from "@ehealth/icons";
-import { handleMutation } from "@ehealth/utils";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
 import LoadingOverlay from "../../../components/LoadingOverlay";
@@ -82,27 +81,21 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                               <Button
                                 variant="green"
                                 onClick={async () => {
-                                  try {
-                                    const { signedContent } = await signData(
-                                      toSignContent
-                                    );
-                                    await handleMutation(
-                                      signContractRequest({
-                                        variables: {
-                                          input: {
-                                            id,
-                                            signedContent: {
-                                              content: signedContent,
-                                              encoding: "BASE64"
-                                            }
-                                          }
+                                  const { signedContent } = await signData(
+                                    toSignContent
+                                  );
+                                  await signContractRequest({
+                                    variables: {
+                                      input: {
+                                        id,
+                                        signedContent: {
+                                          content: signedContent,
+                                          encoding: "BASE64"
                                         }
-                                      })
-                                    );
-                                    navigate("../");
-                                  } catch (errors) {
-                                    return errors;
-                                  }
+                                      }
+                                    }
+                                  });
+                                  await navigate("../");
                                 }}
                               >
                                 <Trans>Signing by EDS and seal</Trans>

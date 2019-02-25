@@ -12,8 +12,7 @@ import { SearchIcon } from "@ehealth/icons";
 import {
   parseSortingParams,
   stringifySortingParams,
-  getFullName,
-  handleMutation
+  getFullName
 } from "@ehealth/utils";
 
 import Tabs from "../../components/Tabs";

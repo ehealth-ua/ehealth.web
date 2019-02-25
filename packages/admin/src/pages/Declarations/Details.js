@@ -8,7 +8,7 @@ import isEmpty from "lodash/isEmpty";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
 import { PositiveIcon, NegativeIcon, DefaultImageIcon } from "@ehealth/icons";
-import { getFullName, getPhones, handleMutation } from "@ehealth/utils";
+import { getFullName, getPhones } from "@ehealth/utils";
 import { Form, Modal, Switch } from "@ehealth/components";
 
 import Line from "../../components/Line";
@@ -131,18 +131,12 @@ const Details = ({ id }) => (
                                   </Box>
                                   <Button
                                     onClick={async () => {
-                                      try {
-                                        await handleMutation(
-                                          rejectDeclaration({
-                                            variables: {
-                                              input: { id }
-                                            }
-                                          })
-                                        );
-                                        toggle();
-                                      } catch (errors) {
-                                        return errors;
-                                      }
+                                      await rejectDeclaration({
+                                        variables: {
+                                          input: { id }
+                                        }
+                                      });
+                                      toggle();
                                     }}
                                     variant="red"
                                   >
@@ -180,18 +174,12 @@ const Details = ({ id }) => (
                                 </Box>
                                 <Button
                                   onClick={async () => {
-                                    try {
-                                      await handleMutation(
-                                        approveDeclaration({
-                                          variables: {
-                                            input: { id }
-                                          }
-                                        })
-                                      );
-                                      toggle();
-                                    } catch (errors) {
-                                      return errors;
-                                    }
+                                    await approveDeclaration({
+                                      variables: {
+                                        input: { id }
+                                      }
+                                    });
+                                    toggle();
                                   }}
                                   variant="green"
                                 >
@@ -330,18 +318,12 @@ const GeneralInfo = ({
               {terminateDeclaration => (
                 <Form
                   onSubmit={async ({ reasonDescription }) => {
-                    try {
-                      await handleMutation(
-                        terminateDeclaration({
-                          variables: {
-                            input: { id, reasonDescription }
-                          }
-                        })
-                      );
-                      toggle();
-                    } catch (errors) {
-                      return errors;
-                    }
+                    await terminateDeclaration({
+                      variables: {
+                        input: { id, reasonDescription }
+                      }
+                    });
+                    toggle();
                   }}
                 >
                   <Text mb={2}>
