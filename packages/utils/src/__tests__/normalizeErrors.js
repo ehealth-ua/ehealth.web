@@ -107,19 +107,17 @@ describe("normalizeErrors", () => {
   });
   it("should return complicated object", () => {
     expect(normalizeErrors(complicatedErrors)).toEqual({
-      UNPROCESSABLE_ENTITY: {
-        address: {
-          settlement: {
-            message: "Foo {bar} baz!",
-            options: { bar: "hello" }
-          },
-          area: {
-            message: "Foo {bar} baz!",
-            options: { bar: "hello" }
-          }
+      address: {
+        settlement: {
+          message: "Foo {bar} baz!",
+          options: { bar: "hello" }
+        },
+        area: {
+          message: "Foo {bar} baz!",
+          options: { bar: "hello" }
         }
       },
-      CONFLICT: {
+      settlement: {
         message: "Foo {bar} baz!",
         options: {
           bar: "hello"
