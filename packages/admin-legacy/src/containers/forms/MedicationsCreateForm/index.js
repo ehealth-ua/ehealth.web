@@ -104,6 +104,15 @@ class MedicationsCreateForm extends React.Component {
               </Field>
             </FormColumn>
           </FormRow>
+          <FormRow>
+            <Field
+              name="daily_dosage"
+              labelText="Добова доза"
+              type="number"
+              component={FieldInput}
+              disabled={disabled}
+            />
+          </FormRow>
           <div className={styles.title}>&#8545;. Складові</div>
           <FormRow>
             <FormColumn align="baseline">
@@ -372,6 +381,9 @@ export default compose(
         required: true
       },
       defaultCodeAtc: {
+        required: true
+      },
+      daily_dosage: {
         required: true
       },
       form: {

@@ -8,6 +8,7 @@ export const onSubmit = (
   {
     name,
     code_atc = [],
+    daily_dosage,
     package_qty,
     package_min_qty,
     certificate,
@@ -32,6 +33,7 @@ export const onSubmit = (
   const values = {
     name,
     code_atc: [defaultCodeAtc, ...code_atc],
+    daily_dosage: parseFloat(daily_dosage, 10),
     package_qty: parseFloat(package_qty, 10),
     package_min_qty: parseFloat(package_min_qty, 10),
     certificate,

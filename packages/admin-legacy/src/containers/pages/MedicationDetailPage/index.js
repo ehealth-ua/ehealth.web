@@ -89,6 +89,10 @@ class MedicationDetailPage extends React.Component {
             {
               name: "Мін. к-сть ліків",
               value: medication.package_min_qty
+            },
+            {
+              name: "Добова доза",
+              value: medication.daily_dosage
             }
           ]}
         />
