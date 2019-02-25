@@ -5,7 +5,7 @@ import setFieldData from "final-form-set-field-data";
 import arrayMutators from "final-form-arrays";
 import styled from "@emotion/styled";
 import { prop } from "styled-tools";
-import { pickProps } from "@ehealth/utils";
+import { pickProps, normalizeErrors } from "@ehealth/utils";
 import { Text } from "@rebass/emotion";
 import debounce from "lodash/debounce";
 
@@ -27,7 +27,7 @@ const focusOnErrors = createFocusDecorator();
 
 const Form = ({ innerRef, ...props }) => {
   const [
-    { decorators = [], mutators, ...finalFormProps },
+    { decorators = [], mutators, onSubmit, ...finalFormProps },
     formProps
   ] = pickProps(props, FINAL_FORM_PROPS);
 
@@ -36,6 +36,17 @@ const Form = ({ innerRef, ...props }) => {
       decorators={[focusOnErrors, ...decorators]}
       mutators={{ setFieldData, ...arrayMutators, ...mutators }}
       subscription={{}}
+      onSubmit={async (...args) => {
+        try {
+          await onSubmit(...args);
+        } catch (error) {
+          if (Array.isArray(error.graphQLErrors)) {
+            return normalizeErrors(error.graphQLErrors);
+          } else {
+            return error;
+          }
+        }
+      }}
       {...finalFormProps}
     >
       {({ handleSubmit }) => (
