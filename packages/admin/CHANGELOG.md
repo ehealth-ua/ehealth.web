@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.50.1"></a>
+## [1.50.1](https://github.com/edenlabllc/ehealth.web/compare/v1.50.0...v1.50.1) (2019-02-25)
+
+
+### Bug Fixes
+
+* **admin:** fix error handling when `error.extensions` is undefined ([bb280b4](https://github.com/edenlabllc/ehealth.web/commit/bb280b4))
+
+
+
+
+
 <a name="1.50.0"></a>
 # [1.50.0](https://github.com/edenlabllc/ehealth.web/compare/v1.49.0...v1.50.0) (2019-02-25)
 
