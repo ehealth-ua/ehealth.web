@@ -34,25 +34,29 @@ const Error = ({ error, blocking, onClose }) => {
             default="Щось пішло не так"
           />
         </ErrorTitle>
-        <ErrorDetails>
-          {code === "CONFLICT" && <Description>{message}</Description>}
-          {code === "FORBIDDEN" && (
-            <Description>
-              {exception ? (
-                <>
-                  Відсутній дозвіл на наступні дії:
-                  <ul>
-                    {exception.missingAllowances.map(scope => (
-                      <li key={scope}>{scope}</li>
-                    ))}
-                  </ul>
-                </>
-              ) : (
-                message
-              )}
-            </Description>
-          )}
-        </ErrorDetails>
+        {!["NETWORK_ERROR", "INTERNAL_SERVER_ERROR", "UNKNOWN_ERROR"].includes(
+          code
+        ) && (
+          <ErrorDetails>
+            {code === "CONFLICT" && <Description>{message}</Description>}
+            {code === "FORBIDDEN" && (
+              <Description>
+                {exception ? (
+                  <>
+                    Відсутній дозвіл на наступні дії:
+                    <ul>
+                      {exception.missingAllowances.map(scope => (
+                        <li key={scope}>{scope}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  message
+                )}
+              </Description>
+            )}
+          </ErrorDetails>
+        )}
         <Flex justifyContent="center" mt={3}>
           {["NETWORK_ERROR", "INTERNAL_SERVER_ERROR", "UNKNOWN_ERROR"].includes(
             code
