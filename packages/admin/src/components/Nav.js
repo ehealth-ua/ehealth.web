@@ -230,6 +230,11 @@ const Nav = () => (
                   <Trans>List of medical programs</Trans>
                 </NavLink>
               </Ability>
+              <Ability action="read" resource="program_medication">
+                <NavLink to="/program-medications">
+                  <Trans>Program medications</Trans>
+                </NavLink>
+              </Ability>
             </NavSection>
           </Ability>
         </Flag>

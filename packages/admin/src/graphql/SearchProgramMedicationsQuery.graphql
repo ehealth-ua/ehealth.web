@@ -1,0 +1,61 @@
+query SearchProgramMedications(
+  $filter: ProgramMedicationFilter
+  $orderBy: ProgramMedicationOrderBy
+  $first: Int
+  $last: Int
+  $before: String
+  $after: String
+) {
+  programMedications(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
+    nodes {
+      id
+      databaseId
+      isActive
+      insertedAt
+      reimbursement {
+        type
+        reimbursementAmount
+      }
+      medicalProgram {
+        id
+        databaseId
+        name
+        isActive
+        insertedAt
+        updatedAt
+      }
+      medication {
+        id
+        databaseId
+        name
+        form
+        manufacturer {
+          name
+          country
+        }
+        ingredients {
+          isPrimary
+          innmDosage {
+            id
+            databaseId
+            name
+          }
+        }
+        isActive
+      }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+  }
+}

@@ -1,0 +1,14 @@
+query SearchMedicationsQuery(
+  $first: Int
+  $filter: MedicationFilter
+  $skip: Boolean!
+) {
+  medications(first: $first, filter: $filter) @skip(if: $skip) {
+    nodes {
+      id
+      databaseId
+      name
+      isActive
+    }
+  }
+}

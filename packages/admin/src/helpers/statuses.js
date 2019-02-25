@@ -46,6 +46,16 @@ const MEDICAL_PROGRAM_STATUS = {
   [false]: "Неактивна"
 };
 
+const PROGRAM_MEDICATION_STATUS = {
+  [true]: "Активний",
+  [false]: "Неактивний"
+};
+
+const MEDICATION_REQUEST_ALLOWED = {
+  [true]: "Дозволено",
+  [false]: "Не дозволено"
+};
+
 const MERGE_LEGAL_ENTITIES_JOBS = {
   FAILED: "Помилка",
   FAILED_WITH_ERROR: "Помилка системи",
@@ -73,6 +83,8 @@ const STATUSES = {
   CONTRACT_REQUEST,
   MERGE_LEGAL_ENTITIES_JOBS,
   MEDICAL_PROGRAM_STATUS,
+  PROGRAM_MEDICATION_STATUS,
+  MEDICATION_REQUEST_ALLOWED,
   SUSPENDED
 };
 

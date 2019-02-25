@@ -1,0 +1,14 @@
+query SearchINNMDosagesQuery(
+  $first: Int
+  $filter: INNMDosageFilter
+  $skip: Boolean!
+) {
+  innmDosages(first: $first, filter: $filter) @skip(if: $skip) {
+    nodes {
+      id
+      databaseId
+      name
+      isActive
+    }
+  }
+}
