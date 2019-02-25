@@ -69,6 +69,6 @@ const defaultOptions = {
     errorPolicy: "all"
   },
   mutate: {
-    errorPolicy: "all"
+    errorPolicy: "none"
   }
 };
