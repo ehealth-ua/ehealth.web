@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.49.0"></a>
+# [1.49.0](https://github.com/edenlabllc/ehealth.web/compare/v1.48.0...v1.49.0) (2019-02-25)
+
+
+### Features
+
+* **admin-legacy:** add daily dosage field for medication ([6e864bc](https://github.com/edenlabllc/ehealth.web/commit/6e864bc))
+
+
+
+
+
 <a name="1.48.0"></a>
 # [1.48.0](https://github.com/edenlabllc/ehealth.web/compare/v1.47.2...v1.48.0) (2019-02-22)
 
