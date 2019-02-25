@@ -8,6 +8,7 @@ export { default as getFullName } from "./getFullName";
 export { default as getPhones } from "./getPhones";
 export { default as getCookie } from "./getCookie";
 export { default as getSpecialities } from "./getSpecialities";
+export { default as handleMutation } from "./handleMutation";
 export { default as filterPropertiesByValue } from "./filterPropertiesByValue";
 export { default as fieldNameDenormalizer } from "./fieldNameDenormalizer";
 export { default as fieldNameNormalizer } from "./fieldNameNormalizer";
