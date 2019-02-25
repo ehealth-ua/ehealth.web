@@ -7,7 +7,7 @@ import { loader } from "graphql.macro";
 import { Trans, t } from "@lingui/macro";
 import { I18n } from "@lingui/react";
 import { LocationParams, Form, Validation } from "@ehealth/components";
-import { getFullName } from "@ehealth/utils";
+import { getFullName, handleMutation } from "@ehealth/utils";
 import { SearchIcon } from "@ehealth/icons";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
@@ -15,7 +15,6 @@ import Button from "../../../components/Button";
 import * as Field from "../../../components/Field/index";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
-import handleMutation from "../../../helpers/handleMutation";
 
 const ReimbursementContractRequestQuery = loader(
   "../../../graphql/ReimbursementContractRequestQuery.graphql"
@@ -157,16 +156,16 @@ const UpdateContractRequest = ({
               {updateContractRequest => (
                 <Form
                   onSubmit={async () => {
-                    const {
-                      nhsSignerId,
-                      nhsContractPrice,
-                      miscellaneous,
-                      nhsPaymentMethod,
-                      issueCity,
-                      nhsSignerBase
-                    } = locationParams;
-                    return handleMutation(
-                      () =>
+                    try {
+                      const {
+                        nhsSignerId,
+                        nhsContractPrice,
+                        miscellaneous,
+                        nhsPaymentMethod,
+                        issueCity,
+                        nhsSignerBase
+                      } = locationParams;
+                      await handleMutation(
                         updateContractRequest({
                           variables: {
                             input: {
@@ -181,9 +180,12 @@ const UpdateContractRequest = ({
                               miscellaneous: miscellaneous || ""
                             }
                           }
-                        }),
-                      () => navigate("../approve")
-                    );
+                        })
+                      );
+                      navigate("../approve");
+                    } catch (errors) {
+                      return errors;
+                    }
                   }}
                   initialValues={{
                     ...initialValues,

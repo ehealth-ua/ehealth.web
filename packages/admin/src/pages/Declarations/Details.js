@@ -8,7 +8,7 @@ import isEmpty from "lodash/isEmpty";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
 import { PositiveIcon, NegativeIcon, DefaultImageIcon } from "@ehealth/icons";
-import { getFullName, getPhones } from "@ehealth/utils";
+import { getFullName, getPhones, handleMutation } from "@ehealth/utils";
 import { Form, Modal, Switch } from "@ehealth/components";
 
 import Line from "../../components/Line";
@@ -25,7 +25,6 @@ import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import env from "../../env";
-import handleMutation from "../../helpers/handleMutation";
 
 const DeclarationQuery = loader("../../graphql/DeclarationQuery.graphql");
 const TerminateDeclarationMutation = loader(
@@ -131,17 +130,20 @@ const Details = ({ id }) => (
                                     </Button>
                                   </Box>
                                   <Button
-                                    onClick={async () =>
-                                      handleMutation(
-                                        () =>
+                                    onClick={async () => {
+                                      try {
+                                        await handleMutation(
                                           rejectDeclaration({
                                             variables: {
                                               input: { id }
                                             }
-                                          }),
-                                        toggle
-                                      )
-                                    }
+                                          })
+                                        );
+                                        toggle();
+                                      } catch (errors) {
+                                        return errors;
+                                      }
+                                    }}
                                     variant="red"
                                   >
                                     <Trans>Decline declaration</Trans>
@@ -177,17 +179,20 @@ const Details = ({ id }) => (
                                   </Button>
                                 </Box>
                                 <Button
-                                  onClick={() =>
-                                    handleMutation(
-                                      () =>
+                                  onClick={async () => {
+                                    try {
+                                      await handleMutation(
                                         approveDeclaration({
                                           variables: {
                                             input: { id }
                                           }
-                                        }),
-                                      toggle
-                                    )
-                                  }
+                                        })
+                                      );
+                                      toggle();
+                                    } catch (errors) {
+                                      return errors;
+                                    }
+                                  }}
                                   variant="green"
                                 >
                                   <Trans>Approve the declaration</Trans>
@@ -324,17 +329,20 @@ const GeneralInfo = ({
             >
               {terminateDeclaration => (
                 <Form
-                  onSubmit={({ reasonDescription }) =>
-                    handleMutation(
-                      () =>
+                  onSubmit={async ({ reasonDescription }) => {
+                    try {
+                      await handleMutation(
                         terminateDeclaration({
                           variables: {
                             input: { id, reasonDescription }
                           }
-                        }),
-                      toggle
-                    )
-                  }
+                        })
+                      );
+                      toggle();
+                    } catch (errors) {
+                      return errors;
+                    }
+                  }}
                 >
                   <Text mb={2}>
                     <Trans>

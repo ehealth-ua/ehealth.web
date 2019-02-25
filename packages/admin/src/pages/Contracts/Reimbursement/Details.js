@@ -17,7 +17,7 @@ import {
   SearchIcon,
   CancelIcon
 } from "@ehealth/icons";
-import { getFullName } from "@ehealth/utils";
+import { getFullName, handleMutation } from "@ehealth/utils";
 
 import Line from "../../../components/Line";
 import Tabs from "../../../components/Tabs";
@@ -34,7 +34,6 @@ import DefinitionListView from "../../../components/DefinitionListView";
 import Pagination from "../../../components/Pagination";
 import EmptyData from "../../../components/EmptyData";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
-import handleMutation from "../../../helpers/handleMutation";
 
 const ReimbursementContractQuery = loader(
   "../../../graphql/ReimbursementContractQuery.graphql"
@@ -153,15 +152,18 @@ const Details = ({ id }) => (
                       >
                         {terminateContract => (
                           <Form
-                            onSubmit={({ statusReason }) =>
-                              handleMutation(
-                                () =>
+                            onSubmit={async ({ statusReason }) => {
+                              try {
+                                await handleMutation(
                                   terminateContract({
                                     variables: { input: { id, statusReason } }
-                                  }),
-                                toggle
-                              )
-                            }
+                                  })
+                                );
+                                toggle();
+                              } catch (errors) {
+                                return errors;
+                              }
+                            }}
                           >
                             <Text mb={2}>
                               <Trans>
@@ -338,15 +340,18 @@ const ProlongateContract = ({ endDate, id }) => (
         >
           {prolongateContract => (
             <Form
-              onSubmit={({ endDate }) =>
-                handleMutation(
-                  () =>
+              onSubmit={async ({ endDate }) => {
+                try {
+                  await handleMutation(
                     prolongateContract({
                       variables: { input: { id, endDate } }
-                    }),
-                  toggle
-                )
-              }
+                    })
+                  );
+                  toggle();
+                } catch (errors) {
+                  return errors;
+                }
+              }}
               initialValues={{ endDate }}
             >
               <Flex>

@@ -19,7 +19,8 @@ import {
   getFullName,
   getPhones,
   parseSortingParams,
-  stringifySortingParams
+  stringifySortingParams,
+  handleMutation
 } from "@ehealth/utils";
 import { LocationParams, Form, Modal } from "@ehealth/components";
 
@@ -40,7 +41,6 @@ import DefinitionListView from "../../components/DefinitionListView";
 import EmptyData from "../../components/EmptyData";
 
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
-import handleMutation from "../../helpers/handleMutation";
 
 const DeactivateLegalEntityMutation = loader(
   "../../graphql/DeactivateLegalEntityMutation.graphql"
@@ -144,17 +144,21 @@ const Details = ({ id, navigate }) => (
                     >
                       {nhsReviewLegalEntity => (
                         <Button
-                          onClick={() =>
-                            handleMutation(() =>
-                              nhsReviewLegalEntity({
-                                variables: {
-                                  input: {
-                                    id
+                          onClick={async () => {
+                            try {
+                              await handleMutation(
+                                nhsReviewLegalEntity({
+                                  variables: {
+                                    input: {
+                                      id
+                                    }
                                   }
-                                }
-                              })
-                            )
-                          }
+                                })
+                              );
+                            } catch (errors) {
+                              return errors;
+                            }
+                          }}
                           variant="blue"
                         >
                           <Trans>To process</Trans>
@@ -185,20 +189,24 @@ const Details = ({ id, navigate }) => (
                                 </Button>
                               </Box>
                               <Button
-                                onClick={() =>
-                                  handleMutation(
-                                    () =>
+                                onClick={async () => {
+                                  try {
+                                    await handleMutation(
                                       deactivateLegalEntity({
                                         variables: {
-                                          input: { id }
+                                          input: {
+                                            id
+                                          }
                                         }
-                                      }),
-                                    () =>
-                                      navigate(
-                                        "/legal-entity-deactivate-jobs/search"
-                                      )
-                                  )
-                                }
+                                      })
+                                    );
+                                    navigate(
+                                      "/legal-entity-deactivate-jobs/search"
+                                    );
+                                  } catch (errors) {
+                                    return errors;
+                                  }
+                                }}
                                 variant="red"
                               >
                                 <Trans>Close legal entity</Trans>
@@ -527,15 +535,18 @@ const License = ({
                     showForm ? (
                       <Form
                         initialValues={{ nhsComment }}
-                        onSubmit={({ nhsComment = "" }) =>
-                          handleMutation(
-                            () =>
+                        onSubmit={async ({ nhsComment = "" }) => {
+                          try {
+                            await handleMutation(
                               nhsCommentLegalEntity({
                                 variables: { input: { id, nhsComment } }
-                              }),
-                            toggle
-                          )
-                        }
+                              })
+                            );
+                            toggle();
+                          } catch (errors) {
+                            return errors;
+                          }
+                        }}
                       >
                         <Trans
                           id="Enter comment"
@@ -571,17 +582,20 @@ const License = ({
                           <Box mr={20}>
                             <Button
                               variant="red"
-                              onClick={() =>
-                                handleMutation(
-                                  () =>
+                              onClick={async () => {
+                                try {
+                                  await handleMutation(
                                     nhsCommentLegalEntity({
                                       variables: {
                                         input: { id, nhsComment: "" }
                                       }
-                                    }),
-                                  toggle
-                                )
-                              }
+                                    })
+                                  );
+                                  toggle();
+                                } catch (errors) {
+                                  return errors;
+                                }
+                              }}
                             >
                               <Trans>Delete</Trans>
                             </Button>
@@ -921,9 +935,9 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
                 </Button>
               </Box>
               <Button
-                onClick={() =>
-                  handleMutation(
-                    () =>
+                onClick={async () => {
+                  try {
+                    await handleMutation(
                       nhsVerifyLegalEntity({
                         variables: {
                           input: {
@@ -931,10 +945,13 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
                             nhsVerified: !nhsVerified
                           }
                         }
-                      }),
-                    toggle
-                  )
-                }
+                      })
+                    );
+                    toggle();
+                  } catch (errors) {
+                    return errors;
+                  }
+                }}
                 variant={variant}
               >
                 {title}

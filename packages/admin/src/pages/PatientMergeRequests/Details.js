@@ -6,7 +6,7 @@ import { Query, Mutation } from "react-apollo";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
-import { getPhones } from "@ehealth/utils";
+import { getPhones, handleMutation } from "@ehealth/utils";
 import system from "@ehealth/system-components";
 import { Form, Modal } from "@ehealth/components";
 
@@ -28,7 +28,6 @@ import {
   TableCell,
   TableRow
 } from "../../components/Table";
-import handleMutation from "../../helpers/handleMutation";
 
 const MergeRequestQuery = loader("../../graphql/MergeRequestQuery.graphql");
 const UpdateMergeRequestMutation = loader(
@@ -522,15 +521,18 @@ const Popup = ({
               >
                 {updateMergeRequest => (
                   <Form
-                    onSubmit={({ comment }) =>
-                      handleMutation(
-                        () =>
+                    onSubmit={async ({ comment }) => {
+                      try {
+                        await handleMutation(
                           updateMergeRequest({
                             variables: { input: { id, status, comment } }
-                          }),
-                        () => navigate("/patient-merge-requests/search")
-                      )
-                    }
+                          })
+                        );
+                        navigate("/patient-merge-requests/search");
+                      } catch (errors) {
+                        return errors;
+                      }
+                    }}
                   >
                     <Trans
                       id="Enter comment"

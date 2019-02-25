@@ -12,7 +12,8 @@ import { SearchIcon } from "@ehealth/icons";
 import {
   parseSortingParams,
   stringifySortingParams,
-  getFullName
+  getFullName,
+  handleMutation
 } from "@ehealth/utils";
 
 import Tabs from "../../components/Tabs";
@@ -36,7 +37,6 @@ import {
 } from "../../constants/declarationSearchPatterns";
 import Pagination from "../../components/Pagination";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
-import handleMutation from "../../helpers/handleMutation";
 
 const ResetAuthMethodMutation = loader(
   "../../graphql/ResetAuthMethodMutation.graphql"
@@ -282,17 +282,17 @@ const AuthInfo = ({ id, databaseId, authInfo, status }) =>
                           <Box mx={2}>
                             <Button
                               variant="green"
-                              onClick={() =>
-                                handleMutation(
-                                  () =>
-                                    resetPersonAuthenticationMethod({
-                                      variables: {
-                                        input: { personId: databaseId }
-                                      }
-                                    }),
-                                  toggle
-                                )
-                              }
+                              onClick={async () => {
+                                try {
+                                  await resetPersonAuthenticationMethod({
+                                    variables: {
+                                      input: { personId: databaseId }
+                                    }
+                                  });
+                                } catch (errors) {
+                                  return errors;
+                                }
+                              }}
                             >
                               <Trans>Reset Authentication Method</Trans>
                             </Button>

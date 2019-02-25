@@ -4,7 +4,11 @@ import { Query, Mutation } from "react-apollo";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
 import { LocationParams } from "@ehealth/components";
-import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+import {
+  parseSortingParams,
+  stringifySortingParams,
+  handleMutation
+} from "@ehealth/utils";
 
 import Link from "../../components/Link";
 import Table from "../../components/Table";
@@ -13,7 +17,6 @@ import Button from "../../components/Button";
 import Pagination from "../../components/Pagination";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
-import handleMutation from "../../helpers/handleMutation";
 
 const PatientMergeRequestsQuery = loader(
   "../../graphql/PatientMergeRequestsQuery.graphql"
@@ -96,7 +99,13 @@ const Search = () => (
                     >
                       {assignMergeCandidate => (
                         <Button
-                          onClick={() => handleMutation(assignMergeCandidate)}
+                          onClick={async () => {
+                            try {
+                              await handleMutation(assignMergeCandidate());
+                            } catch (errors) {
+                              return errors;
+                            }
+                          }}
                           variant="blue"
                           disabled={!canAssignNew}
                         >

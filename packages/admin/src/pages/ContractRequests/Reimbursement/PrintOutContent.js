@@ -9,11 +9,11 @@ import system from "@ehealth/system-components";
 import { Box, Flex, Text } from "@rebass/emotion";
 import { PrinterIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
+import { handleMutation } from "@ehealth/utils";
 
 import LoadingOverlay from "../../../components/LoadingOverlay";
 import Button from "../../../components/Button";
 import env from "../../../env";
-import handleMutation from "../../../helpers/handleMutation";
 
 const SignContractRequestMutation = loader(
   "../../../graphql/SignContractRequestMutation.graphql"
@@ -82,12 +82,11 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                               <Button
                                 variant="green"
                                 onClick={async () => {
-                                  const { signedContent } = await signData(
-                                    toSignContent
-                                  );
-
-                                  return handleMutation(
-                                    () =>
+                                  try {
+                                    const { signedContent } = await signData(
+                                      toSignContent
+                                    );
+                                    await handleMutation(
                                       signContractRequest({
                                         variables: {
                                           input: {
@@ -98,9 +97,12 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                                             }
                                           }
                                         }
-                                      }),
-                                    () => navigate("../")
-                                  );
+                                      })
+                                    );
+                                    navigate("../");
+                                  } catch (errors) {
+                                    return errors;
+                                  }
                                 }}
                               >
                                 <Trans>Signing by EDS and seal</Trans>

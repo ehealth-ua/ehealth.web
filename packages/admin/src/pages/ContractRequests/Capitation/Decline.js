@@ -7,6 +7,7 @@ import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { Signer } from "@ehealth/react-iit-digital-signature";
+import { handleMutation } from "@ehealth/utils";
 
 import Line from "../../../components/Line";
 import Badge from "../../../components/Badge";
@@ -18,7 +19,6 @@ import * as Field from "../../../components/Field";
 import DefinitionListView from "../../../components/DefinitionListView";
 
 import env from "../../../env";
-import handleMutation from "../../../helpers/handleMutation";
 
 const CapitationContractRequestQuery = loader(
   "../../../graphql/CapitationContractRequestQuery.graphql"
@@ -219,12 +219,12 @@ const Sign = ({
                       <Button
                         variant="green"
                         onClick={async () => {
-                          const { signedContent } = await signData({
-                            ...toDeclineContent,
-                            status_reason: base
-                          });
-                          return handleMutation(
-                            () =>
+                          try {
+                            const { signedContent } = await signData({
+                              ...toDeclineContent,
+                              status_reason: base
+                            });
+                            await handleMutation(
                               declineContractRequest({
                                 variables: {
                                   input: {
@@ -235,9 +235,12 @@ const Sign = ({
                                     }
                                   }
                                 }
-                              }),
-                            () => navigate("../../")
-                          );
+                              })
+                            );
+                            navigate("../../");
+                          } catch (errors) {
+                            return errors;
+                          }
                         }}
                       >
                         <Trans>Approve by EDS</Trans>

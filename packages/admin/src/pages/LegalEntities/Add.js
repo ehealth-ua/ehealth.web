@@ -4,7 +4,7 @@ import { Router, Link } from "@reach/router";
 import { Flex, Box, Text } from "@rebass/emotion";
 import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
-import { getFullName } from "@ehealth/utils";
+import { getFullName, handleMutation } from "@ehealth/utils";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { SearchIcon, PositiveIcon, NegativeIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
@@ -21,7 +21,6 @@ import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
 import env from "../../env";
-import handleMutation from "../../helpers/handleMutation";
 
 const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
 const SearchLegalEntitiesQuery = loader(
@@ -338,16 +337,16 @@ const Sign = ({
                             <Button
                               variant="green"
                               onClick={async () => {
-                                const mergedLegalEntities = {
-                                  merged_from_legal_entity: legalEntityFrom,
-                                  merged_to_legal_entity: legalEntityTo,
-                                  reason
-                                };
-                                const { signedContent } = await signData(
-                                  mergedLegalEntities
-                                );
-                                return handleMutation(
-                                  () =>
+                                try {
+                                  const mergedLegalEntities = {
+                                    merged_from_legal_entity: legalEntityFrom,
+                                    merged_to_legal_entity: legalEntityTo,
+                                    reason
+                                  };
+                                  const { signedContent } = await signData(
+                                    mergedLegalEntities
+                                  );
+                                  await handleMutation(
                                     mergeLegalEntities({
                                       variables: {
                                         input: {
@@ -357,9 +356,12 @@ const Sign = ({
                                           }
                                         }
                                       }
-                                    }),
-                                  () => navigate("/legal-entity-merge-jobs")
-                                );
+                                    })
+                                  );
+                                  navigate("/legal-entity-merge-jobs");
+                                } catch (errors) {
+                                  return errors;
+                                }
                               }}
                             >
                               <Trans>Sign</Trans>

@@ -12,7 +12,7 @@ import {
   Validation,
   Validations
 } from "@ehealth/components";
-import { getFullName } from "@ehealth/utils";
+import { getFullName, handleMutation } from "@ehealth/utils";
 import { SearchIcon } from "@ehealth/icons";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
@@ -21,7 +21,6 @@ import LoadingOverlay from "../../../components/LoadingOverlay";
 import * as Field from "../../../components/Field/index";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
-import handleMutation from "../../../helpers/handleMutation";
 
 const CapitationContractRequestQuery = loader(
   "../../../graphql/CapitationContractRequestQuery.graphql"
@@ -163,7 +162,7 @@ const UpdateContractRequest = ({
             >
               {updateContractRequest => (
                 <Form
-                  onSubmit={() => {
+                  onSubmit={async () => {
                     const {
                       nhsSignerId,
                       nhsContractPrice,
@@ -172,8 +171,8 @@ const UpdateContractRequest = ({
                       issueCity,
                       nhsSignerBase
                     } = locationParams;
-                    return handleMutation(
-                      () =>
+                    try {
+                      await handleMutation(
                         updateContractRequest({
                           variables: {
                             input: {
@@ -188,9 +187,12 @@ const UpdateContractRequest = ({
                               miscellaneous: miscellaneous || ""
                             }
                           }
-                        }),
-                      () => navigate("../approve")
-                    );
+                        })
+                      );
+                      navigate("../approve");
+                    } catch (errors) {
+                      return errors;
+                    }
                   }}
                   initialValues={{
                     ...initialValues,
