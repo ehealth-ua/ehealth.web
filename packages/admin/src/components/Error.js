@@ -11,11 +11,6 @@ const Error = ({ error, blocking, onClose }) => {
   const code = getErrorCode(error);
   if (code === "UNPROCESSABLE_ENTITY") return null;
 
-  const {
-    extensions: { exception },
-    message
-  } = error;
-
   return (
     <Modal width={760} px={76} py={32} placement="center" backdrop>
       {blocking || (
@@ -34,33 +29,41 @@ const Error = ({ error, blocking, onClose }) => {
             default="Щось пішло не так"
           />
         </ErrorTitle>
-        {!["NETWORK_ERROR", "INTERNAL_SERVER_ERROR", "UNKNOWN_ERROR"].includes(
-          code
-        ) && (
+        {![
+          "NETWORK_ERROR",
+          "INTERNAL_SERVER_ERROR",
+          "UNKNOWN_ERROR",
+          undefined
+        ].includes(code) && (
           <ErrorDetails>
-            {code === "CONFLICT" && <Description>{message}</Description>}
+            {code === "CONFLICT" && <Description>{error.message}</Description>}
             {code === "FORBIDDEN" && (
               <Description>
-                {exception ? (
+                {error.extensions.exception ? (
                   <>
                     Відсутній дозвіл на наступні дії:
                     <ul>
-                      {exception.missingAllowances.map(scope => (
-                        <li key={scope}>{scope}</li>
-                      ))}
+                      {error.extensions.exception.missingAllowances.map(
+                        scope => (
+                          <li key={scope}>{scope}</li>
+                        )
+                      )}
                     </ul>
                   </>
                 ) : (
-                  message
+                  error.message
                 )}
               </Description>
             )}
           </ErrorDetails>
         )}
         <Flex justifyContent="center" mt={3}>
-          {["NETWORK_ERROR", "INTERNAL_SERVER_ERROR", "UNKNOWN_ERROR"].includes(
-            code
-          ) && (
+          {[
+            "NETWORK_ERROR",
+            "INTERNAL_SERVER_ERROR",
+            "UNKNOWN_ERROR",
+            undefined
+          ].includes(code) && (
             <Button
               variant="blue"
               mx={2}
