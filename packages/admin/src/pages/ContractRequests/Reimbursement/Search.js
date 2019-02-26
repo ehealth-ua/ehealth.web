@@ -80,13 +80,17 @@ const ReimbursementContractRequestsSearch = () => (
                 filter: contractFormFilteredParams(filter)
               }}
             >
-              {({ loading, error, data }) => {
-                if (error || isEmpty(data)) return null;
-                const {
-                  nodes: reimbursementContractRequests = [],
-                  pageInfo
-                } = data.reimbursementContractRequests;
-
+              {({
+                loading,
+                error,
+                data: {
+                  reimbursementContractRequests: {
+                    nodes: reimbursementContractRequests = [],
+                    pageInfo
+                  } = {}
+                }
+              }) => {
+                if (isEmpty(reimbursementContractRequests)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     {reimbursementContractRequests.length > 0 && (

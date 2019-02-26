@@ -142,13 +142,17 @@ const Search = ({ uri }) => (
               fetchPolicy="network-only"
               variables={filteredLocationParams(locationParams)}
             >
-              {({ loading, error, data }) => {
-                if (error || isEmpty(data)) return null;
-                const {
-                  nodes: medicalPrograms = [],
-                  pageInfo
-                } = data.medicalPrograms;
-
+              {({
+                loading,
+                error,
+                data: {
+                  medicalPrograms: {
+                    nodes: medicalPrograms = [],
+                    pageInfo
+                  } = {}
+                }
+              }) => {
+                if (isEmpty(medicalPrograms)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     {medicalPrograms.length > 0 && (

@@ -41,9 +41,9 @@ const Details = ({ name }) => (
     {({
       loading,
       error,
-      data: { dictionaries: { nodes: dictionaries = [] } = {} } = {}
+      data: { dictionaries: { nodes: dictionaries = [] } = {} }
     }) => {
-      if (error) return `Error! ${error.message}`;
+      if (isEmpty(dictionaries)) return null;
       const [{ id, isActive, labels = [], values = [] } = {}] = dictionaries;
       const isReadOnly = labels.includes("READ_ONLY");
 

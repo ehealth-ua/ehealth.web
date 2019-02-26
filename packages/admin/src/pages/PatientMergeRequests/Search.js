@@ -5,6 +5,7 @@ import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
 import { LocationParams } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+import isEmpty from "lodash/isEmpty";
 
 import Link from "../../components/Link";
 import Table from "../../components/Table";
@@ -45,15 +46,14 @@ const Search = () => (
             }}
           >
             {({ loading, error, data }) => {
-              if (error) return null;
+              if (isEmpty(data)) return null;
               const {
                 mergeRequests: {
                   canAssignNew,
                   nodes: mergeRequests = [],
                   pageInfo = {}
                 } = {}
-              } = data || {};
-
+              } = data;
               return (
                 <LoadingOverlay loading={loading}>
                   <Flex

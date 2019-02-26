@@ -9,6 +9,8 @@ import { I18n } from "@lingui/react";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { getFullName } from "@ehealth/utils";
 import { SearchIcon } from "@ehealth/icons";
+import isEmpty from "lodash/isEmpty";
+
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
 import Button from "../../../components/Button";
@@ -46,10 +48,12 @@ const Update = ({ id }) => (
             id
           }}
         >
-          {({ loading, error, data }) => {
-            if (loading) return "Loading...";
-            if (error) return `Error! ${error.message}`;
-            const { reimbursementContractRequest } = data;
+          {({
+            loading,
+            error,
+            data: { reimbursementContractRequest } = {}
+          }) => {
+            if (isEmpty(reimbursementContractRequest)) return null;
             const {
               status,
               databaseId,

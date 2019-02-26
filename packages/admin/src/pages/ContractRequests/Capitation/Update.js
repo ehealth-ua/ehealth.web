@@ -6,6 +6,7 @@ import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 import { Trans, t } from "@lingui/macro";
 import { I18n } from "@lingui/react";
+import isEmpty from "lodash/isEmpty";
 import {
   LocationParams,
   Form,
@@ -47,13 +48,8 @@ const Update = ({ id }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => (
         <Query query={CapitationContractRequestQuery} variables={{ id }}>
-          {({
-            loading,
-            error,
-            data: { capitationContractRequest = {} } = {}
-          }) => {
-            if (error) return `Error! ${error.message}`;
-
+          {({ loading, error, data: { capitationContractRequest } = {} }) => {
+            if (isEmpty(capitationContractRequest)) return null;
             const {
               status,
               databaseId,
@@ -149,7 +145,7 @@ const UpdateContractRequest = ({
           error,
           data: { employees: { nodes: employees = [] } = {} } = {}
         }) => {
-          if (error) return `Error! ${error.message}`;
+          if (isEmpty(employees)) return null;
           return (
             <Mutation
               mutation={UpdateContractRequestMutation}

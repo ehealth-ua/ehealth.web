@@ -7,6 +7,7 @@ import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { Signer } from "@ehealth/react-iit-digital-signature";
+import isEmpty from "lodash/isEmpty";
 
 import Line from "../../../components/Line";
 import Badge from "../../../components/Badge";
@@ -53,8 +54,7 @@ const Decline = ({
               error,
               data: { capitationContractRequest = {} } = {}
             }) => {
-              if (error) return `Error! ${error.message}`;
-
+              if (isEmpty(capitationContractRequest)) return null;
               const {
                 status,
                 databaseId,

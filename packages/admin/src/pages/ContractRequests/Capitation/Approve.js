@@ -6,6 +6,7 @@ import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
 import { getFullName } from "@ehealth/utils";
+import isEmpty from "lodash/isEmpty";
 
 import Line from "../../../components/Line";
 import Badge from "../../../components/Badge";
@@ -39,7 +40,7 @@ const Approve = ({ id }) => (
       }}
     >
       {({ loading, error, data: { capitationContractRequest } = {} }) => {
-        if (error) return `Error! ${error.message}`;
+        if (isEmpty(capitationContractRequest)) return null;
         const {
           status,
           databaseId,

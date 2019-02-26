@@ -96,10 +96,12 @@ const Search = ({ uri }) => (
                 }
               }}
             >
-              {({ loading, error, data }) => {
-                if (error || isEmpty(data)) return null;
-                const { nodes: persons = [], pageInfo } = data.persons;
-
+              {({
+                loading,
+                error,
+                data: { persons: { nodes: persons = [], pageInfo } = {} } = {}
+              }) => {
+                if (isEmpty(persons)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     {persons.length > 0 && (

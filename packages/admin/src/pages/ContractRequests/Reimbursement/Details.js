@@ -47,9 +47,8 @@ const ReimbursementContractRequestDetails = () => (
 
 const Details = ({ id }) => (
   <Query query={ReimbursementContractRequestQuery} variables={{ id }}>
-    {({ loading, error, data }) => {
-      if (loading) return "Loading...";
-      if (error) return `Error! ${error.message}`;
+    {({ loading, error, data: { reimbursementContractRequest = {} } }) => {
+      if (isEmpty(reimbursementContractRequest)) return null;
       const {
         databaseId,
         status,
@@ -69,7 +68,7 @@ const Details = ({ id }) => (
         attachedDocuments,
         previousRequest,
         medicalProgram
-      } = data.reimbursementContractRequest;
+      } = reimbursementContractRequest;
       const { party = "" } = assignee ? assignee : {};
       return (
         <>

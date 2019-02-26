@@ -99,10 +99,9 @@ const Search = ({ uri }) => (
                 error,
                 data: {
                   legalEntities: { nodes: legalEntities = [], pageInfo } = {}
-                },
-                refetch
+                }
               }) => {
-                if (error) return `Error! ${error.message}`;
+                if (isEmpty(legalEntities)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     <Table

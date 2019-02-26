@@ -51,12 +51,16 @@ const Search = () => (
               query={DeclarationByNumberQuery}
               variables={{ declarationNumber }}
             >
-              {({ loading, error, data }) => {
-                if (error || isEmpty(data)) return null;
+              {({
+                loading,
+                error,
+                data: { declarationByNumber = {} } = {}
+              }) => {
+                if (isEmpty(declarationByNumber)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     <Table
-                      data={[data.declarationByNumber]}
+                      data={[declarationByNumber]}
                       header={{
                         databaseId: <Trans>Declaration ID</Trans>,
                         declarationNumber: <Trans>Declaration number</Trans>,

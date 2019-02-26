@@ -25,6 +25,7 @@ import Update from "./Update";
 import Approve from "./Approve";
 import Decline from "./Decline";
 import PrintOutContent from "./PrintOutContent";
+import isEmpty from "lodash/isEmpty";
 
 import Line from "../../../components/Line";
 import Tabs from "../../../components/Tabs";
@@ -66,7 +67,7 @@ const Details = ({ id }) => (
     variables={{ id }}
   >
     {({ loading, error, data: { capitationContractRequest = {} } = {} }) => {
-      if (error) return `Error! ${error.message}`;
+      if (isEmpty(capitationContractRequest)) return null;
       const {
         databaseId,
         status,

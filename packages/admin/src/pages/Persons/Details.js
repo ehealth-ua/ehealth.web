@@ -48,7 +48,7 @@ const PersonDeclarationsQuery = loader(
 const Details = ({ id }) => (
   <Query query={PersonQuery} fetchPolicy="network-only" variables={{ id }}>
     {({ loading, error, data: { person = {} } = {} }) => {
-      if (error) return `Error! ${error.message}`;
+      if (isEmpty(person)) return null;
       const {
         databaseId,
         status,

@@ -65,13 +65,14 @@ const Search = () => (
                 filter: { reason }
               }}
             >
-              {({ loading, error, data }) => {
-                if (error || isEmpty(data)) return null;
-                const {
-                  nodes: declarations,
-                  pageInfo
-                } = data.pendingDeclarations;
-
+              {({
+                loading,
+                error,
+                data: {
+                  pendingDeclarations: { nodes: declarations, pageInfo } = {}
+                }
+              }) => {
+                if (isEmpty(declarations)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     {declarations.length > 0 && (

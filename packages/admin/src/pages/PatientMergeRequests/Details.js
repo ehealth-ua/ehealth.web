@@ -37,7 +37,7 @@ const UpdateMergeRequestMutation = loader(
 const Details = ({ id, navigate }) => (
   <Query query={MergeRequestQuery} variables={{ id }}>
     {({ loading, error, data }) => {
-      if (error) return null;
+      if (isEmpty(data)) return null;
       const {
         mergeRequest: {
           status,

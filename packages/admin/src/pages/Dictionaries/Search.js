@@ -56,9 +56,9 @@ const Search = () => (
                 error,
                 data: {
                   dictionaries: { nodes: dictionaries = [], pageInfo } = {}
-                } = {}
+                }
               }) => {
-                if (error) return `Error! ${error.message}`;
+                if (isEmpty(dictionaries)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     {dictionaries.length > 0 && (

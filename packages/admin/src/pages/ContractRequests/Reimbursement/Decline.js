@@ -5,6 +5,7 @@ import { Flex, Box } from "@rebass/emotion";
 import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
+import isEmpty from "lodash/isEmpty";
 
 import { LocationParams, Form, Validation } from "@ehealth/components";
 import { Signer } from "@ehealth/react-iit-digital-signature";
@@ -44,9 +45,7 @@ const Decline = ({ id, location: { state }, ...props }) => {
         {({ locationParams, setLocationParams }) => (
           <Query query={ReimbursementContractRequestQuery} variables={{ id }}>
             {({ loading, error, data: { reimbursementContractRequest } }) => {
-              if (loading) return "Loading...";
-              if (error) return `Error! ${error.message}`;
-
+              if (isEmpty(reimbursementContractRequest)) return null;
               const {
                 status,
                 databaseId,

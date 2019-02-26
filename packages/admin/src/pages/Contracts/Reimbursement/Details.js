@@ -56,9 +56,9 @@ const Details = ({ id }) => (
     query={ReimbursementContractQuery}
     variables={{ id, first: ITEMS_PER_PAGE[0] }}
   >
-    {({ loading, error, data }) => {
-      if (loading) return "Loading...";
-      if (error) return `Error! ${error.message}`;
+    {({ loading, error, data: { reimbursementContract = {} } = {} }) => {
+      if (isEmpty(reimbursementContract)) return null;
+
       const {
         isSuspended,
         databaseId,
@@ -78,7 +78,7 @@ const Details = ({ id }) => (
         contractorPaymentDetails,
         attachedDocuments,
         medicalProgram
-      } = data.reimbursementContract;
+      } = reimbursementContract;
 
       return (
         <>

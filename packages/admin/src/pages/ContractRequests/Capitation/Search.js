@@ -71,10 +71,9 @@ const CapitationContractRequestsSearch = () => (
                     nodes: capitationContractRequests = [],
                     pageInfo
                   } = {}
-                } = {},
-                refetch
+                }
               }) => {
-                if (error) return `Error! ${error.message}`;
+                if (isEmpty(capitationContractRequests)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     {capitationContractRequests.length > 0 && (

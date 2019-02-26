@@ -71,7 +71,7 @@ const filteredLocationParams = (id, params = {}) => {
 const Details = ({ id, navigate }) => (
   <Query query={LegalEntityQuery} variables={filteredLocationParams(id)}>
     {({ loading, error, data: { legalEntity = {} } }) => {
-      if (error) return `Error! ${error.message}`;
+      if (isEmpty(legalEntity)) return null;
       const {
         id,
         databaseId,

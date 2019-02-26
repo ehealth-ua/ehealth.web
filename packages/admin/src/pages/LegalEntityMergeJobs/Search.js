@@ -5,6 +5,7 @@ import { Query } from "react-apollo";
 import differenceInSeconds from "date-fns/difference_in_seconds";
 import { loader } from "graphql.macro";
 import { Trans, DateFormat, Plural } from "@lingui/macro";
+import isEmpty from "lodash/isEmpty";
 
 import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
 import { SearchIcon } from "@ehealth/icons";
@@ -95,9 +96,9 @@ const Search = ({ uri }) => (
                   legalEntityMergeJobs: {
                     nodes: legalEntityMergeJobs = []
                   } = {}
-                } = {}
+                }
               }) => {
-                if (error) return `Error! ${error.message}`;
+                if (isEmpty(legalEntityMergeJobs)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     {legalEntityMergeJobs.length > 0 ? (

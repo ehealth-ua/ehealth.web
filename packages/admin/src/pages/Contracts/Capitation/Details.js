@@ -7,6 +7,7 @@ import printIframe from "print-iframe";
 import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
 import { DateFormat, Trans } from "@lingui/macro";
+import isEmpty from "lodash/isEmpty";
 
 import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
 import {
@@ -67,7 +68,7 @@ const Details = ({ id }) => (
     variables={{ id, first: ITEMS_PER_PAGE[0] }}
   >
     {({ loading, error, data: { capitationContract = {} } = {} }) => {
-      if (error) return `Error! ${error.message}`;
+      if (isEmpty(capitationContract)) return null;
       const {
         isSuspended,
         databaseId,

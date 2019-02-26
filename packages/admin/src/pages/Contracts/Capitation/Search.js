@@ -76,9 +76,9 @@ const CapitationContractsSearch = ({ uri }) => (
                 error,
                 data: {
                   capitationContracts: { nodes: contracts = [], pageInfo } = {}
-                } = {}
+                }
               }) => {
-                if (error) return `Error! ${error.message}`;
+                if (isEmpty(contracts)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     {contracts.length > 0 && (

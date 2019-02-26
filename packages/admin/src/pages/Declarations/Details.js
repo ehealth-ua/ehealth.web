@@ -40,7 +40,7 @@ const ApproveDeclarationMutation = loader(
 const Details = ({ id }) => (
   <Query query={DeclarationQuery} variables={{ id }}>
     {({ loading, error, data: { declaration = {} } = {} }) => {
-      if (error) return `Error! ${error.message}`;
+      if (isEmpty(declaration)) return null;
       const {
         id,
         databaseId,

@@ -63,13 +63,17 @@ const Search = ({ uri }) => (
                 filter
               }}
             >
-              {({ loading, error, data }) => {
-                if (error || isEmpty(data)) return null;
-                const {
-                  nodes: legalEntityDeactivationJobs = [],
-                  pageInfo
-                } = data.legalEntityDeactivationJobs;
-
+              {({
+                loading,
+                error,
+                data: {
+                  legalEntityDeactivationJobs: {
+                    nodes: legalEntityDeactivationJobs = [],
+                    pageInfo
+                  } = {}
+                }
+              }) => {
+                if (isEmpty(legalEntityDeactivationJobs)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
                     {legalEntityDeactivationJobs.length > 0 && (
