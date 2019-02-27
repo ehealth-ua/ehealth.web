@@ -1,0 +1,83 @@
+query ProgramMedicationQuery($id: ID!) {
+  programMedication(id: $id) {
+    id
+    databaseId
+    isActive
+    insertedAt
+    medicationRequestAllowed
+    wholesalePrice
+    consumerPrice
+    estimatedPaymentAmount
+    reimbursementDailyDosage
+    reimbursement {
+      type
+      reimbursementAmount
+    }
+    medicalProgram {
+      id
+      databaseId
+      name
+      isActive
+      insertedAt
+      updatedAt
+    }
+    medication {
+      id
+      databaseId
+      name
+      manufacturer {
+        name
+        country
+      }
+      codeAtc {
+        codeAtc
+      }
+      form
+      container {
+        numeratorUnit
+        numeratorValue
+        denumeratorUnit
+        denumeratorValue
+      }
+      packageQty
+      packageMinQty
+      certificate
+      certificateExpiredAt
+      ingredients {
+        dosage {
+          numeratorUnit
+          numeratorValue
+          denumeratorUnit
+          denumeratorValue
+        }
+        isPrimary
+        innmDosage {
+          id
+          databaseId
+          name
+          form
+          ingredients {
+            dosage {
+              numeratorUnit
+              numeratorValue
+              denumeratorUnit
+              denumeratorValue
+            }
+            isPrimary
+            innm {
+              id
+              name
+            }
+          }
+          isActive
+          insertedAt
+          updatedAt
+        }
+      }
+      isActive
+      type
+      insertedAt
+      updatedAt
+    }
+  }
+}

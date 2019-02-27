@@ -1,0 +1,366 @@
+import React from "react";
+import isEmpty from "lodash/isEmpty";
+import { Trans } from "@lingui/macro";
+import { Router } from "@reach/router";
+import { loader } from "graphql.macro";
+import { BooleanValue } from "react-values";
+import { Query, Mutation } from "react-apollo";
+import system from "@ehealth/system-components";
+import { Flex, Box, Text } from "@rebass/emotion";
+import { PositiveIcon, CancelIcon } from "@ehealth/icons";
+import { Form, Validations, Validation, Link } from "@ehealth/components";
+
+import env from "../../env";
+import Line from "../../components/Line";
+import Tabs from "../../components/Tabs";
+import Badge from "../../components/Badge";
+import Button from "../../components/Button";
+import Ability from "../../components/Ability";
+import * as Field from "../../components/Field";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import LoadingOverlay from "../../components/LoadingOverlay";
+import DefinitionListView from "../../components/DefinitionListView";
+
+const ProgramMedicationQuery = loader(
+  "../../graphql/ProgramMedicationQuery.graphql"
+);
+const UpdateReimbursementAmountMutation = loader(
+  "../../graphql/UpdateReimbursementAmountMutation.graphql"
+);
+const StatusUpdateProgramMedicationMutation = loader(
+  "../../graphql/StatusUpdateProgramMedicationMutation.graphql"
+);
+const UpdateMedicationRequestAllowedMutation = loader(
+  "../../graphql/UpdateMedicationRequestAllowedMutation.graphql"
+);
+
+const Details = ({ id }) => (
+  <Query query={ProgramMedicationQuery} variables={{ id }}>
+    {({ loading, error, data: { programMedication = {} } }) => {
+      if (isEmpty(programMedication)) return null;
+      const {
+        databaseId,
+        medicationRequestAllowed,
+        isActive,
+        ...details
+      } = programMedication;
+
+      return (
+        <LoadingOverlay loading={loading}>
+          <Box p={6}>
+            <Box py={10}>
+              <Breadcrumbs.List>
+                <Breadcrumbs.Item to="/program-medications">
+                  <Trans>Search program medications</Trans>
+                </Breadcrumbs.Item>
+                <Breadcrumbs.Item>
+                  <Trans>Program medication details</Trans>
+                </Breadcrumbs.Item>
+              </Breadcrumbs.List>
+            </Box>
+            <Flex justifyContent="space-between" alignItems="flex-start">
+              <Box>
+                <DefinitionListView
+                  labels={{
+                    databaseId: <Trans>Participant ID</Trans>,
+                    isActive: <Trans>Status</Trans>,
+                    medicationRequestAllowed: (
+                      <Trans>Medication request allowed</Trans>
+                    )
+                  }}
+                  data={{
+                    databaseId,
+                    isActive: (
+                      <Badge
+                        type="PROGRAM_MEDICATION_STATUS"
+                        name={isActive}
+                        variant={!isActive}
+                        minWidth={100}
+                      />
+                    ),
+                    medicationRequestAllowed: (
+                      <Badge
+                        type="MEDICATION_REQUEST_ALLOWED"
+                        name={medicationRequestAllowed}
+                        variant={!medicationRequestAllowed}
+                        minWidth={100}
+                      />
+                    )
+                  }}
+                  color="#7F8FA4"
+                  labelWidth="200px"
+                />
+              </Box>
+              <Ability action="write" resource="program_medication">
+                <Flex>
+                  <Box mr={2}>
+                    <Mutation
+                      mutation={StatusUpdateProgramMedicationMutation}
+                      refetchQueries={() => [
+                        {
+                          query: ProgramMedicationQuery,
+                          variables: { id }
+                        }
+                      ]}
+                    >
+                      {statusUpdateProgramMedication => (
+                        <Button
+                          variant={isActive ? "red" : "blue"}
+                          disabled={isActive && medicationRequestAllowed}
+                          onClick={async () => {
+                            await statusUpdateProgramMedication({
+                              variables: {
+                                input: {
+                                  id
+                                }
+                              }
+                            });
+                          }}
+                        >
+                          {isActive ? (
+                            <Trans>Deactivate</Trans>
+                          ) : (
+                            <Trans>Activate</Trans>
+                          )}
+                        </Button>
+                      )}
+                    </Mutation>
+                  </Box>
+                  <Box>
+                    <Mutation
+                      mutation={UpdateMedicationRequestAllowedMutation}
+                      refetchQueries={() => [
+                        {
+                          query: ProgramMedicationQuery,
+                          variables: { id }
+                        }
+                      ]}
+                    >
+                      {updateMedicationRequestAllowed => (
+                        <Button
+                          disabled={!isActive}
+                          variant={medicationRequestAllowed ? "red" : "green"}
+                          onClick={async () => {
+                            await updateMedicationRequestAllowed({
+                              variables: {
+                                input: {
+                                  id
+                                }
+                              }
+                            });
+                          }}
+                        >
+                          {medicationRequestAllowed ? (
+                            <Trans>Disallow Request</Trans>
+                          ) : (
+                            <Trans>Allow Request</Trans>
+                          )}
+                        </Button>
+                      )}
+                    </Mutation>
+                  </Box>
+                </Flex>
+              </Ability>
+            </Flex>
+          </Box>
+
+          <Tabs.Nav>
+            <Tabs.NavItem to="./">
+              <Trans>General info</Trans>
+            </Tabs.NavItem>
+          </Tabs.Nav>
+          <Tabs.Content>
+            <Router>
+              <GeneralInfo path="/" data={details} />
+            </Router>
+          </Tabs.Content>
+        </LoadingOverlay>
+      );
+    }}
+  </Query>
+);
+
+const GeneralInfo = ({
+  data: {
+    id,
+    wholesalePrice,
+    consumerPrice,
+    estimatedPaymentAmount,
+    reimbursementDailyDosage,
+    medication,
+    medicalProgram,
+    reimbursement,
+    ...data
+  }
+}) => {
+  const { databaseId: medicationId, name: medicationName } = medication;
+  const {
+    databaseId: medicalProgramId,
+    name: medicalProgramName
+  } = medicalProgram;
+  const { type, reimbursementAmount } = reimbursement;
+
+  return (
+    <Box p={5}>
+      <DefinitionListView
+        labels={{
+          medicationName: <Trans>Medication name</Trans>
+        }}
+        data={{
+          medicationName
+        }}
+      />
+      <DefinitionListView
+        labels={{
+          medicationId: <Trans>Medication ID</Trans>
+        }}
+        data={{
+          medicationId: (
+            <ExternalLink
+              href={`${
+                env.REACT_APP_ADMIN_LEGACY_URL
+              }/program-medications/${medicationId}`}
+            >
+              {medicationId}
+            </ExternalLink>
+          )
+        }}
+        color="blueberrySoda"
+      />
+      <Line />
+      <DefinitionListView
+        labels={{
+          medicalProgramName: <Trans>Medical program name</Trans>
+        }}
+        data={{
+          medicalProgramName
+        }}
+      />
+      <DefinitionListView
+        labels={{
+          medicalProgramId: <Trans>Medical program ID</Trans>
+        }}
+        data={{
+          medicalProgramId
+        }}
+        color="blueberrySoda"
+      />
+      <Line />
+      <DefinitionListView
+        labels={{
+          type: <Trans>Reimbursement type</Trans>,
+          reimbursementAmount: <Trans>Reimbursement amount</Trans>,
+          wholesalePrice: <Trans>Wholesale price</Trans>,
+          consumerPrice: <Trans>Consumer price</Trans>,
+          estimatedPaymentAmount: <Trans>Estimated payment amount</Trans>,
+          reimbursementDailyDosage: <Trans>Reimbursement daily dosage</Trans>
+        }}
+        data={{
+          //TODO: add dictionary value for the type
+          type,
+          reimbursementAmount: (
+            <ReimbursementAmount
+              id={id}
+              reimbursementAmount={reimbursementAmount}
+            />
+          ),
+          wholesalePrice: createPrice(wholesalePrice),
+          consumerPrice: createPrice(consumerPrice),
+          estimatedPaymentAmount: createPrice(estimatedPaymentAmount),
+          reimbursementDailyDosage: createPrice(reimbursementDailyDosage)
+        }}
+      />
+    </Box>
+  );
+};
+
+const ReimbursementAmount = ({ id, reimbursementAmount }) => (
+  <BooleanValue>
+    {({ value: opened, toggle }) =>
+      opened ? (
+        <Mutation
+          mutation={UpdateReimbursementAmountMutation}
+          refetchQueries={() => [
+            {
+              query: ProgramMedicationQuery,
+              variables: { id }
+            }
+          ]}
+        >
+          {updateReimbursementAmount => (
+            <Form
+              onSubmit={async ({ reimbursementAmount }) => {
+                const amount = parseFloat(reimbursementAmount);
+                await updateReimbursementAmount({
+                  variables: {
+                    input: {
+                      programMedicationId: id,
+                      reimbursementAmount: amount
+                    }
+                  }
+                });
+                toggle();
+              }}
+              initialValues={{ reimbursementAmount }}
+            >
+              <Flex>
+                <Field.Text
+                  name="reimbursementAmount"
+                  value={reimbursementAmount}
+                  placement="top"
+                />
+                <Validations field="reimbursementAmount">
+                  <Validation.Float message="Must be number" />
+                  <Validation.Required message="Required field" />
+                </Validations>
+                <Box mx={2} color="redPigment">
+                  <Button
+                    variant="none"
+                    border="none"
+                    px="0"
+                    type="reset"
+                    onClick={toggle}
+                  >
+                    <CancelIcon />
+                  </Button>
+                </Box>
+                <Box>
+                  <Button variant="none" border="none" px="0">
+                    <PositiveIcon />
+                  </Button>
+                </Box>
+              </Flex>
+            </Form>
+          )}
+        </Mutation>
+      ) : (
+        <Flex>
+          {createPrice(reimbursementAmount)}
+          <Button variant="none" border="none" px="0" py="0" onClick={toggle}>
+            <Text fontSize={0} color="rockmanBlue" fontWeight="bold" ml={2}>
+              <Trans>Change</Trans>
+            </Text>
+          </Button>
+        </Flex>
+      )
+    }
+  </BooleanValue>
+);
+
+const createPrice = amount => (
+  <>
+    {amount} <Trans>uah</Trans>
+  </>
+);
+
+const ExternalLink = system(
+  {
+    is: Link,
+    fontSize: 0,
+    color: "rockmanBlue"
+  },
+  "color",
+  "fontSize"
+);
+
+export default Details;

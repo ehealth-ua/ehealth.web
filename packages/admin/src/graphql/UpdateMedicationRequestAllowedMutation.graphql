@@ -1,0 +1,9 @@
+mutation UpdateMedicationRequestAllowedMutation(
+  $input: UpdateMedicationRequestAllowedInput!
+) {
+  updateMedicationRequestAllowed(input: $input) {
+    programMedication {
+      id
+    }
+  }
+}

@@ -333,7 +333,7 @@ const SearchProgramMedicationsForm = ({ initialValues, onSubmit }) => (
           render={({ translation }) => (
             <Field.Select
               name="filter.medicationRequestAllowed"
-              label={<Trans>Створення рецепту</Trans>}
+              label={<Trans>Prescription creation</Trans>}
               items={Object.keys(STATUSES.MEDICATION_REQUEST_ALLOWED)}
               itemToString={item =>
                 STATUSES.MEDICATION_REQUEST_ALLOWED[item] || translation

@@ -16,7 +16,6 @@ const VENDOR_BLACKLIST_FNS = [
   "stripLow",
   "toBoolean",
   "toDate",
-  "toFloat",
   "toInt",
   "trim",
   "whitelist"
