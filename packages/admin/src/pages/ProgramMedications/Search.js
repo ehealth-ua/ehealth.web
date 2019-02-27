@@ -1,14 +1,13 @@
 import React from "react";
+import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
 import debounce from "lodash/debounce";
 import { loader } from "graphql.macro";
-import { BooleanValue } from "react-values";
-import { Query, Mutation } from "react-apollo";
 import { Trans, DateFormat } from "@lingui/macro";
 import { Flex, Box, Heading, Text } from "@rebass/emotion";
 
 import { RemoveItemIcon } from "@ehealth/icons";
-import { Form, LocationParams, Modal } from "@ehealth/components";
+import { Form, LocationParams } from "@ehealth/components";
 import {
   parseSortingParams,
   stringifySortingParams,
@@ -37,7 +36,7 @@ const SearchINNMDosagesQuery = loader(
   "../../graphql/SearchINNMDosagesQuery.graphql"
 );
 
-const Search = ({ uri }) => (
+const Search = ({ navigate }) => (
   <Box p={6}>
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
@@ -57,9 +56,9 @@ const Search = ({ uri }) => (
                 </Text>
               </Box>
               <Box>
-                {
-                  //TODO: add "Add participant" button & mutation here
-                }
+                <Button onClick={() => navigate("../create")} variant="green">
+                  <Trans>Add participant</Trans>
+                </Button>
               </Box>
             </Flex>
 
@@ -73,7 +72,7 @@ const Search = ({ uri }) => (
               variables={filteredLocationParams(locationParams)}
             >
               {({ loading, error, data }) => {
-                if (error || isEmpty(data)) return null;
+                if (isEmpty(data)) return null;
                 const {
                   nodes: programMedications = [],
                   pageInfo

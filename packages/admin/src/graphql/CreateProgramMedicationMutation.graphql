@@ -1,0 +1,9 @@
+mutation CreateProgramMedicationMutation(
+  $input: CreateProgramMedicationInput!
+) {
+  createProgramMedication(input: $input) {
+    programMedication {
+      id
+    }
+  }
+}
