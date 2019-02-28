@@ -99,7 +99,7 @@ const Search = ({ uri }) => (
                 error,
                 data: {
                   legalEntities: { nodes: legalEntities = [], pageInfo } = {}
-                }
+                } = {}
               }) => {
                 if (isEmpty(legalEntities)) return null;
                 return (
