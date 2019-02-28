@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.50.5"></a>
+## [1.50.5](https://github.com/edenlabllc/ehealth.web/compare/v1.50.4...v1.50.5) (2019-02-28)
+
+
+### Bug Fixes
+
+* **admin:** add default orderBy value, add sorting by status field ([#765](https://github.com/edenlabllc/ehealth.web/issues/765)) ([a2c1e98](https://github.com/edenlabllc/ehealth.web/commit/a2c1e98))
+
+
+
+
+
 <a name="1.50.4"></a>
 ## [1.50.4](https://github.com/edenlabllc/ehealth.web/compare/v1.50.3...v1.50.4) (2019-02-28)
 
