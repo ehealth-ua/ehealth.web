@@ -162,7 +162,6 @@ const UpdateContractRequest = ({
                   onSubmit={async () => {
                     const {
                       nhsSignerId,
-                      nhsContractPrice,
                       miscellaneous,
                       nhsPaymentMethod,
                       issueCity,
@@ -175,7 +174,6 @@ const UpdateContractRequest = ({
                           nhsPaymentMethod,
                           issueCity,
                           nhsSignerBase,
-                          nhsContractPrice: parseInt(nhsContractPrice, 10),
                           nhsSignerId: nhsSignerId ? nhsSignerId.id : undefined,
                           miscellaneous: miscellaneous || ""
                         }
