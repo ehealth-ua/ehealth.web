@@ -26,7 +26,13 @@ const Search = () => (
   <Box p={6}>
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
-        const { first, last, after, before, orderBy } = locationParams;
+        const {
+          first,
+          last,
+          after,
+          before,
+          orderBy = "STATUS_ASC"
+        } = locationParams;
 
         return (
           <Query
@@ -150,7 +156,7 @@ const Search = () => (
                             </Link>
                           )
                         })}
-                        sortableFields={["insertedAt"]}
+                        sortableFields={["status", "insertedAt"]}
                         sortingParams={parseSortingParams(
                           locationParams.orderBy
                         )}
