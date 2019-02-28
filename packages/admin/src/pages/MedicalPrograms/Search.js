@@ -439,7 +439,7 @@ const DeactivateButton = system(
   },
   props =>
     mixed({
-      cursor: "pointer",
+      cursor: ifProp("disabled", "not-allowed", "pointer")(props),
       fontWeight: "bold",
       color: ifProp("disabled", "januaryDawn", "rockmanBlue")(props)
     })
