@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.50.4"></a>
+## [1.50.4](https://github.com/edenlabllc/ehealth.web/compare/v1.50.3...v1.50.4) (2019-02-28)
+
+
+### Bug Fixes
+
+* **admin:** fix typo in locales, add not-allowed cursor type for disabled items ([#766](https://github.com/edenlabllc/ehealth.web/issues/766)) ([f132480](https://github.com/edenlabllc/ehealth.web/commit/f132480))
+
+
+
+
+
 <a name="1.50.3"></a>
 ## [1.50.3](https://github.com/edenlabllc/ehealth.web/compare/v1.50.2...v1.50.3) (2019-02-28)
 
