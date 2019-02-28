@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.50.6"></a>
+## [1.50.6](https://github.com/edenlabllc/ehealth.web/compare/v1.50.5...v1.50.6) (2019-02-28)
+
+
+### Bug Fixes
+
+* **admin:** remove nonexistent nhsContractPrice from Reimbursement Contract Request Update ([a36f7d0](https://github.com/edenlabllc/ehealth.web/commit/a36f7d0))
+
+
+
+
+
 <a name="1.50.5"></a>
 ## [1.50.5](https://github.com/edenlabllc/ehealth.web/compare/v1.50.4...v1.50.5) (2019-02-28)
 
