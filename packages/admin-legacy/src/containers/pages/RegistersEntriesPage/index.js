@@ -146,9 +146,9 @@ const RegistersEntriesPage = ({
           columns={[
             { key: "id", title: "ID файлу" },
             { key: "register_id", title: "ID Запису" },
-            { key: "file_name", title: "Назва файлу", width: 200 },
-            { key: "type", title: "Тип файлу" },
-            { key: "document_type", title: "Документ номер" },
+            { key: "file_name", title: "Назва файлу", width: 140 },
+            { key: "type", title: "Тип файлу", width: 120 },
+            { key: "document_type", title: "Документ номер", width: 150 },
             { key: "inserted_at", title: "Дата додавання" },
             { key: "status", title: "Статус запису" }
           ]}
