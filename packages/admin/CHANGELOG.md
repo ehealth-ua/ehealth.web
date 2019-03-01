@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.51.0"></a>
+# [1.51.0](https://github.com/edenlabllc/ehealth.web/compare/v1.50.7...v1.51.0) (2019-03-01)
+
+
+### Features
+
+* **admin:** add search field by LE name, `nhsSigner` in contracts list ([441c9d1](https://github.com/edenlabllc/ehealth.web/commit/441c9d1))
+* **admin:** move `SearchForm` and `SearchModalForm` to the separate component ([4b8b488](https://github.com/edenlabllc/ehealth.web/commit/4b8b488))
+* **admin:** remove the required number of characters from the regular expression ([87721c7](https://github.com/edenlabllc/ehealth.web/commit/87721c7))
+
+
+
+
+
 <a name="1.50.7"></a>
 ## [1.50.7](https://github.com/edenlabllc/ehealth.web/compare/v1.50.6...v1.50.7) (2019-03-01)
 

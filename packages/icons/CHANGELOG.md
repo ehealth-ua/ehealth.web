@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.51.0"></a>
+# [1.51.0](https://github.com/edenlabllc/ehealth.web/compare/v1.50.7...v1.51.0) (2019-03-01)
+
+
+### Features
+
+* **icons:** wrap `FilterIcon` in system-components ([b1d8073](https://github.com/edenlabllc/ehealth.web/commit/b1d8073))
+
+
+
+
+
 <a name="1.39.0"></a>
 # [1.39.0](https://github.com/edenlabllc/ehealth.web/compare/v1.38.2...v1.39.0) (2019-02-06)
 
