@@ -1,7 +1,8 @@
 import React from "react";
+import system from "@ehealth/system-components";
 
 const FilterIcon = props => (
-  <svg {...props} width="17" height="16">
+  <svg {...props} fill="currentColor">
     <path
       fill="currentColor"
       d="M9.6,1.3V0.1h-2v1.2C6.7,1.7,6.1,2.6,6.1,3.6s0.6,1.9,1.5,2.3v10.2h2V5.9c0.9-0.4,1.5-1.3,1.5-2.3 S10.5,1.7,9.6,1.3z M9.6,4.7C9.5,4.8,9.3,4.9,9.2,5c0,0,0,0,0,0C9,5.1,8.8,5.1,8.6,5.1S8.3,5.1,8.1,5c0,0,0,0,0,0 C7.9,4.9,7.8,4.8,7.6,4.7C7.3,4.4,7.1,4,7.1,3.6s0.2-0.8,0.5-1.1c0.1-0.1,0.3-0.2,0.5-0.3c0,0,0,0,0,0c0.2-0.1,0.3-0.1,0.5-0.1 s0.4,0,0.5,0.1c0,0,0,0,0,0c0.2,0.1,0.3,0.2,0.5,0.3c0.3,0.3,0.5,0.7,0.5,1.1S9.9,4.4,9.6,4.7z"
@@ -16,5 +17,9 @@ const FilterIcon = props => (
     />
   </svg>
 );
-
-export default FilterIcon;
+export default system(
+  { extend: FilterIcon, width: "16px", height: "16px" },
+  "width",
+  "height",
+  "color"
+);
