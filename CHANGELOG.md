@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.51.1"></a>
+## [1.51.1](https://github.com/edenlabllc/ehealth.web/compare/v1.51.0...v1.51.1) (2019-03-01)
+
+
+### Bug Fixes
+
+* **admin:** add maxlength prop to the Add Medical Program form ([#772](https://github.com/edenlabllc/ehealth.web/issues/772)) ([50f9b29](https://github.com/edenlabllc/ehealth.web/commit/50f9b29))
+
+
+
+
+
 <a name="1.51.0"></a>
 # [1.51.0](https://github.com/edenlabllc/ehealth.web/compare/v1.50.7...v1.51.0) (2019-03-01)
 
