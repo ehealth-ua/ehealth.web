@@ -6,7 +6,7 @@ import { loader } from "graphql.macro";
 import { Trans, DateFormat } from "@lingui/macro";
 import { Flex, Box, Heading, Text } from "@rebass/emotion";
 
-import { RemoveItemIcon } from "@ehealth/icons";
+import { RemoveItemIcon, SearchIcon } from "@ehealth/icons";
 import { Form, LocationParams } from "@ehealth/components";
 import {
   parseSortingParams,
@@ -94,7 +94,7 @@ const Search = ({ navigate }) => (
                               <Trans>Medication manufacturer</Trans>
                             ),
                             reimbursementAmount: (
-                              <Trans>Reimbursement Amount</Trans>
+                              <Trans>Reimbursement amount</Trans>
                             ),
                             isActive: <Trans>Status</Trans>,
                             insertedAt: <Trans>Inserted at</Trans>,
@@ -229,47 +229,6 @@ const SearchProgramMedicationsForm = ({ initialValues, onSubmit }) => (
       </Box>
       <Box px={1} width={1 / 3}>
         <Trans
-          id="Choose INNM dosage name"
-          render={({ translation }) => (
-            <Query
-              query={SearchINNMDosagesQuery}
-              fetchPolicy="cache-first"
-              variables={{
-                skip: true
-              }}
-            >
-              {({
-                loading,
-                error,
-                data: { innmDosages: { nodes: innmDosages = [] } = {} } = {},
-                refetch: refetchINNMDosages
-              }) => {
-                return (
-                  <Field.Select
-                    name="filter.medication.innmDosage.name"
-                    label={<Trans>INNM dosage name</Trans>}
-                    placeholder={translation}
-                    items={innmDosages.map(({ name }) => name)}
-                    onInputValueChange={debounce(
-                      (name, { selectedItem, inputValue }) =>
-                        !isEmpty(name) &&
-                        selectedItem !== inputValue &&
-                        refetchINNMDosages({
-                          skip: false,
-                          first: 20,
-                          filter: { name: name }
-                        }),
-                      1000
-                    )}
-                  />
-                );
-              }}
-            </Query>
-          )}
-        />
-      </Box>
-      <Box px={1} width={1 / 3}>
-        <Trans
           id="Choose medication name"
           render={({ translation }) => (
             <Query
@@ -304,6 +263,20 @@ const SearchProgramMedicationsForm = ({ initialValues, onSubmit }) => (
                 />
               )}
             </Query>
+          )}
+        />
+      </Box>
+      <Box px={1} width={1 / 3}>
+        <Trans
+          id="Enter INNM dosage name"
+          render={({ translation }) => (
+            <Field.Text
+              name="filter.medication.innmDosages.name"
+              label={<Trans>INNM dosage name</Trans>}
+              placeholder={translation}
+              postfix={<SearchIcon color="silverCity" />}
+              autoComplete="off"
+            />
           )}
         />
       </Box>

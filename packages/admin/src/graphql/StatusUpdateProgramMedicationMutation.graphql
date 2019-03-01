@@ -1,9 +1,0 @@
-mutation StatusUpdateProgramMedicationMutation(
-  $input: StatusUpdateProgramMedicationInput!
-) {
-  statusUpdateProgramMedication(input: $input) {
-    programMedication {
-      id
-    }
-  }
-}

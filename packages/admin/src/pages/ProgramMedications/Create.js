@@ -101,11 +101,11 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                       onInputValueChange={debounce(
                         (name, { selectedItem, inputValue }) =>
                           !isEmpty(name) &&
-                          selectedItem.name !== inputValue &&
+                          (selectedItem && selectedItem.name) !== inputValue &&
                           refetchMedications({
                             skip: false,
                             first: 20,
-                            filter: { name: name }
+                            filter: { isActive: true, name: name }
                           }),
                         1000
                       )}
@@ -149,11 +149,12 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                         onInputValueChange={debounce(
                           (program, { selectedItem, inputValue }) =>
                             !isEmpty(program) &&
-                            selectedItem.name !== inputValue &&
+                            (selectedItem && selectedItem.name) !==
+                              inputValue &&
                             refetchMedicalProgram({
                               skip: false,
                               first: 20,
-                              filter: { name: program }
+                              filter: { isActive: true, name: program }
                             }),
                           1000
                         )}
@@ -208,10 +209,6 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
               placeholder="0 - 1 000 000"
               postfix={<Trans>uah</Trans>}
             />
-            <Validation.Required
-              field="wholesalePrice"
-              message="Required field"
-            />
           </Box>
           <Box width={2 / 5}>
             <Field.Number
@@ -219,10 +216,6 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
               label={<Trans>Consumer price</Trans>}
               placeholder="0 - 1 000 000"
               postfix={<Trans>uah</Trans>}
-            />
-            <Validation.Required
-              field="consumerPrice"
-              message="Required field"
             />
           </Box>
         </Flex>
@@ -234,10 +227,6 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
               placeholder="0 - 1 000 000"
               postfix={<Trans>uah</Trans>}
             />
-            <Validation.Required
-              field="estimatedPaymentAmount"
-              message="Required field"
-            />
           </Box>
           <Box width={2 / 5}>
             <Field.Number
@@ -245,10 +234,6 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
               label={<Trans>Reimbursement daily dosage</Trans>}
               placeholder="0 - 1 000 000"
               postfix={<Trans>uah</Trans>}
-            />
-            <Validation.Required
-              field="reimbursementDailyDosage"
-              message="Required field"
             />
           </Box>
         </Flex>
@@ -352,12 +337,12 @@ const Confirmation = ({ navigate, location: { state } }) => {
                       input: {
                         medicationId: medication.id,
                         medicalProgramId: medicalProgram.id,
-                        wholesalePrice: parseFloat(wholesalePrice),
-                        consumerPrice: parseFloat(consumerPrice),
-                        estimatedPaymentAmount: parseFloat(
+                        wholesalePrice: getPriceVariable(wholesalePrice),
+                        consumerPrice: getPriceVariable(consumerPrice),
+                        estimatedPaymentAmount: getPriceVariable(
                           estimatedPaymentAmount
                         ),
-                        reimbursementDailyDosage: parseFloat(
+                        reimbursementDailyDosage: getPriceVariable(
                           reimbursementDailyDosage
                         ),
                         reimbursement: {
@@ -380,10 +365,13 @@ const Confirmation = ({ navigate, location: { state } }) => {
   );
 };
 
-const createPrice = amount => (
-  <>
-    {amount} <Trans>uah</Trans>
-  </>
-);
+const createPrice = amount =>
+  amount && (
+    <>
+      {amount} <Trans>uah</Trans>
+    </>
+  );
+
+const getPriceVariable = price => parseFloat(price) || undefined;
 
 export default Create;

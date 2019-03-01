@@ -40,14 +40,6 @@ query SearchProgramMedications(
           name
           country
         }
-        ingredients {
-          isPrimary
-          innmDosage {
-            id
-            databaseId
-            name
-          }
-        }
         isActive
       }
     }

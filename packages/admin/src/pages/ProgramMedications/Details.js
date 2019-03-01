@@ -24,14 +24,8 @@ import DefinitionListView from "../../components/DefinitionListView";
 const ProgramMedicationQuery = loader(
   "../../graphql/ProgramMedicationQuery.graphql"
 );
-const UpdateReimbursementAmountMutation = loader(
-  "../../graphql/UpdateReimbursementAmountMutation.graphql"
-);
-const StatusUpdateProgramMedicationMutation = loader(
-  "../../graphql/StatusUpdateProgramMedicationMutation.graphql"
-);
-const UpdateMedicationRequestAllowedMutation = loader(
-  "../../graphql/UpdateMedicationRequestAllowedMutation.graphql"
+const UpdateProgramMedicationMutation = loader(
+  "../../graphql/UpdateProgramMedicationMutation.graphql"
 );
 
 const Details = ({ id }) => (
@@ -88,30 +82,31 @@ const Details = ({ id }) => (
                     )
                   }}
                   color="#7F8FA4"
-                  labelWidth="200px"
+                  labelWidth="120px"
                 />
               </Box>
               <Ability action="write" resource="program_medication">
-                <Flex>
-                  <Box mr={2}>
-                    <Mutation
-                      mutation={StatusUpdateProgramMedicationMutation}
-                      refetchQueries={() => [
-                        {
-                          query: ProgramMedicationQuery,
-                          variables: { id }
-                        }
-                      ]}
-                    >
-                      {statusUpdateProgramMedication => (
+                <Mutation
+                  mutation={UpdateProgramMedicationMutation}
+                  refetchQueries={() => [
+                    {
+                      query: ProgramMedicationQuery,
+                      variables: { id }
+                    }
+                  ]}
+                >
+                  {updateProgramMedication => (
+                    <Flex>
+                      <Box mr={2}>
                         <Button
                           variant={isActive ? "red" : "blue"}
                           disabled={isActive && medicationRequestAllowed}
                           onClick={async () => {
-                            await statusUpdateProgramMedication({
+                            await updateProgramMedication({
                               variables: {
                                 input: {
-                                  id
+                                  id,
+                                  isActive: !isActive
                                 }
                               }
                             });
@@ -123,28 +118,17 @@ const Details = ({ id }) => (
                             <Trans>Activate</Trans>
                           )}
                         </Button>
-                      )}
-                    </Mutation>
-                  </Box>
-                  <Box>
-                    <Mutation
-                      mutation={UpdateMedicationRequestAllowedMutation}
-                      refetchQueries={() => [
-                        {
-                          query: ProgramMedicationQuery,
-                          variables: { id }
-                        }
-                      ]}
-                    >
-                      {updateMedicationRequestAllowed => (
+                      </Box>
+                      <Box>
                         <Button
                           disabled={!isActive}
                           variant={medicationRequestAllowed ? "red" : "green"}
                           onClick={async () => {
-                            await updateMedicationRequestAllowed({
+                            await updateProgramMedication({
                               variables: {
                                 input: {
-                                  id
+                                  id,
+                                  medicationRequestAllowed: !medicationRequestAllowed
                                 }
                               }
                             });
@@ -156,10 +140,10 @@ const Details = ({ id }) => (
                             <Trans>Allow Request</Trans>
                           )}
                         </Button>
-                      )}
-                    </Mutation>
-                  </Box>
-                </Flex>
+                      </Box>
+                    </Flex>
+                  )}
+                </Mutation>
               </Ability>
             </Flex>
           </Box>
@@ -171,7 +155,7 @@ const Details = ({ id }) => (
           </Tabs.Nav>
           <Tabs.Content>
             <Router>
-              <GeneralInfo path="/" data={details} />
+              <GeneralInfo path="/" isActive={isActive} data={details} />
             </Router>
           </Tabs.Content>
         </LoadingOverlay>
@@ -181,6 +165,7 @@ const Details = ({ id }) => (
 );
 
 const GeneralInfo = ({
+  isActive,
   data: {
     id,
     wholesalePrice,
@@ -209,6 +194,7 @@ const GeneralInfo = ({
         data={{
           medicationName
         }}
+        labelWidth="280px"
       />
       <DefinitionListView
         labels={{
@@ -226,6 +212,7 @@ const GeneralInfo = ({
           )
         }}
         color="blueberrySoda"
+        labelWidth="280px"
       />
       <Line />
       <DefinitionListView
@@ -235,6 +222,7 @@ const GeneralInfo = ({
         data={{
           medicalProgramName
         }}
+        labelWidth="280px"
       />
       <DefinitionListView
         labels={{
@@ -244,6 +232,7 @@ const GeneralInfo = ({
           medicalProgramId
         }}
         color="blueberrySoda"
+        labelWidth="280px"
       />
       <Line />
       <DefinitionListView
@@ -258,17 +247,20 @@ const GeneralInfo = ({
         data={{
           //TODO: add dictionary value for the type
           type,
-          reimbursementAmount: (
+          reimbursementAmount: isActive ? (
             <ReimbursementAmount
               id={id}
               reimbursementAmount={reimbursementAmount}
             />
+          ) : (
+            createPrice(reimbursementAmount)
           ),
           wholesalePrice: createPrice(wholesalePrice),
           consumerPrice: createPrice(consumerPrice),
           estimatedPaymentAmount: createPrice(estimatedPaymentAmount),
           reimbursementDailyDosage: createPrice(reimbursementDailyDosage)
         }}
+        labelWidth="280px"
       />
     </Box>
   );
@@ -279,7 +271,7 @@ const ReimbursementAmount = ({ id, reimbursementAmount }) => (
     {({ value: opened, toggle }) =>
       opened ? (
         <Mutation
-          mutation={UpdateReimbursementAmountMutation}
+          mutation={UpdateProgramMedicationMutation}
           refetchQueries={() => [
             {
               query: ProgramMedicationQuery,
@@ -287,15 +279,17 @@ const ReimbursementAmount = ({ id, reimbursementAmount }) => (
             }
           ]}
         >
-          {updateReimbursementAmount => (
+          {updateProgramMedication => (
             <Form
               onSubmit={async ({ reimbursementAmount }) => {
                 const amount = parseFloat(reimbursementAmount);
-                await updateReimbursementAmount({
+                await updateProgramMedication({
                   variables: {
                     input: {
-                      programMedicationId: id,
-                      reimbursementAmount: amount
+                      id,
+                      reimbursement: {
+                        reimbursementAmount: amount
+                      }
                     }
                   }
                 });
@@ -304,15 +298,16 @@ const ReimbursementAmount = ({ id, reimbursementAmount }) => (
               initialValues={{ reimbursementAmount }}
             >
               <Flex>
-                <Field.Text
+                <Field.Number
                   name="reimbursementAmount"
                   value={reimbursementAmount}
-                  placement="top"
+                  placeholder="0 - 1 000 000"
+                  postfix={<Trans>uah</Trans>}
                 />
-                <Validations field="reimbursementAmount">
-                  <Validation.Float message="Must be number" />
-                  <Validation.Required message="Required field" />
-                </Validations>
+                <Validation.Required
+                  field="reimbursementAmount"
+                  message="Required field"
+                />
                 <Box mx={2} color="redPigment">
                   <Button
                     variant="none"
@@ -347,11 +342,12 @@ const ReimbursementAmount = ({ id, reimbursementAmount }) => (
   </BooleanValue>
 );
 
-const createPrice = amount => (
-  <>
-    {amount} <Trans>uah</Trans>
-  </>
-);
+const createPrice = amount =>
+  amount && (
+    <>
+      {amount} <Trans>uah</Trans>
+    </>
+  );
 
 const ExternalLink = system(
   {
