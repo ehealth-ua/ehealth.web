@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.50.7"></a>
+## [1.50.7](https://github.com/edenlabllc/ehealth.web/compare/v1.50.6...v1.50.7) (2019-03-01)
+
+
+### Bug Fixes
+
+* **admin:** add insertedAt date to the Medical Program List Query ([d053c6e](https://github.com/edenlabllc/ehealth.web/commit/d053c6e))
+
+
+
+
+
 <a name="1.50.6"></a>
 ## [1.50.6](https://github.com/edenlabllc/ehealth.web/compare/v1.50.5...v1.50.6) (2019-02-28)
 
