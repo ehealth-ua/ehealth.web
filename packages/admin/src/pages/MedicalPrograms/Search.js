@@ -104,6 +104,8 @@ const Search = ({ uri }) => (
                                           <Trans>Medical program name</Trans>
                                         }
                                         placeholder={translation}
+                                        maxlength={100}
+                                        showLengthHint
                                       />
                                       <Validation.Required
                                         field="name"
