@@ -24,6 +24,15 @@ query SearchCapitationContractsQuery(
       endDate
       status
       insertedAt
+      nhsSigner {
+        id
+        party {
+          id
+          firstName
+          secondName
+          lastName
+        }
+      }
       contractorLegalEntity {
         id
         edrpou

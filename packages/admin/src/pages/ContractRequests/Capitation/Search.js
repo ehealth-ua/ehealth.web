@@ -5,7 +5,7 @@ import { loader } from "graphql.macro";
 import { Box, Flex } from "@rebass/emotion";
 import { Trans, DateFormat } from "@lingui/macro";
 
-import { Form, Validation, LocationParams } from "@ehealth/components";
+import { Validation, LocationParams } from "@ehealth/components";
 import {
   getFullName,
   parseSortingParams,
@@ -22,8 +22,12 @@ import Link from "../../../components/Link";
 import Pagination from "../../../components/Pagination";
 import * as Field from "../../../components/Field";
 import AssigneeSearch from "../../../components/AssigneeSearch";
-import Button, { IconButton } from "../../../components/Button";
-
+import {
+  RemoveItem,
+  SelectedItem
+} from "../../../components/Field/MultiSelectView";
+import SearchModalForm from "../../../components/SearchModalForm";
+import SearchForm from "../../../components/SearchForm";
 import { SEARCH_REQUEST_PATTERN } from "../../../constants/contractRequests";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import STATUSES from "../../../helpers/statuses";
@@ -32,6 +36,13 @@ import contractFormFilteredParams from "../../../helpers/contractFormFilteredPar
 const SearchCapitationContractRequestsQuery = loader(
   "../../../graphql/SearchCapitationContractRequestsQuery.graphql"
 );
+
+const resetPaginationParams = first => ({
+  after: undefined,
+  before: undefined,
+  last: undefined,
+  first: first || ITEMS_PER_PAGE[0]
+});
 
 const CapitationContractRequestsSearch = () => (
   <Box p={6}>
@@ -42,9 +53,12 @@ const CapitationContractRequestsSearch = () => (
 
         return (
           <>
-            <SearchContractRequestsForm
+            <SearchForm
               initialValues={locationParams}
               onSubmit={setLocationParams}
+              fields={PrimarySearchFields}
+              selected={SelectedFilters}
+              modal={SearchContractsModalForm}
             />
             <Query
               query={SearchCapitationContractRequestsQuery}
@@ -176,101 +190,182 @@ const CapitationContractRequestsSearch = () => (
   </Box>
 );
 
-const SearchContractRequestsForm = ({ initialValues, onSubmit }) => (
-  <Form
-    initialValues={initialValues}
-    onSubmit={params =>
-      onSubmit({
-        ...params,
-        after: undefined,
-        before: undefined,
-        last: undefined,
-        first: initialValues.first || ITEMS_PER_PAGE[0]
-      })
-    }
-  >
-    <Flex mx={-1}>
-      <Box px={1} width={1 / 2}>
-        <Trans
-          id="EDRPOU or Contract number"
-          render={({ translation }) => (
-            <Field.Text
-              name="filter.searchRequest"
-              label={<Trans>Search contract request</Trans>}
-              placeholder={translation}
-              postfix={<SearchIcon color="silverCity" />}
-            />
-          )}
-        />
-        <Validation.Matches
-          field="filter.searchRequest"
-          options={SEARCH_REQUEST_PATTERN}
-          message="Invalid number"
-        />
-      </Box>
-
-      <Box px={1} width={2 / 5}>
-        <AssigneeSearch />
-      </Box>
-    </Flex>
-    <Flex mx={-1}>
-      <Box px={1} width={1 / 6}>
-        <Trans
-          id="All statuses"
-          render={({ translation }) => (
-            <Field.Select
-              name="filter.status"
-              label={<Trans>Contract Request status</Trans>}
-              placeholder={translation}
-              items={Object.keys(STATUSES.CONTRACT_REQUEST)}
-              itemToString={item =>
-                STATUSES.CONTRACT_REQUEST[item] || translation
-              }
-              variant="select"
-              emptyOption
-            />
-          )}
-        />
-      </Box>
-
-      <Flex px={1}>
-        <Box mr={1}>
-          <Field.RangePicker
-            rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
-            label={<Trans>Contract start date</Trans>}
+const PrimarySearchFields = () => (
+  <Flex mx={-1}>
+    <Box px={1} width={1 / 3}>
+      <Trans
+        id="EDRPOU or Contract number"
+        render={({ translation }) => (
+          <Field.Text
+            name="filter.searchRequest"
+            label={<Trans>Search contract request</Trans>}
+            placeholder={translation}
+            postfix={<SearchIcon color="silverCity" />}
           />
-        </Box>
+        )}
+      />
+      <Validation.Matches
+        field="filter.searchRequest"
+        options={SEARCH_REQUEST_PATTERN}
+        message="Invalid number"
+      />
+    </Box>
 
+    <Box px={1} width={1 / 3}>
+      <AssigneeSearch />
+    </Box>
+    <Box px={1} width={1 / 3}>
+      <Trans
+        id="All statuses"
+        render={({ translation }) => (
+          <Field.Select
+            name="filter.status"
+            label={<Trans>Contract Request status</Trans>}
+            placeholder={translation}
+            items={Object.keys(STATUSES.CONTRACT_REQUEST)}
+            itemToString={item =>
+              STATUSES.CONTRACT_REQUEST[item] || translation
+            }
+            variant="select"
+            emptyOption
+          />
+        )}
+      />
+    </Box>
+  </Flex>
+);
+
+const SelectedFilters = ({ initialValues, onSubmit }) => {
+  const {
+    filter: {
+      date: { startFrom, startTo, endFrom, endTo } = {},
+      contractorLegalEntity: { name } = {}
+    } = {}
+  } = initialValues;
+  return (
+    <Flex flexWrap="wrap">
+      {(startFrom || startTo) && (
+        <SelectedItem mx={1}>
+          <Trans>Contract start date</Trans>:
+          {startFrom && (
+            <Box ml={1}>
+              з <DateFormat value={startFrom} />
+            </Box>
+          )}
+          {startTo && (
+            <Box ml={1}>
+              по <DateFormat value={startTo} />
+            </Box>
+          )}
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                ...resetPaginationParams(initialValues.first),
+                filter: {
+                  ...initialValues.filter,
+                  date: {
+                    startFrom: undefined,
+                    startTo: undefined
+                  }
+                }
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+      {(endFrom || endTo) && (
+        <SelectedItem mx={1}>
+          <Trans>Contract end date</Trans>:
+          {endFrom && (
+            <Box ml={1}>
+              з <DateFormat value={endFrom} />
+            </Box>
+          )}
+          {endTo && (
+            <Box ml={1}>
+              по <DateFormat value={endTo} />
+            </Box>
+          )}
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                ...resetPaginationParams(initialValues.first),
+                filter: {
+                  ...initialValues.filter,
+                  date: {
+                    endFrom: undefined,
+                    endTo: undefined
+                  }
+                }
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+      {name && (
+        <SelectedItem mx={1}>
+          <Trans>Legal entity name</Trans>:<Box ml={1}>{name}</Box>
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                ...resetPaginationParams(initialValues.first),
+                filter: {
+                  ...initialValues.filter,
+                  contractorLegalEntity: {
+                    name: undefined
+                  }
+                }
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+    </Flex>
+  );
+};
+
+const SearchContractsModalForm = ({
+  fields: PrimarySearchFields,
+  ...props
+}) => (
+  <SearchModalForm {...props}>
+    <PrimarySearchFields />
+    <Flex>
+      <Box mr={1} width={1 / 3}>
+        <Field.RangePicker
+          rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
+          label={<Trans>Contract start date</Trans>}
+        />
+      </Box>
+      <Box width={1 / 3}>
         <Field.RangePicker
           rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
           label={<Trans>Contract end date</Trans>}
         />
-      </Flex>
-    </Flex>
-    <Flex mx={-1} justifyContent="flex-start">
-      <Box px={1}>
-        <Button variant="blue">
-          <Trans>Search</Trans>
-        </Button>
       </Box>
-      <Box px={1}>
-        <IconButton
-          icon={RemoveItemIcon}
-          type="reset"
-          disabled={isEmpty(initialValues.filter)}
-          onClick={() => {
-            onSubmit({
-              ...initialValues,
-              filter: null,
-              searchRequest: null
-            });
-          }}
-        >
-          <Trans>Reset</Trans>
-        </IconButton>
+      <Box px={1} width={1 / 3}>
+        <Trans
+          id="Enter legal entity name"
+          render={({ translation }) => (
+            <Field.Text
+              name="filter.contractorLegalEntity.name"
+              label={<Trans>Legal entity name</Trans>}
+              placeholder={translation}
+            />
+          )}
+        />
       </Box>
     </Flex>
-  </Form>
+  </SearchModalForm>
 );
 
 export default CapitationContractRequestsSearch;

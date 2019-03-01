@@ -22,9 +22,19 @@ query SearchReimbursementContractsQuery(
       endDate
       status
       statusReason
+      nhsSigner {
+        id
+        party {
+          id
+          firstName
+          secondName
+          lastName
+        }
+      }
       contractorLegalEntity {
         id
         edrpou
+        name
       }
       medicalProgram {
         id

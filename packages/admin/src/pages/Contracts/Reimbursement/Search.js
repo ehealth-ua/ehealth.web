@@ -1,23 +1,18 @@
 import React from "react";
-import { Flex, Box, Text } from "@rebass/emotion";
-import { BooleanValue } from "react-values";
-import system from "@ehealth/system-components";
+import { Flex, Box } from "@rebass/emotion";
 import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
 import debounce from "lodash/debounce";
 import { loader } from "graphql.macro";
 import { DateFormat, Trans } from "@lingui/macro";
 
-import { Form, Validation, LocationParams, Modal } from "@ehealth/components";
-import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
-
+import { Validation, LocationParams } from "@ehealth/components";
 import {
-  SearchIcon,
-  FilterIcon,
-  NegativeIcon,
-  RemoveItemIcon
-} from "@ehealth/icons";
-
+  getFullName,
+  parseSortingParams,
+  stringifySortingParams
+} from "@ehealth/utils";
+import { SearchIcon, NegativeIcon, RemoveItemIcon } from "@ehealth/icons";
 import {
   SelectedItem,
   RemoveItem
@@ -27,14 +22,13 @@ import Link from "../../../components/Link";
 import Table from "../../../components/Table";
 import Pagination from "../../../components/Pagination";
 import LoadingOverlay from "../../../components/LoadingOverlay";
-import Button, { IconButton } from "../../../components/Button";
 import Badge from "../../../components/Badge";
+import SearchModalForm from "../../../components/SearchModalForm";
+import SearchForm from "../../../components/SearchForm";
 import STATUSES from "../../../helpers/statuses";
-
 import { SEARCH_CONTRACT_PATTERN } from "../../../constants/contracts";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import contractFormFilteredParams from "../../../helpers/contractFormFilteredParams";
-
 import ContractsNav from "../ContractsNav";
 
 const SearchReimbursementContractsQuery = loader(
@@ -59,9 +53,12 @@ const ReimbursementContractsSearch = () => (
         const { filter, first, last, after, before, orderBy } = locationParams;
         return (
           <>
-            <SearchContractsForm
+            <SearchForm
               initialValues={locationParams}
               onSubmit={setLocationParams}
+              fields={PrimarySearchFields}
+              selected={SelectedFilters}
+              modal={SearchContractsModalForm}
             />
             <Query
               query={SearchReimbursementContractsQuery}
@@ -100,6 +97,8 @@ const ReimbursementContractsSearch = () => (
                           header={{
                             databaseId: <Trans>ID</Trans>,
                             edrpou: <Trans>EDRPOU</Trans>,
+                            name: <Trans>Name of medical institution</Trans>,
+                            nhsSignerName: <Trans>Performer</Trans>,
                             contractNumber: <Trans>Contract Number</Trans>,
                             startDate: (
                               <Trans>The contract is valid with</Trans>
@@ -117,13 +116,18 @@ const ReimbursementContractsSearch = () => (
                             isSuspended,
                             startDate,
                             endDate,
-                            contractorLegalEntity: { edrpou },
+                            contractorLegalEntity: { name, edrpou },
                             insertedAt,
+                            nhsSigner,
                             medicalProgram,
                             ...contracts
                           }) => ({
                             ...contracts,
                             edrpou,
+                            name,
+                            nhsSignerName: nhsSigner
+                              ? getFullName(nhsSigner.party)
+                              : undefined,
                             medicalProgram:
                               medicalProgram && medicalProgram.name,
                             isSuspended: (
@@ -195,137 +199,66 @@ const ReimbursementContractsSearch = () => (
   </Box>
 );
 
-export default ReimbursementContractsSearch;
-
-const SearchContractsForm = ({ initialValues, onSubmit }) => (
-  <Form
-    onSubmit={params =>
-      onSubmit({
-        ...params,
-        ...resetPaginationParams(initialValues.first)
-      })
-    }
-    initialValues={initialValues}
-  >
-    <Flex mx={-1}>
-      <Box px={1} width={1 / 2}>
-        <Trans
-          id="EDRPOU or Contract number"
-          render={({ translation }) => (
-            <Field.Text
-              name="filter.searchRequest"
-              label={<Trans>Search contract</Trans>}
-              placeholder={translation}
-              postfix={<SearchIcon color="silverCity" />}
-            />
-          )}
-        />
-        <Validation.Matches
-          field="filter.searchRequest"
-          options={SEARCH_CONTRACT_PATTERN}
-          message="Invalid number"
-        />
-      </Box>
-    </Flex>
-    <BooleanValue>
-      {({ value: opened, toggle }) => (
-        <>
-          {opened && (
-            <SearchContractsModalForm
-              initialValues={initialValues}
-              onSubmit={onSubmit}
-              toggle={toggle}
-            />
-          )}
-          <Flex mb={4} alignItems="center">
-            <Button
-              variant="none"
-              border="none"
-              px={0}
-              py={0}
-              mr={2}
-              color="bluePastel"
-              onClick={toggle}
-            >
-              <Flex
-                justifyContent="center"
-                alignItems="center"
-                color="bluePastel"
-              >
-                <FilterIcon />
-                <TextNoWrap>
-                  <Trans>Show all filters</Trans>
-                </TextNoWrap>
-              </Flex>
-            </Button>
-            <SelectedFilters
-              initialValues={initialValues}
-              onSubmit={onSubmit}
-            />
-          </Flex>
-        </>
-      )}
-    </BooleanValue>
-    <Flex mx={-1}>
-      <Box px={1} width={1 / 6}>
-        <Trans
-          id="All statuses"
-          render={({ translation }) => (
-            <Field.Select
-              name="filter.status"
-              label={<Trans>Contract status</Trans>}
-              placeholder={translation}
-              items={Object.keys(STATUSES.CONTRACT)}
-              itemToString={item => STATUSES.CONTRACT[item] || translation}
-              variant="select"
-              emptyOption
-            />
-          )}
-        />
-      </Box>
-
-      <Flex px={1}>
-        <Box mr={1}>
-          <Field.RangePicker
-            rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
-            label={<Trans>Contract start date</Trans>}
+const PrimarySearchFields = () => (
+  <Flex mx={-1}>
+    <Box px={1} width={1 / 3}>
+      <Trans
+        id="EDRPOU or Contract number"
+        render={({ translation }) => (
+          <Field.Text
+            name="filter.searchRequest"
+            label={<Trans>Search contract</Trans>}
+            placeholder={translation}
+            postfix={<SearchIcon color="silverCity" />}
           />
-        </Box>
-        <Field.RangePicker
-          rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
-          label={<Trans>Contract end date</Trans>}
-        />
-      </Flex>
-    </Flex>
-
-    <Flex mx={-1} justifyContent="flex-start">
-      <Box px={1}>
-        <Button variant="blue">
-          <Trans>Search</Trans>
-        </Button>
-      </Box>
-      <Box px={1}>
-        <IconButton
-          icon={RemoveItemIcon}
-          type="reset"
-          disabled={isEmpty(initialValues.filter)}
-          onClick={() => {
-            onSubmit({
-              ...initialValues,
-              filter: null,
-              searchRequest: null
-            });
-          }}
-        >
-          <Trans>Reset</Trans>
-        </IconButton>
-      </Box>
-    </Flex>
-  </Form>
+        )}
+      />
+      <Validation.Matches
+        field="filter.searchRequest"
+        options={SEARCH_CONTRACT_PATTERN}
+        message="Invalid number"
+      />
+    </Box>
+    <Box px={1} width={1 / 3}>
+      <Trans
+        id="Enter legal entity name"
+        render={({ translation }) => (
+          <Field.Text
+            name="filter.contractorLegalEntity.name"
+            label={<Trans>Legal entity name</Trans>}
+            placeholder={translation}
+          />
+        )}
+      />
+    </Box>
+    <Box px={1} width={1 / 3}>
+      <Trans
+        id="All statuses"
+        render={({ translation }) => (
+          <Field.Select
+            name="filter.status"
+            label={<Trans>Contract status</Trans>}
+            placeholder={translation}
+            items={Object.keys(STATUSES.CONTRACT)}
+            itemToString={item => STATUSES.CONTRACT[item] || translation}
+            variant="select"
+            emptyOption
+          />
+        )}
+      />
+    </Box>
+  </Flex>
 );
 
-const SelectedFilters = ({ initialValues, onSubmit, toggle }) => {
-  const { filter: { medicalProgram, isSuspended } = {} } = initialValues;
+const SelectedFilters = ({ initialValues, onSubmit }) => {
+  const {
+    filter: {
+      medicalProgram,
+      isSuspended,
+      date: { startFrom, startTo, endFrom, endTo } = {},
+      contractorLegalEntity: { name } = {}
+    } = {}
+  } = initialValues;
 
   return (
     <Flex flexWrap="wrap">
@@ -367,160 +300,154 @@ const SelectedFilters = ({ initialValues, onSubmit, toggle }) => {
           </RemoveItem>
         </SelectedItem>
       )}
+      {(startFrom || startTo) && (
+        <SelectedItem mx={1}>
+          <Trans>Contract start date</Trans>:
+          {startFrom && (
+            <Box ml={1}>
+              з <DateFormat value={startFrom} />
+            </Box>
+          )}
+          {startTo && (
+            <Box ml={1}>
+              по <DateFormat value={startTo} />
+            </Box>
+          )}
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                ...resetPaginationParams(initialValues.first),
+                filter: {
+                  ...initialValues.filter,
+                  date: {
+                    startFrom: undefined,
+                    startTo: undefined
+                  }
+                }
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+      {(endFrom || endTo) && (
+        <SelectedItem mx={1}>
+          <Trans>Contract end date</Trans>:
+          {endFrom && (
+            <Box ml={1}>
+              з <DateFormat value={endFrom} />
+            </Box>
+          )}
+          {endTo && (
+            <Box ml={1}>
+              по <DateFormat value={endTo} />
+            </Box>
+          )}
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                ...resetPaginationParams(initialValues.first),
+                filter: {
+                  ...initialValues.filter,
+                  date: {
+                    endFrom: undefined,
+                    endTo: undefined
+                  }
+                }
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+      {name && (
+        <SelectedItem mx={1}>
+          <Trans>Legal entity name</Trans>:<Box ml={1}>{name}</Box>
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                ...resetPaginationParams(initialValues.first),
+                filter: {
+                  ...initialValues.filter,
+                  contractorLegalEntity: {
+                    name: undefined
+                  }
+                }
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
     </Flex>
   );
 };
 
-const SearchContractsModalForm = ({ initialValues, onSubmit, toggle }) => (
-  <Modal width={800} backdrop textAlign="left">
-    <Button
-      variant="none"
-      border="none"
-      px={0}
-      py={0}
-      mb={4}
-      color="bluePastel"
-      onClick={toggle}
-    >
-      <Flex justifyContent="center" alignItems="center" color="bluePastel">
-        <FilterIcon />
-        <TextNoWrap>
-          <Trans>Hide filters</Trans>
-        </TextNoWrap>
-      </Flex>
-    </Button>
-
-    <Form
-      onSubmit={values => {
-        onSubmit(values);
-        toggle();
-      }}
-      initialValues={initialValues}
-    >
-      <Flex mx={-1}>
-        <Box px={1} width={1 / 4}>
-          <Trans
-            id="All statuses"
-            render={({ translation }) => (
-              <Field.Select
-                name="filter.status"
-                label={<Trans>Contract status</Trans>}
-                placeholder={translation}
-                items={Object.keys(STATUSES.CONTRACT)}
-                itemToString={item => STATUSES.CONTRACT[item] || translation}
-                variant="select"
-                emptyOption
-              />
-            )}
-          />
-        </Box>
-
-        <Flex px={1}>
-          <Box mr={1}>
-            <Field.RangePicker
-              rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
-              label={<Trans>Contract start date</Trans>}
-            />
-          </Box>
-          <Field.RangePicker
-            rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
-            label={<Trans>Contract end date</Trans>}
-          />
-        </Flex>
-      </Flex>
-      <Flex mx={-1}>
-        <Box width={2 / 5} px={1} mr={1}>
-          <Trans
-            id="All contracts"
-            render={({ translation }) => (
-              <Field.Select
-                name="filter.isSuspended"
-                label={<Trans>Suspended</Trans>}
-                placeholder={translation}
-                items={Object.keys(STATUSES.SUSPENDED)}
-                itemToString={item => STATUSES.SUSPENDED[item] || translation}
-                variant="select"
-                emptyOption
-              />
-            )}
-          />
-        </Box>
-        <Box width={2 / 5}>
-          <Trans
-            id="Choose medical program"
-            render={({ translation }) => (
-              <Query
-                query={MedicalProgramsQuery}
-                fetchPolicy="cache-first"
-                variables={{
-                  skip: true
-                }}
-              >
-                {({
-                  data: {
-                    medicalPrograms: { nodes: medicalPrograms = [] } = {}
-                  } = {},
-                  refetch: refetchMedicalProgram
-                }) => (
-                  <Field.Select
-                    name="filter.medicalProgram.name"
-                    label={<Trans>Medical program</Trans>}
-                    placeholder={translation}
-                    items={medicalPrograms.map(({ name }) => name)}
-                    onInputValueChange={debounce(
-                      program =>
-                        !isEmpty(program) &&
-                        refetchMedicalProgram({
-                          skip: false,
-                          first: 20,
-                          filter: { name: program }
-                        }),
-                      1000
-                    )}
-                  />
-                )}
-              </Query>
-            )}
-          />
-        </Box>
-      </Flex>
-      <Flex mx={-1} mt={4} justifyContent="flex-start">
-        <Box px={1}>
-          <Button variant="red" onClick={toggle}>
-            <Trans>Close</Trans>
-          </Button>
-        </Box>
-        <Box px={1}>
-          <Button variant="blue">
-            <Trans>Search</Trans>
-          </Button>
-        </Box>
-        <Box px={1}>
-          <IconButton
-            icon={RemoveItemIcon}
-            type="reset"
-            disabled={isEmpty(initialValues.filter)}
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                filter: null,
-                searchRequest: null
-              });
-            }}
-          >
-            <Trans>Reset</Trans>
-          </IconButton>
-        </Box>
-      </Flex>
-    </Form>
-  </Modal>
+const SearchContractsModalForm = ({
+  fields: PrimarySearchFields,
+  ...props
+}) => (
+  <SearchModalForm {...props}>
+    <PrimarySearchFields />
+    <Flex mx={-1}>
+      <Box px={1} width={1 / 3}>
+        <Field.RangePicker
+          rangeNames={["filter.date.startFrom", "filter.date.startTo"]}
+          label={<Trans>Contract start date</Trans>}
+        />
+      </Box>
+      <Box px={1} width={1 / 3}>
+        <Field.RangePicker
+          rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
+          label={<Trans>Contract end date</Trans>}
+        />
+      </Box>
+      <Box width={1 / 3}>
+        <Trans
+          id="Choose medical program"
+          render={({ translation }) => (
+            <Query
+              query={MedicalProgramsQuery}
+              fetchPolicy="cache-first"
+              variables={{
+                skip: true
+              }}
+            >
+              {({
+                data: {
+                  medicalPrograms: { nodes: medicalPrograms = [] } = {}
+                } = {},
+                refetch: refetchMedicalProgram
+              }) => (
+                <Field.Select
+                  name="filter.medicalProgram.name"
+                  label={<Trans>Medical program</Trans>}
+                  placeholder={translation}
+                  items={medicalPrograms.map(({ name }) => name)}
+                  onInputValueChange={debounce(
+                    program =>
+                      !isEmpty(program) &&
+                      refetchMedicalProgram({
+                        skip: false,
+                        first: 20,
+                        filter: { name: program }
+                      }),
+                    1000
+                  )}
+                />
+              )}
+            </Query>
+          )}
+        />
+      </Box>
+    </Flex>
+  </SearchModalForm>
 );
 
-const TextNoWrap = system(
-  {
-    extend: Text,
-    ml: 2
-  },
-  { whiteSpace: "nowrap" },
-  "space"
-);
+export default ReimbursementContractsSearch;
