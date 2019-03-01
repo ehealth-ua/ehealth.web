@@ -132,7 +132,6 @@ const Search = ({ uri }) => (
                 </BooleanValue>
               </Box>
             </Flex>
-
             <SearchMedicalProgramsForm
               initialValues={locationParams}
               onSubmit={setLocationParams}

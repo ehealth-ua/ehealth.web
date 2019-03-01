@@ -20,6 +20,7 @@ query MedicalProgramsQuery(
       databaseId
       name
       isActive
+      insertedAt
     }
     pageInfo {
       startCursor
