@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.52.0"></a>
+# [1.52.0](https://github.com/edenlabllc/ehealth.web/compare/v1.51.2...v1.52.0) (2019-03-04)
+
+
+### Features
+
+* **admin:** update [@ehealth-ua](https://github.com/ehealth-ua)/schema ([3565dd9](https://github.com/edenlabllc/ehealth.web/commit/3565dd9))
+
+
+
+
+
 <a name="1.51.0"></a>
 # [1.51.0](https://github.com/edenlabllc/ehealth.web/compare/v1.50.7...v1.51.0) (2019-03-01)
 

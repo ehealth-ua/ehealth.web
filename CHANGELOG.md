@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.52.0"></a>
+# [1.52.0](https://github.com/edenlabllc/ehealth.web/compare/v1.51.2...v1.52.0) (2019-03-04)
+
+
+### Bug Fixes
+
+* **admin:** add UpdateProgramMedicationMutation, remove unused mutations for Program Medications, change INNM field from live search to simple input, add locales ([3aa4deb](https://github.com/edenlabllc/ehealth.web/commit/3aa4deb))
+* **admin:** remove header from create page, fix link to medications ([972090c](https://github.com/edenlabllc/ehealth.web/commit/972090c))
+* **admin:** use destructuring object ([e540127](https://github.com/edenlabllc/ehealth.web/commit/e540127))
+* **admin:** use jsx instead of function ([aec169c](https://github.com/edenlabllc/ehealth.web/commit/aec169c))
+
+
+### Features
+
+* **admin:** add Create Program Medication Page and Mutation ([5773102](https://github.com/edenlabllc/ehealth.web/commit/5773102))
+* **admin:** add Program Medications Details Page and Mutations ([856ca90](https://github.com/edenlabllc/ehealth.web/commit/856ca90))
+* **admin:** add Program Medications List Page ([7a6c7dd](https://github.com/edenlabllc/ehealth.web/commit/7a6c7dd))
+* **admin:** update [@ehealth-ua](https://github.com/ehealth-ua)/schema ([3565dd9](https://github.com/edenlabllc/ehealth.web/commit/3565dd9))
+
+
+
+
+
 <a name="1.51.2"></a>
 ## [1.51.2](https://github.com/edenlabllc/ehealth.web/compare/v1.51.1...v1.51.2) (2019-03-01)
 
