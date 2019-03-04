@@ -205,7 +205,7 @@ const GeneralInfo = ({
             <ExternalLink
               href={`${
                 env.REACT_APP_ADMIN_LEGACY_URL
-              }/program-medications/${medicationId}`}
+              }/medications/${medicationId}`}
             >
               {medicationId}
             </ExternalLink>

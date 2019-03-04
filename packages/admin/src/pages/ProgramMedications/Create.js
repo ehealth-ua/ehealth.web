@@ -275,9 +275,6 @@ const Confirmation = ({ navigate, location: { state } }) => {
   } = state;
   return (
     <Box p={5}>
-      <Heading as="h1" fontWeight="normal" mb={5}>
-        <Trans>Confirmation</Trans>
-      </Heading>
       <DefinitionListView
         labels={{
           medicationName: <Trans>Medication name</Trans>,
