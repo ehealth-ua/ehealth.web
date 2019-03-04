@@ -8,7 +8,7 @@ import { Query, Mutation } from "react-apollo";
 import system from "@ehealth/system-components";
 import { Flex, Box, Text } from "@rebass/emotion";
 import { PositiveIcon, CancelIcon } from "@ehealth/icons";
-import { Form, Validations, Validation, Link } from "@ehealth/components";
+import { Form, Validation, Link } from "@ehealth/components";
 
 import env from "../../env";
 import Line from "../../components/Line";
