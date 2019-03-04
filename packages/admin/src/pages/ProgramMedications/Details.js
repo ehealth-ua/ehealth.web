@@ -253,12 +253,12 @@ const GeneralInfo = ({
               reimbursementAmount={reimbursementAmount}
             />
           ) : (
-            createPrice(reimbursementAmount)
+            <Price amount={reimbursementAmount} />
           ),
-          wholesalePrice: createPrice(wholesalePrice),
-          consumerPrice: createPrice(consumerPrice),
-          estimatedPaymentAmount: createPrice(estimatedPaymentAmount),
-          reimbursementDailyDosage: createPrice(reimbursementDailyDosage)
+          wholesalePrice: <Price amount={wholesalePrice} />,
+          consumerPrice: <Price amount={consumerPrice} />,
+          estimatedPaymentAmount: <Price amount={estimatedPaymentAmount} />,
+          reimbursementDailyDosage: <Price amount={reimbursementDailyDosage} />
         }}
         labelWidth="280px"
       />
@@ -330,7 +330,7 @@ const ReimbursementAmount = ({ id, reimbursementAmount }) => (
         </Mutation>
       ) : (
         <Flex>
-          {createPrice(reimbursementAmount)}
+          <Price amount={reimbursementAmount} />
           <Button variant="none" border="none" px="0" py="0" onClick={toggle}>
             <Text fontSize={0} color="rockmanBlue" fontWeight="bold" ml={2}>
               <Trans>Change</Trans>
@@ -342,7 +342,7 @@ const ReimbursementAmount = ({ id, reimbursementAmount }) => (
   </BooleanValue>
 );
 
-const createPrice = amount =>
+const Price = amount =>
   amount && (
     <>
       {amount} <Trans>uah</Trans>

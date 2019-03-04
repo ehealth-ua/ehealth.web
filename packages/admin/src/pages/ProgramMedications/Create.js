@@ -298,11 +298,11 @@ const Confirmation = ({ navigate, location: { state } }) => {
         }}
         data={{
           type,
-          reimbursementAmount: createPrice(reimbursementAmount),
-          wholesalePrice: createPrice(wholesalePrice),
-          consumerPrice: createPrice(consumerPrice),
-          estimatedPaymentAmount: createPrice(estimatedPaymentAmount),
-          reimbursementDailyDosage: createPrice(reimbursementDailyDosage)
+          reimbursementAmount: <Price amount={reimbursementAmount} />,
+          wholesalePrice: <Price amount={wholesalePrice} />,
+          consumerPrice: <Price amount={consumerPrice} />,
+          estimatedPaymentAmount: <Price amount={estimatedPaymentAmount} />,
+          reimbursementDailyDosage: <Price amount={reimbursementDailyDosage} />
         }}
         labelWidth="200px"
       />
@@ -362,7 +362,7 @@ const Confirmation = ({ navigate, location: { state } }) => {
   );
 };
 
-const createPrice = amount =>
+const Price = amount =>
   amount && (
     <>
       {amount} <Trans>uah</Trans>
