@@ -23,7 +23,6 @@ const contractFormFilteredParams = filter => {
       ? { contractorLegalEntity: { edrpou: searchRequest } }
       : { contractNumber: searchRequest });
   return {
-    ...contract,
     startDate: formatDateTimeInterval(startFrom, startTo),
     endDate: formatDateTimeInterval(endFrom, endTo),
     status,
@@ -35,7 +34,8 @@ const contractFormFilteredParams = filter => {
     isSuspended: convertStringToBoolean(isSuspended),
     medicalProgram: !isEmpty(medicalProgram)
       ? { name: medicalProgram.name }
-      : undefined
+      : undefined,
+    ...contract
   };
 };
 
