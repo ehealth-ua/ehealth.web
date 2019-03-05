@@ -1,15 +1,18 @@
 //@flow
 import * as React from "react";
-import capitalize from "lodash/capitalize";
 import DictionaryValue from "./DictionaryValue";
+import { normalizeName } from "@ehealth/utils";
 
 type AddressProps = {
   data: {
     zip?: string,
-    area: string,
-    region?: string,
+    area?: string,
+    region?: string | { name: string },
+    district?: { name: string },
     settlementType: string,
+    type: string,
     settlement: string,
+    name: string,
     streetType: string,
     street: string,
     building: string,
@@ -19,30 +22,34 @@ type AddressProps = {
 
 const AddressView = ({ data }: AddressProps): React.Node => {
   if (!data) return null;
-  const {
-    zip,
-    area,
-    region,
-    settlementType,
-    settlement,
-    streetType,
-    street,
-    building,
-    apartment
-  } = data;
+
+  const { zip, streetType, street, building, apartment } = data;
+
+  const [region, district, settlementType, settlement] = Object.keys(
+    data
+  ).includes("area")
+    ? [data.area, data.region, data.settlementType, data.settlement]
+    : [
+        data.region && data.region.name,
+        data.district && data.district.name,
+        data.type,
+        data.name
+      ];
+
   return (
     <>
       {zip && <>{zip}, </>}
-      {formatArea(area)}, {region && <>{normalizeName(region)} район, </>}
+      {region && <>{formatDistrict(region)}, </>}
+      {district && <>{normalizeName(district)} район, </>}
       <>
         <DictionaryValue name="SETTLEMENT_TYPE" item={settlementType} />
         &nbsp;
         {normalizeName(settlement)}
       </>
-      ,{" "}
       <>
         {street && (
           <>
+            ,&nbsp;
             <DictionaryValue name="STREET_TYPE" item={streetType} />
             &nbsp;
             {normalizeName(street)}
@@ -63,7 +70,7 @@ const AddressView = ({ data }: AddressProps): React.Node => {
 
 export default AddressView;
 
-const formatArea = area => {
+const formatDistrict = area => {
   if (/КРИМ/i.test(area)) {
     return normalizeName(area);
   } else if (/^м\./i.test(area)) {
@@ -73,6 +80,3 @@ const formatArea = area => {
     return `${normalizeName(area)} область`;
   }
 };
-
-const normalizeName = (name = "") =>
-  name.replace(/[\wа-яґїіє]+/gi, word => capitalize(word));
