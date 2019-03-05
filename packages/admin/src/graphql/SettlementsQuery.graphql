@@ -1,17 +1,33 @@
-query SettlementsQuery($filter: SettlementFilter) {
-  settlements(filter: $filter) {
+query SettlementsQuery(
+  $filter: SettlementFilter
+  $orderBy: SettlementOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
+  $skip: Boolean!
+) {
+  settlements(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) @skip(if: $skip) {
     nodes {
       id
-      district
-      districtId
-      koatuu
-      mountainGroup
+      databaseId
       name
-      parentSettlement
-      parentSettlementId
-      region
-      regionId
       type
+      district {
+        id
+        name
+      }
+      region {
+        id
+        name
+      }
     }
   }
 }

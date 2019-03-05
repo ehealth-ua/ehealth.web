@@ -13,16 +13,11 @@ const GetAssignEmployeeQuery = loader(
   "../graphql/GetAssignEmployeeQuery.graphql"
 );
 
-const AssigneeSearch = ({ submitted, id, query }) => (
+const AssigneeSearch = () => (
   <Trans
     id="Choose assignee"
     render={({ translation }) => (
-      <Query
-        query={GetAssignEmployeeQuery}
-        variables={{
-          skip: true
-        }}
-      >
+      <Query query={GetAssignEmployeeQuery} variables={{ skip: true }}>
         {({ data, refetch: refetchEmployees }) => {
           const { employees } = data || {};
 

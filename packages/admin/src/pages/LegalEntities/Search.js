@@ -6,15 +6,15 @@ import { loader } from "graphql.macro";
 import createDecorator from "final-form-calculate";
 import isEmpty from "lodash/isEmpty";
 import { DateFormat, Trans } from "@lingui/macro";
+import debounce from "lodash/debounce";
 
-import { Form, LocationParams, Validation } from "@ehealth/components";
-import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+import { LocationParams, Validation } from "@ehealth/components";
 import {
-  PositiveIcon,
-  SearchIcon,
-  NegativeIcon,
-  RemoveItemIcon
-} from "@ehealth/icons";
+  normalizeName,
+  parseSortingParams,
+  stringifySortingParams
+} from "@ehealth/utils";
+import { PositiveIcon, SearchIcon, NegativeIcon } from "@ehealth/icons";
 
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
@@ -24,10 +24,10 @@ import Link from "../../components/Link";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import AddressView from "../../components/AddressView";
 import Badge from "../../components/Badge";
-import Button, { IconButton } from "../../components/Button";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
+import SearchForm from "../../components/SearchForm";
 
-// const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
+const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
 const SearchLegalEntitiesQuery = loader(
   "../../graphql/SearchLegalEntitiesQuery.graphql"
 );
@@ -49,7 +49,7 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { code, settlement, nhsVerified, type } = {},
+          filter: { code, addresses, nhsVerified, type } = {},
           first,
           last,
           after,
@@ -65,15 +65,21 @@ const Search = ({ uri }) => (
           nhsVerified: isEmpty(nhsVerified)
             ? undefined
             : nhsVerified === "VERIFIED",
-          settlement: isEmpty(settlement) ? undefined : settlement.settlement,
-          area: isEmpty(settlement) ? undefined : settlement.area,
+          addresses: isEmpty(addresses)
+            ? undefined
+            : {
+                settlementId: addresses.databaseId,
+                type: addresses.settlementType
+              },
           type
         };
         return (
           <>
-            <SearchLegalEntitiesForm
+            <SearchForm
               initialValues={locationParams}
-              setLocationParams={setLocationParams}
+              onSubmit={setLocationParams}
+              fields={PrimarySearchFields}
+              decorators={[resetValue]}
             />
             <Query
               query={SearchLegalEntitiesQuery}
@@ -210,20 +216,8 @@ const Search = ({ uri }) => (
 
 export default Search;
 
-const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
-  <Form
-    onSubmit={params =>
-      setLocationParams({
-        ...params,
-        after: undefined,
-        before: undefined,
-        last: undefined,
-        first: initialValues.first || ITEMS_PER_PAGE[0]
-      })
-    }
-    initialValues={initialValues}
-    decorators={[resetValue]}
-  >
+const PrimarySearchFields = ({ initialValues: { addresses } }) => (
+  <>
     <Flex mx={-1}>
       <Box px={1} width={1 / 2}>
         <Trans
@@ -246,43 +240,44 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
       </Box>
     </Flex>
     <Flex mx={-1}>
-      {/*<Box px={1} width={1 / 3}>*/}
-      {/*<Query*/}
-      {/*query={SettlementsQuery}*/}
-      {/*fetchPolicy="cache-first"*/}
-      {/*variables={{ name: "" }}*/}
-      {/*context={{ credentials: "same-origin" }}*/}
-      {/*>*/}
-      {/*{({ loading, error, data, refetch }) => {*/}
-      {/*if (loading) return null;*/}
-      {/*const { nodes: settlements = [{}] } = data.settlements;*/}
-      {/*return (*/}
-      {/*<Field.Select*/}
-      {/*name="filter.settlement"*/}
-      {/*label="Населений пункт"*/}
-      {/*placeholder="Введіть населений пункт"*/}
-      {/*itemToString={item => {*/}
-      {/*if (!item) return "";*/}
-      {/*return typeof item === "string" ? item : item.settlement;*/}
-      {/*}}*/}
-      {/*items={settlements.map(({ name, district, type, region }) => ({*/}
-      {/*area: region || undefined,*/}
-      {/*settlement: name,*/}
-      {/*settlementType: type,*/}
-      {/*region: district || undefined*/}
-      {/*}))}*/}
-      {/*onInputValueChange={debounce(*/}
-      {/*settlement => refetch({ name: settlement }),*/}
-      {/*500*/}
-      {/*)}*/}
-      {/*filterOptions={{ keys: ["settlement"] }}*/}
-      {/*renderItem={address => <AddressView data={address} />}*/}
-      {/*size="small"*/}
-      {/*/>*/}
-      {/*);*/}
-      {/*}}*/}
-      {/*</Query>*/}
-      {/*</Box>*/}
+      <Box px={1} width={1 / 3}>
+        <Trans
+          id="Enter settlement"
+          render={({ translation }) => (
+            <Query
+              query={SettlementsQuery}
+              variables={{ ...addresses, skip: true }}
+            >
+              {({
+                loading,
+                error,
+                data: { settlements: { nodes: settlements = [] } = {} } = {},
+                refetch: refetchSettlements
+              }) => (
+                <Field.Select
+                  name="filter.addresses"
+                  label={<Trans>Settlement</Trans>}
+                  placeholder={translation}
+                  items={settlements}
+                  onInputValueChange={debounce(
+                    (settlement, { selectedItem, inputValue }) =>
+                      selectedItem !== inputValue &&
+                      refetchSettlements({
+                        skip: false,
+                        first: 20,
+                        filter: { name: settlement }
+                      }),
+                    1000
+                  )}
+                  itemToString={item => item && normalizeName(item.name)}
+                  renderItem={address => <AddressView data={address} />}
+                  filterOptions={{ keys: ["name"] }}
+                />
+              )}
+            </Query>
+          )}
+        />
+      </Box>
 
       <Box px={1} width={1 / 4}>
         <Composer
@@ -325,38 +320,15 @@ const SearchLegalEntitiesForm = ({ initialValues, setLocationParams }) => (
         </Composer>
       </Box>
     </Flex>
-    <Flex mx={-1} justifyContent="flex-start">
-      <Box px={1}>
-        <Button variant="blue">
-          <Trans>Search</Trans>
-        </Button>
-      </Box>
-      <Box px={1}>
-        <IconButton
-          icon={RemoveItemIcon}
-          type="reset"
-          disabled={isEmpty(initialValues.filter)}
-          onClick={() => {
-            setLocationParams({
-              ...initialValues,
-              filter: null,
-              searchRequest: null
-            });
-          }}
-        >
-          <Trans>Reset</Trans>
-        </IconButton>
-      </Box>
-    </Flex>
-  </Form>
+  </>
 );
 
 const resetValue = createDecorator(
   {
     field: "filter.code",
     updates: {
-      "filter.settlement": (value, { filter = {} }) => {
-        return value ? undefined : filter.settlement;
+      "filter.addresses": (value, { filter = {} }) => {
+        return value ? undefined : filter.addresses;
       },
       "filter.nhsVerified": (value, { filter = {} }) => {
         return value ? undefined : filter.nhsVerified;
@@ -364,7 +336,7 @@ const resetValue = createDecorator(
     }
   },
   {
-    field: "filter.settlement",
+    field: "filter.addresses",
     updates: {
       "filter.code": (value, { filter = {} }) => {
         return value ? undefined : filter.code;
