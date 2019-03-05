@@ -14,7 +14,8 @@ type SearchFormProps = {
   onSubmit: Object => void,
   fields: React.ElementType,
   modal?: React.ElementType,
-  selected?: React.ElementType
+  selected?: React.ElementType,
+  decorators?: Object => void
 };
 
 const SearchForm = ({
@@ -22,7 +23,8 @@ const SearchForm = ({
   onSubmit,
   fields: PrimarySearchFields,
   modal: SearchModalForm,
-  selected: SelectedFilters
+  selected: SelectedFilters,
+  decorators
 }: SearchFormProps) => (
   <Form
     initialValues={initialValues}
@@ -35,8 +37,9 @@ const SearchForm = ({
         first: initialValues.first || ITEMS_PER_PAGE[0]
       })
     }
+    decorators={decorators}
   >
-    <PrimarySearchFields />
+    <PrimarySearchFields initialValues={initialValues} />
     {SearchModalForm && (
       <BooleanValue>
         {({ value: opened, toggle }) => (
