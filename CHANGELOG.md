@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.53.0"></a>
+# [1.53.0](https://github.com/edenlabllc/ehealth.web/compare/v1.52.0...v1.53.0) (2019-03-05)
+
+
+### Features
+
+* **admin:** add decorator prop to SearchForm, pass initialValues to PrimarySearchFields ([0b59099](https://github.com/edenlabllc/ehealth.web/commit/0b59099))
+* **admin:** add search LE by settlement ([5369f47](https://github.com/edenlabllc/ehealth.web/commit/5369f47))
+* **admin:** make AddressView work with other data structure ([30795b6](https://github.com/edenlabllc/ehealth.web/commit/30795b6))
+* **utils:** move normalizeName to utils package ([999f60d](https://github.com/edenlabllc/ehealth.web/commit/999f60d))
+
+
+
+
+
 <a name="1.52.0"></a>
 # [1.52.0](https://github.com/edenlabllc/ehealth.web/compare/v1.51.2...v1.52.0) (2019-03-04)
 

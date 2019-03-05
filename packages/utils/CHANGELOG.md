@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.53.0"></a>
+# [1.53.0](https://github.com/edenlabllc/ehealth.web/compare/v1.52.0...v1.53.0) (2019-03-05)
+
+
+### Features
+
+* **utils:** move normalizeName to utils package ([999f60d](https://github.com/edenlabllc/ehealth.web/commit/999f60d))
+
+
+
+
+
 <a name="1.50.0"></a>
 # [1.50.0](https://github.com/edenlabllc/ehealth.web/compare/v1.49.0...v1.50.0) (2019-02-25)
 
