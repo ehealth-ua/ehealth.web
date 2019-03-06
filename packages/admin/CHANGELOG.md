@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.54.0"></a>
+# [1.54.0](https://github.com/edenlabllc/ehealth.web/compare/v1.53.2...v1.54.0) (2019-03-06)
+
+
+### Features
+
+* **admin:** add live search by legal entity name on contracts and contract requests ([b2a6c4d](https://github.com/edenlabllc/ehealth.web/commit/b2a6c4d))
+
+
+
+
+
 <a name="1.53.2"></a>
 ## [1.53.2](https://github.com/edenlabllc/ehealth.web/compare/v1.53.1...v1.53.2) (2019-03-06)
 
