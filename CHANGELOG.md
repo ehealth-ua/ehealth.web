@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.53.1"></a>
+## [1.53.1](https://github.com/edenlabllc/ehealth.web/compare/v1.53.0...v1.53.1) (2019-03-06)
+
+
+### Bug Fixes
+
+* **admin:** search LE by settlement `id` instead of `databaseId` ([73db902](https://github.com/edenlabllc/ehealth.web/commit/73db902))
+
+
+
+
+
 <a name="1.53.0"></a>
 # [1.53.0](https://github.com/edenlabllc/ehealth.web/compare/v1.52.0...v1.53.0) (2019-03-05)
 
