@@ -4,10 +4,10 @@ The following is a set of guidelines for contributing to eHealth Web.
 
 ## Development
 
-After cloning repository, run `npm install` to fetch its dependencies. Then, you can run several commands:
+After cloning repository, run `npm ci` to fetch its dependencies. Then, you can run several commands:
 
-* `npm start` runs servers and bundlers across all packages in watch mode.
-* `npm test` runs the complete test suite.
+- `npm start` runs servers and bundlers across all packages in watch mode.
+- `npm test` runs the complete test suite.
 
 You can run these commands for subset of packages with the `--scope` and `--ignore` flags, for example:
 
@@ -73,15 +73,15 @@ If the commit reverts a previous commit, it should begin with `revert:`, followe
 
 Must be one of the following:
 
-* **build**: Changes that affect the build system or external dependencies
-* **ci**: Changes to our CI configuration files and scripts
-* **docs**: Documentation only changes
-* **feat**: A new feature
-* **fix**: A bug fix
-* **perf**: A code change that improves performance
-* **refactor**: A code change that neither fixes a bug nor adds a feature
-* **style**: Changes that do not affect the meaning of the code
-* **test**: Adding missing tests or correcting existing tests
+- **build**: Changes that affect the build system or external dependencies
+- **ci**: Changes to our CI configuration files and scripts
+- **docs**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **style**: Changes that do not affect the meaning of the code
+- **test**: Adding missing tests or correcting existing tests
 
 ### Scope
 
@@ -89,17 +89,17 @@ The scope should be the name of the package affected (as perceived by the person
 
 There are currently a few exceptions to the "use package name" rule:
 
-* **packaging**: used for changes that change the npm package layout in all of our packages, e.g. public path changes, package.json changes done to all packages, changes to bundles, etc.
-* **release**: used for increment package versions and updating the release notes in CHANGELOG.md
-* none/empty string: useful for `style`, `test` and `refactor` changes that are done across all packages
+- **packaging**: used for changes that change the npm package layout in all of our packages, e.g. public path changes, package.json changes done to all packages, changes to bundles, etc.
+- **release**: used for increment package versions and updating the release notes in CHANGELOG.md
+- none/empty string: useful for `style`, `test` and `refactor` changes that are done across all packages
 
 ### Subject
 
 The subject contains a succinct description of the change:
 
-* use the imperative, present tense: "change" not "changed" nor "changes"
-* don't capitalize the first letter
-* no dot (.) at the end
+- use the imperative, present tense: "change" not "changed" nor "changes"
+- don't capitalize the first letter
+- no dot (.) at the end
 
 ### Body
 
@@ -116,11 +116,11 @@ Breaking changes should start with the word `BREAKING CHANGE:` with a space or t
 
 You can publish changes in the project with the `npm publish` command, which creates a new release of the updated packages. When run, this command does the following:
 
-* Increments version and update corresponding fields in `lerna.json` and `package.json` files of updated packages.
-* Updates all dependencies of the updated packages according to their version ranges.
-* Creates a new git commit and tag for the new version.
-* Builds, tests and publishes docker images for updated packages which able to be dockerized.
-* Publishes updated packages to npm.
-* Pushes the git changes to remote.
+- Increments version and update corresponding fields in `lerna.json` and `package.json` files of updated packages.
+- Updates all dependencies of the updated packages according to their version ranges.
+- Creates a new git commit and tag for the new version.
+- Builds, tests and publishes docker images for updated packages which able to be dockerized.
+- Publishes updated packages to npm.
+- Pushes the git changes to remote.
 
 Actions above is the part of the continuous deployment workflow and will be performed automatically on new commits pushed to `master` and `*-stable` branches.

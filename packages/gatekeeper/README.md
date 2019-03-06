@@ -1,6 +1,6 @@
-# Mock server
+# Gatekeeper
 
-Mock-server for eHealth GraphQL API.
+Keeps client secret and exchanges authorization codes to authorization tokens. Implements [redirection endpoint](https://tools.ietf.org/html/rfc6749#section-3.1.2) in OAuth 2.0 Code Grant.
 
 ## Running locally
 

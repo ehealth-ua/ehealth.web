@@ -1,6 +1,6 @@
-# Mock server
+# Polyfill server
 
-Mock-server for eHealth GraphQL API.
+Serves polyfills that are suitable for the requesting browser.
 
 ## Running locally
 

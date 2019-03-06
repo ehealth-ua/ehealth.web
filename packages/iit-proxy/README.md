@@ -1,6 +1,6 @@
-# Mock server
+# IIT Proxy
 
-Mock-server for eHealth GraphQL API.
+Cross-origin request proxy for communicating via text and binary protocols.
 
 ## Running locally
 
