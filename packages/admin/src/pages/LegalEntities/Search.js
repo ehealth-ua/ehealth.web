@@ -68,7 +68,7 @@ const Search = ({ uri }) => (
           addresses: isEmpty(addresses)
             ? undefined
             : {
-                settlementId: addresses.databaseId,
+                settlementId: addresses.id,
                 type: addresses.settlementType
               },
           type

@@ -17,7 +17,6 @@ query SettlementsQuery(
   ) @skip(if: $skip) {
     nodes {
       id
-      databaseId
       name
       type
       district {
