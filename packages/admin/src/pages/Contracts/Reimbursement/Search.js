@@ -37,6 +37,9 @@ const SearchReimbursementContractsQuery = loader(
 const MedicalProgramsQuery = loader(
   "../../../graphql/MedicalProgramsQuery.graphql"
 );
+const SearchContractsByLegalEntitiesQuery = loader(
+  "../../../graphql/SearchContractsByLegalEntitiesQuery.graphql"
+);
 
 const resetPaginationParams = first => ({
   after: undefined,
@@ -223,11 +226,37 @@ const PrimarySearchFields = () => (
       <Trans
         id="Enter legal entity name"
         render={({ translation }) => (
-          <Field.Text
-            name="filter.contractorLegalEntity.name"
-            label={<Trans>Legal entity name</Trans>}
-            placeholder={translation}
-          />
+          <Query
+            query={SearchContractsByLegalEntitiesQuery}
+            variables={{ skip: true }}
+          >
+            {({
+              data: { legalEntities: { nodes: legalEntities = [] } = {} } = {},
+              refetch: refetchlegalEntities
+            }) => (
+              <Field.Select
+                name="filter.contractorLegalEntity"
+                label={<Trans>Legal entity name</Trans>}
+                placeholder={translation}
+                items={legalEntities.map(({ name }) => ({ name }))}
+                onInputValueChange={debounce(
+                  (legalEntity, { selectedItem, inputValue }) =>
+                    selectedItem !== inputValue &&
+                    refetchlegalEntities({
+                      skip: false,
+                      first: 20,
+                      filter: {
+                        name: legalEntity,
+                        type: ["PHARMACY", "MSP_PHARMACY"]
+                      }
+                    }),
+                  1000
+                )}
+                itemToString={item => item && item.name}
+                filterOptions={{ keys: ["name"] }}
+              />
+            )}
+          </Query>
         )}
       />
     </Box>

@@ -1,0 +1,11 @@
+query SearchContractsByLegalEntitiesQuery(
+  $filter: LegalEntityFilter
+  $first: Int
+  $skip: Boolean!
+) {
+  legalEntities(first: $first, filter: $filter) @skip(if: $skip) {
+    nodes {
+      name
+    }
+  }
+}

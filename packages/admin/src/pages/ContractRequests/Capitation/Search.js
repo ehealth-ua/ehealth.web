@@ -4,6 +4,7 @@ import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
 import { Box, Flex } from "@rebass/emotion";
 import { Trans, DateFormat } from "@lingui/macro";
+import debounce from "lodash/debounce";
 
 import { Validation, LocationParams } from "@ehealth/components";
 import {
@@ -35,6 +36,10 @@ import contractFormFilteredParams from "../../../helpers/contractFormFilteredPar
 
 const SearchCapitationContractRequestsQuery = loader(
   "../../../graphql/SearchCapitationContractRequestsQuery.graphql"
+);
+
+const SearchContractsByLegalEntitiesQuery = loader(
+  "../../../graphql/SearchContractsByLegalEntitiesQuery.graphql"
 );
 
 const resetPaginationParams = first => ({
@@ -356,11 +361,39 @@ const SearchContractsModalForm = ({
         <Trans
           id="Enter legal entity name"
           render={({ translation }) => (
-            <Field.Text
-              name="filter.contractorLegalEntity.name"
-              label={<Trans>Legal entity name</Trans>}
-              placeholder={translation}
-            />
+            <Query
+              query={SearchContractsByLegalEntitiesQuery}
+              variables={{ skip: true }}
+            >
+              {({
+                data: {
+                  legalEntities: { nodes: legalEntities = [] } = {}
+                } = {},
+                refetch: refetchlegalEntities
+              }) => (
+                <Field.Select
+                  name="filter.contractorLegalEntity"
+                  label={<Trans>Legal entity name</Trans>}
+                  placeholder={translation}
+                  items={legalEntities.map(({ name }) => ({ name }))}
+                  onInputValueChange={debounce(
+                    (legalEntity, { selectedItem, inputValue }) =>
+                      selectedItem !== inputValue &&
+                      refetchlegalEntities({
+                        skip: false,
+                        first: 20,
+                        filter: {
+                          name: legalEntity,
+                          type: ["MSP", "MSP_PHARMACY"]
+                        }
+                      }),
+                    1000
+                  )}
+                  itemToString={item => item && item.name}
+                  filterOptions={{ keys: ["name"] }}
+                />
+              )}
+            </Query>
           )}
         />
       </Box>
