@@ -71,7 +71,7 @@ const Search = ({ uri }) => (
                 settlementId: addresses.id,
                 type: addresses.settlementType
               },
-          type: [type]
+          type: type ? [type] : undefined
         };
         return (
           <>
