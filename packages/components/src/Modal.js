@@ -46,6 +46,7 @@ const Window = system(
     placement: "center"
   },
   {
+    zIndex: 10,
     maxWidth: "100vw",
     maxHeight: "100vh",
     textAlign: "center",
