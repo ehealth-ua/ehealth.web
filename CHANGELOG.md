@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.55.1"></a>
+## [1.55.1](https://github.com/edenlabllc/ehealth.web/compare/v1.55.0...v1.55.1) (2019-03-07)
+
+
+### Bug Fixes
+
+* **admin:** fix search by settlement ([de28af7](https://github.com/edenlabllc/ehealth.web/commit/de28af7))
+
+
+
+
+
 <a name="1.55.0"></a>
 # [1.55.0](https://github.com/edenlabllc/ehealth.web/compare/v1.54.1...v1.55.0) (2019-03-07)
 
