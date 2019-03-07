@@ -347,7 +347,8 @@ const GeneralInfo = ({
         misVerified: <Trans>MIS Verification</Trans>
       }}
       data={{
-        misVerified: misVerified ? <PositiveIcon /> : <NegativeIcon />
+        misVerified:
+          misVerified === "VERIFIED" ? <PositiveIcon /> : <NegativeIcon />
       }}
       color="blueberrySoda"
     />
