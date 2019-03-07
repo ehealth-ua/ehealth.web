@@ -30,6 +30,7 @@ import Badge from "../../components/Badge";
 import AuthMethodsList from "../../components/AuthMethodsList";
 import DictionaryValue from "../../components/DictionaryValue";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
+import STATUSES from "../../helpers/statuses";
 
 const SearchPersonsQuery = loader("../../graphql/SearchPersonsQuery.graphql");
 
@@ -52,7 +53,7 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { identity, personal } = {},
+          filter: { identity, personal, status } = {},
           first,
           last,
           after,
@@ -92,7 +93,8 @@ const Search = ({ uri }) => (
                         }
                       : undefined
                   },
-                  personal
+                  personal,
+                  status
                 }
               }}
             >
@@ -199,7 +201,7 @@ export default Search;
 const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
   <Form
     initialValues={initialValues}
-    onSubmit={({ filter: { identity, personal }, ...params }) => {
+    onSubmit={({ filter: { identity, personal, status }, ...params }) => {
       const { number, type, ...documents } = identity;
       return onSubmit({
         ...params,
@@ -210,7 +212,8 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
             number: number,
             ...documents
           },
-          personal
+          personal,
+          status
         }
       });
     }}
@@ -337,14 +340,33 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
                   message="Invalid phone number"
                 />
               </Box>
-              <Box px={1} width={1 / 2}>
-                <Field.DatePicker
-                  name="filter.personal.birthDate"
-                  label={<Trans>Date of birth</Trans>}
-                  minDate="1900-01-01"
-                  disabled={isEmpty(identity)}
-                />
-              </Box>
+              <Flex>
+                <Box px={1} width={1 / 2}>
+                  <Field.DatePicker
+                    name="filter.personal.birthDate"
+                    label={<Trans>Date of birth</Trans>}
+                    minDate="1900-01-01"
+                    disabled={isEmpty(identity)}
+                  />
+                </Box>
+                <Box px={1} width={1 / 2}>
+                  <Trans
+                    id="Select person status"
+                    render={({ translation }) => (
+                      <Field.Select
+                        name="filter.status"
+                        label={<Trans>Person status</Trans>}
+                        items={Object.keys(STATUSES.PERSON)}
+                        itemToString={item =>
+                          STATUSES.PERSON[item] || translation
+                        }
+                        variant="select"
+                        emptyOption
+                      />
+                    )}
+                  />
+                </Box>
+              </Flex>
             </Box>
           );
         }}
