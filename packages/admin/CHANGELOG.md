@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.56.0"></a>
+# [1.56.0](https://github.com/edenlabllc/ehealth.web/compare/v1.55.2...v1.56.0) (2019-03-07)
+
+
+### Features
+
+* **admin:** add filter by status in persons ([#799](https://github.com/edenlabllc/ehealth.web/issues/799)) ([cb40604](https://github.com/edenlabllc/ehealth.web/commit/cb40604))
+
+
+
+
+
 <a name="1.55.1"></a>
 ## [1.55.1](https://github.com/edenlabllc/ehealth.web/compare/v1.55.0...v1.55.1) (2019-03-07)
 
