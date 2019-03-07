@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.55.2"></a>
+## [1.55.2](https://github.com/edenlabllc/ehealth.web/compare/v1.55.1...v1.55.2) (2019-03-07)
+
+
+### Bug Fixes
+
+* **auth:** restored error output on forms ([fcfde27](https://github.com/edenlabllc/ehealth.web/commit/fcfde27))
+
+
+
+
+
 <a name="1.55.1"></a>
 ## [1.55.1](https://github.com/edenlabllc/ehealth.web/compare/v1.55.0...v1.55.1) (2019-03-07)
 
