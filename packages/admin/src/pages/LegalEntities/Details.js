@@ -786,8 +786,7 @@ const Divisions = ({ id }) => (
             variables={filteredLocationParams(id, locationParams)}
           >
             {({ loading, error, data }) => {
-              if (loading) return "Loading...";
-              if (error) return `Error! ${error.message}`;
+              if (!data) return null;
               const {
                 legalEntity: {
                   divisions: { nodes: divisions }
@@ -801,12 +800,14 @@ const Divisions = ({ id }) => (
                     addresses: <Trans>Address</Trans>,
                     mountainGroup: <Trans>Mountain region</Trans>,
                     phones: <Trans>Phone</Trans>,
-                    email: <Trans>Email</Trans>
+                    email: <Trans>Email</Trans>,
+                    status: <Trans>Status</Trans>
                   }}
                   renderRow={({
                     mountainGroup,
                     addresses,
                     phones,
+                    status,
                     ...props
                   }) => ({
                     ...props,
@@ -820,7 +821,10 @@ const Divisions = ({ id }) => (
                       .map((item, key) => (
                         <AddressView data={item} key={key} />
                       )),
-                    phones: getPhones(phones)
+                    phones: getPhones(phones),
+                    status: (
+                      <Badge type="LEGALENTITY" name={status} display="block" />
+                    )
                   })}
                 />
               ) : null;
