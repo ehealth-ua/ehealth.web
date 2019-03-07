@@ -42,7 +42,7 @@ const SignInPage = ({
                 const token = await googleReCaptchaProps.executeRecaptcha(
                   "SignInPage"
                 );
-                onSubmit(data, token);
+                return onSubmit(data, token);
               }}
               initialValues={{ email }}
             />

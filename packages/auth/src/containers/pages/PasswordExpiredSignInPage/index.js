@@ -40,7 +40,7 @@ const PasswordExpiredSignInPage = ({
             const token = await googleReCaptchaProps.executeRecaptcha(
               "PasswordExpiredSignInPage"
             );
-            onSubmit(data, token);
+            return onSubmit(data, token);
           }}
           btnColor="green"
         />

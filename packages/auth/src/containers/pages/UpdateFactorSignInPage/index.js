@@ -34,7 +34,7 @@ const UpdateFactorSignInPage = ({
             const token = await googleReCaptchaProps.executeRecaptcha(
               "UpdateFactorSignInPage"
             );
-            onSubmit(data, token);
+            return onSubmit(data, token);
           }}
           initialValues={{
             email: location.query.email
