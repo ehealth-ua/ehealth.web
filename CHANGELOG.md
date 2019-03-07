@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.54.1"></a>
+## [1.54.1](https://github.com/edenlabllc/ehealth.web/compare/v1.54.0...v1.54.1) (2019-03-07)
+
+
+### Bug Fixes
+
+* **admin:** fix misVerified field in LE details ([30c18c4](https://github.com/edenlabllc/ehealth.web/commit/30c18c4))
+
+
+
+
+
 <a name="1.54.0"></a>
 # [1.54.0](https://github.com/edenlabllc/ehealth.web/compare/v1.53.2...v1.54.0) (2019-03-06)
 
