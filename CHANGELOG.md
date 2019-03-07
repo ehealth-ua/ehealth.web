@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.55.0"></a>
+# [1.55.0](https://github.com/edenlabllc/ehealth.web/compare/v1.54.1...v1.55.0) (2019-03-07)
+
+
+### Features
+
+* **admin:** add status to LE divisions ([fe0bdb9](https://github.com/edenlabllc/ehealth.web/commit/fe0bdb9))
+
+
+
+
+
 <a name="1.54.1"></a>
 ## [1.54.1](https://github.com/edenlabllc/ehealth.web/compare/v1.54.0...v1.54.1) (2019-03-07)
 
