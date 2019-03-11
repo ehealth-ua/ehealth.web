@@ -284,8 +284,7 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
     filter: {
       medicalProgram,
       isSuspended,
-      date: { startFrom, startTo, endFrom, endTo } = {},
-      contractorLegalEntity: { name } = {}
+      date: { startFrom, startTo, endFrom, endTo } = {}
     } = {}
   } = initialValues;
 
@@ -384,27 +383,6 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
                   date: {
                     endFrom: undefined,
                     endTo: undefined
-                  }
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-      {name && (
-        <SelectedItem mx={1}>
-          <Trans>Legal entity name</Trans>:<Box ml={1}>{name}</Box>
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                ...resetPaginationParams(initialValues.first),
-                filter: {
-                  ...initialValues.filter,
-                  contractorLegalEntity: {
-                    name: undefined
                   }
                 }
               });

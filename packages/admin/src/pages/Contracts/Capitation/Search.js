@@ -37,6 +37,13 @@ const SearchContractsByLegalEntitiesQuery = loader(
   "../../../graphql/SearchContractsByLegalEntitiesQuery.graphql"
 );
 
+const resetPaginationParams = first => ({
+  after: undefined,
+  before: undefined,
+  last: undefined,
+  first: first || ITEMS_PER_PAGE[0]
+});
+
 const CapitationContractsSearch = ({ uri }) => (
   <Box p={6}>
     <ContractsNav />
@@ -265,7 +272,13 @@ const PrimarySearchFields = () => (
 );
 
 const SelectedFilters = ({ initialValues, onSubmit }) => {
-  const { filter: { legalEntityRelation, isSuspended } = {} } = initialValues;
+  const {
+    filter: {
+      legalEntityRelation,
+      isSuspended,
+      date: { startFrom, startTo, endFrom, endTo } = {}
+    } = {}
+  } = initialValues;
 
   return (
     <Flex>
@@ -300,6 +313,70 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
                 filter: {
                   ...initialValues.filter,
                   isSuspended: undefined
+                }
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+      {(startFrom || startTo) && (
+        <SelectedItem mx={1}>
+          <Trans>Contract start date</Trans>:
+          {startFrom && (
+            <Box ml={1}>
+              з <DateFormat value={startFrom} />
+            </Box>
+          )}
+          {startTo && (
+            <Box ml={1}>
+              по <DateFormat value={startTo} />
+            </Box>
+          )}
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                ...resetPaginationParams(initialValues.first),
+                filter: {
+                  ...initialValues.filter,
+                  date: {
+                    startFrom: undefined,
+                    startTo: undefined
+                  }
+                }
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+      {(endFrom || endTo) && (
+        <SelectedItem mx={1}>
+          <Trans>Contract end date</Trans>:
+          {endFrom && (
+            <Box ml={1}>
+              з <DateFormat value={endFrom} />
+            </Box>
+          )}
+          {endTo && (
+            <Box ml={1}>
+              по <DateFormat value={endTo} />
+            </Box>
+          )}
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                ...resetPaginationParams(initialValues.first),
+                filter: {
+                  ...initialValues.filter,
+                  date: {
+                    endFrom: undefined,
+                    endTo: undefined
+                  }
                 }
               });
             }}
