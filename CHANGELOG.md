@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.57.0"></a>
+# [1.57.0](https://github.com/edenlabllc/ehealth.web/compare/v1.56.2...v1.57.0) (2019-03-11)
+
+
+### Features
+
+* **admin:** add suspend contract mutation ([#800](https://github.com/edenlabllc/ehealth.web/issues/800)) ([4abe4ac](https://github.com/edenlabllc/ehealth.web/commit/4abe4ac))
+
+
+
+
+
 <a name="1.56.2"></a>
 ## [1.56.2](https://github.com/edenlabllc/ehealth.web/compare/v1.56.1...v1.56.2) (2019-03-11)
 
