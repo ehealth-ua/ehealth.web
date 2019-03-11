@@ -121,24 +121,29 @@ const Nav = () => (
             </NavSection>
           </Ability>
 
-          <Ability
-            action="read"
-            resources={["medical_program", "program_medication"]}
-            loose
-          >
-            <NavSection title={<Trans>Medical program</Trans>}>
-              <Ability action="read" resource="medical_program">
-                <NavLinkExternal to="medical-programs">
-                  <Trans>List of medical programs</Trans>
-                </NavLinkExternal>
+          <Flag
+            name="features.medicalPrograms"
+            fallbackRender={() => (
+              <Ability
+                action="read"
+                resources={["medical_program", "program_medication"]}
+                loose
+              >
+                <NavSection title={<Trans>Medical program</Trans>}>
+                  <Ability action="read" resource="medical_program">
+                    <NavLinkExternal to="medical-programs">
+                      <Trans>List of medical programs</Trans>
+                    </NavLinkExternal>
+                  </Ability>
+                  <Ability action="read" resource="program_medication">
+                    <NavLinkExternal to="program-medications">
+                      <Trans>Program Participants</Trans>
+                    </NavLinkExternal>
+                  </Ability>
+                </NavSection>
               </Ability>
-              <Ability action="read" resource="program_medication">
-                <NavLinkExternal to="program-medications">
-                  <Trans>Program Participants</Trans>
-                </NavLinkExternal>
-              </Ability>
-            </NavSection>
-          </Ability>
+            )}
+          />
 
           <Ability
             action="read"

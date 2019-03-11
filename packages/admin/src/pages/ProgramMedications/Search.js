@@ -20,6 +20,7 @@ import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import Button, { IconButton } from "../../components/Button";
+import DictionaryValue from "../../components/DictionaryValue";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 import STATUSES from "../../helpers/statuses";
 
@@ -119,7 +120,12 @@ const Search = ({ navigate }) => (
                               medicalProgramId,
                               medicalProgramName,
                               medicationName,
-                              medicationForm,
+                              medicationForm: (
+                                <DictionaryValue
+                                  name="MEDICATION_FORM"
+                                  item={medicationForm}
+                                />
+                              ),
                               medicationManufacturer: medicationManufacturer && (
                                 <>
                                   {medicationManufacturer.name},{" "}

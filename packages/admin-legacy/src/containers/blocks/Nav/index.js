@@ -197,39 +197,48 @@ class Nav extends React.Component {
                 </ShowMore>
               </li>
             </ShowWithScope>
-            <ShowWithScope
-              scope={["medical_program:read", "program_medication:read"]}
-            >
-              <li>
-                <ShowMore nav name="Програми">
-                  <ul>
-                    <ShowWithScope scope="medical_program:read">
-                      <NavItem
-                        to="medical-programs"
-                        activeClassName={styles.active}
-                      >
-                        <Link id="medical-programs-nav" to="/medical-programs">
-                          Перелік мед. програм
-                        </Link>
-                      </NavItem>
-                    </ShowWithScope>
-                    <ShowWithScope scope="program_medication:read">
-                      <NavItem
-                        to="program-medications"
-                        activeClassName={styles.active}
-                      >
-                        <Link
-                          id="program_medications-nav"
-                          to="/program-medications"
-                        >
-                          Учасники програм
-                        </Link>
-                      </NavItem>
-                    </ShowWithScope>
-                  </ul>
-                </ShowMore>
-              </li>
-            </ShowWithScope>
+
+            <Flag
+              name="features.medicalPrograms"
+              fallbackRender={() => (
+                <ShowWithScope
+                  scope={["medical_program:read", "program_medication:read"]}
+                >
+                  <li>
+                    <ShowMore nav name="Програми">
+                      <ul>
+                        <ShowWithScope scope="medical_program:read">
+                          <NavItem
+                            to="medical-programs"
+                            activeClassName={styles.active}
+                          >
+                            <Link
+                              id="medical-programs-nav"
+                              to="/medical-programs"
+                            >
+                              Перелік мед. програм
+                            </Link>
+                          </NavItem>
+                        </ShowWithScope>
+                        <ShowWithScope scope="program_medication:read">
+                          <NavItem
+                            to="program-medications"
+                            activeClassName={styles.active}
+                          >
+                            <Link
+                              id="program_medications-nav"
+                              to="/program-medications"
+                            >
+                              Учасники програм
+                            </Link>
+                          </NavItem>
+                        </ShowWithScope>
+                      </ul>
+                    </ShowMore>
+                  </li>
+                </ShowWithScope>
+              )}
+            />
             <ShowWithScope
               scope={[
                 "medication_request:read",
@@ -383,6 +392,49 @@ class Nav extends React.Component {
                 </ExternalLink>
               </NavItem>
             </ShowWithScope>
+
+            <Flag name="features.medicalPrograms">
+              <ShowWithScope
+                scope={["medical_program:read", "program_medication:read"]}
+              >
+                <li>
+                  <ShowMore nav name="Медичні програми">
+                    <ul>
+                      <ShowWithScope scope="medical_program:read">
+                        <NavItem
+                          to="medical-programs"
+                          activeClassName={styles.active}
+                        >
+                          <ExternalLink
+                            id="medical-programs-nav"
+                            href={`${
+                              env.REACT_APP_ADMIN_URL
+                            }/medical-programs/search`}
+                          >
+                            Перелік мед. програм
+                          </ExternalLink>
+                        </NavItem>
+                      </ShowWithScope>
+                      <ShowWithScope scope="program_medication:read">
+                        <NavItem
+                          to="program-medications"
+                          activeClassName={styles.active}
+                        >
+                          <ExternalLink
+                            id="program_medications-nav"
+                            href={`${
+                              env.REACT_APP_ADMIN_URL
+                            }/program-medications/search`}
+                          >
+                            Учасники програм
+                          </ExternalLink>
+                        </NavItem>
+                      </ShowWithScope>
+                    </ul>
+                  </ShowMore>
+                </li>
+              </ShowWithScope>
+            </Flag>
 
             <Flag name="features.declaration">
               <ShowWithScope scope="declaration:read">
