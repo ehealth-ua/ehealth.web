@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.57.1"></a>
+## [1.57.1](https://github.com/edenlabllc/ehealth.web/compare/v1.57.0...v1.57.1) (2019-03-11)
+
+
+### Bug Fixes
+
+* **admin:** add DictionaryValue for medicationForm, add Flags to the Admin and Admin Legacy navs ([#804](https://github.com/edenlabllc/ehealth.web/issues/804)) ([e9f0847](https://github.com/edenlabllc/ehealth.web/commit/e9f0847))
+
+
+
+
+
 <a name="1.57.0"></a>
 # [1.57.0](https://github.com/edenlabllc/ehealth.web/compare/v1.56.2...v1.57.0) (2019-03-11)
 
