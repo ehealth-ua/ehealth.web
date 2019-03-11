@@ -7,7 +7,7 @@ import { login } from "../../../redux/session";
 import env from "../../../env";
 import error_messages from "../../../helpers/errors";
 
-export const onSubmitSignUp = (employeeRequestId, email, password) => (
+export const onSubmitSignUp = (employeeRequestId, email, password, token) => (
   dispatch,
   getState
 ) =>
@@ -21,7 +21,8 @@ export const onSubmitSignUp = (employeeRequestId, email, password) => (
           email,
           password,
           client_id: env.REACT_APP_CLIENT_ID,
-          scope: "employee_request:approve employee_request:reject"
+          scope: "employee_request:approve employee_request:reject",
+          token
         })
       ).then(action => {
         if (action.error) return new Error(action.error);
@@ -59,7 +60,7 @@ export const onSubmitSignUp = (employeeRequestId, email, password) => (
     }
   );
 
-export const onSubmitSignIn = (employeeRequestId, email, password) => (
+export const onSubmitSignIn = (employeeRequestId, email, password, token) => (
   dispatch,
   getState
 ) =>
@@ -69,7 +70,8 @@ export const onSubmitSignIn = (employeeRequestId, email, password) => (
       email,
       password,
       client_id: env.REACT_APP_CLIENT_ID,
-      scope: "employee_request:approve employee_request:reject"
+      scope: "employee_request:approve employee_request:reject",
+      token
     })
   ).then(action => {
     if (action.error) {

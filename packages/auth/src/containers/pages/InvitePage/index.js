@@ -3,6 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { provideHooks } from "redial";
 import { withRouter } from "react-router";
+import { withGoogleReCaptcha } from "react-google-recaptcha-v3";
 import format from "date-fns/format";
 
 import Button, { ButtonsGroup } from "../../../components/Button";
@@ -41,7 +42,9 @@ class InvitePage extends Component {
   }
 
   renderDoctorDetails() {
-    const { request: { doctor } } = this.props;
+    const {
+      request: { doctor }
+    } = this.props;
     return (
       <div>
         <div className={styles.details__title}>Освіта</div>
@@ -80,7 +83,8 @@ class InvitePage extends Component {
                   <DictionaryValue
                     dictionary="SCIENCE_DEGREE"
                     value={degree.degree}
-                  />, {degree.city} {degree.country}
+                  />
+                  , {degree.city} {degree.country}
                 </p>
                 <p>
                   <b>Спеціальність:</b>{" "}
@@ -169,7 +173,9 @@ class InvitePage extends Component {
   }
 
   renderDetails() {
-    const { request: { doctor, party } } = this.props;
+    const {
+      request: { doctor, party }
+    } = this.props;
 
     return (
       <div className={styles.details__body}>
@@ -229,7 +235,8 @@ class InvitePage extends Component {
   render() {
     const {
       request: { party = {}, legal_entity = {}, position, user_id, id } = {},
-      location
+      location,
+      googleReCaptchaProps
     } = this.props;
 
     const invite =
@@ -254,12 +261,9 @@ class InvitePage extends Component {
             </div>
 
             <div className={styles.accept}>
-              даю згоду на реєстрацію мене в системі eHealth<br />
-              у ролі "<DictionaryValue
-                dictionary="POSITION"
-                value={position}
-              />"
-              <br />
+              даю згоду на реєстрацію мене в системі eHealth
+              <br />у ролі "
+              <DictionaryValue dictionary="POSITION" value={position} />"<br />
               {legal_entity.name}
             </div>
             <div className={styles.details}>
@@ -288,18 +292,34 @@ class InvitePage extends Component {
                 {user_id && (
                   <InviteSignInForm
                     email={party.email}
-                    onSubmit={({ password }) =>
-                      this.props.onSubmitSignIn(id, party.email, password)
-                    }
+                    onSubmit={async ({ password }) => {
+                      const token = await googleReCaptchaProps.executeRecaptcha(
+                        "InviteSignIn"
+                      );
+                      return this.props.onSubmitSignIn(
+                        id,
+                        party.email,
+                        password,
+                        token
+                      );
+                    }}
                   />
                 )}
 
                 {!user_id && (
                   <InviteSignUpForm
                     email={party.email}
-                    onSubmit={({ password }) =>
-                      this.props.onSubmitSignUp(id, party.email, password)
-                    }
+                    onSubmit={async ({ password }) => {
+                      const token = await googleReCaptchaProps.executeRecaptcha(
+                        "InviteSignUp"
+                      );
+                      return this.props.onSubmitSignUp(
+                        id,
+                        party.email,
+                        password,
+                        token
+                      );
+                    }}
                   />
                 )}
               </div>
@@ -324,6 +344,7 @@ class InvitePage extends Component {
 
 export default compose(
   withRouter,
+  withGoogleReCaptcha,
   provideHooks({
     fetch: ({ dispatch }) => dispatch(fetchDictionaries())
   }),
