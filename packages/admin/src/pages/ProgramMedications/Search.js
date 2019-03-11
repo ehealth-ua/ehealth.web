@@ -209,6 +209,7 @@ const SearchProgramMedicationsForm = ({ initialValues, onSubmit }) => (
                     label={<Trans>Medical program</Trans>}
                     placeholder={translation}
                     items={medicalPrograms.map(({ name }) => name)}
+                    filter={items => items}
                     onInputValueChange={debounce(
                       (program, { selectedItem, inputValue }) =>
                         !isEmpty(program) &&
@@ -249,6 +250,7 @@ const SearchProgramMedicationsForm = ({ initialValues, onSubmit }) => (
                   label={<Trans>Medication name</Trans>}
                   placeholder={translation}
                   items={medications.map(({ name }) => name)}
+                  filter={items => items}
                   onInputValueChange={debounce(
                     (name, { selectedItem, inputValue }) =>
                       !isEmpty(name) &&

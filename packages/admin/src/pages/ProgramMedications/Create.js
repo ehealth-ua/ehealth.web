@@ -97,7 +97,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                         name
                       }))}
                       itemToString={item => item && item.name}
-                      filterOptions={{ keys: ["name"] }}
+                      filter={items => items}
                       onInputValueChange={debounce(
                         (name, { selectedItem, inputValue }) =>
                           !isEmpty(name) &&
@@ -145,7 +145,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                           name
                         }))}
                         itemToString={item => item && item.name}
-                        filterOptions={{ keys: ["name"] }}
+                        filter={items => items}
                         onInputValueChange={debounce(
                           (program, { selectedItem, inputValue }) =>
                             !isEmpty(program) &&
