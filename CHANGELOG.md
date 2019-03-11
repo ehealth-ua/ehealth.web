@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.56.2"></a>
+## [1.56.2](https://github.com/edenlabllc/ehealth.web/compare/v1.56.1...v1.56.2) (2019-03-11)
+
+
+### Bug Fixes
+
+* **admin:** disable matchSorter filter in Program Medications live search fields ([63fcad9](https://github.com/edenlabllc/ehealth.web/commit/63fcad9))
+
+
+
+
+
 <a name="1.56.1"></a>
 ## [1.56.1](https://github.com/edenlabllc/ehealth.web/compare/v1.56.0...v1.56.1) (2019-03-11)
 
