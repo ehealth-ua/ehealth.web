@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.57.3"></a>
+## [1.57.3](https://github.com/edenlabllc/ehealth.web/compare/v1.57.2...v1.57.3) (2019-03-11)
+
+
+### Bug Fixes
+
+* **admin:** show selected filter by date on capitation contracts, remove selected filter by legal entity name on reimbursement contracts ([bd57d9e](https://github.com/edenlabllc/ehealth.web/commit/bd57d9e))
+
+
+
+
+
 <a name="1.57.1"></a>
 ## [1.57.1](https://github.com/edenlabllc/ehealth.web/compare/v1.57.0...v1.57.1) (2019-03-11)
 
