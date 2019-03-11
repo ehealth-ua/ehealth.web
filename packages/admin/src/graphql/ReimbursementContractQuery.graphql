@@ -20,6 +20,7 @@ query ReimbursementContractQuery(
     startDate
     endDate
     statusReason
+    reason
     contractorLegalEntity {
       id
       name
