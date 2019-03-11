@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.56.1"></a>
+## [1.56.1](https://github.com/edenlabllc/ehealth.web/compare/v1.56.0...v1.56.1) (2019-03-11)
+
+
+### Bug Fixes
+
+* **admin:** destructuring prop in Price component on Program Medications Details and Create pages ([4aa74a9](https://github.com/edenlabllc/ehealth.web/commit/4aa74a9))
+
+
+
+
+
 <a name="1.56.0"></a>
 # [1.56.0](https://github.com/edenlabllc/ehealth.web/compare/v1.55.2...v1.56.0) (2019-03-07)
 
