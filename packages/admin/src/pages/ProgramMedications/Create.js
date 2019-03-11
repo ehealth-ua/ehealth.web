@@ -362,7 +362,7 @@ const Confirmation = ({ navigate, location: { state } }) => {
   );
 };
 
-const Price = amount =>
+const Price = ({ amount }) =>
   amount && (
     <>
       {amount} <Trans>uah</Trans>

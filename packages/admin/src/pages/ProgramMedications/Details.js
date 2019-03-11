@@ -342,7 +342,7 @@ const ReimbursementAmount = ({ id, reimbursementAmount }) => (
   </BooleanValue>
 );
 
-const Price = amount =>
+const Price = ({ amount }) =>
   amount && (
     <>
       {amount} <Trans>uah</Trans>
