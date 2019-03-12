@@ -7,6 +7,7 @@ import createDecorator from "final-form-calculate";
 import isEmpty from "lodash/isEmpty";
 import { DateFormat, Trans } from "@lingui/macro";
 import debounce from "lodash/debounce";
+import { FlagsProvider, Flag } from "flag";
 
 import { LocationParams, Validation } from "@ehealth/components";
 import {
@@ -26,6 +27,7 @@ import AddressView from "../../components/AddressView";
 import Badge from "../../components/Badge";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 import SearchForm from "../../components/SearchForm";
+import flags from "../../flags";
 
 const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
 const SearchLegalEntitiesQuery = loader(
@@ -217,110 +219,116 @@ const Search = ({ uri }) => (
 export default Search;
 
 const PrimarySearchFields = ({ initialValues: { addresses } }) => (
-  <>
-    <Flex mx={-1}>
-      <Box px={1} width={1 / 2}>
-        <Trans
-          id="Legal entity EDRPOU or ID"
-          render={({ translation }) => (
-            <Field.Text
-              name="filter.code"
-              label={<Trans>Search legal entity by EDRPOU</Trans>}
-              placeholder={translation}
-              postfix={<SearchIcon color="silverCity" />}
-              autoComplete="off"
-            />
-          )}
-        />
-        <Validation.Matches
-          field="filter.code"
-          options={SEARCH_REQUEST_PATTERN}
-          message="Invalid number"
-        />
-      </Box>
-    </Flex>
-    <Flex mx={-1}>
-      <Box px={1} width={1 / 3}>
-        <Trans
-          id="Enter settlement"
-          render={({ translation }) => (
-            <Query
-              query={SettlementsQuery}
-              variables={{ ...addresses, skip: true }}
-            >
-              {({
-                loading,
-                error,
-                data: { settlements: { nodes: settlements = [] } = {} } = {},
-                refetch: refetchSettlements
-              }) => (
-                <Field.Select
-                  name="filter.addresses"
-                  label={<Trans>Settlement</Trans>}
-                  placeholder={translation}
-                  items={settlements}
-                  onInputValueChange={debounce(
-                    (settlement, { selectedItem, inputValue }) =>
-                      selectedItem !== inputValue &&
-                      refetchSettlements({
-                        skip: false,
-                        first: 20,
-                        filter: { name: settlement }
-                      }),
-                    1000
+  <FlagsProvider flags={flags}>
+    <>
+      <Flex mx={-1}>
+        <Box px={1} width={1 / 2}>
+          <Trans
+            id="Legal entity EDRPOU or ID"
+            render={({ translation }) => (
+              <Field.Text
+                name="filter.code"
+                label={<Trans>Search legal entity by EDRPOU</Trans>}
+                placeholder={translation}
+                postfix={<SearchIcon color="silverCity" />}
+                autoComplete="off"
+              />
+            )}
+          />
+          <Validation.Matches
+            field="filter.code"
+            options={SEARCH_REQUEST_PATTERN}
+            message="Invalid number"
+          />
+        </Box>
+      </Flex>
+      <Flex mx={-1}>
+        <Flag name="features.searchBySettlement">
+          <Box px={1} width={1 / 3}>
+            <Trans
+              id="Enter settlement"
+              render={({ translation }) => (
+                <Query
+                  query={SettlementsQuery}
+                  variables={{ ...addresses, skip: true }}
+                >
+                  {({
+                    loading,
+                    error,
+                    data: {
+                      settlements: { nodes: settlements = [] } = {}
+                    } = {},
+                    refetch: refetchSettlements
+                  }) => (
+                    <Field.Select
+                      name="filter.addresses"
+                      label={<Trans>Settlement</Trans>}
+                      placeholder={translation}
+                      items={settlements}
+                      onInputValueChange={debounce(
+                        (settlement, { selectedItem, inputValue }) =>
+                          selectedItem !== inputValue &&
+                          refetchSettlements({
+                            skip: false,
+                            first: 20,
+                            filter: { name: settlement }
+                          }),
+                        1000
+                      )}
+                      itemToString={item => item && normalizeName(item.name)}
+                      renderItem={address => <AddressView data={address} />}
+                      filterOptions={{ keys: ["name"] }}
+                    />
                   )}
-                  itemToString={item => item && normalizeName(item.name)}
-                  renderItem={address => <AddressView data={address} />}
-                  filterOptions={{ keys: ["name"] }}
-                />
+                </Query>
               )}
-            </Query>
-          )}
-        />
-      </Box>
+            />
+          </Box>
+        </Flag>
 
-      <Box px={1} width={1 / 4}>
-        <Composer
-          components={[
-            <DictionaryValue name="LEGAL_ENTITY_TYPE" />,
-            ({ render }) => <Trans id="Show all" render={render} />
-          ]}
-        >
-          {([dict, { translation }]) => (
-            <Field.Select
-              name="filter.type"
-              label={<Trans>Legal entity type</Trans>}
-              placeholder={translation}
-              items={Object.keys(dict).filter(key => key !== "MIS")}
-              itemToString={item => dict[item] || translation}
-              variant="select"
-              emptyOption
-            />
-          )}
-        </Composer>
-      </Box>
-      <Box px={1} width={1 / 4}>
-        <Composer
-          components={[
-            <DictionaryValue name="LEGAL_ENTITY_STATUS" />,
-            ({ render }) => <Trans id="All statuses" render={render} />
-          ]}
-        >
-          {([dict, { translation }]) => (
-            <Field.Select
-              name="filter.nhsVerified"
-              label={<Trans>Verification status</Trans>}
-              placeholder={translation}
-              items={Object.keys(dict)}
-              itemToString={item => dict[item] || translation}
-              variant="select"
-              emptyOption
-            />
-          )}
-        </Composer>
-      </Box>
-    </Flex>
-  </>
+        <Box px={1} width={1 / 4}>
+          <Composer
+            components={[
+              <DictionaryValue name="LEGAL_ENTITY_TYPE" />,
+              ({ render }) => <Trans id="Show all" render={render} />
+            ]}
+          >
+            {([dict, { translation }]) => (
+              <Field.Select
+                name="filter.type"
+                label={<Trans>Legal entity type</Trans>}
+                placeholder={translation}
+                items={Object.keys(dict).filter(key => key !== "MIS")}
+                itemToString={item => dict[item] || translation}
+                variant="select"
+                emptyOption
+              />
+            )}
+          </Composer>
+        </Box>
+        <Box px={1} width={1 / 4}>
+          <Composer
+            components={[
+              <DictionaryValue name="LEGAL_ENTITY_STATUS" />,
+              ({ render }) => <Trans id="All statuses" render={render} />
+            ]}
+          >
+            {([dict, { translation }]) => (
+              <Field.Select
+                name="filter.nhsVerified"
+                label={<Trans>Verification status</Trans>}
+                placeholder={translation}
+                items={Object.keys(dict)}
+                itemToString={item => dict[item] || translation}
+                variant="select"
+                emptyOption
+              />
+            )}
+          </Composer>
+        </Box>
+      </Flex>
+    </>
+  </FlagsProvider>
 );
 
 const resetValue = createDecorator(
