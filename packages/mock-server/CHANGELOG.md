@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.58.0"></a>
+# [1.58.0](https://github.com/edenlabllc/ehealth.web/compare/v1.57.3...v1.58.0) (2019-03-12)
+
+
+### Features
+
+* **mock-server:** update schema ([61dd74f](https://github.com/edenlabllc/ehealth.web/commit/61dd74f))
+
+
+
+
+
 <a name="1.53.2"></a>
 ## [1.53.2](https://github.com/edenlabllc/ehealth.web/compare/v1.53.1...v1.53.2) (2019-03-06)
 

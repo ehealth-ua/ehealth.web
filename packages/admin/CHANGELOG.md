@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.58.0"></a>
+# [1.58.0](https://github.com/edenlabllc/ehealth.web/compare/v1.57.3...v1.58.0) (2019-03-12)
+
+
+### Bug Fixes
+
+* **admin:** add division statuses ([ccded6a](https://github.com/edenlabllc/ehealth.web/commit/ccded6a))
+* **admin:** add isSuspended to reimbursement list ([a134449](https://github.com/edenlabllc/ehealth.web/commit/a134449))
+* **admin:** rename toggle and footer props in Popup ([89a085f](https://github.com/edenlabllc/ehealth.web/commit/89a085f))
+
+
+### Features
+
+* **admin:** add Popup component ([d131dcd](https://github.com/edenlabllc/ehealth.web/commit/d131dcd))
+* **admin:** use new Popup component for `Suspend` and `Terminate` mutations ([f13a74d](https://github.com/edenlabllc/ehealth.web/commit/f13a74d))
+
+
+
+
+
 <a name="1.57.3"></a>
 ## [1.57.3](https://github.com/edenlabllc/ehealth.web/compare/v1.57.2...v1.57.3) (2019-03-11)
 
