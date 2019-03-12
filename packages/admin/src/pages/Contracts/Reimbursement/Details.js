@@ -149,10 +149,7 @@ const Details = ({ id }) => (
                                   {suspendContract => (
                                     <Popup
                                       title={<Trans>Suspend contract</Trans>}
-                                      toggleComponent={({
-                                        onClick,
-                                        opened
-                                      }) => (
+                                      renderToggle={({ onClick, opened }) => (
                                         <Link
                                           is="a"
                                           disable={opened}
@@ -278,7 +275,7 @@ const Details = ({ id }) => (
                       {terminateContract => (
                         <Popup
                           title={<Trans>Terminate contract</Trans>}
-                          toggleComponent={({ onClick, opened }) => (
+                          renderToggle={({ onClick, opened }) => (
                             <Button
                               variant="red"
                               disable={opened}

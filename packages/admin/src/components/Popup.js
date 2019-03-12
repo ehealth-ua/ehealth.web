@@ -8,7 +8,7 @@ const Popup = ({
   title,
   children,
   render = children,
-  toggleComponent: ToggleButton,
+  renderToggle: ToggleButton,
   cancelText = <Trans>Return</Trans>,
   okText = title,
   okButtonProps = { type: "submit", variant: "red" },
@@ -16,7 +16,7 @@ const Popup = ({
   width = 760,
   onCancel,
   onOk,
-  footer: Footer = PopupFooter,
+  renderFooter: Footer = PopupFooter,
   justifyButtons = "center",
   formId
 }) => {

@@ -149,7 +149,7 @@ const Details = ({ id }) => (
                             minWidth={100}
                           />
                           <Flag name="features.suspendContractMutation">
-                            {isSuspended && (
+                            {!isSuspended && (
                               <Box ml={3}>
                                 <Mutation
                                   mutation={SuspendContractMutation}
@@ -166,10 +166,7 @@ const Details = ({ id }) => (
                                   {suspendContract => (
                                     <Popup
                                       title={<Trans>Suspend contract</Trans>}
-                                      toggleComponent={({
-                                        onClick,
-                                        opened
-                                      }) => (
+                                      renderToggle={({ onClick, opened }) => (
                                         <Link
                                           is="a"
                                           disable={opened}
@@ -295,7 +292,7 @@ const Details = ({ id }) => (
                       {terminateContract => (
                         <Popup
                           title={<Trans>Terminate contract</Trans>}
-                          toggleComponent={({ onClick, opened }) => (
+                          renderToggle={({ onClick, opened }) => (
                             <Button
                               variant="red"
                               disable={opened}
