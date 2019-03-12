@@ -22,6 +22,7 @@ query SearchReimbursementContractsQuery(
       endDate
       status
       statusReason
+      isSuspended
       nhsSigner {
         id
         party {
