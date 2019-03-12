@@ -15,6 +15,11 @@ const LEGALENTITY = {
   CLOSED: "неактивний"
 };
 
+const DIVISIONS = {
+  ACTIVE: "активний",
+  INACTIVE: "неактивний"
+};
+
 const LEGAL_ENTITY_RELATION = {
   MERGED_FROM: "підпорядкованого",
   MERGED_TO: "основного"
@@ -83,6 +88,7 @@ const STATUSES = {
   DECLARATION,
   REASON,
   LEGALENTITY,
+  DIVISIONS,
   LEGAL_ENTITY_RELATION,
   CONTRACT_REQUEST,
   MERGE_LEGAL_ENTITIES_JOBS,

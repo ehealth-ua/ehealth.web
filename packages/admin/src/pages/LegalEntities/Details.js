@@ -823,7 +823,7 @@ const Divisions = ({ id }) => (
                       )),
                     phones: getPhones(phones),
                     status: (
-                      <Badge type="LEGALENTITY" name={status} display="block" />
+                      <Badge type="DIVISIONS" name={status} display="block" />
                     )
                   })}
                 />
