@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.60.0"></a>
+# [1.60.0](https://github.com/edenlabllc/ehealth.web/compare/v1.59.0...v1.60.0) (2019-03-13)
+
+**Note:** Version bump only for package @ehealth/auth
+
+
+
+
+
 <a name="1.57.2"></a>
 ## [1.57.2](https://github.com/edenlabllc/ehealth.web/compare/v1.57.1...v1.57.2) (2019-03-11)
 

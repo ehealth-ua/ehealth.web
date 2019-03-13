@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.60.0"></a>
+# [1.60.0](https://github.com/edenlabllc/ehealth.web/compare/v1.59.0...v1.60.0) (2019-03-13)
+
+
+### Features
+
+* **admin:** search contract requests by insertedAt range ([ebbc5af](https://github.com/edenlabllc/ehealth.web/commit/ebbc5af))
+* **utils:** add formatDateInterval and formatDateInterval functions ([2b1a018](https://github.com/edenlabllc/ehealth.web/commit/2b1a018))
+
+
+
+
+
 <a name="1.59.0"></a>
 # [1.59.0](https://github.com/edenlabllc/ehealth.web/compare/v1.58.0...v1.59.0) (2019-03-13)
 
