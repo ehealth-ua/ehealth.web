@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Router } from "@reach/router";
 import { Mutation, Query } from "react-apollo";
 import { Flex, Box, Text } from "@rebass/emotion";
@@ -68,376 +68,402 @@ const CapitationContractsDetails = () => (
   </Router>
 );
 
-const Details = ({ id }) => (
-  <FlagsProvider flags={flags}>
-    <Query
-      query={CapitationContractQuery}
-      variables={{ id, first: ITEMS_PER_PAGE[0] }}
-    >
-      {({ loading, error, data: { capitationContract = {} } = {} }) => {
-        if (isEmpty(capitationContract)) return null;
-        const {
-          isSuspended,
-          databaseId,
-          contractNumber,
-          contractRequest: {
-            id: contractRequestId,
-            databaseId: contractRequestDatabaseId
-          } = {},
-          status,
-          startDate,
-          endDate,
-          nhsSignerId,
-          nhsSigner: { party: nhsSignerName = "" } = {},
-          nhsSignerBase,
-          nhsContractPrice,
-          nhsPaymentMethod,
-          issueCity,
-          printoutContent,
-          contractorRmspAmount,
-          contractorLegalEntity = {},
-          contractorOwner,
-          contractorBase,
-          contractorPaymentDetails,
-          externalContractors = [],
-          attachedDocuments,
-          statusReason,
-          reason
-        } = capitationContract;
+const Details = ({ id }) => {
+  const [isVisible, setVisibilityState] = useState({
+    suspendPopup: false,
+    terminatePopup: false
+  });
+  const toggle = popup =>
+    setVisibilityState({
+      ...isVisible,
+      [popup]: !isVisible[popup]
+    });
 
-        return (
-          <LoadingOverlay loading={loading}>
-            <Box p={6}>
-              <Box py={10}>
-                <Breadcrumbs.List>
-                  <Breadcrumbs.Item to="/contracts">
-                    <Trans>List of contracts</Trans>
-                  </Breadcrumbs.Item>
-                  <Breadcrumbs.Item>
-                    <Trans>Details of the contract</Trans>
-                  </Breadcrumbs.Item>
-                </Breadcrumbs.List>
-              </Box>
-              <Flex justifyContent="space-between">
-                <Box>
-                  <DefinitionListView
-                    labels={{
-                      databaseId: <Trans>Contract ID</Trans>,
-                      contractRequestId: <Trans>Contract request ID</Trans>,
-                      contractNumber: <Trans>Contract Number</Trans>,
-                      status: <Trans>Status</Trans>,
-                      isSuspended: <Trans>Contract state</Trans>
-                    }}
-                    data={{
-                      databaseId,
-                      contractRequestId: (
-                        <Link
-                          to={`/contract-requests/capitation/${contractRequestId}`}
-                        >
-                          {contractRequestDatabaseId}
-                        </Link>
-                      ),
-                      contractNumber,
-                      status: (
-                        <Badge name={status} type="CONTRACT" minWidth={100} />
-                      ),
-                      isSuspended: (
-                        <Flex alignItems="center">
-                          <Badge
-                            name={isSuspended}
-                            type="SUSPENDED"
-                            minWidth={100}
-                          />
-                          <Flag name="features.suspendContractMutation">
-                            {!isSuspended && (
-                              <Box ml={3}>
-                                <Mutation
-                                  mutation={SuspendContractMutation}
-                                  refetchQueries={() => [
-                                    {
-                                      query: CapitationContractQuery,
-                                      variables: {
-                                        id,
-                                        first: ITEMS_PER_PAGE[0]
-                                      }
-                                    }
-                                  ]}
-                                >
-                                  {suspendContract => (
-                                    <Popup
-                                      title={<Trans>Suspend contract</Trans>}
-                                      renderToggle={({ onClick, opened }) => (
-                                        <Link
-                                          is="a"
-                                          disable={opened}
-                                          onClick={onClick}
-                                          fontWeight="bold"
-                                        >
-                                          <Trans>Suspend contract</Trans>
-                                        </Link>
-                                      )}
-                                      formId="suspendContract"
+  return (
+    <FlagsProvider flags={flags}>
+      <Query
+        query={CapitationContractQuery}
+        variables={{ id, first: ITEMS_PER_PAGE[0] }}
+      >
+        {({ loading, error, data: { capitationContract = {} } = {} }) => {
+          if (isEmpty(capitationContract)) return null;
+          const {
+            isSuspended,
+            databaseId,
+            contractNumber,
+            contractRequest: {
+              id: contractRequestId,
+              databaseId: contractRequestDatabaseId
+            } = {},
+            status,
+            startDate,
+            endDate,
+            nhsSignerId,
+            nhsSigner: { party: nhsSignerName = "" } = {},
+            nhsSignerBase,
+            nhsContractPrice,
+            nhsPaymentMethod,
+            issueCity,
+            printoutContent,
+            contractorRmspAmount,
+            contractorLegalEntity = {},
+            contractorOwner,
+            contractorBase,
+            contractorPaymentDetails,
+            externalContractors = [],
+            attachedDocuments,
+            statusReason,
+            reason
+          } = capitationContract;
+
+          return (
+            <LoadingOverlay loading={loading}>
+              <Box p={6}>
+                <Box py={10}>
+                  <Breadcrumbs.List>
+                    <Breadcrumbs.Item to="/contracts">
+                      <Trans>List of contracts</Trans>
+                    </Breadcrumbs.Item>
+                    <Breadcrumbs.Item>
+                      <Trans>Details of the contract</Trans>
+                    </Breadcrumbs.Item>
+                  </Breadcrumbs.List>
+                </Box>
+                <Flex justifyContent="space-between">
+                  <Box>
+                    <DefinitionListView
+                      labels={{
+                        databaseId: <Trans>Contract ID</Trans>,
+                        contractRequestId: <Trans>Contract request ID</Trans>,
+                        contractNumber: <Trans>Contract Number</Trans>,
+                        status: <Trans>Status</Trans>,
+                        isSuspended: <Trans>Contract state</Trans>
+                      }}
+                      data={{
+                        databaseId,
+                        contractRequestId: (
+                          <Link
+                            to={`/contract-requests/capitation/${contractRequestId}`}
+                          >
+                            {contractRequestDatabaseId}
+                          </Link>
+                        ),
+                        contractNumber,
+                        status: (
+                          <Badge name={status} type="CONTRACT" minWidth={100} />
+                        ),
+                        isSuspended: (
+                          <Flex alignItems="center">
+                            <Badge
+                              name={isSuspended}
+                              type="SUSPENDED"
+                              minWidth={100}
+                            />
+                            <Flag name="features.suspendContractMutation">
+                              {status === "VERIFIED" &&
+                                !isSuspended && (
+                                  <Box ml={3}>
+                                    <Mutation
+                                      mutation={SuspendContractMutation}
+                                      refetchQueries={() => [
+                                        {
+                                          query: CapitationContractQuery,
+                                          variables: {
+                                            id,
+                                            first: ITEMS_PER_PAGE[0]
+                                          }
+                                        }
+                                      ]}
                                     >
-                                      {toggle => (
-                                        <Form
-                                          id="suspendContract"
-                                          onSubmit={async ({
-                                            reason,
-                                            statusReason
-                                          }) => {
-                                            await suspendContract({
-                                              variables: {
-                                                input: {
-                                                  id,
-                                                  reason,
-                                                  isSuspended: true,
-                                                  statusReason
-                                                }
-                                              }
-                                            });
-                                            toggle();
-                                          }}
-                                        >
-                                          <Text mb={5}>
-                                            <Trans>
-                                              Attention! After the suspension of
-                                              the agreement, this action can not
-                                              be canceled
-                                            </Trans>
-                                          </Text>
-                                          <Box width={1 / 2}>
-                                            <DictionaryValue
-                                              name="CONTRACT_STATUS_REASON"
-                                              render={dict => (
-                                                <Trans
-                                                  id="Choose status reason"
-                                                  render={({ translation }) => (
-                                                    <Field.Select
-                                                      name="statusReason"
-                                                      label={
-                                                        <Trans>
-                                                          Status reason
-                                                        </Trans>
-                                                      }
-                                                      placeholder={translation}
-                                                      items={["DEFAULT"]}
-                                                      itemToString={item =>
-                                                        dict[item] ||
+                                      {suspendContract => (
+                                        <>
+                                          <Link
+                                            is="a"
+                                            disabled={isVisible["suspendPopup"]}
+                                            onClick={() =>
+                                              toggle("suspendPopup")
+                                            }
+                                            fontWeight="bold"
+                                          >
+                                            <Trans>Suspend contract</Trans>
+                                          </Link>
+                                          <Popup
+                                            visible={isVisible["suspendPopup"]}
+                                            onCancel={() =>
+                                              toggle("suspendPopup")
+                                            }
+                                            title={
+                                              <Trans>Suspend contract</Trans>
+                                            }
+                                            formId="suspendContract"
+                                          >
+                                            <Form
+                                              id="suspendContract"
+                                              onSubmit={async ({
+                                                reason,
+                                                statusReason
+                                              }) => {
+                                                await suspendContract({
+                                                  variables: {
+                                                    input: {
+                                                      id,
+                                                      reason,
+                                                      isSuspended: true,
+                                                      statusReason
+                                                    }
+                                                  }
+                                                });
+                                                toggle("suspendPopup");
+                                              }}
+                                            >
+                                              <Text mb={5}>
+                                                <Trans>
+                                                  Attention! After the
+                                                  suspension of the agreement,
+                                                  this action can not be
+                                                  canceled
+                                                </Trans>
+                                              </Text>
+                                              <Box width={1 / 2}>
+                                                <DictionaryValue
+                                                  name="CONTRACT_STATUS_REASON"
+                                                  render={dict => (
+                                                    <Trans
+                                                      id="Choose status reason"
+                                                      render={({
                                                         translation
-                                                      }
-                                                      variant="select"
-                                                      emptyOption
+                                                      }) => (
+                                                        <Field.Select
+                                                          name="statusReason"
+                                                          label={
+                                                            <Trans>
+                                                              Status reason
+                                                            </Trans>
+                                                          }
+                                                          placeholder={
+                                                            translation
+                                                          }
+                                                          items={["DEFAULT"]}
+                                                          itemToString={item =>
+                                                            dict[item] ||
+                                                            translation
+                                                          }
+                                                          variant="select"
+                                                          emptyOption
+                                                        />
+                                                      )}
                                                     />
                                                   )}
                                                 />
-                                              )}
-                                            />
-                                            <Validation.Required
-                                              field="statusReason"
-                                              message="Required field"
-                                            />
-                                          </Box>
-                                          <Trans
-                                            id="Enter reason comment"
-                                            render={({ translation }) => (
-                                              <Field.Textarea
-                                                label={
-                                                  <Trans>
-                                                    Status reason comment
-                                                  </Trans>
-                                                }
-                                                name="reason"
-                                                placeholder={translation}
-                                                rows={5}
-                                                maxlength="3000"
-                                                showLengthHint
+                                                <Validation.Required
+                                                  field="statusReason"
+                                                  message="Required field"
+                                                />
+                                              </Box>
+                                              <Trans
+                                                id="Enter reason comment"
+                                                render={({ translation }) => (
+                                                  <Field.Textarea
+                                                    label={
+                                                      <Trans>
+                                                        Status reason comment
+                                                      </Trans>
+                                                    }
+                                                    name="reason"
+                                                    placeholder={translation}
+                                                    rows={5}
+                                                    maxlength="3000"
+                                                    showLengthHint
+                                                  />
+                                                )}
                                               />
-                                            )}
-                                          />
-                                          <Validation.Required
-                                            field="reason"
-                                            message="Required field"
-                                          />
-                                        </Form>
+                                              <Validation.Required
+                                                field="reason"
+                                                message="Required field"
+                                              />
+                                            </Form>
+                                          </Popup>
+                                        </>
                                       )}
-                                    </Popup>
-                                  )}
-                                </Mutation>
-                              </Box>
-                            )}
-                          </Flag>
-                        </Flex>
-                      )
-                    }}
-                    color="#7F8FA4"
-                    labelWidth="120px"
-                  />
-                </Box>
-                <Flex
-                  flexDirection="column"
-                  justifyContent="space-between"
-                  alignItems="flex-end"
-                >
-                  <PrintButton content={printoutContent} />
-                  {status === "VERIFIED" && (
-                    <Mutation
-                      mutation={TerminateContractMutation}
-                      refetchQueries={() => [
-                        {
-                          query: CapitationContractQuery,
-                          variables: { id, first: ITEMS_PER_PAGE[0] }
-                        }
-                      ]}
-                    >
-                      {terminateContract => (
-                        <Popup
-                          title={<Trans>Terminate contract</Trans>}
-                          renderToggle={({ onClick, opened }) => (
+                                    </Mutation>
+                                  </Box>
+                                )}
+                            </Flag>
+                          </Flex>
+                        )
+                      }}
+                      color="#7F8FA4"
+                      labelWidth="120px"
+                    />
+                  </Box>
+                  <Flex
+                    flexDirection="column"
+                    justifyContent="space-between"
+                    alignItems="flex-end"
+                  >
+                    <PrintButton content={printoutContent} />
+                    {status === "VERIFIED" && (
+                      <Mutation
+                        mutation={TerminateContractMutation}
+                        refetchQueries={() => [
+                          {
+                            query: CapitationContractQuery,
+                            variables: { id, first: ITEMS_PER_PAGE[0] }
+                          }
+                        ]}
+                      >
+                        {terminateContract => (
+                          <>
                             <Button
                               variant="red"
-                              disable={opened}
-                              onClick={onClick}
+                              disabled={isVisible["terminatePopup"]}
+                              onClick={() => toggle("terminatePopup")}
                             >
                               <Trans>Terminate contract</Trans>
                             </Button>
-                          )}
-                          formId="terminateContract"
-                        >
-                          {toggle => (
-                            <Form
-                              onSubmit={async ({ reason, statusReason }) => {
-                                await terminateContract({
-                                  variables: {
-                                    input: { id, reason, statusReason }
-                                  }
-                                });
-                                toggle();
-                              }}
-                              id="terminateContract"
+                            <Popup
+                              visible={isVisible["terminatePopup"]}
+                              onCancel={() => toggle("terminatePopup")}
+                              title={<Trans>Terminate contract</Trans>}
+                              formId="terminateContract"
                             >
-                              <Text mb={5}>
-                                <Trans>
-                                  Attention! After the termination of the
-                                  agreement, this action can not be canceled
-                                </Trans>
-                              </Text>
-                              <Box width={1 / 2}>
-                                <DictionaryValue
-                                  name="CONTRACT_STATUS_REASON"
-                                  render={dict => (
-                                    <Trans
-                                      id="Choose status reason"
-                                      render={({ translation }) => (
-                                        <Field.Select
-                                          name="statusReason"
-                                          label={<Trans>Status reason</Trans>}
-                                          placeholder={translation}
-                                          items={["DEFAULT"]}
-                                          itemToString={item =>
-                                            dict[item] || translation
-                                          }
-                                          variant="select"
-                                          emptyOption
-                                        />
-                                      )}
+                              <Form
+                                onSubmit={async ({ reason, statusReason }) => {
+                                  await terminateContract({
+                                    variables: {
+                                      input: { id, reason, statusReason }
+                                    }
+                                  });
+                                  toggle("terminatePopup");
+                                }}
+                                id="terminateContract"
+                              >
+                                <Text mb={5}>
+                                  <Trans>
+                                    Attention! After the termination of the
+                                    agreement, this action can not be canceled
+                                  </Trans>
+                                </Text>
+                                <Box width={1 / 2}>
+                                  <DictionaryValue
+                                    name="CONTRACT_STATUS_REASON"
+                                    render={dict => (
+                                      <Trans
+                                        id="Choose status reason"
+                                        render={({ translation }) => (
+                                          <Field.Select
+                                            name="statusReason"
+                                            label={<Trans>Status reason</Trans>}
+                                            placeholder={translation}
+                                            items={["DEFAULT"]}
+                                            itemToString={item =>
+                                              dict[item] || translation
+                                            }
+                                            variant="select"
+                                            emptyOption
+                                          />
+                                        )}
+                                      />
+                                    )}
+                                  />
+                                  <Validation.Required
+                                    field="statusReason"
+                                    message="Required field"
+                                  />
+                                </Box>
+                                <Trans
+                                  id="Enter reason comment"
+                                  render={({ translation }) => (
+                                    <Field.Textarea
+                                      label={
+                                        <Trans>Status reason comment</Trans>
+                                      }
+                                      name="reason"
+                                      placeholder={translation}
+                                      rows={5}
+                                      maxlength="3000"
+                                      showLengthHint
                                     />
                                   )}
                                 />
                                 <Validation.Required
-                                  field="statusReason"
+                                  field="reason"
                                   message="Required field"
                                 />
-                              </Box>
-                              <Trans
-                                id="Enter reason comment"
-                                render={({ translation }) => (
-                                  <Field.Textarea
-                                    label={<Trans>Status reason comment</Trans>}
-                                    name="reason"
-                                    placeholder={translation}
-                                    rows={5}
-                                    maxlength="3000"
-                                    showLengthHint
-                                  />
-                                )}
-                              />
-                              <Validation.Required
-                                field="reason"
-                                message="Required field"
-                              />
-                            </Form>
-                          )}
-                        </Popup>
-                      )}
-                    </Mutation>
-                  )}
+                              </Form>
+                            </Popup>
+                          </>
+                        )}
+                      </Mutation>
+                    )}
+                  </Flex>
                 </Flex>
-              </Flex>
-            </Box>
+              </Box>
 
-            <Tabs.Nav>
-              <Tabs.NavItem to="./">
-                <Trans>General information</Trans>
-              </Tabs.NavItem>
-              <Tabs.NavItem to="./legal-entity">
-                <Trans>Legal entity</Trans>
-              </Tabs.NavItem>
-              <Tabs.NavItem to="./divisions">
-                <Trans>Division</Trans>
-              </Tabs.NavItem>
-              <Tabs.NavItem to="./employees">
-                <Trans>Doctors</Trans>
-              </Tabs.NavItem>
-              <Tabs.NavItem to="./external-contractors">
-                <Trans>Contractors</Trans>
-              </Tabs.NavItem>
-              <Tabs.NavItem to="./documents">
-                <Trans>Documents</Trans>
-              </Tabs.NavItem>
-            </Tabs.Nav>
-            <Tabs.Content>
-              <Router>
-                <GeneralInfo
-                  path="/"
-                  startDate={startDate}
-                  endDate={endDate}
-                  contractorRmspAmount={contractorRmspAmount}
-                  nhsSignerId={nhsSignerId}
-                  nhsSignerName={nhsSignerName}
-                  nhsSignerBase={nhsSignerBase}
-                  nhsContractPrice={nhsContractPrice}
-                  nhsPaymentMethod={nhsPaymentMethod}
-                  issueCity={issueCity}
-                  statusReason={statusReason}
-                  reason={reason}
-                  contractorLegalEntity={contractorLegalEntity}
-                  status={status}
-                />
-                <LegalEntity
-                  path="/legal-entity"
-                  contractorOwner={contractorOwner}
-                  contractorBase={contractorBase}
-                  contractorLegalEntity={contractorLegalEntity}
-                  contractorPaymentDetails={contractorPaymentDetails}
-                />
-                <Divisions path="/divisions" />
-                <Employees path="/employees" />
-                <ExternalContractors
-                  path="/external-contractors"
-                  externalContractors={externalContractors}
-                />
-                <Documents
-                  path="/documents"
-                  attachedDocuments={attachedDocuments}
-                />
-              </Router>
-            </Tabs.Content>
-          </LoadingOverlay>
-        );
-      }}
-    </Query>
-  </FlagsProvider>
-);
+              <Tabs.Nav>
+                <Tabs.NavItem to="./">
+                  <Trans>General information</Trans>
+                </Tabs.NavItem>
+                <Tabs.NavItem to="./legal-entity">
+                  <Trans>Legal entity</Trans>
+                </Tabs.NavItem>
+                <Tabs.NavItem to="./divisions">
+                  <Trans>Division</Trans>
+                </Tabs.NavItem>
+                <Tabs.NavItem to="./employees">
+                  <Trans>Doctors</Trans>
+                </Tabs.NavItem>
+                <Tabs.NavItem to="./external-contractors">
+                  <Trans>Contractors</Trans>
+                </Tabs.NavItem>
+                <Tabs.NavItem to="./documents">
+                  <Trans>Documents</Trans>
+                </Tabs.NavItem>
+              </Tabs.Nav>
+              <Tabs.Content>
+                <Router>
+                  <GeneralInfo
+                    path="/"
+                    startDate={startDate}
+                    endDate={endDate}
+                    contractorRmspAmount={contractorRmspAmount}
+                    nhsSignerId={nhsSignerId}
+                    nhsSignerName={nhsSignerName}
+                    nhsSignerBase={nhsSignerBase}
+                    nhsContractPrice={nhsContractPrice}
+                    nhsPaymentMethod={nhsPaymentMethod}
+                    issueCity={issueCity}
+                    statusReason={statusReason}
+                    reason={reason}
+                    contractorLegalEntity={contractorLegalEntity}
+                    status={status}
+                  />
+                  <LegalEntity
+                    path="/legal-entity"
+                    contractorOwner={contractorOwner}
+                    contractorBase={contractorBase}
+                    contractorLegalEntity={contractorLegalEntity}
+                    contractorPaymentDetails={contractorPaymentDetails}
+                  />
+                  <Divisions path="/divisions" />
+                  <Employees path="/employees" />
+                  <ExternalContractors
+                    path="/external-contractors"
+                    externalContractors={externalContractors}
+                  />
+                  <Documents
+                    path="/documents"
+                    attachedDocuments={attachedDocuments}
+                  />
+                </Router>
+              </Tabs.Content>
+            </LoadingOverlay>
+          );
+        }}
+      </Query>
+    </FlagsProvider>
+  );
+};
 
 const GeneralInfo = ({
   contractorRmspAmount,
