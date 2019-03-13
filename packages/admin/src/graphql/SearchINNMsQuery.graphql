@@ -1,0 +1,34 @@
+query SearchINNMsQuery(
+  $filter: INNMFilter
+  $orderBy: INNMOrderBy
+  $first: Int
+  $last: Int
+  $before: String
+  $after: String
+  $skip: Boolean = false
+) {
+  innms(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) @skip(if: $skip) {
+    nodes {
+      id
+      databaseId
+      name
+      sctid
+      nameOriginal
+      isActive
+      insertedAt
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+  }
+}

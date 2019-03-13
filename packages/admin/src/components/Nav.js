@@ -223,6 +223,21 @@ const Nav = () => (
             <Trans>Legal entities</Trans>
           </NavLink>
         </Ability>
+        <Flag name="features.medications">
+          <Ability
+            action="read"
+            resources={["innm", "innm_dosage", "medications"]}
+            loose
+          >
+            <NavSection title={<Trans>Medications</Trans>}>
+              <Ability action="read" resource="innm">
+                <NavLink to="/innms">
+                  <Trans>INNMs</Trans>
+                </NavLink>
+              </Ability>
+            </NavSection>
+          </Ability>
+        </Flag>
         <Flag name="features.medicalPrograms">
           <Ability
             action="read"
