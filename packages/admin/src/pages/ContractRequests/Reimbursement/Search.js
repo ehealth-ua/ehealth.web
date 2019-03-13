@@ -249,7 +249,14 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
   const {
     filter: {
       medicalProgram,
-      date: { startFrom, startTo, endFrom, endTo } = {},
+      date: {
+        startFrom,
+        startTo,
+        endFrom,
+        endTo,
+        insertedAtFrom,
+        insertedAtTo
+      } = {},
       contractorLegalEntity: { name } = {}
     } = {}
   } = initialValues;
@@ -296,7 +303,11 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
                   ...initialValues.filter,
                   date: {
                     startFrom: undefined,
-                    startTo: undefined
+                    startTo: undefined,
+                    endFrom,
+                    endTo,
+                    insertedAtFrom,
+                    insertedAtTo
                   }
                 }
               });
@@ -327,8 +338,48 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
                 filter: {
                   ...initialValues.filter,
                   date: {
+                    startFrom,
+                    startTo,
                     endFrom: undefined,
-                    endTo: undefined
+                    endTo: undefined,
+                    insertedAtFrom,
+                    insertedAtTo
+                  }
+                }
+              });
+            }}
+          >
+            <RemoveItemIcon />
+          </RemoveItem>
+        </SelectedItem>
+      )}
+      {(insertedAtFrom || insertedAtTo) && (
+        <SelectedItem mx={1}>
+          <Trans>Contract inserted date</Trans>:
+          {insertedAtFrom && (
+            <Box ml={1}>
+              з <DateFormat value={insertedAtFrom} />
+            </Box>
+          )}
+          {insertedAtTo && (
+            <Box ml={1}>
+              по <DateFormat value={insertedAtTo} />
+            </Box>
+          )}
+          <RemoveItem
+            onClick={() => {
+              onSubmit({
+                ...initialValues,
+                ...resetPaginationParams(initialValues.first),
+                filter: {
+                  ...initialValues.filter,
+                  date: {
+                    startFrom,
+                    startTo,
+                    endFrom,
+                    endTo,
+                    insertedAtFrom: undefined,
+                    insertedAtTo: undefined
                   }
                 }
               });
@@ -380,6 +431,15 @@ const SearchContractsModalForm = ({
         <Field.RangePicker
           rangeNames={["filter.date.endFrom", "filter.date.endTo"]}
           label={<Trans>Contract end date</Trans>}
+        />
+      </Box>
+      <Box width={1 / 3}>
+        <Field.RangePicker
+          rangeNames={[
+            "filter.date.insertedAtFrom",
+            "filter.date.insertedAtTo"
+          ]}
+          label={<Trans>Contract inserted date</Trans>}
         />
       </Box>
     </Flex>
@@ -446,16 +506,20 @@ const SearchContractsModalForm = ({
                   placeholder={translation}
                   items={legalEntities.map(({ name }) => ({ name }))}
                   onInputValueChange={debounce(
-                    (legalEntity, { selectedItem, inputValue }) =>
-                      selectedItem !== inputValue &&
-                      refetchlegalEntities({
-                        skip: false,
-                        first: 20,
-                        filter: {
-                          name: legalEntity,
-                          type: ["PHARMACY", "MSP_PHARMACY"]
-                        }
-                      }),
+                    (legalEntity, { selectedItem, inputValue }) => {
+                      const name = selectedItem && selectedItem.name;
+                      return (
+                        name !== inputValue &&
+                        refetchlegalEntities({
+                          skip: false,
+                          first: 20,
+                          filter: {
+                            name: legalEntity,
+                            type: ["MSP", "MSP_PHARMACY"]
+                          }
+                        })
+                      );
+                    },
                     1000
                   )}
                   itemToString={item => item && item.name}
