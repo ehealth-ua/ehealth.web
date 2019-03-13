@@ -13,6 +13,7 @@ export { default as fieldNameDenormalizer } from "./fieldNameDenormalizer";
 export { default as fieldNameNormalizer } from "./fieldNameNormalizer";
 export { default as filterTableColumn } from "./filterTableColumn";
 export { default as formatDate } from "./formatDate";
+export { default as formatDateInterval } from "./formatDateInterval";
 export { default as formatDateTimeInterval } from "./formatDateTimeInterval";
 export { default as formatPhone } from "./formatPhone";
 export { default as formatUnzr } from "./formatUnzr";

@@ -1,5 +1,9 @@
 import isEmpty from "lodash/isEmpty";
-import { formatDateTimeInterval, convertStringToBoolean } from "@ehealth/utils";
+import {
+  formatDateTimeInterval,
+  formatDateInterval,
+  convertStringToBoolean
+} from "@ehealth/utils";
 
 import { CONTRACT_REQUEST_PATTERN } from "../constants/contractRequests";
 
@@ -13,7 +17,14 @@ const contractFormFilteredParams = filter => {
     assignee,
     isSuspended,
     contractorLegalEntity,
-    date: { startFrom, startTo, endFrom, endTo } = {}
+    date: {
+      startFrom,
+      startTo,
+      endFrom,
+      endTo,
+      insertedAtFrom,
+      insertedAtTo
+    } = {}
   } = filter;
   const contractNumberReg = new RegExp(CONTRACT_REQUEST_PATTERN);
   const contractNumberRegTest = contractNumberReg.test(searchRequest);
@@ -23,8 +34,9 @@ const contractFormFilteredParams = filter => {
       ? { contractorLegalEntity: { edrpou: searchRequest } }
       : { contractNumber: searchRequest });
   return {
-    startDate: formatDateTimeInterval(startFrom, startTo),
-    endDate: formatDateTimeInterval(endFrom, endTo),
+    startDate: formatDateInterval(startFrom, startTo),
+    endDate: formatDateInterval(endFrom, endTo),
+    insertedAt: formatDateTimeInterval(insertedAtFrom, insertedAtTo),
     status,
     contractorLegalEntity,
     legalEntityRelation: legalEntityRelation.name,
