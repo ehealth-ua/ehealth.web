@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.59.0"></a>
+# [1.59.0](https://github.com/edenlabllc/ehealth.web/compare/v1.58.0...v1.59.0) (2019-03-13)
+
+
+### Features
+
+* **admin:** add INNM list and Create INNM Mutation ([#806](https://github.com/edenlabllc/ehealth.web/issues/806)) ([e65621d](https://github.com/edenlabllc/ehealth.web/commit/e65621d))
+
+
+
+
+
 <a name="1.58.0"></a>
 # [1.58.0](https://github.com/edenlabllc/ehealth.web/compare/v1.57.3...v1.58.0) (2019-03-12)
 
