@@ -10,12 +10,7 @@ import {
   parseSortingParams,
   stringifySortingParams
 } from "@ehealth/utils";
-import { SearchIcon, NegativeIcon, RemoveItemIcon } from "@ehealth/icons";
-import {
-  SelectedItem,
-  RemoveItem
-} from "../../../components/Field/MultiSelectView";
-import SearchModalForm from "../../../components/SearchModalForm";
+import { SearchIcon, NegativeIcon } from "@ehealth/icons";
 import SearchForm from "../../../components/SearchForm";
 import * as Field from "../../../components/Field";
 import Link from "../../../components/Link";
@@ -37,13 +32,6 @@ const SearchContractsByLegalEntitiesQuery = loader(
   "../../../graphql/SearchContractsByLegalEntitiesQuery.graphql"
 );
 
-const resetPaginationParams = first => ({
-  after: undefined,
-  before: undefined,
-  last: undefined,
-  first: first || ITEMS_PER_PAGE[0]
-});
-
 const CapitationContractsSearch = ({ uri }) => (
   <Box p={6}>
     <ContractsNav />
@@ -56,9 +44,8 @@ const CapitationContractsSearch = ({ uri }) => (
             <SearchForm
               initialValues={locationParams}
               onSubmit={setLocationParams}
-              fields={PrimarySearchFields}
-              selected={SelectedFilters}
-              modal={SearchContractsModalForm}
+              renderPrimary={PrimarySearchFields}
+              renderSecondary={SecondarySearchFields}
             />
             <Query
               query={SearchCapitationContractsQuery}
@@ -271,130 +258,8 @@ const PrimarySearchFields = () => (
   </Flex>
 );
 
-const SelectedFilters = ({ initialValues, onSubmit }) => {
-  const {
-    filter: {
-      legalEntityRelation,
-      isSuspended,
-      date: { startFrom, startTo, endFrom, endTo } = {}
-    } = {}
-  } = initialValues;
-
-  return (
-    <Flex>
-      {legalEntityRelation && (
-        <SelectedItem mx={1}>
-          <Trans>
-            contract of {STATUSES.LEGAL_ENTITY_RELATION[legalEntityRelation]}{" "}
-            legal entity
-          </Trans>
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                filter: {
-                  ...initialValues.filter,
-                  legalEntityRelation: undefined
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-      {isSuspended !== undefined && (
-        <SelectedItem mx={1}>
-          {STATUSES.SUSPENDED[isSuspended]}
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                filter: {
-                  ...initialValues.filter,
-                  isSuspended: undefined
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-      {(startFrom || startTo) && (
-        <SelectedItem mx={1}>
-          <Trans>Contract start date</Trans>:
-          {startFrom && (
-            <Box ml={1}>
-              з <DateFormat value={startFrom} />
-            </Box>
-          )}
-          {startTo && (
-            <Box ml={1}>
-              по <DateFormat value={startTo} />
-            </Box>
-          )}
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                ...resetPaginationParams(initialValues.first),
-                filter: {
-                  ...initialValues.filter,
-                  date: {
-                    startFrom: undefined,
-                    startTo: undefined
-                  }
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-      {(endFrom || endTo) && (
-        <SelectedItem mx={1}>
-          <Trans>Contract end date</Trans>:
-          {endFrom && (
-            <Box ml={1}>
-              з <DateFormat value={endFrom} />
-            </Box>
-          )}
-          {endTo && (
-            <Box ml={1}>
-              по <DateFormat value={endTo} />
-            </Box>
-          )}
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                ...resetPaginationParams(initialValues.first),
-                filter: {
-                  ...initialValues.filter,
-                  date: {
-                    endFrom: undefined,
-                    endTo: undefined
-                  }
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-    </Flex>
-  );
-};
-
-const SearchContractsModalForm = ({
-  fields: PrimarySearchFields,
-  ...props
-}) => (
-  <SearchModalForm {...props}>
-    <PrimarySearchFields />
+const SecondarySearchFields = () => (
+  <>
     <Flex mx={-1}>
       <Box px={1} width={1 / 3}>
         <Field.RangePicker
@@ -445,7 +310,7 @@ const SearchContractsModalForm = ({
         />
       </Box>
     </Flex>
-  </SearchModalForm>
+  </>
 );
 
 export default CapitationContractsSearch;

@@ -11,12 +11,7 @@ import {
   parseSortingParams,
   stringifySortingParams
 } from "@ehealth/utils";
-import { SearchIcon, RemoveItemIcon } from "@ehealth/icons";
-
-import {
-  SelectedItem,
-  RemoveItem
-} from "../../../components/Field/MultiSelectView";
+import { SearchIcon } from "@ehealth/icons";
 import Table from "../../../components/Table";
 import Badge from "../../../components/Badge";
 import Link from "../../../components/Link";
@@ -25,7 +20,6 @@ import * as Field from "../../../components/Field";
 import AssigneeSearch from "../../../components/AssigneeSearch";
 import LoadingOverlay from "../../../components/LoadingOverlay";
 import SearchForm from "../../../components/SearchForm";
-import SearchModalForm from "../../../components/SearchModalForm";
 import { SEARCH_REQUEST_PATTERN } from "../../../constants/contractRequests";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import STATUSES from "../../../helpers/statuses";
@@ -43,13 +37,6 @@ const SearchContractsByLegalEntitiesQuery = loader(
   "../../../graphql/SearchContractsByLegalEntitiesQuery.graphql"
 );
 
-const resetPaginationParams = first => ({
-  after: undefined,
-  before: undefined,
-  last: undefined,
-  first: first || ITEMS_PER_PAGE[0]
-});
-
 const ReimbursementContractRequestsSearch = () => (
   <Box p={6}>
     <ContractRequestsNav />
@@ -61,9 +48,8 @@ const ReimbursementContractRequestsSearch = () => (
             <SearchForm
               initialValues={locationParams}
               onSubmit={setLocationParams}
-              fields={PrimarySearchFields}
-              selected={SelectedFilters}
-              modal={SearchContractsModalForm}
+              renderPrimary={PrimarySearchFields}
+              renderSecondary={SecondarySearchFields}
             />
             <Query
               query={SearchReimbursementContractRequestsQuery}
@@ -245,181 +231,8 @@ const PrimarySearchFields = () => (
   </Flex>
 );
 
-const SelectedFilters = ({ initialValues, onSubmit }) => {
-  const {
-    filter: {
-      medicalProgram,
-      date: {
-        startFrom,
-        startTo,
-        endFrom,
-        endTo,
-        insertedAtFrom,
-        insertedAtTo
-      } = {},
-      contractorLegalEntity: { name } = {}
-    } = {}
-  } = initialValues;
-  return (
-    <Flex flexWrap="wrap">
-      {!isEmpty(medicalProgram) && (
-        <SelectedItem mx={1}>
-          <Trans>Medical program</Trans>:<Box ml={1}>{medicalProgram.name}</Box>
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                ...resetPaginationParams(initialValues.first),
-                filter: {
-                  ...initialValues.filter,
-                  medicalProgram: undefined
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-      {(startFrom || startTo) && (
-        <SelectedItem mx={1}>
-          <Trans>Contract start date</Trans>:
-          {startFrom && (
-            <Box ml={1}>
-              з <DateFormat value={startFrom} />
-            </Box>
-          )}
-          {startTo && (
-            <Box ml={1}>
-              по <DateFormat value={startTo} />
-            </Box>
-          )}
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                ...resetPaginationParams(initialValues.first),
-                filter: {
-                  ...initialValues.filter,
-                  date: {
-                    startFrom: undefined,
-                    startTo: undefined,
-                    endFrom,
-                    endTo,
-                    insertedAtFrom,
-                    insertedAtTo
-                  }
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-      {(endFrom || endTo) && (
-        <SelectedItem mx={1}>
-          <Trans>Contract end date</Trans>:
-          {endFrom && (
-            <Box ml={1}>
-              з <DateFormat value={endFrom} />
-            </Box>
-          )}
-          {endTo && (
-            <Box ml={1}>
-              по <DateFormat value={endTo} />
-            </Box>
-          )}
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                ...resetPaginationParams(initialValues.first),
-                filter: {
-                  ...initialValues.filter,
-                  date: {
-                    startFrom,
-                    startTo,
-                    endFrom: undefined,
-                    endTo: undefined,
-                    insertedAtFrom,
-                    insertedAtTo
-                  }
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-      {(insertedAtFrom || insertedAtTo) && (
-        <SelectedItem mx={1}>
-          <Trans>Contract inserted date</Trans>:
-          {insertedAtFrom && (
-            <Box ml={1}>
-              з <DateFormat value={insertedAtFrom} />
-            </Box>
-          )}
-          {insertedAtTo && (
-            <Box ml={1}>
-              по <DateFormat value={insertedAtTo} />
-            </Box>
-          )}
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                ...resetPaginationParams(initialValues.first),
-                filter: {
-                  ...initialValues.filter,
-                  date: {
-                    startFrom,
-                    startTo,
-                    endFrom,
-                    endTo,
-                    insertedAtFrom: undefined,
-                    insertedAtTo: undefined
-                  }
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-      {name && (
-        <SelectedItem mx={1}>
-          <Trans>Legal entity name</Trans>:<Box ml={1}>{name}</Box>
-          <RemoveItem
-            onClick={() => {
-              onSubmit({
-                ...initialValues,
-                ...resetPaginationParams(initialValues.first),
-                filter: {
-                  ...initialValues.filter,
-                  contractorLegalEntity: {
-                    name: undefined
-                  }
-                }
-              });
-            }}
-          >
-            <RemoveItemIcon />
-          </RemoveItem>
-        </SelectedItem>
-      )}
-    </Flex>
-  );
-};
-
-const SearchContractsModalForm = ({
-  fields: PrimarySearchFields,
-  ...props
-}) => (
-  <SearchModalForm {...props}>
-    <PrimarySearchFields />
+const SecondarySearchFields = () => (
+  <>
     <Flex>
       <Box mr={1} width={1 / 3}>
         <Field.RangePicker
@@ -531,7 +344,7 @@ const SearchContractsModalForm = ({
         />
       </Box>
     </Flex>
-  </SearchModalForm>
+  </>
 );
 
 export default ReimbursementContractRequestsSearch;

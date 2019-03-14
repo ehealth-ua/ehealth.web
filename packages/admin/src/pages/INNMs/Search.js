@@ -132,7 +132,7 @@ const Search = () => (
             <SearchForm
               initialValues={locationParams}
               onSubmit={setLocationParams}
-              fields={PrimarySearchFields}
+              renderPrimary={PrimarySearchFields}
             />
             <Query
               query={SearchINNMsQuery}

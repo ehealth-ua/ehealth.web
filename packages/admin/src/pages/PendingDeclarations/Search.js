@@ -21,6 +21,7 @@ import Pagination from "../../components/Pagination";
 import AddressView from "../../components/AddressView";
 import STATUSES from "../../helpers/statuses";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
+import resetPaginationParams from "../../helpers/resetPaginationParams";
 
 const SearchPendingDeclarationsQuery = loader(
   "../../graphql/SearchPendingDeclarationsQuery.graphql"
@@ -177,7 +178,7 @@ const SearchDeclarationForm = ({ initialValues, onSubmit }) => {
           !isEqual(params.filter, initialValues.filter) &&
           onSubmit({
             ...params,
-            ...resetPaginationParams(initialValues.first)
+            ...resetPaginationParams(initialValues)
           })
         }
       />
@@ -201,10 +202,3 @@ const SearchDeclarationForm = ({ initialValues, onSubmit }) => {
     </Form>
   );
 };
-
-const resetPaginationParams = first => ({
-  after: undefined,
-  before: undefined,
-  last: undefined,
-  first: first || ITEMS_PER_PAGE[0]
-});

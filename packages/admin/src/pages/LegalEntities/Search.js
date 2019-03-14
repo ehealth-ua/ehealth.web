@@ -80,7 +80,7 @@ const Search = ({ uri }) => (
             <SearchForm
               initialValues={locationParams}
               onSubmit={setLocationParams}
-              fields={PrimarySearchFields}
+              renderPrimary={PrimarySearchFields}
               decorators={[resetValue]}
             />
             <Query

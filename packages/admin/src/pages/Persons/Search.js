@@ -31,19 +31,13 @@ import AuthMethodsList from "../../components/AuthMethodsList";
 import DictionaryValue from "../../components/DictionaryValue";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 import STATUSES from "../../helpers/statuses";
+import resetPaginationParams from "../../helpers/resetPaginationParams";
 
 const SearchPersonsQuery = loader("../../graphql/SearchPersonsQuery.graphql");
 
 const PHONE_PATTERN = "^\\+380\\d{9}$";
 const EDRPOU_PATTERN = "^[0-9]{10}$";
 const UNZR_PATTERN = "^[0-9]{8}-[0-9]{5}$";
-
-const resetPaginationParams = first => ({
-  after: undefined,
-  before: undefined,
-  last: undefined,
-  first: first || ITEMS_PER_PAGE[0]
-});
 
 const Search = ({ uri }) => (
   <Box p={6}>
@@ -205,7 +199,7 @@ const SearchByPersonDataForm = ({ initialValues, onSubmit }) => (
       const { number, type, ...documents } = identity;
       return onSubmit({
         ...params,
-        ...resetPaginationParams(initialValues.first),
+        ...resetPaginationParams(initialValues),
         filter: {
           identity: {
             type: number ? type : undefined,
