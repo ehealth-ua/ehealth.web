@@ -1,0 +1,7 @@
+mutation DeactivateINNMDosageMutation($input: DeactivateINNMDosageInput!) {
+  deactivateINNMDosage(input: $input) {
+    innmDosage {
+      id
+    }
+  }
+}

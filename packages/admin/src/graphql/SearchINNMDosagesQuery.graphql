@@ -1,14 +1,33 @@
 query SearchINNMDosagesQuery(
-  $first: Int
   $filter: INNMDosageFilter
+  $orderBy: INNMDosageOrderBy
+  $first: Int
+  $last: Int
+  $before: String
+  $after: String
   $skip: Boolean = false
 ) {
-  innmDosages(first: $first, filter: $filter) @skip(if: $skip) {
+  innmDosages(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) @skip(if: $skip) {
     nodes {
       id
       databaseId
       name
+      form
       isActive
+      insertedAt
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
     }
   }
 }

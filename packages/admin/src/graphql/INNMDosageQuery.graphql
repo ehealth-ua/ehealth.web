@@ -1,0 +1,27 @@
+query INNMDosageQuery($id: ID!) {
+  innmDosage(id: $id) {
+    id
+    databaseId
+    name
+    form
+    isActive
+    insertedAt
+    ingredients {
+      dosage {
+        numeratorUnit
+        numeratorValue
+        denumeratorUnit
+        denumeratorValue
+      }
+      isPrimary
+      innm {
+        id
+        databaseId
+        name
+        nameOriginal
+        insertedAt
+        sctid
+      }
+    }
+  }
+}

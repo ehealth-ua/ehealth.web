@@ -5,6 +5,7 @@ import { DateFormat, Trans } from "@lingui/macro";
 import STATUSES from "../helpers/statuses";
 import { RemoveItemIcon } from "@ehealth/icons";
 import isEmpty from "lodash/isEmpty";
+import DictionaryValue from "../components/DictionaryValue";
 import resetPaginationParams from "../helpers/resetPaginationParams";
 
 const SelectedFilters = ({ initialValues, onSubmit }) => {
@@ -13,6 +14,7 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
       legalEntityRelation,
       isSuspended,
       medicalProgram,
+      form,
       date: {
         startFrom,
         startTo,
@@ -150,6 +152,15 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
           <RemoveSelected
             reset={{ contractorLegalEntity: { name: undefined } }}
           />
+        </SelectedItem>
+      )}
+      {form && (
+        <SelectedItem mx={1}>
+          <Trans>Form</Trans>:
+          <Box ml={1}>
+            <DictionaryValue name="MEDICATION_UNIT" item={form} />
+          </Box>
+          <RemoveSelected reset={{ form: undefined }} />
         </SelectedItem>
       )}
     </Flex>

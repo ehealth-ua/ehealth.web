@@ -61,7 +61,7 @@ const ACTIVE_STATUS_F = {
   [false]: "Неактивна"
 };
 
-const ACTiVE_STATUS_M = {
+const ACTIVE_STATUS_M = {
   [true]: "Активний",
   [false]: "Неактивний"
 };
@@ -108,7 +108,7 @@ const STATUSES = {
   REIMBURSEMENT_TYPES,
   SUSPENDED,
   ACTIVE_STATUS_F,
-  ACTiVE_STATUS_M
+  ACTIVE_STATUS_M
 };
 
 export default STATUSES;

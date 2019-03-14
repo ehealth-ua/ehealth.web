@@ -24,6 +24,7 @@ import MedicalPrograms from "./pages/MedicalPrograms";
 import ProgramMedications from "./pages/ProgramMedications";
 import Dictionaries from "./pages/Dictionaries";
 import INNMs from "./pages/INNMs";
+import INNMDosages from "./pages/INNMDosages";
 import Medications from "./pages/Medications";
 
 import localeUK from "./locales/uk/messages.js";
@@ -53,6 +54,7 @@ const App = () => (
                 <PendingDeclarations path="pending-declarations/*" />
                 <LegalEntities path="legal-entities/*" />
                 <INNMs path="innms/*" />
+                <INNMDosages path="innm-dosages/*" />
                 <Medications path="medications/*" />
                 <MedicalPrograms path="medical-programs/*" />
                 <ProgramMedications path="program-medications/*" />
