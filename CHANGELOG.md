@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.61.0"></a>
+# [1.61.0](https://github.com/edenlabllc/ehealth.web/compare/v1.60.1...v1.61.0) (2019-03-14)
+
+
+### Features
+
+* **admin:** medication list ([1cc39b8](https://github.com/edenlabllc/ehealth.web/commit/1cc39b8))
+
+
+
+
+
 <a name="1.60.1"></a>
 ## [1.60.1](https://github.com/edenlabllc/ehealth.web/compare/v1.60.0...v1.60.1) (2019-03-14)
 
