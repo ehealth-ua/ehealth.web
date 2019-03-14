@@ -1,7 +1,9 @@
 import { ITEMS_PER_PAGE } from "../constants/pagination";
+import { convertStringToBoolean } from "@ehealth/utils";
 
 const filteredLocationParams = (params = {}, skip) => {
-  const { filter, first, last, before, after } = params;
+  const { filter = {}, first, last, before, after, orderBy } = params;
+  const { isActive, ...restFilters } = filter;
   return {
     ...skip,
     first:
@@ -9,7 +11,11 @@ const filteredLocationParams = (params = {}, skip) => {
     last: last ? parseInt(last) : undefined,
     before,
     after,
-    filter
+    orderBy,
+    filter: {
+      ...restFilters,
+      isActive: convertStringToBoolean(isActive)
+    }
   };
 };
 

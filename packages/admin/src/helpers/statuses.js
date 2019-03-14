@@ -56,6 +56,16 @@ const PROGRAM_MEDICATION_STATUS = {
   [false]: "Неактивний"
 };
 
+const ACTIVE_STATUS_F = {
+  [true]: "Активна",
+  [false]: "Неактивна"
+};
+
+const ACTiVE_STATUS_M = {
+  [true]: "Активний",
+  [false]: "Неактивний"
+};
+
 const MEDICATION_REQUEST_ALLOWED = {
   [true]: "Дозволено",
   [false]: "Не дозволено"
@@ -96,7 +106,9 @@ const STATUSES = {
   PROGRAM_MEDICATION_STATUS,
   MEDICATION_REQUEST_ALLOWED,
   REIMBURSEMENT_TYPES,
-  SUSPENDED
+  SUSPENDED,
+  ACTIVE_STATUS_F,
+  ACTiVE_STATUS_M
 };
 
 export default STATUSES;

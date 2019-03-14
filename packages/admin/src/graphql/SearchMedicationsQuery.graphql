@@ -1,14 +1,42 @@
 query SearchMedicationsQuery(
   $first: Int
+  $last: Int
+  $before: String
+  $after: String
   $filter: MedicationFilter
-  $skip: Boolean!
+  $orderBy: MedicationOrderBy
+  $skip: Boolean = false
 ) {
-  medications(first: $first, filter: $filter) @skip(if: $skip) {
+  medications(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) @skip(if: $skip) {
     nodes {
       id
       databaseId
       name
       isActive
+      ingredients {
+        isPrimary
+        innmDosage {
+          name
+        }
+      }
+      insertedAt
+      manufacturer {
+        country
+        name
+      }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
     }
   }
 }

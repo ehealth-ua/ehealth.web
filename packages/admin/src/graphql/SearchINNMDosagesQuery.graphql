@@ -1,7 +1,7 @@
 query SearchINNMDosagesQuery(
   $first: Int
   $filter: INNMDosageFilter
-  $skip: Boolean!
+  $skip: Boolean = false
 ) {
   innmDosages(first: $first, filter: $filter) @skip(if: $skip) {
     nodes {

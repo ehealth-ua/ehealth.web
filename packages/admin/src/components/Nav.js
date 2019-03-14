@@ -235,6 +235,11 @@ const Nav = () => (
                   <Trans>INNMs</Trans>
                 </NavLink>
               </Ability>
+              <Ability action="read" resource="medication">
+                <NavLink to="/medications">
+                  <Trans>Trade name</Trans>
+                </NavLink>
+              </Ability>
             </NavSection>
           </Ability>
         </Flag>
