@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.62.0"></a>
+# [1.62.0](https://github.com/edenlabllc/ehealth.web/compare/v1.61.0...v1.62.0) (2019-03-14)
+
+
+### Features
+
+* **admin:** add INNM Dosages List, Details and Deactivate INNM Dosage Mutation ([b176941](https://github.com/edenlabllc/ehealth.web/commit/b176941))
+
+
+
+
+
 <a name="1.61.0"></a>
 # [1.61.0](https://github.com/edenlabllc/ehealth.web/compare/v1.60.1...v1.61.0) (2019-03-14)
 
