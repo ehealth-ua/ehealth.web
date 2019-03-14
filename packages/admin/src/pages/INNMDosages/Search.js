@@ -9,11 +9,7 @@ import { Flex, Box, Heading } from "@rebass/emotion";
 
 import { SearchIcon } from "@ehealth/icons";
 import { LocationParams } from "@ehealth/components";
-import {
-  parseSortingParams,
-  stringifySortingParams,
-  convertStringToBoolean
-} from "@ehealth/utils";
+import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import Link from "../../components/Link";
 import Badge from "../../components/Badge";
 import Table from "../../components/Table";

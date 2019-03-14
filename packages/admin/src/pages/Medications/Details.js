@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import isEmpty from "lodash/isEmpty";
 import { loader } from "graphql.macro";
 import { Router } from "@reach/router";
@@ -11,98 +11,149 @@ import Line from "../../components/Line";
 import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
+import Popup from "../../components/Popup";
+import Button from "../../components/Button";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 
 const MedicationQuery = loader("../../graphql/MedicationQuery.graphql");
-
-const Details = ({ id }) => (
-  <Query query={MedicationQuery} variables={{ id }}>
-    {({ loading, error, data: { medication = {} } }) => {
-      if (isEmpty(medication)) return null;
-      const {
-        databaseId,
-        isActive,
-        name,
-        atcCodes,
-        packageMinQty,
-        packageQty,
-        form,
-        manufacturer,
-        certificate,
-        certificateExpiredAt,
-        ingredients
-      } = medication;
-      return (
-        <LoadingOverlay loading={loading}>
-          <Box p={6}>
-            <Box py={10}>
-              <Breadcrumbs.List>
-                <Breadcrumbs.Item to="/medications">
-                  <Trans>Medications</Trans>
-                </Breadcrumbs.Item>
-                <Breadcrumbs.Item>
-                  <Trans>Medication details</Trans>
-                </Breadcrumbs.Item>
-              </Breadcrumbs.List>
-            </Box>
-            <Flex justifyContent="space-between" alignItems="flex-end">
-              <Box>
-                <DefinitionListView
-                  labels={{
-                    databaseId: <Trans>ID</Trans>,
-                    name: <Trans>Name</Trans>,
-                    status: <Trans>Status</Trans>
-                  }}
-                  data={{
-                    databaseId,
-                    name,
-                    status: (
-                      <Badge
-                        name={isActive}
-                        type="ACTIVE_STATUS_F"
-                        variant={!isActive}
-                        minWidth={100}
-                      />
-                    )
-                  }}
-                  color="#7F8FA4"
-                  labelWidth="100px"
-                />
-              </Box>
-            </Flex>
-          </Box>
-
-          <Tabs.Nav>
-            <Tabs.NavItem to="./">
-              <Trans>General info</Trans>
-            </Tabs.NavItem>
-            <Tabs.NavItem to="./ingredients">
-              <Trans>Ingredients</Trans>
-            </Tabs.NavItem>
-          </Tabs.Nav>
-          <Tabs.Content>
-            <Router>
-              <GeneralInfo
-                path="/"
-                atcCodes={atcCodes}
-                packageMinQty={packageMinQty}
-                packageQty={packageQty}
-                form={form}
-                manufacturer={manufacturer}
-                certificate={certificate}
-                certificateExpiredAt={certificateExpiredAt}
-              />
-              <Ingredients path="/ingredients" data={ingredients} />
-            </Router>
-          </Tabs.Content>
-        </LoadingOverlay>
-      );
-    }}
-  </Query>
+const DeactivateMedication = loader(
+  "../../graphql/DeactivateMedicationMutation.graphql"
 );
+
+const Details = ({ id }) => {
+  const [isVisible, setVisibilityState] = useState(false);
+  const toggle = () => setVisibilityState(!isVisible);
+  return (
+    <Query query={MedicationQuery} variables={{ id }}>
+      {({ loading, error, data: { medication = {} } }) => {
+        if (isEmpty(medication)) return null;
+        const {
+          databaseId,
+          isActive,
+          name,
+          atcCodes,
+          packageMinQty,
+          packageQty,
+          form,
+          manufacturer,
+          certificate,
+          certificateExpiredAt,
+          ingredients
+        } = medication;
+        return (
+          <LoadingOverlay loading={loading}>
+            <Box p={6}>
+              <Box py={10}>
+                <Breadcrumbs.List>
+                  <Breadcrumbs.Item to="/medications">
+                    <Trans>Medications</Trans>
+                  </Breadcrumbs.Item>
+                  <Breadcrumbs.Item>
+                    <Trans>Medication details</Trans>
+                  </Breadcrumbs.Item>
+                </Breadcrumbs.List>
+              </Box>
+              <Flex justifyContent="space-between" alignItems="flex-end">
+                <Box>
+                  <DefinitionListView
+                    labels={{
+                      databaseId: <Trans>ID</Trans>,
+                      name: <Trans>Name</Trans>,
+                      status: <Trans>Status</Trans>
+                    }}
+                    data={{
+                      databaseId,
+                      name,
+                      status: (
+                        <Badge
+                          name={isActive}
+                          type="ACTIVE_STATUS_F"
+                          variant={!isActive}
+                          minWidth={100}
+                        />
+                      )
+                    }}
+                    color="#7F8FA4"
+                    labelWidth="100px"
+                  />
+                </Box>
+                {isActive && (
+                  <Box>
+                    <Mutation
+                      mutation={DeactivateMedication}
+                      refetchQueries={() => [
+                        {
+                          query: MedicationQuery,
+                          variables: { id }
+                        }
+                      ]}
+                    >
+                      {deactivateMedication => (
+                        <>
+                          <Button onClick={toggle} variant="red">
+                            <Trans>Deactivate</Trans>
+                          </Button>
+                          <Popup
+                            visible={isVisible}
+                            onCancel={toggle}
+                            title={
+                              <>
+                                <Trans>Deactivate</Trans> "{name}
+                                "?
+                              </>
+                            }
+                            okText={<Trans>Deactivate</Trans>}
+                            onOk={async () => {
+                              await deactivateMedication({
+                                variables: {
+                                  input: {
+                                    id
+                                  }
+                                }
+                              });
+                              toggle();
+                            }}
+                          />
+                        </>
+                      )}
+                    </Mutation>
+                  </Box>
+                )}
+              </Flex>
+            </Box>
+
+            <Tabs.Nav>
+              <Tabs.NavItem to="./">
+                <Trans>General info</Trans>
+              </Tabs.NavItem>
+              <Tabs.NavItem to="./ingredients">
+                <Trans>Ingredients</Trans>
+              </Tabs.NavItem>
+            </Tabs.Nav>
+            <Tabs.Content>
+              <Router>
+                <GeneralInfo
+                  path="/"
+                  atcCodes={atcCodes}
+                  packageMinQty={packageMinQty}
+                  packageQty={packageQty}
+                  form={form}
+                  manufacturer={manufacturer}
+                  certificate={certificate}
+                  certificateExpiredAt={certificateExpiredAt}
+                />
+                <Ingredients path="/ingredients" data={ingredients} />
+              </Router>
+            </Tabs.Content>
+          </LoadingOverlay>
+        );
+      }}
+    </Query>
+  );
+};
 
 const GeneralInfo = ({
   atcCodes = [],

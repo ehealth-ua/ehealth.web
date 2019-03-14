@@ -1,0 +1,7 @@
+mutation DeactivateMedication($input: DeactivateMedicationInput!) {
+  deactivateMedication(input: $input) {
+    medication {
+      id
+    }
+  }
+}
