@@ -1,0 +1,35 @@
+query MedicationQuery($id: ID) {
+  medication(id: $id) {
+    atcCodes
+    certificate
+    certificateExpiredAt
+    databaseId
+    form
+    id
+    ingredients {
+      dosage {
+        denumeratorUnit
+        denumeratorValue
+        numeratorUnit
+        numeratorValue
+      }
+      innmDosage {
+        id
+        databaseId
+        insertedAt
+        isActive
+        name
+        updatedAt
+      }
+      isPrimary
+    }
+    isActive
+    manufacturer {
+      country
+      name
+    }
+    name
+    packageMinQty
+    packageQty
+  }
+}
