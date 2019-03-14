@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.64.0"></a>
+# [1.64.0](https://github.com/edenlabllc/ehealth.web/compare/v1.63.0...v1.64.0) (2019-03-14)
+
+
+### Features
+
+* **admin:** deactivate medication ([#813](https://github.com/edenlabllc/ehealth.web/issues/813)) ([f4f7d72](https://github.com/edenlabllc/ehealth.web/commit/f4f7d72))
+
+
+
+
+
 <a name="1.63.0"></a>
 # [1.63.0](https://github.com/edenlabllc/ehealth.web/compare/v1.62.0...v1.63.0) (2019-03-14)
 
