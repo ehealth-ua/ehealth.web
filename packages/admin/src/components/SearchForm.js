@@ -1,29 +1,28 @@
 //@flow
 import * as React from "react";
 import { Form } from "@ehealth/components";
-import { ITEMS_PER_PAGE } from "../constants/pagination";
-import { BooleanValue } from "react-values";
 import { Box, Flex } from "@rebass/emotion";
 import Button, { IconButton } from "./Button";
-import { FilterIcon, RemoveItemIcon } from "@ehealth/icons";
+import { RemoveItemIcon } from "@ehealth/icons";
 import { Trans } from "@lingui/macro";
 import isEmpty from "lodash/isEmpty";
+import SelectedFilters from "./SelectedFilters";
+import SearchModalForm from "./SearchModalForm";
+import resetPaginationParams from "../helpers/resetPaginationParams";
 
 type SearchFormProps = {
   initialValues: Object,
   onSubmit: Object => void,
-  fields: React.ElementType,
-  modal?: React.ElementType,
-  selected?: React.ElementType,
+  renderPrimary: React.ElementType,
+  renderSecondary: React.ElementType,
   decorators?: Object => void
 };
 
 const SearchForm = ({
   initialValues,
   onSubmit,
-  fields: PrimarySearchFields,
-  modal: SearchModalForm,
-  selected: SelectedFilters,
+  renderPrimary: PrimarySearchFields,
+  renderSecondary: SecondarySearchFields,
   decorators
 }: SearchFormProps) => (
   <Form
@@ -31,53 +30,20 @@ const SearchForm = ({
     onSubmit={params =>
       onSubmit({
         ...params,
-        after: undefined,
-        before: undefined,
-        last: undefined,
-        first: initialValues.first || ITEMS_PER_PAGE[0]
+        ...resetPaginationParams(initialValues)
       })
     }
     decorators={decorators}
   >
     <PrimarySearchFields initialValues={initialValues} />
-    {SearchModalForm && (
-      <BooleanValue>
-        {({ value: opened, toggle }) => (
-          <>
-            {opened && (
-              <SearchModalForm
-                initialValues={initialValues}
-                onSubmit={onSubmit}
-                fields={PrimarySearchFields}
-                toggle={toggle}
-              />
-            )}
-            <Flex mb={4} alignItems="center">
-              <IconButton
-                variant="none"
-                border="none"
-                px={0}
-                py={0}
-                mr={2}
-                fontSize={1}
-                fontWeight="normal"
-                onClick={toggle}
-                type="button"
-                css={{ whiteSpace: "nowrap" }}
-                icon={FilterIcon}
-              >
-                <Trans>Show all filters</Trans>
-              </IconButton>
-              {SelectedFilters && (
-                <SelectedFilters
-                  initialValues={initialValues}
-                  onSubmit={onSubmit}
-                />
-              )}
-            </Flex>
-          </>
-        )}
-      </BooleanValue>
+    {SecondarySearchFields && (
+      <Flex mb={4} alignItems="center">
+        <SearchModalForm initialValues={initialValues} onSubmit={onSubmit}>
+          <PrimarySearchFields initialValues={initialValues} />
+          <SecondarySearchFields initialValues={initialValues} />
+        </SearchModalForm>
+        <SelectedFilters initialValues={initialValues} onSubmit={onSubmit} />
+      </Flex>
     )}
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
