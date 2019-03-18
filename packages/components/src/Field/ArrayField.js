@@ -13,6 +13,8 @@ const ArrayField = ({
   addText,
   disableAdd,
   disableRemove,
+  addButton: AddButton = AddLink,
+  removeButton: RemoveButtom = RemoveLink,
   children,
   render = children
 }) => (
@@ -24,29 +26,34 @@ const ArrayField = ({
             <Item key={name}>
               {render({ name, index })}
               {disableRemove || (
-                <RemoveLink
+                <RemoveButtom
                   icon={<RemoveIcon />}
+                  index={index}
                   onClick={() => fields.remove(index)}
                 />
               )}
             </Item>
           ))}
           {disableAdd || (
-            <Link
-              icon={<AddIcon />}
-              onClick={() => fields.push()}
-              size="xs"
-              iconReverse
-              upperCase
-              bold
-            >
-              {addText}
-            </Link>
+            <AddButton addText={addText} onClick={() => fields.push()} />
           )}
         </>
       )}
     </FieldArray>
   </FieldView>
+);
+
+const AddLink = ({ onClick, addText }) => (
+  <Link
+    icon={<AddIcon />}
+    onClick={onClick}
+    size="xs"
+    iconReverse
+    upperCase
+    bold
+  >
+    {addText}
+  </Link>
 );
 
 export default ArrayField;

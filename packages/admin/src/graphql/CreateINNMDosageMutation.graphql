@@ -1,0 +1,7 @@
+mutation CreateINNMDosageMutation($input: CreateINNMDosageInput!) {
+  createInnmDosage(input: $input) {
+    innmDosage {
+      id
+    }
+  }
+}
