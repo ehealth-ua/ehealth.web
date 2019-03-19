@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.65.1"></a>
+## [1.65.1](https://github.com/edenlabllc/ehealth.web/compare/v1.65.0...v1.65.1) (2019-03-19)
+
+
+### Bug Fixes
+
+* **admin:** show error message if there is one ([#825](https://github.com/edenlabllc/ehealth.web/issues/825)) ([f4d1220](https://github.com/edenlabllc/ehealth.web/commit/f4d1220))
+
+
+
+
+
 <a name="1.65.0"></a>
 # [1.65.0](https://github.com/edenlabllc/ehealth.web/compare/v1.64.0...v1.65.0) (2019-03-18)
 
