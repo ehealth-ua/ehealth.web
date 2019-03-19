@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.66.0"></a>
+# [1.66.0](https://github.com/edenlabllc/ehealth.web/compare/v1.65.1...v1.66.0) (2019-03-19)
+
+
+### Features
+
+* **admin:** add INNM Dosages category to the Nav ([#816](https://github.com/edenlabllc/ehealth.web/issues/816)) ([336e327](https://github.com/edenlabllc/ehealth.web/commit/336e327))
+
+
+
+
+
 <a name="1.65.1"></a>
 ## [1.65.1](https://github.com/edenlabllc/ehealth.web/compare/v1.65.0...v1.65.1) (2019-03-19)
 
