@@ -226,13 +226,18 @@ const Nav = () => (
         <Flag name="features.medications">
           <Ability
             action="read"
-            resources={["innm", "innm_dosage", "medications"]}
+            resources={["innm", "innm_dosage", "medication"]}
             loose
           >
             <NavSection title={<Trans>Medications</Trans>}>
               <Ability action="read" resource="innm">
                 <NavLink to="/innms">
                   <Trans>INNMs</Trans>
+                </NavLink>
+              </Ability>
+              <Ability action="read" resource="innm_dosage">
+                <NavLink to="/innm-dosages">
+                  <Trans>INNM dosages</Trans>
                 </NavLink>
               </Ability>
               <Ability action="read" resource="medication">
