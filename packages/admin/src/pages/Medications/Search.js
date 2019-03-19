@@ -10,6 +10,7 @@ import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 
 import Badge from "../../components/Badge";
 import Table from "../../components/Table";
+import Button from "../../components/Button";
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import SearchForm from "../../components/SearchForm";
@@ -27,7 +28,7 @@ const SearchINNMDosagesQuery = loader(
   "../../graphql/SearchINNMDosagesQuery.graphql"
 );
 
-const Search = () => (
+const Search = ({ navigate }) => (
   <Box p={6}>
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
@@ -39,6 +40,11 @@ const Search = () => (
                 <Heading as="h1" fontWeight="normal" mb={4}>
                   <Trans>Medications</Trans>
                 </Heading>
+              </Box>
+              <Box>
+                <Button onClick={() => navigate("../create")} variant="green">
+                  <Trans>Create medication</Trans>
+                </Button>
               </Box>
             </Flex>
             <SearchForm
