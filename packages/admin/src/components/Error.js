@@ -36,10 +36,9 @@ const Error = ({ error, blocking, onClose }) => {
           undefined
         ].includes(code) && (
           <ErrorDetails>
-            {code === "CONFLICT" && <Description>{error.message}</Description>}
-            {code === "FORBIDDEN" && (
+            {code && (
               <Description>
-                {error.extensions.exception ? (
+                {code === "FORBIDDEN" && error.extensions.exception ? (
                   <>
                     Відсутній дозвіл на наступні дії:
                     <ul>
