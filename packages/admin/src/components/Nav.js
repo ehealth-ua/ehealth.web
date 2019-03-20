@@ -62,12 +62,6 @@ const Nav = () => (
             </NavSection>
           </Ability>
 
-          <Ability action="read" resource="legal_entity">
-            <NavLinkExternal to="clinics-verification">
-              <Trans>Clinics verification</Trans>
-            </NavLinkExternal>
-          </Ability>
-
           <NavLinkExternal to="reports">
             <Trans>Reports</Trans>
           </NavLinkExternal>
@@ -186,12 +180,6 @@ const Nav = () => (
                 </NavLinkExternal>
               </Ability>
             </NavSection>
-          </Ability>
-
-          <Ability action="reset_authentication_method" resource="person">
-            <NavLinkExternal to="reset-authentication-method">
-              <Trans>Reset authentication method</Trans>
-            </NavLinkExternal>
           </Ability>
         </Flag>
 
