@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.67.0"></a>
+# [1.67.0](https://github.com/edenlabllc/ehealth.web/compare/v1.66.0...v1.67.0) (2019-03-20)
+
+
+### Features
+
+* **admin:** add Create Medication page, move ArrayField to the separate component ([0ffd193](https://github.com/edenlabllc/ehealth.web/commit/0ffd193))
+
+
+
+
+
 <a name="1.66.0"></a>
 # [1.66.0](https://github.com/edenlabllc/ehealth.web/compare/v1.65.1...v1.66.0) (2019-03-19)
 
