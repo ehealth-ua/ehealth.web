@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.70.0"></a>
+# [1.70.0](https://github.com/edenlabllc/ehealth.web/compare/v1.69.0...v1.70.0) (2019-03-20)
+
+
+### Features
+
+* **admin:** change texts on auth ([#834](https://github.com/edenlabllc/ehealth.web/issues/834)) ([f4e7142](https://github.com/edenlabllc/ehealth.web/commit/f4e7142))
+
+
+
+
+
 <a name="1.65.0"></a>
 # [1.65.0](https://github.com/edenlabllc/ehealth.web/compare/v1.64.0...v1.65.0) (2019-03-18)
 
