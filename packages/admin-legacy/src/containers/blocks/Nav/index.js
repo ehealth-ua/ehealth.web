@@ -112,17 +112,6 @@ class Nav extends React.Component {
                 </ShowMore>
               </li>
             </ShowWithScope>
-            <ShowWithScope scope="legal_entity:read">
-              <NavItem
-                to="clinics-verification"
-                activeClassName={styles.active}
-              >
-                <Link id="clinics-nav" to="/clinics-verification">
-                  Підтвердження
-                  <br /> медзакладів
-                </Link>
-              </NavItem>
-            </ShowWithScope>
             <NavItem to="reports" activeClassName={styles.active}>
               <Link id="reports-nav" to="/reports">
                 Звіти
@@ -316,21 +305,6 @@ class Nav extends React.Component {
                   </ul>
                 </ShowMore>
               </li>
-            </ShowWithScope>
-            <ShowWithScope scope="person:reset_authentication_method">
-              <NavItem
-                to="reset-authentication-method"
-                activeClassName={styles.active}
-              >
-                <Link
-                  id="reset-authentication-method-nav"
-                  to="/reset-authentication-method"
-                >
-                  Скинути метод
-                  <br />
-                  авторизації
-                </Link>
-              </NavItem>
             </ShowWithScope>
             <ShowWithScope scope={["contract:read", "contract_request:read"]}>
               <li>
