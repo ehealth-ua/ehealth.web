@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.69.0"></a>
+# [1.69.0](https://github.com/edenlabllc/ehealth.web/compare/v1.68.0...v1.69.0) (2019-03-20)
+
+
+### Features
+
+* **admin:** add Employees Search page ([b41d60b](https://github.com/edenlabllc/ehealth.web/commit/b41d60b))
+* **admin:** add medications and employees flags to the Legacy, update Navs with fallbackRender in Admin and Legacy ([18dd241](https://github.com/edenlabllc/ehealth.web/commit/18dd241))
+
+
+
+
+
 <a name="1.68.0"></a>
 # [1.68.0](https://github.com/edenlabllc/ehealth.web/compare/v1.67.0...v1.68.0) (2019-03-20)
 
