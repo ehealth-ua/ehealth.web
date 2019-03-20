@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.68.0"></a>
+# [1.68.0](https://github.com/edenlabllc/ehealth.web/compare/v1.67.0...v1.68.0) (2019-03-20)
+
+
+### Features
+
+* **admin-legacy:** remove useless links from navigation ([7484d14](https://github.com/edenlabllc/ehealth.web/commit/7484d14))
+
+
+
+
+
 <a name="1.65.0"></a>
 # [1.65.0](https://github.com/edenlabllc/ehealth.web/compare/v1.64.0...v1.65.0) (2019-03-18)
 

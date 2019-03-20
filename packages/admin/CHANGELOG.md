@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.68.0"></a>
+# [1.68.0](https://github.com/edenlabllc/ehealth.web/compare/v1.67.0...v1.68.0) (2019-03-20)
+
+
+### Bug Fixes
+
+* **admin:** add statusReason in reimbursement contract request ([2d3a928](https://github.com/edenlabllc/ehealth.web/commit/2d3a928))
+
+
+### Features
+
+* **admin:** remove useless links from navigation ([31cd65e](https://github.com/edenlabllc/ehealth.web/commit/31cd65e))
+
+
+
+
+
 <a name="1.67.0"></a>
 # [1.67.0](https://github.com/edenlabllc/ehealth.web/compare/v1.66.0...v1.67.0) (2019-03-20)
 
