@@ -325,15 +325,19 @@ const GeneralInfo = ({
         )
       }}
     />
-    {statusReason && <Line />}
-    <DefinitionListView
-      labels={{
-        statusReason: <Trans>Status Comment</Trans>
-      }}
-      data={{
-        statusReason
-      }}
-    />
+    {statusReason && (
+      <>
+        <Line />
+        <DefinitionListView
+          labels={{
+            statusReason: <Trans>Status Comment</Trans>
+          }}
+          data={{
+            statusReason
+          }}
+        />
+      </>
+    )}
   </Box>
 );
 

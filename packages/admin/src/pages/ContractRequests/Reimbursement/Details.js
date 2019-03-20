@@ -67,7 +67,8 @@ const Details = ({ id }) => (
         contractorDivisions,
         attachedDocuments,
         previousRequest,
-        medicalProgram
+        medicalProgram,
+        statusReason
       } = reimbursementContractRequest;
       const { party = "" } = assignee ? assignee : {};
       return (
@@ -200,6 +201,7 @@ const Details = ({ id }) => (
                 nhsPaymentMethod={nhsPaymentMethod}
                 issueCity={issueCity}
                 medicalProgram={medicalProgram}
+                statusReason={statusReason}
               />
               <LegalEntity
                 path="/legal-entity"
@@ -231,7 +233,8 @@ const GeneralInfo = ({
   issueCity,
   startDate,
   endDate,
-  medicalProgram
+  medicalProgram,
+  statusReason
 }) => (
   <Box p={5}>
     <DefinitionListView
@@ -282,6 +285,19 @@ const GeneralInfo = ({
           }}
           data={{
             name: medicalProgram.databaseId
+          }}
+        />
+      </>
+    )}
+    {statusReason && (
+      <>
+        <Line />
+        <DefinitionListView
+          labels={{
+            statusReason: <Trans>Status Comment</Trans>
+          }}
+          data={{
+            statusReason
           }}
         />
       </>
