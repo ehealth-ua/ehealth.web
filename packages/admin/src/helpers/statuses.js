@@ -71,6 +71,11 @@ const MEDICATION_REQUEST_ALLOWED = {
   [false]: "Не дозволено"
 };
 
+const NO_TAX_ID = {
+  [true]: "ІПН відсутній",
+  [false]: "З ІПН"
+};
+
 const MERGE_LEGAL_ENTITIES_JOBS = {
   FAILED: "Помилка",
   FAILED_WITH_ERROR: "Помилка системи",
@@ -108,7 +113,8 @@ const STATUSES = {
   REIMBURSEMENT_TYPES,
   SUSPENDED,
   ACTIVE_STATUS_F,
-  ACTIVE_STATUS_M
+  ACTIVE_STATUS_M,
+  NO_TAX_ID
 };
 
 export default STATUSES;

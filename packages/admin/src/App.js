@@ -26,6 +26,7 @@ import Dictionaries from "./pages/Dictionaries";
 import INNMs from "./pages/INNMs";
 import INNMDosages from "./pages/INNMDosages";
 import Medications from "./pages/Medications";
+import Employees from "./pages/Employees";
 
 import localeUK from "./locales/uk/messages.js";
 
@@ -56,6 +57,7 @@ const App = () => (
                 <INNMs path="innms/*" />
                 <INNMDosages path="innm-dosages/*" />
                 <Medications path="medications/*" />
+                <Employees path="employees/*" />
                 <MedicalPrograms path="medical-programs/*" />
                 <ProgramMedications path="program-medications/*" />
                 <Dictionaries path="dictionaries/*" />

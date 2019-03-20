@@ -291,6 +291,18 @@ const Nav = () => (
           </Ability>
         </Flag>
 
+        <Flag name="features.patientsMergeRequest">
+          <Ability action="read" resource="employee">
+            <NavSection title={<Trans>Employees</Trans>}>
+              <Ability action="read" resource="employee">
+                <NavLink to="/employees">
+                  <Trans>Employees</Trans>
+                </NavLink>
+              </Ability>
+            </NavSection>
+          </Ability>
+        </Flag>
+
         <Flag name="features.dictionaries">
           <NavLink to="/dictionaries">
             <Trans>Dictionaries</Trans>

@@ -3,7 +3,7 @@ import { convertStringToBoolean } from "@ehealth/utils";
 
 const filteredLocationParams = (params = {}, skip) => {
   const { filter = {}, first, last, before, after, orderBy } = params;
-  const { isActive, ...restFilters } = filter;
+  const { isActive, noTaxId, ...restFilters } = filter;
   return {
     ...skip,
     first:
@@ -14,7 +14,8 @@ const filteredLocationParams = (params = {}, skip) => {
     orderBy,
     filter: {
       ...restFilters,
-      isActive: convertStringToBoolean(isActive)
+      isActive: convertStringToBoolean(isActive),
+      noTaxId: convertStringToBoolean(noTaxId)
     }
   };
 };

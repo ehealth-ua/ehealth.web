@@ -5,6 +5,7 @@ query SearchLegalEntitiesQuery(
   $after: String
   $first: Int
   $last: Int
+  $skip: Boolean = false
 ) {
   legalEntities(
     first: $first
@@ -13,7 +14,7 @@ query SearchLegalEntitiesQuery(
     before: $before
     after: $after
     last: $last
-  ) {
+  ) @skip(if: $skip) {
     nodes {
       id
       databaseId

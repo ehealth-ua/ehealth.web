@@ -1,0 +1,56 @@
+query SearchEmployeesQuery(
+  $filter: EmployeeFilter
+  $orderBy: EmployeeOrderBy
+  $first: Int
+  $last: Int
+  $before: String
+  $after: String
+) {
+  employees(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
+    nodes {
+      id
+      databaseId
+      position
+      startDate
+      endDate
+      status
+      employeeType
+      isActive
+      party {
+        id
+        firstName
+        secondName
+        lastName
+      }
+      additionalInfo {
+        specialities {
+          speciality
+          specialityOfficio
+        }
+      }
+      division {
+        id
+        databaseId
+        name
+      }
+      legalEntity {
+        id
+        databaseId
+        name
+      }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+  }
+}
