@@ -29,7 +29,9 @@ const SignInPage = ({
 }) => (
   <Main id="sign-in-page">
     <Header>
-      <H1>Вхід у систему eHealth</H1>
+      <H1>
+        ВХІД У ЕЛЕКТРОННУ СИСТЕМУ <br /> ОХОРОНИ ЗДОРОВ’Я
+      </H1>
     </Header>
     <Article>
       {!client_id && <p>Не вказано адресу зворотнього визову</p>}

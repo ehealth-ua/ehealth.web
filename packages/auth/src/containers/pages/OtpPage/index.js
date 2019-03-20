@@ -18,7 +18,9 @@ const OtpPage = ({
 }) => (
   <section className={styles.main} id="otp-page">
     <header className={styles.header}>
-      <H1>Вхід у систему eHealth</H1>
+      <H1>
+        ВХІД У ЕЛЕКТРОННУ СИСТЕМУ <br /> ОХОРОНИ ЗДОРОВ’Я
+      </H1>
     </header>
     <article className={styles.form}>
       <OtpForm onSubmit={onSubmit} onResend={onResend} repeat />
@@ -29,6 +31,10 @@ const OtpPage = ({
   </section>
 );
 
-export default compose(withRouter, connect(null, { onSubmit, onResend }))(
-  OtpPage
-);
+export default compose(
+  withRouter,
+  connect(
+    null,
+    { onSubmit, onResend }
+  )
+)(OtpPage);

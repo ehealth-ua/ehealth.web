@@ -7,7 +7,7 @@ const InviteAcceptForm = ({ onSubmit }) => (
   <Form className={styles.main} onSubmit={onSubmit}>
     <div>
       <Field.Checkbox
-        label="Погоджуюсь з Регламентом функціонування системи eHealth"
+        label="Зобов'язуюсь дотримуватись положень цього Порядку"
         name="confirm"
       />
       <Validation.Required field="confirm" message="Об'язкове поле" />

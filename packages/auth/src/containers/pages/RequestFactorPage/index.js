@@ -15,7 +15,9 @@ import { onSubmit } from "./redux";
 const RequestFactorPage = ({ onSubmit = () => {} }) => (
   <Main id="change-otp-page">
     <Header>
-      <H1>Вхід у систему eHealth</H1>
+      <H1>
+        ВХІД У ЕЛЕКТРОННУ СИСТЕМУ <br /> ОХОРОНИ ЗДОРОВ’Я
+      </H1>
     </Header>
     <Article>
       <NarrowContainer>
@@ -27,4 +29,7 @@ const RequestFactorPage = ({ onSubmit = () => {} }) => (
   </Main>
 );
 
-export default connect(null, { onSubmit })(RequestFactorPage);
+export default connect(
+  null,
+  { onSubmit }
+)(RequestFactorPage);

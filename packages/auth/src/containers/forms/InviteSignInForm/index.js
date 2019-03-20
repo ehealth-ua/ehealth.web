@@ -11,7 +11,9 @@ import styles from "./styles.module.css";
 const InviteSignInForm = ({ handleSubmit, submitting, email }) => (
   <form className={styles.main} onSubmit={handleSubmit}>
     <div>
-      <H1>Вхід у систему eHealth</H1>
+      <H1>
+        ВХІД У ЕЛЕКТРОННУ СИСТЕМУ <br /> ОХОРОНИ ЗДОРОВ’Я
+      </H1>
     </div>
     <div>{email}</div>
     <div className={styles.input}>

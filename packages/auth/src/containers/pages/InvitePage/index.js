@@ -179,7 +179,7 @@ class InvitePage extends Component {
 
     return (
       <div className={styles.details__body}>
-        <div className={styles.details__title}>Персональная інформація</div>
+        <div className={styles.details__title}>Персональні дані</div>
         <div className={styles.details__block}>
           <p>
             {party.first_name} {party.second_name} {party.last_name}
@@ -256,13 +256,13 @@ class InvitePage extends Component {
         <Article>
           <NarrowContainer>
             <div className={styles.description}>
-              Я, {party.first_name} {party.second_name} {party.last_name},{" "}
-              {format(party.birth_date, "DD.MM.YYYY")} р.н.
+              Я, {party.first_name} {party.second_name} {party.last_name}, дата
+              народження {format(party.birth_date, "DD.MM.YYYY")}
             </div>
 
             <div className={styles.accept}>
-              даю згоду на реєстрацію мене в системі eHealth
-              <br />у ролі "
+              даю згоду на реєстрацію мене в Електронній системі охорони
+              здоров’я <br />у ролі "
               <DictionaryValue dictionary="POSITION" value={position} />"<br />
               {legal_entity.name}
             </div>
@@ -274,7 +274,9 @@ class InvitePage extends Component {
                   inheritFontSize
                 >
                   <span className={styles.details__header__title}>
-                    {this.state.showDetails ? "Сховати деталі" : "Детальніше"}
+                    {this.state.showDetails
+                      ? "Сховати деталі"
+                      : "Деталі про персональні дані"}
                     <span className={styles.details__header__arrow}>
                       <Icon
                         name={

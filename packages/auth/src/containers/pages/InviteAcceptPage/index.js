@@ -14,20 +14,20 @@ import styles from "./styles.module.css";
 const SignUpStep2Page = ({ onSubmit, onReject, request: { id } }) => (
   <section className={styles.main} id="sign-up-page">
     <header className={styles.header}>
-      <H1>Прийняття Регламенту</H1>
+      <H1>ПОРЯДОК РОБОТИ СИСТЕМ</H1>
 
       <Points count={2} active={1} />
     </header>
     <article className={styles.content}>
       <p>
-        Приймаючи запрошення на роботу в системі eHealth ви також <br />
-        погоджуєтесь з положеннями{" "}
+        Приймаючи запрошення на роботу в Електронній системі охорони здоров’я я
+        підтверджую, що ознайомився з <br />
         <a
           rel="noopener noreferrer"
           target="__blank"
-          href="https://ti-ukraine.org/publication/rehlament-funktsionuvannia-pilotnoho-proektu-elektronnoi-systemy-okhorony-zdorov-ia/"
+          href="https://zakon.rada.gov.ua/laws/show/411-2018-%D0%BF"
         >
-          Регламенту функціонування системи
+          Порядком функціонування Електронної системи охорони здоров’я
         </a>
       </p>
 
