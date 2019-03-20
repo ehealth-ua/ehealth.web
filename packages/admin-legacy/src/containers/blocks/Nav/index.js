@@ -152,41 +152,49 @@ class Nav extends React.Component {
                 </Link>
               </NavItem>
             </ShowWithScope>
-            <ShowWithScope
-              scope={["innm:read", "innm_dosage:read", "medication:read"]}
-            >
-              <li>
-                <ShowMore nav name="Медикаменти">
-                  <ul>
-                    <ShowWithScope scope="innm:read">
-                      <NavItem to="innms" activeClassName={styles.active}>
-                        <Link id="innms-nav" to="/innms">
-                          МНН
-                        </Link>
-                      </NavItem>
-                    </ShowWithScope>
-                    <ShowWithScope scope="innm_dosage:read">
-                      <NavItem
-                        to="innm-dosages"
-                        activeClassName={styles.active}
-                      >
-                        <Link id="innm-dosages-nav" to="/innm-dosages">
-                          Лікарська форма
-                        </Link>
-                      </NavItem>
-                    </ShowWithScope>
-                    <ShowWithScope scope="medication:read">
-                      <NavItem to="medications" activeClassName={styles.active}>
-                        <Link id="medications-nav" to="/medications">
-                          Торгівельне <br /> найменування
-                        </Link>
-                      </NavItem>
-                    </ShowWithScope>
-                  </ul>
-                </ShowMore>
-              </li>
-            </ShowWithScope>
 
+            <Flag
+              name="features.medications"
+              fallbackRender={() => (
+                <ShowWithScope
+                  scope={["innm:read", "innm_dosage:read", "medication:read"]}
+                >
+                  <li>
+                    <ShowMore nav name="Медикаменти">
+                      <ul>
+                        <ShowWithScope scope="innm:read">
+                          <NavItem to="innms" activeClassName={styles.active}>
+                            <Link id="innms-nav" to="/innms">
+                              МНН
+                            </Link>
+                          </NavItem>
+                        </ShowWithScope>
+                        <ShowWithScope scope="innm_dosage:read">
+                          <NavItem
+                            to="innm-dosages"
+                            activeClassName={styles.active}
+                          >
+                            <Link id="innm-dosages-nav" to="/innm-dosages">
+                              Лікарська форма
+                            </Link>
+                          </NavItem>
+                        </ShowWithScope>
+                        <ShowWithScope scope="medication:read">
+                          <NavItem
+                            to="medications"
+                            activeClassName={styles.active}
+                          >
+                            <Link id="medications-nav" to="/medications">
+                              Торгівельне <br /> найменування
+                            </Link>
+                          </NavItem>
+                        </ShowWithScope>
+                      </ul>
+                    </ShowMore>
+                  </li>
+                </ShowWithScope>
+              )}
+            />
             <Flag
               name="features.medicalPrograms"
               fallbackRender={() => (
@@ -366,6 +374,59 @@ class Nav extends React.Component {
                 </ExternalLink>
               </NavItem>
             </ShowWithScope>
+
+            <Flag name="features.medications">
+              <ShowWithScope
+                scope={["innm:read", "innm_dosage:read", "medication:read"]}
+              >
+                <li>
+                  <ShowMore nav name="Медикаменти">
+                    <ul>
+                      <ShowWithScope scope="innm:read">
+                        <NavItem to="innms" activeClassName={styles.active}>
+                          <ExternalLink
+                            id="innms-nav"
+                            href={`${env.REACT_APP_ADMIN_URL}/innms/search`}
+                          >
+                            МНН
+                          </ExternalLink>
+                        </NavItem>
+                      </ShowWithScope>
+                      <ShowWithScope scope="innm_dosage:read">
+                        <NavItem
+                          to="innm-dosages"
+                          activeClassName={styles.active}
+                        >
+                          <Link
+                            id="innm-dosages-nav"
+                            href={`${
+                              env.REACT_APP_ADMIN_URL
+                            }/innm-dosages/search`}
+                          >
+                            Лікарська форма
+                          </Link>
+                        </NavItem>
+                      </ShowWithScope>
+                      <ShowWithScope scope="medication:read">
+                        <NavItem
+                          to="medications"
+                          activeClassName={styles.active}
+                        >
+                          <Link
+                            id="medications-nav"
+                            href={`${
+                              env.REACT_APP_ADMIN_URL
+                            }/medications/search`}
+                          >
+                            Торгівельне <br /> найменування
+                          </Link>
+                        </NavItem>
+                      </ShowWithScope>
+                    </ul>
+                  </ShowMore>
+                </li>
+              </ShowWithScope>
+            </Flag>
 
             <Flag name="features.medicalPrograms">
               <ShowWithScope

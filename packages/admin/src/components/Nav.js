@@ -91,29 +91,34 @@ const Nav = () => (
             </NavLinkExternal>
           </Ability>
 
-          <Ability
-            action="read"
-            resources={["innm", "innm_dosage", "medication"]}
-            loose
-          >
-            <NavSection title={<Trans>Medicines</Trans>}>
-              <Ability action="read" resource="innm">
-                <NavLinkExternal to="innms">
-                  <Trans>Innm</Trans>
-                </NavLinkExternal>
+          <Flag
+            name="features.medications"
+            fallbackRender={() => (
+              <Ability
+                action="read"
+                resources={["innm", "innm_dosage", "medication"]}
+                loose
+              >
+                <NavSection title={<Trans>Medicines</Trans>}>
+                  <Ability action="read" resource="innm">
+                    <NavLinkExternal to="innms">
+                      <Trans>Innm</Trans>
+                    </NavLinkExternal>
+                  </Ability>
+                  <Ability action="read" resource="innm_dosage">
+                    <NavLinkExternal to="innm-dosages">
+                      <Trans>Innm dosage</Trans>
+                    </NavLinkExternal>
+                  </Ability>
+                  <Ability action="read" resource="medication">
+                    <NavLinkExternal to="medications">
+                      <Trans>Trade name</Trans>
+                    </NavLinkExternal>
+                  </Ability>
+                </NavSection>
               </Ability>
-              <Ability action="read" resource="innm_dosage">
-                <NavLinkExternal to="innm-dosages">
-                  <Trans>Innm dosage</Trans>
-                </NavLinkExternal>
-              </Ability>
-              <Ability action="read" resource="medication">
-                <NavLinkExternal to="medications">
-                  <Trans>Trade name</Trans>
-                </NavLinkExternal>
-              </Ability>
-            </NavSection>
-          </Ability>
+            )}
+          />
 
           <Flag
             name="features.medicalPrograms"
