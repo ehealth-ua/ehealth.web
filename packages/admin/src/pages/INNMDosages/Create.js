@@ -9,11 +9,7 @@ import { Router } from "@reach/router";
 import { Query, Mutation } from "react-apollo";
 import system from "@ehealth/system-components";
 import { Heading, Flex, Box, Text } from "@rebass/emotion";
-import {
-  Field as AdditionalField,
-  Form,
-  Validation
-} from "@ehealth/components";
+import { Form, Validation, Validations } from "@ehealth/components";
 import { DropDownButton as PlusIcon } from "@ehealth/icons";
 
 import Line from "../../components/Line";
@@ -120,33 +116,13 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
           </Box>
         </Flex>
         <Line />
-        <AdditionalField.Array
+        <Field.Array
           name="ingredients"
           addText={<Trans>Add additional ingredient</Trans>}
-          addButton={({ onClick, addText }) => (
-            <AddButton onClick={onClick}>
-              <Flex>
-                <Box mr={2}>
-                  <PlusIcon width={16} height={16} />
-                </Box>
-                {addText}
-              </Flex>
-            </AddButton>
-          )}
-          removeButton={({ onClick, index }) => (
-            <>
-              {index ? (
-                <Button type="reset" variant="red" onClick={onClick}>
-                  <Trans>Delete</Trans>
-                </Button>
-              ) : null}
-              <Line />
-            </>
-          )}
-        >
-          {({ name, index }) => <Ingredients name={name} index={index} />}
-        </AdditionalField.Array>
-        <Flex>
+          removeText={<Trans>Delete</Trans>}
+          fields={Ingredients}
+        />
+        <Flex mb={100}>
           <Box mr={3}>
             <Button
               type="reset"
@@ -186,32 +162,49 @@ const Ingredients = ({ name, index }) => (
             data: { innms: { nodes: innms = [] } = {} } = {},
             refetch: refetchINNMs
           }) => (
-            <I18n>
-              {({ i18n }) => (
-                <Field.Select
-                  name={`${name}.innm`}
-                  label={<Trans>Ingredient name</Trans>}
-                  placeholder={i18n._(t`Enter ingredient name`)}
-                  items={innms.map(({ id, name }) => ({ innmId: id, name }))}
-                  itemToString={item => item && item.name}
-                  filter={innms => innms}
-                  onInputValueChange={debounce(
-                    (name, { selectedItem, inputValue }) =>
-                      !isEmpty(name) &&
-                      (selectedItem && selectedItem.name) !== inputValue &&
-                      refetchINNMs({
-                        skip: false,
-                        first: 20,
-                        filter: { name, isActive: true }
-                      }),
-                    1000
-                  )}
+            <>
+              <I18n>
+                {({ i18n }) => (
+                  <Field.Select
+                    name={`${name}.innm`}
+                    label={<Trans>Ingredient name</Trans>}
+                    placeholder={i18n._(t`Enter ingredient name`)}
+                    items={innms.map(({ id, name }) => ({ innmId: id, name }))}
+                    itemToString={item => item && item.name}
+                    filter={innms => innms}
+                    onInputValueChange={debounce(
+                      (name, { selectedItem, inputValue }) =>
+                        !isEmpty(name) &&
+                        (selectedItem && selectedItem.name) !== inputValue &&
+                        refetchINNMs({
+                          skip: false,
+                          first: 20,
+                          filter: { name, isActive: true }
+                        }),
+                      1000
+                    )}
+                  />
+                )}
+              </I18n>
+              <Validations field={`${name}.innm`}>
+                <Validation.Required message="Required field" />
+                <Validation.Custom
+                  options={({ value, allValues: { ingredients } }) => {
+                    const filteredIngredients = ingredients.filter(
+                      ({ innm } = {}) => {
+                        const { innmId: allValuesId } = innm || {};
+                        const { innmId: valueId } = value || {};
+                        return valueId === allValuesId;
+                      }
+                    );
+                    return filteredIngredients.length === 1;
+                  }}
+                  message="This ingredient is used more than once"
                 />
-              )}
-            </I18n>
+              </Validations>
+            </>
           )}
         </Query>
-        <Validation.Required field={`${name}.innm`} message="Required field" />
       </Box>
       <Box px={1} width={1.5 / 7}>
         <Field.Number

@@ -46,7 +46,8 @@ const CUSTOM_VALIDATORS = {
       !value || (!isNaN(date) && new Date(date).toISOString().startsWith(value))
     );
   },
-  IsExists: (value, ...options) => !options.includes(value)
+  IsExists: (value, ...options) => !options.includes(value),
+  Custom: (value, resultFromOptions) => resultFromOptions
 };
 
 const PREDEFINED_VALIDATORS = { ...VENDOR_VALIDATORS, ...CUSTOM_VALIDATORS };
