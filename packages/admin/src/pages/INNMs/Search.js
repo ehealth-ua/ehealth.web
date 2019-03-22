@@ -6,18 +6,28 @@ import { SearchIcon } from "@ehealth/icons";
 import { Query, Mutation } from "react-apollo";
 import { Trans, DateFormat } from "@lingui/macro";
 import { Flex, Box, Heading } from "@rebass/emotion";
-import { Form, LocationParams, Validation } from "@ehealth/components";
+import {
+  Form,
+  LocationParams,
+  Validation,
+  Validations
+} from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 
 import Badge from "../../components/Badge";
 import Popup from "../../components/Popup";
 import Table from "../../components/Table";
 import Button from "../../components/Button";
+import Ability from "../../components/Ability";
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import SearchForm from "../../components/SearchForm";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import filteredLocationParams from "../../helpers/filteredLocationParams";
+import {
+  INNM_PATTERN,
+  INNM_ORIGINAL_NAME_PATTERN
+} from "../../constants/validationPatterns";
 
 const SearchINNMsQuery = loader("../../graphql/SearchINNMsQuery.graphql");
 const CreateINNMMutation = loader("../../graphql/CreateINNMMutation.graphql");
@@ -43,42 +53,42 @@ const Search = () => {
                     <Trans>INNMs</Trans>
                   </Heading>
                 </Box>
-                <Box>
-                  <Mutation
-                    mutation={CreateINNMMutation}
-                    refetchQueries={() => [
-                      {
-                        query: SearchINNMsQuery,
-                        variables: filteredLocationParams(locationParams)
-                      }
-                    ]}
-                  >
-                    {createINNM => (
-                      <>
-                        <Button onClick={toggle} variant="green">
-                          <Trans>Create INNM</Trans>
-                        </Button>
-                        <Popup
-                          visible={isVisible}
-                          onCancel={toggle}
-                          title={<Trans>Create INNM</Trans>}
-                          formId="createINNM"
-                          okButtonProps={{ variant: "green" }}
-                          justifyButtons="left"
-                        >
-                          <Form
-                            id="createINNM"
-                            onSubmit={async input => {
-                              await createINNM({
-                                variables: { input }
-                              });
-                              toggle();
-                            }}
+                <Ability action="write" resource="innm">
+                  <Box>
+                    <Mutation
+                      mutation={CreateINNMMutation}
+                      refetchQueries={() => [
+                        {
+                          query: SearchINNMsQuery,
+                          variables: filteredLocationParams(locationParams)
+                        }
+                      ]}
+                    >
+                      {createINNM => (
+                        <>
+                          <Button onClick={toggle} variant="green">
+                            <Trans>Create INNM</Trans>
+                          </Button>
+                          <Popup
+                            visible={isVisible}
+                            onCancel={toggle}
+                            title={<Trans>Create INNM</Trans>}
+                            formId="createINNM"
+                            okButtonProps={{ variant: "green" }}
+                            justifyButtons="left"
                           >
-                            <Trans
-                              id="Enter INNM"
-                              render={({ translation }) => (
-                                <>
+                            <Form
+                              id="createINNM"
+                              onSubmit={async input => {
+                                await createINNM({
+                                  variables: { input }
+                                });
+                                toggle();
+                              }}
+                            >
+                              <Trans
+                                id="Enter INNM"
+                                render={({ translation }) => (
                                   <Field.Text
                                     name="name"
                                     label={<Trans>INNM</Trans>}
@@ -86,56 +96,62 @@ const Search = () => {
                                     maxlength={100}
                                     showLengthHint
                                   />
-                                  <Validation.Required
-                                    field="name"
-                                    message="Required field"
-                                  />
-                                </>
-                              )}
-                            />
-                            <Trans
-                              id="Enter original name"
-                              render={({ translation }) => (
-                                <>
-                                  <Field.Text
-                                    name="nameOriginal"
-                                    label={<Trans>INNM original name</Trans>}
-                                    placeholder={translation}
-                                    maxlength={100}
-                                    showLengthHint
-                                  />
-                                  <Validation.Required
-                                    field="nameOriginal"
-                                    message="Required field"
-                                  />
-                                </>
-                              )}
-                            />
-                            <Trans
-                              id="Enter SCTID"
-                              render={({ translation }) => (
-                                <>
-                                  <Field.Text
-                                    name="sctid"
-                                    label={<Trans>SCTID of INNM</Trans>}
-                                    placeholder={translation}
-                                    maxlength={8}
-                                    format={parseDigits}
-                                    showLengthHint
-                                  />
-                                  <Validation.Required
-                                    field="sctid"
-                                    message="Required field"
-                                  />
-                                </>
-                              )}
-                            />
-                          </Form>
-                        </Popup>
-                      </>
-                    )}
-                  </Mutation>
-                </Box>
+                                )}
+                              />
+                              <Validations field="name">
+                                <Validation.Required message="Required field" />
+                                <Validation.Matches
+                                  options={INNM_PATTERN}
+                                  message="Invalid name"
+                                />
+                              </Validations>
+                              <Trans
+                                id="Enter original name"
+                                render={({ translation }) => (
+                                  <>
+                                    <Field.Text
+                                      name="nameOriginal"
+                                      label={<Trans>INNM original name</Trans>}
+                                      placeholder={translation}
+                                      maxlength={100}
+                                      showLengthHint
+                                    />
+                                    <Validations field="nameOriginal">
+                                      <Validation.Required message="Required field" />
+                                      <Validation.Matches
+                                        options={INNM_ORIGINAL_NAME_PATTERN}
+                                        message="Invalid name"
+                                      />
+                                    </Validations>
+                                  </>
+                                )}
+                              />
+                              <Trans
+                                id="Enter SCTID"
+                                render={({ translation }) => (
+                                  <>
+                                    <Field.Text
+                                      name="sctid"
+                                      label={<Trans>SCTID of INNM</Trans>}
+                                      placeholder={translation}
+                                      maxlength={8}
+                                      format={parseDigits}
+                                      showLengthHint
+                                    />
+                                    <Validation.Required
+                                      field="sctid"
+                                      message="Required field"
+                                    />
+                                  </>
+                                )}
+                              />
+                            </Form>
+                          </Popup>
+                        </>
+                      )}
+                    </Mutation>
+                  </Box>
+                </Ability>
               </Flex>
               <SearchForm
                 initialValues={locationParams}

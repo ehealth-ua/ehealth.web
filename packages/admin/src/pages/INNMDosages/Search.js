@@ -14,6 +14,7 @@ import Link from "../../components/Link";
 import Badge from "../../components/Badge";
 import Table from "../../components/Table";
 import Button from "../../components/Button";
+import Ability from "../../components/Ability";
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import SearchForm from "../../components/SearchForm";
@@ -41,11 +42,13 @@ const Search = ({ navigate }) => (
                   <Trans>INNM dosages</Trans>
                 </Heading>
               </Box>
-              <Box>
-                <Button onClick={() => navigate("../create")} variant="green">
-                  <Trans>Create INNM Dosage</Trans>
-                </Button>
-              </Box>
+              <Ability action="write" resource="innm_dosage">
+                <Box>
+                  <Button onClick={() => navigate("../create")} variant="green">
+                    <Trans>Create INNM Dosage</Trans>
+                  </Button>
+                </Box>
+              </Ability>
             </Flex>
 
             <SearchForm

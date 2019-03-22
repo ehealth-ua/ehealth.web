@@ -11,6 +11,7 @@ import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import Badge from "../../components/Badge";
 import Table from "../../components/Table";
 import Button from "../../components/Button";
+import Ability from "../../components/Ability";
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import SearchForm from "../../components/SearchForm";
@@ -41,11 +42,13 @@ const Search = ({ navigate }) => (
                   <Trans>Medications</Trans>
                 </Heading>
               </Box>
-              <Box>
-                <Button onClick={() => navigate("../create")} variant="green">
-                  <Trans>Create medication</Trans>
-                </Button>
-              </Box>
+              <Ability action="write" resource="medication">
+                <Box>
+                  <Button onClick={() => navigate("../create")} variant="green">
+                    <Trans>Create medication</Trans>
+                  </Button>
+                </Box>
+              </Ability>
             </Flex>
             <SearchForm
               initialValues={locationParams}
