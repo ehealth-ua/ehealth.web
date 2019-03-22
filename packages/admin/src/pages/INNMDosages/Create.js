@@ -202,7 +202,7 @@ const Ingredients = ({ name, index }) => (
                       refetchINNMs({
                         skip: false,
                         first: 20,
-                        filter: { name }
+                        filter: { name, isActive: true }
                       }),
                     1000
                   )}
