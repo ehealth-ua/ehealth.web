@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.70.2"></a>
+## [1.70.2](https://github.com/edenlabllc/ehealth.web/compare/v1.70.1...v1.70.2) (2019-03-22)
+
+
+### Bug Fixes
+
+* **admin:** add validations for the Create INNM form, add scopes dependency for the Create button on INNMs, INNMDosages and Medications pages ([86cd1a3](https://github.com/edenlabllc/ehealth.web/commit/86cd1a3))
+
+
+
+
+
 <a name="1.70.1"></a>
 ## [1.70.1](https://github.com/edenlabllc/ehealth.web/compare/v1.70.0...v1.70.1) (2019-03-22)
 
