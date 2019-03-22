@@ -8,7 +8,7 @@ import { Trans, DateFormat } from "@lingui/macro";
 import { Flex, Box, Heading } from "@rebass/emotion";
 
 import { SearchIcon } from "@ehealth/icons";
-import { LocationParams } from "@ehealth/components";
+import { LocationParams, Validation } from "@ehealth/components";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import Link from "../../components/Link";
 import Badge from "../../components/Badge";
@@ -21,6 +21,7 @@ import LoadingOverlay from "../../components/LoadingOverlay";
 import DictionaryValue from "../../components/DictionaryValue";
 import filteredLocationParams from "../../helpers/filteredLocationParams";
 import STATUSES from "../../helpers/statuses";
+import { UUID_PATTERN } from "../../constants/validationPatterns";
 
 const SearchINNMDosagesQuery = loader(
   "../../graphql/SearchINNMDosagesQuery.graphql"
@@ -245,11 +246,16 @@ const SecondarySearchFields = () => (
           />
         )}
       />
+      <Validation.Matches
+        field="filter.databaseId"
+        options={UUID_PATTERN}
+        message="Invalid number"
+      />
     </Box>
     <Box px={1} width={1 / 3}>
       <Composer
         components={[
-          <DictionaryValue name="MEDICATION_UNIT" />,
+          <DictionaryValue name="MEDICATION_FORM" />,
           ({ render }) => <Trans id="Select option" render={render} />
         ]}
       >

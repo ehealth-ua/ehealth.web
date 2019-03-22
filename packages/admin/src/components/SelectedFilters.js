@@ -15,6 +15,7 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
       isSuspended,
       medicalProgram,
       form,
+      databaseId,
       date: {
         startFrom,
         startTo,
@@ -158,9 +159,15 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
         <SelectedItem mx={1}>
           <Trans>Form</Trans>:
           <Box ml={1}>
-            <DictionaryValue name="MEDICATION_UNIT" item={form} />
+            <DictionaryValue name="MEDICATION_FORM" item={form} />
           </Box>
           <RemoveSelected reset={{ form: undefined }} />
+        </SelectedItem>
+      )}
+      {databaseId && (
+        <SelectedItem mx={1}>
+          {databaseId}
+          <RemoveSelected reset={{ databaseId: undefined }} />
         </SelectedItem>
       )}
     </Flex>
