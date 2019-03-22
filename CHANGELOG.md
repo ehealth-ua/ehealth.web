@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.70.3"></a>
+## [1.70.3](https://github.com/edenlabllc/ehealth.web/compare/v1.70.2...v1.70.3) (2019-03-22)
+
+
+### Bug Fixes
+
+* **admin:** add isActive param to the SearchINNMs filter on Create INNM Dosages page ([#838](https://github.com/edenlabllc/ehealth.web/issues/838)) ([d677be9](https://github.com/edenlabllc/ehealth.web/commit/d677be9))
+
+
+
+
+
 <a name="1.70.2"></a>
 ## [1.70.2](https://github.com/edenlabllc/ehealth.web/compare/v1.70.1...v1.70.2) (2019-03-22)
 
