@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.70.1"></a>
+## [1.70.1](https://github.com/edenlabllc/ehealth.web/compare/v1.70.0...v1.70.1) (2019-03-22)
+
+
+### Bug Fixes
+
+* **admin:** add validation for the databaseId filter, change Dictionary for the Form ([54c75b4](https://github.com/edenlabllc/ehealth.web/commit/54c75b4))
+
+
+
+
+
 <a name="1.70.0"></a>
 # [1.70.0](https://github.com/edenlabllc/ehealth.web/compare/v1.69.0...v1.70.0) (2019-03-20)
 
