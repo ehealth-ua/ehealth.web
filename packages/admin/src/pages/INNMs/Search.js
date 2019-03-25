@@ -26,7 +26,8 @@ import LoadingOverlay from "../../components/LoadingOverlay";
 import filteredLocationParams from "../../helpers/filteredLocationParams";
 import {
   INNM_PATTERN,
-  INNM_ORIGINAL_NAME_PATTERN
+  INNM_ORIGINAL_NAME_PATTERN,
+  SCTID_PATTERN
 } from "../../constants/validationPatterns";
 
 const SearchINNMsQuery = loader("../../graphql/SearchINNMsQuery.graphql");
@@ -138,10 +139,13 @@ const Search = () => {
                                       format={parseDigits}
                                       showLengthHint
                                     />
-                                    <Validation.Required
-                                      field="sctid"
-                                      message="Required field"
-                                    />
+                                    <Validations field="sctid">
+                                      <Validation.Required message="Required field" />
+                                      <Validation.Matches
+                                        options={SCTID_PATTERN}
+                                        message="Invalid SCTID"
+                                      />
+                                    </Validations>
                                   </>
                                 )}
                               />

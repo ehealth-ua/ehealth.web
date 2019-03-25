@@ -190,7 +190,9 @@ const GeneralInfo = ({
       }}
       data={{
         manufacturerName,
-        manufacturerCountry
+        manufacturerCountry: (
+          <DictionaryValue name="COUNTRY" item={manufacturerCountry} />
+        )
       }}
     />
     <Line />
