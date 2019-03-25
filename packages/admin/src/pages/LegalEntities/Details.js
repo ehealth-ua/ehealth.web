@@ -38,6 +38,7 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 import EmptyData from "../../components/EmptyData";
+import Pagination from "../../components/Pagination";
 
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
@@ -55,16 +56,13 @@ const NhsReviewLegalEntityMutation = loader(
 );
 const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
 
-//TODO: bring it out to the helper
 const filteredLocationParams = (id, params = {}) => {
-  const { filter, first, last, ...pagination } = params;
+  const { filter } = params;
   return {
     id,
-    ...pagination,
     ...filter,
-    first:
-      !first && !last ? ITEMS_PER_PAGE[0] : first ? parseInt(first) : undefined,
-    last: last ? parseInt(last) : undefined
+    firstMergedFromLegalEntities: ITEMS_PER_PAGE[0],
+    firstDivisions: ITEMS_PER_PAGE[0]
   };
 };
 
@@ -602,126 +600,154 @@ const License = ({
 const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
   <Ability action="read" resource="related_legal_entities">
     <LocationParams>
-      {({ locationParams, setLocationParams }) => (
-        <>
-          <Flex justifyContent="space-between">
-            <Box px={1}>
-              <Form onSubmit={setLocationParams} initialValues={locationParams}>
-                <Box px={5} pt={5} width={460}>
-                  <Trans
-                    id="Enter legal entity EDRPOU"
-                    render={({ translation }) => (
-                      <Field.Text
-                        name="filter.mergeLegalEntityFilter.mergedFromLegalEntity.edrpou"
-                        label={<Trans>Find related legal entity</Trans>}
-                        placeholder={translation}
-                        postfix={<SearchIcon color="silverCity" />}
-                      />
+      {({ locationParams, setLocationParams }) => {
+        const { first, last, after, before, orderBy } = locationParams;
+        return (
+          <>
+            <Flex justifyContent="space-between">
+              <Box px={1}>
+                <Form
+                  onSubmit={setLocationParams}
+                  initialValues={locationParams}
+                >
+                  <Box px={5} pt={5} width={460}>
+                    <Trans
+                      id="Enter legal entity EDRPOU"
+                      render={({ translation }) => (
+                        <Field.Text
+                          name="filter.mergeLegalEntityFilter.mergedFromLegalEntity.edrpou"
+                          label={<Trans>Find related legal entity</Trans>}
+                          placeholder={translation}
+                          postfix={<SearchIcon color="silverCity" />}
+                        />
+                      )}
+                    />
+                  </Box>
+                </Form>
+              </Box>
+              <Box pt={5} pl={4} css={{ textAlign: "right" }}>
+                {mergedToLegalEntity ? (
+                  <Tooltip
+                    placement="top"
+                    content={
+                      <Trans>Attention, legal entity was reorganized</Trans>
+                    }
+                    component={() => (
+                      <Link
+                        to={`../../${
+                          mergedToLegalEntity.mergedToLegalEntity.id
+                        }`}
+                        fontWeight="bold"
+                      >
+                        <Trans>Go to the main legal entity</Trans>
+                      </Link>
                     )}
                   />
-                </Box>
-              </Form>
-            </Box>
-            <Box pt={5} pl={4} css={{ textAlign: "right" }}>
-              {mergedToLegalEntity ? (
-                <Tooltip
-                  placement="top"
-                  content={
-                    <Trans>Attention, legal entity was reorganized</Trans>
-                  }
-                  component={() => (
-                    <Link
-                      to={`../../${mergedToLegalEntity.mergedToLegalEntity.id}`}
-                      fontWeight="bold"
-                    >
-                      <Trans>Go to the main legal entity</Trans>
-                    </Link>
-                  )}
-                />
-              ) : status === "ACTIVE" ? (
-                <Link to="../add" fontWeight="bold">
-                  <Flex mb={2}>
-                    <Box mr={2}>
-                      <AdminAddIcon width={16} height={16} />
-                    </Box>{" "}
-                    <Trans>Add related legal entity</Trans>
-                  </Flex>
-                </Link>
-              ) : null}
-            </Box>
-          </Flex>
-          <Query
-            query={LegalEntityQuery}
-            fetchPolicy="network-only"
-            variables={filteredLocationParams(id, locationParams)}
-          >
-            {({ loading, error, data = {} }) => {
-              if (error) return `Error! ${error.message}`;
-              const {
-                legalEntity: {
-                  mergedFromLegalEntities: { nodes = [] } = {}
+                ) : status === "ACTIVE" ? (
+                  <Link to="../add" fontWeight="bold">
+                    <Flex mb={2}>
+                      <Box mr={2}>
+                        <AdminAddIcon width={16} height={16} />
+                      </Box>{" "}
+                      <Trans>Add related legal entity</Trans>
+                    </Flex>
+                  </Link>
+                ) : null}
+              </Box>
+            </Flex>
+            <Query
+              query={LegalEntityQuery}
+              fetchPolicy="network-only"
+              variables={{
+                id,
+                firstMergedFromLegalEntities:
+                  !first && !last
+                    ? ITEMS_PER_PAGE[0]
+                    : first
+                      ? parseInt(first)
+                      : undefined,
+                lastMergedFromLegalEntities: last ? parseInt(last) : undefined,
+                beforeMergedFromLegalEntities: before,
+                afterMergedFromLegalEntities: after,
+                firstDivisions: ITEMS_PER_PAGE[0]
+              }}
+            >
+              {({
+                loading,
+                error,
+                data: {
+                  legalEntity: {
+                    mergedFromLegalEntities: {
+                      nodes: mergedFromLegalEntities,
+                      pageInfo
+                    } = {}
+                  } = {}
                 } = {}
-              } = data;
-              const { orderBy } = locationParams;
-              return (
-                <LoadingOverlay loading={loading}>
-                  {nodes.length > 0 ? (
-                    <Table
-                      data={nodes}
-                      header={{
-                        name: <Trans>Legal entity name</Trans>,
-                        edrpou: <Trans>EDRPOU</Trans>,
-                        reason: <Trans>Basis</Trans>,
-                        insertedAt: <Trans>Added</Trans>,
-                        isActive: <Trans>Status</Trans>
-                      }}
-                      renderRow={({
-                        reason,
-                        insertedAt,
-                        mergedFromLegalEntity: { edrpou, name },
-                        isActive
-                      }) => ({
-                        reason,
-                        insertedAt: (
-                          <DateFormat
-                            value={insertedAt}
-                            format={{
-                              year: "numeric",
-                              month: "numeric",
-                              day: "numeric",
-                              hour: "numeric",
-                              minute: "numeric"
-                            }}
-                          />
-                        ),
-                        name,
-                        edrpou,
-                        isActive: (
-                          <Badge
-                            name={isActive ? "ACTIVE" : "CLOSED"}
-                            type="LEGALENTITY"
-                            display="block"
-                          />
-                        )
-                      })}
-                      sortableFields={["insertedAt", "isActive"]}
-                      sortingParams={parseSortingParams(orderBy)}
-                      onSortingChange={sortingParams =>
-                        setLocationParams({
-                          orderBy: stringifySortingParams(sortingParams)
-                        })
-                      }
-                      tableName="mergedFromLegalEntities"
-                    />
-                  ) : (
-                    <EmptyData />
-                  )}
-                </LoadingOverlay>
-              );
-            }}
-          </Query>
-        </>
-      )}
+              }) => {
+                if (!mergedFromLegalEntities) return null;
+                return (
+                  <LoadingOverlay loading={loading}>
+                    {mergedFromLegalEntities.length > 0 ? (
+                      <>
+                        <Table
+                          data={mergedFromLegalEntities}
+                          header={{
+                            name: <Trans>Legal entity name</Trans>,
+                            edrpou: <Trans>EDRPOU</Trans>,
+                            reason: <Trans>Basis</Trans>,
+                            insertedAt: <Trans>Added</Trans>,
+                            isActive: <Trans>Status</Trans>
+                          }}
+                          renderRow={({
+                            reason,
+                            insertedAt,
+                            mergedFromLegalEntity: { edrpou, name },
+                            isActive
+                          }) => ({
+                            reason,
+                            insertedAt: (
+                              <DateFormat
+                                value={insertedAt}
+                                format={{
+                                  year: "numeric",
+                                  month: "numeric",
+                                  day: "numeric",
+                                  hour: "numeric",
+                                  minute: "numeric"
+                                }}
+                              />
+                            ),
+                            name,
+                            edrpou,
+                            isActive: (
+                              <Badge
+                                name={isActive ? "ACTIVE" : "CLOSED"}
+                                type="LEGALENTITY"
+                                display="block"
+                              />
+                            )
+                          })}
+                          sortableFields={["insertedAt", "isActive"]}
+                          sortingParams={parseSortingParams(orderBy)}
+                          onSortingChange={sortingParams =>
+                            setLocationParams({
+                              orderBy: stringifySortingParams(sortingParams)
+                            })
+                          }
+                          tableName="mergedFromLegalEntities"
+                        />
+                        <Pagination {...pageInfo} />
+                      </>
+                    ) : (
+                      <EmptyData />
+                    )}
+                  </LoadingOverlay>
+                );
+              }}
+            </Query>
+          </>
+        );
+      }}
     </LocationParams>
   </Ability>
 );
@@ -768,74 +794,109 @@ const Owner = ({
 const Divisions = ({ id }) => (
   <Ability action="read" resource="division">
     <LocationParams>
-      {({ locationParams, setLocationParams }) => (
-        <>
-          <Form onSubmit={setLocationParams} initialValues={locationParams}>
-            <Box px={5} pt={5} width={460}>
-              <Trans
-                id="Enter division name"
-                render={({ translation }) => (
-                  <Field.Text
-                    name="filter.divisionFilter.name"
-                    label={<Trans>Find division</Trans>}
-                    placeholder={translation}
-                    postfix={<SearchIcon color="silverCity" />}
-                  />
-                )}
-              />
-            </Box>
-          </Form>
-          <Query
-            query={LegalEntityQuery}
-            variables={filteredLocationParams(id, locationParams)}
-          >
-            {({ loading, error, data }) => {
-              if (!data) return null;
-              const {
-                legalEntity: {
-                  divisions: { nodes: divisions }
-                }
-              } = data;
-              return divisions.length ? (
-                <Table
-                  data={divisions}
-                  header={{
-                    name: <Trans>Legal entity name</Trans>,
-                    addresses: <Trans>Address</Trans>,
-                    mountainGroup: <Trans>Mountain region</Trans>,
-                    phones: <Trans>Phone</Trans>,
-                    email: <Trans>Email</Trans>,
-                    status: <Trans>Status</Trans>
-                  }}
-                  renderRow={({
-                    mountainGroup,
-                    addresses,
-                    phones,
-                    status,
-                    ...props
-                  }) => ({
-                    ...props,
-                    mountainGroup: (
-                      <Flex justifyContent="center">
-                        {mountainGroup ? <PositiveIcon /> : <NegativeIcon />}
-                      </Flex>
-                    ),
-                    addresses: addresses
-                      .filter(a => a.type === "RESIDENCE")
-                      .map((item, key) => (
-                        <AddressView data={item} key={key} />
-                      )),
-                    phones: getPhones(phones),
-                    status: (
-                      <Badge type="DIVISIONS" name={status} display="block" />
-                    )
-                  })}
+      {({ locationParams, setLocationParams }) => {
+        const { first, last, after, before } = locationParams;
+        return (
+          <>
+            <Form onSubmit={setLocationParams} initialValues={locationParams}>
+              <Box px={5} pt={5} width={460}>
+                <Trans
+                  id="Enter division name"
+                  render={({ translation }) => (
+                    <Field.Text
+                      name="filter.divisionFilter.name"
+                      label={<Trans>Find division</Trans>}
+                      placeholder={translation}
+                      postfix={<SearchIcon color="silverCity" />}
+                    />
+                  )}
                 />
-              ) : null;
-            }}
-          </Query>
-        </>
-      )}
+              </Box>
+            </Form>
+            <Query
+              query={LegalEntityQuery}
+              variables={{
+                id,
+                firstDivisions:
+                  !first && !last
+                    ? ITEMS_PER_PAGE[0]
+                    : first
+                      ? parseInt(first)
+                      : undefined,
+                lastDivisions: last ? parseInt(last) : undefined,
+                beforeDivisions: before,
+                afterDivisions: after,
+                firstMergedFromLegalEntities: ITEMS_PER_PAGE[0]
+              }}
+            >
+              {({
+                loading,
+                error,
+                data: {
+                  legalEntity: {
+                    divisions: { nodes: divisions, pageInfo } = {}
+                  } = {}
+                } = {}
+              }) => {
+                if (!divisions) return null;
+                return (
+                  <LoadingOverlay loading={loading}>
+                    {divisions.length > 0 ? (
+                      <>
+                        <Table
+                          data={divisions}
+                          header={{
+                            name: <Trans>Legal entity name</Trans>,
+                            addresses: <Trans>Address</Trans>,
+                            mountainGroup: <Trans>Mountain region</Trans>,
+                            phones: <Trans>Phone</Trans>,
+                            email: <Trans>Email</Trans>,
+                            status: <Trans>Status</Trans>
+                          }}
+                          renderRow={({
+                            mountainGroup,
+                            addresses,
+                            phones,
+                            status,
+                            ...props
+                          }) => ({
+                            ...props,
+                            mountainGroup: (
+                              <Flex justifyContent="center">
+                                {mountainGroup ? (
+                                  <PositiveIcon />
+                                ) : (
+                                  <NegativeIcon />
+                                )}
+                              </Flex>
+                            ),
+                            addresses: addresses
+                              .filter(a => a.type === "RESIDENCE")
+                              .map((item, key) => (
+                                <AddressView data={item} key={key} />
+                              )),
+                            phones: getPhones(phones),
+                            status: (
+                              <Badge
+                                type="DIVISIONS"
+                                name={status}
+                                display="block"
+                              />
+                            )
+                          })}
+                        />
+                        <Pagination {...pageInfo} />
+                      </>
+                    ) : (
+                      <EmptyData />
+                    )}
+                  </LoadingOverlay>
+                );
+              }}
+            </Query>
+          </>
+        );
+      }}
     </LocationParams>
   </Ability>
 );

@@ -2,8 +2,15 @@ query LegalEntityQuery(
   $id: ID!
   $mergeLegalEntityFilter: RelatedLegalEntityFilter
   $divisionFilter: DivisionFilter
-  $orderBy: RelatedLegalEntityOrderBy
-  $first: Int
+  $orderByMergedFromLegalEntities: RelatedLegalEntityOrderBy
+  $firstMergedFromLegalEntities: Int
+  $lastMergedFromLegalEntities: Int
+  $beforeMergedFromLegalEntities: String
+  $afterMergedFromLegalEntities: String
+  $firstDivisions: Int
+  $lastDivisions: Int
+  $beforeDivisions: String
+  $afterDivisions: String
 ) {
   legalEntity(id: $id) {
     id
@@ -87,9 +94,12 @@ query LegalEntityQuery(
       }
     }
     mergedFromLegalEntities(
-      first: $first
+      first: $firstMergedFromLegalEntities
+      before: $beforeMergedFromLegalEntities
+      after: $afterMergedFromLegalEntities
+      last: $lastMergedFromLegalEntities
       filter: $mergeLegalEntityFilter
-      orderBy: $orderBy
+      orderBy: $orderByMergedFromLegalEntities
     ) {
       nodes {
         id
@@ -102,8 +112,20 @@ query LegalEntityQuery(
           edrpou
         }
       }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
     }
-    divisions(first: $first, filter: $divisionFilter) {
+    divisions(
+      first: $firstDivisions
+      filter: $divisionFilter
+      before: $beforeDivisions
+      after: $afterDivisions
+      last: $lastDivisions
+    ) {
       nodes {
         id
         databaseId
@@ -127,6 +149,12 @@ query LegalEntityQuery(
         email
         status
         mountainGroup
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
       }
     }
   }
