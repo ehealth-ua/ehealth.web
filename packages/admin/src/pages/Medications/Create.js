@@ -677,7 +677,7 @@ const Ingredients = ({ name, index }) => (
                       refetchINNMDosages({
                         skip: false,
                         first: 20,
-                        filter: { name }
+                        filter: { name, isActive: true }
                       }),
                     1000
                   )}
@@ -763,11 +763,21 @@ const IngredientsHeader = ({ index }) => (
 
 export default Create;
 
-const unitDecorator = createDecorator({
-  field: "ingredients[0].dosage.denumeratorUnit",
-  updates: {
-    "container.numeratorUnit": value => {
-      return value ? value : undefined;
+const unitDecorator = createDecorator(
+  {
+    field: "ingredients[0].dosage.denumeratorUnit",
+    updates: {
+      "container.numeratorUnit": value => {
+        return value ? value : undefined;
+      }
+    }
+  },
+  {
+    field: "packageQty",
+    updates: {
+      packageMinQty: value => {
+        return value ? value : undefined;
+      }
     }
   }
-});
+);
