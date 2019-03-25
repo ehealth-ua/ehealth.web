@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.71.0"></a>
+# [1.71.0](https://github.com/edenlabllc/ehealth.web/compare/v1.70.9...v1.71.0) (2019-03-25)
+
+
+### Features
+
+* **admin:** add pagination to LE divisions and mergedFromLegalEntities ([6d81d90](https://github.com/edenlabllc/ehealth.web/commit/6d81d90))
+
+
+
+
+
 <a name="1.70.9"></a>
 ## [1.70.9](https://github.com/edenlabllc/ehealth.web/compare/v1.70.8...v1.70.9) (2019-03-25)
 
