@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.70.9"></a>
+## [1.70.9](https://github.com/edenlabllc/ehealth.web/compare/v1.70.8...v1.70.9) (2019-03-25)
+
+
+### Bug Fixes
+
+* **admin:** add validation pattern for the SCTID, add DictionaryValue for Country on Medication Details page ([85a25cb](https://github.com/edenlabllc/ehealth.web/commit/85a25cb))
+
+
+
+
+
 <a name="1.70.8"></a>
 ## [1.70.8](https://github.com/edenlabllc/ehealth.web/compare/v1.70.7...v1.70.8) (2019-03-25)
 
