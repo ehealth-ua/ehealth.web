@@ -778,80 +778,77 @@ const Divisions = ({ id }) => (
                   } = {}
                 } = {}
               } = {}
-            }) => {
-              if (error) return `Error! ${error.message}`;
-              return (
-                <LoadingOverlay loading={loading}>
-                  {contractorDivisions.length > 0 ? (
-                    <>
-                      <Table
-                        data={contractorDivisions}
-                        header={{
-                          name: <Trans>Division name</Trans>,
-                          addresses: <Trans>Address</Trans>,
-                          mountainGroup: <Trans>Mountain region</Trans>,
-                          phones: (
-                            <>
-                              <Trans>Phone</Trans>
-                              <br />
-                              <Trans>Email</Trans>
-                            </>
-                          ),
-                          action: <Trans>Action</Trans>
-                        }}
-                        renderRow={({
-                          databaseId,
-                          name,
-                          addresses,
-                          mountainGroup,
-                          phones,
-                          email
-                        }) => ({
-                          name,
-                          mountainGroup: (
-                            <Flex justifyContent="center">
-                              {mountainGroup ? (
-                                <PositiveIcon />
-                              ) : (
-                                <NegativeIcon />
-                              )}
-                            </Flex>
-                          ),
-                          phones: (
-                            <>
-                              <Box>
-                                {phones
-                                  .filter(a => a.type === "MOBILE")
-                                  .map(item => item.number)[0] ||
-                                  phones[0].number}
-                              </Box>
-                              <Box>{email}</Box>
-                            </>
-                          ),
-                          addresses: addresses
-                            .filter(a => a.type === "RESIDENCE")
-                            .map((item, key) => (
-                              <AddressView data={item} key={key} />
-                            )),
-                          action: (
-                            <Link
-                              to={`../employees?division.databaseId=${databaseId}&division.name=${name}`}
-                              fontWeight="bold"
-                            >
-                              <Trans>Go to employees</Trans>
-                            </Link>
-                          )
-                        })}
-                        tableName="/contract/divisions"
-                      />
-                      <Pagination {...pageInfo} />
-                    </>
-                  ) : (
-                    <EmptyData />
-                  )}
-                </LoadingOverlay>
-              );
-            }}
+            }) => (
+              <LoadingOverlay loading={loading}>
+                {contractorDivisions.length > 0 ? (
+                  <>
+                    <Table
+                      data={contractorDivisions}
+                      header={{
+                        name: <Trans>Division name</Trans>,
+                        addresses: <Trans>Address</Trans>,
+                        mountainGroup: <Trans>Mountain region</Trans>,
+                        phones: (
+                          <>
+                            <Trans>Phone</Trans>
+                            <br />
+                            <Trans>Email</Trans>
+                          </>
+                        ),
+                        action: <Trans>Action</Trans>
+                      }}
+                      renderRow={({
+                        databaseId,
+                        name,
+                        addresses,
+                        mountainGroup,
+                        phones,
+                        email
+                      }) => ({
+                        name,
+                        mountainGroup: (
+                          <Flex justifyContent="center">
+                            {mountainGroup ? (
+                              <PositiveIcon />
+                            ) : (
+                              <NegativeIcon />
+                            )}
+                          </Flex>
+                        ),
+                        phones: (
+                          <>
+                            <Box>
+                              {phones
+                                .filter(a => a.type === "MOBILE")
+                                .map(item => item.number)[0] ||
+                                phones[0].number}
+                            </Box>
+                            <Box>{email}</Box>
+                          </>
+                        ),
+                        addresses: addresses
+                          .filter(a => a.type === "RESIDENCE")
+                          .map((item, key) => (
+                            <AddressView data={item} key={key} />
+                          )),
+                        action: (
+                          <Link
+                            to={`../employees?division.databaseId=${databaseId}&division.name=${name}`}
+                            fontWeight="bold"
+                          >
+                            <Trans>Go to employees</Trans>
+                          </Link>
+                        )
+                      })}
+                      tableName="/contract/divisions"
+                    />
+                    <Pagination {...pageInfo} />
+                  </>
+                ) : (
+                  <EmptyData />
+                )}
+              </LoadingOverlay>
+            )}
           </Query>
         </>
       );
