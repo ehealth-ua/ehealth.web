@@ -75,7 +75,7 @@ const Details = ({ id }) => {
                   />
                 </Box>
                 {isActive && (
-                  <Ability action="write" resource="innm_dosage">
+                  <Ability action="deactivate" resource="innm_dosage">
                     <Box>
                       <Mutation
                         mutation={DeactivateINNMDosageMutation}

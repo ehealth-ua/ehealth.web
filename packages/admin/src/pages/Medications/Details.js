@@ -13,6 +13,7 @@ import Table from "../../components/Table";
 import Badge from "../../components/Badge";
 import Popup from "../../components/Popup";
 import Button from "../../components/Button";
+import Ability from "../../components/Ability";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import DictionaryValue from "../../components/DictionaryValue";
@@ -81,46 +82,48 @@ const Details = ({ id }) => {
                   />
                 </Box>
                 {isActive && (
-                  <Box>
-                    <Mutation
-                      mutation={DeactivateMedication}
-                      refetchQueries={() => [
-                        {
-                          query: MedicationQuery,
-                          variables: { id }
-                        }
-                      ]}
-                    >
-                      {deactivateMedication => (
-                        <>
-                          <Button onClick={toggle} variant="red">
-                            <Trans>Deactivate</Trans>
-                          </Button>
-                          <Popup
-                            visible={isVisible}
-                            onCancel={toggle}
-                            title={
-                              <>
-                                <Trans>Deactivate</Trans> "{name}
-                                "?
-                              </>
-                            }
-                            okText={<Trans>Deactivate</Trans>}
-                            onOk={async () => {
-                              await deactivateMedication({
-                                variables: {
-                                  input: {
-                                    id
+                  <Ability action="deactivate" resource="medication">
+                    <Box>
+                      <Mutation
+                        mutation={DeactivateMedication}
+                        refetchQueries={() => [
+                          {
+                            query: MedicationQuery,
+                            variables: { id }
+                          }
+                        ]}
+                      >
+                        {deactivateMedication => (
+                          <>
+                            <Button onClick={toggle} variant="red">
+                              <Trans>Deactivate</Trans>
+                            </Button>
+                            <Popup
+                              visible={isVisible}
+                              onCancel={toggle}
+                              title={
+                                <>
+                                  <Trans>Deactivate</Trans> "{name}
+                                  "?
+                                </>
+                              }
+                              okText={<Trans>Deactivate</Trans>}
+                              onOk={async () => {
+                                await deactivateMedication({
+                                  variables: {
+                                    input: {
+                                      id
+                                    }
                                   }
-                                }
-                              });
-                              toggle();
-                            }}
-                          />
-                        </>
-                      )}
-                    </Mutation>
-                  </Box>
+                                });
+                                toggle();
+                              }}
+                            />
+                          </>
+                        )}
+                      </Mutation>
+                    </Box>
+                  </Ability>
                 )}
               </Flex>
             </Box>
@@ -173,7 +176,7 @@ const GeneralInfo = ({
         form: <Trans>Medication form</Trans>
       }}
       data={{
-        atcCodes: atcCodes.join(" "),
+        atcCodes: atcCodes.join(", "),
         packageMinQty,
         packageQty,
         form: <DictionaryValue name="MEDICATION_FORM" item={form} />
