@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.70.6"></a>
+## [1.70.6](https://github.com/edenlabllc/ehealth.web/compare/v1.70.5...v1.70.6) (2019-03-25)
+
+
+### Bug Fixes
+
+* **admin:** hide verify and deactivate buttons if user has no scopes ([807fd94](https://github.com/edenlabllc/ehealth.web/commit/807fd94))
+
+
+
+
+
 <a name="1.70.5"></a>
 ## [1.70.5](https://github.com/edenlabllc/ehealth.web/compare/v1.70.4...v1.70.5) (2019-03-25)
 
