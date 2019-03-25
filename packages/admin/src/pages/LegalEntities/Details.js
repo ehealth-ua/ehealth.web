@@ -132,77 +132,81 @@ const Details = ({ id, navigate }) => (
               {status === "ACTIVE" && (
                 <>
                   {!nhsReviewed ? (
-                    <Mutation
-                      mutation={NhsReviewLegalEntityMutation}
-                      refetchQueries={() => [
-                        {
-                          query: LegalEntityQuery,
-                          variables: filteredLocationParams(id)
-                        }
-                      ]}
-                    >
-                      {nhsReviewLegalEntity => (
-                        <Button
-                          onClick={async () => {
-                            await nhsReviewLegalEntity({
-                              variables: {
-                                input: {
-                                  id
+                    <Ability action="nhs_verify" resource="legal_entity">
+                      <Mutation
+                        mutation={NhsReviewLegalEntityMutation}
+                        refetchQueries={() => [
+                          {
+                            query: LegalEntityQuery,
+                            variables: filteredLocationParams(id)
+                          }
+                        ]}
+                      >
+                        {nhsReviewLegalEntity => (
+                          <Button
+                            onClick={async () => {
+                              await nhsReviewLegalEntity({
+                                variables: {
+                                  input: {
+                                    id
+                                  }
                                 }
-                              }
-                            });
-                          }}
-                          variant="blue"
-                        >
-                          <Trans>To process</Trans>
-                        </Button>
-                      )}
-                    </Mutation>
+                              });
+                            }}
+                            variant="blue"
+                          >
+                            <Trans>To process</Trans>
+                          </Button>
+                        )}
+                      </Mutation>
+                    </Ability>
                   ) : (
-                    <Popup
-                      variant="red"
-                      buttonText={<Trans>Close legal entity</Trans>}
-                      title={<Trans>Close legal entity</Trans>}
-                    >
-                      {toggle => (
-                        <Mutation
-                          mutation={DeactivateLegalEntityMutation}
-                          refetchQueries={() => [
-                            {
-                              query: LegalEntityQuery,
-                              variables: filteredLocationParams(id)
-                            }
-                          ]}
-                        >
-                          {deactivateLegalEntity => (
-                            <Flex justifyContent="center">
-                              <Box mr={20}>
-                                <Button variant="blue" onClick={toggle}>
-                                  <Trans>Back</Trans>
-                                </Button>
-                              </Box>
-                              <Button
-                                onClick={async () => {
-                                  await deactivateLegalEntity({
-                                    variables: {
-                                      input: {
-                                        id
+                    <Ability action="deactivate" resource="legal_entity">
+                      <Popup
+                        variant="red"
+                        buttonText={<Trans>Close legal entity</Trans>}
+                        title={<Trans>Close legal entity</Trans>}
+                      >
+                        {toggle => (
+                          <Mutation
+                            mutation={DeactivateLegalEntityMutation}
+                            refetchQueries={() => [
+                              {
+                                query: LegalEntityQuery,
+                                variables: filteredLocationParams(id)
+                              }
+                            ]}
+                          >
+                            {deactivateLegalEntity => (
+                              <Flex justifyContent="center">
+                                <Box mr={20}>
+                                  <Button variant="blue" onClick={toggle}>
+                                    <Trans>Back</Trans>
+                                  </Button>
+                                </Box>
+                                <Button
+                                  onClick={async () => {
+                                    await deactivateLegalEntity({
+                                      variables: {
+                                        input: {
+                                          id
+                                        }
                                       }
-                                    }
-                                  });
-                                  await navigate(
-                                    "/legal-entity-deactivate-jobs/search"
-                                  );
-                                }}
-                                variant="red"
-                              >
-                                <Trans>Close legal entity</Trans>
-                              </Button>
-                            </Flex>
-                          )}
-                        </Mutation>
-                      )}
-                    </Popup>
+                                    });
+                                    await navigate(
+                                      "/legal-entity-deactivate-jobs/search"
+                                    );
+                                  }}
+                                  variant="red"
+                                >
+                                  <Trans>Close legal entity</Trans>
+                                </Button>
+                              </Flex>
+                            )}
+                          </Mutation>
+                        )}
+                      </Popup>
+                    </Ability>
                   )}
                 </>
               )}
