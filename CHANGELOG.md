@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.70.8"></a>
+## [1.70.8](https://github.com/edenlabllc/ehealth.web/compare/v1.70.7...v1.70.8) (2019-03-25)
+
+
+### Bug Fixes
+
+* **admin:** add isActive param to the SearchINNMDosages filter, add decorator for packageMinQty field on Create Medications page ([950ba09](https://github.com/edenlabllc/ehealth.web/commit/950ba09))
+* **admin:** add link to MedicalPrograms on Program Medication Details page, remove unused imports from INNM Dosages Create Page ([97c24fa](https://github.com/edenlabllc/ehealth.web/commit/97c24fa))
+
+
+
+
+
 <a name="1.70.7"></a>
 ## [1.70.7](https://github.com/edenlabllc/ehealth.web/compare/v1.70.6...v1.70.7) (2019-03-25)
 
