@@ -109,7 +109,12 @@ const Search = ({ navigate }) => (
                               name,
                               innmDosageName,
                               manufacturerName,
-                              manufacturerCountry,
+                              manufacturerCountry: (
+                                <DictionaryValue
+                                  name="COUNTRY"
+                                  item={manufacturerCountry}
+                                />
+                              ),
                               insertedAt: (
                                 <DateFormat
                                   value={insertedAt}
@@ -226,7 +231,7 @@ const PrimarySearchFields = () => (
             }) => {
               return (
                 <Field.Select
-                  name="filter.innmDosages"
+                  name="filter.innmDosages.name"
                   label={<Trans>InnmDosage name</Trans>}
                   placeholder={translation}
                   items={innmDosages.map(({ name }) => name)}
