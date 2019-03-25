@@ -5,12 +5,10 @@ import { Router } from "@reach/router";
 import { loader } from "graphql.macro";
 import { BooleanValue } from "react-values";
 import { Query, Mutation } from "react-apollo";
-import system from "@ehealth/system-components";
 import { Flex, Box, Text } from "@rebass/emotion";
 import { PositiveIcon, CancelIcon } from "@ehealth/icons";
 import { Form, Validation, Link } from "@ehealth/components";
 
-import env from "../../env";
 import Line from "../../components/Line";
 import Tabs from "../../components/Tabs";
 import Badge from "../../components/Badge";
@@ -178,7 +176,11 @@ const GeneralInfo = ({
     ...data
   }
 }) => {
-  const { databaseId: medicationId, name: medicationName } = medication;
+  const {
+    id: medicationId,
+    databaseId: medicationDatabaseId,
+    name: medicationName
+  } = medication;
   const {
     databaseId: medicalProgramId,
     name: medicalProgramName
@@ -202,13 +204,9 @@ const GeneralInfo = ({
         }}
         data={{
           medicationId: (
-            <ExternalLink
-              href={`${
-                env.REACT_APP_ADMIN_LEGACY_URL
-              }/medications/${medicationId}`}
-            >
-              {medicationId}
-            </ExternalLink>
+            <Link to={`../../medications/${medicationId}`}>
+              {medicationDatabaseId}
+            </Link>
           )
         }}
         color="blueberrySoda"
@@ -229,7 +227,13 @@ const GeneralInfo = ({
           medicalProgramId: <Trans>Medical program ID</Trans>
         }}
         data={{
-          medicalProgramId
+          medicalProgramId: (
+            <Link
+              to={`../../medical-programs/search?first=10&filter.databaseId=${medicalProgramId}`}
+            >
+              {medicalProgramId}
+            </Link>
+          )
         }}
         color="blueberrySoda"
         labelWidth="280px"
@@ -348,15 +352,5 @@ const Price = ({ amount }) =>
       {amount} <Trans>uah</Trans>
     </>
   );
-
-const ExternalLink = system(
-  {
-    is: Link,
-    fontSize: 0,
-    color: "rockmanBlue"
-  },
-  "color",
-  "fontSize"
-);
 
 export default Details;

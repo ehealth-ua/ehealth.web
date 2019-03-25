@@ -1,16 +1,14 @@
 import React from "react";
+import { I18n } from "@lingui/react";
 import isEmpty from "lodash/isEmpty";
 import Composer from "react-composer";
-import { I18n } from "@lingui/react";
-import { Trans, t } from "@lingui/macro";
 import debounce from "lodash/debounce";
 import { loader } from "graphql.macro";
 import { Router } from "@reach/router";
+import { Trans, t } from "@lingui/macro";
 import { Query, Mutation } from "react-apollo";
-import system from "@ehealth/system-components";
 import { Heading, Flex, Box, Text } from "@rebass/emotion";
 import { Form, Validation, Validations } from "@ehealth/components";
-import { DropDownButton as PlusIcon } from "@ehealth/icons";
 
 import Line from "../../components/Line";
 import Steps from "../../components/Steps";
@@ -395,21 +393,3 @@ const IngredientsHeader = ({ index }) => (
 );
 
 export default Create;
-
-const AddButton = system(
-  {
-    fontSize: 0,
-    color: "rockmanBlue"
-  },
-  {
-    display: "inline-block",
-    verticalAlign: "middle",
-    userSelect: "none",
-    outline: "none",
-    textDecoration: "none",
-    cursor: "pointer",
-    fontWeight: "bold"
-  },
-  "fontSize",
-  "color"
-);
