@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.70.7"></a>
+## [1.70.7](https://github.com/edenlabllc/ehealth.web/compare/v1.70.6...v1.70.7) (2019-03-25)
+
+
+### Bug Fixes
+
+* **admin:** add DictionaryValue for the Manufacturer country, update innmDosages filter ([#842](https://github.com/edenlabllc/ehealth.web/issues/842)) ([6b041a3](https://github.com/edenlabllc/ehealth.web/commit/6b041a3))
+
+
+
+
+
 <a name="1.70.6"></a>
 ## [1.70.6](https://github.com/edenlabllc/ehealth.web/compare/v1.70.5...v1.70.6) (2019-03-25)
 
