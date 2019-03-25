@@ -32,6 +32,7 @@ import AddressView from "../../../components/AddressView";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 import Pagination from "../../../components/Pagination";
 import EmptyData from "../../../components/EmptyData";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
@@ -701,53 +702,56 @@ const Divisions = ({ id }) => (
             }}
           >
             {({ loading, error, data }) => {
-              if (loading) return "Loading...";
-              if (error) return `Error! ${error.message}`;
               const {
                 contractorDivisions: {
                   nodes: contractorDivisions,
                   pageInfo
                 } = {}
               } = data.reimbursementContract;
-              if (isEmpty(contractorDivisions)) return <EmptyData />;
-
               return (
-                <>
-                  <Table
-                    data={contractorDivisions}
-                    header={{
-                      name: <Trans>Division name</Trans>,
-                      addresses: <Trans>Address</Trans>,
-                      phones: (
-                        <>
-                          <Trans>Phone</Trans>
-                          <br />
-                          <Trans>Email</Trans>
-                        </>
-                      )
-                    }}
-                    renderRow={({ name, addresses, phones, email }) => ({
-                      name,
-                      phones: (
-                        <>
-                          <Box>
-                            {phones
-                              .filter(a => a.type === "MOBILE")
-                              .map(item => item.number)[0] || phones[0].number}
-                          </Box>
-                          <Box>{email}</Box>
-                        </>
-                      ),
-                      addresses: addresses
-                        .filter(a => a.type === "RESIDENCE")
-                        .map((item, key) => (
-                          <AddressView data={item} key={key} />
-                        ))
-                    })}
-                    tableName="reimbursement-contract/divisions"
-                  />
-                  <Pagination {...pageInfo} />
-                </>
+                <LoadingOverlay loading={loading}>
+                  {contractorDivisions.length > 0 ? (
+                    <>
+                      <Table
+                        data={contractorDivisions}
+                        header={{
+                          name: <Trans>Division name</Trans>,
+                          addresses: <Trans>Address</Trans>,
+                          phones: (
+                            <>
+                              <Trans>Phone</Trans>
+                              <br />
+                              <Trans>Email</Trans>
+                            </>
+                          )
+                        }}
+                        renderRow={({ name, addresses, phones, email }) => ({
+                          name,
+                          phones: (
+                            <>
+                              <Box>
+                                {phones
+                                  .filter(a => a.type === "MOBILE")
+                                  .map(item => item.number)[0] ||
+                                  phones[0].number}
+                              </Box>
+                              <Box>{email}</Box>
+                            </>
+                          ),
+                          addresses: addresses
+                            .filter(a => a.type === "RESIDENCE")
+                            .map((item, key) => (
+                              <AddressView data={item} key={key} />
+                            ))
+                        })}
+                        tableName="reimbursement-contract/divisions"
+                      />
+                      <Pagination {...pageInfo} />
+                    </>
+                  ) : (
+                    <EmptyData />
+                  )}
+                </LoadingOverlay>
               );
             }}
           </Query>
