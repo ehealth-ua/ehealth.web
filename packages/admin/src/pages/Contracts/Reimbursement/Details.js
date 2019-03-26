@@ -8,7 +8,7 @@ import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
 import { DateFormat, Trans } from "@lingui/macro";
 import isEmpty from "lodash/isEmpty";
-import { Flag, FlagsProvider } from "flag";
+import { FlagsProvider } from "flag";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
 import {
@@ -143,136 +143,131 @@ const Details = ({ id }) => {
                               type="SUSPENDED"
                               minWidth={100}
                             />
-                            <Flag name="features.suspendContractMutation">
-                              {status === "VERIFIED" &&
-                                !isSuspended && (
-                                  <Box ml={3}>
-                                    <Mutation
-                                      mutation={SuspendContractMutation}
-                                      refetchQueries={() => [
-                                        {
-                                          query: ReimbursementContractQuery,
-                                          variables: {
-                                            id,
-                                            first: ITEMS_PER_PAGE[0]
-                                          }
+                            {status === "VERIFIED" &&
+                              !isSuspended && (
+                                <Box ml={3}>
+                                  <Mutation
+                                    mutation={SuspendContractMutation}
+                                    refetchQueries={() => [
+                                      {
+                                        query: ReimbursementContractQuery,
+                                        variables: {
+                                          id,
+                                          first: ITEMS_PER_PAGE[0]
                                         }
-                                      ]}
-                                    >
-                                      {suspendContract => (
-                                        <>
-                                          <Link
-                                            is="a"
-                                            disabled={isVisible["suspendPopup"]}
-                                            onClick={() =>
-                                              toggle("suspendPopup")
-                                            }
-                                            fontWeight="bold"
-                                          >
+                                      }
+                                    ]}
+                                  >
+                                    {suspendContract => (
+                                      <>
+                                        <Link
+                                          is="a"
+                                          disabled={isVisible["suspendPopup"]}
+                                          onClick={() => toggle("suspendPopup")}
+                                          fontWeight="bold"
+                                        >
+                                          <Trans>Suspend contract</Trans>
+                                        </Link>
+                                        <Popup
+                                          visible={isVisible["suspendPopup"]}
+                                          onCancel={() =>
+                                            toggle("suspendPopup")
+                                          }
+                                          title={
                                             <Trans>Suspend contract</Trans>
-                                          </Link>
-                                          <Popup
-                                            visible={isVisible["suspendPopup"]}
-                                            onCancel={() =>
-                                              toggle("suspendPopup")
-                                            }
-                                            title={
-                                              <Trans>Suspend contract</Trans>
-                                            }
-                                            formId="suspendContract"
-                                          >
-                                            <Form
-                                              id="suspendContract"
-                                              onSubmit={async ({
-                                                reason,
-                                                statusReason
-                                              }) => {
-                                                await suspendContract({
-                                                  variables: {
-                                                    input: {
-                                                      id,
-                                                      reason,
-                                                      isSuspended: true,
-                                                      statusReason
-                                                    }
+                                          }
+                                          formId="suspendContract"
+                                        >
+                                          <Form
+                                            id="suspendContract"
+                                            onSubmit={async ({
+                                              reason,
+                                              statusReason
+                                            }) => {
+                                              await suspendContract({
+                                                variables: {
+                                                  input: {
+                                                    id,
+                                                    reason,
+                                                    isSuspended: true,
+                                                    statusReason
                                                   }
-                                                });
-                                                toggle("suspendPopup");
-                                              }}
-                                            >
-                                              <Text mb={5}>
-                                                <Trans>
-                                                  Attention! After the
-                                                  suspension of the agreement,
-                                                  this action can not be
-                                                  canceled
-                                                </Trans>
-                                              </Text>
-                                              <Box width={1 / 2}>
-                                                <DictionaryValue
-                                                  name="CONTRACT_STATUS_REASON"
-                                                  render={dict => (
-                                                    <Trans
-                                                      id="Choose status reason"
-                                                      render={({
-                                                        translation
-                                                      }) => (
-                                                        <Field.Select
-                                                          name="statusReason"
-                                                          label={
-                                                            <Trans>
-                                                              Status reason
-                                                            </Trans>
-                                                          }
-                                                          placeholder={
-                                                            translation
-                                                          }
-                                                          items={["DEFAULT"]}
-                                                          itemToString={item =>
-                                                            dict[item] ||
-                                                            translation
-                                                          }
-                                                          variant="select"
-                                                          emptyOption
-                                                        />
-                                                      )}
-                                                    />
-                                                  )}
-                                                />
-                                                <Validation.Required
-                                                  field="statusReason"
-                                                  message="Required field"
-                                                />
-                                              </Box>
-                                              <Trans
-                                                id="Enter reason comment"
-                                                render={({ translation }) => (
-                                                  <Field.Textarea
-                                                    label={
-                                                      <Trans>
-                                                        Status reason comment
-                                                      </Trans>
-                                                    }
-                                                    name="reason"
-                                                    placeholder={translation}
-                                                    rows={5}
-                                                    maxlength="3000"
-                                                    showLengthHint
+                                                }
+                                              });
+                                              toggle("suspendPopup");
+                                            }}
+                                          >
+                                            <Text mb={5}>
+                                              <Trans>
+                                                Attention! After the suspension
+                                                of the agreement, this action
+                                                can not be canceled
+                                              </Trans>
+                                            </Text>
+                                            <Box width={1 / 2}>
+                                              <DictionaryValue
+                                                name="CONTRACT_STATUS_REASON"
+                                                render={dict => (
+                                                  <Trans
+                                                    id="Choose status reason"
+                                                    render={({
+                                                      translation
+                                                    }) => (
+                                                      <Field.Select
+                                                        name="statusReason"
+                                                        label={
+                                                          <Trans>
+                                                            Status reason
+                                                          </Trans>
+                                                        }
+                                                        placeholder={
+                                                          translation
+                                                        }
+                                                        items={["DEFAULT"]}
+                                                        itemToString={item =>
+                                                          dict[item] ||
+                                                          translation
+                                                        }
+                                                        variant="select"
+                                                        emptyOption
+                                                      />
+                                                    )}
                                                   />
                                                 )}
                                               />
                                               <Validation.Required
-                                                field="reason"
+                                                field="statusReason"
                                                 message="Required field"
                                               />
-                                            </Form>
-                                          </Popup>
-                                        </>
-                                      )}
-                                    </Mutation>
-                                  </Box>
-                                )}
-                            </Flag>
+                                            </Box>
+                                            <Trans
+                                              id="Enter reason comment"
+                                              render={({ translation }) => (
+                                                <Field.Textarea
+                                                  label={
+                                                    <Trans>
+                                                      Status reason comment
+                                                    </Trans>
+                                                  }
+                                                  name="reason"
+                                                  placeholder={translation}
+                                                  rows={5}
+                                                  maxlength="3000"
+                                                  showLengthHint
+                                                />
+                                              )}
+                                            />
+                                            <Validation.Required
+                                              field="reason"
+                                              message="Required field"
+                                            />
+                                          </Form>
+                                        </Popup>
+                                      </>
+                                    )}
+                                  </Mutation>
+                                </Box>
+                              )}
                           </Flex>
                         )
                       }}

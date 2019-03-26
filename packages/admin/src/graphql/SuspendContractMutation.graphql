@@ -2,6 +2,7 @@ mutation SuspendContractMutation($input: SuspendContractInput!) {
   suspendContract(input: $input) {
     contract {
       id
+      isSuspended
     }
   }
 }
