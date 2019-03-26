@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.71.1"></a>
+## [1.71.1](https://github.com/edenlabllc/ehealth.web/compare/v1.71.0...v1.71.1) (2019-03-26)
+
+
+### Bug Fixes
+
+* **admin:** update isSuspended after mutation ([a7d5ae5](https://github.com/edenlabllc/ehealth.web/commit/a7d5ae5))
+
+
+
+
+
 <a name="1.71.0"></a>
 # [1.71.0](https://github.com/edenlabllc/ehealth.web/compare/v1.70.9...v1.71.0) (2019-03-25)
 
