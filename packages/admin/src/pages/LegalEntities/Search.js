@@ -13,7 +13,8 @@ import { LocationParams, Validation } from "@ehealth/components";
 import {
   normalizeName,
   parseSortingParams,
-  stringifySortingParams
+  stringifySortingParams,
+  convertStringToBoolean
 } from "@ehealth/utils";
 import { PositiveIcon, SearchIcon, NegativeIcon } from "@ehealth/icons";
 
@@ -28,6 +29,7 @@ import Badge from "../../components/Badge";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 import SearchForm from "../../components/SearchForm";
 import flags from "../../flags";
+import STATUSES from "../../helpers/statuses";
 
 const SettlementsQuery = loader("../../graphql/SettlementsQuery.graphql");
 const SearchLegalEntitiesQuery = loader(
@@ -51,7 +53,7 @@ const Search = ({ uri }) => (
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const {
-          filter: { code, addresses, nhsVerified, type } = {},
+          filter: { code, addresses, nhsVerified, type, edrVerified } = {},
           first,
           last,
           after,
@@ -67,6 +69,7 @@ const Search = ({ uri }) => (
           nhsVerified: isEmpty(nhsVerified)
             ? undefined
             : nhsVerified === "VERIFIED",
+          edrVerified: convertStringToBoolean(edrVerified),
           addresses: isEmpty(addresses)
             ? undefined
             : {
@@ -120,6 +123,7 @@ const Search = ({ uri }) => (
                         type: <Trans>Legal entity type</Trans>,
                         edrpou: <Trans>EDRPOU</Trans>,
                         addresses: <Trans>Address</Trans>,
+                        edrVerified: <Trans>EDR verified</Trans>,
                         nhsVerified: <Trans>NHS verified</Trans>,
                         nhsReviewed: <Trans>NHS reviewed</Trans>,
                         insertedAt: <Trans>Inserted at</Trans>,
@@ -130,6 +134,7 @@ const Search = ({ uri }) => (
                         addresses,
                         nhsVerified,
                         nhsReviewed,
+                        edrVerified,
                         status,
                         insertedAt,
                         databaseId,
@@ -147,6 +152,11 @@ const Search = ({ uri }) => (
                         nhsVerified: (
                           <Flex justifyContent="center">
                             {nhsVerified ? <PositiveIcon /> : <NegativeIcon />}
+                          </Flex>
+                        ),
+                        edrVerified: (
+                          <Flex justifyContent="center">
+                            {edrVerified ? <PositiveIcon /> : <NegativeIcon />}
                           </Flex>
                         ),
                         nhsReviewed: (
@@ -244,7 +254,7 @@ const PrimarySearchFields = ({ initialValues: { addresses } }) => (
       </Flex>
       <Flex mx={-1}>
         <Flag name="features.searchBySettlement">
-          <Box px={1} width={1 / 3}>
+          <Box px={1} width={1 / 4}>
             <Trans
               id="Enter settlement"
               render={({ translation }) => (
@@ -325,6 +335,24 @@ const PrimarySearchFields = ({ initialValues: { addresses } }) => (
               />
             )}
           </Composer>
+        </Box>
+
+        <Box px={1} width={1 / 4}>
+          <Trans
+            id="Select option"
+            render={({ translation }) => (
+              <Field.Select
+                name="filter.edrVerified"
+                label={<Trans>EDR Verification</Trans>}
+                items={Object.keys(STATUSES.EDR_VERIFY_STATUS)}
+                itemToString={item =>
+                  STATUSES.EDR_VERIFY_STATUS[item] || translation
+                }
+                variant="select"
+                emptyOption
+              />
+            )}
+          />
         </Box>
       </Flex>
     </>

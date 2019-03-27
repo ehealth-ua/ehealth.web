@@ -41,6 +41,7 @@ query LegalEntityQuery(
     misVerified
     nhsVerified
     nhsReviewed
+    edrVerified
     nhsComment
     website
     receiverFundsCode
@@ -149,6 +150,7 @@ query LegalEntityQuery(
         email
         status
         mountainGroup
+        dlsVerified
       }
       pageInfo {
         endCursor

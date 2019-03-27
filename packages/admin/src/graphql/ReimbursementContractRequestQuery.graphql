@@ -68,6 +68,7 @@ query ReimbursementContractRequestQuery($id: ID!) {
     contractorDivisions {
       id
       name
+      dlsVerified
       addresses {
         type
         area

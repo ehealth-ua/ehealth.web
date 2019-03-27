@@ -19,7 +19,8 @@ import {
   getFullName,
   getPhones,
   parseSortingParams,
-  stringifySortingParams
+  stringifySortingParams,
+  convertStringToBoolean
 } from "@ehealth/utils";
 import { LocationParams, Form, Modal } from "@ehealth/components";
 
@@ -41,6 +42,7 @@ import EmptyData from "../../components/EmptyData";
 import Pagination from "../../components/Pagination";
 
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
+import STATUSES from "../../helpers/statuses";
 
 const DeactivateLegalEntityMutation = loader(
   "../../graphql/DeactivateLegalEntityMutation.graphql"
@@ -84,6 +86,7 @@ const Details = ({ id, navigate }) => (
         kveds = [],
         misVerified,
         nhsVerified,
+        edrVerified,
         nhsReviewed,
         nhsComment,
         owner,
@@ -257,6 +260,7 @@ const Details = ({ id, navigate }) => (
                 path="/licenses"
                 license={medicalServiceProvider}
                 nhsVerified={nhsVerified}
+                edrVerified={edrVerified}
                 nhsComment={nhsComment}
                 isVerificationActive={isVerificationActive}
               />
@@ -386,6 +390,7 @@ const License = ({
   isVerificationActive,
   license,
   nhsVerified,
+  edrVerified,
   nhsComment
 }) => {
   const { accreditation, licenses } = license || {};
@@ -481,10 +486,12 @@ const License = ({
         </Heading>
         <DefinitionListView
           labels={{
-            nhsVerified: <Trans>Verification NZZU</Trans>
+            nhsVerified: <Trans>Verification NZZU</Trans>,
+            edrVerified: <Trans>EDR Verification</Trans>
           }}
           data={{
-            nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />
+            nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />,
+            edrVerified: edrVerified ? <PositiveIcon /> : <NegativeIcon />
           }}
         />
         <Box mt={3} mb={4}>
@@ -795,23 +802,50 @@ const Divisions = ({ id }) => (
   <Ability action="read" resource="division">
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
-        const { first, last, after, before } = locationParams;
+        const {
+          first,
+          last,
+          after,
+          before,
+          filter: { divisionFilter, dlsVerified } = {}
+        } = locationParams;
+
         return (
           <>
             <Form onSubmit={setLocationParams} initialValues={locationParams}>
-              <Box px={5} pt={5} width={460}>
-                <Trans
-                  id="Enter division name"
-                  render={({ translation }) => (
-                    <Field.Text
-                      name="filter.divisionFilter.name"
-                      label={<Trans>Find division</Trans>}
-                      placeholder={translation}
-                      postfix={<SearchIcon color="silverCity" />}
-                    />
-                  )}
-                />
-              </Box>
+              <Form.AutoSubmit onSubmit={values => setLocationParams(values)} />
+              <Flex pt={5}>
+                <Box px={5} width={1 / 2}>
+                  <Trans
+                    id="Enter division name"
+                    render={({ translation }) => (
+                      <Field.Text
+                        name="filter.divisionFilter.name"
+                        label={<Trans>Find division</Trans>}
+                        placeholder={translation}
+                        postfix={<SearchIcon color="silverCity" />}
+                      />
+                    )}
+                  />
+                </Box>
+                <Box px={1} width={1 / 4}>
+                  <Trans
+                    id="Select option"
+                    render={({ translation }) => (
+                      <Field.Select
+                        name="filter.dlsVerified"
+                        label={<Trans>DLS Verification</Trans>}
+                        items={Object.keys(STATUSES.DLS_VERIFY_STATUS)}
+                        itemToString={item =>
+                          STATUSES.DLS_VERIFY_STATUS[item] || translation
+                        }
+                        variant="select"
+                        emptyOption
+                      />
+                    )}
+                  />
+                </Box>
+              </Flex>
             </Form>
             <Query
               query={LegalEntityQuery}
@@ -826,7 +860,11 @@ const Divisions = ({ id }) => (
                 lastDivisions: last ? parseInt(last) : undefined,
                 beforeDivisions: before,
                 afterDivisions: after,
-                firstMergedFromLegalEntities: ITEMS_PER_PAGE[0]
+                firstMergedFromLegalEntities: ITEMS_PER_PAGE[0],
+                divisionFilter: {
+                  ...divisionFilter,
+                  dlsVerified: convertStringToBoolean(dlsVerified)
+                }
               }}
             >
               {({
@@ -851,6 +889,7 @@ const Divisions = ({ id }) => (
                             mountainGroup: <Trans>Mountain region</Trans>,
                             phones: <Trans>Phone</Trans>,
                             email: <Trans>Email</Trans>,
+                            dlsVerified: <Trans>DLS Verification</Trans>,
                             status: <Trans>Status</Trans>
                           }}
                           renderRow={({
@@ -858,6 +897,7 @@ const Divisions = ({ id }) => (
                             addresses,
                             phones,
                             status,
+                            dlsVerified,
                             ...props
                           }) => ({
                             ...props,
@@ -868,6 +908,11 @@ const Divisions = ({ id }) => (
                                 ) : (
                                   <NegativeIcon />
                                 )}
+                              </Flex>
+                            ),
+                            dlsVerified: (
+                              <Flex justifyContent="center">
+                                {STATUSES.DLS_VERIFY_STATUS[dlsVerified]}
                               </Flex>
                             ),
                             addresses: addresses

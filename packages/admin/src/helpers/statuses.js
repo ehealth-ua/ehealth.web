@@ -51,6 +51,17 @@ const MEDICAL_PROGRAM_STATUS = {
   [false]: "Неактивна"
 };
 
+const DLS_VERIFY_STATUS = {
+  [true]: "Так",
+  [false]: "Ні",
+  [null]: "Невизначено"
+};
+
+const EDR_VERIFY_STATUS = {
+  [true]: "Веріфіковано",
+  [false]: "Неверіфіковано"
+};
+
 const PROGRAM_MEDICATION_STATUS = {
   [true]: "Активний",
   [false]: "Неактивний"
@@ -114,7 +125,9 @@ const STATUSES = {
   SUSPENDED,
   ACTIVE_STATUS_F,
   ACTIVE_STATUS_M,
-  NO_TAX_ID
+  NO_TAX_ID,
+  DLS_VERIFY_STATUS,
+  EDR_VERIFY_STATUS
 };
 
 export default STATUSES;

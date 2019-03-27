@@ -38,6 +38,7 @@ import EmptyData from "../../../components/EmptyData";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import Popup from "../../../components/Popup";
 import flags from "../../../flags";
+import STATUSES from "../../../helpers/statuses";
 
 const ReimbursementContractQuery = loader(
   "../../../graphql/ReimbursementContractQuery.graphql"
@@ -696,13 +697,18 @@ const Divisions = ({ id }) => (
               divisionFilter: { name }
             }}
           >
-            {({ loading, error, data }) => {
-              const {
-                contractorDivisions: {
-                  nodes: contractorDivisions,
-                  pageInfo
+            {({
+              loading,
+              error,
+              data: {
+                reimbursementContract: {
+                  contractorDivisions: {
+                    nodes: contractorDivisions = [],
+                    pageInfo
+                  } = {}
                 } = {}
-              } = data.reimbursementContract;
+              } = {}
+            }) => {
               return (
                 <LoadingOverlay loading={loading}>
                   {contractorDivisions.length > 0 ? (
@@ -718,9 +724,16 @@ const Divisions = ({ id }) => (
                               <br />
                               <Trans>Email</Trans>
                             </>
-                          )
+                          ),
+                          dlsVerified: <Trans>DLS Verification</Trans>
                         }}
-                        renderRow={({ name, addresses, phones, email }) => ({
+                        renderRow={({
+                          name,
+                          addresses,
+                          phones,
+                          email,
+                          dlsVerified
+                        }) => ({
                           name,
                           phones: (
                             <>
@@ -737,7 +750,12 @@ const Divisions = ({ id }) => (
                             .filter(a => a.type === "RESIDENCE")
                             .map((item, key) => (
                               <AddressView data={item} key={key} />
-                            ))
+                            )),
+                          dlsVerified: (
+                            <Flex justifyContent="center">
+                              {STATUSES.DLS_VERIFY_STATUS[dlsVerified]}
+                            </Flex>
+                          )
                         })}
                         tableName="reimbursement-contract/divisions"
                       />

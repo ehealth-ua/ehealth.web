@@ -74,6 +74,7 @@ query ReimbursementContractQuery(
         id
         databaseId
         name
+        dlsVerified
         addresses {
           type
           area

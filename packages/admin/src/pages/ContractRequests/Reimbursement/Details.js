@@ -9,7 +9,12 @@ import format from "date-fns/format";
 import isEmpty from "lodash/isEmpty";
 import { Trans } from "@lingui/macro";
 import { Switch } from "@ehealth/components";
-import { PrinterIcon, DefaultImageIcon } from "@ehealth/icons";
+import {
+  PrinterIcon,
+  DefaultImageIcon,
+  PositiveIcon,
+  NegativeIcon
+} from "@ehealth/icons";
 import { getFullName, formatWorkingHours } from "@ehealth/utils";
 
 import Line from "../../../components/Line";
@@ -30,6 +35,7 @@ import Approve from "./Approve";
 import Update from "./Update";
 import Decline from "./Decline";
 import PrintOutContent from "./PrintOutContent";
+import STATUSES from "../../../helpers/statuses";
 
 const ReimbursementContractRequestQuery = loader(
   "../../../graphql/ReimbursementContractRequestQuery.graphql"
@@ -400,6 +406,7 @@ const Divisions = ({ contractorDivisions }) =>
             <Trans>Email</Trans>
           </>
         ),
+        dlsVerified: <Trans>DLS Verification</Trans>,
         workingHours: <Trans>Work schedule</Trans>
       }}
       renderRow={({
@@ -407,7 +414,8 @@ const Divisions = ({ contractorDivisions }) =>
         addresses = [],
         workingHours,
         phones = [],
-        email
+        email,
+        dlsVerified
       }) => ({
         name,
         phones: (
@@ -419,6 +427,11 @@ const Divisions = ({ contractorDivisions }) =>
             </Box>
             <Box>{email}</Box>
           </>
+        ),
+        dlsVerified: (
+          <Flex justifyContent="center">
+            {STATUSES.DLS_VERIFY_STATUS[dlsVerified]}
+          </Flex>
         ),
         workingHours:
           workingHours &&

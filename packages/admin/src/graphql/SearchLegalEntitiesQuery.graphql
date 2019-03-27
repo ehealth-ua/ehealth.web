@@ -34,6 +34,7 @@ query SearchLegalEntitiesQuery(
       }
       nhsVerified
       nhsReviewed
+      edrVerified
       insertedAt
       status
       type
