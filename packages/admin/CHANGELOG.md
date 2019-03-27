@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.73.2"></a>
+## [1.73.2](https://github.com/edenlabllc/ehealth.web/compare/v1.73.1...v1.73.2) (2019-03-27)
+
+
+### Bug Fixes
+
+* **admin:** update Flag value for the Employees ([#863](https://github.com/edenlabllc/ehealth.web/issues/863)) ([d52d4ea](https://github.com/edenlabllc/ehealth.web/commit/d52d4ea))
+
+
+
+
+
 <a name="1.73.0"></a>
 # [1.73.0](https://github.com/edenlabllc/ehealth.web/compare/v1.72.4...v1.73.0) (2019-03-27)
 
