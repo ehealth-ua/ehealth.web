@@ -275,7 +275,7 @@ class InvitePage extends Component {
                 >
                   <span className={styles.details__header__title}>
                     {this.state.showDetails
-                      ? "Сховати деталі"
+                      ? "Сховати деталі про персональні дані"
                       : "Деталі про персональні дані"}
                     <span className={styles.details__header__arrow}>
                       <Icon
