@@ -2332,15 +2332,18 @@
   },
   "Reimbursement amount": {
     "translation": "Сума відшкодування",
+    "origin": [["src/pages/ProgramMedications/Search.js", 98]]
+  },
+  "Reimbursement amount for the package of the medicinal product": {
+    "translation": "Розмір відшкодування за упаковку лікарського засобу",
     "origin": [
       ["src/pages/ProgramMedications/Create.js", 177],
       ["src/pages/ProgramMedications/Create.js", 293],
-      ["src/pages/ProgramMedications/Details.js", 241],
-      ["src/pages/ProgramMedications/Search.js", 98]
+      ["src/pages/ProgramMedications/Details.js", 241]
     ]
   },
   "Reimbursement daily dosage": {
-    "translation": "Розмір відшкодування за упаковку",
+    "translation": "Розмір відшкодування добової дози лікарського засобу",
     "origin": [
       ["src/pages/ProgramMedications/Create.js", 234],
       ["src/pages/ProgramMedications/Create.js", 297],

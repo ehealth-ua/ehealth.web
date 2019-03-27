@@ -242,7 +242,11 @@ const GeneralInfo = ({
       <DefinitionListView
         labels={{
           type: <Trans>Reimbursement type</Trans>,
-          reimbursementAmount: <Trans>Reimbursement amount</Trans>,
+          reimbursementAmount: (
+            <Trans>
+              Reimbursement amount for the package of the medicinal product
+            </Trans>
+          ),
           wholesalePrice: <Trans>Wholesale price</Trans>,
           consumerPrice: <Trans>Consumer price</Trans>,
           estimatedPaymentAmount: <Trans>Estimated payment amount</Trans>,

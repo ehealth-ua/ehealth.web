@@ -183,7 +183,7 @@ const CapitationContractRequestsSearch = () => (
 
 const PrimarySearchFields = () => (
   <Flex mx={-1}>
-    <Box px={1} width={1 / 3}>
+    <Box px={1} width={1 / 4}>
       <Trans
         id="EDRPOU or Contract number"
         render={({ translation }) => (
@@ -201,11 +201,52 @@ const PrimarySearchFields = () => (
         message="Invalid number"
       />
     </Box>
-
-    <Box px={1} width={1 / 3}>
+    <Box px={1} width={1 / 4}>
       <AssigneeSearch />
     </Box>
-    <Box px={1} width={1 / 3}>
+    <Box px={1} width={1 / 4}>
+      <Trans
+        id="Enter legal entity name"
+        render={({ translation }) => (
+          <Query
+            query={SearchContractsByLegalEntitiesQuery}
+            variables={{ skip: true }}
+          >
+            {({
+              data: { legalEntities: { nodes: legalEntities = [] } = {} } = {},
+              refetch: refetchlegalEntities
+            }) => (
+              <Field.Select
+                name="filter.contractorLegalEntity"
+                label={<Trans>Legal entity name</Trans>}
+                placeholder={translation}
+                items={legalEntities.map(({ name }) => ({ name }))}
+                onInputValueChange={debounce(
+                  (legalEntity, { selectedItem, inputValue }) => {
+                    const name = selectedItem && selectedItem.name;
+                    return (
+                      name !== inputValue &&
+                      refetchlegalEntities({
+                        skip: false,
+                        first: 20,
+                        filter: {
+                          name: legalEntity,
+                          type: ["MSP", "MSP_PHARMACY"]
+                        }
+                      })
+                    );
+                  },
+                  1000
+                )}
+                itemToString={item => item && item.name}
+                filterOptions={{ keys: ["name"] }}
+              />
+            )}
+          </Query>
+        )}
+      />
+    </Box>
+    <Box px={1} width={1 / 4}>
       <Trans
         id="All statuses"
         render={({ translation }) => (
@@ -248,52 +289,6 @@ const SecondarySearchFields = () => (
             "filter.date.insertedAtTo"
           ]}
           label={<Trans>Contract inserted date</Trans>}
-        />
-      </Box>
-    </Flex>
-    <Flex mx={-1}>
-      <Box px={1} width={1 / 3}>
-        <Trans
-          id="Enter legal entity name"
-          render={({ translation }) => (
-            <Query
-              query={SearchContractsByLegalEntitiesQuery}
-              variables={{ skip: true }}
-            >
-              {({
-                data: {
-                  legalEntities: { nodes: legalEntities = [] } = {}
-                } = {},
-                refetch: refetchlegalEntities
-              }) => (
-                <Field.Select
-                  name="filter.contractorLegalEntity"
-                  label={<Trans>Legal entity name</Trans>}
-                  placeholder={translation}
-                  items={legalEntities.map(({ name }) => ({ name }))}
-                  onInputValueChange={debounce(
-                    (legalEntity, { selectedItem, inputValue }) => {
-                      const name = selectedItem && selectedItem.name;
-                      return (
-                        name !== inputValue &&
-                        refetchlegalEntities({
-                          skip: false,
-                          first: 20,
-                          filter: {
-                            name: legalEntity,
-                            type: ["MSP", "MSP_PHARMACY"]
-                          }
-                        })
-                      );
-                    },
-                    1000
-                  )}
-                  itemToString={item => item && item.name}
-                  filterOptions={{ keys: ["name"] }}
-                />
-              )}
-            </Query>
-          )}
         />
       </Box>
     </Flex>

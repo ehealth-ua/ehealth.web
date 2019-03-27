@@ -170,11 +170,15 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
             />
           </Box>
         </Flex>
-        <Flex>
+        <Flex alignItems="flex-end">
           <Box pr={2} width={2 / 5}>
             <Field.Number
               name="reimbursement.reimbursementAmount"
-              label={<Trans>Reimbursement amount</Trans>}
+              label={
+                <Trans>
+                  Reimbursement amount for the package of the medicinal product
+                </Trans>
+              }
               placeholder="0 - 1 000 000"
               postfix={<Trans>uah</Trans>}
             />
@@ -219,7 +223,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
             />
           </Box>
         </Flex>
-        <Flex>
+        <Flex alignItems="flex-end">
           <Box pr={2} width={2 / 5}>
             <Field.Number
               name="estimatedPaymentAmount"
@@ -284,13 +288,17 @@ const Confirmation = ({ navigate, location: { state } }) => {
           medicationName: medication.name,
           medicalProgramName: medicalProgram.name
         }}
-        labelWidth="200px"
+        labelWidth="225px"
       />
       <Line />
       <DefinitionListView
         labels={{
           type: <Trans>Reimbursement type</Trans>,
-          reimbursementAmount: <Trans>Reimbursement amount</Trans>,
+          reimbursementAmount: (
+            <Trans>
+              Reimbursement amount for the package of the medicinal product
+            </Trans>
+          ),
           wholesalePrice: <Trans>Wholesale price</Trans>,
           consumerPrice: <Trans>Consumer price</Trans>,
           estimatedPaymentAmount: <Trans>Estimated payment amount</Trans>,
@@ -304,7 +312,7 @@ const Confirmation = ({ navigate, location: { state } }) => {
           estimatedPaymentAmount: <Price amount={estimatedPaymentAmount} />,
           reimbursementDailyDosage: <Price amount={reimbursementDailyDosage} />
         }}
-        labelWidth="200px"
+        labelWidth="225px"
       />
       <Flex mt={5}>
         <Box mr={3}>

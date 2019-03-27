@@ -42,7 +42,8 @@ const Details = ({ id }) => {
           manufacturer,
           certificate,
           certificateExpiredAt,
-          ingredients
+          ingredients,
+          dailyDosage
         } = medication;
         return (
           <LoadingOverlay loading={loading}>
@@ -147,6 +148,7 @@ const Details = ({ id }) => {
                   manufacturer={manufacturer}
                   certificate={certificate}
                   certificateExpiredAt={certificateExpiredAt}
+                  dailyDosage={dailyDosage}
                 />
                 <Ingredients path="/ingredients" data={ingredients} />
               </Router>
@@ -165,7 +167,8 @@ const GeneralInfo = ({
   form,
   manufacturer: { name: manufacturerName, country: manufacturerCountry } = {},
   certificate,
-  certificateExpiredAt
+  certificateExpiredAt,
+  dailyDosage
 }) => (
   <Box p={5}>
     <DefinitionListView
@@ -173,13 +176,15 @@ const GeneralInfo = ({
         atcCodes: <Trans>Atc Codes</Trans>,
         packageMinQty: <Trans>packageMinQty</Trans>,
         packageQty: <Trans>packageQty</Trans>,
-        form: <Trans>Medication form</Trans>
+        form: <Trans>Medication form</Trans>,
+        dailyDosage: <Trans>Daily dosage</Trans>
       }}
       data={{
         atcCodes: atcCodes.join(", "),
         packageMinQty,
         packageQty,
-        form: <DictionaryValue name="MEDICATION_FORM" item={form} />
+        form: <DictionaryValue name="MEDICATION_FORM" item={form} />,
+        dailyDosage
       }}
     />
     <Line />

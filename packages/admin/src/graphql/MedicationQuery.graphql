@@ -1,11 +1,12 @@
 query MedicationQuery($id: ID) {
   medication(id: $id) {
+    id
+    databaseId
     atcCodes
     certificate
     certificateExpiredAt
-    databaseId
     form
-    id
+    dailyDosage
     ingredients {
       dosage {
         denumeratorUnit
