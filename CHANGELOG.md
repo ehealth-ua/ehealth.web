@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.73.0"></a>
+# [1.73.0](https://github.com/edenlabllc/ehealth.web/compare/v1.72.4...v1.73.0) (2019-03-27)
+
+
+### Features
+
+* **admin:** add Employee Details page and Deactivate mutation ([#859](https://github.com/edenlabllc/ehealth.web/issues/859)) ([f031c60](https://github.com/edenlabllc/ehealth.web/commit/f031c60))
+
+
+
+
+
 <a name="1.72.4"></a>
 ## [1.72.4](https://github.com/edenlabllc/ehealth.web/compare/v1.72.3...v1.72.4) (2019-03-27)
 
