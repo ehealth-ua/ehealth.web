@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.74.0"></a>
+# [1.74.0](https://github.com/edenlabllc/ehealth.web/compare/v1.73.2...v1.74.0) (2019-03-27)
+
+
+### Features
+
+* **admin:** add edr and dls verifications ([bd620b0](https://github.com/edenlabllc/ehealth.web/commit/bd620b0))
+
+
+
+
+
 <a name="1.73.2"></a>
 ## [1.73.2](https://github.com/edenlabllc/ehealth.web/compare/v1.73.1...v1.73.2) (2019-03-27)
 
