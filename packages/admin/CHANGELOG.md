@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.72.4"></a>
+## [1.72.4](https://github.com/edenlabllc/ehealth.web/compare/v1.72.3...v1.72.4) (2019-03-27)
+
+
+### Bug Fixes
+
+* **admin:** add DailyDosages to the Medication Details page, update locales for the Program Medications, move search by LE field to the primary position on ContractRequest Search pages ([#862](https://github.com/edenlabllc/ehealth.web/issues/862)) ([4808f69](https://github.com/edenlabllc/ehealth.web/commit/4808f69))
+
+
+
+
+
 <a name="1.71.1"></a>
 ## [1.71.1](https://github.com/edenlabllc/ehealth.web/compare/v1.71.0...v1.71.1) (2019-03-26)
 
