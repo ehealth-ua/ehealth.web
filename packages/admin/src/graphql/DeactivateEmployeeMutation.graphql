@@ -1,0 +1,7 @@
+mutation DeactivateEmployee($input: DeactivateEmployeeInput!) {
+  deactivateEmployee(input: $input) {
+    employee {
+      id
+    }
+  }
+}

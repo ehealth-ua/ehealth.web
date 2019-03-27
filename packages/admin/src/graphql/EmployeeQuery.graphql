@@ -1,0 +1,83 @@
+query EmployeeQuery($id: ID!) {
+  employee(id: $id) {
+    id
+    databaseId
+    position
+    startDate
+    endDate
+    status
+    employeeType
+    isActive
+    party {
+      id
+      databaseId
+      firstName
+      secondName
+      lastName
+      birthDate
+      gender
+      taxId
+      noTaxId
+      email
+      phones {
+        number
+        type
+      }
+      documents {
+        type
+        number
+        issuedBy
+        issuedAt
+      }
+      aboutMyself
+      workingExperience
+    }
+    additionalInfo {
+      specialities {
+        attestationDate
+        attestationName
+        certificateNumber
+        level
+        qualificationType
+        speciality
+        specialityOfficio
+        validToDate
+      }
+      educations {
+        city
+        country
+        degree
+        diplomaNumber
+        institutionName
+        issuedDate
+        speciality
+      }
+      qualifications {
+        certificateNumber
+        institutionName
+        issuedDate
+        speciality
+        type
+      }
+      scienceDegree {
+        city
+        country
+        degree
+        diplomaNumber
+        institutionName
+        issuedDate
+        speciality
+      }
+    }
+    division {
+      id
+      databaseId
+      name
+    }
+    legalEntity {
+      id
+      databaseId
+      name
+    }
+  }
+}
