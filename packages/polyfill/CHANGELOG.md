@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.73.1"></a>
+## [1.73.1](https://github.com/edenlabllc/ehealth.web/compare/v1.73.0...v1.73.1) (2019-03-27)
+
+**Note:** Version bump only for package @ehealth/polyfill
+
+
+
+
+
 <a name="1.53.2"></a>
 ## [1.53.2](https://github.com/edenlabllc/ehealth.web/compare/v1.53.1...v1.53.2) (2019-03-06)
 
