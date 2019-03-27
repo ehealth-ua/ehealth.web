@@ -296,7 +296,7 @@ const Nav = () => (
           </Ability>
         </Flag>
 
-        <Flag name="features.patientsMergeRequest">
+        <Flag name="features.employees">
           <Ability action="read" resource="employee">
             <NavSection title={<Trans>Employees</Trans>}>
               <Ability action="read" resource="employee">
