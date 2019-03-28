@@ -53,8 +53,7 @@ const MEDICAL_PROGRAM_STATUS = {
 
 const DLS_VERIFY_STATUS = {
   [true]: "Так",
-  [false]: "Ні",
-  [null]: "Невизначено"
+  [false]: "Ні"
 };
 
 const EDR_VERIFY_STATUS = {
