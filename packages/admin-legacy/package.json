@@ -46,7 +46,7 @@
     "redux-api-middleware": "1.0.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.4.2",
-    "redux-freeze": "0.1.4",
+    "redux-freeze": "0.1.7",
     "redux-multi": "0.1.12",
     "redux-promise": "0.5.3",
     "redux-thunk": "2.2.0",
