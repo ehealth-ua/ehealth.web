@@ -24,7 +24,7 @@ const ArrayField = ({
         <>
           {fields.map((name, index) => (
             <Item key={name}>
-              {render({ name, index })}
+              {render({ name, index, fields })}
               {disableRemove || (
                 <RemoveButtom
                   icon={<RemoveIcon />}

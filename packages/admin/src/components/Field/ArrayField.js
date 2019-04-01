@@ -11,6 +11,7 @@ const ArrayField = ({
   addText,
   removeText,
   withDelimiter,
+  customRemoveButton,
   fields: Fields
 }) => (
   <Field.Array
@@ -27,14 +28,21 @@ const ArrayField = ({
       </AddButton>
     )}
     removeButton={({ onClick, index }) =>
-      index ? (
+      !customRemoveButton && index ? (
         <Button mb={5} type="reset" variant="red" onClick={onClick}>
           {removeText}
         </Button>
       ) : null
     }
   >
-    {({ name, index }) => <Fields name={name} index={index} />}
+    {({ name, index, fields }) => (
+      <Fields
+        name={name}
+        index={index}
+        fieldsCount={fields.value.length}
+        remove={() => fields.remove(index)}
+      />
+    )}
   </Field.Array>
 );
 
