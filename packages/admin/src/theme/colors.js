@@ -22,7 +22,9 @@ const colors = {
   jacarandaLight: "#A8AAB7",
   orangePastel: "#F7981C",
   jupiter: "#E0E0E0",
-  paleGrey: "#FAFBFC"
+  paleGrey: "#FAFBFC",
+  lightImageTone: "#CED0DA",
+  peterPan: "#27AA11"
 };
 
 export default colors;
