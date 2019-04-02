@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.75.2"></a>
+## [1.75.2](https://github.com/edenlabllc/ehealth.web/compare/v1.75.1...v1.75.2) (2019-04-02)
+
+**Note:** Version bump only for package @ehealth/monorepo
+
+
+
+
+
 <a name="1.75.1"></a>
 ## [1.75.1](https://github.com/edenlabllc/ehealth.web/compare/v1.75.0...v1.75.1) (2019-04-02)
 
