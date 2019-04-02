@@ -12,8 +12,9 @@ import {
   Validation,
   Validations
 } from "@ehealth/components";
-import { parsePhone, formatPhone, getFullName } from "@ehealth/utils";
 import { PositiveIcon, RemoveItemIcon } from "@ehealth/icons";
+import { Signer } from "@ehealth/react-iit-digital-signature";
+import { parsePhone, formatPhone, getFullName } from "@ehealth/utils";
 
 import Line from "../../components/Line";
 import Steps from "../../components/Steps";
@@ -24,11 +25,14 @@ import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
 import {
   TAX_ID_PATTERN,
-  NO_TAX_ID_DOCUMENT_PATTERN
+  NO_TAX_ID_DOCUMENT_PATTERN,
+  UUID_PATTERN
 } from "../../constants/validationPatterns";
 
-const CreateEmployeeMutation = loader(
-  "../../graphql/CreateEmployeeMutation.graphql"
+import env from "../../env";
+
+const CreateEmployeeRequestMutation = loader(
+  "../../graphql/CreateEmployeeRequestMutation.graphql"
 );
 
 const Create = ({ location: { state } }) => (
@@ -238,7 +242,10 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                 />
               )}
             />
-            <Validation.Required field="divisionId" message="Required field" />
+            <Validations field="divisionId">
+              <Validation.Required message="Required field" />
+              <Validation.Matches options={UUID_PATTERN} message="Invalid ID" />
+            </Validations>
           </Box>
         </Flex>
         <Line />
@@ -554,27 +561,40 @@ const Confirmation = ({ navigate, location: { state } }) => {
           </Button>
         </Box>
         <Box>
-          <Mutation mutation={CreateEmployeeMutation}>
-            {createEmployeeMutation => (
-              <Button
-                variant="green"
-                width={140}
-                onClick={async () => {
-                  await createEmployeeMutation({
-                    variables: {
-                      input: {
+          <Signer.Parent
+            url={env.REACT_APP_SIGNER_URL}
+            features={{ width: 640, height: 589 }}
+          >
+            {({ signData }) => (
+              <Mutation mutation={CreateEmployeeRequestMutation}>
+                {createEmployeeRequest => (
+                  <Button
+                    variant="green"
+                    width={140}
+                    onClick={async () => {
+                      const { signedContent } = await signData({
                         ...createEmployee,
                         status: "NEW"
-                      }
-                    }
-                  });
-                  await navigate("../../search");
-                }}
-              >
-                <Trans>Add</Trans>
-              </Button>
+                      });
+                      await createEmployeeRequest({
+                        variables: {
+                          input: {
+                            signedContent: {
+                              content: signedContent,
+                              encoding: "BASE64"
+                            }
+                          }
+                        }
+                      });
+                      await navigate("/employee-requests");
+                    }}
+                  >
+                    <Trans>Sign</Trans>
+                  </Button>
+                )}
+              </Mutation>
             )}
-          </Mutation>
+          </Signer.Parent>
         </Box>
       </Flex>
     </Box>

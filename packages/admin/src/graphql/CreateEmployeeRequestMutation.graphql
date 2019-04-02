@@ -1,0 +1,7 @@
+mutation CreateEmployeeRequestMutation($input: CreateEmployeeRequestInput!) {
+  createEmployeeRequest(input: $input) {
+    employeeRequest {
+      id
+    }
+  }
+}
