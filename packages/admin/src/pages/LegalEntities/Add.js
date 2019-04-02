@@ -258,7 +258,11 @@ const Sign = ({
 }) => (
   <Query
     query={LegalEntityQuery}
-    variables={{ id: legalEntityToId, first: 10 }}
+    variables={{
+      id: legalEntityToId,
+      firstDivisions: 10,
+      firstMergedFromLegalEntities: 10
+    }}
   >
     {({
       loading,
