@@ -12,7 +12,11 @@ const ArrayField = ({
   removeText,
   withDelimiter,
   customRemoveButton,
-  fields: Fields
+  removeButton: RemoveButton = DefaultRemoveButton,
+  fields: Fields,
+  headerComponent: Header,
+  firstItemPinned,
+  vertical
 }) => (
   <Field.Array
     name={name}
@@ -27,26 +31,44 @@ const ArrayField = ({
         </Flex>
       </AddButton>
     )}
-    removeButton={({ onClick, index }) =>
-      !customRemoveButton && index ? (
-        <Button mb={5} type="reset" variant="red" onClick={onClick}>
-          {removeText}
-        </Button>
-      ) : null
-    }
+    disableRemove
   >
-    {({ name, index, fields }) => (
-      <Fields
-        name={name}
-        index={index}
-        fieldsCount={fields.value.length}
-        remove={() => fields.remove(index)}
-      />
+    {({
+      name,
+      index,
+      fields: {
+        remove,
+        value: { length }
+      }
+    }) => (
+      <>
+        {Header && <Header index={index} />}
+        <Wrapper is={vertical && Box}>
+          <Fields name={name} />
+          {length > 1 &&
+            (firstItemPinned && !index ? null : (
+              <RemoveButton
+                buttonText={removeText}
+                onClick={() => remove(index)}
+              />
+            ))}
+        </Wrapper>
+      </>
     )}
   </Field.Array>
 );
 
 export default ArrayField;
+
+const DefaultRemoveButton = ({ buttonText, onClick }) => (
+  <Button mb={5} type="reset" variant="red" onClick={onClick}>
+    {buttonText}
+  </Button>
+);
+
+const Wrapper = system({
+  is: Flex
+});
 
 const AddButton = system(
   {

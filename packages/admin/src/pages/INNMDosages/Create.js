@@ -119,6 +119,9 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
           addText={<Trans>Add additional ingredient</Trans>}
           removeText={<Trans>Delete</Trans>}
           fields={Ingredients}
+          headerComponent={IngredientsHeader}
+          firstItemPinned
+          vertical
         />
         <Flex mb={100}>
           <Box mr={3}>
@@ -142,130 +145,127 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
   );
 };
 
-const Ingredients = ({ name, index }) => (
-  <>
-    <IngredientsHeader index={index} />
-    <Flex mx={-1}>
-      <Box px={1} width={2.5 / 7}>
-        <Query
-          query={SearchINNMsQuery}
-          fetchPolicy="cache-first"
-          variables={{
-            skip: true
-          }}
-        >
-          {({
-            loading,
-            error,
-            data: { innms: { nodes: innms = [] } = {} } = {},
-            refetch: refetchINNMs
-          }) => (
-            <>
-              <I18n>
-                {({ i18n }) => (
-                  <Field.Select
-                    name={`${name}.innm`}
-                    label={<Trans>Ingredient name</Trans>}
-                    placeholder={i18n._(t`Enter ingredient name`)}
-                    items={innms.map(({ id, name }) => ({ innmId: id, name }))}
-                    itemToString={item => item && item.name}
-                    filter={innms => innms}
-                    onInputValueChange={debounce(
-                      (name, { selectedItem, inputValue }) =>
-                        !isEmpty(name) &&
-                        (selectedItem && selectedItem.name) !== inputValue &&
-                        refetchINNMs({
-                          skip: false,
-                          first: 20,
-                          filter: { name, isActive: true }
-                        }),
-                      1000
-                    )}
-                  />
-                )}
-              </I18n>
-              <Validations field={`${name}.innm`}>
-                <Validation.Required message="Required field" />
-                <Validation.Custom
-                  options={({ value, allValues: { ingredients } }) => {
-                    const filteredIngredients = ingredients.filter(
-                      ({ innm } = {}) => {
-                        const { innmId: allValuesId } = innm || {};
-                        const { innmId: valueId } = value || {};
-                        return valueId === allValuesId;
-                      }
-                    );
-                    return filteredIngredients.length === 1;
-                  }}
-                  message="This ingredient is used more than once"
+const Ingredients = ({ name }) => (
+  <Flex mx={-1}>
+    <Box px={1} width={2.5 / 7}>
+      <Query
+        query={SearchINNMsQuery}
+        fetchPolicy="cache-first"
+        variables={{
+          skip: true
+        }}
+      >
+        {({
+          loading,
+          error,
+          data: { innms: { nodes: innms = [] } = {} } = {},
+          refetch: refetchINNMs
+        }) => (
+          <>
+            <I18n>
+              {({ i18n }) => (
+                <Field.Select
+                  name={`${name}.innm`}
+                  label={<Trans>Ingredient name</Trans>}
+                  placeholder={i18n._(t`Enter ingredient name`)}
+                  items={innms.map(({ id, name }) => ({ innmId: id, name }))}
+                  itemToString={item => item && item.name}
+                  filter={innms => innms}
+                  onInputValueChange={debounce(
+                    (name, { selectedItem, inputValue }) =>
+                      !isEmpty(name) &&
+                      (selectedItem && selectedItem.name) !== inputValue &&
+                      refetchINNMs({
+                        skip: false,
+                        first: 20,
+                        filter: { name, isActive: true }
+                      }),
+                    1000
+                  )}
                 />
-              </Validations>
-            </>
-          )}
-        </Query>
-      </Box>
-      <Box px={1} width={1.5 / 7}>
-        <Field.Number
-          name={`${name}.dosage.numeratorValue`}
-          label={<Trans>Amount</Trans>}
-          placeholder="0 - 1 000"
-        />
-        <Validation.Required
-          field={`${name}.dosage.numeratorValue`}
-          message="Required field"
-        />
-      </Box>
+              )}
+            </I18n>
+            <Validations field={`${name}.innm`}>
+              <Validation.Required message="Required field" />
+              <Validation.Custom
+                options={({ value, allValues: { ingredients } }) => {
+                  const filteredIngredients = ingredients.filter(
+                    ({ innm } = {}) => {
+                      const { innmId: allValuesId } = innm || {};
+                      const { innmId: valueId } = value || {};
+                      return valueId === allValuesId;
+                    }
+                  );
+                  return filteredIngredients.length === 1;
+                }}
+                message="This ingredient is used more than once"
+              />
+            </Validations>
+          </>
+        )}
+      </Query>
+    </Box>
+    <Box px={1} width={1.5 / 7}>
+      <Field.Number
+        name={`${name}.dosage.numeratorValue`}
+        label={<Trans>Amount</Trans>}
+        placeholder="0 - 1 000"
+      />
+      <Validation.Required
+        field={`${name}.dosage.numeratorValue`}
+        message="Required field"
+      />
+    </Box>
 
-      <Box px={1} width={1.5 / 7}>
-        <Composer
-          components={[<DictionaryValue name="MEDICATION_UNIT" />, <I18n />]}
-        >
-          {([dict, { i18n }]) => {
-            const translation = i18n._(t`Select option`);
-            return (
-              <Field.Select
-                name={`${name}.dosage.numeratorUnit`}
-                label={<Trans>Units</Trans>}
-                placeholder={translation}
-                items={Object.keys(dict)}
-                itemToString={item => dict[item] || translation}
-                variant="select"
-                emptyOption
-              />
-            );
-          }}
-        </Composer>
-        <Validation.Required
-          field={`${name}.dosage.numeratorUnit`}
-          message="Required field"
-        />
-      </Box>
-      <Box px={1} width={1.5 / 7}>
-        <Composer
-          components={[<DictionaryValue name="MEDICATION_UNIT" />, <I18n />]}
-        >
-          {([dict, { i18n }]) => {
-            const translation = i18n._(t`Select option`);
-            return (
-              <Field.Select
-                name={`${name}.dosage.denumeratorUnit`}
-                label={<Trans>By one</Trans>}
-                placeholder={translation}
-                items={Object.keys(dict)}
-                itemToString={item => dict[item] || translation}
-                variant="select"
-                emptyOption
-              />
-            );
-          }}
-        </Composer>
-        <Validation.Required
-          field={`${name}.dosage.denumeratorUnit`}
-          message="Required field"
-        />
-      </Box>
-    </Flex>
-  </>
+    <Box px={1} width={1.5 / 7}>
+      <Composer
+        components={[<DictionaryValue name="MEDICATION_UNIT" />, <I18n />]}
+      >
+        {([dict, { i18n }]) => {
+          const translation = i18n._(t`Select option`);
+          return (
+            <Field.Select
+              name={`${name}.dosage.numeratorUnit`}
+              label={<Trans>Units</Trans>}
+              placeholder={translation}
+              items={Object.keys(dict)}
+              itemToString={item => dict[item] || translation}
+              variant="select"
+              emptyOption
+            />
+          );
+        }}
+      </Composer>
+      <Validation.Required
+        field={`${name}.dosage.numeratorUnit`}
+        message="Required field"
+      />
+    </Box>
+    <Box px={1} width={1.5 / 7}>
+      <Composer
+        components={[<DictionaryValue name="MEDICATION_UNIT" />, <I18n />]}
+      >
+        {([dict, { i18n }]) => {
+          const translation = i18n._(t`Select option`);
+          return (
+            <Field.Select
+              name={`${name}.dosage.denumeratorUnit`}
+              label={<Trans>By one</Trans>}
+              placeholder={translation}
+              items={Object.keys(dict)}
+              itemToString={item => dict[item] || translation}
+              variant="select"
+              emptyOption
+            />
+          );
+        }}
+      </Composer>
+      <Validation.Required
+        field={`${name}.dosage.denumeratorUnit`}
+        message="Required field"
+      />
+    </Box>
+  </Flex>
 );
 
 const Confirmation = ({ navigate, location: { state } }) => {

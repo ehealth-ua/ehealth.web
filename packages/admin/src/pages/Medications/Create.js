@@ -95,6 +95,8 @@ const GeneralForm = ({ navigate, location, location: { state } }) => {
           addText={<Trans>Add ATC Code</Trans>}
           removeText={<Trans>Delete</Trans>}
           fields={AtcCodes}
+          firstItemPinned
+          vertical
         />
         <Line />
         <Box width={1 / 4}>
@@ -208,6 +210,9 @@ const IngredientsForm = ({ navigate, location, location: { state } }) => {
           addText={<Trans>Add additional ingredient</Trans>}
           removeText={<Trans>Delete</Trans>}
           fields={Ingredients}
+          headerComponent={IngredientsHeader}
+          firstItemPinned
+          vertical
         />
         <Line />
         <Heading as="h1" fontWeight="normal" mb={5}>
@@ -623,7 +628,7 @@ const Confirmation = ({ navigate, location: { state } }) => {
   );
 };
 
-const AtcCodes = ({ name, index }) => (
+const AtcCodes = ({ name }) => (
   <Box width={1 / 4}>
     <Field.Text
       name={name}
@@ -640,115 +645,112 @@ const AtcCodes = ({ name, index }) => (
   </Box>
 );
 
-const Ingredients = ({ name, index }) => (
-  <>
-    <IngredientsHeader index={index} />
-    <Flex mx={-1}>
-      <Box px={1} width={2.5 / 7}>
-        <Query
-          query={SearchINNMDosagesQuery}
-          fetchPolicy="cache-first"
-          variables={{
-            skip: true
-          }}
-        >
-          {({
-            loading,
-            error,
-            data: { innmDosages: { nodes: innmDosages = [] } = {} } = {},
-            refetch: refetchINNMDosages
-          }) => (
-            <I18n>
-              {({ i18n }) => (
-                <Field.Select
-                  name={`${name}.innm`}
-                  label={<Trans>Ingredient name</Trans>}
-                  placeholder={i18n._(t`Enter ingredient name`)}
-                  items={innmDosages.map(({ databaseId, name }) => ({
-                    innmDosageId: databaseId,
-                    name
-                  }))}
-                  itemToString={item => item && item.name}
-                  filter={innmDosages => innmDosages}
-                  onInputValueChange={debounce(
-                    (name, { selectedItem, inputValue }) =>
-                      !isEmpty(name) &&
-                      (selectedItem && selectedItem.name) !== inputValue &&
-                      refetchINNMDosages({
-                        skip: false,
-                        first: 20,
-                        filter: { name, isActive: true }
-                      }),
-                    1000
-                  )}
-                />
-              )}
-            </I18n>
-          )}
-        </Query>
-        <Validation.Required field={`${name}.innm`} message="Required field" />
-      </Box>
-      <Box px={1} width={1.5 / 7}>
-        <Field.Number
-          name={`${name}.dosage.numeratorValue`}
-          label={<Trans>Amount</Trans>}
-          placeholder="0 - 1 000"
-        />
-        <Validation.Required
-          field={`${name}.dosage.numeratorValue`}
-          message="Required field"
-        />
-      </Box>
-      <Box px={1} width={1.5 / 7}>
-        <Composer
-          components={[<DictionaryValue name="MEDICATION_UNIT" />, <I18n />]}
-        >
-          {([dict, { i18n }]) => {
-            const translation = i18n._(t`Select option`);
-            return (
+const Ingredients = ({ name }) => (
+  <Flex mx={-1}>
+    <Box px={1} width={2.5 / 7}>
+      <Query
+        query={SearchINNMDosagesQuery}
+        fetchPolicy="cache-first"
+        variables={{
+          skip: true
+        }}
+      >
+        {({
+          loading,
+          error,
+          data: { innmDosages: { nodes: innmDosages = [] } = {} } = {},
+          refetch: refetchINNMDosages
+        }) => (
+          <I18n>
+            {({ i18n }) => (
               <Field.Select
-                name={`${name}.dosage.numeratorUnit`}
-                label={<Trans>Units</Trans>}
-                placeholder={translation}
-                items={Object.keys(dict)}
-                itemToString={item => dict[item] || translation}
-                variant="select"
-                emptyOption
+                name={`${name}.innm`}
+                label={<Trans>Ingredient name</Trans>}
+                placeholder={i18n._(t`Enter ingredient name`)}
+                items={innmDosages.map(({ databaseId, name }) => ({
+                  innmDosageId: databaseId,
+                  name
+                }))}
+                itemToString={item => item && item.name}
+                filter={innmDosages => innmDosages}
+                onInputValueChange={debounce(
+                  (name, { selectedItem, inputValue }) =>
+                    !isEmpty(name) &&
+                    (selectedItem && selectedItem.name) !== inputValue &&
+                    refetchINNMDosages({
+                      skip: false,
+                      first: 20,
+                      filter: { name, isActive: true }
+                    }),
+                  1000
+                )}
               />
-            );
-          }}
-        </Composer>
-        <Validation.Required
-          field={`${name}.dosage.numeratorUnit`}
-          message="Required field"
-        />
-      </Box>
-      <Box px={1} width={1.5 / 7}>
-        <Composer
-          components={[<DictionaryValue name="MEDICATION_UNIT" />, <I18n />]}
-        >
-          {([dict, { i18n }]) => {
-            const translation = i18n._(t`Select option`);
-            return (
-              <Field.Select
-                name={`${name}.dosage.denumeratorUnit`}
-                label={<Trans>By one</Trans>}
-                placeholder={translation}
-                items={Object.keys(dict)}
-                itemToString={item => dict[item] || translation}
-                variant="select"
-                emptyOption
-              />
-            );
-          }}
-        </Composer>
-        <Validation.Required
-          field={`${name}.dosage.denumeratorUnit`}
-          message="Required field"
-        />
-      </Box>
-    </Flex>
-  </>
+            )}
+          </I18n>
+        )}
+      </Query>
+      <Validation.Required field={`${name}.innm`} message="Required field" />
+    </Box>
+    <Box px={1} width={1.5 / 7}>
+      <Field.Number
+        name={`${name}.dosage.numeratorValue`}
+        label={<Trans>Amount</Trans>}
+        placeholder="0 - 1 000"
+      />
+      <Validation.Required
+        field={`${name}.dosage.numeratorValue`}
+        message="Required field"
+      />
+    </Box>
+    <Box px={1} width={1.5 / 7}>
+      <Composer
+        components={[<DictionaryValue name="MEDICATION_UNIT" />, <I18n />]}
+      >
+        {([dict, { i18n }]) => {
+          const translation = i18n._(t`Select option`);
+          return (
+            <Field.Select
+              name={`${name}.dosage.numeratorUnit`}
+              label={<Trans>Units</Trans>}
+              placeholder={translation}
+              items={Object.keys(dict)}
+              itemToString={item => dict[item] || translation}
+              variant="select"
+              emptyOption
+            />
+          );
+        }}
+      </Composer>
+      <Validation.Required
+        field={`${name}.dosage.numeratorUnit`}
+        message="Required field"
+      />
+    </Box>
+    <Box px={1} width={1.5 / 7}>
+      <Composer
+        components={[<DictionaryValue name="MEDICATION_UNIT" />, <I18n />]}
+      >
+        {([dict, { i18n }]) => {
+          const translation = i18n._(t`Select option`);
+          return (
+            <Field.Select
+              name={`${name}.dosage.denumeratorUnit`}
+              label={<Trans>By one</Trans>}
+              placeholder={translation}
+              items={Object.keys(dict)}
+              itemToString={item => dict[item] || translation}
+              variant="select"
+              emptyOption
+            />
+          );
+        }}
+      </Composer>
+      <Validation.Required
+        field={`${name}.dosage.denumeratorUnit`}
+        message="Required field"
+      />
+    </Box>
+  </Flex>
 );
 
 const IngredientsHeader = ({ index }) => (

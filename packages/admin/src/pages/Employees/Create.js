@@ -12,7 +12,7 @@ import {
   Validation,
   Validations
 } from "@ehealth/components";
-import { formatPhone, getFullName } from "@ehealth/utils";
+import { parsePhone, formatPhone, getFullName } from "@ehealth/utils";
 import { PositiveIcon, RemoveItemIcon } from "@ehealth/icons";
 
 import Line from "../../components/Line";
@@ -265,7 +265,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
           name="party.phones"
           addText={<Trans>Add phone</Trans>}
           fields={PhonesForm}
-          customRemoveButton
+          removeButton={({ onClick }) => <RemoveButton onClick={onClick} />}
         />
         <Line />
         <Text fontSize={2} mb={6}>
@@ -322,7 +322,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
           name="party.documents"
           addText={<Trans>Add document</Trans>}
           fields={DocumentsForm}
-          customRemoveButton
+          removeButton={({ onClick }) => <RemoveButton onClick={onClick} />}
         />
         <Line />
         <Flex mb={200}>
@@ -347,8 +347,8 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
   );
 };
 
-const PhonesForm = ({ name, index, fieldsCount, remove }) => (
-  <Flex>
+const PhonesForm = ({ name }) => (
+  <>
     <Box pr={2} width={2 / 9}>
       <Field.Text
         name={`${name}.number`}
@@ -383,14 +383,11 @@ const PhonesForm = ({ name, index, fieldsCount, remove }) => (
       </Composer>
       <Validation.Required field={`${name}.type`} message="Required field" />
     </Box>
-    <Box width={2 / 9} alignSelf="center">
-      {fieldsCount > 1 && <RemoveItemIcon onClick={remove} />}
-    </Box>
-  </Flex>
+  </>
 );
 
-const DocumentsForm = ({ name, index, fieldsCount, remove }) => (
-  <Flex>
+const DocumentsForm = ({ name }) => (
+  <>
     <Box pr={2} width={2 / 9}>
       <Composer
         components={[<DictionaryValue name="DOCUMENT_TYPE" />, <I18n />]}
@@ -451,10 +448,7 @@ const DocumentsForm = ({ name, index, fieldsCount, remove }) => (
         message="Required field"
       />
     </Box>
-    <Box width={1 / 9} alignSelf="center">
-      {fieldsCount > 1 && <RemoveItemIcon onClick={remove} />}
-    </Box>
-  </Flex>
+  </>
 );
 
 const Confirmation = ({ navigate, location: { state } }) => {
@@ -587,9 +581,10 @@ const Confirmation = ({ navigate, location: { state } }) => {
   );
 };
 
-const parsePhone = phone => {
-  const parsedPhone = `+${phone.replace(/[^\d]/g, "").substr(0, 12)}`;
-  return parsedPhone.length < 4 ? undefined : parsedPhone;
-};
+const RemoveButton = ({ onClick }) => (
+  <Box width={1 / 9} alignSelf="center">
+    <RemoveItemIcon onClick={onClick} />
+  </Box>
+);
 
 export default Create;
