@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.75.4"></a>
+## [1.75.4](https://github.com/edenlabllc/ehealth.web/compare/v1.75.3...v1.75.4) (2019-04-02)
+
+
+### Bug Fixes
+
+* **admin:** change first variable name on LegalEntities Add page ([#876](https://github.com/edenlabllc/ehealth.web/issues/876)) ([e61a6a5](https://github.com/edenlabllc/ehealth.web/commit/e61a6a5))
+
+
+
+
+
 <a name="1.75.3"></a>
 ## [1.75.3](https://github.com/edenlabllc/ehealth.web/compare/v1.75.2...v1.75.3) (2019-04-02)
 
