@@ -79,7 +79,7 @@ const Details = ({ id }) => {
                       databaseId,
                       taxId: party.taxId,
                       name: getFullName(party),
-                      noTaxId: party.noTaxId && <PositiveIcon />
+                      noTaxId: party.noTaxId ? <PositiveIcon /> : null
                     }}
                     color="#7F8FA4"
                     labelWidth="120px"
@@ -136,7 +136,7 @@ const Details = ({ id }) => {
                 <Trans>General info</Trans>
               </Tabs.NavItem>
               <Tabs.NavItem to="./education">
-                <Trans>Education</Trans>
+                <Trans>Education and Qualification</Trans>
               </Tabs.NavItem>
             </Tabs.Nav>
             <Tabs.Content>
@@ -175,7 +175,6 @@ const GeneralInfo = ({
     gender,
     phones,
     documents,
-    email,
     workingExperience,
     aboutMyself
   },
@@ -211,17 +210,15 @@ const GeneralInfo = ({
     <DefinitionListView
       labels={{
         phones: <Trans>Phones</Trans>,
-        email: <Trans>Email</Trans>,
         documents: <Trans>Documents</Trans>
       }}
       data={{
         phones: getPhones(phones),
-        email,
         documents:
           documents &&
           documents.map(({ type, ...documentDetails }, index) => (
-            <Box key={index}>
-              <Heading fontSize="0" fontWeight="bold" py={4}>
+            <Box key={index} pb={4}>
+              <Heading fontSize="0" fontWeight="bold" pb={4}>
                 <DictionaryValue name="DOCUMENT_TYPE" item={type} />
               </Heading>
               <DocumentView data={documentDetails} />
@@ -284,19 +281,79 @@ const Education = ({
   return (
     <Box px={5} pt={5}>
       {specialities && (
-        <EducationDefinitionList title="Specialities" data={specialities} />
+        <EducationDefinitionList
+          title={<Trans>Specialities</Trans>}
+          data={specialities}
+        />
       )}
 
       {educations && (
-        <EducationDefinitionList title="Education" data={educations} />
+        <EducationDefinitionList
+          title={<Trans>Education</Trans>}
+          data={educations}
+        />
       )}
 
       {qualifications && (
-        <EducationDefinitionList title="Qualifications" data={qualifications} />
+        <EducationDefinitionList
+          title={<Trans>Qualifications</Trans>}
+          data={qualifications}
+        />
       )}
 
       {scienceDegree && (
-        <EducationDefinitionList title="Science degree" data={scienceDegree} />
+        <>
+          <Text fontSize={2} mb={6}>
+            <Trans>Science degree</Trans>
+          </Text>
+          {scienceDegree.map(
+            ({
+              degree,
+              speciality,
+              diplomaNumber,
+              institutionName,
+              issuedDate,
+              city,
+              country
+            }) => (
+              <>
+                <DefinitionListView
+                  labels={{
+                    degree: <Trans>Science degree</Trans>,
+                    speciality: <Trans>Speciality</Trans>,
+                    diplomaNumber: <Trans>Diploma number</Trans>,
+                    institutionName: <Trans>Institution name</Trans>,
+                    issuedDate: <Trans>Issued date</Trans>,
+                    place: <Trans>Place of receipt</Trans>
+                  }}
+                  data={{
+                    speciality: speciality && (
+                      <DictionaryValue
+                        name="SPECIALITY_TYPE"
+                        item={speciality}
+                      />
+                    ),
+                    degree: degree && (
+                      <DictionaryValue name="SCIENCE_DEGREE" item={degree} />
+                    ),
+                    diplomaNumber,
+                    institutionName,
+                    issuedDate: issuedDate && <DateFormat value={issuedDate} />,
+                    place: country &&
+                      city && (
+                        <>
+                          <DictionaryValue name="COUNTRY" item={country} />,{" "}
+                          {city}
+                        </>
+                      )
+                  }}
+                  labelWidth="180px"
+                />
+                <Line />
+              </>
+            )
+          )}
+        </>
       )}
     </Box>
   );
@@ -307,7 +364,7 @@ export default Details;
 const EducationDefinitionList = ({ title, data }) => (
   <>
     <Text fontSize={2} mb={6}>
-      <Trans>{title}</Trans>
+      {title}
     </Text>
     {data.map(
       ({
@@ -369,7 +426,12 @@ const EducationDefinitionList = ({ title, data }) => (
               diplomaNumber,
               institutionName,
               issuedDate: issuedDate && <DateFormat value={issuedDate} />,
-              place: country && city && `${country}, ${city}`,
+              place: country &&
+                city && (
+                  <>
+                    <DictionaryValue name="COUNTRY" item={country} />, {city}
+                  </>
+                ),
               type: type && (
                 <DictionaryValue name="QUALIFICATION_TYPE" item={type} />
               )

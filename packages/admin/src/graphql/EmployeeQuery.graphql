@@ -18,7 +18,6 @@ query EmployeeQuery($id: ID!) {
       gender
       taxId
       noTaxId
-      email
       phones {
         number
         type

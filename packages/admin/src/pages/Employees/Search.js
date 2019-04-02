@@ -58,7 +58,6 @@ const Search = ({ navigate }) => (
               renderPrimary={PrimarySearchFields}
               renderSecondary={SecondarySearchFields}
             />
-
             <Query
               query={SearchEmployeesQuery}
               fetchPolicy="network-only"
@@ -75,7 +74,7 @@ const Search = ({ navigate }) => (
                           data={employees}
                           header={{
                             databaseId: <Trans>ID</Trans>,
-                            name: <Trans>Name of employee</Trans>,
+                            partyFullName: <Trans>Name of employee</Trans>,
                             taxId: <Trans>INN</Trans>,
                             noTaxId: <Trans>No tax ID</Trans>,
                             position: <Trans>Position</Trans>,
@@ -88,61 +87,57 @@ const Search = ({ navigate }) => (
                           }}
                           renderRow={({
                             id,
-                            party,
+                            party: { noTaxId, taxId, ...party } = {},
                             position,
-                            noTaxId,
                             employeeType,
                             startDate,
                             legalEntity,
-                            divison,
+                            division,
                             status,
                             ...employeeData
-                          }) => {
-                            return {
-                              ...employeeData,
-                              name: getFullName(party),
-                              noTaxId: (
-                                <Flex justifyContent="center">
-                                  {noTaxId ? (
-                                    <PositiveIcon />
-                                  ) : (
-                                    <NegativeIcon />
-                                  )}
-                                </Flex>
-                              ),
-                              position: (
-                                <DictionaryValue
-                                  name="POSITION"
-                                  item={position}
-                                />
-                              ),
-                              employeeType: (
-                                <DictionaryValue
-                                  name="EMPLOYEE_TYPE"
-                                  item={employeeType}
-                                />
-                              ),
-                              startDate: <DateFormat value={startDate} />,
-                              legalEntityName: legalEntity && legalEntity.name,
-                              divisionName: divison && divison.name,
-                              status: (
-                                <DictionaryValue
-                                  name="EMPLOYEE_STATUS"
-                                  item={status}
-                                />
-                              ),
-                              details: (
-                                <Link to={`../${id}`} fontWeight="bold">
-                                  <Trans>Show details</Trans>
-                                </Link>
-                              )
-                            };
-                          }}
+                          }) => ({
+                            ...employeeData,
+                            partyFullName: getFullName(party),
+                            taxId,
+                            noTaxId: (
+                              <Flex justifyContent="center">
+                                {noTaxId ? <PositiveIcon /> : <NegativeIcon />}
+                              </Flex>
+                            ),
+                            position: (
+                              <DictionaryValue
+                                name="POSITION"
+                                item={position}
+                              />
+                            ),
+                            employeeType: (
+                              <DictionaryValue
+                                name="EMPLOYEE_TYPE"
+                                item={employeeType}
+                              />
+                            ),
+                            startDate: <DateFormat value={startDate} />,
+                            legalEntityName: legalEntity && legalEntity.name,
+                            divisionName: division && division.name,
+                            status: (
+                              <DictionaryValue
+                                name="EMPLOYEE_STATUS"
+                                item={status}
+                              />
+                            ),
+                            details: (
+                              <Link to={`../${id}`} fontWeight="bold">
+                                <Trans>Show details</Trans>
+                              </Link>
+                            )
+                          })}
                           sortableFields={[
-                            "name",
+                            "partyFullName",
                             "startDate",
                             "legalEntityName",
-                            "divisionName"
+                            "divisionName",
+                            "status",
+                            "employeeType"
                           ]}
                           sortingParams={parseSortingParams(orderBy)}
                           onSortingChange={sortingParams =>
@@ -175,7 +170,7 @@ const PrimarySearchFields = () => (
         id="Enter full name"
         render={({ translation }) => (
           <Field.Text
-            name="filter.fullName"
+            name="filter.party.fullName"
             label={<Trans>Full name</Trans>}
             placeholder={translation}
             postfix={<SearchIcon color="silverCity" />}
@@ -225,10 +220,10 @@ const PrimarySearchFields = () => (
     </Box>
     <Box px={1} width={1 / 3}>
       <Trans
-        id="Enter divison name"
+        id="Enter division name"
         render={({ translation }) => (
           <Field.Text
-            name="filter.divison.name"
+            name="filter.division.name"
             label={<Trans>Division name</Trans>}
             placeholder={translation}
             postfix={<SearchIcon color="silverCity" />}
@@ -299,7 +294,7 @@ const SecondarySearchFields = () => (
         >
           {([dict, { translation }]) => (
             <Field.Select
-              name="filter.status"
+              name="filter.employeeStatus"
               label={<Trans>Employee status</Trans>}
               placeholder={translation}
               items={Object.keys(dict)}
@@ -315,7 +310,7 @@ const SecondarySearchFields = () => (
           id="Select option"
           render={({ translation }) => (
             <Field.Select
-              name="filter.noTaxId"
+              name="filter.party.noTaxId"
               label={<Trans>Tax ID existance</Trans>}
               items={Object.keys(STATUSES.NO_TAX_ID)}
               itemToString={item => STATUSES.NO_TAX_ID[item] || translation}

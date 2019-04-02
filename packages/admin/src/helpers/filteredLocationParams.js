@@ -1,9 +1,16 @@
 import { ITEMS_PER_PAGE } from "../constants/pagination";
-import { convertStringToBoolean } from "@ehealth/utils";
+import { convertStringToBoolean, formatDateInterval } from "@ehealth/utils";
 
 const filteredLocationParams = (params = {}, skip) => {
   const { filter = {}, first, last, before, after, orderBy } = params;
-  const { isActive, noTaxId, ...restFilters } = filter;
+  const {
+    isActive,
+    party,
+    startDate: { from, to } = {},
+    employeeStatus,
+    status,
+    ...restFilters
+  } = filter;
   return {
     ...skip,
     first:
@@ -15,7 +22,14 @@ const filteredLocationParams = (params = {}, skip) => {
     filter: {
       ...restFilters,
       isActive: convertStringToBoolean(isActive),
-      noTaxId: convertStringToBoolean(noTaxId)
+      party: party
+        ? {
+            ...party,
+            noTaxId: convertStringToBoolean(party.noTaxId)
+          }
+        : undefined,
+      startDate: formatDateInterval(from, to),
+      status: employeeStatus || status
     }
   };
 };

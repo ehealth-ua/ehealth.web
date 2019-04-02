@@ -16,6 +16,8 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
       medicalProgram,
       form,
       databaseId,
+      employeeType,
+      position,
       date: {
         startFrom,
         startTo,
@@ -24,7 +26,10 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
         insertedAtFrom,
         insertedAtTo
       } = {},
-      contractorLegalEntity: { name } = {}
+      startDate: { from, to } = {},
+      contractorLegalEntity: { name } = {},
+      employeeStatus,
+      party: { noTaxId, ...party } = {}
     } = {}
   } = initialValues;
 
@@ -147,6 +152,29 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
           />
         </SelectedItem>
       )}
+      {(from || to) && (
+        <SelectedItem mx={1}>
+          <Trans>Start date</Trans>:
+          {from && (
+            <Box ml={1}>
+              з <DateFormat value={from} />
+            </Box>
+          )}
+          {to && (
+            <Box ml={1}>
+              по <DateFormat value={to} />
+            </Box>
+          )}
+          <RemoveSelected
+            reset={{
+              startDate: {
+                from: undefined,
+                to: undefined
+              }
+            }}
+          />
+        </SelectedItem>
+      )}
       {name && (
         <SelectedItem mx={1}>
           <Trans>Legal entity name</Trans>:<Box ml={1}>{name}</Box>
@@ -168,6 +196,39 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
         <SelectedItem mx={1}>
           {databaseId}
           <RemoveSelected reset={{ databaseId: undefined }} />
+        </SelectedItem>
+      )}
+      {employeeType && (
+        <SelectedItem mx={1}>
+          <Trans>Type</Trans>:
+          <Box ml={1}>
+            <DictionaryValue name="EMPLOYEE_TYPE" item={employeeType} />
+          </Box>
+          <RemoveSelected reset={{ employeeType: undefined }} />
+        </SelectedItem>
+      )}
+      {position && (
+        <SelectedItem mx={1}>
+          <Trans>Position</Trans>:
+          <Box ml={1}>
+            <DictionaryValue name="POSITION" item={position} />
+          </Box>
+          <RemoveSelected reset={{ position: undefined }} />
+        </SelectedItem>
+      )}
+      {employeeStatus && (
+        <SelectedItem mx={1}>
+          <Trans>Employee status</Trans>:
+          <Box ml={1}>
+            <DictionaryValue name="EMPLOYEE_STATUS" item={employeeStatus} />
+          </Box>
+          <RemoveSelected reset={{ employeeStatus: undefined }} />
+        </SelectedItem>
+      )}
+      {noTaxId && (
+        <SelectedItem mx={1}>
+          <Trans>{STATUSES.NO_TAX_ID[noTaxId]} </Trans>
+          <RemoveSelected reset={{ party: { ...party, noTaxId: undefined } }} />
         </SelectedItem>
       )}
     </Flex>

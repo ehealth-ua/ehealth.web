@@ -28,6 +28,8 @@ query SearchEmployeesQuery(
         firstName
         secondName
         lastName
+        taxId
+        noTaxId
       }
       additionalInfo {
         specialities {
