@@ -7,7 +7,7 @@
     "@ehealth/icons": "file:../icons",
     "@ehealth/react-iit-digital-signature": "file:../react-iit-digital-signature",
     "@ehealth/utils": "file:../utils",
-    "classnames": "2.2.5",
+    "classnames": "2.2.6",
     "cookie-parser": "1.4.3",
     "core-js": "2.4.1",
     "cross-env": "2.0.0",
