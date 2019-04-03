@@ -247,7 +247,7 @@ const GeneralInfo = ({
         endDate: endDate && <DateFormat value={endDate} />,
         legalEntity: legalEntity && (
           <Link to={`../../legal-entities/${legalEntity.id}`} fontWeight="bold">
-            <Trans>{legalEntity.name}</Trans>
+            {legalEntity.name}
           </Link>
         ),
         division: division && division.name
