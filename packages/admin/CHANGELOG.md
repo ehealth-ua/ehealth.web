@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.76.1"></a>
+## [1.76.1](https://github.com/edenlabllc/ehealth.web/compare/v1.76.0...v1.76.1) (2019-04-03)
+
+
+### Bug Fixes
+
+* **admin:** remove Trans component from LE name on Employee Details page ([8fb162c](https://github.com/edenlabllc/ehealth.web/commit/8fb162c))
+
+
+
+
+
 <a name="1.76.0"></a>
 # [1.76.0](https://github.com/edenlabllc/ehealth.web/compare/v1.75.5...v1.76.0) (2019-04-03)
 
