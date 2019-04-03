@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.76.0"></a>
+# [1.76.0](https://github.com/edenlabllc/ehealth.web/compare/v1.75.5...v1.76.0) (2019-04-03)
+
+
+### Features
+
+* **admin:** hide pagination in contract request divisions tab ([890bbaf](https://github.com/edenlabllc/ehealth.web/commit/890bbaf))
+
+
+
+
+
 <a name="1.75.4"></a>
 ## [1.75.4](https://github.com/edenlabllc/ehealth.web/compare/v1.75.3...v1.75.4) (2019-04-02)
 
