@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.77.0"></a>
+# [1.77.0](https://github.com/edenlabllc/ehealth.web/compare/v1.76.1...v1.77.0) (2019-04-03)
+
+
+### Features
+
+* **admin:** add Checkbox component ([f5ad09a](https://github.com/edenlabllc/ehealth.web/commit/f5ad09a))
+
+
+
+
+
 <a name="1.51.0"></a>
 # [1.51.0](https://github.com/edenlabllc/ehealth.web/compare/v1.50.7...v1.51.0) (2019-03-01)
 

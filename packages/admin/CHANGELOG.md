@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.77.0"></a>
+# [1.77.0](https://github.com/edenlabllc/ehealth.web/compare/v1.76.1...v1.77.0) (2019-04-03)
+
+
+### Features
+
+* **admin:** add ability to insert custom remove button in ArrayField component ([08c4469](https://github.com/edenlabllc/ehealth.web/commit/08c4469))
+* **admin:** add Checkbox component ([f5ad09a](https://github.com/edenlabllc/ehealth.web/commit/f5ad09a))
+* **admin:** add Create Employee page ([03bf50e](https://github.com/edenlabllc/ehealth.web/commit/03bf50e))
+* **admin:** add Signer to the CreateEmployeeRequest page ([59806e2](https://github.com/edenlabllc/ehealth.web/commit/59806e2))
+
+
+
+
+
 <a name="1.76.1"></a>
 ## [1.76.1](https://github.com/edenlabllc/ehealth.web/compare/v1.76.0...v1.76.1) (2019-04-03)
 

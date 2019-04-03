@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.77.0"></a>
+# [1.77.0](https://github.com/edenlabllc/ehealth.web/compare/v1.76.1...v1.77.0) (2019-04-03)
+
+
+### Features
+
+* **admin:** add ability to insert custom remove button in ArrayField component ([08c4469](https://github.com/edenlabllc/ehealth.web/commit/08c4469))
+
+
+
+
+
 <a name="1.70.4"></a>
 ## [1.70.4](https://github.com/edenlabllc/ehealth.web/compare/v1.70.3...v1.70.4) (2019-03-22)
 
