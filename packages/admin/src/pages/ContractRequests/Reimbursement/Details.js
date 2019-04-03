@@ -446,6 +446,7 @@ const Divisions = ({ contractorDivisions }) =>
       })}
       tableName="/reimbursement-contract-requests/divisions"
       hiddenFields="workingHours"
+      hidePagination
     />
   ) : (
     <EmptyData />

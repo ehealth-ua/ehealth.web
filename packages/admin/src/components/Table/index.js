@@ -40,7 +40,12 @@ type TableProps = {|
   defaultFilter?: (
     data: HeaderData,
     tableName?: string
-  ) => Array<HeaderDataWithStatus | any>
+  ) => Array<HeaderDataWithStatus | any>,
+  hidePagination: boolean,
+  whiteSpaceNoWrap: boolean,
+  headless: boolean,
+  hiddenFields: string,
+  tableBody: React.Node
 |};
 
 type TableState = {|
@@ -136,7 +141,8 @@ class Table extends React.Component<TableProps, TableState> {
       hiddenFields = "",
       whiteSpaceNoWrap,
       headless,
-      tableBody: Body = TableBody
+      tableBody: Body = TableBody,
+      hidePagination
     } = this.props;
     const { filterRow } = this.state;
 
@@ -150,7 +156,7 @@ class Table extends React.Component<TableProps, TableState> {
             alignItems="center"
           >
             <Flex alignItems="center">
-              <ShowItems list={ITEMS_PER_PAGE} />
+              {!hidePagination && <ShowItems list={ITEMS_PER_PAGE} />}
               <Tooltip
                 content="Скинути поточні налаштування"
                 component={() => (

@@ -471,6 +471,7 @@ const Divisions = ({ contractorDivisions }) =>
       })}
       tableName="/capitation-contract-requests/divisions"
       hiddenFields="workingHours"
+      hidePagination
     />
   ) : (
     <EmptyData />
