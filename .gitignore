@@ -67,6 +67,7 @@ _build/
 .env.development.local
 .env.test.local
 .env.production.local
+schema.json
 .idea/
 
 # Helm charts repository
