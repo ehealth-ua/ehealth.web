@@ -92,14 +92,14 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
               id="Enter first name"
               render={({ translation }) => (
                 <Field.Text
-                  name="party.firstName"
+                  name="party.first_name"
                   label={<Trans>First name</Trans>}
                   placeholder={translation}
                 />
               )}
             />
             <Validation.Required
-              field="party.firstName"
+              field="party.first_name"
               message="Required field"
             />
           </Box>
@@ -108,14 +108,14 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
               id="Enter second name"
               render={({ translation }) => (
                 <Field.Text
-                  name="party.secondName"
+                  name="party.second_name"
                   label={<Trans>Second name</Trans>}
                   placeholder={translation}
                 />
               )}
             />
             <Validation.Required
-              field="party.secondName"
+              field="party.second_name"
               message="Required field"
             />
           </Box>
@@ -124,14 +124,14 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
               id="Enter last name"
               render={({ translation }) => (
                 <Field.Text
-                  name="party.lastName"
+                  name="party.last_name"
                   label={<Trans>Last name</Trans>}
                   placeholder={translation}
                 />
               )}
             />
             <Validation.Required
-              field="party.lastName"
+              field="party.last_name"
               message="Required field"
             />
           </Box>
@@ -163,12 +163,12 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
           </Box>
           <Box px={1} width={1 / 3}>
             <Field.DatePicker
-              name="party.birthDate"
+              name="party.birth_date"
               label={<Trans>Date of birth</Trans>}
               minDate="1900-01-01"
             />
             <Validation.Required
-              field="party.birthDate"
+              field="party.birth_date"
               message="Required field"
             />
           </Box>
@@ -208,7 +208,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
             >
               {([dict, { translation }]) => (
                 <Field.Select
-                  name="employeeType"
+                  name="employee_type"
                   label={<Trans>Employee type</Trans>}
                   placeholder={translation}
                   items={Object.keys(dict)}
@@ -219,33 +219,34 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
               )}
             </Composer>
             <Validation.Required
-              field="employeeType"
+              field="employee_type"
               message="Required field"
             />
           </Box>
           <Box px={1} width={1 / 4}>
             <Field.DatePicker
-              name="startDate"
+              name="start_date"
               label={<Trans>Start date</Trans>}
               minDate="1900-01-01"
             />
-            <Validation.Required field="startDate" message="Required field" />
+            <Validation.Required field="start_date" message="Required field" />
           </Box>
           <Box px={1} width={1 / 4}>
             <Trans
               id="Enter division ID"
               render={({ translation }) => (
                 <Field.Text
-                  name="divisionId"
+                  name="division_id"
                   label={<Trans>Division ID</Trans>}
                   placeholder={translation}
                 />
               )}
             />
-            <Validations field="divisionId">
-              <Validation.Required message="Required field" />
-              <Validation.Matches options={UUID_PATTERN} message="Invalid ID" />
-            </Validations>
+            <Validation.Matches
+              field="division_id"
+              options={UUID_PATTERN}
+              message="Invalid ID"
+            />
           </Box>
         </Flex>
         <Line />
@@ -284,7 +285,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
               id="Enter the number"
               render={({ translation }) => (
                 <ControlledField
-                  name="party.noTaxId"
+                  name="party.no_tax_id"
                   subscription={{ value: true }}
                 >
                   {({ input: { value } }) => {
@@ -294,7 +295,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                     return (
                       <>
                         <Field.Text
-                          name="party.taxId"
+                          name="party.tax_id"
                           label={
                             value ? <Trans>Passport</Trans> : <Trans>INN</Trans>
                           }
@@ -302,7 +303,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                           maxLength={value ? 9 : 10}
                         />
                         <Validation.Matches
-                          field="party.taxId"
+                          field="party.tax_id"
                           options={validationPattern}
                           message="Invalid number"
                         />
@@ -316,11 +317,11 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
           <Box alignSelf="center">
             <Field.Checkbox
               label={<Trans>Person waived of tax ID</Trans>}
-              name="party.noTaxId"
+              name="party.no_tax_id"
             />
             <ControlledField.Listener
-              field="party.noTaxId"
-              set="party.taxId"
+              field="party.no_tax_id"
+              set="party.tax_id"
               to=""
             />
           </Box>
@@ -432,7 +433,7 @@ const DocumentsForm = ({ name }) => (
       <I18n>
         {({ i18n }) => (
           <Field.Text
-            name={`${name}.issuedBy`}
+            name={`${name}.issued_by`}
             label={<Trans>Authority that issued</Trans>}
             placeholder={i18n._(t`Enter authority name`)}
             autoComplete="off"
@@ -440,18 +441,18 @@ const DocumentsForm = ({ name }) => (
         )}
       </I18n>
       <Validation.Required
-        field={`${name}.issuedBy`}
+        field={`${name}.issued_by`}
         message="Required field"
       />
     </Box>
     <Box pr={2} width={2 / 9}>
       <Field.DatePicker
-        name={`${name}.issuedAt`}
+        name={`${name}.issued_at`}
         label={<Trans>Date of issue</Trans>}
         minDate="1900-01-01"
       />
       <Validation.Required
-        field={`${name}.issuedAt`}
+        field={`${name}.issued_at`}
         message="Required field"
       />
     </Box>
@@ -464,21 +465,24 @@ const Confirmation = ({ navigate, location: { state } }) => {
     createEmployee,
     createEmployee: {
       position,
-      startDate,
-      employeeType,
-      divisionId,
+      start_date,
+      employee_type,
+      division_id,
       party: {
-        birthDate,
+        birth_date,
         gender,
-        taxId,
-        noTaxId,
+        tax_id,
+        no_tax_id,
         email,
         documents,
         phones,
-        ...fullName
+        first_name,
+        second_name,
+        last_name
       }
     }
   } = state;
+
   return (
     <Box p={5}>
       <DefinitionListView
@@ -488,9 +492,13 @@ const Confirmation = ({ navigate, location: { state } }) => {
           birthDate: <Trans>Date of birth</Trans>
         }}
         data={{
-          fullName: getFullName(fullName),
+          fullName: getFullName({
+            firstName: first_name,
+            secondName: second_name,
+            lastName: last_name
+          }),
           gender: <DictionaryValue name="GENDER" item={gender} />,
-          birthDate: <DateFormat value={birthDate} />
+          birthDate: <DateFormat value={birth_date} />
         }}
         labelWidth="200px"
       />
@@ -504,10 +512,10 @@ const Confirmation = ({ navigate, location: { state } }) => {
         data={{
           position: <DictionaryValue name="POSITION" item={position} />,
           employeeType: (
-            <DictionaryValue name="EMPLOYEE_TYPE" item={employeeType} />
+            <DictionaryValue name="EMPLOYEE_TYPE" item={employee_type} />
           ),
-          startDate: <DateFormat value={startDate} />,
-          divisionId
+          startDate: <DateFormat value={start_date} />,
+          division_id
         }}
         labelWidth="200px"
       />
@@ -526,13 +534,13 @@ const Confirmation = ({ navigate, location: { state } }) => {
       <Line />
       <DefinitionListView
         labels={{
-          taxId: noTaxId ? <Trans>Passport</Trans> : <Trans>INN</Trans>,
+          taxId: no_tax_id ? <Trans>Passport</Trans> : <Trans>INN</Trans>,
           noTaxId: <Trans>No tax ID</Trans>,
           documents: <Trans>Documents</Trans>
         }}
         data={{
-          taxId,
-          noTaxId: noTaxId ? <PositiveIcon /> : null,
+          tax_id,
+          noTaxId: no_tax_id ? <PositiveIcon /> : null,
           documents: documents.map(({ type, ...documentDetails }, index) => (
             <Box key={index} pb={4}>
               <Heading fontSize="0" fontWeight="bold" pb={3}>
@@ -573,8 +581,10 @@ const Confirmation = ({ navigate, location: { state } }) => {
                     width={140}
                     onClick={async () => {
                       const { signedContent } = await signData({
-                        ...createEmployee,
-                        status: "NEW"
+                        employee_request: {
+                          ...createEmployee,
+                          status: "NEW"
+                        }
                       });
                       await createEmployeeRequest({
                         variables: {
