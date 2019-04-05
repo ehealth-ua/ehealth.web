@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.77.1"></a>
+## [1.77.1](https://github.com/edenlabllc/ehealth.web/compare/v1.77.0...v1.77.1) (2019-04-05)
+
+
+### Bug Fixes
+
+* **admin:** change camel to the snake case in createEmployee signed content object keys ([3b3b673](https://github.com/edenlabllc/ehealth.web/commit/3b3b673))
+
+
+### Reverts
+
+* "refactor(mock-server): remove schema.json from remote" ([3f5c45c](https://github.com/edenlabllc/ehealth.web/commit/3f5c45c))
+
+
+
+
+
 <a name="1.77.0"></a>
 # [1.77.0](https://github.com/edenlabllc/ehealth.web/compare/v1.76.1...v1.77.0) (2019-04-03)
 
