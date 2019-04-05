@@ -6,8 +6,8 @@
   "main": "server.js",
   "bin": "server.js",
   "scripts": {
-    "start": "npm run schema && node server.js",
-    "schema": "AUTH_TOKEN_ENV=NnhhMWdjdlgzdFdvcy81N25EM2o0UT09 npx graphql-cli get-schema",
+    "start": "node server.js",
+    "schema": "npx graphql-cli get-schema",
     "image:build": "ehealth-scripts image build",
     "image:test": "ehealth-scripts image test",
     "image:build-and-test": "npm run image:build && npm run image:test",
