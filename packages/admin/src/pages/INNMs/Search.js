@@ -27,7 +27,8 @@ import filteredLocationParams from "../../helpers/filteredLocationParams";
 import {
   INNM_PATTERN,
   INNM_ORIGINAL_NAME_PATTERN,
-  SCTID_PATTERN
+  SCTID_PATTERN,
+  UUID_PATTERN
 } from "../../constants/validationPatterns";
 
 const SearchINNMsQuery = loader("../../graphql/SearchINNMsQuery.graphql");
@@ -341,6 +342,11 @@ const PrimarySearchFields = () => (
               postfix={<SearchIcon color="silverCity" />}
             />
           )}
+        />
+        <Validation.Matches
+          field="filter.databaseId"
+          options={UUID_PATTERN}
+          message="Invalid ID"
         />
       </Box>
       <Box px={1} width={1 / 4}>
