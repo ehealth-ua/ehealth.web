@@ -275,14 +275,23 @@ const PrimarySearchFields = ({ initialValues: { addresses } }) => (
                       label={<Trans>Settlement</Trans>}
                       placeholder={translation}
                       items={settlements}
+                      filter={item => item}
                       onInputValueChange={debounce(
-                        (settlement, { selectedItem, inputValue }) =>
-                          selectedItem !== inputValue &&
-                          refetchSettlements({
-                            skip: false,
-                            first: 20,
-                            filter: { name: settlement }
-                          }),
+                        (settlement, { selectedItem, inputValue }) => {
+                          const selectedName =
+                            selectedItem && selectedItem.name.toLowerCase();
+                          const inputName =
+                            inputValue && inputValue.toLowerCase();
+
+                          return (
+                            selectedName !== inputName &&
+                            refetchSettlements({
+                              skip: false,
+                              first: 20,
+                              filter: { name: settlement }
+                            })
+                          );
+                        },
                         1000
                       )}
                       itemToString={item => item && normalizeName(item.name)}
