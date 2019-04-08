@@ -211,7 +211,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                   name="employee_type"
                   label={<Trans>Employee type</Trans>}
                   placeholder={translation}
-                  items={Object.keys(dict)}
+                  items={Object.keys(dict).filter(item => /^NHS/.test(item))}
                   itemToString={item => dict[item] || translation}
                   variant="select"
                   emptyOption
