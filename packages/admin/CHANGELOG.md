@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.77.2"></a>
+## [1.77.2](https://github.com/edenlabllc/ehealth.web/compare/v1.77.1...v1.77.2) (2019-04-08)
+
+
+### Bug Fixes
+
+* **admin:** add filtering by NHS for Employee Type Field ([ea7af80](https://github.com/edenlabllc/ehealth.web/commit/ea7af80))
+
+
+
+
+
 <a name="1.77.1"></a>
 ## [1.77.1](https://github.com/edenlabllc/ehealth.web/compare/v1.77.0...v1.77.1) (2019-04-05)
 
