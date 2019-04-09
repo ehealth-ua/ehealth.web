@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.77.5"></a>
+## [1.77.5](https://github.com/edenlabllc/ehealth.web/compare/v1.77.4...v1.77.5) (2019-04-09)
+
+
+### Reverts
+
+* **admin:** return `reset authentication method` page ([3ce232d](https://github.com/edenlabllc/ehealth.web/commit/3ce232d))
+
+
+
+
+
 <a name="1.77.4"></a>
 ## [1.77.4](https://github.com/edenlabllc/ehealth.web/compare/v1.77.3...v1.77.4) (2019-04-08)
 
