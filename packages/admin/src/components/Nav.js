@@ -25,11 +25,20 @@ const Nav = () => (
           <Flag
             name="features.person"
             fallbackRender={() => (
-              <Ability action="read" resource="person">
-                <NavLinkExternal to="persons">
-                  <Trans>Persons</Trans>
-                </NavLinkExternal>
-              </Ability>
+              <>
+                <Ability action="read" resource="person">
+                  <NavLinkExternal to="persons">
+                    <Trans>Persons</Trans>
+                  </NavLinkExternal>
+                </Ability>
+                <Ability action="reset_authentication_method" resource="person">
+                  <NavLinkExternal to="reset-authentication-method">
+                    Скинути метод
+                    <br />
+                    авторизації
+                  </NavLinkExternal>
+                </Ability>
+              </>
             )}
           />
 

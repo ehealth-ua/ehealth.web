@@ -41,13 +41,30 @@ class Nav extends React.Component {
             <Flag
               name="features.person"
               fallbackRender={() => (
-                <ShowWithScope scope="person:read">
-                  <NavItem to="/persons" activeClassName={styles.active}>
-                    <Link id="persons-nav" to="/persons">
-                      Персони
-                    </Link>
-                  </NavItem>
-                </ShowWithScope>
+                <>
+                  <ShowWithScope scope="person:read">
+                    <NavItem to="/persons" activeClassName={styles.active}>
+                      <Link id="persons-nav" to="/persons">
+                        Персони
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                  <ShowWithScope scope="person:reset_authentication_method">
+                    <NavItem
+                      to="reset-authentication-method"
+                      activeClassName={styles.active}
+                    >
+                      <Link
+                        id="reset-authentication-method-nav"
+                        to="/reset-authentication-method"
+                      >
+                        Скинути метод
+                        <br />
+                        авторизації
+                      </Link>
+                    </NavItem>
+                  </ShowWithScope>
+                </>
               )}
             />
 
