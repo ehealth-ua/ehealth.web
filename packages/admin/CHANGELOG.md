@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.78.0"></a>
+# [1.78.0](https://github.com/edenlabllc/ehealth.web/compare/v1.77.6...v1.78.0) (2019-04-10)
+
+
+### Bug Fixes
+
+* **admin:** update Employee Details and Search pages ([1876fb7](https://github.com/edenlabllc/ehealth.web/commit/1876fb7))
+
+
+### Features
+
+* **admin:** add new locales ([44e7d66](https://github.com/edenlabllc/ehealth.web/commit/44e7d66))
+
+
+
+
+
 <a name="1.77.6"></a>
 ## [1.77.6](https://github.com/edenlabllc/ehealth.web/compare/v1.77.5...v1.77.6) (2019-04-10)
 
