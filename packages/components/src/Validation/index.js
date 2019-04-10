@@ -2,6 +2,7 @@ import React, { Children, cloneElement } from "react";
 import { Field } from "react-final-form";
 import validator from "validator";
 import capitalize from "lodash/capitalize";
+import { differenceInCalendarYears, differenceInCalendarDays } from "date-fns";
 
 import SubmitValidation from "./SubmitValidation";
 
@@ -47,6 +48,18 @@ const CUSTOM_VALIDATORS = {
     );
   },
   IsExists: (value, ...options) => !options.includes(value),
+  BirthDate: value => {
+    const differenceInDays = differenceInCalendarDays(
+      new Date(),
+      new Date(value)
+    );
+    const differenceInYears = differenceInCalendarYears(
+      new Date(),
+      new Date(value)
+    );
+
+    return differenceInDays >= 0 && differenceInYears < 150;
+  },
   Custom: (value, resultFromOptions) => resultFromOptions
 };
 

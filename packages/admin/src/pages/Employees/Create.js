@@ -15,6 +15,7 @@ import {
 import { PositiveIcon, RemoveItemIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 import { parsePhone, formatPhone, getFullName } from "@ehealth/utils";
+import { subYears, format } from "date-fns";
 
 import Line from "../../components/Line";
 import Steps from "../../components/Steps";
@@ -26,7 +27,8 @@ import DefinitionListView from "../../components/DefinitionListView";
 import {
   TAX_ID_PATTERN,
   NO_TAX_ID_DOCUMENT_PATTERN,
-  UUID_PATTERN
+  UUID_PATTERN,
+  CYRILLIC_NAME
 } from "../../constants/validationPatterns";
 
 import env from "../../env";
@@ -98,10 +100,13 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                 />
               )}
             />
-            <Validation.Required
-              field="party.first_name"
-              message="Required field"
-            />
+            <Validations field="party.first_name">
+              <Validation.Required message="Required field" />
+              <Validation.Matches
+                options={CYRILLIC_NAME}
+                message="Invalid first name"
+              />
+            </Validations>
           </Box>
           <Box px={1} width={1 / 3}>
             <Trans
@@ -113,10 +118,6 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                   placeholder={translation}
                 />
               )}
-            />
-            <Validation.Required
-              field="party.second_name"
-              message="Required field"
             />
           </Box>
           <Box px={1} width={1 / 3}>
@@ -130,10 +131,13 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                 />
               )}
             />
-            <Validation.Required
-              field="party.last_name"
-              message="Required field"
-            />
+            <Validations field="party.last_name">
+              <Validation.Required message="Required field" />
+              <Validation.Matches
+                options={CYRILLIC_NAME}
+                message="Invalid last name"
+              />
+            </Validations>
           </Box>
         </Flex>
         <Flex mx={-1}>
@@ -165,12 +169,12 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
             <Field.DatePicker
               name="party.birth_date"
               label={<Trans>Date of birth</Trans>}
-              minDate="1900-01-01"
+              minDate={format(subYears(new Date(), 150), "YYYY-MM-DD")}
             />
-            <Validation.Required
-              field="party.birth_date"
-              message="Required field"
-            />
+            <Validations field="party.birth_date">
+              <Validation.Required message="Required field" />
+              <Validation.BirthDate message="Invalid birth date" />
+            </Validations>
           </Box>
         </Flex>
         <Line />
