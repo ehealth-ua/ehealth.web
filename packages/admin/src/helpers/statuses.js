@@ -106,6 +106,11 @@ const REIMBURSEMENT_TYPES = {
   FIXED: "Фіксований"
 };
 
+const EMPLOYEE_STATUS = {
+  APPROVED: "Активний",
+  DISMISSED: "Звільнений"
+};
+
 const STATUSES = {
   CONTRACT,
   PERSON,
@@ -126,7 +131,8 @@ const STATUSES = {
   ACTIVE_STATUS_M,
   NO_TAX_ID,
   DLS_VERIFY_STATUS,
-  EDR_VERIFY_STATUS
+  EDR_VERIFY_STATUS,
+  EMPLOYEE_STATUS
 };
 
 export default STATUSES;

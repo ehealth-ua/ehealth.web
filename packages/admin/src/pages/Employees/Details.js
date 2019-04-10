@@ -12,6 +12,7 @@ import Link from "../../components/Link";
 import Line from "../../components/Line";
 import Tabs from "../../components/Tabs";
 import Popup from "../../components/Popup";
+import Badge from "../../components/Badge";
 import Button from "../../components/Button";
 import Ability from "../../components/Ability";
 import Breadcrumbs from "../../components/Breadcrumbs";
@@ -73,19 +74,27 @@ const Details = ({ id }) => {
                       databaseId: <Trans>Employee ID</Trans>,
                       name: <Trans>Name of employee</Trans>,
                       taxId: <Trans>INN</Trans>,
-                      noTaxId: <Trans>No tax ID</Trans>
+                      noTaxId: <Trans>No tax ID</Trans>,
+                      status: <Trans>Employee status</Trans>
                     }}
                     data={{
                       databaseId,
                       taxId: party.taxId,
                       name: getFullName(party),
-                      noTaxId: party.noTaxId ? <PositiveIcon /> : null
+                      noTaxId: party.noTaxId ? <PositiveIcon /> : null,
+                      status: (
+                        <Badge
+                          name={status}
+                          type="EMPLOYEE_STATUS"
+                          minWidth={100}
+                        />
+                      )
                     }}
                     color="#7F8FA4"
                     labelWidth="120px"
                   />
                 </Box>
-                {isActive && (
+                {status === "APPROVED" && (
                   <Box>
                     <Ability action="deactivate" resource="employee">
                       <Mutation
@@ -100,18 +109,18 @@ const Details = ({ id }) => {
                         {deactivateEmployee => (
                           <>
                             <Button onClick={toggle} variant="red">
-                              <Trans>Deactivate</Trans>
+                              <Trans>Dismiss</Trans>
                             </Button>
                             <Popup
                               visible={isVisible}
                               onCancel={toggle}
                               title={
                                 <>
-                                  <Trans>Deactivate employee</Trans>{" "}
+                                  <Trans>Dismiss employee</Trans>{" "}
                                   {getFullName(party)}?
                                 </>
                               }
-                              okText={<Trans>Deactivate</Trans>}
+                              okText={<Trans>Dismiss</Trans>}
                               onOk={async () => {
                                 await deactivateEmployee({
                                   variables: {
@@ -146,11 +155,11 @@ const Details = ({ id }) => {
                   party={party}
                   startDate={startDate}
                   endDate={endDate}
-                  status={status}
                   position={position}
                   employeeType={employeeType}
                   division={division}
                   legalEntity={legalEntity}
+                  isActive={isActive}
                 />
                 <Education
                   path="education"
@@ -178,7 +187,7 @@ const GeneralInfo = ({
     workingExperience,
     aboutMyself
   },
-  status,
+  isActive,
   position,
   employeeType,
   startDate,
@@ -231,18 +240,17 @@ const GeneralInfo = ({
       labels={{
         position: <Trans>Position</Trans>,
         employeeType: <Trans>Employee type</Trans>,
-        status: <Trans>Status</Trans>,
         startDate: <Trans>Employment start date</Trans>,
         endDate: <Trans>Employment end date</Trans>,
         legalEntity: <Trans>Legal entity</Trans>,
-        division: <Trans>Division</Trans>
+        division: <Trans>Division</Trans>,
+        isActive: <Trans>Is employee active</Trans>
       }}
       data={{
         position: <DictionaryValue name="POSITION" item={position} />,
         employeeType: (
           <DictionaryValue name="EMPLOYEE_TYPE" item={employeeType} />
         ),
-        status: <DictionaryValue name="EMPLOYEE_STATUS" item={status} />,
         startDate: <DateFormat value={startDate} />,
         endDate: endDate && <DateFormat value={endDate} />,
         legalEntity: legalEntity && (
@@ -250,7 +258,8 @@ const GeneralInfo = ({
             {legalEntity.name}
           </Link>
         ),
-        division: division && division.name
+        division: division && division.name,
+        isActive: isActive ? <Trans>Yes</Trans> : <Trans>No</Trans>
       }}
     />
 

@@ -133,7 +133,6 @@ const Search = ({ navigate }) => (
                           })}
                           sortableFields={[
                             "partyFullName",
-                            "startDate",
                             "legalEntityName",
                             "divisionName",
                             "status",

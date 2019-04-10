@@ -227,7 +227,7 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
       )}
       {noTaxId && (
         <SelectedItem mx={1}>
-          <Trans>{STATUSES.NO_TAX_ID[noTaxId]} </Trans>
+          {STATUSES.NO_TAX_ID[noTaxId]}
           <RemoveSelected reset={{ party: { ...party, noTaxId: undefined } }} />
         </SelectedItem>
       )}
