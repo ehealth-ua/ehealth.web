@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.79.0"></a>
+# [1.79.0](https://github.com/edenlabllc/ehealth.web/compare/v1.78.0...v1.79.0) (2019-04-11)
+
+
+### Features
+
+* **admin:** add Create Capitation Contract Request page ([2c620b0](https://github.com/edenlabllc/ehealth.web/commit/2c620b0))
+* **admin:** add CreateContractRequest Query and Mutation ([e3ab590](https://github.com/edenlabllc/ehealth.web/commit/e3ab590))
+* **admin:** add Update button to the Capitation Contract Details ([4490ea8](https://github.com/edenlabllc/ehealth.web/commit/4490ea8))
+
+
+
+
+
 <a name="1.78.0"></a>
 # [1.78.0](https://github.com/edenlabllc/ehealth.web/compare/v1.77.6...v1.78.0) (2019-04-10)
 
