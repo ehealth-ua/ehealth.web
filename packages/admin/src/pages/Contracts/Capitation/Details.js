@@ -305,7 +305,7 @@ const Details = ({ id, navigate }) => {
                             variant="blue"
                             onClick={() =>
                               navigate(
-                                `../../../contract-requests/capitation/create/${id}`,
+                                `/contract-requests/capitation/create/${id}`,
                                 {
                                   state: {
                                     updateContract: { id }

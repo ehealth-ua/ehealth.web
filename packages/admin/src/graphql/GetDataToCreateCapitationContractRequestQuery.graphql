@@ -1,4 +1,4 @@
-query CreateCapitationContractQuery($id: ID!) {
+query GetDataToCreateCapitationContractRequestQuery($id: ID!) {
   capitationContract(id: $id) {
     id
     databaseId
