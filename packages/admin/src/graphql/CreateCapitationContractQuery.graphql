@@ -1,0 +1,12 @@
+query CreateCapitationContractQuery($id: ID!) {
+  capitationContract(id: $id) {
+    id
+    databaseId
+    contractorLegalEntity {
+      id
+      databaseId
+      name
+    }
+    toCreateRequestContent
+  }
+}
