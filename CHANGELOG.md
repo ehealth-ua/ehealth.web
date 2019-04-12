@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.80.0"></a>
+# [1.80.0](https://github.com/edenlabllc/ehealth.web/compare/v1.79.0...v1.80.0) (2019-04-12)
+
+
+### Bug Fixes
+
+* **admin:** set correct variable for dateTimeTo in formatDateTimeInterval ([88c92e8](https://github.com/edenlabllc/ehealth.web/commit/88c92e8))
+
+
+### Features
+
+* **admin:** add Employee Requests List page ([59a8817](https://github.com/edenlabllc/ehealth.web/commit/59a8817))
+* **admin:** add new statuses for the Employee Request Badges ([a834fb6](https://github.com/edenlabllc/ehealth.web/commit/a834fb6))
+* **admin:** add Queries for Search and Filter EmployeeRequests ([f04530f](https://github.com/edenlabllc/ehealth.web/commit/f04530f))
+
+
+
+
+
 <a name="1.79.0"></a>
 # [1.79.0](https://github.com/edenlabllc/ehealth.web/compare/v1.78.0...v1.79.0) (2019-04-11)
 

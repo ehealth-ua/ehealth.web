@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.80.0"></a>
+# [1.80.0](https://github.com/edenlabllc/ehealth.web/compare/v1.79.0...v1.80.0) (2019-04-12)
+
+
+### Bug Fixes
+
+* **admin:** set correct variable for dateTimeTo in formatDateTimeInterval ([88c92e8](https://github.com/edenlabllc/ehealth.web/commit/88c92e8))
+
+
+
+
+
 <a name="1.60.0"></a>
 # [1.60.0](https://github.com/edenlabllc/ehealth.web/compare/v1.59.0...v1.60.0) (2019-03-13)
 
