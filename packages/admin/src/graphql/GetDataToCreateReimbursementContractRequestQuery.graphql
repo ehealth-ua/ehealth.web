@@ -1,0 +1,12 @@
+query GetDataToCreateReimbursementContractRequestQuery($id: ID!) {
+  reimbursementContract(id: $id) {
+    id
+    databaseId
+    contractorLegalEntity {
+      id
+      databaseId
+      name
+    }
+    toCreateRequestContent
+  }
+}
