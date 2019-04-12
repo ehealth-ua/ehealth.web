@@ -9,7 +9,7 @@ import { SearchIcon } from "@ehealth/icons";
 import { getFullName } from "@ehealth/utils";
 import { Query, Mutation } from "react-apollo";
 import system from "@ehealth/system-components";
-import { Form, Validation, Validations } from "@ehealth/components";
+import { Form, Validation } from "@ehealth/components";
 import { Router, Link as RouterLink } from "@reach/router";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
