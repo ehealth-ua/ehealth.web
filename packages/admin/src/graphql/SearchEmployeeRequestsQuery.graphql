@@ -1,0 +1,41 @@
+query SearchEmployeeRequestsQuery(
+  $filter: EmployeeRequestFilter
+  $orderBy: EmployeeRequestOrderBy
+  $first: Int
+  $last: Int
+  $before: String
+  $after: String
+) {
+  employeeRequests(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) {
+    nodes {
+      id
+      databaseId
+      email
+      employeeType
+      firstName
+      secondName
+      lastName
+      noTaxId
+      taxId
+      status
+      insertedAt
+      legalEntity {
+        id
+        name
+      }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+  }
+}

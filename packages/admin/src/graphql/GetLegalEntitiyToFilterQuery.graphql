@@ -1,0 +1,23 @@
+query GetLegalEntitiyToFilterQuery(
+  $filter: LegalEntityFilter
+  $orderBy: LegalEntityOrderBy
+  $before: String
+  $after: String
+  $first: Int
+  $last: Int
+  $skip: Boolean = false
+) {
+  legalEntities(
+    first: $first
+    filter: $filter
+    orderBy: $orderBy
+    before: $before
+    after: $after
+    last: $last
+  ) @skip(if: $skip) {
+    nodes {
+      id
+      name
+    }
+  }
+}
