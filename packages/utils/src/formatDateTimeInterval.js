@@ -6,7 +6,7 @@ const formatDateTimeInterval = (from, to) => {
     ? `${from}T00:00:00.000000+0${timezoneOffsetFrom}:00`
     : "..";
   const dateTimeTo = !!timezoneOffsetTo
-    ? `${from}T23:59:59.999999+0${timezoneOffsetTo}:00`
+    ? `${to}T23:59:59.999999+0${timezoneOffsetTo}:00`
     : "..";
 
   return dateTimeFrom === ".." && dateTimeTo === ".."
