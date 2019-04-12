@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.81.0"></a>
+# [1.81.0](https://github.com/edenlabllc/ehealth.web/compare/v1.80.0...v1.81.0) (2019-04-12)
+
+
+### Features
+
+* **admin:** add Create Reimbursement Contract Request page ([12bf6bf](https://github.com/edenlabllc/ehealth.web/commit/12bf6bf))
+* **admin:** add locales for the Create Reimbursement Contract Request page ([a85c93e](https://github.com/edenlabllc/ehealth.web/commit/a85c93e))
+* **admin:** add Update button to the Reimbursement Contract Details ([f17e3fd](https://github.com/edenlabllc/ehealth.web/commit/f17e3fd))
+
+
+
+
+
 <a name="1.80.0"></a>
 # [1.80.0](https://github.com/edenlabllc/ehealth.web/compare/v1.79.0...v1.80.0) (2019-04-12)
 
