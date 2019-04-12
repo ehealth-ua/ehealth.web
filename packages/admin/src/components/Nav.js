@@ -313,6 +313,11 @@ const Nav = () => (
                   <Trans>Employees</Trans>
                 </NavLink>
               </Ability>
+              <Ability action="read" resource="employee_request">
+                <NavLink to="/employee-requests">
+                  <Trans>Employee Requests</Trans>
+                </NavLink>
+              </Ability>
             </NavSection>
           </Ability>
         </Flag>
