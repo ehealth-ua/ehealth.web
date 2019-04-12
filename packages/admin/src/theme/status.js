@@ -16,6 +16,7 @@ const status = {
       POSTPONE: { bg: "orangePastel" },
       DECLINED: { bg: "redPigment" },
       DISMISSED: { bg: "redPigment" },
+      EXPIRED: { bg: "redPigment" },
       APPROVED: { bg: "darkPastelGreen" },
       PENDING_NHS_SIGN: { bg: "shiningKnight", fontSize: 8 },
       SIGNED: { bg: "darkPastelGreen" },

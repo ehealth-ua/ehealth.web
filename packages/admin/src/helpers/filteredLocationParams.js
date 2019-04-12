@@ -1,5 +1,9 @@
 import { ITEMS_PER_PAGE } from "../constants/pagination";
-import { convertStringToBoolean, formatDateInterval } from "@ehealth/utils";
+import {
+  formatDateTimeInterval,
+  convertStringToBoolean,
+  formatDateInterval
+} from "@ehealth/utils";
 
 const filteredLocationParams = (params = {}, skip) => {
   const { filter = {}, first, last, before, after, orderBy } = params;
@@ -7,8 +11,10 @@ const filteredLocationParams = (params = {}, skip) => {
     isActive,
     party,
     startDate: { from, to } = {},
+    date: { insertedAtFrom, insertedAtTo } = {},
     employeeStatus,
     status,
+    legalEntityId,
     ...restFilters
   } = filter;
   return {
@@ -28,8 +34,10 @@ const filteredLocationParams = (params = {}, skip) => {
             noTaxId: convertStringToBoolean(party.noTaxId)
           }
         : undefined,
+      insertedAt: formatDateTimeInterval(insertedAtFrom, insertedAtTo),
       startDate: formatDateInterval(from, to),
-      status: employeeStatus || status
+      status: employeeStatus || status,
+      legalEntityId: legalEntityId ? legalEntityId.id : undefined
     }
   };
 };

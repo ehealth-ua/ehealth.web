@@ -111,6 +111,13 @@ const EMPLOYEE_STATUS = {
   DISMISSED: "Звільнений"
 };
 
+const EMPLOYEE_REQUEST_STATUS = {
+  APPROVED: "Схвалено",
+  EXPIRED: "Прострочено",
+  NEW: "Очікує верифікації",
+  REJECTED: "Відхилено"
+};
+
 const STATUSES = {
   CONTRACT,
   PERSON,
@@ -132,7 +139,8 @@ const STATUSES = {
   NO_TAX_ID,
   DLS_VERIFY_STATUS,
   EDR_VERIFY_STATUS,
-  EMPLOYEE_STATUS
+  EMPLOYEE_STATUS,
+  EMPLOYEE_REQUEST_STATUS
 };
 
 export default STATUSES;
