@@ -94,50 +94,51 @@ const Details = ({ id }) => {
                     labelWidth="120px"
                   />
                 </Box>
-                {status === "APPROVED" && (
-                  <Box>
-                    <Ability action="deactivate" resource="employee">
-                      <Mutation
-                        mutation={DeactivateEmployee}
-                        refetchQueries={() => [
-                          {
-                            query: EmployeeQuery,
-                            variables: { id }
-                          }
-                        ]}
-                      >
-                        {deactivateEmployee => (
-                          <>
-                            <Button onClick={toggle} variant="red">
-                              <Trans>Dismiss</Trans>
-                            </Button>
-                            <Popup
-                              visible={isVisible}
-                              onCancel={toggle}
-                              title={
-                                <>
-                                  <Trans>Dismiss employee</Trans>{" "}
-                                  {getFullName(party)}?
-                                </>
-                              }
-                              okText={<Trans>Dismiss</Trans>}
-                              onOk={async () => {
-                                await deactivateEmployee({
-                                  variables: {
-                                    input: {
-                                      id
+                {status === "APPROVED" &&
+                  employeeType !== "OWNER" && (
+                    <Box>
+                      <Ability action="deactivate" resource="employee">
+                        <Mutation
+                          mutation={DeactivateEmployee}
+                          refetchQueries={() => [
+                            {
+                              query: EmployeeQuery,
+                              variables: { id }
+                            }
+                          ]}
+                        >
+                          {deactivateEmployee => (
+                            <>
+                              <Button onClick={toggle} variant="red">
+                                <Trans>Dismiss</Trans>
+                              </Button>
+                              <Popup
+                                visible={isVisible}
+                                onCancel={toggle}
+                                title={
+                                  <>
+                                    <Trans>Dismiss employee</Trans>{" "}
+                                    {getFullName(party)}?
+                                  </>
+                                }
+                                okText={<Trans>Dismiss</Trans>}
+                                onOk={async () => {
+                                  await deactivateEmployee({
+                                    variables: {
+                                      input: {
+                                        id
+                                      }
                                     }
-                                  }
-                                });
-                                toggle();
-                              }}
-                            />
-                          </>
-                        )}
-                      </Mutation>
-                    </Ability>
-                  </Box>
-                )}
+                                  });
+                                  toggle();
+                                }}
+                              />
+                            </>
+                          )}
+                        </Mutation>
+                      </Ability>
+                    </Box>
+                  )}
               </Flex>
             </Box>
             <Tabs.Nav>
