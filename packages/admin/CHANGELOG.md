@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.82.0"></a>
+# [1.82.0](https://github.com/edenlabllc/ehealth.web/compare/v1.81.0...v1.82.0) (2019-04-15)
+
+
+### Bug Fixes
+
+* **admin:** hide Dismiss Employee button if employeeType is Owner ([8ebcd8a](https://github.com/edenlabllc/ehealth.web/commit/8ebcd8a))
+
+
+### Features
+
+* **admin:** add column isActive to the Employee List table ([3fca093](https://github.com/edenlabllc/ehealth.web/commit/3fca093))
+
+
+
+
+
 <a name="1.81.0"></a>
 # [1.81.0](https://github.com/edenlabllc/ehealth.web/compare/v1.80.0...v1.81.0) (2019-04-12)
 
