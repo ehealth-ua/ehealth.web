@@ -83,6 +83,7 @@ const Search = ({ navigate }) => (
                             legalEntityName: <Trans>Legal entity name</Trans>,
                             divisionName: <Trans>Division name</Trans>,
                             status: <Trans>Status</Trans>,
+                            isActive: <Trans>Is employee active</Trans>,
                             details: <Trans>Details</Trans>
                           }}
                           renderRow={({
@@ -94,6 +95,7 @@ const Search = ({ navigate }) => (
                             legalEntity,
                             division,
                             status,
+                            isActive,
                             ...employeeData
                           }) => ({
                             ...employeeData,
@@ -119,6 +121,11 @@ const Search = ({ navigate }) => (
                             startDate: <DateFormat value={startDate} />,
                             legalEntityName: legalEntity && legalEntity.name,
                             divisionName: division && division.name,
+                            isActive: (
+                              <Flex justifyContent="center">
+                                {isActive ? <PositiveIcon /> : <NegativeIcon />}
+                              </Flex>
+                            ),
                             status: (
                               <DictionaryValue
                                 name="EMPLOYEE_STATUS"
