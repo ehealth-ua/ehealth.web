@@ -12,7 +12,7 @@ class SelectFilterField extends Component {
   }
 
   render() {
-    const { name, labelText, placeholder, options } = this.props;
+    const { name, labelText, placeholder, options, validate } = this.props;
 
     return (
       <div className={styles.select}>
@@ -22,6 +22,7 @@ class SelectFilterField extends Component {
           labelText={labelText}
           placeholder={placeholder}
           options={options}
+          validate={validate ? [validate] : undefined}
           labelBold
         />
       </div>

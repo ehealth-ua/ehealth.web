@@ -19,6 +19,7 @@ import SelectFilterField from "../../forms/SelectFilterField";
 
 import { getDeclarations } from "../../../reducers";
 import uuidValidate from "../../../helpers/validators/uuid-validate";
+import required from "../../../helpers/validators/required-validate";
 
 import { fetchDeclarations } from "./redux";
 
@@ -32,17 +33,17 @@ const SEARCH_FIELDS = [
       {
         name: "person_id",
         title: "За ID пацієнта",
-        validate: uuidValidate
+        validate: [required, uuidValidate]
       },
       {
         name: "employee_id",
         title: "За ID працівника",
-        validate: uuidValidate
+        validate: [required, uuidValidate]
       },
       {
         name: "legal_entity_id",
         title: "За ID юридичної особи",
-        validate: uuidValidate
+        validate: [required, uuidValidate]
       }
     ]
   },
@@ -51,6 +52,7 @@ const SEARCH_FIELDS = [
     labelText: "Статус",
     placeholder: "Активні/Розірвані/Закриті",
     name: "status",
+    validate: required,
     options: [
       { title: "Активні", name: "active" },
       { title: "Розірвані", name: "terminated" },
@@ -142,8 +144,13 @@ const DeclarationsListPage = ({ declarations = [], paging = {}, location }) => (
 
 export default compose(
   provideHooks({
-    fetch: ({ dispatch, location: { query } }) =>
-      dispatch(fetchDeclarations({ page_size: 5, ...query }))
+    fetch: ({ dispatch, location: { query } }) => {
+      if (
+        query.status &&
+        (query.legal_entity_id || query.employee_id || query.person_id)
+      )
+        return dispatch(fetchDeclarations({ page_size: 5, ...query }));
+    }
   }),
   connect(state => ({
     ...state.pages.DeclarationsListPage,

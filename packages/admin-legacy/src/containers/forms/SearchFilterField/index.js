@@ -39,7 +39,13 @@ class SearchFilterField extends Component {
             type="text"
             component={FieldInput}
             label_bold
-            validate={validate ? [validate] : undefined}
+            validate={
+              Array.isArray(validate)
+                ? [...validate]
+                : validate
+                  ? [validate]
+                  : undefined
+            }
             {...props}
             name={name}
           />
@@ -84,4 +90,9 @@ class SearchFilterField extends Component {
   }
 }
 
-export default compose(connect(null, { change }))(SearchFilterField);
+export default compose(
+  connect(
+    null,
+    { change }
+  )
+)(SearchFilterField);

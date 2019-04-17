@@ -21,6 +21,7 @@ import { getMedicationRequests } from "../../../reducers";
 import uuidValidate from "../../../helpers/validators/uuid-validate";
 
 import { fetchMedicationRequests } from "./redux";
+import { fetchDeclarations } from "../DeclarationsListPage/redux";
 
 const SEARCH_FIELDS = [
   {
@@ -143,8 +144,19 @@ const MedicationRequestsListPage = ({
 
 export default compose(
   provideHooks({
-    fetch: ({ dispatch, location: { query } }) =>
-      dispatch(fetchMedicationRequests({ page_size: 5, ...query }))
+    fetch: ({ dispatch, location: { query } }) => {
+      if (
+        query.employee_id ||
+        query.status ||
+        query.person_id ||
+        query.request_number ||
+        query.legal_entity_id ||
+        query.medication_id ||
+        query.created_from ||
+        query.created_to
+      )
+        return dispatch(fetchMedicationRequests({ page_size: 5, ...query }));
+    }
   }),
   connect((state, props) => ({
     ...state.pages.MedicationRequestsListPage,

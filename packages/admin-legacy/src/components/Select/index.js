@@ -47,7 +47,7 @@ class Select extends React.Component {
   // uncontrolled but not both simultaneously
   componentWillReceiveProps(nextProps) {
     if (nextProps.active !== this.props.active) {
-      this.setState({ active: [nextProps.active] });
+      this.setState({ active: nextProps.active && [nextProps.active] });
     }
   }
 
