@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.83.0"></a>
+# [1.83.0](https://github.com/edenlabllc/ehealth.web/compare/v1.82.0...v1.83.0) (2019-04-17)
+
+
+### Features
+
+* **admin-legacy:** disable first fetch on declarations and receipts ([cd224d6](https://github.com/edenlabllc/ehealth.web/commit/cd224d6))
+
+
+
+
+
 <a name="1.80.0"></a>
 # [1.80.0](https://github.com/edenlabllc/ehealth.web/compare/v1.79.0...v1.80.0) (2019-04-12)
 
