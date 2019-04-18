@@ -269,7 +269,19 @@ const PrimarySearchFields = () => (
 );
 
 const SecondarySearchFields = () => (
-  <Flex>
+  <Flex mx={-1}>
+    <Box px={1} width={1 / 3}>
+      <Trans
+        id="Enter ATC code"
+        render={({ translation }) => (
+          <Field.Text
+            name="filter.atcCode"
+            label={<Trans>ATC Code</Trans>}
+            placeholder={translation}
+          />
+        )}
+      />
+    </Box>
     <Box px={1} width={1 / 3}>
       <Composer
         components={[

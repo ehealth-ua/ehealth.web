@@ -18,6 +18,7 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
       databaseId,
       employeeType,
       position,
+      atcCode,
       date: {
         startFrom,
         startTo,
@@ -229,6 +230,12 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
         <SelectedItem mx={1}>
           {STATUSES.NO_TAX_ID[noTaxId]}
           <RemoveSelected reset={{ party: { ...party, noTaxId: undefined } }} />
+        </SelectedItem>
+      )}
+      {atcCode && (
+        <SelectedItem mx={1}>
+          <Trans>ATC Code</Trans>:<Box ml={1}>{atcCode}</Box>
+          <RemoveSelected reset={{ atcCode: undefined }} />
         </SelectedItem>
       )}
     </Flex>
