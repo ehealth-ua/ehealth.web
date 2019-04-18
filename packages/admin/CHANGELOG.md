@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.84.0"></a>
+# [1.84.0](https://github.com/edenlabllc/ehealth.web/compare/v1.83.0...v1.84.0) (2019-04-18)
+
+
+### Features
+
+* **admin:** add filter by ATC Code on Medications List page ([1a6a0f5](https://github.com/edenlabllc/ehealth.web/commit/1a6a0f5))
+
+
+
+
+
 <a name="1.82.0"></a>
 # [1.82.0](https://github.com/edenlabllc/ehealth.web/compare/v1.81.0...v1.82.0) (2019-04-15)
 
