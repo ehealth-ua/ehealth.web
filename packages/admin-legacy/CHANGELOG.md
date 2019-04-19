@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.85.0"></a>
+# [1.85.0](https://github.com/edenlabllc/ehealth.web/compare/v1.84.0...v1.85.0) (2019-04-19)
+
+
+### Features
+
+* **admin-legacy:** disable first fetch on pending declarations and medication dispences ([3d26336](https://github.com/edenlabllc/ehealth.web/commit/3d26336))
+
+
+
+
+
 <a name="1.83.0"></a>
 # [1.83.0](https://github.com/edenlabllc/ehealth.web/compare/v1.82.0...v1.83.0) (2019-04-17)
 
