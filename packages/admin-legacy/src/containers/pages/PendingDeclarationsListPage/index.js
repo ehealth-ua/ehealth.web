@@ -116,15 +116,17 @@ const PendingDeclarationsListPage = ({
 
 export default compose(
   provideHooks({
-    fetch: ({ dispatch, location: { query } }) =>
-      dispatch(
-        fetchDeclarations({
-          page_size: 5,
-          status: "pending_verification",
-          reason: "no_tax_id",
-          ...query
-        })
-      )
+    fetch: ({ dispatch, location: { query } }) => {
+      if (query.employee_id || query.legal_entity_id)
+        return dispatch(
+          fetchDeclarations({
+            page_size: 5,
+            status: "pending_verification",
+            reason: "no_tax_id",
+            ...query
+          })
+        );
+    }
   }),
   connect(state => ({
     ...state.pages.PendingDeclarationsListPage,

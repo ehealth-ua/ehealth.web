@@ -137,8 +137,19 @@ const MedicationDispensesListPage = ({
 
 export default compose(
   provideHooks({
-    fetch: ({ dispatch, location: { query } }) =>
-      dispatch(fetchMedicationDispenses({ page_size: 5, ...query }))
+    fetch: ({ dispatch, location: { query } }) => {
+      if (
+        query.id ||
+        query.medication_request_id ||
+        query.division_id ||
+        query.status ||
+        query.legal_entity_id ||
+        query.dispensed_at ||
+        query.dispensed_from ||
+        query.dispensed_to
+      )
+        return dispatch(fetchMedicationDispenses({ page_size: 5, ...query }));
+    }
   }),
   connect((state, props) => ({
     ...state.pages.MedicationDispensesListPage,
