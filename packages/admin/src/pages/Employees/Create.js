@@ -292,28 +292,37 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
                   name="party.no_tax_id"
                   subscription={{ value: true }}
                 >
-                  {({ input: { value } }) => {
-                    const validationPattern = value
-                      ? NO_TAX_ID_DOCUMENT_PATTERN
-                      : TAX_ID_PATTERN;
-                    return (
+                  {({ input: { value } }) =>
+                    value ? (
                       <>
                         <Field.Text
-                          name="party.tax_id"
-                          label={
-                            value ? <Trans>Passport</Trans> : <Trans>INN</Trans>
-                          }
+                          name="party.tax_id.passport"
+                          label={<Trans>Passport</Trans>}
                           placeholder={translation}
-                          maxLength={value ? 9 : 10}
+                          maxLength={9}
                         />
                         <Validation.Matches
-                          field="party.tax_id"
-                          options={validationPattern}
+                          field="party.tax_id.passport"
+                          options={NO_TAX_ID_DOCUMENT_PATTERN}
                           message="Invalid number"
                         />
                       </>
-                    );
-                  }}
+                    ) : (
+                      <>
+                        <Field.Text
+                          name="party.tax_id.taxNumber"
+                          label={<Trans>INN</Trans>}
+                          placeholder={translation}
+                          maxLength={10}
+                        />
+                        <Validation.Matches
+                          field="party.tax_id.taxNumber"
+                          options={TAX_ID_PATTERN}
+                          message="Invalid number"
+                        />
+                      </>
+                    )
+                  }
                 </ControlledField>
               )}
             />
@@ -374,6 +383,20 @@ const PhonesForm = ({ name }) => (
           options={"^\\+380\\d{9}$"}
           message="Invalid phone number"
         />
+        <Validation.Custom
+          options={({
+            value,
+            allValues: {
+              party: { phones }
+            }
+          }) => {
+            const duplicates = phones.filter(
+              phone => phone && phone.number === value
+            );
+            return duplicates.length === 1;
+          }}
+          message="This number is used more than once"
+        />
       </Validations>
     </Box>
     <Box pr={2} width={2 / 9}>
@@ -419,7 +442,23 @@ const DocumentsForm = ({ name }) => (
           );
         }}
       </Composer>
-      <Validation.Required field={`${name}.type`} message="Required field" />
+      <Validations field={`${name}.type`}>
+        <Validation.Required message="Required field" />
+        <Validation.Custom
+          options={({
+            value,
+            allValues: {
+              party: { documents }
+            }
+          }) => {
+            const duplicates = documents.filter(
+              doc => doc && doc.type === value
+            );
+            return duplicates.length === 1;
+          }}
+          message="This document type is used more than once"
+        />
+      </Validations>
     </Box>
     <Box pr={2} width={2 / 9}>
       <I18n>
@@ -472,6 +511,7 @@ const Confirmation = ({ navigate, location: { state } }) => {
       start_date,
       employee_type,
       division_id,
+      party,
       party: {
         birth_date,
         gender,
@@ -543,7 +583,7 @@ const Confirmation = ({ navigate, location: { state } }) => {
           documents: <Trans>Documents</Trans>
         }}
         data={{
-          tax_id,
+          taxId: tax_id.taxNumber || tax_id.passport,
           noTaxId: no_tax_id ? <PositiveIcon /> : null,
           documents: documents.map(({ type, ...documentDetails }, index) => (
             <Box key={index} pb={4}>
@@ -587,6 +627,10 @@ const Confirmation = ({ navigate, location: { state } }) => {
                       const { signedContent } = await signData({
                         employee_request: {
                           ...createEmployee,
+                          party: {
+                            ...party,
+                            tax_id: tax_id.taxNumber || tax_id.passport
+                          },
                           status: "NEW"
                         }
                       });
