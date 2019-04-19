@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/admin",
-  "version": "1.84.0",
+  "version": "1.85.1",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.1.6",

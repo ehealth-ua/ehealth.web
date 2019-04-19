@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.85.1"></a>
+## [1.85.1](https://github.com/edenlabllc/ehealth.web/compare/v1.85.0...v1.85.1) (2019-04-19)
+
+
+### Bug Fixes
+
+* **admin:** fixes after Create Employee UAT ([ef483bb](https://github.com/edenlabllc/ehealth.web/commit/ef483bb))
+
+
+
+
+
 <a name="1.84.0"></a>
 # [1.84.0](https://github.com/edenlabllc/ehealth.web/compare/v1.83.0...v1.84.0) (2019-04-18)
 
