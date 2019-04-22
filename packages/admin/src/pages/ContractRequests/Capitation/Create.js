@@ -121,7 +121,7 @@ const CreateContractRequest = ({
         skip: !nhs_signer_id,
         first: 1,
         filter: {
-          employeeType: ["NHS_SIGNER"],
+          employeeType: ["NHS ADMIN SIGNER"],
           status: "APPROVED",
           databaseId: nhs_signer_id
         }
@@ -183,7 +183,7 @@ const CreateContractRequest = ({
                             skip: false,
                             first: 20,
                             filter: {
-                              employeeType: ["NHS_SIGNER"],
+                              employeeType: ["NHS ADMIN SIGNER"],
                               status: "APPROVED",
                               ...filter
                             }
@@ -321,7 +321,7 @@ const CreateContractRequest = ({
                               skip: false,
                               first: 20,
                               filter: {
-                                employeeType: ["NHS", "NHS_SIGNER"],
+                                employeeType: ["NHS ADMIN SIGNER"],
                                 status: "APPROVED",
                                 party: {
                                   fullName

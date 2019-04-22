@@ -136,7 +136,7 @@ const UpdateContractRequest = ({
         variables={{
           first: 50,
           filter: {
-            employeeType: ["NHS_SIGNER"],
+            employeeType: ["NHS ADMIN SIGNER"],
             status: "APPROVED"
           },
           orderBy: "INSERTED_AT_DESC"

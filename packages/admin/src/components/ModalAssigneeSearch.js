@@ -80,7 +80,7 @@ const ModalAssigneeSearch = ({ submitted, id, query }) => (
                       skip: true,
                       first: 50,
                       filter: {
-                        employeeType: ["NHS", "NHS_SIGNER"],
+                        employeeType: ["NHS ADMIN SIGNER"],
                         status: "APPROVED"
                       },
                       orderBy: "INSERTED_AT_DESC"
@@ -110,7 +110,7 @@ const ModalAssigneeSearch = ({ submitted, id, query }) => (
                                     skip: false,
                                     first: 50,
                                     filter: {
-                                      employeeType: ["NHS", "NHS_SIGNER"],
+                                      employeeType: ["NHS ADMIN SIGNER"],
                                       status: "APPROVED",
                                       party: { fullName: name }
                                     }

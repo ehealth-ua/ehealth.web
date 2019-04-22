@@ -40,7 +40,7 @@ const AssigneeSearch = () => (
                     skip: false,
                     first: 50,
                     filter: {
-                      employeeType: ["NHS", "NHS_SIGNER"],
+                      employeeType: ["NHS ADMIN SIGNER"],
                       status: "APPROVED",
                       party: { fullName: name }
                     }
