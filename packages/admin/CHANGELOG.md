@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.85.2"></a>
+## [1.85.2](https://github.com/edenlabllc/ehealth.web/compare/v1.85.1...v1.85.2) (2019-04-22)
+
+
+### Bug Fixes
+
+* **admin:** actualize employee types for contracts ([fe38bc9](https://github.com/edenlabllc/ehealth.web/commit/fe38bc9))
+
+
+
+
+
 <a name="1.85.1"></a>
 ## [1.85.1](https://github.com/edenlabllc/ehealth.web/compare/v1.85.0...v1.85.1) (2019-04-19)
 
