@@ -585,14 +585,22 @@ const Confirmation = ({ navigate, location: { state } }) => {
         data={{
           taxId: tax_id.taxNumber || tax_id.passport,
           noTaxId: no_tax_id ? <PositiveIcon /> : null,
-          documents: documents.map(({ type, ...documentDetails }, index) => (
-            <Box key={index} pb={4}>
-              <Heading fontSize="0" fontWeight="bold" pb={3}>
-                <DictionaryValue name="DOCUMENT_TYPE" item={type} />
-              </Heading>
-              <DocumentView data={documentDetails} />
-            </Box>
-          ))
+          documents: documents.map(
+            ({ number, type, issued_at, issued_by }, index) => (
+              <Box key={index} pb={4}>
+                <Heading fontSize="0" fontWeight="bold" pb={3}>
+                  <DictionaryValue name="DOCUMENT_TYPE" item={type} />
+                </Heading>
+                <DocumentView
+                  data={{
+                    number,
+                    issuedAt: issued_at,
+                    issuedBy: issued_by
+                  }}
+                />
+              </Box>
+            )
+          )
         }}
         labelWidth="200px"
       />
