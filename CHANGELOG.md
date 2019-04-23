@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.86.0"></a>
+# [1.86.0](https://github.com/edenlabllc/ehealth.web/compare/v1.85.2...v1.86.0) (2019-04-23)
+
+
+### Bug Fixes
+
+* **admin:** update data passed to the DocumentView on the Create Employee page ([6e52122](https://github.com/edenlabllc/ehealth.web/commit/6e52122))
+
+
+### Features
+
+* **admin:** add locales for the Employee Update page ([5126c2a](https://github.com/edenlabllc/ehealth.web/commit/5126c2a))
+* **admin:** add Update Employee page ([0d405b2](https://github.com/edenlabllc/ehealth.web/commit/0d405b2))
+
+
+
+
+
 <a name="1.85.2"></a>
 ## [1.85.2](https://github.com/edenlabllc/ehealth.web/compare/v1.85.1...v1.85.2) (2019-04-22)
 
