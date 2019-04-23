@@ -27,7 +27,7 @@ const DeactivateEmployee = loader(
   "../../graphql/DeactivateEmployeeMutation.graphql"
 );
 
-const Details = ({ id }) => {
+const Details = ({ id, navigate }) => {
   const [isVisible, setVisibilityState] = useState(false);
   const toggle = () => setVisibilityState(!isVisible);
 
@@ -96,7 +96,14 @@ const Details = ({ id }) => {
                 </Box>
                 {status === "APPROVED" &&
                   employeeType !== "OWNER" && (
-                    <Box>
+                    <Flex justifyContent="flex-end" flexWrap="wrap">
+                      <Button
+                        mt={2}
+                        variant="blue"
+                        onClick={() => navigate(`../update/${id}`)}
+                      >
+                        <Trans>Update</Trans>
+                      </Button>
                       <Ability action="deactivate" resource="employee">
                         <Mutation
                           mutation={DeactivateEmployee}
@@ -109,7 +116,12 @@ const Details = ({ id }) => {
                         >
                           {deactivateEmployee => (
                             <>
-                              <Button onClick={toggle} variant="red">
+                              <Button
+                                mt={2}
+                                ml={2}
+                                onClick={toggle}
+                                variant="red"
+                              >
                                 <Trans>Dismiss</Trans>
                               </Button>
                               <Popup
@@ -137,7 +149,7 @@ const Details = ({ id }) => {
                           )}
                         </Mutation>
                       </Ability>
-                    </Box>
+                    </Flex>
                   )}
               </Flex>
             </Box>
