@@ -95,7 +95,8 @@ const Details = ({ id, navigate }) => {
                   />
                 </Box>
                 {status === "APPROVED" &&
-                  employeeType !== "OWNER" && (
+                  employeeType !== "OWNER" &&
+                  legalEntity.type === "NHS" && (
                     <Flex justifyContent="flex-end" flexWrap="wrap">
                       <Button
                         mt={2}
