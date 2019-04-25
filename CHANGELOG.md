@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.86.1"></a>
+## [1.86.1](https://github.com/edenlabllc/ehealth.web/compare/v1.86.0...v1.86.1) (2019-04-25)
+
+
+### Bug Fixes
+
+* **admin:** pick only signature requiring props from Phone and Docs ([2ca3558](https://github.com/edenlabllc/ehealth.web/commit/2ca3558))
+
+
+
+
+
 <a name="1.86.0"></a>
 # [1.86.0](https://github.com/edenlabllc/ehealth.web/compare/v1.85.2...v1.86.0) (2019-04-23)
 
