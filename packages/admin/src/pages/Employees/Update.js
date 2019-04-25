@@ -99,9 +99,14 @@ const CreationForm = ({
     : {
         taxNumber: taxId
       };
+  const formattedPhones = phones.map(({ type, number }) => ({
+    type,
+    number
+  }));
   const formattedDocuments = documents.map(
-    ({ issuedBy, issuedAt, ...document }) => ({
-      ...document,
+    ({ type, number, issuedBy, issuedAt }) => ({
+      type,
+      number,
       issued_by: issuedBy,
       issued_at: issuedAt
     })
@@ -135,7 +140,7 @@ const CreationForm = ({
               gender,
               position,
               email,
-              phones,
+              phones: formattedPhones,
               no_tax_id: noTaxId,
               tax_id: taxDocument,
               documents: formattedDocuments
