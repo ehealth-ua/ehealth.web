@@ -89,7 +89,7 @@ const CreationForm = ({
     position,
     employeeType,
     startDate,
-    division = {}
+    division
   } = employee;
 
   const taxDocument = noTaxId
@@ -130,7 +130,7 @@ const CreationForm = ({
             position,
             employee_type: employeeType,
             start_date: startDate,
-            division_id: division.databaseId,
+            division_id: division && division.databaseId,
             employee_id: databaseId,
             party: {
               first_name: firstName,
