@@ -73,6 +73,7 @@ const CreationForm = ({
 }) => {
   const { updateEmployee } = state || {};
   const {
+    id,
     databaseId,
     party: {
       firstName,
@@ -412,14 +413,14 @@ const CreationForm = ({
               type="reset"
               variant="blue"
               width={140}
-              onClick={() => navigate("../search")}
+              onClick={() => navigate(`/employees/${id}`)}
             >
               <Trans>Back</Trans>
             </Button>
           </Box>
           <Box>
             <Button variant="green" width={140}>
-              <Trans>Add</Trans>
+              <Trans>Update</Trans>
             </Button>
           </Box>
         </Flex>
@@ -586,6 +587,7 @@ const Confirmation = ({ navigate, location: { state } }) => {
       }
     }
   } = state;
+  if (!division_id) delete updateEmployee.division_id;
 
   return (
     <Box p={5}>
@@ -618,8 +620,7 @@ const Confirmation = ({ navigate, location: { state } }) => {
           employeeType: (
             <DictionaryValue name="EMPLOYEE_TYPE" item={employee_type} />
           ),
-          startDate: <DateFormat value={start_date} />,
-          division_id
+          startDate: <DateFormat value={start_date} />
         }}
         labelWidth="200px"
       />
