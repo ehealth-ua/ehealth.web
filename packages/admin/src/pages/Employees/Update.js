@@ -15,7 +15,12 @@ import {
 } from "@ehealth/components";
 import { PositiveIcon, RemoveItemIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
-import { parsePhone, formatPhone, getFullName } from "@ehealth/utils";
+import {
+  parsePhone,
+  formatPhone,
+  getFullName,
+  cleanDeep
+} from "@ehealth/utils";
 import { subYears, format } from "date-fns";
 
 import Line from "../../components/Line";
@@ -71,7 +76,7 @@ const CreationForm = ({
   employee,
   location: { state }
 }) => {
-  const { updateEmployee } = state || {};
+  const { toUpdateEmployeeData } = state || {};
   const {
     id,
     databaseId,
@@ -122,12 +127,12 @@ const CreationForm = ({
         onSubmit={data => {
           navigate("./confirm", {
             state: {
-              updateEmployee: data
+              toUpdateEmployeeData: data
             }
           });
         }}
         initialValues={
-          updateEmployee || {
+          toUpdateEmployeeData || {
             position,
             employee_type: employeeType,
             start_date: startDate,
@@ -139,7 +144,6 @@ const CreationForm = ({
               second_name: secondName,
               birth_date: birthDate,
               gender,
-              position,
               email,
               phones: formattedPhones,
               no_tax_id: noTaxId,
@@ -566,28 +570,16 @@ const DocumentsForm = ({ name }) => (
 const Confirmation = ({ navigate, location: { state } }) => {
   if (!state) return null;
   const {
-    updateEmployee,
-    updateEmployee: {
-      position,
-      start_date,
-      employee_type,
-      division_id,
-      party,
-      party: {
-        birth_date,
-        gender,
-        tax_id,
-        no_tax_id,
-        email,
-        documents,
-        phones,
-        first_name,
-        second_name,
-        last_name
-      }
-    }
+    toUpdateEmployeeData: { division_id, party, ...toUpdateEmployeeData }
   } = state;
-  if (!division_id) delete updateEmployee.division_id;
+
+  const cleanedEmployeeData = cleanDeep(
+    {
+      ...toUpdateEmployeeData,
+      division_id: division_id ? division_id : undefined
+    },
+    { nullableValues: false }
+  );
 
   return (
     <Box p={5}>
@@ -599,12 +591,12 @@ const Confirmation = ({ navigate, location: { state } }) => {
         }}
         data={{
           fullName: getFullName({
-            firstName: first_name,
-            secondName: second_name,
-            lastName: last_name
+            firstName: party.first_name,
+            secondName: party.second_name,
+            lastName: party.last_name
           }),
-          gender: <DictionaryValue name="GENDER" item={gender} />,
-          birthDate: <DateFormat value={birth_date} />
+          gender: <DictionaryValue name="GENDER" item={party.gender} />,
+          birthDate: <DateFormat value={party.birth_date} />
         }}
         labelWidth="200px"
       />
@@ -616,11 +608,19 @@ const Confirmation = ({ navigate, location: { state } }) => {
           startDate: <Trans>Start date</Trans>
         }}
         data={{
-          position: <DictionaryValue name="POSITION" item={position} />,
-          employeeType: (
-            <DictionaryValue name="EMPLOYEE_TYPE" item={employee_type} />
+          position: (
+            <DictionaryValue
+              name="POSITION"
+              item={toUpdateEmployeeData.position}
+            />
           ),
-          startDate: <DateFormat value={start_date} />
+          employeeType: (
+            <DictionaryValue
+              name="EMPLOYEE_TYPE"
+              item={toUpdateEmployeeData.employee_type}
+            />
+          ),
+          startDate: <DateFormat value={toUpdateEmployeeData.start_date} />
         }}
         labelWidth="200px"
       />
@@ -631,22 +631,22 @@ const Confirmation = ({ navigate, location: { state } }) => {
           phones: <Trans>Phones</Trans>
         }}
         data={{
-          email,
-          phones: phones.map(({ number }) => number).join(", ")
+          email: party.email,
+          phones: party.phones.map(({ number }) => number).join(", ")
         }}
         labelWidth="200px"
       />
       <Line />
       <DefinitionListView
         labels={{
-          taxId: no_tax_id ? <Trans>Passport</Trans> : <Trans>INN</Trans>,
+          taxId: party.no_tax_id ? <Trans>Passport</Trans> : <Trans>INN</Trans>,
           noTaxId: <Trans>No tax ID</Trans>,
           documents: <Trans>Documents</Trans>
         }}
         data={{
-          taxId: tax_id.taxNumber || tax_id.passport,
-          noTaxId: no_tax_id ? <PositiveIcon /> : null,
-          documents: documents.map(
+          taxId: party.tax_id.taxNumber || party.tax_id.passport,
+          noTaxId: party.no_tax_id ? <PositiveIcon /> : null,
+          documents: party.documents.map(
             ({ number, type, issued_at, issued_by }, index) => (
               <Box key={index} pb={4}>
                 <Heading fontSize="0" fontWeight="bold" pb={3}>
@@ -673,7 +673,10 @@ const Confirmation = ({ navigate, location: { state } }) => {
             onClick={() => {
               navigate("../", {
                 state: {
-                  updateEmployee
+                  toUpdateEmployeeData: {
+                    ...cleanedEmployeeData,
+                    party
+                  }
                 }
               });
             }}
@@ -695,10 +698,11 @@ const Confirmation = ({ navigate, location: { state } }) => {
                     onClick={async () => {
                       const { signedContent } = await signData({
                         employee_request: {
-                          ...updateEmployee,
+                          ...cleanedEmployeeData,
                           party: {
                             ...party,
-                            tax_id: tax_id.taxNumber || tax_id.passport
+                            tax_id:
+                              party.tax_id.taxNumber || party.tax_id.passport
                           },
                           status: "NEW"
                         }
