@@ -101,34 +101,43 @@ class Nav extends React.Component {
                 </ShowWithScope>
               )}
             />
-            <ShowWithScope scope="employee:read">
-              <li>
-                <ShowMore nav name="Співробітники">
-                  <ShowWithScope scope="employee_request:read">
-                    <ul>
-                      <NavItem to="employees" activeClassName={styles.active}>
-                        <Link id="employees-nav" to="/employees">
-                          Співробітники
-                        </Link>
-                      </NavItem>
-                      <NavItem
-                        to="pending-employees"
-                        activeClassName={styles.active}
-                      >
-                        <Link
-                          id="pending-employees-nav"
-                          to="/pending-employees"
-                        >
-                          Співробітники
-                          <br />
-                          на розгляді
-                        </Link>
-                      </NavItem>
-                    </ul>
-                  </ShowWithScope>
-                </ShowMore>
-              </li>
-            </ShowWithScope>
+
+            <Flag
+              name="features.employees"
+              fallbackRender={() => (
+                <ShowWithScope scope="employee:read">
+                  <li>
+                    <ShowMore nav name="Співробітники">
+                      <ShowWithScope scope="employee_request:read">
+                        <ul>
+                          <NavItem
+                            to="employees"
+                            activeClassName={styles.active}
+                          >
+                            <Link id="employees-nav" to="/employees">
+                              Співробітники
+                            </Link>
+                          </NavItem>
+                          <NavItem
+                            to="pending-employees"
+                            activeClassName={styles.active}
+                          >
+                            <Link
+                              id="pending-employees-nav"
+                              to="/pending-employees"
+                            >
+                              Співробітники
+                              <br />
+                              на розгляді
+                            </Link>
+                          </NavItem>
+                        </ul>
+                      </ShowWithScope>
+                    </ShowMore>
+                  </li>
+                </ShowWithScope>
+              )}
+            />
             <NavItem to="reports" activeClassName={styles.active}>
               <Link id="reports-nav" to="/reports">
                 Звіти
@@ -591,6 +600,42 @@ class Nav extends React.Component {
                     Об’єднання пацієнтів
                   </ExternalLink>
                 </NavItem>
+              </ShowWithScope>
+            </Flag>
+
+            <Flag name="features.employees">
+              <ShowWithScope scope="employee:read">
+                <li>
+                  <ShowMore nav name="Співробітники">
+                    <ShowWithScope scope="employee_request:read">
+                      <ul>
+                        <NavItem to="employees" activeClassName={styles.active}>
+                          <ExternalLink
+                            id="employees-nav"
+                            href={`${env.REACT_APP_ADMIN_URL}/employees/search`}
+                          >
+                            Співробітники
+                          </ExternalLink>
+                        </NavItem>
+                        <NavItem
+                          to="employee-requests"
+                          activeClassName={styles.active}
+                        >
+                          <ExternalLink
+                            id="employee-requests-nav"
+                            href={`${
+                              env.REACT_APP_ADMIN_URL
+                            }/employee-requests/search`}
+                          >
+                            Співробітники
+                            <br />
+                            на розгляді
+                          </ExternalLink>
+                        </NavItem>
+                      </ul>
+                    </ShowWithScope>
+                  </ShowMore>
+                </li>
               </ShowWithScope>
             </Flag>
 

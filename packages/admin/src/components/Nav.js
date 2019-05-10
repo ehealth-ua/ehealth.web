@@ -58,18 +58,23 @@ const Nav = () => (
             )}
           />
 
-          <Ability action="read" resource="employee">
-            <NavSection title={<Trans>Employees</Trans>}>
+          <Flag
+            name="features.employees"
+            fallbackRender={() => (
               <Ability action="read" resource="employee">
-                <NavLinkExternal to="employees">
-                  <Trans>Employees</Trans>
-                </NavLinkExternal>
-                <NavLinkExternal to="pending-employees">
-                  <Trans>Pending employees</Trans>
-                </NavLinkExternal>
+                <NavSection title={<Trans>Employees</Trans>}>
+                  <Ability action="read" resource="employee">
+                    <NavLinkExternal to="employees">
+                      <Trans>Employees</Trans>
+                    </NavLinkExternal>
+                    <NavLinkExternal to="pending-employees">
+                      <Trans>Pending employees</Trans>
+                    </NavLinkExternal>
+                  </Ability>
+                </NavSection>
               </Ability>
-            </NavSection>
-          </Ability>
+            )}
+          />
 
           <NavLinkExternal to="reports">
             <Trans>Reports</Trans>
