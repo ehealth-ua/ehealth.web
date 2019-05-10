@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.86.5"></a>
+## [1.86.5](https://github.com/edenlabllc/ehealth.web/compare/v1.86.4...v1.86.5) (2019-05-10)
+
+
+### Bug Fixes
+
+* **admin:** add fallbackRender for employees in both Navigations ([50e8d46](https://github.com/edenlabllc/ehealth.web/commit/50e8d46))
+
+
+
+
+
 <a name="1.86.4"></a>
 ## [1.86.4](https://github.com/edenlabllc/ehealth.web/compare/v1.86.3...v1.86.4) (2019-05-08)
 
