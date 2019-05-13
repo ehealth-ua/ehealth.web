@@ -12,7 +12,9 @@ const PERSON = {
 
 const LEGALENTITY = {
   ACTIVE: "активний",
-  CLOSED: "неактивний"
+  CLOSED: "неактивний",
+  SUSPENDED: "призупинений",
+  REORGANISED: "реорганізований"
 };
 
 const DIVISIONS = {
