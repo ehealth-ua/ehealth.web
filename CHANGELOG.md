@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.86.6"></a>
+## [1.86.6](https://github.com/edenlabllc/ehealth.web/compare/v1.86.5...v1.86.6) (2019-05-13)
+
+
+### Bug Fixes
+
+* **admin:** remove unused result field from LegalEntitiesDeactivationJobsQuery ([20877ab](https://github.com/edenlabllc/ehealth.web/commit/20877ab))
+
+
+
+
+
 <a name="1.86.5"></a>
 ## [1.86.5](https://github.com/edenlabllc/ehealth.web/compare/v1.86.4...v1.86.5) (2019-05-10)
 
