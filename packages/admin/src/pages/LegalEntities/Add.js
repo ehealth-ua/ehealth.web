@@ -19,6 +19,7 @@ import Tooltip from "../../components/Tooltip";
 import * as Field from "../../components/Field";
 import DictionaryValue from "../../components/DictionaryValue";
 import DefinitionListView from "../../components/DefinitionListView";
+import { EDRPOU_PATTERN } from "../../constants/validationPatterns";
 
 import env from "../../env";
 
@@ -74,12 +75,17 @@ const Search = ({ location: { state } }) => (
                 />
               )}
             />
+            <Validation.Matches
+              field="filter.edrpou"
+              options={EDRPOU_PATTERN}
+              message="Invalid number"
+            />
           </Box>
         </Form>
         {filter && (
           <Query
             query={SearchLegalEntitiesQuery}
-            variables={{ filter, first: 1 }}
+            variables={{ filter: { ...filter, status: "ACTIVE" }, first: 1 }}
           >
             {({
               loading,

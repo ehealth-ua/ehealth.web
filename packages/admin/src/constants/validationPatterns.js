@@ -4,6 +4,8 @@ export const UUID_PATTERN =
 export const TAX_ID_PATTERN = "^[0-9]{10}$";
 export const NO_TAX_ID_DOCUMENT_PATTERN = "^([0-9]{9}|[А-ЯЁЇIЄҐ]{2}[0-9]{6})$";
 
+export const EDRPOU_PATTERN = "^[0-9]{8,10}$";
+
 export const INNM_PATTERN = "^[А-Яа-яЁёЇїІіЄєҐґ-\\s]*$";
 export const INNM_ORIGINAL_NAME_PATTERN = "^[a-zA-Z-\\s]*$";
 export const SCTID_PATTERN = "^[0-9]{8}$";
