@@ -25,7 +25,6 @@ query LegalEntitiesDeactivationJobsQuery(
       startedAt
       endedAt
       status
-      result
     }
     pageInfo {
       startCursor
