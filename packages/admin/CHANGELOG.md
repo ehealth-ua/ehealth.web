@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.87.0"></a>
+# [1.87.0](https://github.com/edenlabllc/ehealth.web/compare/v1.86.6...v1.87.0) (2019-05-16)
+
+
+### Features
+
+* **admin:** add SUSPENDED and REORGANISED statuses to the LE status object ([fb7b123](https://github.com/edenlabllc/ehealth.web/commit/fb7b123))
+* **admin:** add validation for the EDRPOU field, add status to the LE filter ([0c55841](https://github.com/edenlabllc/ehealth.web/commit/0c55841))
+
+
+
+
+
 <a name="1.86.6"></a>
 ## [1.86.6](https://github.com/edenlabllc/ehealth.web/compare/v1.86.5...v1.86.6) (2019-05-13)
 
