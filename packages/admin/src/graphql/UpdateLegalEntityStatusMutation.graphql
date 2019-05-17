@@ -1,0 +1,9 @@
+mutation UpdateLegalEntityStatusMutation(
+  $input: UpdateLegalEntityStatusInput!
+) {
+  updateLegalEntityStatus(input: $input) {
+    legalEntity {
+      id
+    }
+  }
+}
