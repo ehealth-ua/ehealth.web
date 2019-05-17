@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.87.1"></a>
+## [1.87.1](https://github.com/edenlabllc/ehealth.web/compare/v1.87.0...v1.87.1) (2019-05-17)
+
+
+### Bug Fixes
+
+* **admin:** add Flag and Ability for the Update contract button ([46e5d8a](https://github.com/edenlabllc/ehealth.web/commit/46e5d8a))
+
+
+
+
+
 <a name="1.87.0"></a>
 # [1.87.0](https://github.com/edenlabllc/ehealth.web/compare/v1.86.6...v1.87.0) (2019-05-16)
 
