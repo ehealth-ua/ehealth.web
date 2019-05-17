@@ -5,14 +5,17 @@ about: I have a suggestion (and may want to implement it 🙂)!
 
 ## Feature Request
 
-#### Detailed Description
+#### User story
 
 <!--- Provide a detailed description of the change or addition you are proposing -->
 
-#### Context
+As a <>
+I want <>
+So that <>
 
-<!--- Why is this change important to you? How would you use it? -->
-<!--- How can it benefit other users? -->
+#### What changes
+
+<!--- Provide a detailed description what this functionality refers to -->
 
 #### Possible Implementation
 
@@ -21,3 +24,7 @@ about: I have a suggestion (and may want to implement it 🙂)!
 #### Documentation, Adoption
 
 <!--If you can, explain how users will be able to use this and possibly write out a version the docs. Maybe a screenshots or design?-->
+
+1. [Confluence]()
+1. [Apiary or Schema]()
+1. [Test cases or features]()
