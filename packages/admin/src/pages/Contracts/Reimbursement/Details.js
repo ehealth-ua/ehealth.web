@@ -8,7 +8,7 @@ import { BooleanValue } from "react-values";
 import { loader } from "graphql.macro";
 import { DateFormat, Trans } from "@lingui/macro";
 import isEmpty from "lodash/isEmpty";
-import { FlagsProvider } from "flag";
+import { FlagsProvider, Flag } from "flag";
 
 import { Form, Validation, LocationParams } from "@ehealth/components";
 import {
@@ -26,6 +26,7 @@ import Table from "../../../components/Table";
 import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
+import Ability from "../../../components/Ability";
 import Tooltip from "../../../components/Tooltip";
 import * as Field from "../../../components/Field";
 import AddressView from "../../../components/AddressView";
@@ -283,25 +284,29 @@ const Details = ({ id, navigate }) => {
                   >
                     <PrintButton content={printoutContent} />
                     <Flex justifyContent="flex-end" flexWrap="wrap">
-                      {status === "VERIFIED" &&
-                        !isSuspended && (
-                          <Button
-                            mt={2}
-                            variant="blue"
-                            onClick={() =>
-                              navigate(
-                                `/contract-requests/reimbursement/create/${id}`,
-                                {
-                                  state: {
-                                    updateContract: { id }
-                                  }
+                      <Flag name="features.createContractRequest">
+                        <Ability action="create" resource="contract_request">
+                          {status === "VERIFIED" &&
+                            !isSuspended && (
+                              <Button
+                                mt={2}
+                                variant="blue"
+                                onClick={() =>
+                                  navigate(
+                                    `/contract-requests/reimbursement/create/${id}`,
+                                    {
+                                      state: {
+                                        updateContract: { id }
+                                      }
+                                    }
+                                  )
                                 }
-                              )
-                            }
-                          >
-                            <Trans>Update contract</Trans>
-                          </Button>
-                        )}
+                              >
+                                <Trans>Update contract</Trans>
+                              </Button>
+                            )}
+                        </Ability>
+                      </Flag>
                       {status === "VERIFIED" && (
                         <Mutation
                           mutation={TerminateContractMutation}
