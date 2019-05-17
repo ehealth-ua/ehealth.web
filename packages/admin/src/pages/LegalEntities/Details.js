@@ -56,6 +56,9 @@ const NhsCommentLegalEntityMutation = loader(
 const NhsReviewLegalEntityMutation = loader(
   "../../graphql/NhsReviewLegalEntityMutation.graphql"
 );
+const UpdateLegalEntityStatusMutation = loader(
+  "../../graphql/UpdateLegalEntityStatusMutation.graphql"
+);
 const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
 
 const filteredLocationParams = (id, params = {}) => {
@@ -99,6 +102,8 @@ const Details = ({ id, navigate }) => (
         archive
       } = legalEntity;
       const isVerificationActive = status === "ACTIVE" && nhsReviewed;
+      const isProcessingActive =
+        status !== "CLOSED" && status !== "REORGANISED";
 
       return (
         <LoadingOverlay loading={loading}>
@@ -130,87 +135,97 @@ const Details = ({ id, navigate }) => (
                   labelWidth="100px"
                 />
               </Box>
-              {status === "ACTIVE" && (
-                <>
-                  {!nhsReviewed ? (
-                    <Ability action="nhs_verify" resource="legal_entity">
-                      <Mutation
-                        mutation={NhsReviewLegalEntityMutation}
-                        refetchQueries={() => [
-                          {
-                            query: LegalEntityQuery,
-                            variables: filteredLocationParams(id)
-                          }
-                        ]}
-                      >
-                        {nhsReviewLegalEntity => (
-                          <Button
-                            onClick={async () => {
-                              await nhsReviewLegalEntity({
-                                variables: {
-                                  input: {
-                                    id
-                                  }
+              {isProcessingActive &&
+                (!nhsReviewed ? (
+                  <Ability action="nhs_verify" resource="legal_entity">
+                    <Mutation
+                      mutation={NhsReviewLegalEntityMutation}
+                      refetchQueries={() => [
+                        {
+                          query: LegalEntityQuery,
+                          variables: filteredLocationParams(id)
+                        }
+                      ]}
+                    >
+                      {nhsReviewLegalEntity => (
+                        <Button
+                          onClick={async () => {
+                            await nhsReviewLegalEntity({
+                              variables: {
+                                input: {
+                                  id
                                 }
-                              });
-                            }}
-                            variant="blue"
-                          >
-                            <Trans>To process</Trans>
-                          </Button>
-                        )}
-                      </Mutation>
-                    </Ability>
-                  ) : (
-                    <Ability action="deactivate" resource="legal_entity">
-                      <Popup
-                        variant="red"
-                        buttonText={<Trans>Close legal entity</Trans>}
-                        title={<Trans>Close legal entity</Trans>}
-                      >
-                        {toggle => (
-                          <Mutation
-                            mutation={DeactivateLegalEntityMutation}
-                            refetchQueries={() => [
-                              {
-                                query: LegalEntityQuery,
-                                variables: filteredLocationParams(id)
                               }
-                            ]}
-                          >
-                            {deactivateLegalEntity => (
-                              <Flex justifyContent="center">
-                                <Box mr={20}>
-                                  <Button variant="blue" onClick={toggle}>
-                                    <Trans>Back</Trans>
-                                  </Button>
-                                </Box>
-                                <Button
-                                  onClick={async () => {
-                                    await deactivateLegalEntity({
-                                      variables: {
-                                        input: {
-                                          id
-                                        }
-                                      }
-                                    });
-                                    await navigate(
-                                      "/legal-entity-deactivate-jobs/search"
-                                    );
-                                  }}
-                                  variant="red"
-                                >
-                                  <Trans>Close legal entity</Trans>
-                                </Button>
-                              </Flex>
-                            )}
-                          </Mutation>
-                        )}
-                      </Popup>
+                            });
+                          }}
+                          variant="blue"
+                        >
+                          <Trans>To process</Trans>
+                        </Button>
+                      )}
+                    </Mutation>
+                  </Ability>
+                ) : (
+                  <Flex justifyContent="flex-end" flexWrap="wrap">
+                    <Ability action="update" resource="legal_entity">
+                      <Box mt={2}>
+                        <UpdateLegalEntityStatusButton
+                          id={id}
+                          isActive={status === "ACTIVE"}
+                          nhsVerified={nhsVerified}
+                        />
+                      </Box>
                     </Ability>
-                  )}
-                </>
-              )}
+                    <Ability action="deactivate" resource="legal_entity">
+                      <Box mt={2} ml={2}>
+                        <Popup
+                          variant="red"
+                          buttonText={<Trans>Close legal entity</Trans>}
+                          title={<Trans>Close legal entity</Trans>}
+                        >
+                          {toggle => (
+                            <Mutation
+                              mutation={DeactivateLegalEntityMutation}
+                              refetchQueries={() => [
+                                {
+                                  query: LegalEntityQuery,
+                                  variables: filteredLocationParams(id)
+                                }
+                              ]}
+                            >
+                              {deactivateLegalEntity => (
+                                <Flex justifyContent="center">
+                                  <Box mr={20}>
+                                    <Button variant="blue" onClick={toggle}>
+                                      <Trans>Back</Trans>
+                                    </Button>
+                                  </Box>
+                                  <Button
+                                    onClick={async () => {
+                                      await deactivateLegalEntity({
+                                        variables: {
+                                          input: {
+                                            id
+                                          }
+                                        }
+                                      });
+                                      await navigate(
+                                        "/legal-entity-deactivate-jobs/search"
+                                      );
+                                    }}
+                                    variant="red"
+                                  >
+                                    <Trans>Close legal entity</Trans>
+                                  </Button>
+                                </Flex>
+                              )}
+                            </Mutation>
+                          )}
+                        </Popup>
+                      </Box>
+                    </Ability>
+                  </Flex>
+                ))}
             </Flex>
           </Box>
 
@@ -547,6 +562,7 @@ const License = ({
                               placeholder={translation}
                               rows={5}
                               maxlength="3000"
+                              showLengthHint
                             />
                           )}
                         />
@@ -1041,6 +1057,76 @@ const NhsVerifyButton = ({ id, nhsVerified, isVerificationActive }) => {
                 {title}
               </Button>
             </Flex>
+          )}
+        </Mutation>
+      )}
+    </Popup>
+  );
+};
+
+const UpdateLegalEntityStatusButton = ({ id, isActive }) => {
+  const update = isActive
+    ? {
+        variant: "orange",
+        title: <Trans>Suspend Legal Entity</Trans>,
+        buttonText: <Trans>Suspend</Trans>,
+        toStatus: "SUSPENDED"
+      }
+    : {
+        variant: "green",
+        title: <Trans>Activate Legal Entity</Trans>,
+        buttonText: <Trans>Activate</Trans>,
+        toStatus: "ACTIVE"
+      };
+
+  return (
+    <Popup
+      variant={update.variant}
+      buttonText={update.buttonText}
+      title={update.title}
+    >
+      {toggle => (
+        <Mutation
+          mutation={UpdateLegalEntityStatusMutation}
+          refetchQueries={() => [
+            {
+              query: LegalEntityQuery,
+              variables: filteredLocationParams(id)
+            }
+          ]}
+        >
+          {updateLegalEntityStatus => (
+            <Form
+              onSubmit={async ({ reason }) => {
+                await updateLegalEntityStatus({
+                  variables: { input: { id, reason, status: update.toStatus } }
+                });
+                toggle();
+              }}
+            >
+              <Trans
+                id="Enter reason comment"
+                render={({ translation }) => (
+                  <Field.Textarea
+                    name="reason"
+                    placeholder={translation}
+                    rows={5}
+                    maxlength="3000"
+                    showLengthHint
+                  />
+                )}
+              />
+              <Flex justifyContent="left">
+                <Box mr={20}>
+                  <Button variant="blue" onClick={toggle}>
+                    <Trans>Back</Trans>
+                  </Button>
+                </Box>
+                <Button type="submit" variant={update.variant}>
+                  {update.buttonText}
+                </Button>
+              </Flex>
+            </Form>
           )}
         </Mutation>
       )}
