@@ -5,13 +5,18 @@ about: I have a suggestion (and may want to implement it 🙂)!
 
 ## Feature Request
 
-#### User story
+#### Description
 
 <!--- Provide a detailed description of the change or addition you are proposing -->
+<!--- You can provide description in `User story` style -->
+<!--- Who are we develop it for, who the user is? — As a <type of user>-->
+<!--- What are we develop, what is the intention? — I want <some goal or objective >-->
+<!--- Why are we develop it, what value it bring for the user.? — So that <benefit, value>-->
 
-As a <>
-I want <>
-So that <>
+#### Context
+
+<!--- Why is this change important to you? How would you use it? -->
+<!--- How can it benefit other users? -->
 
 #### What changes
 
