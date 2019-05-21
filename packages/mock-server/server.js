@@ -19,7 +19,7 @@ const schemaDirectives = require("./lib/directives");
 const { PORT, WHITE_LIST_ORIGINS = "", SCHEMAS = "" } = process.env;
 
 const http = new HttpLink({
-  uri: "https://api.dev.asclepius.com.ua/graphql",
+  uri: "https://api.dev.edenlab.com.ua/graphql",
   fetch
 });
 

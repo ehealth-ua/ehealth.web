@@ -11,7 +11,7 @@ module.exports = function(app) {
 
   app.use(
     proxy(["/api", "/reports"], {
-      target: "http://api.dev.asclepius.com.ua/"
+      target: "http://api.dev.edenlab.com.ua/"
     })
   );
 };
