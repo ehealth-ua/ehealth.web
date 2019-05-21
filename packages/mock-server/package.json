@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/mock-server",
-  "version": "1.72.0",
+  "version": "1.87.2",
   "private": true,
   "description": "",
   "main": "server.js",

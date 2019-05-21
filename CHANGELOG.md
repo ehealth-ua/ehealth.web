@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.87.2"></a>
+## [1.87.2](https://github.com/edenlabllc/ehealth.web/compare/v1.87.1...v1.87.2) (2019-05-21)
+
+
+### Bug Fixes
+
+* change api domain ([5b0970a](https://github.com/edenlabllc/ehealth.web/commit/5b0970a))
+
+
+
+
+
 <a name="1.87.1"></a>
 ## [1.87.1](https://github.com/edenlabllc/ehealth.web/compare/v1.87.0...v1.87.1) (2019-05-17)
 
