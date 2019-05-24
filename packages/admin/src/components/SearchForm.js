@@ -14,7 +14,7 @@ type SearchFormProps = {
   initialValues: Object,
   onSubmit: Object => void,
   renderPrimary: React.ElementType,
-  renderSecondary: React.ElementType,
+  renderSecondary?: React.ElementType,
   decorators?: Object => void
 };
 
