@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.88.0"></a>
+# [1.88.0](https://github.com/edenlabllc/ehealth.web/compare/v1.87.3...v1.88.0) (2019-05-24)
+
+
+### Features
+
+* **admin:** add graphql fragments to AddressView and Pagination ([4679a31](https://github.com/edenlabllc/ehealth.web/commit/4679a31))
+* **admin:** add graphql-tag package ([ef6f28b](https://github.com/edenlabllc/ehealth.web/commit/ef6f28b))
+* **admin:** use fragments on Legal entity search page ([55d5a2a](https://github.com/edenlabllc/ehealth.web/commit/55d5a2a))
+
+
+
+
+
 <a name="1.87.3"></a>
 ## [1.87.3](https://github.com/edenlabllc/ehealth.web/compare/v1.87.2...v1.87.3) (2019-05-24)
 
