@@ -1,5 +1,6 @@
 //@flow
 import * as React from "react";
+import gql from "graphql-tag";
 import DictionaryValue from "./DictionaryValue";
 import { normalizeName } from "@ehealth/utils";
 
@@ -66,6 +67,25 @@ const AddressView = ({ data }: AddressProps): React.Node => {
       )}
     </>
   );
+};
+
+AddressView.fragments = {
+  entry: gql`
+    fragment Addresses on Address {
+      type
+      country
+      area
+      region
+      settlement
+      settlementType
+      settlementId
+      streetType
+      street
+      building
+      apartment
+      zip
+    }
+  `
 };
 
 export default AddressView;

@@ -1,4 +1,5 @@
 import React from "react";
+import gql from "graphql-tag";
 import { Flex, Box, Text } from "@rebass/emotion";
 import { LocationParams } from "@ehealth/components";
 import { TriangleLeftIcon, TriangleRightIcon } from "@ehealth/icons";
@@ -69,6 +70,17 @@ const Pagination = ({
     }}
   </LocationParams>
 );
+
+Pagination.fragments = {
+  entry: gql`
+    fragment PageInfo on PageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  `
+};
 
 const Wrapper = system(
   {
