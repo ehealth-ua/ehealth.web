@@ -29,7 +29,7 @@
     "final-form-calculate": "^1.2.1",
     "flag": "^3.0.0-1",
     "graphql": "14.0.2",
-    "graphql.macro": "^1.0.2",
+    "graphql.macro": "^1.4.2",
     "http-proxy-middleware": "^0.19.0",
     "js-cookie": "^2.2.0",
     "print-iframe": "0.0.4",
