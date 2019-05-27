@@ -189,7 +189,7 @@
       ["src/pages/MedicalPrograms/Search.js", 375],
       ["src/pages/Medications/Search.js", 306],
       ["src/pages/ProgramMedications/Search.js", 294],
-      ["src/pages/Services/Search/SearchFields.js", 46]
+      ["src/pages/Services/Search/SearchFields.js", 41]
     ]
   },
   "Allow Request": {
@@ -768,7 +768,7 @@
   },
   "Create employee": {
     "translation": "Додати співробітника",
-    "origin": [["src/pages/Employees/Search.js", 50]]
+    "origin": [["src/pages/Employees/Search/index.js", 31]]
   },
   "Create medication": {
     "translation": "Створити торгівельне найменування",
@@ -949,10 +949,11 @@
       ["src/pages/ContractRequests/Reimbursement/Search.js", 105],
       ["src/pages/Contracts/Capitation/Search.js", 94],
       ["src/pages/Contracts/Reimbursement/Search.js", 101],
-      ["src/pages/Employees/Search.js", 87],
+      ["src/pages/Employees/Search/EmployeesTable.js", 28],
       ["src/pages/INNMDosages/Search.js", 80],
       ["src/pages/PatientMergeRequests/Search.js", 125],
       ["src/pages/ProgramMedications/Search.js", 102],
+      ["src/pages/Services/Details/ParentGroupsTable.js", 27],
       ["src/pages/Services/Search/ServicesTable.js", 25]
     ]
   },
@@ -1037,8 +1038,8 @@
       ["src/pages/Contracts/Capitation/Details.js", 946],
       ["src/pages/Contracts/Reimbursement/Details.js", 752],
       ["src/pages/Declarations/Search.js", 70],
-      ["src/pages/Employees/Search.js", 84],
-      ["src/pages/Employees/Search.js", 233],
+      ["src/pages/Employees/Search/EmployeesTable.js", 25],
+      ["src/pages/Employees/Search/SearchFields.js", 73],
       ["src/pages/PendingDeclarations/Search.js", 91],
       ["src/pages/Persons/Details.js", 373]
     ]
@@ -1226,7 +1227,7 @@
     "origin": [
       ["src/components/SelectedFilters.js", 222],
       ["src/pages/Employees/Details.js", 78],
-      ["src/pages/Employees/Search.js", 304]
+      ["src/pages/Employees/Search/SearchFields.js", 144]
     ]
   },
   "Employee type": {
@@ -1236,8 +1237,8 @@
       ["src/pages/Employees/Create.js", 216],
       ["src/pages/Employees/Create.js", 553],
       ["src/pages/Employees/Details.js", 256],
-      ["src/pages/Employees/Search.js", 82],
-      ["src/pages/Employees/Search.js", 256],
+      ["src/pages/Employees/Search/EmployeesTable.js", 23],
+      ["src/pages/Employees/Search/SearchFields.js", 96],
       ["src/pages/Employees/Update.js", 281],
       ["src/pages/Employees/Update.js", 607]
     ]
@@ -1250,7 +1251,7 @@
       ["src/components/Nav.js", 324],
       ["src/components/Nav.js", 327],
       ["src/pages/Employees/Details.js", 63],
-      ["src/pages/Employees/Search.js", 45]
+      ["src/pages/Employees/Search/index.js", 26]
     ]
   },
   "Employment end date": {
@@ -1366,7 +1367,7 @@
       ["src/pages/Contracts/Capitation/Details.js", 769],
       ["src/pages/Contracts/Capitation/Details.js", 895],
       ["src/pages/Contracts/Reimbursement/Details.js", 704],
-      ["src/pages/Employees/Search.js", 228],
+      ["src/pages/Employees/Search/SearchFields.js", 68],
       ["src/pages/LegalEntities/Details.js", 819]
     ]
   },
@@ -1391,7 +1392,7 @@
   },
   "Enter full name": {
     "translation": "Введіть повне ім’я",
-    "origin": [["src/pages/Employees/Search.js", 175]]
+    "origin": [["src/pages/Employees/Search/SearchFields.js", 17]]
   },
   "Enter ingredient name": {
     "translation": "Введіть назву складової",
@@ -1423,7 +1424,7 @@
       ["src/pages/Contracts/Capitation/Search.js", 205],
       ["src/pages/Contracts/Reimbursement/Search.js", 213],
       ["src/pages/EmployeeRequests/Search.js", 154],
-      ["src/pages/Employees/Search.js", 188]
+      ["src/pages/Employees/Search/SearchFields.js", 30]
     ]
   },
   "Enter manufacturer": {
@@ -1632,7 +1633,7 @@
     "origin": [
       ["src/pages/Declarations/Details.js", 466],
       ["src/pages/Declarations/Details.js", 523],
-      ["src/pages/Employees/Search.js", 180]
+      ["src/pages/Employees/Search/SearchFields.js", 22]
     ]
   },
   "Gender": {
@@ -1681,6 +1682,14 @@
     "translation": "Перейти до основного закладу",
     "origin": [["src/pages/LegalEntities/Details.js", 649]]
   },
+  "Group code": {
+    "translation": "Код групи",
+    "origin": [["src/pages/Services/Details/ParentGroupsTable.js", 22]]
+  },
+  "Group name": {
+    "translation": "Назва групи",
+    "origin": [["src/pages/Services/Details/ParentGroupsTable.js", 21]]
+  },
   "Hide filters": {
     "translation": "Сховати фільтри",
     "origin": [["src/components/SearchModalForm.js", 56]]
@@ -1693,7 +1702,7 @@
       ["src/pages/Contracts/Capitation/Search.js", 82],
       ["src/pages/Contracts/Reimbursement/Search.js", 88],
       ["src/pages/EmployeeRequests/Search.js", 72],
-      ["src/pages/Employees/Search.js", 76],
+      ["src/pages/Employees/Search/EmployeesTable.js", 17],
       ["src/pages/INNMDosages/Details.js", 150],
       ["src/pages/INNMDosages/Search.js", 75],
       ["src/pages/INNMs/Search.js", 184],
@@ -1704,6 +1713,8 @@
       ["src/pages/Medications/Details.js", 65],
       ["src/pages/Medications/Details.js", 230],
       ["src/pages/Medications/Search.js", 79],
+      ["src/pages/Services/Details/ParentGroupsTable.js", 20],
+      ["src/pages/Services/Details/index.js", 58],
       ["src/pages/Services/Search/ServicesTable.js", 16]
     ]
   },
@@ -1715,7 +1726,7 @@
       ["src/pages/Employees/Create.js", 314],
       ["src/pages/Employees/Create.js", 581],
       ["src/pages/Employees/Details.js", 76],
-      ["src/pages/Employees/Search.js", 78],
+      ["src/pages/Employees/Search/EmployeesTable.js", 19],
       ["src/pages/Employees/Update.js", 379],
       ["src/pages/Employees/Update.js", 642],
       ["src/pages/PatientMergeRequests/Details.js", 124],
@@ -1841,6 +1852,7 @@
       ["src/pages/Medications/Details.js", 233],
       ["src/pages/Medications/Search.js", 87],
       ["src/pages/ProgramMedications/Search.js", 101],
+      ["src/pages/Services/Details/ParentGroupsTable.js", 25],
       ["src/pages/Services/Search/ServicesTable.js", 23]
     ]
   },
@@ -1859,12 +1871,16 @@
     "translation": "Працівник активний",
     "origin": [
       ["src/pages/Employees/Details.js", 261],
-      ["src/pages/Employees/Search.js", 86]
+      ["src/pages/Employees/Search/EmployeesTable.js", 27]
     ]
   },
   "Is request allowed": {
     "translation": "Дозвіл на направлення",
-    "origin": [["src/pages/Services/Search/ServicesTable.js", 21]]
+    "origin": [
+      ["src/pages/Services/Details/ParentGroupsTable.js", 24],
+      ["src/pages/Services/Details/index.js", 60],
+      ["src/pages/Services/Search/ServicesTable.js", 21]
+    ]
   },
   "Issued at": {
     "translation": "Дата видачі",
@@ -2009,8 +2025,8 @@
       ["src/pages/Contracts/Reimbursement/Search.js", 226],
       ["src/pages/EmployeeRequests/Search.js", 77],
       ["src/pages/EmployeeRequests/Search.js", 172],
-      ["src/pages/Employees/Search.js", 83],
-      ["src/pages/Employees/Search.js", 206],
+      ["src/pages/Employees/Search/EmployeesTable.js", 24],
+      ["src/pages/Employees/Search/SearchFields.js", 46],
       ["src/pages/LegalEntities/Add.js", 105],
       ["src/pages/LegalEntities/Details.js", 702],
       ["src/pages/LegalEntities/Details.js", 887],
@@ -2324,7 +2340,7 @@
       ["src/pages/EmployeeRequests/Search.js", 73],
       ["src/pages/Employees/Create.js", 534],
       ["src/pages/Employees/Details.js", 75],
-      ["src/pages/Employees/Search.js", 77],
+      ["src/pages/Employees/Search/EmployeesTable.js", 18],
       ["src/pages/Employees/Update.js", 588]
     ]
   },
@@ -2368,7 +2384,7 @@
       ["src/pages/EmployeeRequests/Search.js", 75],
       ["src/pages/Employees/Create.js", 582],
       ["src/pages/Employees/Details.js", 77],
-      ["src/pages/Employees/Search.js", 79],
+      ["src/pages/Employees/Search/EmployeesTable.js", 20],
       ["src/pages/Employees/Update.js", 643],
       ["src/pages/PatientMergeRequests/Details.js", 125],
       ["src/pages/PendingDeclarations/Search.js", 94]
@@ -2655,8 +2671,8 @@
       ["src/pages/Employees/Create.js", 195],
       ["src/pages/Employees/Create.js", 552],
       ["src/pages/Employees/Details.js", 255],
-      ["src/pages/Employees/Search.js", 80],
-      ["src/pages/Employees/Search.js", 276],
+      ["src/pages/Employees/Search/EmployeesTable.js", 21],
+      ["src/pages/Employees/Search/SearchFields.js", 116],
       ["src/pages/Employees/Update.js", 260],
       ["src/pages/Employees/Update.js", 606],
       ["src/pages/LegalEntities/Details.js", 770]
@@ -3069,10 +3085,10 @@
       ["src/pages/Employees/Create.js", 210],
       ["src/pages/Employees/Create.js", 405],
       ["src/pages/Employees/Create.js", 431],
-      ["src/pages/Employees/Search.js", 250],
-      ["src/pages/Employees/Search.js", 270],
-      ["src/pages/Employees/Search.js", 298],
-      ["src/pages/Employees/Search.js", 315],
+      ["src/pages/Employees/Search/SearchFields.js", 90],
+      ["src/pages/Employees/Search/SearchFields.js", 110],
+      ["src/pages/Employees/Search/SearchFields.js", 138],
+      ["src/pages/Employees/Search/SearchFields.js", 155],
       ["src/pages/Employees/Update.js", 213],
       ["src/pages/Employees/Update.js", 254],
       ["src/pages/Employees/Update.js", 275],
@@ -3113,15 +3129,27 @@
     "translation": "Код сервісу",
     "origin": [["src/pages/Services/Search/ServicesTable.js", 18]]
   },
+  "Service details": {
+    "translation": "Деталі сервісу",
+    "origin": [["src/pages/Services/Details/index.js", 49]]
+  },
+  "Service groups": {
+    "translation": "Сервіс групи",
+    "origin": [["src/pages/Services/Details/index.js", 90]]
+  },
   "Service name": {
     "translation": "Назва сервісу",
-    "origin": [["src/pages/Services/Search/ServicesTable.js", 17]]
+    "origin": [
+      ["src/pages/Services/Details/index.js", 57],
+      ["src/pages/Services/Search/ServicesTable.js", 17]
+    ]
   },
   "Services": {
     "translation": "Сервіси",
     "origin": [
       ["src/components/Nav.js", 280],
       ["src/components/Nav.js", 282],
+      ["src/pages/Services/Details/index.js", 46],
       ["src/pages/Services/Search/index.js", 32]
     ]
   },
@@ -3167,13 +3195,14 @@
       ["src/pages/Contracts/Capitation/Search.js", 145],
       ["src/pages/Contracts/Reimbursement/Search.js", 154],
       ["src/pages/Declarations/Search.js", 116],
-      ["src/pages/Employees/Search.js", 137],
+      ["src/pages/Employees/Search/EmployeesTable.js", 65],
       ["src/pages/INNMDosages/Search.js", 108],
       ["src/pages/PatientMergeRequests/Search.js", 155],
       ["src/pages/PendingDeclarations/Search.js", 140],
       ["src/pages/Persons/Details.js", 412],
       ["src/pages/Persons/Search.js", 158],
       ["src/pages/ProgramMedications/Search.js", 147],
+      ["src/pages/Services/Details/ParentGroupsTable.js", 77],
       ["src/pages/Services/Search/ServicesTable.js", 73]
     ]
   },
@@ -3301,8 +3330,8 @@
       ["src/components/SelectedFilters.js", 158],
       ["src/pages/Employees/Create.js", 233],
       ["src/pages/Employees/Create.js", 554],
-      ["src/pages/Employees/Search.js", 81],
-      ["src/pages/Employees/Search.js", 289],
+      ["src/pages/Employees/Search/EmployeesTable.js", 22],
+      ["src/pages/Employees/Search/SearchFields.js", 129],
       ["src/pages/Employees/Update.js", 298],
       ["src/pages/Employees/Update.js", 608]
     ]
@@ -3345,7 +3374,7 @@
       ["src/pages/Declarations/Details.js", 89],
       ["src/pages/Declarations/Search.js", 72],
       ["src/pages/EmployeeRequests/Search.js", 80],
-      ["src/pages/Employees/Search.js", 85],
+      ["src/pages/Employees/Search/EmployeesTable.js", 26],
       ["src/pages/INNMDosages/Details.js", 56],
       ["src/pages/INNMDosages/Search.js", 78],
       ["src/pages/INNMDosages/Search.js", 226],
@@ -3366,7 +3395,9 @@
       ["src/pages/Persons/Search.js", 116],
       ["src/pages/ProgramMedications/Details.js", 58],
       ["src/pages/ProgramMedications/Search.js", 100],
-      ["src/pages/Services/Search/SearchFields.js", 51],
+      ["src/pages/Services/Details/ParentGroupsTable.js", 23],
+      ["src/pages/Services/Details/index.js", 59],
+      ["src/pages/Services/Search/SearchFields.js", 46],
       ["src/pages/Services/Search/ServicesTable.js", 20]
     ]
   },
@@ -3445,7 +3476,7 @@
   },
   "Tax ID existance": {
     "translation": "Наявність ІПН",
-    "origin": [["src/pages/Employees/Search.js", 320]]
+    "origin": [["src/pages/Employees/Search/SearchFields.js", 160]]
   },
   "Terminate contract": {
     "translation": "Розірвати договір",
@@ -3572,7 +3603,10 @@
   },
   "Updated at": {
     "translation": "Оновлено",
-    "origin": [["src/pages/Services/Search/ServicesTable.js", 24]]
+    "origin": [
+      ["src/pages/Services/Details/ParentGroupsTable.js", 26],
+      ["src/pages/Services/Search/ServicesTable.js", 24]
+    ]
   },
   "Updating employee": {
     "translation": "Оновлення співробітника",
