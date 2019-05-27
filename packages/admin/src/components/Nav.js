@@ -275,6 +275,15 @@ const Nav = () => (
             </NavSection>
           </Ability>
         </Flag>
+        <Flag name="features.services">
+          <Ability action="read" resource="service_catalog">
+            <NavSection title={<Trans>Services</Trans>}>
+              <NavLink to="/services">
+                <Trans>Services</Trans>
+              </NavLink>
+            </NavSection>
+          </Ability>
+        </Flag>
         <Flag name="features.declaration">
           <Ability action="read" resource="declaration">
             <NavSection title={<Trans>Declarations</Trans>}>
