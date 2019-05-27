@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.90.0"></a>
+# [1.90.0](https://github.com/edenlabllc/ehealth.web/compare/v1.89.0...v1.90.0) (2019-05-27)
+
+
+### Bug Fixes
+
+* import Table to LegalEntitiesTable Component ([3236fc2](https://github.com/edenlabllc/ehealth.web/commit/3236fc2))
+
+
+### Features
+
+* add link to the Services list in Navigation ([e10e59f](https://github.com/edenlabllc/ehealth.web/commit/e10e59f))
+* add new locales for Services ([cf3a49a](https://github.com/edenlabllc/ehealth.web/commit/cf3a49a))
+* add Services List page ([3484783](https://github.com/edenlabllc/ehealth.web/commit/3484783))
+
+
+
+
+
 <a name="1.88.0"></a>
 # [1.88.0](https://github.com/edenlabllc/ehealth.web/compare/v1.87.3...v1.88.0) (2019-05-24)
 
