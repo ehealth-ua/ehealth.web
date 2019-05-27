@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.91.0"></a>
+# [1.91.0](https://github.com/edenlabllc/ehealth.web/compare/v1.90.0...v1.91.0) (2019-05-27)
+
+
+### Bug Fixes
+
+* **admin:** delete unused queries ([47cc443](https://github.com/edenlabllc/ehealth.web/commit/47cc443))
+
+
+### Features
+
+* **admin:** add `FullName` component ([55a078f](https://github.com/edenlabllc/ehealth.web/commit/55a078f))
+
+
+
+
+
 <a name="1.90.0"></a>
 # [1.90.0](https://github.com/edenlabllc/ehealth.web/compare/v1.89.0...v1.90.0) (2019-05-27)
 
