@@ -11,11 +11,11 @@ import SearchForm from "../../../components/SearchForm";
 import LoadingOverlay from "../../../components/LoadingOverlay";
 import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
-import PrimarySearchFields from "./SearchFields";
+import { PrimarySearchFields } from "./SearchFields";
 import ServicesTable from "./ServicesTable";
 
 const Search = () => {
-  //TODO: use state for handling `create` and `deactivate` popups visibility
+  //TODO: use state for handling `create` popup visibility
   return (
     <Box p={6}>
       <LocationParams>
@@ -90,7 +90,7 @@ const SearchServicesQuery = gql`
       last: $last
     ) {
       nodes {
-        ...Service
+        ...Services
       }
       pageInfo {
         ...PageInfo

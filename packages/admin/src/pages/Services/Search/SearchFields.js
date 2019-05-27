@@ -7,7 +7,7 @@ import { Validation } from "@ehealth/components";
 
 import STATUSES from "../../../helpers/statuses";
 import * as Field from "../../../components/Field";
-//import DictionaryValue from "../../../components/DictionaryValue";
+import DictionaryValue from "../../../components/DictionaryValue";
 
 const PrimarySearchFields = () => (
   <Flex mx={-1}>
@@ -36,11 +36,6 @@ const PrimarySearchFields = () => (
           />
         )}
       />
-      <Validation.Matches
-        field="filter.code"
-        //TODO: add options={SERVICE_CODE}
-        message="Invalid service code"
-      />
     </Box>
     <Box px={1} width={1 / 4}>
       <Trans
@@ -57,7 +52,7 @@ const PrimarySearchFields = () => (
         )}
       />
     </Box>
-    {/* <Box px={1} width={1 / 4}>
+    <Box px={1} width={1 / 4}>
       <Composer
         components={[
           <DictionaryValue name="SERVICE_CATEGORY" />,
@@ -76,8 +71,8 @@ const PrimarySearchFields = () => (
           />
         )}
       </Composer>
-    </Box> */}
+    </Box>
   </Flex>
 );
 
-export default PrimarySearchFields;
+export { PrimarySearchFields };

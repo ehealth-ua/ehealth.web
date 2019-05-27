@@ -8,8 +8,13 @@ import DictionaryValue from "../../../components/DictionaryValue";
 import AddressView from "../../../components/AddressView";
 import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
+import Table from "../../../components/Table";
 
-const Table = ({ legalEntities, locationParams, setLocationParams }) => (
+const LegalEntitiesTable = ({
+  legalEntities,
+  locationParams,
+  setLocationParams
+}) => (
   <Table
     data={legalEntities}
     header={{
@@ -100,9 +105,9 @@ const Table = ({ legalEntities, locationParams, setLocationParams }) => (
   />
 );
 
-Table.fragments = {
+LegalEntitiesTable.fragments = {
   entry: gql`
-    fragment LegalEntity on LegalEntity {
+    fragment LegalEntities on LegalEntity {
       id
       databaseId
       name
@@ -121,4 +126,4 @@ Table.fragments = {
   `
 };
 
-export default Table;
+export default LegalEntitiesTable;

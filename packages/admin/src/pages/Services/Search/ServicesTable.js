@@ -96,7 +96,7 @@ const StatusIcon = ({ status }) => (
 
 ServicesTable.fragments = {
   entry: gql`
-    fragment Service on Service {
+    fragment Services on Service {
       id
       databaseId
       name

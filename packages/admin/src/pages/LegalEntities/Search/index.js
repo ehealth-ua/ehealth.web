@@ -12,7 +12,7 @@ import LoadingOverlay from "../../../components/LoadingOverlay";
 import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import SearchForm from "../../../components/SearchForm";
 import { PrimarySearchFields } from "./SearchFields";
-import Table from "./Table";
+import LegalEntitiesTable from "./LegalEntitiesTable";
 
 const ID_PATTERN =
   "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
@@ -88,7 +88,7 @@ const Search = () => (
                 if (isEmpty(legalEntities)) return null;
                 return (
                   <LoadingOverlay loading={loading}>
-                    <Table
+                    <LegalEntitiesTable
                       locationParams={locationParams}
                       setLocationParams={setLocationParams}
                       legalEntities={legalEntities}
@@ -126,14 +126,14 @@ const SearchLegalEntitiesQuery = gql`
       last: $last
     ) @skip(if: $skip) {
       nodes {
-        ...LegalEntity
+        ...LegalEntities
       }
       pageInfo {
         ...PageInfo
       }
     }
   }
-  ${Table.fragments.entry}
+  ${LegalEntitiesTable.fragments.entry}
   ${Pagination.fragments.entry}
 `;
 
