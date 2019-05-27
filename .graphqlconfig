@@ -5,7 +5,7 @@
       "extensions": {
         "endpoints": {
           "dev": {
-            "url": "https://api.dev.asclepius.com.ua/graphql",
+            "url": "https://api.dev.edenlab.com.ua/graphql",
             "headers": {
               "Authorization": "Bearer ${env:AUTH_TOKEN_ENV}"
             }
