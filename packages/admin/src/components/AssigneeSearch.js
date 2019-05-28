@@ -1,23 +1,18 @@
 import React from "react";
+import gql from "graphql-tag";
 import isEmpty from "lodash/isEmpty";
 import debounce from "lodash/debounce";
 import { Query } from "react-apollo";
-import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
-
 import { getFullName } from "@ehealth/utils";
-
 import * as Field from "./Field";
-
-const GetAssignEmployeeQuery = loader(
-  "../graphql/GetAssignEmployeeQuery.graphql"
-);
+import FullName from "./FullName";
 
 const AssigneeSearch = () => (
   <Trans
     id="Choose assignee"
     render={({ translation }) => (
-      <Query query={GetAssignEmployeeQuery} variables={{ skip: true }}>
+      <Query query={GetEmployeeNameQuery} variables={{ skip: true }}>
         {({ data, refetch: refetchEmployees }) => {
           const { employees } = data || {};
 
@@ -56,5 +51,25 @@ const AssigneeSearch = () => (
     )}
   />
 );
+
+const GetEmployeeNameQuery = gql`
+  query EmployeesQuery(
+    $first: Int!
+    $filter: EmployeeFilter
+    $skip: Boolean! = false
+  ) {
+    employees(first: $first, filter: $filter) @skip(if: $skip) {
+      nodes {
+        id
+        databaseId
+        party {
+          id
+          ...FullName
+        }
+      }
+    }
+  }
+  ${FullName.fragments.entry}
+`;
 
 export default AssigneeSearch;
