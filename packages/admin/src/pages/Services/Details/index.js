@@ -19,6 +19,7 @@ import DefinitionListView from "../../../components/DefinitionListView";
 import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
 import ParentGroupsTable from "./ParentGroupsTable";
+import UpdateServicePopup from "./UpdateServicePopup";
 import DeactivateServicePopup from "./DeactivateServicePopup";
 
 const Details = ({ id }) => (
@@ -50,7 +51,7 @@ const Details = ({ id }) => (
                     </Breadcrumbs.Item>
                   </Breadcrumbs.List>
                 </Box>
-                <Flex justifyContent="space-between" alignItems="flex-start">
+                <Flex justifyContent="space-between" alignItems="flex-end">
                   <Box>
                     <DefinitionListView
                       labels={{
@@ -80,13 +81,27 @@ const Details = ({ id }) => (
                       labelWidth="120px"
                     />
                   </Box>
-                  <Ability action="write" resource="service_catalog">
-                    <DeactivateServicePopup
-                      id={id}
-                      name={name}
-                      refetchQuery={ServiceDetailsQuery}
-                    />
-                  </Ability>
+                  {isActive && (
+                    <Ability action="write" resource="service_catalog">
+                      <Flex justifyContent="flex-end" flexWrap="wrap">
+                        <Box mt={2}>
+                          <UpdateServicePopup
+                            id={id}
+                            name={name}
+                            requestAllowed={requestAllowed}
+                            refetchQuery={ServiceDetailsQuery}
+                          />
+                        </Box>
+                        <Box mt={2} ml={2}>
+                          <DeactivateServicePopup
+                            id={id}
+                            name={name}
+                            refetchQuery={ServiceDetailsQuery}
+                          />
+                        </Box>
+                      </Flex>
+                    </Ability>
+                  )}
                 </Flex>
               </Box>
               <Tabs.Nav>
