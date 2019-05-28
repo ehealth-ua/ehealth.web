@@ -281,6 +281,9 @@ const Nav = () => (
               <NavLink to="/services">
                 <Trans>Services</Trans>
               </NavLink>
+              <NavLink to="/service-groups">
+                <Trans>Service groups</Trans>
+              </NavLink>
             </NavSection>
           </Ability>
         </Flag>

@@ -29,6 +29,7 @@ import Medications from "./pages/Medications";
 import Employees from "./pages/Employees";
 import EmployeeRequests from "./pages/EmployeeRequests";
 import Services from "./pages/Services";
+import ServiceGroups from "./pages/ServiceGroups";
 
 import localeUK from "./locales/uk/messages.js";
 
@@ -65,6 +66,7 @@ const App = () => (
                 <ProgramMedications path="program-medications/*" />
                 <Dictionaries path="dictionaries/*" />
                 <Services path="services/*" />
+                <ServiceGroups path="service-groups/*" />
                 <NotFound default />
               </Router>
             </Layout>
