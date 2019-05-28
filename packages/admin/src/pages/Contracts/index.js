@@ -3,7 +3,7 @@ import { Router, Redirect } from "@reach/router";
 import CapitationContractDetails from "./Capitation/Details";
 import CapitationContractSearch from "./Capitation/Search/";
 import ReimbursementContractDetails from "./Reimbursement/Details";
-import ReimbursementContractSearch from "./Reimbursement/Search";
+import ReimbursementContractSearch from "./Reimbursement/Search/";
 
 const Contracts = ({ uri }) => (
   <Router>
