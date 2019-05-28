@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.93.0"></a>
+# [1.93.0](https://github.com/edenlabllc/ehealth.web/compare/v1.92.0...v1.93.0) (2019-05-28)
+
+
+### Features
+
+* add Create Service popup and mutation ([8d393f0](https://github.com/edenlabllc/ehealth.web/commit/8d393f0))
+* update locales for Create Service popup ([f0cf053](https://github.com/edenlabllc/ehealth.web/commit/f0cf053))
+
+
+
+
+
 <a name="1.92.0"></a>
 # [1.92.0](https://github.com/edenlabllc/ehealth.web/compare/v1.91.0...v1.92.0) (2019-05-27)
 
