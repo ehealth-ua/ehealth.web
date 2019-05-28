@@ -51,23 +51,21 @@ query LegalEntityQuery(
       date
       place
     }
-    medicalServiceProvider {
-      licenses {
-        licenseNumber
-        issuedBy
-        issuedDate
-        expiryDate
-        activeFromDate
-        whatLicensed
-        orderNo
-      }
-      accreditation {
-        category
-        issuedDate
-        expiryDate
-        orderNo
-        orderDate
-      }
+    license {
+      licenseNumber
+      issuedBy
+      issuedDate
+      expiryDate
+      activeFromDate
+      whatLicensed
+      orderNo
+    }
+    accreditation {
+      category
+      issuedDate
+      expiryDate
+      orderNo
+      orderDate
     }
     owner {
       id

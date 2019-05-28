@@ -22,7 +22,7 @@ import {
   stringifySortingParams,
   convertStringToBoolean
 } from "@ehealth/utils";
-import { LocationParams, Form, Modal } from "@ehealth/components";
+import { LocationParams, Form, Validation, Modal } from "@ehealth/components";
 
 import Line from "../../components/Line";
 import Link from "../../components/Link";
@@ -99,7 +99,9 @@ const Details = ({ id, navigate }) => (
         receiverFundsCode,
         legalForm,
         beneficiary,
-        archive
+        archive,
+        license,
+        accreditation
       } = legalEntity;
       const isVerificationActive = status === "ACTIVE" && nhsReviewed;
       const isProcessingActive =
@@ -273,7 +275,8 @@ const Details = ({ id, navigate }) => (
               />
               <License
                 path="/licenses"
-                license={medicalServiceProvider}
+                license={license}
+                accreditation={accreditation}
                 nhsVerified={nhsVerified}
                 edrVerified={edrVerified}
                 nhsComment={nhsComment}
@@ -404,222 +407,220 @@ const License = ({
   id,
   isVerificationActive,
   license,
+  accreditation,
   nhsVerified,
   edrVerified,
   nhsComment
-}) => {
-  const { accreditation, licenses } = license || {};
-
-  return (
-    <Box p={5}>
-      {!isEmpty(accreditation) && (
-        <>
-          <Heading fontSize="1" fontWeight="normal" mb={5}>
-            <Trans>Accreditation</Trans>
-          </Heading>
-          <DefinitionListView
-            labels={{
-              category: <Trans>Category</Trans>,
-              validateDate: <Trans>Validate Date</Trans>,
-              orderDate: <Trans>Order Date</Trans>,
-              orderNo: <Trans>Order Number</Trans>
-            }}
-            data={{
-              ...accreditation,
-              category: accreditation.category && (
-                <DictionaryValue
-                  name="ACCREDITATION_CATEGORY"
-                  item={accreditation.category}
-                />
-              ),
-              validateDate: (
-                <>
-                  <Trans>From</Trans>{" "}
-                  <DateFormat value={accreditation.issuedDate} />{" "}
-                  {accreditation.expiryDate ? (
-                    <>
-                      <Trans>To</Trans>{" "}
-                      <DateFormat value={accreditation.expiryDate} />
-                    </>
-                  ) : (
-                    ""
-                  )}
-                </>
-              ),
-              orderDate: <DateFormat value={accreditation.orderDate} />
-            }}
-          />
-          <Line />
-        </>
-      )}
-      {!isEmpty(licenses) && (
-        <>
-          <Heading fontSize="1" fontWeight="normal" mb={5}>
-            <Trans>Licenses</Trans>
-          </Heading>
-
-          <Table
-            data={licenses}
-            header={{
-              licenseNumber: <Trans>License number</Trans>,
-              whatLicensed: <Trans>Issued to</Trans>,
-              issuedDate: <Trans>Date of issue</Trans>,
-              issuedBy: <Trans>Authority that issued</Trans>,
-              validateDate: <Trans>Validate Date</Trans>,
-              orderNo: <Trans>Order Number</Trans>
-            }}
-            renderRow={({
-              activeFromDate,
-              expiryDate,
-              issuedDate,
-              ...licenses
-            }) => ({
-              validateDate: (
-                <>
-                  <Trans>From</Trans> <DateFormat value={activeFromDate} />{" "}
-                  {expiryDate ? (
-                    <>
-                      <Trans>To</Trans> <DateFormat value={expiryDate} />
-                    </>
-                  ) : (
-                    ""
-                  )}
-                </>
-              ),
-              issuedDate: <DateFormat value={issuedDate} />,
-              ...licenses
-            })}
-            tableName="legal-entities/licenses"
-          />
-          <Line />
-        </>
-      )}
-
-      <OpacityBox mt={5} opacity={isVerificationActive ? 1 : 0.5}>
+}) => (
+  <Box p={5}>
+    {!isEmpty(accreditation) && (
+      <>
         <Heading fontSize="1" fontWeight="normal" mb={5}>
-          <Trans>Verification</Trans>
+          <Trans>Accreditation</Trans>
         </Heading>
         <DefinitionListView
           labels={{
-            nhsVerified: <Trans>Verification NZZU</Trans>,
-            edrVerified: <Trans>EDR Verification</Trans>
+            category: <Trans>Category</Trans>,
+            validateDate: <Trans>Validate Date</Trans>,
+            orderDate: <Trans>Order Date</Trans>,
+            orderNo: <Trans>Order Number</Trans>
           }}
           data={{
-            nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />,
-            edrVerified: edrVerified ? <PositiveIcon /> : <NegativeIcon />
+            ...accreditation,
+            category: accreditation.category && (
+              <DictionaryValue
+                name="ACCREDITATION_CATEGORY"
+                item={accreditation.category}
+              />
+            ),
+            validateDate: (
+              <>
+                <Trans>From</Trans>{" "}
+                <DateFormat value={accreditation.issuedDate} />{" "}
+                {accreditation.expiryDate ? (
+                  <>
+                    <Trans>To</Trans>{" "}
+                    <DateFormat value={accreditation.expiryDate} />
+                  </>
+                ) : (
+                  ""
+                )}
+              </>
+            ),
+            orderDate: <DateFormat value={accreditation.orderDate} />
           }}
         />
-        <Box mt={3} mb={4}>
-          <NhsVerifyButton
-            id={id}
-            isVerificationActive={isVerificationActive}
-            nhsVerified={nhsVerified}
-          />
-        </Box>
-        <Popup
-          variant="green"
-          buttonText={
-            nhsComment ? (
-              <Trans>Edit comment</Trans>
-            ) : (
-              <Trans>Leave a Comment</Trans>
-            )
-          }
-          title={
-            nhsComment ? <Trans>Comment</Trans> : <Trans>Leave a Comment</Trans>
-          }
-          icon={CommentIcon}
-          disabled={!isVerificationActive}
-        >
-          {toggle => (
-            <Mutation
-              mutation={NhsCommentLegalEntityMutation}
-              refetchQueries={() => [
-                {
-                  query: LegalEntityQuery,
-                  variables: filteredLocationParams(id)
-                }
-              ]}
-            >
-              {nhsCommentLegalEntity => (
-                <BooleanValue defaultValue={!nhsComment}>
-                  {({ value: showForm, toggle: toggleForm }) =>
-                    showForm ? (
-                      <Form
-                        initialValues={{ nhsComment }}
-                        onSubmit={async ({ nhsComment = "" }) => {
-                          await nhsCommentLegalEntity({
-                            variables: { input: { id, nhsComment } }
-                          });
-                          toggle();
-                        }}
-                      >
-                        <Trans
-                          id="Enter comment"
-                          render={({ translation }) => (
-                            <Field.Textarea
-                              name="nhsComment"
-                              placeholder={translation}
-                              rows={5}
-                              maxlength="3000"
-                              showLengthHint
-                            />
-                          )}
-                        />
-                        <Flex justifyContent="left">
-                          <Box mr={20}>
-                            <Button variant="blue" onClick={toggle}>
-                              <Trans>Close</Trans>
-                            </Button>
-                          </Box>
-                          <Button type="submit" variant="green">
-                            <Trans>Leave a Comment</Trans>
+        <Line />
+      </>
+    )}
+    {!isEmpty(license) && (
+      <>
+        <Heading fontSize="1" fontWeight="normal" mb={5}>
+          <Trans>Licenses</Trans>
+        </Heading>
+
+        <Table
+          data={[license]}
+          header={{
+            licenseNumber: <Trans>License number</Trans>,
+            whatLicensed: <Trans>Issued to</Trans>,
+            issuedDate: <Trans>Date of issue</Trans>,
+            issuedBy: <Trans>Authority that issued</Trans>,
+            validateDate: <Trans>Validate Date</Trans>,
+            orderNo: <Trans>Order Number</Trans>
+          }}
+          renderRow={({
+            activeFromDate,
+            expiryDate,
+            issuedDate,
+            ...license
+          }) => ({
+            validateDate: (
+              <>
+                <Trans>From</Trans> <DateFormat value={activeFromDate} />{" "}
+                {expiryDate ? (
+                  <>
+                    <Trans>To</Trans> <DateFormat value={expiryDate} />
+                  </>
+                ) : (
+                  ""
+                )}
+              </>
+            ),
+            issuedDate: <DateFormat value={issuedDate} />,
+            ...license
+          })}
+          tableName="legal-entities/licenses"
+        />
+        <Line />
+      </>
+    )}
+
+    <OpacityBox mt={5} opacity={isVerificationActive ? 1 : 0.5}>
+      <Heading fontSize="1" fontWeight="normal" mb={5}>
+        <Trans>Verification</Trans>
+      </Heading>
+      <DefinitionListView
+        labels={{
+          nhsVerified: <Trans>Verification NZZU</Trans>,
+          edrVerified: <Trans>EDR Verification</Trans>
+        }}
+        data={{
+          nhsVerified: nhsVerified ? <PositiveIcon /> : <NegativeIcon />,
+          edrVerified: edrVerified ? <PositiveIcon /> : <NegativeIcon />
+        }}
+      />
+      <Box mt={3} mb={4}>
+        <NhsVerifyButton
+          id={id}
+          isVerificationActive={isVerificationActive}
+          nhsVerified={nhsVerified}
+        />
+      </Box>
+      <Popup
+        variant="green"
+        buttonText={
+          nhsComment ? (
+            <Trans>Edit comment</Trans>
+          ) : (
+            <Trans>Leave a Comment</Trans>
+          )
+        }
+        title={
+          nhsComment ? <Trans>Comment</Trans> : <Trans>Leave a Comment</Trans>
+        }
+        icon={CommentIcon}
+        disabled={!isVerificationActive}
+      >
+        {toggle => (
+          <Mutation
+            mutation={NhsCommentLegalEntityMutation}
+            refetchQueries={() => [
+              {
+                query: LegalEntityQuery,
+                variables: filteredLocationParams(id)
+              }
+            ]}
+          >
+            {nhsCommentLegalEntity => (
+              <BooleanValue defaultValue={!nhsComment}>
+                {({ value: showForm, toggle: toggleForm }) =>
+                  showForm ? (
+                    <Form
+                      initialValues={{ nhsComment }}
+                      onSubmit={async ({ nhsComment = "" }) => {
+                        await nhsCommentLegalEntity({
+                          variables: { input: { id, nhsComment } }
+                        });
+                        toggle();
+                      }}
+                    >
+                      <Trans
+                        id="Enter comment"
+                        render={({ translation }) => (
+                          <Field.Textarea
+                            name="nhsComment"
+                            placeholder={translation}
+                            rows={5}
+                            maxlength="3000"
+                            showLengthHint
+                          />
+                        )}
+                      />
+                      <Flex justifyContent="left">
+                        <Box mr={20}>
+                          <Button variant="blue" onClick={toggle}>
+                            <Trans>Close</Trans>
                           </Button>
-                        </Flex>
-                      </Form>
-                    ) : (
-                      <>
-                        <CommentBox>{nhsComment}</CommentBox>
-                        <Flex justifyContent="left">
-                          <Box mr={20}>
-                            <Button variant="blue" onClick={toggle}>
-                              <Trans>Close</Trans>
-                            </Button>
-                          </Box>
-                          <Box mr={20}>
-                            <Button
-                              variant="red"
-                              onClick={async () => {
-                                await nhsCommentLegalEntity({
-                                  variables: {
-                                    input: { id, nhsComment: "" }
-                                  }
-                                });
-                                toggle();
-                              }}
-                            >
-                              <Trans>Delete</Trans>
-                            </Button>
-                          </Box>
-                          <Box>
-                            <Button variant="green" onClick={toggleForm}>
-                              <Trans>Edit comment</Trans>
-                            </Button>
-                          </Box>
-                        </Flex>
-                      </>
-                    )
-                  }
-                </BooleanValue>
-              )}
-            </Mutation>
-          )}
-        </Popup>
-        {nhsComment && <BorderBox>{nhsComment}</BorderBox>}
-      </OpacityBox>
-    </Box>
-  );
-};
+                        </Box>
+                        <Button type="submit" variant="green">
+                          <Trans>Leave a Comment</Trans>
+                        </Button>
+                      </Flex>
+                    </Form>
+                  ) : (
+                    <>
+                      <CommentBox>{nhsComment}</CommentBox>
+                      <Flex justifyContent="left">
+                        <Box mr={20}>
+                          <Button variant="blue" onClick={toggle}>
+                            <Trans>Close</Trans>
+                          </Button>
+                        </Box>
+                        <Box mr={20}>
+                          <Button
+                            variant="red"
+                            onClick={async () => {
+                              await nhsCommentLegalEntity({
+                                variables: {
+                                  input: { id, nhsComment: "" }
+                                }
+                              });
+                              toggle();
+                            }}
+                          >
+                            <Trans>Delete</Trans>
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Button variant="green" onClick={toggleForm}>
+                            <Trans>Edit comment</Trans>
+                          </Button>
+                        </Box>
+                      </Flex>
+                    </>
+                  )
+                }
+              </BooleanValue>
+            )}
+          </Mutation>
+        )}
+      </Popup>
+      {nhsComment && <BorderBox>{nhsComment}</BorderBox>}
+    </OpacityBox>
+  </Box>
+);
+
 const RelatedLegalEntities = ({ id, status, mergedToLegalEntity }) => (
   <Ability action="read" resource="related_legal_entities">
     <LocationParams>
@@ -1116,6 +1117,7 @@ const UpdateLegalEntityStatusButton = ({ id, isActive }) => {
                   />
                 )}
               />
+              <Validation.Required field="reason" message="Required field" />
               <Flex justifyContent="left">
                 <Box mr={20}>
                   <Button variant="blue" onClick={toggle}>
