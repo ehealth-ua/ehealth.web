@@ -766,6 +766,13 @@
       ["src/pages/INNMDosages/Search.js", 48]
     ]
   },
+  "Create service": {
+    "translation": "Створити сервіс",
+    "origin": [
+      ["src/pages/Services/Search/CreateServicePopup.js", 32],
+      ["src/pages/Services/Search/CreateServicePopup.js", 37]
+    ]
+  },
   "Create employee": {
     "translation": "Додати співробітника",
     "origin": [["src/pages/Employees/Search/index.js", 31]]
@@ -1469,11 +1476,17 @@
   },
   "Enter service code": {
     "translation": "Введіть код сервісу",
-    "origin": [["src/pages/Services/Search/SearchFields.js", 28]]
+    "origin": [
+      ["src/pages/Services/Search/CreateServicePopup.js", 66],
+      ["src/pages/Services/Search/SearchFields.js", 28]
+    ]
   },
   "Enter service name": {
     "translation": "Введіть назву сервісу",
-    "origin": [["src/pages/Services/Search/SearchFields.js", 15]]
+    "origin": [
+      ["src/pages/Services/Search/CreateServicePopup.js", 51],
+      ["src/pages/Services/Search/SearchFields.js", 15]
+    ]
   },
   "Enter settlement": {
     "translation": "Введіть населений пункт",
@@ -3106,7 +3119,8 @@
       ["src/pages/Medications/Create.js", 359],
       ["src/pages/Medications/Create.js", 710],
       ["src/pages/Medications/Create.js", 734],
-      ["src/pages/ProgramMedications/Search.js", 311]
+      ["src/pages/ProgramMedications/Search.js", 311],
+      ["src/pages/Services/Search/CreateServicePopup.js", 88]
     ]
   },
   "Select person status": {
@@ -3125,9 +3139,16 @@
     "translation": "Оберіть тип",
     "origin": [["src/pages/ProgramMedications/Create.js", 191]]
   },
+  "Service category": {
+    "translation": "Категорія сервісу",
+    "origin": [["src/pages/Services/Search/CreateServicePopup.js", 95]]
+  },
   "Service code": {
     "translation": "Код сервісу",
-    "origin": [["src/pages/Services/Search/ServicesTable.js", 18]]
+    "origin": [
+      ["src/pages/Services/Search/CreateServicePopup.js", 71],
+      ["src/pages/Services/Search/ServicesTable.js", 18]
+    ]
   },
   "Service details": {
     "translation": "Деталі сервісу",
@@ -3141,6 +3162,7 @@
     "translation": "Назва сервісу",
     "origin": [
       ["src/pages/Services/Details/index.js", 57],
+      ["src/pages/Services/Search/CreateServicePopup.js", 56],
       ["src/pages/Services/Search/ServicesTable.js", 17]
     ]
   },
@@ -3150,7 +3172,7 @@
       ["src/components/Nav.js", 280],
       ["src/components/Nav.js", 282],
       ["src/pages/Services/Details/index.js", 46],
-      ["src/pages/Services/Search/index.js", 32]
+      ["src/pages/Services/Search/index.js", 28]
     ]
   },
   "Settlement": {
