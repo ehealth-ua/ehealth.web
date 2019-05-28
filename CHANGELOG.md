@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.94.0"></a>
+# [1.94.0](https://github.com/edenlabllc/ehealth.web/compare/v1.93.0...v1.94.0) (2019-05-28)
+
+
+### Features
+
+* add Deactivate Service popup and mutation ([#958](https://github.com/edenlabllc/ehealth.web/issues/958)) ([fd44737](https://github.com/edenlabllc/ehealth.web/commit/fd44737))
+
+
+
+
+
 <a name="1.93.0"></a>
 # [1.93.0](https://github.com/edenlabllc/ehealth.web/compare/v1.92.0...v1.93.0) (2019-05-28)
 
