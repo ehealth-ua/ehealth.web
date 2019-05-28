@@ -120,6 +120,11 @@ const EMPLOYEE_REQUEST_STATUS = {
   REJECTED: "Відхилено"
 };
 
+const BOOLEAN_VALUE = {
+  [true]: "Так",
+  [false]: "Ні"
+};
+
 const STATUSES = {
   CONTRACT,
   PERSON,
@@ -142,7 +147,8 @@ const STATUSES = {
   DLS_VERIFY_STATUS,
   EDR_VERIFY_STATUS,
   EMPLOYEE_STATUS,
-  EMPLOYEE_REQUEST_STATUS
+  EMPLOYEE_REQUEST_STATUS,
+  BOOLEAN_VALUE
 };
 
 export default STATUSES;

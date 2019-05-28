@@ -6,13 +6,15 @@ import { Trans } from "@lingui/macro";
 import { Flex, Box, Heading } from "@rebass/emotion";
 import { LocationParams } from "@ehealth/components";
 
+import Ability from "../../../components/Ability";
 import Pagination from "../../../components/Pagination";
 import SearchForm from "../../../components/SearchForm";
 import LoadingOverlay from "../../../components/LoadingOverlay";
 import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
-import ServiceGroupsTable from "./ServiceGroupsTable";
 import { PrimarySearchFields } from "./SearchFields";
+import ServiceGroupsTable from "./ServiceGroupsTable";
+import CreateServiceGroupPopup from "./CreateServiceGroupPopup";
 
 const Search = () => (
   <Box p={6}>
@@ -25,9 +27,12 @@ const Search = () => (
                 <Trans>Service groups</Trans>
               </Heading>
             </Box>
-            {
-              //TODO: add Create Service Group mutation with Ability checking
-            }
+            <Ability action="write" resource="service_catalog">
+              <CreateServiceGroupPopup
+                locationParams={filteredLocationParams(locationParams)}
+                refetchQuery={SearchServiceGroupsQuery}
+              />
+            </Ability>
           </Flex>
           <SearchForm
             initialValues={locationParams}
