@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.95.0"></a>
+# [1.95.0](https://github.com/edenlabllc/ehealth.web/compare/v1.94.0...v1.95.0) (2019-05-28)
+
+
+### Features
+
+* **admin:** use fragments on capitation contract request page ([6746a4c](https://github.com/edenlabllc/ehealth.web/commit/6746a4c))
+* **admin:** use fragments on capitation contracts page ([81264eb](https://github.com/edenlabllc/ehealth.web/commit/81264eb))
+* **admin:** use fragments on reimbursement contract request page ([dff0a58](https://github.com/edenlabllc/ehealth.web/commit/dff0a58))
+* **admin:** use fragments on reimbursement contracts page ([87aebb9](https://github.com/edenlabllc/ehealth.web/commit/87aebb9))
+
+
+
+
+
 <a name="1.94.0"></a>
 # [1.94.0](https://github.com/edenlabllc/ehealth.web/compare/v1.93.0...v1.94.0) (2019-05-28)
 
