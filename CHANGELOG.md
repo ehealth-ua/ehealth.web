@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.99.0"></a>
+# [1.99.0](https://github.com/edenlabllc/ehealth.web/compare/v1.98.0...v1.99.0) (2019-05-29)
+
+
+### Bug Fixes
+
+* add description for Update Service Popup ([c573b2f](https://github.com/edenlabllc/ehealth.web/commit/c573b2f))
+
+
+### Features
+
+* add Deactivate and Update Service Group popups and mutations ([2c517e0](https://github.com/edenlabllc/ehealth.web/commit/2c517e0))
+* add Service Group Details page ([70898ce](https://github.com/edenlabllc/ehealth.web/commit/70898ce))
+* update locales for Service Group Deactivate and Update popups ([df22e45](https://github.com/edenlabllc/ehealth.web/commit/df22e45))
+* update locales for Service Group Details page ([3ffbb7c](https://github.com/edenlabllc/ehealth.web/commit/3ffbb7c))
+
+
+
+
+
 <a name="1.98.0"></a>
 # [1.98.0](https://github.com/edenlabllc/ehealth.web/compare/v1.97.0...v1.98.0) (2019-05-29)
 
