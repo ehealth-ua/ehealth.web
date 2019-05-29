@@ -212,7 +212,7 @@ export default compose(
   withRouter,
   connect(
     (state, { location: { query } }) => ({
-      scope: query.scope || state.pages.AcceptPage.scope,
+      scope: !!query.scope ? query.scope : state.pages.AcceptPage.scope,
       client: getClientById(state, query.client_id),
       user: getUser(state)
     }),

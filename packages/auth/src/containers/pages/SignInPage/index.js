@@ -16,13 +16,14 @@ import {
 } from "../../../components/CenterLayout";
 import SignInForm from "../../forms/SignInForm";
 
-import { onSubmit } from "./redux";
+import { onSubmit, idGovUaAuthenticate } from "./redux";
 
 const SignInPage = ({
   onSubmit = () => {},
+  idGovUaAuthenticate,
   location: {
     search,
-    query: { client_id, redirect_uri, email }
+    query: { client_id, redirect_uri, scope, email }
   },
   router,
   googleReCaptchaProps
@@ -35,7 +36,9 @@ const SignInPage = ({
     </Header>
     <Article>
       {!client_id && <p>Не вказано адресу зворотнього визову</p>}
-      {!redirect_uri && <p>Не вказан идентифікатор додатку для авторизації</p>}
+      {!redirect_uri && (
+        <p>Не вказаний ідентифікатор додатку для авторизації</p>
+      )}
       {client_id &&
         redirect_uri && (
           <NarrowContainer>
@@ -57,6 +60,25 @@ const SignInPage = ({
                 block
               >
                 увійти за допомогою ЕЦП
+              </Button>
+            )}
+            {env.REACT_APP_ID_GOV_UA_SIGN_IN_ENABLED && (
+              <Button
+                color="blue"
+                onClick={async () => {
+                  const token = await googleReCaptchaProps.executeRecaptcha(
+                    "IdGovUaSignIn"
+                  );
+                  return idGovUaAuthenticate({
+                    token,
+                    client_id,
+                    redirect_uri,
+                    scope
+                  });
+                }}
+                block
+              >
+                увійти за допомогою GOV ID
               </Button>
             )}
             <ButtonsGroup>
@@ -83,6 +105,6 @@ export default compose(
   withGoogleReCaptcha,
   connect(
     null,
-    { onSubmit }
+    { onSubmit, idGovUaAuthenticate }
   )
 )(SignInPage);

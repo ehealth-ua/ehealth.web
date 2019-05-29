@@ -13,8 +13,8 @@ import { useRedial } from "react-router-redial";
 
 import env from "./env";
 
-import { getUser, getToken } from "./reducers";
-import { loadTokenFromStorage, isLoginned, logout } from "./redux/session";
+import { getUser, getToken, getLocation } from "./reducers";
+import { loadTokenFromStorage, isAuthenticated, logout } from "./redux/session";
 import { fetchUserData } from "./redux/user";
 
 import Main from "./containers/layouts/Main";
@@ -159,13 +159,15 @@ export default class Routes extends Component {
                 />
               </Route>
 
-              <Route path="sign-in" component={SignInPage} />
+              <Route onEnter={this.bypassAuthenticated}>
+                <Route path="sign-in" component={SignInPage} />
 
-              <Route component={DigitalSignatureProvider}>
-                <Route
-                  path="sign-in/digital-signature"
-                  component={SignInDSPage}
-                />
+                <Route component={DigitalSignatureProvider}>
+                  <Route
+                    path="sign-in/digital-signature"
+                    component={SignInDSPage}
+                  />
+                </Route>
               </Route>
 
               <Route
@@ -242,9 +244,9 @@ export default class Routes extends Component {
   requireAuth = async (nextState, replace, next) => {
     const { dispatch, getState } = this.context.store;
 
-    const loginned = await dispatch(isLoginned());
+    const authenticated = await dispatch(isAuthenticated());
 
-    if (!loginned) {
+    if (!authenticated) {
       replace({ pathname: "/" });
       return next();
     }
@@ -259,6 +261,22 @@ export default class Routes extends Component {
     if (error) {
       dispatch(logout());
       replace({ pathname: "/" });
+    }
+
+    return next();
+  };
+
+  bypassAuthenticated = async (nextState, replace, next) => {
+    const { dispatch, getState } = this.context.store;
+
+    const authenticated = await dispatch(isAuthenticated());
+
+    if (authenticated) {
+      const state = getState();
+      const location = getLocation(state);
+
+      replace({ ...location, pathname: "/accept" });
+      return next();
     }
 
     return next();

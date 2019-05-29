@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import Cookies from "js-cookie";
 
-const AUTH_COOKIE_NAME = "token";
+const AUTH_COOKIE_NAME = "authorization";
 
 export const getToken = () => (dispatch, getState) =>
   Cookies.get(AUTH_COOKIE_NAME);
@@ -10,7 +10,7 @@ export const setToken = token => (dispatch, getState) =>
 export const removeToken = () => (dispatch, getState) =>
   Cookies.remove(AUTH_COOKIE_NAME);
 
-export const isLoginned = () => dispatch =>
+export const isAuthenticated = () => dispatch =>
   dispatch(getToken()).then(resp => !!resp);
 
 export const logoutAction = createAction("session/LOGOUT");

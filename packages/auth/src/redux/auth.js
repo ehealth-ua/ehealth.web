@@ -2,6 +2,22 @@ import { handleAction } from "redux-actions";
 import env from "../env";
 import { invoke } from "./api";
 
+export const initAuthRequest = ({ token, client_id, redirect_uri, scope }) =>
+  invoke({
+    endpoint: `${env.REACT_APP_AUTH_URL}/auth/request/${token}`,
+    method: "POST",
+    types: [
+      "auth/INIT_AUTH_REQUEST_REQUEST",
+      "auth/INIT_AUTH_REQUEST_SUCCESS",
+      "auth/INIT_AUTH_REQUEST_FAILURE"
+    ],
+    body: {
+      client_id,
+      redirect_uri,
+      scope
+    }
+  });
+
 export const createSessionToken = ({ drfo, ...body }) =>
   invoke({
     endpoint: `${env.REACT_APP_AUTH_URL}/auth/login`,
