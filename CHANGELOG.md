@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.96.0"></a>
+# [1.96.0](https://github.com/edenlabllc/ehealth.web/compare/v1.95.0...v1.96.0) (2019-05-29)
+
+
+### Bug Fixes
+
+* update Legal Entity Details page according to current schema ([8e22365](https://github.com/edenlabllc/ehealth.web/commit/8e22365))
+
+
+### Features
+
+* **admin:** add new locales for LegalEntity status update ([2c5daa3](https://github.com/edenlabllc/ehealth.web/commit/2c5daa3))
+* **admin:** add UpdateLegalEntityStatus Form to the LegalEntity Details page ([6e0b12a](https://github.com/edenlabllc/ehealth.web/commit/6e0b12a))
+* **admin:** add UpdateLegalEntityStatus Mutation ([da02397](https://github.com/edenlabllc/ehealth.web/commit/da02397))
+
+
+
+
+
 <a name="1.95.0"></a>
 # [1.95.0](https://github.com/edenlabllc/ehealth.web/compare/v1.94.0...v1.95.0) (2019-05-28)
 
