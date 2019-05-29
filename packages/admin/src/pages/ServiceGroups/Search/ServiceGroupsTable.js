@@ -12,7 +12,8 @@ import Table from "../../../components/Table";
 const ServiceGroupsTable = ({
   serviceGroups,
   locationParams,
-  setLocationParams
+  setLocationParams,
+  tableName = "service-groups-table/search"
 }) => (
   <Table
     data={serviceGroups}
@@ -75,7 +76,7 @@ const ServiceGroupsTable = ({
         </Flex>
       ),
       details: (
-        <Link to={`../${id}`} fontWeight="bold">
+        <Link to={`/service-groups/${id}`} fontWeight="bold">
           <Trans>Show details</Trans>
         </Link>
       )
@@ -90,7 +91,7 @@ const ServiceGroupsTable = ({
     }
     whiteSpaceNoWrap={["databaseId"]}
     hiddenFields="updatedAt"
-    tableName="service-groups-table/search"
+    tableName={tableName}
   />
 );
 

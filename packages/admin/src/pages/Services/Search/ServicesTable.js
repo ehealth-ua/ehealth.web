@@ -9,7 +9,12 @@ import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
 import Table from "../../../components/Table";
 
-const ServicesTable = ({ services, locationParams, setLocationParams }) => (
+const ServicesTable = ({
+  services,
+  locationParams,
+  setLocationParams,
+  tableName = "services-table/search"
+}) => (
   <Table
     data={services}
     header={{
@@ -69,7 +74,7 @@ const ServicesTable = ({ services, locationParams, setLocationParams }) => (
       requestAllowed: <StatusIcon status={requestAllowed} />,
       isComposition: <StatusIcon status={isComposition} />,
       details: (
-        <Link to={`../${id}`} fontWeight="bold">
+        <Link to={`/services/${id}`} fontWeight="bold">
           <Trans>Show details</Trans>
         </Link>
       )
@@ -84,7 +89,7 @@ const ServicesTable = ({ services, locationParams, setLocationParams }) => (
     }
     whiteSpaceNoWrap={["databaseId"]}
     hiddenFields="updatedAt"
-    tableName="services-table/search"
+    tableName={tableName}
   />
 );
 
