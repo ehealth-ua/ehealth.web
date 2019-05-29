@@ -11,6 +11,7 @@ import { PositiveIcon, NegativeIcon } from "@ehealth/icons";
 import Tabs from "../../../components/Tabs";
 import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
+import Ability from "../../../components/Ability";
 import EmptyData from "../../../components/EmptyData";
 import Pagination from "../../../components/Pagination";
 import Breadcrumbs from "../../../components/Breadcrumbs";
@@ -20,6 +21,8 @@ import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
 import ServiceGroupsTable from "../Search/ServiceGroupsTable";
 import ServicesTable from "../../Services/Search/ServicesTable";
+import UpdateServiceGroupPopup from "./UpdateServiceGroupPopup";
+import DeactivateServiceGroupPopup from "./DeactivateServiceGroupPopup";
 
 const Details = ({ id }) => (
   <LocationParams>
@@ -93,9 +96,27 @@ const Details = ({ id }) => (
                       marginBetween="auto"
                     />
                   </Box>
-                  {
-                    //TODO: Add mutations with Ability checking
-                  }
+                  {isActive && (
+                    <Ability action="write" resource="service_catalog">
+                      <Flex justifyContent="flex-end" flexWrap="wrap">
+                        <Box mt={2}>
+                          <UpdateServiceGroupPopup
+                            id={id}
+                            name={name}
+                            requestAllowed={requestAllowed}
+                            refetchQuery={ServiceGroupDetailsQuery}
+                          />
+                        </Box>
+                        <Box mt={2} ml={2}>
+                          <DeactivateServiceGroupPopup
+                            id={id}
+                            name={name}
+                            refetchQuery={ServiceGroupDetailsQuery}
+                          />
+                        </Box>
+                      </Flex>
+                    </Ability>
+                  )}
                 </Flex>
               </Box>
               <Tabs.Nav>
