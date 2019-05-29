@@ -14,10 +14,12 @@ const UpdateServicePopup = ({ id, name, requestAllowed, refetchQuery }) => {
   const action = requestAllowed
     ? {
         name: <Trans>Disallow Request</Trans>,
+        description: <Trans>Disallow Request for service</Trans>,
         variant: "orange"
       }
     : {
         name: <Trans>Allow Request</Trans>,
+        description: <Trans>Allow Request for service</Trans>,
         variant: "green"
       };
 
@@ -43,7 +45,7 @@ const UpdateServicePopup = ({ id, name, requestAllowed, refetchQuery }) => {
               onCancel={toggle}
               title={
                 <>
-                  {action.name} "{name}
+                  {action.description} "{name}
                   "?
                 </>
               }
@@ -52,7 +54,8 @@ const UpdateServicePopup = ({ id, name, requestAllowed, refetchQuery }) => {
                 await updateService({
                   variables: {
                     input: {
-                      id
+                      id,
+                      requestAllowed
                     }
                   }
                 });
