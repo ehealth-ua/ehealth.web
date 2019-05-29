@@ -53,11 +53,6 @@ const MEDICAL_PROGRAM_STATUS = {
   [false]: "Неактивна"
 };
 
-const DLS_VERIFY_STATUS = {
-  [true]: "Так",
-  [false]: "Ні"
-};
-
 const EDR_VERIFY_STATUS = {
   [true]: "Веріфіковано",
   [false]: "Неверіфіковано"
@@ -120,7 +115,7 @@ const EMPLOYEE_REQUEST_STATUS = {
   REJECTED: "Відхилено"
 };
 
-const BOOLEAN_VALUE = {
+const YES_NO = {
   [true]: "Так",
   [false]: "Ні"
 };
@@ -144,11 +139,10 @@ const STATUSES = {
   ACTIVE_STATUS_F,
   ACTIVE_STATUS_M,
   NO_TAX_ID,
-  DLS_VERIFY_STATUS,
   EDR_VERIFY_STATUS,
   EMPLOYEE_STATUS,
   EMPLOYEE_REQUEST_STATUS,
-  BOOLEAN_VALUE
+  YES_NO
 };
 
 export default STATUSES;

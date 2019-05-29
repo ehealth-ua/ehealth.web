@@ -6,7 +6,7 @@ import debounce from "lodash/debounce";
 import { Flex, Box } from "@rebass/emotion";
 import { Query, Mutation } from "react-apollo";
 import { Form, Validation } from "@ehealth/components";
-import { convertStringToBoolean } from "@ehealth/utils";
+import { convertStringToBoolean, cleanDeep } from "@ehealth/utils";
 
 import Popup from "../../../components/Popup";
 import Button from "../../../components/Button";
@@ -47,16 +47,11 @@ const CreateServiceGroupPopup = ({ locationParams, refetchQuery }) => {
                   const requestAllowed = convertStringToBoolean(
                     isRequestAllowed
                   );
-                  const createServiceGroupInput = input.parentGroupId
-                    ? {
-                        ...input,
-                        requestAllowed,
-                        parentGroupId: input.parentGroupId.id
-                      }
-                    : {
-                        ...input,
-                        requestAllowed
-                      };
+                  const createServiceGroupInput = cleanDeep({
+                    ...input,
+                    requestAllowed,
+                    parentGroupId: input.parentGroupId && input.parentGroupId.id
+                  });
 
                   await createServiceGroup({
                     variables: {
@@ -159,9 +154,9 @@ const CreateServiceGroupPopup = ({ locationParams, refetchQuery }) => {
                         <Field.Select
                           name="isRequestAllowed"
                           label={<Trans>Is request allowed</Trans>}
-                          items={Object.keys(STATUSES.BOOLEAN_VALUE)}
+                          items={Object.keys(STATUSES.YES_NO)}
                           itemToString={item =>
-                            STATUSES.BOOLEAN_VALUE[item] || translation
+                            STATUSES.YES_NO[item] || translation
                           }
                           variant="select"
                           emptyOption

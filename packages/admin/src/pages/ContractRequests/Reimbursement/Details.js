@@ -429,9 +429,7 @@ const Divisions = ({ contractorDivisions }) =>
           </>
         ),
         dlsVerified: (
-          <Flex justifyContent="center">
-            {STATUSES.DLS_VERIFY_STATUS[dlsVerified]}
-          </Flex>
+          <Flex justifyContent="center">{STATUSES.YES_NO[dlsVerified]}</Flex>
         ),
         workingHours:
           workingHours &&

@@ -852,9 +852,9 @@ const Divisions = ({ id }) => (
                       <Field.Select
                         name="filter.dlsVerified"
                         label={<Trans>DLS Verification</Trans>}
-                        items={Object.keys(STATUSES.DLS_VERIFY_STATUS)}
+                        items={Object.keys(STATUSES.YES_NO)}
                         itemToString={item =>
-                          STATUSES.DLS_VERIFY_STATUS[item] || translation
+                          STATUSES.YES_NO[item] || translation
                         }
                         variant="select"
                         emptyOption
@@ -929,7 +929,7 @@ const Divisions = ({ id }) => (
                             ),
                             dlsVerified: (
                               <Flex justifyContent="center">
-                                {STATUSES.DLS_VERIFY_STATUS[dlsVerified]}
+                                {STATUSES.YES_NO[dlsVerified]}
                               </Flex>
                             ),
                             addresses: addresses

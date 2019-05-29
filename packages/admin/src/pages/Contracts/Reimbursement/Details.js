@@ -786,7 +786,7 @@ const Divisions = ({ id }) => (
                             )),
                           dlsVerified: (
                             <Flex justifyContent="center">
-                              {STATUSES.DLS_VERIFY_STATUS[dlsVerified]}
+                              {STATUSES.YES_NO[dlsVerified]}
                             </Flex>
                           )
                         })}
