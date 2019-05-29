@@ -204,8 +204,19 @@
     "translation": "Надати дозвіл",
     "origin": [
       ["src/pages/ProgramMedications/Details.js", 138],
-      ["src/pages/Services/Details/UpdateServicePopup.js", 20]
+      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 26],
+      ["src/pages/Services/Details/UpdateServicePopup.js", 21]
     ]
+  },
+  "Allow Request for group": {
+    "translation": "Надати дозвіл на направлення для групи",
+    "origin": [
+      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 27]
+    ]
+  },
+  "Allow Request for service": {
+    "translation": "Надати дозвіл на направлення для сервісу",
+    "origin": [["src/pages/Services/Details/UpdateServicePopup.js", 22]]
   },
   "Amount": {
     "translation": "Кількість",
@@ -866,9 +877,17 @@
       ["src/pages/Medications/Details.js", 107],
       ["src/pages/Medications/Details.js", 111],
       ["src/pages/ProgramMedications/Details.js", 114],
+      ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 28],
+      ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 39],
       ["src/pages/Services/Details/DeactivateServicePopup.js", 28],
       ["src/pages/Services/Details/DeactivateServicePopup.js", 35],
       ["src/pages/Services/Details/DeactivateServicePopup.js", 39]
+    ]
+  },
+  "Deactivate group": {
+    "translation": "Деактивувати групу",
+    "origin": [
+      ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 35]
     ]
   },
   "Deactivate medical program": {
@@ -1030,8 +1049,19 @@
     "translation": "Зняти дозвіл",
     "origin": [
       ["src/pages/ProgramMedications/Details.js", 136],
+      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 21],
       ["src/pages/Services/Details/UpdateServicePopup.js", 16]
     ]
+  },
+  "Disallow Request for group": {
+    "translation": "Зняти дозвіл на направлення з групи",
+    "origin": [
+      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 22]
+    ]
+  },
+  "Disallow Request for service": {
+    "translation": "Зняти дозвіл на направлення з сервісу",
+    "origin": [["src/pages/Services/Details/UpdateServicePopup.js", 17]]
   },
   "Dismiss": {
     "translation": "Звільнити",
@@ -1753,7 +1783,7 @@
   "Group name": {
     "translation": "Назва групи",
     "origin": [
-      ["src/pages/ServiceGroups/Details/index.js", 68],
+      ["src/pages/ServiceGroups/Details/index.js", 66],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 71],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 22],
       ["src/pages/Services/Details/ParentGroupsTable.js", 21]
@@ -1782,7 +1812,7 @@
       ["src/pages/Medications/Details.js", 65],
       ["src/pages/Medications/Details.js", 230],
       ["src/pages/Medications/Search.js", 79],
-      ["src/pages/ServiceGroups/Details/index.js", 69],
+      ["src/pages/ServiceGroups/Details/index.js", 67],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 21],
       ["src/pages/Services/Details/ParentGroupsTable.js", 20],
       ["src/pages/Services/Details/index.js", 59],
@@ -1949,7 +1979,7 @@
   "Is request allowed": {
     "translation": "Дозвіл на направлення",
     "origin": [
-      ["src/pages/ServiceGroups/Details/index.js", 71],
+      ["src/pages/ServiceGroups/Details/index.js", 69],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 156],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 25],
       ["src/pages/Services/Details/ParentGroupsTable.js", 24],
@@ -2533,7 +2563,7 @@
   },
   "Parent group": {
     "translation": "Батьківська група",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 72]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 70]]
   },
   "Parent group (optional)": {
     "translation": "Батьківська група (опціонально)",
@@ -3237,13 +3267,13 @@
   },
   "Service group details": {
     "translation": "Деталі сервіс групи",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 60]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 58]]
   },
   "Service groups": {
     "translation": "Сервіс групи",
     "origin": [
       ["src/components/Nav.js", 285],
-      ["src/pages/ServiceGroups/Details/index.js", 57],
+      ["src/pages/ServiceGroups/Details/index.js", 55],
       ["src/pages/ServiceGroups/Search/index.js", 27],
       ["src/pages/Services/Details/index.js", 109]
     ]
@@ -3267,7 +3297,7 @@
   },
   "Services in the group": {
     "translation": "Сервіси у групі",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 108]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 124]]
   },
   "Settlement": {
     "translation": "Населений пункт",
@@ -3512,7 +3542,7 @@
       ["src/pages/Persons/Search.js", 116],
       ["src/pages/ProgramMedications/Details.js", 58],
       ["src/pages/ProgramMedications/Search.js", 100],
-      ["src/pages/ServiceGroups/Details/index.js", 70],
+      ["src/pages/ServiceGroups/Details/index.js", 68],
       ["src/pages/ServiceGroups/Search/SearchFields.js", 43],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 24],
       ["src/pages/Services/Details/ParentGroupsTable.js", 23],
@@ -3562,7 +3592,7 @@
   },
   "Subgroups": {
     "translation": "Підгрупи",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 111]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 127]]
   },
   "Subscriber Name": {
     "translation": "ПІБ підписанта",
