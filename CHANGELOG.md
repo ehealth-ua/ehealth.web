@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.100.1"></a>
+## [1.100.1](https://github.com/edenlabllc/ehealth.web/compare/v1.100.0...v1.100.1) (2019-05-30)
+
+
+### Bug Fixes
+
+* remove routing on nginx level ([eebdcea](https://github.com/edenlabllc/ehealth.web/commit/eebdcea))
+
+
+
+
+
 <a name="1.100.0"></a>
 # [1.100.0](https://github.com/edenlabllc/ehealth.web/compare/v1.99.1...v1.100.0) (2019-05-30)
 
