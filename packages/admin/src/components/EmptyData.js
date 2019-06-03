@@ -5,7 +5,7 @@ import system from "@ehealth/system-components";
 
 const EmptyData = props => (
   <WrapperBoxHeight>
-    <Text color="shiningKnight" {...props} fontSize={1} mx={6} my={2}>
+    <Text color="shiningKnight" fontSize={1} mx={6} my={2} {...props}>
       <Trans>No info</Trans>
     </Text>
   </WrapperBoxHeight>

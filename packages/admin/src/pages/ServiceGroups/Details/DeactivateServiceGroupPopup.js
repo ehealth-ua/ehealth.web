@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import gql from "graphql-tag";
 import { Trans } from "@lingui/macro";
-import { Box } from "@rebass/emotion";
 import { Mutation } from "react-apollo";
 
 import Popup from "../../../components/Popup";

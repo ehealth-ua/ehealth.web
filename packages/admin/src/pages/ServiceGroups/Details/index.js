@@ -185,11 +185,13 @@ const Services = ({
   return (
     <>
       {isActive && (
-        <AddServiceToGroupPopup
-          serviceGroupId={id}
-          serviceGroupName={groupName}
-          refetchQuery={ServiceGroupDetailsQuery}
-        />
+        <Ability action="write" resource="service_catalog">
+          <AddServiceToGroupPopup
+            serviceGroupId={id}
+            serviceGroupName={groupName}
+            refetchQuery={ServiceGroupDetailsQuery}
+          />
+        </Ability>
       )}
       {!isEmpty(nodes) ? (
         <>
