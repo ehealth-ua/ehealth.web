@@ -30,8 +30,13 @@ type TableHeaderType = {
   headerCellComponent: React.ElementType,
   sortableFields?: string[],
   sortingParams?: SortingParams,
-  onSortingChange?: SortingParams => mixed,
-  filterRow: Array<HeaderDataWithStatus | any>
+  onSortingChange?: (value?: SortingParams) => mixed,
+  filterRow: Array<HeaderDataWithStatus | any>,
+  switchSorting: (
+    string,
+    SortingParams,
+    (value?: SortingParams) => mixed
+  ) => void
 };
 
 const TableHeader = ({

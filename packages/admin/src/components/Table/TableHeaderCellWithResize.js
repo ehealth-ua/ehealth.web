@@ -2,9 +2,14 @@
 import * as React from "react";
 import styled from "@emotion/styled/macro";
 
+type Header = { [string]: React.Element<typeof React.Component> };
+
 type CellWithResizeProps = {
+  header: Header,
   onClick: () => mixed,
-  children: React.Node
+  children: React.Node,
+  storageForSizes: string,
+  cellName: string
 };
 
 type CellWithResizeState = {
@@ -37,7 +42,10 @@ class TableHeaderCellWithResize extends React.Component<
     this.setCellWidth(storageForSizes, header, cellName);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(
+    prevProps: CellWithResizeProps,
+    prevState: CellWithResizeState
+  ) {
     const { cellWidth } = this.state;
 
     if (prevState.cellWidth !== cellWidth) {
@@ -132,13 +140,12 @@ class TableHeaderCellWithResize extends React.Component<
     document.removeEventListener("mouseleave", this.resizeColumnEnd);
   };
 
-  getCellWidth(items) {
-    return Object.keys(items).map(item => {
-      return { [item]: this.state.cellWidth };
-    });
-  }
+  getCellWidth = (header: Header) =>
+    Object.keys(header).map<{ [string]: number }>(item => ({
+      [item]: this.state.cellWidth
+    }));
 
-  setCellWidth(storageName, items, cellName) {
+  setCellWidth(storageName: string, items: Header, cellName: string): void {
     if (localStorage.getItem(storageName) === null) {
       localStorage.setItem(
         storageName,
@@ -147,7 +154,8 @@ class TableHeaderCellWithResize extends React.Component<
     } else {
       const storage = localStorage.getItem(storageName);
 
-      isValidJson(storage) &&
+      storage &&
+        isValidJson(storage) &&
         JSON.parse(storage).find(
           item =>
             item[cellName] &&
@@ -158,17 +166,23 @@ class TableHeaderCellWithResize extends React.Component<
     }
   }
 
-  updateCellWidth(storageName, items, cellWidth, cellName) {
+  updateCellWidth(
+    storageName: string,
+    header: Header,
+    cellWidth: number,
+    cellName: string
+  ): void {
     const storage = localStorage.getItem(storageName);
 
     const updateHeader =
-      (isValidJson(storage) &&
+      (storage &&
+        isValidJson(storage) &&
         JSON.parse(storage).map(item => {
           return item[cellName] === undefined
             ? item
             : { [cellName]: cellWidth };
         })) ||
-      this.getCellWidth(items);
+      this.getCellWidth(header);
 
     localStorage.setItem(storageName, JSON.stringify(updateHeader));
   }

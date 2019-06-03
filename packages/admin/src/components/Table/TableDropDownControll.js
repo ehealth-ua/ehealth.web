@@ -15,21 +15,22 @@ type HeaderDataWithStatus = {|
 type TableDropDownControllType = {
   onChange: () => mixed,
   data: Array<HeaderDataWithStatus | any>,
-  columnKeyExtractor: (string, number) => string,
+  columnKeyExtractor: (string, number) => React.Key,
   buttonComponent?: React.ElementType,
-  buttonContent?: React.ElementType
+  buttonContent?: React.ElementType,
+  description?: string
 };
 
 type TableDropdownType = {
   data: Array<HeaderDataWithStatus | any>,
   onChange: string => mixed,
-  columnKeyExtractor: (string, number) => string
+  columnKeyExtractor: (string, number) => React.Key
 };
 
 const TableDropDownControll = ({
   onChange,
   data,
-  columnKeyExtractor = name => name,
+  columnKeyExtractor = (name, index) => name,
   // $FlowFixMe https://github.com/facebook/flow/issues/6832
   buttonComponent: ButtonDropDownWrapper = Box,
   // $FlowFixMe https://github.com/facebook/flow/issues/6832

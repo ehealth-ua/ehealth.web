@@ -19,7 +19,9 @@ import TableHeaderCellWithResize from "./TableHeaderCellWithResize";
 import Tooltip from "../Tooltip";
 import { ITEMS_PER_PAGE } from "../../constants/pagination";
 
-type HeaderData = { [string]: string };
+type TableData = { [string]: any };
+
+type HeaderData = { [string]: any };
 
 type HeaderDataWithStatus = {|
   name: string,
@@ -28,11 +30,11 @@ type HeaderDataWithStatus = {|
 |};
 
 type TableProps = {|
-  data: { value: React.Node },
+  data: Array<TableData>,
   header: HeaderData,
-  renderRow: { value: React.Node },
-  rowKeyExtractor: () => mixed,
-  columnKeyExtractor?: () => mixed,
+  renderRow: ({ [string]: any }) => { [string]: React.Node },
+  rowKeyExtractor?: (string, number) => React.Key,
+  columnKeyExtractor?: (string, number) => React.Key,
   sortableFields: string[],
   sortingParams: SortingParams,
   onSortingChange: SortingParams => mixed,
@@ -41,15 +43,15 @@ type TableProps = {|
     data: HeaderData,
     tableName?: string
   ) => Array<HeaderDataWithStatus | any>,
-  hidePagination: boolean,
-  whiteSpaceNoWrap: boolean,
-  headless: boolean,
-  hiddenFields: string,
-  tableBody: React.Node
+  hidePagination?: boolean,
+  whiteSpaceNoWrap: string[],
+  headless?: boolean,
+  hiddenFields?: string,
+  tableBody?: React.Node
 |};
 
 type TableState = {|
-  filterRow?: Array<HeaderDataWithStatus | null>
+  filterRow: Array<HeaderDataWithStatus | null>
 |};
 
 /**
@@ -101,7 +103,7 @@ class Table extends React.Component<TableProps, TableState> {
     const {
       header,
       defaultFilter = this.defaultFilter,
-      tableName,
+      tableName = "",
       hiddenFields = ""
     } = this.props;
 
@@ -113,13 +115,13 @@ class Table extends React.Component<TableProps, TableState> {
     });
   }
 
-  componentDidUpdate({ data: updateData }) {
+  componentDidUpdate({ data: updateData }: { data: Array<TableData> }) {
     const { data: prevData } = this.props;
     if (!isEqual(updateData, prevData)) {
       const {
         header,
         defaultFilter = this.defaultFilter,
-        tableName
+        tableName = ""
       } = this.props;
       this.setState({
         filterRow: defaultFilter(header, tableName)
@@ -132,12 +134,12 @@ class Table extends React.Component<TableProps, TableState> {
       data,
       header,
       renderRow,
-      rowKeyExtractor,
-      columnKeyExtractor,
+      rowKeyExtractor = i => i,
+      columnKeyExtractor = i => i,
       sortableFields,
       sortingParams,
       onSortingChange,
-      tableName,
+      tableName = "",
       hiddenFields = "",
       whiteSpaceNoWrap,
       headless,
@@ -226,14 +228,14 @@ class Table extends React.Component<TableProps, TableState> {
 
   defaultFilter = (
     header: HeaderData,
-    tableName?: string
+    tableName: string
   ): Array<HeaderDataWithStatus | any> =>
     Object.entries(header).map(
       ([name, title]) =>
         ({
           name,
-          title,
-          status: this.checkStorage(name, tableName)
+          status: this.checkStorage(name, tableName),
+          title
         }: HeaderDataWithStatus)
     );
 
