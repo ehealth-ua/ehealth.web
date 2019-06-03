@@ -13,6 +13,8 @@ const ServicesTable = ({
   services,
   locationParams,
   setLocationParams,
+  deleteServiceHeader,
+  deleteServiceFromGroup: DeleteServiceFromGroup,
   tableName = "services-table/search"
 }) => (
   <Table
@@ -27,10 +29,12 @@ const ServicesTable = ({
       isComposition: <Trans>Is composition</Trans>,
       insertedAt: <Trans>Inserted at</Trans>,
       updatedAt: <Trans>Updated at</Trans>,
+      ...deleteServiceHeader,
       details: <Trans>Details</Trans>
     }}
     renderRow={({
       id,
+      name,
       insertedAt,
       updatedAt,
       isActive,
@@ -39,6 +43,7 @@ const ServicesTable = ({
       ...serviceData
     }) => ({
       ...serviceData,
+      name,
       insertedAt: (
         <DateFormat
           value={insertedAt}
@@ -73,6 +78,9 @@ const ServicesTable = ({
       ),
       requestAllowed: <StatusIcon status={requestAllowed} />,
       isComposition: <StatusIcon status={isComposition} />,
+      action: DeleteServiceFromGroup && (
+        <DeleteServiceFromGroup serviceId={id} serviceName={name} />
+      ),
       details: (
         <Link to={`/services/${id}`} fontWeight="bold">
           <Trans>Show details</Trans>

@@ -31,6 +31,7 @@ import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
 import ServiceGroupsTable from "../Search/ServiceGroupsTable";
 import AddServiceToGroupPopup from "./AddServiceToGroupPopup";
+import DeleteServiceFromGroup from "./DeleteServiceFromGroup";
 import ServicesTable from "../../Services/Search/ServicesTable";
 import UpdateServiceGroupPopup from "./UpdateServiceGroupPopup";
 import DeactivateServiceGroupPopup from "./DeactivateServiceGroupPopup";
@@ -238,6 +239,16 @@ const Services = ({
             services={nodes}
             locationParams={locationParams}
             setLocationParams={setLocationParams}
+            deleteServiceHeader={{ action: <Trans>Action</Trans> }}
+            deleteServiceFromGroup={({ serviceId, serviceName }) => (
+              <DeleteServiceFromGroup
+                serviceId={serviceId}
+                serviceName={serviceName}
+                serviceGroupId={id}
+                serviceGroupName={groupName}
+                refetchQuery={ServiceGroupDetailsQuery}
+              />
+            )}
             tableName="service-group-details/services-table"
           />
           <Pagination {...pageInfo} />
