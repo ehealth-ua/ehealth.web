@@ -44,7 +44,8 @@
       ["src/pages/Medications/Search.js", 88],
       ["src/pages/PendingDeclarations/Search.js", 96],
       ["src/pages/Persons/Details.js", 376],
-      ["src/pages/Persons/Search.js", 117]
+      ["src/pages/Persons/Search.js", 117],
+      ["src/pages/ServiceGroups/Details/index.js", 242]
     ]
   },
   "Activate": {
@@ -217,14 +218,14 @@
     "translation": "Надати дозвіл",
     "origin": [
       ["src/pages/ProgramMedications/Details.js", 138],
-      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 26],
+      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 25],
       ["src/pages/Services/Details/UpdateServicePopup.js", 21]
     ]
   },
   "Allow Request for group": {
     "translation": "Надати дозвіл на направлення для групи",
     "origin": [
-      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 27]
+      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 26]
     ]
   },
   "Allow Request for service": {
@@ -426,7 +427,7 @@
     "translation": "Категорія",
     "origin": [
       ["src/pages/LegalEntities/Details.js", 423],
-      ["src/pages/Services/Search/ServicesTable.js", 24]
+      ["src/pages/Services/Search/ServicesTable.js", 26]
     ]
   },
   "Certificate": {
@@ -896,8 +897,8 @@
       ["src/pages/Medications/Details.js", 107],
       ["src/pages/Medications/Details.js", 111],
       ["src/pages/ProgramMedications/Details.js", 114],
-      ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 27],
-      ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 38],
+      ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 26],
+      ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 37],
       ["src/pages/Services/Details/DeactivateServicePopup.js", 28],
       ["src/pages/Services/Details/DeactivateServicePopup.js", 35],
       ["src/pages/Services/Details/DeactivateServicePopup.js", 39]
@@ -906,7 +907,7 @@
   "Deactivate group": {
     "translation": "Деактивувати групу",
     "origin": [
-      ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 34]
+      ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 33]
     ]
   },
   "Deactivate medical program": {
@@ -1004,7 +1005,15 @@
       ["src/pages/INNMDosages/Create.js", 120],
       ["src/pages/LegalEntities/Details.js", 602],
       ["src/pages/Medications/Create.js", 96],
-      ["src/pages/Medications/Create.js", 211]
+      ["src/pages/Medications/Create.js", 211],
+      ["src/pages/ServiceGroups/Details/DeleteServiceFromGroup.js", 43],
+      ["src/pages/ServiceGroups/Details/DeleteServiceFromGroup.js", 55]
+    ]
+  },
+  "Delete service": {
+    "translation": "Видалити сервіс",
+    "origin": [
+      ["src/pages/ServiceGroups/Details/DeleteServiceFromGroup.js", 50]
     ]
   },
   "Description": {
@@ -1028,7 +1037,7 @@
       ["src/pages/ProgramMedications/Search.js", 102],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 28],
       ["src/pages/Services/Details/ParentGroupsTable.js", 27],
-      ["src/pages/Services/Search/ServicesTable.js", 30]
+      ["src/pages/Services/Search/ServicesTable.js", 33]
     ]
   },
   "Details of the contract": {
@@ -1068,14 +1077,14 @@
     "translation": "Зняти дозвіл",
     "origin": [
       ["src/pages/ProgramMedications/Details.js", 136],
-      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 21],
+      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 20],
       ["src/pages/Services/Details/UpdateServicePopup.js", 16]
     ]
   },
   "Disallow Request for group": {
     "translation": "Зняти дозвіл на направлення з групи",
     "origin": [
-      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 22]
+      ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 21]
     ]
   },
   "Disallow Request for service": {
@@ -1802,7 +1811,7 @@
   "Group name": {
     "translation": "Назва групи",
     "origin": [
-      ["src/pages/ServiceGroups/Details/index.js", 67],
+      ["src/pages/ServiceGroups/Details/index.js", 92],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 71],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 22],
       ["src/pages/Services/Details/ParentGroupsTable.js", 21]
@@ -1831,11 +1840,11 @@
       ["src/pages/Medications/Details.js", 65],
       ["src/pages/Medications/Details.js", 230],
       ["src/pages/Medications/Search.js", 79],
-      ["src/pages/ServiceGroups/Details/index.js", 68],
+      ["src/pages/ServiceGroups/Details/index.js", 93],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 21],
       ["src/pages/Services/Details/ParentGroupsTable.js", 20],
       ["src/pages/Services/Details/index.js", 59],
-      ["src/pages/Services/Search/ServicesTable.js", 21]
+      ["src/pages/Services/Search/ServicesTable.js", 23]
     ]
   },
   "INN": {
@@ -1974,7 +1983,7 @@
       ["src/pages/ProgramMedications/Search.js", 101],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 26],
       ["src/pages/Services/Details/ParentGroupsTable.js", 25],
-      ["src/pages/Services/Search/ServicesTable.js", 28]
+      ["src/pages/Services/Search/ServicesTable.js", 30]
     ]
   },
   "Institution name": {
@@ -1986,7 +1995,7 @@
   },
   "Is composition": {
     "translation": "Послуга пакетна",
-    "origin": [["src/pages/Services/Search/ServicesTable.js", 27]]
+    "origin": [["src/pages/Services/Search/ServicesTable.js", 29]]
   },
   "Is employee active": {
     "translation": "Працівник активний",
@@ -1998,12 +2007,12 @@
   "Is request allowed": {
     "translation": "Дозвіл на направлення",
     "origin": [
-      ["src/pages/ServiceGroups/Details/index.js", 70],
+      ["src/pages/ServiceGroups/Details/index.js", 95],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 156],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 25],
       ["src/pages/Services/Details/ParentGroupsTable.js", 24],
       ["src/pages/Services/Details/index.js", 61],
-      ["src/pages/Services/Search/ServicesTable.js", 26]
+      ["src/pages/Services/Search/ServicesTable.js", 28]
     ]
   },
   "Issued at": {
@@ -2582,7 +2591,7 @@
   },
   "Parent group": {
     "translation": "Батьківська група",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 71]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 96]]
   },
   "Parent group (optional)": {
     "translation": "Батьківська група (опціонально)",
@@ -3277,7 +3286,7 @@
     "translation": "Код сервісу",
     "origin": [
       ["src/pages/Services/Search/CreateServicePopup.js", 71],
-      ["src/pages/Services/Search/ServicesTable.js", 23]
+      ["src/pages/Services/Search/ServicesTable.js", 25]
     ]
   },
   "Service details": {
@@ -3286,13 +3295,13 @@
   },
   "Service group details": {
     "translation": "Деталі сервіс групи",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 59]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 84]]
   },
   "Service groups": {
     "translation": "Сервіс групи",
     "origin": [
       ["src/components/Nav.js", 285],
-      ["src/pages/ServiceGroups/Details/index.js", 56],
+      ["src/pages/ServiceGroups/Details/index.js", 81],
       ["src/pages/ServiceGroups/Search/index.js", 27],
       ["src/pages/Services/Details/index.js", 109]
     ]
@@ -3303,7 +3312,7 @@
       ["src/pages/ServiceGroups/Details/AddServiceToGroupPopup.js", 106],
       ["src/pages/Services/Details/index.js", 58],
       ["src/pages/Services/Search/CreateServicePopup.js", 56],
-      ["src/pages/Services/Search/ServicesTable.js", 22]
+      ["src/pages/Services/Search/ServicesTable.js", 24]
     ]
   },
   "Services": {
@@ -3311,7 +3320,7 @@
     "origin": [
       ["src/components/Nav.js", 280],
       ["src/components/Nav.js", 282],
-      ["src/pages/ServiceGroups/Details/index.js", 125],
+      ["src/pages/ServiceGroups/Details/index.js", 150],
       ["src/pages/Services/Details/index.js", 47],
       ["src/pages/Services/Search/index.js", 27]
     ]
@@ -3373,7 +3382,7 @@
       ["src/pages/ProgramMedications/Search.js", 147],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 80],
       ["src/pages/Services/Details/ParentGroupsTable.js", 77],
-      ["src/pages/Services/Search/ServicesTable.js", 78]
+      ["src/pages/Services/Search/ServicesTable.js", 86]
     ]
   },
   "Show division": {
@@ -3565,13 +3574,13 @@
       ["src/pages/Persons/Search.js", 116],
       ["src/pages/ProgramMedications/Details.js", 58],
       ["src/pages/ProgramMedications/Search.js", 100],
-      ["src/pages/ServiceGroups/Details/index.js", 69],
+      ["src/pages/ServiceGroups/Details/index.js", 94],
       ["src/pages/ServiceGroups/Search/SearchFields.js", 43],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 24],
       ["src/pages/Services/Details/ParentGroupsTable.js", 23],
       ["src/pages/Services/Details/index.js", 60],
       ["src/pages/Services/Search/SearchFields.js", 46],
-      ["src/pages/Services/Search/ServicesTable.js", 25]
+      ["src/pages/Services/Search/ServicesTable.js", 27]
     ]
   },
   "Status Comment": {
@@ -3615,7 +3624,7 @@
   },
   "Subgroups": {
     "translation": "Підгрупи",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 128]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 153]]
   },
   "Subscriber Name": {
     "translation": "ПІБ підписанта",
@@ -3791,7 +3800,7 @@
     "origin": [
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 27],
       ["src/pages/Services/Details/ParentGroupsTable.js", 26],
-      ["src/pages/Services/Search/ServicesTable.js", 29]
+      ["src/pages/Services/Search/ServicesTable.js", 31]
     ]
   },
   "Updating employee": {
@@ -3892,6 +3901,12 @@
   "contract of {0} legal entity": {
     "translation": "Договори {0} закладу",
     "origin": [["src/components/SelectedFilters.js", 68]]
+  },
+  "from service group": {
+    "translation": "з сервіс групи",
+    "origin": [
+      ["src/pages/ServiceGroups/Details/DeleteServiceFromGroup.js", 51]
+    ]
   },
   "includes": {
     "translation": "містить",
