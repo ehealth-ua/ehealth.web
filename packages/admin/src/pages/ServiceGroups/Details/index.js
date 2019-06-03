@@ -1,3 +1,4 @@
+//@flow
 import React from "react";
 import gql from "graphql-tag";
 import isEmpty from "lodash/isEmpty";
@@ -5,8 +6,17 @@ import { Query } from "react-apollo";
 import { Trans } from "@lingui/macro";
 import { Router } from "@reach/router";
 import { Flex, Box } from "@rebass/emotion";
-import { LocationParams } from "@ehealth/components";
+import {
+  LocationParams,
+  SetLocationParamsProp,
+  URLSearchParams
+} from "@ehealth/components";
 import { PositiveIcon, NegativeIcon } from "@ehealth/icons";
+import type {
+  ServiceGroup,
+  ServiceGroupConnection,
+  ServiceConnection
+} from "@ehealth-ua/schema";
 
 import Tabs from "../../../components/Tabs";
 import Link from "../../../components/Link";
@@ -25,14 +35,28 @@ import ServicesTable from "../../Services/Search/ServicesTable";
 import UpdateServiceGroupPopup from "./UpdateServiceGroupPopup";
 import DeactivateServiceGroupPopup from "./DeactivateServiceGroupPopup";
 
-const Details = ({ id }) => (
+const Details = ({ id }: { [string]: string }) => (
   <LocationParams>
-    {({ locationParams, setLocationParams }) => (
+    {({
+      locationParams,
+      setLocationParams
+    }: {
+      locationParams: URLSearchParams,
+      setLocationParams: SetLocationParamsProp
+    }) => (
       <Query
         query={ServiceGroupDetailsQuery}
         variables={{ id, ...filteredLocationParams(locationParams) }}
       >
-        {({ loading, data: { serviceGroup } }) => {
+        {({
+          loading,
+          data: { serviceGroup }
+        }: {
+          loading: boolean,
+          data: {
+            serviceGroup: ServiceGroup
+          }
+        }) => {
           if (isEmpty(serviceGroup)) return null;
           const {
             databaseId,
@@ -155,7 +179,15 @@ const Details = ({ id }) => (
   </LocationParams>
 );
 
-const SubGroups = ({ subGroups, locationParams, setLocationParams }) => {
+const SubGroups = ({
+  subGroups,
+  locationParams,
+  setLocationParams
+}: {
+  subGroups?: ServiceGroupConnection,
+  locationParams: URLSearchParams,
+  setLocationParams: SetLocationParamsProp
+}) => {
   const { nodes, pageInfo } = subGroups || {};
   if (isEmpty(nodes)) return <EmptyData />;
 
@@ -179,6 +211,13 @@ const Services = ({
   groupName,
   locationParams,
   setLocationParams
+}: {
+  id: string,
+  services?: ServiceConnection,
+  isActive: boolean,
+  groupName: string,
+  locationParams: URLSearchParams,
+  setLocationParams: SetLocationParamsProp
 }) => {
   const { nodes, pageInfo } = services || {};
 
