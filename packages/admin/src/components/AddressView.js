@@ -3,25 +3,9 @@ import * as React from "react";
 import gql from "graphql-tag";
 import DictionaryValue from "./DictionaryValue";
 import { normalizeName } from "@ehealth/utils";
+import type { Address } from "@ehealth-ua/schema";
 
-type AddressProps = {
-  data: {
-    zip?: string,
-    area?: string,
-    region?: string | { name: string },
-    district?: { name: string },
-    settlementType: string,
-    type: string,
-    settlement: string,
-    name: string,
-    streetType: string,
-    street: string,
-    building: string,
-    apartment?: string
-  }
-};
-
-const AddressView = ({ data }: AddressProps): React.Node => {
+const AddressView = ({ data }: Address): React.Node => {
   if (!data) return null;
 
   const { zip, streetType, street, building, apartment } = data;
