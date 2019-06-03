@@ -1,7 +1,16 @@
+//@flow
+
 import React from "react";
 import gql from "graphql-tag";
 import { DateFormat, Trans } from "@lingui/macro";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+
+import type { ReimbursementContract } from "@ehealth-ua/schema";
+import type {
+  SetLocationParamsProp,
+  URLSearchParams
+} from "@ehealth/components";
+
 import Badge from "../../../../components/Badge";
 import Link from "../../../../components/Link";
 import Table from "../../../../components/Table";
@@ -13,6 +22,10 @@ const ContractTable = ({
   reimbursementContracts,
   locationParams,
   setLocationParams
+}: {
+  reimbursementContracts: Array<ReimbursementContract>,
+  locationParams: URLSearchParams,
+  setLocationParams: SetLocationParamsProp
 }) => (
   <Table
     data={reimbursementContracts}

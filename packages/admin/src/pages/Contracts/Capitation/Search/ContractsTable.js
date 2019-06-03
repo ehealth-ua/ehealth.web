@@ -1,9 +1,18 @@
+//@flow
+
 import React from "react";
 import gql from "graphql-tag";
 import { Flex } from "@rebass/emotion";
 import { NegativeIcon } from "@ehealth/icons";
 import { DateFormat, Trans } from "@lingui/macro";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+
+import type { CapitationContract } from "@ehealth-ua/schema";
+import type {
+  SetLocationParamsProp,
+  URLSearchParams
+} from "@ehealth/components";
+
 import Badge from "../../../../components/Badge";
 import Link from "../../../../components/Link";
 import Table from "../../../../components/Table";
@@ -13,6 +22,10 @@ const ContractTable = ({
   capitationContracts,
   locationParams,
   setLocationParams
+}: {
+  capitationContracts: Array<CapitationContract>,
+  locationParams: URLSearchParams,
+  setLocationParams: SetLocationParamsProp
 }) => (
   <Table
     data={capitationContracts}

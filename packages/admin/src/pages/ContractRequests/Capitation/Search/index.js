@@ -1,3 +1,5 @@
+//@flow
+
 import React from "react";
 import gql from "graphql-tag";
 import isEmpty from "lodash/isEmpty";
