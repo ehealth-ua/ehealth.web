@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.101.0"></a>
+# [1.101.0](https://github.com/edenlabllc/ehealth.web/compare/v1.100.1...v1.101.0) (2019-06-03)
+
+
+### Bug Fixes
+
+* **components:** enable flow in TableView component ([f9b9b5a](https://github.com/edenlabllc/ehealth.web/commit/f9b9b5a))
+
+
+### Features
+
+* **components:** add flow types to LocationParams component ([9f9e271](https://github.com/edenlabllc/ehealth.web/commit/9f9e271))
+* **components:** declare flow module [@ehealth](https://github.com/ehealth)/components ([08a194e](https://github.com/edenlabllc/ehealth.web/commit/08a194e))
+
+
+
+
+
 <a name="1.86.4"></a>
 ## [1.86.4](https://github.com/edenlabllc/ehealth.web/compare/v1.86.3...v1.86.4) (2019-05-08)
 

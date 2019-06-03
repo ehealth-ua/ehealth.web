@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.101.0"></a>
+# [1.101.0](https://github.com/edenlabllc/ehealth.web/compare/v1.100.1...v1.101.0) (2019-06-03)
+
+
+### Bug Fixes
+
+* **admin:** fix flow types in `Table` component ([d251c58](https://github.com/edenlabllc/ehealth.web/commit/d251c58))
+* **components:** enable flow in TableView component ([f9b9b5a](https://github.com/edenlabllc/ehealth.web/commit/f9b9b5a))
+
+
+### Features
+
+* **admin:** add flow types to `DictionaryValue` component ([473902b](https://github.com/edenlabllc/ehealth.web/commit/473902b))
+* **admin:** add flow types to contract & contract requests search page ([e74485c](https://github.com/edenlabllc/ehealth.web/commit/e74485c))
+* **components:** add flow types to LocationParams component ([9f9e271](https://github.com/edenlabllc/ehealth.web/commit/9f9e271))
+* **components:** declare flow module [@ehealth](https://github.com/ehealth)/components ([08a194e](https://github.com/edenlabllc/ehealth.web/commit/08a194e))
+
+
+
+
+
 <a name="1.100.1"></a>
 ## [1.100.1](https://github.com/edenlabllc/ehealth.web/compare/v1.100.0...v1.100.1) (2019-05-30)
 

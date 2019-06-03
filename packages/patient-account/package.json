@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/patient-account",
-  "version": "1.87.2",
+  "version": "1.101.0",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "7.0.0-beta.44",
