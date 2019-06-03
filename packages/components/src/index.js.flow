@@ -1,0 +1,5 @@
+declare module "@ehealth/components" {
+  declare export * from "./LocationParams"
+  declare export * from "./Field"
+  declare export * from "./DatePicker"
+}
