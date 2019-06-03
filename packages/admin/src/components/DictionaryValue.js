@@ -1,4 +1,6 @@
-import React from "react";
+//@flow
+
+import * as React from "react";
 import { Query } from "react-apollo";
 import { loader } from "graphql.macro";
 
@@ -10,12 +12,7 @@ type DictProps = {
   children?: (data: { value: string }) => React.Node
 };
 
-const DictionaryValue = ({
-  name = "",
-  item = "",
-  children,
-  render = children
-}: DictProps) => (
+const DictionaryValue = ({ name = "", item = "", children }: DictProps) => (
   <Query
     fetchPolicy="cache-first"
     query={DictionaryQuery}
@@ -27,16 +24,20 @@ const DictionaryValue = ({
       data: { dictionaries: { nodes: dictionaries = [] } = {} }
     }) => {
       if (loading || error) return null;
-      const { values } = dictionaries.find(dict => dict.name === name);
+      const dictionary: void | { [string]: any } = dictionaries.find(
+        dict => dict.name === name
+      );
 
-      const value =
-        typeof render !== "function"
+      const values = dictionary && dictionary.values;
+
+      const value: any =
+        typeof children !== "function" && values
           ? values[item]
             ? values[item]
             : item
           : values;
 
-      return typeof render === "function" ? render(value) : value;
+      return typeof children === "function" ? children(value) : value;
     }}
   </Query>
 );
