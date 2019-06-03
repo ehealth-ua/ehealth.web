@@ -20,6 +20,7 @@ import DefinitionListView from "../../../components/DefinitionListView";
 import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
 import ServiceGroupsTable from "../Search/ServiceGroupsTable";
+import AddServiceToGroupPopup from "./AddServiceToGroupPopup";
 import ServicesTable from "../../Services/Search/ServicesTable";
 import UpdateServiceGroupPopup from "./UpdateServiceGroupPopup";
 import DeactivateServiceGroupPopup from "./DeactivateServiceGroupPopup";
@@ -121,7 +122,7 @@ const Details = ({ id }) => (
               </Box>
               <Tabs.Nav>
                 <Tabs.NavItem to="./">
-                  <Trans>Services in the group</Trans>
+                  <Trans>Services</Trans>
                 </Tabs.NavItem>
                 <Tabs.NavItem to="./subgroups">
                   <Trans>Subgroups</Trans>
@@ -131,6 +132,9 @@ const Details = ({ id }) => (
                 <Router>
                   <Services
                     path="/"
+                    id={id}
+                    groupName={name}
+                    isActive={isActive}
                     services={services}
                     locationParams={locationParams}
                     setLocationParams={setLocationParams}
@@ -168,19 +172,38 @@ const SubGroups = ({ subGroups, locationParams, setLocationParams }) => {
   );
 };
 
-const Services = ({ services, locationParams, setLocationParams }) => {
+const Services = ({
+  id,
+  services,
+  isActive,
+  groupName,
+  locationParams,
+  setLocationParams
+}) => {
   const { nodes, pageInfo } = services || {};
-  if (isEmpty(nodes)) return <EmptyData />;
 
   return (
     <>
-      <ServicesTable
-        services={nodes}
-        locationParams={locationParams}
-        setLocationParams={setLocationParams}
-        tableName="service-group-details/services-table"
-      />
-      <Pagination {...pageInfo} />
+      {isActive && (
+        <AddServiceToGroupPopup
+          serviceGroupId={id}
+          serviceGroupName={groupName}
+          refetchQuery={ServiceGroupDetailsQuery}
+        />
+      )}
+      {!isEmpty(nodes) ? (
+        <>
+          <ServicesTable
+            services={nodes}
+            locationParams={locationParams}
+            setLocationParams={setLocationParams}
+            tableName="service-group-details/services-table"
+          />
+          <Pagination {...pageInfo} />
+        </>
+      ) : (
+        <EmptyData mx={0} my={5} />
+      )}
     </>
   );
 };
