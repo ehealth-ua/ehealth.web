@@ -1,3 +1,4 @@
+//@flow
 import React, { useState } from "react";
 import gql from "graphql-tag";
 import { Box } from "@rebass/emotion";
@@ -6,12 +7,21 @@ import Composer from "react-composer";
 import { Mutation } from "react-apollo";
 import { Form, Validation } from "@ehealth/components";
 
+import type { DocumentNode } from "graphql";
+import type { URLSearchParams } from "@ehealth/components";
+
 import Popup from "../../../components/Popup";
 import Button from "../../../components/Button";
 import * as Field from "../../../components/Field";
 import DictionaryValue from "../../../components/DictionaryValue";
 
-const CreateMedicalProgramPopup = ({ locationParams, refetchQuery }) => {
+const CreateMedicalProgramPopup = ({
+  locationParams,
+  medicalProgramsQuery
+}: {
+  locationParams: URLSearchParams,
+  medicalProgramsQuery: DocumentNode
+}) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
 
@@ -21,7 +31,7 @@ const CreateMedicalProgramPopup = ({ locationParams, refetchQuery }) => {
         mutation={CreateMedicalProgramMutation}
         refetchQueries={() => [
           {
-            query: refetchQuery,
+            query: medicalProgramsQuery,
             variables: locationParams
           }
         ]}

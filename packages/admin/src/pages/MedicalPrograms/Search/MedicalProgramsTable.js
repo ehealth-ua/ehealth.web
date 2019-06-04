@@ -1,7 +1,15 @@
+//@flow
 import React from "react";
 import gql from "graphql-tag";
 import { DateFormat, Trans } from "@lingui/macro";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+
+import type { DocumentNode } from "graphql";
+import type { MedicalProgram } from "@ehealth-ua/schema";
+import type {
+  SetLocationParamsProp,
+  URLSearchParams
+} from "@ehealth/components";
 
 import Badge from "../../../components/Badge";
 import Table from "../../../components/Table";
@@ -13,6 +21,11 @@ const MedicalProgramsTable = ({
   locationParams,
   setLocationParams,
   medicalProgramsQuery
+}: {
+  medicalPrograms: Array<MedicalProgram>,
+  locationParams: URLSearchParams,
+  setLocationParams: SetLocationParamsProp,
+  medicalProgramsQuery: DocumentNode
 }) => (
   <Table
     data={medicalPrograms}
@@ -23,8 +36,9 @@ const MedicalProgramsTable = ({
       insertedAt: <Trans>Inserted at</Trans>,
       action: <Trans>Action</Trans>
     }}
-    renderRow={({ id, insertedAt, isActive, ...medicalProgram }) => ({
+    renderRow={({ id, insertedAt, isActive, name, ...medicalProgram }) => ({
       ...medicalProgram,
+      name,
       insertedAt: (
         <DateFormat
           value={insertedAt}
@@ -49,9 +63,9 @@ const MedicalProgramsTable = ({
         <DeactivateMedicalProgram
           id={id}
           isActive={isActive}
-          name={medicalProgram.name}
+          name={name}
           locationParams={locationParams}
-          refetchQuery={medicalProgramsQuery}
+          medicalProgramsQuery={medicalProgramsQuery}
         />
       )
     })}

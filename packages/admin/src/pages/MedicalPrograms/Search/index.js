@@ -3,16 +3,14 @@ import gql from "graphql-tag";
 import isEmpty from "lodash/isEmpty";
 import { Query } from "react-apollo";
 import { Trans } from "@lingui/macro";
-import { Flex, Box, Heading, Text } from "@rebass/emotion";
-
 import { LocationParams } from "@ehealth/components";
-import { convertStringToBoolean } from "@ehealth/utils";
+import { Flex, Box, Heading, Text } from "@rebass/emotion";
 
 import Ability from "../../../components/Ability";
 import SearchForm from "../../../components/SearchForm";
 import Pagination from "../../../components/Pagination";
-import { ITEMS_PER_PAGE } from "../../../constants/pagination";
 import LoadingOverlay from "../../../components/LoadingOverlay";
+import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
 import { PrimarySearchFields } from "./SearchFields";
 import MedicalProgramsTable from "./MedicalProgramsTable";
@@ -40,7 +38,7 @@ const Search = () => (
                 <Ability action="write" resource="medical_program">
                   <CreateMedicalProgramPopup
                     locationParams={filteredParams}
-                    refetchQuery={MedicalProgramsQuery}
+                    medicalProgramsQuery={MedicalProgramsQuery}
                   />
                 </Ability>
               </Box>
@@ -88,26 +86,6 @@ const Search = () => (
 
 export default Search;
 
-const medicalProgramsFilteredParams = filter => {
-  const { isActive, ...params } = filter;
-  return {
-    ...params,
-    isActive: convertStringToBoolean(isActive)
-  };
-};
-
-const filteredLocationParams = (params = {}) => {
-  const { filter, first, last, ...pagination } = params;
-  return {
-    ...pagination,
-    skip: false,
-    first:
-      !first && !last ? ITEMS_PER_PAGE[0] : first ? parseInt(first) : undefined,
-    last: last ? parseInt(last) : undefined,
-    filter: filter ? medicalProgramsFilteredParams(filter) : filter
-  };
-};
-
 const MedicalProgramsQuery = gql`
   query MedicalProgramsQuery(
     $first: Int
@@ -116,7 +94,7 @@ const MedicalProgramsQuery = gql`
     $after: String
     $filter: MedicalProgramFilter
     $orderBy: MedicalProgramOrderBy
-    $skip: Boolean!
+    $skip: Boolean! = false
   ) {
     medicalPrograms(
       first: $first
