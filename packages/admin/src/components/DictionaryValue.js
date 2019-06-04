@@ -9,10 +9,16 @@ const DictionaryQuery = loader("../graphql/SearchDictionariesQuery.graphql");
 type DictProps = {
   name: string,
   item: string,
-  children?: (data: { value: string }) => React.Node
+  children?: (data: { value: string }) => React.Node,
+  render?: any
 };
 
-const DictionaryValue = ({ name = "", item = "", children }: DictProps) => (
+const DictionaryValue = ({
+  name = "",
+  item = "",
+  children,
+  render = children
+}: DictProps) => (
   <Query
     fetchPolicy="cache-first"
     query={DictionaryQuery}
@@ -31,13 +37,13 @@ const DictionaryValue = ({ name = "", item = "", children }: DictProps) => (
       const values = dictionary && dictionary.values;
 
       const value: any =
-        typeof children !== "function" && values
+        typeof render !== "function" && values
           ? values[item]
             ? values[item]
             : item
           : values;
 
-      return typeof children === "function" ? children(value) : value;
+      return typeof render === "function" ? render(value) : value;
     }}
   </Query>
 );

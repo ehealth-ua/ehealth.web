@@ -81,19 +81,18 @@ const Details = ({ id, navigate }) => (
         status,
         edrpou,
         name,
-        addresses = [],
+        addresses,
         phones = [],
         email,
         type,
         ownerPropertyType,
-        kveds = [],
-        misVerified,
+        kveds,
         nhsVerified,
         edrVerified,
+        edrData,
         nhsReviewed,
         nhsComment,
         owner,
-        medicalServiceProvider,
         mergedToLegalEntity,
         website,
         receiverFundsCode,
@@ -101,7 +100,8 @@ const Details = ({ id, navigate }) => (
         beneficiary,
         archive,
         license,
-        accreditation
+        accreditation,
+        residenceAddress
       } = legalEntity;
       const isVerificationActive = status === "ACTIVE" && nhsReviewed;
       const isProcessingActive =
@@ -125,16 +125,18 @@ const Details = ({ id, navigate }) => (
                 <DefinitionListView
                   labels={{
                     databaseId: <Trans>Legal entity ID</Trans>,
+                    name: <Trans>Name</Trans>,
                     status: <Trans>Status</Trans>
                   }}
                   data={{
                     databaseId,
+                    name: (edrData && edrData.name) || name,
                     status: (
                       <Badge name={status} type="LEGALENTITY" minWidth={100} />
                     )
                   }}
                   color="#7F8FA4"
-                  labelWidth="100px"
+                  labelWidth="120px"
                 />
               </Box>
               {isProcessingActive &&
@@ -235,6 +237,11 @@ const Details = ({ id, navigate }) => (
             <Tabs.NavItem to="./">
               <Trans>General info</Trans>
             </Tabs.NavItem>
+            {edrData.edrId && (
+              <Tabs.NavItem to="./edr-data">
+                <Trans>EDR Data</Trans>
+              </Tabs.NavItem>
+            )}
             <Tabs.NavItem to="./licenses">
               <Trans>Licenses</Trans> / <Trans>Verification</Trans>
             </Tabs.NavItem>
@@ -266,13 +273,14 @@ const Details = ({ id, navigate }) => (
                 type={type}
                 ownerPropertyType={ownerPropertyType}
                 kveds={kveds}
-                misVerified={misVerified}
                 website={website}
                 receiverFundsCode={receiverFundsCode}
                 legalForm={legalForm}
                 beneficiary={beneficiary}
                 archive={archive}
+                residenceAddress={residenceAddress}
               />
+              <EDRData path="/edr-data" edrData={edrData} />
               <License
                 path="/licenses"
                 license={license}
@@ -303,105 +311,205 @@ const GeneralInfo = ({
   type,
   ownerPropertyType,
   kveds,
-  misVerified,
   receiverFundsCode,
   legalForm,
   beneficiary,
   archive,
-  ...props
-}) => (
-  <Box p={5}>
-    <DefinitionListView
-      labels={{
-        edrpou: <Trans>EDRPOU</Trans>,
-        name: <Trans>Name</Trans>,
-        addresses: <Trans>Address</Trans>,
-        phones: <Trans>Phone</Trans>,
-        email: <Trans>Email</Trans>,
-        website: <Trans>Website</Trans>,
-        type: <Trans>Type</Trans>
-      }}
-      data={{
-        ...props,
-        addresses: addresses
-          .filter(a => a.type === "REGISTRATION")
-          .map((item, key) => <AddressView data={item} key={key} />),
-        phones: getPhones(phones),
-        type: <DictionaryValue name="LEGAL_ENTITY_TYPE" item={type} />
-      }}
-    />
-    <Line />
-    <DefinitionListView
-      labels={{
-        ownerPropertyType: <Trans>Property type</Trans>,
-        legalForm: <Trans>Form of managment</Trans>,
-        kveds: <Trans>KVED</Trans>,
-        receiverFundsCode: <Trans>Beneficiary recipient Code</Trans>,
-        beneficiary: <Trans>Beneficiary</Trans>
-      }}
-      data={{
-        ownerPropertyType: (
-          <DictionaryValue
-            name="OWNER_PROPERTY_TYPE"
-            item={ownerPropertyType}
-          />
-        ),
-        legalForm: <DictionaryValue name="LEGAL_FORM" item={legalForm} />,
-        beneficiary,
-        receiverFundsCode,
-        kveds: (
-          <DictionaryValue
-            name="KVEDS"
-            render={dict => (
-              <>
-                {kveds.map((el, key, arr) => (
-                  <React.Fragment key={key}>
-                    {dict[el]}
-                    {key !== arr.length - 1 && ", "}
-                  </React.Fragment>
-                ))}
-              </>
-            )}
-          />
-        )
-      }}
-    />
-    <DefinitionListView
-      labels={{
-        misVerified: <Trans>MIS Verification</Trans>
-      }}
-      data={{
-        misVerified:
-          misVerified === "VERIFIED" ? <PositiveIcon /> : <NegativeIcon />
-      }}
-      color="blueberrySoda"
-    />
+  edrpou,
+  email,
+  website,
+  residenceAddress
+}) => {
+  const isDeprecatedDataPresent =
+    addresses || kveds || ownerPropertyType || legalForm;
+  return (
+    <Box p={5}>
+      <DefinitionListView
+        labels={{
+          edrpou: <Trans>EDRPOU</Trans>,
+          phones: <Trans>Phone</Trans>,
+          email: <Trans>Email</Trans>,
+          website: <Trans>Website</Trans>,
+          type: <Trans>Type</Trans>,
+          residenceAddress: <Trans>Legal Entity residence address</Trans>
+        }}
+        data={{
+          edrpou,
+          email,
+          website,
+          phones: getPhones(phones),
+          type: type && (
+            <DictionaryValue name="LEGAL_ENTITY_TYPE" item={type} />
+          ),
+          residenceAddress: residenceAddress && (
+            <AddressView data={residenceAddress} />
+          )
+        }}
+      />
+      <Line />
+      <DefinitionListView
+        labels={{
+          receiverFundsCode: <Trans>Beneficiary recipient Code</Trans>,
+          beneficiary: <Trans>Beneficiary</Trans>
+        }}
+        data={{
+          beneficiary,
+          receiverFundsCode
+        }}
+      />
+      {!isEmpty(archive) && (
+        <>
+          <Line />
+          <Heading fontSize="1" fontWeight="normal" mb={5}>
+            <Trans>Archive</Trans>
+          </Heading>
 
-    {!isEmpty(archive) && (
-      <>
-        <Line />
-        <Heading fontSize="1" fontWeight="normal" mb={5}>
-          <Trans>Archive</Trans>
-        </Heading>
+          {archive.map(({ date, place }, index) => (
+            <ArchiveBox key={index}>
+              <DefinitionListView
+                labels={{
+                  date: <Trans>Archiving Date</Trans>,
+                  place: <Trans>Storage location</Trans>
+                }}
+                data={{
+                  date: <DateFormat value={date} />,
+                  place
+                }}
+              />
+            </ArchiveBox>
+          ))}
+        </>
+      )}
+      {isDeprecatedDataPresent && (
+        <>
+          <Line />
+          <Heading fontSize="1" fontWeight="normal" mb={5}>
+            <Trans>Non EDR data</Trans>
+          </Heading>
+          <DefinitionListView
+            labels={{
+              addresses: <Trans>Address</Trans>,
+              kveds: <Trans>KVED</Trans>
+            }}
+            data={{
+              addresses:
+                addresses &&
+                addresses
+                  .filter(a => a.type === "REGISTRATION")
+                  .map((item, key) => <AddressView data={item} key={key} />),
+              kveds: kveds && (
+                <DictionaryValue
+                  name="KVEDS"
+                  render={dict => (
+                    <>
+                      {kveds.map((el, key, arr) => (
+                        <React.Fragment key={key}>
+                          {dict[el]}
+                          {key !== arr.length - 1 && ", "}
+                        </React.Fragment>
+                      ))}
+                    </>
+                  )}
+                />
+              )
+            }}
+          />
+          <DefinitionListView
+            labels={{
+              ownerPropertyType: <Trans>Property type</Trans>,
+              legalForm: <Trans>Form of managment</Trans>
+            }}
+            data={{
+              ownerPropertyType: ownerPropertyType && (
+                <DictionaryValue
+                  name="OWNER_PROPERTY_TYPE"
+                  item={ownerPropertyType}
+                />
+              ),
+              legalForm: legalForm && (
+                <DictionaryValue name="LEGAL_FORM" item={legalForm} />
+              )
+            }}
+          />
+        </>
+      )}
+    </Box>
+  );
+};
 
-        {archive.map(({ date, place }, index) => (
-          <ArchiveBox key={index}>
-            <DefinitionListView
-              labels={{
-                date: <Trans>Archiving Date</Trans>,
-                place: <Trans>Storage location</Trans>
-              }}
-              data={{
-                date: <DateFormat value={date} />,
-                place
-              }}
+const EDRData = ({ edrData }) => {
+  if (isEmpty(edrData)) return <EmptyData />;
+  const {
+    edrId,
+    edrpou,
+    insertedAt,
+    isActive,
+    kveds,
+    legalForm,
+    registrationAddress,
+    state,
+    updatedAt
+  } = edrData;
+
+  return (
+    <Box p={5}>
+      <DefinitionListView
+        labels={{
+          edrpou: <Trans>EDRPOU</Trans>,
+          registrationAddress: <Trans>Registration address</Trans>
+        }}
+        data={{
+          edrpou,
+          registrationAddress: registrationAddress && (
+            <AddressView data={registrationAddress} />
+          )
+        }}
+      />
+      <Line />
+      <DefinitionListView
+        labels={{
+          legalForm: <Trans>Form of managment</Trans>,
+          kveds: <Trans>KVED</Trans>
+        }}
+        data={{
+          legalForm: <DictionaryValue name="LEGAL_FORM" item={legalForm} />,
+          kveds: (
+            <DictionaryValue
+              name="KVEDS"
+              render={dict => (
+                <>
+                  {kveds.map((kved, key, arr) => (
+                    <React.Fragment key={key}>
+                      {dict[kved.code] || kved.code}
+                      {key !== arr.length - 1 && ", "}
+                    </React.Fragment>
+                  ))}
+                </>
+              )}
             />
-          </ArchiveBox>
-        ))}
-      </>
-    )}
-  </Box>
-);
+          )
+        }}
+      />
+      <Line />
+      <DefinitionListView
+        labels={{
+          edrId: <Trans>EDR ID</Trans>,
+          insertedAt: <Trans>Inserted at</Trans>,
+          updatedAt: <Trans>Updated at</Trans>,
+          state: <Trans>State</Trans>,
+          isActive: <Trans>Is EDR data actual</Trans>
+        }}
+        data={{
+          edrId,
+          insertedAt: <DateFormat value={insertedAt} />,
+          updatedAt: <DateFormat value={updatedAt} />,
+          state: <DictionaryValue name="EDR_STATE" item={state} />,
+          isActive: isActive ? <PositiveIcon /> : <NegativeIcon />
+        }}
+      />
+    </Box>
+  );
+};
 
 const License = ({
   id,

@@ -18,6 +18,51 @@ query LegalEntityQuery(
     status
     edrpou
     name
+    residenceAddress {
+      apartment
+      area
+      building
+      country
+      region
+      settlement
+      settlementId
+      settlementType
+      street
+      streetType
+      type
+      zip
+    }
+    edrData {
+      databaseId
+      edrId
+      edrpou
+      insertedAt
+      isActive
+      kveds {
+        code
+        isPrimary
+      }
+      legalForm
+      name
+      publicName
+      registrationAddress {
+        apartment
+        area
+        building
+        country
+        region
+        settlement
+        settlementId
+        settlementType
+        street
+        streetType
+        type
+        zip
+      }
+      shortName
+      state
+      updatedAt
+    }
     addresses {
       type
       area
