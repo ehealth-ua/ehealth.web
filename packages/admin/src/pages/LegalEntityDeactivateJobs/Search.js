@@ -9,6 +9,8 @@ import isEmpty from "lodash/isEmpty";
 import { Form, Validation, LocationParams } from "@ehealth/components";
 import { SearchIcon, RemoveItemIcon } from "@ehealth/icons";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+
+import Link from "../../components/Link";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
 import Pagination from "../../components/Pagination";
@@ -86,9 +88,11 @@ const Search = ({ uri }) => (
                             edrpou: <Trans>EDRPOU</Trans>,
                             startedAt: <Trans>Started at</Trans>,
                             executionTime: <Trans>Execution time</Trans>,
-                            status: <Trans>Job status</Trans>
+                            status: <Trans>Job status</Trans>,
+                            details: <Trans>Details</Trans>
                           }}
                           renderRow={({
+                            id,
                             databaseId,
                             startedAt,
                             endedAt,
@@ -133,6 +137,11 @@ const Search = ({ uri }) => (
                                 name={status}
                                 display="block"
                               />
+                            ),
+                            details: (
+                              <Link to={`../${id}`} fontWeight="bold">
+                                <Trans>Show details</Trans>
+                              </Link>
                             )
                           })}
                           sortableFields={["startedAt"]}
