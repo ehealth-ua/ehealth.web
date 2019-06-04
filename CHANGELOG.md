@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.104.0"></a>
+# [1.104.0](https://github.com/edenlabllc/ehealth.web/compare/v1.103.0...v1.104.0) (2019-06-04)
+
+
+### Bug Fixes
+
+* move props to the end of EmptyData, remove unused imports ([510806c](https://github.com/edenlabllc/ehealth.web/commit/510806c))
+
+
+### Features
+
+* add AddServiceToGroup popup and mutation ([a549ef6](https://github.com/edenlabllc/ehealth.web/commit/a549ef6))
+* add Delete Service from Service Group popup and mutation ([2bcea4b](https://github.com/edenlabllc/ehealth.web/commit/2bcea4b))
+* add flow types to the Service Group Details page ([4fade26](https://github.com/edenlabllc/ehealth.web/commit/4fade26))
+* add new locales for AddServiceToGroup and LE Details ([5672341](https://github.com/edenlabllc/ehealth.web/commit/5672341))
+* update locales for AddServiceToGroup popup ([ba3457f](https://github.com/edenlabllc/ehealth.web/commit/ba3457f))
+* update locales for DeleteServiceFromGroup popup ([588e617](https://github.com/edenlabllc/ehealth.web/commit/588e617))
+
+
+
+
+
 <a name="1.103.0"></a>
 # [1.103.0](https://github.com/edenlabllc/ehealth.web/compare/v1.102.0...v1.103.0) (2019-06-04)
 
