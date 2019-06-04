@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.105.0"></a>
+# [1.105.0](https://github.com/edenlabllc/ehealth.web/compare/v1.104.0...v1.105.0) (2019-06-04)
+
+
+### Features
+
+* add new select field `type` to the Medical Programs Search ([602cfcf](https://github.com/edenlabllc/ehealth.web/commit/602cfcf))
+* add type column to the MedicalProgramsTable ([141cb34](https://github.com/edenlabllc/ehealth.web/commit/141cb34))
+
+
+
+
+
 <a name="1.104.0"></a>
 # [1.104.0](https://github.com/edenlabllc/ehealth.web/compare/v1.103.0...v1.104.0) (2019-06-04)
 
