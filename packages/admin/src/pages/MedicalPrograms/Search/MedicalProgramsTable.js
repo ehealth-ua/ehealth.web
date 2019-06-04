@@ -13,6 +13,7 @@ import type {
 
 import Badge from "../../../components/Badge";
 import Table from "../../../components/Table";
+import DictionaryValue from "../../../components/DictionaryValue";
 
 import DeactivateMedicalProgram from "./DeactivateMedicalProgram";
 
@@ -33,10 +34,18 @@ const MedicalProgramsTable = ({
       databaseId: <Trans>ID</Trans>,
       name: <Trans>Medical program name</Trans>,
       isActive: <Trans>Status</Trans>,
+      type: <Trans>Type</Trans>,
       insertedAt: <Trans>Inserted at</Trans>,
       action: <Trans>Action</Trans>
     }}
-    renderRow={({ id, insertedAt, isActive, name, ...medicalProgram }) => ({
+    renderRow={({
+      id,
+      insertedAt,
+      isActive,
+      name,
+      type,
+      ...medicalProgram
+    }) => ({
       ...medicalProgram,
       name,
       insertedAt: (
@@ -59,6 +68,7 @@ const MedicalProgramsTable = ({
           display="block"
         />
       ),
+      type: <DictionaryValue name="MEDICAL_PROGRAM_TYPE" item={type} />,
       action: (
         <DeactivateMedicalProgram
           id={id}
@@ -90,6 +100,7 @@ MedicalProgramsTable.fragments = {
       name
       isActive
       insertedAt
+      type
     }
   `
 };
