@@ -1,18 +1,20 @@
 import React from "react";
 import gql from "graphql-tag";
+import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
 import { Trans } from "@lingui/macro";
+import Composer from "react-composer";
+import debounce from "lodash/debounce";
 import { SearchIcon } from "@ehealth/icons";
 import { Flex, Box } from "@rebass/emotion";
-import { Query } from "react-apollo";
-import debounce from "lodash/debounce";
 
 import STATUSES from "../../../helpers/statuses";
 import * as Field from "../../../components/Field";
+import DictionaryValue from "../../../components/DictionaryValue";
 
 const PrimarySearchFields = () => (
   <Flex mx={-1}>
-    <Box px={1} width={1 / 3}>
+    <Box px={1} width={1 / 4}>
       <Trans
         id="Medical program ID"
         render={({ translation }) => (
@@ -25,7 +27,7 @@ const PrimarySearchFields = () => (
         )}
       />
     </Box>
-    <Box px={1} width={1 / 3}>
+    <Box px={1} width={1 / 4}>
       <Trans
         id="Choose medical program"
         render={({ translation }) => (
@@ -68,7 +70,7 @@ const PrimarySearchFields = () => (
         )}
       />
     </Box>
-    <Box px={1} width={1 / 3}>
+    <Box px={1} width={1 / 4}>
       <Trans
         id="All statuses"
         render={({ translation }) => (
@@ -84,6 +86,26 @@ const PrimarySearchFields = () => (
           />
         )}
       />
+    </Box>
+    <Box px={1} width={1 / 4}>
+      <Composer
+        components={[
+          <DictionaryValue name="MEDICAL_PROGRAM_TYPE" />,
+          ({ render }) => <Trans id="Select option" render={render} />
+        ]}
+      >
+        {([dict, { translation }]) => (
+          <Field.Select
+            name="filter.type"
+            label={<Trans>Medical program type</Trans>}
+            placeholder={translation}
+            items={Object.keys(dict)}
+            itemToString={item => dict[item] || translation}
+            variant="select"
+            emptyOption
+          />
+        )}
+      </Composer>
     </Box>
   </Flex>
 );
