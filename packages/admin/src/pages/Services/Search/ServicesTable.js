@@ -1,9 +1,16 @@
-import React from "react";
+//@flow
+import * as React from "react";
 import gql from "graphql-tag";
 import { Flex } from "@rebass/emotion";
 import { DateFormat, Trans } from "@lingui/macro";
 import { NegativeIcon, PositiveIcon } from "@ehealth/icons";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+
+import type { Service } from "@ehealth-ua/schema";
+import type {
+  URLSearchParams,
+  SetLocationParamsProp
+} from "@ehealth/components";
 
 import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
@@ -16,6 +23,16 @@ const ServicesTable = ({
   deleteServiceHeader,
   deleteServiceFromGroup: DeleteServiceFromGroup,
   tableName = "services-table/search"
+}: {
+  services: Array<Service>,
+  locationParams: URLSearchParams,
+  setLocationParams: SetLocationParamsProp,
+  deleteServiceHeader: { [string]: any },
+  deleteServiceFromGroup: (
+    serviceId: string,
+    serviceName: string
+  ) => React.Node,
+  tableName: string
 }) => (
   <Table
     data={services}

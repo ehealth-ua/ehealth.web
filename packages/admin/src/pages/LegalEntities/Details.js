@@ -496,7 +496,7 @@ const EDRData = ({ edrData }) => {
           edrId: <Trans>EDR ID</Trans>,
           insertedAt: <Trans>Inserted at</Trans>,
           updatedAt: <Trans>Updated at</Trans>,
-          state: <Trans>State</Trans>,
+          state: <Trans>Legal entity state</Trans>,
           isActive: <Trans>Is EDR data actual</Trans>
         }}
         data={{

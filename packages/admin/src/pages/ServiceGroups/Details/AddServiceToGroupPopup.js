@@ -9,7 +9,7 @@ import { Query, Mutation } from "react-apollo";
 import { Form, Validation } from "@ehealth/components";
 import { AdminAddIcon } from "@ehealth/icons";
 
-import type { ServiceGroupConnection } from "@ehealth-ua/schema";
+import type { DocumentNode } from "graphql";
 
 import Popup from "../../../components/Popup";
 import * as Field from "../../../components/Field";
@@ -22,7 +22,7 @@ const AddServiceToGroupPopup = ({
 }: {
   serviceGroupId: string,
   serviceGroupName: string,
-  serviceGroupDetailsQuery: ServiceGroupConnection
+  serviceGroupDetailsQuery: DocumentNode
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
