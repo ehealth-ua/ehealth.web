@@ -130,14 +130,14 @@ const Details = ({ id }: { [string]: string }) => (
                             id={id}
                             name={name}
                             requestAllowed={requestAllowed}
-                            refetchQuery={ServiceGroupDetailsQuery}
+                            serviceGroupDetailsQuery={ServiceGroupDetailsQuery}
                           />
                         </Box>
                         <Box mt={2} ml={2}>
                           <DeactivateServiceGroupPopup
                             id={id}
                             name={name}
-                            refetchQuery={ServiceGroupDetailsQuery}
+                            serviceGroupDetailsQuery={ServiceGroupDetailsQuery}
                           />
                         </Box>
                       </Flex>
@@ -229,7 +229,7 @@ const Services = ({
           <AddServiceToGroupPopup
             serviceGroupId={id}
             serviceGroupName={groupName}
-            refetchQuery={ServiceGroupDetailsQuery}
+            serviceGroupDetailsQuery={ServiceGroupDetailsQuery}
           />
         </Ability>
       )}
@@ -246,7 +246,7 @@ const Services = ({
                 serviceName={serviceName}
                 serviceGroupId={id}
                 serviceGroupName={groupName}
-                refetchQuery={ServiceGroupDetailsQuery}
+                serviceGroupDetailsQuery={ServiceGroupDetailsQuery}
               />
             )}
             tableName="service-group-details/services-table"

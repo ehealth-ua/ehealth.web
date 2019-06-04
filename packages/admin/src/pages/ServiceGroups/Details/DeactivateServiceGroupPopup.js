@@ -1,12 +1,23 @@
+//@flow
 import React, { useState } from "react";
 import gql from "graphql-tag";
 import { Trans } from "@lingui/macro";
 import { Mutation } from "react-apollo";
 
+import type { DocumentNode } from "graphql";
+
 import Popup from "../../../components/Popup";
 import Button from "../../../components/Button";
 
-const DeactivateServiceGroupPopup = ({ id, name, refetchQuery }) => {
+const DeactivateServiceGroupPopup = ({
+  id,
+  name,
+  serviceGroupDetailsQuery
+}: {
+  id: string,
+  name: string,
+  serviceGroupDetailsQuery: DocumentNode
+}) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
 
@@ -15,7 +26,7 @@ const DeactivateServiceGroupPopup = ({ id, name, refetchQuery }) => {
       mutation={DeactivateServiceGroupMutation}
       refetchQueries={() => [
         {
-          query: refetchQuery,
+          query: serviceGroupDetailsQuery,
           variables: { id }
         }
       ]}

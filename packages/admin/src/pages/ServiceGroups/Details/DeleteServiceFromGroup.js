@@ -5,7 +5,8 @@ import { Trans } from "@lingui/macro";
 import { Text } from "@rebass/emotion";
 import { Mutation } from "react-apollo";
 import system from "@ehealth/system-components";
-import type { ServiceGroupConnection } from "@ehealth-ua/schema";
+
+import type { DocumentNode } from "graphql";
 
 import Popup from "../../../components/Popup";
 
@@ -14,13 +15,13 @@ const DeleteServiceFromGroupPopup = ({
   serviceName,
   serviceGroupId,
   serviceGroupName,
-  refetchQuery
+  serviceGroupDetailsQuery
 }: {
   serviceId: string,
   serviceName: string,
   serviceGroupId: string,
   serviceGroupName: string,
-  refetchQuery: ServiceGroupConnection
+  serviceGroupDetailsQuery: DocumentNode
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
@@ -30,7 +31,7 @@ const DeleteServiceFromGroupPopup = ({
       mutation={DeleteServiceFromGroupPopupMutation}
       refetchQueries={() => [
         {
-          query: refetchQuery,
+          query: serviceGroupDetailsQuery,
           variables: {
             id: serviceGroupId
           }

@@ -1,7 +1,10 @@
+//@flow
 import React, { useState } from "react";
 import gql from "graphql-tag";
 import { Trans } from "@lingui/macro";
 import { Mutation } from "react-apollo";
+
+import type { DocumentNode } from "graphql";
 
 import Popup from "../../../components/Popup";
 import Button from "../../../components/Button";
@@ -10,7 +13,12 @@ const UpdateServiceGroupPopup = ({
   id,
   name,
   requestAllowed,
-  refetchQuery
+  serviceGroupDetailsQuery
+}: {
+  id: string,
+  name: string,
+  requestAllowed: boolean,
+  serviceGroupDetailsQuery: DocumentNode
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
@@ -32,7 +40,7 @@ const UpdateServiceGroupPopup = ({
       mutation={UpdateServiceGroupMutation}
       refetchQueries={() => [
         {
-          query: refetchQuery,
+          query: serviceGroupDetailsQuery,
           variables: { id, requestAllowed: !requestAllowed }
         }
       ]}

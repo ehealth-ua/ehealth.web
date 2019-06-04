@@ -18,11 +18,11 @@ import { IconButton } from "../../../components/Button";
 const AddServiceToGroupPopup = ({
   serviceGroupId,
   serviceGroupName,
-  refetchQuery
+  serviceGroupDetailsQuery
 }: {
   serviceGroupId: string,
   serviceGroupName: string,
-  refetchQuery: ServiceGroupConnection
+  serviceGroupDetailsQuery: ServiceGroupConnection
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
@@ -45,7 +45,7 @@ const AddServiceToGroupPopup = ({
         mutation={AddServiceToGroupMutation}
         refetchQueries={() => [
           {
-            query: refetchQuery,
+            query: serviceGroupDetailsQuery,
             variables: {
               id: serviceGroupId
             }
