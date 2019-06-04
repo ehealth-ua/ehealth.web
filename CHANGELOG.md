@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.103.0"></a>
+# [1.103.0](https://github.com/edenlabllc/ehealth.web/compare/v1.102.0...v1.103.0) (2019-06-04)
+
+
+### Features
+
+* add EDR Data tab on LE details page ([83453d5](https://github.com/edenlabllc/ehealth.web/commit/83453d5))
+
+
+
+
+
 <a name="1.102.0"></a>
 # [1.102.0](https://github.com/edenlabllc/ehealth.web/compare/v1.101.0...v1.102.0) (2019-06-04)
 
