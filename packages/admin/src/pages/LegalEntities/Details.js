@@ -460,9 +460,8 @@ const EDRData = ({ edrData }) => {
         }}
         data={{
           edrpou,
-          registrationAddress: registrationAddress && (
-            <AddressView data={registrationAddress} />
-          )
+          registrationAddress:
+            registrationAddress && registrationAddress.address
         }}
       />
       <Line />

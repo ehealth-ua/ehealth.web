@@ -46,18 +46,7 @@ query LegalEntityQuery(
       name
       publicName
       registrationAddress {
-        apartment
-        area
-        building
-        country
-        region
-        settlement
-        settlementId
-        settlementType
-        street
-        streetType
-        type
-        zip
+        address
       }
       shortName
       state
