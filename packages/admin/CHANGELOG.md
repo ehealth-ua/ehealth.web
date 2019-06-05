@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.105.2"></a>
+## [1.105.2](https://github.com/edenlabllc/ehealth.web/compare/v1.105.1...v1.105.2) (2019-06-05)
+
+
+### Bug Fixes
+
+* add DictionaryValue for service category ([#971](https://github.com/edenlabllc/ehealth.web/issues/971)) ([66e350b](https://github.com/edenlabllc/ehealth.web/commit/66e350b))
+
+
+
+
+
 <a name="1.105.1"></a>
 ## [1.105.1](https://github.com/edenlabllc/ehealth.web/compare/v1.105.0...v1.105.1) (2019-06-05)
 
