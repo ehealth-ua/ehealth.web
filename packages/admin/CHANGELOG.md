@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.105.5"></a>
+## [1.105.5](https://github.com/edenlabllc/ehealth.web/compare/v1.105.4...v1.105.5) (2019-06-05)
+
+
+### Bug Fixes
+
+* **admin:** pass locationParams in Popup components for refetchQueries ([#976](https://github.com/edenlabllc/ehealth.web/issues/976)) ([21836fc](https://github.com/edenlabllc/ehealth.web/commit/21836fc))
+
+
+
+
+
 <a name="1.105.4"></a>
 ## [1.105.4](https://github.com/edenlabllc/ehealth.web/compare/v1.105.3...v1.105.4) (2019-06-05)
 
