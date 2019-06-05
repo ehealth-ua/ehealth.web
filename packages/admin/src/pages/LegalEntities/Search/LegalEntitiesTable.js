@@ -39,6 +39,7 @@ const LegalEntitiesTable = ({
       insertedAt,
       databaseId,
       type,
+      residenceAddress,
       ...legalEntity
     }) => ({
       ...legalEntity,
@@ -74,9 +75,14 @@ const LegalEntitiesTable = ({
       status: <Badge type="LEGALENTITY" name={status} display="block" />,
       addresses: (
         <>
-          {addresses
-            .filter(a => a && a.type === "REGISTRATION")
-            .map(item => item && <AddressView data={item} />)}
+          {residenceAddress ? (
+            <AddressView data={residenceAddress} />
+          ) : (
+            addresses &&
+            addresses
+              .filter(a => a && a.type === "REGISTRATION")
+              .map(item => item && <AddressView data={item} />)
+          )}
         </>
       ),
       action: (
@@ -113,6 +119,9 @@ LegalEntitiesTable.fragments = {
       name
       edrpou
       addresses {
+        ...Addresses
+      }
+      residenceAddress {
         ...Addresses
       }
       nhsVerified

@@ -43,7 +43,7 @@ const Search = () => (
             ? undefined
             : nhsVerified === "VERIFIED",
           edrVerified: convertStringToBoolean(edrVerified),
-          addresses: isEmpty(addresses)
+          residenceAddress: isEmpty(addresses)
             ? undefined
             : {
                 settlementId: addresses.id,
