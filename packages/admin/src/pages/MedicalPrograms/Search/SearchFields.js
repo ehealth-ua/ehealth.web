@@ -8,9 +8,11 @@ import debounce from "lodash/debounce";
 import { SearchIcon } from "@ehealth/icons";
 import { Flex, Box } from "@rebass/emotion";
 
+import { Validation } from "@ehealth/components";
 import STATUSES from "../../../helpers/statuses";
 import * as Field from "../../../components/Field";
 import DictionaryValue from "../../../components/DictionaryValue";
+import { UUID_PATTERN } from "../../../constants/validationPatterns";
 
 const PrimarySearchFields = () => (
   <Flex mx={-1}>
@@ -25,6 +27,11 @@ const PrimarySearchFields = () => (
             postfix={<SearchIcon color="silverCity" />}
           />
         )}
+      />
+      <Validation.Matches
+        field="filter.databaseId"
+        options={UUID_PATTERN}
+        message="Invalid ID"
       />
     </Box>
     <Box px={1} width={1 / 4}>

@@ -5,7 +5,7 @@ import { Box } from "@rebass/emotion";
 import { Trans } from "@lingui/macro";
 import Composer from "react-composer";
 import { Mutation } from "react-apollo";
-import { Form, Validation } from "@ehealth/components";
+import { Form, Validations, Validation } from "@ehealth/components";
 
 import type { DocumentNode } from "graphql";
 import type { URLSearchParams } from "@ehealth/components";
@@ -14,6 +14,7 @@ import Popup from "../../../components/Popup";
 import Button from "../../../components/Button";
 import * as Field from "../../../components/Field";
 import DictionaryValue from "../../../components/DictionaryValue";
+import { CYRILLIC_MEDICAL_PROGRAM_NAME } from "../../../constants/validationPatterns";
 
 const CreateMedicalProgramPopup = ({
   locationParams,
@@ -73,7 +74,13 @@ const CreateMedicalProgramPopup = ({
                     />
                   )}
                 />
-                <Validation.Required field="name" message="Required field" />
+                <Validations field="name">
+                  <Validation.Required message="Required field" />
+                  <Validation.Matches
+                    options={CYRILLIC_MEDICAL_PROGRAM_NAME}
+                    message="Invalid name"
+                  />
+                </Validations>
                 <Box width={3 / 5} mb={4}>
                   <Composer
                     components={[

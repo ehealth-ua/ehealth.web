@@ -11,3 +11,4 @@ export const INNM_ORIGINAL_NAME_PATTERN = "^[a-zA-Z-\\s]*$";
 export const SCTID_PATTERN = "^[0-9]{8}$";
 
 export const CYRILLIC_NAME = "^(?!.*[ЫЪЭЁыъэё@%&$^#])[А-ЯҐЇІЄа-яґїіє\\'\\- ]+$";
+export const CYRILLIC_MEDICAL_PROGRAM_NAME = "^[А-Яа-яЁёЇїІіЄєҐґ'\\- ]*$";
