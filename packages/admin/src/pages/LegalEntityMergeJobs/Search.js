@@ -1,21 +1,23 @@
 import React from "react";
-import { Flex, Box, Heading } from "@rebass/emotion";
-import { Router, Redirect } from "@reach/router";
 import { Query } from "react-apollo";
-import differenceInSeconds from "date-fns/difference_in_seconds";
-import { loader } from "graphql.macro";
-import { Trans, DateFormat, Plural } from "@lingui/macro";
 import isEmpty from "lodash/isEmpty";
+import { loader } from "graphql.macro";
+import { Router, Redirect } from "@reach/router";
+import { Flex, Box, Heading } from "@rebass/emotion";
+import { Trans, DateFormat, Plural } from "@lingui/macro";
+import differenceInSeconds from "date-fns/difference_in_seconds";
 
-import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
 import { SearchIcon } from "@ehealth/icons";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
+import { Form, Validation, Tabs, LocationParams } from "@ehealth/components";
+
+import Link from "../../components/Link";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
-import LoadingOverlay from "../../components/LoadingOverlay";
 import Button from "../../components/Button";
-import * as Field from "../../components/Field";
 import STATUSES from "../../helpers/statuses";
+import * as Field from "../../components/Field";
+import LoadingOverlay from "../../components/LoadingOverlay";
 
 const LegalEntitiesMergeJobsQuery = loader(
   "../../graphql/LegalEntitiesMergeJobsQuery.graphql"
@@ -120,9 +122,11 @@ const Search = ({ uri }) => (
                           ),
                           startedAt: <Trans>Started at</Trans>,
                           executionTime: <Trans>Execution time</Trans>,
-                          status: <Trans>Job status</Trans>
+                          status: <Trans>Job status</Trans>,
+                          details: <Trans>Details</Trans>
                         }}
                         renderRow={({
+                          id,
                           databaseId,
                           mergedToLegalEntity: {
                             name: mergedToLegalEntityName,
@@ -173,6 +177,11 @@ const Search = ({ uri }) => (
                               name={status}
                               display="block"
                             />
+                          ),
+                          details: (
+                            <Link to={`../${id}`} fontWeight="bold">
+                              <Trans>Show details</Trans>
+                            </Link>
                           )
                         })}
                         sortableFields={["startedAt"]}
