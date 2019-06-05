@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.105.1"></a>
+## [1.105.1](https://github.com/edenlabllc/ehealth.web/compare/v1.105.0...v1.105.1) (2019-06-05)
+
+
+### Bug Fixes
+
+* update search by settlement to search by residenceAddress ([8ab9990](https://github.com/edenlabllc/ehealth.web/commit/8ab9990))
+
+
+
+
+
 <a name="1.105.0"></a>
 # [1.105.0](https://github.com/edenlabllc/ehealth.web/compare/v1.104.0...v1.105.0) (2019-06-04)
 
