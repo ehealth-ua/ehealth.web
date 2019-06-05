@@ -10,6 +10,7 @@ import { Form, Validation } from "@ehealth/components";
 import { AdminAddIcon } from "@ehealth/icons";
 
 import type { DocumentNode } from "graphql";
+import type { URLSearchParams } from "@ehealth/components";
 
 import Popup from "../../../components/Popup";
 import * as Field from "../../../components/Field";
@@ -18,10 +19,12 @@ import { IconButton } from "../../../components/Button";
 const AddServiceToGroupPopup = ({
   serviceGroupId,
   serviceGroupName,
+  locationParams,
   serviceGroupDetailsQuery
 }: {
   serviceGroupId: string,
   serviceGroupName: string,
+  locationParams: URLSearchParams,
   serviceGroupDetailsQuery: DocumentNode
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
@@ -47,7 +50,8 @@ const AddServiceToGroupPopup = ({
           {
             query: serviceGroupDetailsQuery,
             variables: {
-              id: serviceGroupId
+              id: serviceGroupId,
+              ...locationParams
             }
           }
         ]}

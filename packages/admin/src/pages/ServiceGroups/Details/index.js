@@ -44,139 +44,148 @@ const Details = ({ id }: { [string]: string }) => (
     }: {
       locationParams: URLSearchParams,
       setLocationParams: SetLocationParamsProp
-    }) => (
-      <Query
-        query={ServiceGroupDetailsQuery}
-        variables={{ id, ...filteredLocationParams(locationParams) }}
-      >
-        {({
-          loading,
-          data: { serviceGroup }
-        }: {
-          loading: boolean,
-          data: {
-            serviceGroup: ServiceGroup
-          }
-        }) => {
-          if (isEmpty(serviceGroup)) return null;
-          const {
-            databaseId,
-            name,
-            isActive,
-            requestAllowed,
-            parentGroup,
-            services,
-            subGroups
-          } = serviceGroup;
+    }) => {
+      const filteredParams = filteredLocationParams(locationParams);
+      return (
+        <Query
+          query={ServiceGroupDetailsQuery}
+          variables={{ id, ...filteredParams }}
+        >
+          {({
+            loading,
+            data: { serviceGroup }
+          }: {
+            loading: boolean,
+            data: {
+              serviceGroup: ServiceGroup
+            }
+          }) => {
+            if (isEmpty(serviceGroup)) return null;
+            const {
+              databaseId,
+              name,
+              isActive,
+              requestAllowed,
+              parentGroup,
+              services,
+              subGroups
+            } = serviceGroup;
 
-          const { id: parentGroupId, name: parentGroupName } =
-            parentGroup || {};
+            const { id: parentGroupId, name: parentGroupName } =
+              parentGroup || {};
 
-          return (
-            <LoadingOverlay loading={loading}>
-              <Box p={6}>
-                <Box py={10}>
-                  <Breadcrumbs.List>
-                    <Breadcrumbs.Item to="/service-groups">
-                      <Trans>Service groups</Trans>
-                    </Breadcrumbs.Item>
-                    <Breadcrumbs.Item>
-                      <Trans>Service group details</Trans>
-                    </Breadcrumbs.Item>
-                  </Breadcrumbs.List>
-                </Box>
-                <Flex justifyContent="space-between" alignItems="flex-end">
-                  <Box>
-                    <DefinitionListView
-                      labels={{
-                        name: <Trans>Group name</Trans>,
-                        databaseId: <Trans>ID</Trans>,
-                        isActive: <Trans>Status</Trans>,
-                        requestAllowed: <Trans>Is request allowed</Trans>,
-                        parentGroup: <Trans>Parent group</Trans>
-                      }}
-                      data={{
-                        databaseId,
-                        name,
-                        isActive: (
-                          <Badge
-                            type="ACTIVE_STATUS_F"
-                            name={isActive}
-                            variant={!isActive}
-                            minWidth={100}
-                          />
-                        ),
-                        requestAllowed: requestAllowed ? (
-                          <PositiveIcon />
-                        ) : (
-                          <NegativeIcon />
-                        ),
-                        parentGroup: parentGroupId && (
-                          <Link to={`../${parentGroupId}`} fontWeight="bold">
-                            {parentGroupName}
-                          </Link>
-                        )
-                      }}
-                      color="#7F8FA4"
-                      labelWidth="135px"
-                      marginBetween="auto"
-                    />
+            return (
+              <LoadingOverlay loading={loading}>
+                <Box p={6}>
+                  <Box py={10}>
+                    <Breadcrumbs.List>
+                      <Breadcrumbs.Item to="/service-groups">
+                        <Trans>Service groups</Trans>
+                      </Breadcrumbs.Item>
+                      <Breadcrumbs.Item>
+                        <Trans>Service group details</Trans>
+                      </Breadcrumbs.Item>
+                    </Breadcrumbs.List>
                   </Box>
-                  {isActive && (
-                    <Ability action="write" resource="service_catalog">
-                      <Flex justifyContent="flex-end" flexWrap="wrap">
-                        <Box mt={2}>
-                          <UpdateServiceGroupPopup
-                            id={id}
-                            name={name}
-                            requestAllowed={requestAllowed}
-                            serviceGroupDetailsQuery={ServiceGroupDetailsQuery}
-                          />
-                        </Box>
-                        <Box mt={2} ml={2}>
-                          <DeactivateServiceGroupPopup
-                            id={id}
-                            name={name}
-                            serviceGroupDetailsQuery={ServiceGroupDetailsQuery}
-                          />
-                        </Box>
-                      </Flex>
-                    </Ability>
-                  )}
-                </Flex>
-              </Box>
-              <Tabs.Nav>
-                <Tabs.NavItem to="./">
-                  <Trans>Services</Trans>
-                </Tabs.NavItem>
-                <Tabs.NavItem to="./subgroups">
-                  <Trans>Subgroups</Trans>
-                </Tabs.NavItem>
-              </Tabs.Nav>
-              <Tabs.Content>
-                <Router>
-                  <Services
-                    path="/"
-                    id={id}
-                    groupName={name}
-                    isActive={isActive}
-                    services={services}
-                    locationParams={locationParams}
-                    setLocationParams={setLocationParams}
-                  />
-                  <SubGroups
-                    path="/subgroups"
-                    subGroups={subGroups}
-                    locationParams={locationParams}
-                    setLocationParams={setLocationParams}
-                  />
-                </Router>
-              </Tabs.Content>
-            </LoadingOverlay>
-          );
-        }}
-      </Query>
-    )}
+                  <Flex justifyContent="space-between" alignItems="flex-end">
+                    <Box>
+                      <DefinitionListView
+                        labels={{
+                          name: <Trans>Group name</Trans>,
+                          databaseId: <Trans>ID</Trans>,
+                          isActive: <Trans>Status</Trans>,
+                          requestAllowed: <Trans>Is request allowed</Trans>,
+                          parentGroup: <Trans>Parent group</Trans>
+                        }}
+                        data={{
+                          databaseId,
+                          name,
+                          isActive: (
+                            <Badge
+                              type="ACTIVE_STATUS_F"
+                              name={isActive}
+                              variant={!isActive}
+                              minWidth={100}
+                            />
+                          ),
+                          requestAllowed: requestAllowed ? (
+                            <PositiveIcon />
+                          ) : (
+                            <NegativeIcon />
+                          ),
+                          parentGroup: parentGroupId && (
+                            <Link to={`../${parentGroupId}`} fontWeight="bold">
+                              {parentGroupName}
+                            </Link>
+                          )
+                        }}
+                        color="#7F8FA4"
+                        labelWidth="135px"
+                        marginBetween="auto"
+                      />
+                    </Box>
+                    {isActive && (
+                      <Ability action="write" resource="service_catalog">
+                        <Flex justifyContent="flex-end" flexWrap="wrap">
+                          <Box mt={2}>
+                            <UpdateServiceGroupPopup
+                              id={id}
+                              name={name}
+                              requestAllowed={requestAllowed}
+                              serviceGroupDetailsQuery={
+                                ServiceGroupDetailsQuery
+                              }
+                              locationParams={filteredParams}
+                            />
+                          </Box>
+                          <Box mt={2} ml={2}>
+                            <DeactivateServiceGroupPopup
+                              id={id}
+                              name={name}
+                              serviceGroupDetailsQuery={
+                                ServiceGroupDetailsQuery
+                              }
+                              locationParams={filteredParams}
+                            />
+                          </Box>
+                        </Flex>
+                      </Ability>
+                    )}
+                  </Flex>
+                </Box>
+                <Tabs.Nav>
+                  <Tabs.NavItem to="./">
+                    <Trans>Services</Trans>
+                  </Tabs.NavItem>
+                  <Tabs.NavItem to="./subgroups">
+                    <Trans>Subgroups</Trans>
+                  </Tabs.NavItem>
+                </Tabs.Nav>
+                <Tabs.Content>
+                  <Router>
+                    <Services
+                      path="/"
+                      id={id}
+                      groupName={name}
+                      isActive={isActive}
+                      services={services}
+                      locationParams={filteredParams}
+                      setLocationParams={setLocationParams}
+                    />
+                    <SubGroups
+                      path="/subgroups"
+                      subGroups={subGroups}
+                      locationParams={filteredParams}
+                      setLocationParams={setLocationParams}
+                    />
+                  </Router>
+                </Tabs.Content>
+              </LoadingOverlay>
+            );
+          }}
+        </Query>
+      );
+    }}
   </LocationParams>
 );
 
@@ -229,6 +238,7 @@ const Services = ({
           <AddServiceToGroupPopup
             serviceGroupId={id}
             serviceGroupName={groupName}
+            locationParams={locationParams}
             serviceGroupDetailsQuery={ServiceGroupDetailsQuery}
           />
         </Ability>
@@ -246,6 +256,7 @@ const Services = ({
                 serviceName={serviceName}
                 serviceGroupId={id}
                 serviceGroupName={groupName}
+                locationParams={locationParams}
                 serviceGroupDetailsQuery={ServiceGroupDetailsQuery}
               />
             )}

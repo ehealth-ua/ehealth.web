@@ -1,13 +1,27 @@
+//@flow
 import React, { useState } from "react";
 import gql from "graphql-tag";
 import { Trans } from "@lingui/macro";
 import { Mutation } from "react-apollo";
 import { Box } from "@rebass/emotion";
 
+import type { DocumentNode } from "graphql";
+import type { URLSearchParams } from "@ehealth/components";
+
 import Popup from "../../../components/Popup";
 import Button from "../../../components/Button";
 
-const DeactivateServicePopup = ({ id, name, refetchQuery }) => {
+const DeactivateServicePopup = ({
+  id,
+  name,
+  locationParams,
+  serviceDetailsQuery
+}: {
+  id: string,
+  name: string,
+  locationParams: URLSearchParams,
+  serviceDetailsQuery: DocumentNode
+}) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
 
@@ -17,8 +31,8 @@ const DeactivateServicePopup = ({ id, name, refetchQuery }) => {
         mutation={DeactivateServiceMutation}
         refetchQueries={() => [
           {
-            query: refetchQuery,
-            variables: { id }
+            query: serviceDetailsQuery,
+            variables: { id, ...locationParams }
           }
         ]}
       >

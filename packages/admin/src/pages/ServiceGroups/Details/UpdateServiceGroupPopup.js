@@ -5,6 +5,7 @@ import { Trans } from "@lingui/macro";
 import { Mutation } from "react-apollo";
 
 import type { DocumentNode } from "graphql";
+import type { URLSearchParams } from "@ehealth/components";
 
 import Popup from "../../../components/Popup";
 import Button from "../../../components/Button";
@@ -13,11 +14,13 @@ const UpdateServiceGroupPopup = ({
   id,
   name,
   requestAllowed,
+  locationParams,
   serviceGroupDetailsQuery
 }: {
   id: string,
   name: string,
   requestAllowed: boolean,
+  locationParams: URLSearchParams,
   serviceGroupDetailsQuery: DocumentNode
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
@@ -41,7 +44,7 @@ const UpdateServiceGroupPopup = ({
       refetchQueries={() => [
         {
           query: serviceGroupDetailsQuery,
-          variables: { id, requestAllowed: !requestAllowed }
+          variables: { id, ...locationParams }
         }
       ]}
     >
@@ -66,7 +69,7 @@ const UpdateServiceGroupPopup = ({
                 variables: {
                   input: {
                     id,
-                    requestAllowed
+                    requestAllowed: !requestAllowed
                   }
                 }
               });

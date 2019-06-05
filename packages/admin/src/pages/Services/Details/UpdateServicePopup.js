@@ -1,13 +1,29 @@
+//@flow
 import React, { useState } from "react";
 import gql from "graphql-tag";
 import { Trans } from "@lingui/macro";
 import { Mutation } from "react-apollo";
 import { Box } from "@rebass/emotion";
 
+import type { DocumentNode } from "graphql";
+import type { URLSearchParams } from "@ehealth/components";
+
 import Popup from "../../../components/Popup";
 import Button from "../../../components/Button";
 
-const UpdateServicePopup = ({ id, name, requestAllowed, refetchQuery }) => {
+const UpdateServicePopup = ({
+  id,
+  name,
+  requestAllowed,
+  locationParams,
+  serviceDetailsQuery
+}: {
+  id: string,
+  name: string,
+  requestAllowed: boolean,
+  locationParams: URLSearchParams,
+  serviceDetailsQuery: DocumentNode
+}) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
 
@@ -29,8 +45,8 @@ const UpdateServicePopup = ({ id, name, requestAllowed, refetchQuery }) => {
         mutation={UpdateServiceMutation}
         refetchQueries={() => [
           {
-            query: refetchQuery,
-            variables: { id, requestAllowed: !requestAllowed }
+            query: serviceDetailsQuery,
+            variables: { id, ...locationParams }
           }
         ]}
       >
@@ -55,7 +71,7 @@ const UpdateServicePopup = ({ id, name, requestAllowed, refetchQuery }) => {
                   variables: {
                     input: {
                       id,
-                      requestAllowed
+                      requestAllowed: !requestAllowed
                     }
                   }
                 });

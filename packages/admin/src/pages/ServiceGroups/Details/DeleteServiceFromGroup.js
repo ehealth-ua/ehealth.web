@@ -7,6 +7,7 @@ import { Mutation } from "react-apollo";
 import system from "@ehealth/system-components";
 
 import type { DocumentNode } from "graphql";
+import type { URLSearchParams } from "@ehealth/components";
 
 import Popup from "../../../components/Popup";
 
@@ -15,12 +16,14 @@ const DeleteServiceFromGroupPopup = ({
   serviceName,
   serviceGroupId,
   serviceGroupName,
+  locationParams,
   serviceGroupDetailsQuery
 }: {
   serviceId: string,
   serviceName: string,
   serviceGroupId: string,
   serviceGroupName: string,
+  locationParams: URLSearchParams,
   serviceGroupDetailsQuery: DocumentNode
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
@@ -33,7 +36,8 @@ const DeleteServiceFromGroupPopup = ({
         {
           query: serviceGroupDetailsQuery,
           variables: {
-            id: serviceGroupId
+            id: serviceGroupId,
+            ...locationParams
           }
         }
       ]}

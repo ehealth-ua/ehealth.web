@@ -24,106 +24,111 @@ import DeactivateServicePopup from "./DeactivateServicePopup";
 
 const Details = ({ id }) => (
   <LocationParams>
-    {({ locationParams, setLocationParams }) => (
-      <Query
-        query={ServiceDetailsQuery}
-        variables={{ id, ...filteredLocationParams(locationParams) }}
-      >
-        {({ loading, error, data: { service } }) => {
-          if (isEmpty(service)) return null;
-          const {
-            databaseId,
-            name,
-            isActive,
-            requestAllowed,
-            parentGroups
-          } = service;
-          return (
-            <LoadingOverlay loading={loading}>
-              <Box p={6}>
-                <Box py={10}>
-                  <Breadcrumbs.List>
-                    <Breadcrumbs.Item to="/services">
-                      <Trans>Services</Trans>
-                    </Breadcrumbs.Item>
-                    <Breadcrumbs.Item>
-                      <Trans>Service details</Trans>
-                    </Breadcrumbs.Item>
-                  </Breadcrumbs.List>
-                </Box>
-                <Flex justifyContent="space-between" alignItems="flex-end">
-                  <Box>
-                    <DefinitionListView
-                      labels={{
-                        name: <Trans>Service name</Trans>,
-                        databaseId: <Trans>ID</Trans>,
-                        isActive: <Trans>Status</Trans>,
-                        requestAllowed: <Trans>Is request allowed</Trans>
-                      }}
-                      data={{
-                        databaseId,
-                        name,
-                        isActive: (
-                          <Badge
-                            type="ACTIVE_STATUS_M"
-                            name={isActive}
-                            variant={!isActive}
-                            minWidth={100}
-                          />
-                        ),
-                        requestAllowed: requestAllowed ? (
-                          <PositiveIcon />
-                        ) : (
-                          <NegativeIcon />
-                        )
-                      }}
-                      color="#7F8FA4"
-                      labelWidth="120px"
-                    />
+    {({ locationParams, setLocationParams }) => {
+      const filteredParams = filteredLocationParams(locationParams);
+      return (
+        <Query
+          query={ServiceDetailsQuery}
+          variables={{ id, ...filteredParams }}
+        >
+          {({ loading, error, data: { service } }) => {
+            if (isEmpty(service)) return null;
+            const {
+              databaseId,
+              name,
+              isActive,
+              requestAllowed,
+              parentGroups
+            } = service;
+            return (
+              <LoadingOverlay loading={loading}>
+                <Box p={6}>
+                  <Box py={10}>
+                    <Breadcrumbs.List>
+                      <Breadcrumbs.Item to="/services">
+                        <Trans>Services</Trans>
+                      </Breadcrumbs.Item>
+                      <Breadcrumbs.Item>
+                        <Trans>Service details</Trans>
+                      </Breadcrumbs.Item>
+                    </Breadcrumbs.List>
                   </Box>
-                  {isActive && (
-                    <Ability action="write" resource="service_catalog">
-                      <Flex justifyContent="flex-end" flexWrap="wrap">
-                        <Box mt={2}>
-                          <UpdateServicePopup
-                            id={id}
-                            name={name}
-                            requestAllowed={requestAllowed}
-                            refetchQuery={ServiceDetailsQuery}
-                          />
-                        </Box>
-                        <Box mt={2} ml={2}>
-                          <DeactivateServicePopup
-                            id={id}
-                            name={name}
-                            refetchQuery={ServiceDetailsQuery}
-                          />
-                        </Box>
-                      </Flex>
-                    </Ability>
-                  )}
-                </Flex>
-              </Box>
-              <Tabs.Nav>
-                <Tabs.NavItem to="./">
-                  <Trans>Service groups</Trans>
-                </Tabs.NavItem>
-              </Tabs.Nav>
-              <Tabs.Content>
-                <Router>
-                  <ParentGroups
-                    path="/"
-                    parentGroups={parentGroups}
-                    locationParams={locationParams}
-                    setLocationParams={setLocationParams}
-                  />
-                </Router>
-              </Tabs.Content>
-            </LoadingOverlay>
-          );
-        }}
-      </Query>
-    )}
+                  <Flex justifyContent="space-between" alignItems="flex-end">
+                    <Box>
+                      <DefinitionListView
+                        labels={{
+                          name: <Trans>Service name</Trans>,
+                          databaseId: <Trans>ID</Trans>,
+                          isActive: <Trans>Status</Trans>,
+                          requestAllowed: <Trans>Is request allowed</Trans>
+                        }}
+                        data={{
+                          databaseId,
+                          name,
+                          isActive: (
+                            <Badge
+                              type="ACTIVE_STATUS_M"
+                              name={isActive}
+                              variant={!isActive}
+                              minWidth={100}
+                            />
+                          ),
+                          requestAllowed: requestAllowed ? (
+                            <PositiveIcon />
+                          ) : (
+                            <NegativeIcon />
+                          )
+                        }}
+                        color="#7F8FA4"
+                        labelWidth="120px"
+                      />
+                    </Box>
+                    {isActive && (
+                      <Ability action="write" resource="service_catalog">
+                        <Flex justifyContent="flex-end" flexWrap="wrap">
+                          <Box mt={2}>
+                            <UpdateServicePopup
+                              id={id}
+                              name={name}
+                              requestAllowed={requestAllowed}
+                              serviceDetailsQuery={ServiceDetailsQuery}
+                              locationParams={filteredParams}
+                            />
+                          </Box>
+                          <Box mt={2} ml={2}>
+                            <DeactivateServicePopup
+                              id={id}
+                              name={name}
+                              serviceDetailsQuery={ServiceDetailsQuery}
+                              locationParams={filteredParams}
+                            />
+                          </Box>
+                        </Flex>
+                      </Ability>
+                    )}
+                  </Flex>
+                </Box>
+                <Tabs.Nav>
+                  <Tabs.NavItem to="./">
+                    <Trans>Service groups</Trans>
+                  </Tabs.NavItem>
+                </Tabs.Nav>
+                <Tabs.Content>
+                  <Router>
+                    <ParentGroups
+                      path="/"
+                      parentGroups={parentGroups}
+                      locationParams={locationParams}
+                      setLocationParams={setLocationParams}
+                    />
+                  </Router>
+                </Tabs.Content>
+              </LoadingOverlay>
+            );
+          }}
+        </Query>
+      );
+    }}
   </LocationParams>
 );
 
