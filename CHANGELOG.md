@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.105.4"></a>
+## [1.105.4](https://github.com/edenlabllc/ehealth.web/compare/v1.105.3...v1.105.4) (2019-06-05)
+
+
+### Bug Fixes
+
+* update registrationAddress in EDRData on LE details page ([#975](https://github.com/edenlabllc/ehealth.web/issues/975)) ([0299b2d](https://github.com/edenlabllc/ehealth.web/commit/0299b2d))
+
+
+
+
+
 <a name="1.105.3"></a>
 ## [1.105.3](https://github.com/edenlabllc/ehealth.web/compare/v1.105.2...v1.105.3) (2019-06-05)
 
