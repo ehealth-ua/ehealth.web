@@ -20,7 +20,7 @@ const Popup = ({
   formId
 }) =>
   visible && (
-    <Modal width={width} backdrop>
+    <Modal width={width} backdrop overflow="visible">
       <Heading as="h1" fontWeight="normal" mb={6}>
         {title}
       </Heading>

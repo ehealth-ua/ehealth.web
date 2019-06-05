@@ -15,6 +15,7 @@ import type {
 import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
 import Table from "../../../components/Table";
+import DictionaryValue from "../../../components/DictionaryValue";
 
 const ServicesTable = ({
   services,
@@ -57,10 +58,12 @@ const ServicesTable = ({
       isActive,
       requestAllowed,
       isComposition,
+      category,
       ...serviceData
     }) => ({
       ...serviceData,
       name,
+      category: <DictionaryValue name="SERVICE_CATEGORY" item={category} />,
       insertedAt: (
         <DateFormat
           value={insertedAt}
