@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.105.3"></a>
+## [1.105.3](https://github.com/edenlabllc/ehealth.web/compare/v1.105.2...v1.105.3) (2019-06-05)
+
+
+### Bug Fixes
+
+* add validations for MedicalPrograms Search and Create ([#973](https://github.com/edenlabllc/ehealth.web/issues/973)) ([d713fc6](https://github.com/edenlabllc/ehealth.web/commit/d713fc6))
+
+
+
+
+
 <a name="1.105.2"></a>
 ## [1.105.2](https://github.com/edenlabllc/ehealth.web/compare/v1.105.1...v1.105.2) (2019-06-05)
 
