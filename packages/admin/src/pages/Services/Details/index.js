@@ -1,3 +1,4 @@
+//@flow
 import React from "react";
 import gql from "graphql-tag";
 import isEmpty from "lodash/isEmpty";
@@ -7,6 +8,12 @@ import { PositiveIcon, NegativeIcon } from "@ehealth/icons";
 import { Query } from "react-apollo";
 import { Trans } from "@lingui/macro";
 import { LocationParams } from "@ehealth/components";
+
+import type { Scalars, ServiceGroup, PageInfo } from "@ehealth-ua/schema";
+import type {
+  URLSearchParams,
+  SetLocationParamsProp
+} from "@ehealth/components";
 
 import Tabs from "../../../components/Tabs";
 import Badge from "../../../components/Badge";
@@ -22,7 +29,7 @@ import ParentGroupsTable from "./ParentGroupsTable";
 import UpdateServicePopup from "./UpdateServicePopup";
 import DeactivateServicePopup from "./DeactivateServicePopup";
 
-const Details = ({ id }) => (
+const Details = ({ id }: { id: Scalars.ID }) => (
   <LocationParams>
     {({ locationParams, setLocationParams }) => {
       const filteredParams = filteredLocationParams(locationParams);
@@ -38,7 +45,7 @@ const Details = ({ id }) => (
               name,
               isActive,
               requestAllowed,
-              parentGroups
+              serviceGroups
             } = service;
             return (
               <LoadingOverlay loading={loading}>
@@ -117,7 +124,7 @@ const Details = ({ id }) => (
                   <Router>
                     <ParentGroups
                       path="/"
-                      parentGroups={parentGroups}
+                      serviceGroups={serviceGroups}
                       locationParams={locationParams}
                       setLocationParams={setLocationParams}
                     />
@@ -132,8 +139,16 @@ const Details = ({ id }) => (
   </LocationParams>
 );
 
-const ParentGroups = ({ parentGroups, locationParams, setLocationParams }) => {
-  const { nodes, pageInfo } = parentGroups || {};
+const ParentGroups = ({
+  serviceGroups,
+  locationParams,
+  setLocationParams
+}: {
+  serviceGroups: { nodes: Array<ServiceGroup>, pageInfo: PageInfo },
+  locationParams: URLSearchParams,
+  setLocationParams: SetLocationParamsProp
+}) => {
+  const { nodes, pageInfo } = serviceGroups || {};
   if (isEmpty(nodes)) return <EmptyData />;
 
   return (
@@ -162,7 +177,7 @@ const ServiceDetailsQuery = gql`
       name
       isActive
       requestAllowed
-      parentGroups(
+      serviceGroups(
         first: $first
         orderBy: $orderBy
         before: $before
