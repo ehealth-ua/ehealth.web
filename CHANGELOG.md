@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.106.0"></a>
+# [1.106.0](https://github.com/edenlabllc/ehealth.web/compare/v1.105.5...v1.106.0) (2019-06-06)
+
+
+### Bug Fixes
+
+* add flow types for Tasks, check executionTime args ([faef07a](https://github.com/edenlabllc/ehealth.web/commit/faef07a))
+
+
+### Features
+
+* add LegalEntityDeactivateJobs Details page ([285cbe0](https://github.com/edenlabllc/ehealth.web/commit/285cbe0))
+* add LegalEntityJobTasksTable component ([4ea3843](https://github.com/edenlabllc/ehealth.web/commit/4ea3843))
+* add LegalEntityMergeJobs Details page ([a0a6b32](https://github.com/edenlabllc/ehealth.web/commit/a0a6b32))
+
+
+
+
+
 <a name="1.105.5"></a>
 ## [1.105.5](https://github.com/edenlabllc/ehealth.web/compare/v1.105.4...v1.105.5) (2019-06-05)
 
