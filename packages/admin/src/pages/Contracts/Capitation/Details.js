@@ -111,6 +111,7 @@ const Details = ({ id, navigate }) => {
             contractorOwner,
             contractorBase,
             contractorPaymentDetails,
+            contractorEmployeeDivisions,
             externalContractors = [],
             attachedDocuments,
             statusReason,
@@ -438,9 +439,11 @@ const Details = ({ id, navigate }) => {
                 <Tabs.NavItem to="./divisions">
                   <Trans>Division</Trans>
                 </Tabs.NavItem>
-                <Tabs.NavItem to="./employees">
-                  <Trans>Doctors</Trans>
-                </Tabs.NavItem>
+                {contractorEmployeeDivisions && (
+                  <Tabs.NavItem to="./employees">
+                    <Trans>Doctors</Trans>
+                  </Tabs.NavItem>
+                )}
                 <Tabs.NavItem to="./external-contractors">
                   <Trans>Contractors</Trans>
                 </Tabs.NavItem>
