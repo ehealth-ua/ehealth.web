@@ -159,7 +159,7 @@ const Search = ({ uri }) => (
                             />
                           ),
                           executionTime:
-                            status === "PENDING" ? (
+                            status === "PENDING" || (!endedAt || !startedAt) ? (
                               "-"
                             ) : (
                               <Plural

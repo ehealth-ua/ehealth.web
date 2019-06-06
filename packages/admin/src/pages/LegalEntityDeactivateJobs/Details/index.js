@@ -8,6 +8,13 @@ import { Trans } from "@lingui/macro";
 import { Router } from "@reach/router";
 import { LocationParams } from "@ehealth/components";
 
+import type { DocumentNode } from "graphql";
+import type { Task, PageInfo } from "@ehealth-ua/schema";
+import type {
+  URLSearchParams,
+  SetLocationParamsProp
+} from "@ehealth/components";
+
 import Tabs from "../../../components/Tabs";
 import Badge from "../../../components/Badge";
 import EmptyData from "../../../components/EmptyData";
@@ -90,7 +97,15 @@ const Details = ({ id }: { [string]: string }) => (
   </LocationParams>
 );
 
-const Tasks = ({ tasks, locationParams, setLocationParams }) => {
+const Tasks = ({
+  tasks,
+  locationParams,
+  setLocationParams
+}: {
+  tasks: { nodes: Array<Task>, pageInfo: PageInfo },
+  locationParams: URLSearchParams,
+  setLocationParams: SetLocationParamsProp
+}) => {
   const { nodes, pageInfo } = tasks || {};
   if (isEmpty(nodes)) return <EmptyData />;
 
