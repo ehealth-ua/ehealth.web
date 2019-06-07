@@ -32,18 +32,15 @@ const AddServiceToGroupPopup = ({
 
   return (
     <Box>
-      <Flex justifyContent="space-between">
-        <Heading fontSize="1" fontWeight="normal" mt={2}>
-          <Trans>Services in the group</Trans>
-        </Heading>
-        <IconButton
-          pr={0}
-          icon={() => <AdminAddIcon width={16} height={16} />}
-          onClick={toggle}
-        >
-          <Trans>Add service to the group</Trans>
-        </IconButton>
-      </Flex>
+      <IconButton
+        mt={2}
+        p={0}
+        icon={() => <AdminAddIcon width={16} height={16} />}
+        onClick={toggle}
+      >
+        <Trans>Add service to the group</Trans>
+      </IconButton>
+
       <Mutation
         mutation={AddServiceToGroupMutation}
         refetchQueries={() => [
