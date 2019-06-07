@@ -106,11 +106,14 @@ const AddServiceToGroupPopup = ({
                           name="service"
                           label={<Trans>Service name</Trans>}
                           placeholder={translation}
-                          items={services.map(({ id, name }) => ({
+                          items={services.map(({ id, name, code }) => ({
                             id,
-                            name
+                            name,
+                            code
                           }))}
-                          itemToString={item => item && item.name}
+                          itemToString={item =>
+                            item && `${item.name} (${item.code})`
+                          }
                           filter={services => services}
                           onInputValueChange={debounce(
                             (name, { selectedItem, inputValue }) =>
@@ -162,6 +165,7 @@ const GetServicesQuery = gql`
       nodes {
         id
         name
+        code
       }
     }
   }
