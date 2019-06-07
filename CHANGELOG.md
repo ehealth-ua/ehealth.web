@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.106.2"></a>
+## [1.106.2](https://github.com/edenlabllc/ehealth.web/compare/v1.106.1...v1.106.2) (2019-06-07)
+
+
+### Bug Fixes
+
+* **admin:** add code near service name on AddService popup ([8390e60](https://github.com/edenlabllc/ehealth.web/commit/8390e60))
+* **admin:** move AddService button to the left on ServiceGroup Details ([3779c97](https://github.com/edenlabllc/ehealth.web/commit/3779c97))
+
+
+
+
+
 <a name="1.106.1"></a>
 ## [1.106.1](https://github.com/edenlabllc/ehealth.web/compare/v1.106.0...v1.106.1) (2019-06-06)
 
