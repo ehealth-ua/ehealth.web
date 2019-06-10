@@ -30,6 +30,7 @@ import Employees from "./pages/Employees";
 import EmployeeRequests from "./pages/EmployeeRequests";
 import Services from "./pages/Services";
 import ServiceGroups from "./pages/ServiceGroups";
+import ProgramServices from "./pages/ProgramServices";
 
 import localeUK from "./locales/uk/messages.js";
 
@@ -67,6 +68,7 @@ const App = () => (
                 <Dictionaries path="dictionaries/*" />
                 <Services path="services/*" />
                 <ServiceGroups path="service-groups/*" />
+                <ProgramServices path="program-services/*" />
                 <NotFound default />
               </Router>
             </Layout>

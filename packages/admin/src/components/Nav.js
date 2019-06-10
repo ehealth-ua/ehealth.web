@@ -276,14 +276,25 @@ const Nav = () => (
           </Ability>
         </Flag>
         <Flag name="features.services">
-          <Ability action="read" resource="service_catalog">
+          <Ability
+            action="read"
+            resources={["service_catalog", "program_service"]}
+            loose
+          >
             <NavSection title={<Trans>Services</Trans>}>
-              <NavLink to="/services">
-                <Trans>Services</Trans>
-              </NavLink>
-              <NavLink to="/service-groups">
-                <Trans>Service groups</Trans>
-              </NavLink>
+              <Ability action="read" resource="service_catalog">
+                <NavLink to="/services">
+                  <Trans>Services</Trans>
+                </NavLink>
+                <NavLink to="/service-groups">
+                  <Trans>Service groups</Trans>
+                </NavLink>
+              </Ability>
+              <Ability action="read" resource="program_service">
+                <NavLink to="/program-services">
+                  <Trans>Program services</Trans>
+                </NavLink>
+              </Ability>
             </NavSection>
           </Ability>
         </Flag>
