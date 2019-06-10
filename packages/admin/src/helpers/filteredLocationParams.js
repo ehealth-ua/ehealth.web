@@ -15,6 +15,9 @@ const filteredLocationParams = (params = {}, skip) => {
     employeeStatus,
     status,
     legalEntityId,
+    service,
+    serviceGroup,
+    requestAllowed,
     ...restFilters
   } = filter;
   return {
@@ -37,7 +40,12 @@ const filteredLocationParams = (params = {}, skip) => {
       insertedAt: formatDateTimeInterval(insertedAtFrom, insertedAtTo),
       startDate: formatDateInterval(from, to),
       status: employeeStatus || status,
-      legalEntityId: legalEntityId ? legalEntityId.id : undefined
+      legalEntityId: legalEntityId ? legalEntityId.id : undefined,
+      requestAllowed: convertStringToBoolean(requestAllowed),
+      service: service ? { databaseId: service.databaseId } : undefined,
+      serviceGroup: serviceGroup
+        ? { databaseId: serviceGroup.databaseId }
+        : undefined
     }
   };
 };
