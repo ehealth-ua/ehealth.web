@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.106.3"></a>
+## [1.106.3](https://github.com/edenlabllc/ehealth.web/compare/v1.106.2...v1.106.3) (2019-06-10)
+
+
+### Bug Fixes
+
+* **admin:** fix UI bugs in admin panel ([a395b47](https://github.com/edenlabllc/ehealth.web/commit/a395b47))
+
+
+
+
+
 <a name="1.106.2"></a>
 ## [1.106.2](https://github.com/edenlabllc/ehealth.web/compare/v1.106.1...v1.106.2) (2019-06-07)
 
