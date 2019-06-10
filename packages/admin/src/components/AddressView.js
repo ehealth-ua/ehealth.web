@@ -5,7 +5,7 @@ import DictionaryValue from "./DictionaryValue";
 import { normalizeName } from "@ehealth/utils";
 import type { Address } from "@ehealth-ua/schema";
 
-const AddressView = ({ data }: Address): React.Node => {
+const AddressView = ({ data }: { data: Address }): React.Node => {
   if (!data) return null;
 
   const { zip, streetType, street, building, apartment } = data;

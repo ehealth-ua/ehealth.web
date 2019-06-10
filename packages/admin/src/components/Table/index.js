@@ -32,22 +32,29 @@ type HeaderDataWithStatus = {|
 type TableProps = {|
   data: Array<TableData>,
   header: HeaderData,
-  renderRow: ({ [string]: any }) => { [string]: React.Node },
+  renderRow?: ({ [string]: any }) => { [string]: React.Node },
   rowKeyExtractor?: (string, number) => React.Key,
   columnKeyExtractor?: (string, number) => React.Key,
-  sortableFields: string[],
-  sortingParams: SortingParams,
-  onSortingChange: SortingParams => mixed,
+  sortableFields?: string[],
+  sortingParams?: SortingParams,
+  onSortingChange?: SortingParams => mixed,
   tableName?: string,
   defaultFilter?: (
     data: HeaderData,
     tableName?: string
   ) => Array<HeaderDataWithStatus | any>,
   hidePagination?: boolean,
-  whiteSpaceNoWrap: string[],
+  whiteSpaceNoWrap?: string[],
   headless?: boolean,
-  hiddenFields?: string,
-  tableBody?: React.Node
+  hiddenFields?: string
+  // tableBody?: React.StatelessFunctionalComponent<{
+  //   columns: Array<TableData>,
+  //   data: Array<TableData>,
+  //   rowKeyExtractor?: (string, number) => React.Key,
+  //   columnKeyExtractor?: (string, number) => React.Key,
+  //   filterTableColumn?: () => mixed,
+  //   filterRow?: () => mixed
+  // }>
 |};
 
 type TableState = {|
