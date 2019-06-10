@@ -13,25 +13,25 @@ import { Form, Validation, Validations } from "@ehealth/components";
 import { Router, Link as RouterLink } from "@reach/router";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
-import Line from "../../../components/Line";
-import Link from "../../../components/Link";
-import Steps from "../../../components/Steps";
-import Button from "../../../components/Button";
-import * as Field from "../../../components/Field/index";
-import LoadingOverlay from "../../../components/LoadingOverlay";
-import DictionaryValue from "../../../components/DictionaryValue";
-import DefinitionListView from "../../../components/DefinitionListView";
+import Line from "../../../../../components/Line";
+import Link from "../../../../../components/Link";
+import Steps from "../../../../../components/Steps";
+import Button from "../../../../../components/Button";
+import * as Field from "../../../../../components/Field/index";
+import LoadingOverlay from "../../../../../components/LoadingOverlay";
+import DictionaryValue from "../../../../../components/DictionaryValue";
+import DefinitionListView from "../../../../../components/DefinitionListView";
 
-import env from "../../../env";
+import env from "../../../../../env";
 
 const GetDataToCreateCapitationContractRequestQuery = loader(
-  "../../../graphql/GetDataToCreateCapitationContractRequestQuery.graphql"
+  "../../../../../graphql/GetDataToCreateCapitationContractRequestQuery.graphql"
 );
 const GetAssignEmployeeQuery = loader(
-  "../../../graphql/GetAssignEmployeeQuery.graphql"
+  "../../../../../graphql/GetAssignEmployeeQuery.graphql"
 );
 const CreateContractRequestMutation = loader(
-  "../../../graphql/CreateContractRequestMutation.graphql"
+  "../../../../../graphql/CreateContractRequestMutation.graphql"
 );
 
 const Create = ({ id, location: { state } }) => (

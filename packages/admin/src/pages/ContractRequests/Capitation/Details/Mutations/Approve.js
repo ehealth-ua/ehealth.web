@@ -3,22 +3,19 @@ import { Query } from "react-apollo";
 import { Router } from "@reach/router";
 import { Box } from "@rebass/emotion";
 import system from "@ehealth/system-components";
-import { loader } from "graphql.macro";
 import { Trans } from "@lingui/macro";
 import { getFullName } from "@ehealth/utils";
 import isEmpty from "lodash/isEmpty";
 
-import Line from "../../../components/Line";
-import Badge from "../../../components/Badge";
-import Steps from "../../../components/Steps";
-import LoadingOverlay from "../../../components/LoadingOverlay";
-import DictionaryValue from "../../../components/DictionaryValue";
-import DefinitionListView from "../../../components/DefinitionListView";
-import SignContractRequest from "../../../components/SignContractRequest";
+import Line from "../../../../../components/Line";
+import Badge from "../../../../../components/Badge";
+import Steps from "../../../../../components/Steps";
+import LoadingOverlay from "../../../../../components/LoadingOverlay";
+import DictionaryValue from "../../../../../components/DictionaryValue";
+import DefinitionListView from "../../../../../components/DefinitionListView";
+import SignContractRequest from "../../../../../components/SignContractRequest";
 
-const CapitationContractRequestQuery = loader(
-  "../../../graphql/CapitationContractRequestQuery.graphql"
-);
+import { CapitationContractRequestQuery } from "../";
 
 const Approve = ({ id }) => (
   <>

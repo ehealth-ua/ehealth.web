@@ -10,15 +10,14 @@ import { Box, Flex, Text } from "@rebass/emotion";
 import { PrinterIcon } from "@ehealth/icons";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
-import LoadingOverlay from "../../../components/LoadingOverlay";
-import Button from "../../../components/Button";
-import env from "../../../env";
+import LoadingOverlay from "../../../../../components/LoadingOverlay";
+import Button from "../../../../../components/Button";
+import env from "../../../../../env";
+
+import { CapitationContractRequestQuery } from "../";
 
 const SignContractRequestMutation = loader(
-  "../../../graphql/SignContractRequestMutation.graphql"
-);
-const CapitationContractRequestQuery = loader(
-  "../../../graphql/CapitationContractRequestQuery.graphql"
+  "../../../../../graphql/SignContractRequestMutation.graphql"
 );
 
 const PrintOutContent = ({ id, navigate, ...props }) => {

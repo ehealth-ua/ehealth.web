@@ -1,11 +1,11 @@
 import React from "react";
 import { Router, Redirect } from "@reach/router";
 
-import CapitationContractRequestsDetails from "./Capitation/Details";
+import CapitationContractRequestsDetails from "./Capitation/Details/";
 import CapitationContractRequestsSearch from "./Capitation/Search/";
 import ReimbursementContractRequestDetails from "./Reimbursement/Details";
 import ReimbursementContractRequestsSearch from "./Reimbursement/Search/";
-import CreateCapitationContractRequest from "./Capitation/Create";
+import CreateCapitationContractRequest from "./Capitation/Details/Mutations/Create";
 import CreateReimbursementContractRequest from "./Reimbursement/Create";
 
 const ContractRequests = ({ uri }) => (

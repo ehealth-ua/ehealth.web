@@ -9,22 +9,21 @@ import { LocationParams, Form, Validation } from "@ehealth/components";
 import { Signer } from "@ehealth/react-iit-digital-signature";
 import isEmpty from "lodash/isEmpty";
 
-import Line from "../../../components/Line";
-import Badge from "../../../components/Badge";
-import Steps from "../../../components/Steps";
-import Button from "../../../components/Button";
-import LoadingOverlay from "../../../components/LoadingOverlay";
-import Tooltip from "../../../components/Tooltip";
-import * as Field from "../../../components/Field";
-import DefinitionListView from "../../../components/DefinitionListView";
+import Line from "../../../../../components/Line";
+import Badge from "../../../../../components/Badge";
+import Steps from "../../../../../components/Steps";
+import Button from "../../../../../components/Button";
+import LoadingOverlay from "../../../../../components/LoadingOverlay";
+import Tooltip from "../../../../../components/Tooltip";
+import * as Field from "../../../../../components/Field";
+import DefinitionListView from "../../../../../components/DefinitionListView";
 
-import env from "../../../env";
+import env from "../../../../../env";
 
-const CapitationContractRequestQuery = loader(
-  "../../../graphql/CapitationContractRequestQuery.graphql"
-);
+import { CapitationContractRequestQuery } from "../";
+
 const DeclineContractRequestMutation = loader(
-  "../../../graphql/DeclineContractRequestMutation.graphql"
+  "../../../../../graphql/DeclineContractRequestMutation.graphql"
 );
 
 const Decline = ({
