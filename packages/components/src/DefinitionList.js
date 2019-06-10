@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import isNil from "lodash/isNil";
+import isEmpty from "lodash/isEmpty";
 
 type DefinitionListProps = {
   data: { value: React.Node },
@@ -15,7 +15,7 @@ const DefinitionList = ({
   keyExtractor = name => name
 }: DefinitionListProps) =>
   Object.entries(labels)
-    .filter(([name]) => !isNil(data[name]))
+    .filter(([name]) => !isEmpty(data[name]))
     .map(([name, label], index) => (
       <Fragment key={keyExtractor(name, index)}>
         {renderItem({ label, value: data[name] })}
