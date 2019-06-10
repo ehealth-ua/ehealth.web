@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.107.0"></a>
+# [1.107.0](https://github.com/edenlabllc/ehealth.web/compare/v1.106.4...v1.107.0) (2019-06-10)
+
+
+### Bug Fixes
+
+* **admin:** fix flow types in `Table` and `AddressView` components ([004433e](https://github.com/edenlabllc/ehealth.web/commit/004433e))
+* **components:** handle empty arrays or objects in `DefinitionList` ([a1f1d82](https://github.com/edenlabllc/ehealth.web/commit/a1f1d82))
+
+
+### Features
+
+* **admin:** add flow types to `Pagination` component ([380fb1f](https://github.com/edenlabllc/ehealth.web/commit/380fb1f))
+
+
+
+
+
 <a name="1.106.4"></a>
 ## [1.106.4](https://github.com/edenlabllc/ehealth.web/compare/v1.106.3...v1.106.4) (2019-06-10)
 
