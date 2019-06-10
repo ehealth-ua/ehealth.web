@@ -1,4 +1,6 @@
-import React from "react";
+//@flow
+
+import * as React from "react";
 import gql from "graphql-tag";
 import { Flex, Box, Text } from "@rebass/emotion";
 import { LocationParams } from "@ehealth/components";
@@ -6,6 +8,7 @@ import { TriangleLeftIcon, TriangleRightIcon } from "@ehealth/icons";
 import Button from "./Button";
 import system from "@ehealth/system-components";
 import { ITEMS_PER_PAGE } from "../constants/pagination";
+import type { PageInfo } from "@ehealth-ua/schema";
 
 const Pagination = ({
   endCursor,
@@ -13,7 +16,13 @@ const Pagination = ({
   hasPreviousPage,
   startCursor,
   itemsCountDefault = ITEMS_PER_PAGE[0]
-}) => (
+}: {
+  hasNextPage: PageInfo.hasNextPage,
+  hasPreviousPage: PageInfo.hasPreviousPage,
+  endCursor: PageInfo.endCursor,
+  startCursor: PageInfo.startCursor,
+  itemsCountDefault: number
+}): React.Node => (
   <LocationParams>
     {({ locationParams, setLocationParams }) => {
       const { first, last } = locationParams;
