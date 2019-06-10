@@ -136,6 +136,8 @@ const Icon = styled.div`
   height: 16px;
   position: absolute;
   right: 0;
+  bottom: 50%;
+  transform: translateY(50%);
 `;
 
 export default TableHeader;

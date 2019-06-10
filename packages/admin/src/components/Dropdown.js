@@ -17,6 +17,7 @@ const Item = styled.div`
   background: ${ifProp("on", "#F1F4F8", "#fff")};
   user-select: none;
   cursor: pointer;
+  text-align: left;
   &:first-of-type {
     border-top: none;
   }
