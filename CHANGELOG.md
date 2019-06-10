@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.108.0"></a>
+# [1.108.0](https://github.com/edenlabllc/ehealth.web/compare/v1.107.0...v1.108.0) (2019-06-10)
+
+
+### Features
+
+* **admin:** add Program Services list page ([11d8ac5](https://github.com/edenlabllc/ehealth.web/commit/11d8ac5))
+* **admin:** add services filters to the filteredLocationParams ([d697453](https://github.com/edenlabllc/ehealth.web/commit/d697453))
+* **admin:** update locales for Program Services list page ([0e96773](https://github.com/edenlabllc/ehealth.web/commit/0e96773))
+
+
+
+
+
 <a name="1.107.0"></a>
 # [1.107.0](https://github.com/edenlabllc/ehealth.web/compare/v1.106.4...v1.107.0) (2019-06-10)
 
