@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.110.0"></a>
+# [1.110.0](https://github.com/edenlabllc/ehealth.web/compare/v1.109.1...v1.110.0) (2019-06-11)
+
+
+### Features
+
+* **admin:** add Program Services details page ([45e2f90](https://github.com/edenlabllc/ehealth.web/commit/45e2f90))
+* **admin:** update locales for Program Services details page ([180992b](https://github.com/edenlabllc/ehealth.web/commit/180992b))
+
+
+
+
+
 <a name="1.109.1"></a>
 ## [1.109.1](https://github.com/edenlabllc/ehealth.web/compare/v1.109.0...v1.109.1) (2019-06-11)
 
