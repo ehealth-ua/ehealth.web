@@ -2,7 +2,7 @@ import React from "react";
 import { Router, Redirect } from "@reach/router";
 
 import Search from "./Search/";
-import Details from "./Details";
+import Details from "./Details/";
 import Create from "./Create";
 import Update from "./Update";
 

@@ -39,14 +39,15 @@ import {
 
 import env from "../../env";
 
-const EmployeeQuery = loader("../../graphql/EmployeeQuery.graphql");
+import EmployeeQuery from "./";
+
 const CreateEmployeeRequestMutation = loader(
   "../../graphql/CreateEmployeeRequestMutation.graphql"
 );
 
 const Update = ({ id, location: { state } }) => (
   <Query query={EmployeeQuery} variables={{ id }}>
-    {({ loading, error, data: { employee = {} } }) => {
+    {({ data: { employee = {} } }) => {
       if (isEmpty(employee)) return null;
       return (
         <>
