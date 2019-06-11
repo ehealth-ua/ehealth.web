@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.108.1"></a>
+## [1.108.1](https://github.com/edenlabllc/ehealth.web/compare/v1.108.0...v1.108.1) (2019-06-11)
+
+
+### Bug Fixes
+
+* **admin:** update fetchPolicy for ServiceGroup Query ([66a50df](https://github.com/edenlabllc/ehealth.web/commit/66a50df))
+
+
+
+
+
 <a name="1.108.0"></a>
 # [1.108.0](https://github.com/edenlabllc/ehealth.web/compare/v1.107.0...v1.108.0) (2019-06-10)
 
