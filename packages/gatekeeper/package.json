@@ -1,6 +1,6 @@
 {
   "name": "@ehealth/gatekeeper",
-  "version": "1.87.2",
+  "version": "1.109.0",
   "private": true,
   "description": "",
   "main": "server.js",

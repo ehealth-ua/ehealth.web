@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.109.0"></a>
+# [1.109.0](https://github.com/edenlabllc/ehealth.web/compare/v1.108.1...v1.109.0) (2019-06-11)
+
+
+### Features
+
+* **gatekeeper:** ability to set auth cookie on multiple domains ([#986](https://github.com/edenlabllc/ehealth.web/issues/986)) ([328f429](https://github.com/edenlabllc/ehealth.web/commit/328f429))
+
+
+
+
+
 <a name="1.87.2"></a>
 ## [1.87.2](https://github.com/edenlabllc/ehealth.web/compare/v1.87.1...v1.87.2) (2019-05-21)
 
