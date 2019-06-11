@@ -48,6 +48,7 @@ const Details = ({ id }: { [string]: string }) => (
       const filteredParams = filteredLocationParams(locationParams);
       return (
         <Query
+          fetchPolicy="network-only"
           query={ServiceGroupDetailsQuery}
           variables={{ id, ...filteredParams }}
         >
