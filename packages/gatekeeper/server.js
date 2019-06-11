@@ -11,11 +11,13 @@ const {
   API_URL,
   CLIENT_ID,
   CLIENT_SECRET,
-  COOKIE_DOMAIN,
+  COOKIE_DOMAINS = "",
   AUTH_COOKIE_NAME = "authorization",
   META_COOKIE_NAME = "meta",
   REDIRECT_URL = "/"
 } = process.env;
+
+const COOKIE_DOMAINS_LIST = COOKIE_DOMAINS.split(",");
 
 const app = express();
 
@@ -41,19 +43,21 @@ app.get("/auth/redirect", async (req, res) => {
   const expires = new Date(expires_at * 1000);
   const secure = NODE_ENV !== "development";
 
-  res.cookie(AUTH_COOKIE_NAME, value, {
-    domain: COOKIE_DOMAIN,
-    expires,
-    secure,
-    httpOnly: true
-  });
-
   const metadata = { scope, userId: user_id };
 
-  res.cookie(META_COOKIE_NAME, JSON.stringify(metadata), {
-    domain: COOKIE_DOMAIN,
-    expires,
-    secure
+  COOKIE_DOMAINS_LIST.forEach(domain => {
+    res.cookie(AUTH_COOKIE_NAME, value, {
+      domain,
+      expires,
+      secure,
+      httpOnly: true
+    });
+
+    res.cookie(META_COOKIE_NAME, JSON.stringify(metadata), {
+      domain,
+      expires,
+      secure
+    });
   });
 
   res.redirect(REDIRECT_URL);
@@ -62,15 +66,17 @@ app.get("/auth/redirect", async (req, res) => {
 app.get("/auth/logout", async (req, res) => {
   const secure = NODE_ENV !== "development";
 
-  res.clearCookie(AUTH_COOKIE_NAME, {
-    domain: COOKIE_DOMAIN,
-    secure,
-    httpOnly: true
-  });
+  COOKIE_DOMAINS_LIST.forEach(domain => {
+    res.clearCookie(AUTH_COOKIE_NAME, {
+      domain,
+      secure,
+      httpOnly: true
+    });
 
-  res.clearCookie(META_COOKIE_NAME, {
-    domain: COOKIE_DOMAIN,
-    secure
+    res.clearCookie(META_COOKIE_NAME, {
+      domain,
+      secure
+    });
   });
 
   res.redirect(REDIRECT_URL);
