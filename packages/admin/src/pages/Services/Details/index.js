@@ -36,6 +36,7 @@ const Details = ({ id }: { id: Scalars.ID }) => (
       return (
         <Query
           query={ServiceDetailsQuery}
+          fetchPolicy="network-only"
           variables={{ id, ...filteredParams }}
         >
           {({ loading, error, data: { service } }) => {

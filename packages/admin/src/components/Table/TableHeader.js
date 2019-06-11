@@ -134,10 +134,6 @@ const Icon = styled.div`
   align-items: center;
   justify-content: space-around;
   height: 16px;
-  position: absolute;
-  right: 0;
-  bottom: 50%;
-  transform: translateY(50%);
 `;
 
 export default TableHeader;
