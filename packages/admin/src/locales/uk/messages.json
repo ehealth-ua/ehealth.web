@@ -45,7 +45,7 @@
       ["src/pages/PendingDeclarations/Search.js", 96],
       ["src/pages/Persons/Details.js", 376],
       ["src/pages/Persons/Search.js", 117],
-      ["src/pages/ServiceGroups/Details/index.js", 252]
+      ["src/pages/ServiceGroups/Details/index.js", 253]
     ]
   },
   "Activate": {
@@ -452,6 +452,7 @@
     "translation": "Категорія",
     "origin": [
       ["src/pages/LegalEntities/Details.js", 530],
+      ["src/pages/ProgramServices/Details/ServiceConnections.js", 28],
       ["src/pages/Services/Search/ServicesTable.js", 44]
     ]
   },
@@ -613,6 +614,10 @@
       ["src/pages/LegalEntities/Details.js", 188],
       ["src/pages/LegalEntities/Details.js", 222]
     ]
+  },
+  "Code": {
+    "translation": "Код",
+    "origin": [["src/pages/ProgramServices/Details/ServiceConnections.js", 27]]
   },
   "Comment": {
     "translation": "Коментар",
@@ -1100,7 +1105,8 @@
     "origin": [
       ["src/pages/Dictionaries/Details.js", 330],
       ["src/pages/Dictionaries/Details.js", 346],
-      ["src/pages/Dictionaries/Details.js", 472]
+      ["src/pages/Dictionaries/Details.js", 472],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 28]
     ]
   },
   "Details": {
@@ -1907,7 +1913,8 @@
       ["src/pages/LegalEntities/Details.js", 238],
       ["src/pages/Medications/Create.js", 33],
       ["src/pages/Medications/Details.js", 134],
-      ["src/pages/ProgramMedications/Details.js", 151]
+      ["src/pages/ProgramMedications/Details.js", 151],
+      ["src/pages/ProgramServices/Details/index.js", 102]
     ]
   },
   "General information": {
@@ -1944,7 +1951,7 @@
   "Group name": {
     "translation": "Назва групи",
     "origin": [
-      ["src/pages/ServiceGroups/Details/index.js", 94],
+      ["src/pages/ServiceGroups/Details/index.js", 95],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 71],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 22],
       ["src/pages/Services/Details/ParentGroupsTable.js", 21]
@@ -1974,8 +1981,11 @@
       ["src/pages/Medications/Details.js", 65],
       ["src/pages/Medications/Details.js", 230],
       ["src/pages/Medications/Search.js", 79],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 44],
+      ["src/pages/ProgramServices/Details/ServiceConnections.js", 25],
+      ["src/pages/ProgramServices/Details/index.js", 70],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 22],
-      ["src/pages/ServiceGroups/Details/index.js", 95],
+      ["src/pages/ServiceGroups/Details/index.js", 96],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 21],
       ["src/pages/Services/Details/ParentGroupsTable.js", 20],
       ["src/pages/Services/Details/index.js", 68],
@@ -2150,9 +2160,11 @@
     "translation": "Дозвіл на направлення",
     "origin": [
       ["src/components/SelectedFilters.js", 244],
+      ["src/pages/ProgramServices/Details/ServiceConnections.js", 30],
+      ["src/pages/ProgramServices/Details/index.js", 72],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 28],
       ["src/pages/ProgramServices/Search/SearchFields.js", 46],
-      ["src/pages/ServiceGroups/Details/index.js", 97],
+      ["src/pages/ServiceGroups/Details/index.js", 98],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 156],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 25],
       ["src/pages/Services/Details/ParentGroupsTable.js", 24],
@@ -2481,6 +2493,7 @@
       ["src/pages/MedicalPrograms/Search/SearchFields.js", 59],
       ["src/pages/ProgramMedications/Create.js", 141],
       ["src/pages/ProgramMedications/Search.js", 215],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 40],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 23]
     ]
   },
@@ -2681,7 +2694,9 @@
       ["src/pages/LegalEntities/Add.js", 314],
       ["src/pages/LegalEntities/Details.js", 128],
       ["src/pages/MedicalPrograms/Search/CreateMedicalProgramPopup.js", 70],
-      ["src/pages/Medications/Details.js", 66]
+      ["src/pages/Medications/Details.js", 66],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 45],
+      ["src/pages/ProgramServices/Details/ServiceConnections.js", 26]
     ]
   },
   "Name of employee": {
@@ -2817,7 +2832,7 @@
   },
   "Parent group": {
     "translation": "Батьківська група",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 98]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 99]]
   },
   "Parent group (optional)": {
     "translation": "Батьківська група (опціонально)",
@@ -3092,6 +3107,10 @@
       ["src/pages/ContractRequests/Reimbursement/Details.js", 98]
     ]
   },
+  "Price": {
+    "translation": "Ціна",
+    "origin": [["src/pages/ProgramServices/Details/GeneralInfo.js", 27]]
+  },
   "Primary": {
     "translation": "Діюча речовина",
     "origin": [
@@ -3135,10 +3154,15 @@
       ["src/pages/ProgramMedications/Search.js", 50]
     ]
   },
+  "Program service details": {
+    "translation": "Деталі програми послуг",
+    "origin": [["src/pages/ProgramServices/Details/index.js", 62]]
+  },
   "Program services": {
     "translation": "Програми послуг",
     "origin": [
       ["src/components/Nav.js", 295],
+      ["src/pages/ProgramServices/Details/index.js", 59],
       ["src/pages/ProgramServices/Search/index.js", 25]
     ]
   },
@@ -3563,7 +3587,10 @@
   },
   "Service": {
     "translation": "Сервіс",
-    "origin": [["src/pages/ProgramServices/Search/ProgramServicesTable.js", 24]]
+    "origin": [
+      ["src/pages/ProgramServices/Details/index.js", 106],
+      ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 24]
+    ]
   },
   "Service category": {
     "translation": "Категорія сервісу",
@@ -3585,11 +3612,14 @@
   },
   "Service group": {
     "translation": "Сервіс група",
-    "origin": [["src/pages/ProgramServices/Search/ProgramServicesTable.js", 25]]
+    "origin": [
+      ["src/pages/ProgramServices/Details/index.js", 108],
+      ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 25]
+    ]
   },
   "Service group details": {
     "translation": "Деталі сервіс групи",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 86]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 87]]
   },
   "Service group name": {
     "translation": "Назва сервіс групи",
@@ -3599,7 +3629,7 @@
     "translation": "Сервіс групи",
     "origin": [
       ["src/components/Nav.js", 290],
-      ["src/pages/ServiceGroups/Details/index.js", 83],
+      ["src/pages/ServiceGroups/Details/index.js", 84],
       ["src/pages/ServiceGroups/Search/index.js", 27],
       ["src/pages/Services/Details/index.js", 120]
     ]
@@ -3619,7 +3649,7 @@
     "origin": [
       ["src/components/Nav.js", 284],
       ["src/components/Nav.js", 287],
-      ["src/pages/ServiceGroups/Details/index.js", 158],
+      ["src/pages/ServiceGroups/Details/index.js", 159],
       ["src/pages/Services/Details/index.js", 56],
       ["src/pages/Services/Search/index.js", 27]
     ]
@@ -3900,9 +3930,12 @@
       ["src/pages/Persons/Search.js", 116],
       ["src/pages/ProgramMedications/Details.js", 58],
       ["src/pages/ProgramMedications/Search.js", 100],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 46],
+      ["src/pages/ProgramServices/Details/ServiceConnections.js", 29],
+      ["src/pages/ProgramServices/Details/index.js", 71],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 27],
       ["src/pages/ProgramServices/Search/SearchFields.js", 26],
-      ["src/pages/ServiceGroups/Details/index.js", 96],
+      ["src/pages/ServiceGroups/Details/index.js", 97],
       ["src/pages/ServiceGroups/Search/SearchFields.js", 43],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 24],
       ["src/pages/Services/Details/ParentGroupsTable.js", 23],
@@ -3952,7 +3985,7 @@
   },
   "Subgroups": {
     "translation": "Підгрупи",
-    "origin": [["src/pages/ServiceGroups/Details/index.js", 161]]
+    "origin": [["src/pages/ServiceGroups/Details/index.js", 162]]
   },
   "Subscriber Name": {
     "translation": "ПІБ підписанта",
