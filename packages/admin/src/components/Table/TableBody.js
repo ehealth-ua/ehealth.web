@@ -39,14 +39,15 @@ const TableBody = ({
     {data.map((item, index) => {
       const row = renderRow(item, index);
       return (
-        <RowComponent key={rowKeyExtractor(item, index)}>
+        <RowComponent key={index}>
           {columns
             .filter(bodyName => filterTableColumn(filterRow, bodyName))
             .map((name, index, array) => (
               <CellComponent
                 key={columnKeyExtractor(name, index)}
                 title={typeof row[name] === "string" ? row[name] : undefined}
-                whiteSpaceNoWrap={whiteSpaceNoWrap.includes(name)}
+                //whitespacenowrap is a non-boolean attribute, so we need to use 1 or 0
+                whitespacenowrap={whiteSpaceNoWrap.includes(name) ? 1 : 0}
               >
                 {row[name]}
               </CellComponent>

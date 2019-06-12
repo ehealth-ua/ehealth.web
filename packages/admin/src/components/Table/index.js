@@ -340,7 +340,7 @@ export const TableCell = system(
       verticalAlign: "middle",
       overflow: "hidden",
       textOverflow: "ellipsis",
-      whiteSpace: ifProp("whiteSpaceNoWrap", "nowrap", "pre-wrap")(props),
+      whiteSpace: ifProp("whitespacenowrap", "nowrap", "pre-wrap")(props),
       padding: ifNotProp("fullSize", "16px 20px", "0")(props)
     }),
   variant({
