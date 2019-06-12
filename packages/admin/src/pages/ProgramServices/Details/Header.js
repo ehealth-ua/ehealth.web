@@ -50,10 +50,7 @@ const Header = ({
         marginBetween="auto"
       />
     </Box>
-    {
-      //TODO: change scope to program_service
-    }
-    <Ability action="write" resource="service_catalog">
+    <Ability action="write" resource="program_service">
       <Flex justifyContent="flex-end" flexWrap="wrap">
         <Box mt={2}>
           <UpdateProgramServicePopup id={id} requestAllowed={requestAllowed} />
