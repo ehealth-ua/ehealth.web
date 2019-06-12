@@ -55,7 +55,7 @@ const CreateServicePopup = ({ locationParams, refetchQuery }) => {
                       name="name"
                       label={<Trans>Service name</Trans>}
                       placeholder={translation}
-                      maxlength={100}
+                      maxLength={100}
                       showLengthHint
                     />
                   )}
@@ -70,7 +70,7 @@ const CreateServicePopup = ({ locationParams, refetchQuery }) => {
                           name="code"
                           label={<Trans>Service code</Trans>}
                           placeholder={translation}
-                          maxlength={10}
+                          maxLength={10}
                           showLengthHint
                         />
                       )}

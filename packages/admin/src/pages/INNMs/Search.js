@@ -95,7 +95,7 @@ const Search = () => {
                                     name="name"
                                     label={<Trans>INNM</Trans>}
                                     placeholder={translation}
-                                    maxlength={100}
+                                    maxLength={100}
                                     showLengthHint
                                   />
                                 )}
@@ -115,7 +115,7 @@ const Search = () => {
                                       name="nameOriginal"
                                       label={<Trans>INNM original name</Trans>}
                                       placeholder={translation}
-                                      maxlength={100}
+                                      maxLength={100}
                                       showLengthHint
                                     />
                                     <Validations field="nameOriginal">
@@ -136,7 +136,7 @@ const Search = () => {
                                       name="sctid"
                                       label={<Trans>SCTID of INNM</Trans>}
                                       placeholder={translation}
-                                      maxlength={8}
+                                      maxLength={8}
                                       format={parseDigits}
                                       showLengthHint
                                     />
@@ -358,7 +358,7 @@ const PrimarySearchFields = () => (
               label={<Trans>Search by SCTID</Trans>}
               placeholder={translation}
               postfix={<SearchIcon color="silverCity" />}
-              maxlength={8}
+              maxLength={8}
               format={parseDigits}
             />
           )}

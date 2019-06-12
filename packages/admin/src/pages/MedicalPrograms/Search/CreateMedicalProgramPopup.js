@@ -69,7 +69,7 @@ const CreateMedicalProgramPopup = ({
                       name="name"
                       label={<Trans>Name</Trans>}
                       placeholder={translation}
-                      maxlength={100}
+                      maxLength={100}
                       showLengthHint
                     />
                   )}

@@ -70,7 +70,7 @@ const CreateServiceGroupPopup = ({ locationParams, refetchQuery }) => {
                           name="name"
                           label={<Trans>Group name</Trans>}
                           placeholder={translation}
-                          maxlength={100}
+                          maxLength={100}
                           showLengthHint
                         />
                       )}
@@ -137,7 +137,7 @@ const CreateServiceGroupPopup = ({ locationParams, refetchQuery }) => {
                           name="code"
                           label={<Trans>Group code</Trans>}
                           placeholder={translation}
-                          maxlength={10}
+                          maxLength={10}
                           showLengthHint
                         />
                       )}

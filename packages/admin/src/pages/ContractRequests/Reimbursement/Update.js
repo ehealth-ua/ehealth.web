@@ -236,7 +236,7 @@ const UpdateContractRequest = ({
                             name="nhsSignerBase"
                             label={<Trans>Basis</Trans>}
                             placeholder={i18n._(t`Choose base`)}
-                            maxlength={255}
+                            maxLength={255}
                             showLengthHint
                           />
                         )}
@@ -259,7 +259,7 @@ const UpdateContractRequest = ({
                               </Trans>
                             }
                             placeholder={i18n._(t`Enter city`)}
-                            maxlength={100}
+                            maxLength={100}
                             showLengthHint
                           />
                         )}

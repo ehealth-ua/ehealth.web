@@ -137,7 +137,7 @@ const Reason = ({
                 rows={6}
                 label={<Trans>Decline reason</Trans>}
                 placeholder={translation}
-                maxlength="3000"
+                maxLength="3000"
                 showLengthHint
               />
             )}

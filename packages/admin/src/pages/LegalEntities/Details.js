@@ -669,7 +669,7 @@ const License = ({
                             name="nhsComment"
                             placeholder={translation}
                             rows={5}
-                            maxlength="3000"
+                            maxLength="3000"
                             showLengthHint
                           />
                         )}
@@ -1219,7 +1219,7 @@ const UpdateLegalEntityStatusButton = ({ id, isActive }) => {
                     name="reason"
                     placeholder={translation}
                     rows={5}
-                    maxlength="3000"
+                    maxLength="3000"
                     showLengthHint
                   />
                 )}

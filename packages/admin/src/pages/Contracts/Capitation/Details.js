@@ -269,7 +269,7 @@ const Details = ({ id, navigate }) => {
                                                   name="reason"
                                                   placeholder={translation}
                                                   rows={5}
-                                                  maxlength="3000"
+                                                  maxLength="3000"
                                                   showLengthHint
                                                 />
                                               )}
@@ -408,7 +408,7 @@ const Details = ({ id, navigate }) => {
                                         name="reason"
                                         placeholder={translation}
                                         rows={5}
-                                        maxlength="3000"
+                                        maxLength="3000"
                                         showLengthHint
                                       />
                                     )}

@@ -71,7 +71,7 @@ const UpdateServiceGroupPopup = ({
                     name="description"
                     placeholder={translation}
                     rows={5}
-                    maxlength="3000"
+                    maxLength="3000"
                     showLengthHint
                   />
                 )}
