@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.111.0"></a>
+# [1.111.0](https://github.com/edenlabllc/ehealth.web/compare/v1.110.2...v1.111.0) (2019-06-12)
+
+
+### Features
+
+* **admin:** add Deactivate and Update ProgramService popups ([83085f9](https://github.com/edenlabllc/ehealth.web/commit/83085f9))
+
+
+
+
+
 <a name="1.110.2"></a>
 ## [1.110.2](https://github.com/edenlabllc/ehealth.web/compare/v1.110.1...v1.110.2) (2019-06-12)
 
