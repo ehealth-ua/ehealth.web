@@ -4,27 +4,18 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import isEmpty from "lodash/isEmpty";
 import { Trans } from "@lingui/macro";
+import { Box } from "@rebass/emotion";
 import { Router } from "@reach/router";
-import { Flex, Box } from "@rebass/emotion";
 import { LocationParams } from "@ehealth/components";
-import { PositiveIcon, NegativeIcon } from "@ehealth/icons";
 
-import type { Scalars, ServiceGroup, PageInfo } from "@ehealth-ua/schema";
-import type {
-  URLSearchParams,
-  SetLocationParamsProp
-} from "@ehealth/components";
+import type { Scalars } from "@ehealth-ua/schema";
 
 import Tabs from "../../../components/Tabs";
-import Badge from "../../../components/Badge";
-import Ability from "../../../components/Ability";
-import EmptyData from "../../../components/EmptyData";
-import Pagination from "../../../components/Pagination";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import LoadingOverlay from "../../../components/LoadingOverlay";
-import DefinitionListView from "../../../components/DefinitionListView";
 import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
+import Header from "./Header";
 import GeneralInfo from "./GeneralInfo";
 import ServiceConnections from "./ServiceConnections";
 
@@ -35,7 +26,6 @@ const Details = ({ id }: { id: Scalars.ID }) => (
       return (
         <Query
           query={ProgramServiceDetailsQuery}
-          fetchPolicy="network-only"
           variables={{ id, ...filteredParams }}
         >
           {({ loading, data: { programService } }) => {
@@ -63,39 +53,12 @@ const Details = ({ id }: { id: Scalars.ID }) => (
                       </Breadcrumbs.Item>
                     </Breadcrumbs.List>
                   </Box>
-                  <Flex justifyContent="space-between" alignItems="flex-end">
-                    <Box>
-                      <DefinitionListView
-                        labels={{
-                          databaseId: <Trans>ID</Trans>,
-                          isActive: <Trans>Status</Trans>,
-                          requestAllowed: <Trans>Is request allowed</Trans>
-                        }}
-                        data={{
-                          databaseId,
-                          isActive: (
-                            <Badge
-                              type="ACTIVE_STATUS_M"
-                              name={isActive}
-                              variant={!isActive}
-                              minWidth={100}
-                            />
-                          ),
-                          requestAllowed: requestAllowed ? (
-                            <PositiveIcon />
-                          ) : (
-                            <NegativeIcon />
-                          )
-                        }}
-                        color="#7F8FA4"
-                        labelWidth="120px"
-                        marginBetween="auto"
-                      />
-                    </Box>
-                    {
-                      //TODO: add `Update` and `Deactivate` mutations with Ability checking
-                    }
-                  </Flex>
+                  <Header
+                    id={id}
+                    databaseId={databaseId}
+                    isActive={isActive}
+                    requestAllowed={requestAllowed}
+                  />
                 </Box>
                 <Tabs.Nav>
                   <Tabs.NavItem to="./">
@@ -136,13 +99,12 @@ const Details = ({ id }: { id: Scalars.ID }) => (
 const ProgramServiceDetailsQuery = gql`
   query ProgramServiceDetailsQuery($id: ID!) {
     programService(id: $id) {
-      databaseId
-      isActive
-      requestAllowed
+      ...Header
       ...GeneralInfo
       ...ServiceConnections
     }
   }
+  ${Header.fragments.entry}
   ${GeneralInfo.fragments.entry}
   ${ServiceConnections.fragments.entry}
 `;
