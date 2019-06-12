@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.111.1"></a>
+## [1.111.1](https://github.com/edenlabllc/ehealth.web/compare/v1.111.0...v1.111.1) (2019-06-12)
+
+
+### Bug Fixes
+
+* **admin:** rename maxlength to maxLength in Input component ([ddb1d35](https://github.com/edenlabllc/ehealth.web/commit/ddb1d35))
+* **admin:** update keys in RowComponent ([bc0da19](https://github.com/edenlabllc/ehealth.web/commit/bc0da19))
+
+
+
+
+
 <a name="1.111.0"></a>
 # [1.111.0](https://github.com/edenlabllc/ehealth.web/compare/v1.110.2...v1.111.0) (2019-06-12)
 
