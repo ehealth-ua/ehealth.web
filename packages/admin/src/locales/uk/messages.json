@@ -13,7 +13,7 @@
   },
   "About myself": {
     "translation": "Про співробітника",
-    "origin": [["src/pages/Employees/Details.js", 286]]
+    "origin": [["src/pages/Employees/Details/GeneralInfo.js", 121]]
   },
   "Account number": {
     "translation": "Номер рахунку",
@@ -89,7 +89,7 @@
     "translation": "Додати документ",
     "origin": [
       ["src/pages/Employees/Create.js", 344],
-      ["src/pages/Employees/Update.js", 409]
+      ["src/pages/Employees/Update.js", 410]
     ]
   },
   "Add employee": {
@@ -110,7 +110,7 @@
     "translation": "Додати номер телефону",
     "origin": [
       ["src/pages/Employees/Create.js", 278],
-      ["src/pages/Employees/Update.js", 343]
+      ["src/pages/Employees/Update.js", 344]
     ]
   },
   "Add program": {
@@ -307,11 +307,11 @@
   },
   "Attestation date": {
     "translation": "Дата отримання диплому",
-    "origin": [["src/pages/Employees/Details.js", 425]]
+    "origin": [["src/pages/Employees/Details/Education.js", 142]]
   },
   "Attestation name": {
     "translation": "Учбовий заклад",
-    "origin": [["src/pages/Employees/Details.js", 424]]
+    "origin": [["src/pages/Employees/Details/Education.js", 141]]
   },
   "Authentication method": {
     "translation": "Метод аутентифікації",
@@ -329,7 +329,7 @@
     "translation": "Орган, що видав",
     "origin": [
       ["src/pages/Employees/Create.js", 480],
-      ["src/pages/Employees/Update.js", 545],
+      ["src/pages/Employees/Update.js", 546],
       ["src/pages/LegalEntities/Details.js", 575]
     ]
   },
@@ -348,8 +348,8 @@
       ["src/pages/ContractRequests/Reimbursement/PrintOutContent.js", 57],
       ["src/pages/Employees/Create.js", 357],
       ["src/pages/Employees/Create.js", 620],
-      ["src/pages/Employees/Update.js", 422],
-      ["src/pages/Employees/Update.js", 684],
+      ["src/pages/Employees/Update.js", 423],
+      ["src/pages/Employees/Update.js", 685],
       ["src/pages/INNMDosages/Create.js", 134],
       ["src/pages/INNMDosages/Create.js", 347],
       ["src/pages/LegalEntities/Details.js", 204],
@@ -481,7 +481,7 @@
   "Certificate number": {
     "translation": "Номер реєстраційного посвідчення",
     "origin": [
-      ["src/pages/Employees/Details.js", 422],
+      ["src/pages/Employees/Details/Education.js", 139],
       ["src/pages/Medications/Create.js", 403]
     ]
   },
@@ -586,9 +586,12 @@
     "translation": "Оберіть сервіс",
     "origin": [
       ["src/components/SearchField/ServiceField.js", 14],
-      ["src/components/SearchField/ServiceGroupField.js", 14],
       ["src/pages/ServiceGroups/Details/AddServiceToGroupPopup.js", 89]
     ]
+  },
+  "Choose service group": {
+    "translation": "Оберіть сервіс групу",
+    "origin": [["src/components/SearchField/ServiceGroupField.js", 14]]
   },
   "Choose status reason": {
     "translation": "Виберіть причину",
@@ -635,7 +638,7 @@
     "translation": "Підтвердіть дані",
     "origin": [
       ["src/pages/Employees/Create.js", 48],
-      ["src/pages/Employees/Update.js", 59],
+      ["src/pages/Employees/Update.js", 60],
       ["src/pages/INNMDosages/Create.js", 33],
       ["src/pages/Medications/Create.js", 42],
       ["src/pages/ProgramMedications/Create.js", 36]
@@ -675,6 +678,7 @@
       ["src/pages/ProgramMedications/Create.js", 220],
       ["src/pages/ProgramMedications/Create.js", 303],
       ["src/pages/ProgramMedications/Details.js", 251],
+      ["src/pages/ProgramServices/Search/CreateProgramServicePopup.js", 96],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 26]
     ]
   },
@@ -682,7 +686,7 @@
     "translation": "Контактна інформація",
     "origin": [
       ["src/pages/Employees/Create.js", 258],
-      ["src/pages/Employees/Update.js", 323]
+      ["src/pages/Employees/Update.js", 324]
     ]
   },
   "Container": {
@@ -906,6 +910,12 @@
     "translation": "Створення учасника медичної програми",
     "origin": [["src/pages/ProgramMedications/Create.js", 53]]
   },
+  "Create program service": {
+    "translation": "Створити програму послуг",
+    "origin": [
+      ["src/pages/ProgramServices/Search/CreateProgramServicePopup.js", 44]
+    ]
+  },
   "Create service": {
     "translation": "Створити сервіс",
     "origin": [
@@ -916,6 +926,7 @@
   "Create service group": {
     "translation": "Створити сервіс групу",
     "origin": [
+      ["src/pages/ProgramServices/Search/CreateProgramServicePopup.js", 49],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 34],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 39]
     ]
@@ -943,9 +954,9 @@
       ["src/pages/Declarations/Details.js", 524],
       ["src/pages/Employees/Create.js", 171],
       ["src/pages/Employees/Create.js", 536],
-      ["src/pages/Employees/Details.js", 224],
-      ["src/pages/Employees/Update.js", 236],
-      ["src/pages/Employees/Update.js", 590],
+      ["src/pages/Employees/Details/GeneralInfo.js", 59],
+      ["src/pages/Employees/Update.js", 237],
+      ["src/pages/Employees/Update.js", 591],
       ["src/pages/PatientMergeRequests/Details.js", 101],
       ["src/pages/PatientMergeRequests/Details.js", 340],
       ["src/pages/Persons/Details.js", 190],
@@ -957,7 +968,7 @@
     "translation": "Дата видачі",
     "origin": [
       ["src/pages/Employees/Create.js", 494],
-      ["src/pages/Employees/Update.js", 559],
+      ["src/pages/Employees/Update.js", 560],
       ["src/pages/LegalEntities/Details.js", 574]
     ]
   },
@@ -1080,7 +1091,7 @@
   },
   "Degree": {
     "translation": "Ступінь",
-    "origin": [["src/pages/Employees/Details.js", 413]]
+    "origin": [["src/pages/Employees/Details/Education.js", 130]]
   },
   "Delete": {
     "translation": "Видалити",
@@ -1157,8 +1168,8 @@
   "Diploma number": {
     "translation": "Диплом",
     "origin": [
-      ["src/pages/Employees/Details.js", 347],
-      ["src/pages/Employees/Details.js", 415]
+      ["src/pages/Employees/Details/Education.js", 66],
+      ["src/pages/Employees/Details/Education.js", 132]
     ]
   },
   "Disallow Request": {
@@ -1182,13 +1193,13 @@
   "Dismiss": {
     "translation": "Звільнити",
     "origin": [
-      ["src/pages/Employees/Details.js", 126],
-      ["src/pages/Employees/Details.js", 137]
+      ["src/pages/Employees/Details/Header.js", 86],
+      ["src/pages/Employees/Details/Header.js", 98]
     ]
   },
   "Dismiss employee": {
     "translation": "Звільнити працівника",
-    "origin": [["src/pages/Employees/Details.js", 133]]
+    "origin": [["src/pages/Employees/Details/Header.js", 93]]
   },
   "Division": {
     "translation": "Відділення",
@@ -1196,14 +1207,14 @@
       ["src/pages/ContractRequests/Capitation/Details/index.js", 104],
       ["src/pages/Contracts/Capitation/Details.js", 439],
       ["src/pages/Declarations/Details.js", 207],
-      ["src/pages/Employees/Details.js", 260]
+      ["src/pages/Employees/Details/GeneralInfo.js", 95]
     ]
   },
   "Division ID": {
     "translation": "ID підрозділу",
     "origin": [
       ["src/pages/Employees/Create.js", 244],
-      ["src/pages/Employees/Update.js", 309]
+      ["src/pages/Employees/Update.js", 310]
     ]
   },
   "Division and Services": {
@@ -1251,7 +1262,7 @@
     "translation": "Номер документу",
     "origin": [
       ["src/pages/Employees/Create.js", 468],
-      ["src/pages/Employees/Update.js", 533],
+      ["src/pages/Employees/Update.js", 534],
       ["src/pages/Persons/Search.js", 271]
     ]
   },
@@ -1265,9 +1276,9 @@
       ["src/pages/Declarations/Details.js", 216],
       ["src/pages/Employees/Create.js", 284],
       ["src/pages/Employees/Create.js", 583],
-      ["src/pages/Employees/Details.js", 236],
-      ["src/pages/Employees/Update.js", 349],
-      ["src/pages/Employees/Update.js", 644],
+      ["src/pages/Employees/Details/GeneralInfo.js", 71],
+      ["src/pages/Employees/Update.js", 350],
+      ["src/pages/Employees/Update.js", 645],
       ["src/pages/PatientMergeRequests/Details.js", 154],
       ["src/pages/Persons/Details.js", 218]
     ]
@@ -1366,11 +1377,11 @@
   },
   "Education": {
     "translation": "Освіта",
-    "origin": [["src/pages/Employees/Details.js", 315]]
+    "origin": [["src/pages/Employees/Details/Education.js", 34]]
   },
   "Education and Qualification": {
     "translation": "Навчання та кваліфікація",
-    "origin": [["src/pages/Employees/Details.js", 162]]
+    "origin": [["src/pages/Employees/Details/index.js", 78]]
   },
   "Email": {
     "translation": "Email",
@@ -1383,8 +1394,8 @@
       ["src/pages/EmployeeRequests/Search.js", 79],
       ["src/pages/Employees/Create.js", 266],
       ["src/pages/Employees/Create.js", 569],
-      ["src/pages/Employees/Update.js", 331],
-      ["src/pages/Employees/Update.js", 630],
+      ["src/pages/Employees/Update.js", 332],
+      ["src/pages/Employees/Update.js", 631],
       ["src/pages/LegalEntities/Details.js", 331],
       ["src/pages/LegalEntities/Details.js", 1015],
       ["src/pages/PatientMergeRequests/Details.js", 105],
@@ -1403,7 +1414,7 @@
     "translation": "ID лікаря",
     "origin": [
       ["src/pages/Declarations/Details.js", 486],
-      ["src/pages/Employees/Details.js", 74]
+      ["src/pages/Employees/Details/Header.js", 43]
     ]
   },
   "Employee Requests": {
@@ -1415,7 +1426,7 @@
   },
   "Employee details": {
     "translation": "Інформація про співробітника",
-    "origin": [["src/pages/Employees/Details.js", 66]]
+    "origin": [["src/pages/Employees/Details/index.js", 59]]
   },
   "Employee email": {
     "translation": "Email співробітника",
@@ -1429,7 +1440,7 @@
     "translation": "Статус",
     "origin": [
       ["src/components/SelectedFilters.js", 223],
-      ["src/pages/Employees/Details.js", 78],
+      ["src/pages/Employees/Details/Header.js", 47],
       ["src/pages/Employees/Search/SearchFields.js", 144]
     ]
   },
@@ -1439,11 +1450,11 @@
       ["src/pages/EmployeeRequests/Search.js", 76],
       ["src/pages/Employees/Create.js", 216],
       ["src/pages/Employees/Create.js", 553],
-      ["src/pages/Employees/Details.js", 256],
+      ["src/pages/Employees/Details/GeneralInfo.js", 91],
       ["src/pages/Employees/Search/EmployeesTable.js", 23],
       ["src/pages/Employees/Search/SearchFields.js", 96],
-      ["src/pages/Employees/Update.js", 281],
-      ["src/pages/Employees/Update.js", 607]
+      ["src/pages/Employees/Update.js", 282],
+      ["src/pages/Employees/Update.js", 608]
     ]
   },
   "Employees": {
@@ -1453,17 +1464,17 @@
       ["src/components/Nav.js", 68],
       ["src/components/Nav.js", 338],
       ["src/components/Nav.js", 341],
-      ["src/pages/Employees/Details.js", 63],
+      ["src/pages/Employees/Details/index.js", 56],
       ["src/pages/Employees/Search/index.js", 26]
     ]
   },
   "Employment end date": {
     "translation": "Дата завершення роботи",
-    "origin": [["src/pages/Employees/Details.js", 258]]
+    "origin": [["src/pages/Employees/Details/GeneralInfo.js", 93]]
   },
   "Employment start date": {
     "translation": "Дата початку роботи",
-    "origin": [["src/pages/Employees/Details.js", 257]]
+    "origin": [["src/pages/Employees/Details/GeneralInfo.js", 92]]
   },
   "End date of the contract": {
     "translation": "Кінцева дата дії договору",
@@ -1523,7 +1534,7 @@
     "translation": "Введіть назву органу",
     "origin": [
       ["src/pages/Employees/Create.js", 481],
-      ["src/pages/Employees/Update.js", 546]
+      ["src/pages/Employees/Update.js", 547]
     ]
   },
   "Enter certificate number": {
@@ -1568,13 +1579,16 @@
   },
   "Enter description": {
     "translation": "Введіть опис",
-    "origin": [["src/pages/Dictionaries/Details.js", 325]]
+    "origin": [
+      ["src/pages/Dictionaries/Details.js", 325],
+      ["src/pages/ProgramServices/Search/CreateProgramServicePopup.js", 135]
+    ]
   },
   "Enter division ID": {
     "translation": "Введіть ID підрозділу",
     "origin": [
       ["src/pages/Employees/Create.js", 239],
-      ["src/pages/Employees/Update.js", 304]
+      ["src/pages/Employees/Update.js", 305]
     ]
   },
   "Enter division name": {
@@ -1596,14 +1610,14 @@
     "origin": [
       ["src/pages/EmployeeRequests/Search.js", 197],
       ["src/pages/Employees/Create.js", 261],
-      ["src/pages/Employees/Update.js", 326]
+      ["src/pages/Employees/Update.js", 327]
     ]
   },
   "Enter first name": {
     "translation": "Введіть ім’я",
     "origin": [
       ["src/pages/Employees/Create.js", 93],
-      ["src/pages/Employees/Update.js", 158]
+      ["src/pages/Employees/Update.js", 159]
     ]
   },
   "Enter full name": {
@@ -1636,7 +1650,7 @@
     "translation": "Введіть прізвище",
     "origin": [
       ["src/pages/Employees/Create.js", 124],
-      ["src/pages/Employees/Update.js", 189]
+      ["src/pages/Employees/Update.js", 190]
     ]
   },
   "Enter legal entity EDRPOU": {
@@ -1697,7 +1711,7 @@
     "translation": "Введіть ім’я по-батькові",
     "origin": [
       ["src/pages/Employees/Create.js", 112],
-      ["src/pages/Employees/Update.js", 177]
+      ["src/pages/Employees/Update.js", 178]
     ]
   },
   "Enter service code": {
@@ -1747,8 +1761,8 @@
     "origin": [
       ["src/pages/Employees/Create.js", 288],
       ["src/pages/Employees/Create.js", 469],
-      ["src/pages/Employees/Update.js", 353],
-      ["src/pages/Employees/Update.js", 534]
+      ["src/pages/Employees/Update.js", 354],
+      ["src/pages/Employees/Update.js", 535]
     ]
   },
   "Enter value": {
@@ -1805,7 +1819,7 @@
     "translation": "Заповніть форму",
     "origin": [
       ["src/pages/Employees/Create.js", 45],
-      ["src/pages/Employees/Update.js", 56],
+      ["src/pages/Employees/Update.js", 57],
       ["src/pages/INNMDosages/Create.js", 30],
       ["src/pages/ProgramMedications/Create.js", 33]
     ]
@@ -1853,7 +1867,7 @@
     "translation": "Ім’я",
     "origin": [
       ["src/pages/Employees/Create.js", 98],
-      ["src/pages/Employees/Update.js", 163],
+      ["src/pages/Employees/Update.js", 164],
       ["src/pages/PatientMergeRequests/Details.js", 98],
       ["src/pages/PatientMergeRequests/Details.js", 191],
       ["src/pages/PatientMergeRequests/Details.js", 337]
@@ -1898,9 +1912,9 @@
     "origin": [
       ["src/pages/Employees/Create.js", 154],
       ["src/pages/Employees/Create.js", 535],
-      ["src/pages/Employees/Details.js", 225],
-      ["src/pages/Employees/Update.js", 219],
-      ["src/pages/Employees/Update.js", 589],
+      ["src/pages/Employees/Details/GeneralInfo.js", 60],
+      ["src/pages/Employees/Update.js", 220],
+      ["src/pages/Employees/Update.js", 590],
       ["src/pages/PatientMergeRequests/Details.js", 104],
       ["src/pages/PatientMergeRequests/Details.js", 343],
       ["src/pages/Persons/Details.js", 189]
@@ -1909,7 +1923,7 @@
   "General info": {
     "translation": "Загальна інформація",
     "origin": [
-      ["src/pages/Employees/Details.js", 159],
+      ["src/pages/Employees/Details/index.js", 75],
       ["src/pages/LegalEntities/Details.js", 238],
       ["src/pages/Medications/Create.js", 33],
       ["src/pages/Medications/Details.js", 134],
@@ -1988,7 +2002,7 @@
       ["src/pages/ServiceGroups/Details/index.js", 96],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 21],
       ["src/pages/Services/Details/ParentGroupsTable.js", 20],
-      ["src/pages/Services/Details/index.js", 68],
+      ["src/pages/Services/Details/index.js", 69],
       ["src/pages/Services/Search/ServicesTable.js", 41]
     ]
   },
@@ -1999,10 +2013,10 @@
       ["src/pages/EmployeeRequests/Search.js", 74],
       ["src/pages/Employees/Create.js", 314],
       ["src/pages/Employees/Create.js", 581],
-      ["src/pages/Employees/Details.js", 76],
+      ["src/pages/Employees/Details/Header.js", 45],
       ["src/pages/Employees/Search/EmployeesTable.js", 19],
-      ["src/pages/Employees/Update.js", 379],
-      ["src/pages/Employees/Update.js", 642],
+      ["src/pages/Employees/Update.js", 380],
+      ["src/pages/Employees/Update.js", 643],
       ["src/pages/PatientMergeRequests/Details.js", 124],
       ["src/pages/PatientMergeRequests/Details.js", 346],
       ["src/pages/Persons/Details.js", 195],
@@ -2137,8 +2151,8 @@
   "Institution name": {
     "translation": "Навчальний заклад",
     "origin": [
-      ["src/pages/Employees/Details.js", 348],
-      ["src/pages/Employees/Details.js", 416]
+      ["src/pages/Employees/Details/Education.js", 67],
+      ["src/pages/Employees/Details/Education.js", 133]
     ]
   },
   "Is EDR data actual": {
@@ -2152,7 +2166,7 @@
   "Is employee active": {
     "translation": "Працівник активний",
     "origin": [
-      ["src/pages/Employees/Details.js", 261],
+      ["src/pages/Employees/Details/GeneralInfo.js", 96],
       ["src/pages/Employees/Search/EmployeesTable.js", 27]
     ]
   },
@@ -2162,13 +2176,14 @@
       ["src/components/SelectedFilters.js", 244],
       ["src/pages/ProgramServices/Details/ServiceConnections.js", 30],
       ["src/pages/ProgramServices/Details/index.js", 72],
+      ["src/pages/ProgramServices/Search/CreateProgramServicePopup.js", 111],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 28],
       ["src/pages/ProgramServices/Search/SearchFields.js", 46],
       ["src/pages/ServiceGroups/Details/index.js", 98],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 156],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 25],
       ["src/pages/Services/Details/ParentGroupsTable.js", 24],
-      ["src/pages/Services/Details/index.js", 70],
+      ["src/pages/Services/Details/index.js", 71],
       ["src/pages/Services/Search/ServicesTable.js", 46]
     ]
   },
@@ -2183,8 +2198,8 @@
   "Issued date": {
     "translation": "Дата отримання",
     "origin": [
-      ["src/pages/Employees/Details.js", 349],
-      ["src/pages/Employees/Details.js", 417]
+      ["src/pages/Employees/Details/Education.js", 68],
+      ["src/pages/Employees/Details/Education.js", 134]
     ]
   },
   "Issued to": {
@@ -2211,7 +2226,7 @@
     "translation": "Інформація про роботу",
     "origin": [
       ["src/pages/Employees/Create.js", 182],
-      ["src/pages/Employees/Update.js", 247]
+      ["src/pages/Employees/Update.js", 248]
     ]
   },
   "Job status": {
@@ -2247,7 +2262,7 @@
     "translation": "Прізвище",
     "origin": [
       ["src/pages/Employees/Create.js", 129],
-      ["src/pages/Employees/Update.js", 194],
+      ["src/pages/Employees/Update.js", 195],
       ["src/pages/PatientMergeRequests/Details.js", 99],
       ["src/pages/PatientMergeRequests/Details.js", 192],
       ["src/pages/PatientMergeRequests/Details.js", 338]
@@ -2281,7 +2296,7 @@
       ["src/pages/Contracts/Capitation/Details.js", 1038],
       ["src/pages/Declarations/Details.js", 204],
       ["src/pages/Declarations/Search.js", 68],
-      ["src/pages/Employees/Details.js", 259],
+      ["src/pages/Employees/Details/GeneralInfo.js", 94],
       ["src/pages/LegalEntityDeactivateJobs/Details/index.js", 59],
       ["src/pages/PendingDeclarations/Search.js", 89],
       ["src/pages/Persons/Details.js", 371]
@@ -2706,9 +2721,9 @@
       ["src/pages/Contracts/Capitation/Details.js", 947],
       ["src/pages/EmployeeRequests/Search.js", 73],
       ["src/pages/Employees/Create.js", 534],
-      ["src/pages/Employees/Details.js", 75],
+      ["src/pages/Employees/Details/Header.js", 44],
       ["src/pages/Employees/Search/EmployeesTable.js", 18],
-      ["src/pages/Employees/Update.js", 588]
+      ["src/pages/Employees/Update.js", 589]
     ]
   },
   "Name of medical institution": {
@@ -2738,7 +2753,7 @@
   "No": {
     "translation": "Ні",
     "origin": [
-      ["src/pages/Employees/Details.js", 276],
+      ["src/pages/Employees/Details/GeneralInfo.js", 111],
       ["src/pages/PatientMergeRequests/Details.js", 130]
     ]
   },
@@ -2753,9 +2768,9 @@
       ["src/pages/Declarations/Search.js", 73],
       ["src/pages/EmployeeRequests/Search.js", 75],
       ["src/pages/Employees/Create.js", 582],
-      ["src/pages/Employees/Details.js", 77],
+      ["src/pages/Employees/Details/Header.js", 46],
       ["src/pages/Employees/Search/EmployeesTable.js", 20],
-      ["src/pages/Employees/Update.js", 643],
+      ["src/pages/Employees/Update.js", 644],
       ["src/pages/PatientMergeRequests/Details.js", 125],
       ["src/pages/PendingDeclarations/Search.js", 94]
     ]
@@ -2853,8 +2868,8 @@
     "origin": [
       ["src/pages/Employees/Create.js", 300],
       ["src/pages/Employees/Create.js", 581],
-      ["src/pages/Employees/Update.js", 365],
-      ["src/pages/Employees/Update.js", 642]
+      ["src/pages/Employees/Update.js", 366],
+      ["src/pages/Employees/Update.js", 643]
     ]
   },
   "Patient": {
@@ -2967,7 +2982,7 @@
   },
   "Person ID": {
     "translation": "ID персони",
-    "origin": [["src/pages/Employees/Details.js", 215]]
+    "origin": [["src/pages/Employees/Details/GeneralInfo.js", 50]]
   },
   "Person status": {
     "translation": "Статус персони",
@@ -2977,7 +2992,7 @@
     "translation": "Персона відмовилася від ІПН",
     "origin": [
       ["src/pages/Employees/Create.js", 332],
-      ["src/pages/Employees/Update.js", 397]
+      ["src/pages/Employees/Update.js", 398]
     ]
   },
   "Personal information": {
@@ -3027,7 +3042,7 @@
       ["src/pages/Declarations/Details.js", 428],
       ["src/pages/Declarations/Details.js", 530],
       ["src/pages/Employees/Create.js", 376],
-      ["src/pages/Employees/Update.js", 441],
+      ["src/pages/Employees/Update.js", 442],
       ["src/pages/Persons/Details.js", 244],
       ["src/pages/Persons/Search.js", 326]
     ]
@@ -3036,15 +3051,15 @@
     "translation": "Тип",
     "origin": [
       ["src/pages/Employees/Create.js", 409],
-      ["src/pages/Employees/Update.js", 474]
+      ["src/pages/Employees/Update.js", 475]
     ]
   },
   "Phones": {
     "translation": "Телефони",
     "origin": [
       ["src/pages/Employees/Create.js", 570],
-      ["src/pages/Employees/Details.js", 235],
-      ["src/pages/Employees/Update.js", 631],
+      ["src/pages/Employees/Details/GeneralInfo.js", 70],
+      ["src/pages/Employees/Update.js", 632],
       ["src/pages/PatientMergeRequests/Details.js", 135],
       ["src/pages/PatientMergeRequests/Details.js", 142],
       ["src/pages/PatientMergeRequests/Details.js", 194],
@@ -3061,8 +3076,8 @@
   "Place of receipt": {
     "translation": "Місце отримання",
     "origin": [
-      ["src/pages/Employees/Details.js", 350],
-      ["src/pages/Employees/Details.js", 418]
+      ["src/pages/Employees/Details/Education.js", 69],
+      ["src/pages/Employees/Details/Education.js", 135]
     ]
   },
   "Position": {
@@ -3072,11 +3087,11 @@
       ["src/pages/Declarations/Details.js", 468],
       ["src/pages/Employees/Create.js", 195],
       ["src/pages/Employees/Create.js", 552],
-      ["src/pages/Employees/Details.js", 255],
+      ["src/pages/Employees/Details/GeneralInfo.js", 90],
       ["src/pages/Employees/Search/EmployeesTable.js", 21],
       ["src/pages/Employees/Search/SearchFields.js", 116],
-      ["src/pages/Employees/Update.js", 260],
-      ["src/pages/Employees/Update.js", 606],
+      ["src/pages/Employees/Update.js", 261],
+      ["src/pages/Employees/Update.js", 607],
       ["src/pages/LegalEntities/Details.js", 894]
     ]
   },
@@ -3163,7 +3178,7 @@
     "origin": [
       ["src/components/Nav.js", 295],
       ["src/pages/ProgramServices/Details/index.js", 59],
-      ["src/pages/ProgramServices/Search/index.js", 25]
+      ["src/pages/ProgramServices/Search/index.js", 27]
     ]
   },
   "Program status": {
@@ -3176,11 +3191,11 @@
   },
   "Qualification type": {
     "translation": "Тип кваліфікації",
-    "origin": [["src/pages/Employees/Details.js", 421]]
+    "origin": [["src/pages/Employees/Details/Education.js", 138]]
   },
   "Qualifications": {
     "translation": "Кваліфікації",
-    "origin": [["src/pages/Employees/Details.js", 322]]
+    "origin": [["src/pages/Employees/Details/Education.js", 41]]
   },
   "Reason Comment": {
     "translation": "Причина призупинення",
@@ -3405,8 +3420,8 @@
   "Science degree": {
     "translation": "Наукова ступінь",
     "origin": [
-      ["src/pages/Employees/Details.js", 330],
-      ["src/pages/Employees/Details.js", 345]
+      ["src/pages/Employees/Details/Education.js", 49],
+      ["src/pages/Employees/Details/Education.js", 64]
     ]
   },
   "Search": {
@@ -3502,7 +3517,7 @@
     "translation": "По-батькові",
     "origin": [
       ["src/pages/Employees/Create.js", 117],
-      ["src/pages/Employees/Update.js", 182],
+      ["src/pages/Employees/Update.js", 183],
       ["src/pages/PatientMergeRequests/Details.js", 100],
       ["src/pages/PatientMergeRequests/Details.js", 193],
       ["src/pages/PatientMergeRequests/Details.js", 339]
@@ -3523,7 +3538,7 @@
     "translation": "Тип документу",
     "origin": [
       ["src/pages/Employees/Create.js", 435],
-      ["src/pages/Employees/Update.js", 500],
+      ["src/pages/Employees/Update.js", 501],
       ["src/pages/Persons/Search.js", 297]
     ]
   },
@@ -3544,11 +3559,11 @@
       ["src/pages/Employees/Search/SearchFields.js", 110],
       ["src/pages/Employees/Search/SearchFields.js", 138],
       ["src/pages/Employees/Search/SearchFields.js", 155],
-      ["src/pages/Employees/Update.js", 213],
-      ["src/pages/Employees/Update.js", 254],
-      ["src/pages/Employees/Update.js", 275],
-      ["src/pages/Employees/Update.js", 470],
-      ["src/pages/Employees/Update.js", 496],
+      ["src/pages/Employees/Update.js", 214],
+      ["src/pages/Employees/Update.js", 255],
+      ["src/pages/Employees/Update.js", 276],
+      ["src/pages/Employees/Update.js", 471],
+      ["src/pages/Employees/Update.js", 497],
       ["src/pages/INNMDosages/Create.js", 98],
       ["src/pages/INNMDosages/Create.js", 225],
       ["src/pages/INNMDosages/Create.js", 249],
@@ -3564,6 +3579,7 @@
       ["src/pages/Medications/Create.js", 710],
       ["src/pages/Medications/Create.js", 734],
       ["src/pages/ProgramMedications/Search.js", 311],
+      ["src/pages/ProgramServices/Search/CreateProgramServicePopup.js", 106],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 151],
       ["src/pages/Services/Search/CreateServicePopup.js", 88],
       ["src/pages/Services/Search/SearchFields.js", 59]
@@ -3608,7 +3624,7 @@
   },
   "Service details": {
     "translation": "Деталі сервісу",
-    "origin": [["src/pages/Services/Details/index.js", 59]]
+    "origin": [["src/pages/Services/Details/index.js", 60]]
   },
   "Service group": {
     "translation": "Сервіс група",
@@ -3631,7 +3647,7 @@
       ["src/components/Nav.js", 290],
       ["src/pages/ServiceGroups/Details/index.js", 84],
       ["src/pages/ServiceGroups/Search/index.js", 27],
-      ["src/pages/Services/Details/index.js", 120]
+      ["src/pages/Services/Details/index.js", 121]
     ]
   },
   "Service name": {
@@ -3639,7 +3655,7 @@
     "origin": [
       ["src/components/SearchField/ServiceField.js", 33],
       ["src/pages/ServiceGroups/Details/AddServiceToGroupPopup.js", 107],
-      ["src/pages/Services/Details/index.js", 67],
+      ["src/pages/Services/Details/index.js", 68],
       ["src/pages/Services/Search/CreateServicePopup.js", 56],
       ["src/pages/Services/Search/ServicesTable.js", 42]
     ]
@@ -3650,7 +3666,7 @@
       ["src/components/Nav.js", 284],
       ["src/components/Nav.js", 287],
       ["src/pages/ServiceGroups/Details/index.js", 159],
-      ["src/pages/Services/Details/index.js", 56],
+      ["src/pages/Services/Details/index.js", 57],
       ["src/pages/Services/Search/index.js", 27]
     ]
   },
@@ -3741,7 +3757,7 @@
       ["src/pages/ContractRequests/Reimbursement/Create.js", 453],
       ["src/pages/ContractRequests/Reimbursement/Details.js", 174],
       ["src/pages/Employees/Create.js", 658],
-      ["src/pages/Employees/Update.js", 723],
+      ["src/pages/Employees/Update.js", 724],
       ["src/pages/LegalEntities/Add.js", 371]
     ]
   },
@@ -3808,22 +3824,22 @@
   },
   "Specialities": {
     "translation": "Спеціальності",
-    "origin": [["src/pages/Employees/Details.js", 308]]
+    "origin": [["src/pages/Employees/Details/Education.js", 27]]
   },
   "Speciality": {
     "translation": "Спеціальність",
     "origin": [
-      ["src/pages/Employees/Details.js", 346],
-      ["src/pages/Employees/Details.js", 414]
+      ["src/pages/Employees/Details/Education.js", 65],
+      ["src/pages/Employees/Details/Education.js", 131]
     ]
   },
   "Speciality level": {
     "translation": "Категорія",
-    "origin": [["src/pages/Employees/Details.js", 420]]
+    "origin": [["src/pages/Employees/Details/Education.js", 137]]
   },
   "Speciality type": {
     "translation": "Тип спеціальності",
-    "origin": [["src/pages/Employees/Details.js", 419]]
+    "origin": [["src/pages/Employees/Details/Education.js", 136]]
   },
   "Specialty": {
     "translation": "Спеціальність",
@@ -3858,8 +3874,8 @@
       ["src/pages/Employees/Create.js", 554],
       ["src/pages/Employees/Search/EmployeesTable.js", 22],
       ["src/pages/Employees/Search/SearchFields.js", 129],
-      ["src/pages/Employees/Update.js", 298],
-      ["src/pages/Employees/Update.js", 608]
+      ["src/pages/Employees/Update.js", 299],
+      ["src/pages/Employees/Update.js", 609]
     ]
   },
   "Started at": {
@@ -3939,7 +3955,7 @@
       ["src/pages/ServiceGroups/Search/SearchFields.js", 43],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 24],
       ["src/pages/Services/Details/ParentGroupsTable.js", 23],
-      ["src/pages/Services/Details/index.js", 69],
+      ["src/pages/Services/Details/index.js", 70],
       ["src/pages/Services/Search/SearchFields.js", 46],
       ["src/pages/Services/Search/ServicesTable.js", 45]
     ]
@@ -4161,8 +4177,8 @@
   "Update": {
     "translation": "Оновити",
     "origin": [
-      ["src/pages/Employees/Details.js", 106],
-      ["src/pages/Employees/Update.js", 427]
+      ["src/pages/Employees/Details/Header.js", 71],
+      ["src/pages/Employees/Update.js", 428]
     ]
   },
   "Update contract": {
@@ -4185,7 +4201,7 @@
   },
   "Updating employee": {
     "translation": "Оновлення співробітника",
-    "origin": [["src/pages/Employees/Update.js", 124]]
+    "origin": [["src/pages/Employees/Update.js", 125]]
   },
   "Users": {
     "translation": "Користувачі",
@@ -4193,7 +4209,7 @@
   },
   "Valid to date": {
     "translation": "Дійсний до",
-    "origin": [["src/pages/Employees/Details.js", 423]]
+    "origin": [["src/pages/Employees/Details/Education.js", 140]]
   },
   "Validate Date": {
     "translation": "Термін дії",
@@ -4269,12 +4285,12 @@
   },
   "Working experience": {
     "translation": "Досвід роботи",
-    "origin": [["src/pages/Employees/Details.js", 285]]
+    "origin": [["src/pages/Employees/Details/GeneralInfo.js", 120]]
   },
   "Yes": {
     "translation": "Так",
     "origin": [
-      ["src/pages/Employees/Details.js", 276],
+      ["src/pages/Employees/Details/GeneralInfo.js", 111],
       ["src/pages/PatientMergeRequests/Details.js", 130]
     ]
   },
@@ -4337,7 +4353,8 @@
       ["src/pages/ProgramMedications/Create.js", 240],
       ["src/pages/ProgramMedications/Create.js", 376],
       ["src/pages/ProgramMedications/Details.js", 313],
-      ["src/pages/ProgramMedications/Details.js", 356]
+      ["src/pages/ProgramMedications/Details.js", 356],
+      ["src/pages/ProgramServices/Search/CreateProgramServicePopup.js", 98]
     ]
   },
   "{0, plural, zero {# seconds} one {# second} few {# seconds} many {# seconds} other {# seconds}}": {
