@@ -6,13 +6,15 @@ import { Trans } from "@lingui/macro";
 import { Flex, Box, Heading } from "@rebass/emotion";
 import { LocationParams } from "@ehealth/components";
 
+import Ability from "../../../components/Ability";
 import Pagination from "../../../components/Pagination";
 import SearchForm from "../../../components/SearchForm";
 import LoadingOverlay from "../../../components/LoadingOverlay";
 import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
-import { PrimarySearchFields, SecondarySearchFields } from "./SearchFields";
 import ProgramServicesTable from "./ProgramServicesTable";
+import CreateProgramServicePopup from "./CreateProgramServicePopup";
+import { PrimarySearchFields, SecondarySearchFields } from "./SearchFields";
 
 const Search = () => (
   <Box p={6}>
@@ -25,9 +27,12 @@ const Search = () => (
                 <Trans>Program services</Trans>
               </Heading>
             </Box>
-            {
-              //TODO: Add `create program service` popup with ability checking here
-            }
+            <Ability action="write" resource="program_service">
+              <CreateProgramServicePopup
+                locationParams={filterLocationParams(locationParams)}
+                searchProgramServicesQuery={SearchProgramServicesQuery}
+              />
+            </Ability>
           </Flex>
           <SearchForm
             initialValues={locationParams}
@@ -38,7 +43,7 @@ const Search = () => (
           <Query
             query={SearchProgramServicesQuery}
             fetchPolicy="network-only"
-            variables={filteredLocationParams(locationParams)}
+            variables={filterLocationParams(locationParams)}
           >
             {({
               loading,
@@ -65,6 +70,21 @@ const Search = () => (
     </LocationParams>
   </Box>
 );
+
+const filterLocationParams = locationParams => {
+  const { filter } = locationParams;
+  const medicalProgramId = filter && filter.medicalProgram.databaseId;
+
+  return filteredLocationParams({
+    ...locationParams,
+    filter: {
+      ...filter,
+      medicalProgram: medicalProgramId
+        ? { databaseId: medicalProgramId }
+        : undefined
+    }
+  });
+};
 
 const SearchProgramServicesQuery = gql`
   query SearchProgramServicesQuery(
