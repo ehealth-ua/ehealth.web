@@ -27,7 +27,8 @@ const SearchMedicalProgramField = ({ name }: { name: string }) => (
             name={name}
             label={<Trans>Medical program</Trans>}
             placeholder={translation}
-            items={medicalPrograms.map(({ databaseId, name }) => ({
+            items={medicalPrograms.map(({ id, databaseId, name }) => ({
+              id,
               databaseId,
               name
             }))}

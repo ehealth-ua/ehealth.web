@@ -10,7 +10,7 @@ import * as Field from "../Field";
 
 const SearchServiceGroupField = ({ name }: { name: string }) => (
   <Trans
-    id="Choose service"
+    id="Choose service group"
     render={({ translation }) => (
       <Query
         query={GetServiceGroupsQuery}
@@ -27,7 +27,8 @@ const SearchServiceGroupField = ({ name }: { name: string }) => (
             name={name}
             label={<Trans>Service group name</Trans>}
             placeholder={translation}
-            items={serviceGroups.map(({ databaseId, name }) => ({
+            items={serviceGroups.map(({ id, databaseId, name }) => ({
+              id,
               databaseId,
               name
             }))}
