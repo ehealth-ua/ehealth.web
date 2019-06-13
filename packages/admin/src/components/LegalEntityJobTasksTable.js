@@ -93,7 +93,7 @@ const LegalEntityJobTasksTable = ({
       })
     }
     whiteSpaceNoWrap={["databaseId"]}
-    hiddenFields="updatedAt,name"
+    hiddenFields="databaseId,priority,updatedAt"
     tableName={tableName}
   />
 );
