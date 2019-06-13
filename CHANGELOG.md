@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.111.2"></a>
+## [1.111.2](https://github.com/edenlabllc/ehealth.web/compare/v1.111.1...v1.111.2) (2019-06-13)
+
+
+### Bug Fixes
+
+* **admin:** update default hiddenFields in LegalEntityJobTasksTable ([0f3f396](https://github.com/edenlabllc/ehealth.web/commit/0f3f396))
+
+
+
+
+
 <a name="1.111.1"></a>
 ## [1.111.1](https://github.com/edenlabllc/ehealth.web/compare/v1.111.0...v1.111.1) (2019-06-12)
 
