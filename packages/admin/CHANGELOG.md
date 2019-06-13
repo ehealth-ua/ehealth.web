@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.112.0"></a>
+# [1.112.0](https://github.com/edenlabllc/ehealth.web/compare/v1.111.3...v1.112.0) (2019-06-13)
+
+
+### Features
+
+* **admin:** add Create ProgramService Popup and Mutation ([ff73fcc](https://github.com/edenlabllc/ehealth.web/commit/ff73fcc))
+* **admin:** add custom filter for location params on ProgramServices page ([dc067a7](https://github.com/edenlabllc/ehealth.web/commit/dc067a7))
+* **admin:** add new locales for Create ProgramService Popup ([db4856b](https://github.com/edenlabllc/ehealth.web/commit/db4856b))
+
+
+
+
+
 <a name="1.111.3"></a>
 ## [1.111.3](https://github.com/edenlabllc/ehealth.web/compare/v1.111.2...v1.111.3) (2019-06-13)
 
