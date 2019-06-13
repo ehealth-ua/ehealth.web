@@ -8,20 +8,20 @@ import createDecorator from "final-form-calculate";
 import { Form, Validation } from "@ehealth/components";
 import { convertStringToBoolean, cleanDeep } from "@ehealth/utils";
 
-import type { ProgramService } from "@ehealth-ua/schema";
+import type { DocumentNode } from "graphql";
 import type { URLSearchParams } from "@ehealth/components";
 
-import Popup from "../../../components/Popup";
-import Button from "../../../components/Button";
-import STATUSES from "../../../helpers/statuses";
-import * as Field from "../../../components/Field";
-import * as SearchField from "../../../components/SearchField";
+import Popup from "../../../../components/Popup";
+import Button from "../../../../components/Button";
+import STATUSES from "../../../../helpers/statuses";
+import * as Field from "../../../../components/Field";
+import * as SearchField from "../../../../components/SearchField";
 
-const CreateProgramServicePopup = ({
+const CreateProgramService = ({
   searchProgramServicesQuery,
   locationParams
 }: {
-  searchProgramServicesQuery: Array<ProgramService>,
+  searchProgramServicesQuery: DocumentNode,
   locationParams: URLSearchParams
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
@@ -184,4 +184,4 @@ const resetServiceConnection = createDecorator(
   }
 );
 
-export default CreateProgramServicePopup;
+export default CreateProgramService;

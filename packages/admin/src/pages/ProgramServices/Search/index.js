@@ -13,7 +13,7 @@ import LoadingOverlay from "../../../components/LoadingOverlay";
 import filteredLocationParams from "../../../helpers/filteredLocationParams";
 
 import ProgramServicesTable from "./ProgramServicesTable";
-import CreateProgramServicePopup from "./CreateProgramServicePopup";
+import CreateProgramService from "./Mutations/CreateProgramService";
 import { PrimarySearchFields, SecondarySearchFields } from "./SearchFields";
 
 const Search = () => (
@@ -28,7 +28,7 @@ const Search = () => (
               </Heading>
             </Box>
             <Ability action="write" resource="program_service">
-              <CreateProgramServicePopup
+              <CreateProgramService
                 locationParams={filterLocationParams(locationParams)}
                 searchProgramServicesQuery={SearchProgramServicesQuery}
               />
