@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.111.3"></a>
+## [1.111.3](https://github.com/edenlabllc/ehealth.web/compare/v1.111.2...v1.111.3) (2019-06-13)
+
+**Note:** Version bump only for package @ehealth/admin
+
+
+
+
+
 <a name="1.111.2"></a>
 ## [1.111.2](https://github.com/edenlabllc/ehealth.web/compare/v1.111.1...v1.111.2) (2019-06-13)
 
