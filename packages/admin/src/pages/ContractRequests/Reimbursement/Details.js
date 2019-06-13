@@ -9,12 +9,7 @@ import format from "date-fns/format";
 import isEmpty from "lodash/isEmpty";
 import { Trans } from "@lingui/macro";
 import { Switch } from "@ehealth/components";
-import {
-  PrinterIcon,
-  DefaultImageIcon,
-  PositiveIcon,
-  NegativeIcon
-} from "@ehealth/icons";
+import { PrinterIcon, DefaultImageIcon } from "@ehealth/icons";
 import { getFullName, formatWorkingHours } from "@ehealth/utils";
 
 import Line from "../../../components/Line";

@@ -33,9 +33,6 @@ const MedicalProgramsQuery = loader(
 const SearchMedicationsQuery = loader(
   "../../graphql/SearchMedicationsQuery.graphql"
 );
-const SearchINNMDosagesQuery = loader(
-  "../../graphql/SearchINNMDosagesQuery.graphql"
-);
 
 const Search = ({ navigate }) => (
   <Box p={6}>

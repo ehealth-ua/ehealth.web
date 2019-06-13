@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import isEmpty from "lodash/isEmpty";
 import { Trans } from "@lingui/macro";
 import debounce from "lodash/debounce";
-import { Flex, Box, Heading } from "@rebass/emotion";
+import { Box } from "@rebass/emotion";
 import { Query, Mutation } from "react-apollo";
 import { Form, Validation } from "@ehealth/components";
 import { AdminAddIcon } from "@ehealth/icons";

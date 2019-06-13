@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import gql from "graphql-tag";
 import { Trans } from "@lingui/macro";
 import { Mutation } from "react-apollo";
-import { Box } from "@rebass/emotion";
 
 import type { Scalars } from "@ehealth-ua/schema";
 

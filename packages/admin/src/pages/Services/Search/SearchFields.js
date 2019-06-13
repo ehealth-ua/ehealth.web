@@ -3,7 +3,6 @@ import Composer from "react-composer";
 import { Trans } from "@lingui/macro";
 import { SearchIcon } from "@ehealth/icons";
 import { Flex, Box } from "@rebass/emotion";
-import { Validation } from "@ehealth/components";
 
 import STATUSES from "../../../helpers/statuses";
 import * as Field from "../../../components/Field";

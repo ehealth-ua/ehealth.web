@@ -7,7 +7,6 @@ import { Query } from "react-apollo";
 import { Box } from "@rebass/emotion";
 
 import { Trans } from "@lingui/macro";
-import { Switch } from "@ehealth/components";
 
 import isEmpty from "lodash/isEmpty";
 import Update from "./Mutations/Update";

@@ -8,7 +8,6 @@ import { Trans } from "@lingui/macro";
 import { Router } from "@reach/router";
 import { LocationParams } from "@ehealth/components";
 
-import type { DocumentNode } from "graphql";
 import type { Task, PageInfo } from "@ehealth-ua/schema";
 import type {
   URLSearchParams,

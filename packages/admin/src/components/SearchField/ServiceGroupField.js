@@ -5,8 +5,6 @@ import isEmpty from "lodash/isEmpty";
 import { Query } from "react-apollo";
 import { Trans } from "@lingui/macro";
 import debounce from "lodash/debounce";
-import { SearchIcon } from "@ehealth/icons";
-import { Flex, Box } from "@rebass/emotion";
 
 import * as Field from "../Field";
 
