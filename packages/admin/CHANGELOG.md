@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.112.2"></a>
+## [1.112.2](https://github.com/edenlabllc/ehealth.web/compare/v1.112.1...v1.112.2) (2019-06-14)
+
+
+### Bug Fixes
+
+* **admin:** fix typo in REORGANIZED LE status ([#1007](https://github.com/edenlabllc/ehealth.web/issues/1007)) ([562eb85](https://github.com/edenlabllc/ehealth.web/commit/562eb85))
+
+
+
+
+
 <a name="1.112.1"></a>
 ## [1.112.1](https://github.com/edenlabllc/ehealth.web/compare/v1.112.0...v1.112.1) (2019-06-14)
 
