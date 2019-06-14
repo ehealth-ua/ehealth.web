@@ -237,11 +237,12 @@ const Details = ({ id, navigate }) => (
             <Tabs.NavItem to="./">
               <Trans>General info</Trans>
             </Tabs.NavItem>
-            {edrData.edrId && (
-              <Tabs.NavItem to="./edr-data">
-                <Trans>EDR Data</Trans>
-              </Tabs.NavItem>
-            )}
+            {edrData &&
+              edrData.edrId && (
+                <Tabs.NavItem to="./edr-data">
+                  <Trans>EDR Data</Trans>
+                </Tabs.NavItem>
+              )}
             <Tabs.NavItem to="./licenses">
               <Trans>Licenses</Trans> / <Trans>Verification</Trans>
             </Tabs.NavItem>
@@ -267,7 +268,6 @@ const Details = ({ id, navigate }) => (
                 path="/"
                 edrpou={edrpou}
                 name={name}
-                addresses={addresses}
                 phones={phones}
                 email={email}
                 type={type}
@@ -306,7 +306,6 @@ const Details = ({ id, navigate }) => (
 );
 
 const GeneralInfo = ({
-  addresses,
   phones,
   type,
   ownerPropertyType,
@@ -320,8 +319,7 @@ const GeneralInfo = ({
   website,
   residenceAddress
 }) => {
-  const isDeprecatedDataPresent =
-    addresses || kveds || ownerPropertyType || legalForm;
+  const isDeprecatedDataPresent = kveds || ownerPropertyType || legalForm;
   return (
     <Box p={5}>
       <DefinitionListView
@@ -388,15 +386,9 @@ const GeneralInfo = ({
           </Heading>
           <DefinitionListView
             labels={{
-              addresses: <Trans>Address</Trans>,
               kveds: <Trans>KVED</Trans>
             }}
             data={{
-              addresses:
-                addresses &&
-                addresses
-                  .filter(a => a.type === "REGISTRATION")
-                  .map((item, key) => <AddressView data={item} key={key} />),
               kveds: kveds && (
                 <DictionaryValue
                   name="KVEDS"
