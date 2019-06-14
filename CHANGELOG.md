@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.112.1"></a>
+## [1.112.1](https://github.com/edenlabllc/ehealth.web/compare/v1.112.0...v1.112.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **admin:** check edrData, remove deprecated address on LE Details ([8e328b2](https://github.com/edenlabllc/ehealth.web/commit/8e328b2))
+
+
+
+
+
 <a name="1.112.0"></a>
 # [1.112.0](https://github.com/edenlabllc/ehealth.web/compare/v1.111.3...v1.112.0) (2019-06-13)
 
