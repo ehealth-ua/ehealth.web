@@ -9,7 +9,7 @@ const status = {
       TERMINATED: { bg: "silverCity", color: "blueberrySoda" },
       FAILED: { bg: "silverCity", color: "blueberrySoda" },
       FAILED_WITH_ERROR: { bg: "silverCity", color: "blueberrySoda" },
-      REORGANISED: { bg: "silverCity", color: "blueberrySoda" },
+      REORGANIZED: { bg: "orangePastel", color: "blueberrySoda" },
       PENDING_VERIFICATION: { bg: "orangePastel" },
       PENDING: { bg: "orangePastel" },
       NEW: { bg: "bluePastel" },

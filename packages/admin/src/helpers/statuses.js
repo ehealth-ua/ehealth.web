@@ -14,7 +14,7 @@ const LEGALENTITY = {
   ACTIVE: "активний",
   CLOSED: "неактивний",
   SUSPENDED: "призупинений",
-  REORGANISED: "реорганізований"
+  REORGANIZED: "реорганізований"
 };
 
 const DIVISIONS = {
