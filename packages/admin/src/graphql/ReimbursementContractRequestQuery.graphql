@@ -36,6 +36,7 @@ query ReimbursementContractRequestQuery($id: ID!) {
       databaseId
       name
       edrpou
+      status
       addresses {
         type
         area

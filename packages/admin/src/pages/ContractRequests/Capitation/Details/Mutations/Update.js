@@ -18,6 +18,8 @@ import { SearchIcon } from "@ehealth/icons";
 import Badge from "../../../../../components/Badge";
 import Steps from "../../../../../components/Steps";
 import Button from "../../../../../components/Button";
+import InfoBox from "../../../../../components/InfoBox";
+import LinkComponent from "../../../../../components/Link";
 import LoadingOverlay from "../../../../../components/LoadingOverlay";
 import * as Field from "../../../../../components/Field/index";
 import DictionaryValue from "../../../../../components/DictionaryValue";
@@ -53,9 +55,11 @@ const Update = ({ id }) => (
               status,
               databaseId,
               contractorLegalEntity: {
-                databaseId: legalEntityId,
+                id: legalEntityId,
+                databaseId: legalEntityDatabaseId,
                 name,
-                edrpou
+                edrpou,
+                status: contractorLegalEntityStatus
               },
               issueCity,
               nhsContractPrice,
@@ -74,7 +78,7 @@ const Update = ({ id }) => (
                       status: <Trans>Status</Trans>,
                       edrpou: <Trans>EDRPOU</Trans>,
                       name: <Trans>Name</Trans>,
-                      legalEntityId: <Trans>Legal entity ID</Trans>
+                      legalEntityDatabaseId: <Trans>Legal entity ID</Trans>
                     }}
                     data={{
                       databaseId,
@@ -87,10 +91,14 @@ const Update = ({ id }) => (
                       ),
                       edrpou,
                       name,
-                      legalEntityId
+                      legalEntityDatabaseId: (
+                        <LinkComponent to={`/legal-entities/${legalEntityId}`}>
+                          {legalEntityDatabaseId}
+                        </LinkComponent>
+                      )
                     }}
                     color="#7F8FA4"
-                    labelWidth="100px"
+                    labelWidth="120px"
                   />
                 </OpacityBox>
                 <Router>
@@ -107,6 +115,7 @@ const Update = ({ id }) => (
                     locationParams={locationParams}
                     onSubmit={setLocationParams}
                     data={capitationContractRequest}
+                    contractorLegalEntityStatus={contractorLegalEntityStatus}
                   />
                 </Router>
               </LoadingOverlay>
@@ -123,9 +132,12 @@ const UpdateContractRequest = ({
   initialValues,
   navigate,
   locationParams,
-  id
+  id,
+  contractorLegalEntityStatus
 }) => {
   const { nhsSignerBase, issueCity, nhsContractPrice } = initialValues;
+  const isUpdateDisabled = contractorLegalEntityStatus !== "ACTIVE";
+
   return (
     <Box m={5}>
       <Query
@@ -332,9 +344,23 @@ const UpdateContractRequest = ({
                         </Button>
                       </Link>
                     </Box>
-                    <Button variant="green" width={140}>
-                      <Trans>Refresh</Trans>
-                    </Button>
+                    <Box>
+                      <Button
+                        variant="green"
+                        width={140}
+                        disabled={isUpdateDisabled}
+                      >
+                        <Trans>Refresh</Trans>
+                      </Button>
+                      {isUpdateDisabled && (
+                        <InfoBox>
+                          <Trans>
+                            It is impossible to update the contract request,
+                            because the legal entity is inactive.
+                          </Trans>
+                        </InfoBox>
+                      )}
+                    </Box>
                   </Flex>
                 </Form>
               )}

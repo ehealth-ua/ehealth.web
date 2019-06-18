@@ -26,6 +26,7 @@ query ReimbursementContractQuery(
       name
       edrpou
       databaseId
+      status
       addresses {
         type
         area

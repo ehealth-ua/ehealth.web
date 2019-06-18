@@ -114,6 +114,7 @@ LegalEntity.fragments = {
         name
         edrpou
         databaseId
+        status
         addresses {
           ...Addresses
         }

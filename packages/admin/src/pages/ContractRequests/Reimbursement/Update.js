@@ -14,6 +14,8 @@ import isEmpty from "lodash/isEmpty";
 import Badge from "../../../components/Badge";
 import Steps from "../../../components/Steps";
 import Button from "../../../components/Button";
+import InfoBox from "../../../components/InfoBox";
+import LinkComponent from "../../../components/Link";
 import * as Field from "../../../components/Field/index";
 import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
@@ -58,9 +60,11 @@ const Update = ({ id }) => (
               status,
               databaseId,
               contractorLegalEntity: {
-                databaseId: legalEntityId,
+                id: legalEntityId,
+                databaseId: legalEntityDatabaseId,
                 name,
-                edrpou
+                edrpou,
+                status: contractorLegalEntityStatus
               },
               issueCity,
               nhsPaymentMethod,
@@ -78,7 +82,7 @@ const Update = ({ id }) => (
                       status: <Trans>Status</Trans>,
                       edrpou: <Trans>EDRPOU</Trans>,
                       name: <Trans>Name</Trans>,
-                      legalEntityId: <Trans>Pharmacy ID</Trans>
+                      legalEntityDatabaseId: <Trans>Pharmacy ID</Trans>
                     }}
                     data={{
                       databaseId,
@@ -91,7 +95,11 @@ const Update = ({ id }) => (
                       ),
                       edrpou,
                       name,
-                      legalEntityId
+                      legalEntityDatabaseId: (
+                        <LinkComponent to={`/legal-entities/${legalEntityId}`}>
+                          {legalEntityDatabaseId}
+                        </LinkComponent>
+                      )
                     }}
                     color="#7F8FA4"
                     labelWidth="100px"
@@ -110,6 +118,7 @@ const Update = ({ id }) => (
                     locationParams={locationParams}
                     onSubmit={setLocationParams}
                     data={reimbursementContractRequest}
+                    contractorLegalEntityStatus={contractorLegalEntityStatus}
                   />
                 </Router>
               </>
@@ -126,9 +135,12 @@ const UpdateContractRequest = ({
   initialValues,
   navigate,
   locationParams,
-  id
+  id,
+  contractorLegalEntityStatus
 }) => {
   const { nhsSignerBase, issueCity, nhsPaymentMethod } = initialValues;
+  const isUpdateDisabled = contractorLegalEntityStatus !== "ACTIVE";
+
   return (
     <Box m={5}>
       <Query
@@ -321,9 +333,23 @@ const UpdateContractRequest = ({
                         </Button>
                       </Link>
                     </Box>
-                    <Button variant="green" width={140}>
-                      <Trans>Refresh</Trans>
-                    </Button>
+                    <Box>
+                      <Button
+                        variant="green"
+                        width={140}
+                        disabled={isUpdateDisabled}
+                      >
+                        <Trans>Refresh</Trans>
+                      </Button>
+                      {isUpdateDisabled && (
+                        <InfoBox>
+                          <Trans>
+                            It is impossible to update the contract request,
+                            because the pharmacy is inactive.
+                          </Trans>
+                        </InfoBox>
+                      )}
+                    </Box>
                   </Flex>
                 </Form>
               )}
