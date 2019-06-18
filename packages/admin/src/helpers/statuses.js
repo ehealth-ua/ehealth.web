@@ -89,6 +89,16 @@ const JOBS = {
   PROCESSED: "Виконана"
 };
 
+const TASKS = {
+  ABORTED: "Перервана",
+  CONSUMED: "Прийнята на обробку",
+  FAILED: "Помилка",
+  NEW: "Створена",
+  PENDING: "В процесі виконання",
+  PROCESSED: "Виконана",
+  RESCUED: "Системна помилка"
+};
+
 const REASON = {
   NO_TAX_ID: "Без ІПН"
 };
