@@ -33,7 +33,8 @@ const TasksTable = ({
       status: <Trans>Status</Trans>,
       insertedAt: <Trans>Inserted at</Trans>,
       updatedAt: <Trans>Updated at</Trans>,
-      endedAt: <Trans>Ended at</Trans>
+      endedAt: <Trans>Ended at</Trans>,
+      errorMessage: <Trans>Error Message</Trans>
     }}
     renderRow={({
       insertedAt,
@@ -41,9 +42,11 @@ const TasksTable = ({
       status,
       requestAllowed,
       endedAt,
+      error: { message },
       ...taskData
     }) => ({
       ...taskData,
+      errorMessage: message,
       insertedAt: (
         <DateFormat
           value={insertedAt}
@@ -91,7 +94,7 @@ const TasksTable = ({
       })
     }
     whiteSpaceNoWrap={["databaseId"]}
-    hiddenFields="databaseId,priority,updatedAt"
+    hiddenFields="databaseId,priority,updatedAt,errorMessage"
     tableName={tableName}
   />
 );
@@ -107,6 +110,9 @@ TasksTable.fragments = {
       insertedAt
       endedAt
       updatedAt
+      error {
+        message
+      }
     }
   `
 };
