@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.113.0"></a>
+# [1.113.0](https://github.com/edenlabllc/ehealth.web/compare/v1.112.3...v1.113.0) (2019-06-18)
+
+
+### Features
+
+* **admin:** add new locales for Update Request info block ([585ccce](https://github.com/edenlabllc/ehealth.web/commit/585ccce))
+* **admin:** disable Update Request button if LE status is not ACTIVE ([b984834](https://github.com/edenlabllc/ehealth.web/commit/b984834))
+
+
+
+
+
 <a name="1.112.3"></a>
 ## [1.112.3](https://github.com/edenlabllc/ehealth.web/compare/v1.112.2...v1.112.3) (2019-06-18)
 
