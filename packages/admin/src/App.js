@@ -31,6 +31,8 @@ import EmployeeRequests from "./pages/EmployeeRequests";
 import Services from "./pages/Services";
 import ServiceGroups from "./pages/ServiceGroups";
 import ProgramServices from "./pages/ProgramServices";
+import ResetPersonsAuthMethod from "./pages/ResetPersonsAuthMethod";
+import ResetPersonsAuthMethodJobs from "./pages/ResetPersonsAuthMethodJobs";
 
 import localeUK from "./locales/uk/messages.js";
 
@@ -53,7 +55,9 @@ const App = () => (
                 <Contracts path="contracts/*" />
                 <LegalEntityMergeJobs path="legal-entity-merge-jobs/*" />
                 <LegalEntityDeactivateJobs path="legal-entity-deactivate-jobs/*" />
+                <ResetPersonsAuthMethodJobs path="reset-persons-auth-method-jobs/*" />
                 <Persons path="persons/*" />
+                <ResetPersonsAuthMethod path="reset-authentication-method/*" />
                 <PatientMergeRequests path="patient-merge-requests/*" />
                 <Declarations path="declarations/*" />
                 <PendingDeclarations path="pending-declarations/*" />

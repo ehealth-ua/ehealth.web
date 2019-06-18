@@ -219,11 +219,19 @@ const Nav = () => (
           </NavSection>
         </Ability>
         <Flag name="features.person">
-          <Ability action="read" resource="person">
-            <NavLink to="/persons">
-              <Trans>Persons</Trans>
-            </NavLink>
-          </Ability>
+          <NavSection title={<Trans>Persons</Trans>}>
+            <Ability action="read" resource="person">
+              <NavLink to="/persons">
+                <Trans>Persons</Trans>
+              </NavLink>
+              <Ability action="reset_authentication_method" resource="person">
+                <NavLink to="reset-authentication-method">
+                  Скинути метод <br />
+                  авторизації
+                </NavLink>
+              </Ability>
+            </Ability>
+          </NavSection>
         </Flag>
         <Ability action="read" resource="legal_entity">
           <NavLink to="/legal-entities">
@@ -310,7 +318,13 @@ const Nav = () => (
             </NavSection>
           </Ability>
         </Flag>
-        <Ability action="merge" resources={["legal_entity"]} loose>
+        <Ability
+          resources={[
+            "legal_entity:merge",
+            "legal_entity:deactivate",
+            "person:reset_authentication_method"
+          ]}
+        >
           <NavSection title={<Trans>Jobs</Trans>}>
             <Ability action="merge" resource="legal_entity">
               <NavLink to="/legal-entity-merge-jobs">
@@ -320,6 +334,11 @@ const Nav = () => (
             <Ability action="deactivate" resource="legal_entity">
               <NavLink to="/legal-entity-deactivate-jobs">
                 <Trans>Legal entity deactivate jobs</Trans>
+              </NavLink>
+            </Ability>
+            <Ability action="reset_authentication_method" resource="person">
+              <NavLink to="/reset-persons-auth-method-jobs">
+                <Trans>Reset persons auth method jobs</Trans>
               </NavLink>
             </Ability>
           </NavSection>
