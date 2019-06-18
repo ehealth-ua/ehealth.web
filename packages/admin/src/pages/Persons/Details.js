@@ -248,7 +248,7 @@ const AuthInfo = ({ id, databaseId, authInfo, status }) =>
       {authInfo.type !== "NA" && (
         <Box>
           <Mutation mutation={ResetAuthMethodMutation}>
-            {resetPersonAuthenticationMethod => (
+            {resetPersonAuth => (
               <BooleanValue>
                 {({ value: opened, toggle }) => (
                   <>
@@ -283,7 +283,7 @@ const AuthInfo = ({ id, databaseId, authInfo, status }) =>
                               variant="green"
                               onClick={async () => {
                                 try {
-                                  await resetPersonAuthenticationMethod({
+                                  await resetPersonAuth({
                                     variables: {
                                       input: { personId: databaseId }
                                     }
