@@ -22,7 +22,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import LoadingOverlay from "../../../components/LoadingOverlay";
 import DefinitionListView from "../../../components/DefinitionListView";
 import filteredLocationParams from "../../../helpers/filteredLocationParams";
-import LegalEntityJobTasksTable from "../../../components/LegalEntityJobTasksTable";
+import TasksTable from "../../../components/TasksTable";
 
 const Details = ({ id }: { [string]: string }) => (
   <LocationParams>
@@ -66,13 +66,7 @@ const Details = ({ id }: { [string]: string }) => (
                     databaseId,
                     mergedToLegalEntity: mergedToLegalEntity.name,
                     mergedFromLegalEntity: mergedFromLegalEntity.name,
-                    status: (
-                      <Badge
-                        type="MERGE_LEGAL_ENTITIES_JOBS"
-                        name={status}
-                        minWidth={100}
-                      />
-                    )
+                    status: <Badge type="JOBS" name={status} minWidth={100} />
                   }}
                   color="#7F8FA4"
                   labelWidth="140px"
@@ -115,7 +109,7 @@ const Tasks = ({
 
   return (
     <>
-      <LegalEntityJobTasksTable
+      <TasksTable
         tasks={nodes}
         locationParams={locationParams}
         setLocationParams={setLocationParams}
@@ -164,7 +158,7 @@ const LegalEntityMergeJobQuery = gql`
       }
     }
   }
-  ${LegalEntityJobTasksTable.fragments.entry}
+  ${TasksTable.fragments.entry}
   ${Pagination.fragments.entry}
 `;
 

@@ -13,7 +13,7 @@ import type {
 import Badge from "./Badge";
 import Table from "./Table";
 
-const LegalEntityJobTasksTable = ({
+const TasksTable = ({
   tasks,
   locationParams,
   setLocationParams,
@@ -80,9 +80,7 @@ const LegalEntityJobTasksTable = ({
           }}
         />
       ),
-      status: (
-        <Badge type="MERGE_LEGAL_ENTITIES_JOBS" name={status} display="block" />
-      )
+      status: <Badge type="TASKS" name={status} display="block" />
     })}
     sortableFields={["status", "insertedAt"]}
     sortingParams={parseSortingParams(locationParams.orderBy)}
@@ -98,7 +96,7 @@ const LegalEntityJobTasksTable = ({
   />
 );
 
-LegalEntityJobTasksTable.fragments = {
+TasksTable.fragments = {
   entry: gql`
     fragment JobTasks on Task {
       id
@@ -113,4 +111,4 @@ LegalEntityJobTasksTable.fragments = {
   `
 };
 
-export default LegalEntityJobTasksTable;
+export default TasksTable;

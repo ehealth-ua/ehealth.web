@@ -83,9 +83,8 @@ const NO_TAX_ID = {
   [false]: "З ІПН"
 };
 
-const MERGE_LEGAL_ENTITIES_JOBS = {
+const JOBS = {
   FAILED: "Помилка",
-  FAILED_WITH_ERROR: "Помилка системи",
   PENDING: "В процесі виконання",
   PROCESSED: "Виконана"
 };
@@ -130,7 +129,8 @@ const STATUSES = {
   DIVISIONS,
   LEGAL_ENTITY_RELATION,
   CONTRACT_REQUEST,
-  MERGE_LEGAL_ENTITIES_JOBS,
+  JOBS,
+  TASKS,
   MEDICAL_PROGRAM_STATUS,
   PROGRAM_MEDICATION_STATUS,
   MEDICATION_REQUEST_ALLOWED,

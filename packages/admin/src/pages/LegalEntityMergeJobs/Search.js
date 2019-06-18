@@ -172,11 +172,7 @@ const Search = ({ uri }) => (
                               />
                             ),
                           status: (
-                            <Badge
-                              type="MERGE_LEGAL_ENTITIES_JOBS"
-                              name={status}
-                              display="block"
-                            />
+                            <Badge type="JOBS" name={status} display="block" />
                           ),
                           details: (
                             <Link to={`../${id}`} fontWeight="bold">
@@ -236,10 +232,8 @@ const SearchByRelatedLegalEntityForm = ({ initialValues, onSubmit }) => (
               name="filter.status"
               label={<Trans>Job status</Trans>}
               placeholder={translation}
-              items={Object.keys(STATUSES.MERGE_LEGAL_ENTITIES_JOBS)}
-              itemToString={item =>
-                STATUSES.MERGE_LEGAL_ENTITIES_JOBS[item] || translation
-              }
+              items={Object.keys(STATUSES.JOBS)}
+              itemToString={item => STATUSES.JOBS[item] || translation}
               variant="select"
               filterOptions={{ keys: ["value"] }}
               emptyOption
@@ -284,10 +278,8 @@ const SearchByMainLegalEntityForm = ({ initialValues, onSubmit }) => (
               name="filter.status"
               label={<Trans>Job status</Trans>}
               placeholder={translation}
-              items={Object.keys(STATUSES.MERGE_LEGAL_ENTITIES_JOBS)}
-              itemToString={item =>
-                STATUSES.MERGE_LEGAL_ENTITIES_JOBS[item] || translation
-              }
+              items={Object.keys(STATUSES.JOBS)}
+              itemToString={item => STATUSES.JOBS[item] || translation}
               variant="select"
               filterOptions={{ keys: ["value"] }}
               emptyOption

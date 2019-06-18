@@ -134,7 +134,7 @@ const Search = ({ uri }) => (
                               ),
                             status: (
                               <Badge
-                                type="MERGE_LEGAL_ENTITIES_JOBS"
+                                type="JOBS"
                                 name={status}
                                 display="block"
                               />
@@ -210,10 +210,8 @@ const SearchLegalEntitiesForm = ({ initialValues, onSubmit }) => (
             <Field.Select
               name="filter.status"
               label={<Trans>Job status</Trans>}
-              items={Object.keys(STATUSES.MERGE_LEGAL_ENTITIES_JOBS)}
-              itemToString={item =>
-                STATUSES.MERGE_LEGAL_ENTITIES_JOBS[item] || translation
-              }
+              items={Object.keys(STATUSES.JOBS)}
+              itemToString={item => STATUSES.JOBS[item] || translation}
               filterOptions={{ keys: ["value"] }}
               variant="select"
               emptyOption
