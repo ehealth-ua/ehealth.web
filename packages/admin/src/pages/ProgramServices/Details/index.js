@@ -99,6 +99,7 @@ const Details = ({ id }: { id: Scalars.ID }) => (
 const ProgramServiceDetailsQuery = gql`
   query ProgramServiceDetailsQuery($id: ID!) {
     programService(id: $id) {
+      id
       ...Header
       ...GeneralInfo
       ...ServiceConnections

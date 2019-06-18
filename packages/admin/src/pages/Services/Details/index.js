@@ -174,6 +174,7 @@ const ServiceDetailsQuery = gql`
     $orderBy: ServiceGroupOrderBy
   ) {
     service(id: $id) {
+      id
       databaseId
       name
       isActive

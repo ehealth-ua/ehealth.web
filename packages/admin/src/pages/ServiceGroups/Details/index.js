@@ -283,6 +283,7 @@ const ServiceGroupDetailsQuery = gql`
     $orderGroupBy: ServiceGroupOrderBy
   ) {
     serviceGroup(id: $id) {
+      id
       databaseId
       name
       isActive
