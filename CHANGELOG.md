@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.112.3"></a>
+## [1.112.3](https://github.com/edenlabllc/ehealth.web/compare/v1.112.2...v1.112.3) (2019-06-18)
+
+
+### Bug Fixes
+
+* **admin:** add id to the ProgramServiceDetailsQuery ([#1002](https://github.com/edenlabllc/ehealth.web/issues/1002)) ([5aa126b](https://github.com/edenlabllc/ehealth.web/commit/5aa126b))
+
+
+
+
+
 <a name="1.112.2"></a>
 ## [1.112.2](https://github.com/edenlabllc/ehealth.web/compare/v1.112.1...v1.112.2) (2019-06-14)
 
