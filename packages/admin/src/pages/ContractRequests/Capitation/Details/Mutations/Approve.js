@@ -44,9 +44,12 @@ const Approve = ({ id }) => (
           contractorLegalEntity: {
             databaseId: legalEntityId,
             name,
-            edrpou
+            edrpou,
+            status: contractorLegalEntityStatus
           } = {}
         } = capitationContractRequest;
+
+        const isApproveDisabled = contractorLegalEntityStatus !== "ACTIVE";
 
         return (
           <LoadingOverlay loading={loading}>
@@ -80,6 +83,7 @@ const Approve = ({ id }) => (
               <ApproveContractRequest
                 path="/"
                 data={capitationContractRequest}
+                isApproveDisabled={isApproveDisabled}
               />
             </Router>
           </LoadingOverlay>
@@ -89,7 +93,7 @@ const Approve = ({ id }) => (
   </>
 );
 
-const ApproveContractRequest = ({ id, navigate, data }) => {
+const ApproveContractRequest = ({ id, navigate, data, isApproveDisabled }) => {
   const {
     nhsSigner,
     nhsContractPrice,
@@ -133,6 +137,7 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
         data={data}
         navigate={navigate}
         query={CapitationContractRequestQuery}
+        isApproveDisabled={isApproveDisabled}
       />
     </Box>
   );

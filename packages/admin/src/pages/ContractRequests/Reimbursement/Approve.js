@@ -43,8 +43,15 @@ const Approve = ({ id }) => (
         const {
           status,
           databaseId,
-          contractorLegalEntity: { databaseId: legalEntityId, name, edrpou }
+          contractorLegalEntity: {
+            databaseId: legalEntityId,
+            name,
+            edrpou,
+            status: contractorLegalEntityStatus
+          }
         } = reimbursementContractRequest;
+
+        const isApproveDisabled = contractorLegalEntityStatus !== "ACTIVE";
 
         return (
           <>
@@ -78,6 +85,7 @@ const Approve = ({ id }) => (
               <ApproveContractRequest
                 path="/"
                 data={reimbursementContractRequest}
+                isApproveDisabled={isApproveDisabled}
               />
             </Router>
           </>
@@ -87,7 +95,7 @@ const Approve = ({ id }) => (
   </>
 );
 
-const ApproveContractRequest = ({ id, navigate, data }) => {
+const ApproveContractRequest = ({ id, navigate, data, isApproveDisabled }) => {
   const { nhsSigner, nhsPaymentMethod, ...reimbursementContractRequest } = data;
   return (
     <Box m={5}>
@@ -120,6 +128,7 @@ const ApproveContractRequest = ({ id, navigate, data }) => {
         data={data}
         navigate={navigate}
         query={ReimbursementContractRequestQuery}
+        isApproveDisabled={isApproveDisabled}
       />
     </Box>
   );

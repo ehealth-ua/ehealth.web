@@ -8,6 +8,7 @@ import system from "@ehealth/system-components";
 import { loader } from "graphql.macro";
 
 import Button from "./Button";
+import InfoBox from "./InfoBox";
 
 import { Signer } from "@ehealth/react-iit-digital-signature";
 
@@ -25,7 +26,8 @@ class SignContractRequest extends React.Component {
       id,
       data: { toApproveContent },
       navigate,
-      query
+      query,
+      isApproveDisabled
     } = this.props;
 
     return (
@@ -61,6 +63,7 @@ class SignContractRequest extends React.Component {
                     <Box mr={3}>
                       <Button
                         variant="green"
+                        disabled={isApproveDisabled}
                         onMouseOver={() => !opened && toggle()}
                         onClick={async () => {
                           opened && toggle();
@@ -84,6 +87,14 @@ class SignContractRequest extends React.Component {
                       >
                         <Trans>Approve by EDS</Trans>
                       </Button>
+                      {isApproveDisabled && (
+                        <InfoBox>
+                          <Trans>
+                            It is impossible to sign the contract request,
+                            because the legal entity is inactive.
+                          </Trans>
+                        </InfoBox>
+                      )}
                       <Box ref={this.infoBox}>
                         {opened && (
                           <>
