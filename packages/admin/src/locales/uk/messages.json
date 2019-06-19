@@ -2236,6 +2236,17 @@
     "translation": "Видана на",
     "origin": [["src/pages/LegalEntities/Details.js", 565]]
   },
+  "It is impossible to sign the contract request, because the legal entity is inactive.": {
+    "translation": "Підписання неможливе, оскільки медзаклад неактивний.",
+    "origin": [
+      ["src/components/SignContractRequest.js", 92],
+      [
+        "src/pages/ContractRequests/Capitation/Details/Mutations/PrintOutContent.js",
+        110
+      ],
+      ["src/pages/ContractRequests/Reimbursement/PrintOutContent.js", 111]
+    ]
+  },
   "It is impossible to update the contract request, because the legal entity is inactive.": {
     "translation": "Оновлення заяви неможливе, оскільки медзаклад неактивний.",
     "origin": [
