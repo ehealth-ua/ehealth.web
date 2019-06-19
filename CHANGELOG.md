@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.114.1"></a>
+## [1.114.1](https://github.com/edenlabllc/ehealth.web/compare/v1.114.0...v1.114.1) (2019-06-19)
+
+
+### Bug Fixes
+
+* **admin:** check medicalProgram existence in filter on ProgramServices Search ([#1011](https://github.com/edenlabllc/ehealth.web/issues/1011)) ([4bf0abc](https://github.com/edenlabllc/ehealth.web/commit/4bf0abc))
+
+
+
+
+
 <a name="1.114.0"></a>
 # [1.114.0](https://github.com/edenlabllc/ehealth.web/compare/v1.113.0...v1.114.0) (2019-06-19)
 
