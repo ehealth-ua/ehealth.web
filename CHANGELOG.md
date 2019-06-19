@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.114.0"></a>
+# [1.114.0](https://github.com/edenlabllc/ehealth.web/compare/v1.113.0...v1.114.0) (2019-06-19)
+
+
+### Features
+
+* **admin:** add variants to the InfoBox component ([92a44d9](https://github.com/edenlabllc/ehealth.web/commit/92a44d9))
+* **admin:** disable Approve Request button if LE status is not ACTIVE ([da4c399](https://github.com/edenlabllc/ehealth.web/commit/da4c399))
+* **admin:** disable Sign Request button if LE status is not ACTIVE ([368f9d9](https://github.com/edenlabllc/ehealth.web/commit/368f9d9))
+* **admin:** update locales for Approve and Sign info boxes ([d483eb1](https://github.com/edenlabllc/ehealth.web/commit/d483eb1))
+
+
+
+
+
 <a name="1.113.0"></a>
 # [1.113.0](https://github.com/edenlabllc/ehealth.web/compare/v1.112.3...v1.113.0) (2019-06-18)
 
