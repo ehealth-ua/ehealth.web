@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.115.1"></a>
+## [1.115.1](https://github.com/edenlabllc/ehealth.web/compare/v1.115.0...v1.115.1) (2019-06-19)
+
+
+### Bug Fixes
+
+* **admin:** batch of fixes on ProgramServices Details ([dcf9851](https://github.com/edenlabllc/ehealth.web/commit/dcf9851))
+
+
+
+
+
 <a name="1.115.0"></a>
 # [1.115.0](https://github.com/edenlabllc/ehealth.web/compare/v1.114.1...v1.115.0) (2019-06-19)
 
