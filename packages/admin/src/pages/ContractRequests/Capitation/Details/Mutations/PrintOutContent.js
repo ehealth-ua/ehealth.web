@@ -12,6 +12,7 @@ import { Signer } from "@ehealth/react-iit-digital-signature";
 
 import LoadingOverlay from "../../../../../components/LoadingOverlay";
 import Button from "../../../../../components/Button";
+import InfoBox from "../../../../../components/InfoBox";
 import env from "../../../../../env";
 
 import { CapitationContractRequestQuery } from "../";
@@ -35,11 +36,14 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
           capitationContractRequest: {
             printoutContent: content,
             status,
-            toSignContent
+            toSignContent,
+            contractorLegalEntity
           } = {}
         } = {}
       }) => {
         if (error) return `Error! ${error.message}`;
+        const isSignDisabled =
+          contractorLegalEntity && contractorLegalEntity.status !== "ACTIVE";
         return (
           <LoadingOverlay loading={loading}>
             <Portal content={content} />
@@ -50,7 +54,7 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                 alignItems="center"
                 mx="auto"
               >
-                <Box>
+                <Flex>
                   <Link to="../">
                     <Button mr="2" variant="blue">
                       <Trans>Back</Trans>
@@ -77,35 +81,47 @@ const PrintOutContent = ({ id, navigate, ...props }) => {
                             ]}
                           >
                             {signContractRequest => (
-                              <Button
-                                variant="green"
-                                onClick={async () => {
-                                  const { signedContent } = await signData(
-                                    toSignContent
-                                  );
-                                  await signContractRequest({
-                                    variables: {
-                                      input: {
-                                        id,
-                                        signedContent: {
-                                          content: signedContent,
-                                          encoding: "BASE64"
+                              <>
+                                <Button
+                                  variant="green"
+                                  disabled={isSignDisabled}
+                                  onClick={async () => {
+                                    const { signedContent } = await signData(
+                                      toSignContent
+                                    );
+                                    await signContractRequest({
+                                      variables: {
+                                        input: {
+                                          id,
+                                          signedContent: {
+                                            content: signedContent,
+                                            encoding: "BASE64"
+                                          }
                                         }
                                       }
-                                    }
-                                  });
-                                  await navigate("../");
-                                }}
-                              >
-                                <Trans>Signing by EDS and seal</Trans>
-                              </Button>
+                                    });
+                                    await navigate("../");
+                                  }}
+                                >
+                                  <Trans>Signing by EDS and seal</Trans>
+                                </Button>
+                                {isSignDisabled && (
+                                  <InfoBox variant="horizontal">
+                                    <Trans>
+                                      It is impossible to sign the contract
+                                      request, because the legal entity is
+                                      inactive.
+                                    </Trans>
+                                  </InfoBox>
+                                )}
+                              </>
                             )}
                           </Mutation>
                         )}
                       </Signer.Parent>
                     }
                   />
-                </Box>
+                </Flex>
 
                 <Button
                   variant="none"
