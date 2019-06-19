@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.115.2"></a>
+## [1.115.2](https://github.com/edenlabllc/ehealth.web/compare/v1.115.1...v1.115.2) (2019-06-19)
+
+
+### Bug Fixes
+
+* **admin:** hide UpdateProgramService button for inactive PS ([#1017](https://github.com/edenlabllc/ehealth.web/issues/1017)) ([65bab5a](https://github.com/edenlabllc/ehealth.web/commit/65bab5a))
+
+
+
+
+
 <a name="1.115.1"></a>
 ## [1.115.1](https://github.com/edenlabllc/ehealth.web/compare/v1.115.0...v1.115.1) (2019-06-19)
 
