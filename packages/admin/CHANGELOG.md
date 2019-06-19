@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.115.0"></a>
+# [1.115.0](https://github.com/edenlabllc/ehealth.web/compare/v1.114.1...v1.115.0) (2019-06-19)
+
+
+### Features
+
+* **admin:** add isRequestAllowed field to CreateService form ([2a01036](https://github.com/edenlabllc/ehealth.web/commit/2a01036))
+* **admin:** add new validations to CreateProgramService form ([a358e29](https://github.com/edenlabllc/ehealth.web/commit/a358e29))
+
+
+
+
+
 <a name="1.114.1"></a>
 ## [1.114.1](https://github.com/edenlabllc/ehealth.web/compare/v1.114.0...v1.114.1) (2019-06-19)
 
