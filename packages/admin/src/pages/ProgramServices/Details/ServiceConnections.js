@@ -52,6 +52,7 @@ ServiceConnections.fragments = {
   entry: gql`
     fragment ServiceConnections on ProgramService {
       service {
+        id
         databaseId
         name
         code
@@ -60,6 +61,7 @@ ServiceConnections.fragments = {
         requestAllowed
       }
       serviceGroup {
+        id
         databaseId
         name
         code

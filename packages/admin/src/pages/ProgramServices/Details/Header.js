@@ -55,9 +55,11 @@ const Header = ({
         <Box mt={2}>
           <UpdateProgramServicePopup id={id} requestAllowed={requestAllowed} />
         </Box>
-        <Box mt={2} ml={2}>
-          <DeactivateProgramServicePopup id={id} />
-        </Box>
+        {isActive && (
+          <Box mt={2} ml={2}>
+            <DeactivateProgramServicePopup id={id} />
+          </Box>
+        )}
       </Flex>
     </Ability>
   </Flex>
@@ -66,6 +68,7 @@ const Header = ({
 Header.fragments = {
   entry: gql`
     fragment Header on ProgramService {
+      id
       databaseId
       isActive
       requestAllowed

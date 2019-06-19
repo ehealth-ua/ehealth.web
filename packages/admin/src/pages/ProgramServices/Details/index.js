@@ -65,7 +65,7 @@ const Details = ({ id }: { id: Scalars.ID }) => (
                     <Trans>General info</Trans>
                   </Tabs.NavItem>
                   <Tabs.NavItem to="./connections">
-                    {service.databaseId ? (
+                    {service ? (
                       <Trans>Service</Trans>
                     ) : (
                       <Trans>Service group</Trans>
@@ -99,7 +99,6 @@ const Details = ({ id }: { id: Scalars.ID }) => (
 const ProgramServiceDetailsQuery = gql`
   query ProgramServiceDetailsQuery($id: ID!) {
     programService(id: $id) {
-      id
       ...Header
       ...GeneralInfo
       ...ServiceConnections

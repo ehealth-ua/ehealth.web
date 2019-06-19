@@ -28,14 +28,14 @@ const GeneralInfo = ({
           description: <Trans>Description</Trans>
         }}
         data={{
-          consumerPrice: <Price amount={consumerPrice} />,
+          consumerPrice: consumerPrice && <Price amount={consumerPrice} />,
           description
         }}
         labelWidth="120px"
       />
+      {databaseId && (consumerPrice || description) && <Line />}
       {databaseId && (
         <>
-          <Line />
           <Heading fontSize="1" fontWeight="normal" mb={5}>
             <Trans>Medical program</Trans>
           </Heading>
@@ -71,6 +71,7 @@ GeneralInfo.fragments = {
       description
       consumerPrice
       medicalProgram {
+        id
         databaseId
         name
         isActive
