@@ -5,7 +5,7 @@ import { Trans } from "@lingui/macro";
 import { Flex, Box } from "@rebass/emotion";
 import { Mutation } from "react-apollo";
 import createDecorator from "final-form-calculate";
-import { Form, Validation } from "@ehealth/components";
+import { Form, Validation, Field as FieldListener } from "@ehealth/components";
 import { convertStringToBoolean, cleanDeep } from "@ehealth/utils";
 
 import type { DocumentNode } from "graphql";
@@ -46,7 +46,7 @@ const CreateProgramService = ({
             <Popup
               visible={isPopupVisible}
               onCancel={toggle}
-              title={<Trans>Create service group</Trans>}
+              title={<Trans>Create program service</Trans>}
               okButtonProps={{ variant: "green" }}
               justifyButtons="left"
               formId="createProgramService"
@@ -57,8 +57,8 @@ const CreateProgramService = ({
                   medicalProgram,
                   consumerPrice,
                   isRequestAllowed,
-                  service,
-                  serviceGroup,
+                  serviceId,
+                  serviceGroupId,
                   description
                 }) => {
                   const requestAllowed = convertStringToBoolean(
@@ -70,8 +70,8 @@ const CreateProgramService = ({
                     medicalProgramId: medicalProgram && medicalProgram.id,
                     consumerPrice: price,
                     requestAllowed,
-                    serviceId: service && service.id,
-                    serviceGroupId: serviceGroup && serviceGroup.id,
+                    serviceId: serviceId && serviceId.id,
+                    serviceGroupId: serviceGroupId && serviceGroupId.id,
                     description
                   });
 
@@ -84,21 +84,11 @@ const CreateProgramService = ({
                 }}
                 decorators={[resetServiceConnection]}
               >
-                <SearchField.MedicalProgram name="medicalProgram" />
-                <Validation.Required
-                  field="medicalProgram"
-                  message="Required field"
-                />
                 <Flex mx={-1}>
                   <Box px={1} width={1 / 2}>
-                    <Field.Number
-                      name="consumerPrice"
-                      label={<Trans>Price</Trans>}
-                      placeholder="0 - 1 000 000"
-                      postfix={<Trans>uah</Trans>}
-                    />
+                    <SearchField.MedicalProgram name="medicalProgram" />
                     <Validation.Required
-                      field="consumerPrice"
+                      field="medicalProgram"
                       message="Required field"
                     />
                   </Box>
@@ -125,11 +115,32 @@ const CreateProgramService = ({
                   </Box>
                 </Flex>
                 <Flex mx={-1}>
-                  <Box px={1} width={1 / 2}>
-                    <SearchField.Service name="service" />
+                  <Box px={1} width={1 / 3}>
+                    <Field.Number
+                      name="consumerPrice"
+                      label={<Trans>Price</Trans>}
+                      placeholder="0 - 1 000 000"
+                      postfix={<Trans>uah</Trans>}
+                    />
+                    <FieldListener
+                      name="serviceGroupId"
+                      subscription={{ value: true }}
+                    >
+                      {({ input: { value } }) =>
+                        value ? null : (
+                          <Validation.Required
+                            field="consumerPrice"
+                            message="Required field"
+                          />
+                        )
+                      }
+                    </FieldListener>
                   </Box>
-                  <Box px={1} width={1 / 2}>
-                    <SearchField.ServiceGroup name="serviceGroup" />
+                  <Box px={1} width={1 / 3}>
+                    <SearchField.Service name="serviceId" />
+                  </Box>
+                  <Box px={1} width={1 / 3}>
+                    <SearchField.ServiceGroup name="serviceGroupId" />
                   </Box>
                 </Flex>
                 <Trans
@@ -165,20 +176,24 @@ const CreateProgramServiceMutation = gql`
 
 const resetServiceConnection = createDecorator(
   {
-    field: "service",
+    field: "serviceId",
     updates: {
-      serviceGroup: (value, allValues) => {
-        const { serviceGroup } = allValues || {};
-        return value ? undefined : serviceGroup;
+      serviceGroupId: (value, allValues) => {
+        const { serviceGroupId } = allValues || {};
+        return value ? undefined : serviceGroupId;
       }
     }
   },
   {
-    field: "serviceGroup",
+    field: "serviceGroupId",
     updates: {
-      service: (value, allValues) => {
-        const { service } = allValues || {};
-        return value ? undefined : service;
+      serviceId: (value, allValues) => {
+        const { serviceId } = allValues || {};
+        return value ? undefined : serviceId;
+      },
+      consumerPrice: (value, allValues) => {
+        const { consumerPrice } = allValues || {};
+        return value ? undefined : consumerPrice;
       }
     }
   }
