@@ -5,9 +5,11 @@ import Composer from "react-composer";
 import { Mutation } from "react-apollo";
 import { Flex, Box } from "@rebass/emotion";
 import { Form, Validation } from "@ehealth/components";
+import { convertStringToBoolean } from "@ehealth/utils";
 
 import Popup from "../../../components/Popup";
 import Button from "../../../components/Button";
+import STATUSES from "../../../helpers/statuses";
 import * as Field from "../../../components/Field";
 import DictionaryValue from "../../../components/DictionaryValue";
 
@@ -41,25 +43,51 @@ const CreateServicePopup = ({ locationParams, refetchQuery }) => {
             >
               <Form
                 id="createService"
-                onSubmit={async input => {
+                onSubmit={async ({ isRequestAllowed, ...input }) => {
+                  const requestAllowed = convertStringToBoolean(
+                    isRequestAllowed
+                  );
                   await createService({
-                    variables: { input }
+                    variables: {
+                      input: { ...input, requestAllowed }
+                    }
                   });
                   toggle();
                 }}
               >
-                <Trans
-                  id="Enter service name"
-                  render={({ translation }) => (
-                    <Field.Text
-                      name="name"
-                      label={<Trans>Service name</Trans>}
-                      placeholder={translation}
-                      maxLength={100}
-                      showLengthHint
+                <Flex mx={-1}>
+                  <Box px={1} width={1 / 2}>
+                    <Trans
+                      id="Enter service name"
+                      render={({ translation }) => (
+                        <Field.Text
+                          name="name"
+                          label={<Trans>Service name</Trans>}
+                          placeholder={translation}
+                          maxLength={100}
+                          showLengthHint
+                        />
+                      )}
                     />
-                  )}
-                />
+                  </Box>
+                  <Box px={1} width={1 / 2}>
+                    <Trans
+                      id="Select option"
+                      render={({ translation }) => (
+                        <Field.Select
+                          name="isRequestAllowed"
+                          label={<Trans>Is request allowed</Trans>}
+                          items={Object.keys(STATUSES.YES_NO)}
+                          itemToString={item =>
+                            STATUSES.YES_NO[item] || translation
+                          }
+                          variant="select"
+                          emptyOption
+                        />
+                      )}
+                    />
+                  </Box>
+                </Flex>
                 <Validation.Required field="name" message="Required field" />
                 <Flex mx={-1}>
                   <Box px={1} width={1 / 2}>
