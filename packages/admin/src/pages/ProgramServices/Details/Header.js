@@ -50,18 +50,21 @@ const Header = ({
         marginBetween="auto"
       />
     </Box>
-    <Ability action="write" resource="program_service">
-      <Flex justifyContent="flex-end" flexWrap="wrap">
-        <Box mt={2}>
-          <UpdateProgramServicePopup id={id} requestAllowed={requestAllowed} />
-        </Box>
-        {isActive && (
+    {isActive && (
+      <Ability action="write" resource="program_service">
+        <Flex justifyContent="flex-end" flexWrap="wrap">
+          <Box mt={2}>
+            <UpdateProgramServicePopup
+              id={id}
+              requestAllowed={requestAllowed}
+            />
+          </Box>
           <Box mt={2} ml={2}>
             <DeactivateProgramServicePopup id={id} />
           </Box>
-        )}
-      </Flex>
-    </Ability>
+        </Flex>
+      </Ability>
+    )}
   </Flex>
 );
 
