@@ -93,7 +93,7 @@ const CreateProgramService = ({
                   <Box px={1} width={1 / 2}>
                     <Field.Number
                       name="consumerPrice"
-                      label={<Trans>Consumer price</Trans>}
+                      label={<Trans>Price</Trans>}
                       placeholder="0 - 1 000 000"
                       postfix={<Trans>uah</Trans>}
                     />

@@ -72,8 +72,9 @@ const Search = () => (
 );
 
 const filterLocationParams = locationParams => {
-  const { filter } = locationParams;
-  const medicalProgramId = filter && filter.medicalProgram.databaseId;
+  const { filter = {} } = locationParams;
+  const medicalProgramId =
+    filter.medicalProgram && filter.medicalProgram.databaseId;
 
   return filteredLocationParams({
     ...locationParams,
