@@ -38,10 +38,8 @@ const ResetPersonsAuthMethod = ({
               maxSize={ONE_MB}
               onDrop={acceptedFiles => {
                 const reader = new FileReader();
-                reader.onabort = () => console.log("file reading was aborted");
                 reader.onloadstart = () => setLoading(true);
                 reader.onloadend = () => setLoading(false);
-                reader.onerror = () => console.log("file reading has failed");
                 reader.onload = () => {
                   const parseResult = Papa.parse(reader.result);
                   const validEntries: string[] = parseResult.data
@@ -85,7 +83,7 @@ const ResetPersonsAuthMethod = ({
                     </DropzoneView>
                     {fileSizeError && (
                       <Text color="red" fontSize={1} mb={2}>
-                        File size more than 1MB
+                        <Trans>File size more than 1MB</Trans>
                       </Text>
                     )}
                     {!isEmpty(fileContent.invalidEntries) && (
@@ -113,7 +111,7 @@ const ResetPersonsAuthMethod = ({
                         await navigate("/reset-persons-auth-method-jobs");
                       }}
                     >
-                      <Trans>Скинути</Trans>
+                      <Trans>Reset authentication method</Trans>
                     </Button>
                   </>
                 );
@@ -140,7 +138,7 @@ const InvalidEntriesList = ({
 }) => (
   <Box mb={3}>
     <Text fontWeight="bold" fontSize={2}>
-      Ці поля є невалідними:
+      <Trans>Invalid fields</Trans>
     </Text>
     <Box
       as="ul"

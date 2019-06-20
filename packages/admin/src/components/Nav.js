@@ -224,12 +224,13 @@ const Nav = () => (
               <NavLink to="/persons">
                 <Trans>Persons</Trans>
               </NavLink>
-              <Ability action="reset_authentication_method" resource="person">
-                <NavLink to="reset-authentication-method">
-                  Скинути метод <br />
-                  авторизації
-                </NavLink>
-              </Ability>
+              <Flag name="features.reset_authentication_method">
+                <Ability action="reset_authentication_method" resource="person">
+                  <NavLink to="reset-authentication-method">
+                    <Trans>Reset persons authentication method</Trans>
+                  </NavLink>
+                </Ability>
+              </Flag>
             </Ability>
           </NavSection>
         </Flag>
@@ -338,7 +339,7 @@ const Nav = () => (
             </Ability>
             <Ability action="reset_authentication_method" resource="person">
               <NavLink to="/reset-persons-auth-method-jobs">
-                <Trans>Reset persons auth method jobs</Trans>
+                <Trans>Reset persons authentication method</Trans>
               </NavLink>
             </Ability>
           </NavSection>

@@ -9,24 +9,31 @@ import differenceInSeconds from "date-fns/difference_in_seconds";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
 import { LocationParams } from "@ehealth/components";
 
-import Link from "../../components/Link";
-import Table from "../../components/Table";
-import Badge from "../../components/Badge";
-import LoadingOverlay from "../../components/LoadingOverlay";
-import Pagination from "../../components/Pagination";
+import Link from "../../../components/Link";
+import Table from "../../../components/Table";
+import Badge from "../../../components/Badge";
+import SearchForm from "../../../components/SearchForm";
+import Pagination from "../../../components/Pagination";
+import LoadingOverlay from "../../../components/LoadingOverlay";
 
-import { ITEMS_PER_PAGE } from "../../constants/pagination";
+import { ITEMS_PER_PAGE } from "../../../constants/pagination";
+import { PrimarySearchFields } from "./SearchFields";
 
 const Search = () => (
   <Box p={6}>
     <Heading as="h1" fontWeight="normal" mb={1}>
-      <Trans>Reset Auth Method Jobs</Trans>
+      <Trans>Reset persons authentication method jobs</Trans>
     </Heading>
     <LocationParams>
       {({ locationParams, setLocationParams }) => {
         const { filter, first, last, after, before, orderBy } = locationParams;
         return (
           <>
+            <SearchForm
+              initialValues={locationParams}
+              onSubmit={setLocationParams}
+              renderPrimary={PrimarySearchFields}
+            />
             <Query
               query={ResetPersonsAuthMethodJobsQuery}
               fetchPolicy="network-only"
@@ -122,7 +129,7 @@ const Search = () => (
                           orderBy: stringifySortingParams(sortingParams)
                         })
                       }
-                      tableName="personsAuthResetJobs/search"
+                      tableName="persons-auth-reset-jobs/search"
                     />
                     <Pagination {...pageInfo} />
                   </LoadingOverlay>
