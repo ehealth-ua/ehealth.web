@@ -25,7 +25,7 @@ const FINAL_FORM_PROPS = [
 
 const focusOnErrors = createFocusDecorator();
 
-const Form = ({ innerRef, withErrorHandling, ...props }) => {
+const Form = ({ innerRef, ...props }) => {
   const [
     { decorators = [], mutators, onSubmit, ...finalFormProps },
     formProps
@@ -57,7 +57,7 @@ const Form = ({ innerRef, withErrorHandling, ...props }) => {
             onSubmit={handleSubmit}
             method="POST"
           />
-          {withErrorHandling ? <NonExistentInputError /> : null}
+          <NonExistentInputError />
         </>
       )}
     </FinalForm>

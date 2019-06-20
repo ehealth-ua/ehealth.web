@@ -58,6 +58,7 @@ const Details = ({ id }: { id: Scalars.ID }) => (
                     databaseId={databaseId}
                     isActive={isActive}
                     requestAllowed={requestAllowed}
+                    description={description}
                   />
                 </Box>
                 <Tabs.Nav>

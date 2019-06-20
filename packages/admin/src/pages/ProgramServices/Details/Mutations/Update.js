@@ -13,10 +13,12 @@ import * as Field from "../../../../components/Field";
 
 const UpdateServiceGroupPopup = ({
   id,
-  requestAllowed
+  requestAllowed,
+  description
 }: {
   id: Scalars.ID,
-  requestAllowed: ProgramService.requestAllowed
+  requestAllowed: ProgramService.requestAllowed,
+  description: ProgramService.description
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
@@ -51,7 +53,8 @@ const UpdateServiceGroupPopup = ({
           >
             <Form
               id="updateProgramService"
-              onSubmit={async ({ description }) => {
+              initialValues={{ description }}
+              onSubmit={async ({ description = "" }) => {
                 await updateProgramService({
                   variables: {
                     input: {

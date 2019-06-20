@@ -18,12 +18,14 @@ const Header = ({
   id,
   databaseId,
   isActive,
-  requestAllowed
+  requestAllowed,
+  description
 }: {
   id: Scalars.ID,
   databaseId: Scalars.UUID,
   isActive: ProgramService.isActive,
-  requestAllowed: ProgramService.requestAllowed
+  requestAllowed: ProgramService.requestAllowed,
+  description: ProgramService.description
 }) => (
   <Flex justifyContent="space-between" alignItems="flex-end">
     <Box>
@@ -57,6 +59,7 @@ const Header = ({
             <UpdateProgramServicePopup
               id={id}
               requestAllowed={requestAllowed}
+              description={description}
             />
           </Box>
           <Box mt={2} ml={2}>
