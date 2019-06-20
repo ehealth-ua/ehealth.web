@@ -25,7 +25,7 @@ const FINAL_FORM_PROPS = [
 
 const focusOnErrors = createFocusDecorator();
 
-const Form = ({ innerRef, ...props }) => {
+const Form = ({ innerRef, withErrorHandling, ...props }) => {
   const [
     { decorators = [], mutators, onSubmit, ...finalFormProps },
     formProps
@@ -50,12 +50,15 @@ const Form = ({ innerRef, ...props }) => {
       {...finalFormProps}
     >
       {({ handleSubmit }) => (
-        <form
-          {...formProps}
-          ref={innerRef}
-          onSubmit={handleSubmit}
-          method="POST"
-        />
+        <>
+          <form
+            {...formProps}
+            ref={innerRef}
+            onSubmit={handleSubmit}
+            method="POST"
+          />
+          {withErrorHandling ? <NonExistentInputError /> : null}
+        </>
       )}
     </FinalForm>
   );
@@ -110,6 +113,29 @@ export const FormError = ({ entry = "$.data", ...props }) => (
         <Heading.H3>
           <Text color="red">{result}</Text>
         </Heading.H3>
+      );
+    }}
+  </FormSpy>
+);
+
+export const NonExistentInputError = () => (
+  <FormSpy subscription={{ submitErrors: true }}>
+    {({ submitErrors, form }) => {
+      if (!submitErrors) return null;
+
+      const renderedFormFields = form.getRegisteredFields();
+      const uniqueFieldsWithError = Object.keys(submitErrors).filter(
+        erroredField => !renderedFormFields.includes(erroredField)
+      );
+
+      return (
+        <Heading.H4 textAlign="left">
+          {uniqueFieldsWithError.map((field, key) => (
+            <Text color="red" key={key}>
+              {submitErrors[field].message}
+            </Text>
+          ))}
+        </Heading.H4>
       );
     }}
   </FormSpy>
