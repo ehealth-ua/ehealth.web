@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.1.6",
-    "@ehealth-ua/schema": "^3.2.0",
+    "@ehealth-ua/schema": "^4.1.1",
     "@ehealth/components": "file:../components",
     "@ehealth/icons": "file:../icons",
     "@ehealth/system-components": "file:../system-components",
