@@ -336,7 +336,7 @@ const AddressFields = ({ name }) => (
               itemToString={item =>
                 item === null || item === "" ? "" : item.name
               }
-              items={loading || error ? [] : settlements.data}
+              items={loading || error || !settlements ? [] : settlements.data}
               onInputValueChange={debounce(name => refetch({ name }), 500)}
               renderItem={({ type, name, district }) => (
                 <>
