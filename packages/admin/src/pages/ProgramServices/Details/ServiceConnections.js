@@ -6,7 +6,9 @@ import { PositiveIcon, NegativeIcon } from "@ehealth/icons";
 
 import type { ProgramService } from "@ehealth-ua/schema";
 
+import Link from "../../../components/Link";
 import Badge from "../../../components/Badge";
+import DictionaryValue from "../../../components/DictionaryValue";
 import DefinitionListView from "../../../components/DefinitionListView";
 
 const ServiceConnections = ({
@@ -16,8 +18,11 @@ const ServiceConnections = ({
   service?: ProgramService.service,
   serviceGroup?: ProgramService.serviceGroup
 }) => {
-  const { isActive, requestAllowed, ...details } =
+  const { id, databaseId, isActive, requestAllowed, category, ...details } =
     service || serviceGroup || {};
+
+  const connectionUrl = service ? "services" : "service-groups";
+
   return (
     <Box p={5}>
       <DefinitionListView
@@ -31,6 +36,12 @@ const ServiceConnections = ({
         }}
         data={{
           ...details,
+          databaseId: databaseId && (
+            <Link to={`/${connectionUrl}/${id}`}>{databaseId}</Link>
+          ),
+          category: category && (
+            <DictionaryValue name="SERVICE_CATEGORY" item={category} />
+          ),
           isActive: (
             <Badge
               type="ACTIVE_STATUS_M"
