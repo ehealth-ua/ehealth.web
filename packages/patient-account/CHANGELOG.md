@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.115.4"></a>
+## [1.115.4](https://github.com/edenlabllc/ehealth.web/compare/v1.115.3...v1.115.4) (2019-06-20)
+
+
+### Bug Fixes
+
+* **patient-account:** check settlements before getting settlements.data on ProfileEditPage ([6d00da3](https://github.com/edenlabllc/ehealth.web/commit/6d00da3))
+
+
+
+
+
 <a name="1.107.0"></a>
 # [1.107.0](https://github.com/edenlabllc/ehealth.web/compare/v1.106.4...v1.107.0) (2019-06-10)
 

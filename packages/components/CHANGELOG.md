@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.115.4"></a>
+## [1.115.4](https://github.com/edenlabllc/ehealth.web/compare/v1.115.3...v1.115.4) (2019-06-20)
+
+
+### Bug Fixes
+
+* **admin:** add handler for non-existent inputs errors in the Form ([166251d](https://github.com/edenlabllc/ehealth.web/commit/166251d))
+* **admin:** use errors handler in UpdateProgramService form ([e5285b2](https://github.com/edenlabllc/ehealth.web/commit/e5285b2))
+
+
+
+
+
 <a name="1.107.0"></a>
 # [1.107.0](https://github.com/edenlabllc/ehealth.web/compare/v1.106.4...v1.107.0) (2019-06-10)
 
