@@ -1,29 +1,20 @@
 import React from "react";
-import isEmpty from "lodash/isEmpty";
-import { Trans } from "@lingui/macro";
-import debounce from "lodash/debounce";
-import { loader } from "graphql.macro";
+import gql from "graphql-tag";
 import { Router } from "@reach/router";
-import { Query, Mutation } from "react-apollo";
+import { SearchIcon } from "@ehealth/icons";
+import { Mutation } from "react-apollo";
+import { Trans, DateFormat } from "@lingui/macro";
 import { Heading, Flex, Box } from "@rebass/emotion";
 import { Form, Validation } from "@ehealth/components";
 
 import Line from "../../components/Line";
+import Price from "../../components/Price";
 import Steps from "../../components/Steps";
 import Button from "../../components/Button";
 import * as Field from "../../components/Field";
+import * as SearchField from "../../components/SearchField";
 import DefinitionListView from "../../components/DefinitionListView";
 import STATUSES from "../../helpers/statuses";
-
-const MedicalProgramsQuery = loader(
-  "../../graphql/MedicalProgramsQuery.graphql"
-);
-const SearchMedicationsQuery = loader(
-  "../../graphql/SearchMedicationsQuery.graphql"
-);
-const CreateProgramMedicationMutation = loader(
-  "../../graphql/CreateProgramMedicationMutation.graphql"
-);
 
 const Create = ({ location: { state } }) => (
   <>
@@ -48,7 +39,7 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
   const { data, data: { reimbursement } = {} } = state || {};
   const { type, reimbursementAmount } = reimbursement || {};
   return (
-    <Box p={5}>
+    <Box p={5} pb={300}>
       <Heading as="h1" fontWeight="normal" mb={5}>
         <Trans>Create program medication</Trans>
       </Heading>
@@ -70,100 +61,11 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
       >
         <Flex>
           <Box pr={2} width={2 / 5}>
-            <Trans
-              id="Choose medication name"
-              render={({ translation }) => (
-                <Query
-                  query={SearchMedicationsQuery}
-                  fetchPolicy="cache-first"
-                  variables={{
-                    skip: true
-                  }}
-                >
-                  {({
-                    loading,
-                    error,
-                    data: {
-                      medications: { nodes: medications = [] } = {}
-                    } = {},
-                    refetch: refetchMedications
-                  }) => (
-                    <Field.Select
-                      name="medication"
-                      label={<Trans>Medication name</Trans>}
-                      placeholder={translation}
-                      items={medications.map(({ id, name }) => ({
-                        id,
-                        name
-                      }))}
-                      itemToString={item => item && item.name}
-                      filter={items => items}
-                      onInputValueChange={debounce(
-                        (name, { selectedItem, inputValue }) =>
-                          !isEmpty(name) &&
-                          (selectedItem && selectedItem.name) !== inputValue &&
-                          refetchMedications({
-                            skip: false,
-                            first: 20,
-                            filter: { isActive: true, name: name }
-                          }),
-                        1000
-                      )}
-                    />
-                  )}
-                </Query>
-              )}
-            />
+            <SearchField.Medication name="medication" />
             <Validation.Required field="medication" message="Required field" />
           </Box>
           <Box width={2 / 5}>
-            <Trans
-              id="Choose medical program"
-              render={({ translation }) => (
-                <Query
-                  query={MedicalProgramsQuery}
-                  fetchPolicy="cache-first"
-                  variables={{
-                    skip: true
-                  }}
-                >
-                  {({
-                    loading,
-                    error,
-                    data: {
-                      medicalPrograms: { nodes: medicalPrograms = [] } = {}
-                    } = {},
-                    refetch: refetchMedicalProgram
-                  }) => {
-                    return (
-                      <Field.Select
-                        name="medicalProgram"
-                        label={<Trans>Medical program</Trans>}
-                        placeholder={translation}
-                        items={medicalPrograms.map(({ id, name }) => ({
-                          id,
-                          name
-                        }))}
-                        itemToString={item => item && item.name}
-                        filter={items => items}
-                        onInputValueChange={debounce(
-                          (program, { selectedItem, inputValue }) =>
-                            !isEmpty(program) &&
-                            (selectedItem && selectedItem.name) !==
-                              inputValue &&
-                            refetchMedicalProgram({
-                              skip: false,
-                              first: 20,
-                              filter: { isActive: true, name: program }
-                            }),
-                          1000
-                        )}
-                      />
-                    );
-                  }}
-                </Query>
-              )}
-            />
+            <SearchField.MedicalProgram name="medicalProgram" />
             <Validation.Required
               field="medicalProgram"
               message="Required field"
@@ -241,6 +143,39 @@ const CreationForm = ({ navigate, location, location: { state } }) => {
             />
           </Box>
         </Flex>
+        <Box mt={-1} width={4 / 5}>
+          <Line />
+        </Box>
+        <Flex mx={-1}>
+          <Box px={1} width={2 / 5}>
+            <Trans
+              id="Enter registry number"
+              render={({ translation }) => (
+                <Field.Text
+                  name="registryNumber"
+                  label={<Trans>Registry number</Trans>}
+                  placeholder={translation}
+                  postfix={<SearchIcon color="silverCity" />}
+                  autoComplete="off"
+                />
+              )}
+            />
+          </Box>
+          <Box px={1} width={1 / 5}>
+            <Field.DatePicker
+              name="startDate"
+              label={<Trans>Start date</Trans>}
+              minDate="1900-01-01"
+            />
+          </Box>
+          <Box px={1} width={1 / 5}>
+            <Field.DatePicker
+              name="endDate"
+              label={<Trans>End date</Trans>}
+              minDate="1900-01-01"
+            />
+          </Box>
+        </Flex>
         <Flex>
           <Box mr={3}>
             <Button
@@ -274,6 +209,9 @@ const Confirmation = ({ navigate, location: { state } }) => {
       consumerPrice,
       estimatedPaymentAmount,
       reimbursementDailyDosage,
+      registryNumber,
+      startDate,
+      endDate,
       reimbursement: { type, reimbursementAmount }
     }
   } = state;
@@ -314,6 +252,21 @@ const Confirmation = ({ navigate, location: { state } }) => {
         }}
         labelWidth="225px"
       />
+      <Line />
+      <DefinitionListView
+        labels={{
+          startDate: <Trans>Start date</Trans>,
+          endDate: <Trans>End date</Trans>,
+          registryNumber: <Trans>Registry number</Trans>
+        }}
+        data={{
+          startDate: startDate ? <DateFormat value={startDate} /> : "-",
+          endDate: endDate ? <DateFormat value={endDate} /> : "-",
+          registryNumber: registryNumber ? registryNumber : "-"
+        }}
+        labelWidth="225px"
+      />
+
       <Flex mt={5}>
         <Box mr={3}>
           <Button
@@ -353,7 +306,10 @@ const Confirmation = ({ navigate, location: { state } }) => {
                         reimbursement: {
                           type,
                           reimbursementAmount: parseFloat(reimbursementAmount)
-                        }
+                        },
+                        startDate,
+                        endDate,
+                        registryNumber
                       }
                     }
                   });
@@ -370,13 +326,18 @@ const Confirmation = ({ navigate, location: { state } }) => {
   );
 };
 
-const Price = ({ amount }) =>
-  amount && (
-    <>
-      {amount} <Trans>uah</Trans>
-    </>
-  );
-
 const getPriceVariable = price => parseFloat(price) || undefined;
+
+const CreateProgramMedicationMutation = gql`
+  mutation CreateProgramMedicationMutation(
+    $input: CreateProgramMedicationInput!
+  ) {
+    createProgramMedication(input: $input) {
+      programMedication {
+        id
+      }
+    }
+  }
+`;
 
 export default Create;
