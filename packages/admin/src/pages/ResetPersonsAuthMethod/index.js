@@ -100,11 +100,10 @@ const ResetPersonsAuthMethod = ({
                       }
                       onClick={async () => {
                         await resetPersonsAuth({
-                          input: {
-                            variables: {
-                              input: {
-                                ids: fileContent && fileContent.validEntries
-                              }
+                          variables: {
+                            input: {
+                              databaseIds:
+                                fileContent && fileContent.validEntries
                             }
                           }
                         });
