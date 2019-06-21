@@ -218,12 +218,20 @@ const Nav = () => (
             </Ability>
           </NavSection>
         </Ability>
-        <Flag name="features.person">
-          <NavSection title={<Trans>Persons</Trans>}>
-            <Ability action="read" resource="person">
-              <NavLink to="/persons">
-                <Trans>Persons</Trans>
-              </NavLink>
+        <Flag name="computed.personNavSection">
+          <Ability
+            actions={["read", "reset_authentication_method"]}
+            resource="person"
+            loose
+          >
+            <NavSection title={<Trans>Persons</Trans>}>
+              <Flag name="features.person">
+                <Ability action="read" resource="person">
+                  <NavLink to="/persons">
+                    <Trans>Persons</Trans>
+                  </NavLink>
+                </Ability>
+              </Flag>
               <Flag name="features.reset_authentication_method">
                 <Ability action="reset_authentication_method" resource="person">
                   <NavLink to="reset-authentication-method">
@@ -231,8 +239,8 @@ const Nav = () => (
                   </NavLink>
                 </Ability>
               </Flag>
-            </Ability>
-          </NavSection>
+            </NavSection>
+          </Ability>
         </Flag>
         <Ability action="read" resource="legal_entity">
           <NavLink to="/legal-entities">
@@ -320,24 +328,25 @@ const Nav = () => (
           </Ability>
         </Flag>
         <Ability
-          resources={[
+          scopes={[
             "legal_entity:merge",
             "legal_entity:deactivate",
-            "person:reset_authentication_method"
+            "persons_auth_reset_job:read"
           ]}
+          loose
         >
           <NavSection title={<Trans>Jobs</Trans>}>
-            <Ability action="merge" resource="legal_entity">
+            <Ability action="read" resource="legal_entity_merge_job">
               <NavLink to="/legal-entity-merge-jobs">
                 <Trans>Legal entity merge jobs</Trans>
               </NavLink>
             </Ability>
-            <Ability action="deactivate" resource="legal_entity">
+            <Ability action="read" resource="legal_entity_deactivation_job">
               <NavLink to="/legal-entity-deactivate-jobs">
                 <Trans>Legal entity deactivate jobs</Trans>
               </NavLink>
             </Ability>
-            <Ability action="reset_authentication_method" resource="person">
+            <Ability action="read" resource="persons_auth_reset_job">
               <NavLink to="/reset-persons-auth-method-jobs">
                 <Trans>Reset persons authentication method</Trans>
               </NavLink>
