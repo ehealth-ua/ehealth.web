@@ -11,21 +11,19 @@ import Badge from "../../../components/Badge";
 import Ability from "../../../components/Ability";
 import DefinitionListView from "../../../components/DefinitionListView";
 
-import UpdateProgramServicePopup from "./Mutations/Update";
+import UpdateProgramServiceRequestAllowance from "./Mutations/UpdateRequestAllowance";
 import DeactivateProgramServicePopup from "./Mutations/Deactivate";
 
 const Header = ({
   id,
   databaseId,
   isActive,
-  requestAllowed,
-  description
+  requestAllowed
 }: {
   id: Scalars.ID,
   databaseId: Scalars.UUID,
   isActive: ProgramService.isActive,
-  requestAllowed: ProgramService.requestAllowed,
-  description: ProgramService.description
+  requestAllowed: ProgramService.requestAllowed
 }) => (
   <Flex justifyContent="space-between" alignItems="flex-end">
     <Box>
@@ -56,10 +54,9 @@ const Header = ({
       <Ability action="write" resource="program_service">
         <Flex justifyContent="flex-end" flexWrap="wrap">
           <Box mt={2}>
-            <UpdateProgramServicePopup
+            <UpdateProgramServiceRequestAllowance
               id={id}
               requestAllowed={requestAllowed}
-              description={description}
             />
           </Box>
           <Box mt={2} ml={2}>

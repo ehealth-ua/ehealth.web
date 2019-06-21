@@ -77,6 +77,7 @@ const Details = ({ id }: { id: Scalars.ID }) => (
                   <Router>
                     <GeneralInfo
                       path="/"
+                      id={id}
                       consumerPrice={consumerPrice}
                       description={description}
                       medicalProgram={medicalProgram}

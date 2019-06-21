@@ -2,6 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { Trans } from "@lingui/macro";
 import { Heading, Box } from "@rebass/emotion";
+import system from "@ehealth/system-components";
 
 import type { ProgramService } from "@ehealth-ua/schema";
 
@@ -10,11 +11,15 @@ import Price from "../../../components/Price";
 import Badge from "../../../components/Badge";
 import DefinitionListView from "../../../components/DefinitionListView";
 
+import UpdateProgramServiceDescription from "./Mutations/UpdateDescription";
+
 const GeneralInfo = ({
+  id,
   consumerPrice,
   description,
   medicalProgram
 }: {
+  id: ProgramService.id,
   consumerPrice: ProgramService.consumerPrice,
   description: ProgramService.description,
   medicalProgram: ProgramService.medicalProgram
@@ -29,7 +34,15 @@ const GeneralInfo = ({
         }}
         data={{
           consumerPrice: consumerPrice && <Price amount={consumerPrice} />,
-          description
+          description: (
+            <DescriptionBox>
+              {description}
+              <UpdateProgramServiceDescription
+                id={id}
+                description={description}
+              />
+            </DescriptionBox>
+          )
         }}
         labelWidth="120px"
       />
@@ -79,5 +92,14 @@ GeneralInfo.fragments = {
     }
   `
 };
+
+const DescriptionBox = system(
+  {
+    extend: Box
+  },
+  `
+    white-space: pre-line;
+  `
+);
 
 export default GeneralInfo;
