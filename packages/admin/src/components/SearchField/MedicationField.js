@@ -22,26 +22,30 @@ const SearchMedicationField = ({ name }: { name: string }) => (
         {({
           data: { medications: { nodes: medications = [] } = {} } = {},
           refetch: refetchMedications
-        }) => (
-          <Field.Select
-            name="filter.medication.name"
-            label={<Trans>Medication name</Trans>}
-            placeholder={translation}
-            items={medications.map(({ name }) => name)}
-            filter={items => items}
-            onInputValueChange={debounce(
-              (name, { selectedItem, inputValue }) =>
-                !isEmpty(name) &&
-                selectedItem !== inputValue &&
-                refetchMedications({
-                  skip: false,
-                  first: 20,
-                  filter: { name: name }
-                }),
-              1000
-            )}
-          />
-        )}
+        }) => {
+          const stringifyItem = item => item && item.name;
+          return (
+            <Field.Select
+              name={name}
+              label={<Trans>Medication name</Trans>}
+              placeholder={translation}
+              items={medications.map(({ id, name }) => ({ id, name }))}
+              itemToString={item => stringifyItem(item)}
+              filter={items => items}
+              onInputValueChange={debounce(
+                (name, { selectedItem, inputValue }) =>
+                  !isEmpty(name) &&
+                  stringifyItem(selectedItem) !== inputValue &&
+                  refetchMedications({
+                    skip: false,
+                    first: 20,
+                    filter: { name: name }
+                  }),
+                1000
+              )}
+            />
+          );
+        }}
       </Query>
     )}
   />

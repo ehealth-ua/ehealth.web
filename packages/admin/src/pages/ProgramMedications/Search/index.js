@@ -25,6 +25,7 @@ const Search = ({ navigate }) => (
             isActive,
             medicationRequestAllowed,
             medicalProgram,
+            medication,
             ...params
           } = {}
         } = locationParams;
@@ -33,6 +34,9 @@ const Search = ({ navigate }) => (
           ...params,
           medicalProgram: medicalProgram && {
             name: medicalProgram.name
+          },
+          medication: medication && {
+            name: medication.name
           },
           isActive: convertStringToBoolean(isActive),
           medicationRequestAllowed: convertStringToBoolean(
