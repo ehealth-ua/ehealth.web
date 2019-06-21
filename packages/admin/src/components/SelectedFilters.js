@@ -31,7 +31,8 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
       contractorLegalEntity: { name } = {},
       employeeStatus,
       party: { noTaxId, ...party } = {},
-      requestAllowed
+      requestAllowed,
+      registryNumber
     } = {}
   } = initialValues;
 
@@ -244,6 +245,12 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
           <Trans>Is request allowed</Trans>:
           <Box ml={1}>{STATUSES.YES_NO[requestAllowed]}</Box>
           <RemoveSelected reset={{ requestAllowed: undefined }} />
+        </SelectedItem>
+      )}
+      {registryNumber && (
+        <SelectedItem mx={1}>
+          <Trans>Registry number</Trans>:<Box ml={1}>{registryNumber}</Box>
+          <RemoveSelected reset={{ registryNumber: undefined }} />
         </SelectedItem>
       )}
     </Flex>
