@@ -3,22 +3,18 @@ import React, { useState } from "react";
 import gql from "graphql-tag";
 import { Trans } from "@lingui/macro";
 import { Mutation } from "react-apollo";
-import { Form } from "@ehealth/components";
 
 import type { Scalars, ProgramService } from "@ehealth-ua/schema";
 
 import Popup from "../../../../components/Popup";
 import Button from "../../../../components/Button";
-import * as Field from "../../../../components/Field";
 
-const UpdateServiceGroupPopup = ({
+const UpdateProgramServiceRequestAllowance = ({
   id,
-  requestAllowed,
-  description
+  requestAllowed
 }: {
   id: Scalars.ID,
-  requestAllowed: ProgramService.requestAllowed,
-  description: ProgramService.description
+  requestAllowed: ProgramService.requestAllowed
 }) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const toggle = () => setPopupVisibility(!isPopupVisible);
@@ -43,51 +39,29 @@ const UpdateServiceGroupPopup = ({
             {action.name}
           </Button>
           <Popup
-            okButtonProps={{ type: "submit", variant: action.variant }}
             visible={isPopupVisible}
             onCancel={toggle}
             title={<>{action.description}?</>}
             okText={action.name}
-            justifyButtons="left"
-            formId="updateProgramService"
-          >
-            <Form
-              id="updateProgramService"
-              initialValues={{ description }}
-              onSubmit={async ({ description = "" }) => {
-                await updateProgramService({
-                  variables: {
-                    input: {
-                      id,
-                      description,
-                      requestAllowed: !requestAllowed
-                    }
+            onOk={async () => {
+              await updateProgramService({
+                variables: {
+                  input: {
+                    id,
+                    requestAllowed: !requestAllowed
                   }
-                });
-                toggle();
-              }}
-            >
-              <Trans
-                id="Enter description"
-                render={({ translation }) => (
-                  <Field.Textarea
-                    name="description"
-                    placeholder={translation}
-                    rows={5}
-                    maxLength="3000"
-                    showLengthHint
-                  />
-                )}
-              />
-            </Form>
-          </Popup>
+                }
+              });
+              toggle();
+            }}
+          />
         </>
       )}
     </Mutation>
   );
 };
 
-const UpdateProgramServiceMutation = gql`
+export const UpdateProgramServiceMutation = gql`
   mutation UpdateProgramServiceMutation($input: UpdateProgramServiceInput!) {
     updateProgramService(input: $input) {
       programService {
@@ -99,4 +73,4 @@ const UpdateProgramServiceMutation = gql`
   }
 `;
 
-export default UpdateServiceGroupPopup;
+export default UpdateProgramServiceRequestAllowance;
