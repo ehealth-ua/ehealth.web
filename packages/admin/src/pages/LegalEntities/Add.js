@@ -23,7 +23,8 @@ import { EDRPOU_PATTERN } from "../../constants/validationPatterns";
 
 import env from "../../env";
 
-const LegalEntityQuery = loader("../../graphql/LegalEntityQuery.graphql");
+import { LegalEntityQuery } from "./Details/";
+
 const SearchLegalEntitiesQuery = loader(
   "../../graphql/SearchLegalEntitiesQuery.graphql"
 );

@@ -1,7 +1,0 @@
-mutation NhsVerifyLegalEntityMutation($input: NhsVerifyLegalEntityInput!) {
-  legalEntity: nhsVerifyLegalEntity(input: $input) {
-    legalEntity {
-      id
-    }
-  }
-}
