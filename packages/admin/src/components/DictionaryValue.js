@@ -8,7 +8,7 @@ const DictionaryQuery = loader("../graphql/SearchDictionariesQuery.graphql");
 
 type DictProps = {
   name: string,
-  item: string,
+  item?: string,
   children?: (data: { value: string }) => React.Node,
   render?: any
 };
