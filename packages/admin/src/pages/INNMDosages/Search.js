@@ -18,10 +18,10 @@ import Ability from "../../components/Ability";
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import SearchForm from "../../components/SearchForm";
+import * as SearchField from "../../components/SearchField";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import DictionaryValue from "../../components/DictionaryValue";
 import filteredLocationParams from "../../helpers/filteredLocationParams";
-import STATUSES from "../../helpers/statuses";
 import { UUID_PATTERN } from "../../constants/validationPatterns";
 
 const SearchINNMDosagesQuery = loader(
@@ -218,19 +218,7 @@ const PrimarySearchFields = () => (
       />
     </Box>
     <Box px={1} width={1 / 3}>
-      <Trans
-        id="All statuses"
-        render={({ translation }) => (
-          <Field.Select
-            name="filter.isActive"
-            label={<Trans>Status</Trans>}
-            items={Object.keys(STATUSES.ACTIVE_STATUS_F)}
-            itemToString={item => STATUSES.ACTIVE_STATUS_F[item] || translation}
-            variant="select"
-            emptyOption
-          />
-        )}
-      />
+      <SearchField.Status name="filter.isActive" status="ACTIVE_STATUS_F" />
     </Box>
   </Flex>
 );

@@ -9,8 +9,8 @@ import { SearchIcon } from "@ehealth/icons";
 import { Flex, Box } from "@rebass/emotion";
 
 import { Validation } from "@ehealth/components";
-import STATUSES from "../../../helpers/statuses";
 import * as Field from "../../../components/Field";
+import * as SearchField from "../../../components/SearchField";
 import DictionaryValue from "../../../components/DictionaryValue";
 import { UUID_PATTERN } from "../../../constants/validationPatterns";
 
@@ -78,21 +78,7 @@ const PrimarySearchFields = () => (
       />
     </Box>
     <Box px={1} width={1 / 4}>
-      <Trans
-        id="All statuses"
-        render={({ translation }) => (
-          <Field.Select
-            name="filter.isActive"
-            label={<Trans>Program status</Trans>}
-            items={Object.keys(STATUSES.MEDICAL_PROGRAM_STATUS)}
-            itemToString={item =>
-              STATUSES.MEDICAL_PROGRAM_STATUS[item] || translation
-            }
-            variant="select"
-            emptyOption
-          />
-        )}
-      />
+      <SearchField.Status name="filter.isActive" status="ACTIVE_STATUS_F" />
     </Box>
     <Box px={1} width={1 / 4}>
       <Composer

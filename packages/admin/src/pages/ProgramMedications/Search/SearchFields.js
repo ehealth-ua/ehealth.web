@@ -49,20 +49,10 @@ const SecondarySearchFields = () => (
       />
     </Box>
     <Box px={1} width={1 / 3}>
-      <Trans
-        id="All statuses"
-        render={({ translation }) => (
-          <Field.Select
-            name="filter.isActive"
-            label={<Trans>Participant status</Trans>}
-            items={Object.keys(STATUSES.PROGRAM_MEDICATION_STATUS)}
-            itemToString={item =>
-              STATUSES.PROGRAM_MEDICATION_STATUS[item] || translation
-            }
-            variant="select"
-            emptyOption
-          />
-        )}
+      <SearchField.Status
+        name="filter.isActive"
+        status="ACTIVE_STATUS_M"
+        label={<Trans>Participant status</Trans>}
       />
     </Box>
     <Box px={1} width={1 / 3}>

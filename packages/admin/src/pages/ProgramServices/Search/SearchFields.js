@@ -18,19 +18,7 @@ const PrimarySearchFields = () => (
       <SearchField.ServiceGroup name="filter.serviceGroup" />
     </Box>
     <Box px={1} width={1 / 4}>
-      <Trans
-        id="All statuses"
-        render={({ translation }) => (
-          <Field.Select
-            name="filter.isActive"
-            label={<Trans>Status</Trans>}
-            items={Object.keys(STATUSES.ACTIVE_STATUS_F)}
-            itemToString={item => STATUSES.ACTIVE_STATUS_F[item] || translation}
-            variant="select"
-            emptyOption
-          />
-        )}
-      />
+      <SearchField.Status name="filter.isActive" status="ACTIVE_STATUS_F" />
     </Box>
   </Flex>
 );

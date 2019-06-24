@@ -3,8 +3,8 @@ import { Trans } from "@lingui/macro";
 import { SearchIcon } from "@ehealth/icons";
 import { Flex, Box } from "@rebass/emotion";
 
-import STATUSES from "../../../helpers/statuses";
 import * as Field from "../../../components/Field";
+import * as SearchField from "../../../components/SearchField";
 
 const PrimarySearchFields = () => (
   <Flex mx={-1}>
@@ -35,19 +35,7 @@ const PrimarySearchFields = () => (
       />
     </Box>
     <Box px={1} width={1 / 3}>
-      <Trans
-        id="All statuses"
-        render={({ translation }) => (
-          <Field.Select
-            name="filter.isActive"
-            label={<Trans>Status</Trans>}
-            items={Object.keys(STATUSES.ACTIVE_STATUS_F)}
-            itemToString={item => STATUSES.ACTIVE_STATUS_F[item] || translation}
-            variant="select"
-            emptyOption
-          />
-        )}
-      />
+      <SearchField.Status name="filter.isActive" status="ACTIVE_STATUS_F" />
     </Box>
   </Flex>
 );

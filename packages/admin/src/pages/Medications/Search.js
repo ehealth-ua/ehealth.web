@@ -15,11 +15,11 @@ import Ability from "../../components/Ability";
 import * as Field from "../../components/Field";
 import Pagination from "../../components/Pagination";
 import SearchForm from "../../components/SearchForm";
+import * as SearchField from "../../components/SearchField";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import filteredLocationParams from "../../helpers/filteredLocationParams";
 import Composer from "react-composer";
 import DictionaryValue from "../../components/DictionaryValue";
-import STATUSES from "../../helpers/statuses";
 import Link from "../../components/Link";
 
 const SearchMedicationsQuery = loader(
@@ -129,7 +129,7 @@ const Search = ({ navigate }) => (
                               ),
                               isActive: (
                                 <Badge
-                                  type="ACTIVE_STATUS_F"
+                                  type="ACTIVE_STATUS_M"
                                   name={isActive}
                                   variant={!isActive}
                                   display="block"
@@ -303,19 +303,7 @@ const SecondarySearchFields = () => (
       </Composer>
     </Box>
     <Box px={1} width={1 / 3}>
-      <Trans
-        id="All statuses"
-        render={({ translation }) => (
-          <Field.Select
-            name="filter.isActive"
-            label={<Trans>Status</Trans>}
-            items={Object.keys(STATUSES.ACTIVE_STATUS_F)}
-            itemToString={item => STATUSES.ACTIVE_STATUS_F[item] || translation}
-            variant="select"
-            emptyOption
-          />
-        )}
-      />
+      <SearchField.Status name="filter.isActive" status="ACTIVE_STATUS_M" />
     </Box>
   </Flex>
 );
