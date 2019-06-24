@@ -1,5 +1,5 @@
 //@flow
-import React from "react";
+import * as React from "react";
 import gql from "graphql-tag";
 import { DateFormat, Trans } from "@lingui/macro";
 import { parseSortingParams, stringifySortingParams } from "@ehealth/utils";
@@ -17,12 +17,14 @@ const TasksTable = ({
   tasks,
   locationParams,
   setLocationParams,
-  tableName
+  tableName,
+  taskName: TaskName
 }: {
   tasks: Array<Task>,
   locationParams: URLSearchParams,
   setLocationParams: SetLocationParamsProp,
-  tableName: string
+  tableName: string,
+  taskName: ({ value: string }) => React.Node
 }) => (
   <Table
     data={tasks}
@@ -37,54 +39,61 @@ const TasksTable = ({
       errorMessage: <Trans>Error Message</Trans>
     }}
     renderRow={({
+      name,
       insertedAt,
       updatedAt,
       status,
       requestAllowed,
       endedAt,
-      error: { message },
+      meta,
+      error,
       ...taskData
-    }) => ({
-      ...taskData,
-      errorMessage: message,
-      insertedAt: (
-        <DateFormat
-          value={insertedAt}
-          format={{
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric"
-          }}
-        />
-      ),
-      updatedAt: (
-        <DateFormat
-          value={updatedAt}
-          format={{
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric"
-          }}
-        />
-      ),
-      endedAt: (
-        <DateFormat
-          value={endedAt}
-          format={{
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric"
-          }}
-        />
-      ),
-      status: <Badge type="TASKS" name={status} display="block" />
-    })}
+    }) => {
+      const errorMessage = error && error.message;
+      const userId = meta && meta.id;
+      return {
+        ...taskData,
+        name: <TaskName value={userId} />,
+        errorMessage,
+        insertedAt: (
+          <DateFormat
+            value={insertedAt}
+            format={{
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric"
+            }}
+          />
+        ),
+        updatedAt: (
+          <DateFormat
+            value={updatedAt}
+            format={{
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric"
+            }}
+          />
+        ),
+        endedAt: (
+          <DateFormat
+            value={endedAt}
+            format={{
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric"
+            }}
+          />
+        ),
+        status: <Badge type="TASKS" name={status} display="block" />
+      };
+    }}
     sortableFields={["status", "insertedAt"]}
     sortingParams={parseSortingParams(locationParams.orderBy)}
     onSortingChange={sortingParams =>
@@ -110,9 +119,6 @@ TasksTable.fragments = {
       insertedAt
       endedAt
       updatedAt
-      error {
-        message
-      }
     }
   `
 };

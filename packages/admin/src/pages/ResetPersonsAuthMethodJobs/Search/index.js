@@ -21,7 +21,7 @@ import { PrimarySearchFields } from "./SearchFields";
 
 const Search = () => (
   <Box p={6}>
-    <Heading as="h1" fontWeight="normal" mb={1}>
+    <Heading as="h1" fontWeight="normal" mb={6}>
       <Trans>Reset persons authentication method jobs</Trans>
     </Heading>
     <LocationParams>
@@ -53,7 +53,6 @@ const Search = () => (
             >
               {({
                 loading,
-                error,
                 data: {
                   personsAuthResetJobs: {
                     nodes: personsAuthResetJobs = [],
@@ -69,7 +68,6 @@ const Search = () => (
                       header={{
                         databaseId: <Trans>ID</Trans>,
                         name: <Trans>Job name</Trans>,
-                        strategy: <Trans>Job execution strategy</Trans>,
                         startedAt: <Trans>Started at</Trans>,
                         executionTime: <Trans>Execution time</Trans>,
                         status: <Trans>Job status</Trans>,
@@ -78,15 +76,14 @@ const Search = () => (
                       renderRow={({
                         id,
                         databaseId,
-                        name,
                         status,
-                        strategy,
                         startedAt,
                         endedAt
                       }) => ({
                         databaseId,
-                        name,
-                        strategy,
+                        name: (
+                          <Trans>Reset persons authentication method</Trans>
+                        ),
                         startedAt: (
                           <DateFormat
                             value={startedAt}
@@ -165,7 +162,6 @@ const ResetPersonsAuthMethodJobsQuery = gql`
         databaseId
         name
         status
-        strategy
         startedAt
         endedAt
       }

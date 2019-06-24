@@ -101,6 +101,9 @@ const Tasks = ({
         tasks={nodes}
         locationParams={locationParams}
         setLocationParams={setLocationParams}
+        taskName={({ value }) => (
+          <Trans>Reset authentication method for person with id {value}</Trans>
+        )}
         tableName="reset-persons-auth-method-jobs-table/tasks"
       />
       <Pagination {...pageInfo} />
@@ -119,6 +122,7 @@ const ResetPersonsAuthMethodJobQuery = gql`
     $orderBy: TaskOrderBy
   ) {
     personsAuthResetJob(id: $id) {
+      id
       databaseId
       status
       tasks(
@@ -130,7 +134,19 @@ const ResetPersonsAuthMethodJobQuery = gql`
         orderBy: $orderBy
       ) {
         nodes {
-          ...JobTasks
+          databaseId
+          name
+          priority
+          status
+          insertedAt
+          endedAt
+          updatedAt
+          meta {
+            id
+          }
+          error {
+            message
+          }
         }
         pageInfo {
           ...PageInfo
