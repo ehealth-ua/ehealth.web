@@ -12,3 +12,11 @@ export const SCTID_PATTERN = "^[0-9]{8}$";
 
 export const CYRILLIC_NAME = "^(?!.*[ЫЪЭЁыъэё@%&$^#])[А-ЯҐЇІЄа-яґїіє\\'\\- ]+$";
 export const CYRILLIC_MEDICAL_PROGRAM_NAME = "^[А-Яа-яЁёЇїІіЄєҐґ'\\- ]*$";
+
+export const PHONE_PATTERN = "^\\+380\\d{9}$";
+
+export const UNZR_PATTERN = "^[0-9]{8}-[0-9]{5}$";
+export const NATIONAL_ID = "^[0-9]{9}$";
+
+export const BIRTH_CERTIFICATE =
+  "^(?![ЫЪЭЁыъэё@%&$^#`~:,.*|}{?!])[A-ZА-ЯҐЇІЄ0-9№/()-]+$";
