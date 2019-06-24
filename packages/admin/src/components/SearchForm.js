@@ -15,7 +15,8 @@ type SearchFormProps = {
   onSubmit: Object => void,
   renderPrimary: React.ElementType,
   renderSecondary?: React.ElementType,
-  decorators?: Object => void
+  decorators?: Object => void,
+  customSearchButton?: React.ElementType
 };
 
 const SearchForm = ({
@@ -23,7 +24,8 @@ const SearchForm = ({
   onSubmit,
   renderPrimary: PrimarySearchFields,
   renderSecondary: SecondarySearchFields,
-  decorators
+  decorators,
+  customSearchButton: CustomSearchButton
 }: SearchFormProps) => (
   <Form
     initialValues={initialValues}
@@ -38,7 +40,11 @@ const SearchForm = ({
     <PrimarySearchFields initialValues={initialValues} />
     {SecondarySearchFields && (
       <Flex mb={4} alignItems="center">
-        <SearchModalForm initialValues={initialValues} onSubmit={onSubmit}>
+        <SearchModalForm
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          customSearchButton={CustomSearchButton}
+        >
           <PrimarySearchFields initialValues={initialValues} />
           <SecondarySearchFields initialValues={initialValues} />
         </SearchModalForm>
@@ -47,9 +53,13 @@ const SearchForm = ({
     )}
     <Flex mx={-1} justifyContent="flex-start">
       <Box px={1}>
-        <Button variant="blue">
-          <Trans>Search</Trans>
-        </Button>
+        {CustomSearchButton ? (
+          <CustomSearchButton />
+        ) : (
+          <Button variant="blue">
+            <Trans>Search</Trans>
+          </Button>
+        )}
       </Box>
       <Box px={1}>
         <IconButton
