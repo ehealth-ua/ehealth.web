@@ -26,11 +26,9 @@ import RelatedLegalEntities from "./RelatedLegalEntities";
 
 import type { Scalars } from "@ehealth-ua/schema";
 
-const filteredLocationParams = (id, params = {}) => {
-  const { filter } = params;
+const filteredLocationParams = id => {
   return {
     id,
-    ...filter,
     firstMergedFromLegalEntities: ITEMS_PER_PAGE[0],
     firstDivisions: ITEMS_PER_PAGE[0]
   };
