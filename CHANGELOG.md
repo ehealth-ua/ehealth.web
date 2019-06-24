@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.117.0"></a>
+# [1.117.0](https://github.com/edenlabllc/ehealth.web/compare/v1.116.1...v1.117.0) (2019-06-24)
+
+
+### Features
+
+* **admin:** add id to the MedicationField, update params filter ([52ebcf7](https://github.com/edenlabllc/ehealth.web/commit/52ebcf7))
+* **admin:** add MedicationField component ([b354345](https://github.com/edenlabllc/ehealth.web/commit/b354345))
+* **admin:** add new fields to the ProgramMedications Create form ([6a0ead7](https://github.com/edenlabllc/ehealth.web/commit/6a0ead7))
+* **admin:** show new attributes and refactor program medications details ([94f4c08](https://github.com/edenlabllc/ehealth.web/commit/94f4c08))
+* **admin:** show new attributes and refactor program medications search ([3002aec](https://github.com/edenlabllc/ehealth.web/commit/3002aec))
+
+
+
+
+
 <a name="1.116.1"></a>
 ## [1.116.1](https://github.com/edenlabllc/ehealth.web/compare/v1.116.0...v1.116.1) (2019-06-24)
 
