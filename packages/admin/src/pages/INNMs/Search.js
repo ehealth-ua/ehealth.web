@@ -209,7 +209,7 @@ const Search = () => {
                               ),
                               isActive: (
                                 <Badge
-                                  type="MEDICAL_PROGRAM_STATUS"
+                                  type="ACTIVE_STATUS_F"
                                   name={isActive}
                                   variant={!isActive}
                                   display="block"

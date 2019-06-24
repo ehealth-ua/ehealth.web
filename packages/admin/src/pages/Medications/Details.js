@@ -72,7 +72,7 @@ const Details = ({ id }) => {
                       status: (
                         <Badge
                           name={isActive}
-                          type="ACTIVE_STATUS_F"
+                          type="ACTIVE_STATUS_M"
                           variant={!isActive}
                           minWidth={100}
                         />

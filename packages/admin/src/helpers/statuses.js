@@ -48,19 +48,9 @@ const SUSPENDED = {
   [true]: "Призупинений"
 };
 
-const MEDICAL_PROGRAM_STATUS = {
-  [true]: "Активна",
-  [false]: "Неактивна"
-};
-
 const EDR_VERIFY_STATUS = {
   [true]: "Веріфіковано",
   [false]: "Неверіфіковано"
-};
-
-const PROGRAM_MEDICATION_STATUS = {
-  [true]: "Активний",
-  [false]: "Неактивний"
 };
 
 const ACTIVE_STATUS_F = {
@@ -141,8 +131,6 @@ const STATUSES = {
   CONTRACT_REQUEST,
   JOBS,
   TASKS,
-  MEDICAL_PROGRAM_STATUS,
-  PROGRAM_MEDICATION_STATUS,
   MEDICATION_REQUEST_ALLOWED,
   REIMBURSEMENT_TYPES,
   SUSPENDED,

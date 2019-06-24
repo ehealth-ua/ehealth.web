@@ -35,7 +35,7 @@ const Header = ({
           databaseId,
           isActive: (
             <Badge
-              type="PROGRAM_MEDICATION_STATUS"
+              type="ACTIVE_STATUS_M"
               name={isActive}
               variant={!isActive}
               minWidth={100}

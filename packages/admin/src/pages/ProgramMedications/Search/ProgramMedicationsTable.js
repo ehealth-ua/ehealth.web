@@ -74,7 +74,7 @@ const ProgramMedicationsTable = ({
         ),
         isActive: (
           <Badge
-            type="PROGRAM_MEDICATION_STATUS"
+            type="ACTIVE_STATUS_M"
             name={isActive}
             variant={!isActive}
             display="block"
