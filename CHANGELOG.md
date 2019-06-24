@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.116.0"></a>
+# [1.116.0](https://github.com/edenlabllc/ehealth.web/compare/v1.115.4...v1.116.0) (2019-06-24)
+
+
+### Bug Fixes
+
+* **admin:** add translation for task name, add theme for task status ([392a69d](https://github.com/edenlabllc/ehealth.web/commit/392a69d))
+* **admin:** add translations to `Reset persons authentication method` page ([c996168](https://github.com/edenlabllc/ehealth.web/commit/c996168))
+* **admin:** fix resetPersonsAuth mutation input ([c1f3990](https://github.com/edenlabllc/ehealth.web/commit/c1f3990))
+* **admin:** made `item` prop in `DictionaryValue` flow types unnecessary ([9608428](https://github.com/edenlabllc/ehealth.web/commit/9608428))
+* **admin:** rename mutation according to new schema ([0479831](https://github.com/edenlabllc/ehealth.web/commit/0479831))
+
+
+### Features
+
+* **admin:** add `TASKS` statuses ([eeac580](https://github.com/edenlabllc/ehealth.web/commit/eeac580))
+* **admin:** add computed flag to person nav section ([8296adf](https://github.com/edenlabllc/ehealth.web/commit/8296adf))
+* **admin:** add error message in Tasks table ([51f7ce2](https://github.com/edenlabllc/ehealth.web/commit/51f7ce2))
+* **admin:** add reset persons page and jobs page for it ([ad4c029](https://github.com/edenlabllc/ehealth.web/commit/ad4c029))
+
+
+
+
+
 <a name="1.115.4"></a>
 ## [1.115.4](https://github.com/edenlabllc/ehealth.web/compare/v1.115.3...v1.115.4) (2019-06-20)
 

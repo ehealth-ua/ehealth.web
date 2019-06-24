@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.116.0"></a>
+# [1.116.0](https://github.com/edenlabllc/ehealth.web/compare/v1.115.4...v1.116.0) (2019-06-24)
+
+**Note:** Version bump only for package @ehealth/mock-server
+
+
+
+
+
 <a name="1.106.4"></a>
 ## [1.106.4](https://github.com/edenlabllc/ehealth.web/compare/v1.106.3...v1.106.4) (2019-06-10)
 
