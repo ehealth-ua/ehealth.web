@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.118.1"></a>
+## [1.118.1](https://github.com/edenlabllc/ehealth.web/compare/v1.118.0...v1.118.1) (2019-06-24)
+
+**Note:** Version bump only for package @ehealth/monorepo
+
+
+
+
+
 <a name="1.118.0"></a>
 # [1.118.0](https://github.com/edenlabllc/ehealth.web/compare/v1.117.0...v1.118.0) (2019-06-24)
 
