@@ -28,7 +28,7 @@
     "downshift": "^3.1.8",
     "emotion": "^10.0.5",
     "final-form-calculate": "^1.2.1",
-    "flag": "^4.1.0",
+    "flag": "^3.0.0-1",
     "graphql": "14.0.2",
     "graphql-tag": "^2.10.1",
     "graphql.macro": "^1.4.2",
