@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.118.3"></a>
+## [1.118.3](https://github.com/edenlabllc/ehealth.web/compare/v1.118.2...v1.118.3) (2019-06-25)
+
+
+### Bug Fixes
+
+* **admin-legacy:** add reset auth link in menu ([6c3f952](https://github.com/edenlabllc/ehealth.web/commit/6c3f952))
+
+
+
+
+
 <a name="1.115.4"></a>
 ## [1.115.4](https://github.com/edenlabllc/ehealth.web/compare/v1.115.3...v1.115.4) (2019-06-20)
 
