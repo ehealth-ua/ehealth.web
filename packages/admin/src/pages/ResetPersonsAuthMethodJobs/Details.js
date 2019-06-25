@@ -101,8 +101,11 @@ const Tasks = ({
         tasks={nodes}
         locationParams={locationParams}
         setLocationParams={setLocationParams}
-        taskName={({ value }) => (
-          <Trans>Reset authentication method for person with id {value}</Trans>
+        taskName={({ value: userId }) => (
+          <>
+            <Trans>Reset authentication method for person with id</Trans>{" "}
+            {userId}
+          </>
         )}
         tableName="reset-persons-auth-method-jobs-table/tasks"
       />

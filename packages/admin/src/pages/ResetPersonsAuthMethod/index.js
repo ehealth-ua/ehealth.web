@@ -96,7 +96,8 @@ const ResetPersonsAuthMethod = ({
                       disabled={
                         isLoading ||
                         fileSizeError ||
-                        !isEmpty(fileContent.invalidEntries)
+                        !isEmpty(fileContent.invalidEntries) ||
+                        isEmpty(fileContent.validEntries)
                       }
                       onClick={async () => {
                         await resetPersonsAuth({

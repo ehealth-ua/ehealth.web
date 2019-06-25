@@ -2,7 +2,7 @@
   "ATC Code": {
     "translation": "АТX код",
     "origin": [
-      ["src/components/SelectedFilters.js", 238],
+      ["src/components/SelectedFilters.js", 239],
       ["src/pages/Medications/Create.js", 635],
       ["src/pages/Medications/Search.js", 279]
     ]
@@ -50,7 +50,7 @@
   },
   "Activate": {
     "translation": "Активувати",
-    "origin": [["src/pages/ProgramMedications/Details.js", 116]]
+    "origin": [["src/pages/ProgramMedications/Details/Mutations/Update.js", 39]]
   },
   "Activate Legal Entity": {
     "translation": "Активувати медзаклад",
@@ -65,8 +65,9 @@
       ["src/pages/INNMDosages/Create.js", 139],
       ["src/pages/INNMDosages/Create.js", 375],
       ["src/pages/Medications/Create.js", 621],
-      ["src/pages/ProgramMedications/Create.js", 257],
-      ["src/pages/ProgramMedications/Create.js", 363]
+      ["src/pages/ProgramMedications/Create.js", 192],
+      ["src/pages/ProgramMedications/Create.js", 319],
+      ["src/pages/ProgramServices/Details/Mutations/UpdateDescription.js", 89]
     ]
   },
   "Add ATC Code": {
@@ -103,7 +104,7 @@
   },
   "Add participant": {
     "translation": "Додати учасника",
-    "origin": [["src/pages/ProgramMedications/Search.js", 58]]
+    "origin": [["src/pages/ProgramMedications/Search/index.js", 62]]
   },
   "Add phone": {
     "translation": "Додати номер телефону",
@@ -198,30 +199,27 @@
   "All statuses": {
     "translation": "Всі статуси",
     "origin": [
+      ["src/components/SearchField/StatusField.js", 17],
       ["src/pages/ContractRequests/Capitation/Search/SearchFields.js", 85],
       ["src/pages/ContractRequests/Reimbursement/Search/SearchFields.js", 89],
       ["src/pages/Contracts/Capitation/Search/SearchFields.js", 77],
       ["src/pages/Contracts/Reimbursement/Search/SearchFields.js", 81],
-      ["src/pages/INNMDosages/Search.js", 221],
       ["src/pages/LegalEntities/Search/SearchFields.js", 124],
       ["src/pages/LegalEntityDeactivateJobs/Search.js", 207],
       ["src/pages/LegalEntityMergeJobs/Search.js", 228],
       ["src/pages/LegalEntityMergeJobs/Search.js", 274],
-      ["src/pages/MedicalPrograms/Search/SearchFields.js", 81],
-      ["src/pages/Medications/Search.js", 306],
-      ["src/pages/ProgramMedications/Search.js", 291],
-      ["src/pages/ProgramServices/Search/SearchFields.js", 21],
-      ["src/pages/ProgramServices/Search/SearchFields.js", 41],
-      ["src/pages/ResetPersonsAuthMethodJobs/Search/SearchFields.js", 10],
-      ["src/pages/ServiceGroups/Search/SearchFields.js", 38],
-      ["src/pages/Services/Search/SearchFields.js", 40]
+      ["src/pages/ProgramServices/Search/SearchFields.js", 29],
+      ["src/pages/ResetPersonsAuthMethodJobs/Search/SearchFields.js", 10]
     ]
   },
   "Allow Request": {
     "translation": "Надати дозвіл",
     "origin": [
-      ["src/pages/ProgramMedications/Details.js", 138],
-      ["src/pages/ProgramServices/Details/Mutations/Update.js", 33],
+      ["src/pages/ProgramMedications/Details/Mutations/Update.js", 60],
+      [
+        "src/pages/ProgramServices/Details/Mutations/UpdateRequestAllowance.js",
+        29
+      ],
       ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 36],
       ["src/pages/Services/Details/UpdateServicePopup.js", 37]
     ]
@@ -234,7 +232,12 @@
   },
   "Allow Request for program service": {
     "translation": "Надати дозвіл на направлення для програми послуг",
-    "origin": [["src/pages/ProgramServices/Details/Mutations/Update.js", 34]]
+    "origin": [
+      [
+        "src/pages/ProgramServices/Details/Mutations/UpdateRequestAllowance.js",
+        30
+      ]
+    ]
   },
   "Allow Request for service": {
     "translation": "Надати дозвіл на направлення для сервісу",
@@ -360,8 +363,8 @@
       ["src/pages/Medications/Create.js", 324],
       ["src/pages/Medications/Create.js", 433],
       ["src/pages/Medications/Create.js", 592],
-      ["src/pages/ProgramMedications/Create.js", 252],
-      ["src/pages/ProgramMedications/Create.js", 330]
+      ["src/pages/ProgramMedications/Create.js", 187],
+      ["src/pages/ProgramMedications/Create.js", 283]
     ]
   },
   "Bank": {
@@ -491,7 +494,11 @@
     "translation": "Змінити",
     "origin": [
       ["src/pages/Contracts/Capitation/Details.js", 676],
-      ["src/pages/ProgramMedications/Details.js", 344]
+      [
+        "src/pages/ProgramMedications/Details/Mutations/UpdateReimbursementAmount.js",
+        83
+      ],
+      ["src/pages/ProgramServices/Details/Mutations/UpdateDescription.js", 89]
     ]
   },
   "Change authentication method": {
@@ -550,17 +557,14 @@
       ["src/components/SearchField/MedicalProgramField.js", 12],
       ["src/pages/ContractRequests/Reimbursement/Search/SearchFields.js", 136],
       ["src/pages/Contracts/Reimbursement/Search/SearchFields.js", 115],
-      ["src/pages/MedicalPrograms/Search/SearchFields.js", 38],
-      ["src/pages/ProgramMedications/Create.js", 120],
-      ["src/pages/ProgramMedications/Search.js", 191]
+      ["src/pages/MedicalPrograms/Search/SearchFields.js", 38]
     ]
   },
   "Choose medication name": {
     "translation": "Оберіть торгівельне найменування",
     "origin": [
-      ["src/pages/Medications/Search.js", 175],
-      ["src/pages/ProgramMedications/Create.js", 73],
-      ["src/pages/ProgramMedications/Search.js", 235]
+      ["src/components/SearchField/MedicationField.js", 12],
+      ["src/pages/Medications/Search.js", 175]
     ]
   },
   "Choose parent group": {
@@ -638,7 +642,7 @@
       ["src/pages/Employees/Update.js", 60],
       ["src/pages/INNMDosages/Create.js", 33],
       ["src/pages/Medications/Create.js", 42],
-      ["src/pages/ProgramMedications/Create.js", 36]
+      ["src/pages/ProgramMedications/Create.js", 27]
     ]
   },
   "Confirm with EDS": {
@@ -672,9 +676,9 @@
   "Consumer price": {
     "translation": "Роздрібна ціна за упаковку",
     "origin": [
-      ["src/pages/ProgramMedications/Create.js", 220],
-      ["src/pages/ProgramMedications/Create.js", 303],
-      ["src/pages/ProgramMedications/Details.js", 251],
+      ["src/pages/ProgramMedications/Create.js", 122],
+      ["src/pages/ProgramMedications/Create.js", 241],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 119],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 26]
     ]
   },
@@ -749,7 +753,7 @@
   "Contract end date": {
     "translation": "Дата закінчення",
     "origin": [
-      ["src/components/SelectedFilters.js", 105],
+      ["src/components/SelectedFilters.js", 106],
       [
         "src/pages/ContractRequests/Capitation/Details/ExternalContractors.js",
         43
@@ -764,7 +768,7 @@
   "Contract inserted date": {
     "translation": "Дата додавання",
     "origin": [
-      ["src/components/SelectedFilters.js", 132],
+      ["src/components/SelectedFilters.js", 133],
       ["src/pages/ContractRequests/Capitation/Search/SearchFields.js", 126],
       ["src/pages/ContractRequests/Reimbursement/Search/SearchFields.js", 130]
     ]
@@ -822,7 +826,7 @@
   "Contract start date": {
     "translation": "Дата укладення",
     "origin": [
-      ["src/components/SelectedFilters.js", 78],
+      ["src/components/SelectedFilters.js", 79],
       [
         "src/pages/ContractRequests/Capitation/Details/ExternalContractors.js",
         42
@@ -904,7 +908,7 @@
   },
   "Create program medication": {
     "translation": "Створення учасника медичної програми",
-    "origin": [["src/pages/ProgramMedications/Create.js", 53]]
+    "origin": [["src/pages/ProgramMedications/Create.js", 44]]
   },
   "Create program service": {
     "translation": "Створити програму послуг",
@@ -982,7 +986,7 @@
       ["src/pages/Medications/Details.js", 100],
       ["src/pages/Medications/Details.js", 107],
       ["src/pages/Medications/Details.js", 111],
-      ["src/pages/ProgramMedications/Details.js", 114],
+      ["src/pages/ProgramMedications/Details/Mutations/Update.js", 39],
       ["src/pages/ProgramServices/Details/Mutations/Deactivate.js", 21],
       ["src/pages/ProgramServices/Details/Mutations/Deactivate.js", 31],
       ["src/pages/ServiceGroups/Details/DeactivateServiceGroupPopup.js", 40],
@@ -1124,7 +1128,8 @@
       ["src/pages/Dictionaries/Details.js", 330],
       ["src/pages/Dictionaries/Details.js", 346],
       ["src/pages/Dictionaries/Details.js", 472],
-      ["src/pages/ProgramServices/Details/GeneralInfo.js", 28]
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 33],
+      ["src/pages/ProgramServices/Details/Mutations/UpdateDescription.js", 35]
     ]
   },
   "Details": {
@@ -1139,7 +1144,7 @@
       ["src/pages/LegalEntityDeactivateJobs/Search.js", 92],
       ["src/pages/LegalEntityMergeJobs/Search.js", 126],
       ["src/pages/PatientMergeRequests/Search.js", 125],
-      ["src/pages/ProgramMedications/Search.js", 99],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 43],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 31],
       ["src/pages/ResetPersonsAuthMethodJobs/Search/index.js", 74],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 28],
@@ -1161,7 +1166,7 @@
   "Dictionaries": {
     "translation": "Словники",
     "origin": [
-      ["src/components/Nav.js", 384],
+      ["src/components/Nav.js", 386],
       ["src/pages/Dictionaries/Details.js", 56],
       ["src/pages/Dictionaries/Search.js", 26]
     ]
@@ -1183,8 +1188,11 @@
   "Disallow Request": {
     "translation": "Зняти дозвіл",
     "origin": [
-      ["src/pages/ProgramMedications/Details.js", 136],
-      ["src/pages/ProgramServices/Details/Mutations/Update.js", 28],
+      ["src/pages/ProgramMedications/Details/Mutations/Update.js", 58],
+      [
+        "src/pages/ProgramServices/Details/Mutations/UpdateRequestAllowance.js",
+        24
+      ],
       ["src/pages/ServiceGroups/Details/UpdateServiceGroupPopup.js", 31],
       ["src/pages/Services/Details/UpdateServicePopup.js", 32]
     ]
@@ -1197,7 +1205,12 @@
   },
   "Disallow Request for program service": {
     "translation": "Зняти дозвіл на направлення з програми послуг",
-    "origin": [["src/pages/ProgramServices/Details/Mutations/Update.js", 29]]
+    "origin": [
+      [
+        "src/pages/ProgramServices/Details/Mutations/UpdateRequestAllowance.js",
+        25
+      ]
+    ]
   },
   "Disallow Request for service": {
     "translation": "Зняти дозвіл на направлення з сервісу",
@@ -1437,7 +1450,7 @@
   "Employee Requests": {
     "translation": "Співробітники на розгляді",
     "origin": [
-      ["src/components/Nav.js", 375],
+      ["src/components/Nav.js", 377],
       ["src/pages/EmployeeRequests/Search.js", 43]
     ]
   },
@@ -1456,7 +1469,7 @@
   "Employee status": {
     "translation": "Статус",
     "origin": [
-      ["src/components/SelectedFilters.js", 223],
+      ["src/components/SelectedFilters.js", 224],
       ["src/pages/Employees/Details/Header.js", 47],
       ["src/pages/Employees/Search/SearchFields.js", 144]
     ]
@@ -1479,8 +1492,8 @@
     "origin": [
       ["src/components/Nav.js", 65],
       ["src/components/Nav.js", 68],
-      ["src/components/Nav.js", 367],
-      ["src/components/Nav.js", 370],
+      ["src/components/Nav.js", 369],
+      ["src/components/Nav.js", 372],
       ["src/pages/Employees/Details/index.js", 56],
       ["src/pages/Employees/Search/index.js", 26]
     ]
@@ -1492,6 +1505,15 @@
   "Employment start date": {
     "translation": "Дата початку роботи",
     "origin": [["src/pages/Employees/Details/GeneralInfo.js", 92]]
+  },
+  "End date": {
+    "translation": "",
+    "origin": [
+      ["src/pages/ProgramMedications/Create.js", 174],
+      ["src/pages/ProgramMedications/Create.js", 259],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 123],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 42]
+    ]
   },
   "End date of the contract": {
     "translation": "Кінцева дата дії договору",
@@ -1511,7 +1533,7 @@
   },
   "Enter ID": {
     "translation": "Введіть ID",
-    "origin": [["src/pages/INNMDosages/Search.js", 241]]
+    "origin": [["src/pages/INNMDosages/Search.js", 229]]
   },
   "Enter ID or Declaration number": {
     "translation": "Введіть ID або номер декларації",
@@ -1533,7 +1555,7 @@
     "translation": "Введіть назву лікарської форми",
     "origin": [
       ["src/pages/INNMDosages/Search.js", 181],
-      ["src/pages/ProgramMedications/Search.js", 275]
+      ["src/pages/ProgramMedications/Search/SearchFields.js", 19]
     ]
   },
   "Enter SCTID": {
@@ -1598,7 +1620,7 @@
     "translation": "Введіть опис",
     "origin": [
       ["src/pages/Dictionaries/Details.js", 325],
-      ["src/pages/ProgramServices/Details/Mutations/Update.js", 70],
+      ["src/pages/ProgramServices/Details/Mutations/UpdateDescription.js", 55],
       [
         "src/pages/ProgramServices/Search/Mutations/CreateProgramService.js",
         146
@@ -1728,6 +1750,13 @@
       ["src/pages/LegalEntities/Details/Mutations/UpdateStatus.js", 42]
     ]
   },
+  "Enter registry number": {
+    "translation": "",
+    "origin": [
+      ["src/pages/ProgramMedications/Create.js", 151],
+      ["src/pages/ProgramMedications/Search/SearchFields.js", 38]
+    ]
+  },
   "Enter second name": {
     "translation": "Введіть ім’я по-батькові",
     "origin": [
@@ -1797,9 +1826,9 @@
   "Estimated payment amount": {
     "translation": "Сума доплати за упаковку",
     "origin": [
-      ["src/pages/ProgramMedications/Create.js", 230],
-      ["src/pages/ProgramMedications/Create.js", 304],
-      ["src/pages/ProgramMedications/Details.js", 252]
+      ["src/pages/ProgramMedications/Create.js", 132],
+      ["src/pages/ProgramMedications/Create.js", 242],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 120]
     ]
   },
   "Example: Order of the Cabinet of Ministers of Ukraine # 73465 ": {
@@ -1851,7 +1880,7 @@
       ["src/pages/Employees/Create.js", 45],
       ["src/pages/Employees/Update.js", 57],
       ["src/pages/INNMDosages/Create.js", 30],
-      ["src/pages/ProgramMedications/Create.js", 33]
+      ["src/pages/ProgramMedications/Create.js", 24]
     ]
   },
   "Filter by Tag": {
@@ -1906,11 +1935,11 @@
   "Form": {
     "translation": "Форма",
     "origin": [
-      ["src/components/SelectedFilters.js", 190],
+      ["src/components/SelectedFilters.js", 191],
       ["src/pages/INNMDosages/Create.js", 104],
       ["src/pages/INNMDosages/Create.js", 282],
       ["src/pages/INNMDosages/Details.js", 55],
-      ["src/pages/INNMDosages/Search.js", 268],
+      ["src/pages/INNMDosages/Search.js", 256],
       ["src/pages/Medications/Create.js", 111],
       ["src/pages/Medications/Create.js", 487]
     ]
@@ -1957,7 +1986,7 @@
       ["src/pages/LegalEntities/Details/index.js", 102],
       ["src/pages/Medications/Create.js", 33],
       ["src/pages/Medications/Details.js", 134],
-      ["src/pages/ProgramMedications/Details.js", 151],
+      ["src/pages/ProgramMedications/Details/index.js", 50],
       ["src/pages/ProgramServices/Details/index.js", 66]
     ]
   },
@@ -2025,8 +2054,8 @@
       ["src/pages/Medications/Details.js", 65],
       ["src/pages/Medications/Details.js", 230],
       ["src/pages/Medications/Search.js", 79],
-      ["src/pages/ProgramServices/Details/GeneralInfo.js", 44],
-      ["src/pages/ProgramServices/Details/Header.js", 34],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 57],
+      ["src/pages/ProgramServices/Details/Header.js", 32],
       ["src/pages/ProgramServices/Details/ServiceConnections.js", 30],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 22],
       ["src/pages/ResetPersonsAuthMethodJobs/Search/index.js", 69],
@@ -2069,7 +2098,7 @@
     "translation": "ID лікарської форми",
     "origin": [
       ["src/pages/INNMDosages/Details.js", 53],
-      ["src/pages/INNMDosages/Search.js", 246]
+      ["src/pages/INNMDosages/Search.js", 234]
     ]
   },
   "INNM dosage details": {
@@ -2081,7 +2110,7 @@
     "origin": [
       ["src/pages/INNMDosages/Create.js", 281],
       ["src/pages/INNMDosages/Search.js", 199],
-      ["src/pages/ProgramMedications/Search.js", 280]
+      ["src/pages/ProgramMedications/Search/SearchFields.js", 24]
     ]
   },
   "INNM dosages": {
@@ -2172,7 +2201,7 @@
       ["src/pages/MedicalPrograms/Search/MedicalProgramsTable.js", 38],
       ["src/pages/Medications/Details.js", 233],
       ["src/pages/Medications/Search.js", 87],
-      ["src/pages/ProgramMedications/Search.js", 98],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 40],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 29],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 26],
       ["src/pages/Services/Details/ParentGroupsTable.js", 25],
@@ -2188,7 +2217,7 @@
   },
   "Invalid fields": {
     "translation": "Помилки у файлі",
-    "origin": [["src/pages/ResetPersonsAuthMethod/index.js", 140]]
+    "origin": [["src/pages/ResetPersonsAuthMethod/index.js", 141]]
   },
   "Is EDR data actual": {
     "translation": "Дані з ЄДР актуальні",
@@ -2208,15 +2237,15 @@
   "Is request allowed": {
     "translation": "Дозвіл на направлення",
     "origin": [
-      ["src/components/SelectedFilters.js", 244],
-      ["src/pages/ProgramServices/Details/Header.js", 36],
+      ["src/components/SelectedFilters.js", 245],
+      ["src/pages/ProgramServices/Details/Header.js", 34],
       ["src/pages/ProgramServices/Details/ServiceConnections.js", 35],
       [
         "src/pages/ProgramServices/Search/Mutations/CreateProgramService.js",
         101
       ],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 28],
-      ["src/pages/ProgramServices/Search/SearchFields.js", 46],
+      ["src/pages/ProgramServices/Search/SearchFields.js", 34],
       ["src/pages/ServiceGroups/Details/index.js", 98],
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 156],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 25],
@@ -2427,7 +2456,7 @@
   "Legal entity name": {
     "translation": "Назва Медзакладу",
     "origin": [
-      ["src/components/SelectedFilters.js", 182],
+      ["src/components/SelectedFilters.js", 183],
       ["src/pages/ContractRequests/Capitation/Search/SearchFields.js", 56],
       ["src/pages/ContractRequests/Reimbursement/Search/SearchFields.js", 60],
       ["src/pages/Contracts/Capitation/Search/SearchFields.js", 52],
@@ -2524,7 +2553,7 @@
   },
   "Manage a participant of medical program from the list below or add the new one": {
     "translation": "Опрацюйте учасника зі списку або додайте нового",
-    "origin": [["src/pages/ProgramMedications/Search.js", 50]]
+    "origin": [["src/pages/ProgramMedications/Search/index.js", 54]]
   },
   "Manage a program from the list below or add the new one": {
     "translation": "Опрацюйте програму зі списку або додайте нову",
@@ -2573,9 +2602,7 @@
       ["src/pages/Contracts/Reimbursement/Search/ContractsTable.js", 40],
       ["src/pages/Contracts/Reimbursement/Search/SearchFields.js", 133],
       ["src/pages/MedicalPrograms/Search/SearchFields.js", 59],
-      ["src/pages/ProgramMedications/Create.js", 141],
-      ["src/pages/ProgramMedications/Search.js", 212],
-      ["src/pages/ProgramServices/Details/GeneralInfo.js", 40],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 53],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 23]
     ]
   },
@@ -2584,24 +2611,24 @@
     "origin": [
       ["src/pages/ContractRequests/Reimbursement/Details.js", 285],
       ["src/pages/MedicalPrograms/Search/SearchFields.js", 20],
-      ["src/pages/ProgramMedications/Details.js", 227],
-      ["src/pages/ProgramMedications/Search.js", 85]
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 95],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 32]
     ]
   },
   "Medical program name": {
     "translation": "Назва медичної програми",
     "origin": [
       ["src/pages/MedicalPrograms/Search/MedicalProgramsTable.js", 35],
-      ["src/pages/ProgramMedications/Create.js", 285],
-      ["src/pages/ProgramMedications/Details.js", 218],
-      ["src/pages/ProgramMedications/Search.js", 87]
+      ["src/pages/ProgramMedications/Create.js", 223],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 86],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 33]
     ]
   },
   "Medical program type": {
     "translation": "Тип медичної програми",
     "origin": [
       ["src/pages/MedicalPrograms/Search/CreateMedicalProgramPopup.js", 96],
-      ["src/pages/MedicalPrograms/Search/SearchFields.js", 107]
+      ["src/pages/MedicalPrograms/Search/SearchFields.js", 93]
     ]
   },
   "Medical programs": {
@@ -2610,7 +2637,7 @@
   },
   "Medication ID": {
     "translation": "ID торгівельного найменування",
-    "origin": [["src/pages/ProgramMedications/Details.js", 203]]
+    "origin": [["src/pages/ProgramMedications/Details/GeneralInfo.js", 71]]
   },
   "Medication details": {
     "translation": "Деталі медикамента",
@@ -2626,30 +2653,31 @@
       ["src/pages/INNMDosages/Search.js", 77],
       ["src/pages/Medications/Details.js", 179],
       ["src/pages/Medications/Search.js", 295],
-      ["src/pages/ProgramMedications/Search.js", 90]
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 35]
     ]
   },
   "Medication manufacturer": {
     "translation": "Виробник",
-    "origin": [["src/pages/ProgramMedications/Search.js", 92]]
+    "origin": [
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 36]
+    ]
   },
   "Medication name": {
     "translation": "Торгівельне найменування",
     "origin": [
+      ["src/components/SearchField/MedicationField.js", 30],
       ["src/pages/Medications/Create.js", 86],
       ["src/pages/Medications/Create.js", 486],
       ["src/pages/Medications/Search.js", 80],
       ["src/pages/Medications/Search.js", 194],
-      ["src/pages/ProgramMedications/Create.js", 93],
-      ["src/pages/ProgramMedications/Create.js", 284],
-      ["src/pages/ProgramMedications/Details.js", 194],
-      ["src/pages/ProgramMedications/Search.js", 89],
-      ["src/pages/ProgramMedications/Search.js", 253]
+      ["src/pages/ProgramMedications/Create.js", 222],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 62],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 34]
     ]
   },
   "Medication request allowed": {
     "translation": "Дозвіл на створення рецептів",
-    "origin": [["src/pages/ProgramMedications/Details.js", 60]]
+    "origin": [["src/pages/ProgramMedications/Details/Header.js", 32]]
   },
   "Medications": {
     "translation": "Медикаменти",
@@ -2777,7 +2805,7 @@
       ["src/pages/LegalEntities/Details/Header.js", 40],
       ["src/pages/MedicalPrograms/Search/CreateMedicalProgramPopup.js", 70],
       ["src/pages/Medications/Details.js", 66],
-      ["src/pages/ProgramServices/Details/GeneralInfo.js", 45],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 58],
       ["src/pages/ProgramServices/Details/ServiceConnections.js", 31]
     ]
   },
@@ -2924,11 +2952,11 @@
   },
   "Participant ID": {
     "translation": "ID учасника",
-    "origin": [["src/pages/ProgramMedications/Details.js", 57]]
+    "origin": [["src/pages/ProgramMedications/Details/Header.js", 30]]
   },
   "Participant status": {
     "translation": "Статус учасника",
-    "origin": [["src/pages/ProgramMedications/Search.js", 296]]
+    "origin": [["src/pages/ProgramMedications/Search/SearchFields.js", 55]]
   },
   "Passport": {
     "translation": "Паспорт",
@@ -2973,7 +3001,7 @@
   "Patients Merge": {
     "translation": "Об’єднання пацієнтів",
     "origin": [
-      ["src/components/Nav.js", 360],
+      ["src/components/Nav.js", 362],
       ["src/pages/PatientMergeRequests/Details.js", 60],
       ["src/pages/PatientMergeRequests/Search.js", 72]
     ]
@@ -3154,7 +3182,7 @@
   "Position": {
     "translation": "Посада",
     "origin": [
-      ["src/components/SelectedFilters.js", 214],
+      ["src/components/SelectedFilters.js", 215],
       ["src/pages/Declarations/Details.js", 468],
       ["src/pages/Employees/Create.js", 195],
       ["src/pages/Employees/Create.js", 552],
@@ -3184,7 +3212,7 @@
   },
   "Prescription creation": {
     "translation": "Дозвіл на створення рецептів",
-    "origin": [["src/pages/ProgramMedications/Search.js", 313]]
+    "origin": [["src/pages/ProgramMedications/Search/SearchFields.js", 64]]
   },
   "Previous request ID": {
     "translation": "ID попередньої заяви",
@@ -3196,7 +3224,7 @@
   "Price": {
     "translation": "Ціна",
     "origin": [
-      ["src/pages/ProgramServices/Details/GeneralInfo.js", 27],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 32],
       [
         "src/pages/ProgramServices/Search/Mutations/CreateProgramService.js",
         121
@@ -3237,13 +3265,13 @@
   },
   "Program medication details": {
     "translation": "Деталі учасника медичної програми",
-    "origin": [["src/pages/ProgramMedications/Details.js", 49]]
+    "origin": [["src/pages/ProgramMedications/Details/index.js", 36]]
   },
   "Program medications": {
     "translation": "Учасники медичних програм",
     "origin": [
       ["src/components/Nav.js", 289],
-      ["src/pages/ProgramMedications/Search.js", 47]
+      ["src/pages/ProgramMedications/Search/index.js", 51]
     ]
   },
   "Program service details": {
@@ -3257,10 +3285,6 @@
       ["src/pages/ProgramServices/Details/index.js", 49],
       ["src/pages/ProgramServices/Search/index.js", 27]
     ]
-  },
-  "Program status": {
-    "translation": "Статус програми",
-    "origin": [["src/pages/MedicalPrograms/Search/SearchFields.js", 86]]
   },
   "Property type": {
     "translation": "Тип власності",
@@ -3329,16 +3353,29 @@
       ["src/pages/Persons/Details.js", 193]
     ]
   },
+  "Registry number": {
+    "translation": "",
+    "origin": [
+      ["src/components/SelectedFilters.js", 252],
+      ["src/pages/ProgramMedications/Create.js", 156],
+      ["src/pages/ProgramMedications/Create.js", 260],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 124],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 39],
+      ["src/pages/ProgramMedications/Search/SearchFields.js", 43]
+    ]
+  },
   "Reimbursement amount": {
     "translation": "Сума відшкодування",
-    "origin": [["src/pages/ProgramMedications/Search.js", 95]]
+    "origin": [
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 37]
+    ]
   },
   "Reimbursement amount for the package of the medicinal product": {
     "translation": "Розмір відшкодування за упаковку лікарського засобу",
     "origin": [
-      ["src/pages/ProgramMedications/Create.js", 178],
-      ["src/pages/ProgramMedications/Create.js", 298],
-      ["src/pages/ProgramMedications/Details.js", 246]
+      ["src/pages/ProgramMedications/Create.js", 80],
+      ["src/pages/ProgramMedications/Create.js", 236],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 114]
     ]
   },
   "Reimbursement contract type": {
@@ -3348,9 +3385,9 @@
   "Reimbursement daily dosage": {
     "translation": "Розмір відшкодування добової дози лікарського засобу",
     "origin": [
-      ["src/pages/ProgramMedications/Create.js", 238],
-      ["src/pages/ProgramMedications/Create.js", 305],
-      ["src/pages/ProgramMedications/Details.js", 253]
+      ["src/pages/ProgramMedications/Create.js", 140],
+      ["src/pages/ProgramMedications/Create.js", 243],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 121]
     ]
   },
   "Reimbursement report": {
@@ -3360,9 +3397,9 @@
   "Reimbursement type": {
     "translation": "Тип реімбурсації",
     "origin": [
-      ["src/pages/ProgramMedications/Create.js", 196],
-      ["src/pages/ProgramMedications/Create.js", 296],
-      ["src/pages/ProgramMedications/Details.js", 244]
+      ["src/pages/ProgramMedications/Create.js", 98],
+      ["src/pages/ProgramMedications/Create.js", 234],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 112]
     ]
   },
   "Reject": {
@@ -3423,8 +3460,7 @@
       ["src/pages/Declarations/Search.js", 191],
       ["src/pages/Dictionaries/Search.js", 180],
       ["src/pages/LegalEntityDeactivateJobs/Search.js", 241],
-      ["src/pages/Persons/Search.js", 409],
-      ["src/pages/ProgramMedications/Search.js", 343]
+      ["src/pages/Persons/Search.js", 409]
     ]
   },
   "Reset Authentication Method": {
@@ -3436,17 +3472,17 @@
   },
   "Reset authentication method": {
     "translation": "Скинути метод аутентифікації",
-    "origin": [["src/pages/ResetPersonsAuthMethod/index.js", 113]]
+    "origin": [["src/pages/ResetPersonsAuthMethod/index.js", 114]]
   },
-  "Reset authentication method for person with id {value}": {
+  "Reset authentication method for person with id": {
     "translation": "Скинути метод аутентифікації для особи з ID",
-    "origin": [["src/pages/ResetPersonsAuthMethodJobs/Details.js", 105]]
+    "origin": [["src/pages/ResetPersonsAuthMethodJobs/Details.js", 106]]
   },
   "Reset persons authentication method": {
     "translation": "Скинути метод аутентифікації у паціентів",
     "origin": [
       ["src/components/Nav.js", 238],
-      ["src/components/Nav.js", 351],
+      ["src/components/Nav.js", 352],
       ["src/pages/ResetPersonsAuthMethod/index.js", 30],
       ["src/pages/ResetPersonsAuthMethodJobs/Details.js", 43],
       ["src/pages/ResetPersonsAuthMethodJobs/Search/index.js", 85]
@@ -3531,8 +3567,7 @@
       ["src/pages/LegalEntityDeactivateJobs/Search.js", 226],
       ["src/pages/LegalEntityMergeJobs/Search.js", 246],
       ["src/pages/LegalEntityMergeJobs/Search.js", 292],
-      ["src/pages/Persons/Search.js", 392],
-      ["src/pages/ProgramMedications/Search.js", 328]
+      ["src/pages/Persons/Search.js", 392]
     ]
   },
   "Search by INNM ID": {
@@ -3605,7 +3640,7 @@
   },
   "Search program medications": {
     "translation": "Список учасників медичних програм",
-    "origin": [["src/pages/ProgramMedications/Details.js", 46]]
+    "origin": [["src/pages/ProgramMedications/Details/index.js", 33]]
   },
   "Search related legal entity": {
     "translation": "Знайти підпорядкований медзаклад",
@@ -3665,18 +3700,18 @@
       ["src/pages/INNMDosages/Create.js", 98],
       ["src/pages/INNMDosages/Create.js", 225],
       ["src/pages/INNMDosages/Create.js", 249],
-      ["src/pages/INNMDosages/Search.js", 262],
+      ["src/pages/INNMDosages/Search.js", 250],
       ["src/pages/LegalEntities/Details/Divisions.js", 58],
       ["src/pages/LegalEntities/Search/SearchFields.js", 142],
       ["src/pages/MedicalPrograms/Search/CreateMedicalProgramPopup.js", 89],
-      ["src/pages/MedicalPrograms/Search/SearchFields.js", 101],
+      ["src/pages/MedicalPrograms/Search/SearchFields.js", 87],
       ["src/pages/Medications/Create.js", 107],
       ["src/pages/Medications/Create.js", 233],
       ["src/pages/Medications/Create.js", 271],
       ["src/pages/Medications/Create.js", 359],
       ["src/pages/Medications/Create.js", 710],
       ["src/pages/Medications/Create.js", 734],
-      ["src/pages/ProgramMedications/Search.js", 308],
+      ["src/pages/ProgramMedications/Search/SearchFields.js", 59],
       [
         "src/pages/ProgramServices/Search/Mutations/CreateProgramService.js",
         96
@@ -3684,7 +3719,7 @@
       ["src/pages/ServiceGroups/Search/CreateServiceGroupPopup.js", 151],
       ["src/pages/Services/Search/CreateServicePopup.js", 74],
       ["src/pages/Services/Search/CreateServicePopup.js", 116],
-      ["src/pages/Services/Search/SearchFields.js", 58]
+      ["src/pages/Services/Search/SearchFields.js", 46]
     ]
   },
   "Select person status": {
@@ -3701,7 +3736,7 @@
   },
   "Select type": {
     "translation": "Оберіть тип",
-    "origin": [["src/pages/ProgramMedications/Create.js", 191]]
+    "origin": [["src/pages/ProgramMedications/Create.js", 93]]
   },
   "Service": {
     "translation": "Сервіс",
@@ -3714,7 +3749,7 @@
     "translation": "Категорія сервісу",
     "origin": [
       ["src/pages/Services/Search/CreateServicePopup.js", 123],
-      ["src/pages/Services/Search/SearchFields.js", 64]
+      ["src/pages/Services/Search/SearchFields.js", 52]
     ]
   },
   "Service code": {
@@ -3822,7 +3857,7 @@
       ["src/pages/PendingDeclarations/Search.js", 140],
       ["src/pages/Persons/Details.js", 412],
       ["src/pages/Persons/Search.js", 158],
-      ["src/pages/ProgramMedications/Search.js", 144],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 90],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 89],
       ["src/pages/ResetPersonsAuthMethodJobs/Search/index.js", 117],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 80],
@@ -3972,13 +4007,17 @@
   "Start date": {
     "translation": "Дата початку роботи",
     "origin": [
-      ["src/components/SelectedFilters.js", 159],
+      ["src/components/SelectedFilters.js", 160],
       ["src/pages/Employees/Create.js", 233],
       ["src/pages/Employees/Create.js", 554],
       ["src/pages/Employees/Search/EmployeesTable.js", 22],
       ["src/pages/Employees/Search/SearchFields.js", 129],
       ["src/pages/Employees/Update.js", 299],
-      ["src/pages/Employees/Update.js", 609]
+      ["src/pages/Employees/Update.js", 609],
+      ["src/pages/ProgramMedications/Create.js", 167],
+      ["src/pages/ProgramMedications/Create.js", 258],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 122],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 41]
     ]
   },
   "Started at": {
@@ -4003,6 +4042,7 @@
   "Status": {
     "translation": "Статус",
     "origin": [
+      ["src/components/SearchField/StatusField.js", 22],
       ["src/components/TasksTable.js", 35],
       ["src/pages/ContractRequests/Capitation/Details/Header.js", 46],
       [
@@ -4030,7 +4070,6 @@
       ["src/pages/Employees/Search/EmployeesTable.js", 26],
       ["src/pages/INNMDosages/Details.js", 56],
       ["src/pages/INNMDosages/Search.js", 78],
-      ["src/pages/INNMDosages/Search.js", 226],
       ["src/pages/INNMs/Search.js", 188],
       ["src/pages/LegalEntities/Add.js", 111],
       ["src/pages/LegalEntities/Details/Divisions.js", 119],
@@ -4042,27 +4081,23 @@
       ["src/pages/MedicalPrograms/Search/MedicalProgramsTable.js", 36],
       ["src/pages/Medications/Details.js", 67],
       ["src/pages/Medications/Search.js", 86],
-      ["src/pages/Medications/Search.js", 311],
       ["src/pages/PatientMergeRequests/Search.js", 123],
       ["src/pages/PendingDeclarations/Search.js", 93],
       ["src/pages/Persons/Details.js", 109],
       ["src/pages/Persons/Details.js", 375],
       ["src/pages/Persons/Search.js", 116],
-      ["src/pages/ProgramMedications/Details.js", 58],
-      ["src/pages/ProgramMedications/Search.js", 97],
-      ["src/pages/ProgramServices/Details/GeneralInfo.js", 46],
-      ["src/pages/ProgramServices/Details/Header.js", 35],
+      ["src/pages/ProgramMedications/Details/Header.js", 31],
+      ["src/pages/ProgramMedications/Search/ProgramMedicationsTable.js", 38],
+      ["src/pages/ProgramServices/Details/GeneralInfo.js", 59],
+      ["src/pages/ProgramServices/Details/Header.js", 33],
       ["src/pages/ProgramServices/Details/ServiceConnections.js", 34],
       ["src/pages/ProgramServices/Search/ProgramServicesTable.js", 27],
-      ["src/pages/ProgramServices/Search/SearchFields.js", 26],
       ["src/pages/ResetPersonsAuthMethodJobs/Details.js", 53],
       ["src/pages/ResetPersonsAuthMethodJobs/Search/SearchFields.js", 15],
       ["src/pages/ServiceGroups/Details/index.js", 97],
-      ["src/pages/ServiceGroups/Search/SearchFields.js", 43],
       ["src/pages/ServiceGroups/Search/ServiceGroupsTable.js", 24],
       ["src/pages/Services/Details/ParentGroupsTable.js", 23],
       ["src/pages/Services/Details/index.js", 70],
-      ["src/pages/Services/Search/SearchFields.js", 45],
       ["src/pages/Services/Search/ServicesTable.js", 45]
     ]
   },
@@ -4255,7 +4290,7 @@
   "Type": {
     "translation": "Тип",
     "origin": [
-      ["src/components/SelectedFilters.js", 205],
+      ["src/components/SelectedFilters.js", 206],
       ["src/pages/ContractRequests/Capitation/Details/Mutations/Create.js", 66],
       ["src/pages/ContractRequests/Reimbursement/Create.js", 66],
       ["src/pages/Declarations/Details.js", 293],
@@ -4375,9 +4410,9 @@
   "Wholesale price": {
     "translation": "Оптово-відпускна ціна за упаковку",
     "origin": [
-      ["src/pages/ProgramMedications/Create.js", 212],
-      ["src/pages/ProgramMedications/Create.js", 302],
-      ["src/pages/ProgramMedications/Details.js", 250]
+      ["src/pages/ProgramMedications/Create.js", 114],
+      ["src/pages/ProgramMedications/Create.js", 240],
+      ["src/pages/ProgramMedications/Details/GeneralInfo.js", 118]
     ]
   },
   "Work schedule": {
@@ -4400,7 +4435,7 @@
   },
   "contract of {0} legal entity": {
     "translation": "Договори {0} закладу",
-    "origin": [["src/components/SelectedFilters.js", 69]]
+    "origin": [["src/components/SelectedFilters.js", 70]]
   },
   "from service group": {
     "translation": "з сервіс групи",
@@ -4450,14 +4485,15 @@
         "src/pages/ContractRequests/Capitation/Details/Mutations/Update.js",
         268
       ],
-      ["src/pages/ProgramMedications/Create.js", 183],
-      ["src/pages/ProgramMedications/Create.js", 214],
-      ["src/pages/ProgramMedications/Create.js", 222],
-      ["src/pages/ProgramMedications/Create.js", 232],
-      ["src/pages/ProgramMedications/Create.js", 240],
-      ["src/pages/ProgramMedications/Create.js", 376],
-      ["src/pages/ProgramMedications/Details.js", 313],
-      ["src/pages/ProgramMedications/Details.js", 356],
+      ["src/pages/ProgramMedications/Create.js", 85],
+      ["src/pages/ProgramMedications/Create.js", 116],
+      ["src/pages/ProgramMedications/Create.js", 124],
+      ["src/pages/ProgramMedications/Create.js", 134],
+      ["src/pages/ProgramMedications/Create.js", 142],
+      [
+        "src/pages/ProgramMedications/Details/Mutations/UpdateReimbursementAmount.js",
+        52
+      ],
       [
         "src/pages/ProgramServices/Search/Mutations/CreateProgramService.js",
         123
