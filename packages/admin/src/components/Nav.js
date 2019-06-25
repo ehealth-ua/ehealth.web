@@ -346,11 +346,13 @@ const Nav = () => (
                 <Trans>Legal entity deactivate jobs</Trans>
               </NavLink>
             </Ability>
-            <Ability action="read" resource="persons_auth_reset_job">
-              <NavLink to="/reset-persons-auth-method-jobs">
-                <Trans>Reset persons authentication method</Trans>
-              </NavLink>
-            </Ability>
+            <Flag name="features.reset_authentication_method">
+              <Ability action="read" resource="persons_auth_reset_job">
+                <NavLink to="/reset-persons-auth-method-jobs">
+                  <Trans>Reset persons authentication method</Trans>
+                </NavLink>
+              </Ability>
+            </Flag>
           </NavSection>
         </Ability>
 

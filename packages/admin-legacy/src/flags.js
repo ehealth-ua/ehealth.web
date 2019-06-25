@@ -7,7 +7,11 @@ const features = env.REACT_APP_FEATURES
   : {};
 
 const flags = {
-  features
+  features,
+  computed: {
+    personNavSection: () =>
+      features.person || features.reset_authentication_method
+  }
 };
 
 export default flags;

@@ -377,16 +377,42 @@ class Nav extends React.Component {
               </li>
             </ShowWithScope>
 
-            <Flag name="features.person">
-              <ShowWithScope scope="person:read">
-                <NavItem to="persons" activeClassName={styles.active}>
-                  <ExternalLink
-                    id="persons-nav"
-                    href={`${env.REACT_APP_ADMIN_URL}/persons/search`}
-                  >
-                    Паціенти
-                  </ExternalLink>
-                </NavItem>
+            <Flag name="computed.personNavSection">
+              <ShowWithScope
+                scope={["person:read", "person:reset_authentication_method"]}
+              >
+                <li>
+                  <ShowMore nav name="Паціенти">
+                    <ul>
+                      <ShowWithScope scope="person:read">
+                        <NavItem to="persons" activeClassName={styles.active}>
+                          <ExternalLink
+                            id="persons-nav"
+                            href={`${env.REACT_APP_ADMIN_URL}/persons/search`}
+                          >
+                            Паціенти
+                          </ExternalLink>
+                        </NavItem>
+                      </ShowWithScope>
+                      <ShowWithScope scope="person:reset_authentication_method">
+                        <NavItem
+                          to="reset-authentication-method"
+                          activeClassName={styles.active}
+                        >
+                          <ExternalLink
+                            id="persons-nav"
+                            href={`${
+                              env.REACT_APP_ADMIN_URL
+                            }/reset-authentication-method`}
+                          >
+                            Скинути метод <br /> аутентифікації у<br />{" "}
+                            паціентів
+                          </ExternalLink>
+                        </NavItem>
+                      </ShowWithScope>
+                    </ul>
+                  </ShowMore>
+                </li>
               </ShowWithScope>
             </Flag>
 
@@ -580,6 +606,24 @@ class Nav extends React.Component {
                         </ExternalLink>
                       </NavItem>
                     </ShowWithScope>
+                    <Flag name="features.reset_authentication_method">
+                      <ShowWithScope scope="persons_auth_reset_job:read">
+                        <NavItem
+                          to="reset-persons-auth-method-jobs"
+                          activeClassName={styles.active}
+                        >
+                          <ExternalLink
+                            id="legal-entity-deactivate-jobs-nav"
+                            href={`${
+                              env.REACT_APP_ADMIN_URL
+                            }/reset-persons-auth-method-jobs/search`}
+                          >
+                            Скинути метод <br /> аутентифікації у<br />{" "}
+                            паціентів
+                          </ExternalLink>
+                        </NavItem>
+                      </ShowWithScope>
+                    </Flag>
                   </ul>
                 </ShowMore>
               </li>
