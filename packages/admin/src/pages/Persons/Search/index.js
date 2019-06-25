@@ -16,7 +16,7 @@ import PersonsTable from "./PersonsTable";
 import {
   PrimarySearchFields,
   SecondarySearchFields,
-  CustomSearchButton
+  SearchButton
 } from "./SearchFields";
 
 const Search = () => (
@@ -51,7 +51,7 @@ const Search = () => (
               onSubmit={setLocationParams}
               renderPrimary={PrimarySearchFields}
               renderSecondary={SecondarySearchFields}
-              customSearchButton={CustomSearchButton}
+              searchButton={SearchButton}
             />
             <Query
               skip={

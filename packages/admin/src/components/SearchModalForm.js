@@ -11,14 +11,14 @@ import resetPaginationParams from "../helpers/resetPaginationParams";
 type SearchModalFormProps = {
   initialValues: Object,
   onSubmit: Object => void,
-  customSearchButton?: React.ElementType,
+  searchButton: React.ElementType,
   children: React.Node
 };
 
 const SearchModalForm = ({
   initialValues,
   onSubmit,
-  customSearchButton: CustomSearchButton,
+  searchButton: SearchButton,
   children
 }: SearchModalFormProps) => {
   const [visible, setToggleState] = React.useState(false);
@@ -75,13 +75,7 @@ const SearchModalForm = ({
                 </Button>
               </Box>
               <Box px={1}>
-                {CustomSearchButton ? (
-                  <CustomSearchButton />
-                ) : (
-                  <Button variant="blue">
-                    <Trans>Search</Trans>
-                  </Button>
-                )}
+                <SearchButton />
               </Box>
               <Box px={1}>
                 <IconButton
