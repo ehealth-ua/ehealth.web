@@ -5,6 +5,7 @@ import { DateFormat, Trans } from "@lingui/macro";
 import STATUSES from "../helpers/statuses";
 import { RemoveItemIcon } from "@ehealth/icons";
 import isEmpty from "lodash/isEmpty";
+import FullName from "../components/FullName";
 import DictionaryValue from "../components/DictionaryValue";
 import resetPaginationParams from "../helpers/resetPaginationParams";
 
@@ -31,6 +32,8 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
       contractorLegalEntity: { name } = {},
       employeeStatus,
       party: { noTaxId, ...party } = {},
+      identity = {},
+      personal = {},
       requestAllowed,
       registryNumber
     } = {}
@@ -251,6 +254,63 @@ const SelectedFilters = ({ initialValues, onSubmit }) => {
         <SelectedItem mx={1}>
           <Trans>Registry number</Trans>:<Box ml={1}>{registryNumber}</Box>
           <RemoveSelected reset={{ registryNumber: undefined }} />
+        </SelectedItem>
+      )}
+      {identity.firstName &&
+        identity.lastName && (
+          <SelectedItem mx={1}>
+            <Trans>Full name</Trans>:
+            <Box ml={1}>
+              <FullName
+                party={{
+                  firstName: identity.firstName,
+                  lastName: identity.lastName
+                }}
+              />
+            </Box>
+            <RemoveSelected
+              reset={{
+                identity: {
+                  ...identity,
+                  firstName: undefined,
+                  lastName: undefined
+                }
+              }}
+            />
+          </SelectedItem>
+        )}
+      {identity.number && (
+        <SelectedItem mx={1}>
+          <Trans>Document number</Trans>:<Box ml={1}>{identity.number}</Box>
+          <RemoveSelected
+            reset={{
+              identity: { ...identity, type: undefined, number: undefined }
+            }}
+          />
+        </SelectedItem>
+      )}
+      {personal.birthDate && (
+        <SelectedItem mx={1}>
+          <Trans>Date of birth</Trans>:
+          <Box ml={1}>
+            <DateFormat value={personal.birthDate} />
+          </Box>
+          <RemoveSelected
+            reset={{
+              personal: { ...personal, birthDate: undefined }
+            }}
+          />
+        </SelectedItem>
+      )}
+      {personal.authenticationMethod && (
+        <SelectedItem mx={1}>
+          <Trans>Phone number</Trans>:
+          <Box ml={1}>{personal.authenticationMethod.phoneNumber}</Box>
+          <RemoveSelected
+            reset={{
+              personal: { ...personal, authenticationMethod: undefined }
+            }}
+          />
         </SelectedItem>
       )}
     </Flex>
