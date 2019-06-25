@@ -38,7 +38,13 @@ const ResetPersonsAuthMethod = ({
               maxSize={ONE_MB}
               onDrop={acceptedFiles => {
                 const reader = new FileReader();
-                reader.onloadstart = () => setLoading(true);
+                reader.onloadstart = () => {
+                  setFileContent({
+                    validEntries: [],
+                    invalidEntries: []
+                  });
+                  setLoading(true);
+                };
                 reader.onloadend = () => setLoading(false);
                 reader.onload = () => {
                   const parseResult = Papa.parse(reader.result);
