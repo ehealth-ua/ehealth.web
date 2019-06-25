@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.118.4"></a>
+## [1.118.4](https://github.com/edenlabllc/ehealth.web/compare/v1.118.3...v1.118.4) (2019-06-25)
+
+
+### Bug Fixes
+
+* **admin:** disable button if the file wasn't uploaded ([4f0d887](https://github.com/edenlabllc/ehealth.web/commit/4f0d887))
+
+
+
+
+
 <a name="1.118.3"></a>
 ## [1.118.3](https://github.com/edenlabllc/ehealth.web/compare/v1.118.2...v1.118.3) (2019-06-25)
 
