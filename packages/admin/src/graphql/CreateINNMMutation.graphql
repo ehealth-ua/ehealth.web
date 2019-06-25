@@ -1,8 +1,0 @@
-mutation CreateINNMMutation($input: CreateINNMInput!) {
-  createINNM(input: $input) {
-    innm {
-      id
-      databaseId
-    }
-  }
-}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Router, Redirect } from "@reach/router";
 
-import Search from "./Search";
+import Search from "./Search/";
 
 const INNMs = ({ uri }) => (
   <Router>
