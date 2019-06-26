@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.119.1"></a>
+## [1.119.1](https://github.com/edenlabllc/ehealth.web/compare/v1.119.0...v1.119.1) (2019-06-26)
+
+
+### Bug Fixes
+
+* hide employees tab if contractorEmployeeDivisions is empty ([d80eaf1](https://github.com/edenlabllc/ehealth.web/commit/d80eaf1))
+
+
+
+
+
 <a name="1.119.0"></a>
 # [1.119.0](https://github.com/edenlabllc/ehealth.web/compare/v1.118.6...v1.119.0) (2019-06-26)
 
