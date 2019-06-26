@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.119.0"></a>
+# [1.119.0](https://github.com/edenlabllc/ehealth.web/compare/v1.118.6...v1.119.0) (2019-06-26)
+
+
+### Features
+
+* **admin:** add CustomSearchButton to the SearchForm component ([8b03b3d](https://github.com/edenlabllc/ehealth.web/commit/8b03b3d))
+* **admin:** add new fields to the Persons search form ([3f3db23](https://github.com/edenlabllc/ehealth.web/commit/3f3db23))
+* **admin:** add new SelectedFilters for Persons search ([05f4fe8](https://github.com/edenlabllc/ehealth.web/commit/05f4fe8))
+* **admin:** add new validation patterns for the fields ([8e89c53](https://github.com/edenlabllc/ehealth.web/commit/8e89c53))
+
+
+
+
+
 <a name="1.118.6"></a>
 ## [1.118.6](https://github.com/edenlabllc/ehealth.web/compare/v1.118.5...v1.118.6) (2019-06-25)
 
